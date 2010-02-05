@@ -11,7 +11,7 @@ kde_module_LTLIBRARIES = libk3baudiometainforenamerplugin.la
 
 libk3baudiometainforenamerplugin_la_SOURCES = k3baudiometainforenamerplugin.cpp
 libk3baudiometainforenamerplugin_la_LIBADD = ../../../libk3b/libk3b.la
-libk3baudiometainforenamerplugin_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
+libk3baudiometainforenamerplugin_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries) $(LIB_QT) -lkio -lkdecore -lkdeui -L../../../libk3bdevice/.libs -lk3bdevice
 
 pluginsdir = $(kde_datadir)/k3b/plugins
 plugins_DATA = k3baudiometainforenamerplugin.plugin

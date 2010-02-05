@@ -14,7 +14,7 @@ libk3baudioprojectcddbplugin_la_SOURCES = k3baudioprojectcddbplugin.cpp
 
 libk3baudioprojectcddbplugin_la_LIBADD = ../../../libk3b/libk3b.la
 
-libk3baudioprojectcddbplugin_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
+libk3baudioprojectcddbplugin_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries) $(LIB_QT) -lkio -lkdecore -lkdeui -L../../../libk3bdevice/.libs -lk3bdevice
 
 pluginsdir = $(kde_datadir)/k3b/plugins
 plugins_DATA = k3baudioprojectcddbplugin.plugin
