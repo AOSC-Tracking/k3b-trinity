@@ -781,6 +781,20 @@ if test "$ac_cv_use_mpc" = "yes"; then
 		],
 		[], [], [])
   ])
+
+  if test "$have_mpc" = "no"; then
+    KDE_CHECK_HEADERS(mpc/mpcdec.h, [
+        AC_CHECK_LIB(mpcdec, mpc_decoder_setup, [
+                have_mpc=yes
+                MPC_LIBS="-lmpcdec"
+                AC_DEFINE(
+                        MPC_HEADER_FILE,
+                        <mpc/mpcdec.h>,
+                        [The header to include for MPC decoding.])
+                ],
+                [], [], [])
+    ])
+  fi
 	
   if test "$have_mpc" = "no"; then
     KDE_CHECK_HEADERS(musepack/musepack.h, [
