@@ -17,16 +17,16 @@
 
 #include "k3bcddblocalsubmit.h"
 
-#include <qdir.h>
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 #include <kdebug.h>
 #include <klocale.h>
 
 
-K3bCddbLocalSubmit::K3bCddbLocalSubmit( QObject* parent, const char* name )
-  : K3bCddbSubmit( parent, name )
+K3bCddbLocalSubmit::K3bCddbLocalSubmit( TQObject* tqparent, const char* name )
+  : K3bCddbSubmit( tqparent, name )
 {
 }
 
@@ -38,29 +38,29 @@ K3bCddbLocalSubmit::~K3bCddbLocalSubmit()
 
 void K3bCddbLocalSubmit::doSubmit()
 {
-  QString path = m_cddbDir;
+  TQString path = m_cddbDir;
   if( path.startsWith( "~" ) )
-    path.replace( 0, 1, QDir::homeDirPath() + "/" );
+    path.tqreplace( 0, 1, TQDir::homeDirPath() + "/" );
   else if( !path.startsWith( "/" ) )
-    path.prepend( QDir::homeDirPath() + "/" );
+    path.prepend( TQDir::homeDirPath() + "/" );
   if( path[path.length()-1] != '/' )
     path.append( "/" );
 
-  if( !QFile::exists( path ) && !QDir().mkdir( path ) ) {
+  if( !TQFile::exists( path ) && !TQDir().mkdir( path ) ) {
     kdDebug() << "(K3bCddbLocalSubmit) could not create directory: " << path << endl;
     setError( IO_ERROR );
     emit submitFinished( this );
     return;
   }
 
-  if( QFile::exists( path ) ) {
+  if( TQFile::exists( path ) ) {
     // if the category dir does not exists
     // create it
 
     path += resultEntry().category;
 
-    if( !QFile::exists( path ) ) {
-      if( !QDir().mkdir( path ) ) {
+    if( !TQFile::exists( path ) ) {
+      if( !TQDir().mkdir( path ) ) {
 	kdDebug() << "(K3bCddbLocalSubmit) could not create directory: " << path << endl;
 	setError( IO_ERROR );
 	emit submitFinished( this );
@@ -70,7 +70,7 @@ void K3bCddbLocalSubmit::doSubmit()
 
     // we always overwrite existing entries
     path += "/" + resultEntry().discid;
-    QFile entryFile( path );
+    TQFile entryFile( path );
     if( entryFile.exists() ) {
       kdDebug() << "(K3bCddbLocalSubmit) file already exists: " << path << endl;
     }
@@ -82,8 +82,8 @@ void K3bCddbLocalSubmit::doSubmit()
     }
     else {
       kdDebug() << "(K3bCddbLocalSubmit) creating file: " << path << endl;
-      QTextStream entryStream( &entryFile );
-      entryStream.setEncoding( QTextStream::UnicodeUTF8 );
+      TQTextStream entryStream( &entryFile );
+      entryStream.setEncoding( TQTextStream::UnicodeUTF8 );
       entryStream << resultEntry().rawData;
       entryFile.close();
 
@@ -94,7 +94,7 @@ void K3bCddbLocalSubmit::doSubmit()
   else {
     kdDebug() << "(K3bCddbLocalSubmit) could not find directory: " << path << endl;
     setError( IO_ERROR );
-    emit infoMessage( i18n("Could not find directory: %1").arg(path) );
+    emit infoMessage( i18n("Could not find directory: %1").tqarg(path) );
     emit submitFinished( this );
   }
 }

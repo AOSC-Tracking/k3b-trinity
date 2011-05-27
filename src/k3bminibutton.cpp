@@ -20,14 +20,14 @@
 
 #include "k3bminibutton.h"
 
-#include <qpainter.h>
+#include <tqpainter.h>
 
 
-K3bMiniButton::K3bMiniButton( QWidget *parent, const char * name )
-  :QPushButton( parent, name ),
+K3bMiniButton::K3bMiniButton( TQWidget *tqparent, const char * name )
+  :TQPushButton( tqparent, name ),
    m_mouseOver( false )
 {
-  setFocusPolicy( NoFocus );
+  setFocusPolicy( TQ_NoFocus );
 }
 
 K3bMiniButton::~K3bMiniButton()
@@ -35,9 +35,9 @@ K3bMiniButton::~K3bMiniButton()
 }
 
 
-void K3bMiniButton::drawButton( QPainter* p )
+void K3bMiniButton::drawButton( TQPainter* p )
 {
-  p->fillRect( 0,0, width(), height(), QBrush(colorGroup().brush(QColorGroup::Background)) );
+  p->fillRect( 0,0, width(), height(), TQBrush(tqcolorGroup().brush(TQColorGroup::Background)) );
   p->drawPixmap( (width() - pixmap()->width()) / 2, (height() - pixmap()->height()) / 2, *pixmap() );
   if( m_mouseOver && !isDown() ){
     p->setPen( white );
@@ -45,12 +45,12 @@ void K3bMiniButton::drawButton( QPainter* p )
     p->lineTo( 0, 0 );
     p->lineTo( width() - 1, 0 );
 
-    p->setPen( colorGroup().dark() );
+    p->setPen( tqcolorGroup().dark() );
     p->lineTo( width() - 1, height() - 1 );
     p->lineTo( 0, height() - 1 );
   }
   if( isOn() || isDown() ){
-    p->setPen( colorGroup().dark() );
+    p->setPen( tqcolorGroup().dark() );
     p->moveTo( 0, height() - 1 );
     p->lineTo( 0, 0 );
     p->lineTo( width() - 1, 0 );
@@ -61,17 +61,17 @@ void K3bMiniButton::drawButton( QPainter* p )
   }
 }
 
-void K3bMiniButton::enterEvent( QEvent * )
+void K3bMiniButton::enterEvent( TQEvent * )
 {
   m_mouseOver = true;
-  repaint();
+  tqrepaint();
 }
 
 
-void K3bMiniButton::leaveEvent( QEvent * )
+void K3bMiniButton::leaveEvent( TQEvent * )
 {
   m_mouseOver = false;
-  repaint();
+  tqrepaint();
 }
 
 #include "k3bminibutton.moc"

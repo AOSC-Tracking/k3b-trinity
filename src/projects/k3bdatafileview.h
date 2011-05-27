@@ -21,7 +21,7 @@
 
 #include <kurl.h>
 
-#include <qmap.h>
+#include <tqmap.h>
 
 
 class K3bDataDoc;
@@ -29,16 +29,16 @@ class K3bDirItem;
 class K3bDataView;
 class K3bDataViewItem;
 class K3bDataItem;
-class QDropEvent;
+class TQDropEvent;
 class KActionCollection;
 class KActionMenu;
 class KAction;
 class K3bDataDirTreeView;
 class K3bDataDirViewItem;
 class K3bView;
-class QPainter;
-class QDragMoveEvent;
-class QDragLeaveEvent;
+class TQPainter;
+class TQDragMoveEvent;
+class TQDragLeaveEvent;
 
 /**
   *@author Sebastian Trueg
@@ -47,9 +47,10 @@ class QDragLeaveEvent;
 class K3bDataFileView : public K3bListView  
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDataFileView( K3bView*, K3bDataDirTreeView*, K3bDataDoc*, QWidget* parent );
+  K3bDataFileView( K3bView*, K3bDataDirTreeView*, K3bDataDoc*, TQWidget* tqparent );
   ~K3bDataFileView();
 	
   K3bDirItem* currentDir() const;
@@ -65,24 +66,24 @@ class K3bDataFileView : public K3bListView
 
  private slots:
   void slotDataItemRemoved( K3bDataItem* );
-  void slotExecuted( QListViewItem* );
-  void slotDropped( QDropEvent* e, QListViewItem* after, QListViewItem* parent );
-  void showPopupMenu( KListView*, QListViewItem* _item, const QPoint& );
+  void slotExecuted( TQListViewItem* );
+  void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* tqparent );
+  void showPopupMenu( KListView*, TQListViewItem* _item, const TQPoint& );
   void slotRenameItem();
   void slotRemoveItem();
   void slotNewDir();
   void slotParentDir();
   void slotProperties();
-  void slotDoubleClicked( QListViewItem* item );
+  void slotDoubleClicked( TQListViewItem* item );
   void slotItemAdded( K3bDataItem* );
   void slotAddUrls();
   void slotOpen();
 
  protected:
-  bool acceptDrag(QDropEvent* e) const;
-  void contentsDragMoveEvent( QDragMoveEvent* e );
-  void contentsDragLeaveEvent( QDragLeaveEvent* e );
-  QDragObject* dragObject();
+  bool acceptDrag(TQDropEvent* e) const;
+  void contentsDragMoveEvent( TQDragMoveEvent* e );
+  void contentsDragLeaveEvent( TQDragLeaveEvent* e );
+  TQDragObject* dragObject();
 
  private:
   void clearItems();
@@ -105,7 +106,7 @@ class K3bDataFileView : public K3bListView
 
   K3bDataDirViewItem* m_dropDirItem;
 
-  QMap<K3bDataItem*, K3bDataViewItem*> m_itemMap;
+  TQMap<K3bDataItem*, K3bDataViewItem*> m_itemMap;
 
   // used for the urladdingdialog hack
   KURL::List m_addUrls;

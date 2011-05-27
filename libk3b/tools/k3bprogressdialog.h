@@ -21,9 +21,9 @@
 #include "k3b_export.h"
 
 class K3bBusyWidget;
-class QLabel;
+class TQLabel;
 class KProgress;
-class QWidgetStack;
+class TQWidgetStack;
 
 
 /**
@@ -34,18 +34,19 @@ class QWidgetStack;
 class LIBK3B_EXPORT  K3bProgressDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bProgressDialog( const QString& text = QString::null,
-		     QWidget* parent = 0, 
-		     const QString& caption = QString::null,
+  K3bProgressDialog( const TQString& text = TQString(),
+		     TQWidget* tqparent = 0, 
+		     const TQString& caption = TQString(),
 		     const char* name = 0 );
   ~K3bProgressDialog();
 
   int exec( bool showProgress );
 
  public slots:
-  void setText( const QString& );
+  void setText( const TQString& );
   void slotFinished( bool success );
   void setProgress( int p );
 
@@ -53,8 +54,8 @@ class LIBK3B_EXPORT  K3bProgressDialog : public KDialogBase
   void slotCancel();
 
  private:
-  QLabel* m_label;
-  QWidgetStack* m_stack;
+  TQLabel* m_label;
+  TQWidgetStack* m_stack;
   K3bBusyWidget* m_busyWidget;
   KProgress* m_progressBar;
 };

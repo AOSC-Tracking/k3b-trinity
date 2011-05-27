@@ -26,15 +26,15 @@
 #include <kdebug.h>
 #include <knuminput.h>
 
-#include <qlayout.h>
-#include <qradiobutton.h>
-#include <qslider.h>
-#include <qlcdnumber.h>
-#include <qcheckbox.h>
-#include <qcstring.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqradiobutton.h>
+#include <tqslider.h>
+#include <tqlcdnumber.h>
+#include <tqcheckbox.h>
+#include <tqcstring.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqlabel.h>
 
 #include <vorbis/vorbisenc.h>
 
@@ -124,8 +124,8 @@ public:
 };
 
 
-K3bOggVorbisEncoder::K3bOggVorbisEncoder( QObject* parent, const char* name )
-  : K3bAudioEncoder( parent, name )
+K3bOggVorbisEncoder::K3bOggVorbisEncoder( TQObject* tqparent, const char* name )
+  : K3bAudioEncoder( tqparent, name )
 {
   d = new Private();
 }
@@ -138,7 +138,7 @@ K3bOggVorbisEncoder::~K3bOggVorbisEncoder()
 }
 
 
-bool K3bOggVorbisEncoder::initEncoderInternal( const QString&, const K3b::Msf& )
+bool K3bOggVorbisEncoder::initEncoderInternal( const TQString&, const K3b::Msf& )
 {
   cleanup();
 
@@ -194,7 +194,7 @@ bool K3bOggVorbisEncoder::initEncoderInternal( const QString&, const K3b::Msf& )
   vorbis_comment_init( d->vorbisComment );
 
   // add the encoder tag (so everybody knows we did it! ;)
-  vorbis_comment_add_tag( d->vorbisComment, QCString("ENCODER").data(), QCString("K3bOggVorbisEncoderPlugin").data() );
+  vorbis_comment_add_tag( d->vorbisComment, TQCString("ENCODER").data(), TQCString("K3bOggVorbisEncoderPlugin").data() );
 
   // set up the analysis state and auxiliary encoding storage
   d->vorbisDspState = new vorbis_dsp_state;
@@ -251,7 +251,7 @@ bool K3bOggVorbisEncoder::writeOggHeaders()
   // This ensures the actual
   // audio data will start on a new page, as per spec
   //
-  QByteArray data;
+  TQByteArray data;
   while( ogg_stream_flush( d->oggStream, d->oggPage ) ) {
     writeData( (char*)d->oggPage->header, d->oggPage->header_len );
     writeData( (char*)d->oggPage->body, d->oggPage->body_len );
@@ -263,7 +263,7 @@ bool K3bOggVorbisEncoder::writeOggHeaders()
 }
 
 
-long K3bOggVorbisEncoder::encodeInternal( const char* data, Q_ULONG len )
+long K3bOggVorbisEncoder::encodeInternal( const char* data, TQ_ULONG len )
 {
   if( !d->headersWritten )
     if( !writeOggHeaders() )
@@ -328,10 +328,10 @@ void K3bOggVorbisEncoder::finishEncoderInternal()
 }
 
 
-void K3bOggVorbisEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, const QString& value )
+void K3bOggVorbisEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, const TQString& value )
 {
   if( d->vorbisComment ) {
-    QCString key;
+    TQCString key;
 
     switch( f ) {
     case META_TRACK_TITLE:
@@ -426,13 +426,13 @@ void K3bOggVorbisEncoder::loadConfig()
 
 
 
-K3bOggVorbisEncoderSettingsWidget::K3bOggVorbisEncoderSettingsWidget( QWidget* parent, const char* name )
-  : K3bPluginConfigWidget( parent, name )
+K3bOggVorbisEncoderSettingsWidget::K3bOggVorbisEncoderSettingsWidget( TQWidget* tqparent, const char* name )
+  : K3bPluginConfigWidget( tqparent, name )
 {
   w = new base_K3bOggVorbisEncoderSettingsWidget( this );
 
-  QString ttQuality = i18n("Controls the quality of the encoded files.");
-  QString wsQuality = i18n("<p>Vorbis' audio quality is not best measured in kilobits per second, "
+  TQString ttQuality = i18n("Controls the quality of the encoded files.");
+  TQString wsQuality = i18n("<p>Vorbis' audio quality is not best measured in kilobits per second, "
 			   "but on a scale from -1 to 10 called <em>quality</em>."
 			   "<p>For now, quality -1 is roughly equivalent to 45kbps average, "
 			   "5 is roughly 160kbps, and 10 gives about 400kbps. "
@@ -442,21 +442,21 @@ K3bOggVorbisEncoderSettingsWidget::K3bOggVorbisEncoderSettingsWidget( QWidget* p
 			   "than .mp3 compression at 128kbps."
 			   "<p><em>This explanation is based on the one from the www.vorbis.com FAQ.</em>");
 
-  QToolTip::add( w->m_radioQualityLevel, ttQuality );
-  QToolTip::add( w->m_labelQualityLevel, ttQuality );
-  QToolTip::add( w->m_slideQualityLevel, ttQuality );
-  QWhatsThis::add( w->m_radioQualityLevel, wsQuality );
-  QWhatsThis::add( w->m_labelQualityLevel, wsQuality );
-  QWhatsThis::add( w->m_slideQualityLevel, wsQuality );
+  TQToolTip::add( w->m_radioQualityLevel, ttQuality );
+  TQToolTip::add( w->m_labelQualityLevel, ttQuality );
+  TQToolTip::add( w->m_slideQualityLevel, ttQuality );
+  TQWhatsThis::add( w->m_radioQualityLevel, wsQuality );
+  TQWhatsThis::add( w->m_labelQualityLevel, wsQuality );
+  TQWhatsThis::add( w->m_slideQualityLevel, wsQuality );
 
 
-  QHBoxLayout* lay = new QHBoxLayout( this );
+  TQHBoxLayout* lay = new TQHBoxLayout( this );
   lay->setMargin( 0 );
 
   lay->addWidget( w );
 
-  connect( w->m_slideQualityLevel, SIGNAL(valueChanged(int)),
-	   this, SLOT(slotQualityLevelChanged(int)) );
+  connect( w->m_slideQualityLevel, TQT_SIGNAL(valueChanged(int)),
+	   this, TQT_SLOT(slotQualityLevelChanged(int)) );
 
   slotQualityLevelChanged( 4 );
 }
@@ -469,8 +469,8 @@ K3bOggVorbisEncoderSettingsWidget::~K3bOggVorbisEncoderSettingsWidget()
 
 void K3bOggVorbisEncoderSettingsWidget::slotQualityLevelChanged( int val )
 {
-  w->m_labelQualityLevel->setText( QString::number(val) + " " 
-				   + i18n("(targetted VBR of %1)").arg(s_rough_average_quality_level_bitrates[val+1]) );
+  w->m_labelQualityLevel->setText( TQString::number(val) + " " 
+				   + i18n("(targetted VBR of %1)").tqarg(s_rough_average_quality_level_bitrates[val+1]) );
 }
 
 
@@ -510,13 +510,13 @@ void K3bOggVorbisEncoderSettingsWidget::saveConfig()
 }
 
 
-QString K3bOggVorbisEncoder::fileTypeComment( const QString& ) const
+TQString K3bOggVorbisEncoder::fileTypeComment( const TQString& ) const
 {
   return i18n("Ogg-Vorbis");
 }
 
 
-long long K3bOggVorbisEncoder::fileSize( const QString&, const K3b::Msf& msf ) const
+long long K3bOggVorbisEncoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 {
   KConfig* c = k3bcore->config();
   c->setGroup( "K3bOggVorbisEncoderPlugin" );
@@ -545,10 +545,10 @@ long long K3bOggVorbisEncoder::fileSize( const QString&, const K3b::Msf& msf ) c
 }
 
 
-K3bPluginConfigWidget* K3bOggVorbisEncoder::createConfigWidget( QWidget* parent, 
+K3bPluginConfigWidget* K3bOggVorbisEncoder::createConfigWidget( TQWidget* tqparent, 
 								const char* name ) const
 {
-  return new K3bOggVorbisEncoderSettingsWidget( parent, name );
+  return new K3bOggVorbisEncoderSettingsWidget( tqparent, name );
 }
 
 

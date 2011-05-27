@@ -27,14 +27,15 @@ namespace K3bDevice {
 class K3bMediaSelectionDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
    * Do not use the constructor. Use the static method instead.
    */
-  K3bMediaSelectionDialog( QWidget* parent = 0, 
-			   const QString& title = QString::null, 
-			   const QString& text = QString::null, 
+  K3bMediaSelectionDialog( TQWidget* tqparent = 0, 
+			   const TQString& title = TQString(), 
+			   const TQString& text = TQString(), 
 			   bool modal = false );
   ~K3bMediaSelectionDialog();
 
@@ -66,15 +67,15 @@ class K3bMediaSelectionDialog : public KDialogBase
    * If only one medium of the wanted type is found the method returns immideately
    * without showing the dialog.
    */
-  static K3bDevice::Device* selectMedium( int type, int state, QWidget* parent = 0,
-					  const QString& title = QString::null, 
-					  const QString& text = QString::null,
+  static K3bDevice::Device* selectMedium( int type, int state, TQWidget* tqparent = 0,
+					  const TQString& title = TQString(), 
+					  const TQString& text = TQString(),
 					  bool* canceled = 0 );
 
   static K3bDevice::Device* selectMedium( int type, int state, int content = K3bMedium::CONTENT_ALL,
-					  QWidget* parent = 0,
-					  const QString& title = QString::null, 
-					  const QString& text = QString::null,
+					  TQWidget* tqparent = 0,
+					  const TQString& title = TQString(), 
+					  const TQString& text = TQString(),
 					  bool* canceled = 0 );
 
  private slots:

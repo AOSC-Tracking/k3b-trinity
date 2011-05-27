@@ -17,9 +17,9 @@
 #ifndef K3BDEVICE_H
 #define K3BDEVICE_H
 
-#include <qstringlist.h>
-#include <qvaluelist.h>
-#include <qglobal.h>
+#include <tqstringlist.h>
+#include <tqvaluelist.h>
+#include <tqglobal.h>
 
 #include <k3bdevicetypes.h>
 #include <k3bdiskinfo.h>
@@ -95,17 +95,17 @@ namespace K3bDevice
       /**
        * \return Vendor string as reported by the device's firmware.
        */
-      const QString& vendor() const { return m_vendor; }
+      const TQString& vendor() const { return m_vendor; }
 
       /**
        * \return Description string as reported by the device's firmware.
        */
-      const QString& description() const { return m_description; }
+      const TQString& description() const { return m_description; }
 
       /**
        * \return Version string as reported by the device's firmware.
        */
-      const QString& version() const { return m_version; }
+      const TQString& version() const { return m_version; }
 
       /**
        * Shortcut for \code writesCd() || writesDvd() \endcode
@@ -207,13 +207,13 @@ namespace K3bDevice
       /**
        * @return the corresponding device name.
        */
-      const QString& devicename() const;
+      const TQString& devicename() const;
 
       /**
        * for SCSI devices this should be something like /dev/scd0 or /dev/sr0
        * for IDE device this should be something like /dev/hdb1
        */
-      const QString& blockDeviceName() const { return m_blockDevice; }
+      const TQString& blockDeviceName() const { return m_blockDevice; }
 
       /**
        * This is only valid for SCSI devices. Without devfs it's something
@@ -222,24 +222,24 @@ namespace K3bDevice
        * This is not needed in K3b at all. But cdrecord and cdrdao use the sg devices and
        * we need it to fixup it's permissions in K3bSetup.
        */
-      const QString& genericDevice() const { return m_genericDevice; }
+      const TQString& genericDevice() const { return m_genericDevice; }
 
       /**
        * \return All device nodes for this drive.
        */
-      const QStringList& deviceNodes() const;
+      const TQStringList& deviceNodes() const;
 
       /**
        * \see K3bDevice::Device::deviceNodes()
        */
-      void addDeviceNode( const QString& );
+      void addDeviceNode( const TQString& );
 
       /**
        * Makes only sense to use with scsi devices
        * @return a string for use with the cdrtools
        * @deprecated
        */
-      QString busTargetLun() const;
+      TQString busTargetLun() const;
 
       int scsiBus() const { return m_bus; }
       int scsiId() const { return m_target; }
@@ -250,7 +250,7 @@ namespace K3bDevice
       /**
        * \deprecated the cdrdao driver has no place in this library. It will be removed.
        */
-      const QString& cdrdaoDriver() const { return m_cdrdaoDriver; }
+      const TQString& cdrdaoDriver() const { return m_cdrdaoDriver; }
 
       /**
        * returns: 0 auto (no cdrdao-driver selected)
@@ -281,7 +281,7 @@ namespace K3bDevice
        * Use this if cdrdao is not able to autodetect the nessessary driver.
        * \deprecated the cdrdao driver has no place in this library. It will be removed.
        */
-      void setCdrdaoDriver( const QString& d ) { m_cdrdaoDriver = d; }
+      void setCdrdaoDriver( const TQString& d ) { m_cdrdaoDriver = d; }
 
       /**
        * Only used if the cdrdao-driver is NOT set to "auto".
@@ -443,7 +443,7 @@ namespace K3bDevice
        *
        * This only works with MMC3 compliant drives.
        */
-      QValueList<int> determineSupportedWriteSpeeds() const;
+      TQValueList<int> determineSupportedWriteSpeeds() const;
 
       /**
        * @returnes the speed in kb/s or 0 on failure.
@@ -558,7 +558,7 @@ namespace K3bDevice
        * if true is returned dataLen specifies the actual length of *data which needs to be
        * deleted after using.
        */
-      bool mechanismStatus( unsigned char** data, unsigned int& dataLen ) const;
+      bool mechanismtqStatus( unsigned char** data, unsigned int& dataLen ) const;
 
       /**
        * Read a single feature.
@@ -669,9 +669,9 @@ namespace K3bDevice
 			   unsigned int subchannelParam,
 			   unsigned int trackNumber ) const;
 
-      bool readIsrc( unsigned int track, QCString& isrc ) const;
+      bool readIsrc( unsigned int track, TQCString& isrc ) const;
 
-      bool readMcn( QCString& mcn ) const;
+      bool readMcn( TQCString& mcn ) const;
 
       /**
        * MMC command Read Buffer Capacity
@@ -761,7 +761,7 @@ namespace K3bDevice
       /**
        * A Device can only be constructed the the DeviceManager.
        */
-      Device( const QString& devname );
+      Device( const TQString& devname );
 
       /**
        * Determines the device's capabilities. This needs to be called once before
@@ -787,15 +787,15 @@ namespace K3bDevice
        */
       int rawTocDataWithBcdValues( unsigned char* data, unsigned int dataLen ) const;
 
-      bool getSupportedWriteSpeedsVia2A( QValueList<int>& list, bool dvd ) const;
-      bool getSupportedWriteSpeedsViaGP( QValueList<int>& list, bool dvd ) const;
+      bool getSupportedWriteSpeedsVia2A( TQValueList<int>& list, bool dvd ) const;
+      bool getSupportedWriteSpeedsViaGP( TQValueList<int>& list, bool dvd ) const;
 
-      QCString mediaId( int mediaType ) const;
+      TQCString mediaId( int mediaType ) const;
 
-      QString m_vendor;
-      QString m_description;
-      QString m_version;
-      QString m_cdrdaoDriver;
+      TQString m_vendor;
+      TQString m_description;
+      TQString m_version;
+      TQString m_cdrdaoDriver;
       int m_cdTextCapable;
       int m_maxReadSpeed;
       int m_maxWriteSpeed;
@@ -813,9 +813,9 @@ namespace K3bDevice
       int m_writeModes;
 
       // only needed on FreeBSD
-      QString m_passDevice;
-      QString m_blockDevice;
-      QString m_genericDevice;
+      TQString m_passDevice;
+      TQString m_blockDevice;
+      TQString m_genericDevice;
 
       class Private;
       Private* d;

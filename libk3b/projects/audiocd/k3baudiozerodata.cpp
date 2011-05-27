@@ -55,15 +55,15 @@ void K3bAudioZeroData::setLength( const K3b::Msf& msf )
 }
 
 
-QString K3bAudioZeroData::type() const
+TQString K3bAudioZeroData::type() const
 {
   return i18n("Silence");
 }
 
 
-QString K3bAudioZeroData::sourceComment() const
+TQString K3bAudioZeroData::sourceComment() const
 {
-  return QString::null;
+  return TQString();
 }
 
 

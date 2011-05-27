@@ -15,22 +15,22 @@
 
 #include "k3blistviewitemanimator.h"
 
-#include <qtimer.h>
-#include <qlistview.h>
+#include <tqtimer.h>
+#include <tqlistview.h>
 
 #include <kpixmap.h>
 #include <kpixmapeffect.h>
 
 
-K3bListViewItemAnimator::K3bListViewItemAnimator( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bListViewItemAnimator::K3bListViewItemAnimator( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   init();
 }
 
 
-K3bListViewItemAnimator::K3bListViewItemAnimator( QListViewItem* item, int col, QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bListViewItemAnimator::K3bListViewItemAnimator( TQListViewItem* item, int col, TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   init();
   setItem( item, col );
@@ -42,7 +42,7 @@ K3bListViewItemAnimator::~K3bListViewItemAnimator()
 }
 
 
-QListViewItem* K3bListViewItemAnimator::item() const
+TQListViewItem* K3bListViewItemAnimator::item() const
 {
     return m_item;
 }
@@ -52,8 +52,8 @@ void K3bListViewItemAnimator::init()
 {
   m_item = 0;
   m_column = 0;
-  m_timer = new QTimer( this );
-  connect( m_timer, SIGNAL(timeout()), this, SLOT(slotAnimate()) );
+  m_timer = new TQTimer( this );
+  connect( m_timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotAnimate()) );
 }
 
 
@@ -75,17 +75,17 @@ void K3bListViewItemAnimator::stop()
 }
 
 
-void K3bListViewItemAnimator::setItem( QListViewItem* item, int col )
+void K3bListViewItemAnimator::setItem( TQListViewItem* item, int col )
 {
   m_item = item;
   m_column = col;
   m_pixmap = *item->pixmap(col);
-  m_fadeColor = item->listView()->colorGroup().base();
+  m_fadeColor = item->listView()->tqcolorGroup().base();
   start();
 }
 
 
-void K3bListViewItemAnimator::setPixmap( const QPixmap& p )
+void K3bListViewItemAnimator::setPixmap( const TQPixmap& p )
 {
   m_pixmap = p;
   start();
@@ -99,7 +99,7 @@ void K3bListViewItemAnimator::setColumn( int col )
 }
 
 
-void K3bListViewItemAnimator::setFadeColor( const QColor& c )
+void K3bListViewItemAnimator::setFadeColor( const TQColor& c )
 {
   m_fadeColor = c;
   start();

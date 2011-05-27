@@ -6,7 +6,7 @@
 // ImageMagick code begin
 // ----------------------
 
-// This code is ImageMagick's resize code, adapted for QImage, with
+// This code is ImageMagick's resize code, adapted for TQImage, with
 // fastfloat class added as an optimization.
 // The original license text follows.
 
@@ -69,9 +69,9 @@
 #endif
 #endif
 
-// Qt
-#include <qimage.h>
-#include <qcolor.h>
+// TQt
+#include <tqimage.h>
+#include <tqcolor.h>
 
 #include <kdeversion.h>
 #include <kcpuinfo.h>
@@ -86,8 +86,8 @@
 namespace ImageUtils {
 
 
-#define Max QMAX
-#define Min QMIN
+#define Max TQMAX
+#define Min TQMIN
 
 // mustn't be less than used precision (i.e. 1/fastfloat::RATIO)
 #define MagickEpsilon 0.0002
@@ -423,7 +423,7 @@ static fastfloat Triangle(const fastfloat x,const fastfloat)
   return(0.0);
 }
 
-static void HorizontalFilter(const QImage& source,QImage& destination,
+static void HorizontalFilter(const TQImage& source,TQImage& destination,
   const fastfloat x_factor,const fastfloat blur,
   ContributionInfo *contribution, Filter filter, fastfloat filtersupport)
 {
@@ -492,23 +492,23 @@ static void HorizontalFilter(const QImage& source,QImage& destination,
       {
         int px = contribution[i].pixel;
         int py = y;
-        QRgb p = reinterpret_cast< QRgb* >( source.jumpTable()[ py ])[ px ];
-        red+=contribution[i].weight*qRed(p);
-        green+=contribution[i].weight*qGreen(p);
-        blue+=contribution[i].weight*qBlue(p);
-        alpha+=contribution[i].weight*qAlpha(p);
+        TQRgb p = reinterpret_cast< TQRgb* >( const_cast<TQImage&>(source).jumpTable()[ py ])[ px ];
+        red+=contribution[i].weight*tqRed(p);
+        green+=contribution[i].weight*tqGreen(p);
+        blue+=contribution[i].weight*tqBlue(p);
+        alpha+=contribution[i].weight*tqAlpha(p);
       }
-      QRgb pix = qRgba(
+      TQRgb pix = tqRgba(
           fasttolong( red < 0 ? 0 : red > 255 ? 255 : red + 0.5 ),
           fasttolong( green < 0 ? 0 : green > 255 ? 255 : green + 0.5 ),
           fasttolong( blue < 0 ? 0 : blue > 255 ? 255 : blue + 0.5 ),
           fasttolong( alpha < 0 ? 0 : alpha > 255 ? 255 : alpha + 0.5 ));
-      reinterpret_cast< QRgb* >( destination.jumpTable()[ y ])[ x ] = pix;
+      reinterpret_cast< TQRgb* >( destination.jumpTable()[ y ])[ x ] = pix;
     }
   }
 }
 
-static void VerticalFilter(const QImage& source,QImage& destination,
+static void VerticalFilter(const TQImage& source,TQImage& destination,
   const fastfloat y_factor,const fastfloat blur,
   ContributionInfo *contribution, Filter filter, fastfloat filtersupport )
 {
@@ -577,23 +577,23 @@ static void VerticalFilter(const QImage& source,QImage& destination,
       {
         int px = x;
         int py = contribution[i].pixel;
-        QRgb p = reinterpret_cast< QRgb* >( source.jumpTable()[ py ])[ px ];
-        red+=contribution[i].weight*qRed(p);
-        green+=contribution[i].weight*qGreen(p);
-        blue+=contribution[i].weight*qBlue(p);
-        alpha+=contribution[i].weight*qAlpha(p);
+        TQRgb p = reinterpret_cast< TQRgb* >( const_cast<TQImage&>(source).jumpTable()[ py ])[ px ];
+        red+=contribution[i].weight*tqRed(p);
+        green+=contribution[i].weight*tqGreen(p);
+        blue+=contribution[i].weight*tqBlue(p);
+        alpha+=contribution[i].weight*tqAlpha(p);
       }
-      QRgb pix = qRgba(
+      TQRgb pix = tqRgba(
           fasttolong( red < 0 ? 0 : red > 255 ? 255 : red + 0.5 ),
           fasttolong( green < 0 ? 0 : green > 255 ? 255 : green + 0.5 ),
           fasttolong( blue < 0 ? 0 : blue > 255 ? 255 : blue + 0.5 ),
           fasttolong( alpha < 0 ? 0 : alpha > 255 ? 255 : alpha + 0.5 ));
-      reinterpret_cast< QRgb* >( destination.jumpTable()[ y ])[ x ] = pix;
+      reinterpret_cast< TQRgb* >( destination.jumpTable()[ y ])[ x ] = pix;
     }
   }
 }
 
-static QImage ResizeImage(const QImage& image,const int columns,
+static TQImage ResizeImage(const TQImage& image,const int columns,
   const int rows, Filter filter, fastfloat filtersupport, double blur)
 {
   ContributionInfo
@@ -611,7 +611,7 @@ static QImage ResizeImage(const QImage& image,const int columns,
   */
   if ((columns == image.width()) && (rows == image.height()) && (blur == 1.0))
     return image.copy();
-  QImage resize_image( columns, rows, 32 );
+  TQImage resize_image( columns, rows, 32 );
   resize_image.setAlphaBuffer( image.hasAlphaBuffer());
   /*
     Allocate filter contribution info.
@@ -638,20 +638,20 @@ static QImage ResizeImage(const QImage& image,const int columns,
   if (((fastfloat) columns*(image.height()+rows)) >
       ((fastfloat) rows*(image.width()+columns)))
     {
-      QImage source_image( columns, image.height(), 32 );
+      TQImage source_image( columns, image.height(), 32 );
       source_image.setAlphaBuffer( image.hasAlphaBuffer());
-      HorizontalFilter(image,source_image,x_factor,blur,
+     HorizontalFilter(image,source_image,x_factor,blur,
         contribution,filter,filtersupport);
-      VerticalFilter(source_image,resize_image,y_factor,
+     VerticalFilter(source_image,resize_image,y_factor,
         blur,contribution,filter,filtersupport);
     }
   else
     {
-      QImage source_image( image.width(), rows, 32 );
+      TQImage source_image( image.width(), rows, 32 );
       source_image.setAlphaBuffer( image.hasAlphaBuffer());
-      VerticalFilter(image,source_image,y_factor,blur,
+     VerticalFilter(image,source_image,y_factor,blur,
         contribution,filter,filtersupport);
-      HorizontalFilter(source_image,resize_image,x_factor,
+     HorizontalFilter(source_image,resize_image,x_factor,
         blur,contribution,filter,filtersupport);
     }
   /*
@@ -724,7 +724,7 @@ static QImage ResizeImage(const QImage& image,const int columns,
 %
 %
 */
-QImage SampleImage(const QImage& image,const int columns,
+TQImage SampleImage(const TQImage& image,const int columns,
   const int rows)
 {
   int
@@ -756,7 +756,7 @@ QImage SampleImage(const QImage& image,const int columns,
   // 32bit like the ImageMagick original. This avoids the relatively
   // expensive conversion.
   const int d = image.depth() / 8;
-  QImage sample_image( columns, rows, image.depth());
+  TQImage sample_image( columns, rows, image.depth());
   sample_image.setAlphaBuffer( image.hasAlphaBuffer());
   /*
     Allocate scan line buffer and column offset buffers.
@@ -769,7 +769,7 @@ QImage SampleImage(const QImage& image,const int columns,
   */
 // In the following several code 0.5 needs to be added, otherwise the image
 // would be moved by half a pixel to bottom-right, just like
-// with Qt's QImage::scale()
+// with TQt's TQImage::scale()
   for (x=0; x < (long) sample_image.width(); x++)
   {
     x_offset[x]=int((x+0.5)*image.width()/sample_image.width());
@@ -808,7 +808,7 @@ QImage SampleImage(const QImage& image,const int columns,
     case 4: // 32bit
       for (x=0; x < (long) sample_image.width(); x++)
       {
-        *(QRgb*)q=((QRgb*)pixels)[ x_offset[x] ];
+        *(TQRgb*)q=((TQRgb*)pixels)[ x_offset[x] ];
         q += d;
       }
       break;
@@ -848,11 +848,11 @@ QImage SampleImage(const QImage& image,const int columns,
 /**
  * This is the normal smoothscale method, based on Imlib2's smoothscale.
  *
- * Originally I took the algorithm used in NetPBM and Qt and added MMX/3dnow
- * optimizations. It ran in about 1/2 the time as Qt. Then I ported Imlib's
+ * Originally I took the algorithm used in NetPBM and TQt and added MMX/3dnow
+ * optimizations. It ran in about 1/2 the time as TQt. Then I ported Imlib's
  * C algorithm and it ran at about the same speed as my MMX optimized one...
  * Finally I ported Imlib's MMX version and it ran in less than half the
- * time as my MMX algorithm, (taking only a quarter of the time Qt does).
+ * time as my MMX algorithm, (taking only a quarter of the time TQt does).
  *
  * Changes include formatting, namespaces and other C++'ings, removal of old
  * #ifdef'ed code, and removal of unneeded border calculation code.
@@ -933,7 +933,7 @@ namespace MImageScale{
     int* mimageCalcXPoints(int sw, int dw);
     int* mimageCalcApoints(int s, int d, int up);
     MImageScaleInfo* mimageFreeScaleInfo(MImageScaleInfo *isi);
-    MImageScaleInfo *mimageCalcScaleInfo(QImage &img, int sw, int sh,
+    MImageScaleInfo *mimageCalcScaleInfo(TQImage &img, int sw, int sh,
                                          int dw, int dh, char aa, int sow);
     void mimageSampleRGBA(MImageScaleInfo *isi, unsigned int *dest, int dxx,
                           int dyy, int dx, int dy, int dw, int dh, int dow);
@@ -943,7 +943,7 @@ namespace MImageScale{
     void mimageScaleAARGB(MImageScaleInfo *isi, unsigned int *dest, int dxx,
                           int dyy, int dx, int dy, int dw, int dh, int dow, int
                           sow);
-    QImage smoothScale(const QImage& img, int dw, int dh);
+    TQImage smoothScale(const TQImage& img, int dw, int dh);
 }
 
 #ifdef HAVE_X86_MMX
@@ -957,14 +957,14 @@ extern "C" {
 
 using namespace MImageScale;
 
-QImage MImageScale::smoothScale(const QImage& image, int dw, int dh)
+TQImage MImageScale::smoothScale(const TQImage& image, int dw, int dh)
 {
-    QImage img = image.depth() < 32 ? image.convertDepth( 32 ) : image;
+    TQImage img = image.depth() < 32 ? image.convertDepth( 32 ) : image;
     int w = img.width();
     int h = img.height();
 
     int sow = img.bytesPerLine();
-    // handle CroppedQImage
+    // handle CroppedTQImage
     if( img.height() > 1 && sow != img.scanLine( 1 ) - img.scanLine( 0 ))
         sow = img.scanLine( 1 ) - img.scanLine( 0 );
     sow = sow / ( img.depth() / 8 );
@@ -972,9 +972,9 @@ QImage MImageScale::smoothScale(const QImage& image, int dw, int dh)
     MImageScaleInfo *scaleinfo =
         mimageCalcScaleInfo(img, w, h, dw, dh, true, sow);
     if(!scaleinfo)
-        return QImage();
+        return TQImage();
 
-    QImage buffer(dw, dh, 32);
+    TQImage buffer(dw, dh, 32);
     buffer.setAlphaBuffer(img.hasAlphaBuffer());
 
 #ifdef HAVE_X86_MMX
@@ -1139,7 +1139,7 @@ MImageScaleInfo* MImageScale::mimageFreeScaleInfo(MImageScaleInfo *isi)
     return(NULL);
 }
 
-MImageScaleInfo* MImageScale::mimageCalcScaleInfo(QImage &img, int sw, int sh,
+MImageScaleInfo* MImageScale::mimageCalcScaleInfo(TQImage &img, int sw, int sh,
                                                   int dw, int dh, char aa, int sow)
 {
     MImageScaleInfo *isi;
@@ -1250,7 +1250,7 @@ void MImageScale::mimageScaleAARGBA(MImageScaleInfo *isi, unsigned int *dest,
                         g = ((gg * YAP) + (g * INV_YAP)) >> 16;
                         b = ((bb * YAP) + (b * INV_YAP)) >> 16;
                         a = ((aa * YAP) + (a * INV_YAP)) >> 16;
-                        *dptr++ = qRgba(r, g, b, a);
+                        *dptr++ = tqRgba(r, g, b, a);
                     }
                     else{
                         pix = ypoints[dyy + y] + xpoints[x];
@@ -1267,7 +1267,7 @@ void MImageScale::mimageScaleAARGBA(MImageScaleInfo *isi, unsigned int *dest,
                         g >>= 8;
                         b >>= 8;
                         a >>= 8;
-                        *dptr++ = qRgba(r, g, b, a);
+                        *dptr++ = tqRgba(r, g, b, a);
                     }
                 }
             }
@@ -1291,7 +1291,7 @@ void MImageScale::mimageScaleAARGBA(MImageScaleInfo *isi, unsigned int *dest,
                         g >>= 8;
                         b >>= 8;
                         a >>= 8;
-                        *dptr++ = qRgba(r, g, b, a);
+                        *dptr++ = tqRgba(r, g, b, a);
                     }
                     else
                         *dptr++ = sptr[xpoints[x] ];
@@ -1368,7 +1368,7 @@ void MImageScale::mimageScaleAARGBA(MImageScaleInfo *isi, unsigned int *dest,
                     b >>= 4;
                     a >>= 4;
                 }
-                *dptr = qRgba(r, g, b, a);
+                *dptr = tqRgba(r, g, b, a);
                 dptr++;
             }
         }
@@ -1442,7 +1442,7 @@ void MImageScale::mimageScaleAARGBA(MImageScaleInfo *isi, unsigned int *dest,
                     b >>= 4;
                     a >>= 4;
                 }
-                *dptr = qRgba(r, g, b, a);
+                *dptr = tqRgba(r, g, b, a);
                 dptr++;
             }
         }
@@ -1606,7 +1606,7 @@ void MImageScale::mimageScaleAARGB(MImageScaleInfo *isi, unsigned int *dest,
                         r = ((rr * YAP) + (r * INV_YAP)) >> 16;
                         g = ((gg * YAP) + (g * INV_YAP)) >> 16;
                         b = ((bb * YAP) + (b * INV_YAP)) >> 16;
-                        *dptr++ = qRgba(r, g, b, 0xff);
+                        *dptr++ = tqRgba(r, g, b, 0xff);
                     }
                     else{
                         pix = ypoints[dyy + y] + xpoints[x];
@@ -1620,7 +1620,7 @@ void MImageScale::mimageScaleAARGB(MImageScaleInfo *isi, unsigned int *dest,
                         r >>= 8;
                         g >>= 8;
                         b >>= 8;
-                        *dptr++ = qRgba(r, g, b, 0xff);
+                        *dptr++ = tqRgba(r, g, b, 0xff);
                     }
                 }
             }
@@ -1641,7 +1641,7 @@ void MImageScale::mimageScaleAARGB(MImageScaleInfo *isi, unsigned int *dest,
                         r >>= 8;
                         g >>= 8;
                         b >>= 8;
-                        *dptr++ = qRgba(r, g, b, 0xff);
+                        *dptr++ = tqRgba(r, g, b, 0xff);
                     }
                     else
                         *dptr++ = sptr[xpoints[x] ];
@@ -1709,7 +1709,7 @@ void MImageScale::mimageScaleAARGB(MImageScaleInfo *isi, unsigned int *dest,
                     g >>= 4;
                     b >>= 4;
                 }
-                *dptr = qRgba(r, g, b, 0xff);
+                *dptr = tqRgba(r, g, b, 0xff);
                 dptr++;
             }
         }
@@ -1774,7 +1774,7 @@ void MImageScale::mimageScaleAARGB(MImageScaleInfo *isi, unsigned int *dest,
                     g >>= 4;
                     b >>= 4;
                 }
-                *dptr = qRgba(r, g, b, 0xff);
+                *dptr = tqRgba(r, g, b, 0xff);
                 dptr++;
             }
         }
@@ -1913,20 +1913,20 @@ void MImageScale::mimageScaleAARGB(MImageScaleInfo *isi, unsigned int *dest,
 // 	// Imlib2/Mosfet scale - I have really no idea how many pixels it needs
 // 	if( filter == Box && blur == 1.0 ) return int( 3 / zoom + 1 );
 // // This is support size for ImageMagick's scaling.
-// 	double scale=blur*QMAX(1.0/zoom,1.0);
+// 	double scale=blur*TQMAX(1.0/zoom,1.0);
 // 	double support=scale* filtersupport;
 // 	if (support <= 0.5) support=0.5+0.000001;
 // 	return int( support + 1 );
 // }
 
-QImage scale(const QImage& image, int width, int height,
-	SmoothAlgorithm alg, QImage::ScaleMode mode, double blur )
+TQImage scale(const TQImage& image, int width, int height,
+	SmoothAlgorithm alg, TQ_ScaleMode mode, double blur )
 {
 	if( image.isNull()) return image.copy();
 	
-	QSize newSize( image.size() );
-	newSize.scale( QSize( width, height ), (QSize::ScaleMode)mode ); // ### remove cast in Qt 4.0
-	newSize = newSize.expandedTo( QSize( 1, 1 )); // make sure it doesn't become null
+	TQSize newSize( image.size() );
+	newSize.tqscale( TQSize( width, height ), (TQSize::ScaleMode)mode ); // ### remove cast in TQt 4.0
+	newSize = newSize.expandedTo( TQSize( 1, 1 )); // make sure it doesn't become null
 
 	if ( newSize == image.size() ) return image.copy();
 	
@@ -1968,7 +1968,7 @@ QImage scale(const QImage& image, int width, int height,
 	}
 
 	return ResizeImage( image.convertDepth( 32 ), width, height, filter, filtersupport, blur );
-        // unlike Qt's smoothScale() this function introduces new colors to grayscale images ... oh well
+        // unlike TQt's smoothScale() this function introduces new colors to grayscale images ... oh well
 }
 
 

@@ -17,8 +17,8 @@
 #ifndef _K3B_MSF_H_
 #define _K3B_MSF_H_
 
-#include <qstring.h>
-#include <qregexp.h>
+#include <tqstring.h>
+#include <tqregexp.h>
 
 #include <kdebug.h>
 #include <kio/global.h>
@@ -65,7 +65,7 @@ namespace K3b
       void addSeconds( int s );
       void addFrames( int f );
 
-      QString toString( bool showFrames = true ) const;
+      TQString toString( bool showFrames = true ) const;
 
       KIO::filesize_t mode1Bytes() const;
       KIO::filesize_t mode2Form1Bytes() const;
@@ -83,7 +83,7 @@ namespace K3b
        * \li 100:23:57 - treated as 100 minutes, 23 seconds, and 57 frames
        * \li 100:23.57 - treated as 100 minutes, 23 seconds, and 57 frames
        */
-      static Msf fromString( const QString&, bool* ok = 0 );
+      static Msf fromString( const TQString&, bool* ok = 0 );
 
       /**
        * @param ms seconds
@@ -91,7 +91,7 @@ namespace K3b
        */
       static Msf fromSeconds( double ms );
 
-      static QRegExp regExp();
+      static TQRegExp regExp();
 
     private:
       void makeValid();

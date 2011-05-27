@@ -20,11 +20,11 @@
 #include <kconfig.h>
 #include <kdeversion.h>
 
-#include <qstring.h>
-#include <qregexp.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqregexp.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqptrlist.h>
 
 #include <unistd.h>
 #include <sys/stat.h>
@@ -32,7 +32,7 @@
 
 
 
-QString K3bExternalBinManager::m_noPath = "";
+TQString K3bExternalBinManager::m_noPath = "";
 
 
 // ///////////////////////////////////////////////////////////
@@ -53,25 +53,25 @@ bool K3bExternalBin::isEmpty() const
 }
 
 
-const QString& K3bExternalBin::name() const
+const TQString& K3bExternalBin::name() const
 {
   return m_program->name();
 }
 
 
-bool K3bExternalBin::hasFeature( const QString& f ) const
+bool K3bExternalBin::hasFeature( const TQString& f ) const
 {
-  return m_features.contains( f );
+  return m_features.tqcontains( f );
 }
 
 
-void K3bExternalBin::addFeature( const QString& f )
+void K3bExternalBin::addFeature( const TQString& f )
 {
   m_features.append( f );
 }
 
 
-const QStringList& K3bExternalBin::userParameters() const
+const TQStringList& K3bExternalBin::userParameters() const
 {
   return m_program->userParameters();
 }
@@ -85,7 +85,7 @@ const QStringList& K3bExternalBin::userParameters() const
 // ///////////////////////////////////////////////////////////
 
 
-K3bExternalProgram::K3bExternalProgram( const QString& name )
+K3bExternalProgram::K3bExternalProgram( const TQString& name )
   : m_name( name )
 {
   m_bins.setAutoDelete( true );
@@ -99,7 +99,7 @@ K3bExternalProgram::~K3bExternalProgram()
 
 const K3bExternalBin* K3bExternalProgram::mostRecentBin() const
 {
-  QPtrListIterator<K3bExternalBin> it( m_bins );
+  TQPtrListIterator<K3bExternalBin> it( m_bins );
   K3bExternalBin* bin = *it;
   ++it;
   while( *it ) {
@@ -113,7 +113,7 @@ const K3bExternalBin* K3bExternalProgram::mostRecentBin() const
 
 void K3bExternalProgram::addBin( K3bExternalBin* bin )
 {
-  if( !m_bins.contains( bin ) ) {
+  if( !m_bins.tqcontains( bin ) ) {
     // insertion sort
     // the first bin in the list is always the one used 
     // so we default to using the newest one
@@ -127,17 +127,17 @@ void K3bExternalProgram::addBin( K3bExternalBin* bin )
 
 void K3bExternalProgram::setDefault( const K3bExternalBin* bin )
 {
-  if( m_bins.contains( bin ) )
-    m_bins.take( m_bins.find( bin ) );
+  if( m_bins.tqcontains( bin ) )
+    m_bins.take( m_bins.tqfind( bin ) );
 
   // the first bin in the list is always the one used 
   m_bins.insert( 0, bin );
 }
 
 
-void K3bExternalProgram::setDefault( const QString& path )
+void K3bExternalProgram::setDefault( const TQString& path )
 {
-  for( QPtrListIterator<K3bExternalBin> it( m_bins ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bExternalBin> it( m_bins ); it.current(); ++it ) {
     if( it.current()->path == path ) {
       setDefault( it.current() );
       return;
@@ -146,9 +146,9 @@ void K3bExternalProgram::setDefault( const QString& path )
 }
 
 
-void K3bExternalProgram::addUserParameter( const QString& p )
+void K3bExternalProgram::addUserParameter( const TQString& p )
 {
-  if( !m_userParameters.contains( p ) )
+  if( !m_userParameters.tqcontains( p ) )
     m_userParameters.append(p);
 }
 
@@ -161,8 +161,8 @@ void K3bExternalProgram::addUserParameter( const QString& p )
 // ///////////////////////////////////////////////////////////
 
 
-K3bExternalBinManager::K3bExternalBinManager( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bExternalBinManager::K3bExternalBinManager( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
 }
 
@@ -184,14 +184,14 @@ bool K3bExternalBinManager::readConfig( KConfig* c )
 
   search();
 
-  for ( QMap<QString, K3bExternalProgram*>::iterator it = m_programs.begin(); it != m_programs.end(); ++it ) {
+  for ( TQMap<TQString, K3bExternalProgram*>::iterator it = m_programs.begin(); it != m_programs.end(); ++it ) {
     K3bExternalProgram* p = it.data();
     if( c->hasKey( p->name() + " default" ) ) {
       p->setDefault( c->readEntry( p->name() + " default" ) );
     }
     if( c->hasKey( p->name() + " user parameters" ) ) {
-      QStringList list = c->readListEntry( p->name() + " user parameters" );
-      for( QStringList::iterator strIt = list.begin(); strIt != list.end(); ++strIt )
+      TQStringList list = c->readListEntry( p->name() + " user parameters" );
+      for( TQStringList::iterator strIt = list.begin(); strIt != list.end(); ++strIt )
 	p->addUserParameter( *strIt );
     }
     if( c->hasKey( p->name() + " last seen newest version" ) ) {
@@ -212,7 +212,7 @@ bool K3bExternalBinManager::saveConfig( KConfig* c )
   c->setGroup( "External Programs" );
   c->writePathEntry( "search path", m_searchPath );
 
-  for ( QMap<QString, K3bExternalProgram*>::iterator it = m_programs.begin(); it != m_programs.end(); ++it ) {
+  for ( TQMap<TQString, K3bExternalProgram*>::iterator it = m_programs.begin(); it != m_programs.end(); ++it ) {
     K3bExternalProgram* p = it.data();
     if( p->defaultBin() )
       c->writeEntry( p->name() + " default", p->defaultBin()->path );
@@ -228,18 +228,18 @@ bool K3bExternalBinManager::saveConfig( KConfig* c )
 }
 
 
-bool K3bExternalBinManager::foundBin( const QString& name )
+bool K3bExternalBinManager::foundBin( const TQString& name )
 {
-  if( m_programs.find( name ) == m_programs.end() )
+  if( m_programs.tqfind( name ) == m_programs.end() )
     return false;
   else
     return (m_programs[name]->defaultBin() != 0);
 }
 
 
-const QString& K3bExternalBinManager::binPath( const QString& name )
+const TQString& K3bExternalBinManager::binPath( const TQString& name )
 {
-  if( m_programs.find( name ) == m_programs.end() )
+  if( m_programs.tqfind( name ) == m_programs.end() )
     return m_noPath;
 
   if( m_programs[name]->defaultBin() != 0 )
@@ -249,9 +249,9 @@ const QString& K3bExternalBinManager::binPath( const QString& name )
 }
 
 
-const K3bExternalBin* K3bExternalBinManager::binObject( const QString& name )
+const K3bExternalBin* K3bExternalBinManager::binObject( const TQString& name )
 {
-  if( m_programs.find( name ) == m_programs.end() )
+  if( m_programs.tqfind( name ) == m_programs.end() )
     return 0;
 
   return m_programs[name]->defaultBin();
@@ -266,7 +266,7 @@ void K3bExternalBinManager::addProgram( K3bExternalProgram* p )
 
 void K3bExternalBinManager::clear()
 {
-  for( QMap<QString, K3bExternalProgram*>::Iterator it = m_programs.begin(); it != m_programs.end(); ++it )
+  for( TQMap<TQString, K3bExternalProgram*>::Iterator it = m_programs.begin(); it != m_programs.end(); ++it )
     delete it.data();
   m_programs.clear();
 }
@@ -277,36 +277,36 @@ void K3bExternalBinManager::search()
   if( m_searchPath.isEmpty() )
     loadDefaultSearchPath();
 
-  for( QMap<QString, K3bExternalProgram*>::iterator it = m_programs.begin(); it != m_programs.end(); ++it ) {
+  for( TQMap<TQString, K3bExternalProgram*>::iterator it = m_programs.begin(); it != m_programs.end(); ++it ) {
     it.data()->clear();
   }
 
   // do not search one path twice
-  QStringList paths;
-  for( QStringList::const_iterator it = m_searchPath.begin(); it != m_searchPath.end(); ++it ) {
-    QString p = *it;
+  TQStringList paths;
+  for( TQStringList::const_iterator it = m_searchPath.begin(); it != m_searchPath.end(); ++it ) {
+    TQString p = *it;
     if( p[p.length()-1] == '/' )
       p.truncate( p.length()-1 );
-    if( !paths.contains( p ) && !paths.contains( p + "/" ) )
+    if( !paths.tqcontains( p ) && !paths.tqcontains( p + "/" ) )
       paths.append(p);
   }
 
   // get the environment path variable
   char* env_path = ::getenv("PATH");
   if( env_path ) {
-    QStringList env_pathList = QStringList::split(":", QString::fromLocal8Bit(env_path));
-    for( QStringList::const_iterator it = env_pathList.begin(); it != env_pathList.end(); ++it ) {
-      QString p = *it;
+    TQStringList env_pathList = TQStringList::split(":", TQString::fromLocal8Bit(env_path));
+    for( TQStringList::const_iterator it = env_pathList.begin(); it != env_pathList.end(); ++it ) {
+      TQString p = *it;
       if( p[p.length()-1] == '/' )
 	p.truncate( p.length()-1 );
-      if( !paths.contains( p ) && !paths.contains( p + "/" ) )
+      if( !paths.tqcontains( p ) && !paths.tqcontains( p + "/" ) )
 	paths.append(p);
     }
   }
 
 
-  for( QStringList::const_iterator it = paths.begin(); it != paths.end(); ++it )
-    for( QMap<QString, K3bExternalProgram*>::iterator pit = m_programs.begin(); pit != m_programs.end(); ++pit )
+  for( TQStringList::const_iterator it = paths.begin(); it != paths.end(); ++it )
+    for( TQMap<TQString, K3bExternalProgram*>::iterator pit = m_programs.begin(); pit != m_programs.end(); ++pit )
       pit.data()->scan(*it);
 
   // TESTING
@@ -332,9 +332,9 @@ void K3bExternalBinManager::search()
 }
 
 
-K3bExternalProgram* K3bExternalBinManager::program( const QString& name ) const
+K3bExternalProgram* K3bExternalBinManager::program( const TQString& name ) const
 {
-  if( m_programs.find( name ) == m_programs.end() )
+  if( m_programs.tqfind( name ) == m_programs.end() )
     return 0;
   else
     return m_programs[name];
@@ -358,26 +358,26 @@ void K3bExternalBinManager::loadDefaultSearchPath()
 }
 
 
-void K3bExternalBinManager::setSearchPath( const QStringList& list )
+void K3bExternalBinManager::setSearchPath( const TQStringList& list )
 {
   loadDefaultSearchPath();
 
-  for( QStringList::const_iterator it = list.begin(); it != list.end(); ++it ) {
-    if( !m_searchPath.contains( *it ) )
+  for( TQStringList::const_iterator it = list.begin(); it != list.end(); ++it ) {
+    if( !m_searchPath.tqcontains( *it ) )
       m_searchPath.append( *it );
   }
 }
 
 
-void K3bExternalBinManager::addSearchPath( const QString& path )
+void K3bExternalBinManager::addSearchPath( const TQString& path )
 {
-  if( !m_searchPath.contains( path ) )
+  if( !m_searchPath.tqcontains( path ) )
     m_searchPath.append( path );
 }
 
 
 
-const K3bExternalBin* K3bExternalBinManager::mostRecentBinObject( const QString& name )
+const K3bExternalBin* K3bExternalBinManager::mostRecentBinObject( const TQString& name )
 {
   if( K3bExternalProgram* p = program( name ) )
     return p->mostRecentBin();

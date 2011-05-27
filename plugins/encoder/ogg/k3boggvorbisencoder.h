@@ -27,28 +27,29 @@ class base_K3bOggVorbisEncoderSettingsWidget;
 class K3bOggVorbisEncoder : public K3bAudioEncoder
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bOggVorbisEncoder( QObject* parent = 0, const char* name = 0 );
+  K3bOggVorbisEncoder( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bOggVorbisEncoder();
 
-  QStringList extensions() const { return QStringList("ogg"); }
+  TQStringList extensions() const { return TQStringList("ogg"); }
   
-  QString fileTypeComment( const QString& ) const;
+  TQString fileTypeComment( const TQString& ) const;
 
-  long long fileSize( const QString&, const K3b::Msf& msf ) const;
+  long long fileSize( const TQString&, const K3b::Msf& msf ) const;
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bPluginConfigWidget* createConfigWidget( QWidget* parent = 0, 
+  K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent = 0, 
 					     const char* name = 0 ) const;
 
  private:
   void loadConfig();
   void finishEncoderInternal();
-  bool initEncoderInternal( const QString& extension, const K3b::Msf& length );
-  long encodeInternal( const char* data, Q_ULONG len );
-  void setMetaDataInternal( MetaDataField, const QString& );
+  bool initEncoderInternal( const TQString& extension, const K3b::Msf& length );
+  long encodeInternal( const char* data, TQ_ULONG len );
+  void setMetaDataInternal( MetaDataField, const TQString& );
 
   bool writeOggHeaders();
   void cleanup();
@@ -62,9 +63,10 @@ class K3bOggVorbisEncoder : public K3bAudioEncoder
 class K3bOggVorbisEncoderSettingsWidget : public K3bPluginConfigWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bOggVorbisEncoderSettingsWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bOggVorbisEncoderSettingsWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bOggVorbisEncoderSettingsWidget();
 
  public slots:

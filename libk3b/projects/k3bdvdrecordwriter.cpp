@@ -26,8 +26,8 @@
 #include <klocale.h>
 
 
-K3bDvdrecordWriter::K3bDvdrecordWriter( K3bDevice::Device* dev, QObject* parent, const char* name )
-  : K3bCdrecordWriter( dev, parent, name )
+K3bDvdrecordWriter::K3bDvdrecordWriter( K3bDevice::Device* dev, TQObject* tqparent, const char* name )
+  : K3bCdrecordWriter( dev, tqparent, name )
 {
 }
 
@@ -42,10 +42,10 @@ void K3bDvdrecordWriter::prepareProcess()
   m_process = new K3bProcess();
   m_process->setRunPrivileged(true);
   m_process->setSplitStdout(true);
-  connect( m_process, SIGNAL(stdoutLine(const QString&)), this, SLOT(slotStdLine(const QString&)) );
-  connect( m_process, SIGNAL(stderrLine(const QString&)), this, SLOT(slotStdLine(const QString&)) );
-  connect( m_process, SIGNAL(processExited(KProcess*)), this, SLOT(slotProcessExited(KProcess*)) );
-  connect( m_process, SIGNAL(wroteStdin(KProcess*)), this, SIGNAL(dataWritten()) );
+  connect( m_process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
+  connect( m_process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
+  connect( m_process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
+  connect( m_process, TQT_SIGNAL(wroteStdin(KProcess*)), this, TQT_SIGNAL(dataWritten()) );
 
 //   if( k3bcore->externalBinManager()->binObject("cdrecord")->hasFeature( "dvd-patch" ) )
 //     m_cdrecordBinObject = k3bcore->externalBinManager()->binObject("cdrecord");
@@ -66,8 +66,8 @@ void K3bDvdrecordWriter::prepareProcess()
     *m_process << "gracetime=2";  // 2 is the lowest allowed value (Joerg, why do you do this to us?)
    
   // Again we assume the device to be set!
-  *m_process << QString("dev=%1").arg(K3b::externalBinDeviceParameter(burnDevice(), m_cdrecordBinObject));
-  *m_process << QString("speed=%1").arg(burnSpeed());
+  *m_process << TQString("dev=%1").tqarg(K3b::externalBinDeviceParameter(burnDevice(), m_cdrecordBinObject));
+  *m_process << TQString("speed=%1").tqarg(burnSpeed());
   
   // DVDs are only written in DAO mode (and Packet, but we do not support that since it does not
   //                                    make much sense here)  
@@ -95,7 +95,7 @@ void K3bDvdrecordWriter::prepareProcess()
 
   bool manualBufferSize = k3bcore->globalSettings()->manualBufferSize();
   if( manualBufferSize ) {
-    *m_process << QString("fs=%1m").arg( k3bcore->globalSettings()->writingBuffer() );
+    *m_process << TQString("fs=%1m").tqarg( k3bcore->globalSettings()->writingBuffer() );
   }
     
   bool overburn = k3bcore->globalSettings()->overburn();
@@ -103,15 +103,15 @@ void K3bDvdrecordWriter::prepareProcess()
     if( m_cdrecordBinObject->hasFeature("overburn") )
       *m_process << "-overburn";
     else
-      emit infoMessage( i18n("Cdrecord %1 does not support overburning.").arg(m_cdrecordBinObject->version), INFO );
+      emit infoMessage( i18n("Cdrecord %1 does not support overburning.").tqarg(m_cdrecordBinObject->version), INFO );
     
   // additional user parameters from config
-  const QStringList& params = m_cdrecordBinObject->userParameters();
-  for( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+  const TQStringList& params = m_cdrecordBinObject->userParameters();
+  for( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
     *m_process << *it;
 
   // add the user parameters
-  for( QStringList::const_iterator it = m_arguments.begin(); it != m_arguments.end(); ++it )
+  for( TQStringList::const_iterator it = m_arguments.begin(); it != m_arguments.end(); ++it )
     *m_process << *it;
 }
 

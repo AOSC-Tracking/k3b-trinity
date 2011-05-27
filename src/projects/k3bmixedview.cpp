@@ -31,10 +31,10 @@
 #include <k3btoolbox.h>
 #include <k3bprojectplugin.h>
 
-#include <qwidgetstack.h>
-#include <qsplitter.h>
-#include <qlayout.h>
-#include <qvaluelist.h>
+#include <tqwidgetstack.h>
+#include <tqsplitter.h>
+#include <tqlayout.h>
+#include <tqvaluelist.h>
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -44,22 +44,22 @@
 #include <kactionclasses.h>
 
 
-K3bMixedView::K3bMixedView( K3bMixedDoc* doc, QWidget* parent, const char* name )
-  : K3bView( doc, parent, name ), m_doc(doc)
+K3bMixedView::K3bMixedView( K3bMixedDoc* doc, TQWidget* tqparent, const char* name )
+  : K3bView( doc, tqparent, name ), m_doc(doc)
 {
-  QSplitter* splitter = new QSplitter( this );
+  TQSplitter* splitter = new TQSplitter( this );
   m_mixedDirTreeView = new K3bMixedDirTreeView( this, doc, splitter );
-  m_widgetStack = new QWidgetStack( splitter );
+  m_widgetStack = new TQWidgetStack( splitter );
   m_dataFileView = new K3bDataFileView( this, m_mixedDirTreeView, doc->dataDoc(), m_widgetStack );
   m_mixedDirTreeView->setFileView( m_dataFileView );
   m_audioListView = new K3bAudioTrackView( doc->audioDoc(), m_widgetStack );
 
   setMainWidget( splitter );
 
-  connect( m_mixedDirTreeView, SIGNAL(audioTreeSelected()), 
-	   this, SLOT(slotAudioTreeSelected()) );
-  connect( m_mixedDirTreeView, SIGNAL(dataTreeSelected()), 
-	   this, SLOT(slotDataTreeSelected()) );
+  connect( m_mixedDirTreeView, TQT_SIGNAL(audioTreeSelected()), 
+	   this, TQT_SLOT(slotAudioTreeSelected()) );
+  connect( m_mixedDirTreeView, TQT_SIGNAL(dataTreeSelected()), 
+	   this, TQT_SLOT(slotDataTreeSelected()) );
 
   m_widgetStack->raiseWidget( m_dataFileView );
 
@@ -123,7 +123,7 @@ void K3bMixedView::slotBurn()
 {
   if( m_doc->audioDoc()->numOfTracks() == 0 || m_doc->dataDoc()->size() == 0 ) {
     KMessageBox::information( this, i18n("Please add files and audio titles to your project first."),
-			      i18n("No Data to Burn"), QString::null, false );
+			      i18n("No Data to Burn"), TQString(), false );
   }
   else {
     K3bProjectBurnDialog* dlg = newBurnDialog( this );
@@ -138,9 +138,9 @@ void K3bMixedView::slotBurn()
 }
 
 
-K3bProjectBurnDialog* K3bMixedView::newBurnDialog( QWidget* parent, const char* name )
+K3bProjectBurnDialog* K3bMixedView::newBurnDialog( TQWidget* tqparent, const char* name )
 {
-  return new K3bMixedBurnDialog( m_doc, parent, name, true );
+  return new K3bMixedBurnDialog( m_doc, tqparent, name, true );
 }
 
 

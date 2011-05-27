@@ -34,8 +34,8 @@
 class LIBK3B_EXPORT K3bTempFile : public KTempFile
 {
  public:
-  K3bTempFile( const QString& filePrefix = QString::null, 
-	       const QString& fileExtension = QString::null, 
+  K3bTempFile( const TQString& filePrefix = TQString(), 
+	       const TQString& fileExtension = TQString(), 
 	       int mode = 0600 );
   ~K3bTempFile();
 };

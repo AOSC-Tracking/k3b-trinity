@@ -20,12 +20,12 @@
 #include <klocale.h>
 #include <k3bdebug.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 
-QString K3bDevice::deviceTypeString( int t )
+TQString K3bDevice::deviceTypeString( int t )
 {
-  QStringList s;
+  TQStringList s;
   if( t & K3bDevice::DEVICE_CD_R )
     s += i18n("CD-R");
   if( t & K3bDevice::DEVICE_CD_RW )
@@ -68,9 +68,9 @@ QString K3bDevice::deviceTypeString( int t )
 }
 
 
-QString K3bDevice::writingModeString( int m )
+TQString K3bDevice::writingModeString( int m )
 {
-  QStringList s;
+  TQStringList s;
   if( m & K3bDevice::WRITINGMODE_SAO )
     s += i18n("SAO");
   if( m & K3bDevice::WRITINGMODE_TAO )
@@ -108,12 +108,12 @@ QString K3bDevice::writingModeString( int m )
 }
 
 
-QString K3bDevice::mediaTypeString( int m, bool simple )
+TQString K3bDevice::mediaTypeString( int m, bool simple )
 {
   if( m == K3bDevice::MEDIA_UNKNOWN )
     return i18n("Unknown");
 
-  QStringList s;
+  TQStringList s;
   if( m & MEDIA_NONE )
     s += i18n("No media");
   if( m & MEDIA_DVD_ROM )
@@ -183,7 +183,7 @@ QString K3bDevice::mediaTypeString( int m, bool simple )
 void K3bDevice::debugBitfield( unsigned char* data, long len )
 {
   for( int i = 0; i < len; ++i ) {
-    QString index, bitString;
+    TQString index, bitString;
     index.sprintf( "%4i", i );
     for( int bp = 7; bp >= 0; --bp )
       bitString[7-bp] = ( data[i] & (1<<bp) ? '1' : '0' );

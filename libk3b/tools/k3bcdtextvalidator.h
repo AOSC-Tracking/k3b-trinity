@@ -24,10 +24,10 @@
 class LIBK3B_EXPORT K3bCdTextValidator : public K3bLatin1Validator
 {
  public:
-  K3bCdTextValidator(QObject *parent = 0, const char *name = 0);
+  K3bCdTextValidator(TQObject *tqparent = 0, const char *name = 0);
   ~K3bCdTextValidator();
   
-  State validate( QString& input, int& pos ) const;
+  State validate( TQString& input, int& pos ) const;
 };
 
 #endif

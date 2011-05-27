@@ -32,31 +32,31 @@
 #include <kglobal.h>
 #include <kdebug.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qframe.h>
-#include <qeventloop.h>
-#include <qpushbutton.h>
-#include <qapplication.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
+#include <tqframe.h>
+#include <tqeventloop.h>
+#include <tqpushbutton.h>
+#include <tqapplication.h>
 
 
-K3bAudioTrackTRMLookupDialog::K3bAudioTrackTRMLookupDialog( QWidget* parent, const char* name )
+K3bAudioTrackTRMLookupDialog::K3bAudioTrackTRMLookupDialog( TQWidget* tqparent, const char* name )
   : KDialogBase( KDialogBase::Plain, 
 		 i18n("MusicBrainz Query"), 
 		 KDialogBase::Cancel,
 		 KDialogBase::Cancel,
-		 parent, 
+		 tqparent, 
 		 name,
 		 true,
 		 true )
 {
-  QGridLayout* grid = new QGridLayout( plainPage() );
+  TQGridLayout* grid = new TQGridLayout( plainPage() );
   grid->setMargin( marginHint() );
   grid->setSpacing( spacingHint() );
 
-  m_infoLabel = new QLabel( plainPage() );
-  QLabel* pixLabel = new QLabel( plainPage() );
+  m_infoLabel = new TQLabel( plainPage() );
+  TQLabel* pixLabel = new TQLabel( plainPage() );
   pixLabel->setPixmap( KGlobal::iconLoader()->loadIcon( "musicbrainz", KIcon::NoGroup, 64 ) );
   pixLabel->setScaledContents( false );
 
@@ -68,11 +68,11 @@ K3bAudioTrackTRMLookupDialog::K3bAudioTrackTRMLookupDialog( QWidget* parent, con
 
   m_inLoop = false;
   m_mbJob = new K3bMusicBrainzJob( this );
-  connect( m_mbJob, SIGNAL(infoMessage(const QString&, int)), 
-	   this, SLOT(slotMbJobInfoMessage(const QString&, int)) );
-  connect( m_mbJob, SIGNAL(finished(bool)), this, SLOT(slotMbJobFinished(bool)) );
-  connect( m_mbJob, SIGNAL(trackFinished(K3bAudioTrack*, bool)), 
-	   this, SLOT(slotTrackFinished(K3bAudioTrack*, bool)) );
+  connect( m_mbJob, TQT_SIGNAL(infoMessage(const TQString&, int)), 
+	   this, TQT_SLOT(slotMbJobInfoMessage(const TQString&, int)) );
+  connect( m_mbJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMbJobFinished(bool)) );
+  connect( m_mbJob, TQT_SIGNAL(trackFinished(K3bAudioTrack*, bool)), 
+	   this, TQT_SLOT(slotTrackFinished(K3bAudioTrack*, bool)) );
 }
 
 
@@ -81,7 +81,7 @@ K3bAudioTrackTRMLookupDialog::~K3bAudioTrackTRMLookupDialog()
 }
 
 
-int K3bAudioTrackTRMLookupDialog::lookup( const QPtrList<K3bAudioTrack>& tracks )
+int K3bAudioTrackTRMLookupDialog::lookup( const TQPtrList<K3bAudioTrack>& tracks )
 {
   m_mbJob->setTracks( tracks );
   m_mbJob->start();
@@ -90,13 +90,13 @@ int K3bAudioTrackTRMLookupDialog::lookup( const QPtrList<K3bAudioTrack>& tracks 
   setModal( true );
   show();
   m_inLoop = true;
-  QApplication::eventLoop()->enterLoop();
+  TQApplication::eventLoop()->enterLoop();
 
   return 0;
 }
 
 
-void K3bAudioTrackTRMLookupDialog::slotMbJobInfoMessage( const QString& message, int )
+void K3bAudioTrackTRMLookupDialog::slotMbJobInfoMessage( const TQString& message, int )
 {
   m_infoLabel->setText( message );
 }
@@ -107,7 +107,7 @@ void K3bAudioTrackTRMLookupDialog::slotMbJobFinished( bool )
   m_busyWidget->showBusy(false);
   hide();
   if( m_inLoop )
-    QApplication::eventLoop()->exitLoop();
+    TQApplication::eventLoop()->exitLoop();
 }
 
 
@@ -122,7 +122,7 @@ void K3bAudioTrackTRMLookupDialog::slotTrackFinished( K3bAudioTrack* track, bool
 {
   if( !success )
     K3bPassivePopup::showPopup( i18n("Track %1 was not found in the MusicBrainz database.")
-				.arg( track->trackNumber()),
+				.tqarg( track->trackNumber()),
 				i18n("Audio Project") );
 }
 

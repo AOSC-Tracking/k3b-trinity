@@ -47,22 +47,22 @@
 #include <kurldrag.h>
 #include <klineedit.h>
 
-#include <qheader.h>
-#include <qgroupbox.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qlayout.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qpushbutton.h>
-#include <qtabwidget.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qspinbox.h>
-#include <qevent.h>
-#include <qpopupmenu.h>
-#include <qclipboard.h>
+#include <tqheader.h>
+#include <tqgroupbox.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqlayout.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqpushbutton.h>
+#include <tqtabwidget.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqspinbox.h>
+#include <tqevent.h>
+#include <tqpopupmenu.h>
+#include <tqclipboard.h>
 
 
 class K3bIsoImageWritingDialog::Private
@@ -76,15 +76,15 @@ public:
 
   K3bListViewItem* md5SumItem;
   bool haveMd5Sum;
-  QString lastCheckedFile;
+  TQString lastCheckedFile;
   bool isIsoImage;
 
   bool imageForced;
 };
 
 
-K3bIsoImageWritingDialog::K3bIsoImageWritingDialog( QWidget* parent, const char* name, bool modal )
-  : K3bInteractionDialog( parent, name,
+K3bIsoImageWritingDialog::K3bIsoImageWritingDialog( TQWidget* tqparent, const char* name, bool modal )
+  : K3bInteractionDialog( tqparent, name,
 			  i18n("Burn Iso9660 Image"),
 			  i18n("to DVD"),
 			  START_BUTTON|CANCEL_BUTTON,
@@ -102,24 +102,24 @@ K3bIsoImageWritingDialog::K3bIsoImageWritingDialog( QWidget* parent, const char*
   m_writerSelectionWidget->setSupportedWritingApps( K3b::GROWISOFS );
   m_writingModeWidget->setSupportedModes( K3b::DAO|K3b::WRITING_MODE_INCR_SEQ|K3b::WRITING_MODE_RES_OVWR );
 
-  m_md5Job = new K3bMd5Job( 0, this );
-  connect( m_md5Job, SIGNAL(finished(bool)),
-	   this, SLOT(slotMd5JobFinished(bool)) );
-  connect( m_md5Job, SIGNAL(percent(int)),
-	   this, SLOT(slotMd5JobPercent(int)) );
+  m_md5Job = new K3bMd5Job( 0, TQT_TQOBJECT(this) );
+  connect( m_md5Job, TQT_SIGNAL(finished(bool)),
+	   this, TQT_SLOT(slotMd5JobFinished(bool)) );
+  connect( m_md5Job, TQT_SIGNAL(percent(int)),
+	   this, TQT_SLOT(slotMd5JobPercent(int)) );
 
   updateImageSize( imagePath() );
 
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged()),
-	   this, SLOT(slotWriterChanged()) );
-  connect( m_writerSelectionWidget, SIGNAL(writingAppChanged(int)),
-	   this, SLOT(slotWriterChanged()) );
-  connect( m_writingModeWidget, SIGNAL(writingModeChanged(int)),
-	   this, SLOT(slotWriterChanged()) );
-  connect( m_editImagePath, SIGNAL(textChanged(const QString&)),
-	   this, SLOT(updateImageSize(const QString&)) );
-  connect( m_checkDummy, SIGNAL(toggled(bool)),
-	   this, SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()),
+	   this, TQT_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)),
+	   this, TQT_SLOT(slotWriterChanged()) );
+  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)),
+	   this, TQT_SLOT(slotWriterChanged()) );
+  connect( m_editImagePath, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SLOT(updateImageSize(const TQString&)) );
+  connect( m_checkDummy, TQT_SIGNAL(toggled(bool)),
+	   this, TQT_SLOT(slotWriterChanged()) );
 }
 
 
@@ -136,8 +136,8 @@ void K3bIsoImageWritingDialog::init()
     // last written image because that's what most users want
     KConfig* c = k3bcore->config();
     c->setGroup( configGroup() );
-    QString image = c->readPathEntry( "last written image" );
-    if( QFile::exists( image ) )
+    TQString image = c->readPathEntry( "last written image" );
+    if( TQFile::exists( image ) )
       m_editImagePath->setURL( image );
   }
 }
@@ -145,18 +145,18 @@ void K3bIsoImageWritingDialog::init()
 
 void K3bIsoImageWritingDialog::setupGui()
 {
-  QWidget* frame = mainWidget();
+  TQWidget* frame = mainWidget();
 
   // image
   // -----------------------------------------------------------------------
-  QGroupBox* groupImageUrl = new QGroupBox( 1, Qt::Horizontal, i18n("Image to Burn"), frame );
+  TQGroupBox* groupImageUrl = new TQGroupBox( 1, Qt::Horizontal, i18n("Image to Burn"), frame );
   m_editImagePath = new KURLRequester( groupImageUrl );
   m_editImagePath->setMode( KFile::File|KFile::ExistingOnly );
   m_editImagePath->setCaption( i18n("Choose Image File") );
   m_editImagePath->setFilter( i18n("*.iso *.ISO|ISO9660 Image Files") + "\n"
 			      + i18n("*|All Files") );
 
-  connect( m_editImagePath->lineEdit(), SIGNAL( textChanged ( const QString & ) ), this,  SLOT( slotWriterChanged() ) );
+  connect( m_editImagePath->lineEdit(), TQT_SIGNAL( textChanged ( const TQString & ) ), this,  TQT_SLOT( slotWriterChanged() ) );
 
   // image info
   // -----------------------------------------------------------------------
@@ -166,43 +166,43 @@ void K3bIsoImageWritingDialog::setupGui()
   m_infoView->header()->hide();
   m_infoView->setNoItemText( i18n("No image file selected") );
   m_infoView->setSorting( -1 );
-  m_infoView->setAlternateBackground( QColor() );
+  m_infoView->setAlternateBackground( TQColor() );
   m_infoView->setFullWidth(true);
-  m_infoView->setSelectionMode( QListView::NoSelection );
+  m_infoView->setSelectionMode( TQListView::NoSelection );
 
-  connect( m_infoView, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
-	   this, SLOT(slotContextMenu(KListView*, QListViewItem*, const QPoint&)) );
+  connect( m_infoView, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem*, const TQPoint&)) );
 
   m_writerSelectionWidget = new K3bWriterSelectionWidget( frame );
 
   // options
   // -----------------------------------------------------------------------
-  QTabWidget* optionTabbed = new QTabWidget( frame );
+  TQTabWidget* optionTabbed = new TQTabWidget( frame );
 
-  QWidget* optionTab = new QWidget( optionTabbed );
-  QGridLayout* optionTabLayout = new QGridLayout( optionTab );
-  optionTabLayout->setAlignment( Qt::AlignTop );
+  TQWidget* optionTab = new TQWidget( optionTabbed );
+  TQGridLayout* optionTabLayout = new TQGridLayout( optionTab );
+  optionTabLayout->tqsetAlignment( TQt::AlignTop );
   optionTabLayout->setSpacing( spacingHint() );
   optionTabLayout->setMargin( marginHint() );
 
-  QGroupBox* writingModeGroup = new QGroupBox( 1, Vertical, i18n("Writing Mode"), optionTab );
+  TQGroupBox* writingModeGroup = new TQGroupBox( 1,Qt::Vertical, i18n("Writing Mode"), optionTab );
   writingModeGroup->setInsideMargin( marginHint() );
   m_writingModeWidget = new K3bWritingModeWidget( writingModeGroup );
 
 
   // copies --------
-  QGroupBox* groupCopies = new QGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
+  TQGroupBox* groupCopies = new TQGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
-  QLabel* pixLabel = new QLabel( groupCopies );
+  TQLabel* pixLabel = new TQLabel( groupCopies );
   pixLabel->setPixmap( SmallIcon( "cdcopy", KIcon::SizeMedium ) );
   pixLabel->setScaledContents( false );
-  m_spinCopies = new QSpinBox( groupCopies );
+  m_spinCopies = new TQSpinBox( groupCopies );
   m_spinCopies->setMinValue( 1 );
   m_spinCopies->setMaxValue( 999 );
   // -------- copies
 
-  QGroupBox* optionGroup = new QGroupBox( 3, Vertical, i18n("Settings"), optionTab );
+  TQGroupBox* optionGroup = new TQGroupBox( 3,Qt::Vertical, i18n("Settings"), optionTab );
   optionGroup->setInsideMargin( marginHint() );
   optionGroup->setInsideSpacing( spacingHint() );
   m_checkDummy = K3bStdGuiItems::simulateCheckbox( optionGroup );
@@ -218,7 +218,7 @@ void K3bIsoImageWritingDialog::setupGui()
   optionTabbed->addTab( optionTab, i18n("Settings") );
 
 
-  QGridLayout* grid = new QGridLayout( frame );
+  TQGridLayout* grid = new TQGridLayout( frame );
   grid->setSpacing( spacingHint() );
   grid->setMargin( 0 );
 
@@ -296,7 +296,7 @@ void K3bIsoImageWritingDialog::slotStartClicked()
 }
 
 
-void K3bIsoImageWritingDialog::updateImageSize( const QString& path )
+void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
 {
   m_md5Job->cancel();
   m_infoView->clear();
@@ -304,7 +304,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const QString& path )
   d->haveMd5Sum = false;
   d->isIsoImage = false;
 
-  QFileInfo info( path );
+  TQFileInfo info( path );
   if( info.isFile() ) {
 
     KIO::filesize_t imageSize = K3b::filesize( KURL::fromPathOrURL(path) );
@@ -319,59 +319,59 @@ void K3bIsoImageWritingDialog::updateImageSize( const QString& path )
 
       K3bListViewItem* isoRootItem = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 							  i18n("Iso9660 image") );
-      isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
+      isoRootItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
       isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
       K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 						   i18n("Filesize:"), KIO::convertSize( imageSize ) );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
 				  i18n("System Id:"),
 				  isoF.primaryDescriptor().systemId.isEmpty()
-				  ? QString("-")
+				  ? TQString("-")
 				  : isoF.primaryDescriptor().systemId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
 				  i18n("Volume Id:"),
 				  isoF.primaryDescriptor().volumeId.isEmpty()
-				  ? QString("-")
+				  ? TQString("-")
 				  : isoF.primaryDescriptor().volumeId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
 				  i18n("Volume Set Id:"),
 				  isoF.primaryDescriptor().volumeSetId.isEmpty()
-				  ? QString("-")
+				  ? TQString("-")
 				  : isoF.primaryDescriptor().volumeSetId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
 				  i18n("Publisher Id:"),
 				  isoF.primaryDescriptor().publisherId.isEmpty()
-				  ? QString("-")
+				  ? TQString("-")
 				  : isoF.primaryDescriptor().publisherId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
 				  i18n("Preparer Id:"),
 				  isoF.primaryDescriptor().preparerId.isEmpty()
-				  ? QString("-") : isoF.primaryDescriptor().preparerId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+				  ? TQString("-") : isoF.primaryDescriptor().preparerId );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
 				  i18n("Application Id:"),
 				  isoF.primaryDescriptor().applicationId.isEmpty()
-				  ? QString("-")
+				  ? TQString("-")
 				  : isoF.primaryDescriptor().applicationId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       isoRootItem->setOpen( true );
 
@@ -380,7 +380,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const QString& path )
     else {
       K3bListViewItem* item = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 				  i18n("Not an Iso9660 image") );
-      item->setForegroundColor( 0, Qt::red );
+      item->setForegroundColor( 0, TQt::red );
       item->setPixmap( 0, SmallIcon( "stop") );
     }
 
@@ -433,7 +433,7 @@ void K3bIsoImageWritingDialog::setImage( const KURL& url )
 }
 
 
-void K3bIsoImageWritingDialog::calculateMd5Sum( const QString& file )
+void K3bIsoImageWritingDialog::calculateMd5Sum( const TQString& file )
 {
   d->haveMd5Sum = false;
 
@@ -441,7 +441,7 @@ void K3bIsoImageWritingDialog::calculateMd5Sum( const QString& file )
     d->md5SumItem = new K3bListViewItem( m_infoView, m_infoView->firstChild() );
 
   d->md5SumItem->setText( 0, i18n("Md5 Sum:") );
-  d->md5SumItem->setForegroundColor( 0, palette().disabled().foreground() );
+  d->md5SumItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
   d->md5SumItem->setProgress( 1, 0 );
   d->md5SumItem->setPixmap( 0, SmallIcon( "exec") );
 
@@ -468,7 +468,7 @@ void K3bIsoImageWritingDialog::slotMd5JobFinished( bool success )
     d->haveMd5Sum = true;
   }
   else {
-    d->md5SumItem->setForegroundColor( 1, Qt::red );
+    d->md5SumItem->setForegroundColor( 1, TQt::red );
     if( m_md5Job->hasBeenCanceled() )
       d->md5SumItem->setText( 1, i18n("Calculation cancelled") );
     else
@@ -481,12 +481,12 @@ void K3bIsoImageWritingDialog::slotMd5JobFinished( bool success )
 }
 
 
-void K3bIsoImageWritingDialog::slotContextMenu( KListView*, QListViewItem*, const QPoint& pos )
+void K3bIsoImageWritingDialog::slotContextMenu( KListView*, TQListViewItem*, const TQPoint& pos )
 {
   if( !d->haveMd5Sum )
     return;
 
-  QPopupMenu popup;
+  TQPopupMenu popup;
   int copyItem = popup.insertItem( i18n("Copy checksum to clipboard") );
   int compareItem = popup.insertItem( i18n("Compare checksum...") );
 
@@ -494,22 +494,22 @@ void K3bIsoImageWritingDialog::slotContextMenu( KListView*, QListViewItem*, cons
 
   if( r == compareItem ) {
     bool ok;
-    QString md5sumToCompare = KInputDialog::getText( i18n("MD5 Sum Check"),
+    TQString md5sumToCompare = KInputDialog::getText( i18n("MD5 Sum Check"),
 						     i18n("Please insert the MD5 Sum to compare:"),
-						     QString::null,
+						     TQString(),
 						     &ok,
 						     this );
     if( ok ) {
       if( md5sumToCompare.lower().utf8() == m_md5Job->hexDigest().lower() )
-	KMessageBox::information( this, i18n("The MD5 Sum of %1 equals the specified.").arg(imagePath()),
+	KMessageBox::information( this, i18n("The MD5 Sum of %1 equals the specified.").tqarg(imagePath()),
 				  i18n("MD5 Sums Equal") );
       else
-	KMessageBox::sorry( this, i18n("The MD5 Sum of %1 differs from the specified.").arg(imagePath()),
+	KMessageBox::sorry( this, i18n("The MD5 Sum of %1 differs from the specified.").tqarg(imagePath()),
 			    i18n("MD5 Sums Differ") );
     }
   }
   else if( r == copyItem ) {
-    QApplication::clipboard()->setText( m_md5Job->hexDigest().lower(), QClipboard::Clipboard );
+    TQApplication::tqclipboard()->setText( m_md5Job->hexDigest().lower(), TQClipboard::Clipboard );
   }
 }
 
@@ -524,8 +524,8 @@ void K3bIsoImageWritingDialog::loadUserDefaults( KConfigBase* c )
   m_writerSelectionWidget->loadConfig( c );
 
   if( !d->imageForced ) {
-    QString image = c->readPathEntry( "image path", c->readPathEntry( "last written image" ) );
-    if( QFile::exists( image ) )
+    TQString image = c->readPathEntry( "image path", c->readPathEntry( "last written image" ) );
+    if( TQFile::exists( image ) )
       m_editImagePath->setURL( image );
   }
 }
@@ -554,19 +554,19 @@ void K3bIsoImageWritingDialog::loadK3bDefaults()
 }
 
 
-QString K3bIsoImageWritingDialog::imagePath() const
+TQString K3bIsoImageWritingDialog::imagePath() const
 {
   return K3b::convertToLocalUrl( KURL::fromPathOrURL( m_editImagePath->url() ) ).path();
 }
 
 
-void K3bIsoImageWritingDialog::dragEnterEvent( QDragEnterEvent* e )
+void K3bIsoImageWritingDialog::dragEnterEvent( TQDragEnterEvent* e )
 {
   e->accept( KURLDrag::canDecode(e) );
 }
 
 
-void K3bIsoImageWritingDialog::dropEvent( QDropEvent* e )
+void K3bIsoImageWritingDialog::dropEvent( TQDropEvent* e )
 {
   KURL::List urls;
   KURLDrag::decode( e, urls );

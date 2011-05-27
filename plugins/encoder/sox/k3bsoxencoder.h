@@ -27,36 +27,37 @@ class KProcess;
 class K3bSoxEncoder : public K3bAudioEncoder
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bSoxEncoder( QObject* parent = 0, const char* name = 0 );
+  K3bSoxEncoder( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bSoxEncoder();
 
-  QStringList extensions() const;
+  TQStringList extensions() const;
   
-  QString fileTypeComment( const QString& ) const;
+  TQString fileTypeComment( const TQString& ) const;
 
-  long long fileSize( const QString&, const K3b::Msf& msf ) const;
+  long long fileSize( const TQString&, const K3b::Msf& msf ) const;
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bPluginConfigWidget* createConfigWidget( QWidget* parent = 0, 
+  K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent = 0, 
 					     const char* name = 0 ) const;
 
   /**
    * reimplemented since sox writes the file itself
    */
-  bool openFile( const QString& ext, const QString& filename, const K3b::Msf& );
+  bool openFile( const TQString& ext, const TQString& filename, const K3b::Msf& );
   void closeFile();
 
  private slots:
   void slotSoxFinished( KProcess* );
-  void slotSoxOutputLine( const QString& );
+  void slotSoxOutputLine( const TQString& );
 
  private:
   void finishEncoderInternal();
-  bool initEncoderInternal( const QString& extension );
-  long encodeInternal( const char* data, Q_ULONG len );
+  bool initEncoderInternal( const TQString& extension );
+  long encodeInternal( const char* data, TQ_ULONG len );
 
   class Private;
   Private* d;
@@ -66,9 +67,10 @@ class K3bSoxEncoder : public K3bAudioEncoder
 class K3bSoxEncoderSettingsWidget : public K3bPluginConfigWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bSoxEncoderSettingsWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bSoxEncoderSettingsWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bSoxEncoderSettingsWidget();
 
  public slots:

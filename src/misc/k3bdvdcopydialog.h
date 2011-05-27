@@ -30,17 +30,18 @@ namespace K3bDevice {
 class K3bTempDirSelectionWidget;
 class K3bWriterSelectionWidget;
 class K3bMediaSelectionComboBox;
-class QCheckBox;
-class QSpinBox;
+class TQCheckBox;
+class TQSpinBox;
 class K3bWritingModeWidget;
 
 
 class K3bDvdCopyDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDvdCopyDialog( QWidget* parent = 0, const char* name = 0, bool modal = true );
+  K3bDvdCopyDialog( TQWidget* tqparent = 0, const char* name = 0, bool modal = true );
   ~K3bDvdCopyDialog();
 
   void setReadingDevice( K3bDevice::Device* );
@@ -65,14 +66,14 @@ class K3bDvdCopyDialog : public K3bInteractionDialog
   K3bWriterSelectionWidget* m_writerSelectionWidget;
   K3bTempDirSelectionWidget* m_tempDirSelectionWidget;
   K3bMediaSelectionComboBox* m_comboSourceDevice;
-  QCheckBox* m_checkSimulate;
-  QCheckBox* m_checkDeleteImages;
-  QCheckBox* m_checkOnlyCreateImage;
-  QCheckBox* m_checkCacheImage;
-  QCheckBox* m_checkVerifyData;
-  QSpinBox* m_spinCopies;
-  QSpinBox* m_spinRetries;
-  QCheckBox* m_checkIgnoreReadErrors;
+  TQCheckBox* m_checkSimulate;
+  TQCheckBox* m_checkDeleteImages;
+  TQCheckBox* m_checkOnlyCreateImage;
+  TQCheckBox* m_checkCacheImage;
+  TQCheckBox* m_checkVerifyData;
+  TQSpinBox* m_spinCopies;
+  TQSpinBox* m_spinRetries;
+  TQCheckBox* m_checkIgnoreReadErrors;
   K3bWritingModeWidget* m_writingModeWidget;
 };
 

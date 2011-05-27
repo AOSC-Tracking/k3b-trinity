@@ -20,30 +20,31 @@
 
 #include <k3bvideodvdtitletranscodingjob.h>
 
-#include <qvaluevector.h>
-#include <qmap.h>
+#include <tqvaluevector.h>
+#include <tqmap.h>
 
 #include <kio/global.h>
 
-class QTimer;
+class TQTimer;
 
 class K3bVideoDVDRippingWidget : public base_K3bVideoDVDRippingWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingWidget( QWidget* parent );
+  K3bVideoDVDRippingWidget( TQWidget* tqparent );
   ~K3bVideoDVDRippingWidget();
 
   K3bVideoDVDTitleTranscodingJob::VideoCodec selectedVideoCodec() const;
   K3bVideoDVDTitleTranscodingJob::AudioCodec selectedAudioCodec() const;
   int selectedAudioBitrate() const;
-  QSize selectedPictureSize() const;
+  TQSize selectedPictureSize() const;
 
   void setSelectedVideoCodec( K3bVideoDVDTitleTranscodingJob::VideoCodec codec );
   void setSelectedAudioCodec( K3bVideoDVDTitleTranscodingJob::AudioCodec codec );
   void setSelectedAudioBitrate( int bitrate );
-  void setSelectedPictureSize( const QSize& );
+  void setSelectedPictureSize( const TQSize& );
 
   void setNeededSize( KIO::filesize_t );
 
@@ -58,10 +59,10 @@ class K3bVideoDVDRippingWidget : public base_K3bVideoDVDRippingWidget
   void slotCustomPictureSize();
 
  private:
-  QTimer* m_freeSpaceUpdateTimer;
+  TQTimer* m_freeSpaceUpdateTimer;
   KIO::filesize_t m_neededSize;
 
-  QSize m_customVideoSize;
+  TQSize m_customVideoSize;
 };
 
 #endif

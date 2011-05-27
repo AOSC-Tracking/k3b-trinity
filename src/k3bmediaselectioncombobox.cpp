@@ -27,19 +27,19 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <qfont.h>
-#include <qmap.h>
-#include <qvaluevector.h>
-#include <qtooltip.h>
-#include <qlistbox.h>
+#include <tqfont.h>
+#include <tqmap.h>
+#include <tqvaluevector.h>
+#include <tqtooltip.h>
+#include <tqlistbox.h>
 
 
-class K3bMediaSelectionComboBox::ToolTip : public QToolTip
+class K3bMediaSelectionComboBox::ToolTip : public TQToolTip
 {
 public:
   ToolTip( K3bMediaSelectionComboBox* box );
 
-  void maybeTip( const QPoint &pos );
+  void maybeTip( const TQPoint &pos );
 
 private:
   K3bMediaSelectionComboBox* m_box;
@@ -47,24 +47,24 @@ private:
 
 
 K3bMediaSelectionComboBox::ToolTip::ToolTip( K3bMediaSelectionComboBox* box )
-  : QToolTip( box->listBox()->viewport() ),
+  : TQToolTip( box->listBox()->viewport() ),
     m_box( box )
 {
 }
 
-void K3bMediaSelectionComboBox::ToolTip::maybeTip( const QPoint& pos )
+void K3bMediaSelectionComboBox::ToolTip::maybeTip( const TQPoint& pos )
 {
-  if( !parentWidget() || !m_box )
+  if( !tqparentWidget() || !m_box )
     return;
 
-  QListBoxItem* item = m_box->listBox()->itemAt( pos );
+  TQListBoxItem* item = m_box->listBox()->itemAt( pos );
   if( !item )
     return;
 
   int index = m_box->listBox()->index( item );
 
   if( K3bDevice::Device* dev = m_box->deviceAt( index ) ) {
-    tip( m_box->listBox()->itemRect( item ),
+    tip( m_box->listBox()->tqitemRect( item ),
 	 m_box->mediumToolTip( k3bappcore->mediaCache()->medium( dev ) ) );
   }
 }
@@ -80,24 +80,24 @@ public:
         : ignoreDevice( 0 ) {
     }
 
-    QMap<K3bDevice::Device*, int> deviceIndexMap;
-    QValueVector<K3bDevice::Device*> devices;
+    TQMap<K3bDevice::Device*, int> deviceIndexMap;
+    TQValueVector<K3bDevice::Device*> devices;
 
     K3bDevice::Device* ignoreDevice;
 
     // medium strings for every entry
-    QMap<QString, int> mediaStringMap;
+    TQMap<TQString, int> mediaStringMap;
 
     int wantedMediumType;
     int wantedMediumState;
     int wantedMediumContent;
 
-    QFont font;
+    TQFont font;
 };
 
 
-K3bMediaSelectionComboBox::K3bMediaSelectionComboBox( QWidget* parent )
-  : KComboBox( false, parent )
+K3bMediaSelectionComboBox::K3bMediaSelectionComboBox( TQWidget* tqparent )
+  : KComboBox( false, tqparent )
 {
   d = new Private();
 
@@ -108,14 +108,14 @@ K3bMediaSelectionComboBox::K3bMediaSelectionComboBox( QWidget* parent )
 
   d->font = font();
 
-  connect( this, SIGNAL(activated(int)),
-	   this, SLOT(slotActivated(int)) );
-  connect( k3bcore->deviceManager(), SIGNAL(changed(K3bDevice::DeviceManager*)),
-	   this, SLOT(slotDeviceManagerChanged(K3bDevice::DeviceManager*)) );
-  connect( k3bappcore->mediaCache(), SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, SLOT(slotMediumChanged(K3bDevice::Device*)) );
-  connect( this, SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, SLOT(slotUpdateToolTip(K3bDevice::Device*)) );
+  connect( this, TQT_SIGNAL(activated(int)),
+	   this, TQT_SLOT(slotActivated(int)) );
+  connect( k3bcore->deviceManager(), TQT_SIGNAL(changed(K3bDevice::DeviceManager*)),
+	   this, TQT_SLOT(slotDeviceManagerChanged(K3bDevice::DeviceManager*)) );
+  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( this, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotUpdateToolTip(K3bDevice::Device*)) );
 
   updateMedia();
 
@@ -146,9 +146,9 @@ K3bDevice::Device* K3bMediaSelectionComboBox::selectedDevice() const
 }
 
 
-QValueList<K3bDevice::Device*> K3bMediaSelectionComboBox::allDevices() const
+TQValueList<K3bDevice::Device*> K3bMediaSelectionComboBox::allDevices() const
 {
-  QValueList<K3bDevice::Device*> l;
+  TQValueList<K3bDevice::Device*> l;
   for( unsigned int i = 0; i < d->devices.count(); ++i )
     l.append( d->devices[i] );
   return l;
@@ -157,7 +157,7 @@ QValueList<K3bDevice::Device*> K3bMediaSelectionComboBox::allDevices() const
 
 void K3bMediaSelectionComboBox::setSelectedDevice( K3bDevice::Device* dev )
 {
-  if( dev && d->deviceIndexMap.contains( dev ) ) {
+  if( dev && d->deviceIndexMap.tqcontains( dev ) ) {
     setCurrentItem( d->deviceIndexMap[dev] );
     emit selectionChanged( dev );
   }
@@ -234,7 +234,7 @@ void K3bMediaSelectionComboBox::clear()
 void K3bMediaSelectionComboBox::showNoMediumMessage()
 {
   // make it italic
-  QFont f( d->font );
+  TQFont f( d->font );
   f.setItalic( true );
   setFont( f );
 
@@ -248,7 +248,7 @@ void K3bMediaSelectionComboBox::updateMedia()
   setFont( d->font );
 
   // remember set of devices
-  QValueVector<K3bDevice::Device*> oldDevices = d->devices;
+  TQValueVector<K3bDevice::Device*> oldDevices = d->devices;
 
   // remember last selected medium
   K3bDevice::Device* selected = selectedDevice();
@@ -264,7 +264,7 @@ void K3bMediaSelectionComboBox::updateMedia()
   bool rwOnly = !( wantedMediumType() & (K3bDevice::MEDIA_CD_ROM|K3bDevice::MEDIA_DVD_ROM) );
   bool dvdOnly = !( wantedMediumType() & (K3bDevice::MEDIA_CD_ROM|K3bDevice::MEDIA_WRITABLE_CD) );
 
-  QPtrList<K3bDevice::Device> devices = k3bcore->deviceManager()->allDevices();
+  TQPtrList<K3bDevice::Device> devices = k3bcore->deviceManager()->allDevices();
   if( dvdOnly ) {
     if( rwOnly )
       devices = k3bcore->deviceManager()->dvdWriter();
@@ -276,7 +276,7 @@ void K3bMediaSelectionComboBox::updateMedia()
   else
     devices = k3bcore->deviceManager()->cdReader();
 
-  for( QPtrListIterator<K3bDevice::Device> it( devices ); *it; ++it ) {
+  for( TQPtrListIterator<K3bDevice::Device> it( devices ); *it; ++it ) {
       if ( d->ignoreDevice == *it ) {
           continue;
       }
@@ -298,7 +298,7 @@ void K3bMediaSelectionComboBox::updateMedia()
       emit selectionChanged( 0 );
     }
   }
-  else if( selected && d->deviceIndexMap.contains( selected ) ) {
+  else if( selected && d->deviceIndexMap.tqcontains( selected ) ) {
     setCurrentItem( d->deviceIndexMap[selected] );
   }
   else {
@@ -340,17 +340,17 @@ void K3bMediaSelectionComboBox::addMedium( K3bDevice::Device* dev )
   // Otherwise we show the contents type since this might also be used
   // for source selection.
   //
-  QString s = mediumString( k3bappcore->mediaCache()->medium( dev ) );
+  TQString s = mediumString( k3bappcore->mediaCache()->medium( dev ) );
 
   //
   // Now let's see if this string is already contained in the list
   // and if so add the device name to both
   //
-  if( d->mediaStringMap.contains( s ) ) {
+  if( d->mediaStringMap.tqcontains( s ) ) {
     //
     // insert the modified string
     //
-    insertItem( s + QString(" (%1 - %2)").arg(dev->vendor()).arg(dev->description()) );
+    insertItem( s + TQString(" (%1 - %2)").tqarg(dev->vendor()).tqarg(dev->description()) );
 
     //
     // change the already existing string if we did not already do so
@@ -358,7 +358,7 @@ void K3bMediaSelectionComboBox::addMedium( K3bDevice::Device* dev )
     //
     int prevIndex = d->mediaStringMap[s];
     if( prevIndex >= 0 )
-      changeItem( text(prevIndex) + QString(" (%1 - %2)").arg(d->devices[prevIndex]->vendor()).arg(d->devices[prevIndex]->description()),
+      changeItem( text(prevIndex) + TQString(" (%1 - %2)").tqarg(d->devices[prevIndex]->vendor()).tqarg(d->devices[prevIndex]->description()),
 		  prevIndex );
 
     //
@@ -419,21 +419,21 @@ bool K3bMediaSelectionComboBox::showMedium( const K3bMedium& m ) const
 }
 
 
-QString K3bMediaSelectionComboBox::mediumString( const K3bMedium& medium ) const
+TQString K3bMediaSelectionComboBox::mediumString( const K3bMedium& medium ) const
 {
   return medium.shortString( d->wantedMediumState != K3bDevice::STATE_EMPTY );
 }
 
 
-QString K3bMediaSelectionComboBox::mediumToolTip( const K3bMedium& m ) const
+TQString K3bMediaSelectionComboBox::mediumToolTip( const K3bMedium& m ) const
 {
   return m.longString();
 }
 
 
-QString K3bMediaSelectionComboBox::noMediumMessage() const
+TQString K3bMediaSelectionComboBox::noMediumMessage() const
 {
-  QString stateString;
+  TQString stateString;
   if( d->wantedMediumContent == K3bMedium::CONTENT_ALL ) {
     if( d->wantedMediumState == K3bDevice::STATE_EMPTY )
       stateString = i18n("an empty %1 medium");
@@ -469,7 +469,7 @@ QString K3bMediaSelectionComboBox::noMediumMessage() const
 
   // this is basically the same as in K3bEmptyDiskWaiter
   // FIXME: include things like only rewritable dvd or cd since we will probably need that
-  QString mediumString;
+  TQString mediumString;
   if( d->wantedMediumType == (K3bDevice::MEDIA_CD_ALL|K3bDevice::MEDIA_DVD_ALL) )
     mediumString = i18n("CD or DVD");
   else if( d->wantedMediumType == K3bDevice::MEDIA_CD_ALL )
@@ -478,11 +478,11 @@ QString K3bMediaSelectionComboBox::noMediumMessage() const
     mediumString = i18n("DVD");
   else if( (d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_DVD) &&
       (d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_CD) )
-    mediumString = i18n("CD-R(W) or DVD%1R(W)").arg("±");
+    mediumString = i18n("CD-R(W) or DVD%1R(W)").tqarg("±");
   else if( d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_DVD_SL )
-    mediumString = i18n("DVD%1R(W)").arg("±");
+    mediumString = i18n("DVD%1R(W)").tqarg("±");
   else if( d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_DVD_DL )
-    mediumString = i18n("Double Layer DVD%1R").arg("±");
+    mediumString = i18n("Double Layer DVD%1R").tqarg("±");
   else if( d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_CD )
     mediumString = i18n("CD-R(W)");
   else if( d->wantedMediumType & K3bDevice::MEDIA_DVD_ROM )
@@ -490,16 +490,16 @@ QString K3bMediaSelectionComboBox::noMediumMessage() const
   else
     mediumString = i18n("CD-ROM");
 
-  return i18n("Please insert %1...").arg( stateString.arg( mediumString ) );
+  return i18n("Please insert %1...").tqarg( stateString.tqarg( mediumString ) );
 }
 
 
 void K3bMediaSelectionComboBox::slotUpdateToolTip( K3bDevice::Device* dev )
 {
   // update the tooltip for the combobox (the tooltip for the dropdown box is created in the constructor)
-  QToolTip::remove( this );
+  TQToolTip::remove( this );
   if( dev )
-    QToolTip::add( this, mediumToolTip( k3bappcore->mediaCache()->medium( dev ) ) );
+    TQToolTip::add( this, mediumToolTip( k3bappcore->mediaCache()->medium( dev ) ) );
 }
 
 #include "k3bmediaselectioncombobox.moc"

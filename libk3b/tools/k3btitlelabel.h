@@ -17,22 +17,23 @@
 #ifndef _K3B_TITLE_LABEL_H_
 #define _K3B_TITLE_LABEL_H_
 
-#include <qframe.h>
+#include <tqframe.h>
 #include "k3b_export.h"
-class QPainter;
-class QResizeEvent;
+class TQPainter;
+class TQResizeEvent;
 
 
-class LIBK3B_EXPORT K3bTitleLabel : public QFrame
+class LIBK3B_EXPORT K3bTitleLabel : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bTitleLabel( QWidget* parent = 0, const char* name = 0 );
+  K3bTitleLabel( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bTitleLabel();
 
-  QSize sizeHint() const;
-  QSize minimumSizeHint() const;
+  TQSize tqsizeHint() const;
+  TQSize tqminimumSizeHint() const;
 
  public slots:
    /**
@@ -40,20 +41,20 @@ class LIBK3B_EXPORT K3bTitleLabel : public QFrame
     */
   void setMargin( int );
 
-  void setTitle( const QString& title, const QString& subTitle = QString::null );
-  void setSubTitle( const QString& subTitle );
+  void setTitle( const TQString& title, const TQString& subTitle = TQString() );
+  void setSubTitle( const TQString& subTitle );
 
   /**
-   * The title label only supports alignments left, hcenter, and right
+   * The title label only supports tqalignments left, hcenter, and right
    *
-   * Default alignment is left.
+   * Default tqalignment is left.
    */
   // FIXME: honor right-to-left languages
-  void setAlignment( int align );
+  void tqsetAlignment( int align );
 
  protected:
-  void resizeEvent( QResizeEvent* );
-  void drawContents( QPainter* p );
+  void resizeEvent( TQResizeEvent* );
+  void drawContents( TQPainter* p );
 
  private:
   void updatePositioning();

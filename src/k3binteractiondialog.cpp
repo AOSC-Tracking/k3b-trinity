@@ -25,18 +25,18 @@
 #include <k3btoolbutton.h>
 #include <k3bmultichoicedialog.h>
 
-#include <qlabel.h>
-#include <qtoolbutton.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qstring.h>
-#include <qpoint.h>
-#include <qfont.h>
-#include <qpopupmenu.h>
-#include <qeventloop.h>
-#include <qapplication.h>
-#include <qtimer.h>
+#include <tqlabel.h>
+#include <tqtoolbutton.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqstring.h>
+#include <tqpoint.h>
+#include <tqfont.h>
+#include <tqpopupmenu.h>
+#include <tqeventloop.h>
+#include <tqapplication.h>
+#include <tqtimer.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -49,16 +49,16 @@
 #include <kdeversion.h>
 
 
-K3bInteractionDialog::K3bInteractionDialog( QWidget* parent,
+K3bInteractionDialog::K3bInteractionDialog( TQWidget* tqparent,
 					    const char* name,
-					    const QString& title,
-					    const QString& subTitle,
+					    const TQString& title,
+					    const TQString& subTitle,
 					    int buttonMask,
 					    int defaultButton,
-					    const QString& configGroup,
+					    const TQString& configGroup,
 					    bool modal,
 					    WFlags fl )
-  : KDialog( parent, name, modal, fl ),
+  : KDialog( tqparent, name, modal, fl ),
     m_mainWidget(0),
     m_defaultButton(defaultButton),
     m_configGroup(configGroup),
@@ -69,7 +69,7 @@ K3bInteractionDialog::K3bInteractionDialog( QWidget* parent,
 {
   installEventFilter( this );
 
-  mainGrid = new QGridLayout( this );
+  mainGrid = new TQGridLayout( this );
   mainGrid->setSpacing( spacingHint() );
   mainGrid->setMargin( marginHint() );
 
@@ -82,31 +82,31 @@ K3bInteractionDialog::K3bInteractionDialog( QWidget* parent,
   // settings buttons
   // ---------------------------------------------------------------------------------------------------
   if( !m_configGroup.isEmpty() ) {
-    QHBoxLayout* layout2 = new QHBoxLayout( 0, 0, spacingHint(), "layout2");
+    TQHBoxLayout* tqlayout2 = new TQHBoxLayout( 0, 0, spacingHint(), "tqlayout2");
     m_buttonLoadSettings = new K3bToolButton( /*i18n("User Defaults"), */this );
     ((K3bToolButton*)m_buttonLoadSettings)->setIconSet( SmallIconSet( "revert" ) );
-    QPopupMenu* userDefaultsPopup = new QPopupMenu( m_buttonLoadSettings );
-    userDefaultsPopup->insertItem( i18n("Load default settings"), this, SLOT(slotLoadK3bDefaults()) );
-    userDefaultsPopup->insertItem( i18n("Load saved settings"), this, SLOT(slotLoadUserDefaults()) );
-    userDefaultsPopup->insertItem( i18n("Load last used settings"), this, SLOT(slotLoadLastSettings()) );
-    ((QToolButton*)m_buttonLoadSettings)->setPopup( userDefaultsPopup );
+    TQPopupMenu* userDefaultsPopup = new TQPopupMenu( m_buttonLoadSettings );
+    userDefaultsPopup->insertItem( i18n("Load default settings"), this, TQT_SLOT(slotLoadK3bDefaults()) );
+    userDefaultsPopup->insertItem( i18n("Load saved settings"), this, TQT_SLOT(slotLoadUserDefaults()) );
+    userDefaultsPopup->insertItem( i18n("Load last used settings"), this, TQT_SLOT(slotLoadLastSettings()) );
+    ((TQToolButton*)m_buttonLoadSettings)->setPopup( userDefaultsPopup );
     ((K3bToolButton*)m_buttonLoadSettings)->setInstantMenu( true );
-    layout2->addWidget( m_buttonLoadSettings );
+    tqlayout2->addWidget( m_buttonLoadSettings );
 
-    m_buttonSaveSettings = new QToolButton( /*i18n("Save User Defaults"), */this, "m_buttonSaveSettings" );
-    ((QToolButton*)m_buttonSaveSettings)->setIconSet( SmallIconSet( "filesave" ) );
-    layout2->addWidget( m_buttonSaveSettings );
+    m_buttonSaveSettings = new TQToolButton( /*i18n("Save User Defaults"), */this, "m_buttonSaveSettings" );
+    ((TQToolButton*)m_buttonSaveSettings)->setIconSet( SmallIconSet( "filesave" ) );
+    tqlayout2->addWidget( m_buttonSaveSettings );
 
-    mainGrid->addLayout( layout2, 2, 0 );
+    mainGrid->addLayout( tqlayout2, 2, 0 );
   }
 
-  QSpacerItem* spacer = new QSpacerItem( 10, 10, QSizePolicy::Expanding, QSizePolicy::Minimum );
+  TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
   mainGrid->addItem( spacer, 2, 1 );
 
 
   // action buttons
   // ---------------------------------------------------------------------------------------------------
-  QHBoxLayout* layout5 = new QHBoxLayout( 0, 0, spacingHint(), "layout5");
+  TQHBoxLayout* tqlayout5 = new TQHBoxLayout( 0, 0, spacingHint(), "tqlayout5");
 
   if( buttonMask & START_BUTTON ) {
     KGuiItem startItem = KStdGuiItem::ok();
@@ -115,7 +115,7 @@ K3bInteractionDialog::K3bInteractionDialog( QWidget* parent,
     setButtonText( START_BUTTON,
 		   i18n("Start"),
 		   i18n("Start the task") );
-    QFont fnt( m_buttonStart->font() );
+    TQFont fnt( m_buttonStart->font() );
     fnt.setBold(true);
     m_buttonStart->setFont( fnt );
   }
@@ -149,33 +149,33 @@ K3bInteractionDialog::K3bInteractionDialog( QWidget* parent,
   case 0: // KDE default
   default:
       if ( m_buttonStart )
-          layout5->addWidget( m_buttonStart );
+          tqlayout5->addWidget( m_buttonStart );
       if ( m_buttonSave )
-          layout5->addWidget( m_buttonSave );
+          tqlayout5->addWidget( m_buttonSave );
       if ( m_buttonCancel )
-          layout5->addWidget( m_buttonCancel );
+          tqlayout5->addWidget( m_buttonCancel );
       break;
 
   case 1: // something different
       if ( m_buttonCancel )
-          layout5->addWidget( m_buttonCancel );
+          tqlayout5->addWidget( m_buttonCancel );
       if ( m_buttonSave )
-          layout5->addWidget( m_buttonSave );
+          tqlayout5->addWidget( m_buttonSave );
       if ( m_buttonStart )
-          layout5->addWidget( m_buttonStart );
+          tqlayout5->addWidget( m_buttonStart );
       break;
 
   case 2: // GTK-Style
       if ( m_buttonSave )
-          layout5->addWidget( m_buttonSave );
+          tqlayout5->addWidget( m_buttonSave );
       if ( m_buttonCancel )
-          layout5->addWidget( m_buttonCancel );
+          tqlayout5->addWidget( m_buttonCancel );
       if ( m_buttonStart )
-          layout5->addWidget( m_buttonStart );
+          tqlayout5->addWidget( m_buttonStart );
       break;
   }
 
-  mainGrid->addLayout( layout5, 2, 2 );
+  mainGrid->addLayout( tqlayout5, 2, 2 );
 
   mainGrid->setRowStretch( 1, 1 );
 
@@ -200,9 +200,9 @@ void K3bInteractionDialog::show()
 }
 
 
-QSize K3bInteractionDialog::sizeHint() const
+TQSize K3bInteractionDialog::tqsizeHint() const
 {
-  QSize s = KDialog::sizeHint();
+  TQSize s = KDialog::tqsizeHint();
   // I want the dialogs to look good.
   // That means their height should never outgrow their width
   if( s.height() > s.width() )
@@ -215,22 +215,22 @@ QSize K3bInteractionDialog::sizeHint() const
 void K3bInteractionDialog::initConnections()
 {
   if( m_buttonStart ) {
-    connect( m_buttonStart, SIGNAL(clicked()),
-	     this, SLOT(slotStartClickedInternal()) );
+    connect( m_buttonStart, TQT_SIGNAL(clicked()),
+	     this, TQT_SLOT(slotStartClickedInternal()) );
   }
   if( m_buttonSave ) {
-//     connect( m_buttonSave, SIGNAL(clicked()),
-// 	     this, SLOT(slotSaveLastSettings()) );
-    connect( m_buttonSave, SIGNAL(clicked()),
-	     this, SLOT(slotSaveClicked()) );
+//     connect( m_buttonSave, TQT_SIGNAL(clicked()),
+// 	     this, TQT_SLOT(slotSaveLastSettings()) );
+    connect( m_buttonSave, TQT_SIGNAL(clicked()),
+	     this, TQT_SLOT(slotSaveClicked()) );
   }
   if( m_buttonCancel )
-    connect( m_buttonCancel, SIGNAL(clicked()),
-	     this, SLOT(slotCancelClicked()) );
+    connect( m_buttonCancel, TQT_SIGNAL(clicked()),
+	     this, TQT_SLOT(slotCancelClicked()) );
 
   if( !m_configGroup.isEmpty() ) {
-    connect( m_buttonSaveSettings, SIGNAL(clicked()),
-	     this, SLOT(slotSaveUserDefaults()) );
+    connect( m_buttonSaveSettings, TQT_SIGNAL(clicked()),
+	     this, TQT_SLOT(slotSaveUserDefaults()) );
   }
 }
 
@@ -240,14 +240,14 @@ void K3bInteractionDialog::initToolTipsAndWhatsThis()
   if( !m_configGroup.isEmpty() ) {
     // ToolTips
     // -------------------------------------------------------------------------
-    QToolTip::add( m_buttonLoadSettings, i18n("Load default or saved settings") );
-    QToolTip::add( m_buttonSaveSettings, i18n("Save current settings to reuse them later") );
+    TQToolTip::add( m_buttonLoadSettings, i18n("Load default or saved settings") );
+    TQToolTip::add( m_buttonSaveSettings, i18n("Save current settings to reuse them later") );
 
     // What's This info
     // -------------------------------------------------------------------------
-    QWhatsThis::add( m_buttonLoadSettings, i18n("<p>Load a set of settings either from the default K3b settings, "
+    TQWhatsThis::add( m_buttonLoadSettings, i18n("<p>Load a set of settings either from the default K3b settings, "
 						"settings saved before, or the last used ones.") );
-    QWhatsThis::add( m_buttonSaveSettings, i18n("<p>Saves the current settings of the action dialog."
+    TQWhatsThis::add( m_buttonSaveSettings, i18n("<p>Saves the current settings of the action dialog."
 						"<p>These settings can be loaded with the <em>Load saved settings</em> "
 						"button."
 						"<p><b>The K3b defaults are not overwritten by this.</b>") );
@@ -255,7 +255,7 @@ void K3bInteractionDialog::initToolTipsAndWhatsThis()
 }
 
 
-void K3bInteractionDialog::setTitle( const QString& title, const QString& subTitle )
+void K3bInteractionDialog::setTitle( const TQString& title, const TQString& subTitle )
 {
   m_dialogHeader->setTitle( title, subTitle );
 
@@ -263,17 +263,17 @@ void K3bInteractionDialog::setTitle( const QString& title, const QString& subTit
 }
 
 
-void K3bInteractionDialog::setMainWidget( QWidget* w )
+void K3bInteractionDialog::setMainWidget( TQWidget* w )
 {
-  w->reparent( this, QPoint(0,0) );
+  w->reparent( this, TQPoint(0,0) );
   mainGrid->addMultiCellWidget( w, 1, 1, 0, 2 );
   m_mainWidget = w;
 }
 
-QWidget* K3bInteractionDialog::mainWidget()
+TQWidget* K3bInteractionDialog::mainWidget()
 {
   if( !m_mainWidget ) {
-    setMainWidget( new QWidget( this ) );
+    setMainWidget( new TQWidget( this ) );
   }
   return m_mainWidget;
 }
@@ -324,7 +324,7 @@ void K3bInteractionDialog::slotStartClickedInternal()
 					       "dialog is opened again."
 					       "<p><em>Be aware that this choice can always be changed from the K3b "
 					       "configuration dialog.</em>"),
-					  QMessageBox::Question,
+					  TQMessageBox::Question,
 					  this,
 					  0,
 					  3,
@@ -382,12 +382,12 @@ void K3bInteractionDialog::setDefaultButton( int button )
 }
 
 
-bool K3bInteractionDialog::eventFilter( QObject* o, QEvent* ev )
+bool K3bInteractionDialog::eventFilter( TQObject* o, TQEvent* ev )
 {
   if( dynamic_cast<K3bInteractionDialog*>(o) == this &&
-      ev->type() == QEvent::KeyPress ) {
+      ev->type() == TQEvent::KeyPress ) {
 
-    QKeyEvent* kev = dynamic_cast<QKeyEvent*>(ev);
+    TQKeyEvent* kev = dynamic_cast<TQKeyEvent*>(ev);
 
     switch ( kev->key() ) {
     case Key_Enter:
@@ -445,16 +445,16 @@ void K3bInteractionDialog::setButtonGui( int button,
 
 
 void K3bInteractionDialog::setButtonText( int button,
-					  const QString& text,
-					  const QString& tooltip,
-					  const QString& whatsthis )
+					  const TQString& text,
+					  const TQString& tooltip,
+					  const TQString& whatsthis )
 {
   if( KPushButton* b = getButton( button ) ) {
     b->setText( text );
-    QToolTip::remove( b );
-    QWhatsThis::remove( b );
-    QToolTip::add( b, tooltip );
-    QWhatsThis::add( b, whatsthis );
+    TQToolTip::remove( b );
+    TQWhatsThis::remove( b );
+    TQToolTip::add( b, tooltip );
+    TQWhatsThis::add( b, whatsthis );
   }
 }
 
@@ -479,44 +479,44 @@ void K3bInteractionDialog::setButtonShown( int button, bool shown )
 }
 
 
-void K3bInteractionDialog::setStartButtonText( const QString& text,
-					       const QString& tooltip,
-					       const QString& whatsthis )
+void K3bInteractionDialog::setStartButtonText( const TQString& text,
+					       const TQString& tooltip,
+					       const TQString& whatsthis )
 {
   if( m_buttonStart ) {
     m_buttonStart->setText( text );
-    QToolTip::remove( m_buttonStart );
-    QWhatsThis::remove( m_buttonStart );
-    QToolTip::add( m_buttonStart, tooltip );
-    QWhatsThis::add( m_buttonStart, whatsthis );
+    TQToolTip::remove( m_buttonStart );
+    TQWhatsThis::remove( m_buttonStart );
+    TQToolTip::add( m_buttonStart, tooltip );
+    TQWhatsThis::add( m_buttonStart, whatsthis );
   }
 }
 
 
-void K3bInteractionDialog::setCancelButtonText( const QString& text,
-						const QString& tooltip,
-						const QString& whatsthis )
+void K3bInteractionDialog::setCancelButtonText( const TQString& text,
+						const TQString& tooltip,
+						const TQString& whatsthis )
 {
   if( m_buttonCancel ) {
     m_buttonCancel->setText( text );
-    QToolTip::remove( m_buttonCancel );
-    QWhatsThis::remove( m_buttonCancel );
-    QToolTip::add( m_buttonCancel, tooltip );
-    QWhatsThis::add( m_buttonCancel, whatsthis );
+    TQToolTip::remove( m_buttonCancel );
+    TQWhatsThis::remove( m_buttonCancel );
+    TQToolTip::add( m_buttonCancel, tooltip );
+    TQWhatsThis::add( m_buttonCancel, whatsthis );
   }
 }
 
 
-void K3bInteractionDialog::setSaveButtonText( const QString& text,
-					      const QString& tooltip,
-					      const QString& whatsthis )
+void K3bInteractionDialog::setSaveButtonText( const TQString& text,
+					      const TQString& tooltip,
+					      const TQString& whatsthis )
 {
   if( m_buttonSave ) {
     m_buttonSave->setText( text );
-    QToolTip::remove( m_buttonSave );
-    QWhatsThis::remove( m_buttonSave );
-    QToolTip::add( m_buttonSave, tooltip );
-    QWhatsThis::add( m_buttonSave, whatsthis );
+    TQToolTip::remove( m_buttonSave );
+    TQWhatsThis::remove( m_buttonSave );
+    TQToolTip::add( m_buttonSave, tooltip );
+    TQWhatsThis::add( m_buttonSave, whatsthis );
   }
 }
 
@@ -567,7 +567,7 @@ int K3bInteractionDialog::exec( bool returnOnHide )
 {
   m_exitLoopOnHide = returnOnHide;
 
-  // the following code is mainly taken from QDialog::exec
+  // the following code is mainly taken from TQDialog::exec
 
   if( m_inLoop ) {
     kdError() << "(K3bInteractionDialog::exec) Recursive call detected." << endl;
@@ -584,12 +584,12 @@ int K3bInteractionDialog::exec( bool returnOnHide )
   loadStartupSettings();
   show();
   if( m_delayedInit )
-    QTimer::singleShot( 0, this, SLOT(slotDelayedInit()) );
+    TQTimer::singleShot( 0, this, TQT_SLOT(slotDelayedInit()) );
   else
     init();
 
   m_inLoop = true;
-  QApplication::eventLoop()->enterLoop();
+  TQApplication::eventLoop()->enterLoop();
 
   if( !wasShowModal )
     clearWFlags( WShowModal );
@@ -612,7 +612,7 @@ void K3bInteractionDialog::hide()
 
   if( m_inLoop && m_exitLoopOnHide ) {
     m_inLoop = false;
-    QApplication::eventLoop()->exitLoop();
+    TQApplication::eventLoop()->exitLoop();
   }
 }
 
@@ -621,7 +621,7 @@ bool K3bInteractionDialog::close( bool alsoDelete )
 {
   if( m_inLoop && !m_exitLoopOnHide ) {
     m_inLoop = false;
-    QApplication::eventLoop()->exitLoop();
+    TQApplication::eventLoop()->exitLoop();
   }
 
   return KDialog::close( alsoDelete );
@@ -632,7 +632,7 @@ void K3bInteractionDialog::done( int r )
 {
   if( m_inLoop && !m_exitLoopOnHide ) {
     m_inLoop = false;
-    QApplication::eventLoop()->exitLoop();
+    TQApplication::eventLoop()->exitLoop();
   }
 
   return KDialog::done( r );

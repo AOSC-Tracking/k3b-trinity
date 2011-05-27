@@ -46,13 +46,13 @@
 #include <kstandarddirs.h>
 #include <kdialogbase.h>
 
-#include <qlayout.h>
-#include <qheader.h>
-#include <qlabel.h>
-#include <qframe.h>
-#include <qspinbox.h>
-#include <qfont.h>
-#include <qdragobject.h>
+#include <tqlayout.h>
+#include <tqheader.h>
+#include <tqlabel.h>
+#include <tqframe.h>
+#include <tqspinbox.h>
+#include <tqfont.h>
+#include <tqdragobject.h>
 
 
 
@@ -60,14 +60,14 @@
 class K3bAudioCdView::AudioTrackViewItem : public K3bCheckListViewItem
 {
 public:
-  AudioTrackViewItem( QListView* parent, 
-		      QListViewItem* after,
+  AudioTrackViewItem( TQListView* tqparent, 
+		      TQListViewItem* after,
 		      int _trackNumber,
 		      const K3b::Msf& length) 
-    : K3bCheckListViewItem( parent, after ) {
+    : K3bCheckListViewItem( tqparent, after ) {
 
-    setText( 1, QString::number(_trackNumber).rightJustify( 2, ' ' ) );
-    setText( 3, i18n("Track %1").arg(_trackNumber) );
+    setText( 1, TQString::number(_trackNumber).rightJustify( 2, ' ' ) );
+    setText( 3, i18n("Track %1").tqarg(_trackNumber) );
     setText( 4, " " + length.toString() + " " );
     setText( 5, " " + KIO::convertSize( length.audioBytes() ) + " " );
 
@@ -94,24 +94,24 @@ public:
 };
 
 
-K3bAudioCdView::K3bAudioCdView( QWidget* parent, const char *name )
+K3bAudioCdView::K3bAudioCdView( TQWidget* tqparent, const char *name )
   : K3bMediaContentsView( true, 
 			  K3bMedium::CONTENT_AUDIO,
 			  K3bDevice::MEDIA_CD_ALL,
 			  K3bDevice::STATE_INCOMPLETE|K3bDevice::STATE_COMPLETE,
-			  parent, name )
+			  tqparent, name )
 {
-  QGridLayout* mainGrid = new QGridLayout( mainWidget() );
+  TQGridLayout* mainGrid = new TQGridLayout( mainWidget() );
 
   // toolbox
   // ----------------------------------------------------------------------------------
-  QHBoxLayout* toolBoxLayout = new QHBoxLayout( 0, 0, 0, "toolBoxLayout" );
+  TQHBoxLayout* toolBoxLayout = new TQHBoxLayout( 0, 0, 0, "toolBoxLayout" );
   m_toolBox = new K3bToolBox( mainWidget() );
   toolBoxLayout->addWidget( m_toolBox );
-  QSpacerItem* spacer = new QSpacerItem( 10, 10, QSizePolicy::Expanding, QSizePolicy::Minimum );
+  TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
   toolBoxLayout->addItem( spacer );
-  m_labelLength = new QLabel( mainWidget() );
-  m_labelLength->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
+  m_labelLength = new TQLabel( mainWidget() );
+  m_labelLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   toolBoxLayout->addWidget( m_labelLength );
 
 
@@ -119,21 +119,21 @@ K3bAudioCdView::K3bAudioCdView( QWidget* parent, const char *name )
   // ----------------------------------------------------------------------------------
   m_trackView = new K3bAudioCdListView( this, mainWidget() );
 
-  connect( m_trackView, SIGNAL(itemRenamed(QListViewItem*, const QString&, int)),
-	   this, SLOT(slotItemRenamed(QListViewItem*, const QString&, int)) );
-  connect( m_trackView, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
-	   this, SLOT(slotContextMenu(KListView*, QListViewItem*, const QPoint&)) );
-//   connect( m_trackView, SIGNAL(selectionChanged(QListViewItem*)), 
-// 	   this, SLOT(slotTrackSelectionChanged(QListViewItem*)) );
+  connect( m_trackView, TQT_SIGNAL(itemRenamed(TQListViewItem*, const TQString&, int)),
+	   this, TQT_SLOT(slotItemRenamed(TQListViewItem*, const TQString&, int)) );
+  connect( m_trackView, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem*, const TQPoint&)) );
+//   connect( m_trackView, TQT_SIGNAL(selectionChanged(TQListViewItem*)), 
+// 	   this, TQT_SLOT(slotTrackSelectionChanged(TQListViewItem*)) );
 
   mainGrid->addLayout( toolBoxLayout, 0, 0 );
   mainGrid->addWidget( m_trackView, 1, 0 );
 
 
-  m_cddb = new K3bCddb( this );
+  m_cddb = new K3bCddb( TQT_TQOBJECT(this) );
 
-  connect( m_cddb, SIGNAL(queryFinished(int)),
-	   this, SLOT(slotCddbQueryFinished(int)) );
+  connect( m_cddb, TQT_SIGNAL(queryFinished(int)),
+	   this, TQT_SLOT(slotCddbQueryFinished(int)) );
 
   initActions();
   //  slotTrackSelectionChanged(0);
@@ -142,7 +142,7 @@ K3bAudioCdView::K3bAudioCdView( QWidget* parent, const char *name )
   setRightPixmap( K3bTheme::MEDIA_AUDIO );
 
   m_busyInfoLabel = new K3bThemedLabel( i18n("Searching for Artist information..."), this );
-  m_busyInfoLabel->setFrameStyle( QFrame::Box|QFrame::Plain );
+  m_busyInfoLabel->setFrameStyle( TQFrame::Box|TQFrame::Plain );
   m_busyInfoLabel->setMargin( 6 );
   m_busyInfoLabel->hide();
 }
@@ -160,7 +160,7 @@ void K3bAudioCdView::reloadMedium()
 
   // initialize cddb info for editing
   m_cddbInfo = K3bCddbResultEntry();
-  m_cddbInfo.discid = QString::number( medium().toc().discId(), 16 );
+  m_cddbInfo.discid = TQString::number( medium().toc().discId(), 16 );
 
   for( int i = 0; i < (int)m_toc.count(); ++i ) {
     m_cddbInfo.titles.append("");
@@ -226,33 +226,33 @@ void K3bAudioCdView::initActions()
 {
   m_actionCollection = new KActionCollection( this );
 
-  KAction* actionSelectAll = new KAction( i18n("Check All"), 0, 0, this,
-					  SLOT(slotCheckAll()), actionCollection(),
+  KAction* actionSelectAll = new KAction( i18n("Check All"), 0, 0, TQT_TQOBJECT(this),
+					  TQT_SLOT(slotCheckAll()), actionCollection(),
 					  "check_all" );
-  KAction* actionDeselectAll = new KAction( i18n("Uncheck All"), 0, 0, this,
-					    SLOT(slotUncheckAll()), actionCollection(),
+  KAction* actionDeselectAll = new KAction( i18n("Uncheck All"), 0, 0, TQT_TQOBJECT(this),
+					    TQT_SLOT(slotUncheckAll()), actionCollection(),
 					    "uncheck_all" );
-  KAction* actionSelect = new KAction( i18n("Check Track"), 0, 0, this,
-				       SLOT(slotSelect()), actionCollection(),
+  KAction* actionSelect = new KAction( i18n("Check Track"), 0, 0, TQT_TQOBJECT(this),
+				       TQT_SLOT(slotSelect()), actionCollection(),
 				       "select_track" );
-  KAction* actionDeselect = new KAction( i18n("Uncheck Track"), 0, 0, this,
-					 SLOT(slotDeselect()), actionCollection(),
+  KAction* actionDeselect = new KAction( i18n("Uncheck Track"), 0, 0, TQT_TQOBJECT(this),
+					 TQT_SLOT(slotDeselect()), actionCollection(),
 					 "deselect_track" );
-  KAction* actionEditTrackCddbInfo = new KAction( i18n("Edit Track cddb Info"), "edit", 0, this,
-						  SLOT(slotEditTrackCddb()), actionCollection(),
+  KAction* actionEditTrackCddbInfo = new KAction( i18n("Edit Track cddb Info"), "edit", 0, TQT_TQOBJECT(this),
+						  TQT_SLOT(slotEditTrackCddb()), actionCollection(),
 						  "edit_track_cddb" );
-  KAction* actionEditAlbumCddbInfo = new KAction( i18n("Edit Album cddb Info"), "edit", 0, this,
-						  SLOT(slotEditAlbumCddb()), actionCollection(),
+  KAction* actionEditAlbumCddbInfo = new KAction( i18n("Edit Album cddb Info"), "edit", 0, TQT_TQOBJECT(this),
+						  TQT_SLOT(slotEditAlbumCddb()), actionCollection(),
 						  "edit_album_cddb" );
 
-  KAction* actionStartRip = new KAction( i18n("Start Ripping"), "cddarip", 0, this,
-					 SLOT(startRip()), actionCollection(), "start_rip" );
+  KAction* actionStartRip = new KAction( i18n("Start Ripping"), "cddarip", 0, TQT_TQOBJECT(this),
+					 TQT_SLOT(startRip()), actionCollection(), "start_rip" );
 
-  KAction* actionQueryCddb = new KAction( i18n("Query cddb"), "reload", 0, this,
-					  SLOT(queryCddb()), actionCollection(), "query_cddb" );
+  KAction* actionQueryCddb = new KAction( i18n("Query cddb"), "reload", 0, TQT_TQOBJECT(this),
+					  TQT_SLOT(queryCddb()), actionCollection(), "query_cddb" );
 
-  KAction* actionSaveCddbLocally = new KAction( i18n("Save Cddb Entry Locally"), "filesave", 0, this,
-						SLOT(slotSaveCddbLocally()), actionCollection(), "save_cddb_local" );
+  KAction* actionSaveCddbLocally = new KAction( i18n("Save Cddb Entry Locally"), "filesave", 0, TQT_TQOBJECT(this),
+						TQT_SLOT(slotSaveCddbLocally()), actionCollection(), "save_cddb_local" );
 
   // TODO: set the actions tooltips and whatsthis infos
 
@@ -279,13 +279,13 @@ void K3bAudioCdView::initActions()
 }
 
 
-void K3bAudioCdView::slotContextMenu( KListView*, QListViewItem*, const QPoint& p )
+void K3bAudioCdView::slotContextMenu( KListView*, TQListViewItem*, const TQPoint& p )
 {
   m_popupMenu->popup(p);
 }
 
 
-void K3bAudioCdView::slotItemRenamed( QListViewItem* item, const QString& str, int col )
+void K3bAudioCdView::slotItemRenamed( TQListViewItem* item, const TQString& str, int col )
 {
   AudioTrackViewItem* a = (AudioTrackViewItem*)item;
   if( col == 2 )
@@ -297,7 +297,7 @@ void K3bAudioCdView::slotItemRenamed( QListViewItem* item, const QString& str, i
 }
 
 
-void K3bAudioCdView::slotTrackSelectionChanged( QListViewItem* item )
+void K3bAudioCdView::slotTrackSelectionChanged( TQListViewItem* item )
 {
   actionCollection()->action("edit_track_cddb")->setEnabled( item != 0 );
   actionCollection()->action("select_track")->setEnabled( item != 0 );
@@ -307,8 +307,8 @@ void K3bAudioCdView::slotTrackSelectionChanged( QListViewItem* item )
 
 void K3bAudioCdView::startRip()
 {
-  QValueList<int> trackNumbers;
-  for( QListViewItemIterator it( m_trackView ); it.current(); ++it ) {
+  TQValueList<int> trackNumbers;
+  for( TQListViewItemIterator it( m_trackView ); it.current(); ++it ) {
     AudioTrackViewItem* a = (AudioTrackViewItem*)it.current();
     if( a->isChecked() )
       trackNumbers.append( a->trackNumber );
@@ -331,37 +331,37 @@ void K3bAudioCdView::startRip()
 
 void K3bAudioCdView::slotEditTrackCddb()
 {
-  QPtrList<QListViewItem> items( m_trackView->selectedItems() );
+  TQPtrList<TQListViewItem> items( m_trackView->selectedItems() );
   if( !items.isEmpty() ) {
     AudioTrackViewItem* a = static_cast<AudioTrackViewItem*>(items.first());
 
-    KDialogBase d( this, "trackCddbDialog", true, i18n("Cddb Track %1").arg(a->trackNumber),
+    KDialogBase d( this, "trackCddbDialog", true, i18n("Cddb Track %1").tqarg(a->trackNumber),
 		   KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true);
-    QWidget* w = new QWidget( &d );
+    TQWidget* w = new TQWidget( &d );
 
     KLineEdit* editTitle = new KLineEdit( m_cddbInfo.titles[a->trackNumber-1], w );
     KLineEdit* editArtist = new KLineEdit( m_cddbInfo.artists[a->trackNumber-1], w );
     KLineEdit* editExtInfo = new KLineEdit( m_cddbInfo.extInfos[a->trackNumber-1], w );
-    QFrame* line = new QFrame( w );
-    line->setFrameShape( QFrame::HLine );
-    line->setFrameShadow( QFrame::Sunken );
+    TQFrame* line = new TQFrame( w );
+    line->setFrameShape( TQFrame::HLine );
+    line->setFrameShadow( TQFrame::Sunken );
 
-    QGridLayout* grid = new QGridLayout( w );
+    TQGridLayout* grid = new TQGridLayout( w );
     grid->setSpacing( KDialog::spacingHint() );
 
-    grid->addWidget( new QLabel( i18n("Title:"), w ), 0, 0 );
+    grid->addWidget( new TQLabel( i18n("Title:"), w ), 0, 0 );
     grid->addWidget( editTitle, 0, 1 );
     grid->addMultiCellWidget( line, 1, 1, 0, 1 );
-    grid->addWidget( new QLabel( i18n("Artist:"), w ), 2, 0 );
+    grid->addWidget( new TQLabel( i18n("Artist:"), w ), 2, 0 );
     grid->addWidget( editArtist, 2, 1 );
-    grid->addWidget( new QLabel( i18n("Extra info:"), w ), 3, 0 );
+    grid->addWidget( new TQLabel( i18n("Extra info:"), w ), 3, 0 );
     grid->addWidget( editExtInfo, 3, 1 );
     grid->setRowStretch( 4, 1 );
 
     d.setMainWidget(w);
-    d.resize( QMAX( QMAX(d.sizeHint().height(), d.sizeHint().width()), 300), d.sizeHint().height() );
+    d.resize( TQMAX( TQMAX(d.tqsizeHint().height(), d.tqsizeHint().width()), 300), d.tqsizeHint().height() );
 
-    if( d.exec() == QDialog::Accepted ) {
+    if( d.exec() == TQDialog::Accepted ) {
       m_cddbInfo.titles[a->trackNumber-1] = editTitle->text();
       m_cddbInfo.artists[a->trackNumber-1] = editArtist->text();
       m_cddbInfo.extInfos[a->trackNumber-1] = editExtInfo->text();
@@ -375,17 +375,17 @@ void K3bAudioCdView::slotEditAlbumCddb()
 {
   KDialogBase d( this, "trackCddbDialog", true, i18n("Album Cddb"),
 		 KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true);
-  QWidget* w = new QWidget( &d );
+  TQWidget* w = new TQWidget( &d );
 
   KLineEdit* editTitle = new KLineEdit( m_cddbInfo.cdTitle, w );
   KLineEdit* editArtist = new KLineEdit( m_cddbInfo.cdArtist, w );
   KLineEdit* editExtInfo = new KLineEdit( m_cddbInfo.cdExtInfo, w );
   KLineEdit* editGenre = new KLineEdit( m_cddbInfo.genre, w );
-  QSpinBox* spinYear = new QSpinBox( 0, 9999, 1, w );
+  TQSpinBox* spinYear = new TQSpinBox( 0, 9999, 1, w );
   spinYear->setValue( m_cddbInfo.year );
-  QFrame* line = new QFrame( w );
-  line->setFrameShape( QFrame::HLine );
-  line->setFrameShadow( QFrame::Sunken );
+  TQFrame* line = new TQFrame( w );
+  line->setFrameShape( TQFrame::HLine );
+  line->setFrameShadow( TQFrame::Sunken );
   KComboBox* comboCat = new KComboBox( w );
   comboCat->insertStringList( K3bCddbQuery::categories() );
 
@@ -396,28 +396,28 @@ void K3bAudioCdView::slotEditAlbumCddb()
       break;
     }
 
-  QGridLayout* grid = new QGridLayout( w );
+  TQGridLayout* grid = new TQGridLayout( w );
   grid->setSpacing( KDialog::spacingHint() );
 
-  grid->addWidget( new QLabel( i18n("Title:"), w ), 0, 0 );
+  grid->addWidget( new TQLabel( i18n("Title:"), w ), 0, 0 );
   grid->addWidget( editTitle, 0, 1 );
   grid->addMultiCellWidget( line, 1, 1, 0, 1 );
-  grid->addWidget( new QLabel( i18n("Artist:"), w ), 2, 0 );
+  grid->addWidget( new TQLabel( i18n("Artist:"), w ), 2, 0 );
   grid->addWidget( editArtist, 2, 1 );
-  grid->addWidget( new QLabel( i18n("Extra info:"), w ), 3, 0 );
+  grid->addWidget( new TQLabel( i18n("Extra info:"), w ), 3, 0 );
   grid->addWidget( editExtInfo, 3, 1 );
-  grid->addWidget( new QLabel( i18n("Genre:"), w ), 4, 0 );
+  grid->addWidget( new TQLabel( i18n("Genre:"), w ), 4, 0 );
   grid->addWidget( editGenre, 4, 1 );
-  grid->addWidget( new QLabel( i18n("Year:"), w ), 5, 0 );
+  grid->addWidget( new TQLabel( i18n("Year:"), w ), 5, 0 );
   grid->addWidget( spinYear, 5, 1 );
-  grid->addWidget( new QLabel( i18n("Category:"), w ), 6, 0 );
+  grid->addWidget( new TQLabel( i18n("Category:"), w ), 6, 0 );
   grid->addWidget( comboCat, 6, 1 );
   grid->setRowStretch( 7, 1 );
 
   d.setMainWidget(w);
-  d.resize( QMAX( QMAX(d.sizeHint().height(), d.sizeHint().width()), 300), d.sizeHint().height() );
+  d.resize( TQMAX( TQMAX(d.tqsizeHint().height(), d.tqsizeHint().width()), 300), d.tqsizeHint().height() );
 
-  if( d.exec() == QDialog::Accepted ) {
+  if( d.exec() == TQDialog::Accepted ) {
     m_cddbInfo.cdTitle = editTitle->text();
     m_cddbInfo.cdArtist = editArtist->text();
     m_cddbInfo.cdExtInfo = editExtInfo->text();
@@ -516,36 +516,36 @@ void K3bAudioCdView::slotSaveCddbLocally()
 
   m_cddb->saveEntry( m_cddbInfo );
   K3bPassivePopup::showPopup( i18n("Saved entry (%1) in category %2.")
-			      .arg(m_cddbInfo.discid)
-			      .arg(m_cddbInfo.category),
+			      .tqarg(m_cddbInfo.discid)
+			      .tqarg(m_cddbInfo.category),
 			      i18n("CDDB") );
 }
 
 
 void K3bAudioCdView::slotCheckAll()
 {
-  for( QListViewItemIterator it( m_trackView ); it.current(); ++it )
+  for( TQListViewItemIterator it( m_trackView ); it.current(); ++it )
     ((AudioTrackViewItem*)it.current())->setChecked(true);
 }
 
 void K3bAudioCdView::slotUncheckAll()
 {
-  for( QListViewItemIterator it( m_trackView ); it.current(); ++it )
+  for( TQListViewItemIterator it( m_trackView ); it.current(); ++it )
     ((AudioTrackViewItem*)it.current())->setChecked(false);
 }
 
 void K3bAudioCdView::slotSelect()
 {
-  QPtrList<QListViewItem> items( m_trackView->selectedItems() );
-  for( QPtrListIterator<QListViewItem> it( items );
+  TQPtrList<TQListViewItem> items( m_trackView->selectedItems() );
+  for( TQPtrListIterator<TQListViewItem> it( items );
        it.current(); ++it )
     static_cast<AudioTrackViewItem*>(it.current())->setChecked(true);
 }
 
 void K3bAudioCdView::slotDeselect()
 {
-  QPtrList<QListViewItem> items( m_trackView->selectedItems() );
-  for( QPtrListIterator<QListViewItem> it( items );
+  TQPtrList<TQListViewItem> items( m_trackView->selectedItems() );
+  for( TQPtrListIterator<TQListViewItem> it( items );
        it.current(); ++it )
     static_cast<AudioTrackViewItem*>(it.current())->setChecked(false);
 }
@@ -553,13 +553,13 @@ void K3bAudioCdView::slotDeselect()
 void K3bAudioCdView::updateDisplay()
 {
   // update the listview
-  for( QListViewItemIterator it( m_trackView ); it.current(); ++it ) {
+  for( TQListViewItemIterator it( m_trackView ); it.current(); ++it ) {
     AudioTrackViewItem* item = (AudioTrackViewItem*)it.current();
     item->updateCddbData( m_cddbInfo );
   }
 
   if( !m_cddbInfo.cdTitle.isEmpty() ) {
-    QString s = m_cddbInfo.cdTitle;
+    TQString s = m_cddbInfo.cdTitle;
     if( !m_cddbInfo.cdArtist.isEmpty() )
       s += " (" + m_cddbInfo.cdArtist + ")";
     setTitle( s );
@@ -569,7 +569,7 @@ void K3bAudioCdView::updateDisplay()
 
   m_labelLength->setText( i18n("1 track (%1)", 
 			       "%n tracks (%1)", 
-			       m_toc.count()).arg(K3b::Msf(m_toc.length()).toString()) );
+			       m_toc.count()).tqarg(K3b::Msf(m_toc.length()).toString()) );
 }
 
 
@@ -584,10 +584,10 @@ void K3bAudioCdView::showBusyLabel( bool b )
     // the themed label is a cut label, thus its size hint is
     // based on the cut text, we force it to be full
     m_busyInfoLabel->resize( width(), height() );
-    m_busyInfoLabel->resize( m_busyInfoLabel->sizeHint() );
+    m_busyInfoLabel->resize( m_busyInfoLabel->tqsizeHint() );
     int x = (width() - m_busyInfoLabel->width())/2;
     int y = (height() - m_busyInfoLabel->height())/2;
-    QRect r( QPoint( x, y ), m_busyInfoLabel->size() );
+    TQRect r( TQPoint( x, y ), m_busyInfoLabel->size() );
     m_busyInfoLabel->setGeometry( r );
     m_busyInfoLabel->show();
 
@@ -607,16 +607,16 @@ void K3bAudioCdView::enableInteraction( bool b )
 }
 
 
-QDragObject* K3bAudioCdView::dragObject()
+TQDragObject* K3bAudioCdView::dragObject()
 {
-  QPtrList<QListViewItem> items = m_trackView->selectedItems();
-  QValueList<int> tracks;
-  for( QPtrListIterator<QListViewItem> it( items );
+  TQPtrList<TQListViewItem> items = m_trackView->selectedItems();
+  TQValueList<int> tracks;
+  for( TQPtrListIterator<TQListViewItem> it( items );
        it.current(); ++it )
     tracks.append( static_cast<AudioTrackViewItem*>(it.current())->trackNumber );
 
   if( !items.isEmpty() ) {
-    QDragObject* drag = new K3bAudioCdTrackDrag( m_toc, 
+    TQDragObject* drag = new K3bAudioCdTrackDrag( m_toc, 
 						 tracks, 
 						 m_cddbInfo,
 						 m_device,

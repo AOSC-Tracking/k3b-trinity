@@ -25,8 +25,8 @@
 
 #include <dlfcn.h>
 
-#include <qfile.h>
-#include <qmutex.h>
+#include <tqfile.h>
+#include <tqmutex.h>
 
 
 static bool s_haveLibCdio = false;
@@ -189,7 +189,7 @@ class K3bCdparanoiaLibData
   long sector() const { return m_currentSector; }
 
   static K3bCdparanoiaLibData* data( K3bDevice::Device* dev ) {
-    QMap<K3bDevice::Device*, K3bCdparanoiaLibData*>::const_iterator it = s_dataMap.find( dev );
+    TQMap<K3bDevice::Device*, K3bCdparanoiaLibData*>::const_iterator it = s_dataMap.tqfind( dev );
     if( it == s_dataMap.constEnd() )
       return new K3bCdparanoiaLibData( dev );
     else
@@ -198,7 +198,7 @@ class K3bCdparanoiaLibData
 
   static void freeAll() {
     // clean up all K3bCdparanoiaLibData instances
-    for( QMap<K3bDevice::Device*, K3bCdparanoiaLibData*>::iterator it = s_dataMap.begin();
+    for( TQMap<K3bDevice::Device*, K3bCdparanoiaLibData*>::iterator it = s_dataMap.begin();
 	 it != s_dataMap.end(); ++it )
       delete it.data();
   }
@@ -207,7 +207,7 @@ class K3bCdparanoiaLibData
   //
   // We have exactly one instance of K3bCdparanoiaLibData per device
   //
-  static QMap<K3bDevice::Device*, K3bCdparanoiaLibData*> s_dataMap;
+  static TQMap<K3bDevice::Device*, K3bCdparanoiaLibData*> s_dataMap;
 
   K3bDevice::Device* m_device;
 
@@ -216,11 +216,11 @@ class K3bCdparanoiaLibData
 
   long m_currentSector;
 
-  QMutex mutex;
+  TQMutex mutex;
 };
 
 
-QMap<K3bDevice::Device*, K3bCdparanoiaLibData*> K3bCdparanoiaLibData::s_dataMap;
+TQMap<K3bDevice::Device*, K3bCdparanoiaLibData*> K3bCdparanoiaLibData::s_dataMap;
 
 bool K3bCdparanoiaLibData::paranoiaInit()
 {
@@ -233,7 +233,7 @@ bool K3bCdparanoiaLibData::paranoiaInit()
   // the device here
   m_device->close();
 
-  m_drive = cdda_cdda_identify( QFile::encodeName(m_device->blockDeviceName()), 0, 0 );
+  m_drive = cdda_cdda_identify( TQFile::encodeName(m_device->blockDeviceName()), 0, 0 );
   if( m_drive == 0 ) {
     mutex.unlock();
     return false;
@@ -710,7 +710,7 @@ char* K3bCdparanoiaLib::read( int* statusCode, unsigned int* track, bool littleE
   //
   d->updateParanoiaMode();
 
-  Q_INT16* data = d->data->paranoiaRead( paranoiaCallback, d->maxRetries );
+  TQ_INT16* data = d->data->paranoiaRead( paranoiaCallback, d->maxRetries );
 
   char* charData = reinterpret_cast<char*>(data);
 

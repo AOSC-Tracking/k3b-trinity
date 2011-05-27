@@ -20,10 +20,10 @@
 #include <k3bdiritem.h>
 
 
-K3bMovixFileItem::K3bMovixFileItem( const QString& fileName, 
+K3bMovixFileItem::K3bMovixFileItem( const TQString& fileName, 
 				    K3bMovixDoc* doc, 
 				    K3bDirItem* dir, 
-				    const QString& k3bName )
+				    const TQString& k3bName )
   : K3bFileItem( fileName, doc, dir, k3bName ),
     m_doc(doc),
     m_subTitleItem(0)
@@ -36,16 +36,16 @@ K3bMovixFileItem::~K3bMovixFileItem()
   if( m_subTitleItem )
     m_doc->removeSubTitleItem( this );
 
-  // remove this from parentdir
+  // remove this from tqparentdir
   // it is important to do it here and not
   // rely on the K3bFileItem destructor becasue
   // otherwise the doc is not informed early enough
-  if( parent() )
-    parent()->takeDataItem( this );
+  if( tqparent() )
+    tqparent()->takeDataItem( this );
 }
 
 
-void K3bMovixFileItem::setK3bName( const QString& newName )
+void K3bMovixFileItem::setK3bName( const TQString& newName )
 {
   K3bFileItem::setK3bName( newName );
 
@@ -56,11 +56,11 @@ void K3bMovixFileItem::setK3bName( const QString& newName )
 }
 
 
-QString K3bMovixFileItem::subTitleFileName( const QString& name )
+TQString K3bMovixFileItem::subTitleFileName( const TQString& name )
 {
   // remove ending from k3bName
-  QString subName = name;
-  int pos = subName.findRev(".");
+  TQString subName = name;
+  int pos = subName.tqfindRev(".");
   if( pos > 0 )
     subName.truncate( pos );
   subName += ".sub";

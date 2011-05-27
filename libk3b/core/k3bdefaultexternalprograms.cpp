@@ -18,12 +18,12 @@
 #include "k3bexternalbinmanager.h"
 #include <k3bglobals.h>
 
-#include <qfile.h>
-#include <qdir.h>
-#include <qfileinfo.h>
-#include <qobject.h>
-#include <qregexp.h>
-#include <qtextstream.h>
+#include <tqfile.h>
+#include <tqdir.h>
+#include <tqfileinfo.h>
+#include <tqobject.h>
+#include <tqregexp.h>
+#include <tqtextstream.h>
 
 #include <k3bprocess.h>
 #include <kdebug.h>
@@ -92,18 +92,18 @@ K3bCdrecordProgram::K3bCdrecordProgram( bool dvdPro )
 // But since it may be that someone manually installed cdrecord
 // replacing the wrapper we check if cdrecord is a script.
 //
-static QString& debianWeirdnessHack( QString& path )
+static TQString& debianWeirdnessHack( TQString& path )
 {
-  if( QFile::exists( path + ".mmap" ) ) {
+  if( TQFile::exists( path + ".mmap" ) ) {
     kdDebug() << "(K3bCdrecordProgram) checking for Debian cdrecord wrapper script." << endl;
-    if( QFileInfo( path ).size() < 1024 ) {
+    if( TQFileInfo( path ).size() < 1024 ) {
       kdDebug() << "(K3bCdrecordProgram) Debian Wrapper script size fits. Checking file." << endl;
-      QFile f( path );
+      TQFile f( path );
       f.open( IO_ReadOnly );
-      QString s = QTextStream( &f ).read();
-      if( s.contains( "cdrecord.mmap" ) && s.contains( "cdrecord.shm" ) ) {
+      TQString s = TQTextStream( &f ).read();
+      if( s.tqcontains( "cdrecord.mmap" ) && s.tqcontains( "cdrecord.shm" ) ) {
 	kdDebug() << "(K3bCdrecordProgram) Found Debian Wrapper script." << endl;
-	QString ext;
+	TQString ext;
 	if( K3b::kernelVersion().versionString().left(3) > "2.2" )
 	  ext = ".mmap";
 	else
@@ -120,23 +120,23 @@ static QString& debianWeirdnessHack( QString& path )
 }
 
 
-bool K3bCdrecordProgram::scan( const QString& p )
+bool K3bCdrecordProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
   bool wodim = false;
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
 
-    if( QFile::exists( path + "wodim" ) ) {
+    if( TQFile::exists( path + "wodim" ) ) {
       wodim = true;
       path += "wodim";
     }
-    else if( QFile::exists( path + "cdrecord" ) ) {
+    else if( TQFile::exists( path + "cdrecord" ) ) {
       path += "cdrecord";
     }
     else
@@ -155,23 +155,23 @@ bool K3bCdrecordProgram::scan( const QString& p )
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
     int pos = -1;
     if( wodim ) {
-      pos = out.output().find( "Wodim" );
+      pos = out.output().tqfind( "Wodim" );
     }
     else if( m_dvdPro ) {
-      pos = out.output().find( "Cdrecord-ProDVD" );
+      pos = out.output().tqfind( "Cdrecord-ProDVD" );
     }
     else {
-      pos = out.output().find( "Cdrecord" );
+      pos = out.output().tqfind( "Cdrecord" );
     }
 
     if( pos < 0 )
       return false;
 
-    pos = out.output().find( QRegExp("[0-9]"), pos );
+    pos = out.output().tqfind( TQRegExp("[0-9]"), pos );
     if( pos < 0 )
       return false;
 
-    int endPos = out.output().find( QRegExp("\\s"), pos+1 );
+    int endPos = out.output().tqfind( TQRegExp("\\s"), pos+1 );
     if( endPos < 0 )
       return false;
 
@@ -182,11 +182,11 @@ bool K3bCdrecordProgram::scan( const QString& p )
     if( wodim )
       bin->addFeature( "wodim" );
 
-    pos = out.output().find( "Copyright") + 14;
-    endPos = out.output().find( "\n", pos );
+    pos = out.output().tqfind( "Copyright") + 14;
+    endPos = out.output().tqfind( "\n", pos );
 
     // cdrecord does not use local encoding for the copyright statement but plain latin1
-    bin->copyright = QString::fromLatin1( out.output().mid( pos, endPos-pos ).local8Bit() ).stripWhiteSpace();
+    bin->copyright = TQString::tqfromLatin1( out.output().mid( pos, endPos-pos ).local8Bit() ).stripWhiteSpace();
   }
   else {
     kdDebug() << "(K3bCdrecordProgram) could not start " << path << endl;
@@ -195,7 +195,7 @@ bool K3bCdrecordProgram::scan( const QString& p )
 
   if( !m_dvdPro && bin->version.suffix().endsWith( "-dvd" ) ) {
     bin->addFeature( "dvd-patch" );
-    bin->version = QString(bin->version.versionString()).remove("-dvd");
+    bin->version = TQString(bin->version.versionString()).remove("-dvd");
   }
 
   // probe features
@@ -203,17 +203,17 @@ bool K3bCdrecordProgram::scan( const QString& p )
   out.setProcess( &fp );
   fp << path << "-help";
   if( fp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    if( out.output().contains( "gracetime" ) )
+    if( out.output().tqcontains( "gracetime" ) )
       bin->addFeature( "gracetime" );
-    if( out.output().contains( "-overburn" ) )
+    if( out.output().tqcontains( "-overburn" ) )
       bin->addFeature( "overburn" );
-    if( out.output().contains( "-text" ) )
+    if( out.output().tqcontains( "-text" ) )
       bin->addFeature( "cdtext" );
-    if( out.output().contains( "-clone" ) )
+    if( out.output().tqcontains( "-clone" ) )
       bin->addFeature( "clone" );
-    if( out.output().contains( "-tao" ) )
+    if( out.output().tqcontains( "-tao" ) )
       bin->addFeature( "tao" );
-    if( out.output().contains( "cuefile=" ) &&
+    if( out.output().tqcontains( "cuefile=" ) &&
 	( wodim || bin->version > K3bVersion( 2, 1, -1, "a14") ) ) // cuefile handling was still buggy in a14
       bin->addFeature( "cuefile" );
 
@@ -222,14 +222,14 @@ bool K3bCdrecordProgram::scan( const QString& p )
     // just double-checked and the help page is proper but there is no harm in having
     // two checks)
     // and the version check does not handle versions like 2.01-dvd properly
-    if( out.output().contains( "-xamix" ) ||
+    if( out.output().tqcontains( "-xamix" ) ||
 	bin->version >= K3bVersion( 2, 1, -1, "a12" ) ||
 	wodim )
       bin->addFeature( "xamix" );
 
     // check if we run cdrecord as root
     struct stat s;
-    if( !::stat( QFile::encodeName(path), &s ) ) {
+    if( !::stat( TQFile::encodeName(path), &s ) ) {
       if( (s.st_mode & S_ISUID) && s.st_uid == 0 )
 	bin->addFeature( "suidroot" );
     }
@@ -271,23 +271,23 @@ K3bMkisofsProgram::K3bMkisofsProgram()
 {
 }
 
-bool K3bMkisofsProgram::scan( const QString& p )
+bool K3bMkisofsProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
   bool genisoimage = false;
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
 
-    if( QFile::exists( path + "genisoimage" ) ) {
+    if( TQFile::exists( path + "genisoimage" ) ) {
       genisoimage = true;
       path += "genisoimage";
     }
-    else if( QFile::exists( path + "mkisofs" ) ) {
+    else if( TQFile::exists( path + "mkisofs" ) ) {
       path += "mkisofs";
     }
     else
@@ -303,18 +303,18 @@ bool K3bMkisofsProgram::scan( const QString& p )
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
     int pos = -1;
     if( genisoimage )
-      pos = out.output().find( "genisoimage" );
+      pos = out.output().tqfind( "genisoimage" );
     else
-      pos = out.output().find( "mkisofs" );
+      pos = out.output().tqfind( "mkisofs" );
 
     if( pos < 0 )
       return false;
 
-    pos = out.output().find( QRegExp("[0-9]"), pos );
+    pos = out.output().tqfind( TQRegExp("[0-9]"), pos );
     if( pos < 0 )
       return false;
 
-    int endPos = out.output().find( ' ', pos+1 );
+    int endPos = out.output().tqfind( ' ', pos+1 );
     if( endPos < 0 )
       return false;
 
@@ -337,20 +337,20 @@ bool K3bMkisofsProgram::scan( const QString& p )
   fp << path << "-help";
   out.setProcess( &fp );
   if( fp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    if( out.output().contains( "-udf" ) )
+    if( out.output().tqcontains( "-udf" ) )
       bin->addFeature( "udf" );
-    if( out.output().contains( "-dvd-video" ) )
+    if( out.output().tqcontains( "-dvd-video" ) )
       bin->addFeature( "dvd-video" );
-    if( out.output().contains( "-joliet-long" ) )
+    if( out.output().tqcontains( "-joliet-long" ) )
       bin->addFeature( "joliet-long" );
-    if( out.output().contains( "-xa" ) )
+    if( out.output().tqcontains( "-xa" ) )
       bin->addFeature( "xa" );
-    if( out.output().contains( "-sectype" ) )
+    if( out.output().tqcontains( "-sectype" ) )
       bin->addFeature( "sectype" );
 
     // check if we run mkisofs as root
     struct stat s;
-    if( !::stat( QFile::encodeName(path), &s ) ) {
+    if( !::stat( TQFile::encodeName(path), &s ) ) {
       if( (s.st_mode & S_ISUID) && s.st_uid == 0 )
 	bin->addFeature( "suidroot" );
     }
@@ -383,30 +383,30 @@ K3bReadcdProgram::K3bReadcdProgram()
 {
 }
 
-bool K3bReadcdProgram::scan( const QString& p )
+bool K3bReadcdProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
   bool readom = false;
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
 
-    if( QFile::exists( path + "readom" ) ) {
+    if( TQFile::exists( path + "readom" ) ) {
       readom = true;
       path += "readom";
     }
-    else if( QFile::exists( path + "readcd" ) ) {
+    else if( TQFile::exists( path + "readcd" ) ) {
       path += "readcd";
     }
     else
       return false;
   }
 
-  if( !QFile::exists( path ) )
+  if( !TQFile::exists( path ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -418,17 +418,17 @@ bool K3bReadcdProgram::scan( const QString& p )
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
     int pos = -1;
     if( readom )
-      pos = out.output().find( "readom" );
+      pos = out.output().tqfind( "readom" );
     else
-      pos = out.output().find( "readcd" );
+      pos = out.output().tqfind( "readcd" );
     if( pos < 0 )
       return false;
 
-    pos = out.output().find( QRegExp("[0-9]"), pos );
+    pos = out.output().tqfind( TQRegExp("[0-9]"), pos );
     if( pos < 0 )
       return false;
 
-    int endPos = out.output().find( ' ', pos+1 );
+    int endPos = out.output().tqfind( ' ', pos+1 );
     if( endPos < 0 )
       return false;
 
@@ -451,12 +451,12 @@ bool K3bReadcdProgram::scan( const QString& p )
   fp << path << "-help";
   out.setProcess( &fp );
   if( fp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    if( out.output().contains( "-clone" ) )
+    if( out.output().tqcontains( "-clone" ) )
       bin->addFeature( "clone" );
 
     // check if we run mkisofs as root
     struct stat s;
-    if( !::stat( QFile::encodeName(path), &s ) ) {
+    if( !::stat( TQFile::encodeName(path), &s ) ) {
       if( (s.st_mode & S_ISUID) && s.st_uid == 0 )
 	bin->addFeature( "suidroot" );
     }
@@ -484,20 +484,20 @@ K3bCdrdaoProgram::K3bCdrdaoProgram()
 {
 }
 
-bool K3bCdrdaoProgram::scan( const QString& p )
+bool K3bCdrdaoProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
     path.append("cdrdao");
   }
 
-  if( !QFile::exists( path ) )
+  if( !TQFile::exists( path ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -507,15 +507,15 @@ bool K3bCdrdaoProgram::scan( const QString& p )
   vp << path ;
   K3bProcessOutputCollector out( &vp );
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    int pos = out.output().find( "Cdrdao version" );
+    int pos = out.output().tqfind( "Cdrdao version" );
     if( pos < 0 )
       return false;
 
-    pos = out.output().find( QRegExp("[0-9]"), pos );
+    pos = out.output().tqfind( TQRegExp("[0-9]"), pos );
     if( pos < 0 )
       return false;
 
-    int endPos = out.output().find( ' ', pos+1 );
+    int endPos = out.output().tqfind( ' ', pos+1 );
     if( endPos < 0 )
       return false;
 
@@ -523,8 +523,8 @@ bool K3bCdrdaoProgram::scan( const QString& p )
     bin->path = path;
     bin->version = out.output().mid( pos, endPos-pos );
 
-    pos = out.output().find( "(C)", endPos+1 ) + 4;
-    endPos = out.output().find( '\n', pos );
+    pos = out.output().tqfind( "(C)", endPos+1 ) + 4;
+    endPos = out.output().tqfind( '\n', pos );
     bin->copyright = out.output().mid( pos, endPos-pos );
   }
   else {
@@ -539,17 +539,17 @@ bool K3bCdrdaoProgram::scan( const QString& p )
   fp << path << "write" << "-h";
   out.setProcess( &fp );
   if( fp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    if( out.output().contains( "--overburn" ) )
+    if( out.output().tqcontains( "--overburn" ) )
       bin->addFeature( "overburn" );
-    if( out.output().contains( "--multi" ) )
+    if( out.output().tqcontains( "--multi" ) )
       bin->addFeature( "multisession" );
 
-    if( out.output().contains( "--buffer-under-run-protection" ) )
+    if( out.output().tqcontains( "--buffer-under-run-protection" ) )
       bin->addFeature( "disable-burnproof" );
 
     // check if we run cdrdao as root
     struct stat s;
-    if( !::stat( QFile::encodeName(path), &s ) ) {
+    if( !::stat( TQFile::encodeName(path), &s ) ) {
       if( (s.st_mode & S_ISUID) && s.st_uid == 0 )
 	bin->addFeature( "suidroot" );
     }
@@ -578,24 +578,24 @@ bool K3bCdrdaoProgram::scan( const QString& p )
 }
 
 
-K3bTranscodeProgram::K3bTranscodeProgram( const QString& transcodeProgram )
+K3bTranscodeProgram::K3bTranscodeProgram( const TQString& transcodeProgram )
   : K3bExternalProgram( transcodeProgram ),
     m_transcodeProgram( transcodeProgram )
 {
 }
 
-bool K3bTranscodeProgram::scan( const QString& p )
+bool K3bTranscodeProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
+  TQString path = p;
   if( path[path.length()-1] != '/' )
     path.append("/");
 
-  QString appPath = path + m_transcodeProgram;
+  TQString appPath = path + m_transcodeProgram;
 
-  if( !QFile::exists( appPath ) )
+  if( !TQFile::exists( appPath ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -605,13 +605,13 @@ bool K3bTranscodeProgram::scan( const QString& p )
   vp << appPath << "-v";
   K3bProcessOutputCollector out( &vp );
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    int pos = out.output().find( "transcode v" );
+    int pos = out.output().tqfind( "transcode v" );
     if( pos < 0 )
       return false;
 
     pos += 11;
 
-    int endPos = out.output().find( QRegExp("[\\s\\)]"), pos+1 );
+    int endPos = out.output().tqfind( TQRegExp("[\\s\\)]"), pos+1 );
     if( endPos < 0 )
       return false;
 
@@ -627,20 +627,20 @@ bool K3bTranscodeProgram::scan( const QString& p )
   //
   // Check features
   //
-  QString modInfoBin = path + "tcmodinfo";
+  TQString modInfoBin = path + "tcmodinfo";
   KProcess modp;
   modp << modInfoBin << "-p";
   out.setProcess( &modp );
   if( modp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    QString modPath = out.output().stripWhiteSpace();
-    QDir modDir( modPath );
-    if( !modDir.entryList( "*export_xvid*", QDir::Files ).isEmpty() )
+    TQString modPath = out.output().stripWhiteSpace();
+    TQDir modDir( modPath );
+    if( !modDir.entryList( "*export_xvid*", TQDir::Files ).isEmpty() )
       bin->addFeature( "xvid" );
-    if( !modDir.entryList( "*export_lame*", QDir::Files ).isEmpty() )
+    if( !modDir.entryList( "*export_lame*", TQDir::Files ).isEmpty() )
       bin->addFeature( "lame" );
-    if( !modDir.entryList( "*export_ffmpeg*", QDir::Files ).isEmpty() )
+    if( !modDir.entryList( "*export_ffmpeg*", TQDir::Files ).isEmpty() )
       bin->addFeature( "ffmpeg" );
-    if( !modDir.entryList( "*export_ac3*", QDir::Files ).isEmpty() )
+    if( !modDir.entryList( "*export_ac3*", TQDir::Files ).isEmpty() )
       bin->addFeature( "ac3" );
   }
 
@@ -650,26 +650,26 @@ bool K3bTranscodeProgram::scan( const QString& p )
 
 
 
-K3bVcdbuilderProgram::K3bVcdbuilderProgram( const QString& p )
+K3bVcdbuilderProgram::K3bVcdbuilderProgram( const TQString& p )
   : K3bExternalProgram( p ),
     m_vcdbuilderProgram( p )
 {
 }
 
-bool K3bVcdbuilderProgram::scan( const QString& p )
+bool K3bVcdbuilderProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
     path.append(m_vcdbuilderProgram);
   }
 
-  if( !QFile::exists( path ) )
+  if( !TQFile::exists( path ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -679,13 +679,13 @@ bool K3bVcdbuilderProgram::scan( const QString& p )
   vp << path << "-V";
   K3bProcessOutputCollector out( &vp );
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    int pos = out.output().find( "GNU VCDImager" );
+    int pos = out.output().tqfind( "GNU VCDImager" );
     if( pos < 0 )
       return false;
 
     pos += 14;
 
-    int endPos = out.output().find( QRegExp("[\\n\\)]"), pos+1 );
+    int endPos = out.output().tqfind( TQRegExp("[\\n\\)]"), pos+1 );
     if( endPos < 0 )
       return false;
 
@@ -693,8 +693,8 @@ bool K3bVcdbuilderProgram::scan( const QString& p )
     bin->path = path;
     bin->version = out.output().mid( pos, endPos-pos ).stripWhiteSpace();
 
-    pos = out.output().find( "Copyright" ) + 14;
-    endPos = out.output().find( "\n", pos );
+    pos = out.output().tqfind( "Copyright" ) + 14;
+    endPos = out.output().tqfind( "\n", pos );
     bin->copyright = out.output().mid( pos, endPos-pos ).stripWhiteSpace();
   }
   else {
@@ -713,20 +713,20 @@ K3bNormalizeProgram::K3bNormalizeProgram()
 }
 
 
-bool K3bNormalizeProgram::scan( const QString& p )
+bool K3bNormalizeProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
     path.append("normalize-audio");
   }
 
-  if( !QFile::exists( path ) )
+  if( !TQFile::exists( path ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -737,15 +737,15 @@ bool K3bNormalizeProgram::scan( const QString& p )
 
   vp << path << "--version";
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    int pos = out.output().find( "normalize" );
+    int pos = out.output().tqfind( "normalize" );
     if( pos < 0 )
       return false;
 
-    pos = out.output().find( QRegExp("\\d"), pos );
+    pos = out.output().tqfind( TQRegExp("\\d"), pos );
     if( pos < 0 )
       return false;
 
-    int endPos = out.output().find( QRegExp("\\s"), pos+1 );
+    int endPos = out.output().tqfind( TQRegExp("\\s"), pos+1 );
     if( endPos < 0 )
       return false;
 
@@ -753,8 +753,8 @@ bool K3bNormalizeProgram::scan( const QString& p )
     bin->path = path;
     bin->version = out.output().mid( pos, endPos-pos );
 
-    pos = out.output().find( "Copyright" )+14;
-    endPos = out.output().find( "\n", pos );
+    pos = out.output().tqfind( "Copyright" )+14;
+    endPos = out.output().tqfind( "\n", pos );
     bin->copyright = out.output().mid( pos, endPos-pos ).stripWhiteSpace();
   }
   else {
@@ -772,20 +772,20 @@ K3bGrowisofsProgram::K3bGrowisofsProgram()
 {
 }
 
-bool K3bGrowisofsProgram::scan( const QString& p )
+bool K3bGrowisofsProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
     path.append("growisofs");
   }
 
-  if( !QFile::exists( path ) )
+  if( !TQFile::exists( path ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -796,15 +796,15 @@ bool K3bGrowisofsProgram::scan( const QString& p )
 
   vp << path << "-version";
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    int pos = out.output().find( "growisofs" );
+    int pos = out.output().tqfind( "growisofs" );
     if( pos < 0 )
       return false;
 
-    pos = out.output().find( QRegExp("\\d"), pos );
+    pos = out.output().tqfind( TQRegExp("\\d"), pos );
     if( pos < 0 )
       return false;
 
-    int endPos = out.output().find( ",", pos+1 );
+    int endPos = out.output().tqfind( ",", pos+1 );
     if( endPos < 0 )
       return false;
 
@@ -822,7 +822,7 @@ bool K3bGrowisofsProgram::scan( const QString& p )
 
   // check if we run growisofs as root
   struct stat s;
-  if( !::stat( QFile::encodeName(path), &s ) ) {
+  if( !::stat( TQFile::encodeName(path), &s ) ) {
     if( (s.st_mode & S_ISUID) && s.st_uid == 0 )
       bin->addFeature( "suidroot" );
   }
@@ -837,20 +837,20 @@ K3bDvdformatProgram::K3bDvdformatProgram()
 {
 }
 
-bool K3bDvdformatProgram::scan( const QString& p )
+bool K3bDvdformatProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
     path.append("dvd+rw-format");
   }
 
-  if( !QFile::exists( path ) )
+  if( !TQFile::exists( path ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -863,18 +863,18 @@ bool K3bDvdformatProgram::scan( const QString& p )
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
     // different locales make searching for the +- char difficult
     // so we simply ignore it.
-    int pos = out.output().find( QRegExp("DVD.*RAM format utility") );
+    int pos = out.output().tqfind( TQRegExp("DVD.*RAM format utility") );
     if( pos < 0 )
       return false;
 
-    pos = out.output().find( "version", pos );
+    pos = out.output().tqfind( "version", pos );
     if( pos < 0 )
       return false;
 
     pos += 8;
 
     // the version ends in a dot.
-    int endPos = out.output().find( QRegExp("\\.\\D"), pos );
+    int endPos = out.output().tqfind( TQRegExp("\\.\\D"), pos );
     if( endPos < 0 )
       return false;
 
@@ -892,7 +892,7 @@ bool K3bDvdformatProgram::scan( const QString& p )
 
   // check if we run dvd+rw-format as root
   struct stat s;
-  if( !::stat( QFile::encodeName(path), &s ) ) {
+  if( !::stat( TQFile::encodeName(path), &s ) ) {
     if( (s.st_mode & S_ISUID) && s.st_uid == 0 )
       bin->addFeature( "suidroot" );
   }
@@ -907,20 +907,20 @@ K3bDvdBooktypeProgram::K3bDvdBooktypeProgram()
 {
 }
 
-bool K3bDvdBooktypeProgram::scan( const QString& p )
+bool K3bDvdBooktypeProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
     path.append("dvd+rw-booktype");
   }
 
-  if( !QFile::exists( path ) )
+  if( !TQFile::exists( path ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -931,7 +931,7 @@ bool K3bDvdBooktypeProgram::scan( const QString& p )
 
   vp << path;
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    int pos = out.output().find( "dvd+rw-booktype" );
+    int pos = out.output().tqfind( "dvd+rw-booktype" );
     if( pos < 0 )
       return false;
 
@@ -956,20 +956,20 @@ K3bCdda2wavProgram::K3bCdda2wavProgram()
 {
 }
 
-bool K3bCdda2wavProgram::scan( const QString& p )
+bool K3bCdda2wavProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
-  QFileInfo fi( path );
+  TQString path = p;
+  TQFileInfo fi( path );
   if( fi.isDir() ) {
     if( path[path.length()-1] != '/' )
       path.append("/");
     path.append("cdda2wav");
   }
 
-  if( !QFile::exists( path ) )
+  if( !TQFile::exists( path ) )
     return false;
 
   K3bExternalBin* bin = 0;
@@ -980,18 +980,18 @@ bool K3bCdda2wavProgram::scan( const QString& p )
 
   vp << path << "-h";
   if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
-    int pos = out.output().find( "cdda2wav" );
+    int pos = out.output().tqfind( "cdda2wav" );
     if( pos < 0 )
       return false;
 
-    pos = out.output().find( "Version", pos );
+    pos = out.output().tqfind( "Version", pos );
     if( pos < 0 )
       return false;
 
     pos += 8;
 
     // the version does not end in a space but the kernel info
-    int endPos = out.output().find( QRegExp("[^\\d\\.]"), pos );
+    int endPos = out.output().tqfind( TQRegExp("[^\\d\\.]"), pos );
     if( endPos < 0 )
       return false;
 
@@ -1001,15 +1001,15 @@ bool K3bCdda2wavProgram::scan( const QString& p )
 
     // features (we do this since the cdda2wav help says that the short
     //           options will disappear soon)
-    if( out.output().find( "-info-only" ) )
+    if( out.output().tqfind( "-info-only" ) )
       bin->addFeature( "info-only" ); // otherwise use the -J option
-    if( out.output().find( "-no-infofile" ) )
+    if( out.output().tqfind( "-no-infofile" ) )
       bin->addFeature( "no-infofile" ); // otherwise use the -H option
-    if( out.output().find( "-gui" ) )
+    if( out.output().tqfind( "-gui" ) )
       bin->addFeature( "gui" ); // otherwise use the -g option
-    if( out.output().find( "-bulk" ) )
+    if( out.output().tqfind( "-bulk" ) )
       bin->addFeature( "bulk" ); // otherwise use the -B option
-    if( out.output().find( "dev=" ) )
+    if( out.output().tqfind( "dev=" ) )
       bin->addFeature( "dev" ); // otherwise use the -B option
   }
   else {
@@ -1019,7 +1019,7 @@ bool K3bCdda2wavProgram::scan( const QString& p )
 
   // check if we run as root
   struct stat s;
-  if( !::stat( QFile::encodeName(path), &s ) ) {
+  if( !::stat( TQFile::encodeName(path), &s ) ) {
     if( (s.st_mode & S_ISUID) && s.st_uid == 0 )
       bin->addFeature( "suidroot" );
   }

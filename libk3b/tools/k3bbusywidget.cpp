@@ -15,19 +15,19 @@
 
 #include "k3bbusywidget.h"
 
-#include <qtimer.h>
-#include <qpainter.h>
+#include <tqtimer.h>
+#include <tqpainter.h>
 
 #include <kglobalsettings.h>
 
 
-K3bBusyWidget::K3bBusyWidget( QWidget* parent, const char* name )
-  : QFrame( parent, name )
+K3bBusyWidget::K3bBusyWidget( TQWidget* tqparent, const char* name )
+  : TQFrame( tqparent, name )
 {
-  m_busyTimer = new QTimer( this );
+  m_busyTimer = new TQTimer( this );
   m_iBusyPosition = 0;
 
-  connect( m_busyTimer, SIGNAL(timeout()), this, SLOT(animateBusy()) );
+  connect( m_busyTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(animateBusy()) );
 
   m_bBusy = false;
 }
@@ -68,21 +68,21 @@ void K3bBusyWidget::animateBusy()
 }
 
 
-QSize K3bBusyWidget::sizeHint() const
+TQSize K3bBusyWidget::tqsizeHint() const
 {
-  return minimumSizeHint();
+  return tqminimumSizeHint();
 }
 
 
-QSize K3bBusyWidget::minimumSizeHint() const
+TQSize K3bBusyWidget::tqminimumSizeHint() const
 {
-  return QSize( 2*frameWidth() + 62, 10 );
+  return TQSize( 2*frameWidth() + 62, 10 );
 }
 
 
-void K3bBusyWidget::drawContents( QPainter* p )
+void K3bBusyWidget::drawContents( TQPainter* p )
 {
-  QRect rect = contentsRect();
+  TQRect rect = contentsRect();
 
   int squareSize = 8;
 

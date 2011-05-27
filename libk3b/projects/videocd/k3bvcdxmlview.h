@@ -17,8 +17,8 @@
 #ifndef K3B_VCD_XMLVIEW_H
 #define K3B_VCD_XMLVIEW_H
 
-#include <qstring.h>
-#include <qdom.h>
+#include <tqstring.h>
+#include <tqdom.h>
 #include <ktempfile.h>
 
 #include <k3bvcddoc.h>
@@ -34,24 +34,24 @@ class K3bVcdXmlView
         K3bVcdXmlView( K3bVcdDoc* );
         ~K3bVcdXmlView();
 
-        bool write( const QString& );
-        QString xmlString()
+        bool write( const TQString& );
+        TQString xmlString()
         {
             return m_xmlstring;
         }
 
     private:
-        QString m_xmlstring;
+        TQString m_xmlstring;
 
-        void addComment( QDomDocument& doc, QDomElement& parent, const QString& text );
-        QDomElement addSubElement( QDomDocument&, QDomElement&, const QString& name, const QString& value = QString::null );
-        QDomElement addSubElement( QDomDocument&, QDomElement&, const QString& name, const int& value );
+        void addComment( TQDomDocument& doc, TQDomElement& tqparent, const TQString& text );
+        TQDomElement addSubElement( TQDomDocument&, TQDomElement&, const TQString& name, const TQString& value = TQString() );
+        TQDomElement addSubElement( TQDomDocument&, TQDomElement&, const TQString& name, const int& value );
 
-        QDomElement addFolderElement( QDomDocument&, QDomElement&, const QString& name );
-        void addFileElement( QDomDocument&, QDomElement&, const QString& src, const QString& name, bool mixed = false );
-        void doPbc( QDomDocument&, QDomElement&, K3bVcdTrack* );
-        void setNumkeyBSN( QDomDocument& , QDomElement&, K3bVcdTrack* );
-        void setNumkeySEL( QDomDocument& , QDomElement&, K3bVcdTrack* );
+        TQDomElement addFolderElement( TQDomDocument&, TQDomElement&, const TQString& name );
+        void addFileElement( TQDomDocument&, TQDomElement&, const TQString& src, const TQString& name, bool mixed = false );
+        void doPbc( TQDomDocument&, TQDomElement&, K3bVcdTrack* );
+        void setNumkeyBSN( TQDomDocument& , TQDomElement&, K3bVcdTrack* );
+        void setNumkeySEL( TQDomDocument& , TQDomElement&, K3bVcdTrack* );
         K3bVcdDoc* m_doc;
         int m_startkey;
 };

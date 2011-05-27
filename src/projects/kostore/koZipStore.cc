@@ -19,7 +19,7 @@
 
 #include "koZipStore.h"
 
-#include <qbuffer.h>
+#include <tqbuffer.h>
 
 #include <kzip.h>
 #include <kdebug.h>
@@ -27,11 +27,11 @@
 #include <kurl.h>
 #include <kio/netaccess.h>
 #if ! KDE_IS_VERSION( 3, 4, 1 )
-#include <qdir.h>
-#include <qfileinfo.h>
+#include <tqdir.h>
+#include <tqfileinfo.h>
 #endif
 
-KoZipStore::KoZipStore( const QString & _filename, Mode _mode, const QCString & appIdentification )
+KoZipStore::KoZipStore( const TQString & _filename, Mode _mode, const TQCString & appIdentification )
 {
     kdDebug(s_area) << "KoZipStore Constructor filename = " << _filename
                     << " mode = " << int(_mode)
@@ -42,8 +42,8 @@ KoZipStore::KoZipStore( const QString & _filename, Mode _mode, const QCString & 
 #if ! KDE_IS_VERSION( 3, 4, 1 )
     // Workaround for KZip KSaveFile double deletion in kdelibs-3.4,
     // when trying to write to a non-writable directory.
-    QDir dir( QFileInfo( _filename ).dir() );
-    if (_mode == Write && !QFileInfo( dir.path() ).isWritable()  )
+    TQDir dir( TQFileInfo( _filename ).dir() );
+    if (_mode == Write && !TQFileInfo( dir.path() ).isWritable()  )
     {
         kdWarning(s_area) << dir.path() << " isn't writable" << endl;
         m_bGood = false;
@@ -57,13 +57,13 @@ KoZipStore::KoZipStore( const QString & _filename, Mode _mode, const QCString & 
     }
 }
 
-KoZipStore::KoZipStore( QIODevice *dev, Mode mode, const QCString & appIdentification )
+KoZipStore::KoZipStore( TQIODevice *dev, Mode mode, const TQCString & appIdentification )
 {
     m_pZip = new KZip( dev );
     m_bGood = init( mode, appIdentification );
 }
 
-KoZipStore::KoZipStore( QWidget* window, const KURL & _url, const QString & _filename, Mode _mode, const QCString & appIdentification )
+KoZipStore::KoZipStore( TQWidget* window, const KURL & _url, const TQString & _filename, Mode _mode, const TQCString & appIdentification )
 {
     kdDebug(s_area) << "KoZipStore Constructor url" << _url.prettyURL()
                     << " filename = " << _filename
@@ -107,7 +107,7 @@ KoZipStore::~KoZipStore()
     }
 }
 
-bool KoZipStore::init( Mode _mode, const QCString& appIdentification )
+bool KoZipStore::init( Mode _mode, const TQCString& appIdentification )
 {
     KoStore::init( _mode );
     m_currentDir = 0;
@@ -129,12 +129,12 @@ bool KoZipStore::init( Mode _mode, const QCString& appIdentification )
     return good;
 }
 
-bool KoZipStore::openWrite( const QString& name )
+bool KoZipStore::openWrite( const TQString& name )
 {
 #if 0
     // Prepare memory buffer for writing
     m_byteArray.resize( 0 );
-    m_stream = new QBuffer( m_byteArray );
+    m_stream = new TQBuffer( m_byteArray );
     m_stream->open( IO_WriteOnly );
     return true;
 #endif
@@ -142,7 +142,7 @@ bool KoZipStore::openWrite( const QString& name )
     return m_pZip->prepareWriting( name, "", "" /*m_pZip->rootDir()->user(), m_pZip->rootDir()->group()*/, 0 );
 }
 
-bool KoZipStore::openRead( const QString& name )
+bool KoZipStore::openRead( const TQString& name )
 {
     const KArchiveEntry * entry = m_pZip->directory()->entry( name );
     if ( entry == 0L )
@@ -165,7 +165,7 @@ bool KoZipStore::openRead( const QString& name )
     return true;
 }
 
-Q_LONG KoZipStore::write( const char* _data, Q_ULONG _len )
+TQ_LONG KoZipStore::write( const char* _data, TQ_ULONG _len )
 {
   if ( _len == 0L ) return 0;
   //kdDebug(s_area) << "KoZipStore::write " << _len << endl;
@@ -200,7 +200,7 @@ bool KoZipStore::closeWrite()
 #endif
 }
 
-bool KoZipStore::enterRelativeDirectory( const QString& dirName )
+bool KoZipStore::enterRelativeDirectory( const TQString& dirName )
 {
     if ( m_mode == Read ) {
         if ( !m_currentDir ) {
@@ -218,7 +218,7 @@ bool KoZipStore::enterRelativeDirectory( const QString& dirName )
         return true;
 }
 
-bool KoZipStore::enterAbsoluteDirectory( const QString& path )
+bool KoZipStore::enterAbsoluteDirectory( const TQString& path )
 {
     if ( path.isEmpty() )
     {
@@ -230,7 +230,7 @@ bool KoZipStore::enterAbsoluteDirectory( const QString& path )
     return m_currentDir != 0;
 }
 
-bool KoZipStore::fileExists( const QString& absPath ) const
+bool KoZipStore::fileExists( const TQString& absPath ) const
 {
     const KArchiveEntry *entry = m_pZip->directory()->entry( absPath );
     return entry && entry->isFile();

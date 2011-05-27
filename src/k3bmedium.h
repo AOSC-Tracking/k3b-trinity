@@ -67,8 +67,8 @@ class K3bMedium
    * media. In that case refer to K3bDevice::Device::maxWriteSpeed
    * combined with a manual speed selection.
    */
-  const QValueList<int>& writingSpeeds() const;
-  const QString& volumeId() const;
+  const TQValueList<int>& writingSpeeds() const;
+  const TQString& volumeId() const;
 
   /**
    * This method tries to make a volume identificator witch uses a reduced character set
@@ -77,7 +77,7 @@ class K3bMedium
    *
    * Volume ids already containing spaces or lower case characters are left unchanged.
    */
-  QString beautifiedVolumeId() const;
+  TQString beautifiedVolumeId() const;
 
   /**
    * Content type. May be combined by a binary OR.
@@ -109,7 +109,7 @@ class K3bMedium
    * \param useContent if true the content of the CD/DVD will be used, otherwise
    *                   the string will simply be something like "empty DVD-R medium".
    */
-  QString shortString( bool useContent = true ) const;
+  TQString shortString( bool useContent = true ) const;
 
   /**
    * \return A HTML formatted string decribing this medium. This includes the device, the
@@ -117,7 +117,7 @@ class K3bMedium
    *         tracks.
    *         This string may be used for tooltips or short descriptions.
    */
-  QString longString() const;
+  TQString longString() const;
 
   bool operator==( const K3bMedium& other );
   bool operator!=( const K3bMedium& other );

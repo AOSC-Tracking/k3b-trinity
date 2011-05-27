@@ -32,9 +32,10 @@ namespace K3bDevice {
 class K3bCdda2wavReader : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCdda2wavReader( QObject* parent = 0, const char* name = 0 );
+  K3bCdda2wavReader( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCdda2wavReader();
 
   bool active() const;
@@ -45,7 +46,7 @@ class K3bCdda2wavReader : public K3bJob
   void cancel();
 
   void setReadDevice( K3bDevice::Device* dev ) { m_device = dev; }
-  void setImagePath( const QString& p ) { m_imagePath = p; }
+  void setImagePath( const TQString& p ) { m_imagePath = p; }
 
   /**
    * the data gets written directly into fd instead of the imagefile.
@@ -55,13 +56,13 @@ class K3bCdda2wavReader : public K3bJob
   void writeToFd( int fd );
 
  private slots:
-  void slotProcessLine( const QString& );
+  void slotProcessLine( const TQString& );
   void slotProcessExited( KProcess* );
 
  private:
   K3bDevice::Device* m_device;
 
-  QString m_imagePath;
+  TQString m_imagePath;
 
   class Private;
   Private* d;

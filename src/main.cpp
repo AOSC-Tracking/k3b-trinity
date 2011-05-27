@@ -27,10 +27,10 @@
 #include <dcopref.h>
 #include <kurl.h>
 
-#include <qfile.h>
-#include <qcstring.h>
-#include <qdatastream.h>
-#include <qtimer.h>
+#include <tqfile.h>
+#include <tqcstring.h>
+#include <tqdatastream.h>
+#include <tqtimer.h>
 
 #include <stdlib.h>
 
@@ -145,7 +145,7 @@ int main( int argc, char* argv[] )
     K3bApplication app;
 
     // we need a running app for the init method
-    QTimer::singleShot( 0, &app, SLOT(init()) );
+    TQTimer::singleShot( 0, &app, TQT_SLOT(init()) );
 
     return app.exec();
   }

@@ -15,10 +15,10 @@
 
 
 
-#include <qstring.h>
-#include <qvaluelist.h>
-#include <qstringlist.h>
-#include <qtimer.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
+#include <tqstringlist.h>
+#include <tqtimer.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -36,8 +36,8 @@
 #include "k3bcddbmultientriesdialog.h"
 
 
-K3bCddb::K3bCddb( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bCddb::K3bCddb( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   m_httpQuery = 0;
   m_cddbpQuery = 0;
@@ -61,8 +61,8 @@ void K3bCddb::readConfig( KConfig* c )
   m_bLocalCddbQuery = c->readBoolEntry( "use local cddb query", false );
 
   // old config <= 0.7.3
-  QStringList cddbpServer = c->readListEntry( "cddbp server" );
-  QStringList httpServer = c->readListEntry( "http server" );
+  TQStringList cddbpServer = c->readListEntry( "cddbp server" );
+  TQStringList httpServer = c->readListEntry( "http server" );
 
   // new config
   m_cddbServer = c->readListEntry( "cddb server" );
@@ -77,12 +77,12 @@ void K3bCddb::readConfig( KConfig* c )
 
   // old config <= 0.7.3
   if( !httpServer.isEmpty() ) {
-    for( QStringList::iterator it = httpServer.begin(); it != httpServer.end(); ++it ) {
+    for( TQStringList::iterator it = httpServer.begin(); it != httpServer.end(); ++it ) {
       m_cddbServer.append( "Http " + *it );
     }
   }
   if( !cddbpServer.isEmpty() ) {
-    for( QStringList::iterator it = cddbpServer.begin(); it != cddbpServer.end(); ++it ) {
+    for( TQStringList::iterator it = cddbpServer.begin(); it != cddbpServer.end(); ++it ) {
       m_cddbServer.append( "Cddbp " + *it );
     }
   }
@@ -98,14 +98,14 @@ void K3bCddb::query( const K3bDevice::Toc& toc )
 
   if( m_bLocalCddbQuery ) {
     m_iCurrentQueriedLocalDir = 0;
-    QTimer::singleShot( 0, this, SLOT(localQuery()) );
+    TQTimer::singleShot( 0, this, TQT_SLOT(localQuery()) );
   }
   else if( m_bRemoteCddbQuery ) {
     m_iCurrentQueriedServer = 0;
-    QTimer::singleShot( 0, this, SLOT(remoteQuery()) );
+    TQTimer::singleShot( 0, this, TQT_SLOT(remoteQuery()) );
   }
   else {
-    QTimer::singleShot( 0, this, SLOT(slotNoEntry()) );
+    TQTimer::singleShot( 0, this, TQT_SLOT(slotNoEntry()) );
   }
 }
 
@@ -141,7 +141,7 @@ void K3bCddb::slotQueryFinished( K3bCddbQuery* query )
     m_lastResult = m_lastUsedQuery->result();
 
     // make sure the result has the requested discid since otherwise local saving does not make much sense
-    m_lastResult.discid = QString::number( m_toc.discId(), 16 ).rightJustify( 8, '0' );
+    m_lastResult.discid = TQString::number( m_toc.discId(), 16 ).rightJustify( 8, '0' );
 
     emit queryFinished( K3bCddbQuery::SUCCESS );
   }
@@ -169,37 +169,37 @@ void K3bCddb::slotQueryFinished( K3bCddbQuery* query )
 }
 
 
-K3bCddbQuery* K3bCddb::getQuery( const QString& s )
+K3bCddbQuery* K3bCddb::getQuery( const TQString& s )
 {
-  QStringList buf = QStringList::split( ":", s.mid( s.find(" ")+1 ) );
-  QString server = buf[0];
+  TQStringList buf = TQStringList::split( ":", s.mid( s.tqfind(" ")+1 ) );
+  TQString server = buf[0];
   int port = buf[1].toInt();
 
   if( s.startsWith("Http") ) {
     if( !m_httpQuery ) {
       m_httpQuery = new K3bCddbHttpQuery( this );
-      connect( m_httpQuery, SIGNAL(infoMessage(const QString&)),
-	       this, SIGNAL(infoMessage(const QString&)) );
-      connect( m_httpQuery, SIGNAL(queryFinished(K3bCddbQuery*)),
-	       this, SLOT(slotQueryFinished(K3bCddbQuery*)) );
-      connect( m_httpQuery, SIGNAL(inexactMatches(K3bCddbQuery*)),
-	       this, SLOT(slotMultibleMatches(K3bCddbQuery*)) );
+      connect( m_httpQuery, TQT_SIGNAL(infoMessage(const TQString&)),
+	       this, TQT_SIGNAL(infoMessage(const TQString&)) );
+      connect( m_httpQuery, TQT_SIGNAL(queryFinished(K3bCddbQuery*)),
+	       this, TQT_SLOT(slotQueryFinished(K3bCddbQuery*)) );
+      connect( m_httpQuery, TQT_SIGNAL(inexactMatches(K3bCddbQuery*)),
+	       this, TQT_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
     }
 
     m_httpQuery->setServer( server, port );
-    m_httpQuery->setCgiPath( m_bUseManualCgiPath ? m_cgiPath : QString::fromLatin1("/~cddb/cddb.cgi") );
+    m_httpQuery->setCgiPath( m_bUseManualCgiPath ? m_cgiPath : TQString::tqfromLatin1("/~cddb/cddb.cgi") );
 
     return m_httpQuery;
   }
   else {
     if( !m_cddbpQuery ) {
       m_cddbpQuery = new K3bCddbpQuery( this );
-      connect( m_cddbpQuery, SIGNAL(infoMessage(const QString&)),
-	       this, SIGNAL(infoMessage(const QString&)) );
-      connect( m_cddbpQuery, SIGNAL(queryFinished(K3bCddbQuery*)),
-	       this, SLOT(slotQueryFinished(K3bCddbQuery*)) );
-      connect( m_cddbpQuery, SIGNAL(inexactMatches(K3bCddbQuery*)),
-	       this, SLOT(slotMultibleMatches(K3bCddbQuery*)) );
+      connect( m_cddbpQuery, TQT_SIGNAL(infoMessage(const TQString&)),
+	       this, TQT_SIGNAL(infoMessage(const TQString&)) );
+      connect( m_cddbpQuery, TQT_SIGNAL(queryFinished(K3bCddbQuery*)),
+	       this, TQT_SLOT(slotQueryFinished(K3bCddbQuery*)) );
+      connect( m_cddbpQuery, TQT_SIGNAL(inexactMatches(K3bCddbQuery*)),
+	       this, TQT_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
     }
 
     m_cddbpQuery->setServer( server, port );
@@ -213,12 +213,12 @@ void K3bCddb::localQuery()
 {
   if( !m_localQuery ) {
     m_localQuery = new K3bCddbLocalQuery( this );
-    connect( m_localQuery, SIGNAL(infoMessage(const QString&)),
-	     this, SIGNAL(infoMessage(const QString&)) );
-    connect( m_localQuery, SIGNAL(queryFinished(K3bCddbQuery*)),
-	     this, SLOT(slotQueryFinished(K3bCddbQuery*)) );
-    connect( m_localQuery, SIGNAL(inexactMatches(K3bCddbQuery*)),
-	     this, SLOT(slotMultibleMatches(K3bCddbQuery*)) );
+    connect( m_localQuery, TQT_SIGNAL(infoMessage(const TQString&)),
+	     this, TQT_SIGNAL(infoMessage(const TQString&)) );
+    connect( m_localQuery, TQT_SIGNAL(queryFinished(K3bCddbQuery*)),
+	     this, TQT_SLOT(slotQueryFinished(K3bCddbQuery*)) );
+    connect( m_localQuery, TQT_SIGNAL(inexactMatches(K3bCddbQuery*)),
+	     this, TQT_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
   }
   
   m_localQuery->setCddbDir( m_localCddbDirs[m_iCurrentQueriedLocalDir] );
@@ -227,7 +227,7 @@ void K3bCddb::localQuery()
 }
 
 
-QString K3bCddb::errorString() const
+TQString K3bCddb::errorString() const
 {
   if( !m_lastUsedQuery )
     return "no query";
@@ -241,7 +241,7 @@ QString K3bCddb::errorString() const
     return i18n("Error while connecting to host.");
   case K3bCddbQuery::WORKING:
     return i18n("Working...");
-  case K3bCddbQuery::QUERY_ERROR:
+  case K3bCddbQuery::TQUERY_ERROR:
   case K3bCddbQuery::READ_ERROR:
   case K3bCddbQuery::FAILURE:
   default:
@@ -261,8 +261,8 @@ void K3bCddb::saveEntry( const K3bCddbResultEntry& entry )
 {
   if( !m_localSubmit ) {
     m_localSubmit = new K3bCddbLocalSubmit( this );
-    connect( m_localSubmit, SIGNAL(submitFinished(K3bCddbSubmit*)),
-	     this, SLOT(slotSubmitFinished(K3bCddbSubmit*)) );
+    connect( m_localSubmit, TQT_SIGNAL(submitFinished(K3bCddbSubmit*)),
+	     this, TQT_SLOT(slotSubmitFinished(K3bCddbSubmit*)) );
   }
   
   m_localSubmit->setCddbDir( m_localCddbDirs[0] );

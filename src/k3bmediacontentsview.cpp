@@ -18,10 +18,10 @@
 #include <k3bmediacache.h>
 #include <k3bapplication.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qwidgetstack.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
+#include <tqwidgetstack.h>
 
 
 class K3bMediaContentsView::Private
@@ -40,9 +40,9 @@ K3bMediaContentsView::K3bMediaContentsView( bool withHeader,
 					    int mediumContent,
 					    int mediumTypes,
 					    int mediumState,
-					    QWidget* parent,
+					    TQWidget* tqparent,
 					    const char* name )
-  : K3bContentsView( withHeader, parent, name )
+  : K3bContentsView( withHeader, tqparent, name )
 {
   d = new Private;
   d->supportedMediumContent = mediumContent;
@@ -50,8 +50,8 @@ K3bMediaContentsView::K3bMediaContentsView( bool withHeader,
   d->supportedMediumStates = mediumState;
   d->autoReload = true;
 
-  connect( k3bappcore->mediaCache(), SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 }
 
 
@@ -131,9 +131,9 @@ void K3bMediaContentsView::enableInteraction( bool enable )
 
 void K3bMediaContentsView::slotMediumChanged( K3bDevice::Device* dev )
 {
-  // FIXME: derive a K3bContentsStack from QWidgetStack and let it set an active flag
+  // FIXME: derive a K3bContentsStack from TQWidgetStack and let it set an active flag
   // to replace this hack
-  if( QWidgetStack* stack = dynamic_cast<QWidgetStack*>( parentWidget() ) )
+  if( TQWidgetStack* stack = dynamic_cast<TQWidgetStack*>( tqparentWidget() ) )
     if( stack->visibleWidget() != this )
       return;
 

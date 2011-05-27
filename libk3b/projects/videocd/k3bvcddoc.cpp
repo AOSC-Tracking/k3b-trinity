@@ -14,14 +14,14 @@
 */
 
 // QT-includes
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qfile.h>
-#include <qdatastream.h>
-#include <qdom.h>
-#include <qdatetime.h>
-#include <qtimer.h>
-#include <qtextstream.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqfile.h>
+#include <tqdatastream.h>
+#include <tqdom.h>
+#include <tqdatetime.h>
+#include <tqtimer.h>
+#include <tqtextstream.h>
 
 // KDE-includes
 #include <kprocess.h>
@@ -49,8 +49,8 @@ bool print_progress = true;
 bool aspect_correction = false;
 byte forced_sequence_header = 0;
 
-K3bVcdDoc::K3bVcdDoc( QObject* parent )
-        : K3bDoc( parent )
+K3bVcdDoc::K3bVcdDoc( TQObject* tqparent )
+        : K3bDoc( tqparent )
 {
     m_tracks = 0L;
     m_vcdOptions = new K3bVcdOptions();
@@ -58,12 +58,12 @@ K3bVcdDoc::K3bVcdDoc( QObject* parent )
     m_docType = VCD;
     m_vcdType = NONE;
 
-    m_urlAddingTimer = new QTimer( this );
-    connect( m_urlAddingTimer, SIGNAL( timeout() ), this, SLOT( slotWorkUrlQueue() ) );
+    m_urlAddingTimer = new TQTimer( this );
+    connect( m_urlAddingTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotWorkUrlQueue() ) );
 
     // FIXME: remove the newTracks() signal and replace it with the changed signal
-    connect( this, SIGNAL( newTracks() ), this, SIGNAL( changed() ) );
-    connect( this, SIGNAL( trackRemoved( K3bVcdTrack* ) ), this, SIGNAL( changed() ) );
+    connect( this, TQT_SIGNAL( newTracks() ), this, TQT_SIGNAL( changed() ) );
+    connect( this, TQT_SIGNAL( trackRemoved( K3bVcdTrack* ) ), this, TQT_SIGNAL( changed() ) );
 }
 
 K3bVcdDoc::~K3bVcdDoc()
@@ -82,14 +82,14 @@ bool K3bVcdDoc::newDocument()
         while ( m_tracks->first() )
             removeTrack( m_tracks->first() );
     else
-        m_tracks = new QPtrList<K3bVcdTrack>;
+        m_tracks = new TQPtrList<K3bVcdTrack>;
     m_tracks->setAutoDelete( false );
 
     return K3bDoc::newDocument();
 }
 
 
-QString K3bVcdDoc::name() const
+TQString K3bVcdDoc::name() const
 {
   return m_vcdOptions->volumeId();
 }
@@ -133,8 +133,8 @@ K3b::Msf K3bVcdDoc::length() const
 
 bool K3bVcdDoc::isImage( const KURL& url )
 {
-    QImage p;
-    return p.load( QFile::encodeName( url.path() ) );
+    TQImage p;
+    return p.load( TQFile::encodeName( url.path() ) );
 }
 
 void K3bVcdDoc::addUrls( const KURL::List& urls )
@@ -168,7 +168,7 @@ void K3bVcdDoc::slotWorkUrlQueue()
             return ;
         }
 
-        if ( !QFile::exists( item->url.path() ) ) {
+        if ( !TQFile::exists( item->url.path() ) ) {
             kdDebug() << "(K3bVcdDoc) file not found: " << item->url.path() << endl;
             m_notFoundFiles.append( item->url.path() );
             return ;
@@ -195,8 +195,8 @@ void K3bVcdDoc::slotWorkUrlQueue()
 K3bVcdTrack* K3bVcdDoc::createTrack( const KURL& url )
 {
     char filename[ 255 ];
-    QString error_string = "";
-    strcpy( filename, QFile::encodeName( url.path() ) );
+    TQString error_string = "";
+    strcpy( filename, TQFile::encodeName( url.path() ) );
     K3bMpegInfo* Mpeg = new K3bMpegInfo( filename );
 
     if ( Mpeg ) {
@@ -211,8 +211,8 @@ K3bVcdTrack* K3bVcdDoc::createTrack( const KURL& url )
                                           i18n( "K3b will create a %1 image from the given MPEG "
                                                 "files, but these files must already be in %2 "
                                                 "format. K3b does not yet resample MPEG files." )
-                                          .arg( i18n( "VCD" ) )
-                                          .arg( i18n( "VCD" ) ),
+                                          .tqarg( i18n( "VCD" ) )
+                                          .tqarg( i18n( "VCD" ) ),
                                           i18n( "Information" ) );
                 m_urlAddingTimer->start( 0 );
             } else if ( vcdType() == NONE ) {
@@ -223,8 +223,8 @@ K3bVcdTrack* K3bVcdDoc::createTrack( const KURL& url )
                                                       i18n( "K3b will create a %1 image from the given MPEG "
                                                             "files, but these files must already be in %2 "
                                                             "format. K3b does not yet resample MPEG files." )
-                                                      .arg( i18n( "SVCD" ) )
-                                                      .arg( i18n( "SVCD" ) )
+                                                      .tqarg( i18n( "SVCD" ) )
+                                                      .tqarg( i18n( "SVCD" ) )
                                                       + "\n\n"
                                                       + i18n( "Note: Forcing MPEG2 as VCD is not supported by "
                                                               "some standalone DVD players." ),
@@ -336,7 +336,7 @@ void K3bVcdDoc::removeTrack( K3bVcdTrack* track )
     }
 
     // set the current item to track
-    if ( m_tracks->findRef( track ) >= 0 ) {
+    if ( m_tracks->tqfindRef( track ) >= 0 ) {
         // take the current item
         track = m_tracks->take();
 
@@ -374,12 +374,12 @@ void K3bVcdDoc::moveTrack( const K3bVcdTrack* track, const K3bVcdTrack* after )
         return ;
 
     // set the current item to track
-    m_tracks->findRef( track );
+    m_tracks->tqfindRef( track );
     // take the current item
     track = m_tracks->take();
 
-    // if after == 0 findRef returnes -1
-    int pos = m_tracks->findRef( after );
+    // if after == 0 tqfindRef returnes -1
+    int pos = m_tracks->tqfindRef( after );
     m_tracks->insert( pos + 1, track );
 
     // reorder pbc tracks
@@ -389,15 +389,15 @@ void K3bVcdDoc::moveTrack( const K3bVcdTrack* track, const K3bVcdTrack* after )
 }
 
 
-QString K3bVcdDoc::typeString() const
+TQString K3bVcdDoc::typeString() const
 {
     return "vcd";
 }
 
 
-K3bBurnJob* K3bVcdDoc::newBurnJob( K3bJobHandler* hdl, QObject* parent )
+K3bBurnJob* K3bVcdDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
 {
-    return new K3bVcdJob( this, hdl, parent );
+    return new K3bVcdJob( this, hdl, tqparent );
 }
 
 void K3bVcdDoc::informAboutNotFoundFiles()
@@ -448,9 +448,9 @@ void K3bVcdDoc::setPbcTracks()
 
     if ( m_tracks ) {
         int count = m_tracks->count();
-        kdDebug() << QString( "K3bVcdDoc::setPbcTracks() - we have %1 tracks in list." ).arg( count ) << endl;
+        kdDebug() << TQString( "K3bVcdDoc::setPbcTracks() - we have %1 tracks in list." ).tqarg( count ) << endl;
 
-        QPtrListIterator<K3bVcdTrack> iterTrack( *m_tracks );
+        TQPtrListIterator<K3bVcdTrack> iterTrack( *m_tracks );
         K3bVcdTrack* track;
         while ( ( track = iterTrack.current() ) != 0 ) {
             ++iterTrack;
@@ -546,11 +546,11 @@ void K3bVcdDoc::setPbcTracks()
 }
 
 
-bool K3bVcdDoc::loadDocumentData( QDomElement* root )
+bool K3bVcdDoc::loadDocumentData( TQDomElement* root )
 {
     newDocument();
 
-    QDomNodeList nodes = root->childNodes();
+    TQDomNodeList nodes = root->childNodes();
 
     if ( nodes.length() < 3 )
         return false;
@@ -568,13 +568,13 @@ bool K3bVcdDoc::loadDocumentData( QDomElement* root )
 
 
     // vcd Label
-    QDomNodeList vcdNodes = nodes.item( 1 ).childNodes();
+    TQDomNodeList vcdNodes = nodes.item( 1 ).childNodes();
 
     for ( uint i = 0; i < vcdNodes.count(); i++ ) {
-        QDomNode item = vcdNodes.item( i );
-        QString name = item.nodeName();
+        TQDomNode item = vcdNodes.item( i );
+        TQString name = item.nodeName();
 
-        kdDebug() << QString( "(K3bVcdDoc::loadDocumentData) nodeName = '%1'" ).arg( name ) << endl;
+        kdDebug() << TQString( "(K3bVcdDoc::loadDocumentData) nodeName = '%1'" ).tqarg( name ) << endl;
 
         if ( name == "volumeId" )
             vcdOptions() ->setVolumeId( item.toElement().text() );
@@ -629,14 +629,14 @@ bool K3bVcdDoc::loadDocumentData( QDomElement* root )
     }
 
     // vcd Tracks
-    QDomNodeList trackNodes = nodes.item( 2 ).childNodes();
+    TQDomNodeList trackNodes = nodes.item( 2 ).childNodes();
 
     for ( uint i = 0; i < trackNodes.length(); i++ ) {
 
         // check if url is available
-        QDomElement trackElem = trackNodes.item( i ).toElement();
-        QString url = trackElem.attributeNode( "url" ).value();
-        if ( !QFile::exists( url ) )
+        TQDomElement trackElem = trackNodes.item( i ).toElement();
+        TQString url = trackElem.attributeNode( "url" ).value();
+        if ( !TQFile::exists( url ) )
             m_notFoundFiles.append( url );
         else {
             KURL k;
@@ -645,8 +645,8 @@ bool K3bVcdDoc::loadDocumentData( QDomElement* root )
                 track ->setPlayTime( trackElem.attribute( "playtime", "1" ).toInt() );
                 track ->setWaitTime( trackElem.attribute( "waittime", "2" ).toInt() );
                 track ->setReactivity( trackElem.attribute( "reactivity", "0" ).toInt() );
-                track -> setPbcNumKeys( ( trackElem.attribute( "numkeys", "yes" ).contains( "yes" ) ) ? true : false );
-                track -> setPbcNumKeysUserdefined( ( trackElem.attribute( "userdefinednumkeys", "no" ).contains( "yes" ) ) ? true : false );
+                track -> setPbcNumKeys( ( trackElem.attribute( "numkeys", "yes" ).tqcontains( "yes" ) ) ? true : false );
+                track -> setPbcNumKeysUserdefined( ( trackElem.attribute( "userdefinednumkeys", "no" ).tqcontains( "yes" ) ) ? true : false );
 
                 addTrack( track, m_tracks->count() );
             }
@@ -662,12 +662,12 @@ bool K3bVcdDoc::loadDocumentData( QDomElement* root )
         int val;
         bool pbctrack;
         for ( uint trackId = 0; trackId < trackNodes.length(); trackId++ ) {
-            QDomElement trackElem = trackNodes.item( trackId ).toElement();
-            QDomNodeList trackNodes = trackElem.childNodes();
+            TQDomElement trackElem = trackNodes.item( trackId ).toElement();
+            TQDomNodeList trackNodes = trackElem.childNodes();
             for ( uint i = 0; i < trackNodes.length(); i++ ) {
-                QDomElement trackElem = trackNodes.item( i ).toElement();
-                QString name = trackElem.tagName();
-                if ( name.contains( "pbc" ) ) {
+                TQDomElement trackElem = trackNodes.item( i ).toElement();
+                TQString name = trackElem.tagName();
+                if ( name.tqcontains( "pbc" ) ) {
                     if ( trackElem.hasAttribute ( "type" ) ) {
                         type = trackElem.attribute ( "type" ).toInt();
                         if ( trackElem.hasAttribute ( "pbctrack" ) ) {
@@ -688,7 +688,7 @@ bool K3bVcdDoc::loadDocumentData( QDomElement* root )
                             }
                         }
                     }
-                } else if ( name.contains( "numkeys" ) ) {
+                } else if ( name.tqcontains( "numkeys" ) ) {
                     if ( trackElem.hasAttribute ( "key" ) ) {
                         int key = trackElem.attribute ( "key" ).toInt();
                         if ( trackElem.hasAttribute ( "val" ) ) {
@@ -717,15 +717,15 @@ bool K3bVcdDoc::loadDocumentData( QDomElement* root )
 
 
 
-bool K3bVcdDoc::saveDocumentData( QDomElement * docElem )
+bool K3bVcdDoc::saveDocumentData( TQDomElement * docElem )
 {
-    QDomDocument doc = docElem->ownerDocument();
+    TQDomDocument doc = docElem->ownerDocument();
     saveGeneralDocumentData( docElem );
 
     // save Vcd Label
-    QDomElement vcdMain = doc.createElement( "vcd" );
+    TQDomElement vcdMain = doc.createElement( "vcd" );
 
-    QDomElement vcdElem = doc.createElement( "volumeId" );
+    TQDomElement vcdElem = doc.createElement( "volumeId" );
     vcdElem.appendChild( doc.createTextNode( vcdOptions() ->volumeId() ) );
     vcdMain.appendChild( vcdElem );
 
@@ -749,98 +749,98 @@ bool K3bVcdDoc::saveDocumentData( QDomElement * docElem )
     // systemId()
 
     vcdElem = doc.createElement( "vcdType" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdType() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdType() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "mpegVersion" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->mpegVersion() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->mpegVersion() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "PreGapLeadout" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->PreGapLeadout() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->PreGapLeadout() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "PreGapTrack" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->PreGapTrack() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->PreGapTrack() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "FrontMarginTrack" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->FrontMarginTrack() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->FrontMarginTrack() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "RearMarginTrack" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->RearMarginTrack() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->RearMarginTrack() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "FrontMarginTrackSVCD" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->FrontMarginTrackSVCD() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->FrontMarginTrackSVCD() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "RearMarginTrackSVCD" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->RearMarginTrackSVCD() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->RearMarginTrackSVCD() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "volumeCount" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->volumeCount() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->volumeCount() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "volumeNumber" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->volumeNumber() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->volumeNumber() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "AutoDetect" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->AutoDetect() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->AutoDetect() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "CdiSupport" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->CdiSupport() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->CdiSupport() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "NonCompliantMode" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->NonCompliantMode() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->NonCompliantMode() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "Sector2336" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->Sector2336() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->Sector2336() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "UpdateScanOffsets" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->UpdateScanOffsets() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->UpdateScanOffsets() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "RelaxedAps" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->RelaxedAps() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->RelaxedAps() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "UseGaps" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->UseGaps() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->UseGaps() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "PbcEnabled" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->PbcEnabled() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->PbcEnabled() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "SegmentFolder" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->SegmentFolder() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->SegmentFolder() ) ) );
     vcdMain.appendChild( vcdElem );
 
     vcdElem = doc.createElement( "Restriction" );
-    vcdElem.appendChild( doc.createTextNode( QString::number( vcdOptions() ->Restriction() ) ) );
+    vcdElem.appendChild( doc.createTextNode( TQString::number( vcdOptions() ->Restriction() ) ) );
     vcdMain.appendChild( vcdElem );
 
     docElem->appendChild( vcdMain );
 
     // save the tracks
     // -------------------------------------------------------------
-    QDomElement contentsElem = doc.createElement( "contents" );
+    TQDomElement contentsElem = doc.createElement( "contents" );
 
-    QPtrListIterator<K3bVcdTrack> iterTrack( *m_tracks );
+    TQPtrListIterator<K3bVcdTrack> iterTrack( *m_tracks );
     K3bVcdTrack* track;
 
     while ( ( track = iterTrack.current() ) != 0 ) {
         ++iterTrack;
 
-        QDomElement trackElem = doc.createElement( "track" );
+        TQDomElement trackElem = doc.createElement( "track" );
         trackElem.setAttribute( "url", KIO::decodeFileName( track->absPath() ) );
         trackElem.setAttribute( "playtime", track->getPlayTime() );
         trackElem.setAttribute( "waittime", track->getWaitTime() );
@@ -853,7 +853,7 @@ bool K3bVcdDoc::saveDocumentData( QDomElement * docElem )
                 i++ ) {
             if ( track->isPbcUserDefined( i ) ) {
                 // save pbcTracks
-                QDomElement pbcElem = doc.createElement( "pbc" );
+                TQDomElement pbcElem = doc.createElement( "pbc" );
                 pbcElem.setAttribute( "type", i );
                 if ( track->getPbcTrack( i ) ) {
                     pbcElem.setAttribute( "pbctrack", "yes" );
@@ -865,13 +865,13 @@ bool K3bVcdDoc::saveDocumentData( QDomElement * docElem )
                 trackElem.appendChild( pbcElem );
             }
         }
-        QMap<int, K3bVcdTrack*> numKeyMap = track->DefinedNumKey();
-        QMap<int, K3bVcdTrack*>::const_iterator trackIt;
+        TQMap<int, K3bVcdTrack*> numKeyMap = track->DefinedNumKey();
+        TQMap<int, K3bVcdTrack*>::const_iterator trackIt;
 
         for ( trackIt = numKeyMap.begin();
                 trackIt != numKeyMap.end();
                 ++trackIt ) {
-            QDomElement numElem = doc.createElement( "numkeys" );
+            TQDomElement numElem = doc.createElement( "numkeys" );
             if ( trackIt.data() ) {
                 numElem.setAttribute( "key", trackIt.key() );
                 numElem.setAttribute( "val", trackIt.data() ->index() + 1 );

@@ -22,11 +22,11 @@
 #include "k3bisooptions.h"
 #include <k3bglobals.h>
 
-#include <qfileinfo.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qregexp.h>
-#include <qfile.h>
+#include <tqfileinfo.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqregexp.h>
+#include <tqfile.h>
 
 #include <kurl.h>
 #include <kdebug.h>
@@ -57,7 +57,7 @@ bool operator>( const K3bFileItem::Id& id1, const K3bFileItem::Id& id2 )
 
 
 
-K3bFileItem::K3bFileItem( const QString& filePath, K3bDataDoc* doc, K3bDirItem* dir, const QString& k3bName, int flags )
+K3bFileItem::K3bFileItem( const TQString& filePath, K3bDataDoc* doc, K3bDirItem* dir, const TQString& k3bName, int flags )
   : K3bDataItem( doc, dir, flags ),
     m_replacedItemFromOldSession(0),
     m_localPath(filePath)
@@ -71,7 +71,7 @@ K3bFileItem::K3bFileItem( const QString& filePath, K3bDataDoc* doc, K3bDirItem* 
   // we need to use lstat here since for symlinks both KDE and QT return the size of the file pointed to
   // instead the size of the link.
   k3b_struct_stat statBuf;
-  if( k3b_lstat( QFile::encodeName(filePath), &statBuf ) ) {
+  if( k3b_lstat( TQFile::encodeName(filePath), &statBuf ) ) {
     m_size = K3b::filesize( filePath );
     m_id.inode = 0;
     m_id.device = 0;
@@ -104,7 +104,7 @@ K3bFileItem::K3bFileItem( const QString& filePath, K3bDataDoc* doc, K3bDirItem* 
 
   if( isSymLink() ) {
     k3b_struct_stat statBuf;
-    if( k3b_stat( QFile::encodeName(filePath), &statBuf ) == 0 ) {
+    if( k3b_stat( TQFile::encodeName(filePath), &statBuf ) == 0 ) {
       m_idFollowed.inode = statBuf.st_ino;
       m_idFollowed.device = statBuf.st_dev;
 
@@ -113,14 +113,14 @@ K3bFileItem::K3bFileItem( const QString& filePath, K3bDataDoc* doc, K3bDirItem* 
   }
 
   // add automagically like a qlistviewitem
-  if( parent() )
-    parent()->addDataItem( this );
+  if( tqparent() )
+    tqparent()->addDataItem( this );
 }
 
 
 K3bFileItem::K3bFileItem( const k3b_struct_stat* stat, 
 			  const k3b_struct_stat* followedStat,
-			  const QString& filePath, K3bDataDoc* doc, K3bDirItem* dir, const QString& k3bName )
+			  const TQString& filePath, K3bDataDoc* doc, K3bDirItem* dir, const TQString& k3bName )
   : K3bDataItem( doc, dir ),
     m_replacedItemFromOldSession(0),
     m_localPath(filePath)
@@ -151,8 +151,8 @@ K3bFileItem::K3bFileItem( const k3b_struct_stat* stat,
     m_sizeFollowed = m_size;
   }
 
-  if( parent() )
-    parent()->addDataItem( this );
+  if( tqparent() )
+    tqparent()->addDataItem( this );
 }
 
 
@@ -171,7 +171,7 @@ K3bFileItem::K3bFileItem( const K3bFileItem& item )
 
 K3bFileItem::~K3bFileItem()
 {
-  // remove this from parentdir
+  // remove this from tqparentdir
   take();
 }
 
@@ -211,14 +211,14 @@ bool K3bFileItem::exists() const
   return true;
 }
 
-QString K3bFileItem::absIsoPath()
+TQString K3bFileItem::absIsoPath()
 {
   //	return m_dir->absIsoPath() + m_isoName;
-  return QString::null;
+  return TQString();
 }
 
 
-QString K3bFileItem::localPath() const
+TQString K3bFileItem::localPath() const
 {
   return m_localPath;
 }
@@ -235,9 +235,9 @@ bool K3bFileItem::isSymLink() const
 }
 
 
-QString K3bFileItem::linkDest() const
+TQString K3bFileItem::linkDest() const
 {
-  return QFileInfo( localPath() ).readLink();
+  return TQFileInfo( localPath() ).readLink();
 }
 
 
@@ -247,10 +247,10 @@ bool K3bFileItem::isValid() const
 
     // this link is not valid if we cannot follow it if we want to
     if( doc()->isoOptions().followSymbolicLinks() ) {
-      return QFile::exists( K3b::resolveLink( localPath() ) );
+      return TQFile::exists( K3b::resolveLink( localPath() ) );
     }
 
-    QString dest = linkDest();
+    TQString dest = linkDest();
 
     if( dest[0] == '/' )
       return false;  // absolut links can never be part of the compilation!
@@ -258,7 +258,7 @@ bool K3bFileItem::isValid() const
     // parse the link
     K3bDirItem* dir = getParent();
 
-    QStringList tokens = QStringList::split( QRegExp("/+"), dest );  // two slashes or more do the same as one does!
+    TQStringList tokens = TQStringList::split( TQRegExp("/+"), dest );  // two slashes or more do the same as one does!
 
     unsigned int i = 0;
     while( i < tokens.size() ) {
@@ -267,13 +267,13 @@ bool K3bFileItem::isValid() const
       }
       else if( tokens[i] == ".." ) {
 	// change the directory
-	dir = dir->parent();
+	dir = dir->tqparent();
 	if( dir == 0 )
 	  return false;
       }
       else {
 	// search for the item in dir
-	K3bDataItem* d = dir->find( tokens[i] );
+	K3bDataItem* d = dir->tqfind( tokens[i] );
 	if( d == 0 )
 	  return false;
 

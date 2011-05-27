@@ -18,19 +18,20 @@
 #ifndef _K3B_NOTIFY_OPTIONTAB_H_
 #define _K3B_NOTIFY_OPTIONTAB_H_
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 namespace KNotify {
   class KNotifyWidget;
 }
 
 
-class K3bNotifyOptionTab : public QWidget
+class K3bNotifyOptionTab : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bNotifyOptionTab( QWidget* parent = 0, const char* name = 0 );
+  K3bNotifyOptionTab( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bNotifyOptionTab();
 
   void readSettings();

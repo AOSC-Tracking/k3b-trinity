@@ -26,6 +26,7 @@ namespace K3bDevice {
 class K3bLsofWrapperDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   ~K3bLsofWrapperDialog();
@@ -37,14 +38,14 @@ class K3bLsofWrapperDialog : public KDialogBase
    *
    * If the device is not in use this method simply returns.
    */
-  static void checkDevice( K3bDevice::Device* dev, QWidget* parent = 0 );
+  static void checkDevice( K3bDevice::Device* dev, TQWidget* tqparent = 0 );
 
  private slots:
   bool slotCheckDevice();
   void slotQuitOtherApps();
 
  private:
-  K3bLsofWrapperDialog( QWidget* parent );
+  K3bLsofWrapperDialog( TQWidget* tqparent );
 
   K3bDevice::Device* m_device;
   K3bRichTextLabel* m_label;

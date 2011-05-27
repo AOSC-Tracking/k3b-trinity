@@ -15,34 +15,35 @@
 
 
 
-#ifndef K3BCDDB_LOCAL_QUERY_H
-#define K3BCDDB_LOCAL_QUERY_H
+#ifndef K3BCDDB_LOCAL_TQUERY_H
+#define K3BCDDB_LOCAL_TQUERY_H
 
 #include "k3bcddbquery.h"
 #include "k3bcddbresult.h"
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
 class K3bCddbLocalQuery : public K3bCddbQuery
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCddbLocalQuery( QObject* parent = 0, const char* name = 0 );
+  K3bCddbLocalQuery( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCddbLocalQuery();
 
  public slots:
-  void setCddbDir( const QString& dir ) { m_cddbDir = dir; }
+  void setCddbDir( const TQString& dir ) { m_cddbDir = dir; }
 
  protected:
   void doQuery();
   void doMatchQuery();
 
  private:
-  QString preparePath( const QString& p );
+  TQString preparePath( const TQString& p );
 
-  QString m_cddbDir;
+  TQString m_cddbDir;
 };
 
 #endif

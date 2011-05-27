@@ -24,7 +24,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <unistd.h>
 
@@ -40,7 +40,7 @@ public:
 
   bool m_canceled;
   int m_fd;
-  QStringList m_imageNames;
+  TQStringList m_imageNames;
   K3bAudioImager::ErrorType lastError;
 
 private:
@@ -68,7 +68,7 @@ void K3bAudioImager::WorkThread::run()
   //
   // 
   //
-  QStringList::iterator imageFileIt = m_imageNames.begin();
+  TQStringList::iterator imageFileIt = m_imageNames.begin();
   K3bWaveFileWriter waveFileWriter;
 
   K3bAudioTrack* track = m_doc->firstTrack();
@@ -85,7 +85,7 @@ void K3bAudioImager::WorkThread::run()
     // Seek to the beginning of the track
     //
     if( !track->seek(0) ) {
-      emitInfoMessage( i18n("Unable to seek in track %1.").arg(trackNumber), K3bJob::ERROR );
+      emitInfoMessage( i18n("Unable to seek in track %1.").tqarg(trackNumber), K3bJob::ERROR );
       emitFinished(false);
       return;
     }
@@ -101,7 +101,7 @@ void K3bAudioImager::WorkThread::run()
     //
     if( m_fd == -1 ) {
       if( !waveFileWriter.open( *imageFileIt ) ) {
-	emitInfoMessage( i18n("Could not open %1 for writing").arg(*imageFileIt), K3bJob::ERROR );
+	emitInfoMessage( i18n("Could not open %1 for writing").tqarg(*imageFileIt), K3bJob::ERROR );
 	emitFinished(false);
 	return;
       }
@@ -142,7 +142,7 @@ void K3bAudioImager::WorkThread::run()
     }
 
     if( read < 0 ) {
-      emitInfoMessage( i18n("Error while decoding track %1.").arg(trackNumber), K3bJob::ERROR );
+      emitInfoMessage( i18n("Error while decoding track %1.").tqarg(trackNumber), K3bJob::ERROR );
       kdDebug() << "(K3bAudioImager::WorkThread) read error on track " << trackNumber
 		<< " at pos " << K3b::Msf(trackRead/2352) << endl;
       lastError = K3bAudioImager::ERROR_DECODING_TRACK;
@@ -167,8 +167,8 @@ void K3bAudioImager::WorkThread::cancel()
 
 
 
-K3bAudioImager::K3bAudioImager( K3bAudioDoc* doc, K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bThreadJob( jh, parent, name ),
+K3bAudioImager::K3bAudioImager( K3bAudioDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bThreadJob( jh, tqparent, name ),
     m_doc(doc)
 {
   m_thread = new WorkThread(doc);
@@ -188,7 +188,7 @@ void K3bAudioImager::writeToFd( int fd )
 }
 
 
-void K3bAudioImager::setImageFilenames( const QStringList& p )
+void K3bAudioImager::setImageFilenames( const TQStringList& p )
 {
   m_thread->m_imageNames = p;
   m_thread->m_fd = -1;

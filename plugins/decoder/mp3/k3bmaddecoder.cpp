@@ -35,9 +35,9 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <qstring.h>
-#include <qfile.h>
-#include <qvaluevector.h>
+#include <tqstring.h>
+#include <tqfile.h>
+#include <tqvaluevector.h>
 
 #include <stdlib.h>
 #include <cmath>
@@ -70,7 +70,7 @@ public:
 
   K3bMad* handle;
 
-  QValueVector<unsigned long long> seekPositions;
+  TQValueVector<unsigned long long> seekPositions;
 
   bool bOutputFinished;
 
@@ -86,8 +86,8 @@ public:
 
 
 
-K3bMadDecoder::K3bMadDecoder( QObject* parent, const char* name )
-  : K3bAudioDecoder( parent, name )
+K3bMadDecoder::K3bMadDecoder( TQObject* tqparent, const char* name )
+  : K3bAudioDecoder( tqparent, name )
 {
   d = new MadDecoderPrivate();
   d->handle = new K3bMad();
@@ -102,10 +102,10 @@ K3bMadDecoder::~K3bMadDecoder()
 }
 
 
-QString K3bMadDecoder::metaInfo( MetaDataField f )
+TQString K3bMadDecoder::metaInfo( MetaDataField f )
 {
 #ifdef HAVE_TAGLIB
-  TagLib::MPEG::File file( QFile::encodeName( filename() ).data() );
+  TagLib::MPEG::File file( TQFile::encodeName( filename() ).data() );
 
   if ( file.tag() ) {
       switch( f ) {
@@ -116,11 +116,11 @@ QString K3bMadDecoder::metaInfo( MetaDataField f )
       case META_COMMENT:
           return TStringToQString( file.tag()->comment() );
       default:
-          return QString::null;
+          return TQString();
       }
   }
   else {
-      return QString::null;
+      return TQString();
   }
 
 #else
@@ -370,7 +370,7 @@ bool K3bMadDecoder::seekInternal( const K3b::Msf& pos )
 }
 
 
-QString K3bMadDecoder::fileType() const
+TQString K3bMadDecoder::fileType() const
 {
   switch( d->firstHeader.layer ) {
   case MAD_LAYER_I:
@@ -384,9 +384,9 @@ QString K3bMadDecoder::fileType() const
   }
 }
 
-QStringList K3bMadDecoder::supportedTechnicalInfos() const
+TQStringList K3bMadDecoder::supportedTechnicalInfos() const
 {
-  return QStringList::split( ";",
+  return TQStringList::split( ";",
 			     i18n("Channels") + ";" +
 			     i18n("Sampling Rate") + ";" +
 			     i18n("Bitrate") + ";" +
@@ -398,7 +398,7 @@ QStringList K3bMadDecoder::supportedTechnicalInfos() const
 }
 
 
-QString K3bMadDecoder::technicalInfo( const QString& name ) const
+TQString K3bMadDecoder::technicalInfo( const TQString& name ) const
 {
   if( name == i18n("Channels") ) {
     switch( d->firstHeader.mode ) {
@@ -415,12 +415,12 @@ QString K3bMadDecoder::technicalInfo( const QString& name ) const
     }
   }
   else if( name == i18n("Sampling Rate") )
-    return i18n("%1 Hz").arg(d->firstHeader.samplerate);
+    return i18n("%1 Hz").tqarg(d->firstHeader.samplerate);
   else if( name == i18n("Bitrate") ) {
     if( d->vbr )
       return i18n("VBR");
     else
-      return i18n("%1 bps").arg(d->firstHeader.bitrate);
+      return i18n("%1 bps").tqarg(d->firstHeader.bitrate);
   }
   else if(  name == i18n("Layer") ){
     switch( d->firstHeader.layer ) {
@@ -453,12 +453,12 @@ QString K3bMadDecoder::technicalInfo( const QString& name ) const
   else if( name == i18n("CRC") )
     return ( d->firstHeader.flags & MAD_FLAG_PROTECTION ? i18n("Yes") : i18n("No") );
   else
-    return QString::null;
+    return TQString();
 }
 
 
-K3bMadDecoderFactory::K3bMadDecoderFactory( QObject* parent, const char* name )
-  : K3bAudioDecoderFactory( parent, name )
+K3bMadDecoderFactory::K3bMadDecoderFactory( TQObject* tqparent, const char* name )
+  : K3bAudioDecoderFactory( tqparent, name )
 {
 }
 
@@ -468,10 +468,10 @@ K3bMadDecoderFactory::~K3bMadDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bMadDecoderFactory::createDecoder( QObject* parent,
+K3bAudioDecoder* K3bMadDecoderFactory::createDecoder( TQObject* tqparent,
 						      const char* name ) const
 {
-  return new K3bMadDecoder( parent, name );
+  return new K3bMadDecoder( tqparent, name );
 }
 
 
@@ -484,14 +484,14 @@ bool K3bMadDecoderFactory::canDecode( const KURL& url )
   // It always takes waves for mp3 files so we introduce this hack to
   // filter out wave files. :(
   //
-  QFile f( url.path() );
+  TQFile f( url.path() );
   if( !f.open( IO_ReadOnly ) )
     return false;
   char buffer[12];
   if( f.readBlock( buffer, 12 ) != 12 )
     return false;
-  if( !qstrncmp( buffer, "RIFF", 4 ) &&
-      !qstrncmp( buffer + 8, "WAVE", 4 ) )
+  if( !tqstrncmp( buffer, "RIFF", 4 ) &&
+      !tqstrncmp( buffer + 8, "WAVE", 4 ) )
     return false;
   f.close();
 
@@ -510,7 +510,7 @@ bool K3bMadDecoderFactory::canDecode( const KURL& url )
     unsigned int s = handle.madFrame->header.samplerate;
 
     //
-    // find 4 more mp3 headers (random value since 2 was not enough)
+    // tqfind 4 more mp3 headers (random value since 2 was not enough)
     // This way we get most of the mp3 files while sorting out
     // for example wave files.
     //

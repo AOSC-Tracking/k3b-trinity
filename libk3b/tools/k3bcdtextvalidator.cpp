@@ -16,8 +16,8 @@
 
 #include "k3bcdtextvalidator.h"
 
-K3bCdTextValidator::K3bCdTextValidator(QObject *parent, const char *name)
-  : K3bLatin1Validator(parent, name)
+K3bCdTextValidator::K3bCdTextValidator(TQObject *tqparent, const char *name)
+  : K3bLatin1Validator(tqparent, name)
 {
 }
 
@@ -27,7 +27,7 @@ K3bCdTextValidator::~K3bCdTextValidator()
 }
 
 
-QValidator::State K3bCdTextValidator::validate( QString& input, int& pos ) const
+TQValidator::State K3bCdTextValidator::validate( TQString& input, int& pos ) const
 {
   if( input.length() > 160 )
     return Invalid;

@@ -20,7 +20,7 @@ extern "C" {
 #include <mad.h>
 }
 
-#include <qfile.h>
+#include <tqfile.h>
 
 
 class K3bMad
@@ -29,7 +29,7 @@ public:
   K3bMad();
   ~K3bMad();
 
-  bool open( const QString& filename );
+  bool open( const TQString& filename );
 
   /**
    * @return true if the mad stream contains data
@@ -59,13 +59,13 @@ public:
    * care about the status of the mad stream. Use streamPos()
    * in that case.
    */
-  QIODevice::Offset inputPos() const;
+  TQIODevice::Offset inputPos() const;
 
   /**
    * Current absolut position of the decoder stream.
    */
-  QIODevice::Offset streamPos() const;
-  bool inputSeek( QIODevice::Offset pos );
+  TQIODevice::Offset streamPos() const;
+  bool inputSeek( TQIODevice::Offset pos );
 
   void initMad();
   void cleanup();
@@ -80,7 +80,7 @@ public:
   mad_timer_t*  madTimer;
 
 private:
-  QFile m_inputFile;
+  TQFile m_inputFile;
   bool m_madStructuresInitialized;
   unsigned char* m_inputBuffer;
   bool m_bInputError;

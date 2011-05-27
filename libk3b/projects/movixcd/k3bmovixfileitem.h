@@ -25,7 +25,7 @@ class K3bMovixDoc;
 class K3bMovixFileItem : public K3bFileItem
 {
  public:
-  K3bMovixFileItem( const QString& fileName, K3bMovixDoc* doc, K3bDirItem* dir, const QString& k3bName = 0 );
+  K3bMovixFileItem( const TQString& fileName, K3bMovixDoc* doc, K3bDirItem* dir, const TQString& k3bName = 0 );
   ~K3bMovixFileItem();
 
   K3bFileItem* subTitleItem() const { return m_subTitleItem; }
@@ -35,13 +35,13 @@ class K3bMovixFileItem : public K3bFileItem
    * reimplemented from K3bDataItem
    * also renames the subTitleItem
    */
-  void setK3bName( const QString& );
+  void setK3bName( const TQString& );
 
   /**
    * returnes the name that the subtitle file must have in
    * order to work with mplayer
    */
-  static QString subTitleFileName( const QString& );
+  static TQString subTitleFileName( const TQString& );
 
  private:
   K3bMovixDoc* m_doc;

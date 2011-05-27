@@ -16,9 +16,9 @@
 #ifndef _K3B_SERVICE_MENU_INSTALLER_H_
 #define _K3B_SERVICE_MENU_INSTALLER_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 
-class QWidget;
+class TQWidget;
 
 
 /**
@@ -29,7 +29,7 @@ class QWidget;
 class K3bServiceInstaller
 {
  public:
-  K3bServiceInstaller( const QString& appname = "k3b" );
+  K3bServiceInstaller( const TQString& appname = "k3b" );
   ~K3bServiceInstaller();
 
   /**
@@ -38,14 +38,14 @@ class K3bServiceInstaller
   bool allInstalled() const;
 
   /**
-   * If parent != 0 a messagebox will be shown in case of an error.
+   * If tqparent != 0 a messagebox will be shown in case of an error.
    */
-  bool install( QWidget* parent = 0 );
+  bool install( TQWidget* tqparent = 0 );
 
   /**
-   * If parent != 0 a messagebox will be shown in case of an error.
+   * If tqparent != 0 a messagebox will be shown in case of an error.
    */
-  bool remove( QWidget* parent = 0 );
+  bool remove( TQWidget* tqparent = 0 );
 
  private:
   class Private;

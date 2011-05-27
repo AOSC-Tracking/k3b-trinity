@@ -21,7 +21,7 @@
 
 class K3bBurnJob;
 class KProgress;
-class QLabel;
+class TQLabel;
 
 
 /**
@@ -30,9 +30,10 @@ class QLabel;
 class K3bBurnProgressDialog : public K3bJobProgressDialog  {
 
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bBurnProgressDialog( QWidget* parent = 0, const char* name = 0, bool showSubProgress = true, 
+  K3bBurnProgressDialog( TQWidget* tqparent = 0, const char* name = 0, bool showSubProgress = true, 
 			 bool modal = true, WFlags = 0 );
   ~K3bBurnProgressDialog();
 
@@ -41,15 +42,15 @@ class K3bBurnProgressDialog : public K3bJobProgressDialog  {
 
  protected slots:
   void slotWriteSpeed( int, int );
-  void slotBufferStatus( int );
+  void slotBuffertqStatus( int );
   void slotDeviceBuffer( int );
   void slotFinished(bool);
 
  protected:
-  QLabel* m_labelWriter;
+  TQLabel* m_labelWriter;
   KProgress* m_progressWritingBuffer;
   KProgress* m_progressDeviceBuffer;
-  QLabel* m_labelWritingSpeed;
+  TQLabel* m_labelWritingSpeed;
 };
 
 #endif

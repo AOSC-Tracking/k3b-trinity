@@ -19,8 +19,8 @@
 
 #include <k3bpluginfactory.h>
 
-#include <qfile.h>
-#include <qstringlist.h>
+#include <tqfile.h>
+#include <tqstringlist.h>
 
 #include <kurl.h>
 #include <kdebug.h>
@@ -51,8 +51,8 @@ public:
 };
 
 
-K3bOggVorbisDecoder::K3bOggVorbisDecoder( QObject* parent, const char* name )
-  : K3bAudioDecoder( parent, name )
+K3bOggVorbisDecoder::K3bOggVorbisDecoder( TQObject* tqparent, const char* name )
+  : K3bAudioDecoder( tqparent, name )
 {
   d = new Private();
 }
@@ -67,7 +67,7 @@ K3bOggVorbisDecoder::~K3bOggVorbisDecoder()
 bool K3bOggVorbisDecoder::openOggVorbisFile()
 {
   if( !d->isOpen ) {
-    FILE* file = fopen( QFile::encodeName(filename()), "r" );
+    FILE* file = fopen( TQFile::encodeName(filename()), "r" );
     if( !file ) {
       kdDebug() << "(K3bOggVorbisDecoder) Could not open file " << filename() << endl;
       return false;
@@ -104,8 +104,8 @@ bool K3bOggVorbisDecoder::analyseFileInternal( K3b::Msf& frames, int& samplerate
 
       // add meta tags
       for( int i = 0; i < d->vComment->comments; ++i ) {
-	QString comment = QString::fromUtf8( d->vComment->user_comments[i] );
-	QStringList values = QStringList::split( "=", comment );
+	TQString comment = TQString::fromUtf8( d->vComment->user_comments[i] );
+	TQStringList values = TQStringList::split( "=", comment );
 	if( values.count() > 1 ) {
 	  if( values[0].lower() == "title" )
 	    addMetaInfo( META_TITLE, values[1] );
@@ -118,15 +118,15 @@ bool K3bOggVorbisDecoder::analyseFileInternal( K3b::Msf& frames, int& samplerate
 
 
       // add technical infos
-      addTechnicalInfo( i18n("Version"), QString::number(d->vInfo->version) );
-      addTechnicalInfo( i18n("Channels"), QString::number(d->vInfo->channels) );
-      addTechnicalInfo( i18n("Sampling Rate"), i18n("%1 Hz").arg(d->vInfo->rate) );
+      addTechnicalInfo( i18n("Version"), TQString::number(d->vInfo->version) );
+      addTechnicalInfo( i18n("Channels"), TQString::number(d->vInfo->channels) );
+      addTechnicalInfo( i18n("Sampling Rate"), i18n("%1 Hz").tqarg(d->vInfo->rate) );
       if( d->vInfo->bitrate_upper > 0 )
-	addTechnicalInfo( i18n("Bitrate Upper"), i18n( "%1 bps" ).arg(d->vInfo->bitrate_upper) );
+	addTechnicalInfo( i18n("Bitrate Upper"), i18n( "%1 bps" ).tqarg(d->vInfo->bitrate_upper) );
       if( d->vInfo->bitrate_nominal > 0 )
-	addTechnicalInfo( i18n("Bitrate Nominal"), i18n( "%1 bps" ).arg(d->vInfo->bitrate_nominal) );
+	addTechnicalInfo( i18n("Bitrate Nominal"), i18n( "%1 bps" ).tqarg(d->vInfo->bitrate_nominal) );
       if( d->vInfo->bitrate_lower > 0 )
-	addTechnicalInfo( i18n("Bitrate Lower"), i18n( "%1 bps" ).arg(d->vInfo->bitrate_lower) );
+	addTechnicalInfo( i18n("Bitrate Lower"), i18n( "%1 bps" ).tqarg(d->vInfo->bitrate_lower) );
 
       frames = K3b::Msf::fromSeconds(seconds);
       samplerate = d->vInfo->rate;
@@ -203,14 +203,14 @@ bool K3bOggVorbisDecoder::seekInternal( const K3b::Msf& pos )
 }
 
 
-QString K3bOggVorbisDecoder::fileType() const
+TQString K3bOggVorbisDecoder::fileType() const
 {
   return i18n("Ogg-Vorbis");
 }
 
 
-K3bOggVorbisDecoderFactory::K3bOggVorbisDecoderFactory( QObject* parent, const char* name )
-  : K3bAudioDecoderFactory( parent, name )
+K3bOggVorbisDecoderFactory::K3bOggVorbisDecoderFactory( TQObject* tqparent, const char* name )
+  : K3bAudioDecoderFactory( tqparent, name )
 {
 }
 
@@ -220,16 +220,16 @@ K3bOggVorbisDecoderFactory::~K3bOggVorbisDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bOggVorbisDecoderFactory::createDecoder( QObject* parent, 
+K3bAudioDecoder* K3bOggVorbisDecoderFactory::createDecoder( TQObject* tqparent, 
 							    const char* name ) const
 {
-  return new K3bOggVorbisDecoder( parent, name );
+  return new K3bOggVorbisDecoder( tqparent, name );
 }
 
 
 bool K3bOggVorbisDecoderFactory::canDecode( const KURL& url )
 {
-  FILE* file = fopen( QFile::encodeName(url.path()), "r" );
+  FILE* file = fopen( TQFile::encodeName(url.path()), "r" );
   if( !file ) {
     kdDebug() << "(K3bOggVorbisDecoder) Could not open file " << url.path() << endl;
     return false;

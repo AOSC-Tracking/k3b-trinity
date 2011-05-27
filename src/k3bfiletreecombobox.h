@@ -19,10 +19,10 @@
 #include <kcombobox.h>
 
 class K3bFileTreeView;
-class QEvent;
-class QKeyEvent;
-class QMouseEvent;
-class QPaintEvent;
+class TQEvent;
+class TQKeyEvent;
+class TQMouseEvent;
+class TQPaintEvent;
 
 namespace K3bDevice {
   class Device;
@@ -31,16 +31,17 @@ namespace K3bDevice {
 class K3bFileTreeComboBox : public KComboBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bFileTreeComboBox( QWidget* parent = 0, const char* name = 0 );
+  K3bFileTreeComboBox( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bFileTreeComboBox();
 
   void popup();
   void popdown();
 
   void setCurrentItem( int );
-  void setCurrentText( const QString& );
+  void setCurrentText( const TQString& );
 
  public slots:
   void setDevice( K3bDevice::Device* );
@@ -56,13 +57,13 @@ class K3bFileTreeComboBox : public KComboBox
   void slotUrlExecuted( const KURL& url );
 
  protected:
-  bool eventFilter( QObject*, QEvent* );
-  void keyPressEvent( QKeyEvent* );
-  void mousePressEvent( QMouseEvent* );
-  void paintEvent( QPaintEvent* );
+  bool eventFilter( TQObject*, TQEvent* );
+  void keyPressEvent( TQKeyEvent* );
+  void mousePressEvent( TQMouseEvent* );
+  void paintEvent( TQPaintEvent* );
 
  private:
-  void setEditText( const QPixmap& pix, const QString& t );
+  void setEditText( const TQPixmap& pix, const TQString& t );
 
   class Private;
   Private* d;

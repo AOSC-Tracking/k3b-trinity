@@ -41,47 +41,47 @@
 #include <kio/job.h>
 #include <kdialogbase.h>
 
-#include <qpixmap.h>
-#include <qsplitter.h>
-#include <qlayout.h>
-#include <qdragobject.h>
-#include <qheader.h>
-#include <qptrlist.h>
-#include <qlineedit.h>
+#include <tqpixmap.h>
+#include <tqsplitter.h>
+#include <tqlayout.h>
+#include <tqdragobject.h>
+#include <tqheader.h>
+#include <tqptrlist.h>
+#include <tqlineedit.h>
 
 #include <assert.h>
 #include <kdebug.h>
 
 
-K3bDataView::K3bDataView(K3bDataDoc* doc, QWidget *parent, const char *name )
-  : K3bView(doc, parent,name)
+K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *tqparent, const char *name )
+  : K3bView(doc, tqparent,name)
 {
   m_doc = doc;
 
   // --- setup GUI ---------------------------------------------------
-  QSplitter* mainSplitter = new QSplitter( this );
+  TQSplitter* mainSplitter = new TQSplitter( this );
   m_dataDirTree = new K3bDataDirTreeView( this, doc, mainSplitter );
   m_dataFileView = new K3bDataFileView( this, m_dataDirTree, doc, mainSplitter );
   m_dataDirTree->setFileView( m_dataFileView );
   setMainWidget( mainSplitter );
 
 
-  connect( m_dataFileView, SIGNAL(dirSelected(K3bDirItem*)),
-	   m_dataDirTree, SLOT(setCurrentDir(K3bDirItem*)) );
-  connect( m_doc, SIGNAL(changed()), this, SLOT(slotDocChanged()) );
+  connect( m_dataFileView, TQT_SIGNAL(dirSelected(K3bDirItem*)),
+	   m_dataDirTree, TQT_SLOT(setCurrentDir(K3bDirItem*)) );
+  connect( m_doc, TQT_SIGNAL(changed()), TQT_TQOBJECT(this), TQT_SLOT(slotDocChanged()) );
 
   m_dataDirTree->checkForNewItems();
   m_dataFileView->checkForNewItems();
 
 
   // the data actions
-  KAction* actionImportSession = new KAction(i18n("&Import Session..."), "gear", 0, this, SLOT(importSession()),
+  KAction* actionImportSession = new KAction(i18n("&Import Session..."), "gear", 0, TQT_TQOBJECT(this), TQT_SLOT(importSession()),
 					     actionCollection(), "project_data_import_session" );
-  KAction* actionClearSession = new KAction(i18n("&Clear Imported Session"), "gear", 0, this,
-					    SLOT(clearImportedSession()), actionCollection(),
+  KAction* actionClearSession = new KAction(i18n("&Clear Imported Session"), "gear", 0, TQT_TQOBJECT(this),
+					    TQT_SLOT(clearImportedSession()), actionCollection(),
 					    "project_data_clear_imported_session" );
-  KAction* actionEditBootImages = new KAction(i18n("&Edit Boot Images..."), "cdtrack", 0, this,
-					      SLOT(editBootImages()), actionCollection(),
+  KAction* actionEditBootImages = new KAction(i18n("&Edit Boot Images..."), "cdtrack", 0, TQT_TQOBJECT(this),
+					      TQT_SLOT(editBootImages()), actionCollection(),
 					      "project_data_edit_boot_images" );
 
   actionImportSession->setToolTip( i18n("Import a previously burned session into the current project") );
@@ -92,21 +92,21 @@ K3bDataView::K3bDataView(K3bDataDoc* doc, QWidget *parent, const char *name )
   toolBox()->addButton( actionClearSession );
   toolBox()->addButton( actionEditBootImages );
   toolBox()->addSeparator();
-  toolBox()->addButton( m_dataFileView->actionCollection()->action("parent_dir") );
+  toolBox()->addButton( m_dataFileView->actionCollection()->action("tqparent_dir") );
   toolBox()->addSeparator();
 
   addPluginButtons( K3bProjectPlugin::DATA_CD );
 
   toolBox()->addStretch();
 
-  m_volumeIDEdit = new QLineEdit( doc->isoOptions().volumeID(), toolBox() );
-  m_volumeIDEdit->setValidator( new K3bLatin1Validator( m_volumeIDEdit ) );
+  m_volumeIDEdit = new TQLineEdit( doc->isoOptions().volumeID(), toolBox() );
+  m_volumeIDEdit->setValidator( new K3bLatin1Validator( TQT_TQOBJECT(m_volumeIDEdit) ) );
   toolBox()->addLabel( i18n("Volume Name:") );
   toolBox()->addSpacing();
   toolBox()->addWidget( m_volumeIDEdit );
-  connect( m_volumeIDEdit, SIGNAL(textChanged(const QString&)),
+  connect( m_volumeIDEdit, TQT_SIGNAL(textChanged(const TQString&)),
 	   m_doc,
-	   SLOT(setVolumeID(const QString&)) );
+	   TQT_SLOT(setVolumeID(const TQString&)) );
 
   // this is just for testing (or not?)
   // most likely every project type will have it's rc file in the future
@@ -156,9 +156,9 @@ void K3bDataView::editBootImages()
 }
 
 
-K3bProjectBurnDialog* K3bDataView::newBurnDialog( QWidget* parent, const char* name )
+K3bProjectBurnDialog* K3bDataView::newBurnDialog( TQWidget* tqparent, const char* name )
 {
-  return new K3bDataBurnDialog( m_doc, parent, name, true );
+  return new K3bDataBurnDialog( m_doc, tqparent, name, true );
 }
 
 
@@ -170,7 +170,7 @@ void K3bDataView::slotBurn()
     if( m_doc->sessionImported() && m_doc->burningSize() == 0 ||
         m_doc->root()->numFiles() == 0 ) {
         KMessageBox::information( this, i18n("Please add files to your project first."),
-                                  i18n("No Data to Burn"), QString::null, false );
+                                  i18n("No Data to Burn"), TQString(), false );
     }
     else {
         K3bProjectBurnDialog* dlg = newBurnDialog( this );

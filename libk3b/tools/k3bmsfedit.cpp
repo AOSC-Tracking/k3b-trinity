@@ -18,31 +18,31 @@
 #include "k3bmsfedit.h"
 #include "k3bglobals.h"
 
-#include <qstringlist.h>
-#include <qlineedit.h>
-#include <qstyle.h>
-#include <qfontmetrics.h>
-#include <qapplication.h>
+#include <tqstringlist.h>
+#include <tqlineedit.h>
+#include <tqstyle.h>
+#include <tqfontmetrics.h>
+#include <tqapplication.h>
 
 
 
-K3bMsfValidator::K3bMsfValidator( QObject* parent, const char* name )
-  : QRegExpValidator( K3b::Msf::regExp(), parent, name )
+K3bMsfValidator::K3bMsfValidator( TQObject* tqparent, const char* name )
+  : TQRegExpValidator( K3b::Msf::regExp(), tqparent, name )
 {
 }
 
 
 
-K3bMsfEdit::K3bMsfEdit( QWidget* parent, const char* name )
-  : QSpinBox( parent, name )
+K3bMsfEdit::K3bMsfEdit( TQWidget* tqparent, const char* name )
+  : TQSpinBox( tqparent, name )
 {
-  setValidator( new K3bMsfValidator( this ) );
+  setValidator( new K3bMsfValidator( TQT_TQOBJECT(this) ) );
   setMinValue( 0 );
   // some very high value (10000 minutes)
   setMaxValue( 10000*60*75 );
 
-  connect( this, SIGNAL(valueChanged(int)),
-	   this, SLOT(slotValueChanged(int)) );
+  connect( this, TQT_SIGNAL(valueChanged(int)),
+	   this, TQT_SLOT(slotValueChanged(int)) );
 }
 
 
@@ -50,24 +50,24 @@ K3bMsfEdit::~K3bMsfEdit()
 {}
 
 
-QSize K3bMsfEdit::sizeHint() const
+TQSize K3bMsfEdit::tqsizeHint() const
 {
-  // more or less copied from QSpinBox
+  // more or less copied from TQSpinBox
   constPolish();
-  QSize sz = editor()->sizeHint();
+  TQSize sz = editor()->tqsizeHint();
   int h = sz.height();
-  QFontMetrics fm( font() );
+  TQFontMetrics fm( font() );
   int w = fm.width( "00:00:00" );
   int wx = fm.width( ' ' )*2;
-  int frame = style().pixelMetric( QStyle::PM_SpinBoxFrameWidth );
-  return style().sizeFromContents(QStyle::CT_SpinBox, this,
-				  QSize( w + wx + downRect().width() + frame*2,
+  int frame = tqstyle().tqpixelMetric( TQStyle::PM_SpinBoxFrameWidth );
+  return tqstyle().tqsizeFromContents(TQStyle::CT_SpinBox, this,
+				  TQSize( w + wx + downRect().width() + frame*2,
 					 h + frame*2).
-				  expandedTo( QApplication::globalStrut() ));
+				  expandedTo( TQApplication::globalStrut() ));
 }
 
 
-QString K3bMsfEdit::mapValueToText( int value )
+TQString K3bMsfEdit::mapValueToText( int value )
 {
   return K3b::framesToString( value, true );
 }
@@ -91,7 +91,7 @@ int K3bMsfEdit::mapTextToValue( bool* ok )
 }
 
 
-void K3bMsfEdit::setText( const QString& str )
+void K3bMsfEdit::setText( const TQString& str )
 {
   bool ok;
   editor()->setText( str );
@@ -112,7 +112,7 @@ void K3bMsfEdit::setLineWidth( int v )
 void K3bMsfEdit::setValue( int v )
 {
   int i = editor()->cursorPosition();
-  QSpinBox::setValue( v );
+  TQSpinBox::setValue( v );
   editor()->setCursorPosition( i );
 }
 
@@ -131,10 +131,10 @@ int K3bMsfEdit::currentStepValue() const
   int val = 1;
 
   // look if we are currently editing minutes or seconds
-  QString text = editor()->text();
+  TQString text = editor()->text();
   if( text.length() == 8 ) {
     text = text.mid( editor()->cursorPosition() );
-    int num = text.contains( ':' );
+    int num = text.tqcontains( ':' );
     if( num == 1 )
       val = 75;
     else if( num == 2 )

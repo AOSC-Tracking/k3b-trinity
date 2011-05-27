@@ -16,11 +16,11 @@
 #ifndef _K3B_THREAD_WIDGET_H_
 #define _K3B_THREAD_WIDGET_H_
 
-#include <qobject.h>
-#include <qintdict.h>
+#include <tqobject.h>
+#include <tqintdict.h>
 
 
-class QCustomEvent;
+class TQCustomEvent;
 namespace K3bDevice {
   class Device;
 }
@@ -32,9 +32,10 @@ namespace K3bDevice {
  * Since the calling thread cannot create the K3bThreadWidget by himself there exists
  * exactly one instance created by K3bCore which is used by all threads.
  */
-class K3bThreadWidget : public QObject
+class K3bThreadWidget : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   ~K3bThreadWidget();
@@ -44,14 +45,14 @@ class K3bThreadWidget : public QObject
   /**
    * Call this from a thread to show a device selection dialog.
    */
-  static K3bDevice::Device* selectDevice( QWidget* parent, 
-					  const QString& text = QString::null );
+  static K3bDevice::Device* selectDevice( TQWidget* tqparent, 
+					  const TQString& text = TQString() );
 
  protected:
   /**
    * communication between the threads
    */
-  void customEvent( QCustomEvent* );
+  void customEvent( TQCustomEvent* );
 
  private:
   /**
@@ -70,7 +71,7 @@ class K3bThreadWidget : public QObject
   Data* data( int id );
 
   int m_idCounter;
-  QIntDict<Data> m_dataMap;
+  TQIntDict<Data> m_dataMap;
 
   static K3bThreadWidget* s_instance;
 };

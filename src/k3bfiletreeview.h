@@ -23,9 +23,9 @@
 class KFileTreeBranch;
 class KActionCollection;
 class KActionMenu;
-class QPoint;
-class QDropEvent;
-class QDragEnterEvent;
+class TQPoint;
+class TQDropEvent;
+class TQDragEnterEvent;
 
 namespace K3bDevice {
   class Device;
@@ -40,6 +40,7 @@ namespace KIO {
 class K3bDeviceBranch : public KFileTreeBranch
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   K3bDeviceBranch( KFileTreeView*, K3bDevice::Device* dev, KFileTreeViewItem* item = 0 );
@@ -72,8 +73,8 @@ class K3bFileTreeBranch : public KFileTreeBranch
  public:
   K3bFileTreeBranch( KFileTreeView*,
 		     const KURL& url,
-		     const QString& name,
-		     const QPixmap& pix,
+		     const TQString& name,
+		     const TQPixmap& pix,
 		     bool showHidden = false,
 		     KFileTreeViewItem* item = 0 );
 };
@@ -85,11 +86,11 @@ class K3bDeviceBranchViewItem : public KFileTreeViewItem
   K3bDeviceBranchViewItem( KFileTreeViewItem*, K3bDevice::Device*, K3bDeviceBranch* );
   K3bDeviceBranchViewItem( KFileTreeView*, K3bDevice::Device*, K3bDeviceBranch* );
 
-  QString key( int column, bool ascending ) const;
+  TQString key( int column, bool ascending ) const;
 
   void setCurrent( bool );
 
-  void paintCell( QPainter* p, const QColorGroup& cg, int col, int width, int align );
+  void paintCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align );
 
   int widthHint() const;
 
@@ -106,7 +107,7 @@ class K3bFileTreeViewItem : public KFileTreeViewItem
   K3bFileTreeViewItem( KFileTreeViewItem*, KFileItem*, KFileTreeBranch* );
   K3bFileTreeViewItem( KFileTreeView *, KFileItem*, KFileTreeBranch* );
 
-  QString key( int column, bool ascending ) const;
+  TQString key( int column, bool ascending ) const;
 };
 
 
@@ -116,14 +117,15 @@ class K3bFileTreeViewItem : public KFileTreeViewItem
 class K3bFileTreeView : public KFileTreeView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bFileTreeView( QWidget *parent = 0, const char *name = 0 );
+  K3bFileTreeView( TQWidget *tqparent = 0, const char *name = 0 );
   ~K3bFileTreeView();
 
 
   virtual KFileTreeBranch* addBranch( KFileTreeBranch* );
-  virtual KFileTreeBranch* addBranch( const KURL& url, const QString& name, const QPixmap& , bool showHidden = false );
+  virtual KFileTreeBranch* addBranch( const KURL& url, const TQString& name, const TQPixmap& , bool showHidden = false );
 
   K3bDeviceBranch* branch( K3bDevice::Device* dev );
 
@@ -173,15 +175,15 @@ class K3bFileTreeView : public KFileTreeView
   void deviceExecuted( K3bDevice::Device* dev );
 
   /** only gets emitted if the menu is disabled */
-  void contextMenu( K3bDevice::Device*, const QPoint& );
+  void contextMenu( K3bDevice::Device*, const TQPoint& );
   /** only gets emitted if the menu is disabled */
-  void contextMenu( const KURL& url, const QPoint& );
+  void contextMenu( const KURL& url, const TQPoint& );
   
  private slots:
-  void slotItemExecuted( QListViewItem* item );
-  void slotContextMenu( KListView*, QListViewItem*, const QPoint& );
+  void slotItemExecuted( TQListViewItem* item );
+  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& );
   void slotSettingsChangedK3b(int category);
-  void slotMouseButtonClickedK3b( int btn, QListViewItem *item, const QPoint &pos, int c );
+  void slotMouseButtonClickedK3b( int btn, TQListViewItem *item, const TQPoint &pos, int c );
 
  private:
   void initActions();

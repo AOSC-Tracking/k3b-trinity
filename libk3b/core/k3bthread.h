@@ -17,10 +17,10 @@
 #ifndef _K3B_THREAD_H_
 #define _K3B_THREAD_H_
 
-#include <qthread.h>
+#include <tqthread.h>
 #include "k3b_export.h"
 
-class QObject;
+class TQObject;
 
 /**
  * The threaded couterpart to K3bJob
@@ -34,14 +34,14 @@ class QObject;
  *
  * See K3bThreadJob for more information.
  */
-class LIBK3B_EXPORT K3bThread : public QThread
+class LIBK3B_EXPORT K3bThread : public TQThread
 {
  public:
-  K3bThread( QObject* eventHandler = 0 );
-  K3bThread( unsigned int stackSize, QObject* eventHandler = 0  );
+  K3bThread( TQObject* eventHandler = 0 );
+  K3bThread( unsigned int stackSize, TQObject* eventHandler = 0  );
   virtual ~K3bThread();
 
-  void setProgressInfoEventHandler( QObject* eventHandler );
+  void setProgressInfoEventHandler( TQObject* eventHandler );
 
   /**
    * Initialize the thread before starting it in the GUi thread.
@@ -58,8 +58,8 @@ class LIBK3B_EXPORT K3bThread : public QThread
    */
   virtual void cancel();
 
-  virtual QString jobDescription() const;
-  virtual QString jobDetails() const;
+  virtual TQString jobDescription() const;
+  virtual TQString jobDetails() const;
 
   /**
    * waits until all running K3bThread have finished.
@@ -73,7 +73,7 @@ class LIBK3B_EXPORT K3bThread : public QThread
   /**
    * uses the K3bJob::MessageType enum
    */
-  void emitInfoMessage( const QString& msg, int type );
+  void emitInfoMessage( const TQString& msg, int type );
   void emitPercent( int p );
   void emitSubPercent( int p );
   void emitStarted();
@@ -81,9 +81,9 @@ class LIBK3B_EXPORT K3bThread : public QThread
   void emitFinished( bool success );
   void emitProcessedSize( int processed, int size );
   void emitProcessedSubSize( int processed, int size );
-  void emitNewTask( const QString& job );
-  void emitNewSubTask( const QString& job );
-  void emitDebuggingOutput(const QString&, const QString&);
+  void emitNewTask( const TQString& job );
+  void emitNewSubTask( const TQString& job );
+  void emitDebuggingOutput(const TQString&, const TQString&);
   void emitData( const char* data, int len );
   void emitNextTrack( int track, int trackNum );
 

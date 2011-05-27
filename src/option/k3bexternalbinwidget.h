@@ -18,26 +18,27 @@
 #define K3B_EXTERNAL_BIN_WIDGET_H
 
 
-#include <qwidget.h>
-#include <qptrlist.h>
+#include <tqwidget.h>
+#include <tqptrlist.h>
 
 #include <k3blistview.h>
 
 
 class K3bExternalBinManager;
-class QPushButton;
-class QTabWidget;
+class TQPushButton;
+class TQTabWidget;
 class KEditListBox;
 class K3bExternalProgram;
 class K3bExternalBin;
 
 
-class K3bExternalBinWidget : public QWidget
+class K3bExternalBinWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bExternalBinWidget( K3bExternalBinManager*, QWidget* parent = 0, const char* name = 0 );
+  K3bExternalBinWidget( K3bExternalBinManager*, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bExternalBinWidget();
 
   class K3bExternalBinViewItem;
@@ -50,28 +51,28 @@ class K3bExternalBinWidget : public QWidget
 
  private slots:
   void slotSetDefaultButtonClicked();
-  void slotProgramSelectionChanged( QListViewItem* );
+  void slotProgramSelectionChanged( TQListViewItem* );
   void saveSearchPath();
 
  private:
   K3bExternalBinManager* m_manager;
 
-  QTabWidget* m_mainTabWidget;
+  TQTabWidget* m_mainTabWidget;
   K3bListView* m_programView;
   K3bListView* m_parameterView;
   KEditListBox* m_searchPathBox;
 
-  QPushButton* m_defaultButton;
-  QPushButton* m_rescanButton;
+  TQPushButton* m_defaultButton;
+  TQPushButton* m_rescanButton;
 
-  QPtrList<K3bExternalProgramViewItem> m_programRootItems;
+  TQPtrList<K3bExternalProgramViewItem> m_programRootItems;
 };
 
 
 class K3bExternalBinWidget::K3bExternalProgramViewItem : public K3bListViewItem
 {
  public:
-  K3bExternalProgramViewItem( K3bExternalProgram* p, QListView* parent );
+  K3bExternalProgramViewItem( K3bExternalProgram* p, TQListView* tqparent );
   
   K3bExternalProgram* program() const { return m_program; }
   
@@ -84,10 +85,10 @@ class K3bExternalBinWidget::K3bExternalProgramViewItem : public K3bListViewItem
 class K3bExternalBinWidget::K3bExternalBinViewItem : public K3bListViewItem
 {
  public:
-  K3bExternalBinViewItem( K3bExternalBin* bin, K3bExternalProgramViewItem* parent );
+  K3bExternalBinViewItem( K3bExternalBin* bin, K3bExternalProgramViewItem* tqparent );
 
   K3bExternalBin* bin() const { return m_bin; }
-  K3bExternalProgramViewItem* parentProgramItem() const { return m_parent; }
+  K3bExternalProgramViewItem* tqparentProgramItem() const { return m_parent; }
 
   bool isDefault() const { return m_default; }
   void setDefault( bool b );

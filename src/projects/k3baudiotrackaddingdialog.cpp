@@ -29,11 +29,11 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qfileinfo.h>
-#include <qtimer.h>
-#include <qdir.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqfileinfo.h>
+#include <tqtimer.h>
+#include <tqdir.h>
 
 
 class K3bAudioTrackAddingDialog::AnalyserThread : public K3bThread
@@ -54,31 +54,31 @@ public:
 };
 
 
-K3bAudioTrackAddingDialog::K3bAudioTrackAddingDialog( QWidget* parent, const char* name )
+K3bAudioTrackAddingDialog::K3bAudioTrackAddingDialog( TQWidget* tqparent, const char* name )
   : KDialogBase( Plain,
 		 i18n("Please be patient..."),
 		 Cancel,
 		 Cancel,
-		 parent,
+		 tqparent,
 		 name,
 		 true,
 		 true ),
     m_bCanceled(false)
 {
-  QWidget* page = plainPage();
-  QGridLayout* grid = new QGridLayout( page );
+  TQWidget* page = plainPage();
+  TQGridLayout* grid = new TQGridLayout( page );
   grid->setSpacing( spacingHint() );
   grid->setMargin( marginHint() );
 
-  m_infoLabel = new QLabel( page );
+  m_infoLabel = new TQLabel( page );
   m_busyWidget = new K3bBusyWidget( page );
 
   grid->addWidget( m_infoLabel, 0, 0 );
   grid->addWidget( m_busyWidget, 1, 0 );
 
   m_analyserThread = new AnalyserThread();
-  m_analyserJob = new K3bThreadJob( m_analyserThread, this, this );
-  connect( m_analyserJob, SIGNAL(finished(bool)), this, SLOT(slotAnalysingFinished(bool)) );
+  m_analyserJob = new K3bThreadJob( m_analyserThread, this, TQT_TQOBJECT(this) );
+  connect( m_analyserJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotAnalysingFinished(bool)) );
 }
 
 
@@ -91,48 +91,48 @@ K3bAudioTrackAddingDialog::~K3bAudioTrackAddingDialog()
 int K3bAudioTrackAddingDialog::addUrls( const KURL::List& urls, 
 					K3bAudioDoc* doc,
 					K3bAudioTrack* afterTrack,
-					K3bAudioTrack* parentTrack,
+					K3bAudioTrack* tqparentTrack,
 					K3bAudioDataSource* afterSource,
-					QWidget* parent )
+					TQWidget* tqparent )
 {
   if( urls.isEmpty() )
     return 0;
 
-  K3bAudioTrackAddingDialog dlg( parent );
+  K3bAudioTrackAddingDialog dlg( tqparent );
   dlg.m_urls = extractUrlList( urls );
   dlg.m_doc = doc;
   dlg.m_trackAfter = afterTrack;
-  dlg.m_parentTrack = parentTrack;
+  dlg.m_parentTrack = tqparentTrack;
   dlg.m_sourceAfter = afterSource;
-  dlg.m_infoLabel->setText( i18n("Adding files to project \"%1\"...").arg(doc->URL().fileName()) );
+  dlg.m_infoLabel->setText( i18n("Adding files to project \"%1\"...").tqarg(doc->URL().fileName()) );
 
   dlg.m_busyWidget->showBusy(true);
-  QTimer::singleShot( 0, &dlg, SLOT(slotAddUrls()) );
+  TQTimer::singleShot( 0, &dlg, TQT_SLOT(slotAddUrls()) );
   int ret = dlg.exec();
 
-  QString message;
+  TQString message;
   if( !dlg.m_unreadableFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("Insufficient permissions to read the following files") )
-      .arg( dlg.m_unreadableFiles.join( "<br>" ) );
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("Insufficient permissions to read the following files") )
+      .tqarg( dlg.m_unreadableFiles.join( "<br>" ) );
   if( !dlg.m_notFoundFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("Unable to find the following files") )
-      .arg( dlg.m_notFoundFiles.join( "<br>" ) );
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("Unable to find the following files") )
+      .tqarg( dlg.m_notFoundFiles.join( "<br>" ) );
   if( !dlg.m_nonLocalFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("No non-local files supported") )
-      .arg( dlg.m_unreadableFiles.join( "<br>" ) );
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("No non-local files supported") )
+      .tqarg( dlg.m_unreadableFiles.join( "<br>" ) );
   if( !dlg.m_unsupportedFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br><i>%2</i><br>%3")
-      .arg( i18n("Unable to handle the following files due to an unsupported format" ) )
-      .arg( i18n("You may manually convert these audio files to wave using another "
+    message += TQString("<p><b>%1:</b><br><i>%2</i><br>%3")
+      .tqarg( i18n("Unable to handle the following files due to an unsupported format" ) )
+      .tqarg( i18n("You may manually convert these audio files to wave using another "
 		 "application supporting the audio format and then add the wave files "
 		 "to the K3b project.") )
-      .arg( dlg.m_unsupportedFiles.join( "<br>" ) );
+      .tqarg( dlg.m_unsupportedFiles.join( "<br>" ) );
 
   if( !message.isEmpty() )
-    KMessageBox::detailedSorry( parent, i18n("Problems while adding files to the project."), message );
+    KMessageBox::detailedSorry( tqparent, i18n("Problems while adding files to the project."), message );
 
   return ret;
 }
@@ -162,14 +162,14 @@ void K3bAudioTrackAddingDialog::slotAddUrls()
     }
   }
 
-  m_infoLabel->setText( i18n("Analysing file '%1'...").arg( url.fileName() ) );
+  m_infoLabel->setText( i18n("Analysing file '%1'...").tqarg( url.fileName() ) );
 
   if( !url.isLocalFile() ) {
     valid = false;
     m_nonLocalFiles.append( url.path() );
   }
   else {
-    QFileInfo fi( url.path() );
+    TQFileInfo fi( url.path() );
     if( !fi.exists() ) {
       valid = false;
       m_notFoundFiles.append( url.path() );
@@ -199,7 +199,7 @@ void K3bAudioTrackAddingDialog::slotAddUrls()
   // invalid file, next url
   if( !valid ) {
     m_urls.remove( m_urls.begin() );
-    QTimer::singleShot( 0, this, SLOT(slotAddUrls()) );
+    TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
   }
 }
 
@@ -251,7 +251,7 @@ void K3bAudioTrackAddingDialog::slotAnalysingFinished( bool /*success*/ )
     }
   }
 
-  QTimer::singleShot( 0, this, SLOT(slotAddUrls()) );
+  TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
 }
 
 
@@ -271,16 +271,16 @@ KURL::List K3bAudioTrackAddingDialog::extractUrlList( const KURL::List& urls )
   while( it != allUrls.end() ) {
 
     const KURL& url = *it;
-    QFileInfo fi( url.path() );
+    TQFileInfo fi( url.path() );
 
     if( fi.isDir() ) {
       it = allUrls.remove( it );
       // add all files in the dir
-      QDir dir(fi.filePath());
-      QStringList entries = dir.entryList( QDir::Files );
+      TQDir dir(fi.filePath());
+      TQStringList entries = dir.entryList( TQDir::Files );
       KURL::List::iterator oldIt = it;
       // add all files into the list after the current item
-      for( QStringList::iterator dirIt = entries.begin();
+      for( TQStringList::iterator dirIt = entries.begin();
 	   dirIt != entries.end(); ++dirIt )
 	it = allUrls.insert( oldIt, KURL::fromPathOrURL( dir.absPath() + "/" + *dirIt ) );
     }

@@ -29,6 +29,7 @@
 class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
@@ -38,72 +39,72 @@ class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
    *
    * @param text The text that will be displayed.
    * @param cut The corresponding keyboard accelerator (shortcut).
-   * @param parent This action's parent.
+   * @param tqparent This action's tqparent.
    * @param name An internal name for this action.
    */
-  K3bRadioAction( const QString& text, const KShortcut& cut = KShortcut(), QObject* parent = 0, const char* name = 0 );
+  K3bRadioAction( const TQString& text, const KShortcut& cut = KShortcut(), TQObject* tqparent = 0, const char* name = 0 );
 
   /**
    *  @param text The text that will be displayed.
    *  @param cut The corresponding keyboard accelerator (shortcut).
-   *  @param receiver The SLOT's parent.
-   *  @param slot The SLOT to invoke to execute this action.
-   *  @param parent This action's parent.
+   *  @param receiver The SLOT's tqparent.
+   *  @param slot The TQT_SLOT to invoke to execute this action.
+   *  @param tqparent This action's tqparent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( const QString& text, const KShortcut& cut,
-                  const QObject* receiver, const char* slot, QObject* parent, const char* name = 0 );
-
-  /**
-   *  @param text The text that will be displayed.
-   *  @param pix The icons that go with this action.
-   *  @param cut The corresponding keyboard accelerator (shortcut).
-   *  @param parent This action's parent.
-   *  @param name An internal name for this action.
-   */
-  K3bRadioAction( const QString& text, const QIconSet& pix, const KShortcut& cut = KShortcut(),
-                  QObject* parent = 0, const char* name = 0 );
-
-  /**
-   *  @param text The text that will be displayed.
-   *  @param pix The dynamically loaded icon that goes with this action.
-   *  @param cut The corresponding keyboard accelerator (shortcut).
-   *  @param parent This action's parent.
-   *  @param name An internal name for this action.
-   */
-  K3bRadioAction( const QString& text, const QString& pix, const KShortcut& cut = KShortcut(),
-                  QObject* parent = 0, const char* name = 0 );
+  K3bRadioAction( const TQString& text, const KShortcut& cut,
+                  const TQObject* receiver, const char* slot, TQObject* tqparent, const char* name = 0 );
 
   /**
    *  @param text The text that will be displayed.
    *  @param pix The icons that go with this action.
    *  @param cut The corresponding keyboard accelerator (shortcut).
-   *  @param receiver The SLOT's parent.
-   *  @param slot The SLOT to invoke to execute this action.
-   *  @param parent This action's parent.
+   *  @param tqparent This action's tqparent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( const QString& text, const QIconSet& pix, const KShortcut& cut,
-                  const QObject* receiver, const char* slot, QObject* parent, const char* name = 0 );
+  K3bRadioAction( const TQString& text, const TQIconSet& pix, const KShortcut& cut = KShortcut(),
+                  TQObject* tqparent = 0, const char* name = 0 );
 
   /**
    *  @param text The text that will be displayed.
    *  @param pix The dynamically loaded icon that goes with this action.
    *  @param cut The corresponding keyboard accelerator (shortcut).
-   *  @param receiver The SLOT's parent.
-   *  @param slot The SLOT to invoke to execute this action.
-   *  @param parent This action's parent.
+   *  @param tqparent This action's tqparent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( const QString& text, const QString& pix, const KShortcut& cut,
-                  const QObject* receiver, const char* slot,
-                  QObject* parent, const char* name = 0 );
+  K3bRadioAction( const TQString& text, const TQString& pix, const KShortcut& cut = KShortcut(),
+                  TQObject* tqparent = 0, const char* name = 0 );
 
   /**
-   *  @param parent This action's parent.
+   *  @param text The text that will be displayed.
+   *  @param pix The icons that go with this action.
+   *  @param cut The corresponding keyboard accelerator (shortcut).
+   *  @param receiver The SLOT's tqparent.
+   *  @param slot The TQT_SLOT to invoke to execute this action.
+   *  @param tqparent This action's tqparent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( QObject* parent = 0, const char* name = 0 );
+  K3bRadioAction( const TQString& text, const TQIconSet& pix, const KShortcut& cut,
+                  const TQObject* receiver, const char* slot, TQObject* tqparent, const char* name = 0 );
+
+  /**
+   *  @param text The text that will be displayed.
+   *  @param pix The dynamically loaded icon that goes with this action.
+   *  @param cut The corresponding keyboard accelerator (shortcut).
+   *  @param receiver The SLOT's tqparent.
+   *  @param slot The TQT_SLOT to invoke to execute this action.
+   *  @param tqparent This action's tqparent.
+   *  @param name An internal name for this action.
+   */
+  K3bRadioAction( const TQString& text, const TQString& pix, const KShortcut& cut,
+                  const TQObject* receiver, const char* slot,
+                  TQObject* tqparent, const char* name = 0 );
+
+  /**
+   *  @param tqparent This action's tqparent.
+   *  @param name An internal name for this action.
+   */
+  K3bRadioAction( TQObject* tqparent = 0, const char* name = 0 );
 
   /**
    * @param b if true the action will always emit the activated signal

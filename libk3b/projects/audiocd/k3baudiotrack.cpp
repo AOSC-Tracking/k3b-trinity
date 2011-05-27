@@ -22,7 +22,7 @@
 #include <k3bcore.h>
 #include <k3bcdtextvalidator.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kdebug.h>
 
@@ -59,8 +59,8 @@ K3bAudioTrack::K3bAudioTrack()
 }
 
 
-K3bAudioTrack::K3bAudioTrack( K3bAudioDoc* parent )
-  : m_parent(parent),
+K3bAudioTrack::K3bAudioTrack( K3bAudioDoc* tqparent )
+  : m_parent(tqparent),
     m_copy(false),
     m_preEmp(false),
     m_index0Offset(150),
@@ -106,67 +106,67 @@ void K3bAudioTrack::emitChanged()
 }
 
 
-void K3bAudioTrack::setArtist( const QString& a )
+void K3bAudioTrack::setArtist( const TQString& a )
 {
   setPerformer( a );
 }
 
 
-void K3bAudioTrack::setPerformer( const QString& a )
+void K3bAudioTrack::setPerformer( const TQString& a )
 {
-  QString s( a );
+  TQString s( a );
   d->cdTextValidator->fixup( s );
   m_cdText.setPerformer(s);
   emitChanged();
 }
 
 
-void K3bAudioTrack::setTitle( const QString& t )
+void K3bAudioTrack::setTitle( const TQString& t )
 {
-  QString s( t );
+  TQString s( t );
   d->cdTextValidator->fixup( s );
   m_cdText.setTitle(s);
   emitChanged();
 }
 
 
-void K3bAudioTrack::setArranger( const QString& t )
+void K3bAudioTrack::setArranger( const TQString& t )
 {
-  QString s( t );
+  TQString s( t );
   d->cdTextValidator->fixup( s );
   m_cdText.setArranger(s);
   emitChanged();
 }
 
 
-void K3bAudioTrack::setSongwriter( const QString& t )
+void K3bAudioTrack::setSongwriter( const TQString& t )
 {
-  QString s( t );
+  TQString s( t );
   d->cdTextValidator->fixup( s );
   m_cdText.setSongwriter(s);
   emitChanged();
 }
 
 
-void K3bAudioTrack::setComposer( const QString& t )
+void K3bAudioTrack::setComposer( const TQString& t )
 {
-  QString s( t );
+  TQString s( t );
   d->cdTextValidator->fixup( s );
   m_cdText.setComposer(s);
   emitChanged();
 }
 
 
-void K3bAudioTrack::setIsrc( const QString& t )
+void K3bAudioTrack::setIsrc( const TQString& t )
 {
   m_cdText.setIsrc(t);
   emitChanged();
 }
 
 
-void K3bAudioTrack::setCdTextMessage( const QString& t )
+void K3bAudioTrack::setCdTextMessage( const TQString& t )
 {
-  QString s( t );
+  TQString s( t );
   d->cdTextValidator->fixup( s );
   m_cdText.setMessage(s);
   emitChanged();
@@ -282,7 +282,7 @@ void K3bAudioTrack::moveAfter( K3bAudioTrack* track )
   kdDebug() << "(K3bAudioTrack::moveAfter( " << track << " )" << endl;
   if( !track ) {
     if( !doc() ) {
-      kdDebug() << "(K3bAudioTrack::moveAfter) no parent set" << endl;
+      kdDebug() << "(K3bAudioTrack::moveAfter) no tqparent set" << endl;
       return;
     }
       
@@ -302,7 +302,7 @@ void K3bAudioTrack::moveAfter( K3bAudioTrack* track )
     // remove this from the list
     take();
     
-    // set the new parent doc
+    // set the new tqparent doc
     m_parent = track->doc();
     
     K3bAudioTrack* oldNext = track->m_next;
@@ -330,7 +330,7 @@ void K3bAudioTrack::moveAhead( K3bAudioTrack* track )
 {
   if( !track ) {
     if( !doc() ) {
-      kdDebug() << "(K3bAudioTrack::moveAfter) no parent set" << endl;
+      kdDebug() << "(K3bAudioTrack::moveAfter) no tqparent set" << endl;
       return;
     }
 
@@ -350,7 +350,7 @@ void K3bAudioTrack::moveAhead( K3bAudioTrack* track )
     // remove this from the list
     take();
     
-    // set the new parent doc
+    // set the new tqparent doc
     m_parent = track->doc();
     
     K3bAudioTrack* oldPrev = track->m_prev;
@@ -568,7 +568,7 @@ K3bAudioTrack* K3bAudioTrack::split( const K3b::Msf& pos )
       splitTrack->addSource( addSource );
     }
 
-    kdDebug() << "(K3bAudioTrack) moving track " << splitTrack << " after this (" << this << ") with parent " << doc() << endl;
+    kdDebug() << "(K3bAudioTrack) moving track " << splitTrack << " after this (" << this << ") with tqparent " << doc() << endl;
     splitTrack->moveAfter( this );
 
     return splitTrack;
@@ -604,7 +604,7 @@ K3bDevice::Track K3bAudioTrack::toCdTrack() const
   if( doc()->lastTrack() != this )
     cdTrack.setIndex0( index0() );
   
-  // FIXME: convert to QCString
+  // FIXME: convert to TQCString
   //    cdTrack.setIsrc( isrc() );
   
   return cdTrack;

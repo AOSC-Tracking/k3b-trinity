@@ -55,15 +55,15 @@ class LIBK3B_EXPORT K3bAudioFile : public K3bAudioDataSource
    */
   ~K3bAudioFile();
 
-  const QString& filename() const;
+  const TQString& filename() const;
 
   /**
    * The complete length of the file used by this source.
    */
   K3b::Msf originalLength() const;
 
-  QString type() const;
-  QString sourceComment() const;
+  TQString type() const;
+  TQString sourceComment() const;
 
   bool isValid() const;
 

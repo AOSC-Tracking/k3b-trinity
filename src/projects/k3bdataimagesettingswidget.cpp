@@ -19,14 +19,14 @@
 
 #include "k3bisooptions.h"
 
-#include <qcheckbox.h>
-#include <qradiobutton.h>
-#include <qbuttongroup.h>
-#include <qlineedit.h>
-#include <qcombobox.h>
-#include <qpushbutton.h>
-#include <qwhatsthis.h>
-#include <qlayout.h>
+#include <tqcheckbox.h>
+#include <tqradiobutton.h>
+#include <tqbuttongroup.h>
+#include <tqlineedit.h>
+#include <tqcombobox.h>
+#include <tqpushbutton.h>
+#include <tqwhatsthis.h>
+#include <tqlayout.h>
 
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -126,8 +126,8 @@ static void initializePresets()
 class K3bDataImageSettingsWidget::CustomFilesystemsDialog : public KDialogBase
 {
 public:
-  CustomFilesystemsDialog( QWidget* parent )
-    : KDialogBase( parent,
+  CustomFilesystemsDialog( TQWidget* tqparent )
+    : KDialogBase( tqparent,
 		   "custom_filesystems_dialog",
 		   true,
 		   i18n("Custom Data Project Filesystems"),
@@ -145,8 +145,8 @@ public:
 class K3bDataImageSettingsWidget::VolumeDescDialog : public KDialogBase
 {
 public:
-  VolumeDescDialog( QWidget* parent )
-    : KDialogBase( parent,
+  VolumeDescDialog( TQWidget* tqparent )
+    : KDialogBase( tqparent,
 		   "voldesc_dialog",
 		   true,
 		   i18n("Volume Descriptor"),
@@ -157,8 +157,8 @@ public:
     setMainWidget( w );
 
     // give ourselves a reasonable size
-    QSize s = sizeHint();
-    s.setWidth( QMAX(s.width(), 300) );
+    TQSize s = tqsizeHint();
+    s.setWidth( TQMAX(s.width(), 300) );
     resize( s );
   }
 
@@ -167,21 +167,21 @@ public:
 
 
 
-K3bDataImageSettingsWidget::K3bDataImageSettingsWidget( QWidget* parent, const char* name )
-  : base_K3bDataImageSettings( parent, name ),
+K3bDataImageSettingsWidget::K3bDataImageSettingsWidget( TQWidget* tqparent, const char* name )
+  : base_K3bDataImageSettings( tqparent, name ),
     m_fileSystemOptionsShown(true)
 {
-  layout()->setMargin( KDialog::marginHint() );
+  tqlayout()->setMargin( KDialog::marginHint() );
 
   m_customFsDlg = new CustomFilesystemsDialog( this );
   m_volDescDlg = new VolumeDescDialog( this );
 
-  connect( m_buttonCustomFilesystems, SIGNAL(clicked()),
-	   this, SLOT(slotCustomFilesystems()) );
-  connect( m_buttonMoreVolDescFields, SIGNAL(clicked()),
-	   this, SLOT(slotMoreVolDescFields()) );
-  connect( m_comboSpaceHandling, SIGNAL(activated(int)),
-	   this, SLOT(slotSpaceHandlingChanged(int)) );
+  connect( m_buttonCustomFilesystems, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotCustomFilesystems()) );
+  connect( m_buttonMoreVolDescFields, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotMoreVolDescFields()) );
+  connect( m_comboSpaceHandling, TQT_SIGNAL(activated(int)),
+	   this, TQT_SLOT(slotSpaceHandlingChanged(int)) );
 
   for( int i = 0; i < FS_MAX; ++i )
     m_comboFilesystems->insertItem( i18n( s_fsPresetNames[i] ) );
@@ -189,7 +189,7 @@ K3bDataImageSettingsWidget::K3bDataImageSettingsWidget( QWidget* parent, const c
   if( !s_fsPresetsInitialized )
     initializePresets();
 
-  QWhatsThis::add( m_comboFilesystems,
+  TQWhatsThis::add( m_comboFilesystems,
 		   i18n("<p><b>File System Presets</b>"
 			"<p>K3b provides the following file system Presets which allow for a quick selection "
 			"of the most frequently used settings.")
@@ -242,7 +242,7 @@ void K3bDataImageSettingsWidget::slotCustomFilesystems()
     K3bIsoOptions o;
     m_customFsDlg->w->save( o );
 
-    if( m_customFsDlg->exec() == QDialog::Accepted ) {
+    if( m_customFsDlg->exec() == TQDialog::Accepted ) {
         slotFilesystemsChanged();
     }
     else {
@@ -258,7 +258,7 @@ void K3bDataImageSettingsWidget::slotFilesystemsChanged()
     return;
 
   // new custom entry
-  QStringList s;
+  TQStringList s;
   if( m_customFsDlg->w->m_checkRockRidge->isChecked() )
     s += i18n("Rock Ridge");
   if( m_customFsDlg->w->m_checkJoliet->isChecked() )
@@ -268,7 +268,7 @@ void K3bDataImageSettingsWidget::slotFilesystemsChanged()
   if( s.isEmpty() )
     m_comboFilesystems->changeItem( i18n("Custom (ISO9660 only)"), FS_CUSTOM );
   else
-    m_comboFilesystems->changeItem( i18n("Custom (%1)").arg( s.join(", ") ), FS_CUSTOM );
+    m_comboFilesystems->changeItem( i18n("Custom (%1)").tqarg( s.join(", ") ), FS_CUSTOM );
 
   // see if any of the presets is loaded
   m_comboFilesystems->setCurrentItem( FS_CUSTOM );
@@ -318,7 +318,7 @@ void K3bDataImageSettingsWidget::slotMoreVolDescFields()
   m_volDescDlg->w->save( o );
 
   // exec dlg
-  if( m_volDescDlg->exec() == QDialog::Accepted ) {
+  if( m_volDescDlg->exec() == TQDialog::Accepted ) {
     // accept new entries
     m_volDescDlg->w->save( o );
     m_editVolumeName->setText( o.volumeID() );
@@ -353,7 +353,7 @@ void K3bDataImageSettingsWidget::load( const K3bIsoOptions& o )
   case K3bIsoOptions::extended:
     m_comboSpaceHandling->setCurrentItem( WS_EXTENDED_STRIP );
     break;
-  case K3bIsoOptions::replace:
+  case K3bIsoOptions::tqreplace:
     m_comboSpaceHandling->setCurrentItem( WS_REPLACE );
     break;
   default:
@@ -387,7 +387,7 @@ void K3bDataImageSettingsWidget::save( K3bIsoOptions& o )
     o.setWhiteSpaceTreatment( K3bIsoOptions::extended );
     break;
   case WS_REPLACE:
-    o.setWhiteSpaceTreatment( K3bIsoOptions::replace );
+    o.setWhiteSpaceTreatment( K3bIsoOptions::tqreplace );
     break;
   default:
     o.setWhiteSpaceTreatment( K3bIsoOptions::noChange );

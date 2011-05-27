@@ -26,8 +26,8 @@
 #include <k3bglobals.h>
 
 #include <dcopclient.h>
-#include <qptrlist.h>
-#include <qtimer.h>
+#include <tqptrlist.h>
+#include <tqtimer.h>
 
 
 
@@ -105,11 +105,11 @@ DCOPRef K3bInterface::openProject( const KURL& url )
     return DCOPRef();
 }
 
-QValueList<DCOPRef> K3bInterface::projects()
+TQValueList<DCOPRef> K3bInterface::projects()
 {
-  QValueList<DCOPRef> lst;
-  const QPtrList<K3bDoc>& docs = k3bappcore->projectManager()->projects();
-  for( QPtrListIterator<K3bDoc> it( docs ); it.current(); ++it )
+  TQValueList<DCOPRef> lst;
+  const TQPtrList<K3bDoc>& docs = k3bappcore->projectManager()->projects();
+  for( TQPtrListIterator<K3bDoc> it( docs ); it.current(); ++it )
     lst.append( DCOPRef( kapp->dcopClient()->appId(), k3bappcore->projectManager()->dcopInterface( it.current() )->objId() ) );
 
   return lst;
@@ -143,28 +143,28 @@ void K3bInterface::copyDvd( const KURL& dev )
 void K3bInterface::copyCd()
 {
   // HACK since we want this method to return immediately
-  QTimer::singleShot( 0, m_main, SLOT(slotCdCopy()) );
+  TQTimer::singleShot( 0, m_main, TQT_SLOT(slotCdCopy()) );
 }
 
 
 void K3bInterface::copyDvd()
 {
   // HACK since we want this method to return immediately
-  QTimer::singleShot( 0, m_main, SLOT(slotDvdCopy()) );
+  TQTimer::singleShot( 0, m_main, TQT_SLOT(slotDvdCopy()) );
 }
 
 
 void K3bInterface::eraseCdrw()
 {
   // HACK since we want this method to return immediately
-  QTimer::singleShot( 0, m_main, SLOT(slotBlankCdrw()) );
+  TQTimer::singleShot( 0, m_main, TQT_SLOT(slotBlankCdrw()) );
 }
 
 
 void K3bInterface::formatDvd()
 {
   // HACK since we want this method to return immediately
-  QTimer::singleShot( 0, m_main, SLOT(slotFormatDvd()) );
+  TQTimer::singleShot( 0, m_main, TQT_SLOT(slotFormatDvd()) );
 }
 
 

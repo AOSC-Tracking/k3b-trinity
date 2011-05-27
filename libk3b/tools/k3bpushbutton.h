@@ -26,29 +26,30 @@
 class LIBK3B_EXPORT K3bPushButton : public KPushButton
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
    * Default constructor.
    */
-  K3bPushButton( QWidget* parent = 0, const char* name = 0 );
+  K3bPushButton( TQWidget* tqparent = 0, const char* name = 0 );
 
   /**
    * Constructor, that sets the button-text to @p text
    */
-  K3bPushButton( const QString& text, QWidget* parent = 0, const char* name = 0 );
+  K3bPushButton( const TQString& text, TQWidget* tqparent = 0, const char* name = 0 );
 
   /**
    * Constructor, that sets an icon and the button-text to @p text
    */
-  K3bPushButton( const QIconSet& icon, const QString& text,
-		 QWidget* parent = 0, const char* name = 0 );
+  K3bPushButton( const TQIconSet& icon, const TQString& text,
+		 TQWidget* tqparent = 0, const char* name = 0 );
 
   /**
    * Constructor that takes a KGuiItem for the text, the icon, the tooltip
    * and the what's this help
    */
-  K3bPushButton( const KGuiItem& item, QWidget* parent = 0, const char* name = 0 );
+  K3bPushButton( const KGuiItem& item, TQWidget* tqparent = 0, const char* name = 0 );
 
   /**
    * Destructs the button.
@@ -59,10 +60,10 @@ class LIBK3B_EXPORT K3bPushButton : public KPushButton
    * The popup menu will show if the button is pressed down for about half a second
    * or if the mouse is moved while pressed just like the KToolBarButton.
    */
-  void setDelayedPopupMenu( QPopupMenu* );
+  void setDelayedPopupMenu( TQPopupMenu* );
 
  protected:
-  virtual bool eventFilter( QObject*, QEvent* );
+  virtual bool eventFilter( TQObject*, TQEvent* );
 
  private slots:
   void slotDelayedPopup();

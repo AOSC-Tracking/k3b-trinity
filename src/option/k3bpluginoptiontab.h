@@ -23,9 +23,10 @@
 class K3bPluginOptionTab : public base_K3bPluginOptionTab
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bPluginOptionTab( QWidget* parent = 0, const char* name = 0 );
+  K3bPluginOptionTab( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bPluginOptionTab();
 
  public slots:

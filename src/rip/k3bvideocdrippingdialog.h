@@ -17,27 +17,28 @@
 #ifndef _K3B_VIDEOCD_RIPPING_DIALOG_H_
 #define _K3B_VIDEOCD_RIPPING_DIALOG_H_
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include <k3binteractiondialog.h>
 #include <k3bdiskinfo.h>
 #include "k3bvideocdrippingoptions.h"
 
 class KListView;
-class QCheckBox;
-class QLabel;
-class QSpinBox;
-class QComboBox;
-class QToolButton;
+class TQCheckBox;
+class TQLabel;
+class TQSpinBox;
+class TQComboBox;
+class TQToolButton;
 class KURLRequester;
 class K3bTempDirSelectionWidget;
 
 class K3bVideoCdRippingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bVideoCdRippingDialog( K3bVideoCdRippingOptions* options, QWidget* parent = 0, const char* name = 0 );
+  K3bVideoCdRippingDialog( K3bVideoCdRippingOptions* options, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bVideoCdRippingDialog();
 
  private:
@@ -52,11 +53,11 @@ class K3bVideoCdRippingDialog : public K3bInteractionDialog
 
   KURLRequester* m_editDirectory;
 
-  QLabel* m_labelFreeSpace;
-  QLabel* m_labelNecessarySize;
-  QCheckBox* m_ignoreExt;
-  QCheckBox* m_sector2336;
-  QCheckBox* m_extractXML;
+  TQLabel* m_labelFreeSpace;
+  TQLabel* m_labelNecessarySize;
+  TQCheckBox* m_ignoreExt;
+  TQCheckBox* m_sector2336;
+  TQCheckBox* m_extractXML;
 
   K3bVideoCdRippingOptions* m_videooptions;
 
@@ -66,7 +67,7 @@ class K3bVideoCdRippingDialog : public K3bInteractionDialog
   void slotStartClicked();
 
   void slotUpdateFreeSpace();
-  void slotFreeSpace(const QString&, unsigned long, unsigned long, unsigned long);
+  void slotFreeSpace(const TQString&, unsigned long, unsigned long, unsigned long);
 
 };
 

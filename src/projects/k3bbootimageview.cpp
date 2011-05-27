@@ -25,33 +25,33 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 
-#include <qpushbutton.h>
-#include <qstring.h>
-#include <qgroupbox.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qradiobutton.h>
-#include <qbuttongroup.h>
-#include <qregexp.h>
+#include <tqpushbutton.h>
+#include <tqstring.h>
+#include <tqgroupbox.h>
+#include <tqlineedit.h>
+#include <tqcheckbox.h>
+#include <tqradiobutton.h>
+#include <tqbuttongroup.h>
+#include <tqregexp.h>
 
 
 
 class K3bBootImageView::PrivateBootImageViewItem : public KListViewItem
 {
 public:
-  PrivateBootImageViewItem( K3bBootItem* image, QListView* parent ) 
-    : KListViewItem( parent ), 
+  PrivateBootImageViewItem( K3bBootItem* image, TQListView* tqparent ) 
+    : KListViewItem( tqparent ), 
       m_image( image ) {
 
   }
 
-  PrivateBootImageViewItem( K3bBootItem* image, QListView* parent, QListViewItem* after )
-    : KListViewItem( parent, after ),
+  PrivateBootImageViewItem( K3bBootItem* image, TQListView* tqparent, TQListViewItem* after )
+    : KListViewItem( tqparent, after ),
       m_image( image ) {
 
   }
 
-  QString text( int col ) const {
+  TQString text( int col ) const {
     if( col == 0 ) {
       if( m_image->imageType() == K3bBootItem::FLOPPY )
 	return i18n("Floppy");
@@ -61,11 +61,11 @@ public:
 	return i18n("None");
     }
     else if( col == 1 )
-      return QString( "%1 KB" ).arg( m_image->size()/1024 );
+      return TQString( "%1 KB" ).tqarg( m_image->size()/1024 );
     else if( col == 2 )
       return m_image->localPath();
     else
-      return QString::null;
+      return TQString();
   }
 
   K3bBootItem* bootImage() const { return m_image; }
@@ -75,20 +75,20 @@ private:
 };
 
 
-K3bBootImageView::K3bBootImageView( K3bDataDoc* doc, QWidget* parent, const char* name )
-  : base_K3bBootImageView( parent, name ),
+K3bBootImageView::K3bBootImageView( K3bDataDoc* doc, TQWidget* tqparent, const char* name )
+  : base_K3bBootImageView( tqparent, name ),
     m_doc(doc)
 {
-  connect( m_buttonNew, SIGNAL(clicked()), 
-	   this, SLOT(slotNewBootImage()) );
-  connect( m_buttonDelete, SIGNAL(clicked()), 
-	   this, SLOT(slotDeleteBootImage()) );
-  connect( m_buttonToggleOptions, SIGNAL(clicked()),
-	   this, SLOT(slotToggleOptions()) );
-  connect( m_viewImages, SIGNAL(selectionChanged()),
-	   this, SLOT(slotSelectionChanged()) );
-  connect( m_radioNoEmulation, SIGNAL(toggled(bool)),
-	   this, SLOT(slotNoEmulationToggled(bool)) );
+  connect( m_buttonNew, TQT_SIGNAL(clicked()), 
+	   this, TQT_SLOT(slotNewBootImage()) );
+  connect( m_buttonDelete, TQT_SIGNAL(clicked()), 
+	   this, TQT_SLOT(slotDeleteBootImage()) );
+  connect( m_buttonToggleOptions, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotToggleOptions()) );
+  connect( m_viewImages, TQT_SIGNAL(selectionChanged()),
+	   this, TQT_SLOT(slotSelectionChanged()) );
+  connect( m_radioNoEmulation, TQT_SIGNAL(toggled(bool)),
+	   this, TQT_SLOT(slotNoEmulationToggled(bool)) );
 
   K3bIntValidator* v = new K3bIntValidator( this );
   m_editLoadSegment->setValidator( v );
@@ -126,7 +126,7 @@ void K3bBootImageView::showAdvancedOptions( bool show )
 
 void K3bBootImageView::slotNewBootImage()
 {
-  QString file = KFileDialog::getOpenFileName( QString::null, QString::null, this, i18n("Please Choose Boot Image") );
+  TQString file = KFileDialog::getOpenFileName( TQString(), TQString(), this, i18n("Please Choose Boot Image") );
   if( !file.isEmpty() ) {
     KIO::filesize_t fsize = K3b::filesize( file );
     int boottype = K3bBootItem::FLOPPY;
@@ -146,7 +146,7 @@ void K3bBootImageView::slotNewBootImage()
 					       i18n("No Floppy image selected"),
 					       i18n("Use harddisk emulation"),
 					       i18n("Use no emulation"),
-					       QString::null,
+					       TQString(),
 					       KMessageBox::AllowLink ) ) {
       case KMessageBox::Yes:
 	boottype = K3bBootItem::HARDDISK;
@@ -167,7 +167,7 @@ void K3bBootImageView::slotNewBootImage()
 
 void K3bBootImageView::slotDeleteBootImage()
 {
-  QListViewItem* item = m_viewImages->selectedItem();
+  TQListViewItem* item = m_viewImages->selectedItem();
   if( item ) {
     K3bBootItem* i = ((PrivateBootImageViewItem*)item)->bootImage();
     delete item;
@@ -178,7 +178,7 @@ void K3bBootImageView::slotDeleteBootImage()
 
 void K3bBootImageView::slotSelectionChanged()
 {
-  QListViewItem* item = m_viewImages->selectedItem();
+  TQListViewItem* item = m_viewImages->selectedItem();
   if( item )
     loadBootItemSettings( ((PrivateBootImageViewItem*)item)->bootImage() );
   else
@@ -189,7 +189,7 @@ void K3bBootImageView::slotSelectionChanged()
 void K3bBootImageView::updateBootImages()
 {
   m_viewImages->clear();
-  for( QPtrListIterator<K3bBootItem> it( m_doc->bootImages() ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bBootItem> it( m_doc->bootImages() ); it.current(); ++it ) {
     (void)new PrivateBootImageViewItem( *it, m_viewImages, 
 					m_viewImages->lastItem() );
   }
@@ -207,8 +207,8 @@ void K3bBootImageView::loadBootItemSettings( K3bBootItem* item )
 
     m_checkNoBoot->setChecked( item->noBoot() );
     m_checkInfoTable->setChecked( item->bootInfoTable() );
-    m_editLoadSegment->setText( "0x" + QString::number( item->loadSegment(), 16 ) );
-    m_editLoadSize->setText( "0x" + QString::number( item->loadSize(), 16 ) );
+    m_editLoadSegment->setText( "0x" + TQString::number( item->loadSegment(), 16 ) );
+    m_editLoadSize->setText( "0x" + TQString::number( item->loadSize(), 16 ) );
 
     if( item->imageType() == K3bBootItem::FLOPPY )
       m_radioFloppy->setChecked(true);
@@ -235,14 +235,14 @@ void K3bBootImageView::loadBootItemSettings( K3bBootItem* item )
 void K3bBootImageView::slotOptionsChanged()
 {
   if( !m_loadingItem ) {
-    QListViewItem* item = m_viewImages->selectedItem();
+    TQListViewItem* item = m_viewImages->selectedItem();
     if( item ) {
       K3bBootItem* i = ((PrivateBootImageViewItem*)item)->bootImage();
       
       i->setNoBoot( m_checkNoBoot->isChecked() );
       i->setBootInfoTable( m_checkInfoTable->isChecked() );
 
-      // TODO: create some class K3bIntEdit : public QLineEdit
+      // TODO: create some class K3bIntEdit : public TQLineEdit
       bool ok = true;
       i->setLoadSegment( K3bIntValidator::toInt( m_editLoadSegment->text(), &ok ) );
       if( !ok )

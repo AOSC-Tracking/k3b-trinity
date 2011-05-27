@@ -29,8 +29,8 @@ class LIBK3B_EXPORT K3bAudioZeroData : public K3bAudioDataSource
   K3b::Msf originalLength() const { return m_length; }
   void setLength( const K3b::Msf& msf );
 
-  QString type() const;
-  QString sourceComment() const;
+  TQString type() const;
+  TQString sourceComment() const;
 
   bool seek( const K3b::Msf& );
   int read( char* data, unsigned int max );

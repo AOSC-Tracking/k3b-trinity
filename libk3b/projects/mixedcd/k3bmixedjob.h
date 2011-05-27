@@ -23,8 +23,8 @@
 class K3bMixedDoc;
 class K3bIsoImager;
 class K3bAudioImager;
-class QFile;
-class QDataStream;
+class TQFile;
+class TQDataStream;
 class K3bAbstractWriter;
 class K3bWaveFileWriter;
 class KTempFile;
@@ -40,16 +40,17 @@ class K3bDevice::Device;
 class K3bMixedJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 	
  public:
-  K3bMixedJob( K3bMixedDoc*, K3bJobHandler*, QObject* parent = 0 );
+  K3bMixedJob( K3bMixedDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
   ~K3bMixedJob();
 	
   K3bDoc* doc() const;
   K3bDevice::Device* writer() const;
 		
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 		
  public slots:
   void cancel();
@@ -109,7 +110,7 @@ class K3bMixedJob : public K3bBurnJob
   K3bMsInfoFetcher* m_msInfoFetcher;
   K3bAudioNormalizeJob* m_normalizeJob;
 
-  QString m_isoImageFilePath;
+  TQString m_isoImageFilePath;
 
   KTempFile* m_tocFile;
 
@@ -133,7 +134,7 @@ class K3bMixedJob : public K3bBurnJob
   int m_usedDataWritingMode;
   int m_usedAudioWritingMode;
 
-  QString m_tempFilePrefix;
+  TQString m_tempFilePrefix;
 
   K3b::Msf m_projectSize;
 

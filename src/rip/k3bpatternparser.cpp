@@ -17,24 +17,24 @@
 
 #include "k3bpatternparser.h"
 
-#include <qregexp.h>
-#include <qdatetime.h>
-#include <qvaluestack.h>
+#include <tqregexp.h>
+#include <tqdatetime.h>
+#include <tqvaluestack.h>
 
 #include <kglobal.h>
 #include <klocale.h>
 
 
-QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
+TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
                                         unsigned int trackNumber,
-                                        const QString& pattern,
-                                        bool replace,
-                                        const QString& replaceString )
+                                        const TQString& pattern,
+                                        bool tqreplace,
+                                        const TQString& replaceString )
 {
   if( entry.titles.count() < trackNumber )
     return "";
 
-  QString dir, s;
+  TQString dir, s;
   char c = ' ';     // contains the character representation of a special string
   unsigned int len; // length of the current special string
 
@@ -115,40 +115,40 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
         switch( c ) {
           case ARTIST:
             s = entry.artists[trackNumber-1];
-            s.replace( '/', '_' );
-            s.replace( '*', '_' );
-            s.replace( '}', '*' );  // for conditional inclusion
+            s.tqreplace( '/', '_' );
+            s.tqreplace( '*', '_' );
+            s.tqreplace( '}', '*' );  // for conditional inclusion
             dir.append( s.isEmpty()
-                ? i18n("unknown") + QString(" %1").arg(trackNumber)
+                ? i18n("unknown") + TQString(" %1").tqarg(trackNumber)
                 : s );
             break;
           case TITLE:
             s = entry.titles[trackNumber-1];
-            s.replace( '/', '_' );
-            s.replace( '*', '_' );
-            s.replace( '}', '*' );
+            s.tqreplace( '/', '_' );
+            s.tqreplace( '*', '_' );
+            s.tqreplace( '}', '*' );
             dir.append( s.isEmpty()
-                ? i18n("Track %1").arg(trackNumber)
+                ? i18n("Track %1").tqarg(trackNumber)
                 : s );
             break;
           case NUMBER:
-            dir.append( QString::number(trackNumber).rightJustify( 2, '0' ) );
+            dir.append( TQString::number(trackNumber).rightJustify( 2, '0' ) );
             break;
           case YEAR:
-            dir.append( QString::number( entry.year ) );
+            dir.append( TQString::number( entry.year ) );
             break;
           case COMMENT:
             s = entry.extInfos[trackNumber-1];
-            s.replace( '/', '_' );
-            s.replace( '*', '_' );
-            s.replace( '}', '*' );
+            s.tqreplace( '/', '_' );
+            s.tqreplace( '*', '_' );
+            s.tqreplace( '}', '*' );
             dir.append( s );
             break;
           case GENRE:
             s = ( entry.genre.isEmpty() ? entry.category : entry.genre );
-            s.replace( '/', '_' );
-            s.replace( '*', '_' );
-            s.replace( '}', '*' );
+            s.tqreplace( '/', '_' );
+            s.tqreplace( '*', '_' );
+            s.tqreplace( '}', '*' );
             dir.append( s );
             break;
           case ALBUMARTIST:
@@ -157,21 +157,21 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             break;
           case ALBUMTITLE:
             s = entry.cdTitle;
-            s.replace( '/', '_' );
-            s.replace( '*', '_' );
-            s.replace( '}', '*' );
+            s.tqreplace( '/', '_' );
+            s.tqreplace( '*', '_' );
+            s.tqreplace( '}', '*' );
             dir.append( s.isEmpty()
                 ? i18n("unknown") : s );
             break;
           case ALBUMCOMMENT:
             s = entry.cdExtInfo;
-            s.replace( '/', '_' );
-            s.replace( '*', '_' );
-            s.replace( '}', '*' );
+            s.tqreplace( '/', '_' );
+            s.tqreplace( '*', '_' );
+            s.tqreplace( '}', '*' );
             dir.append( s ); // I think it makes more sense to allow empty comments
             break;
           case DATE:
-            dir.append( KGlobal::locale()->formatDate( QDate::currentDate() ) );
+            dir.append( KGlobal::locale()->formatDate( TQDate::tqcurrentDate() ) );
             break;
           default:
             dir.append( pattern.mid(i, len) );
@@ -193,17 +193,17 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
   // /* delete line comment to comment out
   // the following part: Conditional Inclusion
 
-  QValueStack<int> offsetStack;
-  QString inclusion;
+  TQValueStack<int> offsetStack;
+  TQString inclusion;
   bool isIncluded;
 
-  static QRegExp conditionrx( "^[@|!][atyegrmx](?:='.*')?\\{" );
+  static TQRegExp conditionrx( "^[@|!][atyegrmx](?:='.*')?\\{" );
   conditionrx.setMinimal( TRUE );
 
   for( unsigned int i = 0; i < dir.length(); ++i ) {
 
     offsetStack.push(
-      conditionrx.search(dir, i, QRegExp::CaretAtOffset) );
+      conditionrx.search(dir, i, TQRegExp::CaretAtOffset) );
 
     if( offsetStack.top() == -1 ) {
       offsetStack.pop();
@@ -218,7 +218,7 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
       int offset = offsetStack.pop();
       int length = i - offset + 1;
 
-      switch( (QChar) dir[offset+1] ) {
+      switch( (TQChar) dir[offset+1] ) {
       case ARTIST:
         s = entry.artists[trackNumber-1];
         break;
@@ -226,10 +226,10 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
         s = entry.titles[trackNumber-1];
         break;
       case NUMBER:
-        s = QString::number( trackNumber );
+        s = TQString::number( trackNumber );
         break;
       case YEAR:
-        s = QString::number( entry.year );
+        s = TQString::number( entry.year );
         break;
       case COMMENT:
         s = entry.extInfos[trackNumber-1];
@@ -247,14 +247,14 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
         s = entry.cdExtInfo;
         break;
       case DATE:
-        s = KGlobal::locale()->formatDate( QDate::currentDate() );
+        s = KGlobal::locale()->formatDate( TQDate::tqcurrentDate() );
         break;
       default: // we must never get here,
         break; // all choices should be covered
       }
 
       if( dir[offset+2] == '{' ) { // no string matching, e.g. ?y{text}
-        switch( (QChar) dir[offset+1] ) {
+        switch( (TQChar) dir[offset+1] ) {
         case YEAR:
           isIncluded = (s != "0");
           break;
@@ -267,8 +267,8 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
       else { // with string matching, e.g. ?y='2004'{text}
 
 	// Be aware that there might be ' in the condition text
-        int endOfCondition = dir.find( '{', offset+4 )-1;
-        QString condition = dir.mid( offset+4,
+        int endOfCondition = dir.tqfind( '{', offset+4 )-1;
+        TQString condition = dir.mid( offset+4,
 				     endOfCondition - (offset+4) );
 
         isIncluded = (s == condition);
@@ -280,7 +280,7 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
           isIncluded = !isIncluded;
       // Leave it when it's '@'.
 
-      dir.replace( offset, length, ( isIncluded ? inclusion : QString("") ) );
+      dir.tqreplace( offset, length, ( isIncluded ? inclusion : TQString("") ) );
 
       if( isIncluded == TRUE )
         i -= length - inclusion.length();
@@ -289,17 +289,17 @@ QString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
 
       continue;
 
-    } // end of replace (at closing bracket '}')
+    } // end of tqreplace (at closing bracket '}')
 
   } // end of conditional inclusion for(...)
 
   // end of Conditional Inclusion */
 
 
-  dir.replace( '*', '}' );  // bring the brackets back, if there were any
+  dir.tqreplace( '*', '}' );  // bring the brackets back, if there were any
 
-  if( replace )
-    dir.replace( QRegExp( "\\s" ), replaceString );
+  if( tqreplace )
+    dir.tqreplace( TQRegExp( "\\s" ), replaceString );
 
   return dir;
 }

@@ -25,11 +25,11 @@
 #include <k3bvideodvdvideostream.h>
 #include <k3bvideodvdsubpicturestream.h>
 
-#include <qsimplerichtext.h>
-#include <qfontmetrics.h>
-#include <qpainter.h>
-#include <qheader.h>
-#include <qtooltip.h>
+#include <tqsimplerichtext.h>
+#include <tqfontmetrics.h>
+#include <tqpainter.h>
+#include <tqheader.h>
+#include <tqtooltip.h>
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -37,22 +37,22 @@
 #include <kapplication.h>
 
 
-static QString audioStreamString( const K3bVideoDVD::Title& title, unsigned int maxLines = 9999, bool includeExtInfo = true )
+static TQString audioStreamString( const K3bVideoDVD::Title& title, unsigned int maxLines = 9999, bool includeExtInfo = true )
 {
-  QString s = "<p>";
-  for( unsigned int i = 0; i < QMIN( title.numAudioStreams(), maxLines ); ++i ) {
+  TQString s = "<p>";
+  for( unsigned int i = 0; i < TQMIN( title.numAudioStreams(), maxLines ); ++i ) {
     if( i > 0 )
       s += "<br>";
-    s += QString::number(i+1) + ": " 
+    s += TQString::number(i+1) + ": " 
       + i18n("%1 %2Ch (%3<em>%4</em>)")
-      .arg( K3bVideoDVD::audioFormatString( title.audioStream(i).format() ) )
-      .arg( title.audioStream(i).channels() )
-      .arg( title.audioStream(i).langCode().isEmpty()
+      .tqarg( K3bVideoDVD::audioFormatString( title.audioStream(i).format() ) )
+      .tqarg( title.audioStream(i).channels() )
+      .tqarg( title.audioStream(i).langCode().isEmpty()
 	    ? i18n("unknown language")
 	    : KGlobal::locale()->twoAlphaToLanguageName( title.audioStream(i).langCode() ) )
-      .arg( includeExtInfo && title.audioStream(i).codeExtension() != K3bVideoDVD::AUDIO_CODE_EXT_UNSPECIFIED 
-	    ? QString(" ") + K3bVideoDVD::audioCodeExtensionString( title.audioStream(i).codeExtension() )
-	    : QString::null );
+      .tqarg( includeExtInfo && title.audioStream(i).codeExtension() != K3bVideoDVD::AUDIO_CODE_EXT_UNSPECIFIED 
+	    ? TQString(" ") + K3bVideoDVD::audioCodeExtensionString( title.audioStream(i).codeExtension() )
+	    : TQString() );
   }
   if( title.numAudioStreams() > maxLines )
     s += "...";
@@ -61,23 +61,23 @@ static QString audioStreamString( const K3bVideoDVD::Title& title, unsigned int 
 }
 
 
-static QString subpictureStreamString( const K3bVideoDVD::Title& title, unsigned int maxLines = 9999, bool includeExtInfo = true )
+static TQString subpictureStreamString( const K3bVideoDVD::Title& title, unsigned int maxLines = 9999, bool includeExtInfo = true )
 {
-  QString s = "<p>";
-  for( unsigned int i = 0; i < QMIN( title.numSubPictureStreams(), maxLines ); ++i ) {
+  TQString s = "<p>";
+  for( unsigned int i = 0; i < TQMIN( title.numSubPictureStreams(), maxLines ); ++i ) {
     if( i > 0 )
       s += "<br>";
-    s += QString::number(i+1) + ": " 
-      + QString("%1 (%2<em>%3</em>)")
-      .arg( title.subPictureStream(i).codeMode() == K3bVideoDVD::SUBPIC_CODE_MODE_RLE 
+    s += TQString::number(i+1) + ": " 
+      + TQString("%1 (%2<em>%3</em>)")
+      .tqarg( title.subPictureStream(i).codeMode() == K3bVideoDVD::SUBPIC_CODE_MODE_RLE 
 	    ? i18n("RLE")
 	    : i18n("Extended") )
-      .arg( title.subPictureStream(i).langCode().isEmpty()
+      .tqarg( title.subPictureStream(i).langCode().isEmpty()
 	    ? i18n("unknown language")
 	    : KGlobal::locale()->twoAlphaToLanguageName( title.subPictureStream(i).langCode() ) )
-      .arg( includeExtInfo && title.subPictureStream(i).codeExtension() != K3bVideoDVD::SUBPIC_CODE_EXT_UNSPECIFIED 
-	    ? QString(" ") + K3bVideoDVD::subPictureCodeExtensionString( title.subPictureStream(i).codeExtension() )
-	    : QString::null );
+      .tqarg( includeExtInfo && title.subPictureStream(i).codeExtension() != K3bVideoDVD::SUBPIC_CODE_EXT_UNSPECIFIED 
+	    ? TQString(" ") + K3bVideoDVD::subPictureCodeExtensionString( title.subPictureStream(i).codeExtension() )
+	    : TQString() );
   }
   if( title.numSubPictureStreams() > maxLines )
     s += "...";
@@ -90,8 +90,8 @@ static QString subpictureStreamString( const K3bVideoDVD::Title& title, unsigned
 class K3bVideoDVDRippingTitleListView::TitleViewItem : public K3bCheckListViewItem
 {
 public:
-  TitleViewItem( K3bVideoDVDRippingTitleListView* parent, QListViewItem* after, const K3bVideoDVD::Title& title ) 
-    : K3bCheckListViewItem( parent, after ),
+  TitleViewItem( K3bVideoDVDRippingTitleListView* tqparent, TQListViewItem* after, const K3bVideoDVD::Title& title ) 
+    : K3bCheckListViewItem( tqparent, after ),
       m_title( title ) {
 
     setMarginVertical( 4 );
@@ -113,39 +113,39 @@ public:
     // set a valid height
     int maxH = 0;
     for( int c = 1; c <= 4; ++c ) {
-      QSimpleRichText rt( text(c), listView()->font() );
+      TQSimpleRichText rt( text(c), listView()->font() );
       rt.setWidth( 600 ); // way to big to avoid line breaks
-      maxH = QMAX( maxH, rt.height() );
+      maxH = TQMAX( maxH, rt.height() );
     }
 
     setHeight( maxH + 2*marginVertical() );
   }
 
-  int width( const QFontMetrics& fm, const QListView* lv, int c ) const {
+  int width( const TQFontMetrics& fm, const TQListView* lv, int c ) const {
     if( c == 0 )
       return K3bCheckListViewItem::width( fm, lv, c );
     else {
-      QSimpleRichText rt( text(c), lv->font() );
+      TQSimpleRichText rt( text(c), lv->font() );
       rt.setWidth( 600 ); // way to big to avoid line breaks
       return rt.widthUsed() + 2*marginHorizontal( c );
     }
   }
 
-  void setPreview( const QImage& preview ) {
+  void setPreview( const TQImage& preview ) {
     m_preview = preview;
-    m_scaledPreview = QPixmap();
+    m_scaledPreview = TQPixmap();
 
     m_previewSet = true;
 
-    repaint();
+    tqrepaint();
   }
 
-  const QImage& preview() const {
+  const TQImage& preview() const {
     return m_preview;
   }
 
 protected:
-  void paintK3bCell( QPainter* p, const QColorGroup& cg, int col, int w, int align ) {
+  void paintK3bCell( TQPainter* p, const TQColorGroup& cg, int col, int w, int align ) {
     p->save();
 
     if( col == 0 ) {
@@ -155,7 +155,7 @@ protected:
     else if( col == 2 ) {
       if( isSelected() ) {
 	p->fillRect( 0, 0, w, height(),
-		     cg.brush( QColorGroup::Highlight ) );
+		     cg.brush( TQColorGroup::Highlight ) );
 	p->setPen( cg.highlightedText() );
       }
       else {
@@ -193,35 +193,35 @@ protected:
 	  preW = h*16/9;
 
 	p->drawRect( ( w - preW ) / 2, ( height() - h ) / 2, preW, h );
-	QPixmap noIcon = KApplication::kApplication()->iconLoader()->loadIcon( "no", KIcon::NoGroup, KIcon::SizeSmall, KIcon::DefaultState, 0, true );
+	TQPixmap noIcon = KApplication::kApplication()->iconLoader()->loadIcon( "no", KIcon::NoGroup, KIcon::SizeSmall, KIcon::DefaultState, 0, true );
 	p->drawPixmap( ( w - noIcon.width() ) / 2, ( height() - noIcon.height() ) / 2, noIcon );
       }
       else {
-	p->drawText( 0, 0, w, height(), Qt::AlignCenter, "..." );
+	p->drawText( 0, 0, w, height(), TQt::AlignCenter, "..." );
       }
     }
     else {
-      QString s = text( col );
+      TQString s = text( col );
       if( s.isEmpty() )
 	K3bCheckListViewItem::paintK3bCell( p, cg, col, w, align );
       else {
-	QColorGroup cg1( cg );
+	TQColorGroup cg1( cg );
 	if( isSelected() ) {
 	  p->fillRect( 0, 0, w, height(),
-		       cg.brush( QColorGroup::Highlight ) );
-	  cg1.setColor( QColorGroup::Text, cg.highlightedText() );
+		       cg.brush( TQColorGroup::Highlight ) );
+	  cg1.setColor( TQColorGroup::Text, cg.highlightedText() );
 	}
 	else {
 	  p->fillRect( 0, 0, w, height(), cg.base() ); 
 	}
 
-	// paint using QSimpleRichText
-	QSimpleRichText rt( text(col), listView()->font() );
+	// paint using TQSimpleRichText
+	TQSimpleRichText rt( text(col), listView()->font() );
 	rt.setWidth( 600 ); // way to big to avoid line breaks
 	// normally we would have to clip the height to height()-2*marginVertical(). But if we do that
-	// some characters are cut (such as p or q). It seems as if QSimpleRichText does not properly 
+	// some characters are cut (such as p or q). It seems as if TQSimpleRichText does not properly 
 	// calculate it's height...
-	rt.draw( p, 0, marginVertical(), QRect( 0, 0, w, height() ), cg1 );
+	rt.draw( p, 0, marginVertical(), TQRect( 0, 0, w, height() ), cg1 );
       }
     }
 
@@ -229,7 +229,7 @@ protected:
     if( listView()->firstChild() != this ) {
       p->translate( -1*marginHorizontal(col), 0 );
       // FIXME: modify the value from palette().disabled().foreground() to be lighter (or darker, depending on the background color )
-      p->setPen( Qt::lightGray );
+      p->setPen( TQt::lightGray );
       p->drawLine( 0, 0, w+2*marginHorizontal(col), 0 );
     }
 
@@ -237,26 +237,26 @@ protected:
   }
 
 private:
-  QString text( int col ) const {
+  TQString text( int col ) const {
     switch( col ) {
     case 1:
       // Title X + length
       return i18n("<p><b>Title %1 (%2)</b><br>"
 		  "%3")
-	.arg( m_title.titleNumber(), 2 )
-	.arg( m_title.playbackTime().toString( false ) )
-	.arg( i18n("%n chapter", "%n chapters", m_title.numPTTs() ) );
+	.tqarg( m_title.titleNumber(), 2 )
+	.tqarg( m_title.playbackTime().toString( false ) )
+	.tqarg( i18n("%n chapter", "%n chapters", m_title.numPTTs() ) );
 
     case 3:
       // video stream info
-      return QString("<p>%1 %2x%3<br>%4%5")
-	.arg( m_title.videoStream().mpegVersion() == 0 ? i18n("MPEG1") : i18n("MPEG2") )
-	.arg( m_title.videoStream().pictureWidth() )
-	.arg( m_title.videoStream().pictureHeight() )
-	.arg( m_title.videoStream().displayAspectRatio() == K3bVideoDVD::VIDEO_ASPECT_RATIO_4_3 ? "4:3" : "16:9" )
-	.arg( m_title.videoStream().letterboxed() ? QString(" - <em>") + i18n("letterboxed") + QString("</em>"): 
+      return TQString("<p>%1 %2x%3<br>%4%5")
+	.tqarg( m_title.videoStream().mpegVersion() == 0 ? i18n("MPEG1") : i18n("MPEG2") )
+	.tqarg( m_title.videoStream().pictureWidth() )
+	.tqarg( m_title.videoStream().pictureHeight() )
+	.tqarg( m_title.videoStream().displayAspectRatio() == K3bVideoDVD::VIDEO_ASPECT_RATIO_4_3 ? "4:3" : "16:9" )
+	.tqarg( m_title.videoStream().letterboxed() ? TQString(" - <em>") + i18n("letterboxed") + TQString("</em>"): 
 	      m_title.videoStream().permittedDf() == K3bVideoDVD::VIDEO_PERMITTED_DF_LETTERBOXED 
-	      ? QString(" - <em>") + i18n("anamorph") + QString("</em>") : QString::null );
+	      ? TQString(" - <em>") + i18n("anamorph") + TQString("</em>") : TQString() );
 
     case 4:
       // audio streams info
@@ -280,8 +280,8 @@ private:
   K3bVideoDVD::Title m_title;
 
   bool m_previewSet;
-  QImage m_preview;
-  QPixmap m_scaledPreview;
+  TQImage m_preview;
+  TQPixmap m_scaledPreview;
 };
 
 
@@ -293,14 +293,14 @@ public:
       m_view( view ) {
   }
 
-  void maybeTip( const QPoint& pos ) {
+  void maybeTip( const TQPoint& pos ) {
     TitleViewItem* item = static_cast<TitleViewItem*>( m_view->itemAt( pos ) );
-    QPoint contentsPos = m_view->viewportToContents( pos );
+    TQPoint contentsPos = m_view->viewportToContents( pos );
     if( !item )
       return;
     int col = m_view->header()->sectionAt( contentsPos.x() );
 
-    QRect r = m_view->itemRect( item );
+    TQRect r = m_view->tqitemRect( item );
     int headerPos = m_view->header()->sectionPos( col );
     r.setLeft( headerPos );
     r.setRight( headerPos + m_view->header()->sectionSize( col ) );
@@ -308,7 +308,7 @@ public:
     switch( col ) {
     case 2:
       if( !item->preview().isNull() ) {
-	QPixmap previewPix;
+	TQPixmap previewPix;
 	if( previewPix.convertFromImage( item->preview() ) )
 	  tip( r, previewPix, 0 );
       }
@@ -330,8 +330,8 @@ private:
 
 
 
-K3bVideoDVDRippingTitleListView::K3bVideoDVDRippingTitleListView( QWidget* parent )
-  : K3bListView( parent )
+K3bVideoDVDRippingTitleListView::K3bVideoDVDRippingTitleListView( TQWidget* tqparent )
+  : K3bListView( tqparent )
 {
   setFullWidth(true);
   setSorting(-1);
@@ -346,15 +346,15 @@ K3bVideoDVDRippingTitleListView::K3bVideoDVDRippingTitleListView( QWidget* paren
   addColumn( i18n("Subpicture") );
 
   header()->setClickEnabled( false );
-  setColumnWidthMode( 0, QListView::Manual );
+  setColumnWidthMode( 0, TQListView::Manual );
   setColumnWidth( 0, 20 );
   header()->setResizeEnabled( false, 0 );
 
   m_toolTip = new TitleToolTip( this );
 
   m_previewGen = new K3bVideoDVDRippingPreview( this );
-  connect( m_previewGen, SIGNAL(previewDone(bool)),
-	   this, SLOT(slotPreviewDone(bool)) );
+  connect( m_previewGen, TQT_SIGNAL(previewDone(bool)),
+	   this, TQT_SLOT(slotPreviewDone(bool)) );
 }
 
 
@@ -385,7 +385,7 @@ void K3bVideoDVDRippingTitleListView::slotPreviewDone( bool success )
   if( success )
     m_itemMap[m_currentPreviewTitle-1]->setPreview( m_previewGen->preview() );
   else
-    m_itemMap[m_currentPreviewTitle-1]->setPreview( QImage() );
+    m_itemMap[m_currentPreviewTitle-1]->setPreview( TQImage() );
 
   // cancel if we got hidden or if the medium changed.
   if( isVisible() && m_medium == k3bappcore->mediaCache()->medium( m_dvd.device() ) ) {
@@ -396,7 +396,7 @@ void K3bVideoDVDRippingTitleListView::slotPreviewDone( bool success )
 }
 
 
-void K3bVideoDVDRippingTitleListView::hideEvent( QHideEvent* e )
+void K3bVideoDVDRippingTitleListView::hideEvent( TQHideEvent* e )
 {
   //
   // For now we do it the easy way: just stop the preview generation

@@ -16,7 +16,7 @@
 #ifndef _K3B_IMAGE_FILE_READER_H_
 #define _K3B_IMAGE_FILE_READER_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 #include "k3b_export.h"
 
 class LIBK3B_EXPORT K3bImageFileReader
@@ -28,24 +28,24 @@ class LIBK3B_EXPORT K3bImageFileReader
   /**
    * Open a file. In most cases the TOC file
    */
-  void openFile( const QString& filename );
+  void openFile( const TQString& filename );
 
   virtual bool isValid() const;
 
   /**
    * Return the current set filename;
    */
-  const QString& filename() const;
+  const TQString& filename() const;
 
   /**
    * returns the name of the corresponding image file.
    */
-  virtual const QString& imageFilename() const;
+  virtual const TQString& imageFilename() const;
 
  protected:
   virtual void readFile() = 0;
   void setValid( bool );
-  void setImageFilename( const QString& );
+  void setImageFilename( const TQString& );
 
  private:
   class Private;

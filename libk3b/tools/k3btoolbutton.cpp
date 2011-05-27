@@ -15,9 +15,9 @@
 
 #include "k3btoolbutton.h"
 
-#include <qstyle.h>
-#include <qpainter.h>
-#include <qevent.h>
+#include <tqstyle.h>
+#include <tqpainter.h>
+#include <tqevent.h>
 
 #include <kglobalsettings.h>
 #include <kapplication.h>
@@ -26,13 +26,13 @@
 class K3bToolButton::Private
 {
 public:
-  QPoint mousePressPos;
+  TQPoint mousePressPos;
   bool instantMenu;
 };
 
 
-K3bToolButton::K3bToolButton( QWidget* parent )
-  : QToolButton( parent )
+K3bToolButton::K3bToolButton( TQWidget* tqparent )
+  : TQToolButton( tqparent )
 {
   d = new Private;
   d->instantMenu = false;
@@ -52,38 +52,38 @@ void K3bToolButton::setInstantMenu( bool b )
 }
 
 
-void K3bToolButton::drawButton( QPainter* p )
+void K3bToolButton::drawButton( TQPainter* p )
 {
-  QToolButton::drawButton( p );
+  TQToolButton::drawButton( p );
 
   //
   // code below comes from ktoolbarbutton.cpp from the kdelibs sources
   // see the file for copyright information
   //
-  if( QToolButton::popup() ) {
-    QStyle::SFlags arrowFlags = QStyle::Style_Default;
+  if( TQToolButton::popup() ) {
+    TQStyle::SFlags arrowFlags = TQStyle::Style_Default;
     
     if( isDown() )
-      arrowFlags |= QStyle::Style_Down;
+      arrowFlags |= TQStyle::Style_Down;
     if( isEnabled() )
-      arrowFlags |= QStyle::Style_Enabled;
+      arrowFlags |= TQStyle::Style_Enabled;
     
-    style().drawPrimitive(QStyle::PE_ArrowDown, p,
-			  QRect(width()-7, height()-7, 7, 7), colorGroup(),
-			  arrowFlags, QStyleOption() );
+    tqstyle().tqdrawPrimitive(TQStyle::PE_ArrowDown, p,
+			  TQRect(width()-7, height()-7, 7, 7), tqcolorGroup(),
+			  arrowFlags, TQStyleOption() );
   }
 }
 
 
-bool K3bToolButton::eventFilter( QObject* o, QEvent* ev )
+bool K3bToolButton::eventFilter( TQObject* o, TQEvent* ev )
 {
   if( dynamic_cast<K3bToolButton*>(o) == this ) {
 
     // Popup the menu when the left mousebutton is pressed and the mouse
     // is moved by a small distance.
-    if( QToolButton::popup() ) {
-      if( ev->type() == QEvent::MouseButtonPress ) {
-	QMouseEvent* mev = static_cast<QMouseEvent*>(ev);
+    if( TQToolButton::popup() ) {
+      if( ev->type() == TQEvent::MouseButtonPress ) {
+	TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
 
 	if( d->instantMenu ) {
 	  setDown(true);
@@ -94,8 +94,8 @@ bool K3bToolButton::eventFilter( QObject* o, QEvent* ev )
 	  d->mousePressPos = mev->pos();
 	}
       }
-      else if( ev->type() == QEvent::MouseMove ) {
-        QMouseEvent* mev = static_cast<QMouseEvent*>(ev);
+      else if( ev->type() == TQEvent::MouseMove ) {
+        TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
         if( !d->instantMenu &&
 	    ( mev->pos() - d->mousePressPos).manhattanLength() > KGlobalSettings::dndEventDelay() ) {
 	  openPopup();
@@ -105,5 +105,5 @@ bool K3bToolButton::eventFilter( QObject* o, QEvent* ev )
     }
   }
 
-  return QToolButton::eventFilter( o, ev );
+  return TQToolButton::eventFilter( o, ev );
 }

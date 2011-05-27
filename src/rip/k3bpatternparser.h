@@ -17,7 +17,7 @@
 #ifndef K3BPATTERNPARSER_H
 #define K3BPATTERNPARSER_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <k3bcddbquery.h>
 
@@ -28,11 +28,11 @@
 class K3bPatternParser
 {
  public:
-  static QString parsePattern( const K3bCddbResultEntry& entry,
+  static TQString parsePattern( const K3bCddbResultEntry& entry,
                                unsigned int trackNumber,
-                               const QString& pattern,
-                               bool replace = false,
-                               const QString& replaceString = "_" );
+                               const TQString& pattern,
+                               bool tqreplace = false,
+                               const TQString& replaceString = "_" );
 
  private:
   enum {

@@ -16,25 +16,26 @@
 #ifndef _K3B_AUDIO_EDITOR_WIDGET_H_
 #define _K3B_AUDIO_EDITOR_WIDGET_H_
 
-#include <qframe.h>
-#include <qptrlist.h>
+#include <tqframe.h>
+#include <tqptrlist.h>
 
 #include <k3bmsf.h>
 
 
-class QPainter;
+class TQPainter;
 
 
-class K3bAudioEditorWidget : public QFrame
+class K3bAudioEditorWidget : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioEditorWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bAudioEditorWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bAudioEditorWidget();
 
-  QSize sizeHint() const;
-  QSize minimumSizeHint() const;
+  TQSize tqsizeHint() const;
+  TQSize tqminimumSizeHint() const;
 
   /**
    * For now the Editor has only one parameter: the length data.
@@ -53,8 +54,8 @@ class K3bAudioEditorWidget : public QFrame
    */
   int addRange( const K3b::Msf& start, const K3b::Msf& end, 
 		bool startFixed = false, bool endFixed = false,
-		const QString& toolTip = QString::null,
-		const QBrush& brush = QBrush() );
+		const TQString& toolTip = TQString(),
+		const TQBrush& brush = TQBrush() );
 
   /**
    * \returns the identifier of the range which spans over x position \a pos or
@@ -86,7 +87,7 @@ class K3bAudioEditorWidget : public QFrame
    * \return A list of all ranges' identifiers sorted ascending by start
    * offset
    */
-  QValueList<int> allRanges() const;
+  TQValueList<int> allRanges() const;
 
   void setMaxNumberOfMarkers( int );
 
@@ -95,7 +96,7 @@ class K3bAudioEditorWidget : public QFrame
    * @return -1 on error or an identifier on success.
    */
   int addMarker( const K3b::Msf& pos, bool fixed = false, 
-		 const QString& toolTip = QString::null, const QColor& color = QColor() );
+		 const TQString& toolTip = TQString(), const TQColor& color = TQColor() );
 
   /**
    * @return false if the marker does not exist.
@@ -140,10 +141,10 @@ class K3bAudioEditorWidget : public QFrame
   int msfToPos( const K3b::Msf& msf ) const;
 
   /**
-   * Set the brush to paint the selected range. Default is QColorGroup::Highlight
+   * Set the brush to paint the selected range. Default is TQColorGroup::Highlight
    */
-  void setSelectedRangeBrush( const QBrush& );
-  const QBrush& selectedRangeBrush() const;
+  void setSelectedRangeBrush( const TQBrush& );
+  const TQBrush& selectedRangeBrush() const;
 
  signals:
   /**
@@ -177,14 +178,14 @@ class K3bAudioEditorWidget : public QFrame
   class Private;
   Private* d;
 
-  void mousePressEvent( QMouseEvent* e );
-  void mouseReleaseEvent( QMouseEvent* e );
-  void mouseDoubleClickEvent( QMouseEvent* e );
-  void mouseMoveEvent( QMouseEvent* e );
-  void drawContents( QPainter* );
-  void drawAll( QPainter*, const QRect& );
-  void drawRange( QPainter* p, const QRect&, Range* r );
-  void drawMarker( QPainter* p, const QRect&, Marker* m );
+  void mousePressEvent( TQMouseEvent* e );
+  void mouseReleaseEvent( TQMouseEvent* e );
+  void mouseDoubleClickEvent( TQMouseEvent* e );
+  void mouseMoveEvent( TQMouseEvent* e );
+  void drawContents( TQPainter* );
+  void drawAll( TQPainter*, const TQRect& );
+  void drawRange( TQPainter* p, const TQRect&, Range* r );
+  void drawMarker( TQPainter* p, const TQRect&, Marker* m );
 
   /**
    * Makes sure that \a r does not overlap any other range by modifying and
@@ -194,14 +195,14 @@ class K3bAudioEditorWidget : public QFrame
 
   Range* getRange( int i ) const;
   Marker* getMarker( int i ) const;
-  Range* findRange( const QPoint& p ) const;
-  Range* findRangeEdge( const QPoint& p, bool* end = 0 ) const;
-  Marker* findMarker( const QPoint& p ) const;
+  Range* findRange( const TQPoint& p ) const;
+  Range* findRangeEdge( const TQPoint& p, bool* end = 0 ) const;
+  Marker* findMarker( const TQPoint& p ) const;
   void setSelectedRange( Range* );
 
   int m_maxMarkers;
   K3b::Msf m_length;
-  QPtrList<Marker> m_markers;
+  TQPtrList<Marker> m_markers;
   int m_idCnt;
   bool m_mouseAt;
 

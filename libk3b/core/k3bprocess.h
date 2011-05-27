@@ -19,7 +19,7 @@
 
 
 #include <kprocess.h>
-#include <qstring.h>
+#include <tqstring.h>
 #include "k3b_export.h"
 
 class K3bExternalBin;
@@ -38,6 +38,7 @@ class K3bExternalBin;
 class LIBK3B_EXPORT K3bProcess : public KProcess
 {
   Q_OBJECT
+  TQ_OBJECT
     
  public:
   class OutputCollector;
@@ -51,10 +52,10 @@ class LIBK3B_EXPORT K3bProcess : public KProcess
    */
   K3bProcess& operator<<( const K3bExternalBin* );
 
-  K3bProcess& operator<<( const QString& arg );
+  K3bProcess& operator<<( const TQString& arg );
   K3bProcess& operator<<( const char* arg );
-  K3bProcess& operator<<( const QCString& arg );
-  K3bProcess& operator<<( const QStringList& args );
+  K3bProcess& operator<<( const TQCString& arg );
+  K3bProcess& operator<<( const TQStringList& args );
 
   bool start( RunMode run = NotifyOnExit, Communication com = NoCommunication );
 
@@ -138,8 +139,8 @@ class LIBK3B_EXPORT K3bProcess : public KProcess
   void slotSplitStdout( KProcess*, char*, int );
 
  signals:
-  void stderrLine( const QString& line );
-  void stdoutLine( const QString& line );
+  void stderrLine( const TQString& line );
+  void stdoutLine( const TQString& line );
 
   /** 
    * Gets emitted if raw stdout mode has been requested
@@ -169,7 +170,7 @@ class LIBK3B_EXPORT K3bProcess : public KProcess
   void commClose();
 
  private:
-  static QStringList splitOutput( char*, int, QString&, bool );
+  static TQStringList splitOutput( char*, int, TQString&, bool );
 
   class Data;
   Data* d;
@@ -177,26 +178,27 @@ class LIBK3B_EXPORT K3bProcess : public KProcess
   bool m_bSplitStdout;
 };
 
-class LIBK3B_EXPORT K3bProcessOutputCollector: public QObject
+class LIBK3B_EXPORT K3bProcessOutputCollector: public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
     
  public:
   K3bProcessOutputCollector( KProcess* );
   void setProcess( KProcess* );
   
-  const QString& output() const { return m_gatheredOutput; }
-  const QString& stderrOutput() const { return m_stderrOutput; }
-  const QString& stdoutOutput() const { return m_stdoutOutput; }
+  const TQString& output() const { return m_gatheredOutput; }
+  const TQString& stderrOutput() const { return m_stderrOutput; }
+  const TQString& stdoutOutput() const { return m_stdoutOutput; }
   
  private slots:
   void slotGatherStderr( KProcess*, char*, int );
   void slotGatherStdout( KProcess*, char*, int );
   
  private:
-  QString m_gatheredOutput;
-  QString m_stderrOutput;
-  QString m_stdoutOutput;
+  TQString m_gatheredOutput;
+  TQString m_stderrOutput;
+  TQString m_stdoutOutput;
   KProcess* m_process;
 };
 

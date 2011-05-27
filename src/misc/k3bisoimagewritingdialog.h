@@ -20,20 +20,20 @@
 #include <k3binteractiondialog.h>
 
 
-class QCheckBox;
+class TQCheckBox;
 class K3bWriterSelectionWidget;
-class QLabel;
+class TQLabel;
 class KURL;
 class K3bMd5Job;
 class K3bWritingModeWidget;
 class KURLRequester;
 class K3bListView;
-class QSpinBox;
-class QDragEnterEvent;
-class QDropEvent;
+class TQSpinBox;
+class TQDragEnterEvent;
+class TQDropEvent;
 class KListView;
-class QListViewItem;
-class QPoint;
+class TQListViewItem;
+class TQPoint;
 
 
 /**
@@ -42,42 +42,43 @@ class QPoint;
 class K3bIsoImageWritingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bIsoImageWritingDialog( QWidget* = 0, const char* = 0, bool = true );
+  K3bIsoImageWritingDialog( TQWidget* = 0, const char* = 0, bool = true );
   ~K3bIsoImageWritingDialog();
 
   void setImage( const KURL& url );
 
  protected slots:
   void slotStartClicked();
-  void updateImageSize( const QString& );
+  void updateImageSize( const TQString& );
   void slotWriterChanged();
   void slotMd5JobPercent( int );
   void slotMd5JobFinished( bool );
-  void slotContextMenu( KListView*, QListViewItem*, const QPoint& pos );
+  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& pos );
 
  protected:
   void loadUserDefaults( KConfigBase* );
   void saveUserDefaults( KConfigBase* );
   void loadK3bDefaults();
 
-  void calculateMd5Sum( const QString& );
-  void dragEnterEvent( QDragEnterEvent* );
-  void dropEvent( QDropEvent* );
+  void calculateMd5Sum( const TQString& );
+  void dragEnterEvent( TQDragEnterEvent* );
+  void dropEvent( TQDropEvent* );
 
   void init();
 
  private:
   void setupGui();
-  QString imagePath() const;
+  TQString imagePath() const;
 
   K3bMd5Job* m_md5Job;
 
   K3bWriterSelectionWidget* m_writerSelectionWidget;
-  QCheckBox* m_checkDummy;
-  QCheckBox* m_checkVerify;
-  QSpinBox* m_spinCopies;
+  TQCheckBox* m_checkDummy;
+  TQCheckBox* m_checkVerify;
+  TQSpinBox* m_spinCopies;
   K3bWritingModeWidget* m_writingModeWidget;
 
   KURLRequester* m_editImagePath;

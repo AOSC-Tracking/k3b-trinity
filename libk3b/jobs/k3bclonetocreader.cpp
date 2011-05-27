@@ -21,8 +21,8 @@
 #include <k3bdeviceglobals.h>
 #include <k3bglobals.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 #include <kdebug.h>
 
@@ -35,12 +35,12 @@ public:
   }
 
   K3b::Msf size;
-  QString tocFile;
+  TQString tocFile;
 };
 
 
 
-K3bCloneTocReader::K3bCloneTocReader( const QString& filename )
+K3bCloneTocReader::K3bCloneTocReader( const TQString& filename )
   : K3bImageFileReader()
 {
   d = new Private;
@@ -74,8 +74,8 @@ void K3bCloneTocReader::readFile()
     d->tocFile = filename() + ".toc";
 
   // now get rid of the ".toc" extension
-  QString imageFileName = d->tocFile.left( d->tocFile.length()-4 );
-  if( !QFile::exists( imageFileName ) ) {
+  TQString imageFileName = d->tocFile.left( d->tocFile.length()-4 );
+  if( !TQFile::exists( imageFileName ) ) {
     kdDebug() << "(K3bCloneTocReader) could not find image file " << imageFileName << endl;
     return;
   }
@@ -84,7 +84,7 @@ void K3bCloneTocReader::readFile()
 
   d->size = 0;
 
-  QFile f( d->tocFile );
+  TQFile f( d->tocFile );
   if( f.open( IO_ReadOnly ) ) {
     //
     // Inspired by clone.c from the cdrecord sources

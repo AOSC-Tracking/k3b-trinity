@@ -19,7 +19,7 @@
 #include <k3binteractiondialog.h>
 
 
-class QCheckBox;
+class TQCheckBox;
 class K3bWritingModeWidget;
 class K3bWriterSelectionWidget;
 namespace K3bDevice {
@@ -29,9 +29,10 @@ namespace K3bDevice {
 class K3bDvdFormattingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDvdFormattingDialog( QWidget* = 0, const char* = 0, bool modal = true );
+  K3bDvdFormattingDialog( TQWidget* = 0, const char* = 0, bool modal = true );
   ~K3bDvdFormattingDialog();
 
  public slots:
@@ -48,8 +49,8 @@ class K3bDvdFormattingDialog : public K3bInteractionDialog
 
   K3bWriterSelectionWidget* m_writerSelectionWidget;
   K3bWritingModeWidget* m_writingModeWidget;
-  QCheckBox* m_checkForce;
-  QCheckBox* m_checkQuickFormat;
+  TQCheckBox* m_checkForce;
+  TQCheckBox* m_checkQuickFormat;
 };
 
 #endif

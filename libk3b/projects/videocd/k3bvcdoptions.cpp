@@ -20,9 +20,9 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-// Qt Includes
-#include <qstring.h>
-#include <qfile.h>
+// TQt Includes
+#include <tqstring.h>
+#include <tqfile.h>
 
 // K3b Includes
 #include "k3bvcdoptions.h"
@@ -37,7 +37,7 @@ K3bVcdOptions::K3bVcdOptions()
         m_volumeID( "VIDEOCD" ),
         m_albumID( "" ),
         m_volumeSetId( "" ),
-        m_publisher( QString( "K3b - Version %1" ).arg( k3bcore->version() ) ),
+        m_publisher( TQString( "K3b - Version %1" ).tqarg( k3bcore->version() ) ),
         m_applicationId( "CDI/CDI_VCD.APP;1" ),
         m_systemId( "CD-RTOS CD-BRIDGE" ),
         m_vcdclass( "vcd" ),
@@ -65,19 +65,19 @@ K3bVcdOptions::K3bVcdOptions()
 bool K3bVcdOptions::checkCdiFiles()
 {
     m_cdisize = 0;
-    if ( !QFile::exists( locate( "data", "k3b/cdi/cdi_imag.rtf" ) ) )
+    if ( !TQFile::exists( locate( "data", "k3b/cdi/cdi_imag.rtf" ) ) )
         return false;
-    if ( !QFile::exists( locate( "data", "k3b/cdi/cdi_text.fnt" ) ) )
+    if ( !TQFile::exists( locate( "data", "k3b/cdi/cdi_text.fnt" ) ) )
         return false;
-    if ( !QFile::exists( locate( "data", "k3b/cdi/cdi_vcd.app" ) ) )
+    if ( !TQFile::exists( locate( "data", "k3b/cdi/cdi_vcd.app" ) ) )
         return false;
-    if ( !QFile::exists( locate( "data", "k3b/cdi/cdi_vcd.cfg" ) ) )
+    if ( !TQFile::exists( locate( "data", "k3b/cdi/cdi_vcd.cfg" ) ) )
         return false;
 
-    m_cdisize += QFile( locate( "data", "k3b/cdi/cdi_imag.rtf" ) ).size();
-    m_cdisize += QFile( locate( "data", "k3b/cdi/cdi_text.fnt" ) ).size();
-    m_cdisize += QFile( locate( "data", "k3b/cdi/cdi_vcd.app" ) ).size();
-    m_cdisize += QFile( locate( "data", "k3b/cdi/cdi_vcd.cfg" ) ).size();
+    m_cdisize += TQFile( locate( "data", "k3b/cdi/cdi_imag.rtf" ) ).size();
+    m_cdisize += TQFile( locate( "data", "k3b/cdi/cdi_text.fnt" ) ).size();
+    m_cdisize += TQFile( locate( "data", "k3b/cdi/cdi_vcd.app" ) ).size();
+    m_cdisize += TQFile( locate( "data", "k3b/cdi/cdi_vcd.cfg" ) ).size();
 
     return true;
 }

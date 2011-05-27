@@ -29,7 +29,7 @@
 class LIBK3B_EXPORT K3bCueFileParser : public K3bImageFileReader
 {
  public:
-  K3bCueFileParser( const QString& filename = QString::null );
+  K3bCueFileParser( const TQString& filename = TQString() );
   ~K3bCueFileParser();
 
   /**
@@ -44,9 +44,9 @@ class LIBK3B_EXPORT K3bCueFileParser : public K3bImageFileReader
 
  private:
   void readFile();
-  bool parseLine( QString& line );
-  void simplifyWhiteSpace( QString& s );
-  bool findImageFileName( const QString& fileEntry );
+  bool parseLine( TQString& line );
+  void simplifyWhiteSpace( TQString& s );
+  bool findImageFileName( const TQString& fileEntry );
 
   bool m_imageFilenameInCue;
 

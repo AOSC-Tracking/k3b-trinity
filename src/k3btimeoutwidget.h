@@ -16,22 +16,23 @@
 #ifndef _K3B_TIMEOUT_WIDGET_H_
 #define _K3B_TIMEOUT_WIDGET_H_
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
-class QPaintEvent;
-class QResizeEvent;
+class TQPaintEvent;
+class TQResizeEvent;
 
 
-class K3bTimeoutWidget : public QWidget
+class K3bTimeoutWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bTimeoutWidget( QWidget* parent );
+  K3bTimeoutWidget( TQWidget* tqparent );
   ~K3bTimeoutWidget();
 
-  QSize sizeHint() const;
-  QSize minimumSizeHint() const;
+  TQSize tqsizeHint() const;
+  TQSize tqminimumSizeHint() const;
 
  public slots:
   void setTimeout( int msecs );
@@ -44,8 +45,8 @@ class K3bTimeoutWidget : public QWidget
   void timeout();
 
  protected:
-  void paintEvent( QPaintEvent* );
-  void resizeEvent( QResizeEvent* );
+  void paintEvent( TQPaintEvent* );
+  void resizeEvent( TQResizeEvent* );
 
  private slots:
   void timeStep();

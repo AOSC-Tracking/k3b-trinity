@@ -22,9 +22,9 @@
 class K3bDataItem;
 
 class KLineEdit;
-class QPushButton;
-class QLabel;
-class QCheckBox;
+class TQPushButton;
+class TQLabel;
+class TQCheckBox;
 
 
 /**
@@ -33,9 +33,10 @@ class QCheckBox;
 class K3bDataPropertiesDialog : public KDialogBase  
 {
 Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bDataPropertiesDialog( K3bDataItem*, QWidget* parent = 0, const char* name = 0 );
+  K3bDataPropertiesDialog( K3bDataItem*, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bDataPropertiesDialog();
 
  protected slots:
@@ -43,16 +44,16 @@ Q_OBJECT
 
  private:
   KLineEdit* m_editName;
-  QLabel* m_labelType;
-  QLabel* m_labelLocation;
-  QLabel* m_labelSize;
-  QLabel* m_labelBlocks;
+  TQLabel* m_labelType;
+  TQLabel* m_labelLocation;
+  TQLabel* m_labelSize;
+  TQLabel* m_labelBlocks;
 
-  QLabel* m_labelLocalName;
-  QLabel* m_labelLocalLocation;
+  TQLabel* m_labelLocalName;
+  TQLabel* m_labelLocalLocation;
 
-  QCheckBox* m_checkHideOnRockRidge;
-  QCheckBox* m_checkHideOnJoliet;
+  TQCheckBox* m_checkHideOnRockRidge;
+  TQCheckBox* m_checkHideOnJoliet;
   KLineEdit* m_editSortWeight;
 
   K3bDataItem* m_dataItem;

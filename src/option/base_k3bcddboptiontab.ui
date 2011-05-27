@@ -1,11 +1,11 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bCddbOptionTab</class>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>base_K3bCddbOptionTab</cstring>
     </property>
-    <property name="geometry">
+    <property name="tqgeometry">
         <rect>
             <x>0</x>
             <y>0</y>
@@ -26,7 +26,7 @@
         <property name="spacing">
             <number>6</number>
         </property>
-        <widget class="QTabWidget">
+        <widget class="TQTabWidget">
             <property name="name">
                 <cstring>m_mainTabbed</cstring>
             </property>
@@ -38,7 +38,7 @@
                     <verstretch>0</verstretch>
                 </sizepolicy>
             </property>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -49,7 +49,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QCheckBox" row="0" column="0">
+                    <widget class="TQCheckBox" row="0" column="0">
                         <property name="name">
                             <cstring>m_checkUseLocalCddb</cstring>
                         </property>
@@ -57,7 +57,7 @@
                             <string>Use local CDDB directory</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox" row="1" column="0">
+                    <widget class="TQCheckBox" row="1" column="0">
                         <property name="name">
                             <cstring>m_checkSaveLocalEntries</cstring>
                         </property>
@@ -68,7 +68,7 @@
                             <string>Save entries in local directory (the first directory in the list)</string>
                         </property>
                     </widget>
-                    <widget class="QFrame" row="2" column="0">
+                    <widget class="TQFrame" row="2" column="0">
                         <property name="name">
                             <cstring>m_boxLocalDirectory</cstring>
                         </property>
@@ -94,7 +94,7 @@
                             <property name="spacing">
                                 <number>6</number>
                             </property>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="TQLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>TextLabel1_4</cstring>
                                 </property>
@@ -121,7 +121,7 @@
                                     <bool>true</bool>
                                 </property>
                             </widget>
-                            <widget class="QToolButton" row="3" column="2">
+                            <widget class="TQToolButton" row="3" column="2">
                                 <property name="name">
                                     <cstring>m_buttonLocalDirDown</cstring>
                                 </property>
@@ -135,7 +135,7 @@
                                     <string>Move directory down</string>
                                 </property>
                             </widget>
-                            <widget class="QToolButton" row="0" column="2">
+                            <widget class="TQToolButton" row="0" column="2">
                                 <property name="name">
                                     <cstring>m_buttonAddLocalDir</cstring>
                                 </property>
@@ -157,7 +157,7 @@
                                     <string></string>
                                 </property>
                             </widget>
-                            <widget class="QToolButton" row="1" column="2">
+                            <widget class="TQToolButton" row="1" column="2">
                                 <property name="name">
                                     <cstring>m_buttonRemoveLocalDir</cstring>
                                 </property>
@@ -171,7 +171,7 @@
                                     <string>Remove directory</string>
                                 </property>
                             </widget>
-                            <widget class="QToolButton" row="2" column="2">
+                            <widget class="TQToolButton" row="2" column="2">
                                 <property name="name">
                                     <cstring>m_buttonLocalDirUp</cstring>
                                 </property>
@@ -195,7 +195,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>20</width>
                                         <height>51</height>
@@ -206,7 +206,7 @@
                     </widget>
                 </grid>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -217,7 +217,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QFrame" row="1" column="0">
+                    <widget class="TQFrame" row="1" column="0">
                         <property name="name">
                             <cstring>m_boxCddbServer</cstring>
                         </property>
@@ -243,7 +243,7 @@
                             <property name="spacing">
                                 <number>6</number>
                             </property>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="TQLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>TextLabel1</cstring>
                                 </property>
@@ -251,7 +251,7 @@
                                     <string>Server:</string>
                                 </property>
                             </widget>
-                            <widget class="QComboBox" row="0" column="1">
+                            <widget class="TQComboBox" row="0" column="1">
                                 <property name="name">
                                     <cstring>m_comboCddbType</cstring>
                                 </property>
@@ -328,7 +328,7 @@
                                     <string>Port </string>
                                 </property>
                             </widget>
-                            <widget class="QToolButton" row="0" column="4">
+                            <widget class="TQToolButton" row="0" column="4">
                                 <property name="name">
                                     <cstring>m_buttonAddCddbServer</cstring>
                                 </property>
@@ -342,7 +342,7 @@
                                     <string>Add server</string>
                                 </property>
                             </widget>
-                            <widget class="QToolButton" row="1" column="4">
+                            <widget class="TQToolButton" row="1" column="4">
                                 <property name="name">
                                     <cstring>m_buttonRemoveCddbServer</cstring>
                                 </property>
@@ -356,7 +356,7 @@
                                     <string>Remove server</string>
                                 </property>
                             </widget>
-                            <widget class="QToolButton" row="2" column="4">
+                            <widget class="TQToolButton" row="2" column="4">
                                 <property name="name">
                                     <cstring>m_buttonCddbServerUp</cstring>
                                 </property>
@@ -370,7 +370,7 @@
                                     <string>Move server up</string>
                                 </property>
                             </widget>
-                            <widget class="QToolButton" row="3" column="4">
+                            <widget class="TQToolButton" row="3" column="4">
                                 <property name="name">
                                     <cstring>m_buttonCddbServerDown</cstring>
                                 </property>
@@ -394,7 +394,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>20</width>
                                         <height>30</height>
@@ -403,7 +403,7 @@
                             </spacer>
                         </grid>
                     </widget>
-                    <widget class="QCheckBox" row="0" column="0">
+                    <widget class="TQCheckBox" row="0" column="0">
                         <property name="name">
                             <cstring>m_checkRemoteCddb</cstring>
                         </property>
@@ -413,7 +413,7 @@
                     </widget>
                 </grid>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -424,7 +424,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QGroupBox">
+                    <widget class="TQGroupBox">
                         <property name="name">
                             <cstring>m_groupCgi</cstring>
                         </property>
@@ -460,7 +460,7 @@
                                     <string>~/cddb/cddb.cgi</string>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="2" column="0">
+                            <widget class="TQLabel" row="2" column="0">
                                 <property name="name">
                                     <cstring>TextLabel3</cstring>
                                 </property>
@@ -471,7 +471,7 @@
                                     <string>Path:</string>
                                 </property>
                             </widget>
-                            <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="2">
+                            <widget class="TQCheckBox" row="1" column="0" rowspan="1" colspan="2">
                                 <property name="name">
                                     <cstring>m_checkManualCgiPath</cstring>
                                 </property>
@@ -491,7 +491,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>31</width>
                                 <height>151</height>
@@ -551,7 +551,7 @@
     <tabstop>m_checkManualCgiPath</tabstop>
     <tabstop>m_editManualCgiPath</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
     <includehint>klistview.h</includehint>

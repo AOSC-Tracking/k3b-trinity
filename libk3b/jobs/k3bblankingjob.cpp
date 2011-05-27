@@ -27,12 +27,12 @@
 #include <kio/job.h>
 #include <kdebug.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
 
-K3bBlankingJob::K3bBlankingJob( K3bJobHandler* hdl, QObject* parent )
-  : K3bBurnJob( hdl, parent ),
+K3bBlankingJob::K3bBlankingJob( K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bBurnJob( hdl, tqparent ),
     m_writerJob(0),
     m_force(true),
     m_device(0),
@@ -94,7 +94,7 @@ void K3bBlankingJob::slotStartErasing()
     K3bCdrecordWriter* writer = new K3bCdrecordWriter( m_device, this );
     m_writerJob = writer;
 
-    QString mode;
+    TQString mode;
     switch( m_mode ) {
     case Fast:
       mode = "fast";
@@ -121,19 +121,19 @@ void K3bBlankingJob::slotStartErasing()
     writer->setForceNoEject( m_forceNoEject );
   }
 
-  connect(m_writerJob, SIGNAL(finished(bool)), this, SLOT(slotFinished(bool)));
-  connect(m_writerJob, SIGNAL(infoMessage( const QString&, int)),
-          this,SIGNAL(infoMessage( const QString&, int)));
-  connect( m_writerJob, SIGNAL(debuggingOutput(const QString&, const QString&)), 
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+  connect(m_writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotFinished(bool)));
+  connect(m_writerJob, TQT_SIGNAL(infoMessage( const TQString&, int)),
+          this,TQT_SIGNAL(infoMessage( const TQString&, int)));
+  connect( m_writerJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   if( waitForMedia( m_device,  
 		    K3bDevice::STATE_COMPLETE|K3bDevice::STATE_INCOMPLETE,
 		    K3bDevice::MEDIA_CD_RW,
 		    i18n("Please insert a rewritable CD medium into drive<p><b>%1 %2 (%3)</b>.")
-		    .arg(m_device->vendor())
-		    .arg(m_device->description())
-		    .arg(m_device->devicename()) ) < 0 ) {
+		    .tqarg(m_device->vendor())
+		    .tqarg(m_device->description())
+		    .tqarg(m_device->devicename()) ) < 0 ) {
     emit canceled();
     jobFinished(false);
     return;

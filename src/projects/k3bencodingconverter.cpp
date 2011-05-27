@@ -17,8 +17,8 @@
 
 #include "k3bencodingconverter.h"
 
-#include <qwidget.h>
-#include <qlayout.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
 
 #include <kdebug.h>
 
@@ -32,8 +32,8 @@ class K3bEncodingConverter::Private
 {
  public:
   iconv_t ic;
-  QString localEncoding;
-  QString lastEncoding;
+  TQString localEncoding;
+  TQString lastEncoding;
 };
 
 
@@ -42,7 +42,7 @@ K3bEncodingConverter::K3bEncodingConverter()
   d = new Private;
 #ifdef HAVE_ICONV_H
   char* codec = nl_langinfo( CODESET );
-  d->localEncoding = QString::fromLocal8Bit( codec );
+  d->localEncoding = TQString::fromLocal8Bit( codec );
   kdDebug() << "(K3bDataUrlAddingDialog) using locale codec: " << codec << endl;
   d->ic = ::iconv_open( "UCS-2BE", codec );
 #endif
@@ -58,14 +58,14 @@ K3bEncodingConverter::~K3bEncodingConverter()
 }
 
 
-bool K3bEncodingConverter::encodedLocally( const QCString& s )
+bool K3bEncodingConverter::encodedLocally( const TQCString& s )
 {
 #ifdef HAVE_ICONV_H
-  QCString utf8Encoded( s.length()*2 );
+  TQCString utf8Encoded( s.length()*2 );
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD)
   const char* in = s.data();
 #else
-  char* in = s.data();
+  char* in = const_cast<char*>(s.data());
 #endif
   char* out = utf8Encoded.data();
   size_t inSize = s.length();
@@ -77,7 +77,7 @@ bool K3bEncodingConverter::encodedLocally( const QCString& s )
 }
 
 
-bool K3bEncodingConverter::fixEncoding( const QCString& s, QCString& result, QWidget* parent, bool cache )
+bool K3bEncodingConverter::fixEncoding( const TQCString& s, TQCString& result, TQWidget* tqparent, bool cache )
 {
 #ifdef IMPLEMENT_THIS_METHOD // HAVE_ICONV_H
   if( !d->lastEncoding.isEmpty() ) {
@@ -96,14 +96,14 @@ bool K3bEncodingConverter::fixEncoding( const QCString& s, QCString& result, QWi
 
   }
   else
-    d->lastEncoding = QString::null;
+    d->lastEncoding = TQString();
 #else
   return false;
 #endif
 }
 
 
-bool K3bEncodingConverter::convert( const QCString& s, QCString& result, const QString& from, const QString& to )
+bool K3bEncodingConverter::convert( const TQCString& s, TQCString& result, const TQString& from, const TQString& to )
 {
   bool r = false;
 
@@ -114,7 +114,7 @@ bool K3bEncodingConverter::convert( const QCString& s, QCString& result, const Q
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD)
   const char* in = s.data();
 #else
-  char* in = s.data();
+  char* in = const_cast<char*>(s.data());
 #endif
   char* out = result.data();
   size_t inSize = s.length();

@@ -47,9 +47,10 @@ namespace K3bDevice {
 class K3bVerificationJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVerificationJob( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bVerificationJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bVerificationJob();
 
  public slots:
@@ -67,7 +68,7 @@ class K3bVerificationJob : public K3bJob
    *        useful when writing to DVD+RW media and the iso descriptor does not
    *        contain the exact image size (as true for many commercial Video DVDs)
    */
-  void addTrack( int tracknum, const QCString& checksum, const K3b::Msf& length = K3b::Msf() );
+  void addTrack( int tracknum, const TQCString& checksum, const K3b::Msf& length = K3b::Msf() );
 
   /**
    * Handle the special case of iso session growing

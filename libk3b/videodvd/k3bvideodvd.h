@@ -20,8 +20,8 @@
 
 #include <k3b_export.h>
 
-#include <qstring.h>
-#include <qvaluevector.h>
+#include <tqstring.h>
+#include <tqvaluevector.h>
 
 
 namespace K3bDevice {
@@ -65,7 +65,7 @@ namespace K3bVideoDVD
       bool open( K3bDevice::Device* dev );
       
       K3bDevice::Device* device() const { return m_device; }
-      const QString& volumeIdentifier() const { return m_volumeIdentifier; }
+      const TQString& volumeIdentifier() const { return m_volumeIdentifier; }
       unsigned int numTitles() const { return m_titles.count(); }
       
       /**
@@ -78,14 +78,14 @@ namespace K3bVideoDVD
       
     private:
       K3bDevice::Device* m_device;
-      QValueVector<Title> m_titles;
-      QString m_volumeIdentifier;
+      TQValueVector<Title> m_titles;
+      TQString m_volumeIdentifier;
     };
 
-  LIBK3B_EXPORT QString audioFormatString( int format );
-  LIBK3B_EXPORT QString audioCodeExtensionString( int ext );
-  LIBK3B_EXPORT QString subPictureCodeModeString( int mode );
-  LIBK3B_EXPORT QString subPictureCodeExtensionString( int ext );
+  LIBK3B_EXPORT TQString audioFormatString( int format );
+  LIBK3B_EXPORT TQString audioCodeExtensionString( int ext );
+  LIBK3B_EXPORT TQString subPictureCodeModeString( int mode );
+  LIBK3B_EXPORT TQString subPictureCodeExtensionString( int ext );
 }
 
 #endif

@@ -23,9 +23,10 @@ class K3bAudioDoc;
 class K3bAudioImager : public K3bThreadJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioImager( K3bAudioDoc*, K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bAudioImager( K3bAudioDoc*, K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bAudioImager();
 
   /**
@@ -39,7 +40,7 @@ class K3bAudioImager : public K3bThreadJob
    * Image path. Should be an empty directory or a non-existing
    * directory in which case it will be created.
    */
-  void setImageFilenames( const QStringList& p );
+  void setImageFilenames( const TQStringList& p );
 
   enum ErrorType {
     ERROR_FD_WRITE,

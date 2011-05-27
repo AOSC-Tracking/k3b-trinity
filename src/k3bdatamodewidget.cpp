@@ -20,23 +20,23 @@
 #include <klocale.h>
 #include <kconfig.h>
 
-#include <qwhatsthis.h>
-#include <qtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqtooltip.h>
 
 static const int s_autoIndex = 0;
 static const int s_mode1Index = 1;
 static const int s_mode2Index = 2;
 
 
-K3bDataModeWidget::K3bDataModeWidget( QWidget* parent, const char* name )
-  : QComboBox( false, parent, name )
+K3bDataModeWidget::K3bDataModeWidget( TQWidget* tqparent, const char* name )
+  : TQComboBox( false, tqparent, name )
 {
   insertItem( i18n("Auto"), s_autoIndex );
   insertItem( i18n("Mode1"), s_mode1Index );
   insertItem( i18n("Mode2"), s_mode2Index );
 
-  QToolTip::add( this,i18n("Select the mode for the data-track") );
-  QWhatsThis::add( this, i18n("<p><b>Data Mode</b>"
+  TQToolTip::add( this,i18n("Select the mode for the data-track") );
+  TQWhatsThis::add( this, i18n("<p><b>Data Mode</b>"
 			      "<p>Data tracks may be written in two different modes:</p>"
 			      "<p><b>Auto</b><br>"
 			      "Let K3b select the best suited data mode.</p>"
@@ -81,7 +81,7 @@ void K3bDataModeWidget::setDataMode( int mode )
 
 void K3bDataModeWidget::saveConfig( KConfigBase* c )
 {
-  QString datamode;
+  TQString datamode;
   if( dataMode() == K3b::MODE1 )
     datamode = "mode1";
   else if( dataMode() == K3b::MODE2 )
@@ -94,7 +94,7 @@ void K3bDataModeWidget::saveConfig( KConfigBase* c )
 
 void K3bDataModeWidget::loadConfig( KConfigBase* c )
 {
-  QString datamode = c->readEntry( "data_track_mode" );
+  TQString datamode = c->readEntry( "data_track_mode" );
   if( datamode == "mode1" )
     setDataMode( K3b::MODE1 );
   else if( datamode == "mode2" )

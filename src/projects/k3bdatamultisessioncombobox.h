@@ -16,18 +16,19 @@
 #ifndef _K3B_DATA_MULTISESSION_COMBOBOX_H_
 #define _K3B_DATA_MULTISESSION_COMBOBOX_H_
 
-#include <qcombobox.h>
+#include <tqcombobox.h>
 #include <k3bdatadoc.h>
 
 class KConfigBase;
 
 
-class K3bDataMultiSessionCombobox : public QComboBox
+class K3bDataMultiSessionCombobox : public TQComboBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDataMultiSessionCombobox( QWidget* parent = 0, const char* name = 0 );
+  K3bDataMultiSessionCombobox( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bDataMultiSessionCombobox();
 
   /**

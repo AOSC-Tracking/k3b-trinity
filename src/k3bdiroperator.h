@@ -20,8 +20,8 @@
 #include <kdiroperator.h>
 #include <kbookmarkmanager.h>
 
-class QIconViewItem;
-class QListViewItem;
+class TQIconViewItem;
+class TQListViewItem;
 class KBookmarkMenu;
 class KActionMenu;
 
@@ -33,35 +33,36 @@ class KActionMenu;
 class K3bDirOperator : public KDirOperator, public KBookmarkOwner
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bDirOperator( const KURL& urlName = KURL(), QWidget* parent = 0, const char* name = 0 );
+  K3bDirOperator( const KURL& urlName = KURL(), TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bDirOperator();
 
   /**
    * reimplemented from KDirOperator
    */
-  void readConfig( KConfig* cfg, const QString& group );
+  void readConfig( KConfig* cfg, const TQString& group );
 
   /**
    * reimplemented from KDirOperator
    */
-  void writeConfig( KConfig* cfg, const QString& group );
+  void writeConfig( KConfig* cfg, const TQString& group );
 
   /**
    * reimplemented from KBookmarkOwner
    */
-  void openBookmarkURL( const QString& url );
+  void openBookmarkURL( const TQString& url );
 
   /**
    * reimplemented from KBookmarkOwner
    */
-  QString currentTitle() const;
+  TQString currentTitle() const;
 
   /**
    * reimplemented from KBookmarkOwner
    */
-  QString currentURL() const;
+  TQString currentURL() const;
 
   KActionMenu* bookmarkMenu() const { return m_bmPopup; }
 
@@ -72,7 +73,7 @@ class K3bDirOperator : public KDirOperator, public KBookmarkOwner
   /**
    * reimplemented from KDirOperator
    */
-  void activatedMenu( const KFileItem*, const QPoint& );
+  void activatedMenu( const KFileItem*, const TQPoint& );
 
  private:
   KBookmarkMenu* m_bmMenu;

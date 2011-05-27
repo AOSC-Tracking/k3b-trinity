@@ -21,9 +21,9 @@
 #include <config.h>
 #endif
 
-// include files for Qt
-#include <qwidget.h>
-#include <qptrdict.h>
+// include files for TQt
+#include <tqwidget.h>
+#include <tqptrdict.h>
 
 #include <kxmlguiclient.h>
 #include <kurl.h>
@@ -39,15 +39,16 @@ class K3bProjectPlugin;
 /** 
  *
  */
-class K3bView : public QWidget, public KXMLGUIClient
+class K3bView : public TQWidget, public KXMLGUIClient
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /** 
    *
    */
-  K3bView( K3bDoc* pDoc, QWidget* parent, const char *name = 0 );
+  K3bView( K3bDoc* pDoc, TQWidget* tqparent, const char *name = 0 );
   virtual ~K3bView();
 	
   /** 
@@ -57,7 +58,7 @@ class K3bView : public QWidget, public KXMLGUIClient
   K3bDoc* getDocument() const { return m_doc; }
   K3bDoc* doc() const { return m_doc; }
 
-  void setMainWidget( QWidget* );
+  void setMainWidget( TQWidget* );
 
  public slots:
   /**
@@ -85,7 +86,7 @@ class K3bView : public QWidget, public KXMLGUIClient
   /**
    * Protected since the BurnDialog is not part of the API.
    */
-  virtual K3bProjectBurnDialog* newBurnDialog( QWidget* = 0, const char* = 0 ) = 0;
+  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* = 0, const char* = 0 ) = 0;
 
   /**
    * Call this to add the projectplugin buttons to the toolbox. It is not called 
@@ -106,7 +107,7 @@ class K3bView : public QWidget, public KXMLGUIClient
   K3bFillStatusDisplay* m_fillStatusDisplay;
   K3bToolBox* m_toolBox;
 
-  QPtrDict<K3bProjectPlugin> m_plugins;
+  TQPtrDict<K3bProjectPlugin> m_plugins;
 };
 
 #endif // K3BVIEW_H

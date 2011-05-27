@@ -23,10 +23,10 @@
 #include <config.h>
 #endif
 
-// include files for Qt
-#include <qstrlist.h>
-#include <qworkspace.h>
-#include <qptrlist.h>
+// include files for TQt
+#include <tqstrlist.h>
+#include <tqworkspace.h>
+#include <tqptrlist.h>
 
 // include files for KDE
 #include <kapplication.h>
@@ -35,7 +35,7 @@
 #include <kaction.h>
 #include <kurl.h>
 
-class QVBox;
+class TQVBox;
 
 
 // forward declaration of the K3b classes
@@ -62,6 +62,7 @@ namespace K3bDevice {
 class K3bMainWindow : public KParts::DockMainWindow
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /** construtor of K3bMainWindow, calls all init functions to create the application.
@@ -87,7 +88,7 @@ class K3bMainWindow : public KParts::DockMainWindow
    */
   K3bDoc* activeDoc() const;
 
-  const QPtrList<K3bDoc>& projects() const;
+  const TQPtrList<K3bDoc>& projects() const;
 
   bool eject();
   void showOptionDialog( int = 0 );
@@ -133,8 +134,8 @@ class K3bMainWindow : public KParts::DockMainWindow
   void slotVideoCdRip();
   void slotK3bSetup();
 
-  void slotErrorMessage(const QString&);
-  void slotWarningMessage(const QString&);
+  void slotErrorMessage(const TQString&);
+  void slotWarningMessage(const TQString&);
 
   void slotConfigureKeys();
   void slotShowTips();
@@ -143,7 +144,7 @@ class K3bMainWindow : public KParts::DockMainWindow
   void addUrls( const KURL::List& urls );
 
  signals:
-  void initializationInfo( const QString& );
+  void initializationInfo( const TQString& );
   void configChanged( KConfig* c );
 
  protected:
@@ -181,7 +182,7 @@ class K3bMainWindow : public KParts::DockMainWindow
    */
   bool canCloseDocument( K3bDoc* );
 
-  virtual void showEvent( QShowEvent* e );
+  virtual void showEvent( TQShowEvent* e );
 
  private slots:
   /** open a file and load it into the document*/
@@ -214,12 +215,12 @@ class K3bMainWindow : public KParts::DockMainWindow
 
   void slotViewDocumentHeader();
 
-  void slotCheckDockWidgetStatus();
+  void slotCheckDockWidgettqStatus();
 
   /** changes the statusbar contents for the standard label permanently, used to indicate current actions.
    * @param text the text that is displayed in the statusbar
    */
-  void slotStatusMsg(const QString &text);
+  void slotStatusMsg(const TQString &text);
 
   void slotShowDirTreeView();
   void slotShowContentsView();
@@ -234,7 +235,7 @@ class K3bMainWindow : public KParts::DockMainWindow
   void slotDataClearImportedSession();
   void slotEditBootImages();
 
-  void slotAudioServerError( const QString& error );
+  void slotAudioServerError( const TQString& error );
 
   void createClient(K3bDoc* doc);
 
@@ -248,7 +249,7 @@ class K3bMainWindow : public KParts::DockMainWindow
   void fileSaveAs( K3bDoc* doc = 0 );
   void closeProject( K3bDoc* );
 
-  /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
+  /** save general Options like all bar positions and status as well as the tqgeometry and the recent file list to the configuration
    * file
    */
   void saveOptions();
@@ -304,7 +305,7 @@ class K3bMainWindow : public KParts::DockMainWindow
   KToggleAction* actionViewDocumentHeader;
 
   // project actions
-  QPtrList<KAction> m_dataProjectActions;
+  TQPtrList<KAction> m_dataProjectActions;
 
   KDockWidget* mainDock;
   KDockWidget* m_contentsDock;

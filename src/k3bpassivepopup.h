@@ -16,24 +16,25 @@
 #ifndef _K3B_PASSIVE_POPUP_H_
 #define _K3B_PASSIVE_POPUP_H_
 
-#include <qframe.h>
+#include <tqframe.h>
 
 class K3bTimeoutWidget;
 class KActiveLabel;
 class KPushButton;
-class QLabel;
+class TQLabel;
 
 
 /**
  * A message box which is closed using a timer or a close button
  * It will delete itself once it has been closed.
  */
-class K3bPassivePopup : public QFrame
+class K3bPassivePopup : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bPassivePopup( QWidget* parent );
+  K3bPassivePopup( TQWidget* tqparent );
   ~K3bPassivePopup();
 
   enum MessageType {
@@ -48,8 +49,8 @@ class K3bPassivePopup : public QFrame
    */
   void slideIn();
 
-  static void showPopup( const QString& message, 
-			 const QString& title = QString::null, 
+  static void showPopup( const TQString& message, 
+			 const TQString& title = TQString(), 
 			 MessageType messageType = Information,
 			 bool countdown = true,
 			 bool button = true );
@@ -57,8 +58,8 @@ class K3bPassivePopup : public QFrame
  public slots:
   void setShowCloseButton( bool b );
   void setShowCountdown( bool b );
-  void setMessage( const QString& m );
-  void setTitle( const QString& t );
+  void setMessage( const TQString& m );
+  void setTitle( const TQString& t );
   void setTimeout( int msecs );
   void setMessageType( MessageType m );
 

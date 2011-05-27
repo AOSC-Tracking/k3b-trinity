@@ -15,9 +15,9 @@
 
 #include "k3bpushbutton.h"
 
-#include <qtimer.h>
-#include <qpopupmenu.h>
-#include <qevent.h>
+#include <tqtimer.h>
+#include <tqpopupmenu.h>
+#include <tqevent.h>
 
 #include <kglobalsettings.h>
 #include <kapplication.h>
@@ -31,39 +31,39 @@ public:
     : popupTimer(0) {
   }
 
-  QTimer* popupTimer;
-  QPoint mousePressPos;
+  TQTimer* popupTimer;
+  TQPoint mousePressPos;
 };
 
 
 
-K3bPushButton::K3bPushButton( QWidget* parent, const char* name )
-  : KPushButton( parent, name )
+K3bPushButton::K3bPushButton( TQWidget* tqparent, const char* name )
+  : KPushButton( tqparent, name )
 {
   d = new Private();
   installEventFilter(this);
 }
 
 
-K3bPushButton::K3bPushButton( const QString& text, QWidget* parent, const char* name )
-  : KPushButton( text, parent, name )
+K3bPushButton::K3bPushButton( const TQString& text, TQWidget* tqparent, const char* name )
+  : KPushButton( text, tqparent, name )
 {
   d = new Private();
   installEventFilter(this);
 }
 
 
-K3bPushButton::K3bPushButton( const QIconSet& icon, const QString& text,
-			      QWidget* parent, const char* name )
-  : KPushButton( icon, text, parent, name )
+K3bPushButton::K3bPushButton( const TQIconSet& icon, const TQString& text,
+			      TQWidget* tqparent, const char* name )
+  : KPushButton( icon, text, tqparent, name )
 {
   d = new Private();
   installEventFilter(this);
 }
 
 
-K3bPushButton::K3bPushButton( const KGuiItem& item, QWidget* parent, const char* name )
-  : KPushButton( item, parent, name )
+K3bPushButton::K3bPushButton( const KGuiItem& item, TQWidget* tqparent, const char* name )
+  : KPushButton( item, tqparent, name )
 {
   d = new Private();
   installEventFilter(this);
@@ -76,35 +76,35 @@ K3bPushButton::~K3bPushButton()
 }
 
 
-void K3bPushButton::setDelayedPopupMenu( QPopupMenu* popup )
+void K3bPushButton::setDelayedPopupMenu( TQPopupMenu* popup )
 {
   if( !d->popupTimer ) {
-    d->popupTimer = new QTimer( this );
-    connect( d->popupTimer, SIGNAL(timeout()), this, SLOT(slotDelayedPopup()) );
+    d->popupTimer = new TQTimer( this );
+    connect( d->popupTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotDelayedPopup()) );
   }
 
   setPopup( popup );
 
   // we need to do the popup handling ourselves so we cheat a little
-  // QPushButton connects a popup slot to the pressed signal which we disconnect here
+  // TQPushButton connects a popup slot to the pressed signal which we disconnect here
   disconnect( this );
 }
 
 
-bool K3bPushButton::eventFilter( QObject* o, QEvent* ev )
+bool K3bPushButton::eventFilter( TQObject* o, TQEvent* ev )
 {
   if( dynamic_cast<K3bPushButton*>(o) == this ) {
 
     // Popup the menu when the left mousebutton is pressed and the mouse
     // is moved by a small distance.
     if( popup() ) {
-      if( ev->type() == QEvent::MouseButtonPress ) {
-        QMouseEvent* mev = static_cast<QMouseEvent*>(ev);
+      if( ev->type() == TQEvent::MouseButtonPress ) {
+        TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
         d->mousePressPos = mev->pos();
-	d->popupTimer->start( QApplication::startDragTime() );
+	d->popupTimer->start( TQApplication::startDragTime() );
       }
-      else if( ev->type() == QEvent::MouseMove ) {
-        QMouseEvent* mev = static_cast<QMouseEvent*>(ev);
+      else if( ev->type() == TQEvent::MouseMove ) {
+        TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
         if( ( mev->pos() - d->mousePressPos).manhattanLength() > KGlobalSettings::dndEventDelay() ) {
 	  d->popupTimer->stop();
 	  slotDelayedPopup();
@@ -124,11 +124,11 @@ void K3bPushButton::slotDelayedPopup()
 
   if( isDown() ) {
     // popup the menu.
-    // this has been taken from the QPushButton code
-    if( mapToGlobal( QPoint( 0, rect().bottom() ) ).y() + popup()->sizeHint().height() <= qApp->desktop()->height() )
+    // this has been taken from the TQPushButton code
+    if( mapToGlobal( TQPoint( 0, rect().bottom() ) ).y() + popup()->tqsizeHint().height() <= tqApp->desktop()->height() )
       popup()->exec( mapToGlobal( rect().bottomLeft() ) );
     else
-      popup()->exec( mapToGlobal( rect().topLeft() - QPoint( 0, popup()->sizeHint().height() ) ) );
+      popup()->exec( mapToGlobal( rect().topLeft() - TQPoint( 0, popup()->tqsizeHint().height() ) ) );
     setDown( false );
   }
 }

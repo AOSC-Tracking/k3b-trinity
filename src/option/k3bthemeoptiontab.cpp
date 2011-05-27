@@ -32,9 +32,9 @@
 #include <kurlrequesterdlg.h>
 #include <kdeversion.h>
 
-#include <qlabel.h>
-#include <qfile.h>
-#include <qfileinfo.h>
+#include <tqlabel.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
 
 
 class K3bThemeOptionTab::Private
@@ -46,8 +46,8 @@ public:
 class ThemeViewItem : public KListViewItem 
 {
 public:
-  ThemeViewItem( K3bTheme* theme_, QListView* parent, QListViewItem* after )
-    : KListViewItem( parent, after ),
+  ThemeViewItem( K3bTheme* theme_, TQListView* tqparent, TQListViewItem* after )
+    : KListViewItem( tqparent, after ),
       theme(theme_) {
     setText( 0, theme->name() );
     setText( 1, theme->author() );
@@ -58,8 +58,8 @@ public:
   K3bTheme* theme;
 };
 
-K3bThemeOptionTab::K3bThemeOptionTab(QWidget *parent, const char *name )
-  : base_K3bThemeOptionTab(parent,name)
+K3bThemeOptionTab::K3bThemeOptionTab(TQWidget *tqparent, const char *name )
+  : base_K3bThemeOptionTab(tqparent,name)
 {
   d = new Private();
 
@@ -67,14 +67,14 @@ K3bThemeOptionTab::K3bThemeOptionTab(QWidget *parent, const char *name )
   m_viewTheme->setShadeSortColumn( false );
 #endif
 
-  connect( m_viewTheme, SIGNAL(selectionChanged()),
-	   this, SLOT(selectionChanged()) );
-  connect( kapp, SIGNAL(appearanceChanged()),
-	   this, SLOT(selectionChanged()) );
-  connect( m_buttonInstallTheme, SIGNAL(clicked()),
-	   this, SLOT(slotInstallTheme()) );
-  connect( m_buttonRemoveTheme, SIGNAL(clicked()),
-	   this, SLOT(slotRemoveTheme()) );
+  connect( m_viewTheme, TQT_SIGNAL(selectionChanged()),
+	   this, TQT_SLOT(selectionChanged()) );
+  connect( kapp, TQT_SIGNAL(appearanceChanged()),
+	   this, TQT_SLOT(selectionChanged()) );
+  connect( m_buttonInstallTheme, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotInstallTheme()) );
+  connect( m_buttonRemoveTheme, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotRemoveTheme()) );
 }
 
 
@@ -90,8 +90,8 @@ void K3bThemeOptionTab::readSettings()
 
   k3bappcore->themeManager()->loadThemes();
 
-  QValueList<K3bTheme*> themes = k3bappcore->themeManager()->themes();
-  for( QValueList<K3bTheme*>::const_iterator it = themes.constBegin(); it != themes.constEnd(); ++it ) {
+  TQValueList<K3bTheme*> themes = k3bappcore->themeManager()->themes();
+  for( TQValueList<K3bTheme*>::const_iterator it = themes.constBegin(); it != themes.constEnd(); ++it ) {
     K3bTheme* theme = *it;
     ThemeViewItem* item = new ThemeViewItem( theme, m_viewTheme, m_viewTheme->lastItem() );
     if( theme == k3bappcore->themeManager()->currentTheme() )
@@ -131,32 +131,32 @@ void K3bThemeOptionTab::selectionChanged()
 
 void K3bThemeOptionTab::slotInstallTheme()
 {
-  KURL themeURL = KURLRequesterDlg::getURL( QString::null, this,
+  KURL themeURL = KURLRequesterDlg::getURL( TQString(), this,
 					    i18n("Drag or Type Theme URL") );
 
   if( themeURL.url().isEmpty() )
     return;
 
-  QString themeTmpFile;
+  TQString themeTmpFile;
   // themeTmpFile contains the name of the downloaded file
 
   if( !KIO::NetAccess::download( themeURL, themeTmpFile, this ) ) {
-    QString sorryText;
+    TQString sorryText;
     if (themeURL.isLocalFile())
        sorryText = i18n("Unable to find the icon theme archive %1.");
     else
        sorryText = i18n("Unable to download the icon theme archive.\n"
                         "Please check that address %1 is correct.");
-    KMessageBox::sorry( this, sorryText.arg(themeURL.prettyURL()) );
+    KMessageBox::sorry( this, sorryText.tqarg(themeURL.prettyURL()) );
     return;
   }
 
   // check if the archive contains a dir with a k3b.theme file
-  QString themeName;
+  TQString themeName;
   KTar archive( themeTmpFile );
   archive.open(IO_ReadOnly);
   const KArchiveDirectory* themeDir = archive.directory();
-  QStringList entries = themeDir->entries();
+  TQStringList entries = themeDir->entries();
   bool validThemeArchive = false;
   if( entries.count() > 0 ) {
     if( themeDir->entry(entries.first())->isDirectory() ) {
@@ -180,10 +180,10 @@ void K3bThemeOptionTab::slotInstallTheme()
     KMessageBox::error( this, i18n("The file is not a valid K3b theme archive.") );
   }
   else {
-    QString themeBasePath = locateLocal( "data", "k3b/pics/" );
+    TQString themeBasePath = locateLocal( "data", "k3b/pics/" );
 
     // check if there already is a theme by that name
-    if( !QFile::exists( themeBasePath + '/' + themeName ) ||
+    if( !TQFile::exists( themeBasePath + '/' + themeName ) ||
 	KMessageBox::warningYesNo( this,
 				   i18n("A theme with the name '%1' already exists. Do you want to "
 					"overwrite it?"),
@@ -206,7 +206,7 @@ void K3bThemeOptionTab::slotRemoveTheme()
 {
   ThemeViewItem* item = (ThemeViewItem*)m_viewTheme->selectedItem();
   if( item ) {
-    QString question=i18n("<qt>Are you sure you want to remove the "
+    TQString question=i18n("<qt>Are you sure you want to remove the "
 			  "<strong>%1</strong> icon theme?<br>"
 			  "<br>"
 			  "This will delete the files installed by this theme.</qt>").
@@ -217,10 +217,10 @@ void K3bThemeOptionTab::slotRemoveTheme()
 
     K3bTheme* theme = item->theme;
     delete item;
-    QString path = theme->path();
+    TQString path = theme->path();
 
     // delete k3b.theme file to avoid it to get loaded
-    QFile::remove( path + "/k3b.theme" );
+    TQFile::remove( path + "/k3b.theme" );
     
     // reread the themes (this will also set the default theme in case we delete the 
     // selected one)

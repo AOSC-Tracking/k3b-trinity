@@ -16,12 +16,25 @@
 #ifndef _K3B_DEBUGGING_OUTPUT_FILE_H_
 #define _K3B_DEBUGGING_OUTPUT_FILE_H_
 
-#include <qfile.h>
-#include <qobject.h>
+#include <tqfile.h>
+#include <tqobject.h>
 
-class K3bDebuggingOutputFile : public QObject, public QFile
+#ifdef Q_MOC_RUN
+#define USE_QT4
+#endif // Q_MOC_RUN
+
+// MOC_SKIP_BEGIN
+#ifdef USE_QT4
+class K3bDebuggingOutputFile : public TQFile
+#else // USE_QT4
+// MOC_SKIP_END
+class K3bDebuggingOutputFile : public TQObject, public TQFile
+// MOC_SKIP_BEGIN
+#endif // USE_QT4
+// MOC_SKIP_END
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   K3bDebuggingOutputFile();
@@ -32,7 +45,7 @@ class K3bDebuggingOutputFile : public QObject, public QFile
   bool open();
 
  public slots:
-  void addOutput( const QString&, const QString& );
+  void addOutput( const TQString&, const TQString& );
 };
 
 

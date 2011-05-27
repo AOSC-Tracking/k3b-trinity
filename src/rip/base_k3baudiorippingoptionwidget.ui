@@ -1,11 +1,11 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bAudioRippingOptionWidget</class>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Form1</cstring>
     </property>
-    <property name="geometry">
+    <property name="tqgeometry">
         <rect>
             <x>0</x>
             <y>0</y>
@@ -17,7 +17,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QGroupBox" row="0" column="0">
+        <widget class="TQGroupBox" row="0" column="0">
             <property name="name">
                 <cstring>groupBox2</cstring>
             </property>
@@ -41,7 +41,7 @@
                         </sizepolicy>
                     </property>
                 </widget>
-                <widget class="QToolButton">
+                <widget class="TQToolButton">
                     <property name="name">
                         <cstring>m_buttonConfigurePlugin</cstring>
                     </property>
@@ -54,7 +54,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QGroupBox" row="0" column="1" rowspan="2" colspan="1">
+        <widget class="TQGroupBox" row="0" column="1" rowspan="2" colspan="1">
             <property name="name">
                 <cstring>groupBox3</cstring>
             </property>
@@ -65,7 +65,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkCreatePlaylist</cstring>
                     </property>
@@ -81,9 +81,9 @@ which can be used with programs like xmms or noatun.
 &lt;p&gt;You may use the special strings to give the playlist a unique filename.</string>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout6</cstring>
+                        <cstring>tqlayout6</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -99,14 +99,14 @@ which can be used with programs like xmms or noatun.
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>16</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>m_checkPlaylistRelative</cstring>
                             </property>
@@ -128,7 +128,7 @@ playlist will look something like: &lt;em&gt;cool/track1.ogg&lt;/em&gt;.</string
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkSingleFile</cstring>
                     </property>
@@ -146,9 +146,9 @@ file will contain all tracks one after the other.
 &lt;p&gt;&lt;b&gt;Caution:&lt;/b&gt; The file will have the name of the first track.</string>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout6_2</cstring>
+                        <cstring>tqlayout6_2</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -164,14 +164,14 @@ file will contain all tracks one after the other.
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>16</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>m_checkWriteCueFile</cstring>
                             </property>
@@ -192,7 +192,7 @@ file will contain all tracks one after the other.
                 </widget>
             </vbox>
         </widget>
-        <widget class="QGroupBox" row="1" column="0">
+        <widget class="TQGroupBox" row="1" column="0">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -211,7 +211,7 @@ file will contain all tracks one after the other.
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -224,18 +224,18 @@ file will contain all tracks one after the other.
                         <cstring>m_editBaseDir</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="1">
+                <widget class="TQLabel" row="1" column="1">
                     <property name="name">
                         <cstring>m_labelFreeSpace</cstring>
                     </property>
                     <property name="text">
                         <string>-</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="0">
+                <widget class="TQLabel" row="2" column="0">
                     <property name="name">
                         <cstring>textLabel1_2</cstring>
                     </property>
@@ -243,14 +243,14 @@ file will contain all tracks one after the other.
                         <string>Space needed:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="1">
+                <widget class="TQLabel" row="2" column="1">
                     <property name="name">
                         <cstring>m_labelNeededSpace</cstring>
                     </property>
                     <property name="text">
                         <string>-</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
@@ -274,7 +274,7 @@ file will contain all tracks one after the other.
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kurlrequester.h</includehint>
     <includehint>kpushbutton.h</includehint>

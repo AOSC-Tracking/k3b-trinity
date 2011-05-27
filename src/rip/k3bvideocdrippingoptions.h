@@ -16,7 +16,7 @@
 #ifndef _K3B_VIDEOCD_OPTIONS_H_
 #define _K3B_VIDEOCD_OPTIONS_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 
 class K3bVideoCdRippingOptions
 {
@@ -35,9 +35,9 @@ class K3bVideoCdRippingOptions
         {}
 
         void setVideoCdSize( unsigned long size ) { m_videocdsize = size;}
-        void setVideoCdSource( const QString& source ) { m_videocdsource = source;}
-        void setVideoCdDestination( const QString& destination ) { m_videocddestination = destination;}
-        void setVideoCdDescription( const QString& description ) { m_videocddescription = description;}
+        void setVideoCdSource( const TQString& source ) { m_videocdsource = source;}
+        void setVideoCdDestination( const TQString& destination ) { m_videocddestination = destination;}
+        void setVideoCdDescription( const TQString& description ) { m_videocddescription = description;}
         void setVideoCdRipFiles( bool ripfiles ) { m_videocdripfiles = ripfiles;}
         void setVideoCdRipSegments( bool ripsegments ) { m_videocdripsegments = ripsegments;}
         void setVideoCdRipSequences( bool ripsequences ) { m_videocdripsequences = ripsequences;}
@@ -46,9 +46,9 @@ class K3bVideoCdRippingOptions
         void setVideoCdExtractXml( bool extractxml ) { m_extractXML = extractxml;}
 
         unsigned long getVideoCdSize( ) { return m_videocdsize;}
-        QString getVideoCdSource( ) { return m_videocdsource;}
-        QString getVideoCdDestination( ) { return m_videocddestination;}
-        QString getVideoCdDescription( ) { return m_videocddescription;}
+        TQString getVideoCdSource( ) { return m_videocdsource;}
+        TQString getVideoCdDestination( ) { return m_videocddestination;}
+        TQString getVideoCdDescription( ) { return m_videocddescription;}
         bool getVideoCdRipFiles( ) { return m_videocdripfiles;}
         bool getVideoCdRipSegments( ) { return m_videocdripsegments;}
         bool getVideoCdRipSequences( ) { return m_videocdripsequences;}
@@ -59,9 +59,9 @@ class K3bVideoCdRippingOptions
     private:
         unsigned long m_videocdsize;
 
-        QString m_videocdsource;
-        QString m_videocddestination;
-        QString m_videocddescription;
+        TQString m_videocdsource;
+        TQString m_videocddestination;
+        TQString m_videocddescription;
         
         bool m_videocdripfiles;
         bool m_videocdripsegments;

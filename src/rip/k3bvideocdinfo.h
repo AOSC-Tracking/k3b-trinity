@@ -17,9 +17,9 @@
 #ifndef K3BVIDEOCDINFO_H
 #define K3BVIDEOCDINFO_H
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qobject.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqobject.h>
 
 #include <k3btoc.h>
 #include <k3bcore.h>
@@ -32,12 +32,12 @@ class K3bVideoCdInfoResultEntry
         K3bVideoCdInfoResultEntry() : name( 0 ), id( 0 )
         {}
 
-        K3bVideoCdInfoResultEntry( const QString& name, const QString& id )
+        K3bVideoCdInfoResultEntry( const TQString& name, const TQString& id )
                 : name( name ), id( id )
         {}
 
-        QString name;
-        QString id;
+        TQString name;
+        TQString id;
 
         long size;
 };
@@ -54,26 +54,27 @@ class K3bVideoCdInfoResult
         const K3bVideoCdInfoResultEntry& entry( unsigned int number = 0 , int type = K3bVideoCdInfoResult::SEQUENCE ) const;
         int foundEntries( int type = K3bVideoCdInfoResult::SEQUENCE ) const;
 
-        QString volumeId;
-        QString type;
-        QString version;
+        TQString volumeId;
+        TQString type;
+        TQString version;
 
-        QString xmlData;
+        TQString xmlData;
 
     private:
-        QValueList<K3bVideoCdInfoResultEntry> m_fileEntry;
-        QValueList<K3bVideoCdInfoResultEntry> m_segmentEntry;
-        QValueList<K3bVideoCdInfoResultEntry> m_sequenceEntry;
+        TQValueList<K3bVideoCdInfoResultEntry> m_fileEntry;
+        TQValueList<K3bVideoCdInfoResultEntry> m_segmentEntry;
+        TQValueList<K3bVideoCdInfoResultEntry> m_sequenceEntry;
 
         K3bVideoCdInfoResultEntry m_emptyEntry;
 };
 
-class K3bVideoCdInfo : public QObject
+class K3bVideoCdInfo : public TQObject
 {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        K3bVideoCdInfo( QObject* parent = 0, const char* name = 0 );
+        K3bVideoCdInfo( TQObject* tqparent = 0, const char* name = 0 );
         ~K3bVideoCdInfo();
 
         /**
@@ -82,7 +83,7 @@ class K3bVideoCdInfo : public QObject
          */
         const K3bVideoCdInfoResult& result() const;
 
-        void info( const QString& );
+        void info( const TQString& );
 
     signals:
         void infoFinished( bool success );
@@ -99,7 +100,7 @@ class K3bVideoCdInfo : public QObject
 
         KProcess* m_process;
 
-        QString m_xmlData;
+        TQString m_xmlData;
         bool m_isXml;
 
 };

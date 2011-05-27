@@ -26,10 +26,10 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <qtextstream.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qptrlist.h>
+#include <tqtextstream.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqptrlist.h>
 
 
 
@@ -38,12 +38,12 @@ class K3bVideoDvdImager::Private
 public:
   K3bVideoDvdDoc* doc;
 
-  QString tempPath;
+  TQString tempPath;
 };
 
 
-K3bVideoDvdImager::K3bVideoDvdImager( K3bVideoDvdDoc* doc, K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bIsoImager( doc, jh, parent, name )
+K3bVideoDvdImager::K3bVideoDvdImager( K3bVideoDvdDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bIsoImager( doc, jh, tqparent, name )
 {
   d = new Private;
   d->doc = doc;
@@ -104,30 +104,30 @@ int K3bVideoDvdImager::writePathSpec()
   //
   // We do this here since K3bIsoImager::start calls cleanup which deletes the temp files
   //
-  QDir dir( KGlobal::dirs()->resourceDirs( "tmp" ).first() );
+  TQDir dir( KGlobal::dirs()->resourceDirs( "tmp" ).first() );
   d->tempPath = K3b::findUniqueFilePrefix( "k3bVideoDvd", dir.path() );
   kdDebug() << "(K3bVideoDvdImager) creating temp dir: " << d->tempPath << endl;
   if( !dir.mkdir( d->tempPath, true ) ) {
-    emit infoMessage( i18n("Unable to create temporary directory '%1'.").arg(d->tempPath), ERROR );
+    emit infoMessage( i18n("Unable to create temporary directory '%1'.").tqarg(d->tempPath), ERROR );
     return -1;
   }
 
   dir.cd( d->tempPath );
   if( !dir.mkdir( "VIDEO_TS" ) ) {
-    emit infoMessage( i18n("Unable to create temporary directory '%1'.").arg(d->tempPath + "/VIDEO_TS"), ERROR );
+    emit infoMessage( i18n("Unable to create temporary directory '%1'.").tqarg(d->tempPath + "/VIDEO_TS"), ERROR );
     return -1;
   }
   
-  for( QPtrListIterator<K3bDataItem> it( d->doc->videoTsDir()->children() ); *it; ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( d->doc->videoTsDir()->tqchildren() ); *it; ++it ) {
     if( (*it)->isDir() ) {
-      emit infoMessage( i18n("Found invalid entry in the VIDEO_TS folder (%1).").arg((*it)->k3bName()), ERROR );
+      emit infoMessage( i18n("Found invalid entry in the VIDEO_TS folder (%1).").tqarg((*it)->k3bName()), ERROR );
       return -1;
     }
 
     // convert to upper case names
-    if( ::symlink( QFile::encodeName( (*it)->localPath() ), 
-		   QFile::encodeName( d->tempPath + "/VIDEO_TS/" + (*it)->k3bName().upper() ) ) == -1 ) {
-      emit infoMessage( i18n("Unable to link temporary file in folder %1.").arg( d->tempPath ), ERROR );
+    if( ::symlink( TQFile::encodeName( (*it)->localPath() ), 
+		   TQFile::encodeName( d->tempPath + "/VIDEO_TS/" + (*it)->k3bName().upper() ) ) == -1 ) {
+      emit infoMessage( i18n("Unable to link temporary file in folder %1.").tqarg( d->tempPath ), ERROR );
       return -1;
     }
   }
@@ -137,7 +137,7 @@ int K3bVideoDvdImager::writePathSpec()
 }
 
 
-int K3bVideoDvdImager::writePathSpecForDir( K3bDirItem* dirItem, QTextStream& stream )
+int K3bVideoDvdImager::writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& stream )
 {
   //
   // We handle the VIDEO_TS dir differently since otherwise mkisofs is not able to 
@@ -148,7 +148,7 @@ int K3bVideoDvdImager::writePathSpecForDir( K3bDirItem* dirItem, QTextStream& st
   }
 
   int num = 0;
-  for( QPtrListIterator<K3bDataItem> it( dirItem->children() ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( dirItem->tqchildren() ); it.current(); ++it ) {
     K3bDataItem* item = it.current();
     num++;
       
@@ -192,25 +192,25 @@ bool K3bVideoDvdImager::addMkisofsParameters( bool printSize )
 
 void K3bVideoDvdImager::cleanup()
 {
-  if( QFile::exists( d->tempPath ) ) {
-    QDir dir( d->tempPath );
+  if( TQFile::exists( d->tempPath ) ) {
+    TQDir dir( d->tempPath );
     dir.cd( "VIDEO_TS" );
-    for( QPtrListIterator<K3bDataItem> it( d->doc->videoTsDir()->children() ); *it; ++it )
+    for( TQPtrListIterator<K3bDataItem> it( d->doc->videoTsDir()->tqchildren() ); *it; ++it )
       dir.remove( (*it)->k3bName().upper() );
     dir.cdUp();
     dir.rmdir( "VIDEO_TS" );
     dir.cdUp();
     dir.rmdir( d->tempPath );
   }
-  d->tempPath = QString::null;
+  d->tempPath = TQString();
 
   K3bIsoImager::cleanup();
 }
 
 
-void K3bVideoDvdImager::slotReceivedStderr( const QString& line )
+void K3bVideoDvdImager::slotReceivedStderr( const TQString& line )
 {
-  if( line.contains( "Unable to make a DVD-Video image" ) ) {
+  if( line.tqcontains( "Unable to make a DVD-Video image" ) ) {
     emit infoMessage( i18n("The project does not contain all necessary VideoDVD files."), WARNING );
     emit infoMessage( i18n("The resulting DVD will most likely not be playable on a Hifi DVD player."), WARNING );
   }

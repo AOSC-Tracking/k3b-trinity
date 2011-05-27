@@ -21,7 +21,7 @@
 class K3bDirItem;
 class K3bDataDoc;
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kio/global.h>
 
@@ -35,12 +35,12 @@ class K3bDataDoc;
 class LIBK3B_EXPORT K3bDataItem
 {
  public: 
-  K3bDataItem( K3bDataDoc* doc, K3bDataItem* parent = 0, int flags = 0 );
+  K3bDataItem( K3bDataDoc* doc, K3bDataItem* tqparent = 0, int flags = 0 );
 
   /**
    * Default copy constructor.
    *
-   * The result is an exact copy except that no parent dir it set and, thus, also no doc.
+   * The result is an exact copy except that no tqparent dir it set and, thus, also no doc.
    */
   K3bDataItem( const K3bDataItem& );
 
@@ -49,44 +49,44 @@ class LIBK3B_EXPORT K3bDataItem
   /**
    * Return an exact copy of this data item.
    *
-   * The result is an exact copy except that no parent dir it set and, thus, also no doc.
+   * The result is an exact copy except that no tqparent dir it set and, thus, also no doc.
    *
    * Implementations should use the default constructor.
    */
   virtual K3bDataItem* copy() const = 0;
 	
-  K3bDirItem* parent() { return m_parentDir; }
+  K3bDirItem* tqparent() { return m_parentDir; }
   K3bDirItem* getParent() const { return m_parentDir; }
 
   /**
-   * Remove this item from it's parent and return a pointer to it.
+   * Remove this item from it's tqparent and return a pointer to it.
    */
   K3bDataItem* take();
 	
   K3bDataDoc* doc() const { return m_doc; }
-  virtual const QString& k3bName() const;
-  virtual void setK3bName( const QString& );
+  virtual const TQString& k3bName() const;
+  virtual void setK3bName( const TQString& );
 
   /** 
    * returns the path as defined by the k3b-hierachy, NOT starting with a slash
    * (since this is used for graft-points!) 
    * directories have a trailing "/"
    */
-  virtual QString k3bPath() const;
+  virtual TQString k3bPath() const;
 
   /**
    * Returns the name of the item as used on the CD or DVD image.
    *
    * This is only valid after a call to @p K3bDataDoc::prepareFilenames()
    */
-  const QString& writtenName() const { return m_writtenName; }
+  const TQString& writtenName() const { return m_writtenName; }
 
   /**
    * \return the pure name used in the Iso9660 tree.
    *
    * This is only valid after a call to @p K3bDataDoc::prepareFilenames()
    */
-  const QString& iso9660Name() const { return m_rawIsoName; }
+  const TQString& iso9660Name() const { return m_rawIsoName; }
 
   /**
    * Returns the path of the item as written to the CD or DVD image.
@@ -95,24 +95,24 @@ class LIBK3B_EXPORT K3bDataItem
    *
    * This is only valid after a call to @p K3bDataDoc::prepareFilenames()
    */
-  virtual QString writtenPath() const;
+  virtual TQString writtenPath() const;
 
-  virtual QString iso9660Path() const;
+  virtual TQString iso9660Path() const;
 
   /**
    * Used to set the written name by @p K3bDataDoc::prepareFilenames()
    */
-  void setWrittenName( const QString& s ) { m_writtenName = s; }
+  void setWrittenName( const TQString& s ) { m_writtenName = s; }
 
   /**
    * Used to set the pure Iso9660 name by @p K3bDataDoc::prepareFilenames()
    */
-  void setIso9660Name( const QString& s ) { m_rawIsoName = s; }
+  void setIso9660Name( const TQString& s ) { m_rawIsoName = s; }
 
   virtual K3bDataItem* nextSibling() const;
 	
   /** returns the path to the file on the local filesystem */
-  virtual QString localPath() const { return QString::null; }
+  virtual TQString localPath() const { return TQString(); }
 
   /**
    * The size of the item
@@ -133,7 +133,7 @@ class LIBK3B_EXPORT K3bDataItem
   virtual void reparent( K3bDirItem* );
 
   // FIXME: use all these flags and make the isXXX methods
-  // non-virtual. Then move the parent()->addDataItem call
+  // non-virtual. Then move the tqparent()->addDataItem call
   // to the K3bDataItem constructor
   enum ItemFlags {
     DIR = 0x1,
@@ -173,14 +173,14 @@ class LIBK3B_EXPORT K3bDataItem
   virtual bool isRenameable() const { return m_bRenameable; }
   virtual bool isHideable() const { return m_bHideable; }
   virtual bool writeToCd() const { return m_bWriteToCd; }
-  virtual const QString& extraInfo() const { return m_extraInfo; }
+  virtual const TQString& extraInfo() const { return m_extraInfo; }
 
   void setRenameable( bool b ) { m_bRenameable = b; }
   void setMoveable( bool b ) { m_bMovable = b; }
   void setRemoveable( bool b ) { m_bRemoveable = b; }
   void setHideable( bool b ) { m_bHideable = b; }
   void setWriteToCd( bool b ) { m_bWriteToCd = b; }
-  void setExtraInfo( const QString& i ) { m_extraInfo = i; }
+  void setExtraInfo( const TQString& i ) { m_extraInfo = i; }
 
  protected:
   virtual KIO::filesize_t itemSize( bool followSymlinks ) const = 0;
@@ -194,7 +194,7 @@ class LIBK3B_EXPORT K3bDataItem
    */
   virtual K3b::Msf itemBlocks( bool followSymlinks ) const;
 
-  QString m_k3bName;
+  TQString m_k3bName;
 
   void setFlags( int flags );
 
@@ -202,8 +202,8 @@ class LIBK3B_EXPORT K3bDataItem
   class Private;
   Private* d;
 
-  QString m_writtenName;
-  QString m_rawIsoName;
+  TQString m_writtenName;
+  TQString m_rawIsoName;
 
   K3bDataDoc* m_doc;
   K3bDirItem* m_parentDir;
@@ -215,7 +215,7 @@ class LIBK3B_EXPORT K3bDataItem
   bool m_bMovable;
   bool m_bHideable;
   bool m_bWriteToCd;
-  QString m_extraInfo;
+  TQString m_extraInfo;
 
   long m_sortWeight;
 

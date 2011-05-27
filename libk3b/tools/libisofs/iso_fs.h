@@ -131,13 +131,13 @@ struct hs_primary_descriptor {
 	char root_directory_record	[ISODCL (181, 214)]; /* 9.1 */
 };
 
-/* We use this to help us look up the parent inode numbers. */
+/* We use this to help us look up the tqparent inode numbers. */
 
 struct iso_path_table{
 	char  name_len[1];		  /* 711 */
 	char  ext_attr_length[1]; /* 711 */
 	char  extent[4];		  /* 731 */
-	char  parent[2];	      /* 721 */
+	char  tqparent[2];	      /* 721 */
 	char  name[1];
 };
 

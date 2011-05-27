@@ -18,13 +18,13 @@
 
 #include <kdialogbase.h>
 
-#include <qptrlist.h>
-#include <qmap.h>
+#include <tqptrlist.h>
+#include <tqmap.h>
 
 #include <k3bdevice.h>
 
 
-class QLabel;
+class TQLabel;
 class KListBox;
 class K3bDataDoc;
 class K3bMediaSelectionComboBox;
@@ -33,6 +33,7 @@ class K3bMediaSelectionComboBox;
 class K3bDataSessionImportDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
@@ -44,7 +45,7 @@ class K3bDataSessionImportDialog : public KDialogBase
    *
    * \return the project
    */
-  static K3bDataDoc* importSession( K3bDataDoc* doc, QWidget* parent );
+  static K3bDataDoc* importSession( K3bDataDoc* doc, TQWidget* tqparent );
 
  private slots:
   void slotOk();
@@ -54,7 +55,7 @@ class K3bDataSessionImportDialog : public KDialogBase
   void slotSelectionChanged( K3bDevice::Device* );
 
  private:
-  K3bDataSessionImportDialog( QWidget* parent = 0 );
+  K3bDataSessionImportDialog( TQWidget* tqparent = 0 );
   ~K3bDataSessionImportDialog();
 
   K3bDataDoc* m_doc;

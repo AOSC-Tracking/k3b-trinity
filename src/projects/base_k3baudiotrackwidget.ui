@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bAudioTrackWidget</class>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>K3bAudioTrackWidget</cstring>
     </property>
@@ -15,11 +15,11 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QTabWidget">
+        <widget class="TQTabWidget">
             <property name="name">
                 <cstring>m_mainTab</cstring>
             </property>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -30,9 +30,9 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QLayoutWidget">
+                    <widget class="TQLayoutWidget">
                         <property name="name">
-                            <cstring>layout9</cstring>
+                            <cstring>tqlayout9</cstring>
                         </property>
                         <grid>
                             <property name="name">
@@ -43,7 +43,7 @@
                                     <cstring>m_editSongwriter</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="4" column="0">
+                            <widget class="TQLabel" row="4" column="0">
                                 <property name="name">
                                     <cstring>textLabel4</cstring>
                                 </property>
@@ -83,7 +83,7 @@
                                     <enum>Horizontal</enum>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="2" column="0" rowspan="2" colspan="1">
+                            <widget class="TQLabel" row="2" column="0" rowspan="2" colspan="1">
                                 <property name="name">
                                     <cstring>textLabel3</cstring>
                                 </property>
@@ -94,7 +94,7 @@
                                     <cstring>m_editArranger</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="2" column="2" rowspan="2" colspan="1">
+                            <widget class="TQLabel" row="2" column="2" rowspan="2" colspan="1">
                                 <property name="name">
                                     <cstring>textLabel5</cstring>
                                 </property>
@@ -105,7 +105,7 @@
                                     <cstring>m_editComposer</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="5" column="0">
+                            <widget class="TQLabel" row="5" column="0">
                                 <property name="name">
                                     <cstring>textLabel8</cstring>
                                 </property>
@@ -121,7 +121,7 @@
                                     <cstring>m_editTitle</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="0" column="2">
+                            <widget class="TQLabel" row="0" column="2">
                                 <property name="name">
                                     <cstring>textLabel2</cstring>
                                 </property>
@@ -132,7 +132,7 @@
                                     <cstring>m_editPerformer</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="4" column="2">
+                            <widget class="TQLabel" row="4" column="2">
                                 <property name="name">
                                     <cstring>textLabel6</cstring>
                                 </property>
@@ -143,7 +143,7 @@
                                     <cstring>m_editIsrc</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="TQLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>textLabel1</cstring>
                                 </property>
@@ -176,7 +176,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>350</width>
                                 <height>50</height>
@@ -185,7 +185,7 @@
                     </spacer>
                 </vbox>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -196,7 +196,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>m_checkPreemphasis</cstring>
                         </property>
@@ -204,10 +204,10 @@
                             <string>Preemph&amp;asis</string>
                         </property>
                         <property name="whatsThis" stdset="0">
-                            <string>&lt;p&gt;Preemphasis is mainly used in audio processing. Higher frequencies in audio signals usually have lower amplitudes. This can lead to bad signal quality on noisy transmission because the high frequencies might become too weak. To avoid this effect, high frequencies are amplified before transmission (preemphasis); the receiver will then weaken them accordingly for playback.</string>
+                            <string>&lt;p&gt;Preemphasis is mainly used in audio processing. Higher frequencies in audio Q_SIGNALS usually have lower amplitudes. This can lead to bad signal quality on noisy transmission because the high frequencies might become too weak. To avoid this effect, high frequencies are amplified before transmission (preemphasis); the receiver will then weaken them accordingly for playback.</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>m_checkCopyPermitted</cstring>
                         </property>
@@ -215,15 +215,15 @@
                             <string>&amp;Copy permitted</string>
                         </property>
                     </widget>
-                    <widget class="QLayoutWidget">
+                    <widget class="TQLayoutWidget">
                         <property name="name">
-                            <cstring>layout6</cstring>
+                            <cstring>tqlayout6</cstring>
                         </property>
                         <hbox>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel">
+                            <widget class="TQLabel">
                                 <property name="name">
                                     <cstring>m_labelPostGap</cstring>
                                 </property>
@@ -257,7 +257,7 @@ This does not mean that K3b adds an additional gap of silence to the track. This
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>161</width>
                                         <height>20</height>
@@ -276,7 +276,7 @@ This does not mean that K3b adds an additional gap of silence to the track. This
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>41</width>
                                 <height>80</height>
@@ -322,7 +322,7 @@ This does not mean that K3b adds an additional gap of silence to the track. This
     <tabstop>m_checkPreemphasis</tabstop>
     <tabstop>m_checkCopyPermitted</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klineedit.h</includehint>
     <includehint>klineedit.h</includehint>

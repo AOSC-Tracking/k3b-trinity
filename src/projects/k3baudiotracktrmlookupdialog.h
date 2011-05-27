@@ -17,9 +17,9 @@
 #define _K3B_AUDIOTRACK_TRM_LOOKUP_DIALOG_H_
 
 #include <kdialogbase.h>
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
-class QLabel;
+class TQLabel;
 class K3bAudioTrack;
 class K3bMusicBrainzJob;
 class K3bBusyWidget;
@@ -28,24 +28,25 @@ class K3bBusyWidget;
 class K3bAudioTrackTRMLookupDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioTrackTRMLookupDialog( QWidget* parent = 0, const char* name = 0 );
+  K3bAudioTrackTRMLookupDialog( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bAudioTrackTRMLookupDialog();
 
   /**
    * This will show the dialog and start the lookup
    */
-  int lookup( const QPtrList<K3bAudioTrack>& tracks );
+  int lookup( const TQPtrList<K3bAudioTrack>& tracks );
 
  private slots:
   void slotMbJobFinished( bool );
-  void slotMbJobInfoMessage( const QString&, int );
+  void slotMbJobInfoMessage( const TQString&, int );
   void slotTrackFinished( K3bAudioTrack* track, bool success );
   void slotCancel();
 
  private:
-  QLabel* m_infoLabel;
+  TQLabel* m_infoLabel;
   K3bBusyWidget* m_busyWidget;
   K3bMusicBrainzJob* m_mbJob;
   bool m_inLoop;

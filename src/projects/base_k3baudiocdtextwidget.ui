@@ -2,7 +2,7 @@
 <class>base_K3bAudioCdTextWidget</class>
 <comment>Widget to edit the global CD-Text in a K3b audio project.</comment>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>K3bAudioCDTextWidget</cstring>
     </property>
@@ -13,7 +13,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>m_groupCdText</cstring>
             </property>
@@ -40,7 +40,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QFrame">
+                <widget class="TQFrame">
                     <property name="name">
                         <cstring>frame3</cstring>
                     </property>
@@ -57,7 +57,7 @@
                         <property name="margin">
                             <number>0</number>
                         </property>
-                        <widget class="QLabel" row="2" column="0">
+                        <widget class="TQLabel" row="2" column="0">
                             <property name="name">
                                 <cstring>textLabel2</cstring>
                             </property>
@@ -68,9 +68,9 @@
                                 <cstring>m_editPerformer</cstring>
                             </property>
                         </widget>
-                        <widget class="QLayoutWidget" row="2" column="1">
+                        <widget class="TQLayoutWidget" row="2" column="1">
                             <property name="name">
-                                <cstring>layout4</cstring>
+                                <cstring>tqlayout4</cstring>
                             </property>
                             <hbox>
                                 <property name="name">
@@ -81,7 +81,7 @@
                                         <cstring>m_editPerformer</cstring>
                                     </property>
                                 </widget>
-                                <widget class="QToolButton">
+                                <widget class="TQToolButton">
                                     <property name="name">
                                         <cstring>m_buttonCopyPerformer</cstring>
                                     </property>
@@ -94,9 +94,9 @@
                                 </widget>
                             </hbox>
                         </widget>
-                        <widget class="QLayoutWidget" row="1" column="1">
+                        <widget class="TQLayoutWidget" row="1" column="1">
                             <property name="name">
-                                <cstring>layout5</cstring>
+                                <cstring>tqlayout5</cstring>
                             </property>
                             <hbox>
                                 <property name="name">
@@ -107,7 +107,7 @@
                                         <cstring>m_editTitle</cstring>
                                     </property>
                                 </widget>
-                                <widget class="QToolButton">
+                                <widget class="TQToolButton">
                                     <property name="name">
                                         <cstring>m_buttonCopyTitle</cstring>
                                     </property>
@@ -120,7 +120,7 @@
                                 </widget>
                             </hbox>
                         </widget>
-                        <widget class="QLabel" row="1" column="0">
+                        <widget class="TQLabel" row="1" column="0">
                             <property name="name">
                                 <cstring>textLabel1</cstring>
                             </property>
@@ -133,9 +133,9 @@
                         </widget>
                     </grid>
                 </widget>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout15</cstring>
+                        <cstring>tqlayout15</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -151,14 +151,14 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>0</width>
                                     <height>0</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QPushButton">
+                        <widget class="TQPushButton">
                             <property name="name">
                                 <cstring>m_buttonMoreFields</cstring>
                             </property>
@@ -178,7 +178,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>21</width>
                             <height>0</height>
@@ -207,14 +207,14 @@
     <tabstop>m_editTitle</tabstop>
     <tabstop>m_editPerformer</tabstop>
 </tabstops>
-<slots>
+<Q_SLOTS>
     <slot access="protected" specifier="pure virtual">slotCopyTitle()</slot>
     <slot access="protected" specifier="pure virtual">slotCopyPerformer()</slot>
     <slot access="protected" specifier="pure virtual">slotCopyArranger()</slot>
     <slot access="protected" specifier="pure virtual">slotCopyComposer()</slot>
     <slot access="protected" specifier="pure virtual">slotCopySongwriter()</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klineedit.h</includehint>
     <includehint>klineedit.h</includehint>

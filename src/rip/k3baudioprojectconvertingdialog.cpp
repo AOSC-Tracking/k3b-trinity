@@ -41,14 +41,14 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 
-#include <qgroupbox.h>
-#include <qheader.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qdir.h>
-#include <qstringlist.h>
-#include <qtabwidget.h>
+#include <tqgroupbox.h>
+#include <tqheader.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqdir.h>
+#include <tqstringlist.h>
+#include <tqtabwidget.h>
 
 
 
@@ -58,16 +58,16 @@ public:
   Private() {
   }
 
-  QValueVector<QString> filenames;
-  QString playlistFilename;
-  QString cueFilename;
+  TQValueVector<TQString> filenames;
+  TQString playlistFilename;
+  TQString cueFilename;
 };
 
 
-K3bAudioProjectConvertingDialog::K3bAudioProjectConvertingDialog( K3bAudioDoc* doc, QWidget *parent, const char *name )
-  : K3bInteractionDialog( parent, name,
-			  QString::null,
-			  QString::null,
+K3bAudioProjectConvertingDialog::K3bAudioProjectConvertingDialog( K3bAudioDoc* doc, TQWidget *tqparent, const char *name )
+  : K3bInteractionDialog( tqparent, name,
+			  TQString(),
+			  TQString(),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  "Audio Project Converting" ), // config group
@@ -79,7 +79,7 @@ K3bAudioProjectConvertingDialog::K3bAudioProjectConvertingDialog( K3bAudioDoc* d
 
   setTitle( i18n("Audio Project Conversion"), 
 	    i18n("1 track (%1)", "%n tracks (%1)", 
-		 m_doc->numOfTracks()).arg(m_doc->length().toString()) );
+		 m_doc->numOfTracks()).tqarg(m_doc->length().toString()) );
 
   refresh();
 }
@@ -93,8 +93,8 @@ K3bAudioProjectConvertingDialog::~K3bAudioProjectConvertingDialog()
 
 void K3bAudioProjectConvertingDialog::setupGui()
 {
-  QWidget *frame = mainWidget();
-  QGridLayout* Form1Layout = new QGridLayout( frame );
+  TQWidget *frame = mainWidget();
+  TQGridLayout* Form1Layout = new TQGridLayout( frame );
   Form1Layout->setSpacing( KDialog::spacingHint() );
   Form1Layout->setMargin( 0 );
 
@@ -106,7 +106,7 @@ void K3bAudioProjectConvertingDialog::setupGui()
   m_viewTracks->setAllColumnsShowFocus(true);
   m_viewTracks->setFullWidth(true);
 
-  QTabWidget* mainTab = new QTabWidget( frame );
+  TQTabWidget* mainTab = new TQTabWidget( frame );
 
   m_optionWidget = new K3bAudioConvertingOptionWidget( mainTab );
   mainTab->addTab( m_optionWidget, i18n("Settings") );
@@ -116,13 +116,13 @@ void K3bAudioProjectConvertingDialog::setupGui()
   // -------------------------------------------------------------------------------------------
   m_patternWidget = new K3bCddbPatternWidget( mainTab );
   mainTab->addTab( m_patternWidget, i18n("File Naming") );
-  connect( m_patternWidget, SIGNAL(changed()), this, SLOT(refresh()) );
+  connect( m_patternWidget, TQT_SIGNAL(changed()), this, TQT_SLOT(refresh()) );
 
   Form1Layout->addWidget( m_viewTracks, 0, 0 );
   Form1Layout->addWidget( mainTab, 1, 0 );
   Form1Layout->setRowStretch( 0, 1 );
 
-  connect( m_optionWidget, SIGNAL(changed()), this, SLOT(refresh()) );
+  connect( m_optionWidget, TQT_SIGNAL(changed()), this, TQT_SLOT(refresh()) );
 }
 
 
@@ -151,14 +151,14 @@ void K3bAudioProjectConvertingDialog::slotStartClicked()
   }
 
   // check if we need to overwrite some files...
-  QListViewItemIterator it( m_viewTracks );
-  QStringList filesToOverwrite;
+  TQListViewItemIterator it( m_viewTracks );
+  TQStringList filesToOverwrite;
   for( unsigned int i = 0; i < d->filenames.count(); ++i ) {
-    if( QFile::exists( d->filenames[i] ) )
+    if( TQFile::exists( d->filenames[i] ) )
       filesToOverwrite.append( d->filenames[i] );
   }
 
-  if( m_optionWidget->createPlaylist() && QFile::exists( d->playlistFilename ) )
+  if( m_optionWidget->createPlaylist() && TQFile::exists( d->playlistFilename ) )
     filesToOverwrite.append( d->playlistFilename );
 
   if( !filesToOverwrite.isEmpty() )
@@ -171,11 +171,11 @@ void K3bAudioProjectConvertingDialog::slotStartClicked()
 
   // just generate a fake m_tracks list for now so we can keep most of the methods
   // like they are in K3bAudioRipThread. This way future combination is easier
-  QValueVector<QPair<int, QString> > tracksToRip;
+  TQValueVector<TQPair<int, TQString> > tracksToRip;
   int i = 0;
   K3bAudioTrack* track = m_doc->firstTrack();
   while( track ) {
-    tracksToRip.append( qMakePair( i+1, d->filenames[(m_optionWidget->createSingleFile() ? 0 : i)] ) );
+    tracksToRip.append( tqMakePair( i+1, d->filenames[(m_optionWidget->createSingleFile() ? 0 : i)] ) );
     ++i;
     track = track->next();
   }
@@ -194,9 +194,9 @@ void K3bAudioProjectConvertingDialog::slotStartClicked()
   if( encoder )
     thread->setFileType( m_optionWidget->extension() );
 
-  K3bJobProgressDialog progressDialog( parentWidget() );
+  K3bJobProgressDialog progressDialog( tqparentWidget() );
 
-  K3bThreadJob job( thread, &progressDialog, this );
+  K3bThreadJob job( thread, &progressDialog, TQT_TQOBJECT(this) );
 
   hide();
   progressDialog.startJob(&job);
@@ -216,14 +216,14 @@ void K3bAudioProjectConvertingDialog::refresh()
   // create a cddb entry from the doc to use in the patternparser
   K3bCddbResultEntry cddbEntry = createCddbEntryFromDoc( m_doc );
 
-  QString baseDir = K3b::prepareDir( m_optionWidget->baseDir() );
+  TQString baseDir = K3b::prepareDir( m_optionWidget->baseDir() );
 
-  QString extension = m_optionWidget->extension();
+  TQString extension = m_optionWidget->extension();
 
   KIO::filesize_t overallSize = 0;
 
   if( m_optionWidget->createSingleFile() ) {
-    QString filename;
+    TQString filename;
     long long filesize = 0;
     if( m_optionWidget->encoder() == 0 ) {
       filesize = m_doc->length().audioBytes() + 44;
@@ -274,7 +274,7 @@ void K3bAudioProjectConvertingDialog::refresh()
       if( filesize > 0 )
 	overallSize += filesize;
 
-      QString filename = K3bPatternParser::parsePattern( cddbEntry, i,
+      TQString filename = K3bPatternParser::parsePattern( cddbEntry, i,
 							 m_patternWidget->filenamePattern(),
 							 m_patternWidget->replaceBlanks(),
 							 m_patternWidget->blankReplaceString() ) + "." + extension;
@@ -294,7 +294,7 @@ void K3bAudioProjectConvertingDialog::refresh()
 
   // create playlist item
   if( m_optionWidget->createPlaylist() ) {
-    QString filename = K3bPatternParser::parsePattern( cddbEntry, 1,
+    TQString filename = K3bPatternParser::parsePattern( cddbEntry, 1,
 						       m_patternWidget->playlistPattern(),
 						       m_patternWidget->replaceBlanks(),
 						       m_patternWidget->blankReplaceString() ) + ".m3u";
@@ -316,7 +316,7 @@ void K3bAudioProjectConvertingDialog::refresh()
 }
 
 
-void K3bAudioProjectConvertingDialog::setBaseDir( const QString& path )
+void K3bAudioProjectConvertingDialog::setBaseDir( const TQString& path )
 {
   m_optionWidget->setBaseDir( path );
 }

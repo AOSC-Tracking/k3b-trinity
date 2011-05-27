@@ -17,8 +17,8 @@
 #ifndef _K3B_CDTEXT_H_
 #define _K3B_CDTEXT_H_
 
-#include <qstring.h>
-#include <qvaluevector.h>
+#include <tqstring.h>
+#include <tqvaluevector.h>
 #include "k3bdevice_export.h"
 
 namespace K3bDevice
@@ -43,22 +43,22 @@ namespace K3bDevice
 	m_isrc.truncate(0);
       }
 
-      const QString& title() const { return m_title; }
-      const QString& performer() const { return m_performer; }
-      const QString& songwriter() const { return m_songwriter; }
-      const QString& composer() const { return m_composer; }
-      const QString& arranger() const { return m_arranger; }
-      const QString& message() const { return m_message; }
-      const QString& isrc() const { return m_isrc; }
+      const TQString& title() const { return m_title; }
+      const TQString& performer() const { return m_performer; }
+      const TQString& songwriter() const { return m_songwriter; }
+      const TQString& composer() const { return m_composer; }
+      const TQString& arranger() const { return m_arranger; }
+      const TQString& message() const { return m_message; }
+      const TQString& isrc() const { return m_isrc; }
 
       // TODO: use the real CD-TEXT charset (a modified ISO8859-1)
-      void setTitle( const QString& s ) { m_title = s; fixup(m_title); }
-      void setPerformer( const QString& s ) { m_performer = s; fixup(m_performer); }
-      void setSongwriter( const QString& s ) { m_songwriter = s; fixup(m_songwriter); }
-      void setComposer( const QString& s ) { m_composer = s; fixup(m_composer); }
-      void setArranger( const QString& s ) { m_arranger = s; fixup(m_arranger); }
-      void setMessage( const QString& s ) { m_message = s; fixup(m_message); }
-      void setIsrc( const QString& s ) { m_isrc = s; fixup(m_isrc); }
+      void setTitle( const TQString& s ) { m_title = s; fixup(m_title); }
+      void setPerformer( const TQString& s ) { m_performer = s; fixup(m_performer); }
+      void setSongwriter( const TQString& s ) { m_songwriter = s; fixup(m_songwriter); }
+      void setComposer( const TQString& s ) { m_composer = s; fixup(m_composer); }
+      void setArranger( const TQString& s ) { m_arranger = s; fixup(m_arranger); }
+      void setMessage( const TQString& s ) { m_message = s; fixup(m_message); }
+      void setIsrc( const TQString& s ) { m_isrc = s; fixup(m_isrc); }
 
       bool isEmpty() const {
 	if( !m_title.isEmpty() )
@@ -84,34 +84,34 @@ namespace K3bDevice
 
     private:
       // TODO: remove this (see above)
-      void fixup( QString& s ) { s.replace( '/', "_" ); s.replace( '\"', "_" ); }
+      void fixup( TQString& s ) { s.tqreplace( '/', "_" ); s.tqreplace( '\"', "_" ); }
 
-      QString m_title;
-      QString m_performer;
-      QString m_songwriter;
-      QString m_composer;
-      QString m_arranger;
-      QString m_message;
-      QString m_isrc;
+      TQString m_title;
+      TQString m_performer;
+      TQString m_songwriter;
+      TQString m_composer;
+      TQString m_arranger;
+      TQString m_message;
+      TQString m_isrc;
 
       friend class CdText;
     };
 
-  class LIBK3BDEVICE_EXPORT CdText : public QValueVector<TrackCdText>
+  class LIBK3BDEVICE_EXPORT CdText : public TQValueVector<TrackCdText>
     {
       friend class Device;
 
     public:
       CdText();
       CdText( const unsigned char* data, int len );
-      CdText( const QByteArray& );
+      CdText( const TQByteArray& );
       CdText( int size );
       CdText( const CdText& );
 
       void setRawPackData( const unsigned char*, int );
-      void setRawPackData( const QByteArray& );
+      void setRawPackData( const TQByteArray& );
 
-      QByteArray rawPackData() const;
+      TQByteArray rawPackData() const;
 
       bool empty() const {
 	if( !m_title.isEmpty() )
@@ -144,24 +144,24 @@ namespace K3bDevice
 
       void clear();
 
-      const QString& title() const { return m_title; }
-      const QString& performer() const { return m_performer; }
-      const QString& songwriter() const { return m_songwriter; }
-      const QString& composer() const { return m_composer; }
-      const QString& arranger() const { return m_arranger; }
-      const QString& message() const { return m_message; }
-      const QString& discId() const { return m_discId; }
-      const QString& upcEan() const { return m_upcEan; }
+      const TQString& title() const { return m_title; }
+      const TQString& performer() const { return m_performer; }
+      const TQString& songwriter() const { return m_songwriter; }
+      const TQString& composer() const { return m_composer; }
+      const TQString& arranger() const { return m_arranger; }
+      const TQString& message() const { return m_message; }
+      const TQString& discId() const { return m_discId; }
+      const TQString& upcEan() const { return m_upcEan; }
 
       // TODO: use the real CD-TEXT charset (a modified ISO8859-1)
-      void setTitle( const QString& s ) { m_title = s; fixup(m_title); }
-      void setPerformer( const QString& s ) { m_performer = s; fixup(m_performer); }
-      void setSongwriter( const QString& s ) { m_songwriter = s; fixup(m_songwriter); }
-      void setComposer( const QString& s ) { m_composer = s; fixup(m_composer); }
-      void setArranger( const QString& s ) { m_arranger = s; fixup(m_arranger); }
-      void setMessage( const QString& s ) { m_message = s; fixup(m_message); }
-      void setDiscId( const QString& s ) { m_discId = s; fixup(m_discId); }
-      void setUpcEan( const QString& s ) { m_upcEan = s; fixup(m_upcEan); }
+      void setTitle( const TQString& s ) { m_title = s; fixup(m_title); }
+      void setPerformer( const TQString& s ) { m_performer = s; fixup(m_performer); }
+      void setSongwriter( const TQString& s ) { m_songwriter = s; fixup(m_songwriter); }
+      void setComposer( const TQString& s ) { m_composer = s; fixup(m_composer); }
+      void setArranger( const TQString& s ) { m_arranger = s; fixup(m_arranger); }
+      void setMessage( const TQString& s ) { m_message = s; fixup(m_message); }
+      void setDiscId( const TQString& s ) { m_discId = s; fixup(m_discId); }
+      void setUpcEan( const TQString& s ) { m_upcEan = s; fixup(m_upcEan); }
 
       void debug() const;
 
@@ -170,32 +170,32 @@ namespace K3bDevice
        * wrong length.
        */
       static bool checkCrc( const unsigned char*, int );
-      static bool checkCrc( const QByteArray& );
+      static bool checkCrc( const TQByteArray& );
 
       bool operator==( const CdText& ) const;
       bool operator!=( const CdText& ) const;
 	
     private:
       // TODO: remove this (see above)
-      void fixup( QString& s ) { s.replace( '/', "_" ); s.replace( '\"', "_" ); }
+      void fixup( TQString& s ) { s.tqreplace( '/', "_" ); s.tqreplace( '\"', "_" ); }
 
-      const QString& textForPackType( int packType, unsigned int track ) const;
+      const TQString& textForPackType( int packType, unsigned int track ) const;
       unsigned int textLengthForPackType( int packType ) const;
-      QByteArray createPackData( int packType, unsigned int& ) const;
-      void savePack( cdtext_pack* pack, QByteArray& data, unsigned int& dataFill ) const;
-      void appendByteArray( QByteArray& a, const QByteArray& b ) const;
+      TQByteArray createPackData( int packType, unsigned int& ) const;
+      void savePack( cdtext_pack* pack, TQByteArray& data, unsigned int& dataFill ) const;
+      void appendByteArray( TQByteArray& a, const TQByteArray& b ) const;
 
-      QString m_title;
-      QString m_performer;
-      QString m_songwriter;
-      QString m_composer;
-      QString m_arranger;
-      QString m_message;
-      QString m_discId;
-      QString m_upcEan;
+      TQString m_title;
+      TQString m_performer;
+      TQString m_songwriter;
+      TQString m_composer;
+      TQString m_arranger;
+      TQString m_message;
+      TQString m_discId;
+      TQString m_upcEan;
     };
 
-  QCString encodeCdText( const QString& s, bool* illegalChars = 0 );
+  TQCString encodeCdText( const TQString& s, bool* illegalChars = 0 );
 }
 
 #endif

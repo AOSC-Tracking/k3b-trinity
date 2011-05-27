@@ -25,13 +25,14 @@ class K3bExternalBin;
 class K3bProcess;
 class KProcess;
 class K3bDevice::Device;
-class QSocket;
+class TQSocket;
 
 
 
 class K3bCdrdaoWriter : public K3bAbstractWriter
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
 
@@ -40,13 +41,13 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
   enum SubMode { None, RW, RW_RAW };
 
   K3bCdrdaoWriter( K3bDevice::Device* dev, K3bJobHandler*, 
-		   QObject* parent = 0, const char* name = 0 );
+		   TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCdrdaoWriter();
 
   /**
    * to be used in chain: addArgument(x)->addArgument(y)
    */
-  K3bCdrdaoWriter* addArgument( const QString& );
+  K3bCdrdaoWriter* addArgument( const TQString& );
   K3bDevice::Device* sourceDevice() { return m_sourceDevice; };
 
   int fd() const;
@@ -55,9 +56,9 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
 
  private:
   void reinitParser();
-  void parseCdrdaoLine( const QString& line );
-  void parseCdrdaoWrote( const QString& line );
-  void parseCdrdaoError( const QString& line ); 
+  void parseCdrdaoLine( const TQString& line );
+  void parseCdrdaoWrote( const TQString& line );
+  void parseCdrdaoError( const TQString& line ); 
 
  public slots:
   void start();
@@ -70,8 +71,8 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
   void setMulti( bool b ) { m_multi = b; }
   void setForce( bool b ) { m_force = b; }
   void setOnTheFly( bool b ) { m_onTheFly = b; }
-  void setDataFile( const QString& s ) { m_dataFile = s; }
-  void setTocFile( const QString& s ) { m_tocFile = s; }
+  void setDataFile( const TQString& s ) { m_dataFile = s; }
+  void setTocFile( const TQString& s ) { m_tocFile = s; }
 
   void setSourceDevice( K3bDevice::Device* dev ) { m_sourceDevice = dev; }
   void setFastToc( bool b ) { m_fastToc = b; }
@@ -91,13 +92,13 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
   void setForceNoEject( bool b ) { m_forceNoEject = b; }
 
  private slots:
-  void slotStdLine( const QString& line );
+  void slotStdLine( const TQString& line );
   void slotProcessExited(KProcess*);
   void parseCdrdaoMessage();
   void slotThroughput( int t );
 
  private:
-  void unknownCdrdaoLine( const QString& );
+  void unknownCdrdaoLine( const TQString& );
   void prepareArgumentList();
   void setWriteArguments();
   void setReadArguments();
@@ -107,7 +108,7 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
 
   bool cueSheet();
 
-  QString findDriverFile( const K3bExternalBin* bin );
+  TQString findDriverFile( const K3bExternalBin* bin );
   bool defaultToGenericMMC( K3bDevice::Device* dev, bool writer );
 
   // options
@@ -115,11 +116,11 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
   int        m_command;
   int        m_blankMode;
   K3bDevice::Device* m_sourceDevice;
-  QString    m_dataFile;
-  QString    m_tocFile;
-  QString    m_cueFileLnk;
-  QString    m_binFileLnk;
-  QString m_backupTocFile;
+  TQString    m_dataFile;
+  TQString    m_tocFile;
+  TQString    m_cueFileLnk;
+  TQString    m_binFileLnk;
+  TQString m_backupTocFile;
   bool       m_readRaw;
   bool       m_multi;
   bool       m_force;
@@ -137,7 +138,7 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
   K3bProcess* m_process;
 
   int m_cdrdaoComm[2];
-  QSocket         *m_comSock;
+  TQSocket         *m_comSock;
 
   bool m_canceled;
 

@@ -29,15 +29,15 @@
 class K3bSpecialDataItem : public K3bDataItem
 {
  public:
-  K3bSpecialDataItem( K3bDataDoc* doc, KIO::filesize_t size, K3bDirItem* parent = 0, const QString& k3bName = QString::null )
-    : K3bDataItem( doc, parent ),
+  K3bSpecialDataItem( K3bDataDoc* doc, KIO::filesize_t size, K3bDirItem* tqparent = 0, const TQString& k3bName = TQString() )
+    : K3bDataItem( doc, tqparent ),
     m_size( size )
     {
       setK3bName( k3bName );
 
       // add automagically like a qlistviewitem
-      if( parent )
-	parent->addDataItem( this );
+      if( tqparent )
+	tqparent->addDataItem( this );
     }
 
     K3bSpecialDataItem( const K3bSpecialDataItem& item )
@@ -47,17 +47,17 @@ class K3bSpecialDataItem : public K3bDataItem
     }
 
   ~K3bSpecialDataItem() {
-    // remove this from parentdir
-    if( parent() )
-      parent()->takeDataItem( this );
+    // remove this from tqparentdir
+    if( tqparent() )
+      tqparent()->takeDataItem( this );
   }
 
   K3bDataItem* copy() const {
     return new K3bSpecialDataItem( *this );
   }
 
-  void setMimeType( const QString& s ) { m_mimeType = s; }
-  const QString& mimeType() const { return m_mimeType; }
+  void setMimeType( const TQString& s ) { m_mimeType = s; }
+  const TQString& mimeType() const { return m_mimeType; }
 
   bool isSpecialFile() const { return true; }
 
@@ -68,7 +68,7 @@ class K3bSpecialDataItem : public K3bDataItem
   KIO::filesize_t itemSize( bool ) const { return m_size; }
 
  private:
-  QString m_mimeType;
+  TQString m_mimeType;
   KIO::filesize_t m_size;
 };
 

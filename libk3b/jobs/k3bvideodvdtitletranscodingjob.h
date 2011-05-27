@@ -33,9 +33,10 @@ class K3bExternalBin;
 class LIBK3B_EXPORT K3bVideoDVDTitleTranscodingJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDVDTitleTranscodingJob( K3bJobHandler* hdl, QObject* parent );
+  K3bVideoDVDTitleTranscodingJob( K3bJobHandler* hdl, TQObject* tqparent );
   ~K3bVideoDVDTitleTranscodingJob();
 
   /**
@@ -67,7 +68,7 @@ class LIBK3B_EXPORT K3bVideoDVDTitleTranscodingJob : public K3bJob
   int clippingRight() const { return m_clippingRight; }
   int height() const { return m_height; }
   int width() const { return m_width; }
-  const QString& filename() { return m_filename; }
+  const TQString& filename() { return m_filename; }
   VideoCodec videoCodec() const { return m_videoCodec; }
   int videoBitrate() const { return m_videoBitrate; }
   bool twoPassEncoding() const { return m_twoPassEncoding; }
@@ -87,11 +88,11 @@ class LIBK3B_EXPORT K3bVideoDVDTitleTranscodingJob : public K3bJob
    */
   static bool transcodeBinaryHasSupportFor( AudioCodec codec, const K3bExternalBin* bin = 0 );
 
-  static QString videoCodecString( VideoCodec );
-  static QString audioCodecString( AudioCodec );
+  static TQString videoCodecString( VideoCodec );
+  static TQString audioCodecString( AudioCodec );
 
-  static QString videoCodecDescription( VideoCodec );
-  static QString audioCodecDescription( AudioCodec );
+  static TQString videoCodecDescription( VideoCodec );
+  static TQString audioCodecDescription( AudioCodec );
 
  public slots:
   void start();
@@ -158,7 +159,7 @@ class LIBK3B_EXPORT K3bVideoDVDTitleTranscodingJob : public K3bJob
    * The default is some automatically generated filename
    * in the default K3b temp directory.
    */
-  void setFilename( const QString& name ) { m_filename = name; }
+  void setFilename( const TQString& name ) { m_filename = name; }
 
   /**
    * Set the video codec used to encode the video title.
@@ -228,7 +229,7 @@ class LIBK3B_EXPORT K3bVideoDVDTitleTranscodingJob : public K3bJob
   void setLowPriority( bool b ) { m_lowPriority = b; }
 
  private slots:
-  void slotTranscodeStderr( const QString& );
+  void slotTranscodeStderr( const TQString& );
   void slotTranscodeExited( KProcess* );
 
  private:
@@ -243,7 +244,7 @@ class LIBK3B_EXPORT K3bVideoDVDTitleTranscodingJob : public K3bJob
 
   K3bVideoDVD::VideoDVD m_dvd;
 
-  QString m_filename;
+  TQString m_filename;
 
   int m_clippingTop;
   int m_clippingBottom;

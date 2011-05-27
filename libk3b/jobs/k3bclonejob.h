@@ -18,7 +18,7 @@
 
 #include <k3bjob.h>
 #include "k3b_export.h"
-#include <qstring.h>
+#include <tqstring.h>
 
 
 namespace K3bDevice {
@@ -31,16 +31,17 @@ class K3bReadcdReader;
 class LIBK3B_EXPORT K3bCloneJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCloneJob( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bCloneJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCloneJob();
 
   K3bDevice::Device* writer() const { return m_writerDevice; }
   K3bDevice::Device* readingDevice() const { return m_readerDevice; }
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
  public slots:
   void start();
@@ -48,7 +49,7 @@ class LIBK3B_EXPORT K3bCloneJob : public K3bBurnJob
 
   void setWriterDevice( K3bDevice::Device* w ) { m_writerDevice = w; }
   void setReaderDevice( K3bDevice::Device* w ) { m_readerDevice = w; }
-  void setImagePath( const QString& p ) { m_imagePath = p; }
+  void setImagePath( const TQString& p ) { m_imagePath = p; }
   void setNoCorrection( bool b ) { m_noCorrection = b; }
   void setRemoveImageFiles( bool b ) { m_removeImageFiles = b; }
   void setOnlyCreateImage( bool b ) { m_onlyCreateImage = b; }
@@ -73,7 +74,7 @@ class LIBK3B_EXPORT K3bCloneJob : public K3bBurnJob
 
   K3bDevice::Device* m_writerDevice;
   K3bDevice::Device* m_readerDevice;
-  QString m_imagePath;
+  TQString m_imagePath;
 
   K3bCdrecordWriter* m_writerJob;
   K3bReadcdReader* m_readcdReader;

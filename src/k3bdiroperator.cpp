@@ -28,11 +28,11 @@
 #include <kstandarddirs.h>
 #include <kpopupmenu.h>
 
-#include <qdir.h>
+#include <tqdir.h>
 
 
-K3bDirOperator::K3bDirOperator(const KURL& url, QWidget* parent, const char* name )
-  : KDirOperator( url, parent, name )
+K3bDirOperator::K3bDirOperator(const KURL& url, TQWidget* tqparent, const char* name )
+  : KDirOperator( url, tqparent, name )
 {
   setViewConfig( k3bcore->config(), "file view" );
   setMode( KFile::Files );
@@ -49,11 +49,11 @@ K3bDirOperator::K3bDirOperator(const KURL& url, QWidget* parent, const char* nam
   bmMan->setUpdate( true );
   bmMan->setShowNSBookmarks( false );
 
-  m_bmPopup = new KActionMenu( i18n("Bookmarks"), "bookmark", this, "bookmarks" );
+  m_bmPopup = new KActionMenu( i18n("Bookmarks"), "bookmark", TQT_TQOBJECT(this), "bookmarks" );
   m_bmMenu = new KBookmarkMenu( bmMan, this, m_bmPopup->popupMenu(), actionCollection(), true );
 
   (void)new KAction( i18n("&Add to Project"), SHIFT+Key_Return, 
-		     this, SLOT(slotAddFilesToProject()), 
+		     TQT_TQOBJECT(this), TQT_SLOT(slotAddFilesToProject()), 
 		     actionCollection(), "add_file_to_project");
 }
 
@@ -64,9 +64,9 @@ K3bDirOperator::~K3bDirOperator()
 }
 
 
-void K3bDirOperator::readConfig( KConfig* cfg, const QString& group )
+void K3bDirOperator::readConfig( KConfig* cfg, const TQString& group )
 {
-  QString oldGroup = cfg->group();
+  TQString oldGroup = cfg->group();
   cfg->setGroup( group );
 
   KDirOperator::readConfig( cfg, group );
@@ -76,11 +76,11 @@ void K3bDirOperator::readConfig( KConfig* cfg, const QString& group )
   // There seems to be a bug in the KDELibs which makes setURL crash on
   // some systems when used with a non-existing url
   //
-  QString lastUrl = cfg->readPathEntry( "last url", QDir::home().absPath() );
-  while( !QFile::exists(lastUrl) ) {
-    QString urlUp = lastUrl.section( '/', 0, -2 );
+  TQString lastUrl = cfg->readPathEntry( "last url", TQDir::home().absPath() );
+  while( !TQFile::exists(lastUrl) ) {
+    TQString urlUp = lastUrl.section( '/', 0, -2 );
     if( urlUp == lastUrl )
-      lastUrl = QDir::home().absPath();
+      lastUrl = TQDir::home().absPath();
     else
       lastUrl = urlUp;
   }
@@ -93,9 +93,9 @@ void K3bDirOperator::readConfig( KConfig* cfg, const QString& group )
 }
 
 
-void K3bDirOperator::writeConfig( KConfig* cfg, const QString& group )
+void K3bDirOperator::writeConfig( KConfig* cfg, const TQString& group )
 {
-  QString oldGroup = cfg->group();
+  TQString oldGroup = cfg->group();
   cfg->setGroup( group );
 
   KDirOperator::writeConfig( cfg, group );
@@ -105,25 +105,25 @@ void K3bDirOperator::writeConfig( KConfig* cfg, const QString& group )
 }
 
 
-void K3bDirOperator::openBookmarkURL( const QString& url )
+void K3bDirOperator::openBookmarkURL( const TQString& url )
 {
   setURL( KURL::fromPathOrURL( url ), true );
 }
 
 
-QString K3bDirOperator::currentTitle() const
+TQString K3bDirOperator::currentTitle() const
 {
   return url().path(-1);
 }
 
 
-QString K3bDirOperator::currentURL() const
+TQString K3bDirOperator::currentURL() const
 {
   return url().path(-1);
 }
 
 
-void K3bDirOperator::activatedMenu( const KFileItem*, const QPoint& pos )
+void K3bDirOperator::activatedMenu( const KFileItem*, const TQPoint& pos )
 {
   // both from KDirOperator
   setupMenu();
@@ -148,7 +148,7 @@ void K3bDirOperator::activatedMenu( const KFileItem*, const QPoint& pos )
 void K3bDirOperator::slotAddFilesToProject()
 {
   KURL::List files;
-  for( QPtrListIterator<KFileItem> it( *(selectedItems()) ); it.current(); ++it ) {
+  for( TQPtrListIterator<KFileItem> it( *(selectedItems()) ); it.current(); ++it ) {
     files.append( it.current()->url() );
   }    
   if( !files.isEmpty() )

@@ -17,7 +17,7 @@
 #ifndef _K3B_VIDEOCDVIEW_H_
 #define _K3B_VIDEOCDVIEW_H_
 
-#include <qdom.h>
+#include <tqdom.h>
 
 #include <k3bmediacontentsview.h>
 #include <k3bmedium.h>
@@ -28,8 +28,8 @@ class KActionCollection;
 class KActionMenu;
 class KListView;
 
-class QLabel;
-class QListViewItem;
+class TQLabel;
+class TQListViewItem;
 
 class K3bListView;
 class K3bToolBox;
@@ -46,9 +46,10 @@ namespace K3bDevice
 class K3bVideoCdView : public K3bMediaContentsView
 {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        K3bVideoCdView( QWidget* parent = 0, const char * name = 0 );
+        K3bVideoCdView( TQWidget* tqparent = 0, const char * name = 0 );
         ~K3bVideoCdView();
 
         KActionCollection* actionCollection() const
@@ -57,9 +58,9 @@ class K3bVideoCdView : public K3bMediaContentsView
         }
 
     private slots:
-        void slotContextMenu( KListView*, QListViewItem*, const QPoint& );
-        void slotTrackSelectionChanged( QListViewItem* );
-        void slotStateChanged( QListViewItem* );
+        void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& );
+        void slotTrackSelectionChanged( TQListViewItem* );
+        void slotStateChanged( TQListViewItem* );
         void slotVideoCdInfoFinished( bool );
 
         void startRip();
@@ -78,7 +79,7 @@ class K3bVideoCdView : public K3bMediaContentsView
         void initActions();
         void updateDisplay();
         void enableInteraction( bool );
-        void buildTree( QListViewItem *parentItem, const QDomElement &parentElement, const QString& pname = QString::null );
+        void buildTree( TQListViewItem *tqparentItem, const TQDomElement &tqparentElement, const TQString& pname = TQString() );
 
         K3bDevice::Toc m_toc;
 
@@ -91,11 +92,11 @@ class K3bVideoCdView : public K3bMediaContentsView
 
         K3bListView* m_trackView;
         K3bToolBox* m_toolBox;
-        QLabel* m_labelLength;
+        TQLabel* m_labelLength;
 
-        QDomDocument domTree;
+        TQDomDocument domTree;
 
-        QValueList<VideoTrackViewCheckItem *> m_contentList;
+        TQValueList<VideoTrackViewCheckItem *> m_contentList;
 
         unsigned long m_videocddatasize;
         unsigned long m_videocdmpegsize;

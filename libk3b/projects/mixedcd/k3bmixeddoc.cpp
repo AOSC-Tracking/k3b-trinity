@@ -21,8 +21,8 @@
 #include <k3bglobals.h>
 #include <k3bmsf.h>
 
-#include <qfileinfo.h>
-#include <qdom.h>
+#include <tqfileinfo.h>
+#include <tqdom.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -31,16 +31,16 @@
 
 
 
-K3bMixedDoc::K3bMixedDoc( QObject* parent )
-  : K3bDoc( parent )
+K3bMixedDoc::K3bMixedDoc( TQObject* tqparent )
+  : K3bDoc( tqparent )
 {
   m_dataDoc = new K3bDataDoc( this );
   m_audioDoc = new K3bAudioDoc( this );
 
-  connect( m_dataDoc, SIGNAL(changed()),
-	   this, SIGNAL(changed()) );
-  connect( m_audioDoc, SIGNAL(changed()),
-	   this, SIGNAL(changed()) );
+  connect( m_dataDoc, TQT_SIGNAL(changed()),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_audioDoc, TQT_SIGNAL(changed()),
+	   this, TQT_SIGNAL(changed()) );
 }
 
 
@@ -58,7 +58,7 @@ bool K3bMixedDoc::newDocument()
 }
 
 
-QString K3bMixedDoc::name() const
+TQString K3bMixedDoc::name() const
 {
   return m_dataDoc->name();
 }
@@ -102,9 +102,9 @@ int K3bMixedDoc::numOfTracks() const
 }
 
 
-K3bBurnJob* K3bMixedDoc::newBurnJob( K3bJobHandler* hdl, QObject* parent )
+K3bBurnJob* K3bMixedDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
 {
-  return new K3bMixedJob( this, hdl, parent  );
+  return new K3bMixedJob( this, hdl, tqparent  );
 }
 
 
@@ -114,9 +114,9 @@ void K3bMixedDoc::addUrls( const KURL::List& urls )
 }
 
 
-bool K3bMixedDoc::loadDocumentData( QDomElement* rootElem )
+bool K3bMixedDoc::loadDocumentData( TQDomElement* rootElem )
 {
-  QDomNodeList nodes = rootElem->childNodes();
+  TQDomNodeList nodes = rootElem->childNodes();
 
   if( nodes.length() < 4 )
     return false;
@@ -128,23 +128,23 @@ bool K3bMixedDoc::loadDocumentData( QDomElement* rootElem )
 
   if( nodes.item(1).nodeName() != "audio" )
     return false;
-  QDomElement audioElem = nodes.item(1).toElement();
+  TQDomElement audioElem = nodes.item(1).toElement();
   if( !m_audioDoc->loadDocumentData( &audioElem ) )
     return false;
 
   if( nodes.item(2).nodeName() != "data" )
     return false;
-  QDomElement dataElem = nodes.item(2).toElement();
+  TQDomElement dataElem = nodes.item(2).toElement();
   if( !m_dataDoc->loadDocumentData( &dataElem ) )
     return false;
 
   if( nodes.item(3).nodeName() != "mixed" )
     return false;
 
-  QDomNodeList optionList = nodes.item(3).childNodes();
+  TQDomNodeList optionList = nodes.item(3).childNodes();
   for( uint i = 0; i < optionList.count(); i++ ) {
 
-    QDomElement e = optionList.item(i).toElement();
+    TQDomElement e = optionList.item(i).toElement();
     if( e.isNull() )
       return false;
 
@@ -153,7 +153,7 @@ bool K3bMixedDoc::loadDocumentData( QDomElement* rootElem )
     else if( e.nodeName() == "image_path" )
       setTempDir( e.toElement().text() );
     else if( e.nodeName() == "mixed_type" ) {
-      QString mt = e.toElement().text();
+      TQString mt = e.toElement().text();
       if( mt == "last_track" )
 	setMixedType( DATA_LAST_TRACK );
       else if( mt == "second_session" )
@@ -167,31 +167,31 @@ bool K3bMixedDoc::loadDocumentData( QDomElement* rootElem )
 }
 
 
-bool K3bMixedDoc::saveDocumentData( QDomElement* docElem )
+bool K3bMixedDoc::saveDocumentData( TQDomElement* docElem )
 {
-  QDomDocument doc = docElem->ownerDocument();
+  TQDomDocument doc = docElem->ownerDocument();
   saveGeneralDocumentData( docElem );
 
-  QDomElement audioElem = doc.createElement( "audio" );
+  TQDomElement audioElem = doc.createElement( "audio" );
   m_audioDoc->saveDocumentData( &audioElem );
   docElem->appendChild( audioElem );
 
-  QDomElement dataElem = doc.createElement( "data" );
+  TQDomElement dataElem = doc.createElement( "data" );
   m_dataDoc->saveDocumentData( &dataElem );
   docElem->appendChild( dataElem );
 
-  QDomElement mixedElem = doc.createElement( "mixed" );
+  TQDomElement mixedElem = doc.createElement( "mixed" );
   docElem->appendChild( mixedElem );
 
-  QDomElement bufferFilesElem = doc.createElement( "remove_buffer_files" );
+  TQDomElement bufferFilesElem = doc.createElement( "remove_buffer_files" );
   bufferFilesElem.appendChild( doc.createTextNode( removeImages() ? "yes" : "no" ) );
   mixedElem.appendChild( bufferFilesElem );
 
-  QDomElement imagePathElem = doc.createElement( "image_path" );
+  TQDomElement imagePathElem = doc.createElement( "image_path" );
   imagePathElem.appendChild( doc.createTextNode( tempDir() ) );
   mixedElem.appendChild( imagePathElem );
 
-  QDomElement mixedTypeElem = doc.createElement( "mixed_type" );
+  TQDomElement mixedTypeElem = doc.createElement( "mixed_type" );
   switch( mixedType() ) {
   case DATA_FIRST_TRACK:
     mixedTypeElem.appendChild( doc.createTextNode( "first_track" ) );

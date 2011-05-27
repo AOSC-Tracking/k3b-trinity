@@ -17,18 +17,19 @@
 #ifndef _K3B_DATAMODE_WIDGET_H_
 #define _K3B_DATAMODE_WIDGET_H_
 
-#include <qcombobox.h>
+#include <tqcombobox.h>
 
 
 class KConfigBase;
 
 
-class K3bDataModeWidget : public QComboBox
+class K3bDataModeWidget : public TQComboBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDataModeWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bDataModeWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bDataModeWidget();
 
   /**

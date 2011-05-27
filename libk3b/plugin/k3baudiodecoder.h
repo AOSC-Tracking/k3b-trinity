@@ -31,12 +31,13 @@
  *
  * Instances are created by K3bAudioDecoderFactory
  **/
-class LIBK3B_EXPORT K3bAudioDecoder : public QObject
+class LIBK3B_EXPORT K3bAudioDecoder : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioDecoder( QObject* parent = 0, const char* name = 0 );
+  K3bAudioDecoder( TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bAudioDecoder();
 
 
@@ -44,7 +45,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
    * Set the file to decode. Be aware that one cannot rely 
    * on the file length until analyseFile() has been called.
    */
-  void setFilename( const QString& );
+  void setFilename( const TQString& );
 
   /**
    * Since this may take a while depending on the filetype it is best
@@ -87,7 +88,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
    * the default implementation returns the infos set via @p addMetaInfo
    * and uses KFileMetaInfo if none was set
    */ 
-  virtual QString metaInfo( MetaDataField );
+  virtual TQString metaInfo( MetaDataField );
 
   /**
    * The filetype is only used for informational purposes.
@@ -95,7 +96,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
    * as it enhances usability.
    * @returne The filetype of the decoded file.
    */
-  virtual QString fileType() const { return QString::null; }
+  virtual TQString fileType() const { return TQString(); }
 
   /**
    * This method may be reimplemented to provide technical information about
@@ -103,7 +104,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
    *
    * the default implementation returns the infos set via @p addTechnicalInfo
    */
-  virtual QStringList supportedTechnicalInfos() const;
+  virtual TQStringList supportedTechnicalInfos() const;
 
   /**
    * The framework will call this method with all strings returned by the
@@ -111,7 +112,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
    *
    * the default implementation returns the infos set via @p addTechnicalInfo
    */
-  virtual QString technicalInfo( const QString& ) const;
+  virtual TQString technicalInfo( const TQString& ) const;
 
   /**
    * returnes -1 on error, 0 when finished, length of data otherwise
@@ -144,7 +145,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
    */
   virtual K3b::Msf length() const { return m_length; }
 
-  const QString& filename() const { return m_fileName; }
+  const TQString& filename() const { return m_fileName; }
 
   // some helper methods
   static void fromFloatTo16BitBeSigned( float* src, char* dest, int samples );
@@ -155,13 +156,13 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
   /**
    * Use this method if using the default implementation of @p metaInfo
    */
-  void addMetaInfo( MetaDataField, const QString& );
+  void addMetaInfo( MetaDataField, const TQString& );
 
   /**
    * Use this method if using the default implementation of @p technicalInfo
    * and @p supportedTechnicalInfos.
    */
-  void addTechnicalInfo( const QString&, const QString& );
+  void addTechnicalInfo( const TQString&, const TQString& );
 
   /**
    * This will be called once before the first call to decodeInternal.
@@ -191,7 +192,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
  private:
   int resample( char* data, int maxLen );
 
-  QString m_fileName;
+  TQString m_fileName;
   K3b::Msf m_length;
 
   class Private;
@@ -209,16 +210,17 @@ class LIBK3B_EXPORT K3bAudioDecoder : public QObject
 class LIBK3B_EXPORT K3bAudioDecoderFactory : public K3bPlugin
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioDecoderFactory( QObject* parent = 0, const char* name = 0 )
-    : K3bPlugin( parent, name ) {
+  K3bAudioDecoderFactory( TQObject* tqparent = 0, const char* name = 0 )
+    : K3bPlugin( tqparent, name ) {
   }
 
   virtual ~K3bAudioDecoderFactory() {
   }
 
-  QString group() const { return "AudioDecoder"; }
+  TQString group() const { return "AudioDecoder"; }
 
   /**
    * K3b uses this flag to decide which plugins to test first
@@ -239,7 +241,7 @@ class LIBK3B_EXPORT K3bAudioDecoderFactory : public K3bPlugin
    */
   virtual bool canDecode( const KURL& filename ) = 0;
 
-  virtual K3bAudioDecoder* createDecoder( QObject* parent = 0, const char* name = 0 ) const = 0;
+  virtual K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, const char* name = 0 ) const = 0;
 
   /**
    * Searching for an audiodecoder for @p filename.

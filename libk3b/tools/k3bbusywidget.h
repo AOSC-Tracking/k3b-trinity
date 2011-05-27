@@ -17,28 +17,29 @@
 #define K3B_BUSY_WIDGET_H
 
 
-#include <qframe.h>
+#include <tqframe.h>
 #include "k3b_export.h"
 
-class QPainter;
-class QTimer;
+class TQPainter;
+class TQTimer;
 
 
-class LIBK3B_EXPORT K3bBusyWidget : public QFrame
+class LIBK3B_EXPORT K3bBusyWidget : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bBusyWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bBusyWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bBusyWidget();
 
   void showBusy( bool b );
 
-  QSize sizeHint() const;
-  QSize minimumSizeHint() const;
+  TQSize tqsizeHint() const;
+  TQSize tqminimumSizeHint() const;
 
  protected:
-  void drawContents( QPainter* p );
+  void drawContents( TQPainter* p );
 
  private slots:
   void animateBusy();
@@ -47,7 +48,7 @@ class LIBK3B_EXPORT K3bBusyWidget : public QFrame
   bool m_bBusy;
   int m_iBusyPosition;
 
-  QTimer* m_busyTimer;
+  TQTimer* m_busyTimer;
 };
 
 

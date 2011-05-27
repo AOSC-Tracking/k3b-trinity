@@ -16,18 +16,18 @@
 #ifndef K3BVCDVIEW_H
 #define K3BVCDVIEW_H
 
-#include <qstringlist.h>
-#include <qptrlist.h>
+#include <tqstringlist.h>
+#include <tqptrlist.h>
 
 // K3b Includes
 #include <k3bview.h>
 
 class K3bVcdListView;
 class K3bVcdListViewItem;
-class QWidget;
+class TQWidget;
 class K3bVcdDoc;
 class K3bVcdTrack;
-class QListViewItem;
+class TQListViewItem;
 class KListView;
 class K3bVcdBurnDialog;
 class K3bProjectBurnDialog;
@@ -36,13 +36,14 @@ class K3bProjectBurnDialog;
 class K3bVcdView : public K3bView
 {
   Q_OBJECT
+  TQ_OBJECT
   
  public:
-  K3bVcdView( K3bVcdDoc* pDoc, QWidget* parent, const char *name = 0 );
+  K3bVcdView( K3bVcdDoc* pDoc, TQWidget* tqparent, const char *name = 0 );
   ~K3bVcdView();
   
  protected:
-  K3bProjectBurnDialog* newBurnDialog( QWidget* parent = 0, const char* name = 0 );
+  K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
 
   void init();
   

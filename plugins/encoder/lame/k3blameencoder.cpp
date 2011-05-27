@@ -28,18 +28,18 @@
 #include <kcombobox.h>
 #include <kdialogbase.h>
 
-#include <qlayout.h>
-#include <qcstring.h>
-#include <qradiobutton.h>
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qgroupbox.h>
-#include <qbuttongroup.h>
-#include <qtextcodec.h>
-#include <qfile.h>
-#include <qslider.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqcstring.h>
+#include <tqradiobutton.h>
+#include <tqcheckbox.h>
+#include <tqspinbox.h>
+#include <tqgroupbox.h>
+#include <tqbuttongroup.h>
+#include <tqtextcodec.h>
+#include <tqfile.h>
+#include <tqslider.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
 
 #include <stdio.h>
 #include <lame/lame.h>
@@ -135,15 +135,15 @@ public:
 
   char buffer[8000];
 
-  QString filename;
+  TQString filename;
   FILE* fid;
 };
 
 
 
 
-K3bLameEncoder::K3bLameEncoder( QObject* parent, const char* name )
-  : K3bAudioEncoder( parent, name )
+K3bLameEncoder::K3bLameEncoder( TQObject* tqparent, const char* name )
+  : K3bAudioEncoder( tqparent, name )
 {
   d = new Private();
 }
@@ -157,12 +157,12 @@ K3bLameEncoder::~K3bLameEncoder()
 }
 
 
-bool K3bLameEncoder::openFile( const QString& extension, const QString& filename, const K3b::Msf& length )
+bool K3bLameEncoder::openFile( const TQString& extension, const TQString& filename, const K3b::Msf& length )
 {
   closeFile();
 
   d->filename = filename;
-  d->fid = ::fopen( QFile::encodeName( filename ), "w+" );
+  d->fid = ::fopen( TQFile::encodeName( filename ), "w+" );
   if( d->fid )
     return initEncoder( extension, length );
   else
@@ -187,13 +187,13 @@ void K3bLameEncoder::closeFile()
 }
 
 
-const QString& K3bLameEncoder::filename() const
+const TQString& K3bLameEncoder::filename() const
 {
   return d->filename;
 }
 
 
-bool K3bLameEncoder::initEncoderInternal( const QString&, const K3b::Msf& length )
+bool K3bLameEncoder::initEncoderInternal( const TQString&, const K3b::Msf& length )
 {
   KConfig* c = k3bcore->config();
   c->setGroup( "K3bLameEncoderPlugin" );
@@ -226,7 +226,7 @@ bool K3bLameEncoder::initEncoderInternal( const QString&, const K3b::Msf& length
     //
     // Mode
     //
-    QString mode = c->readEntry( "Mode", "stereo" );
+    TQString mode = c->readEntry( "Mode", "stereo" );
     if( mode == "stereo" )
       lame_set_mode( d->flags, STEREO );
     else if( mode == "joint" )
@@ -323,7 +323,7 @@ bool K3bLameEncoder::initEncoderInternal( const QString&, const K3b::Msf& length
 }
 
 
-long K3bLameEncoder::encodeInternal( const char* data, Q_ULONG len )
+long K3bLameEncoder::encodeInternal( const char* data, TQ_ULONG len )
 {
   // FIXME: we may have to swap data here
   int size = lame_encode_buffer_interleaved( d->flags,
@@ -355,11 +355,11 @@ void K3bLameEncoder::finishEncoderInternal()
 }
 
 
-void K3bLameEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, const QString& value )
+void K3bLameEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, const TQString& value )
 {
   // let's not use UTF-8 here since I don't know how to tell lame...
   // FIXME: when we use the codec we only get garbage. Why?
-  QTextCodec* codec = 0;//QTextCodec::codecForName( "ISO8859-1" );
+  TQTextCodec* codec = 0;//TQTextCodec::codecForName( "ISO8859-1" );
 //  if( !codec )
 //    kdDebug() << "(K3bLameEncoder) could not find codec ISO8859-1." << endl;
 
@@ -398,8 +398,8 @@ void K3bLameEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, cons
 
 
 
-K3bLameEncoderSettingsWidget::K3bLameEncoderSettingsWidget( QWidget* parent, const char* name )
-  : K3bPluginConfigWidget( parent, name )
+K3bLameEncoderSettingsWidget::K3bLameEncoderSettingsWidget( TQWidget* tqparent, const char* name )
+  : K3bPluginConfigWidget( tqparent, name )
 {
   m_w = new base_K3bLameEncoderSettingsWidget( this );
   m_w->m_sliderQuality->setRange( 0, 9 );
@@ -411,26 +411,26 @@ K3bLameEncoderSettingsWidget::K3bLameEncoderSettingsWidget( QWidget* parent, con
   m_manualSettingsDlg->setMainWidget( m_brW );
 
   for( int i = 0; s_lame_bitrates[i]; ++i )
-    m_brW->m_comboMaximumBitrate->insertItem( i18n("%1 kbps" ).arg(s_lame_bitrates[i]) );
+    m_brW->m_comboMaximumBitrate->insertItem( i18n("%1 kbps" ).tqarg(s_lame_bitrates[i]) );
 
   for( int i = 0; s_lame_bitrates[i]; ++i )
-    m_brW->m_comboMinimumBitrate->insertItem( i18n("%1 kbps" ).arg(s_lame_bitrates[i]) );
+    m_brW->m_comboMinimumBitrate->insertItem( i18n("%1 kbps" ).tqarg(s_lame_bitrates[i]) );
 
   for( int i = 0; s_lame_bitrates[i]; ++i )
-    m_brW->m_comboConstantBitrate->insertItem( i18n("%1 kbps" ).arg(s_lame_bitrates[i]) );
+    m_brW->m_comboConstantBitrate->insertItem( i18n("%1 kbps" ).tqarg(s_lame_bitrates[i]) );
 
 
-  QHBoxLayout* lay = new QHBoxLayout( this );
+  TQHBoxLayout* lay = new TQHBoxLayout( this );
   lay->setMargin( 0 );
   lay->addWidget( m_w );
 
   // TODO: add whatsthis help for the quality level.
-  //  QString qualityLevelWhatsThis = i18n("<p>");
+  //  TQString qualityLevelWhatsThis = i18n("<p>");
 
-  connect( m_w->m_buttonManualSettings, SIGNAL(clicked()),
-	   this, SLOT(slotShowManualSettings()) );
-  connect( m_w->m_sliderQuality, SIGNAL(valueChanged(int)),
-	   this, SLOT(slotQualityLevelChanged(int)) );
+  connect( m_w->m_buttonManualSettings, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotShowManualSettings()) );
+  connect( m_w->m_sliderQuality, TQT_SIGNAL(valueChanged(int)),
+	   this, TQT_SLOT(slotQualityLevelChanged(int)) );
 
   updateManualSettingsLabel();
   slotQualityLevelChanged( 5 );
@@ -452,7 +452,7 @@ void K3bLameEncoderSettingsWidget::slotShowManualSettings()
   int av = m_brW->m_spinAverageBitrate->value();
   int mode = m_brW->m_comboMode->currentItem();
 
-  if( m_manualSettingsDlg->exec() == QDialog::Rejected ) {
+  if( m_manualSettingsDlg->exec() == TQDialog::Rejected ) {
     m_brW->m_radioConstantBitrate->setChecked( constant );
     m_brW->m_comboConstantBitrate->setCurrentItem( constBitrate );
     m_brW->m_comboMaximumBitrate->setCurrentItem( max );
@@ -469,11 +469,11 @@ void K3bLameEncoderSettingsWidget::updateManualSettingsLabel()
 {
   if( m_brW->m_radioConstantBitrate->isChecked() )
     m_w->m_labelManualSettings->setText( i18n("Constant Bitrate: %1 kbps (%2)")
-					 .arg(s_lame_bitrates[m_brW->m_comboConstantBitrate->currentItem()])
-					 .arg(i18n(s_lame_mode_strings[m_brW->m_comboMode->currentItem()])) );
+					 .tqarg(s_lame_bitrates[m_brW->m_comboConstantBitrate->currentItem()])
+					 .tqarg(i18n(s_lame_mode_strings[m_brW->m_comboMode->currentItem()])) );
   else
     m_w->m_labelManualSettings->setText( i18n("Variable Bitrate (%1)")
-					 .arg(i18n(s_lame_mode_strings[m_brW->m_comboMode->currentItem()])) );
+					 .tqarg(i18n(s_lame_mode_strings[m_brW->m_comboMode->currentItem()])) );
 }
 
 
@@ -488,7 +488,7 @@ void K3bLameEncoderSettingsWidget::loadConfig()
   KConfig* c = k3bcore->config();
   c->setGroup( "K3bLameEncoderPlugin" );
 
-  QString mode = c->readEntry( "Mode", "stereo" );
+  TQString mode = c->readEntry( "Mode", "stereo" );
   if( mode == "stereo" )
     m_brW->m_comboMode->setCurrentItem( 0 );
   else if( mode == "joint" )
@@ -507,9 +507,9 @@ void K3bLameEncoderSettingsWidget::loadConfig()
   else
     m_brW->m_radioConstantBitrate->setChecked( true );
 
-  m_brW->m_comboConstantBitrate->setCurrentItem( i18n("%1 kbps").arg(c->readNumEntry( "Constant Bitrate", 128 )) );
-  m_brW->m_comboMaximumBitrate->setCurrentItem( i18n("%1 kbps").arg(c->readNumEntry( "Maximum Bitrate", 224 )) );
-  m_brW->m_comboMinimumBitrate->setCurrentItem( i18n("%1 kbps").arg(c->readNumEntry( "Minimum Bitrate", 32 )) );
+  m_brW->m_comboConstantBitrate->setCurrentItem( i18n("%1 kbps").tqarg(c->readNumEntry( "Constant Bitrate", 128 )) );
+  m_brW->m_comboMaximumBitrate->setCurrentItem( i18n("%1 kbps").tqarg(c->readNumEntry( "Maximum Bitrate", 224 )) );
+  m_brW->m_comboMinimumBitrate->setCurrentItem( i18n("%1 kbps").tqarg(c->readNumEntry( "Minimum Bitrate", 32 )) );
   m_brW->m_spinAverageBitrate->setValue( c->readNumEntry( "Average Bitrate", 128) );
 
   m_brW->m_checkBitrateMaximum->setChecked( c->readBoolEntry( "Use Maximum Bitrate", false ) );
@@ -535,7 +535,7 @@ void K3bLameEncoderSettingsWidget::saveConfig()
   KConfig* c = k3bcore->config();
   c->setGroup( "K3bLameEncoderPlugin" );
 
-  QString mode;
+  TQString mode;
   switch( m_brW->m_comboMode->currentItem() ) {
   case 0:
     mode = "stereo";
@@ -574,19 +574,19 @@ void K3bLameEncoderSettingsWidget::saveConfig()
 
 
 
-QStringList K3bLameEncoder::extensions() const
+TQStringList K3bLameEncoder::extensions() const
 {
-  return QStringList( "mp3" );
+  return TQStringList( "mp3" );
 }
 
 
-QString K3bLameEncoder::fileTypeComment( const QString& ) const
+TQString K3bLameEncoder::fileTypeComment( const TQString& ) const
 {
   return "MPEG1 Layer III (mp3)";
 }
 
 
-long long K3bLameEncoder::fileSize( const QString&, const K3b::Msf& msf ) const
+long long K3bLameEncoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 {
   KConfig* c = k3bcore->config();
   c->setGroup( "K3bLameEncoderPlugin" );
@@ -617,10 +617,10 @@ long long K3bLameEncoder::fileSize( const QString&, const K3b::Msf& msf ) const
 }
 
 
-K3bPluginConfigWidget* K3bLameEncoder::createConfigWidget( QWidget* parent,
+K3bPluginConfigWidget* K3bLameEncoder::createConfigWidget( TQWidget* tqparent,
 							   const char* name ) const
 {
-  return new K3bLameEncoderSettingsWidget( parent, name );
+  return new K3bLameEncoderSettingsWidget( tqparent, name );
 }
 
 

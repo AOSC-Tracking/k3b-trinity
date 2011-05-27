@@ -30,15 +30,16 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bBinImageWritingJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bBinImageWritingJob( K3bJobHandler*, QObject* parent = 0 );
+  K3bBinImageWritingJob( K3bJobHandler*, TQObject* tqparent = 0 );
   ~K3bBinImageWritingJob();
 
   K3bDevice::Device* writer() const { return m_device; };
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
  public slots:
   void start();
@@ -48,7 +49,7 @@ class LIBK3B_EXPORT K3bBinImageWritingJob : public K3bBurnJob
   void setSimulate( bool b ) { m_simulate = b; }
   void setForce(bool b) { m_force = b; }
   void setMulti( bool b ) { m_noFix = b; }
-  void setTocFile( const QString& s);
+  void setTocFile( const TQString& s);
   void setCopies(int c) { m_copies = c; }
   void setSpeed( int s ) { m_speed = s; }
 
@@ -66,7 +67,7 @@ class LIBK3B_EXPORT K3bBinImageWritingJob : public K3bBurnJob
   bool m_simulate;
   bool m_force;
   bool m_noFix;
-  QString m_tocFile;
+  TQString m_tocFile;
   int m_speed;
   int m_copies;
   int m_finishedCopies;

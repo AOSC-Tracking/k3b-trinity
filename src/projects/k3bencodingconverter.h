@@ -16,10 +16,10 @@
 #ifndef _K3B_ENCODING_CONVERTER_H_
 #define _K3B_ENCODING_CONVERTER_H_
 
-#include <qcstring.h>
-#include <qstring.h>
+#include <tqcstring.h>
+#include <tqstring.h>
 
-class QWidget;
+class TQWidget;
 
 class K3bEncodingConverter
 {
@@ -32,7 +32,7 @@ class K3bEncodingConverter
    *
    * \return True if the string is encoded in the local encoding.
    */
-  bool encodedLocally( const QCString& );
+  bool encodedLocally( const TQCString& );
 
   /**
    * Tries to fix the encoding of a string to fit the local
@@ -41,16 +41,16 @@ class K3bEncodingConverter
    * the proper encoding based on example conversions.
    *
    * \param s The string to be fixed.
-   * \param parent The parent widget to be used when showing the encoding selection dialog.
+   * \param tqparent The tqparent widget to be used when showing the encoding selection dialog.
    * \param cacheEncoding If true the codeset used for successful conversion is cached and
    *                      reused for the next call to fixEncoding.
    *
    * \return True if the conversion was successful.
    */
-  bool fixEncoding( const QCString& s, QCString& result, QWidget* parent = 0, bool cacheEncoding = true );
+  bool fixEncoding( const TQCString& s, TQCString& result, TQWidget* tqparent = 0, bool cacheEncoding = true );
 
  private:
-  bool convert( const QCString& s, QCString& result, const QString& from, const QString& to );
+  bool convert( const TQCString& s, TQCString& result, const TQString& from, const TQString& to );
 
   class Private;
   Private* d;

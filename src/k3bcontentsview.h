@@ -17,33 +17,34 @@
 #ifndef _K3B_CONTENTS_VIEW_H_
 #define _K3B_CONTENTS_VIEW_H_
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include <k3bthememanager.h>
 
 class K3bThemedHeader;
 
 
-class K3bContentsView : public QWidget
+class K3bContentsView : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   virtual ~K3bContentsView();
 
  protected:
   K3bContentsView( bool withHeader,
-		   QWidget* parent = 0, 
+		   TQWidget* tqparent = 0, 
 		   const char* name = 0 );
 
-  QWidget* mainWidget();
-  void setMainWidget( QWidget* );
-  void setTitle( const QString& );
+  TQWidget* mainWidget();
+  void setMainWidget( TQWidget* );
+  void setTitle( const TQString& );
   void setLeftPixmap( K3bTheme::PixmapType );
   void setRightPixmap( K3bTheme::PixmapType );
 
  private:
   K3bThemedHeader* m_header;
-  QWidget* m_centerWidget;
+  TQWidget* m_centerWidget;
 };
 
 #endif

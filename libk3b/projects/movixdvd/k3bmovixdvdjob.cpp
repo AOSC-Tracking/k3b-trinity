@@ -27,33 +27,33 @@
 #include <kdebug.h>
 
 
-K3bMovixDvdJob::K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler* jh, QObject* parent )
-  : K3bBurnJob( jh, parent ),
+K3bMovixDvdJob::K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler* jh, TQObject* tqparent )
+  : K3bBurnJob( jh, tqparent ),
     m_doc(doc)
 {
   m_dvdJob = new K3bDvdJob( doc, this, this );
   m_movixDocPreparer = new K3bMovixDocPreparer( doc, this, this );
 
   // pipe signals
-  connect( m_dvdJob, SIGNAL(percent(int)), this, SIGNAL(percent(int)) );
-  connect( m_dvdJob, SIGNAL(subPercent(int)), this, SIGNAL(subPercent(int)) );
-  connect( m_dvdJob, SIGNAL(processedSubSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-  connect( m_dvdJob, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSize(int, int)) );
-  connect( m_dvdJob, SIGNAL(bufferStatus(int)), this, SIGNAL(bufferStatus(int)) );
-  connect( m_dvdJob, SIGNAL(writeSpeed(int, int)), this, SIGNAL(writeSpeed(int, int)) );
-  connect( m_dvdJob, SIGNAL(newTask(const QString&)), this, SIGNAL(newTask(const QString&)) );
-  connect( m_dvdJob, SIGNAL(newSubTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-  connect( m_dvdJob, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
-  connect( m_dvdJob, SIGNAL(infoMessage(const QString&, int)),
-	   this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_dvdJob, SIGNAL(burning(bool)), this, SIGNAL(burning(bool)) );
+  connect( m_dvdJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(percent(int)) );
+  connect( m_dvdJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
+  connect( m_dvdJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+  connect( m_dvdJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
+  connect( m_dvdJob, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_dvdJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
+  connect( m_dvdJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
+  connect( m_dvdJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_dvdJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_dvdJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_dvdJob, TQT_SIGNAL(burning(bool)), this, TQT_SIGNAL(burning(bool)) );
 
   // we need to clean up here
-  connect( m_dvdJob, SIGNAL(finished(bool)), this, SLOT(slotDvdJobFinished(bool)) );
+  connect( m_dvdJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotDvdJobFinished(bool)) );
 
-  connect( m_movixDocPreparer, SIGNAL(infoMessage(const QString&, int)),
-	   this, SIGNAL(infoMessage(const QString&, int)) );
+  connect( m_movixDocPreparer, TQT_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
 }
 
 
@@ -109,23 +109,23 @@ void K3bMovixDvdJob::slotDvdJobFinished( bool success )
 }
 
 
-QString K3bMovixDvdJob::jobDescription() const
+TQString K3bMovixDvdJob::jobDescription() const
 {
   if( m_doc->isoOptions().volumeID().isEmpty() )
     return i18n("Writing eMovix DVD");
   else
-    return i18n("Writing eMovix DVD (%1)").arg(m_doc->isoOptions().volumeID());
+    return i18n("Writing eMovix DVD (%1)").tqarg(m_doc->isoOptions().volumeID());
 }
 
 
-QString K3bMovixDvdJob::jobDetails() const
+TQString K3bMovixDvdJob::jobDetails() const
 {
   return ( i18n("1 file (%1) and about 8 MB eMovix data", 
 		"%n files (%1) and about 8 MB eMovix data", 
-		m_doc->movixFileItems().count()).arg(KIO::convertSize(m_doc->size()))
+		m_doc->movixFileItems().count()).tqarg(KIO::convertSize(m_doc->size()))
 	   + ( m_doc->copies() > 1 
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
-	       : QString::null ) );
+	       : TQString() ) );
 }
 
 #include "k3bmovixdvdjob.moc"

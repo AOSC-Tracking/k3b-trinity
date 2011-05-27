@@ -19,9 +19,9 @@
 
 #include <k3bglobals.h>
 
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qregexp.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqregexp.h>
 
 #include <kdebug.h>
 
@@ -57,13 +57,13 @@ public:
   }
 
   FileSystemType type;
-  QString path;
+  TQString path;
 
   bool statDone;
 
   void stat() {
     struct statfs fs;
-    if( !::statfs( QFile::encodeName( QFileInfo(path).dirPath( true ) ), &fs ) ) {
+    if( !::statfs( TQFile::encodeName( TQFileInfo(path).dirPath( true ) ), &fs ) ) {
       switch( fs.f_type ) {
       case 0x4d44: // MS-DOS
 	type = FS_FAT;
@@ -86,7 +86,7 @@ K3bFileSystemInfo::K3bFileSystemInfo()
 }
 
 
-K3bFileSystemInfo::K3bFileSystemInfo( const QString& path )
+K3bFileSystemInfo::K3bFileSystemInfo( const TQString& path )
 {
   d = new Private;
   d->path = path;
@@ -108,13 +108,13 @@ K3bFileSystemInfo::~K3bFileSystemInfo()
 }
 
 
-QString K3bFileSystemInfo::path() const
+TQString K3bFileSystemInfo::path() const
 {
   return d->path;
 }
 
 
-void K3bFileSystemInfo::setPath( const QString& path )
+void K3bFileSystemInfo::setPath( const TQString& path )
 {
   if( d->path != path ) {
     d->path = path;
@@ -131,11 +131,11 @@ K3bFileSystemInfo::FileSystemType K3bFileSystemInfo::type() const
 }
 
 
-QString K3bFileSystemInfo::fixupPath( const QString& path )
+TQString K3bFileSystemInfo::fixupPath( const TQString& path )
 {
-  QString s = K3b::fixupPath( path );
+  TQString s = K3b::fixupPath( path );
   if( type() == K3bFileSystemInfo::FS_FAT )
-    return s.replace( QRegExp("[\"\\?\\*/\\\\[\\]\\|\\=\\:;]"), "_" );
+    return s.tqreplace( TQRegExp("[\"\\?\\*/\\\\[\\]\\|\\=\\:;]"), "_" );
   else
     return s;
 }

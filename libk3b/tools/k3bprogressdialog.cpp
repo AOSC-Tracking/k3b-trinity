@@ -17,29 +17,29 @@
 
 #include <k3bbusywidget.h>
 
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qframe.h>
-#include <qwidgetstack.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqlayout.h>
+#include <tqframe.h>
+#include <tqwidgetstack.h>
 
 #include <klocale.h>
 #include <kprogress.h>
 
 
-K3bProgressDialog::K3bProgressDialog( const QString& text,
-				      QWidget* parent, 
-				      const QString& caption,
+K3bProgressDialog::K3bProgressDialog( const TQString& text,
+				      TQWidget* tqparent, 
+				      const TQString& caption,
 				      const char* name ) 
-  : KDialogBase( parent, name, true, caption, Cancel|Ok, Ok, true )
+  : KDialogBase( tqparent, name, true, caption, Cancel|Ok, Ok, true )
 {
-  QFrame* main = makeMainWidget();
-  QGridLayout* mainLayout = new QGridLayout( main );
+  TQFrame* main = makeMainWidget();
+  TQGridLayout* mainLayout = new TQGridLayout( main );
   mainLayout->setMargin( marginHint() );
   mainLayout->setSpacing( spacingHint() );
 
-  m_label = new QLabel( text, main );
-  m_stack = new QWidgetStack( main );
+  m_label = new TQLabel( text, main );
+  m_stack = new TQWidgetStack( main );
   m_progressBar = new KProgress( m_stack );
   m_busyWidget = new K3bBusyWidget( m_stack );
   m_stack->addWidget( m_progressBar );
@@ -71,7 +71,7 @@ int K3bProgressDialog::exec( bool progress )
 }
 
 
-void K3bProgressDialog::setText( const QString& text )
+void K3bProgressDialog::setText( const TQString& text )
 {
   m_label->setText( text );
 }

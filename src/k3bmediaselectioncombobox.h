@@ -34,9 +34,10 @@ namespace K3bDevice {
 class K3bMediaSelectionComboBox : public KComboBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMediaSelectionComboBox( QWidget* parent );
+  K3bMediaSelectionComboBox( TQWidget* tqparent );
   virtual ~K3bMediaSelectionComboBox();
 
   /**
@@ -45,7 +46,7 @@ class K3bMediaSelectionComboBox : public KComboBox
    */
   K3bDevice::Device* selectedDevice() const;
 
-  QValueList<K3bDevice::Device*> allDevices() const;
+  TQValueList<K3bDevice::Device*> allDevices() const;
 
   int wantedMediumType() const;
   int wantedMediumState() const;
@@ -113,9 +114,9 @@ class K3bMediaSelectionComboBox : public KComboBox
  protected:
   void updateMedia();
   virtual bool showMedium( const K3bMedium& ) const;
-  virtual QString mediumString( const K3bMedium& ) const;
-  virtual QString mediumToolTip( const K3bMedium& ) const;
-  virtual QString noMediumMessage() const;
+  virtual TQString mediumString( const K3bMedium& ) const;
+  virtual TQString mediumToolTip( const K3bMedium& ) const;
+  virtual TQString noMediumMessage() const;
 
  private:
   void updateMedium( K3bDevice::Device* );

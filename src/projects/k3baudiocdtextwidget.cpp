@@ -20,12 +20,12 @@
 #include "k3baudiotrack.h"
 #include <k3bcdtextvalidator.h>
 
-#include <qcheckbox.h>
-#include <qtoolbutton.h>
-#include <qpushbutton.h>
-#include <qptrlist.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
+#include <tqcheckbox.h>
+#include <tqtoolbutton.h>
+#include <tqpushbutton.h>
+#include <tqptrlist.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
 
 #include <klineedit.h>
 #include <klocale.h>
@@ -36,8 +36,8 @@
 class K3bAudioCdTextWidget::AllFieldsDialog : public KDialogBase
 {
 public:
-  AllFieldsDialog( QWidget* parent )
-    : KDialogBase( parent,
+  AllFieldsDialog( TQWidget* tqparent )
+    : KDialogBase( tqparent,
 		   "cdtext_allfields_dialog",
 		   true,
 		   i18n("CD-Text"),
@@ -52,8 +52,8 @@ public:
 };
 
 
-K3bAudioCdTextWidget::K3bAudioCdTextWidget( QWidget* parent, const char* name )
-  : base_K3bAudioCdTextWidget( parent, name ),
+K3bAudioCdTextWidget::K3bAudioCdTextWidget( TQWidget* tqparent, const char* name )
+  : base_K3bAudioCdTextWidget( tqparent, name ),
     m_doc(0)
 {
   m_allFieldsDlg = new AllFieldsDialog( this );
@@ -67,7 +67,7 @@ K3bAudioCdTextWidget::K3bAudioCdTextWidget( QWidget* parent, const char* name )
   m_allFieldsDlg->w->m_buttonCopyComposer->setPixmap( SmallIcon( "editcopy" ) );
   m_allFieldsDlg->w->m_buttonCopyArranger->setPixmap( SmallIcon( "editcopy" ) );
 
-  QValidator* cdTextVal = new K3bCdTextValidator( this );
+  TQValidator* cdTextVal = new K3bCdTextValidator( TQT_TQOBJECT(this) );
   m_editTitle->setValidator( cdTextVal );
   m_editPerformer->setValidator( cdTextVal );
 
@@ -80,19 +80,19 @@ K3bAudioCdTextWidget::K3bAudioCdTextWidget( QWidget* parent, const char* name )
   m_allFieldsDlg->w->m_editSongwriter->setValidator( cdTextVal );
   m_allFieldsDlg->w->m_editComposer->setValidator( cdTextVal );
 
-  connect( m_allFieldsDlg->w->m_buttonCopyTitle, SIGNAL(clicked()),
-	   this, SLOT(slotCopyTitle()) );
-  connect( m_allFieldsDlg->w->m_buttonCopyPerformer, SIGNAL(clicked()),
-	   this, SLOT(slotCopyPerformer()) );
-  connect( m_allFieldsDlg->w->m_buttonCopyArranger, SIGNAL(clicked()),
-	   this, SLOT(slotCopyArranger()) );
-  connect( m_allFieldsDlg->w->m_buttonCopySongwriter, SIGNAL(clicked()),
-	   this, SLOT(slotCopySongwriter()) );
-  connect( m_allFieldsDlg->w->m_buttonCopyComposer, SIGNAL(clicked()),
-	   this, SLOT(slotCopyComposer()) );
+  connect( m_allFieldsDlg->w->m_buttonCopyTitle, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotCopyTitle()) );
+  connect( m_allFieldsDlg->w->m_buttonCopyPerformer, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotCopyPerformer()) );
+  connect( m_allFieldsDlg->w->m_buttonCopyArranger, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotCopyArranger()) );
+  connect( m_allFieldsDlg->w->m_buttonCopySongwriter, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotCopySongwriter()) );
+  connect( m_allFieldsDlg->w->m_buttonCopyComposer, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotCopyComposer()) );
 
-  connect( m_buttonMoreFields, SIGNAL(clicked()),
-	   this, SLOT(slotMoreFields()) );
+  connect( m_buttonMoreFields, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotMoreFields()) );
 }
 
 
@@ -143,17 +143,17 @@ void K3bAudioCdTextWidget::slotMoreFields()
   m_allFieldsDlg->w->m_editPerformer->setText( m_editPerformer->text() );
 
   // save old settings
-  QString title = m_allFieldsDlg->w->m_editTitle->text();
-  QString performer = m_allFieldsDlg->w->m_editPerformer->text();
-  QString disc_id = m_allFieldsDlg->w->m_editDisc_id->text();
-  QString upc_ean = m_allFieldsDlg->w->m_editUpc_ean->text();
-  QString arranger = m_allFieldsDlg->w->m_editArranger->text();
-  QString songwriter = m_allFieldsDlg->w->m_editSongwriter->text();
-  QString composer = m_allFieldsDlg->w->m_editComposer->text();
-  QString message = m_allFieldsDlg->w->m_editMessage->text();
+  TQString title = m_allFieldsDlg->w->m_editTitle->text();
+  TQString performer = m_allFieldsDlg->w->m_editPerformer->text();
+  TQString disc_id = m_allFieldsDlg->w->m_editDisc_id->text();
+  TQString upc_ean = m_allFieldsDlg->w->m_editUpc_ean->text();
+  TQString arranger = m_allFieldsDlg->w->m_editArranger->text();
+  TQString songwriter = m_allFieldsDlg->w->m_editSongwriter->text();
+  TQString composer = m_allFieldsDlg->w->m_editComposer->text();
+  TQString message = m_allFieldsDlg->w->m_editMessage->text();
 
   // exec dlg
-  if( m_allFieldsDlg->exec() == QDialog::Accepted ) {
+  if( m_allFieldsDlg->exec() == TQDialog::Accepted ) {
     // accept new entries
     m_editTitle->setText( m_allFieldsDlg->w->m_editTitle->text() );
     m_editPerformer->setText( m_allFieldsDlg->w->m_editPerformer->text() );

@@ -25,7 +25,7 @@
 #include <kglobal.h>
 #include <kdebug.h>
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 #include <errno.h>
 #include <string.h>
@@ -39,8 +39,8 @@ public:
 };
 
 
-K3bGrowisofsHandler::K3bGrowisofsHandler( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bGrowisofsHandler::K3bGrowisofsHandler( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private;
   reset();
@@ -65,18 +65,18 @@ void K3bGrowisofsHandler::reset( K3bDevice::Device* dev, bool dao )
 
 void K3bGrowisofsHandler::handleStart()
 {
-//  QTimer::singleShot( 2000, this, SLOT(slotCheckBufferStatus()) );
+//  TQTimer::singleShot( 2000, this, TQT_SLOT(slotCheckBuffertqStatus()) );
 }
 
 
-void K3bGrowisofsHandler::handleLine( const QString& line )
+void K3bGrowisofsHandler::handleLine( const TQString& line )
 {
   int pos = 0;
 
   if( line.startsWith( ":-[" ) ) {
     // Error
 
-    if( line.contains( "ASC=30h" ) )
+    if( line.tqcontains( "ASC=30h" ) )
       m_error = ERROR_MEDIA;
 
     // :-[ PERFORM OPC failed with SK=3h/ASC=73h/ASCQ=03h
@@ -85,7 +85,7 @@ void K3bGrowisofsHandler::handleLine( const QString& line )
 
     // :-[ attempt -blank=full or re-run with -dvd-compat -dvd-compat to engage DAO ]
     else if( !m_dao && 
-	     ( line.contains( "engage DAO" ) || line.contains( "media is not formatted or unsupported" ) ) )
+	     ( line.tqcontains( "engage DAO" ) || line.tqcontains( "media is not formatted or unsupported" ) ) )
       emit infoMessage( i18n("Please try again with writing mode DAO."), K3bJob::ERROR );
 
     else if( line.startsWith( ":-[ Failed to change write speed" ) ) {
@@ -93,10 +93,10 @@ void K3bGrowisofsHandler::handleLine( const QString& line )
     }
   }
   else if( line.startsWith( ":-(" ) ) {
-    if( line.contains( "No space left on device" ) )
+    if( line.tqcontains( "No space left on device" ) )
       m_error = ERROR_OVERSIZE;
 
-    else if( line.contains( "blocks are free" ) && line.contains( "to be written" ) ) {
+    else if( line.tqcontains( "blocks are free" ) && line.tqcontains( "to be written" ) ) {
       m_error = ERROR_OVERSIZE;
       if( k3bcore->globalSettings()->overburn() )
 	emit infoMessage( i18n("Trying to write more than the official disk capacity"), K3bJob::WARNING );
@@ -116,7 +116,7 @@ void K3bGrowisofsHandler::handleLine( const QString& line )
   else if( line.startsWith( "PERFORM OPC" ) ) {
     m_error = ERROR_OPC;
   }
-  else if( line.contains( "flushing cache" ) ) {
+  else if( line.tqcontains( "flushing cache" ) ) {
     // here is where we already should stop queriying the buffer fill
     // since the device is only used there so far...
     m_device = 0;
@@ -131,34 +131,34 @@ void K3bGrowisofsHandler::handleLine( const QString& line )
   //              line = line.mid( dev->blockDeviceName().length() );
   //              if( line.startsWith( "closing.....
 
-  else if( line.contains( "closing track" ) ) {
+  else if( line.tqcontains( "closing track" ) ) {
     emit newSubTask( i18n("Closing Track")  );
   }
-  else if( line.contains( "closing disc" ) ) {
+  else if( line.tqcontains( "closing disc" ) ) {
     emit newSubTask( i18n("Closing Disk")  );
   }
-  else if( line.contains( "closing session" ) ) {
+  else if( line.tqcontains( "closing session" ) ) {
     emit newSubTask( i18n("Closing Session")  );
   }
-  else if( line.contains( "updating RMA" ) ) {
+  else if( line.tqcontains( "updating RMA" ) ) {
     emit newSubTask( i18n("Updating RMA") );
     emit infoMessage( i18n("Updating RMA") + "...", K3bJob::INFO );
   }
-  else if( line.contains( "closing session" ) ) {
+  else if( line.tqcontains( "closing session" ) ) {
     emit newSubTask( i18n("Closing Session") );
     emit infoMessage( i18n("Closing Session") + "...", K3bJob::INFO );
   }
-  else if( line.contains( "writing lead-out" ) ) {
+  else if( line.tqcontains( "writing lead-out" ) ) {
     emit newSubTask( i18n("Writing Lead-out") );
     emit infoMessage( i18n("Writing the lead-out may take some time."), K3bJob::INFO );
   }
-  else if( line.contains( "Quick Grow" ) ) {
+  else if( line.tqcontains( "Quick Grow" ) ) {
     emit infoMessage( i18n("Removing reference to lead-out."), K3bJob::INFO );
   }
-  else if( line.contains( "copying volume descriptor" ) ) {
+  else if( line.tqcontains( "copying volume descriptor" ) ) {
     emit infoMessage( i18n("Modifying ISO9660 volume descriptor"), K3bJob::INFO );
   }
-  else if( line.contains( "FEATURE 21h is not on" ) ) {
+  else if( line.tqcontains( "FEATURE 21h is not on" ) ) {
     if( !m_dao ) {
       // FIXME: it's not only the writer. It may be the media: something like does not support it with this media
       //        da war was mit: wenn einmal formattiert, dann geht nur noch dao oder wenn einmal als overwrite
@@ -167,28 +167,28 @@ void K3bGrowisofsHandler::handleLine( const QString& line )
       emit infoMessage( i18n("Engaging DAO"), K3bJob::WARNING );
     }
   }
-  else if( ( pos = line.find( "Current Write Speed" ) ) > 0 ) {
+  else if( ( pos = line.tqfind( "Current Write Speed" ) ) > 0 ) {
     // parse write speed
     // /dev/sr0: "Current Write Speed" is 2.4x1385KBps
 
     pos += 24;
-    int endPos = line.find( 'x', pos+1 );
+    int endPos = line.tqfind( 'x', pos+1 );
     bool ok = true;
     double speed = line.mid( pos, endPos-pos ).toDouble(&ok);
     if( ok )
       emit infoMessage( i18n("Writing speed: %1 KB/s (%2x)")
-			.arg((int)(speed*1385.0))
-			.arg(KGlobal::locale()->formatNumber(speed)), K3bJob::INFO );
+			.tqarg((int)(speed*1385.0))
+			.tqarg(KGlobal::locale()->formatNumber(speed)), K3bJob::INFO );
     else
       kdDebug() << "(K3bGrowisofsHandler) parsing error: '" << line.mid( pos, endPos-pos ) << "'" << endl;
   }
-  else if( (pos = line.find( "RBU" )) > 0 ) {
+  else if( (pos = line.tqfind( "RBU" )) > 0 ) {
 
-    // FIXME: use QRegExp
+    // FIXME: use TQRegExp
 
     // parse ring buffer fill for growisofs >= 6.0
     pos += 4;
-    int endPos = line.find( '%', pos+1 );
+    int endPos = line.tqfind( '%', pos+1 );
     bool ok = true;
     double val = line.mid( pos, endPos-pos ).toDouble( &ok );
     if( ok ) {
@@ -199,8 +199,8 @@ void K3bGrowisofsHandler::handleLine( const QString& line )
       }
 
       // device buffer for growisofs >= 7.0
-      pos = line.find( "UBU", pos );
-      endPos = line.find( '%', pos+5 );
+      pos = line.tqfind( "UBU", pos );
+      endPos = line.tqfind( '%', pos+5 );
       if( pos > 0 ) {
 	pos += 4;
 	val = line.mid( pos, endPos-pos ).toDouble( &ok );
@@ -274,7 +274,7 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
       // for now we just emit a message with the error
       // in the future when I know more about what kinds of errors may occur
       // we will enhance this
-      emit infoMessage( i18n("Fatal error at startup: %1").arg(strerror(exitCode-128)), 
+      emit infoMessage( i18n("Fatal error at startup: %1").tqarg(strerror(exitCode-128)), 
 			K3bJob::ERROR );
     }
     else if( exitCode == 1 ) {
@@ -286,7 +286,7 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
       emit infoMessage( i18n("Most likely mkisofs failed in some way."), K3bJob::ERROR );
     }
     else {
-      emit infoMessage( i18n("Fatal error during recording: %1").arg(strerror(exitCode)), 
+      emit infoMessage( i18n("Fatal error during recording: %1").tqarg(strerror(exitCode)), 
 			K3bJob::ERROR );
     }
   }
@@ -295,12 +295,12 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
 }
 
 
-void K3bGrowisofsHandler::slotCheckBufferStatus()
+void K3bGrowisofsHandler::slotCheckBuffertqStatus()
 {
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::BUFFER_CAPACITY, m_device ),
-	   SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	   TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	   this,
-	   SLOT(slotCheckBufferStatusDone(K3bDevice::DeviceHandler*)) );
+	   TQT_SLOT(slotCheckBufferStatusDone(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -308,7 +308,7 @@ void K3bGrowisofsHandler::slotCheckBufferStatusDone( K3bDevice::DeviceHandler* d
 {
   if( dh->success() && dh->bufferCapacity() > 0 ) {
     emit deviceBuffer( 100 * (dh->bufferCapacity() - dh->availableBufferCapacity() ) / dh->bufferCapacity() );
-    QTimer::singleShot( 500, this, SLOT(slotCheckBufferStatus()) );
+    TQTimer::singleShot( 500, this, TQT_SLOT(slotCheckBuffertqStatus()) );
   }
   else {
     kdDebug() << "(K3bGrowisofsHandler) stopping buffer check." << endl;

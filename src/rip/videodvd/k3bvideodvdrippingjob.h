@@ -20,7 +20,7 @@
 #include <k3bvideodvd.h>
 #include <k3bvideodvdtitletranscodingjob.h>
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 
 
 class K3bVideoDVDTitleDetectClippingJob;
@@ -32,9 +32,10 @@ class K3bVideoDVDTitleDetectClippingJob;
 class K3bVideoDVDRippingJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingJob( K3bJobHandler* hdl, QObject* parent );
+  K3bVideoDVDRippingJob( K3bJobHandler* hdl, TQObject* tqparent );
   ~K3bVideoDVDRippingJob();
 
   class TitleRipInfo {
@@ -42,7 +43,7 @@ class K3bVideoDVDRippingJob : public K3bJob
     TitleRipInfo();
     TitleRipInfo( int title,
 		  int audioStream = 0,
-		  const QString& fn = QString::null,
+		  const TQString& fn = TQString(),
 		  int width = 0,  // 0 -> no resize
 		  int height = 0, // 0 -> no resize
 		  int videoBitrate = 0, // 0 -> use default from job settings
@@ -52,7 +53,7 @@ class K3bVideoDVDRippingJob : public K3bJob
 		  int clipRight = 0 );
     int title;
     int audioStream;
-    QString filename;
+    TQString filename;
     int width;
     int height;
     int videoBitrate;
@@ -62,15 +63,15 @@ class K3bVideoDVDRippingJob : public K3bJob
     int clipRight;
   };
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
  public slots:
   void start();
   void cancel();
 
   void setVideoDVD( const K3bVideoDVD::VideoDVD& dvd ) { m_dvd = dvd; }
-  void setTitles( const QValueVector<TitleRipInfo>& titles ) { m_titleRipInfos = titles; }
+  void setTitles( const TQValueVector<TitleRipInfo>& titles ) { m_titleRipInfos = titles; }
 
   void setVideoCodec( K3bVideoDVDTitleTranscodingJob::VideoCodec codec );
   void setVideoBitrate( int bitrate );
@@ -94,7 +95,7 @@ class K3bVideoDVDRippingJob : public K3bJob
   void initProgressInfo();
 
   K3bVideoDVD::VideoDVD m_dvd;
-  QValueVector<TitleRipInfo> m_titleRipInfos;
+  TQValueVector<TitleRipInfo> m_titleRipInfos;
 
   K3bVideoDVDTitleTranscodingJob* m_transcodingJob;
   K3bVideoDVDTitleDetectClippingJob* m_detectClippingJob;

@@ -27,15 +27,16 @@ class K3bDataFileView;
 class K3bVideoDvdView : public K3bView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDvdView( K3bVideoDvdDoc* doc, QWidget *parent = 0, const char *name = 0 );
+  K3bVideoDvdView( K3bVideoDvdDoc* doc, TQWidget *tqparent = 0, const char *name = 0 );
   ~K3bVideoDvdView();
 
    void addUrls( const KURL::List& );
 
  protected:
-  virtual K3bProjectBurnDialog* newBurnDialog( QWidget* parent = 0, const char* name = 0 );
+  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
 
   void init();
 

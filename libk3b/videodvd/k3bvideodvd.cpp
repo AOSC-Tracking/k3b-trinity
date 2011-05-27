@@ -22,7 +22,7 @@
 
 #include <k3bdevice.h>
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <klocale.h>
 
@@ -61,7 +61,7 @@ bool K3bVideoDVD::VideoDVD::open( K3bDevice::Device* dev )
   //
   // Initialize libdvdread
   //
-  dvd_reader_t* dvdReaderT = DVDOpen( QFile::encodeName(dev->blockDeviceName()) );
+  dvd_reader_t* dvdReaderT = DVDOpen( TQFile::encodeName(dev->blockDeviceName()) );
   if( !dvdReaderT ) {
     kdDebug() << "(K3bVideoDVD) Could not open device " << dev->blockDeviceName() << endl;
     return false;
@@ -77,7 +77,7 @@ bool K3bVideoDVD::VideoDVD::open( K3bDevice::Device* dev )
     DVDClose( dvdReaderT );
     return false;
   }
-  m_volumeIdentifier = QString::fromLatin1( v, 32 );
+  m_volumeIdentifier = TQString::tqfromLatin1( v, 32 );
 
   //
   // Open the VMG info
@@ -160,7 +160,7 @@ bool K3bVideoDVD::VideoDVD::open( K3bDevice::Device* dev )
 							  titleIfo->vtsi_mat->vts_audio_attr[j].lang_code>>8, 
 							  titleIfo->vtsi_mat->vts_audio_attr[j].lang_code & 0xff );
       else
-	m_titles[i].m_audioStreams[j].m_langCode = QString::null;
+	m_titles[i].m_audioStreams[j].m_langCode = TQString();
     }
 
     //
@@ -175,7 +175,7 @@ bool K3bVideoDVD::VideoDVD::open( K3bDevice::Device* dev )
 							       titleIfo->vtsi_mat->vts_subp_attr[j].lang_code>>8, 
 							       titleIfo->vtsi_mat->vts_subp_attr[j].lang_code & 0xff );
       else
-	m_titles[i].m_subPictureStreams[j].m_langCode = QString::null;
+	m_titles[i].m_subPictureStreams[j].m_langCode = TQString();
     }
 
     //
@@ -244,7 +244,7 @@ void K3bVideoDVD::VideoDVD::debug() const
 }
 
 
-QString K3bVideoDVD::audioFormatString( int format )
+TQString K3bVideoDVD::audioFormatString( int format )
 {
   switch( format ) {
   case AUDIO_FORMAT_AC3:
@@ -263,7 +263,7 @@ QString K3bVideoDVD::audioFormatString( int format )
 }
 
 
-QString K3bVideoDVD::audioCodeExtensionString( int ext )
+TQString K3bVideoDVD::audioCodeExtensionString( int ext )
 {
   switch( ext ) {
   case AUDIO_CODE_EXT_UNSPECIFIED:
@@ -282,7 +282,7 @@ QString K3bVideoDVD::audioCodeExtensionString( int ext )
 }
 
 
-QString K3bVideoDVD::subPictureCodeModeString( int mode )
+TQString K3bVideoDVD::subPictureCodeModeString( int mode )
 {
   switch( mode ) {
   case SUBPIC_CODE_MODE_RLE:
@@ -295,7 +295,7 @@ QString K3bVideoDVD::subPictureCodeModeString( int mode )
 }
 
 
-QString K3bVideoDVD::subPictureCodeExtensionString( int ext )
+TQString K3bVideoDVD::subPictureCodeExtensionString( int ext )
 {
   switch( ext ) {
   case SUBPIC_CODE_EXT_UNSPECIFIED:
@@ -305,13 +305,13 @@ QString K3bVideoDVD::subPictureCodeExtensionString( int ext )
   case SUBPIC_CODE_EXT_CAPTION_BIGGER_SIZE:
     return i18n("Caption with bigger size character");
   case SUBPIC_CODE_EXT_CAPTION_FOR_CHILDREN:
-    return i18n("Caption for children");
+    return i18n("Caption for tqchildren");
   case SUBPIC_CODE_EXT_CLOSED_CAPTION_NORMAL_SIZE:
     return i18n("Closed caption with normal size character");
   case SUBPIC_CODE_EXT_CLOSED_CAPTION_BIGGER_SIZE:
     return i18n("Closed caption with bigger size character");
   case SUBPIC_CODE_EXT_CLOSED_CAPTION_FOR_CHILDREN:
-    return i18n("Closed caption for children");
+    return i18n("Closed caption for tqchildren");
   case SUBPIC_CODE_EXT_FORCED_CAPTION:
     return i18n("Forced caption");
   case SUBPIC_CODE_EXT_DIR_COMMENTS_NORMAL_SIZE:
@@ -319,7 +319,7 @@ QString K3bVideoDVD::subPictureCodeExtensionString( int ext )
   case SUBPIC_CODE_EXT_DIR_COMMENTS_BIGGER_SIZE:
     return i18n("Director's comments with bigger size characters");
   case SUBPIC_CODE_EXT_DIR_COMMENTS_FOR_CHILDREN:
-    return i18n("Director's comments for children");
+    return i18n("Director's comments for tqchildren");
   default:
     return i18n("unknown code extension");
   }

@@ -20,10 +20,10 @@
 
 class K3bVcdDoc;
 class K3bVcdTrack;
-class QString;
+class TQString;
 class K3bProcess;
 class KProcess;
-class QDataStream;
+class TQDataStream;
 class K3bAbstractWriter;
 class K3bDevice::Device;
 
@@ -31,9 +31,10 @@ class K3bDevice::Device;
 class K3bVcdJob : public K3bBurnJob
 {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        K3bVcdJob( K3bVcdDoc*, K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+        K3bVcdJob( K3bVcdDoc*, K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
         ~K3bVcdJob();
 
         K3bDoc* doc() const;
@@ -43,8 +44,8 @@ class K3bVcdJob : public K3bBurnJob
         }
         K3bDevice::Device* writer() const;
 
-        QString jobDescription() const;
-        QString jobDetails() const;
+        TQString jobDescription() const;
+        TQString jobDetails() const;
 
     public slots:
         void start();
@@ -68,7 +69,7 @@ class K3bVcdJob : public K3bBurnJob
 
         void xmlGen();
         void vcdxBuild();
-        void parseInformation( const QString& );
+        void parseInformation( const TQString& );
         void startWriterjob();
 
         int m_copies;
@@ -103,10 +104,10 @@ class K3bVcdJob : public K3bBurnJob
         bool m_imageFinished;
         bool m_canceled;
 
-        QString m_tempPath;
-        QString m_cueFile;
-        QString m_xmlFile;
-        QString m_collectedOutput;
+        TQString m_tempPath;
+        TQString m_cueFile;
+        TQString m_xmlFile;
+        TQString m_collectedOutput;
 
         K3bAbstractWriter* m_writerJob;
         K3bProcess* m_process;

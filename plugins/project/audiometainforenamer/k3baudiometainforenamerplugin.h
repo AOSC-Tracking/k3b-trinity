@@ -18,27 +18,28 @@
 
 
 #include <k3bprojectplugin.h>
-#include <qwidget.h>
+#include <tqwidget.h>
 
 
 class K3bDataDoc;
 class K3bDirItem;
 class K3bFileItem;
-class QListViewItem;
+class TQListViewItem;
 
 
-class K3bAudioMetainfoRenamerPluginWidget : public QWidget, public K3bProjectPluginGUIBase
+class K3bAudioMetainfoRenamerPluginWidget : public TQWidget, public K3bProjectPluginGUIBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioMetainfoRenamerPluginWidget( K3bDoc* doc, QWidget* parent = 0, const char* name = 0 );
+  K3bAudioMetainfoRenamerPluginWidget( K3bDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bAudioMetainfoRenamerPluginWidget();
 
-  QWidget* qWidget() { return this; }
+  TQWidget* qWidget() { return this; }
 
-  QString title() const;
-  QString subTitle() const;
+  TQString title() const;
+  TQString subTitle() const;
 
   void loadDefaults();
   void readSettings( KConfigBase* );
@@ -50,9 +51,9 @@ class K3bAudioMetainfoRenamerPluginWidget : public QWidget, public K3bProjectPlu
   void slotScanClicked();
 
  private:
-  void scanDir( K3bDirItem*, QListViewItem* parent );
-  QString createNewName( K3bFileItem* );
-  bool existsOtherItemWithSameName( K3bFileItem*, const QString& );
+  void scanDir( K3bDirItem*, TQListViewItem* tqparent );
+  TQString createNewName( K3bFileItem* );
+  bool existsOtherItemWithSameName( K3bFileItem*, const TQString& );
 
   class Private;
   Private* d;
@@ -62,14 +63,15 @@ class K3bAudioMetainfoRenamerPluginWidget : public QWidget, public K3bProjectPlu
 class K3bAudioMetainfoRenamerPlugin : public K3bProjectPlugin
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioMetainfoRenamerPlugin( QObject* parent, const char* name );
+  K3bAudioMetainfoRenamerPlugin( TQObject* tqparent, const char* name );
   ~K3bAudioMetainfoRenamerPlugin();
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bProjectPluginGUIBase* createGUI( K3bDoc*, QWidget* = 0, const char* = 0 );
+  K3bProjectPluginGUIBase* createGUI( K3bDoc*, TQWidget* = 0, const char* = 0 );
 };
 
 

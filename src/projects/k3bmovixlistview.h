@@ -21,7 +21,7 @@
 #include <k3blistview.h>
 #include <kfileitem.h>
 
-#include <qmap.h>
+#include <tqmap.h>
 
 
 class K3bMovixDoc;
@@ -32,8 +32,8 @@ class K3bFileItem;
 class K3bMovixListViewItem : public K3bListViewItem
 {
  public:
-  K3bMovixListViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, QListView* parent, QListViewItem* after );
-  K3bMovixListViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, QListViewItem* parent );
+  K3bMovixListViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListView* tqparent, TQListViewItem* after );
+  K3bMovixListViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListViewItem* tqparent );
   ~K3bMovixListViewItem();
 
   K3bMovixFileItem* fileItem() const { return m_fileItem; }
@@ -50,22 +50,22 @@ class K3bMovixListViewItem : public K3bListViewItem
 class K3bMovixFileViewItem : public K3bMovixListViewItem, public KFileItem
 {
  public:
-  K3bMovixFileViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, QListView* parent, QListViewItem* );
+  K3bMovixFileViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListView* tqparent, TQListViewItem* );
 
-  QString text( int ) const;
-  void setText(int col, const QString& text );
+  TQString text( int ) const;
+  void setText(int col, const TQString& text );
 
   /** always sort according to the playlist order */
-  QString key( int, bool ) const;
+  TQString key( int, bool ) const;
 };
 
 class K3bMovixSubTitleViewItem : public K3bMovixListViewItem, public KFileItem
 {
  public:
-  K3bMovixSubTitleViewItem( K3bMovixDoc*, K3bMovixFileItem* item, K3bMovixListViewItem* parent );
+  K3bMovixSubTitleViewItem( K3bMovixDoc*, K3bMovixFileItem* item, K3bMovixListViewItem* tqparent );
   ~K3bMovixSubTitleViewItem();
 
-  QString text( int ) const;
+  TQString text( int ) const;
 
   bool isMovixFileItem() const { return false; }
 };
@@ -74,27 +74,28 @@ class K3bMovixSubTitleViewItem : public K3bMovixListViewItem, public KFileItem
 class K3bMovixListView : public K3bListView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMovixListView( K3bMovixDoc* doc, QWidget* parent = 0, const char* name = 0 );
+  K3bMovixListView( K3bMovixDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bMovixListView();
 
-  QDragObject* dragObject();
+  TQDragObject* dragObject();
 
  protected:
-  bool acceptDrag(QDropEvent* e) const;
+  bool acceptDrag(TQDropEvent* e) const;
 
  private slots:
   void slotNewFileItems();
   void slotFileItemRemoved( K3bMovixFileItem* );
   void slotSubTitleItemRemoved( K3bMovixFileItem* );
-  void slotDropped( KListView*, QDropEvent* e, QListViewItem* after );
+  void slotDropped( KListView*, TQDropEvent* e, TQListViewItem* after );
   void slotChanged();
 
  private:
   K3bMovixDoc* m_doc;
 
-  QMap<K3bFileItem*, K3bMovixFileViewItem*> m_itemMap;
+  TQMap<K3bFileItem*, K3bMovixFileViewItem*> m_itemMap;
 };
 
 #endif

@@ -15,14 +15,14 @@
 
 #include "k3bstringutils.h"
 
-#include <qfontmetrics.h>
+#include <tqfontmetrics.h>
 
 #include <kdebug.h>
 
 
-QString K3b::cutToWidth( const QFontMetrics& fm, const QString& fullText, int cutWidth )
+TQString K3b::cutToWidth( const TQFontMetrics& fm, const TQString& fullText, int cutWidth )
 {
-  QString squeezedText = "...";
+  TQString squeezedText = "...";
   int squeezedWidth = fm.width(squeezedText);
   int textWidth = fm.width(fullText);
 
@@ -65,12 +65,12 @@ QString K3b::cutToWidth( const QFontMetrics& fm, const QString& fullText, int cu
 
 
 // from KSqueezedTextLabel
-QString K3b::squeezeTextToWidth( const QFontMetrics& fm, const QString& fullText, int cutWidth )
+TQString K3b::squeezeTextToWidth( const TQFontMetrics& fm, const TQString& fullText, int cutWidth )
 {
   int textWidth = fm.width(fullText);
   if (textWidth > cutWidth) {
     // start with the dots only
-    QString squeezedText = "...";
+    TQString squeezedText = "...";
     int squeezedWidth = fm.width(squeezedText);
 
     // estimate how many letters we can add to the dots on both sides

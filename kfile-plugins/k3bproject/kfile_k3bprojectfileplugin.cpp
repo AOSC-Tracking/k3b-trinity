@@ -24,24 +24,24 @@
 
 #include <kgenericfactory.h>
 
-#include <qtextstream.h>
-#include <qdom.h>
-#include <qfile.h>
+#include <tqtextstream.h>
+#include <tqdom.h>
+#include <tqfile.h>
 
 
 
 K_EXPORT_COMPONENT_FACTORY(kfile_k3b, KGenericFactory<K3bProjectFilePlugin>("kfile_k3b"))
 
 
-K3bProjectFilePlugin::K3bProjectFilePlugin( QObject *parent, const char *name,
-					    const QStringList &args)
-  : KFilePlugin(parent, name, args)
+K3bProjectFilePlugin::K3bProjectFilePlugin( TQObject *tqparent, const char *name,
+					    const TQStringList &args)
+  : KFilePlugin(tqparent, name, args)
 {
   KFileMimeTypeInfo* info = addMimeTypeInfo( "application/x-k3b" );
 
   KFileMimeTypeInfo::GroupInfo* group = addGroupInfo( info, "General", i18n("General") );
 
-  addItemInfo( group, "documenttype", i18n("Document Type"), QVariant::String );
+  addItemInfo( group, "documenttype", i18n("Document Type"), TQVariant::String );
 }
 
 
@@ -54,12 +54,12 @@ bool K3bProjectFilePlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 
   // open the file
   bool success = false;
-  QDomDocument xmlDoc;
+  TQDomDocument xmlDoc;
 
   // try opening a store
   KoStore* store = KoStore::createStore( info.url().path(), KoStore::Read );
   if( store && !store->bad() && store->open( "maindata.xml" ) ) {
-    QIODevice* dev = store->device();
+    TQIODevice* dev = store->device();
     dev->open( IO_ReadOnly );
     if( xmlDoc.setContent( dev ) )
       success = true;
@@ -93,7 +93,7 @@ bool K3bProjectFilePlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
       success = false;
     }
 
-    QString stringType;
+    TQString stringType;
     switch( type ) {
     case K3bDoc::AUDIO:
       stringType = i18n("Audio CD");

@@ -22,9 +22,9 @@
 #endif
 
 // include files for QT
-#include <qobject.h>
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
 
 // include files for KDE
@@ -33,11 +33,11 @@
 #include "k3b_export.h"
 
 // forward declaration of the K3b classes
-class QTimer;
+class TQTimer;
 class KTempFile;
 class K3bBurnJob;
-class QDomDocument;
-class QDomElement;
+class TQDomDocument;
+class TQDomElement;
 class KConfig;
 class KActionCollection;
 class K3bJobHandler;
@@ -54,12 +54,13 @@ namespace K3b {
  * K3bDoc is the base document class.
  * It handles some general settings.
  */
-class LIBK3B_EXPORT K3bDoc : public QObject
+class LIBK3B_EXPORT K3bDoc : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDoc( QObject* = 0 );
+  K3bDoc( TQObject* = 0 );
   virtual ~K3bDoc();
 
   enum DocType { 
@@ -79,22 +80,22 @@ class LIBK3B_EXPORT K3bDoc : public QObject
    * \return A name for the project which might for example be used as a suggestion for a file name
    *         when saving. The default implementation extracts a name from the URL.
    */
-  virtual QString name() const;
+  virtual TQString name() const;
 
   /**
    * \return A string representation of the document type.
    */
-  virtual QString typeString() const = 0;
+  virtual TQString typeString() const = 0;
 
   /** 
    * returns the view widget set with setView() or null if none has been set.
    */
-  QWidget* view() const { return m_view; }
+  TQWidget* view() const { return m_view; }
 
   /**
    * Just for convenience to make an easy mapping from doc to GUI possible.
    */
-  void setView( QWidget* v ) { m_view = v; }
+  void setView( TQWidget* v ) { m_view = v; }
 
   /** 
    * sets the modified flag for the document after a modifying action on the view connected to the document.
@@ -118,14 +119,14 @@ class LIBK3B_EXPORT K3bDoc : public QObject
    *
    * This is used to load/save k3b projects. 
    */
-  virtual bool loadDocumentData( QDomElement* root ) = 0;
+  virtual bool loadDocumentData( TQDomElement* root ) = 0;
 
   /**
    * Save a project to an xml stream.
    *
    * This is used to load/save k3b projects. 
    */
-  virtual bool saveDocumentData( QDomElement* docElem ) = 0;
+  virtual bool saveDocumentData( TQDomElement* docElem ) = 0;
 
   /** returns the KURL of the document */
   const KURL& URL() const;
@@ -144,7 +145,7 @@ class LIBK3B_EXPORT K3bDoc : public QObject
   virtual K3b::Msf length() const = 0;
 
   // FIXME: rename this to something like imagePath
-  const QString& tempDir() const { return m_tempDir; }
+  const TQString& tempDir() const { return m_tempDir; }
 
   virtual int numOfTracks() const { return 1; }
 
@@ -154,7 +155,7 @@ class LIBK3B_EXPORT K3bDoc : public QObject
    * easier this way since you don't need to distinguish between the different
    * project types.
    */
-  virtual K3bBurnJob* newBurnJob( K3bJobHandler*, QObject* parent = 0 ) = 0;
+  virtual K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* tqparent = 0 ) = 0;
 
   int writingApp() const { return m_writingApp; }
   void setWritingApp( int a ) { m_writingApp = a; }
@@ -179,7 +180,7 @@ class LIBK3B_EXPORT K3bDoc : public QObject
   void setOnTheFly( bool b ) { m_onTheFly = b; }
   void setSpeed( int speed );
   void setBurner( K3bDevice::Device* dev );
-  void setTempDir( const QString& dir ) { m_tempDir = dir; }
+  void setTempDir( const TQString& dir ) { m_tempDir = dir; }
   void setRemoveImages( bool b ) { m_removeImages = b; }
   void setOnlyCreateImages( bool b ) { m_onlyCreateImages = b; }
   void setCopies( int c ) { m_copies = c; }
@@ -194,9 +195,9 @@ class LIBK3B_EXPORT K3bDoc : public QObject
  protected:
   int m_docType;
 
-  bool saveGeneralDocumentData( QDomElement* );
+  bool saveGeneralDocumentData( TQDomElement* );
 
-  bool readGeneralDocumentData( const QDomElement& );
+  bool readGeneralDocumentData( const TQDomElement& );
 
  private slots:
   void slotChanged();
@@ -206,9 +207,9 @@ class LIBK3B_EXPORT K3bDoc : public QObject
   bool m_modified;
   KURL doc_url;
 
-  QWidget* m_view;
+  TQWidget* m_view;
 
-  QString m_tempDir;
+  TQString m_tempDir;
   K3bDevice::Device* m_burner;
   bool m_dummy;
   bool m_onTheFly;

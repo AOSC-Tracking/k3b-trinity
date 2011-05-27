@@ -30,24 +30,24 @@
 #include <k3bwritingmodewidget.h>
 #include <k3bexternalbinmanager.h>
 
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qtabwidget.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qgrid.h>
-#include <qtoolbutton.h>
-#include <qptrlist.h>
-#include <qstringlist.h>
-#include <qpoint.h>
-#include <qhbox.h>
-#include <qspinbox.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqpushbutton.h>
+#include <tqtabwidget.h>
+#include <tqlayout.h>
+#include <tqvariant.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqgrid.h>
+#include <tqtoolbutton.h>
+#include <tqptrlist.h>
+#include <tqstringlist.h>
+#include <tqpoint.h>
+#include <tqhbox.h>
+#include <tqspinbox.h>
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -55,17 +55,17 @@
 #include <kmessagebox.h>
 
 
-K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, QWidget *parent, const char *name, bool modal )
-  : K3bProjectBurnDialog( _doc, parent, name, modal ),
+K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, TQWidget *tqparent, const char *name, bool modal )
+  : K3bProjectBurnDialog( _doc, tqparent, name, modal ),
     m_doc(_doc)
 {
   prepareGui();
 
   setTitle( i18n("Audio Project"),
 	    i18n("1 track (%1 minutes)", "%n tracks (%1 minutes)",
-		 m_doc->numOfTracks() ).arg(m_doc->length().toString()) );
+		 m_doc->numOfTracks() ).tqarg(m_doc->length().toString()) );
 
-  QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+  TQSpacerItem* spacer = new TQSpacerItem( 20, 20, TQSizePolicy::Minimum, TQSizePolicy::Expanding );
   m_optionGroupLayout->addItem( spacer );
 
   // create cd-text page
@@ -74,27 +74,27 @@ K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, QWidget *parent, const
 
   // create advanced tab
   // ----------------------------------------------------------
-  QWidget* advancedTab = new QWidget( this );
-  QGridLayout* advancedTabGrid = new QGridLayout( advancedTab );
+  TQWidget* advancedTab = new TQWidget( this );
+  TQGridLayout* advancedTabGrid = new TQGridLayout( advancedTab );
   advancedTabGrid->setSpacing( spacingHint() );
   advancedTabGrid->setMargin( marginHint() );
 
-  QGroupBox* advancedSettingsGroup = new QGroupBox( 1, Qt::Vertical, i18n("Settings"), advancedTab );
+  TQGroupBox* advancedSettingsGroup = new TQGroupBox( 1, Qt::Vertical, i18n("Settings"), advancedTab );
   m_checkNormalize = K3bStdGuiItems::normalizeCheckBox( advancedSettingsGroup );
 
-  QGroupBox* advancedGimmickGroup = new QGroupBox( 1, Qt::Vertical, i18n("Gimmicks"), advancedTab );
-  m_checkHideFirstTrack = new QCheckBox( i18n( "Hide first track" ), advancedGimmickGroup, "m_checkHideFirstTrack" );
+  TQGroupBox* advancedGimmickGroup = new TQGroupBox( 1, Qt::Vertical, i18n("Gimmicks"), advancedTab );
+  m_checkHideFirstTrack = new TQCheckBox( i18n( "Hide first track" ), advancedGimmickGroup, "m_checkHideFirstTrack" );
 
-  m_audioRippingGroup = new QGroupBox( 3, Qt::Vertical, i18n("Audio Ripping"), advancedTab );
-  QHBox* box = new QHBox( m_audioRippingGroup );
+  m_audioRippingGroup = new TQGroupBox( 3, Qt::Vertical, i18n("Audio Ripping"), advancedTab );
+  TQHBox* box = new TQHBox( m_audioRippingGroup );
   box->setSpacing( spacingHint() );
-  box->setStretchFactor(new QLabel( i18n("Paranoia mode:"), box ), 1 );
+  box->setStretchFactor(new TQLabel( i18n("Paranoia mode:"), box ), 1 );
   m_comboParanoiaMode = K3bStdGuiItems::paranoiaModeComboBox( box );
-  box = new QHBox( m_audioRippingGroup );
+  box = new TQHBox( m_audioRippingGroup );
   box->setSpacing( spacingHint() );
-  box->setStretchFactor( new QLabel( i18n("Read retries:"), box ), 1 );
-  m_spinAudioRippingReadRetries = new QSpinBox( 1, 128, 1, box );
-  m_checkAudioRippingIgnoreReadErrors = new QCheckBox( i18n("Ignore read errors"), m_audioRippingGroup );
+  box->setStretchFactor( new TQLabel( i18n("Read retries:"), box ), 1 );
+  m_spinAudioRippingReadRetries = new TQSpinBox( 1, 128, 1, box );
+  m_checkAudioRippingIgnoreReadErrors = new TQCheckBox( i18n("Ignore read errors"), m_audioRippingGroup );
 
   advancedTabGrid->addWidget( advancedSettingsGroup, 0, 0 );
   advancedTabGrid->addWidget( advancedGimmickGroup, 1, 0 );
@@ -103,18 +103,18 @@ K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, QWidget *parent, const
 
   addPage( advancedTab, i18n("Advanced") );
 
-  connect( m_writerSelectionWidget, SIGNAL(writingAppChanged(int)), this, SLOT(slotToggleAll()) );
-  connect( m_checkNormalize, SIGNAL(toggled(bool)), this, SLOT(slotNormalizeToggled(bool)) );
-  connect( m_checkCacheImage, SIGNAL(toggled(bool)), this, SLOT(slotCacheImageToggled(bool)) );
-  connect( m_writingModeWidget, SIGNAL(writingModeChanged(int)), this, SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkNormalize, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotNormalizeToggled(bool)) );
+  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotCacheImageToggled(bool)) );
+  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
 
   // ToolTips
   // -------------------------------------------------------------------------
-  QToolTip::add( m_checkHideFirstTrack, i18n("Hide the first track in the first pregap") );
+  TQToolTip::add( m_checkHideFirstTrack, i18n("Hide the first track in the first pregap") );
 
   // What's This info
   // -------------------------------------------------------------------------
-  QWhatsThis::add( m_checkHideFirstTrack,
+  TQWhatsThis::add( m_checkHideFirstTrack,
 		   i18n("<p>If this option is checked K3b will <em>hide</em> the first track."
 			"<p>The audio CD standard uses pregaps before every track on the CD. "
 			"By default these last for 2 seconds and are silent. In DAO mode it "
@@ -262,7 +262,7 @@ void K3bAudioBurnDialog::toggleAll()
 }
 
 
-void K3bAudioBurnDialog::showEvent( QShowEvent* e )
+void K3bAudioBurnDialog::showEvent( TQShowEvent* e )
 {
   // we only show the audio ripping options when there are audio cd track sources
   bool showRipOptions = false;
@@ -308,7 +308,7 @@ void K3bAudioBurnDialog::slotNormalizeToggled( bool on )
       if( KMessageBox::warningYesNo( this, i18n("<p>K3b is not able to normalize audio tracks when burning on-the-fly. "
 						"The external program used for this task only supports normalizing a set "
 						"of audio files."),
-				     QString::null,
+				     TQString(),
 				     i18n("Disable normalization"),
 				     i18n("Disable on-the-fly burning"),
 				     "audioProjectNormalizeOrOnTheFly" ) == KMessageBox::Yes )
@@ -327,7 +327,7 @@ void K3bAudioBurnDialog::slotCacheImageToggled( bool on )
       if( KMessageBox::warningYesNo( this, i18n("<p>K3b is not able to normalize audio tracks when burning on-the-fly. "
 						"The external program used for this task only supports normalizing a set "
 						"of audio files."),
-				     QString::null,
+				     TQString(),
 				     i18n("Disable normalization"),
 				     i18n("Disable on-the-fly burning"),
 				     "audioProjectNormalizeOrOnTheFly" ) == KMessageBox::Yes )

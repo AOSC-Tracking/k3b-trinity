@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bMovixOptionsWidget</class>
 <author>Sebastian trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Form1</cstring>
     </property>
@@ -9,7 +9,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox2</cstring>
             </property>
@@ -26,7 +26,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="TQLabel" row="0" column="0">
                     <property name="name">
                         <cstring>textLabel2</cstring>
                     </property>
@@ -42,7 +42,7 @@
                         <string>Select the font to be used to render subtitles</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="5" column="0">
+                <widget class="TQLabel" row="5" column="0">
                     <property name="name">
                         <cstring>textLabel7</cstring>
                     </property>
@@ -53,15 +53,15 @@
                         <string></string>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget" row="3" column="0" rowspan="1" colspan="2">
+                <widget class="TQLayoutWidget" row="3" column="0" rowspan="1" colspan="2">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>tqlayout1</cstring>
                     </property>
                     <hbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>m_checkRandomPlay</cstring>
                             </property>
@@ -75,7 +75,7 @@
                                 <string>&lt;p&gt;If this option is checked the order in which the files are played is determined randomly every time it is played.</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>m_checkNoDma</cstring>
                             </property>
@@ -91,7 +91,7 @@
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QLineEdit" row="5" column="1">
+                <widget class="TQLineEdit" row="5" column="1">
                     <property name="name">
                         <cstring>m_editUnwantedMplayerOptions</cstring>
                     </property>
@@ -104,7 +104,7 @@
 &lt;pre&gt;opt1 opt2 opt3&lt;/pre&gt;</string>
                     </property>
                 </widget>
-                <widget class="QLineEdit" row="4" column="1">
+                <widget class="TQLineEdit" row="4" column="1">
                     <property name="name">
                         <cstring>m_editAdditionalMplayerOptions</cstring>
                     </property>
@@ -117,7 +117,7 @@
 &lt;pre&gt;opt1 opt2 opt3&lt;/pre&gt;</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="4" column="0">
+                <widget class="TQLabel" row="4" column="0">
                     <property name="name">
                         <cstring>textLabel6</cstring>
                     </property>
@@ -125,7 +125,7 @@
                         <string>Additional MPlayer options:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="0">
+                <widget class="TQLabel" row="2" column="0">
                     <property name="name">
                         <cstring>textLabel3</cstring>
                     </property>
@@ -133,7 +133,7 @@
                         <string>Loop playlist:</string>
                     </property>
                 </widget>
-                <widget class="QSpinBox" row="2" column="1">
+                <widget class="TQSpinBox" row="2" column="1">
                     <property name="name">
                         <cstring>m_spinLoop</cstring>
                     </property>
@@ -150,7 +150,7 @@
                         <string>How many times should the playlist be looped</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>m_labelAudioBackground</cstring>
                     </property>
@@ -173,7 +173,7 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox3</cstring>
             </property>
@@ -184,7 +184,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>m_labelKeyboardLayout</cstring>
                     </property>
@@ -192,7 +192,7 @@
                         <string>Keyboard Layout:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="TQLabel" row="0" column="0">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -208,7 +208,7 @@
                         <string>Select the language of the eMovix help screens</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="0">
+                <widget class="TQLabel" row="2" column="0">
                     <property name="name">
                         <cstring>textLabel5</cstring>
                     </property>
@@ -239,15 +239,15 @@
                         <cstring>m_comboKeyboardLayout</cstring>
                     </property>
                     <property name="toolTip" stdset="0">
-                        <string>Select the layout of the keyboard</string>
+                        <string>Select the tqlayout of the keyboard</string>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>&lt;p&gt;The keyboard layout selected here will be used for the eMovix commands like controlling the media player.</string>
+                        <string>&lt;p&gt;The keyboard tqlayout selected here will be used for the eMovix commands like controlling the media player.</string>
                     </property>
                 </widget>
             </grid>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -266,7 +266,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkEject</cstring>
                     </property>
@@ -280,7 +280,7 @@
                         <string>&lt;p&gt;If this option is checked the disk will be ejected after MPlayer has finished.</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkShutdown</cstring>
                     </property>
@@ -294,7 +294,7 @@
                         <string>&lt;p&gt;If this option is checked the PC will be shut down after MPlayer has finished playing.</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkReboot</cstring>
                     </property>
@@ -326,7 +326,7 @@
         <slot>setDisabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kcombobox.h</includehint>
     <includehint>kcombobox.h</includehint>

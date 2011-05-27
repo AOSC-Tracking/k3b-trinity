@@ -17,9 +17,9 @@
 #ifndef K3BCDDB_H
 #define K3BCDDB_H
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qobject.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqobject.h>
 
 #include <k3btoc.h>
 
@@ -35,15 +35,16 @@ class K3bCddbSubmit;
 class K3bCddbLocalSubmit;
 
 
-class LIBK3B_EXPORT K3bCddb : public QObject 
+class LIBK3B_EXPORT K3bCddb : public TQObject 
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCddb( QObject* parent = 0, const char* name = 0 );
+  K3bCddb( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCddb();
 
-  QString errorString() const;
+  TQString errorString() const;
 
   /**
    * Do NOT call this before queryResult has
@@ -60,7 +61,7 @@ class LIBK3B_EXPORT K3bCddb : public QObject
  signals:
   void queryFinished( int error );
   void submitFinished( bool success );
-  void infoMessage( const QString& );
+  void infoMessage( const TQString& );
 
  private slots:
   void localQuery();
@@ -71,7 +72,7 @@ class LIBK3B_EXPORT K3bCddb : public QObject
   void slotNoEntry();
 
  private:
-  K3bCddbQuery* getQuery( const QString& );
+  K3bCddbQuery* getQuery( const TQString& );
 
   K3bCddbHttpQuery* m_httpQuery;
   K3bCddbpQuery* m_cddbpQuery;
@@ -86,13 +87,13 @@ class LIBK3B_EXPORT K3bCddb : public QObject
   K3bCddbResultEntry m_lastResult;
 
   // config
-  QStringList m_cddbServer;
-  QString m_proxyServer;
+  TQStringList m_cddbServer;
+  TQString m_proxyServer;
   int m_proxyPort;
-  QString m_cgiPath;
+  TQString m_cgiPath;
   bool m_bUseProxyServer;
   bool m_bUseKdeSettings;
-  QStringList m_localCddbDirs;
+  TQStringList m_localCddbDirs;
   bool m_bSaveCddbEntriesLocally;
   bool m_bUseManualCgiPath;
   bool m_bRemoteCddbQuery;

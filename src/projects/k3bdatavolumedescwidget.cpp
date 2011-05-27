@@ -18,18 +18,18 @@
 #include "k3bisooptions.h"
 #include <k3bvalidators.h>
 
-#include <qlineedit.h>
-#include <qspinbox.h>
-#include <qlabel.h>
-#include <qtoolbutton.h>
+#include <tqlineedit.h>
+#include <tqspinbox.h>
+#include <tqlabel.h>
+#include <tqtoolbutton.h>
 
 
-K3bDataVolumeDescWidget::K3bDataVolumeDescWidget( QWidget* parent, const char* name )
-  : base_K3bDataVolumeDescWidget( parent, name )
+K3bDataVolumeDescWidget::K3bDataVolumeDescWidget( TQWidget* tqparent, const char* name )
+  : base_K3bDataVolumeDescWidget( tqparent, name )
 {
   // the maximal number of characters that can be inserted are set in the ui file!
 
-  QValidator* isoValidator = new K3bLatin1Validator( this );
+  TQValidator* isoValidator = new K3bLatin1Validator( TQT_TQOBJECT(this) );
 
   m_editVolumeName->setValidator( isoValidator );
   m_editVolumeSetName->setValidator( isoValidator );
@@ -38,8 +38,8 @@ K3bDataVolumeDescWidget::K3bDataVolumeDescWidget( QWidget* parent, const char* n
   m_editSystem->setValidator( isoValidator );
   m_editApplication->setValidator( isoValidator );
 
-  connect( m_spinVolumeSetSize, SIGNAL(valueChanged(int)),
-	   this, SLOT(slotVolumeSetSizeChanged(int)) );
+  connect( m_spinVolumeSetSize, TQT_SIGNAL(valueChanged(int)),
+	   this, TQT_SLOT(slotVolumeSetSizeChanged(int)) );
 
   // for now we hide the volume set size stuff since it's not working anymore in mkisofs 2.01a34
   textLabel1->hide();

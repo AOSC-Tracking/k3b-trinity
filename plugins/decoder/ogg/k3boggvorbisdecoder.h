@@ -26,16 +26,17 @@ class KURL;
 class K3bOggVorbisDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bOggVorbisDecoderFactory( QObject* parent = 0, const char* name = 0 );
+  K3bOggVorbisDecoderFactory( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bOggVorbisDecoderFactory();
 
   bool canDecode( const KURL& filename );
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bAudioDecoder* createDecoder( QObject* parent = 0, 
+  K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, 
 				  const char* name = 0 ) const;
 };
 
@@ -46,14 +47,15 @@ class K3bOggVorbisDecoderFactory : public K3bAudioDecoderFactory
 class K3bOggVorbisDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bOggVorbisDecoder( QObject* parent = 0, const char* name = 0 );
+  K3bOggVorbisDecoder( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bOggVorbisDecoder();
 
   void cleanup();
 
-  QString fileType() const;
+  TQString fileType() const;
 
  protected:
   bool analyseFileInternal( K3b::Msf& frames, int& samplerate, int& ch );

@@ -20,7 +20,7 @@
 
 #include "k3babstractwriter.h"
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 class K3bExternalBin;
 class K3bProcess;
@@ -31,10 +31,11 @@ class K3bDevice::Device;
 class K3bCdrecordWriter : public K3bAbstractWriter
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   K3bCdrecordWriter( K3bDevice::Device*, K3bJobHandler* hdl, 
-		     QObject* parent = 0, const char* name = 0 );
+		     TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCdrecordWriter();
 
   bool active() const;
@@ -42,7 +43,7 @@ class K3bCdrecordWriter : public K3bAbstractWriter
   /**
    * to be used in chain: addArgument(x)->addArgument(y)
    */
-  K3bCdrecordWriter* addArgument( const QString& );
+  K3bCdrecordWriter* addArgument( const TQString& );
   void clearArguments();
 
   int fd() const;
@@ -53,10 +54,10 @@ class K3bCdrecordWriter : public K3bAbstractWriter
 
   void setDao( bool b );
   void setWritingMode( int );
-  void setCueFile( const QString& s);
+  void setCueFile( const TQString& s);
   void setClone( bool b );
 
-  void setRawCdText( const QByteArray& a ) { m_rawCdText = a; }
+  void setRawCdText( const TQByteArray& a ) { m_rawCdText = a; }
 
   /**
    * If set true the job ignores the global K3b setting
@@ -65,7 +66,7 @@ class K3bCdrecordWriter : public K3bAbstractWriter
   void setForceNoEject( bool b ) { m_forceNoEject = b; }
 
  protected slots:
-  void slotStdLine( const QString& line );
+  void slotStdLine( const TQString& line );
   void slotProcessExited(KProcess*);
   void slotThroughput( int t );
 
@@ -80,7 +81,7 @@ class K3bCdrecordWriter : public K3bAbstractWriter
   bool m_clone;
   bool m_cue;
 
-  QString m_cueFile;
+  TQString m_cueFile;
 
   enum CdrecordError { UNKNOWN, 
 		       OVERSIZE, 
@@ -100,7 +101,7 @@ class K3bCdrecordWriter : public K3bAbstractWriter
 		       DEVICE_BUSY,
 		       BLANK_FAILED };
 
-  QStringList m_arguments;
+  TQStringList m_arguments;
 
  private:  
   unsigned int m_currentTrack;
@@ -114,7 +115,7 @@ class K3bCdrecordWriter : public K3bAbstractWriter
 
   bool m_forceNoEject;
 
-  QByteArray m_rawCdText;
+  TQByteArray m_rawCdText;
 
   class Private;
   Private* d;

@@ -16,7 +16,7 @@
 #ifndef K3B_ISO_OPTIONS_H
 #define K3B_ISO_OPTIONS_H
 
-#include <qstring.h>
+#include <tqstring.h>
 #include "k3b_export.h"
 
 class KConfigBase;
@@ -28,10 +28,10 @@ class LIBK3B_EXPORT K3bIsoOptions
   K3bIsoOptions();
 
   bool forceInputCharset() const { return m_bForceInputCharset; }
-  const QString& inputCharset() const { return m_inputCharset; }
+  const TQString& inputCharset() const { return m_inputCharset; }
 
   void setForceInputCharset( bool b ) { m_bForceInputCharset = b; }
-  void setInputCharset( const QString& cs ) { m_inputCharset = cs; }
+  void setInputCharset( const TQString& cs ) { m_inputCharset = cs; }
 
 	
   // -- mkisofs-options ----------------------------------------------------------------------
@@ -56,17 +56,17 @@ class LIBK3B_EXPORT K3bIsoOptions
   bool preserveFilePermissions() const { return m_preserveFilePermissions; }
 
   int ISOLevel() const { return m_isoLevel; }
-  const QString& systemId() const { return m_systemId; }
-  const QString& applicationID() const { return m_applicationID; }
-  const QString& volumeID() const { return m_volumeID; }
-  const QString& volumeSetId() const { return m_volumeSetId; }
+  const TQString& systemId() const { return m_systemId; }
+  const TQString& applicationID() const { return m_applicationID; }
+  const TQString& volumeID() const { return m_volumeID; }
+  const TQString& volumeSetId() const { return m_volumeSetId; }
   int volumeSetSize() const { return m_volumeSetSize; }
   int volumeSetNumber() const { return m_volumeSetNumber; }
-  const QString& publisher() const { return m_publisher; }
-  const QString& preparer() const { return m_preparer; }
-  const QString& abstractFile() const { return m_abstractFile; }
-  const QString& copyrightFile() const { return m_copyrightFile; }
-  const QString& bibliographFile() const { return m_bibliographFile; }
+  const TQString& publisher() const { return m_publisher; }
+  const TQString& preparer() const { return m_preparer; }
+  const TQString& abstractFile() const { return m_abstractFile; }
+  const TQString& copyrightFile() const { return m_copyrightFile; }
+  const TQString& bibliographFile() const { return m_bibliographFile; }
 	
   void setCreateRockRidge( bool b ) { m_createRockRidge = b; }
   void setCreateJoliet( bool b ) {  m_createJoliet = b; }
@@ -87,33 +87,33 @@ class LIBK3B_EXPORT K3bIsoOptions
   void setJolietLong( bool b ) { m_jolietLong = b; }
 	
   void setISOLevel( int i ) { m_isoLevel = i; }
-  void setSystemId( const QString& s ) { m_systemId = s; }
-  void setApplicationID( const QString& s ) { m_applicationID = s; }
+  void setSystemId( const TQString& s ) { m_systemId = s; }
+  void setApplicationID( const TQString& s ) { m_applicationID = s; }
 
   /**
    * Set the filesystems volume id.
    *
    * max length for this field is 32 chars.
    */
-  void setVolumeID( const QString& s ) { m_volumeID = s; }
-  void setVolumeSetId( const QString& s ) { m_volumeSetId = s; }
+  void setVolumeID( const TQString& s ) { m_volumeID = s; }
+  void setVolumeSetId( const TQString& s ) { m_volumeSetId = s; }
   void setVolumeSetSize( int size ) { m_volumeSetSize = size; }
   void setVolumeSetNumber( int n ) { m_volumeSetNumber = n; }
-  void setPublisher( const QString& s ) { m_publisher = s; }
-  void setPreparer( const QString& s ) { m_preparer = s; }
-  void setAbstractFile( const QString& s ) { m_abstractFile = s; }
-  void setCoprightFile( const QString& s ) { m_copyrightFile = s; }
-  void setBibliographFile( const QString& s ) { m_bibliographFile = s; }
+  void setPublisher( const TQString& s ) { m_publisher = s; }
+  void setPreparer( const TQString& s ) { m_preparer = s; }
+  void setAbstractFile( const TQString& s ) { m_abstractFile = s; }
+  void setCoprightFile( const TQString& s ) { m_copyrightFile = s; }
+  void setBibliographFile( const TQString& s ) { m_bibliographFile = s; }
 
   void setPreserveFilePermissions( bool b ) { m_preserveFilePermissions = b; }
   // ----------------------------------------------------------------- mkisofs-options -----------
 
-  enum whiteSpaceTreatments { noChange = 0, replace = 1, strip = 2, extended = 3 };
+  enum whiteSpaceTreatments { noChange = 0, tqreplace = 1, strip = 2, extended = 3 };
 
   void setWhiteSpaceTreatment( int i ) { m_whiteSpaceTreatment = i; }
   int whiteSpaceTreatment() const { return m_whiteSpaceTreatment; }
-  const QString& whiteSpaceTreatmentReplaceString() const { return m_whiteSpaceTreatmentReplaceString; }
-  void setWhiteSpaceTreatmentReplaceString( const QString& s ) { m_whiteSpaceTreatmentReplaceString = s; }
+  const TQString& whiteSpaceTreatmentReplaceString() const { return m_whiteSpaceTreatmentReplaceString; }
+  void setWhiteSpaceTreatmentReplaceString( const TQString& s ) { m_whiteSpaceTreatmentReplaceString = s; }
 
   bool discardSymlinks() const { return m_discardSymlinks; }
   void setDiscardSymlinks( bool b ) { m_discardSymlinks = b; }
@@ -131,21 +131,21 @@ class LIBK3B_EXPORT K3bIsoOptions
 
  private:
   // volume descriptor
-  QString m_volumeID;
-  QString m_applicationID;
-  QString m_preparer;
-  QString m_publisher;
-  QString m_systemId;
-  QString m_volumeSetId;
-  QString m_abstractFile;
-  QString m_copyrightFile;
-  QString m_bibliographFile;
+  TQString m_volumeID;
+  TQString m_applicationID;
+  TQString m_preparer;
+  TQString m_publisher;
+  TQString m_systemId;
+  TQString m_volumeSetId;
+  TQString m_abstractFile;
+  TQString m_copyrightFile;
+  TQString m_bibliographFile;
 
   int m_volumeSetSize;
   int m_volumeSetNumber;	
 
   bool m_bForceInputCharset;
-  QString m_inputCharset;
+  TQString m_inputCharset;
 
   // mkisofs options -------------------------------------
   bool m_createRockRidge;    // -r or -R
@@ -174,7 +174,7 @@ class LIBK3B_EXPORT K3bIsoOptions
 
 
   int m_whiteSpaceTreatment;
-  QString m_whiteSpaceTreatmentReplaceString;
+  TQString m_whiteSpaceTreatmentReplaceString;
 
   bool m_discardSymlinks;
   bool m_discardBrokenSymlinks;

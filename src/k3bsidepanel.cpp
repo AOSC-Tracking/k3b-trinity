@@ -21,14 +21,14 @@
 #include <kiconloader.h>
 #include <kdebug.h>
 
-#include <qtoolbutton.h>
-#include <qframe.h>
-#include <qlayout.h>
+#include <tqtoolbutton.h>
+#include <tqframe.h>
+#include <tqlayout.h>
 
 
 
-K3bSidePanel::K3bSidePanel( K3bMainWindow* m, QWidget* parent, const char* name )
-  : QToolBox( parent, name ),
+K3bSidePanel::K3bSidePanel( K3bMainWindow* m, TQWidget* tqparent, const char* name )
+  : TQToolBox( tqparent, name ),
     m_mainWindow(m)
 {
   // our first widget is the tree view
@@ -36,14 +36,14 @@ K3bSidePanel::K3bSidePanel( K3bMainWindow* m, QWidget* parent, const char* name 
   addItem( m_fileTreeView, SmallIconSet( "folder_open" ), i18n("Folders") );
 
   // CD projects
-  QFrame* cdProjectsFrame = createPanel();
+  TQFrame* cdProjectsFrame = createPanel();
   addItem( cdProjectsFrame, SmallIconSet( "cdrom_unmount" ), i18n("CD Tasks") );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_audio" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_data" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_mixed" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_vcd" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_movix" ) );
-  QGridLayout* grid = (QGridLayout*)cdProjectsFrame->layout();
+  TQGridLayout* grid = (TQGridLayout*)cdProjectsFrame->tqlayout();
   grid->setRowSpacing( grid->numRows(), 15 );
   addButton( cdProjectsFrame, m_mainWindow->action( "tools_copy_cd" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "tools_write_cd_image" ) );
@@ -51,12 +51,12 @@ K3bSidePanel::K3bSidePanel( K3bMainWindow* m, QWidget* parent, const char* name 
   grid->setRowStretch( grid->numRows()+1, 1 );
 
   // DVD projects
-  QFrame* dvdProjectsFrame = createPanel();
+  TQFrame* dvdProjectsFrame = createPanel();
   addItem( dvdProjectsFrame, SmallIconSet( "dvd_unmount" ), i18n("DVD Tasks") );
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_dvd" ) );
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_video_dvd" ) );
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_movix_dvd" ) );
-  grid = (QGridLayout*)dvdProjectsFrame->layout();
+  grid = (TQGridLayout*)dvdProjectsFrame->tqlayout();
   grid->setRowSpacing( grid->numRows(), 15 );
   addButton( dvdProjectsFrame, m_mainWindow->action( "tools_copy_dvd" ) );
   addButton( dvdProjectsFrame, m_mainWindow->action( "tools_write_dvd_iso" ) );
@@ -74,31 +74,31 @@ K3bSidePanel::~K3bSidePanel()
 }
 
 
-QFrame* K3bSidePanel::createPanel()
+TQFrame* K3bSidePanel::createPanel()
 {
-  QFrame* frame = new QFrame( this );
-  frame->setPaletteBackgroundColor( Qt::white );
-  QGridLayout* grid = new QGridLayout( frame );
+  TQFrame* frame = new TQFrame( this );
+  frame->setPaletteBackgroundColor( TQt::white );
+  TQGridLayout* grid = new TQGridLayout( frame );
   grid->setMargin( 5 );
   grid->setSpacing( 5 );
   return frame;
 }
 
 
-void K3bSidePanel::addButton( QFrame* frame, KAction* a )
+void K3bSidePanel::addButton( TQFrame* frame, KAction* a )
 {
   if( a ) {
-    QToolButton* b = new QToolButton( frame );
+    TQToolButton* b = new TQToolButton( frame );
     b->setTextLabel( a->toolTip(), true );
     b->setTextLabel( a->text(), false );
     b->setIconSet( a->iconSet(KIcon::Small) );
     b->setUsesTextLabel( true );
     b->setAutoRaise( true );
-    b->setTextPosition( QToolButton::BesideIcon );
+    b->setTextPosition( TQToolButton::BesideIcon );
 
-    connect( b, SIGNAL(clicked()), a, SLOT(activate()) );
+    connect( b, TQT_SIGNAL(clicked()), a, TQT_SLOT(activate()) );
 
-    QGridLayout* grid = (QGridLayout*)(frame->layout());
+    TQGridLayout* grid = (TQGridLayout*)(frame->tqlayout());
     grid->addWidget( b, grid->numRows(), 0 );
   }
   else

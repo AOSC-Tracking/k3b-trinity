@@ -17,28 +17,29 @@
 #define _K3B_DEBUGGING_OUTPUT_DIALOG_H_
 
 #include <kdialogbase.h>
-#include <qmap.h>
+#include <tqmap.h>
 
-class QTextEdit;
+class TQTextEdit;
 
 class K3bDebuggingOutputDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDebuggingOutputDialog( QWidget* parent );
+  K3bDebuggingOutputDialog( TQWidget* tqparent );
   
  public slots:
-  void setOutput( const QMap<QString, QStringList>& );
-  void addOutput( const QString&, const QString& );
+  void setOutput( const TQMap<TQString, TQStringList>& );
+  void addOutput( const TQString&, const TQString& );
   void clear();
 
  private:
   void slotUser1();
   void slotUser2();
   
-  QTextEdit* debugView;
-  QMap<QString, int> m_paragraphMap;
+  TQTextEdit* debugView;
+  TQMap<TQString, int> m_paragraphMap;
 };
 
 

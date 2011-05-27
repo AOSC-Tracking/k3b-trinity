@@ -17,9 +17,9 @@
 #ifndef _K3B_STRING_UTILS_H_
 #define _K3B_STRING_UTILS_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 
-class QFontMetrics;
+class TQFontMetrics;
 
 namespace K3b
 {
@@ -27,13 +27,13 @@ namespace K3b
    * Cuts the text at the end.
    * Example: "some long text" -> "some lo..."
    */
-  QString cutToWidth( const QFontMetrics&, const QString&, int );
+  TQString cutToWidth( const TQFontMetrics&, const TQString&, int );
 
   /**
    * squeezes the text.
    * Example: "some long text" -> "some...ext"
    */
-  QString squeezeTextToWidth( const QFontMetrics& fm, const QString& fullText, int cutWidth );
+  TQString squeezeTextToWidth( const TQFontMetrics& fm, const TQString& fullText, int cutWidth );
 }
 
 #endif

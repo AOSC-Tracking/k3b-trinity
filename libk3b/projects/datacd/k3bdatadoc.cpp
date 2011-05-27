@@ -34,14 +34,14 @@
 #include <k3bmultichoicedialog.h>
 #include <k3bvalidators.h>
 
-#include <qdir.h>
-#include <qstring.h>
-#include <qfileinfo.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qtimer.h>
-#include <qdom.h>
-#include <qptrlist.h>
+#include <tqdir.h>
+#include <tqstring.h>
+#include <tqfileinfo.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqtimer.h>
+#include <tqdom.h>
+#include <tqptrlist.h>
 
 #include <kstandarddirs.h>
 #include <kurl.h>
@@ -67,8 +67,8 @@
  * \li or create your own K3bDirItems and K3bFileItems. The doc will be properly updated
  *     by the constructors of the items.
  */
-K3bDataDoc::K3bDataDoc( QObject* parent )
-  : K3bDoc( parent )
+K3bDataDoc::K3bDataDoc( TQObject* tqparent )
+  : K3bDoc( tqparent )
 {
   m_root = 0;
 
@@ -92,8 +92,8 @@ bool K3bDataDoc::newDocument()
   m_bExistingItemsReplaceAll = m_bExistingItemsIgnoreAll = false;
 
   if( m_root ) {
-    while( m_root->children().getFirst() )
-      removeItem( m_root->children().getFirst() );
+    while( m_root->tqchildren().getFirst() )
+      removeItem( m_root->tqchildren().getFirst() );
   }
   else
     m_root = new K3bRootItem( this );
@@ -109,7 +109,7 @@ bool K3bDataDoc::newDocument()
 }
 
 
-QString K3bDataDoc::name() const
+TQString K3bDataDoc::name() const
 {
   return m_isoOptions.volumeID();
 }
@@ -122,7 +122,7 @@ void K3bDataDoc::setIsoOptions( const K3bIsoOptions& o )
 }
 
 
-void K3bDataDoc::setVolumeID( const QString& v )
+void K3bDataDoc::setVolumeID( const TQString& v )
 {
   m_isoOptions.setVolumeID( v );
   emit changed();
@@ -144,8 +144,8 @@ void K3bDataDoc::addUrls( const KURL::List& l, K3bDirItem* dir )
 
   for( KURL::List::ConstIterator it = urls.begin(); it != urls.end(); ++it ) {
     const KURL& url = *it;
-    QFileInfo f( url.path() );
-    QString k3bname = f.absFilePath().section( "/", -1 );
+    TQFileInfo f( url.path() );
+    TQString k3bname = f.absFilePath().section( "/", -1 );
 
     // filenames cannot end in backslashes (mkisofs problem. See comments in k3bisoimager.cpp (escapeGraftPoint()))
     while( k3bname[k3bname.length()-1] == '\\' )
@@ -162,10 +162,10 @@ void K3bDataDoc::addUrls( const KURL::List& l, K3bDirItem* dir )
     bool ok = false;
     while( !ok ) {
       ok = true;
-      QString name( k3bname );
+      TQString name( k3bname );
       if( cnt > 0 )
-	name += QString("_%1").arg(cnt);
-      if( K3bDataItem* oldItem = dir->find( name ) ) {
+	name += TQString("_%1").tqarg(cnt);
+      if( K3bDataItem* oldItem = dir->tqfind( name ) ) {
 	if( f.isDir() && oldItem->isDir() ) {
 	  // ok, just reuse the dir
 	  newDirItem = static_cast<K3bDirItem*>(oldItem);
@@ -182,9 +182,9 @@ void K3bDataDoc::addUrls( const KURL::List& l, K3bDirItem* dir )
       }
     }
     if( cnt > 0 )
-      k3bname += QString("_%1").arg(cnt);
+      k3bname += TQString("_%1").tqarg(cnt);
 
-    // QFileInfo::exists and QFileInfo::isReadable return false for broken symlinks :(
+    // TQFileInfo::exists and TQFileInfo::isReadable return false for broken symlinks :(
     if( f.isDir() && !f.isSymLink() ) {
       if( !newDirItem ) {
 	newDirItem = new K3bDirItem( k3bname, this, dir );
@@ -192,11 +192,11 @@ void K3bDataDoc::addUrls( const KURL::List& l, K3bDirItem* dir )
       }
 
       // recursively add all the files in the directory
-      QStringList dlist = QDir( f.absFilePath() ).entryList( QDir::All|QDir::System|QDir::Hidden );
+      TQStringList dlist = TQDir( f.absFilePath() ).entryList( TQDir::All|TQDir::System|TQDir::Hidden );
       dlist.remove(".");
       dlist.remove("..");
       KURL::List newUrls;
-      for( QStringList::Iterator it = dlist.begin(); it != dlist.end(); ++it )
+      for( TQStringList::Iterator it = dlist.begin(); it != dlist.end(); ++it )
 	newUrls.append( KURL::fromPathOrURL( f.absFilePath() + "/" + *it ) );
       addUrls( newUrls, newDirItem );
     }
@@ -210,18 +210,18 @@ void K3bDataDoc::addUrls( const KURL::List& l, K3bDirItem* dir )
 }
 
 
-bool K3bDataDoc::nameAlreadyInDir( const QString& name, K3bDirItem* dir )
+bool K3bDataDoc::nameAlreadyInDir( const TQString& name, K3bDirItem* dir )
 {
   if( !dir )
     return false;
   else
-    return ( dir->find( name ) != 0 );
+    return ( dir->tqfind( name ) != 0 );
 }
 
 
-K3bDirItem* K3bDataDoc::addEmptyDir( const QString& name, K3bDirItem* parent )
+K3bDirItem* K3bDataDoc::addEmptyDir( const TQString& name, K3bDirItem* tqparent )
 {
-  K3bDirItem* item = new K3bDirItem( name, this, parent );
+  K3bDirItem* item = new K3bDirItem( name, this, tqparent );
 
   setModified( true );
 
@@ -261,21 +261,21 @@ K3b::Msf K3bDataDoc::burningLength() const
 }
 
 
-QString K3bDataDoc::typeString() const
+TQString K3bDataDoc::typeString() const
 {
-  return QString::fromLatin1("data");
+  return TQString::tqfromLatin1("data");
 }
 
 
-bool K3bDataDoc::loadDocumentData( QDomElement* rootElem )
+bool K3bDataDoc::loadDocumentData( TQDomElement* rootElem )
 {
   if( !root() )
     newDocument();
 
-  QDomNodeList nodes = rootElem->childNodes();
+  TQDomNodeList nodes = rootElem->childNodes();
 
   if( nodes.item(0).nodeName() != "general" ) {
-    kdDebug() << "(K3bDataDoc) could not find 'general' section." << endl;
+    kdDebug() << "(K3bDataDoc) could not tqfind 'general' section." << endl;
     return false;
   }
   if( !readGeneralDocumentData( nodes.item(0).toElement() ) )
@@ -285,7 +285,7 @@ bool K3bDataDoc::loadDocumentData( QDomElement* rootElem )
   // parse options
   // -----------------------------------------------------------------
   if( nodes.item(1).nodeName() != "options" ) {
-    kdDebug() << "(K3bDataDoc) could not find 'options' section." << endl;
+    kdDebug() << "(K3bDataDoc) could not tqfind 'options' section." << endl;
     return false;
   }
   if( !loadDocumentDataOptions( nodes.item(1).toElement() ) )
@@ -297,7 +297,7 @@ bool K3bDataDoc::loadDocumentData( QDomElement* rootElem )
   // parse header
   // -----------------------------------------------------------------
   if( nodes.item(2).nodeName() != "header" ) {
-    kdDebug() << "(K3bDataDoc) could not find 'header' section." << endl;
+    kdDebug() << "(K3bDataDoc) could not tqfind 'header' section." << endl;
     return false;
   }
   if( !loadDocumentDataHeader( nodes.item(2).toElement() ) )
@@ -309,17 +309,17 @@ bool K3bDataDoc::loadDocumentData( QDomElement* rootElem )
   // parse files
   // -----------------------------------------------------------------
   if( nodes.item(3).nodeName() != "files" ) {
-    kdDebug() << "(K3bDataDoc) could not find 'files' section." << endl;
+    kdDebug() << "(K3bDataDoc) could not tqfind 'files' section." << endl;
     return false;
   }
 
   if( m_root == 0 )
     m_root = new K3bRootItem( this );
 
-  QDomNodeList filesList = nodes.item(3).childNodes();
+  TQDomNodeList filesList = nodes.item(3).childNodes();
   for( uint i = 0; i < filesList.count(); i++ ) {
 
-    QDomElement e = filesList.item(i).toElement();
+    TQDomElement e = filesList.item(i).toElement();
     if( !loadDataItem( e, root() ) )
       return false;
   }
@@ -332,7 +332,7 @@ bool K3bDataDoc::loadDocumentData( QDomElement* rootElem )
   // file we create a default one here.
   //
   if( !m_bootImages.isEmpty() && !m_bootCataloge )
-    createBootCatalogeItem( m_bootImages.first()->parent() );
+    createBootCatalogeItem( m_bootImages.first()->tqparent() );
 
 
   informAboutNotFoundFiles();
@@ -341,12 +341,12 @@ bool K3bDataDoc::loadDocumentData( QDomElement* rootElem )
 }
 
 
-bool K3bDataDoc::loadDocumentDataOptions( QDomElement elem )
+bool K3bDataDoc::loadDocumentDataOptions( TQDomElement elem )
 {
-  QDomNodeList headerList = elem.childNodes();
+  TQDomNodeList headerList = elem.childNodes();
   for( uint i = 0; i < headerList.count(); i++ ) {
 
-    QDomElement e = headerList.item(i).toElement();
+    TQDomElement e = headerList.item(i).toElement();
     if( e.isNull() )
       return false;
 
@@ -428,7 +428,7 @@ bool K3bDataDoc::loadDocumentDataOptions( QDomElement elem )
       else if( e.text() == "extended" )
 	m_isoOptions.setWhiteSpaceTreatment( K3bIsoOptions::extended );
       else if( e.text() == "extended" )
-	m_isoOptions.setWhiteSpaceTreatment( K3bIsoOptions::replace );
+	m_isoOptions.setWhiteSpaceTreatment( K3bIsoOptions::tqreplace );
       else
 	m_isoOptions.setWhiteSpaceTreatment( K3bIsoOptions::noChange );
     }
@@ -446,7 +446,7 @@ bool K3bDataDoc::loadDocumentDataOptions( QDomElement elem )
     }
 
     else if( e.nodeName() == "multisession" ) {
-      QString mode = e.text();
+      TQString mode = e.text();
       if( mode == "start" )
 	setMultiSessionMode( START );
       else if( mode == "continue" )
@@ -470,12 +470,12 @@ bool K3bDataDoc::loadDocumentDataOptions( QDomElement elem )
 }
 
 
-bool K3bDataDoc::loadDocumentDataHeader( QDomElement headerElem )
+bool K3bDataDoc::loadDocumentDataHeader( TQDomElement headerElem )
 {
-  QDomNodeList headerList = headerElem.childNodes();
+  TQDomNodeList headerList = headerElem.childNodes();
   for( uint i = 0; i < headerList.count(); i++ ) {
 
-    QDomElement e = headerList.item(i).toElement();
+    TQDomElement e = headerList.item(i).toElement();
     if( e.isNull() )
       return false;
 
@@ -511,31 +511,31 @@ bool K3bDataDoc::loadDocumentDataHeader( QDomElement headerElem )
 }
 
 
-bool K3bDataDoc::loadDataItem( QDomElement& elem, K3bDirItem* parent )
+bool K3bDataDoc::loadDataItem( TQDomElement& elem, K3bDirItem* tqparent )
 {
   K3bDataItem* newItem = 0;
 
   if( elem.nodeName() == "file" ) {
-    QDomElement urlElem = elem.firstChild().toElement();
+    TQDomElement urlElem = elem.firstChild().toElement();
     if( urlElem.isNull() ) {
       kdDebug() << "(K3bDataDoc) file-element without url!" << endl;
       return false;
     }
 
-    QFileInfo f( urlElem.text() );
+    TQFileInfo f( urlElem.text() );
 
     // We canot use exists() here since this always disqualifies broken symlinks
     if( !f.isFile() && !f.isSymLink() )
       m_notFoundFiles.append( urlElem.text() );
 
-    // broken symlinks are not readable according to QFileInfo which is wrong in our case
+    // broken symlinks are not readable according to TQFileInfo which is wrong in our case
     else if( f.isFile() && !f.isReadable() )
       m_noPermissionFiles.append( urlElem.text() );
 
     else if( !elem.attribute( "bootimage" ).isEmpty() ) {
       K3bBootItem* bootItem = new K3bBootItem( urlElem.text(),
 					       this,
-					       parent,
+					       tqparent,
 					       elem.attributeNode( "name" ).value() );
       if( elem.attribute( "bootimage" ) == "floppy" )
 	bootItem->setImageType( K3bBootItem::FLOPPY );
@@ -554,18 +554,18 @@ bool K3bDataDoc::loadDataItem( QDomElement& elem, K3bDirItem* parent )
     else {
       newItem = new K3bFileItem( urlElem.text(),
 				 this,
-				 parent,
+				 tqparent,
 				 elem.attributeNode( "name" ).value() );
     }
   }
   else if( elem.nodeName() == "special" ) {
     if( elem.attributeNode( "type" ).value() == "boot cataloge" )
-      createBootCatalogeItem( parent )->setK3bName( elem.attributeNode( "name" ).value() );
+      createBootCatalogeItem( tqparent )->setK3bName( elem.attributeNode( "name" ).value() );
   }
   else if( elem.nodeName() == "directory" ) {
     // This is for the VideoDVD project which already contains the *_TS folders
     K3bDirItem* newDirItem = 0;
-    if( K3bDataItem* item = parent->find( elem.attributeNode( "name" ).value() ) ) {
+    if( K3bDataItem* item = tqparent->tqfind( elem.attributeNode( "name" ).value() ) ) {
       if( item->isDir() ) {
 	newDirItem = static_cast<K3bDirItem*>(item);
       }
@@ -576,11 +576,11 @@ bool K3bDataDoc::loadDataItem( QDomElement& elem, K3bDirItem* parent )
     }
 
     if( !newDirItem )
-      newDirItem = new K3bDirItem( elem.attributeNode( "name" ).value(), this, parent );
-    QDomNodeList childNodes = elem.childNodes();
+      newDirItem = new K3bDirItem( elem.attributeNode( "name" ).value(), this, tqparent );
+    TQDomNodeList childNodes = elem.childNodes();
     for( uint i = 0; i < childNodes.count(); i++ ) {
 
-      QDomElement e = childNodes.item(i).toElement();
+      TQDomElement e = childNodes.item(i).toElement();
       if( !loadDataItem( e, newDirItem ) )
 	return false;
     }
@@ -600,31 +600,31 @@ bool K3bDataDoc::loadDataItem( QDomElement& elem, K3bDirItem* parent )
 }
 
 
-bool K3bDataDoc::saveDocumentData( QDomElement* docElem )
+bool K3bDataDoc::saveDocumentData( TQDomElement* docElem )
 {
-  QDomDocument doc = docElem->ownerDocument();
+  TQDomDocument doc = docElem->ownerDocument();
 
   saveGeneralDocumentData( docElem );
 
   // all options
   // ----------------------------------------------------------------------
-  QDomElement optionsElem = doc.createElement( "options" );
+  TQDomElement optionsElem = doc.createElement( "options" );
   saveDocumentDataOptions( optionsElem );
   docElem->appendChild( optionsElem );
   // ----------------------------------------------------------------------
 
   // the header stuff
   // ----------------------------------------------------------------------
-  QDomElement headerElem = doc.createElement( "header" );
+  TQDomElement headerElem = doc.createElement( "header" );
   saveDocumentDataHeader( headerElem );
   docElem->appendChild( headerElem );
 
 
   // now do the "real" work: save the entries
   // ----------------------------------------------------------------------
-  QDomElement topElem = doc.createElement( "files" );
+  TQDomElement topElem = doc.createElement( "files" );
 
-  QPtrListIterator<K3bDataItem> it( root()->children() );
+  TQPtrListIterator<K3bDataItem> it( root()->tqchildren() );
   for( ; it.current(); ++it ) {
     saveDataItem( it.current(), &doc, &topElem );
   }
@@ -636,11 +636,11 @@ bool K3bDataDoc::saveDocumentData( QDomElement* docElem )
 }
 
 
-void K3bDataDoc::saveDocumentDataOptions( QDomElement& optionsElem )
+void K3bDataDoc::saveDocumentDataOptions( TQDomElement& optionsElem )
 {
-  QDomDocument doc = optionsElem.ownerDocument();
+  TQDomDocument doc = optionsElem.ownerDocument();
 
-  QDomElement topElem = doc.createElement( "rock_ridge" );
+  TQDomElement topElem = doc.createElement( "rock_ridge" );
   topElem.setAttribute( "activated", isoOptions().createRockRidge() ? "yes" : "no" );
   optionsElem.appendChild( topElem );
 
@@ -709,7 +709,7 @@ void K3bDataDoc::saveDocumentDataOptions( QDomElement& optionsElem )
   optionsElem.appendChild( topElem );
 
   topElem = doc.createElement( "iso_level" );
-  topElem.appendChild( doc.createTextNode( QString::number(isoOptions().ISOLevel()) ) );
+  topElem.appendChild( doc.createTextNode( TQString::number(isoOptions().ISOLevel()) ) );
   optionsElem.appendChild( topElem );
 
   topElem = doc.createElement( "discard_symlinks" );
@@ -745,8 +745,8 @@ void K3bDataDoc::saveDocumentDataOptions( QDomElement& optionsElem )
   case K3bIsoOptions::extended:
     topElem.appendChild( doc.createTextNode( "extended" ) );
     break;
-  case K3bIsoOptions::replace:
-    topElem.appendChild( doc.createTextNode( "replace" ) );
+  case K3bIsoOptions::tqreplace:
+    topElem.appendChild( doc.createTextNode( "tqreplace" ) );
     break;
   default:
     topElem.appendChild( doc.createTextNode( "noChange" ) );
@@ -796,11 +796,11 @@ void K3bDataDoc::saveDocumentDataOptions( QDomElement& optionsElem )
 }
 
 
-void K3bDataDoc::saveDocumentDataHeader( QDomElement& headerElem )
+void K3bDataDoc::saveDocumentDataHeader( TQDomElement& headerElem )
 {
-  QDomDocument doc = headerElem.ownerDocument();
+  TQDomDocument doc = headerElem.ownerDocument();
 
-  QDomElement topElem = doc.createElement( "volume_id" );
+  TQDomElement topElem = doc.createElement( "volume_id" );
   topElem.appendChild( doc.createTextNode( isoOptions().volumeID() ) );
   headerElem.appendChild( topElem );
 
@@ -809,11 +809,11 @@ void K3bDataDoc::saveDocumentDataHeader( QDomElement& headerElem )
   headerElem.appendChild( topElem );
 
   topElem = doc.createElement( "volume_set_size" );
-  topElem.appendChild( doc.createTextNode( QString::number(isoOptions().volumeSetSize()) ) );
+  topElem.appendChild( doc.createTextNode( TQString::number(isoOptions().volumeSetSize()) ) );
   headerElem.appendChild( topElem );
 
   topElem = doc.createElement( "volume_set_number" );
-  topElem.appendChild( doc.createTextNode( QString::number(isoOptions().volumeSetNumber()) ) );
+  topElem.appendChild( doc.createTextNode( TQString::number(isoOptions().volumeSetNumber()) ) );
   headerElem.appendChild( topElem );
 
   topElem = doc.createElement( "system_id" );
@@ -835,23 +835,23 @@ void K3bDataDoc::saveDocumentDataHeader( QDomElement& headerElem )
 }
 
 
-void K3bDataDoc::saveDataItem( K3bDataItem* item, QDomDocument* doc, QDomElement* parent )
+void K3bDataDoc::saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomElement* tqparent )
 {
   if( K3bFileItem* fileItem = dynamic_cast<K3bFileItem*>( item ) ) {
-    if( m_oldSession.contains( fileItem ) ) {
+    if( m_oldSession.tqcontains( fileItem ) ) {
       kdDebug() << "(K3bDataDoc) ignoring fileitem " << fileItem->k3bName() << " from old session while saving..." << endl;
     }
     else {
-      QDomElement topElem = doc->createElement( "file" );
+      TQDomElement topElem = doc->createElement( "file" );
       topElem.setAttribute( "name", fileItem->k3bName() );
-      QDomElement subElem = doc->createElement( "url" );
+      TQDomElement subElem = doc->createElement( "url" );
       subElem.appendChild( doc->createTextNode( fileItem->localPath() ) );
       topElem.appendChild( subElem );
 
       if( item->sortWeight() != 0 )
-	topElem.setAttribute( "sort_weight", QString::number(item->sortWeight()) );
+	topElem.setAttribute( "sort_weight", TQString::number(item->sortWeight()) );
 
-      parent->appendChild( topElem );
+      tqparent->appendChild( topElem );
 
       // add boot options as attributes to preserve compatibility to older K3b versions
       if( K3bBootItem* bootItem = dynamic_cast<K3bBootItem*>( fileItem ) ) {
@@ -864,31 +864,31 @@ void K3bDataDoc::saveDataItem( K3bDataItem* item, QDomDocument* doc, QDomElement
 
 	topElem.setAttribute( "no_boot", bootItem->noBoot() ? "yes" : "no" );
 	topElem.setAttribute( "boot_info_table", bootItem->bootInfoTable() ? "yes" : "no" );
-	topElem.setAttribute( "load_segment", QString::number( bootItem->loadSegment() ) );
-	topElem.setAttribute( "load_size", QString::number( bootItem->loadSize() ) );
+	topElem.setAttribute( "load_segment", TQString::number( bootItem->loadSegment() ) );
+	topElem.setAttribute( "load_size", TQString::number( bootItem->loadSize() ) );
       }
     }
   }
   else if( item == m_bootCataloge ) {
-    QDomElement topElem = doc->createElement( "special" );
+    TQDomElement topElem = doc->createElement( "special" );
     topElem.setAttribute( "name", m_bootCataloge->k3bName() );
     topElem.setAttribute( "type", "boot cataloge" );
 
-    parent->appendChild( topElem );
+    tqparent->appendChild( topElem );
   }
   else if( K3bDirItem* dirItem = dynamic_cast<K3bDirItem*>( item ) ) {
-    QDomElement topElem = doc->createElement( "directory" );
+    TQDomElement topElem = doc->createElement( "directory" );
     topElem.setAttribute( "name", dirItem->k3bName() );
 
     if( item->sortWeight() != 0 )
-      topElem.setAttribute( "sort_weight", QString::number(item->sortWeight()) );
+      topElem.setAttribute( "sort_weight", TQString::number(item->sortWeight()) );
 
-    QPtrListIterator<K3bDataItem> it( dirItem->children() );
+    TQPtrListIterator<K3bDataItem> it( dirItem->tqchildren() );
     for( ; it.current(); ++it ) {
       saveDataItem( it.current(), doc, &topElem );
     }
 
-    parent->appendChild( topElem );
+    tqparent->appendChild( topElem );
   }
 }
 
@@ -944,7 +944,7 @@ void K3bDataDoc::itemAddedToDir( K3bDirItem*, K3bDataItem* item )
 void K3bDataDoc::moveItem( K3bDataItem* item, K3bDirItem* newParent )
 {
   if( !item || !newParent ) {
-    kdDebug() << "(K3bDataDoc) item or parentitem was NULL while moving." << endl;
+    kdDebug() << "(K3bDataDoc) item or tqparentitem was NULL while moving." << endl;
     return;
   }
 
@@ -957,14 +957,14 @@ void K3bDataDoc::moveItem( K3bDataItem* item, K3bDirItem* newParent )
 }
 
 
-void K3bDataDoc::moveItems( QPtrList<K3bDataItem> itemList, K3bDirItem* newParent )
+void K3bDataDoc::moveItems( TQPtrList<K3bDataItem> itemList, K3bDirItem* newParent )
 {
   if( !newParent ) {
     kdDebug() << "(K3bDataDoc) tried to move items to nowhere...!" << endl;
     return;
   }
 
-  QPtrListIterator<K3bDataItem> it( itemList );
+  TQPtrListIterator<K3bDataItem> it( itemList );
   for( ; it.current(); ++it ) {
     // check if newParent is subdir of item
     if( K3bDirItem* dirItem = dynamic_cast<K3bDirItem*>( it.current() ) ) {
@@ -979,13 +979,13 @@ void K3bDataDoc::moveItems( QPtrList<K3bDataItem> itemList, K3bDirItem* newParen
 }
 
 
-K3bBurnJob* K3bDataDoc::newBurnJob( K3bJobHandler* hdl, QObject* parent )
+K3bBurnJob* K3bDataDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
 {
-  return new K3bDataJob( this, hdl, parent );
+  return new K3bDataJob( this, hdl, tqparent );
 }
 
 
-QString K3bDataDoc::treatWhitespace( const QString& path )
+TQString K3bDataDoc::treatWhitespace( const TQString& path )
 {
 
   // TODO:
@@ -996,10 +996,10 @@ QString K3bDataDoc::treatWhitespace( const QString& path )
 
 
   if( isoOptions().whiteSpaceTreatment() != K3bIsoOptions::noChange ) {
-    QString result = path;
+    TQString result = path;
 
-    if( isoOptions().whiteSpaceTreatment() == K3bIsoOptions::replace ) {
-      result.replace( ' ', isoOptions().whiteSpaceTreatmentReplaceString() );
+    if( isoOptions().whiteSpaceTreatment() == K3bIsoOptions::tqreplace ) {
+      result.tqreplace( ' ', isoOptions().whiteSpaceTreatmentReplaceString() );
     }
     else if( isoOptions().whiteSpaceTreatment() == K3bIsoOptions::strip ) {
       result.remove( ' ' );
@@ -1064,8 +1064,8 @@ void K3bDataDoc::prepareFilenamesInDir( K3bDirItem* dir )
   if( !dir )
     return;
 
-  QPtrList<K3bDataItem> sortedChildren;
-  QPtrListIterator<K3bDataItem> it( dir->children() );
+  TQPtrList<K3bDataItem> sortedChildren;
+  TQPtrListIterator<K3bDataItem> it( dir->tqchildren() );
 
   for( it.toLast(); it.current(); --it ) {
     K3bDataItem* item = it.current();
@@ -1083,7 +1083,7 @@ void K3bDataDoc::prepareFilenamesInDir( K3bDirItem* dir )
 
 
   if( isoOptions().createJoliet() || isoOptions().createRockRidge() ) {
-    QPtrList<K3bDataItem> sameNameList;
+    TQPtrList<K3bDataItem> sameNameList;
     while( !sortedChildren.isEmpty() ) {
 
       sameNameList.clear();
@@ -1105,7 +1105,7 @@ void K3bDataDoc::prepareFilenamesInDir( K3bDirItem* dir )
 	}
 
 	int cnt = 1;
-	for( QPtrListIterator<K3bDataItem> it( sameNameList );
+	for( TQPtrListIterator<K3bDataItem> it( sameNameList );
 	     it.current(); ++it ) {
 	  it.current()->setWrittenName( K3b::appendNumberToFilename( it.current()->writtenName(), cnt++, maxlen ) );
 	}
@@ -1118,13 +1118,13 @@ void K3bDataDoc::prepareFilenamesInDir( K3bDirItem* dir )
 void K3bDataDoc::informAboutNotFoundFiles()
 {
   if( !m_notFoundFiles.isEmpty() ) {
-    KMessageBox::informationList( qApp->activeWindow(), i18n("Could not find the following files:"),
+    KMessageBox::informationList( TQT_TQWIDGET(tqApp->activeWindow()), i18n("Could not find the following files:"),
  				  m_notFoundFiles, i18n("Not Found") );
     m_notFoundFiles.clear();
   }
 
   if( !m_noPermissionFiles.isEmpty() ) {
-    KMessageBox::informationList( qApp->activeWindow(), i18n("No permission to read the following files:"),
+    KMessageBox::informationList( TQT_TQWIDGET(tqApp->activeWindow()), i18n("No permission to read the following files:"),
 				  m_noPermissionFiles, i18n("No Read Permission") );
 
     m_noPermissionFiles.clear();
@@ -1188,7 +1188,7 @@ bool K3bDataDoc::importSession( K3bDevice::Device* device )
     // TODO: also import some other pd fields
     
     const K3bIso9660Directory* rootDir = iso.firstRRDirEntry();
-    // Jörg Schilling says that it is impossible to import the joliet tree for multisession
+    // Jï¿½rg Schilling says that it is impossible to import the joliet tree for multisession
 //     if( !rootDir )
 //       rootDir = iso.firstJolietDirEntry();
     if( !rootDir )
@@ -1211,16 +1211,16 @@ bool K3bDataDoc::importSession( K3bDevice::Device* device )
 }
 
 
-void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir, K3bDirItem* parent )
+void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir, K3bDirItem* tqparent )
 {
   Q_ASSERT(importDir);
-  QStringList entries = importDir->entries();
+  TQStringList entries = importDir->entries();
   entries.remove( "." );
   entries.remove( ".." );
-  for( QStringList::const_iterator it = entries.begin();
+  for( TQStringList::const_iterator it = entries.begin();
        it != entries.end(); ++it ) {
     const K3bIso9660Entry* entry = importDir->entry( *it );
-    K3bDataItem* oldItem = parent->find( entry->name() );
+    K3bDataItem* oldItem = tqparent->tqfind( entry->name() );
     if( entry->isDirectory() ) {
       K3bDirItem* dir = 0;
       if( oldItem && oldItem->isDir() ) {
@@ -1230,7 +1230,7 @@ void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir,
 	// we overwrite without warning!
 	if( oldItem )
 	  removeItem( oldItem );
-	dir = new K3bDirItem( entry->name(), this, parent );
+	dir = new K3bDirItem( entry->name(), this, tqparent );
       }
 
       dir->setRemoveable(false);
@@ -1250,7 +1250,7 @@ void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir,
       if( oldItem )
 	removeItem( oldItem );
 
-      K3bSessionImportItem* item = new K3bSessionImportItem( file, this, parent );
+      K3bSessionImportItem* item = new K3bSessionImportItem( file, this, tqparent );
       item->setExtraInfo( i18n("From previous session") );
       m_oldSession.append( item );
     }
@@ -1277,8 +1277,8 @@ void K3bDataDoc::clearImportedSession()
 	delete dir;
       }
       else {
-	for( QPtrListIterator<K3bDataItem> it( dir->children() ); it.current(); ++it ) {
-	  if( !m_oldSession.contains(it.current()) ) {
+	for( TQPtrListIterator<K3bDataItem> it( dir->tqchildren() ); it.current(); ++it ) {
+	  if( !m_oldSession.tqcontains(it.current()) ) {
 	    m_oldSession.remove();
 	    // now the dir becomes a totally normal dir
 	    dir->setRemoveable(true);
@@ -1308,7 +1308,7 @@ void K3bDataDoc::clearImportedSession()
 
 K3bDirItem* K3bDataDoc::bootImageDir()
 {
-  K3bDataItem* b = m_root->find( "boot" );
+  K3bDataItem* b = m_root->tqfind( "boot" );
   if( !b ) {
     b = new K3bDirItem( "boot", this, m_root );
     setModified( true );
@@ -1322,7 +1322,7 @@ K3bDirItem* K3bDataDoc::bootImageDir()
 }
 
 
-K3bBootItem* K3bDataDoc::createBootItem( const QString& filename, K3bDirItem* dir )
+K3bBootItem* K3bDataDoc::createBootItem( const TQString& filename, K3bDirItem* dir )
 {
   if( !dir )
     dir = bootImageDir();
@@ -1339,11 +1339,11 @@ K3bBootItem* K3bDataDoc::createBootItem( const QString& filename, K3bDirItem* di
 K3bDataItem* K3bDataDoc::createBootCatalogeItem( K3bDirItem* dir )
 {
   if( !m_bootCataloge ) {
-    QString newName = "boot.catalog";
+    TQString newName = "boot.catalog";
     int i = 0;
     while( dir->alreadyInDirectory( "boot.catalog" ) ) {
       ++i;
-      newName = QString( "boot%1.catalog" ).arg(i);
+      newName = TQString( "boot%1.catalog" ).tqarg(i);
     }
 
     K3bSpecialDataItem* b = new K3bSpecialDataItem( this, 0, dir, newName );
@@ -1361,10 +1361,10 @@ K3bDataItem* K3bDataDoc::createBootCatalogeItem( K3bDirItem* dir )
 }
 
 
-QValueList<K3bDataItem*> K3bDataDoc::findItemByLocalPath( const QString& path ) const
+TQValueList<K3bDataItem*> K3bDataDoc::findItemByLocalPath( const TQString& path ) const
 {
   Q_UNUSED( path );
-  return QValueList<K3bDataItem*>();
+  return TQValueList<K3bDataItem*>();
 }
 
 

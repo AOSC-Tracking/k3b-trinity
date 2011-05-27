@@ -23,28 +23,28 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include <qpushbutton.h>
+#include <tqpushbutton.h>
 
 #include <sys/types.h>
 #include <signal.h>
 
 
-static QString joinProcessNames( const QValueList<K3bLsofWrapper::Process>& apps )
+static TQString joinProcessNames( const TQValueList<K3bLsofWrapper::Process>& apps )
 {
-  QStringList l;
-  for( QValueList<K3bLsofWrapper::Process>::const_iterator it = apps.begin();
+  TQStringList l;
+  for( TQValueList<K3bLsofWrapper::Process>::const_iterator it = apps.begin();
        it != apps.end(); ++it )
     l.append( (*it).name );
   return l.join( ", " );
 }
 
 
-K3bLsofWrapperDialog::K3bLsofWrapperDialog( QWidget* parent )
+K3bLsofWrapperDialog::K3bLsofWrapperDialog( TQWidget* tqparent )
   : KDialogBase( KDialogBase::Swallow,
 		 i18n("Device in use"),
 		 Close|User1|User2,
 		 Close,
-		 parent,
+		 tqparent,
 		 0,
 		 true,
 		 true,
@@ -56,8 +56,8 @@ K3bLsofWrapperDialog::K3bLsofWrapperDialog( QWidget* parent )
   m_label = new K3bRichTextLabel( this );
   setMainWidget( m_label );
 
-  connect( this, SIGNAL(user1Clicked()), SLOT(slotQuitOtherApps()) );
-  connect( this, SIGNAL(user2Clicked()), SLOT(slotCheckDevice()) );
+  connect( this, TQT_SIGNAL(user1Clicked()), TQT_SLOT(slotQuitOtherApps()) );
+  connect( this, TQT_SIGNAL(user2Clicked()), TQT_SLOT(slotCheckDevice()) );
 }
 
 
@@ -70,7 +70,7 @@ bool K3bLsofWrapperDialog::slotCheckDevice()
 {
   K3bLsofWrapper lsof;
   if( lsof.checkDevice( m_device ) ) {
-    const QValueList<K3bLsofWrapper::Process>& apps = lsof.usingApplications();
+    const TQValueList<K3bLsofWrapper::Process>& apps = lsof.usingApplications();
     if( apps.count() > 0 ) {
       m_label->setText( i18n("<p>Device <b>'%1'</b> is already in use by other applications "
 			     "(<em>%2</em>)."
@@ -79,9 +79,9 @@ bool K3bLsofWrapperDialog::slotCheckDevice()
 			     "<p><em>Hint: Sometimes shutting down an application does not "
 			     "happen instantly. In that case you might have to use the '%3' "
 			     "button.")
-			.arg( m_device->vendor() + " - " + m_device->description() )
-			.arg( joinProcessNames(apps) )
-			.arg( actionButton( User2 )->text() ) );
+			.tqarg( m_device->vendor() + " - " + m_device->description() )
+			.tqarg( joinProcessNames(apps) )
+			.tqarg( actionButton( User2 )->text() ) );
       return true;
     }
   }
@@ -97,12 +97,12 @@ void K3bLsofWrapperDialog::slotQuitOtherApps()
 {
   K3bLsofWrapper lsof;
   if( lsof.checkDevice( m_device ) ) {
-    const QValueList<K3bLsofWrapper::Process>& apps = lsof.usingApplications();
+    const TQValueList<K3bLsofWrapper::Process>& apps = lsof.usingApplications();
     if( apps.count() > 0 ) {
       if( KMessageBox::warningYesNo( this,
 				     i18n("<p>Do you really want K3b to kill the following processes: <em>")
 					  + joinProcessNames(apps) ) == KMessageBox::Yes ) {
-	for( QValueList<K3bLsofWrapper::Process>::const_iterator it = apps.begin();
+	for( TQValueList<K3bLsofWrapper::Process>::const_iterator it = apps.begin();
 	     it != apps.end(); ++it )
 	  ::kill( (*it).pid, SIGTERM );
       }
@@ -116,9 +116,9 @@ void K3bLsofWrapperDialog::slotQuitOtherApps()
 }
 
 
-void K3bLsofWrapperDialog::checkDevice( K3bDevice::Device* dev, QWidget* parent )
+void K3bLsofWrapperDialog::checkDevice( K3bDevice::Device* dev, TQWidget* tqparent )
 {
-  K3bLsofWrapperDialog dlg( parent );
+  K3bLsofWrapperDialog dlg( tqparent );
   dlg.m_device = dev;
   if( dlg.slotCheckDevice() )
     dlg.exec();

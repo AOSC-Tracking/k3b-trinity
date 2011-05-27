@@ -24,8 +24,8 @@
 K_EXPORT_COMPONENT_FACTORY( libk3bartsoutputplugin, K3bPluginFactory<K3bArtsOutputPlugin>( "k3bartsoutputplugin" ) )
 
 
-K3bArtsOutputPlugin::K3bArtsOutputPlugin( QObject* parent, const char* name )
-  : K3bAudioOutputPlugin( parent, name ),
+K3bArtsOutputPlugin::K3bArtsOutputPlugin( TQObject* tqparent, const char* name )
+  : K3bAudioOutputPlugin( tqparent, name ),
     m_initialized(false),
     m_lastErrorCode(0)
 {
@@ -83,8 +83,8 @@ bool K3bArtsOutputPlugin::init()
 }
 
 
-QString K3bArtsOutputPlugin::lastErrorMessage() const
+TQString K3bArtsOutputPlugin::lastErrorMessage() const
 {
-  return QString::fromLocal8Bit( arts_error_text(m_lastErrorCode) );
+  return TQString::fromLocal8Bit( arts_error_text(m_lastErrorCode) );
 }
 

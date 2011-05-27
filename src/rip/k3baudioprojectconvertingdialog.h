@@ -20,15 +20,15 @@
 #include <k3binteractiondialog.h>
 #include <k3bmsf.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 
 class K3bListView;
-class QCheckBox;
-class QSpinBox;
-class QComboBox;
+class TQCheckBox;
+class TQSpinBox;
+class TQComboBox;
 class K3bCddbPatternWidget;
-class QToolButton;
+class TQToolButton;
 class K3bAudioConvertingOptionWidget;
 class K3bCddbResultEntry;
 class K3bAudioConvertingJob;
@@ -42,12 +42,13 @@ class K3bAudioDoc;
 class K3bAudioProjectConvertingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bAudioProjectConvertingDialog( K3bAudioDoc*, QWidget *parent = 0, const char *name = 0 );
+  K3bAudioProjectConvertingDialog( K3bAudioDoc*, TQWidget *tqparent = 0, const char *name = 0 );
   ~K3bAudioProjectConvertingDialog();
 
-  void setBaseDir( const QString& path );
+  void setBaseDir( const TQString& path );
 
  public slots:  
   void refresh();

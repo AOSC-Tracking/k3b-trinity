@@ -84,14 +84,14 @@ K3bDebug& K3bDebug::operator<<( double d )
 }
 
 
-K3bDebug& K3bDebug::operator<<( const QString& s )
+K3bDebug& K3bDebug::operator<<( const TQString& s )
 {
   fprintf( stderr, "%s", s.utf8().data() );
   return *this;
 }
 
 
-K3bDebug& K3bDebug::operator<<( const QCString& s )
+K3bDebug& K3bDebug::operator<<( const TQCString& s )
 {
   fprintf( stderr, "%s", s.data() );
   return *this;

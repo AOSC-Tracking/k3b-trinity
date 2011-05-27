@@ -21,7 +21,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <k3bdevice.h>
 
@@ -78,7 +78,7 @@ int K3bIso9660DeviceBackend::read( unsigned int sector, char* data, int len )
     int sectorsRead = 0;
     int retries = 10;  // TODO: no fixed value
     while( retries ) {
-      int read = QMIN(len-sectorsRead, maxReadSectors);
+      int read = TQMIN(len-sectorsRead, maxReadSectors);
       if( !m_device->read10( (unsigned char*)(data+sectorsRead*2048),
 			     read*2048,
 			     sector+sectorsRead,
@@ -102,7 +102,7 @@ int K3bIso9660DeviceBackend::read( unsigned int sector, char* data, int len )
 // K3bIso9660FileBackend -----------------------------------
 // 
 
-K3bIso9660FileBackend::K3bIso9660FileBackend( const QString& filename )
+K3bIso9660FileBackend::K3bIso9660FileBackend( const TQString& filename )
   : m_filename( filename ),
     m_fd( -1 ),
     m_closeFd( true )
@@ -132,7 +132,7 @@ bool K3bIso9660FileBackend::open()
   if( m_fd > 0 )
     return true;
   else {
-    m_fd = ::open( QFile::encodeName( m_filename ), O_RDONLY|O_LARGEFILE );
+    m_fd = ::open( TQFile::encodeName( m_filename ), O_RDONLY|O_LARGEFILE );
     return ( m_fd > 0 );
   }
 }

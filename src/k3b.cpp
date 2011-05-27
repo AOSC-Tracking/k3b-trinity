@@ -17,21 +17,21 @@
 
 
 // include files for QT
-#include <qdir.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qtooltip.h>
-#include <qtoolbutton.h>
-#include <qstring.h>
-#include <qsplitter.h>
-#include <qevent.h>
-#include <qvaluelist.h>
-#include <qfont.h>
-#include <qpalette.h>
-#include <qwidgetstack.h>
-#include <qtimer.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqlayout.h>
+#include <tqwhatsthis.h>
+#include <tqtooltip.h>
+#include <tqtoolbutton.h>
+#include <tqstring.h>
+#include <tqsplitter.h>
+#include <tqevent.h>
+#include <tqvaluelist.h>
+#include <tqfont.h>
+#include <tqpalette.h>
+#include <tqwidgetstack.h>
+#include <tqtimer.h>
 
 #include <kdockwidget.h>
 #include <kkeydialog.h>
@@ -131,13 +131,13 @@ class K3bMainWindow::Private
 public:
   K3bDoc* lastDoc;
 
-  QWidgetStack* documentStack;
+  TQWidgetStack* documentStack;
   K3bWelcomeWidget* welcomeWidget;
-  QWidget* documentHull;
+  TQWidget* documentHull;
 
-  QLabel* leftDocPicLabel;
-  QLabel* centerDocLabel;
-  QLabel* rightDocPicLabel;
+  TQLabel* leftDocPicLabel;
+  TQLabel* centerDocLabel;
+  TQLabel* rightDocPicLabel;
 };
 
 
@@ -175,14 +175,14 @@ K3bMainWindow::K3bMainWindow()
   // disable actions at startup
   slotStateChanged( "state_project_active", KXMLGUIClient::StateReverse );
 
-  connect( k3bappcore->projectManager(), SIGNAL(newProject(K3bDoc*)), this, SLOT(createClient(K3bDoc*)) );
-  connect( k3bcore->deviceManager(), SIGNAL(changed()), this, SLOT(slotCheckSystemTimed()) );
-  connect( K3bAudioServer::instance(), SIGNAL(error(const QString&)), this, SLOT(slotAudioServerError(const QString&)) );
+  connect( k3bappcore->projectManager(), TQT_SIGNAL(newProject(K3bDoc*)), TQT_TQOBJECT(this), TQT_SLOT(createClient(K3bDoc*)) );
+  connect( k3bcore->deviceManager(), TQT_SIGNAL(changed()), TQT_TQOBJECT(this), TQT_SLOT(slotCheckSystemTimed()) );
+  connect( K3bAudioServer::instance(), TQT_SIGNAL(error(const TQString&)), TQT_TQOBJECT(this), TQT_SLOT(slotAudioServerError(const TQString&)) );
 
   // FIXME: now make sure the welcome screen is displayed completely
   resize( 780, 550 );
-//   getMainDockWidget()->resize( getMainDockWidget()->size().expandedTo( d->welcomeWidget->sizeHint() ) );
-//   m_dirTreeDock->resize( QSize( m_dirTreeDock->sizeHint().width(), m_dirTreeDock->height() ) );
+//   getMainDockWidget()->resize( getMainDockWidget()->size().expandedTo( d->welcomeWidget->tqsizeHint() ) );
+//   m_dirTreeDock->resize( TQSize( m_dirTreeDock->tqsizeHint().width(), m_dirTreeDock->height() ) );
 
   readOptions();
 }
@@ -196,9 +196,9 @@ K3bMainWindow::~K3bMainWindow()
 }
 
 
-void K3bMainWindow::showEvent( QShowEvent* e )
+void K3bMainWindow::showEvent( TQShowEvent* e )
 {
-  slotCheckDockWidgetStatus();
+  slotCheckDockWidgettqStatus();
   KDockMainWindow::showEvent( e );
 }
 
@@ -211,59 +211,59 @@ void K3bMainWindow::initActions()
   // see the correct solution?)
   *actionCollection() += *k3bappcore->appDeviceManager()->actionCollection();
 
-  actionFileOpen = KStdAction::open(this, SLOT(slotFileOpen()), actionCollection());
-  actionFileOpenRecent = KStdAction::openRecent(this, SLOT(slotFileOpenRecent(const KURL&)), actionCollection());
-  actionFileSave = KStdAction::save(this, SLOT(slotFileSave()), actionCollection());
-  actionFileSaveAs = KStdAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
-  actionFileSaveAll = new KAction( i18n("Save All"), "save_all", 0, this, SLOT(slotFileSaveAll()), 
+  actionFileOpen = KStdAction::open(TQT_TQOBJECT(this), TQT_SLOT(slotFileOpen()), actionCollection());
+  actionFileOpenRecent = KStdAction::openRecent(TQT_TQOBJECT(this), TQT_SLOT(slotFileOpenRecent(const KURL&)), actionCollection());
+  actionFileSave = KStdAction::save(TQT_TQOBJECT(this), TQT_SLOT(slotFileSave()), actionCollection());
+  actionFileSaveAs = KStdAction::saveAs(TQT_TQOBJECT(this), TQT_SLOT(slotFileSaveAs()), actionCollection());
+  actionFileSaveAll = new KAction( i18n("Save All"), "save_all", 0, TQT_TQOBJECT(this), TQT_SLOT(slotFileSaveAll()), 
 				   actionCollection(), "file_save_all" );
-  actionFileClose = KStdAction::close(this, SLOT(slotFileClose()), actionCollection());
-  actionFileCloseAll = new KAction( i18n("Close All"), 0, 0, this, SLOT(slotFileCloseAll()), 
+  actionFileClose = KStdAction::close(TQT_TQOBJECT(this), TQT_SLOT(slotFileClose()), actionCollection());
+  actionFileCloseAll = new KAction( i18n("Close All"), 0, 0, TQT_TQOBJECT(this), TQT_SLOT(slotFileCloseAll()), 
 				    actionCollection(), "file_close_all" );
-  actionFileQuit = KStdAction::quit(this, SLOT(slotFileQuit()), actionCollection());
-  actionViewStatusBar = KStdAction::showStatusbar(this, SLOT(slotViewStatusBar()), actionCollection());
-  actionSettingsConfigure = KStdAction::preferences(this, SLOT(slotSettingsConfigure()), actionCollection() );
+  actionFileQuit = KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(slotFileQuit()), actionCollection());
+  actionViewStatusBar = KStdAction::showStatusbar(TQT_TQOBJECT(this), TQT_SLOT(slotViewStatusBar()), actionCollection());
+  actionSettingsConfigure = KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(slotSettingsConfigure()), actionCollection() );
 
   // the tip action
-  (void)KStdAction::tipOfDay(this, SLOT(slotShowTips()), actionCollection() );
-  (void)KStdAction::keyBindings( this, SLOT( slotConfigureKeys() ), actionCollection() );
+  (void)KStdAction::tipOfDay(TQT_TQOBJECT(this), TQT_SLOT(slotShowTips()), actionCollection() );
+  (void)KStdAction::keyBindings( TQT_TQOBJECT(this), TQT_SLOT( slotConfigureKeys() ), actionCollection() );
 
-  KStdAction::configureToolbars(this, SLOT(slotEditToolbars()), actionCollection());
+  KStdAction::configureToolbars(TQT_TQOBJECT(this), TQT_SLOT(slotEditToolbars()), actionCollection());
   setStandardToolBarMenuEnabled(true);
-  KStdAction::showMenubar( this, SLOT(slotShowMenuBar()), actionCollection() );
+  KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT(slotShowMenuBar()), actionCollection() );
 
   actionFileNewMenu = new KActionMenu( i18n("&New Project"), "filenew", actionCollection(), "file_new" );
-  actionFileNewAudio = new KAction(i18n("New &Audio CD Project"), "audiocd", 0, this, SLOT(slotNewAudioDoc()),
+  actionFileNewAudio = new KAction(i18n("New &Audio CD Project"), "audiocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewAudioDoc()),
 			     actionCollection(), "file_new_audio");
-  actionFileNewData = new KAction(i18n("New Data &CD Project"), "datacd", 0, this, SLOT(slotNewDataDoc()),
+  actionFileNewData = new KAction(i18n("New Data &CD Project"), "datacd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewDataDoc()),
 			    actionCollection(), "file_new_data");
-  actionFileNewMixed = new KAction(i18n("New &Mixed Mode CD Project"), "mixedcd", 0, this, SLOT(slotNewMixedDoc()),
+  actionFileNewMixed = new KAction(i18n("New &Mixed Mode CD Project"), "mixedcd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMixedDoc()),
 				   actionCollection(), "file_new_mixed");
-  actionFileNewVcd = new KAction(i18n("New &Video CD Project"), "videocd", 0, this, SLOT(slotNewVcdDoc()),
+  actionFileNewVcd = new KAction(i18n("New &Video CD Project"), "videocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewVcdDoc()),
 				   actionCollection(), "file_new_vcd");
-  actionFileNewMovix = new KAction(i18n("New &eMovix CD Project"), "emovix", 0, this, SLOT(slotNewMovixDoc()),
+  actionFileNewMovix = new KAction(i18n("New &eMovix CD Project"), "emovix", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMovixDoc()),
 				   actionCollection(), "file_new_movix");
-  actionFileNewMovixDvd = new KAction(i18n("New &eMovix DVD Project"), "emovix", 0, this, SLOT(slotNewMovixDvdDoc()),
+  actionFileNewMovixDvd = new KAction(i18n("New &eMovix DVD Project"), "emovix", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMovixDvdDoc()),
 				      actionCollection(), "file_new_movix_dvd");
-  actionFileNewDvd = new KAction(i18n("New Data &DVD Project"), "datadvd", 0, this, SLOT(slotNewDvdDoc()),
+  actionFileNewDvd = new KAction(i18n("New Data &DVD Project"), "datadvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewDvdDoc()),
 				 actionCollection(), "file_new_dvd");
-  actionFileNewVideoDvd = new KAction(i18n("New V&ideo DVD Project"), "videodvd", 0, this, SLOT(slotNewVideoDvdDoc()),
+  actionFileNewVideoDvd = new KAction(i18n("New V&ideo DVD Project"), "videodvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewVideoDvdDoc()),
 				      actionCollection(), "file_new_video_dvd");
-  actionFileContinueMultisession = new KAction( i18n("Continue Multisession Project"), "datacd", 0, this, SLOT(slotContinueMultisession()),
+  actionFileContinueMultisession = new KAction( i18n("Continue Multisession Project"), "datacd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotContinueMultisession()),
 						actionCollection(), "file_continue_multisession" );
 
   actionFileNewMenu->setDelayed( false );
   actionFileNewMenu->insert( actionFileNewData );
   actionFileNewMenu->insert( actionFileNewDvd );
   actionFileNewMenu->insert( actionFileContinueMultisession );
-  actionFileNewMenu->insert( new KActionSeparator( this ) );
+  actionFileNewMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
   actionFileNewMenu->insert( actionFileNewAudio );
-  actionFileNewMenu->insert( new KActionSeparator( this ) );
+  actionFileNewMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
   actionFileNewMenu->insert( actionFileNewMixed );
-  actionFileNewMenu->insert( new KActionSeparator( this ) );
+  actionFileNewMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
   actionFileNewMenu->insert( actionFileNewVcd );
   actionFileNewMenu->insert( actionFileNewVideoDvd );
-  actionFileNewMenu->insert( new KActionSeparator( this ) );
+  actionFileNewMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
   actionFileNewMenu->insert( actionFileNewMovix );
   actionFileNewMenu->insert( actionFileNewMovixDvd );
 
@@ -271,54 +271,54 @@ void K3bMainWindow::initActions()
 
 
 
-  actionProjectAddFiles = new KAction( i18n("&Add Files..."), "filenew", 0, this, SLOT(slotProjectAddFiles()),
+  actionProjectAddFiles = new KAction( i18n("&Add Files..."), "filenew", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProjectAddFiles()),
 				       actionCollection(), "project_add_files");
 
-  KAction* actionClearProject = new KAction( i18n("&Clear Project"), QApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, 
-					     this, SLOT(slotClearProject()), actionCollection(), "project_clear_project" );
+  KAction* actionClearProject = new KAction( i18n("&Clear Project"), TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, 
+					     TQT_TQOBJECT(this), TQT_SLOT(slotClearProject()), actionCollection(), "project_clear_project" );
 
-  actionViewDirTreeView = new KToggleAction(i18n("Show Directories"), 0, this, SLOT(slotShowDirTreeView()),
+  actionViewDirTreeView = new KToggleAction(i18n("Show Directories"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotShowDirTreeView()),
 					    actionCollection(), "view_dir_tree");
 
-  actionViewContentsView = new KToggleAction(i18n("Show Contents"), 0, this, SLOT(slotShowContentsView()),
+  actionViewContentsView = new KToggleAction(i18n("Show Contents"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotShowContentsView()),
 					     actionCollection(), "view_contents");
 
-  actionViewDocumentHeader = new KToggleAction(i18n("Show Document Header"), 0, this, SLOT(slotViewDocumentHeader()),
+  actionViewDocumentHeader = new KToggleAction(i18n("Show Document Header"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotViewDocumentHeader()),
 					       actionCollection(), "view_document_header");
 
-  actionToolsBlankCdrw = new KAction( i18n("&Erase CD-RW..."), "erasecd", 0, this, SLOT(slotBlankCdrw()),
+  actionToolsBlankCdrw = new KAction( i18n("&Erase CD-RW..."), "erasecd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotBlankCdrw()),
 				      actionCollection(), "tools_blank_cdrw" );
-  KAction* actionToolsFormatDVD = new KAction( i18n("&Format DVD%1RW...").arg("±"), "formatdvd", 0, this, 
-					       SLOT(slotFormatDvd()), actionCollection(), "tools_format_dvd" );
-  actionToolsWriteCdImage = new KAction(i18n("&Burn CD Image..."), "burn_cdimage", 0, this, SLOT(slotWriteCdImage()),
+  KAction* actionToolsFormatDVD = new KAction( i18n("&Format DVD%1RW...").tqarg("ï¿½"), "formatdvd", 0, TQT_TQOBJECT(this), 
+					       TQT_SLOT(slotFormatDvd()), actionCollection(), "tools_format_dvd" );
+  actionToolsWriteCdImage = new KAction(i18n("&Burn CD Image..."), "burn_cdimage", 0, TQT_TQOBJECT(this), TQT_SLOT(slotWriteCdImage()),
 					 actionCollection(), "tools_write_cd_image" );
-  KAction* actionToolsWriteDvdImage = new KAction(i18n("&Burn DVD ISO Image..."), "burn_dvdimage", 0, this, SLOT(slotWriteDvdIsoImage()),
+  KAction* actionToolsWriteDvdImage = new KAction(i18n("&Burn DVD ISO Image..."), "burn_dvdimage", 0, TQT_TQOBJECT(this), TQT_SLOT(slotWriteDvdIsoImage()),
 						 actionCollection(), "tools_write_dvd_iso" );
 
-  actionCdCopy = new KAction(i18n("&Copy CD..."), "cdcopy", 0, this, SLOT(slotCdCopy()),
+  actionCdCopy = new KAction(i18n("&Copy CD..."), "cdcopy", 0, TQT_TQOBJECT(this), TQT_SLOT(slotCdCopy()),
 			     actionCollection(), "tools_copy_cd" );
 
-  KAction* actionToolsDvdCopy = new KAction(i18n("Copy &DVD..."), "dvdcopy", 0, this, SLOT(slotDvdCopy()),
+  KAction* actionToolsDvdCopy = new KAction(i18n("Copy &DVD..."), "dvdcopy", 0, TQT_TQOBJECT(this), TQT_SLOT(slotDvdCopy()),
 					    actionCollection(), "tools_copy_dvd" );
 
-  actionToolsCddaRip = new KAction( i18n("Rip Audio CD..."), "cddarip", 0, this, SLOT(slotCddaRip()),
+  actionToolsCddaRip = new KAction( i18n("Rip Audio CD..."), "cddarip", 0, TQT_TQOBJECT(this), TQT_SLOT(slotCddaRip()),
 				    actionCollection(), "tools_cdda_rip" );
-  actionToolsVideoDvdRip = new KAction( i18n("Rip Video DVD..."), "videodvd", 0, this, SLOT(slotVideoDvdRip()),
+  actionToolsVideoDvdRip = new KAction( i18n("Rip Video DVD..."), "videodvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotVideoDvdRip()),
 				    actionCollection(), "tools_videodvd_rip" );
-  actionToolsVideoCdRip = new KAction( i18n("Rip Video CD..."), "videocd", 0, this, SLOT(slotVideoCdRip()),
+  actionToolsVideoCdRip = new KAction( i18n("Rip Video CD..."), "videocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotVideoCdRip()),
 				       actionCollection(), "tools_videocd_rip" );
 
-  (void)new KAction( i18n("System Check"), 0, 0, this, SLOT(slotCheckSystem()),
+  (void)new KAction( i18n("System Check"), 0, 0, TQT_TQOBJECT(this), TQT_SLOT(slotCheckSystem()),
 		     actionCollection(), "help_check_system" );
 
 #ifdef HAVE_K3BSETUP
-  actionSettingsK3bSetup = new KAction(i18n("&Setup System Permissions..."), "configure", 0, this, SLOT(slotK3bSetup()),
+  actionSettingsK3bSetup = new KAction(i18n("&Setup System Permissions..."), "configure", 0, TQT_TQOBJECT(this), TQT_SLOT(slotK3bSetup()),
 				       actionCollection(), "settings_k3bsetup" );
 #endif
 
 #ifdef K3B_DEBUG
-  (void)new KAction( "Test Media Selection ComboBox", 0, 0, this, 
-		     SLOT(slotMediaSelectionTester()), actionCollection(),
+  (void)new KAction( "Test Media Selection ComboBox", 0, 0, TQT_TQOBJECT(this), 
+		     TQT_SLOT(slotMediaSelectionTester()), actionCollection(),
 		     "test_media_selection" );
 #endif
 
@@ -330,7 +330,7 @@ void K3bMainWindow::initActions()
   actionFileNewMovix->setToolTip( i18n("Creates a new eMovix CD project") );
   actionFileNewVcd->setToolTip( i18n("Creates a new Video CD project") );
   actionToolsBlankCdrw->setToolTip( i18n("Open the CD-RW erasing dialog") );
-  actionToolsFormatDVD->setToolTip( i18n("Open the DVD%1RW formatting dialog").arg("±") );
+  actionToolsFormatDVD->setToolTip( i18n("Open the DVD%1RW formatting dialog").tqarg("ï¿½") );
   actionCdCopy->setToolTip( i18n("Open the CD copy dialog") );
   actionToolsWriteCdImage->setToolTip( i18n("Write an Iso9660, cue/bin, or cdrecord clone image to CD") );
   actionToolsWriteDvdImage->setToolTip( i18n("Write an Iso9660 image to DVD") );
@@ -359,7 +359,7 @@ void K3bMainWindow::initActions()
 
 
 
-const QPtrList<K3bDoc>& K3bMainWindow::projects() const
+const TQPtrList<K3bDoc>& K3bMainWindow::projects() const
 {
   return k3bappcore->projectManager()->projects();
 }
@@ -387,18 +387,18 @@ void K3bMainWindow::initView()
   setMainDockWidget( mainDock );
 
   // --- Document Dock ----------------------------------------------------------------------------
-  d->documentStack = new QWidgetStack( mainDock );
+  d->documentStack = new TQWidgetStack( mainDock );
   mainDock->setWidget( d->documentStack );
 
-  d->documentHull = new QWidget( d->documentStack );
+  d->documentHull = new TQWidget( d->documentStack );
   d->documentStack->addWidget( d->documentHull );
-  QGridLayout* documentHullLayout = new QGridLayout( d->documentHull );
+  TQGridLayout* documentHullLayout = new TQGridLayout( d->documentHull );
   documentHullLayout->setMargin( 2 );
   documentHullLayout->setSpacing( 0 );
 
   m_documentHeader = new K3bThemedHeader( d->documentHull );
   m_documentHeader->setTitle( i18n("Current Projects") );
-  m_documentHeader->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+  m_documentHeader->tqsetAlignment( TQt::AlignHCenter | TQt::AlignVCenter );
   m_documentHeader->setLeftPixmap( K3bTheme::PROJECT_LEFT );
   m_documentHeader->setRightPixmap( K3bTheme::PROJECT_RIGHT );
 
@@ -408,7 +408,7 @@ void K3bMainWindow::initView()
   documentHullLayout->addWidget( m_documentHeader, 0, 0 );
   documentHullLayout->addWidget( m_documentTab, 1, 0 );
 
-  connect( m_documentTab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotCurrentDocChanged()) );
+  connect( m_documentTab, TQT_SIGNAL(currentChanged(TQWidget*)), TQT_TQOBJECT(this), TQT_SLOT(slotCurrentDocChanged()) );
 
   d->welcomeWidget = new K3bWelcomeWidget( this, m_documentTab );
   m_documentTab->addTab( d->welcomeWidget, i18n("Quickstart") );
@@ -427,8 +427,8 @@ void K3bMainWindow::initView()
 
   m_dirTreeDock->setWidget( sidePanel );
   m_dirTreeDock->manualDock( mainDock, KDockWidget::DockTop, 4000 );
-  connect( m_dirTreeDock, SIGNAL(iMBeingClosed()), this, SLOT(slotDirTreeDockHidden()) );
-  connect( m_dirTreeDock, SIGNAL(hasUndocked()), this, SLOT(slotDirTreeDockHidden()) );
+  connect( m_dirTreeDock, TQT_SIGNAL(iMBeingClosed()), TQT_TQOBJECT(this), TQT_SLOT(slotDirTreeDockHidden()) );
+  connect( m_dirTreeDock, TQT_SIGNAL(hasUndocked()), TQT_TQOBJECT(this), TQT_SLOT(slotDirTreeDockHidden()) );
   // ---------------------------------------------------------------------------------------------
 
   // --- Contents Dock ---------------------------------------------------------------------------
@@ -439,24 +439,24 @@ void K3bMainWindow::initView()
   m_contentsDock->setWidget( m_dirView );
   m_contentsDock->manualDock( m_dirTreeDock, KDockWidget::DockRight, 2000 );
 
-  connect( m_contentsDock, SIGNAL(iMBeingClosed()), this, SLOT(slotContentsDockHidden()) );
-  connect( m_contentsDock, SIGNAL(hasUndocked()), this, SLOT(slotContentsDockHidden()) );
+  connect( m_contentsDock, TQT_SIGNAL(iMBeingClosed()), TQT_TQOBJECT(this), TQT_SLOT(slotContentsDockHidden()) );
+  connect( m_contentsDock, TQT_SIGNAL(hasUndocked()), TQT_TQOBJECT(this), TQT_SLOT(slotContentsDockHidden()) );
   // ---------------------------------------------------------------------------------------------
 
   // --- filetreecombobox-toolbar ----------------------------------------------------------------
   K3bFileTreeComboBox* m_fileTreeComboBox = new K3bFileTreeComboBox( 0 );
-  connect( m_fileTreeComboBox, SIGNAL(urlExecuted(const KURL&)), m_dirView, SLOT(showUrl(const KURL& )) );
-  connect( m_fileTreeComboBox, SIGNAL(deviceExecuted(K3bDevice::Device*)), m_dirView,
-	   SLOT(showDevice(K3bDevice::Device* )) );
-  connect( m_dirView, SIGNAL(urlEntered(const KURL&)), m_fileTreeComboBox, SLOT(setUrl(const KURL&)) );
-  connect( m_dirView, SIGNAL(deviceSelected(K3bDevice::Device*)), m_fileTreeComboBox, SLOT(setDevice(K3bDevice::Device*)) );
+  connect( m_fileTreeComboBox, TQT_SIGNAL(urlExecuted(const KURL&)), m_dirView, TQT_SLOT(showUrl(const KURL& )) );
+  connect( m_fileTreeComboBox, TQT_SIGNAL(deviceExecuted(K3bDevice::Device*)), m_dirView,
+	   TQT_SLOT(showDevice(K3bDevice::Device* )) );
+  connect( m_dirView, TQT_SIGNAL(urlEntered(const KURL&)), m_fileTreeComboBox, TQT_SLOT(setUrl(const KURL&)) );
+  connect( m_dirView, TQT_SIGNAL(deviceSelected(K3bDevice::Device*)), m_fileTreeComboBox, TQT_SLOT(setDevice(K3bDevice::Device*)) );
 
   KWidgetAction* fileTreeComboAction = new KWidgetAction( m_fileTreeComboBox,
 							  i18n("&Quick Dir Selector"),
 							  0, 0, 0,
 							  actionCollection(), "quick_dir_selector" );
   fileTreeComboAction->setAutoSized(true);
-  (void)new KAction( i18n("Go"), "key_enter", 0, m_fileTreeComboBox, SLOT(slotGoUrl()), actionCollection(), "go_url" );
+  (void)new KAction( i18n("Go"), "key_enter", 0, TQT_TQOBJECT(m_fileTreeComboBox), TQT_SLOT(slotGoUrl()), actionCollection(), "go_url" );
   // ---------------------------------------------------------------------------------------------
 }
 
@@ -509,7 +509,7 @@ void K3bMainWindow::createClient( K3bDoc* doc )
 
 K3bView* K3bMainWindow::activeView() const
 {
-  QWidget* w = m_documentTab->currentPage();
+  TQWidget* w = m_documentTab->currentPage();
   if( K3bView* view = dynamic_cast<K3bView*>(w) )
     return view;
   else
@@ -609,7 +609,7 @@ void K3bMainWindow::readOptions()
   m_dirView->readConfig( config() );
 
   slotViewDocumentHeader();
-  slotCheckDockWidgetStatus();
+  slotCheckDockWidgettqStatus();
 }
 
 
@@ -620,7 +620,7 @@ void K3bMainWindow::saveProperties( KConfig* c )
   // 3. save the url of the project (might be something like "AudioCD1") in the config
   // 4. save the status of every project (modified/saved)
 
-  QString saveDir = KGlobal::dirs()->saveLocation( "appdata", "sessions/" + qApp->sessionId() + "/", true );
+  TQString saveDir = KGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
 
   // FIXME: for some reason the config entries are not properly stored when using the default
   //        KMainWindow session config. Since I was not able to find the bug I use another config object
@@ -629,26 +629,26 @@ void K3bMainWindow::saveProperties( KConfig* c )
   c->setGroup( "Saved Session" );
   // ----------------------------------------------------------
 
-  const QPtrList<K3bDoc>& docs = k3bappcore->projectManager()->projects();
+  const TQPtrList<K3bDoc>& docs = k3bappcore->projectManager()->projects();
   c->writeEntry( "Number of projects", docs.count() );
 
   int cnt = 1;
-  for( QPtrListIterator<K3bDoc> it( docs ); *it; ++it ) {
+  for( TQPtrListIterator<K3bDoc> it( docs ); *it; ++it ) {
     // the "name" of the project (or the original url if isSaved())
-    c->writePathEntry( QString("%1 url").arg(cnt), (*it)->URL().url() );
+    c->writePathEntry( TQString("%1 url").tqarg(cnt), (*it)->URL().url() );
 
     // is the doc modified
-    c->writeEntry( QString("%1 modified").arg(cnt), (*it)->isModified() );
+    c->writeEntry( TQString("%1 modified").tqarg(cnt), (*it)->isModified() );
 
     // has the doc already been saved?
-    c->writeEntry( QString("%1 saved").arg(cnt), (*it)->isSaved() );
+    c->writeEntry( TQString("%1 saved").tqarg(cnt), (*it)->isSaved() );
 
     // where does the session management save it? If it's not modified and saved this is
     // the same as the url
     KURL saveUrl = (*it)->URL();
     if( !(*it)->isSaved() || (*it)->isModified() )
-      saveUrl = KURL::fromPathOrURL( saveDir + QString::number(cnt) );
-    c->writePathEntry( QString("%1 saveurl").arg(cnt), saveUrl.url() );
+      saveUrl = KURL::fromPathOrURL( saveDir + TQString::number(cnt) );
+    c->writePathEntry( TQString("%1 saveurl").tqarg(cnt), saveUrl.url() );
 
     // finally save it
     k3bappcore->projectManager()->saveProject( *it, saveUrl );
@@ -675,7 +675,7 @@ void K3bMainWindow::readProperties( KConfig* c )
   // 3. reset the saved urls and the modified state
   // 4. delete "~/.kde/share/apps/k3b/sessions/" + KApp->sessionId()
 
-  QString saveDir = KGlobal::dirs()->saveLocation( "appdata", "sessions/" + qApp->sessionId() + "/", true );
+  TQString saveDir = KGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
 
   // FIXME: for some reason the config entries are not properly stored when using the default
   //        KMainWindow session config. Since I was not able to find the bug I use another config object
@@ -690,13 +690,13 @@ void K3bMainWindow::readProperties( KConfig* c )
 
   for( int i = 1; i <= cnt; ++i ) {
     // in this case the constructor works since we saved as url()
-    KURL url = c->readPathEntry( QString("%1 url").arg(i) );
+    KURL url = c->readPathEntry( TQString("%1 url").tqarg(i) );
 
-    bool modified = c->readBoolEntry( QString("%1 modified").arg(i) );
+    bool modified = c->readBoolEntry( TQString("%1 modified").tqarg(i) );
 
-    bool saved = c->readBoolEntry( QString("%1 saved").arg(i) );
+    bool saved = c->readBoolEntry( TQString("%1 saved").tqarg(i) );
 
-    KURL saveUrl = c->readPathEntry( QString("%1 saveurl").arg(i) );
+    KURL saveUrl = c->readPathEntry( TQString("%1 saveurl").tqarg(i) );
 
     // now load the project
     if( K3bDoc* doc = k3bappcore->projectManager()->openProject( saveUrl ) ) {
@@ -711,7 +711,7 @@ void K3bMainWindow::readProperties( KConfig* c )
 
     // remove the temp file
     if( !saved || modified )
-      QFile::remove( saveUrl.path() );
+      TQFile::remove( saveUrl.path() );
   }
 
   // and now remove the temp dir
@@ -752,7 +752,7 @@ bool K3bMainWindow::queryClose()
 //     kdDebug() << "(K3bMainWindow::queryClose) main job found: " << job->jobDescription() << endl;
 
 //     // now job is the major job and jh should be a widget
-//     QWidget* progressDialog = dynamic_cast<QWidget*>( jh );
+//     TQWidget* progressDialog = dynamic_cast<TQWidget*>( jh );
 
 //     kdDebug() << "(K3bMainWindow::queryClose) job active: " << job->active() << endl;
 
@@ -774,14 +774,14 @@ bool K3bMainWindow::queryClose()
 // 	  kdDebug() << "(K3bMainWindow::queryClose) closing progress dialog." << endl;
 // 	  progressDialog->close();
 // 	  //
-// 	  // now here we have the problem that due to the whole Qt event thing the exec call (or
+// 	  // now here we have the problem that due to the whole TQt event thing the exec call (or
 // 	  // in this case most likely the startJob call) does not return until we leave this method.
-// 	  // That means that the progress dialog might be deleted by it's parent below (when we 
+// 	  // That means that the progress dialog might be deleted by it's tqparent below (when we 
 // 	  // close docs) before it is deleted by the creator (most likely a projectburndialog).
 // 	  // That would result in a double deletion and thus a crash.
-// 	  // So we just reparent the dialog to 0 here so it's (former) parent won't delete it.
+// 	  // So we just reparent the dialog to 0 here so it's (former) tqparent won't delete it.
 // 	  //
-// 	  progressDialog->reparent( 0, QPoint(0,0) );
+// 	  progressDialog->reparent( 0, TQPoint(0,0) );
 // 	}
 
 // 	kdDebug() << "(K3bMainWindow::queryClose) job cleanup done." << endl;
@@ -826,7 +826,7 @@ bool K3bMainWindow::canCloseDocument( K3bDoc* doc )
     return true;
 
   switch ( KMessageBox::warningYesNoCancel( this, 
-					    i18n("%1 has unsaved data.").arg( doc->URL().fileName() ),
+					    i18n("%1 has unsaved data.").tqarg( doc->URL().fileName() ),
 					    i18n("Closing Project"), 
 					    KStdGuiItem::save(),
 					    KGuiItem( i18n("&Discard"), "editshred" ) ) )
@@ -851,7 +851,7 @@ bool K3bMainWindow::queryExit()
 
 
 /////////////////////////////////////////////////////////////////////
-// SLOT IMPLEMENTATION
+// TQT_SLOT IMPLEMENTATION
 /////////////////////////////////////////////////////////////////////
 
 
@@ -879,7 +879,7 @@ void K3bMainWindow::slotFileOpenRecent(const KURL& url)
 
 void K3bMainWindow::slotFileSaveAll()
 {
-  for( QPtrListIterator<K3bDoc> it( k3bappcore->projectManager()->projects() );
+  for( TQPtrListIterator<K3bDoc> it( k3bappcore->projectManager()->projects() );
        *it; ++it ) {
     fileSave( *it );
   }
@@ -940,7 +940,7 @@ void K3bMainWindow::fileSaveAs( K3bDoc* doc )
       bool exists = KIO::NetAccess::exists( url, false, 0 );
       if( !exists ||
 	  ( exists &&
-	    KMessageBox::warningContinueCancel( this, i18n("Do you want to overwrite %1?").arg( url.prettyURL() ), 
+	    KMessageBox::warningContinueCancel( this, i18n("Do you want to overwrite %1?").tqarg( url.prettyURL() ), 
 						i18n("File Exists"), i18n("Overwrite") )
 	    == KMessageBox::Continue ) ) {
 
@@ -1030,7 +1030,7 @@ void K3bMainWindow::slotViewStatusBar()
 }
 
 
-void K3bMainWindow::slotStatusMsg(const QString &text)
+void K3bMainWindow::slotStatusMsg(const TQString &text)
 {
   ///////////////////////////////////////////////////////////////////
   // change status message permanently
@@ -1202,7 +1202,7 @@ void K3bMainWindow::slotEditToolbars()
 {
   saveMainWindowSettings( m_config, "main_window_settings" );
   KEditToolbar dlg( factory() );
-  connect(&dlg, SIGNAL(newToolbarConfig()), SLOT(slotNewToolBarConfig()));
+  connect(&dlg, TQT_SIGNAL(newToolbarConfig()), TQT_SLOT(slotNewToolBarConfig()));
   dlg.exec();
 }
 
@@ -1220,13 +1220,13 @@ bool K3bMainWindow::eject()
 }
 
 
-void K3bMainWindow::slotErrorMessage(const QString& message)
+void K3bMainWindow::slotErrorMessage(const TQString& message)
 {
   KMessageBox::error( this, message );
 }
 
 
-void K3bMainWindow::slotWarningMessage(const QString& message)
+void K3bMainWindow::slotWarningMessage(const TQString& message)
 {
   KMessageBox::sorry( this, message );
 }
@@ -1267,13 +1267,13 @@ void K3bMainWindow::slotProjectAddFiles()
   K3bView* view = activeView();
 
   if( view ) {
-    QStringList files = KFileDialog::getOpenFileNames( ":k3b-project-add-files", 
+    TQStringList files = KFileDialog::getOpenFileNames( ":k3b-project-add-files", 
 						       i18n("*|All Files"), 
 						       this, 
 						       i18n("Select Files to Add to Project") );
 
     KURL::List urls;
-    for( QStringList::ConstIterator it = files.begin();
+    for( TQStringList::ConstIterator it = files.begin();
          it != files.end(); it++ ) {
       KURL url;
       url.setPath(*it);
@@ -1364,14 +1364,14 @@ void K3bMainWindow::slotDvdCopy()
 void K3bMainWindow::slotShowDirTreeView()
 {
   m_dirTreeDock->changeHideShowState();
-  slotCheckDockWidgetStatus();
+  slotCheckDockWidgettqStatus();
 }
 
 
 void K3bMainWindow::slotShowContentsView()
 {
   m_contentsDock->changeHideShowState();
-  slotCheckDockWidgetStatus();
+  slotCheckDockWidgettqStatus();
 }
 
 
@@ -1386,7 +1386,7 @@ void K3bMainWindow::slotShowMenuBar()
 
 void K3bMainWindow::slotShowTips()
 {
-  KTipDialog::showTip( this, QString::null, true );
+  KTipDialog::showTip( this, TQString(), true );
 }
 
 
@@ -1402,7 +1402,7 @@ void K3bMainWindow::slotContentsDockHidden()
 }
 
 
-void K3bMainWindow::slotCheckDockWidgetStatus()
+void K3bMainWindow::slotCheckDockWidgettqStatus()
 {
   actionViewContentsView->setChecked( m_contentsDock->isVisible() );
   actionViewDirTreeView->setChecked( m_dirTreeDock->isVisible() );
@@ -1468,7 +1468,7 @@ void K3bMainWindow::slotCheckSystemTimed()
   // run the system check from the event queue so we do not
   // mess with the device state resetting throughout the app
   // when called from K3bDeviceManager::changed
-  QTimer::singleShot( 0, this, SLOT(slotCheckSystem()) );
+  TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT(slotCheckSystem()) );
 }
 
 
@@ -1486,17 +1486,17 @@ void K3bMainWindow::addUrls( const KURL::List& urls )
   else {
     // check if the files are all audio we can handle. If so create an audio project
     bool audio = true;
-    QPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioDecoder" );
+    TQPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioDecoder" );
     for( KURL::List::const_iterator it = urls.begin(); it != urls.end(); ++it ) {
       const KURL& url = *it;
 
-      if( QFileInfo(url.path()).isDir() ) {
+      if( TQFileInfo(url.path()).isDir() ) {
 	audio = false;
 	break;
       }
 
       bool a = false;
-      for( QPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
+      for( TQPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
 	if( static_cast<K3bAudioDecoderFactory*>(it.current())->canDecode( url ) ) {
 	  a = true;
 	  break;
@@ -1621,7 +1621,7 @@ void K3bMainWindow::slotVideoCdRip()
 }
 
 
-void K3bMainWindow::slotAudioServerError( const QString& error )
+void K3bMainWindow::slotAudioServerError( const TQString& error )
 {
   K3bPassivePopup::showPopup( error, i18n("Audio Output Problem") );
 }

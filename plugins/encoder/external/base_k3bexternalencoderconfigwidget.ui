@@ -1,11 +1,11 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bExternalEncoderConfigWidget</class>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>base_K3bExternalEncoderConfigWidget</cstring>
     </property>
-    <property name="geometry">
+    <property name="tqgeometry">
         <rect>
             <x>0</x>
             <y>0</y>
@@ -29,7 +29,7 @@
 &lt;p&gt;K3b comes with a selection of predefined external applications that depends on the installed applications.</string>
             </property>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -48,7 +48,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QListView">
+                <widget class="TQListView">
                     <column>
                         <property name="text">
                             <string>Name</string>
@@ -86,9 +86,9 @@
                         <cstring>m_viewEncoders</cstring>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout6</cstring>
+                        <cstring>tqlayout6</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -104,14 +104,14 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>71</width>
                                     <height>20</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QPushButton">
+                        <widget class="TQPushButton">
                             <property name="name">
                                 <cstring>m_buttonRemove</cstring>
                             </property>
@@ -119,7 +119,7 @@
                                 <string>Remove</string>
                             </property>
                         </widget>
-                        <widget class="QPushButton">
+                        <widget class="TQPushButton">
                             <property name="name">
                                 <cstring>m_buttonEdit</cstring>
                             </property>
@@ -127,7 +127,7 @@
                                 <string>Edit...</string>
                             </property>
                         </widget>
-                        <widget class="QPushButton">
+                        <widget class="TQPushButton">
                             <property name="name">
                                 <cstring>m_buttonAdd</cstring>
                             </property>
@@ -141,7 +141,7 @@
         </widget>
     </vbox>
 </widget>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kactivelabel.h</includehint>
 </includehints>

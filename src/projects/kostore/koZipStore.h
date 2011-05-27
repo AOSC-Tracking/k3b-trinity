@@ -29,26 +29,26 @@ class KURL;
 class KoZipStore : public KoStoreBase
 {
 public:
-    KoZipStore( const QString & _filename, Mode _mode, const QCString & appIdentification );
-    KoZipStore( QIODevice *dev, Mode mode, const QCString & appIdentification );
+    KoZipStore( const TQString & _filename, Mode _mode, const TQCString & appIdentification );
+    KoZipStore( TQIODevice *dev, Mode mode, const TQCString & appIdentification );
     /**
      * KURL-constructor
      * @todo saving not completely implemented (fixed temporary file)
      * @since 1.4
      */
-    KoZipStore( QWidget* window, const KURL& _url, const QString & _filename, Mode _mode, const QCString & appIdentification );
+    KoZipStore( TQWidget* window, const KURL& _url, const TQString & _filename, Mode _mode, const TQCString & appIdentification );
     ~KoZipStore();
 
-    virtual Q_LONG write( const char* _data, Q_ULONG _len );
+    virtual TQ_LONG write( const char* _data, TQ_ULONG _len );
 protected:
-    virtual bool init( Mode _mode, const QCString& appIdentification );
-    virtual bool openWrite( const QString& name );
-    virtual bool openRead( const QString& name );
+    virtual bool init( Mode _mode, const TQCString& appIdentification );
+    virtual bool openWrite( const TQString& name );
+    virtual bool openRead( const TQString& name );
     virtual bool closeWrite();
     virtual bool closeRead() { return true; }
-    virtual bool enterRelativeDirectory( const QString& dirName );
-    virtual bool enterAbsoluteDirectory( const QString& path );
-    virtual bool fileExists( const QString& absPath ) const;
+    virtual bool enterRelativeDirectory( const TQString& dirName );
+    virtual bool enterAbsoluteDirectory( const TQString& path );
+    virtual bool fileExists( const TQString& absPath ) const;
 
     /// The archive
     KZip * m_pZip;

@@ -25,14 +25,15 @@ class KConfigBase;
 class K3bCddbPatternWidget : public base_K3bCddbPatternWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCddbPatternWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bCddbPatternWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bCddbPatternWidget();
 
-  QString filenamePattern() const;
-  QString playlistPattern() const;
-  QString blankReplaceString() const;
+  TQString filenamePattern() const;
+  TQString playlistPattern() const;
+  TQString blankReplaceString() const;
   bool replaceBlanks() const;
 
  signals:

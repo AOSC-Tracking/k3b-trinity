@@ -20,11 +20,11 @@
 
 #include <k3bdatadoc.h>
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 #include "k3b_export.h"
 //class K3bView;
 class KURL;
-class QDomElement;
+class TQDomElement;
 class K3bFileItem;
 class K3bMovixFileItem;
 class K3bDataItem;
@@ -34,18 +34,19 @@ class KConfig;
 class LIBK3B_EXPORT K3bMovixDoc : public K3bDataDoc
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMovixDoc( QObject* parent = 0 );
+  K3bMovixDoc( TQObject* tqparent = 0 );
   virtual ~K3bMovixDoc();
 
   virtual int type() const { return MOVIX; }
 
-  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, QObject* parent );
+  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent );
 
   bool newDocument();
 
-  const QPtrList<K3bMovixFileItem>& movixFileItems() const { return m_movixFiles; }
+  const TQPtrList<K3bMovixFileItem>& movixFileItems() const { return m_movixFiles; }
 
   int indexOf( K3bMovixFileItem* );
 
@@ -54,14 +55,14 @@ class LIBK3B_EXPORT K3bMovixDoc : public K3bDataDoc
   bool reboot() const { return m_reboot; }
   bool ejectDisk() const { return m_ejectDisk; }
   bool randomPlay() const { return m_randomPlay; }
-  const QString& subtitleFontset() const { return m_subtitleFontset; }
-  const QString& bootMessageLanguage() const { return m_bootMessageLanguage; }
-  const QString& audioBackground() const { return m_audioBackground; }
-  const QString& keyboardLayout() const { return m_keyboardLayout; }
-  const QStringList& codecs() const { return m_codecs; }
-  const QString& defaultBootLabel() const { return m_defaultBootLabel; }
-  const QString& additionalMPlayerOptions() const { return m_additionalMPlayerOptions; }
-  const QString& unwantedMPlayerOptions() const { return m_unwantedMPlayerOptions; }
+  const TQString& subtitleFontset() const { return m_subtitleFontset; }
+  const TQString& bootMessageLanguage() const { return m_bootMessageLanguage; }
+  const TQString& audioBackground() const { return m_audioBackground; }
+  const TQString& keyboardLayout() const { return m_keyboardLayout; }
+  const TQStringList& codecs() const { return m_codecs; }
+  const TQString& defaultBootLabel() const { return m_defaultBootLabel; }
+  const TQString& additionalMPlayerOptions() const { return m_additionalMPlayerOptions; }
+  const TQString& unwantedMPlayerOptions() const { return m_unwantedMPlayerOptions; }
   int loopPlaylist() const { return m_loopPlaylist; }
   bool noDma() const { return m_noDma; }
 
@@ -69,14 +70,14 @@ class LIBK3B_EXPORT K3bMovixDoc : public K3bDataDoc
   void setReboot( bool v ) { m_reboot = v; }
   void setEjectDisk( bool v ) { m_ejectDisk = v; }
   void setRandomPlay( bool v ) { m_randomPlay = v; }
-  void setSubtitleFontset( const QString& v ) { m_subtitleFontset = v; }
-  void setBootMessageLanguage( const QString& v ) { m_bootMessageLanguage = v; }
-  void setAudioBackground( const QString& b ) { m_audioBackground = b; }
-  void setKeyboardLayout( const QString& l ) { m_keyboardLayout = l; }
-  void setCodecs( const QStringList& c ) { m_codecs = c; }
-  void setDefaultBootLabel( const QString& v ) { m_defaultBootLabel = v; }
-  void setAdditionalMPlayerOptions( const QString& v ) { m_additionalMPlayerOptions = v; }
-  void setUnwantedMPlayerOptions( const QString& v ) { m_unwantedMPlayerOptions = v; }
+  void setSubtitleFontset( const TQString& v ) { m_subtitleFontset = v; }
+  void setBootMessageLanguage( const TQString& v ) { m_bootMessageLanguage = v; }
+  void setAudioBackground( const TQString& b ) { m_audioBackground = b; }
+  void setKeyboardLayout( const TQString& l ) { m_keyboardLayout = l; }
+  void setCodecs( const TQStringList& c ) { m_codecs = c; }
+  void setDefaultBootLabel( const TQString& v ) { m_defaultBootLabel = v; }
+  void setAdditionalMPlayerOptions( const TQString& v ) { m_additionalMPlayerOptions = v; }
+  void setUnwantedMPlayerOptions( const TQString& v ) { m_unwantedMPlayerOptions = v; }
   void setLoopPlaylist( int v ) { m_loopPlaylist = v; }
   void setNoDma( bool b ) { m_noDma = b; }
 
@@ -94,30 +95,30 @@ class LIBK3B_EXPORT K3bMovixDoc : public K3bDataDoc
 
  protected:
   /** reimplemented from K3bDoc */
-  bool loadDocumentData( QDomElement* root );
+  bool loadDocumentData( TQDomElement* root );
   /** reimplemented from K3bDoc */
-  bool saveDocumentData( QDomElement* );
+  bool saveDocumentData( TQDomElement* );
 
-  virtual QString typeString() const { return "movix"; }
+  virtual TQString typeString() const { return "movix"; }
 
  private slots:
   void slotDataItemRemoved( K3bDataItem* );
 
  private:
-  QPtrList<K3bMovixFileItem> m_movixFiles;
+  TQPtrList<K3bMovixFileItem> m_movixFiles;
 
   bool m_shutdown;
   bool m_reboot;
   bool m_ejectDisk;
   bool m_randomPlay;
-  QString m_subtitleFontset;
-  QString m_bootMessageLanguage;
-  QString m_audioBackground;
-  QString m_keyboardLayout;
-  QStringList m_codecs;
-  QString m_defaultBootLabel;
-  QString m_additionalMPlayerOptions;
-  QString m_unwantedMPlayerOptions;
+  TQString m_subtitleFontset;
+  TQString m_bootMessageLanguage;
+  TQString m_audioBackground;
+  TQString m_keyboardLayout;
+  TQStringList m_codecs;
+  TQString m_defaultBootLabel;
+  TQString m_additionalMPlayerOptions;
+  TQString m_unwantedMPlayerOptions;
   int m_loopPlaylist;
   bool m_noDma;
 };

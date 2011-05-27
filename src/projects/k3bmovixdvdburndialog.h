@@ -23,15 +23,16 @@
 class K3bMovixDvdDoc;
 class K3bMovixOptionsWidget;
 class K3bDataImageSettingsWidget;
-class QCheckBox;
+class TQCheckBox;
 
 
 class K3bMovixDvdBurnDialog : public K3bProjectBurnDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, QWidget* parent = 0, const char* name = 0, bool modal = true );
+  K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, TQWidget* tqparent = 0, const char* name = 0, bool modal = true );
   ~K3bMovixDvdBurnDialog();
 
  protected slots:
@@ -50,7 +51,7 @@ class K3bMovixDvdBurnDialog : public K3bProjectBurnDialog
   K3bMovixOptionsWidget* m_movixOptionsWidget;
   K3bDataImageSettingsWidget* m_imageSettingsWidget;
 
-  QCheckBox* m_checkVerify;
+  TQCheckBox* m_checkVerify;
 };
 
 #endif

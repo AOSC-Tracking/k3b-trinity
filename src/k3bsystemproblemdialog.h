@@ -17,14 +17,14 @@
 #ifndef _K3B_SYSTEM_DIALOG_H_
 #define _K3B_SYSTEM_DIALOG_H_
 
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
 
 #include <kdialog.h>
 
-class QPushButton;
-class QCheckBox;
-class QCloseEvent;
+class TQPushButton;
+class TQCheckBox;
+class TQCloseEvent;
 namespace K3bDevice {
   class Device;
 }
@@ -34,9 +34,9 @@ class K3bSystemProblem
 {
  public:
   K3bSystemProblem( int type = NON_CRITICAL,
-		    const QString& problem = QString::null,
-		    const QString& details = QString::null,
-		    const QString& solution = QString::null,
+		    const TQString& problem = TQString(),
+		    const TQString& details = TQString(),
+		    const TQString& solution = TQString(),
 		    bool k3bsetup = false );
 
   enum {
@@ -46,9 +46,9 @@ class K3bSystemProblem
   };
 
   int type;
-  QString problem;
-  QString details;
-  QString solution;
+  TQString problem;
+  TQString details;
+  TQString solution;
   bool solvableByK3bSetup;
 };
 
@@ -68,6 +68,7 @@ class K3bSystemProblem
 class K3bSystemProblemDialog : public KDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
@@ -77,25 +78,25 @@ class K3bSystemProblemDialog : public KDialog
    * or K3b is started for the first time.
    */
   static bool readCheckSystemConfig();
-  static void checkSystem( QWidget* parent = 0, 
+  static void checkSystem( TQWidget* tqparent = 0, 
 			   const char* name = 0 );
 
  protected:
-  void closeEvent( QCloseEvent* );
+  void closeEvent( TQCloseEvent* );
 
  private slots:
   void slotK3bSetup();
 
  private:
-  K3bSystemProblemDialog( const QValueList<K3bSystemProblem>&,
-			  QWidget* parent = 0, 
+  K3bSystemProblemDialog( const TQValueList<K3bSystemProblem>&,
+			  TQWidget* tqparent = 0, 
 			  const char* name = 0 );
   static int dmaActivated( K3bDevice::Device* );
-  static QPtrList<K3bDevice::Device> checkForAutomounting();
+  static TQPtrList<K3bDevice::Device> checkForAutomounting();
 
-  QPushButton* m_closeButton;
-  QPushButton* m_k3bsetupButton;
-  QCheckBox* m_checkDontShowAgain;
+  TQPushButton* m_closeButton;
+  TQPushButton* m_k3bsetupButton;
+  TQCheckBox* m_checkDontShowAgain;
 };
 
 #endif

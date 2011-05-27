@@ -48,12 +48,12 @@ public:
   char* outputBufferPos;
   int outputBufferSize;
   AVPacket packet;
-  Q_UINT8* packetData;
+  TQ_UINT8* packetData;
   int packetSize;
 };
 
 
-K3bFFMpegFile::K3bFFMpegFile( const QString& filename )
+K3bFFMpegFile::K3bFFMpegFile( const TQString& filename )
   : m_filename(filename)
 {
   d = new Private;
@@ -187,7 +187,7 @@ int K3bFFMpegFile::type() const
 }
 
 
-QString K3bFFMpegFile::typeComment() const
+TQString K3bFFMpegFile::typeComment() const
 {
   switch( type() ) {
   case CODEC_ID_WMAV1:
@@ -199,45 +199,45 @@ QString K3bFFMpegFile::typeComment() const
   case CODEC_ID_AAC:
     return i18n("Advanced Audio Coding (AAC)");
   default:
-    return QString::fromLocal8Bit( d->codec->name );
+    return TQString::fromLocal8Bit( d->codec->name );
   }
 }
 
 
-QString K3bFFMpegFile::title() const
+TQString K3bFFMpegFile::title() const
 {
   // FIXME: is this UTF8 or something??
   if( d->formatContext->title[0] != '\0' )
-    return QString::fromLocal8Bit( d->formatContext->title );
+    return TQString::fromLocal8Bit( d->formatContext->title );
   else
-    return QString::null;
+    return TQString();
 }
 
 
-QString K3bFFMpegFile::author() const
+TQString K3bFFMpegFile::author() const
 {
   // FIXME: is this UTF8 or something??
   if( d->formatContext->author[0] != '\0' )
-    return QString::fromLocal8Bit( d->formatContext->author );
+    return TQString::fromLocal8Bit( d->formatContext->author );
   else
-    return QString::null;
+    return TQString();
 }
 
 
-QString K3bFFMpegFile::comment() const
+TQString K3bFFMpegFile::comment() const
 {
   // FIXME: is this UTF8 or something??
   if( d->formatContext->comment[0] != '\0' )
-    return QString::fromLocal8Bit( d->formatContext->comment );
+    return TQString::fromLocal8Bit( d->formatContext->comment );
   else
-    return QString::null;
+    return TQString();
 }
 
 
 int K3bFFMpegFile::read( char* buf, int bufLen )
 {
   if( fillOutputBuffer() > 0 ) {
-    int len = QMIN(bufLen, d->outputBufferSize);
+    int len = TQMIN(bufLen, d->outputBufferSize);
     ::memcpy( buf, d->outputBufferPos, len );
 
     // TODO: only swap if needed
@@ -316,7 +316,7 @@ bool K3bFFMpegFile::seek( const K3b::Msf& msf )
   d->packetSize = 0;
 
   double seconds = (double)msf.totalFrames()/75.0;
-  Q_UINT64 timestamp = (Q_UINT64)(seconds * (double)AV_TIME_BASE);
+  TQ_UINT64 timestamp = (TQ_UINT64)(seconds * (double)AV_TIME_BASE);
 
   // FIXME: do we really need the start_time and why?
 #if LIBAVFORMAT_BUILD >= 4619
@@ -353,7 +353,7 @@ K3bFFMpegWrapper* K3bFFMpegWrapper::instance()
 }
 
 
-K3bFFMpegFile* K3bFFMpegWrapper::open( const QString& filename ) const
+K3bFFMpegFile* K3bFFMpegWrapper::open( const TQString& filename ) const
 {
   K3bFFMpegFile* file = new K3bFFMpegFile( filename );
   if( file->open() ) {

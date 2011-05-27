@@ -20,13 +20,13 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <k3bmsf.h>
 
 #include MPC_HEADER_FILE
 
-class QFile;
+class TQFile;
 
 
 class K3bMpcWrapper
@@ -35,7 +35,7 @@ class K3bMpcWrapper
   K3bMpcWrapper();
   ~K3bMpcWrapper();
 
-  bool open( const QString& filename );
+  bool open( const TQString& filename );
   void close();
 
   int decode( char*, int max );
@@ -46,10 +46,10 @@ class K3bMpcWrapper
   int samplerate() const;
   unsigned int channels() const;
 
-  QFile* input() const { return m_input; }
+  TQFile* input() const { return m_input; }
 
  private:
-  QFile* m_input;
+  TQFile* m_input;
   mpc_reader* m_reader;
   mpc_decoder* m_decoder;
   mpc_streaminfo* m_info;

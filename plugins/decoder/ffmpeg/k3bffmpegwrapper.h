@@ -30,7 +30,7 @@ class K3bFFMpegFile
  public:
   ~K3bFFMpegFile();
 
-  const QString& filename() const { return m_filename; }
+  const TQString& filename() const { return m_filename; }
 
   bool open();
   void close();
@@ -43,21 +43,21 @@ class K3bFFMpegFile
    * ffmpeg internal enumeration
    */
   int type() const;
-  QString typeComment() const;
+  TQString typeComment() const;
 
-  QString title() const;
-  QString author() const;
-  QString comment() const;
+  TQString title() const;
+  TQString author() const;
+  TQString comment() const;
 
   int read( char* buf, int bufLen );
   bool seek( const K3b::Msf& );
 
  private:
-  K3bFFMpegFile( const QString& filename );
+  K3bFFMpegFile( const TQString& filename );
   int readPacket();
   int fillOutputBuffer();
 
-  QString m_filename;
+  TQString m_filename;
 
   class Private;
   Private* d;
@@ -72,7 +72,7 @@ class K3bFFMpegWrapper
   /**
    * returns 0 on failure.
    */
-  K3bFFMpegFile* open( const QString& filename ) const;
+  K3bFFMpegFile* open( const TQString& filename ) const;
 
   static K3bFFMpegWrapper* instance();
 

@@ -17,32 +17,33 @@
 #ifndef K3BSPLASH_H
 #define K3BSPLASH_H
 
-#include <qvbox.h>
+#include <tqvbox.h>
 
-class QLabel;
-class QMouseEvent;
-class QPaintEvent;
-class QString;
+class TQLabel;
+class TQMouseEvent;
+class TQPaintEvent;
+class TQString;
 
 
-class K3bSplash : public QVBox
+class K3bSplash : public TQVBox
 {
 Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bSplash( QWidget* parent = 0, const char* name = 0 );
+  K3bSplash( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bSplash();
 
  public slots:
   void show();
-  void addInfo( const QString& );
+  void addInfo( const TQString& );
 
  protected:
-  void mousePressEvent( QMouseEvent* );
-  //  void paintEvent( QPaintEvent* );
+  void mousePressEvent( TQMouseEvent* );
+  //  void paintEvent( TQPaintEvent* );
 
  private:
-  QLabel* m_infoBox;
+  TQLabel* m_infoBox;
 };
 
 #endif

@@ -22,16 +22,16 @@
 #include <k3bcore.h>
 #include <k3bglobals.h>
 
-#include <qrect.h>
-#include <qapplication.h>
-#include <qstyle.h>
-#include <qlistbox.h>
-#include <qheader.h>
-#include <qevent.h>
-#include <qpainter.h>
-#include <qpalette.h>
-#include <qdrawutil.h>
-#include <qdir.h>
+#include <tqrect.h>
+#include <tqapplication.h>
+#include <tqstyle.h>
+#include <tqlistbox.h>
+#include <tqheader.h>
+#include <tqevent.h>
+#include <tqpainter.h>
+#include <tqpalette.h>
+#include <tqdrawutil.h>
+#include <tqdir.h>
 
 #include <kdebug.h>
 #include <kiconloader.h>
@@ -53,8 +53,8 @@ public:
 };
 
 
-K3bFileTreeComboBox::K3bFileTreeComboBox( QWidget* parent, const char* name )
-  : KComboBox( true, parent, name )
+K3bFileTreeComboBox::K3bFileTreeComboBox( TQWidget* tqparent, const char* name )
+  : KComboBox( true, tqparent, name )
 {
   d = new Private;
 
@@ -63,23 +63,23 @@ K3bFileTreeComboBox::K3bFileTreeComboBox( QWidget* parent, const char* name )
 
   m_fileTreeView = new K3bFileTreeView( this );
   m_fileTreeView->hide();
-  m_fileTreeView->reparent( this, WType_Popup, QPoint(0,0), false );
+  m_fileTreeView->reparent( this, WType_Popup, TQPoint(0,0), false );
   m_fileTreeView->header()->hide();
   m_fileTreeView->installEventFilter(this);
 
   m_fileTreeView->addDefaultBranches();
   m_fileTreeView->addCdDeviceBranches( k3bcore->deviceManager() );
 
-  // HACK! Why the hell is QComboBox that closed???
+  // HACK! Why the hell is TQComboBox that closed???
   listBox()->insertItem( "HACK" );
 
-  connect( m_fileTreeView, SIGNAL(deviceExecuted(K3bDevice::Device*)),
-	   this, SLOT(slotDeviceExecuted(K3bDevice::Device*)) );
-  connect( m_fileTreeView, SIGNAL(urlExecuted(const KURL&)),
-	   this, SLOT(slotUrlExecuted(const KURL&)) );
+  connect( m_fileTreeView, TQT_SIGNAL(deviceExecuted(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotDeviceExecuted(K3bDevice::Device*)) );
+  connect( m_fileTreeView, TQT_SIGNAL(urlExecuted(const KURL&)),
+	   this, TQT_SLOT(slotUrlExecuted(const KURL&)) );
 
-  connect( lineEdit(), SIGNAL(returnPressed()),
-	   this, SLOT(slotGoUrl()) );
+  connect( lineEdit(), TQT_SIGNAL(returnPressed()),
+	   this, TQT_SLOT(slotGoUrl()) );
 
   // TODO: subclass KURLCompletition to support the dev:/ stuff and block any non-local urls
 }
@@ -120,9 +120,9 @@ void K3bFileTreeComboBox::setDevice( K3bDevice::Device* dev )
 }
 
 
-void K3bFileTreeComboBox::setEditText( const QPixmap& pix, const QString& t )
+void K3bFileTreeComboBox::setEditText( const TQPixmap& pix, const TQString& t )
 {
-  // QComboBox::changeItem() doesn't honor the pixmap when
+  // TQComboBox::changeItem() doesn't honor the pixmap when
   // using an editable combobox, so we just remove and insert
   
   setUpdatesEnabled( false );
@@ -144,7 +144,7 @@ void K3bFileTreeComboBox::setCurrentItem( int )
 }
 
 
-void K3bFileTreeComboBox::setCurrentText( const QString& )
+void K3bFileTreeComboBox::setCurrentText( const TQString& )
 {
 }
 
@@ -154,15 +154,15 @@ void K3bFileTreeComboBox::popup()
   // code mainly from qcombobox.cpp
 
   m_fileTreeView->triggerUpdate();
-  int w = QMAX( m_fileTreeView->sizeHint().width(), width() );
-  int h = m_fileTreeView->sizeHint().height();
-  QRect screen = QApplication::desktop()->availableGeometry( this );
+  int w = TQMAX( m_fileTreeView->tqsizeHint().width(), width() );
+  int h = m_fileTreeView->tqsizeHint().height();
+  TQRect screen = TQApplication::desktop()->availableGeometry( this );
   int sx = screen.x();				// screen pos
   int sy = screen.y();
   int sw = screen.width();			// screen width
   int sh = screen.height();			// screen height
-  QPoint pos = mapToGlobal( QPoint(0,height()) );
-  // ## Similar code is in QPopupMenu
+  TQPoint pos = mapToGlobal( TQPoint(0,height()) );
+  // ## Similar code is in TQPopupMenu
   int x = pos.x();
   int y = pos.y();
 
@@ -174,10 +174,10 @@ void K3bFileTreeComboBox::popup()
   if (y + h > sy+sh && y - h - height() >= 0 )
     y = y - h - height();
 
-  QRect rect =
-    style().querySubControlMetrics( QStyle::CC_ComboBox, this,
-				    QStyle::SC_ComboBoxListBoxPopup,
-				    QStyleOption( x, y, w, h ) );
+  TQRect rect =
+    tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
+				    TQStyle::SC_ComboBoxListBoxPopup,
+				    TQStyleOption( x, y, w, h ) );
   // work around older styles that don't implement the combobox
   // listbox popup subcontrol
   if ( rect.isNull() )
@@ -198,13 +198,13 @@ void K3bFileTreeComboBox::popdown()
 {
   m_fileTreeView->hide();
   d->poppedUp = false;
-  repaint(); // repaint the arrow
+  tqrepaint(); // tqrepaint the arrow
 }
 
 
 void K3bFileTreeComboBox::slotGoUrl()
 {
-  QString p = currentText();
+  TQString p = currentText();
 
   // check for a media url or a device string
   if( K3bDevice::Device* dev = K3b::urlToDevice( p ) ) {
@@ -213,10 +213,10 @@ void K3bFileTreeComboBox::slotGoUrl()
   }
 
   // check for our own internal format
-  else if( p.contains("/dev/") ) {
-    int pos1 = p.findRev('(');
-    int pos2 = p.findRev(')');
-    QString devStr = p.mid( pos1+1, pos2-pos1-1  );
+  else if( p.tqcontains("/dev/") ) {
+    int pos1 = p.tqfindRev('(');
+    int pos2 = p.tqfindRev(')');
+    TQString devStr = p.mid( pos1+1, pos2-pos1-1  );
     if( K3bDevice::Device* dev = k3bcore->deviceManager()->findDevice( devStr ) ) {
       emit deviceExecuted( dev );
       return;
@@ -234,18 +234,18 @@ void K3bFileTreeComboBox::slotGoUrl()
   // TODO: move this to k3bglobals
 
   // to expand another user's home dir we need a tilde followed by a user name
-  static QRegExp someUsersHomeDir( "\\~([^/]+)" );
+  static TQRegExp someUsersHomeDir( "\\~([^/]+)" );
   int pos = 0;
   while( ( pos = someUsersHomeDir.search( p, pos ) ) != -1 ) {
     KUser user( someUsersHomeDir.cap(1) );
     if( user.isValid() )
-      p.replace( pos, someUsersHomeDir.cap(1).length() + 1, user.homeDir() );
+      p.tqreplace( pos, someUsersHomeDir.cap(1).length() + 1, user.homeDir() );
     else
       ++pos; // skip this ~
   }
 
   // now replace the unmatched tildes with our home dir
-  p.replace( "~", K3b::prepareDir( QDir::homeDirPath() ) );
+  p.tqreplace( "~", K3b::prepareDir( TQDir::homeDirPath() ) );
 
 
   lineEdit()->setText( p );
@@ -255,34 +255,34 @@ void K3bFileTreeComboBox::slotGoUrl()
 }
 
 
-bool K3bFileTreeComboBox::eventFilter( QObject* o, QEvent* e )
+bool K3bFileTreeComboBox::eventFilter( TQObject* o, TQEvent* e )
 {
   if( dynamic_cast<K3bFileTreeView*>(o) == m_fileTreeView ) {
-    if( e->type() == QEvent::DragLeave ) {
+    if( e->type() == TQEvent::DragLeave ) {
       // the user dragged a dir from the filetree
       // now 
       popdown();
       return true;
     }
-    else if( e->type() == QEvent::KeyPress ) {
-      QKeyEvent *k = (QKeyEvent *)e;
-      if( k->key() == Qt::Key_Escape ) {
+    else if( e->type() == TQEvent::KeyPress ) {
+      TQKeyEvent *k = (TQKeyEvent *)e;
+      if( k->key() == TQt::Key_Escape ) {
 	popdown();
 	return true;
       }
     }
-    else if( e->type() == QEvent::MouseButtonPress ) {
-      QMouseEvent* me = (QMouseEvent*)e;
-      if ( !m_fileTreeView->rect().contains( me->pos() ) ) {
-	QRect arrowRect = style().querySubControlMetrics( QStyle::CC_ComboBox, this,
-							  QStyle::SC_ComboBoxArrow);
-	arrowRect = QStyle::visualRect(arrowRect, this);
+    else if( e->type() == TQEvent::MouseButtonPress ) {
+      TQMouseEvent* me = (TQMouseEvent*)e;
+      if ( !TQT_TQRECT_OBJECT(m_fileTreeView->rect()).tqcontains( me->pos() ) ) {
+	TQRect arrowRect = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
+							  TQStyle::SC_ComboBoxArrow);
+	arrowRect = TQStyle::tqvisualRect(arrowRect, this);
 	
 	// Correction for motif style, where arrow is smaller
 	// and thus has a rect that doesn't fit the button.
-	arrowRect.setHeight( QMAX(  height() - (2 * arrowRect.y()), arrowRect.height() ) );
+	arrowRect.setHeight( TQMAX(  height() - (2 * arrowRect.y()), arrowRect.height() ) );
 
-	if ( arrowRect.contains( mapFromGlobal(me->globalPos()) ) ) {
+	if ( arrowRect.tqcontains( mapFromGlobal(me->globalPos()) ) ) {
 	  d->ignoreNextMouseClick = true;  // in the case we hit the arrow button
 	}
 	popdown();
@@ -297,90 +297,90 @@ bool K3bFileTreeComboBox::eventFilter( QObject* o, QEvent* e )
 }
 
 
-void K3bFileTreeComboBox::mousePressEvent( QMouseEvent* e )
+void K3bFileTreeComboBox::mousePressEvent( TQMouseEvent* e )
 {
   // mainly from qcombobox.cpp
 
-  if ( e->button() != LeftButton )
+  if ( e->button() != Qt::LeftButton )
     return;
   if ( d->ignoreNextMouseClick ) {
     d->ignoreNextMouseClick = FALSE;
     return;
   }
 
-  QRect arrowRect = style().querySubControlMetrics( QStyle::CC_ComboBox, this,
-						    QStyle::SC_ComboBoxArrow);
-  arrowRect = QStyle::visualRect(arrowRect, this);
+  TQRect arrowRect = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
+						    TQStyle::SC_ComboBoxArrow);
+  arrowRect = TQStyle::tqvisualRect(arrowRect, this);
 
   // Correction for motif style, where arrow is smaller
   // and thus has a rect that doesn't fit the button.
-  arrowRect.setHeight( QMAX(  height() - (2 * arrowRect.y()), arrowRect.height() ) );
+  arrowRect.setHeight( TQMAX(  height() - (2 * arrowRect.y()), arrowRect.height() ) );
 
-  if ( arrowRect.contains( e->pos() ) ) {
+  if ( arrowRect.tqcontains( e->pos() ) ) {
     popup();
-    repaint( FALSE );
+    tqrepaint( FALSE );
   }
 }
 
 
-void K3bFileTreeComboBox::keyPressEvent( QKeyEvent* e )
+void K3bFileTreeComboBox::keyPressEvent( TQKeyEvent* e )
 {
-  if( e->key() == Qt::Key_Escape ) {
+  if( e->key() == TQt::Key_Escape ) {
     popdown();
   }
   KComboBox::keyPressEvent(e);
 }
 
 
-void K3bFileTreeComboBox::paintEvent( QPaintEvent* )
+void K3bFileTreeComboBox::paintEvent( TQPaintEvent* )
 {
   // a lot of code from qcombobox.cpp
 
   // we only need this since there is no way to change the status of the arrow-button
 
-  QPainter p( this );
-  const QColorGroup & g = colorGroup();
+  TQPainter p( this );
+  const TQColorGroup & g = tqcolorGroup();
   p.setPen(g.text());
 
-  QStyle::SFlags flags = QStyle::Style_Default;
+  TQStyle::SFlags flags = TQStyle::Style_Default;
   if (isEnabled())
-    flags |= QStyle::Style_Enabled;
+    flags |= TQStyle::Style_Enabled;
   if (hasFocus())
-    flags |= QStyle::Style_HasFocus;
+    flags |= TQStyle::Style_HasFocus;
 
   if ( width() < 5 || height() < 5 ) {
     qDrawShadePanel( &p, rect(), g, FALSE, 2,
-		     &g.brush( QColorGroup::Button ) );
+		     &g.brush( TQColorGroup::Button ) );
     return;
   }
 
-  //  bool reverse = QApplication::reverseLayout();
+  //  bool reverse = TQApplication::reverseLayout();
 
-  style().drawComplexControl( QStyle::CC_ComboBox, &p, this, rect(), g,
-			      flags, QStyle::SC_All,
+  tqstyle().tqdrawComplexControl( TQStyle::CC_ComboBox, &p, this, rect(), g,
+			      flags, TQStyle::SC_All,
 			      (d->poppedUp ?
-			       QStyle::SC_ComboBoxArrow :
-			       QStyle::SC_None ));
+			       TQStyle::SC_ComboBoxArrow :
+			       TQStyle::SC_None ));
 
-  QRect re = style().querySubControlMetrics( QStyle::CC_ComboBox, this,
-					     QStyle::SC_ComboBoxEditField );
-  re = QStyle::visualRect(re, this);
+  TQRect re = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
+					     TQStyle::SC_ComboBoxEditField );
+  re = TQStyle::tqvisualRect(re, this);
   p.setClipRect( re );
 
-//     QListBoxItem * item = listBox()->item( 0 );
+//     TQListBoxItem * item = listBox()->item( 0 );
 //     if ( item ) {
-//       // we calculate the QListBoxTexts height (ignoring strut)
+//       // we calculate the TQListBoxTexts height (ignoring strut)
 //       int itemh = d->listBox()->fontMetrics().lineSpacing() + 2;
 //       p.translate( re.x(), re.y() + (re.height() - itemh)/2  );
 //       item->paint( &p );
 //     }
 //   } else if ( d->listBox() && d->listBox()->item( 0 ) ) {
     p.setClipping( FALSE );
-    QListBoxItem * item = listBox()->item( 0 );
-    const QPixmap *pix = item->pixmap();
+    TQListBoxItem * item = listBox()->item( 0 );
+    const TQPixmap *pix = item->pixmap();
     if ( pix ) {
       p.fillRect( re.x(), re.y(), pix->width() + 4, re.height(),
-		  colorGroup().brush( QColorGroup::Base ) );
+		  tqcolorGroup().brush( TQColorGroup::Base ) );
       p.drawPixmap( re.x() + 2, re.y() +
 		    ( re.height() - pix->height() ) / 2, *pix );
     }

@@ -19,14 +19,14 @@
 #include "k3bsessionimportitem.h"
 #include "k3bfileitem.h"
 
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
 #include <kdebug.h>
 
 
-K3bDirItem::K3bDirItem(const QString& name, K3bDataDoc* doc, K3bDirItem* parentDir)
-  : K3bDataItem( doc, parentDir ),
+K3bDirItem::K3bDirItem(const TQString& name, K3bDataDoc* doc, K3bDirItem* tqparentDir)
+  : K3bDataItem( doc, tqparentDir ),
     m_size(0),
     m_followSymlinksSize(0),
     m_blocks(0),
@@ -37,8 +37,8 @@ K3bDirItem::K3bDirItem(const QString& name, K3bDataDoc* doc, K3bDirItem* parentD
   m_k3bName = name;
 
   // add automagically like a qlistviewitem
-  if( parent() )
-    parent()->addDataItem( this );
+  if( tqparent() )
+    tqparent()->addDataItem( this );
 }
 
 
@@ -52,26 +52,26 @@ K3bDirItem::K3bDirItem( const K3bDirItem& item )
     m_dirs(0),
     m_localPath( item.m_localPath )
 {
-  for( QPtrListIterator<K3bDataItem> it( item.children() ); *it; ++it )
+  for( TQPtrListIterator<K3bDataItem> it( item.tqchildren() ); *it; ++it )
     addDataItem( (*it)->copy() );
 }
 
 K3bDirItem::~K3bDirItem()
 {
-  // delete all children
+  // delete all tqchildren
   // doing this by hand is much saver than using the
   // auto-delete feature since some of the items' destructors
   // may change the list
-  K3bDataItem* i = m_children.first();
+  K3bDataItem* i = m_tqchildren.first();
   while( i ) {
     // it is important to use takeDataItem here to be sure
     // the size gets updated properly
     takeDataItem(i);
     delete i;
-    i = m_children.first();
+    i = m_tqchildren.first();
   }
 
-  // this has to be done after deleting the children
+  // this has to be done after deleting the tqchildren
   // because the directory itself has a size of 0 in K3b
   // and all it's files' sizes have already been substracted
   take();
@@ -99,14 +99,14 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
     }
   }
 
-  if( m_children.findRef( item ) == -1 ) {
+  if( m_tqchildren.tqfindRef( item ) == -1 ) {
     if( item->isFile() ) {
       // do we replace an old item?
-      QString name = item->k3bName();
+      TQString name = item->k3bName();
       int cnt = 1;
-      while( K3bDataItem* oldItem = find( name ) ) {
+      while( K3bDataItem* oldItem = tqfind( name ) ) {
 	if( !oldItem->isDir() && oldItem->isFromOldSession() ) {
-	  // in this case we remove this item from it's parent and save it in the new one
+	  // in this case we remove this item from it's tqparent and save it in the new one
 	  // to be able to recover it
 	  oldItem->take();
 	  static_cast<K3bSessionImportItem*>(oldItem)->setReplaceItem( static_cast<K3bFileItem*>(item) );
@@ -118,15 +118,15 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
 	  // add a counter to the filename
 	  //
 	  if( item->k3bName()[item->k3bName().length()-4] == '.' )
-	    name = item->k3bName().left( item->k3bName().length()-4 ) + QString::number(cnt++) + item->k3bName().right(4);
+	    name = item->k3bName().left( item->k3bName().length()-4 ) + TQString::number(cnt++) + item->k3bName().right(4);
 	  else
-	    name = item->k3bName() + QString::number(cnt++);
+	    name = item->k3bName() + TQString::number(cnt++);
 	}
       }
       item->setK3bName( name );
     }
 
-    m_children.append( item->take() );
+    m_tqchildren.append( item->take() );
     updateSize( item, false );
     if( item->isDir() )
       updateFiles( ((K3bDirItem*)item)->numFiles(), ((K3bDirItem*)item)->numDirs()+1 );
@@ -146,9 +146,9 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
 
 K3bDataItem* K3bDirItem::takeDataItem( K3bDataItem* item )
 {
-  int x = m_children.findRef( item );
+  int x = m_tqchildren.tqfindRef( item );
   if( x > -1 ) {
-    K3bDataItem* item = m_children.take();
+    K3bDataItem* item = m_tqchildren.take();
     updateSize( item, true );
     if( item->isDir() )
       updateFiles( -1*((K3bDirItem*)item)->numFiles(), -1*((K3bDirItem*)item)->numDirs()-1 );
@@ -176,8 +176,8 @@ K3bDataItem* K3bDirItem::takeDataItem( K3bDataItem* item )
 
 K3bDataItem* K3bDirItem::nextSibling() const
 {
-  if( !m_children.isEmpty() )
-    return m_children.getFirst();
+  if( !m_tqchildren.isEmpty() )
+    return m_tqchildren.getFirst();
   else
     return K3bDataItem::nextSibling();
 }
@@ -185,24 +185,24 @@ K3bDataItem* K3bDirItem::nextSibling() const
 
 K3bDataItem* K3bDirItem::nextChild( K3bDataItem* prev ) const
 {
-  // search for prev in children
-  if( m_children.findRef( prev ) < 0 ) {
+  // search for prev in tqchildren
+  if( m_tqchildren.tqfindRef( prev ) < 0 ) {
     return 0;
   }
   else
-    return m_children.next();
+    return m_tqchildren.next();
 }
 
 
-bool K3bDirItem::alreadyInDirectory( const QString& filename ) const
+bool K3bDirItem::alreadyInDirectory( const TQString& filename ) const
 {
-  return (find( filename ) != 0);
+  return (tqfind( filename ) != 0);
 }
 
 
-K3bDataItem* K3bDirItem::find( const QString& filename ) const
+K3bDataItem* K3bDirItem::tqfind( const TQString& filename ) const
 {
-  for( QPtrListIterator<K3bDataItem> it( m_children ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( it.current()->k3bName() == filename )
       return it.current();
   }
@@ -210,20 +210,20 @@ K3bDataItem* K3bDirItem::find( const QString& filename ) const
 }
 
 
-K3bDataItem* K3bDirItem::findByPath( const QString& p )
+K3bDataItem* K3bDirItem::findByPath( const TQString& p )
 {
   if( p.isEmpty() || p == "/" )
     return this;
 
-  QString path = p;
+  TQString path = p;
   if( path.startsWith("/") )
     path = path.mid(1);
-  int pos = path.find( "/" );
+  int pos = path.tqfind( "/" );
   if( pos < 0 )
-    return find( path );
+    return tqfind( path );
   else {
     // do it recursivly
-    K3bDataItem* item = find( path.left(pos) );
+    K3bDataItem* item = tqfind( path.left(pos) );
     if( item && item->isDir() )
       return ((K3bDirItem*)item)->findByPath( path.mid( pos+1 ) );
     else
@@ -232,14 +232,14 @@ K3bDataItem* K3bDirItem::findByPath( const QString& p )
 }
 
 
-bool K3bDirItem::mkdir( const QString& dirPath )
+bool K3bDirItem::mkdir( const TQString& dirPath )
 {
   //
   // An absolut path always starts at the root item
   //
   if( dirPath[0] == '/' ) {
-    if( parent() )
-      return parent()->mkdir( dirPath );
+    if( tqparent() )
+      return tqparent()->mkdir( dirPath );
     else
       return mkdir( dirPath.mid( 1 ) );
   }
@@ -247,9 +247,9 @@ bool K3bDirItem::mkdir( const QString& dirPath )
   if( findByPath( dirPath ) )
     return false;
 
-  QString restPath;
-  QString dirName;
-  int pos = dirPath.find( '/' );
+  TQString restPath;
+  TQString dirName;
+  int pos = dirPath.tqfind( '/' );
   if( pos == -1 ) {
     dirName = dirPath;
   }
@@ -258,7 +258,7 @@ bool K3bDirItem::mkdir( const QString& dirPath )
     restPath = dirPath.mid( pos+1 );
   }
 
-  K3bDataItem* dir = find( dirName );
+  K3bDataItem* dir = tqfind( dirName );
   if( !dir )
     dir = new K3bDirItem( dirName, doc(), this );
   else if( !dir->isDir() )
@@ -294,12 +294,12 @@ bool K3bDirItem::isSubItem( K3bDataItem* item ) const
   if( dynamic_cast<K3bDirItem*>(item) == this )
     return true;
 
-  K3bDirItem* d = item->parent();
+  K3bDirItem* d = item->tqparent();
   while( d ) {
     if( d == this ) {
       return true;
     }
-    d = d->parent();
+    d = d->tqparent();
   }
 
   return false;
@@ -323,7 +323,7 @@ bool K3bDirItem::isRemoveable() const
   if( !K3bDataItem::isRemoveable() )
     return false;
 
-  for( QPtrListIterator<K3bDataItem> it( m_children ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( !it.current()->isRemoveable() )
       return false;
   }
@@ -349,22 +349,22 @@ void K3bDirItem::updateSize( K3bDataItem* item, bool removed )
         }
     }
 
-    if( parent() )
-        parent()->updateSize( item, removed );
+    if( tqparent() )
+        tqparent()->updateSize( item, removed );
 }
 
 void K3bDirItem::updateFiles( long files, long dirs )
 {
   m_files += files;
   m_dirs += dirs;
-  if( parent() )
-    parent()->updateFiles( files, dirs );
+  if( tqparent() )
+    tqparent()->updateFiles( files, dirs );
 }
 
 
 bool K3bDirItem::isFromOldSession() const
 {
-  for( QPtrListIterator<K3bDataItem> it( m_children ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( (*it)->isFromOldSession() )
       return true;
   }
@@ -375,7 +375,7 @@ bool K3bDirItem::isFromOldSession() const
 bool K3bDirItem::writeToCd() const
 {
   // check if this dir contains items to write
-  for( QPtrListIterator<K3bDataItem> it( m_children ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( (*it)->writeToCd() )
       return true;
   }
@@ -394,13 +394,13 @@ K3bRootItem::~K3bRootItem()
 }
 
 
-const QString& K3bRootItem::k3bName() const
+const TQString& K3bRootItem::k3bName() const
 {
   return doc()->isoOptions().volumeID();
 }
 
 
-void K3bRootItem::setK3bName( const QString& text )
+void K3bRootItem::setK3bName( const TQString& text )
 {
   doc()->setVolumeID( text );
 }

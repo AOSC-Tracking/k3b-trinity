@@ -22,19 +22,20 @@
 
 class K3bDvdDoc;
 class K3bDataImageSettingsWidget;
-class QGroupBox;
-class QRadioButton;
-class QButtonGroup;
-class QCheckBox;
+class TQGroupBox;
+class TQRadioButton;
+class TQButtonGroup;
+class TQCheckBox;
 class K3bDataMultiSessionCombobox;
 
 
 class K3bDvdBurnDialog : public K3bProjectBurnDialog
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
-   K3bDvdBurnDialog( K3bDvdDoc*, QWidget *parent = 0, const char *name = 0, bool modal = true );
+   K3bDvdBurnDialog( K3bDvdDoc*, TQWidget *tqparent = 0, const char *name = 0, bool modal = true );
    ~K3bDvdBurnDialog();
 
  protected slots:
@@ -61,7 +62,7 @@ class K3bDvdBurnDialog : public K3bProjectBurnDialog
    K3bDataMultiSessionCombobox* m_comboMultisession;
    // ---------------------------------------------
 
-   QCheckBox* m_checkVerify;
+   TQCheckBox* m_checkVerify;
 
    K3bDvdDoc* m_doc;
 };

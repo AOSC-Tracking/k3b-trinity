@@ -15,10 +15,10 @@
 
 #include <config.h>
 
-#include <qcstring.h>
-#include <qdatetime.h>
-#include <qbitarray.h>
-#include <qptrlist.h>
+#include <tqcstring.h>
+#include <tqdatetime.h>
+#include <tqbitarray.h>
+#include <tqptrlist.h>
 
 #include <kdebug.h>
 #include <kinstance.h>
@@ -67,7 +67,7 @@ extern "C"
 K3bDevice::DeviceManager* kio_videodvdProtocol::s_deviceManager = 0;
 int kio_videodvdProtocol::s_instanceCnt = 0;
 
-kio_videodvdProtocol::kio_videodvdProtocol(const QCString &pool_socket, const QCString &app_socket)
+kio_videodvdProtocol::kio_videodvdProtocol(const TQCString &pool_socket, const TQCString &app_socket)
     : SlaveBase("kio_videodvd", pool_socket, app_socket)
 {
   kdDebug() << "kio_videodvdProtocol::kio_videodvdProtocol()" << endl;
@@ -150,16 +150,16 @@ KIO::UDSEntry kio_videodvdProtocol::createUDSEntry( const K3bIso9660Entry* e ) c
 
 // FIXME: remember the iso instance for quicker something and search for the videodvd
 //        in the available devices.
-K3bIso9660* kio_videodvdProtocol::openIso( const KURL& url, QString& plainIsoPath )
+K3bIso9660* kio_videodvdProtocol::openIso( const KURL& url, TQString& plainIsoPath )
 {
   // get the volume id from the url
-  QString volumeId = url.path().section( '/', 1, 1 );
+  TQString volumeId = url.path().section( '/', 1, 1 );
 
   kdDebug() << "(kio_videodvdProtocol) searching for Video dvd: " << volumeId << endl;
 
   // now search the devices for this volume id
   // FIXME: use the cache created in listVideoDVDs
-  for( QPtrListIterator<K3bDevice::Device> it( s_deviceManager->dvdReader() ); *it; ++it ) {
+  for( TQPtrListIterator<K3bDevice::Device> it( s_deviceManager->dvdReader() ); *it; ++it ) {
     K3bDevice::Device* dev = *it;
     K3bDevice::DiskInfo di = dev->diskInfo();
 
@@ -187,7 +187,7 @@ void kio_videodvdProtocol::get(const KURL& url )
 {
   kdDebug() << "kio_videodvd::get(const KURL& url)" << endl ;
 
-  QString isoPath;
+  TQString isoPath;
   if( K3bIso9660* iso = openIso( url, isoPath ) )
   {
     const K3bIso9660Entry* e = iso->firstIsoDirEntry()->entry( isoPath );
@@ -195,7 +195,7 @@ void kio_videodvdProtocol::get(const KURL& url )
     {
       const K3bIso9660File* file = static_cast<const K3bIso9660File*>( e );
       totalSize( file->size() );
-      QByteArray buffer( 10*2048 );
+      TQByteArray buffer( 10*2048 );
       int read = 0;
       int cnt = 0;
       KIO::filesize_t totalRead = 0;
@@ -214,7 +214,7 @@ void kio_videodvdProtocol::get(const KURL& url )
 
       delete iso;
 
-      data(QByteArray()); // empty array means we're done sending the data
+      data(TQByteArray()); // empty array means we're done sending the data
 
       if( read == 0 )
         finished();
@@ -233,7 +233,7 @@ void kio_videodvdProtocol::listDir( const KURL& url )
     listVideoDVDs();
   }
   else {
-    QString isoPath;
+    TQString isoPath;
     K3bIso9660* iso = openIso( url, isoPath );
     if( iso ) {
       const K3bIso9660Directory* mainDir = iso->firstIsoDirEntry();
@@ -241,11 +241,11 @@ void kio_videodvdProtocol::listDir( const KURL& url )
       if( e ) {
 	if( e->isDirectory() ) {
 	  const K3bIso9660Directory* dir = static_cast<const K3bIso9660Directory*>(e);
-	  QStringList el = dir->entries();
+	  TQStringList el = dir->entries();
 	  el.remove( "." );
 	  el.remove( ".." );
 	  UDSEntryList udsl;
-	  for( QStringList::const_iterator it = el.begin(); it != el.end(); ++it )
+	  for( TQStringList::const_iterator it = el.begin(); it != el.end(); ++it )
 	    udsl.append( createUDSEntry( dir->entry( *it ) ) );
 	  listEntries( udsl );
 	  finished();
@@ -269,7 +269,7 @@ void kio_videodvdProtocol::listVideoDVDs()
 {
   int cnt = 0;
 
-  for( QPtrListIterator<K3bDevice::Device> it( s_deviceManager->dvdReader() ); *it; ++it ) {
+  for( TQPtrListIterator<K3bDevice::Device> it( s_deviceManager->dvdReader() ); *it; ++it ) {
     K3bDevice::Device* dev = *it;
     K3bDevice::DiskInfo di = dev->diskInfo();
 
@@ -346,7 +346,7 @@ void kio_videodvdProtocol::stat( const KURL& url )
     finished();
   }
   else {
-    QString isoPath;
+    TQString isoPath;
     K3bIso9660* iso = openIso( url, isoPath );
     if( iso ) {
       const K3bIso9660Entry* e = iso->firstIsoDirEntry()->entry( isoPath );
@@ -371,7 +371,7 @@ void kio_videodvdProtocol::mimetype( const KURL& url )
     return;
   }
 
-  QString isoPath;
+  TQString isoPath;
   K3bIso9660* iso = openIso( url, isoPath );
   if( iso )
   {
@@ -388,13 +388,13 @@ void kio_videodvdProtocol::mimetype( const KURL& url )
       {
         // send some data
         const K3bIso9660File* file = static_cast<const K3bIso9660File*>( e );
-        QByteArray buffer( 10*2048 );
+        TQByteArray buffer( 10*2048 );
         int read = file->read( 0, buffer.data(), buffer.size() );
         if( read > 0 )
         {
           buffer.resize( read );
           data(buffer);
-          data(QByteArray());
+          data(TQByteArray());
           finished();
           // FIXME: do we need to emit finished() after emitting the end of data()?
         }

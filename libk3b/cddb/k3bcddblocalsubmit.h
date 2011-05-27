@@ -19,25 +19,26 @@
 
 #include "k3bcddbsubmit.h"
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
 class K3bCddbLocalSubmit : public K3bCddbSubmit
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCddbLocalSubmit( QObject* parent = 0, const char* name = 0 );
+  K3bCddbLocalSubmit( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCddbLocalSubmit();
 
  public slots:
-  void setCddbDir( const QString& dir ) { m_cddbDir = dir; }
+  void setCddbDir( const TQString& dir ) { m_cddbDir = dir; }
 
  protected slots:
   void doSubmit();
 
  private:
-  QString m_cddbDir;
+  TQString m_cddbDir;
 };
 
 #endif

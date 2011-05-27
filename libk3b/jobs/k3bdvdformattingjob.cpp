@@ -29,8 +29,8 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <qvaluelist.h>
-#include <qregexp.h>
+#include <tqvaluelist.h>
+#include <tqregexp.h>
 
 #include <errno.h>
 #include <string.h>
@@ -71,8 +71,8 @@ public:
 };
 
 
-K3bDvdFormattingJob::K3bDvdFormattingJob( K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bBurnJob( jh, parent, name )
+K3bDvdFormattingJob::K3bDvdFormattingJob( K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bBurnJob( jh, tqparent, name )
 {
   d = new Private;
 }
@@ -97,18 +97,18 @@ void K3bDvdFormattingJob::setForceNoEject( bool b )
 }
 
 
-QString K3bDvdFormattingJob::jobDescription() const
+TQString K3bDvdFormattingJob::jobDescription() const
 {
   return i18n("Formatting DVD"); // Formatting DVDÂ±RW
 }
 
 
-QString K3bDvdFormattingJob::jobDetails() const
+TQString K3bDvdFormattingJob::jobDetails() const
 {
   if( d->quick )
     return i18n("Quick Format");
   else
-    return QString::null;
+    return TQString();
 }
 
 
@@ -142,7 +142,7 @@ void K3bDvdFormattingJob::start()
 		    K3bDevice::STATE_COMPLETE|K3bDevice::STATE_INCOMPLETE|K3bDevice::STATE_EMPTY,
 		    K3bDevice::MEDIA_WRITABLE_DVD,
 		    i18n("Please insert a rewritable DVD medium into drive<p><b>%1 %2 (%3)</b>.")
-		    .arg(d->device->vendor()).arg(d->device->description()).arg(d->device->devicename()) ) == -1 ) {
+		    .tqarg(d->device->vendor()).tqarg(d->device->description()).tqarg(d->device->devicename()) ) == -1 ) {
     emit canceled();
     d->running = false;
     jobFinished(false);
@@ -153,9 +153,9 @@ void K3bDvdFormattingJob::start()
   emit newTask( i18n("Checking media") );
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::NG_DISKINFO, d->device ),
-	   SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	   TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	   this,
-	   SLOT(slotDeviceHandlerFinished(K3bDevice::DeviceHandler*)) );
+	   TQT_SLOT(slotDeviceHandlerFinished(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -207,7 +207,7 @@ void K3bDvdFormattingJob::setForce( bool b )
 }
 
 
-void K3bDvdFormattingJob::slotStderrLine( const QString& line )
+void K3bDvdFormattingJob::slotStderrLine( const TQString& line )
 {
 // * DVD±RW format utility by <appro@fy.chalmers.se>, version 4.4.
 // * 4.7GB DVD-RW media in Sequential mode detected.
@@ -218,15 +218,15 @@ void K3bDvdFormattingJob::slotStderrLine( const QString& line )
   emit debuggingOutput( "dvd+rw-format", line );
 
   // parsing for the -gui mode (since dvd+rw-format 4.6)
-  int pos = line.find( "blanking" );
+  int pos = line.tqfind( "blanking" );
   if( pos < 0 )
-    pos = line.find( "formatting" );
+    pos = line.tqfind( "formatting" );
   if( pos >= 0 ) {
-    pos = line.find( QRegExp( "\\d" ), pos );
+    pos = line.tqfind( TQRegExp( "\\d" ), pos );
   }
   // parsing for \b\b... stuff
   else if( !line.startsWith("*") ) {
-    pos = line.find( QRegExp( "\\d" ) );
+    pos = line.tqfind( TQRegExp( "\\d" ) );
   }
   else if( line.startsWith( ":-(" ) ) {
     if( line.startsWith( ":-( unable to proceed with format" ) ) {
@@ -235,7 +235,7 @@ void K3bDvdFormattingJob::slotStderrLine( const QString& line )
   }
 
   if( pos >= 0 ) {
-    int endPos = line.find( QRegExp("[^\\d\\.]"), pos ) - 1;
+    int endPos = line.tqfind( TQRegExp("[^\\d\\.]"), pos ) - 1;
     bool ok;
     int progress = (int)(line.mid( pos, endPos - pos ).toDouble(&ok));
     if( ok ) {
@@ -267,7 +267,7 @@ void K3bDvdFormattingJob::slotProcessFinished( KProcess* p )
       d->success = true;
     }
     else {
-      emit infoMessage( i18n("%1 returned an unknown error (code %2).").arg(d->dvdFormatBin->name()).arg(p->exitStatus()),
+      emit infoMessage( i18n("%1 returned an unknown error (code %2).").tqarg(d->dvdFormatBin->name()).tqarg(p->exitStatus()),
 			K3bJob::ERROR );
       emit infoMessage( i18n("Please send me an email with the last output."), K3bJob::ERROR );
 
@@ -275,7 +275,7 @@ void K3bDvdFormattingJob::slotProcessFinished( KProcess* p )
     }
   }
   else {
-    emit infoMessage( i18n("%1 did not exit cleanly.").arg(d->dvdFormatBin->name()),
+    emit infoMessage( i18n("%1 did not exit cleanly.").tqarg(d->dvdFormatBin->name()),
 		      ERROR );
     d->success = false;
   }
@@ -288,9 +288,9 @@ void K3bDvdFormattingJob::slotProcessFinished( KProcess* p )
   else {
     emit infoMessage( i18n("Ejecting DVD..."), INFO );
     connect( K3bDevice::eject( d->device ),
-	     SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	     TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	     this,
-	     SLOT(slotEjectingFinished(K3bDevice::DeviceHandler*)) );
+	     TQT_SLOT(slotEjectingFinished(K3bDevice::DeviceHandler*)) );
   }
 }
 
@@ -362,7 +362,7 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
 
 
   if( diskInfo.mediaType() == K3bDevice::MEDIA_DVD_PLUS_RW ) {
-    emit infoMessage( i18n("Found %1 media.").arg(K3bDevice::mediaTypeString(K3bDevice::MEDIA_DVD_PLUS_RW)),
+    emit infoMessage( i18n("Found %1 media.").tqarg(K3bDevice::mediaTypeString(K3bDevice::MEDIA_DVD_PLUS_RW)),
 		      INFO );
 
     // mode is ignored
@@ -375,7 +375,7 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
     }
     else {
       emit infoMessage( i18n("No need to format %1 media more than once.")
-			.arg(K3bDevice::mediaTypeString(K3bDevice::MEDIA_DVD_PLUS_RW)), INFO );
+			.tqarg(K3bDevice::mediaTypeString(K3bDevice::MEDIA_DVD_PLUS_RW)), INFO );
       emit infoMessage( i18n("It may simply be overwritten."), INFO );
 
       if( d->force ) {
@@ -401,11 +401,11 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
   //
 
   else {  // MEDIA_DVD_RW
-    emit infoMessage( i18n("Found %1 media.").arg(K3bDevice::mediaTypeString(K3bDevice::MEDIA_DVD_RW)),
+    emit infoMessage( i18n("Found %1 media.").tqarg(K3bDevice::mediaTypeString(K3bDevice::MEDIA_DVD_RW)),
 		      INFO );
 
     if( diskInfo.currentProfile() != K3bDevice::MEDIA_UNKNOWN ) {
-      emit infoMessage( i18n("Formatted in %1 mode.").arg(K3bDevice::mediaTypeString(diskInfo.currentProfile())), INFO );
+      emit infoMessage( i18n("Formatted in %1 mode.").tqarg(K3bDevice::mediaTypeString(diskInfo.currentProfile())), INFO );
 
 
       //
@@ -428,7 +428,7 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
       else if( diskInfo.currentProfile() == K3bDevice::MEDIA_DVD_RW_OVWR &&
 	       d->mode != K3b::WRITING_MODE_INCR_SEQ ) {
 	emit infoMessage( i18n("No need to format %1 media more than once.")
-			  .arg(K3bDevice::mediaTypeString(diskInfo.currentProfile())), INFO );
+			  .tqarg(K3bDevice::mediaTypeString(diskInfo.currentProfile())), INFO );
 	emit infoMessage( i18n("It may simply be overwritten."), INFO );
 
 	if( d->force )
@@ -448,7 +448,7 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
 	}
 
 	emit newSubTask( i18n("Formatting"
-			      " DVD-RW in %1 mode.").arg(K3bDevice::mediaTypeString( blank ?
+			      " DVD-RW in %1 mode.").tqarg(K3bDevice::mediaTypeString( blank ?
 										     K3bDevice::MEDIA_DVD_RW_SEQ :
 										     K3bDevice::MEDIA_DVD_RW_OVWR )) );
       }
@@ -467,19 +467,19 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
     d->process = new K3bProcess();
     d->process->setRunPrivileged(true);
     //      d->process->setSuppressEmptyLines(false);
-    connect( d->process, SIGNAL(stderrLine(const QString&)), this, SLOT(slotStderrLine(const QString&)) );
-    connect( d->process, SIGNAL(processExited(KProcess*)), this, SLOT(slotProcessFinished(KProcess*)) );
+    connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStderrLine(const TQString&)) );
+    connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessFinished(KProcess*)) );
 
     d->dvdFormatBin = k3bcore->externalBinManager()->binObject( "dvd+rw-format" );
     if( !d->dvdFormatBin ) {
-      emit infoMessage( i18n("Could not find %1 executable.").arg("dvd+rw-format"), ERROR );
+      emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("dvd+rw-format"), ERROR );
       d->running = false;
       jobFinished(false);
       return;
     }
 
     if( !d->dvdFormatBin->copyright.isEmpty() )
-      emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3").arg(d->dvdFormatBin->name()).arg(d->dvdFormatBin->version).arg(d->dvdFormatBin->copyright), INFO );
+      emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3").tqarg(d->dvdFormatBin->name()).tqarg(d->dvdFormatBin->version).tqarg(d->dvdFormatBin->copyright), INFO );
 
 
     *d->process << d->dvdFormatBin;
@@ -487,7 +487,7 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
     if( d->dvdFormatBin->version >= K3bVersion( 4, 6 ) )
       *d->process << "-gui";
 
-    QString p;
+    TQString p;
     if( blank )
       p = "-blank";
     else
@@ -500,14 +500,14 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
     *d->process << d->device->blockDeviceName();
 
     // additional user parameters from config
-    const QStringList& params = d->dvdFormatBin->userParameters();
-    for( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+    const TQStringList& params = d->dvdFormatBin->userParameters();
+    for( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
       *d->process << *it;
 
     kdDebug() << "***** dvd+rw-format parameters:\n";
-    const QValueList<QCString>& args = d->process->args();
-    QString s;
-    for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+    const TQValueList<TQCString>& args = d->process->args();
+    TQString s;
+    for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
       s += *it + " ";
     }
     kdDebug() << s << endl << flush;
@@ -517,7 +517,7 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
       // something went wrong when starting the program
       // it "should" be the executable
       kdDebug() << "(K3bDvdFormattingJob) could not start " << d->dvdFormatBin->path << endl;
-      emit infoMessage( i18n("Could not start %1.").arg(d->dvdFormatBin->name()), K3bJob::ERROR );
+      emit infoMessage( i18n("Could not start %1.").tqarg(d->dvdFormatBin->name()), K3bJob::ERROR );
       d->running = false;
       jobFinished(false);
     }

@@ -1,10 +1,10 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bCddbPatternWidget</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>base_K3bPatternOptionTab</cstring>
     </property>
-    <property name="geometry">
+    <property name="tqgeometry">
         <rect>
             <x>0</x>
             <y>0</y>
@@ -25,15 +25,15 @@
         <property name="spacing">
             <number>6</number>
         </property>
-        <widget class="QLayoutWidget" row="3" column="0" rowspan="1" colspan="2">
+        <widget class="TQLayoutWidget" row="3" column="0" rowspan="1" colspan="2">
             <property name="name">
-                <cstring>layout8</cstring>
+                <cstring>tqlayout8</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkBlankReplace</cstring>
                     </property>
@@ -54,7 +54,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QLabel" row="1" column="0">
+        <widget class="TQLabel" row="1" column="0">
             <property name="name">
                 <cstring>textLabel2</cstring>
             </property>
@@ -78,7 +78,7 @@
                 <bool>true</bool>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -105,9 +105,9 @@
                 <string>Insert your custom pattern here</string>
             </property>
         </widget>
-        <widget class="QLayoutWidget" row="2" column="0" rowspan="1" colspan="2">
+        <widget class="TQLayoutWidget" row="2" column="0" rowspan="1" colspan="2">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -123,7 +123,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>31</width>
                             <height>2</height>
@@ -137,7 +137,7 @@
                     <property name="text">
                         <string>See special strings</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
@@ -148,7 +148,7 @@
                     <property name="text">
                         <string>About conditional inclusion</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
@@ -172,7 +172,7 @@
     <tabstop>m_checkBlankReplace</tabstop>
     <tabstop>m_editBlankReplace</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kurllabel.h</includehint>
     <includehint>kurllabel.h</includehint>

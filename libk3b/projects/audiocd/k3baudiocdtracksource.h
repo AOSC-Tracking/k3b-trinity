@@ -50,8 +50,8 @@ class LIBK3B_EXPORT K3bAudioCdTrackSource : public K3bAudioDataSource
    * Constructor to create sources when loading from a project file without toc information
    */
   K3bAudioCdTrackSource( unsigned int discid, const K3b::Msf& length, int cdTrackNumber, 
-			 const QString& artist, const QString& title,
-			 const QString& cdartist, const QString& cdtitle );
+			 const TQString& artist, const TQString& title,
+			 const TQString& cdartist, const TQString& cdtitle );
   K3bAudioCdTrackSource( const K3bAudioCdTrackSource& );
   ~K3bAudioCdTrackSource();
 
@@ -62,8 +62,8 @@ class LIBK3B_EXPORT K3bAudioCdTrackSource : public K3bAudioDataSource
   K3b::Msf originalLength() const;
   bool seek( const K3b::Msf& );
   int read( char* data, unsigned int max );
-  QString type() const;
-  QString sourceComment() const;
+  TQString type() const;
+  TQString sourceComment() const;
   K3bAudioDataSource* copy() const;
 
   /**

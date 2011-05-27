@@ -16,8 +16,8 @@
 #ifndef _K3B_SCSI_COMMAND_H_
 #define _K3B_SCSI_COMMAND_H_
 
-#include <qglobal.h>
-#include <qstring.h>
+#include <tqglobal.h>
+#include <tqstring.h>
 
 #include "k3bdevice.h"
 
@@ -31,7 +31,7 @@ namespace K3bDevice
   const unsigned char MMC_GET_CONFIGURATION = 0x46;
   const unsigned char MMC_GET_EVENT_STATUS_NOTIFICATION = 0x4A;
   const unsigned char MMC_GET_PERFORMANCE = 0xAC;
-  const unsigned char MMC_INQUIRY = 0x12;
+  const unsigned char MMC_INTQUIRY = 0x12;
   const unsigned char MMC_LOAD_UNLOAD_MEDIUM = 0xA6;
   const unsigned char MMC_MECHANISM_STATUS = 0xBD;
   const unsigned char MMC_MODE_SELECT = 0x55;
@@ -78,7 +78,7 @@ namespace K3bDevice
   const unsigned char MMC_WRITE_AND_VERIFY_10 = 0x2E;
   const unsigned char MMC_WRITE_BUFFER = 0x3B;
 
-  QString commandString( const unsigned char& command );
+  TQString commandString( const unsigned char& command );
 
   enum TransportDirection {
     TR_DIR_NONE,
@@ -127,7 +127,7 @@ namespace K3bDevice
 		     size_t len = 0 );
 
     private:
-      static QString senseKeyToString( int key );
+      static TQString senseKeyToString( int key );
       void debugError( int command, int errorCode, int senseKey, int asc, int ascq );
 
       class Private;

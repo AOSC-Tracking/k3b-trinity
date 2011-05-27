@@ -27,7 +27,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <qdatetime.h>
+#include <tqdatetime.h>
 
 
 class K3bAudioMaxSpeedJob::WorkThread : public K3bThread
@@ -106,7 +106,7 @@ void K3bAudioMaxSpeedJob::WorkThread::run()
     }
     else if( speed > 0 ) {
       // update the max speed
-      maxSpeed = QMIN( maxSpeed, speed );
+      maxSpeed = TQMIN( maxSpeed, speed );
     }
       
     it.next();
@@ -142,7 +142,7 @@ int K3bAudioMaxSpeedJob::WorkThread::speedTest( K3bAudioDataSource* source )
     }
   }
 
-  QTime t;
+  TQTime t;
   int dataRead = 0;
   int r = 0;
 
@@ -183,11 +183,11 @@ int K3bAudioMaxSpeedJob::WorkThread::maxSpeedByMedia() const
 {
   int s = 0;
     
-  QValueList<int> speeds = m_doc->burner()->determineSupportedWriteSpeeds();
+  TQValueList<int> speeds = m_doc->burner()->determineSupportedWriteSpeeds();
   // simply use what we have and let the writer decide if the speeds are empty
   if( !speeds.isEmpty() ) {
     // start with the highest speed and go down the list until we are below our max
-    QValueListIterator<int> it = speeds.end();
+    TQValueListIterator<int> it = speeds.end();
     --it;
     while( *it > maxSpeed && it != speeds.begin() )
       --it;
@@ -203,8 +203,8 @@ int K3bAudioMaxSpeedJob::WorkThread::maxSpeedByMedia() const
 
 
 
-K3bAudioMaxSpeedJob::K3bAudioMaxSpeedJob( K3bAudioDoc* doc, K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bThreadJob( jh, parent, name )
+K3bAudioMaxSpeedJob::K3bAudioMaxSpeedJob( K3bAudioDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bThreadJob( jh, tqparent, name )
 {
   m_thread = new WorkThread( doc );
   setThread( m_thread );

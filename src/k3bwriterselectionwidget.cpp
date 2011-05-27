@@ -32,27 +32,27 @@
 #include <kiconloader.h>
 #include <kinputdialog.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qtooltip.h>
-#include <qtoolbutton.h>
-#include <qwhatsthis.h>
-#include <qmap.h>
-#include <qptrvector.h>
-#include <qcursor.h>
-#include <qapplication.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqtooltip.h>
+#include <tqtoolbutton.h>
+#include <tqwhatsthis.h>
+#include <tqmap.h>
+#include <tqptrvector.h>
+#include <tqcursor.h>
+#include <tqapplication.h>
 
 
 class K3bWriterSelectionWidget::MediaSelectionComboBox : public K3bMediaSelectionComboBox
 {
 public:
-  MediaSelectionComboBox( QWidget* parent )
-    : K3bMediaSelectionComboBox( parent ),
+  MediaSelectionComboBox( TQWidget* tqparent )
+    : K3bMediaSelectionComboBox( tqparent ),
       m_overrideDevice( 0 ) {
   }
 
-  void setOverrideDevice( K3bDevice::Device* dev, const QString& s, const QString& t ) {
+  void setOverrideDevice( K3bDevice::Device* dev, const TQString& s, const TQString& t ) {
     m_overrideDevice = dev;
     m_overrideString = s;
     m_overrideToolTip = t;
@@ -69,18 +69,18 @@ public:
 	     K3bMediaSelectionComboBox::showMedium( m ) );
   }
 
-  QString mediumString( const K3bMedium& m ) const {
+  TQString mediumString( const K3bMedium& m ) const {
     if( m.device() == m_overrideDevice )
       return m_overrideString;
     else
       return K3bMediaSelectionComboBox::mediumString( m );
   }
 
-  QString mediumToolTip( const K3bMedium& m ) const {
+  TQString mediumToolTip( const K3bMedium& m ) const {
     if( m.device() == m_overrideDevice )
       return m_overrideToolTip;
     else {
-      QString s = K3bMediaSelectionComboBox::mediumToolTip( m );
+      TQString s = K3bMediaSelectionComboBox::mediumToolTip( m );
       if( !m.diskInfo().empty() && !(wantedMediumState() & m.diskInfo().diskState()) )
 	s.append( "<p><i>" + i18n("Medium will be overwritten.") + "</i>" );
       return s;
@@ -89,8 +89,8 @@ public:
 
 private:
   K3bDevice::Device* m_overrideDevice;
-  QString m_overrideString;
-  QString m_overrideToolTip;
+  TQString m_overrideString;
+  TQString m_overrideToolTip;
 };
 
 
@@ -105,31 +105,31 @@ public:
 
   int lastSetSpeed;
 
-  QMap<int, int> indexSpeedMap;
-  QMap<int, int> speedIndexMap;
+  TQMap<int, int> indexSpeedMap;
+  TQMap<int, int> speedIndexMap;
 };
 
 
-K3bWriterSelectionWidget::K3bWriterSelectionWidget( QWidget *parent, const char *name )
-  : QWidget( parent, name )
+K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *tqparent, const char *name )
+  : TQWidget( tqparent, name )
 {
   d = new Private;
   d->forceAutoSpeed = false;
   d->supportedWritingApps = K3b::CDRECORD|K3b::CDRDAO|K3b::GROWISOFS;
   d->lastSetSpeed = -1;
 
-  QGroupBox* groupWriter = new QGroupBox( this );
+  TQGroupBox* groupWriter = new TQGroupBox( this );
   groupWriter->setTitle( i18n( "Burn Medium" ) );
   groupWriter->setColumnLayout(0, Qt::Vertical );
-  groupWriter->layout()->setSpacing( 0 );
-  groupWriter->layout()->setMargin( 0 );
+  groupWriter->tqlayout()->setSpacing( 0 );
+  groupWriter->tqlayout()->setMargin( 0 );
 
-  QGridLayout* groupWriterLayout = new QGridLayout( groupWriter->layout() );
-  groupWriterLayout->setAlignment( Qt::AlignTop );
+  TQGridLayout* groupWriterLayout = new TQGridLayout( groupWriter->tqlayout() );
+  groupWriterLayout->tqsetAlignment( TQt::AlignTop );
   groupWriterLayout->setSpacing( KDialog::spacingHint() );
   groupWriterLayout->setMargin( KDialog::marginHint() );
 
-  QLabel* labelSpeed = new QLabel( groupWriter, "TextLabel1" );
+  TQLabel* labelSpeed = new TQLabel( groupWriter, "TextLabel1" );
   labelSpeed->setText( i18n( "Speed:" ) );
 
   m_comboSpeed = new KComboBox( false, groupWriter, "m_comboSpeed" );
@@ -138,7 +138,7 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( QWidget *parent, const char 
 
   m_comboMedium = new MediaSelectionComboBox( groupWriter );
 
-  m_writingAppLabel = new QLabel( i18n("Writing app:"), groupWriter );
+  m_writingAppLabel = new TQLabel( i18n("Writing app:"), groupWriter );
   m_comboWritingApp = new KComboBox( groupWriter );
 
   groupWriterLayout->addWidget( m_comboMedium, 0, 0 );
@@ -149,8 +149,8 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( QWidget *parent, const char 
   groupWriterLayout->setColStretch( 0, 1 );
 
 
-  QGridLayout* mainLayout = new QGridLayout( this );
-  mainLayout->setAlignment( Qt::AlignTop );
+  TQGridLayout* mainLayout = new TQGridLayout( this );
+  mainLayout->tqsetAlignment( TQt::AlignTop );
   mainLayout->setSpacing( KDialog::spacingHint() );
   mainLayout->setMargin( 0 );
 
@@ -160,25 +160,25 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( QWidget *parent, const char 
   setTabOrder( m_comboMedium, m_comboSpeed );
   setTabOrder( m_comboSpeed, m_comboWritingApp );
 
-  connect( m_comboMedium, SIGNAL(selectionChanged(K3bDevice::Device*)), this, SIGNAL(writerChanged()) );
-  connect( m_comboMedium, SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, SIGNAL(writerChanged(K3bDevice::Device*)) );
-  connect( m_comboMedium, SIGNAL(newMedia()), this, SIGNAL(newMedia()) );
-  connect( m_comboMedium, SIGNAL(newMedium(K3bDevice::Device*)), this, SIGNAL(newMedium(K3bDevice::Device*)) );
-  connect( m_comboMedium, SIGNAL(newMedium(K3bDevice::Device*)), this, SLOT(slotNewBurnMedium(K3bDevice::Device*)) );
-  connect( m_comboWritingApp, SIGNAL(activated(int)), this, SLOT(slotWritingAppSelected(int)) );
-  connect( this, SIGNAL(writerChanged()), SLOT(slotWriterChanged()) );
-  connect( m_comboSpeed, SIGNAL(activated(int)), this, SLOT(slotSpeedChanged(int)) );
+  connect( m_comboMedium, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQT_SIGNAL(writerChanged()) );
+  connect( m_comboMedium, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQT_SIGNAL(writerChanged(K3bDevice::Device*)) );
+  connect( m_comboMedium, TQT_SIGNAL(newMedia()), this, TQT_SIGNAL(newMedia()) );
+  connect( m_comboMedium, TQT_SIGNAL(newMedium(K3bDevice::Device*)), this, TQT_SIGNAL(newMedium(K3bDevice::Device*)) );
+  connect( m_comboMedium, TQT_SIGNAL(newMedium(K3bDevice::Device*)), this, TQT_SLOT(slotNewBurnMedium(K3bDevice::Device*)) );
+  connect( m_comboWritingApp, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotWritingAppSelected(int)) );
+  connect( this, TQT_SIGNAL(writerChanged()), TQT_SLOT(slotWriterChanged()) );
+  connect( m_comboSpeed, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSpeedChanged(int)) );
 
 
-  QToolTip::add( m_comboMedium, i18n("The medium that will be used for burning") );
-  QToolTip::add( m_comboSpeed, i18n("The speed at which to burn the medium") );
-  QToolTip::add( m_comboWritingApp, i18n("The external application to actually burn the medium") );
+  TQToolTip::add( m_comboMedium, i18n("The medium that will be used for burning") );
+  TQToolTip::add( m_comboSpeed, i18n("The speed at which to burn the medium") );
+  TQToolTip::add( m_comboWritingApp, i18n("The external application to actually burn the medium") );
 
-  QWhatsThis::add( m_comboMedium, i18n("<p>Select the medium that you want to use for burning."
+  TQWhatsThis::add( m_comboMedium, i18n("<p>Select the medium that you want to use for burning."
 				       "<p>In most cases there will only be one medium available which "
 				       "does not leave much choice.") );
-  QWhatsThis::add( m_comboSpeed, i18n("<p>Select the speed with which you want to burn."
+  TQWhatsThis::add( m_comboSpeed, i18n("<p>Select the speed with which you want to burn."
 				      "<p><b>Auto</b><br>"
 				      "This will choose the maximum writing speed possible with the used "
 				      "medium. "
@@ -189,7 +189,7 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( QWidget *parent, const char 
 				      "<p>1x refers to 1385 KB/s for DVD and 175 KB/s for CD.</p>"
 				      "<p><b>Caution:</b> Make sure your system is able to send the data "
 				      "fast enough to prevent buffer underruns.") );
-  QWhatsThis::add( m_comboWritingApp, i18n("<p>K3b uses the command line tools cdrecord, growisofs, and cdrdao "
+  TQWhatsThis::add( m_comboWritingApp, i18n("<p>K3b uses the command line tools cdrecord, growisofs, and cdrdao "
 					   "to actually write a CD or DVD."
 					   "<p>Normally K3b chooses the best "
 					   "suited application for every task automatically but in some cases it "
@@ -251,7 +251,7 @@ void K3bWriterSelectionWidget::slotConfigChanged( KConfigBase* c )
 void K3bWriterSelectionWidget::slotRefreshWriterSpeeds()
 {
   if( writerDevice() ) {
-    QValueList<int> speeds = k3bappcore->mediaCache()->writingSpeeds( writerDevice() );
+    TQValueList<int> speeds = k3bappcore->mediaCache()->writingSpeeds( writerDevice() );
 
     int lastSpeed = writerSpeed();
 
@@ -294,7 +294,7 @@ void K3bWriterSelectionWidget::slotRefreshWriterSpeeds()
 	d->haveManualSpeed = true;
       }
       else {
-	for( QValueList<int>::iterator it = speeds.begin(); it != speeds.end(); ++it )
+	for( TQValueList<int>::iterator it = speeds.begin(); it != speeds.end(); ++it )
 	  insertSpeedItem( *it );
       }
     }
@@ -322,17 +322,17 @@ void K3bWriterSelectionWidget::clearSpeedCombo()
 
 void K3bWriterSelectionWidget::insertSpeedItem( int speed )
 {
-  if( !d->speedIndexMap.contains( speed ) ) {
+  if( !d->speedIndexMap.tqcontains( speed ) ) {
     d->indexSpeedMap[m_comboSpeed->count()] = speed;
     d->speedIndexMap[speed] = m_comboSpeed->count();
 
     if( k3bappcore->mediaCache()->diskInfo( writerDevice() ).isDvdMedia() )
       m_comboSpeed->insertItem( ( speed%1385 > 0
-				? QString::number( (float)speed/1385.0, 'f', 1 )  // example: DVD+R(W): 2.4x
-				: QString::number( speed/1385 ) )
+				? TQString::number( (float)speed/1385.0, 'f', 1 )  // example: DVD+R(W): 2.4x
+				: TQString::number( speed/1385 ) )
 			      + "x" );
     else
-      m_comboSpeed->insertItem( QString("%1x").arg(speed/175) );
+      m_comboSpeed->insertItem( TQString("%1x").tqarg(speed/175) );
   }
 }
 
@@ -349,7 +349,7 @@ K3bDevice::Device* K3bWriterSelectionWidget::writerDevice() const
 }
 
 
-QValueList<K3bDevice::Device*> K3bWriterSelectionWidget::allDevices() const
+TQValueList<K3bDevice::Device*> K3bWriterSelectionWidget::allDevices() const
 {
   return m_comboMedium->allDevices();
 }
@@ -367,7 +367,7 @@ void K3bWriterSelectionWidget::setSpeed( int s )
 
   if( d->haveIgnoreSpeed && s < 0 )
     m_comboSpeed->setCurrentItem( 1 ); // Ignore
-  else if( d->speedIndexMap.contains( s ) )
+  else if( d->speedIndexMap.tqcontains( s ) )
     m_comboSpeed->setCurrentItem( d->speedIndexMap[s] );
   else {
     m_comboSpeed->setCurrentItem( 0 ); // Auto
@@ -511,7 +511,7 @@ void K3bWriterSelectionWidget::loadConfig( KConfigBase* c )
 void K3bWriterSelectionWidget::saveConfig( KConfigBase* c )
 {
   c->writeEntry( "writing_speed", writerSpeed() );
-  c->writeEntry( "writer_device", writerDevice() ? writerDevice()->devicename() : QString::null );
+  c->writeEntry( "writer_device", writerDevice() ? writerDevice()->devicename() : TQString() );
   c->writeEntry( "writing_app", m_comboWritingApp->currentText() );
 }
 
@@ -530,7 +530,7 @@ void K3bWriterSelectionWidget::setForceAutoSpeed( bool b )
 }
 
 
-void K3bWriterSelectionWidget::setOverrideDevice( K3bDevice::Device* dev, const QString& overrideString, const QString& tooltip )
+void K3bWriterSelectionWidget::setOverrideDevice( K3bDevice::Device* dev, const TQString& overrideString, const TQString& tooltip )
 {
   m_comboMedium->setOverrideDevice( dev, overrideString, tooltip );
 }
@@ -586,7 +586,7 @@ void K3bWriterSelectionWidget::slotManualSpeed()
 					   &ok,
 					   this ) * speedFactor;
   if( ok ) {
-    writerDevice()->setMaxWriteSpeed( QMAX( newSpeed, writerDevice()->maxWriteSpeed() ) );
+    writerDevice()->setMaxWriteSpeed( TQMAX( newSpeed, writerDevice()->maxWriteSpeed() ) );
     slotRefreshWriterSpeeds();
     setSpeed( newSpeed );
   }

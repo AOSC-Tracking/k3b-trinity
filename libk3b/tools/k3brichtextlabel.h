@@ -16,38 +16,39 @@
 #ifndef K3BRICHTEXTLABEL_H
 #define K3BRICHTEXTLABEL_H
 
-#include <qlabel.h>
+#include <tqlabel.h>
 
 #include <k3b_export.h>
 
 /**
- * @short A replacement for QLabel that supports richtext and proper layout management
+ * @short A replacement for TQLabel that supports richtext and proper tqlayout management
  *
  * @author Waldo Bastian <bastian@kde.org>
  */
 
 /*
- * QLabel
+ * TQLabel
  */
-class LIBK3B_EXPORT K3bRichTextLabel : public QLabel {
+class LIBK3B_EXPORT K3bRichTextLabel : public TQLabel {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   /**
    * Default constructor.
    */
-  K3bRichTextLabel( QWidget *parent, const char *name = 0 );
-  K3bRichTextLabel( const QString &text, QWidget *parent, const char *name = 0 );
+  K3bRichTextLabel( TQWidget *tqparent, const char *name = 0 );
+  K3bRichTextLabel( const TQString &text, TQWidget *tqparent, const char *name = 0 );
 
   int defaultWidth() const { return m_defaultWidth; }
   void setDefaultWidth(int defaultWidth);
 
-  virtual QSize minimumSizeHint() const;
-  virtual QSize sizeHint() const;
-  QSizePolicy sizePolicy() const;
+  virtual TQSize tqminimumSizeHint() const;
+  virtual TQSize tqsizeHint() const;
+  TQSizePolicy sizePolicy() const;
 
 public slots:
-  void setText( const QString & );
+  void setText( const TQString & );
 
 protected:
   int m_defaultWidth;

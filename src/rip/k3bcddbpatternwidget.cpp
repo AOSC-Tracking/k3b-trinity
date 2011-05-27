@@ -22,18 +22,18 @@
 #include <kurllabel.h>
 #include <kdebug.h>
 
-#include <qregexp.h>
-#include <qvalidator.h>
-#include <qwhatsthis.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <tqregexp.h>
+#include <tqvalidator.h>
+#include <tqwhatsthis.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
 
 
-K3bCddbPatternWidget::K3bCddbPatternWidget( QWidget* parent, const char* name )
-  : base_K3bCddbPatternWidget( parent, name )
+K3bCddbPatternWidget::K3bCddbPatternWidget( TQWidget* tqparent, const char* name )
+  : base_K3bCddbPatternWidget( tqparent, name )
 {
-  // fix the layout
-  ((QGridLayout*)layout())->setRowStretch( 4, 1 );
+  // fix the tqlayout
+  ((TQGridLayout*)tqlayout())->setRowStretch( 4, 1 );
 
   // setup validators
   // there can never be one of the following characters in both dir and filename:
@@ -41,7 +41,7 @@ K3bCddbPatternWidget::K3bCddbPatternWidget( QWidget* parent, const char* name )
   // additional the filename can never contain a slash /
   // and the dir should never start with a slash since it should always be a relative path
 
-  QRegExpValidator* dirValidator = new QRegExpValidator( QRegExp( "[^/][^?\\*\\\"]*" ), this );
+  TQRegExpValidator* dirValidator = new TQRegExpValidator( TQRegExp( "[^/][^?\\*\\\"]*" ), TQT_TQOBJECT(this) );
   m_comboFilenamePattern->setValidator( dirValidator );
   m_comboPlaylistPattern->setValidator( dirValidator );
   m_editBlankReplace->setValidator( dirValidator );
@@ -56,18 +56,18 @@ K3bCddbPatternWidget::K3bCddbPatternWidget( QWidget* parent, const char* name )
   m_comboPlaylistPattern->insertItem( i18n( "Playlist" ) );
   m_comboPlaylistPattern->insertItem( i18n( "playlists/%{albumartist}/%{albumtitle    }" ) );
 
-  connect( m_comboFilenamePattern, SIGNAL(textChanged(const QString&)),
-	   this, SIGNAL(changed()) );
-  connect( m_comboPlaylistPattern, SIGNAL(textChanged(const QString&)),
-	   this, SIGNAL(changed()) );
-  connect( m_editBlankReplace, SIGNAL(textChanged(const QString&)),
-	   this, SIGNAL(changed()) );
-  connect( m_checkBlankReplace, SIGNAL(toggled(bool)),
-	   this, SIGNAL(changed()) );
-  connect( m_specialStringsLabel, SIGNAL(leftClickedURL()),
-	   this, SLOT(slotSeeSpecialStrings()) );
-  connect( m_conditionalInclusionLabel, SIGNAL(leftClickedURL()),
-	   this, SLOT(slotSeeConditionalInclusion()) );
+  connect( m_comboFilenamePattern, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_comboPlaylistPattern, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_editBlankReplace, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_checkBlankReplace, TQT_SIGNAL(toggled(bool)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_specialStringsLabel, TQT_SIGNAL(leftClickedURL()),
+	   this, TQT_SLOT(slotSeeSpecialStrings()) );
+  connect( m_conditionalInclusionLabel, TQT_SIGNAL(leftClickedURL()),
+	   this, TQT_SLOT(slotSeeConditionalInclusion()) );
 }
 
 
@@ -76,19 +76,19 @@ K3bCddbPatternWidget::~K3bCddbPatternWidget()
 }
 
 
-QString K3bCddbPatternWidget::filenamePattern() const
+TQString K3bCddbPatternWidget::filenamePattern() const
 {
   return m_comboFilenamePattern->currentText();
 }
 
 
-QString K3bCddbPatternWidget::playlistPattern() const
+TQString K3bCddbPatternWidget::playlistPattern() const
 {
   return m_comboPlaylistPattern->currentText();
 }
 
 
-QString K3bCddbPatternWidget::blankReplaceString() const
+TQString K3bCddbPatternWidget::blankReplaceString() const
 {
   return m_editBlankReplace->text();
 }
@@ -129,7 +129,7 @@ void K3bCddbPatternWidget::loadDefaults()
 
 void K3bCddbPatternWidget::slotSeeSpecialStrings()
 {
-  QWhatsThis::display( i18n( "<p><b>Pattern special strings:</b>"
+  TQWhatsThis::display( i18n( "<p><b>Pattern special strings:</b>"
 			     "<p>The following strings will be replaced with their respective meaning in every "
 			     "track name.<br>"
 			     "<em>Hint:</em> %A differs from %a only on soundtracks or compilations."
@@ -150,7 +150,7 @@ void K3bCddbPatternWidget::slotSeeSpecialStrings()
 
 void K3bCddbPatternWidget::slotSeeConditionalInclusion()
 {
-  QWhatsThis::display( i18n( "<p><b>Conditional inclusion:</b>"
+  TQWhatsThis::display( i18n( "<p><b>Conditional inclusion:</b>"
                              "<p>These patterns make it possible to selectively include texts, "
                              "depending on the value of CDDB entries. You can choose only to "
                              "include or exclude texts if one of the entries is empty, "

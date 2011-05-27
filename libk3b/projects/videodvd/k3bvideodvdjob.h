@@ -28,13 +28,14 @@ class K3bVideoDvdDoc;
 class K3bVideoDvdJob : public K3bDvdJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDvdJob( K3bVideoDvdDoc*, K3bJobHandler*, QObject* parent = 0 );
+  K3bVideoDvdJob( K3bVideoDvdDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
   virtual ~K3bVideoDvdJob();
 
-  virtual QString jobDescription() const;
-  virtual QString jobDetails() const;
+  virtual TQString jobDescription() const;
+  virtual TQString jobDetails() const;
 
  private:
   bool prepareWriterJob();

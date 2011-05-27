@@ -19,10 +19,10 @@
 #include <kdialog.h>
 
 
-class QGridLayout;
-class QLabel;
+class TQGridLayout;
+class TQLabel;
 class KPushButton;
-class QButton;
+class TQButton;
 class K3bThemedHeader;
 class KConfigBase;
 class KGuiItem;
@@ -38,6 +38,7 @@ class KGuiItem;
 class K3bInteractionDialog : public KDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
@@ -50,19 +51,19 @@ class K3bInteractionDialog : public KDialog
    * @param defaultButton may also be null to deactivate the feature
    * @param configgroup The config group used for the loadUserDefaults and saveUserDefaults methods
    */
-  K3bInteractionDialog( QWidget* parent = 0, 
+  K3bInteractionDialog( TQWidget* tqparent = 0, 
 			const char* name = 0, 
-			const QString& title = QString::null,
-			const QString& subTitle = QString::null,
+			const TQString& title = TQString(),
+			const TQString& subTitle = TQString(),
 			int buttonMask = START_BUTTON|CANCEL_BUTTON,
 			int defaultButton = START_BUTTON,
-			const QString& configgroup = QString::null,
+			const TQString& configgroup = TQString(),
 			bool modal = true, 
 			WFlags fl = 0 );
   virtual ~K3bInteractionDialog();
 
-  void setMainWidget( QWidget* w );
-  void setTitle( const QString& title, const QString& subTitle = QString::null );
+  void setMainWidget( TQWidget* w );
+  void setTitle( const TQString& title, const TQString& subTitle = TQString() );
   void setDefaultButton( int b );
 
   /**
@@ -96,7 +97,7 @@ class K3bInteractionDialog : public KDialog
   /**
    * If no mainWidget has been set a plain page will be created.
    */
-  QWidget* mainWidget();
+  TQWidget* mainWidget();
 
   enum Buttons {
     START_BUTTON = 1,
@@ -104,9 +105,9 @@ class K3bInteractionDialog : public KDialog
     CANCEL_BUTTON = 4
   };
 
-  QSize sizeHint() const;
+  TQSize tqsizeHint() const;
 
-  const QString& configGroup() const { return m_configGroup; }
+  const TQString& configGroup() const { return m_configGroup; }
 
   /**
    * K3b's dialogs use this method to determine if it is safe to hide when starting
@@ -139,35 +140,35 @@ class K3bInteractionDialog : public KDialog
   /**
    * \deprecated use setButtonText
    */
-  void setStartButtonText( const QString& text, 
-			   const QString& tooltip = QString::null, 
-			   const QString& whatsthis = QString::null );
+  void setStartButtonText( const TQString& text, 
+			   const TQString& tooltip = TQString(), 
+			   const TQString& whatsthis = TQString() );
   /**
    * \deprecated use setButtonText
    */
-  void setCancelButtonText( const QString& text, 
-			    const QString& tooltip = QString::null, 
-			    const QString& whatsthis = QString::null );
+  void setCancelButtonText( const TQString& text, 
+			    const TQString& tooltip = TQString(), 
+			    const TQString& whatsthis = TQString() );
   /**
    * \deprecated use setButtonText
    */
-  void setSaveButtonText( const QString& text, 
-			  const QString& tooltip = QString::null, 
-			  const QString& whatsthis = QString::null );
+  void setSaveButtonText( const TQString& text, 
+			  const TQString& tooltip = TQString(), 
+			  const TQString& whatsthis = TQString() );
 
   void setButtonGui( int button,
 		     const KGuiItem& );
 
   void setButtonText( int button,
-		      const QString& text, 
-		      const QString& tooltip = QString::null, 
-		      const QString& whatsthis = QString::null );
+		      const TQString& text, 
+		      const TQString& tooltip = TQString(), 
+		      const TQString& whatsthis = TQString() );
 
   void setButtonEnabled( int button, bool enabled );
   void setButtonShown( int button, bool enabled );
 
   /**
-   * If set true the init() method will be called via a QTimer to ensure event
+   * If set true the init() method will be called via a TQTimer to ensure event
    * handling be done before (default: false).
    */
   void setDelayedInitialization( bool b ) { m_delayedInit = b; }
@@ -231,9 +232,9 @@ class K3bInteractionDialog : public KDialog
   virtual void init() {}
 
   /**
-   * reimplemented from QDialog
+   * reimplemented from TQDialog
    */
-  virtual bool eventFilter( QObject*, QEvent* );
+  virtual bool eventFilter( TQObject*, TQEvent* );
 
  protected slots:
   /**
@@ -261,14 +262,14 @@ class K3bInteractionDialog : public KDialog
   KPushButton* m_buttonStart;
   KPushButton* m_buttonSave;
   KPushButton* m_buttonCancel;
-  QWidget* m_mainWidget;
+  TQWidget* m_mainWidget;
 
-  QButton* m_buttonLoadSettings;
-  QButton* m_buttonSaveSettings;
+  TQButton* m_buttonLoadSettings;
+  TQButton* m_buttonSaveSettings;
 
-  QGridLayout* mainGrid;
+  TQGridLayout* mainGrid;
   int m_defaultButton;
-  QString m_configGroup;
+  TQString m_configGroup;
 
   bool m_exitLoopOnHide;
   bool m_inLoop;

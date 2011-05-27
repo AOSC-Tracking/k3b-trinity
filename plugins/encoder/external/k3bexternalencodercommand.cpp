@@ -23,17 +23,17 @@
 #include <kstandarddirs.h>
 
 
-QValueList<K3bExternalEncoderCommand> K3bExternalEncoderCommand::readCommands()
+TQValueList<K3bExternalEncoderCommand> K3bExternalEncoderCommand::readCommands()
 {
   KConfig* c = k3bcore->config();
 
   c->setGroup( "K3bExternalEncoderPlugin" );
 
-  QValueList<K3bExternalEncoderCommand> cl;
+  TQValueList<K3bExternalEncoderCommand> cl;
 
-  QStringList cmds = c->readListEntry( "commands" );
-  for( QStringList::iterator it = cmds.begin(); it != cmds.end(); ++it ) {
-    QStringList cmdString = c->readListEntry( "command_" + *it );
+  TQStringList cmds = c->readListEntry( "commands" );
+  for( TQStringList::iterator it = cmds.begin(); it != cmds.end(); ++it ) {
+    TQStringList cmdString = c->readListEntry( "command_" + *it );
     K3bExternalEncoderCommand cmd;
     cmd.name = cmdString[0];
     cmd.extension = cmdString[1];

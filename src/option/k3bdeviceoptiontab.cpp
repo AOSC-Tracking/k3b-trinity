@@ -19,11 +19,11 @@
 #include <k3bglobals.h>
 #include <k3bcore.h>
 
-#include <qlabel.h>
-#include <qstring.h>
-#include <qlayout.h>
-#include <qcursor.h>
-#include <qapplication.h>
+#include <tqlabel.h>
+#include <tqstring.h>
+#include <tqlayout.h>
+#include <tqcursor.h>
+#include <tqapplication.h>
 
 #include <kapplication.h>
 #include <kdialog.h>
@@ -32,18 +32,18 @@
 #include <kstandarddirs.h>
 
 
-K3bDeviceOptionTab::K3bDeviceOptionTab( QWidget* parent, const char* name )
-  : QWidget( parent, name )
+K3bDeviceOptionTab::K3bDeviceOptionTab( TQWidget* tqparent, const char* name )
+  : TQWidget( tqparent, name )
 {
-  QGridLayout* frameLayout = new QGridLayout( this );
+  TQGridLayout* frameLayout = new TQGridLayout( this );
   frameLayout->setSpacing( KDialog::spacingHint() );
   frameLayout->setMargin( 0 );
 
 
   // Info Label
   // ------------------------------------------------
-  m_labelDevicesInfo = new QLabel( this, "m_labelDevicesInfo" );
-  m_labelDevicesInfo->setAlignment( int( QLabel::WordBreak | QLabel::AlignVCenter | QLabel::AlignLeft ) );
+  m_labelDevicesInfo = new TQLabel( this, "m_labelDevicesInfo" );
+  m_labelDevicesInfo->tqsetAlignment( int( TQLabel::WordBreak | TQLabel::AlignVCenter | TQLabel::AlignLeft ) );
   m_labelDevicesInfo->setText( i18n( "K3b tries to detect all your devices properly. "
 				     "You can add devices that have not been detected and change "
 				     "the black values by clicking in the list. If K3b is unable "
@@ -56,7 +56,7 @@ K3bDeviceOptionTab::K3bDeviceOptionTab( QWidget* parent, const char* name )
   frameLayout->addWidget( m_labelDevicesInfo, 0, 0 );
   frameLayout->addWidget( m_deviceWidget, 1, 0 );
 
-  connect( m_deviceWidget, SIGNAL(refreshButtonClicked()), this, SLOT(slotRefreshButtonClicked()) );
+  connect( m_deviceWidget, TQT_SIGNAL(refreshButtonClicked()), this, TQT_SLOT(slotRefreshButtonClicked()) );
 }
 
 
@@ -84,11 +84,11 @@ void K3bDeviceOptionTab::saveDevices()
 
 void K3bDeviceOptionTab::slotRefreshButtonClicked()
 {
-  QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
+  TQApplication::setOverrideCursor( TQCursor(TQt::WaitCursor) );
   k3bcore->deviceManager()->clear();
   k3bcore->deviceManager()->scanBus();
   m_deviceWidget->init();
-  QApplication::restoreOverrideCursor();
+  TQApplication::restoreOverrideCursor();
 }
 
 #include "k3bdeviceoptiontab.moc"

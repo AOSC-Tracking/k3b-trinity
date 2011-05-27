@@ -17,20 +17,20 @@
 
 #include <k3bthemedheader.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpixmap.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
 
 
 K3bContentsView::K3bContentsView( bool withHeader,
-				  QWidget* parent, 
+				  TQWidget* tqparent, 
 				  const char* name )
-  : QWidget( parent, name ),
+  : TQWidget( tqparent, name ),
     m_header(0),
     m_centerWidget(0)
 {
   if( withHeader ) {
-    QVBoxLayout* lay = new QVBoxLayout( this );
+    TQVBoxLayout* lay = new TQVBoxLayout( this );
     lay->setMargin( 2 );
     lay->setSpacing( 0 );
 
@@ -48,22 +48,22 @@ K3bContentsView::~K3bContentsView()
 }
 
 
-void K3bContentsView::setMainWidget( QWidget* w )
+void K3bContentsView::setMainWidget( TQWidget* w )
 {
   m_centerWidget = w;
-  ((QVBoxLayout*)layout())->addWidget( w );
+  ((TQVBoxLayout*)tqlayout())->addWidget( w );
 }
 
 
-QWidget* K3bContentsView::mainWidget()
+TQWidget* K3bContentsView::mainWidget()
 {
   if( !m_centerWidget )
-    setMainWidget( new QWidget( this ) );
+    setMainWidget( new TQWidget( this ) );
   return m_centerWidget;
 }
 
 
-void K3bContentsView::setTitle( const QString& s )
+void K3bContentsView::setTitle( const TQString& s )
 {
   if( m_header )
     m_header->setTitle( s );

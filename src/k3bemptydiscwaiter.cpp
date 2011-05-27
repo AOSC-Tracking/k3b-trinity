@@ -28,14 +28,14 @@
 #include <k3bprogressdialog.h>
 #include <k3bdvdformattingjob.h>
 
-#include <qtimer.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qpushbutton.h>
-#include <qapplication.h>
-#include <qeventloop.h>
-#include <qfont.h>
+#include <tqtimer.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqpushbutton.h>
+#include <tqapplication.h>
+#include <tqeventloop.h>
+#include <tqfont.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -61,7 +61,7 @@ public:
   int wantedMediaType;
   int wantedMediaState;
 
-  QString wantedMediaTypeString;
+  TQString wantedMediaTypeString;
 
   int result;
   int dialogVisible;
@@ -75,52 +75,52 @@ public:
 
   bool waitingDone;
 
-  QLabel* labelRequest;
-  QLabel* labelFoundMedia;
-  QLabel* pixLabel;
+  TQLabel* labelRequest;
+  TQLabel* labelFoundMedia;
+  TQLabel* pixLabel;
 
   K3bProgressDialog* erasingInfoDialog;
 };
 
 
 
-K3bEmptyDiscWaiter::K3bEmptyDiscWaiter( K3bDevice::Device* device, QWidget* parent, const char* name )
+K3bEmptyDiscWaiter::K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* tqparent, const char* name )
   : KDialogBase( KDialogBase::Plain, i18n("Waiting for Disk"),
 		 KDialogBase::Cancel|KDialogBase::User1|KDialogBase::User2|KDialogBase::User3,
-		 KDialogBase::User3, parent, name, true, true, i18n("Force"), i18n("Eject"), i18n("Load") )
+		 KDialogBase::User3, tqparent, name, true, true, i18n("Force"), i18n("Eject"), i18n("Load") )
 {
   d = new Private();
   d->device = device;
 
   // setup the gui
   // -----------------------------
-  d->labelRequest = new QLabel( plainPage() );
-  d->labelRequest->setAlignment( Qt::AlignLeft | Qt::AlignVCenter );
-  d->labelFoundMedia = new QLabel( plainPage() );
-  d->pixLabel = new QLabel( plainPage() );
-  d->pixLabel->setAlignment( Qt::AlignHCenter | Qt::AlignTop );
+  d->labelRequest = new TQLabel( plainPage() );
+  d->labelRequest->tqsetAlignment( TQt::AlignLeft | TQt::AlignVCenter );
+  d->labelFoundMedia = new TQLabel( plainPage() );
+  d->pixLabel = new TQLabel( plainPage() );
+  d->pixLabel->tqsetAlignment( TQt::AlignHCenter | TQt::AlignTop );
 
-  QFont f( d->labelFoundMedia->font() );
+  TQFont f( d->labelFoundMedia->font() );
   f.setBold(true);
   d->labelFoundMedia->setFont( f );
 
-  QGridLayout* grid = new QGridLayout( plainPage() );
+  TQGridLayout* grid = new TQGridLayout( plainPage() );
   grid->setMargin( marginHint() );
   grid->setSpacing( spacingHint() );
 
   grid->addMultiCellWidget( d->pixLabel, 0, 2, 0, 0 );
   grid->addColSpacing( 1, 20 );
-  grid->addWidget( new QLabel( i18n("Found media:"), plainPage() ), 0, 2 );
+  grid->addWidget( new TQLabel( i18n("Found media:"), plainPage() ), 0, 2 );
   grid->addWidget( d->labelFoundMedia, 0, 3 );
   grid->addMultiCellWidget( d->labelRequest, 1, 1, 2, 3 );
   grid->setRowStretch( 2, 1 );
   grid->setColStretch( 3, 1 );
   // -----------------------------
 
-  connect( k3bappcore->mediaCache(), SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 
-  QToolTip::add( actionButton(KDialogBase::User1),
+  TQToolTip::add( actionButton(KDialogBase::User1),
 		 i18n("Force K3b to continue if it seems not to detect your empty CD/DVD.") );
 }
 
@@ -131,7 +131,7 @@ K3bEmptyDiscWaiter::~K3bEmptyDiscWaiter()
 }
 
 
-int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const QString& message )
+int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const TQString& message )
 {
   if ( d->inLoop ) {
     kdError() << "(K3bEmptyDiscWaiter) Recursive call detected." << endl;
@@ -152,11 +152,11 @@ int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const QStrin
   //
   if( (d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD) &&
 	   (d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_CD) )
-    d->wantedMediaTypeString = i18n("CD-R(W) or DVD%1R(W)").arg("±");
+    d->wantedMediaTypeString = i18n("CD-R(W) or DVD%1R(W)").tqarg("ï¿½");
   else if( d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD_SL )
-    d->wantedMediaTypeString = i18n("DVD%1R(W)").arg("±");
+    d->wantedMediaTypeString = i18n("DVD%1R(W)").tqarg("ï¿½");
   else if( d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD_DL )
-    d->wantedMediaTypeString = i18n("Double Layer DVD%1R").arg("±");
+    d->wantedMediaTypeString = i18n("Double Layer DVD%1R").tqarg("ï¿½");
   else
     d->wantedMediaTypeString = i18n("CD-R(W)");
 
@@ -164,44 +164,44 @@ int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const QStrin
     if( (d->wantedMediaState & K3bDevice::STATE_COMPLETE) && (d->wantedMediaState & K3bDevice::STATE_INCOMPLETE) )
       d->labelRequest->setText( i18n("Please insert a complete or appendable %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.arg(d->device->vendor())
-				.arg(d->device->description())
-				.arg(d->device->devicename())
-				.arg( d->wantedMediaTypeString ) );
+				.tqarg(d->device->vendor())
+				.tqarg(d->device->description())
+				.tqarg(d->device->devicename())
+				.tqarg( d->wantedMediaTypeString ) );
     else if( d->wantedMediaState & K3bDevice::STATE_COMPLETE )
       d->labelRequest->setText( i18n("Please insert a complete %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.arg(d->device->vendor())
-				.arg(d->device->description())
-				.arg(d->device->devicename())
-				.arg( d->wantedMediaTypeString ) );
+				.tqarg(d->device->vendor())
+				.tqarg(d->device->description())
+				.tqarg(d->device->devicename())
+				.tqarg( d->wantedMediaTypeString ) );
     else if( (d->wantedMediaState & K3bDevice::STATE_INCOMPLETE) && (d->wantedMediaState & K3bDevice::STATE_EMPTY) )
       d->labelRequest->setText( i18n("Please insert an empty or appendable %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.arg(d->device->vendor())
-				.arg(d->device->description())
-				.arg(d->device->devicename())
-				.arg( d->wantedMediaTypeString ) );
+				.tqarg(d->device->vendor())
+				.tqarg(d->device->description())
+				.tqarg(d->device->devicename())
+				.tqarg( d->wantedMediaTypeString ) );
     else if( d->wantedMediaState & K3bDevice::STATE_INCOMPLETE )
       d->labelRequest->setText( i18n("Please insert an appendable %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.arg(d->device->vendor())
-				.arg(d->device->description())
-				.arg(d->device->devicename())
-				.arg( d->wantedMediaTypeString ) );
+				.tqarg(d->device->vendor())
+				.tqarg(d->device->description())
+				.tqarg(d->device->devicename())
+				.tqarg( d->wantedMediaTypeString ) );
     else if( d->wantedMediaState & K3bDevice::STATE_EMPTY )
       d->labelRequest->setText( i18n("Please insert an empty %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.arg(d->device->vendor())
-				.arg(d->device->description())
-				.arg(d->device->devicename())
-				.arg( d->wantedMediaTypeString ) );
+				.tqarg(d->device->vendor())
+				.tqarg(d->device->description())
+				.tqarg(d->device->devicename())
+				.tqarg( d->wantedMediaTypeString ) );
     else // fallback case (this should not happen in K3b)
       d->labelRequest->setText( i18n("Please insert a suitable medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.arg(d->device->vendor())
-				.arg(d->device->description())
-				.arg(d->device->devicename()) );
+				.tqarg(d->device->vendor())
+				.tqarg(d->device->description())
+				.tqarg(d->device->devicename()) );
 
   }
   else
@@ -225,7 +225,7 @@ int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const QStrin
   //
   if( !d->waitingDone ) {
     d->inLoop = true;
-    QApplication::eventLoop()->enterLoop();
+    TQApplication::eventLoop()->enterLoop();
   }
 
   return d->result;
@@ -269,7 +269,7 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
     return;
   }
 
-//   QString mediaState;
+//   TQString mediaState;
 //   if( medium.diskInfo().diskState() == K3bDevice::STATE_COMPLETE )
 //     mediaState = i18n("complete");
 //   else if( medium.diskInfo().diskState() == K3bDevice::STATE_INCOMPLETE )
@@ -314,9 +314,9 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	  job.setForceNoEject( true );
 
 	  d->erasingInfoDialog->setText( i18n("Preformatting DVD+RW") );
-	  connect( &job, SIGNAL(finished(bool)), this, SLOT(slotErasingFinished(bool)) );
-	  connect( &job, SIGNAL(percent(int)), d->erasingInfoDialog, SLOT(setProgress(int)) );
-	  connect( d->erasingInfoDialog, SIGNAL(cancelClicked()), &job, SLOT(cancel()) );
+	  connect( &job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotErasingFinished(bool)) );
+	  connect( &job, TQT_SIGNAL(percent(int)), d->erasingInfoDialog, TQT_SLOT(setProgress(int)) );
+	  connect( d->erasingInfoDialog, TQT_SIGNAL(cancelClicked()), &job, TQT_SLOT(cancel()) );
 	  job.start( medium.diskInfo() );
 	  d->erasingInfoDialog->exec( true );
 	}
@@ -337,13 +337,13 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 
 	if( formatWithoutAsking ||
 	    !hasIso ||
-	    KMessageBox::warningContinueCancel( parentWidgetToUse(),
+	    KMessageBox::warningContinueCancel( tqparentWidgetToUse(),
 						i18n("Found %1 media in %2 - %3. "
 						     "Should it be overwritten?")
-						.arg("DVD+RW")
-						.arg(d->device->vendor())
-						.arg(d->device->description()),
-						i18n("Found %1").arg("DVD+RW"),i18n("Overwrite") ) == KMessageBox::Continue ) {
+						.tqarg("DVD+RW")
+						.tqarg(d->device->vendor())
+						.tqarg(d->device->description()),
+						i18n("Found %1").tqarg("DVD+RW"),i18n("Overwrite") ) == KMessageBox::Continue ) {
 	  finishWaiting( K3bDevice::MEDIA_DVD_PLUS_RW );
 	}
 	else {
@@ -407,13 +407,13 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 
 	if( formatWithoutAsking ||
 	    !hasIso ||
-	    KMessageBox::warningContinueCancel( parentWidgetToUse(),
+	    KMessageBox::warningContinueCancel( tqparentWidgetToUse(),
 						i18n("Found %1 media in %2 - %3. "
 						     "Should it be overwritten?")
-						.arg(K3bDevice::mediaTypeString(medium.diskInfo().mediaType()))
-						.arg(d->device->vendor())
-						.arg(d->device->description()),
-						i18n("Found %1").arg("DVD-RW"),i18n("Overwrite") ) == KMessageBox::Continue ) {
+						.tqarg(K3bDevice::mediaTypeString(medium.diskInfo().mediaType()))
+						.tqarg(d->device->vendor())
+						.tqarg(d->device->description()),
+						i18n("Found %1").tqarg("DVD-RW"),i18n("Overwrite") ) == KMessageBox::Continue ) {
 	  finishWaiting( K3bDevice::MEDIA_DVD_RW_OVWR );
 	}
 	else {
@@ -464,13 +464,13 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
       kdDebug() << "(K3bEmptyDiscWaiter) ------ DVD-RW needs to be formated." << endl;
 
       if( formatWithoutAsking ||
-	  KMessageBox::warningContinueCancel( parentWidgetToUse(),
+	  KMessageBox::warningContinueCancel( tqparentWidgetToUse(),
 					      i18n("Found %1 media in %2 - %3. "
 						   "Should it be formatted?")
-					      .arg( K3bDevice::mediaTypeString(medium.diskInfo().mediaType()) )
-					      .arg(d->device->vendor())
-					      .arg(d->device->description()),
-					      i18n("Found %1").arg("DVD-RW"), i18n("Format") ) == KMessageBox::Continue ) {
+					      .tqarg( K3bDevice::mediaTypeString(medium.diskInfo().mediaType()) )
+					      .tqarg(d->device->vendor())
+					      .tqarg(d->device->description()),
+					      i18n("Found %1").tqarg("DVD-RW"), i18n("Format") ) == KMessageBox::Continue ) {
 
 	kdDebug() << "(K3bEmptyDiscWaiter) ------ formatting DVD-RW." << endl;
 
@@ -492,9 +492,9 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	job.setForceNoEject(true);
 
 	d->erasingInfoDialog->setText( i18n("Formatting DVD-RW") );
-	connect( &job, SIGNAL(finished(bool)), this, SLOT(slotErasingFinished(bool)) );
-	connect( &job, SIGNAL(percent(int)), d->erasingInfoDialog, SLOT(setProgress(int)) );
-	connect( d->erasingInfoDialog, SIGNAL(cancelClicked()), &job, SLOT(cancel()) );
+	connect( &job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotErasingFinished(bool)) );
+	connect( &job, TQT_SIGNAL(percent(int)), d->erasingInfoDialog, TQT_SLOT(setProgress(int)) );
+	connect( d->erasingInfoDialog, TQT_SIGNAL(cancelClicked()), &job, TQT_SLOT(cancel()) );
 	job.start( medium.diskInfo() );
 	d->erasingInfoDialog->exec( true );
       }
@@ -540,9 +540,9 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	   medium.diskInfo().rewritable() ) {
 
     if( formatWithoutAsking ||
-	KMessageBox::questionYesNo( parentWidgetToUse(),
+	KMessageBox::questionYesNo( tqparentWidgetToUse(),
 				    i18n("Found rewritable media in %1 - %2. "
-					 "Should it be erased?").arg(d->device->vendor()).arg(d->device->description()),
+					 "Should it be erased?").tqarg(d->device->vendor()).tqarg(d->device->description()),
 				    i18n("Found Rewritable Disk"),
 				    KGuiItem(i18n("&Erase"), "cdrwblank"),
 				    KGuiItem(i18n("E&ject")) ) == KMessageBox::Yes ) {
@@ -566,8 +566,8 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
       job.setForceNoEject(true);
       job.setSpeed( 0 ); // Auto
       job.setWritingApp( erasingApp );
-      connect( &job, SIGNAL(finished(bool)), this, SLOT(slotErasingFinished(bool)) );
-      connect( d->erasingInfoDialog, SIGNAL(cancelClicked()), &job, SLOT(cancel()) );
+      connect( &job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotErasingFinished(bool)) );
+      connect( d->erasingInfoDialog, TQT_SIGNAL(cancelClicked()), &job, TQT_SLOT(cancel()) );
       job.start();
       d->erasingInfoDialog->exec( false );
     }
@@ -655,7 +655,7 @@ void K3bEmptyDiscWaiter::finishWaiting( int code )
   if( d->inLoop ) {
     d->inLoop = false;
     kdDebug() << "(K3bEmptyDiscWaiter) exitLoop " << endl;
-    QApplication::eventLoop()->exitLoop();
+    TQApplication::eventLoop()->exitLoop();
   }
 }
 
@@ -664,9 +664,9 @@ void K3bEmptyDiscWaiter::slotErasingFinished( bool success )
 {
   if( success ) {
     connect( K3bDevice::reload( d->device ),
-	     SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	     TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	     this,
-	     SLOT(slotReloadingAfterErasingFinished(K3bDevice::DeviceHandler*)) );
+	     TQT_SLOT(slotReloadingAfterErasingFinished(K3bDevice::DeviceHandler*)) );
   }
   else {
     K3bDevice::eject( d->device );
@@ -683,9 +683,9 @@ void K3bEmptyDiscWaiter::slotReloadingAfterErasingFinished( K3bDevice::DeviceHan
 }
 
 
-int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device, bool appendable, int mediaType, QWidget* parent )
+int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device, bool appendable, int mediaType, TQWidget* tqparent )
 {
-  K3bEmptyDiscWaiter d( device, parent ? parent : qApp->activeWindow() );
+  K3bEmptyDiscWaiter d( device, tqparent ? tqparent : TQT_TQWIDGET(tqApp->activeWindow()) );
   int mediaState = K3bDevice::STATE_EMPTY;
   if( appendable ) mediaState |= K3bDevice::STATE_INCOMPLETE;
   return d.waitForDisc( mediaState, mediaType );
@@ -695,19 +695,19 @@ int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device, bool appendable, int me
 int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device,
 			      int mediaState,
 			      int mediaType,
-			      const QString& message,
-			      QWidget* parent )
+			      const TQString& message,
+			      TQWidget* tqparent )
 {
-  K3bEmptyDiscWaiter d( device, parent ? parent : qApp->activeWindow() );
+  K3bEmptyDiscWaiter d( device, tqparent ? tqparent : TQT_TQWIDGET(tqApp->activeWindow()) );
   return d.waitForDisc( mediaState, mediaType, message );
 }
 
 
 void K3bEmptyDiscWaiter::prepareErasingDialog()
 {
-  // we hide the emptydiskwaiter so the info dialog needs to have the same parent
+  // we hide the emptydiskwaiter so the info dialog needs to have the same tqparent
   if( !d->erasingInfoDialog )
-    d->erasingInfoDialog = new K3bProgressDialog( QString::null, parentWidget() );
+    d->erasingInfoDialog = new K3bProgressDialog( TQString(), tqparentWidget() );
 
   //
   // hide the dialog
@@ -719,32 +719,32 @@ void K3bEmptyDiscWaiter::prepareErasingDialog()
 }
 
 
-QWidget* K3bEmptyDiscWaiter::parentWidgetToUse()
+TQWidget* K3bEmptyDiscWaiter::tqparentWidgetToUse()
 {
   // we might also show dialogs if the discwaiter widget is not visible yet
   if( d->dialogVisible )
     return this;
   else
-    return parentWidget();
+    return tqparentWidget();
 }
 
 
 int K3bEmptyDiscWaiter::waitForMedia( K3bDevice::Device* device,
 				      int mediaState,
 				      int mediaType,
-				      const QString& message )
+				      const TQString& message )
 {
   // this is only needed for the formatting
   return wait( device, mediaState, mediaType, message, d->erasingInfoDialog );
 }
 
 
-bool K3bEmptyDiscWaiter::questionYesNo( const QString& text,
-					const QString& caption,
-					const QString& yesText,
-					const QString& noText )
+bool K3bEmptyDiscWaiter::questionYesNo( const TQString& text,
+					const TQString& caption,
+					const TQString& yesText,
+					const TQString& noText )
 {
-  return ( KMessageBox::questionYesNo( parentWidgetToUse(),
+  return ( KMessageBox::questionYesNo( tqparentWidgetToUse(),
 				       text,
 				       caption,
 				       yesText.isEmpty() ? KStdGuiItem::yes() : KGuiItem(yesText),
@@ -752,8 +752,8 @@ bool K3bEmptyDiscWaiter::questionYesNo( const QString& text,
 }
 
 
-void K3bEmptyDiscWaiter::blockingInformation( const QString& text,
-					      const QString& caption )
+void K3bEmptyDiscWaiter::blockingInformation( const TQString& text,
+					      const TQString& caption )
 {
   KMessageBox::information( this, text, caption );
 }

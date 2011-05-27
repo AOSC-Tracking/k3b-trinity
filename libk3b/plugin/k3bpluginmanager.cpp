@@ -27,23 +27,23 @@
 #include <kmessagebox.h>
 #include <klibloader.h>
 
-#include <qptrlist.h>
-#include <qmap.h>
-#include <qdir.h>
+#include <tqptrlist.h>
+#include <tqmap.h>
+#include <tqdir.h>
 
 
 
 class K3bPluginManager::Private
 {
 public:
-  QPtrList<K3bPlugin> plugins;
+  TQPtrList<K3bPlugin> plugins;
 };
 
 
 
 
-K3bPluginManager::K3bPluginManager( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bPluginManager::K3bPluginManager( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private();
 }
@@ -56,14 +56,14 @@ K3bPluginManager::~K3bPluginManager()
 
 
 
-QStringList K3bPluginManager::groups() const
+TQStringList K3bPluginManager::groups() const
 {
-  QStringList grps;
+  TQStringList grps;
 
-  QPtrList<K3bPlugin> fl;
-  for( QPtrListIterator<K3bPlugin> it( d->plugins );
+  TQPtrList<K3bPlugin> fl;
+  for( TQPtrListIterator<K3bPlugin> it( d->plugins );
        it.current(); ++it ) {
-    if( !grps.contains( it.current()->group() ) )
+    if( !grps.tqcontains( it.current()->group() ) )
 	grps.append( it.current()->group() );
   }
 
@@ -71,10 +71,10 @@ QStringList K3bPluginManager::groups() const
 }
 
 
-QPtrList<K3bPlugin> K3bPluginManager::plugins( const QString& group ) const
+TQPtrList<K3bPlugin> K3bPluginManager::plugins( const TQString& group ) const
 {
-  QPtrList<K3bPlugin> fl;
-  for( QPtrListIterator<K3bPlugin> it( d->plugins );
+  TQPtrList<K3bPlugin> fl;
+  for( TQPtrListIterator<K3bPlugin> it( d->plugins );
        it.current(); ++it ) {
     if( it.current()->group() == group || group.isEmpty() )
       fl.append( it.current() );
@@ -83,12 +83,12 @@ QPtrList<K3bPlugin> K3bPluginManager::plugins( const QString& group ) const
 }
 
 
-void K3bPluginManager::loadPlugin( const QString& fileName )
+void K3bPluginManager::loadPlugin( const TQString& fileName )
 {
   KSimpleConfig c( fileName, true );
   c.setGroup( "K3b Plugin" );
 
-  QString libName = c.readEntry( "Lib" );
+  TQString libName = c.readEntry( "Lib" );
   if( libName.isEmpty() ) {
     kdDebug() << "(K3bPluginManager) no Lib specified in " << fileName << endl;
     return;
@@ -115,7 +115,7 @@ void K3bPluginManager::loadPlugin( const QString& fileName )
 
 	// make sure to only use the latest version of one plugin
 	bool addPlugin = true;
-	for( QPtrListIterator<K3bPlugin> it( d->plugins ); *it; ++it ) {
+	for( TQPtrListIterator<K3bPlugin> it( d->plugins ); *it; ++it ) {
 	  if( it.current()->pluginInfo().name() == plugin->pluginInfo().name() ) {
 	    if( K3bVersion(it.current()->pluginInfo().version()) < K3bVersion(plugin->pluginInfo().version()) ) {
 	      K3bPlugin* p = it.current();
@@ -145,12 +145,12 @@ void K3bPluginManager::loadPlugin( const QString& fileName )
 void K3bPluginManager::loadAll()
 {
   // we simply search the K3b plugin dir for now
-  QStringList dirs = KGlobal::dirs()->findDirs( "data", "k3b/plugins/" );
+  TQStringList dirs = KGlobal::dirs()->findDirs( "data", "k3b/plugins/" );
 
-  for( QStringList::const_iterator it = dirs.begin();
+  for( TQStringList::const_iterator it = dirs.begin();
        it != dirs.end(); ++it ) {
-    QStringList entries = QDir(*it).entryList( "*.plugin", QDir::Files );
-    for( QStringList::const_iterator it2 = entries.begin();
+    TQStringList entries = TQDir(*it).entryList( "*.plugin", TQDir::Files );
+    for( TQStringList::const_iterator it2 = entries.begin();
 	 it2 != entries.end(); ++it2 ) {
       loadPlugin( *it + *it2 );
     }
@@ -163,25 +163,25 @@ int K3bPluginManager::pluginSystemVersion() const
 }
 
 
-int K3bPluginManager::execPluginDialog( K3bPlugin* plugin, QWidget* parent, const char* name )
+int K3bPluginManager::execPluginDialog( K3bPlugin* plugin, TQWidget* tqparent, const char* name )
 {
-  KDialogBase dlg( parent, 
+  KDialogBase dlg( tqparent, 
 		   name, 
 		   true,
-		   i18n("Configure plugin %1").arg( plugin->pluginInfo().name() ) );
+		   i18n("Configure plugin %1").tqarg( plugin->pluginInfo().name() ) );
   
   K3bPluginConfigWidget* configWidget = plugin->createConfigWidget( &dlg );
   if( configWidget ) {
     dlg.setMainWidget( configWidget );
-    connect( &dlg, SIGNAL(applyClicked()), configWidget, SLOT(saveConfig()) );
-    connect( &dlg, SIGNAL(okClicked()), configWidget, SLOT(saveConfig()) );
+    connect( &dlg, TQT_SIGNAL(applyClicked()), configWidget, TQT_SLOT(saveConfig()) );
+    connect( &dlg, TQT_SIGNAL(okClicked()), configWidget, TQT_SLOT(saveConfig()) );
     configWidget->loadConfig();
     int r = dlg.exec();
     delete configWidget;
     return r;
   }
   else {
-    KMessageBox::sorry( parent, i18n("No settings available for plugin %1.").arg( plugin->pluginInfo().name() ) );
+    KMessageBox::sorry( tqparent, i18n("No settings available for plugin %1.").tqarg( plugin->pluginInfo().name() ) );
     return 0;
   }
 }

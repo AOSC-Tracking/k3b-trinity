@@ -19,12 +19,12 @@
 
 #include <k3blistview.h>
 
-#include <qmap.h>
+#include <tqmap.h>
 
-class QDragEnterEvent;
-class QDragObject;
-class QDropEvent;
-class QTimer;
+class TQDragEnterEvent;
+class TQDragObject;
+class TQDropEvent;
+class TQTimer;
 class KPopupMenu;
 class KAction;
 class K3bVcdDoc;
@@ -32,28 +32,29 @@ class K3bView;
 class K3bVcdTrack;
 class KActionCollection;
 class K3bVcdListViewItem;
-class QPainter;
+class TQPainter;
 
 
 class K3bVcdListView : public K3bListView
 {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        K3bVcdListView( K3bView*, K3bVcdDoc*, QWidget *parent = 0, const char *name = 0 );
+        K3bVcdListView( K3bView*, K3bVcdDoc*, TQWidget *tqparent = 0, const char *name = 0 );
         ~K3bVcdListView();
 
         /**
          * reimplemented from KListView
          */
-        void insertItem( QListViewItem* );
+        void insertItem( TQListViewItem* );
 
         KActionCollection* actionCollection() const
         {
             return m_actionCollection;
         }
 
-        QPtrList<K3bVcdTrack> selectedTracks();
+        TQPtrList<K3bVcdTrack> selectedTracks();
 
     signals:
         void lengthReady();
@@ -72,19 +73,19 @@ class K3bVcdListView : public K3bListView
 
         KPopupMenu* m_popupMenu;
 
-        QMap<K3bVcdTrack*, K3bVcdListViewItem*> m_itemMap;
+        TQMap<K3bVcdTrack*, K3bVcdListViewItem*> m_itemMap;
 
     private slots:
-        void slotDropped( KListView*, QDropEvent* e, QListViewItem* after );
+        void slotDropped( KListView*, TQDropEvent* e, TQListViewItem* after );
         void slotUpdateItems();
-        void showPopupMenu( KListView*, QListViewItem* item, const QPoint& );
+        void showPopupMenu( KListView*, TQListViewItem* item, const TQPoint& );
         void showPropertiesDialog();
         void slotRemoveTracks();
         void slotTrackRemoved( K3bVcdTrack* );
 
     protected:
-        bool acceptDrag( QDropEvent* e ) const;
-        QDragObject* dragObject();
+        bool acceptDrag( TQDropEvent* e ) const;
+        TQDragObject* dragObject();
 };
 
 #endif

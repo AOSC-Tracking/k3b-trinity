@@ -17,33 +17,34 @@
 #ifndef KCUTLABEL_H
 #define KCUTLABEL_H
 
-#include <qlabel.h>
+#include <tqlabel.h>
 #include "k3b_export.h"
 
 
 /*
- * @ref QLabel
+ * @ref TQLabel
  */
-class LIBK3B_EXPORT KCutLabel : public QLabel 
+class LIBK3B_EXPORT KCutLabel : public TQLabel 
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
    * Default constructor.
    */
-  KCutLabel( QWidget *parent = 0, const char *name = 0);
-  KCutLabel( const QString &text, QWidget *parent = 0, const char *name = 0 );
+  KCutLabel( TQWidget *tqparent = 0, const char *name = 0);
+  KCutLabel( const TQString &text, TQWidget *tqparent = 0, const char *name = 0 );
 
-  virtual QSize minimumSizeHint() const;
+  virtual TQSize tqminimumSizeHint() const;
 
   /**
    * \return the full text while text() returns the cut text
    */
-  const QString& fullText() const;
+  const TQString& fullText() const;
 
  public slots:
-  void setText( const QString & );
+  void setText( const TQString & );
 
   /**
    * \param i the number of characters that have to be visible. Default is 1.
@@ -54,14 +55,14 @@ class LIBK3B_EXPORT KCutLabel : public QLabel
   /**
    * used when widget is resized
    */
-  void resizeEvent( QResizeEvent * );
+  void resizeEvent( TQResizeEvent * );
   /**
    * does the dirty work
    */
   void cutTextToLabel();
 
  private:
-  QString m_fullText;
+  TQString m_fullText;
   int m_minChars;
 };
 

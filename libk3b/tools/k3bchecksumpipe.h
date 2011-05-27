@@ -53,7 +53,7 @@ class LIBK3B_EXPORT K3bChecksumPipe : public K3bActivePipe
   /**
    * Get the calculated checksum
    */
-  QCString checksum() const;
+  TQCString checksum() const;
 
  protected:
   int write( char* data, int max );

@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bAdvancedDataImageSettings</class>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>base_K3bDataCustomFilesystemsWidget</cstring>
     </property>
@@ -18,7 +18,7 @@
         <property name="spacing">
             <number>6</number>
         </property>
-        <widget class="QGroupBox" row="1" column="0" rowspan="1" colspan="2">
+        <widget class="TQGroupBox" row="1" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>groupIsoSettings</cstring>
             </property>
@@ -50,7 +50,7 @@
                 </widget>
             </vbox>
         </widget>
-        <widget class="QGroupBox" row="0" column="0">
+        <widget class="TQGroupBox" row="0" column="0">
             <property name="name">
                 <cstring>groupBox3</cstring>
             </property>
@@ -61,7 +61,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkRockRidge</cstring>
                     </property>
@@ -81,7 +81,7 @@
 &lt;p&gt;&lt;b&gt;It is highly recommended to use Rock Ridge extensions on every data CD or DVD.&lt;/b&gt;</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkJoliet</cstring>
                     </property>
@@ -99,7 +99,7 @@
 &lt;p&gt;&lt;b&gt;Caution:&lt;/b&gt; With the exception of Linux and FreeBSD, there is no POSIX-like OS that supports Joliet. So &lt;b&gt;never create Joliet-only CDs or DVDs&lt;/b&gt; for that reason.</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkUdf</cstring>
                     </property>
@@ -116,7 +116,7 @@
                 </widget>
             </vbox>
         </widget>
-        <widget class="QGroupBox" row="0" column="1">
+        <widget class="TQGroupBox" row="0" column="1">
             <property name="name">
                 <cstring>groupBox5</cstring>
             </property>
@@ -127,15 +127,15 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>tqlayout1</cstring>
                     </property>
                     <hbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>m_checkForceInputCharset</cstring>
                             </property>
@@ -156,7 +156,7 @@
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>m_checkPreservePermissions</cstring>
                     </property>
@@ -184,7 +184,7 @@
     <tabstop>m_checkRockRidge</tabstop>
     <tabstop>m_checkJoliet</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
     <includehint>kcombobox.h</includehint>

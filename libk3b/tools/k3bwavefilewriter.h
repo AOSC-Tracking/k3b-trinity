@@ -17,9 +17,9 @@
 #ifndef K3BWAVEFILEWRITER_H
 #define K3BWAVEFILEWRITER_H
 
-#include <qstring.h>
-#include <qfile.h>
-#include <qdatastream.h>
+#include <tqstring.h>
+#include <tqfile.h>
+#include <tqdatastream.h>
 #include "k3b_export.h"
 /**
  * @author Sebastian Trueg
@@ -39,10 +39,10 @@ class LIBK3B_EXPORT K3bWaveFileWriter
    * open a new wave file.
    * closes any opened file.
    */
-  bool open( const QString& filename );
+  bool open( const TQString& filename );
 
   bool isOpen();
-  const QString& filename() const;
+  const TQString& filename() const;
 
   /**
    * closes the file.
@@ -70,9 +70,9 @@ class LIBK3B_EXPORT K3bWaveFileWriter
   void updateHeader();
   void padTo2352();
 
-  QFile m_outputFile;
-  QDataStream m_outputStream;
-  QString m_filename;
+  TQFile m_outputFile;
+  TQDataStream m_outputStream;
+  TQString m_filename;
 };
 
 #endif

@@ -1,11 +1,11 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bOggVorbisEncoderSettingsWidget</class>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Form1</cstring>
     </property>
-    <property name="geometry">
+    <property name="tqgeometry">
         <rect>
             <x>0</x>
             <y>0</y>
@@ -20,7 +20,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QButtonGroup">
+        <widget class="TQButtonGroup">
             <property name="name">
                 <cstring>buttonGroup1</cstring>
             </property>
@@ -31,15 +31,15 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout7</cstring>
+                        <cstring>tqlayout7</cstring>
                     </property>
                     <hbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QRadioButton">
+                        <widget class="TQRadioButton">
                             <property name="name">
                                 <cstring>m_radioQualityLevel</cstring>
                             </property>
@@ -56,7 +56,7 @@
                                 <string>&lt;p&gt;Vorbis' audio quality is not best measured in kilobits per second, but on a scale from -1 to 10 called "quality". &lt;p&gt;For now, quality -1 is roughly equivalent to 45kbps average, 5 is roughly 160kbps, and 10 gives about 400kbps. Most people seeking very-near-CD-quality audio encode at a quality of 5 or, for lossless stereo coupling, 6. The default setting is quality 3, which at approximately 110kbps gives a smaller filesize and significantly better fidelity than .mp3 compression at 128kbps. &lt;p&gt;&lt;em&gt;This explanation was copied from the www.vorbis.com FAQ.&lt;/em&gt;</string>
                             </property>
                         </widget>
-                        <widget class="QLabel">
+                        <widget class="TQLabel">
                             <property name="name">
                                 <cstring>m_labelQualityLevel</cstring>
                             </property>
@@ -68,13 +68,13 @@
                             <property name="text">
                                 <string>textLabel1</string>
                             </property>
-                            <property name="alignment">
+                            <property name="tqalignment">
                                 <set>AlignVCenter|AlignRight</set>
                             </property>
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QFrame">
+                <widget class="TQFrame">
                     <property name="name">
                         <cstring>frame6</cstring>
                     </property>
@@ -101,22 +101,22 @@
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>20</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QLayoutWidget">
+                        <widget class="TQLayoutWidget">
                             <property name="name">
-                                <cstring>layout8</cstring>
+                                <cstring>tqlayout8</cstring>
                             </property>
                             <grid>
                                 <property name="name">
                                     <cstring>unnamed</cstring>
                                 </property>
-                                <widget class="QSlider" row="0" column="0" rowspan="1" colspan="2">
+                                <widget class="TQSlider" row="0" column="0" rowspan="1" colspan="2">
                                     <property name="name">
                                         <cstring>m_slideQualityLevel</cstring>
                                     </property>
@@ -136,7 +136,7 @@
                                         <enum>Horizontal</enum>
                                     </property>
                                 </widget>
-                                <widget class="QLabel" row="1" column="1">
+                                <widget class="TQLabel" row="1" column="1">
                                     <property name="name">
                                         <cstring>textLabel4</cstring>
                                     </property>
@@ -148,11 +148,11 @@
                                     <property name="text">
                                         <string>high quality</string>
                                     </property>
-                                    <property name="alignment">
+                                    <property name="tqalignment">
                                         <set>AlignVCenter|AlignRight</set>
                                     </property>
                                 </widget>
-                                <widget class="QLabel" row="1" column="0">
+                                <widget class="TQLabel" row="1" column="0">
                                     <property name="name">
                                         <cstring>textLabel3_2</cstring>
                                     </property>
@@ -179,14 +179,14 @@
                     <property name="sizeType">
                         <enum>Fixed</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>20</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QRadioButton">
+                <widget class="TQRadioButton">
                     <property name="name">
                         <cstring>m_radioManual</cstring>
                     </property>
@@ -194,9 +194,9 @@
                         <string>M&amp;anual settings:</string>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout6</cstring>
+                        <cstring>tqlayout6</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -212,14 +212,14 @@
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>21</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QFrame">
+                        <widget class="TQFrame">
                             <property name="name">
                                 <cstring>frame3</cstring>
                             </property>
@@ -239,7 +239,7 @@
                                 <property name="margin">
                                     <number>0</number>
                                 </property>
-                                <widget class="QCheckBox" row="0" column="0">
+                                <widget class="TQCheckBox" row="0" column="0">
                                     <property name="name">
                                         <cstring>m_checkBitrateUpper</cstring>
                                     </property>
@@ -247,7 +247,7 @@
                                         <string>&amp;Upper bitrate:</string>
                                     </property>
                                 </widget>
-                                <widget class="QCheckBox" row="2" column="0">
+                                <widget class="TQCheckBox" row="2" column="0">
                                     <property name="name">
                                         <cstring>m_checkBitrateLower</cstring>
                                     </property>
@@ -295,7 +295,7 @@
                                         <bool>false</bool>
                                     </property>
                                 </widget>
-                                <widget class="QLabel" row="1" column="2">
+                                <widget class="TQLabel" row="1" column="2">
                                     <property name="name">
                                         <cstring>textLabel2</cstring>
                                     </property>
@@ -303,7 +303,7 @@
                                         <string>kbps</string>
                                     </property>
                                 </widget>
-                                <widget class="QLabel" row="2" column="2">
+                                <widget class="TQLabel" row="2" column="2">
                                     <property name="name">
                                         <cstring>textLabel3</cstring>
                                     </property>
@@ -311,7 +311,7 @@
                                         <string>kbps</string>
                                     </property>
                                 </widget>
-                                <widget class="QLabel" row="0" column="2">
+                                <widget class="TQLabel" row="0" column="2">
                                     <property name="name">
                                         <cstring>textLabel1</cstring>
                                     </property>
@@ -319,7 +319,7 @@
                                         <string>kbps</string>
                                     </property>
                                 </widget>
-                                <widget class="QCheckBox" row="1" column="0">
+                                <widget class="TQCheckBox" row="1" column="0">
                                     <property name="name">
                                         <cstring>m_checkBitrateNominal</cstring>
                                     </property>
@@ -383,7 +383,7 @@
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>
     <includehint>knuminput.h</includehint>

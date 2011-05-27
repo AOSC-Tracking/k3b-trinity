@@ -19,7 +19,7 @@
 
 #include <kcombobox.h>
 #include "k3b_export.h"
-class QResizeEvent;
+class TQResizeEvent;
 
 
 /**
@@ -35,15 +35,16 @@ class QResizeEvent;
 class LIBK3B_EXPORT K3bCutComboBox : public KComboBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCutComboBox( QWidget* parent = 0, const char* name = 0 );
-  K3bCutComboBox( int method, QWidget* parent = 0, const char* name = 0 );
+  K3bCutComboBox( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bCutComboBox( int method, TQWidget* tqparent = 0, const char* name = 0 );
   virtual ~K3bCutComboBox();
 
   enum Method {
     CUT,
-    SQUEEZE
+    STQUEEZE
   };
 
   /**
@@ -53,35 +54,35 @@ class LIBK3B_EXPORT K3bCutComboBox : public KComboBox
   void setMethod( int );
 
   /** reimplemeted */
-  QSize sizeHint() const;
+  TQSize tqsizeHint() const;
 
   /** reimplemeted */
-  QSize minimumSizeHint() const;
+  TQSize tqminimumSizeHint() const;
 
   /** reimplemeted */
-  virtual void setCurrentText( const QString& );
+  virtual void setCurrentText( const TQString& );
 
-  void	insertStringList( const QStringList &, int index=-1 );
-  void	insertStrList( const QStrList &, int index=-1 );
-  void	insertStrList( const QStrList *, int index=-1 );
+  void	insertStringList( const TQStringList &, int index=-1 );
+  void	insertStrList( const TQStrList &, int index=-1 );
+  void	insertStrList( const TQStrList *, int index=-1 );
   void	insertStrList( const char **, int numStrings=-1, int index=-1);
 
-  void	insertItem( const QString &text, int index=-1 );
-  void	insertItem( const QPixmap &pixmap, int index=-1 );
-  void	insertItem( const QPixmap &pixmap, const QString &text, int index=-1 );
+  void	insertItem( const TQString &text, int index=-1 );
+  void	insertItem( const TQPixmap &pixmap, int index=-1 );
+  void	insertItem( const TQPixmap &pixmap, const TQString &text, int index=-1 );
 
   void	removeItem( int index );
 
-  void	changeItem( const QString &text, int index );
-  void	changeItem( const QPixmap &pixmap, const QString &text, int index );
+  void	changeItem( const TQString &text, int index );
+  void	changeItem( const TQPixmap &pixmap, const TQString &text, int index );
 
-  QString text( int ) const;
-  QString currentText() const;
+  TQString text( int ) const;
+  TQString currentText() const;
 
   void clear();
 
  protected:
-  void resizeEvent( QResizeEvent* e );
+  void resizeEvent( TQResizeEvent* e );
   void cutText();
 
  private:

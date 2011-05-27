@@ -19,13 +19,13 @@
 
 #include "k3bprojectburndialog.h"
 
-class QCheckBox;
+class TQCheckBox;
 class K3bWriterSelectionWidget;
 class K3bTempDirSelectionWidget;
 class K3bMixedDoc;
 class K3bDataImageSettingsWidget;
-class QButtonGroup;
-class QRadioButton;
+class TQButtonGroup;
+class TQRadioButton;
 class K3bAudioCdTextWidget;
 class K3bDataModeWidget;
 class K3bIntMapComboBox;
@@ -37,9 +37,10 @@ class K3bIntMapComboBox;
 class K3bMixedBurnDialog : public K3bProjectBurnDialog  
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
-   K3bMixedBurnDialog( K3bMixedDoc*, QWidget *parent=0, const char *name=0, bool modal = true );
+   K3bMixedBurnDialog( K3bMixedDoc*, TQWidget *tqparent=0, const char *name=0, bool modal = true );
 
  protected:
    void loadK3bDefaults();
@@ -66,11 +67,11 @@ class K3bMixedBurnDialog : public K3bProjectBurnDialog
    K3bMixedDoc* m_doc;
 
    K3bIntMapComboBox* m_comboMixedModeType;
-   QRadioButton* m_radioMixedTypeFirstTrack;
-   QRadioButton* m_radioMixedTypeLastTrack;
-   QRadioButton* m_radioMixedTypeSessions;
+   TQRadioButton* m_radioMixedTypeFirstTrack;
+   TQRadioButton* m_radioMixedTypeLastTrack;
+   TQRadioButton* m_radioMixedTypeSessions;
 
-   QCheckBox* m_checkNormalize;
+   TQCheckBox* m_checkNormalize;
 
    K3bDataModeWidget* m_dataModeWidget;
 };

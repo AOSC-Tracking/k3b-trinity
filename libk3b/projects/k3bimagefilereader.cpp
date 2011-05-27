@@ -15,8 +15,8 @@
 
 #include "k3bimagefilereader.h"
 
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 #include <kdebug.h>
 
@@ -29,8 +29,8 @@ public:
     : isValid(false) {
   }
 
-  QString filename;
-  QString imageFilename;
+  TQString filename;
+  TQString imageFilename;
   bool isValid;
 };
 
@@ -47,10 +47,10 @@ K3bImageFileReader::~K3bImageFileReader()
 }
 
 
-void K3bImageFileReader::openFile( const QString& filename )
+void K3bImageFileReader::openFile( const TQString& filename )
 {
   d->filename = filename;
-  d->imageFilename = QString::null;
+  d->imageFilename = TQString();
   setValid(false);
 
   if( !filename.isEmpty() )
@@ -64,7 +64,7 @@ void K3bImageFileReader::setValid( bool b )
 }
 
 
-void K3bImageFileReader::setImageFilename( const QString& filename )
+void K3bImageFileReader::setImageFilename( const TQString& filename )
 {
   d->imageFilename = filename;
 }
@@ -76,13 +76,13 @@ bool K3bImageFileReader::isValid() const
 }
 
 
-const QString& K3bImageFileReader::filename() const
+const TQString& K3bImageFileReader::filename() const
 {
   return d->filename;
 }
 
 
-const QString& K3bImageFileReader::imageFilename() const
+const TQString& K3bImageFileReader::imageFilename() const
 {
   return d->imageFilename;
 }

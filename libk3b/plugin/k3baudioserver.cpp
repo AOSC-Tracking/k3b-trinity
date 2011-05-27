@@ -89,8 +89,8 @@ private:
 };
 
 
-K3bAudioServer::K3bAudioServer( QObject* parent, const char* name )
-  : QObject( parent, name ),
+K3bAudioServer::K3bAudioServer( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name ),
     m_usedOutputPlugin(0),
     m_pluginInitialized(false),
     m_client(0)
@@ -107,7 +107,7 @@ K3bAudioServer::~K3bAudioServer()
 }
 
 
-bool K3bAudioServer::setOutputMethod( const QCString& name )
+bool K3bAudioServer::setOutputMethod( const TQCString& name )
 {
   if( K3bAudioOutputPlugin* p = findOutputPlugin( name ) ) {
     setOutputPlugin( p );
@@ -153,8 +153,8 @@ void K3bAudioServer::attachClient( K3bAudioClient* c )
   if( m_usedOutputPlugin && !m_pluginInitialized ) {
     if( !m_usedOutputPlugin->init() ) {
       emit error( i18n("Could not initialize Audio Output plugin %1 (%2)")
-		  .arg(m_usedOutputPlugin->pluginInfo().name())
-		  .arg(m_usedOutputPlugin->lastErrorMessage()) );
+		  .tqarg(m_usedOutputPlugin->pluginInfo().name())
+		  .tqarg(m_usedOutputPlugin->lastErrorMessage()) );
     }
     else
       m_pluginInitialized = true;
@@ -184,11 +184,11 @@ void K3bAudioServer::detachClient( K3bAudioClient* c )
 }
 
 
-K3bAudioOutputPlugin* K3bAudioServer::findOutputPlugin( const QCString& name )
+K3bAudioOutputPlugin* K3bAudioServer::findOutputPlugin( const TQCString& name )
 {
-  QPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioOutput" );
+  TQPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioOutput" );
   
-  for( QPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
     K3bAudioOutputPlugin* f = dynamic_cast<K3bAudioOutputPlugin*>( it.current() );
 
     if( f && f->soundSystem() == name ) {
@@ -202,7 +202,7 @@ K3bAudioOutputPlugin* K3bAudioServer::findOutputPlugin( const QCString& name )
 }
 
 
-void K3bAudioServer::customEvent( QCustomEvent* e )
+void K3bAudioServer::customEvent( TQCustomEvent* e )
 {
   if( K3bProgressInfoEvent* be = dynamic_cast<K3bProgressInfoEvent*>(e) ) {
     if( be->type() == K3bProgressInfoEvent::InfoMessage ) {

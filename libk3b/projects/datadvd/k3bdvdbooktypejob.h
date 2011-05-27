@@ -34,13 +34,14 @@ namespace K3bDevice {
 class K3bDvdBooktypeJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDvdBooktypeJob( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bDvdBooktypeJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bDvdBooktypeJob();
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
   /**
    * @list SET_MEDIA_DVD_ROM Change media identification on current media to DVD-ROM.
@@ -81,7 +82,7 @@ class K3bDvdBooktypeJob : public K3bJob
   void setForceNoEject( bool );
 
  private slots:
-  void slotStderrLine( const QString& );
+  void slotStderrLine( const TQString& );
   void slotProcessFinished( KProcess* );
   void slotDeviceHandlerFinished( K3bDevice::DeviceHandler* );
   void slotEjectingFinished( K3bDevice::DeviceHandler* );

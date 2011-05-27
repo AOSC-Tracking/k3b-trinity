@@ -19,13 +19,13 @@
 
 #include "k3bprojectburndialog.h"
 
-class QCheckBox;
+class TQCheckBox;
 class KComboBox;
-class QGroupBox;
-class QLabel;
-class QToolButton;
-class QRadioButton;
-class QButtonGroup;
+class TQGroupBox;
+class TQLabel;
+class TQToolButton;
+class TQRadioButton;
+class TQButtonGroup;
 class K3bWriterSelectionWidget;
 class K3bTempDirSelectionWidget;
 class K3bDataDoc;
@@ -42,9 +42,10 @@ class K3bDataMultiSessionCombobox;
 class K3bDataBurnDialog : public K3bProjectBurnDialog
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
-   K3bDataBurnDialog(K3bDataDoc*, QWidget *parent=0, const char *name=0, bool modal = true );
+   K3bDataBurnDialog(K3bDataDoc*, TQWidget *tqparent=0, const char *name=0, bool modal = true );
    ~K3bDataBurnDialog();
 
  protected:
@@ -58,11 +59,11 @@ class K3bDataBurnDialog : public K3bProjectBurnDialog
    K3bDataImageSettingsWidget* m_imageSettingsWidget;
    // ----------------------------------------------
 	
-   QGroupBox* m_groupDataMode;
+   TQGroupBox* m_groupDataMode;
    K3bDataModeWidget* m_dataModeWidget;
    K3bDataMultiSessionCombobox* m_comboMultisession;
 
-   QCheckBox* m_checkVerify;
+   TQCheckBox* m_checkVerify;
 
  protected slots:
    void slotStartClicked();

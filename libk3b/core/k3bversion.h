@@ -17,7 +17,7 @@
 #ifndef _K3B_VERSION_H_
 #define _K3B_VERSION_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 #include "k3b_export.h"
 /**
  * \brief Representation of a version.
@@ -32,7 +32,7 @@
  * K3bVersion tries to treat version suffixes in an "intelligent" way to properly compare versions
  * (see compareSuffix() for more details).
  *
- * K3bVersion may also be used everywhere a QString is needed as it automatically converts to a
+ * K3bVersion may also be used everywhere a TQString is needed as it automatically converts to a
  * string representation using createVersionString().
  */
 class LIBK3B_EXPORT K3bVersion 
@@ -53,18 +53,18 @@ class LIBK3B_EXPORT K3bVersion
   /**
    * this constructor tries to parse the given version string
    */
-  K3bVersion( const QString& version );
+  K3bVersion( const TQString& version );
 
   /**
    * sets the version and generates a version string from it
    */
-  K3bVersion( int majorVersion, int minorVersion, int pachlevel = -1, const QString& suffix = QString::null );
+  K3bVersion( int majorVersion, int minorVersion, int pachlevel = -1, const TQString& suffix = TQString() );
 
   /**
    * tries to parse the version string
    * used by the constructor
    */
-  void setVersion( const QString& );
+  void setVersion( const TQString& );
 
   bool isValid() const;
 
@@ -74,19 +74,19 @@ class LIBK3B_EXPORT K3bVersion
    *
    * If minorVersion or pachlevel are -1 they will not be used when generating the version string.
    */
-  void setVersion( int majorVersion, int minorVersion = -1, int patchlevel = -1, const QString& suffix = QString::null );
+  void setVersion( int majorVersion, int minorVersion = -1, int patchlevel = -1, const TQString& suffix = TQString() );
 
-  const QString& versionString() const { return m_versionString; }
+  const TQString& versionString() const { return m_versionString; }
   int majorVersion() const { return m_majorVersion; }
   int minorVersion() const { return m_minorVersion; }
   int patchLevel() const { return m_patchLevel; }
-  const QString& suffix() const { return m_suffix; }
+  const TQString& suffix() const { return m_suffix; }
 
   /**
-   * just to make it possible to use as a QString
+   * just to make it possible to use as a TQString
    */
-  operator const QString& () const { return m_versionString; }
-  K3bVersion& operator=( const QString& v );
+  operator const TQString& () const { return m_versionString; }
+  K3bVersion& operator=( const TQString& v );
 
   /**
    * \return A new K3bVersion object which equals this one except that the suffix is empty.
@@ -97,10 +97,10 @@ class LIBK3B_EXPORT K3bVersion
    * If minorVersion or pachlevel are -1 they will not be used when generating the version string.
    * If minorVersion is -1 patchlevel will be ignored.
    */
-  static QString createVersionString( int majorVersion, 
+  static TQString createVersionString( int majorVersion, 
 				      int minorVersion = -1, 
 				      int patchlevel = -1, 
-				      const QString& suffix = QString::null );
+				      const TQString& suffix = TQString() );
 
   /**
    * "Intelligent" comparison of two version suffixes.
@@ -118,16 +118,16 @@ class LIBK3B_EXPORT K3bVersion
    *             alphaX equals aX in this case.)
    *         \li 1 if suffix1 is greater than suffix2
    */
-  static int compareSuffix( const QString& suffix1, const QString& suffix2 );
+  static int compareSuffix( const TQString& suffix1, const TQString& suffix2 );
 
  private:
-  static void splitVersionString( const QString& s, int& num, QString& suffix );
+  static void splitVersionString( const TQString& s, int& num, TQString& suffix );
 
-  QString m_versionString;
+  TQString m_versionString;
   int m_majorVersion;
   int m_minorVersion;
   int m_patchLevel;
-  QString m_suffix;
+  TQString m_suffix;
 };
 
 

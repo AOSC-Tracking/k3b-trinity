@@ -19,7 +19,7 @@
 
 #include <k3bjob.h>
 #include "k3b_export.h"
-class QString;
+class TQString;
 class K3bAbstractWriter;
 class KTempFile;
 namespace K3bDevice {
@@ -34,6 +34,7 @@ class K3bVerificationJob;
 class LIBK3B_EXPORT K3bIso9660ImageWritingJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 	
  public:
   K3bIso9660ImageWritingJob( K3bJobHandler* );
@@ -41,14 +42,14 @@ class LIBK3B_EXPORT K3bIso9660ImageWritingJob : public K3bBurnJob
 
   K3bDevice::Device* writer() const { return m_device; };
 	
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 		
  public slots:
   void cancel();
   void start();
 
-  void setImagePath( const QString& path ) { m_imagePath = path; }
+  void setImagePath( const TQString& path ) { m_imagePath = path; }
   void setSpeed( int s ) { m_speed = s; }
   void setBurnDevice( K3bDevice::Device* dev ) { m_device = dev; }
   void setWritingMode( int mode ) { m_writingMode = mode; }
@@ -78,7 +79,7 @@ class LIBK3B_EXPORT K3bIso9660ImageWritingJob : public K3bBurnJob
   bool m_verifyData;
   bool m_dvd;
 
-  QString m_imagePath;
+  TQString m_imagePath;
 
   K3bAbstractWriter* m_writer;
   KTempFile* m_tocFile;

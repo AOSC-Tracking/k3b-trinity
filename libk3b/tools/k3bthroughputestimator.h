@@ -16,7 +16,7 @@
 #ifndef _K3B_THROUGHPUT_ESTIMATOR_H_
 #define _K3B_THROUGHPUT_ESTIMATOR_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 
 
 /**
@@ -25,12 +25,13 @@
  * the already written data in KB. The class will emit throughput signals
  * whenever the throughput changes.
  */
-class K3bThroughputEstimator : public QObject
+class K3bThroughputEstimator : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bThroughputEstimator( QObject* parent = 0, const char* name = 0 );
+  K3bThroughputEstimator( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bThroughputEstimator();
 
   int average() const;

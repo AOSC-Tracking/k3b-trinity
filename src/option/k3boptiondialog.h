@@ -35,17 +35,18 @@ class K3bThemeOptionTab;
 class K3bOptionDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bOptionDialog(QWidget *parent=0, const char *name=0, bool modal = true);
+  K3bOptionDialog(TQWidget *tqparent=0, const char *name=0, bool modal = true);
   ~K3bOptionDialog();
 
   enum m_configPageIndex { Burning = 0, Devices = 1, Programs = 2, Cddb = 3 };
 
-/*   void addOptionPage( QWidget* widget, */
-/* 		      const QString& name, */
-/* 		      const QString& header, */
-/* 		      const QPixmap& icon ); */
+/*   void addOptionPage( TQWidget* widget, */
+/* 		      const TQString& name, */
+/* 		      const TQString& header, */
+/* 		      const TQPixmap& icon ); */
 
  protected slots:
   void slotOk();

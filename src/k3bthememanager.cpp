@@ -23,12 +23,12 @@
 #include <kdebug.h>
 #include <kglobal.h>
 
-#include <qpixmap.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qdir.h>
-#include <qstringlist.h>
-#include <qvaluelist.h>
+#include <tqpixmap.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqdir.h>
+#include <tqstringlist.h>
+#include <tqvaluelist.h>
 
 
 K3bTheme::K3bTheme()
@@ -37,7 +37,7 @@ K3bTheme::K3bTheme()
 }
 
 
-QColor K3bTheme::backgroundColor() const
+TQColor K3bTheme::backgroundColor() const
 {
   if( m_bgColor.isValid() )
     return m_bgColor;
@@ -46,7 +46,7 @@ QColor K3bTheme::backgroundColor() const
 }
 
 
-QColor K3bTheme::foregroundColor() const
+TQColor K3bTheme::foregroundColor() const
 {
   if( m_fgColor.isValid() )
     return m_fgColor;
@@ -55,15 +55,15 @@ QColor K3bTheme::foregroundColor() const
 }
 
 
-const QPixmap& K3bTheme::pixmap( const QString& name ) const
+const TQPixmap& K3bTheme::pixmap( const TQString& name ) const
 {
-  QMap<QString, QPixmap>::const_iterator it = m_pixmapMap.find( name );
+  TQMap<TQString, TQPixmap>::const_iterator it = m_pixmapMap.tqfind( name );
   if( it != m_pixmapMap.end() )
     return *it;
 
   // try loading the image
-  if( QFile::exists( m_path + name ) )
-    return *m_pixmapMap.insert( name, QPixmap( m_path + name ) );
+  if( TQFile::exists( m_path + name ) )
+    return *m_pixmapMap.insert( name, TQPixmap( m_path + name ) );
 
   kdDebug() << "(K3bTheme) " << m_name << ": could not load image " << name << endl;
 
@@ -71,15 +71,15 @@ const QPixmap& K3bTheme::pixmap( const QString& name ) const
 }
 
 
-const QPixmap& K3bTheme::pixmap( K3bTheme::PixmapType t ) const
+const TQPixmap& K3bTheme::pixmap( K3bTheme::PixmapType t ) const
 {
   return pixmap( filenameForPixmapType( t ) );
 }
 
 
-QString K3bTheme::filenameForPixmapType( PixmapType t )
+TQString K3bTheme::filenameForPixmapType( PixmapType t )
 {
-  QString name;
+  TQString name;
 
   switch( t ) {
   case MEDIA_AUDIO:
@@ -157,17 +157,17 @@ public:
     : currentTheme(&emptyTheme) {
   }
 
-  QValueList<K3bTheme*> themes;
+  TQValueList<K3bTheme*> themes;
   K3bTheme* currentTheme;
-  QString currentThemeName;
+  TQString currentThemeName;
 
   K3bTheme emptyTheme;
 };
 
 
 
-K3bThemeManager::K3bThemeManager( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bThemeManager::K3bThemeManager( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private();
   d->emptyTheme.m_name = "Empty Theme";
@@ -180,7 +180,7 @@ K3bThemeManager::~K3bThemeManager()
 }
 
 
-const QValueList<K3bTheme*>& K3bThemeManager::themes() const
+const TQValueList<K3bTheme*>& K3bThemeManager::themes() const
 {
   return d->themes;
 }
@@ -197,7 +197,7 @@ void K3bThemeManager::readConfig( KConfigBase* c )
   KConfigGroup generalOptions( c, "General Options" );
 
   // allow to override the default theme by packaging a default config file
-  QString defaultTheme = generalOptions.readEntry( "default theme", "quant" );
+  TQString defaultTheme = generalOptions.readEntry( "default theme", "quant" );
 
   K3bVersion configVersion( generalOptions.readEntry( "config version", "0.1" ) );
   if( configVersion >= K3bVersion("0.98") )
@@ -214,7 +214,7 @@ void K3bThemeManager::saveConfig( KConfigBase* c )
 }
 
 
-void K3bThemeManager::setCurrentTheme( const QString& name )
+void K3bThemeManager::setCurrentTheme( const TQString& name )
 {
   if( name != d->currentThemeName ) {
     if( K3bTheme* theme = findTheme( name ) )
@@ -240,9 +240,9 @@ void K3bThemeManager::setCurrentTheme( K3bTheme* theme )
 }
 
 
-K3bTheme* K3bThemeManager::findTheme( const QString& name ) const
+K3bTheme* K3bThemeManager::findTheme( const TQString& name ) const
 {
-  for( QValueList<K3bTheme*>::iterator it = d->themes.begin(); it != d->themes.end(); ++it )
+  for( TQValueList<K3bTheme*>::iterator it = d->themes.begin(); it != d->themes.end(); ++it )
     if( (*it)->name() == name )
       return *it;
   return 0;
@@ -252,30 +252,30 @@ K3bTheme* K3bThemeManager::findTheme( const QString& name ) const
 void K3bThemeManager::loadThemes()
 {
   // first we cleanup the loaded themes
-  for( QValueList<K3bTheme*>::iterator it = d->themes.begin(); it != d->themes.end(); ++it )
+  for( TQValueList<K3bTheme*>::iterator it = d->themes.begin(); it != d->themes.end(); ++it )
     delete *it;
   d->themes.clear();
 
-  QStringList dirs = KGlobal::dirs()->findDirs( "data", "k3b/pics" );
+  TQStringList dirs = KGlobal::dirs()->findDirs( "data", "k3b/pics" );
   // now search for themes. As there may be multiple themes with the same name
   // we only use the names from this list and then use findResourceDir to make sure
   // the local is preferred over the global stuff (like testing a theme by copying it
   // to the .kde dir)
-  QStringList themeNames;
-  for( QStringList::const_iterator dirIt = dirs.begin(); dirIt != dirs.end(); ++dirIt ) {
-    QDir dir( *dirIt );
-    QStringList entries = dir.entryList( QDir::Dirs );
+  TQStringList themeNames;
+  for( TQStringList::const_iterator dirIt = dirs.begin(); dirIt != dirs.end(); ++dirIt ) {
+    TQDir dir( *dirIt );
+    TQStringList entries = dir.entryList( TQDir::Dirs );
     entries.remove( "." );
     entries.remove( ".." );
     // every theme dir needs to contain a k3b.theme file
-    for( QStringList::const_iterator entryIt = entries.begin(); entryIt != entries.end(); ++entryIt ) {
-      QString themeDir = *dirIt + *entryIt + "/";
-      if( !themeNames.contains( *entryIt ) && QFile::exists( themeDir + "k3b.theme" ) ) {
+    for( TQStringList::const_iterator entryIt = entries.begin(); entryIt != entries.end(); ++entryIt ) {
+      TQString themeDir = *dirIt + *entryIt + "/";
+      if( !themeNames.tqcontains( *entryIt ) && TQFile::exists( themeDir + "k3b.theme" ) ) {
 	bool themeValid = true;
 
 	// check for all nessessary pixmaps (this is a little evil hacking)
 	for( int i = 0; i <= K3bTheme::WELCOME_BG; ++i ) {
-	  if( !QFile::exists( themeDir + K3bTheme::filenameForPixmapType( (K3bTheme::PixmapType)i ) ) ) {
+	  if( !TQFile::exists( themeDir + K3bTheme::filenameForPixmapType( (K3bTheme::PixmapType)i ) ) ) {
 	    kdDebug() << "(K3bThemeManager) theme misses pixmap: " << K3bTheme::filenameForPixmapType( (K3bTheme::PixmapType)i ) << endl;
 	    themeValid = false;
 	    break;
@@ -289,7 +289,7 @@ void K3bThemeManager::loadThemes()
   }
 
   // now load the themes
-  for( QStringList::const_iterator themeIt = themeNames.begin(); themeIt != themeNames.end(); ++themeIt )
+  for( TQStringList::const_iterator themeIt = themeNames.begin(); themeIt != themeNames.end(); ++themeIt )
     loadTheme( *themeIt );
 
   // load the current theme
@@ -297,14 +297,14 @@ void K3bThemeManager::loadThemes()
 }
 
 
-void K3bThemeManager::loadTheme( const QString& name )
+void K3bThemeManager::loadTheme( const TQString& name )
 {
-  QString path = KGlobal::dirs()->findResource( "data", "k3b/pics/" + name + "/k3b.theme" );
+  TQString path = KGlobal::dirs()->findResource( "data", "k3b/pics/" + name + "/k3b.theme" );
   if( !path.isEmpty() ) {
     K3bTheme* t = new K3bTheme();
     t->m_name = name;
     t->m_path = path.left( path.length() - 9 );
-    QFileInfo fi( t->m_path );
+    TQFileInfo fi( t->m_path );
     t->m_local = fi.isWritable();
 
     // load the stuff

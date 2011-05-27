@@ -17,11 +17,11 @@
 #ifndef K3BWRITERSELECTIONWIDGET_H
 #define K3BWRITERSELECTIONWIDGET_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 class KComboBox;
 class KConfigBase;
-class QLabel;
+class TQLabel;
 class K3bMediaSelectionComboBox;
 namespace K3bDevice {
   class Device;
@@ -32,21 +32,22 @@ namespace K3bDevice {
 /**
   *@author Sebastian Trueg
   */
-class K3bWriterSelectionWidget : public QWidget
+class K3bWriterSelectionWidget : public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 
  public: 
   /**
    * Creates a writerselectionwidget
    */
-  K3bWriterSelectionWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bWriterSelectionWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bWriterSelectionWidget();
 
   int writerSpeed() const;
   K3bDevice::Device* writerDevice() const;
 
-  QValueList<K3bDevice::Device*> allDevices() const;
+  TQValueList<K3bDevice::Device*> allDevices() const;
 
   /**
    * returns K3b::WritingApp
@@ -99,7 +100,7 @@ class K3bWriterSelectionWidget : public QWidget
    *                       For example: "Burn to the same device". Set it to 0 in order
    *                       to disable the feature.
    */
-  void setOverrideDevice( K3bDevice::Device* dev, const QString& overrideString = QString::null, const QString& tooltip = QString::null );
+  void setOverrideDevice( K3bDevice::Device* dev, const TQString& overrideString = TQString(), const TQString& tooltip = TQString() );
 
   /**
    * Compare K3bMediaSelectionComboBox::setIgnoreDevice
@@ -137,7 +138,7 @@ class K3bWriterSelectionWidget : public QWidget
   KComboBox* m_comboSpeed;
   MediaSelectionComboBox* m_comboMedium;
   KComboBox* m_comboWritingApp;
-  QLabel* m_writingAppLabel;
+  TQLabel* m_writingAppLabel;
 
   class Private;
   Private* d;

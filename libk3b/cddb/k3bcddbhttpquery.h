@@ -14,13 +14,13 @@
  */
 
 
-#ifndef K3BCDDB_HTTP_QUERY_H
-#define K3BCDDB_HTTP_QUERY_H
+#ifndef K3BCDDB_HTTP_TQUERY_H
+#define K3BCDDB_HTTP_TQUERY_H
 
 #include "k3bcddbquery.h"
 #include "k3bcddbresult.h"
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 namespace KIO {
   class Job;
@@ -29,35 +29,36 @@ namespace KIO {
 class K3bCddbHttpQuery : public K3bCddbQuery
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCddbHttpQuery( QObject* parent = 0, const char* name = 0 );
+  K3bCddbHttpQuery( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCddbHttpQuery();
 
  public slots:
-  void setServer( const QString& s, int port = 80 ) { m_server = s; m_port = port; }
-  void setCgiPath( const QString& p ) { m_cgiPath = p; }
+  void setServer( const TQString& s, int port = 80 ) { m_server = s; m_port = port; }
+  void setCgiPath( const TQString& p ) { m_cgiPath = p; }
 
  protected slots:
   void doQuery();
   void doMatchQuery();
   void slotResult( KIO::Job* );
-  void slotData( KIO::Job*, const QByteArray& data );
+  void slotData( KIO::Job*, const TQByteArray& data );
 
  private:
-  void performCommand( const QString& );
+  void performCommand( const TQString& );
 
-  enum State { QUERY, QUERY_DATA, READ, READ_DATA, FINISHED };
+  enum State { TQUERY, TQUERY_DATA, READ, READ_DATA, FINISHED };
 
   int m_state;
-  QString m_server;
+  TQString m_server;
   int m_port;
-  QString m_cgiPath;
+  TQString m_cgiPath;
 
-  QString m_currentlyConnectingServer;
+  TQString m_currentlyConnectingServer;
 
-  QByteArray m_data;
-  QString m_parsingBuffer;
+  TQByteArray m_data;
+  TQString m_parsingBuffer;
 };
 
 #endif

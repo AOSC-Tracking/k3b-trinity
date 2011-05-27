@@ -22,13 +22,13 @@
 
 #include <kiconloader.h>
 
-#include <qpainter.h>
+#include <tqpainter.h>
 
 
-K3bAudioTrackViewItem::K3bAudioTrackViewItem( K3bAudioTrackView* parent, 
+K3bAudioTrackViewItem::K3bAudioTrackViewItem( K3bAudioTrackView* tqparent, 
 					      K3bAudioTrackViewItem* after, 
 					      K3bAudioTrack* track )
-  : K3bListViewItem( parent, after ),
+  : K3bListViewItem( tqparent, after ),
     m_track( track ),
     m_alreadyRemoved(false),
     m_showingSources(false),
@@ -52,12 +52,12 @@ K3bAudioTrackViewItem::K3bAudioTrackViewItem( K3bAudioTrackView* parent,
   //  setMarginVertical( 5 );
 
   // italic type
-  QFont f(listView()->font());
+  TQFont f(listView()->font());
   f.setItalic( true );
   setFont( 3, f );
 
   // gray out filename
-  setForegroundColor( 5, listView()->palette().disabled().foreground() );
+  setForegroundColor( 5, listView()->tqpalette().disabled().foreground() );
 
   // smaller filename
   f = listView()->font();
@@ -74,7 +74,7 @@ K3bAudioTrackViewItem::~K3bAudioTrackViewItem()
 }
 
 
-void K3bAudioTrackViewItem::paintCell( QPainter* p, const QColorGroup& cg, int col, int width, int align )
+void K3bAudioTrackViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align )
 {
   K3bListViewItem::paintCell( p, cg, col, width, align );
 
@@ -82,25 +82,25 @@ void K3bAudioTrackViewItem::paintCell( QPainter* p, const QColorGroup& cg, int c
   if( listView()->firstChild() != this ) {
     p->save();
     // FIXME: modify the value from palette().disabled().foreground() to be lighter (or darker, depending on the background color )
-    p->setPen( Qt::lightGray );
+    p->setPen( TQt::lightGray );
     p->drawLine( 0, 0, width, 0 );
     p->restore();
   }
 }
 
 
-void K3bAudioTrackViewItem::paintBranches( QPainter* p, const QColorGroup& cg, int w, int, int h )
+void K3bAudioTrackViewItem::paintBranches( TQPainter* p, const TQColorGroup& cg, int w, int, int h )
 {
   // we just want empty space
-  p->fillRect( QRect( 0, 0, w, h ), cg.base() );
+  p->fillRect( TQRect( 0, 0, w, h ), cg.base() );
 }
 
 
-QString K3bAudioTrackViewItem::text(int i) const
+TQString K3bAudioTrackViewItem::text(int i) const
 {
   // to avoid crashes when the track has been deleted and this viewitem is still around
   if( m_alreadyRemoved )
-    return QString::null;
+    return TQString();
 
   //
   // We add two spaces after all strings (except the once renameable)
@@ -110,21 +110,21 @@ QString K3bAudioTrackViewItem::text(int i) const
   switch( i )
     {
     case 0:
-      return QString::number( m_track->trackNumber() ).rightJustify( 2, ' ' );
+      return TQString::number( m_track->trackNumber() ).rightJustify( 2, ' ' );
     case 1:
       return m_track->performer();
     case 2:
       return m_track->title();
     case 3:
       if( m_showingSources )
-	return QString::null;
+	return TQString();
       else
 	return m_track->firstSource()->type();
     case 4:
       return m_track->length().toString();
     case 5:
       if( m_showingSources )
-	return QString::null;
+	return TQString();
       else
 	return m_track->firstSource()->sourceComment();
     default:
@@ -132,10 +132,10 @@ QString K3bAudioTrackViewItem::text(int i) const
     }
 }
 
-void K3bAudioTrackViewItem::setText( int col, const QString& text )
+void K3bAudioTrackViewItem::setText( int col, const TQString& text )
 {
   //
-  // Stupid QListViewItem actually calls setText in paintCell. Thus, once a new item
+  // Stupid TQListViewItem actually calls setText in paintCell. Thus, once a new item
   // is created setText is called and in turn the doc is marked as modified since
   // we call setArtist or setPerformer here! :(
   //
@@ -186,7 +186,7 @@ bool K3bAudioTrackViewItem::animate()
   //
   bool animate = false;
   bool valid = true;
-  QListViewItem* item = firstChild();
+  TQListViewItem* item = firstChild();
   while( item ) {
     K3bAudioDataSourceViewItem* sourceItem = dynamic_cast<K3bAudioDataSourceViewItem*>( item );
     animate = animate || sourceItem->animate();
@@ -194,7 +194,7 @@ bool K3bAudioTrackViewItem::animate()
     item = item->nextSibling();
   }
   if( animate ) {
-    QString icon = QString( "kde%1" ).arg( m_animationCounter );
+    TQString icon = TQString( "kde%1" ).tqarg( m_animationCounter );
     setPixmap( 4, SmallIcon( icon ) );
     m_animationCounter++;
     if ( m_animationCounter > 6 )
@@ -213,7 +213,7 @@ void K3bAudioTrackViewItem::setSelected( bool s )
   K3bListViewItem::setSelected(s);
 
   // we also select or unselect all source items
-  QListViewItem* item = firstChild();
+  TQListViewItem* item = firstChild();
   while( item ) {
     item->setSelected(s);
     item = item->nextSibling();
@@ -221,7 +221,7 @@ void K3bAudioTrackViewItem::setSelected( bool s )
 }
 
 
-void K3bAudioTrackViewItem::insertItem( QListViewItem* item )
+void K3bAudioTrackViewItem::insertItem( TQListViewItem* item )
 {
   K3bListViewItem::insertItem( item );
   if( isSelected() )

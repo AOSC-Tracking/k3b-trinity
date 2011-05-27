@@ -24,35 +24,35 @@
 #include <kiconloader.h>
 #include <klistview.h>
 
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qfile.h>
-#include <qptrlist.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqlayout.h>
+#include <tqvariant.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqfile.h>
+#include <tqptrlist.h>
 
 
 
-K3bExternalBinOptionTab::K3bExternalBinOptionTab( K3bExternalBinManager* manager, QWidget* parent, const char* name )
-  : QWidget( parent, name )
+K3bExternalBinOptionTab::K3bExternalBinOptionTab( K3bExternalBinManager* manager, TQWidget* tqparent, const char* name )
+  : TQWidget( tqparent, name )
 {
   m_manager = manager;
 
-  QGridLayout* frameLayout = new QGridLayout( this );
+  TQGridLayout* frameLayout = new TQGridLayout( this );
   frameLayout->setSpacing( KDialog::spacingHint() );
   frameLayout->setMargin( 0 );
 
   m_externalBinWidget = new K3bExternalBinWidget( manager, this );
   frameLayout->addWidget( m_externalBinWidget, 1, 0 );
 
-  QLabel* m_labelInfo = new QLabel( this, "m_labelInfo" );
+  TQLabel* m_labelInfo = new TQLabel( this, "m_labelInfo" );
   m_labelInfo->setText( i18n( "Specify the paths to the external programs that K3b needs to work properly, "
 			      "or press \"Search\" to let K3b search for the programs." ) );
   m_labelInfo->setScaledContents( false );
-  m_labelInfo->setAlignment( int( QLabel::WordBreak | QLabel::AlignVCenter | QLabel::AlignLeft ) );
+  m_labelInfo->tqsetAlignment( int( TQLabel::WordBreak | TQLabel::AlignVCenter | TQLabel::AlignLeft ) );
 
   frameLayout->addWidget( m_labelInfo, 0, 0 );
 }

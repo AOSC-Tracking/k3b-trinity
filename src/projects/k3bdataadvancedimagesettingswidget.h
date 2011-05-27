@@ -20,15 +20,16 @@
 #include "base_k3badvanceddataimagesettings.h"
 
 class K3bIsoOptions;
-class QCheckListItem;
+class TQCheckListItem;
 
 
 class K3bDataAdvancedImageSettingsWidget : public base_K3bAdvancedDataImageSettings
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDataAdvancedImageSettingsWidget( QWidget* parent = 0, const char* name =  0 );
+  K3bDataAdvancedImageSettingsWidget( TQWidget* tqparent = 0, const char* name =  0 );
   ~K3bDataAdvancedImageSettingsWidget();
 
   void load( const K3bIsoOptions& );
@@ -38,26 +39,26 @@ class K3bDataAdvancedImageSettingsWidget : public base_K3bAdvancedDataImageSetti
   void slotJolietToggled( bool on );
 
  private:
-  QCheckListItem* m_checkAllowUntranslatedFilenames;
-  QCheckListItem* m_checkAllowMaxLengthFilenames;
-  QCheckListItem* m_checkAllowFullAscii;
-  QCheckListItem* m_checkAllowOther;
-  QCheckListItem* m_checkAllowLowercaseCharacters;
-  QCheckListItem* m_checkAllowMultiDot;
-  QCheckListItem* m_checkOmitVersionNumbers;
-  QCheckListItem* m_checkOmitTrailingPeriod;
-  QCheckListItem* m_checkCreateTransTbl;
-  QCheckListItem* m_checkHideTransTbl;
-  QCheckListItem* m_checkFollowSymbolicLinks;
-  QCheckListItem* m_checkAllow31CharFilenames;
-  QCheckListItem* m_checkAllowBeginningPeriod;
-  QCheckListItem* m_checkJolietLong;
-  QCheckListItem* m_checkDoNotCacheInodes;
+  TQCheckListItem* m_checkAllowUntranslatedFilenames;
+  TQCheckListItem* m_checkAllowMaxLengthFilenames;
+  TQCheckListItem* m_checkAllowFullAscii;
+  TQCheckListItem* m_checkAllowOther;
+  TQCheckListItem* m_checkAllowLowercaseCharacters;
+  TQCheckListItem* m_checkAllowMultiDot;
+  TQCheckListItem* m_checkOmitVersionNumbers;
+  TQCheckListItem* m_checkOmitTrailingPeriod;
+  TQCheckListItem* m_checkCreateTransTbl;
+  TQCheckListItem* m_checkHideTransTbl;
+  TQCheckListItem* m_checkFollowSymbolicLinks;
+  TQCheckListItem* m_checkAllow31CharFilenames;
+  TQCheckListItem* m_checkAllowBeginningPeriod;
+  TQCheckListItem* m_checkJolietLong;
+  TQCheckListItem* m_checkDoNotCacheInodes;
 
-  QCheckListItem* m_isoLevelController;
-  QCheckListItem* m_radioIsoLevel1;
-  QCheckListItem* m_radioIsoLevel2;
-  QCheckListItem* m_radioIsoLevel3;
+  TQCheckListItem* m_isoLevelController;
+  TQCheckListItem* m_radioIsoLevel1;
+  TQCheckListItem* m_radioIsoLevel2;
+  TQCheckListItem* m_radioIsoLevel3;
 
   class PrivateCheckViewItem;
   class PrivateIsoWhatsThis;

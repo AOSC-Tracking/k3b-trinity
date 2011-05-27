@@ -25,9 +25,9 @@
 #include <kdebug.h>
 #include <kio/netaccess.h>
 
-#include <qtimer.h>
-#include <qcstring.h>
-#include <qsocketnotifier.h>
+#include <tqtimer.h>
+#include <tqcstring.h>
+#include <tqsocketnotifier.h>
 
 #include <unistd.h>
 
@@ -47,11 +47,11 @@ public:
 
   KMD5 md5;
   K3bFileSplitter file;
-  QTimer timer;
-  QString filename;
+  TQTimer timer;
+  TQString filename;
   int fileDes;
   K3bDevice::Device* device;
-  QSocketNotifier* fdNotifier;
+  TQSocketNotifier* fdNotifier;
 
   bool finished;
   char* data;
@@ -68,13 +68,13 @@ public:
 };
 
 
-K3bMd5Job::K3bMd5Job( K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bJob( jh, parent, name )
+K3bMd5Job::K3bMd5Job( K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bJob( jh, tqparent, name )
 {
   d = new K3bMd5JobPrivate;
   d->data = new char[K3bMd5JobPrivate::BUFFERSIZE];
-  connect( &d->timer, SIGNAL(timeout()), 
-	   this, SLOT(slotUpdate()) );
+  connect( &d->timer, TQT_SIGNAL(timeout()), 
+	   this, TQT_SLOT(slotUpdate()) );
 }
 
 
@@ -96,15 +96,15 @@ void K3bMd5Job::start()
     d->imageSize = d->isoFile->size();
   }
   else if( !d->filename.isEmpty() ) {
-    if( !QFile::exists( d->filename ) ) {
-      emit infoMessage( i18n("Could not find file %1").arg(d->filename), ERROR );
+    if( !TQFile::exists( d->filename ) ) {
+      emit infoMessage( i18n("Could not find file %1").tqarg(d->filename), ERROR );
       jobFinished(false);
       return;
     }
 
     d->file.setName( d->filename );
     if( !d->file.open( IO_ReadOnly ) ) {
-      emit infoMessage( i18n("Could not open file %1").arg(d->filename), ERROR );
+      emit infoMessage( i18n("Could not open file %1").tqarg(d->filename), ERROR );
       jobFinished(false);
       return;
     }
@@ -132,10 +132,10 @@ void K3bMd5Job::start()
 
 void K3bMd5Job::setupFdNotifier()
 {
-  // the QSocketNotifier will fire once the fd is closed
+  // the TQSocketNotifier will fire once the fd is closed
   delete d->fdNotifier;
-  d->fdNotifier = new QSocketNotifier( d->fileDes, QSocketNotifier::Read, this );
-  connect( d->fdNotifier, SIGNAL(activated(int)), this, SLOT(slotUpdate()) );
+  d->fdNotifier = new TQSocketNotifier( d->fileDes, TQSocketNotifier::Read, this );
+  connect( d->fdNotifier, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotUpdate()) );
   d->fdNotifier->setEnabled( true );
 }
 
@@ -151,7 +151,7 @@ void K3bMd5Job::cancel()
 }
 
 
-void K3bMd5Job::setFile( const QString& filename )
+void K3bMd5Job::setFile( const TQString& filename )
 {
   d->filename = filename;
   d->isoFile = 0;
@@ -200,11 +200,11 @@ void K3bMd5Job::slotUpdate()
     // determine bytes to read
     unsigned int readSize = K3bMd5JobPrivate::BUFFERSIZE;
     if( d->maxSize > 0 )
-      readSize = QMIN( readSize, d->maxSize - d->readData );
+      readSize = TQMIN( readSize, d->maxSize - d->readData );
 
     if( readSize <= 0 ) {
       //      kdDebug() << "(K3bMd5Job) reached max size of " << d->maxSize << ". Stopping." << endl;
-      emit debuggingOutput( "K3bMd5Job", QString("Reached max read of %1. Stopping after %2 bytes.").arg(d->maxSize).arg(d->readData) );
+      emit debuggingOutput( "K3bMd5Job", TQString("Reached max read of %1. Stopping after %2 bytes.").tqarg(d->maxSize).tqarg(d->readData) );
       stopAll();
       emit percent( 100 );
       jobFinished(true);
@@ -228,13 +228,13 @@ void K3bMd5Job::slotUpdate()
 	// Only the last sector may not be used completely.
 	//
 	unsigned long sector = d->readData/2048;
-	unsigned int sectorCnt = QMAX( readSize/2048, 1 );
+	unsigned int sectorCnt = TQMAX( readSize/2048, 1 );
 	read = -1;
 	if( d->device->read10( reinterpret_cast<unsigned char*>(d->data),
 			       sectorCnt*2048,
 			       sector,
 			       sectorCnt ) )
-	  read = QMIN( readSize, sectorCnt*2048 );
+	  read = TQMIN( readSize, sectorCnt*2048 );
       }
 
       //
@@ -252,13 +252,13 @@ void K3bMd5Job::slotUpdate()
       }
 
       if( read < 0 ) {
-	emit infoMessage( i18n("Error while reading from file %1").arg(d->filename), ERROR );
+	emit infoMessage( i18n("Error while reading from file %1").tqarg(d->filename), ERROR );
 	stopAll();
 	jobFinished(false);
       }
       else if( read == 0 ) {
 	//	kdDebug() << "(K3bMd5Job) read all data. Total size: " << d->readData << ". Stopping." << endl;
-	emit debuggingOutput( "K3bMd5Job", QString("All data read. Stopping after %1 bytes.").arg(d->readData) );
+	emit debuggingOutput( "K3bMd5Job", TQString("All data read. Stopping after %1 bytes.").tqarg(d->readData) );
 	stopAll();
 	emit percent( 100 );
 	jobFinished(true);
@@ -282,7 +282,7 @@ void K3bMd5Job::slotUpdate()
 }
 
 
-QCString K3bMd5Job::hexDigest()
+TQCString K3bMd5Job::hexDigest()
 {
   if( d->finished )
     return d->md5.hexDigest();
@@ -291,7 +291,7 @@ QCString K3bMd5Job::hexDigest()
 }
 
 
-QCString K3bMd5Job::base64Digest()
+TQCString K3bMd5Job::base64Digest()
 {
   if( d->finished )
     return d->md5.base64Digest();  
@@ -303,7 +303,7 @@ QCString K3bMd5Job::base64Digest()
 
 void K3bMd5Job::stop()
 {
-  emit debuggingOutput( "K3bMd5Job", QString("Stopped manually after %1 bytes.").arg(d->readData) );
+  emit debuggingOutput( "K3bMd5Job", TQString("Stopped manually after %1 bytes.").tqarg(d->readData) );
   stopAll();
   jobFinished( true );
 }

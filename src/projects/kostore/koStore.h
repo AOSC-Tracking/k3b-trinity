@@ -21,16 +21,16 @@
 #ifndef __koStore_h_
 #define __koStore_h_
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qiodevice.h>
-#include <qvaluestack.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqiodevice.h>
+#include <tqvaluestack.h>
 //#include <koffice_export.h>
 #include <kdemacros.h>
 
 #define KOSTORE_EXPORT KDE_EXPORT
 
-class QWidget;
+class TQWidget;
 
 class KURL;
 
@@ -61,14 +61,14 @@ public:
    * to be written in the file for "mime-magic" identification.
    * Only meaningful if mode is Write, and if backend!=Directory.
    */
-  static KoStore* createStore( const QString& fileName, Mode mode, const QCString & appIdentification = "", Backend backend = Auto );
+  static KoStore* createStore( const TQString& fileName, Mode mode, const TQCString & appIdentification = "", Backend backend = Auto );
 
   /**
-   * Create a store for any kind of QIODevice: file, memory buffer...
-   * KoStore will take care of opening the QIODevice.
+   * Create a store for any kind of TQIODevice: file, memory buffer...
+   * KoStore will take care of opening the TQIODevice.
    * This method doesn't support the Directory store!
    */
-  static KoStore* createStore( QIODevice *device, Mode mode, const QCString & appIdentification = "", Backend backend = Auto );
+  static KoStore* createStore( TQIODevice *device, Mode mode, const TQCString & appIdentification = "", Backend backend = Auto );
 
   /**
    * Open a store (i.e. the representation on disk of a KOffice document).
@@ -90,7 +90,7 @@ public:
    * @since 1.4
    * @bug saving not completely implemented (fixed temporary file)
    */
-  static KoStore* createStore( QWidget* window, const KURL& url, Mode mode, const QCString & appIdentification = "", Backend backend = Auto );
+  static KoStore* createStore( TQWidget* window, const KURL& url, Mode mode, const TQCString & appIdentification = "", Backend backend = Auto );
 
   /**
    * Destroys the store (i.e. closes the file on the hard disk)
@@ -103,7 +103,7 @@ public:
    *        If the tar:/ prefix is missing it's assumed to be a relative URI.
    * @return true on success.
    */
-  bool open( const QString & name );
+  bool open( const TQString & name );
 
   /**
    * Check whether a file inside the store is currently opened with open(),
@@ -123,38 +123,38 @@ public:
    * (slightly faster than read() calls)
    * You need to call @ref open first, and @ref close afterwards.
    */
-  QIODevice* device() const;
+  TQIODevice* device() const;
 
   /**
    * Read data from the currently opened file. You can also use the streams
    * for this.
    */
-  QByteArray read( unsigned long int max );
+  TQByteArray read( unsigned long int max );
 
   /**
    * Write data into the currently opened file. You can also use the streams
    * for this.
    */
-  Q_LONG write( const QByteArray& _data );
+  TQ_LONG write( const TQByteArray& _data );
 
   /**
    * Read data from the currently opened file. You can also use the streams
    * for this.
    * @return size of data read, -1 on error
    */
-  Q_LONG read( char *_buffer, Q_ULONG _len );
+  TQ_LONG read( char *_buffer, TQ_ULONG _len );
 
   /**
    * Write data into the currently opened file. You can also use the streams
    * for this.
    */
-  virtual Q_LONG write( const char* _data, Q_ULONG _len );
+  virtual TQ_LONG write( const char* _data, TQ_ULONG _len );
 
   /**
    * @return the size of the currently opened file, -1 on error.
    * Can be used as an argument for the read methods, for instance
    */
-  QIODevice::Offset size() const;
+  TQIODevice::Offset size() const;
 
   /**
    * @return true if an error occurred
@@ -175,7 +175,7 @@ public:
    * opening a stream.
    * Note: Operates on internal names
    */
-  bool enterDirectory( const QString& directory );
+  bool enterDirectory( const TQString& directory );
 
   /**
    * Leaves a directory. Equivalent to "cd .."
@@ -188,13 +188,13 @@ public:
    * Returns the current path including a trailing slash.
    * Note: Returns a path in "internal name" style
    */
-  QString currentPath() const;
+  TQString currentPath() const;
 
   /**
    * Returns the current directory.
    * Note: Returns a path in "internal name" style
    */
-  QString currentDirectory() const;
+  TQString currentDirectory() const;
 
 
   /**
@@ -213,14 +213,14 @@ public:
    * @return true if the given file exists in the current directory,
    * i.e. if open(fileName) will work.
    */
-  bool hasFile( const QString& fileName ) const;
+  bool hasFile( const TQString& fileName ) const;
 
   /**
    * Imports a local file into a store
    * @param fileName file on hard disk
    * @param destName file in the store
    */
-  bool addLocalFile( const QString &fileName, const QString &destName );
+  bool addLocalFile( const TQString &fileName, const TQString &destName );
 
   /**
    * Imports a local directory
@@ -228,7 +228,7 @@ public:
    * @param dest path in the store where the directory should get saved
    * @return the directory index
    */
-  QStringList addLocalDirectory( const QString &dirPath, const QString &dest );
+  TQStringList addLocalDirectory( const TQString &dirPath, const TQString &dest );
 
 
   /**
@@ -236,12 +236,12 @@ public:
    * @param srcName file in the store
    * @param fileName file on a disk
    */
-  bool extractFile( const QString &srcName, const QString &fileName );
+  bool extractFile( const TQString &srcName, const TQString &fileName );
 
   //@{
-  /// See QIODevice
-  bool at( QIODevice::Offset pos );
-  QIODevice::Offset at() const;
+  /// See TQIODevice
+  bool at( TQIODevice::Offset pos );
+  TQIODevice::Offset at() const;
   bool atEnd() const;
   //@}
 
@@ -267,7 +267,7 @@ protected:
    * @param name "absolute path" (in the archive) to the file to open
    * @return true on success
    */
-  virtual bool openWrite( const QString& name ) = 0;
+  virtual bool openWrite( const TQString& name ) = 0;
   /**
    * Open the file @p name in the store, for reading.
    * On success, this method must set m_stream to a stream from which we can read,
@@ -275,7 +275,7 @@ protected:
    * @param name "absolute path" (in the archive) to the file to open
    * @return true on success
    */
-  virtual bool openRead( const QString& name ) = 0;
+  virtual bool openRead( const TQString& name ) = 0;
 
   /**
    * @return true on success
@@ -290,21 +290,21 @@ protected:
    * Enter a subdirectory of the current directory.
    * The directory might not exist yet in Write mode.
    */
-  virtual bool enterRelativeDirectory( const QString& dirName ) = 0;
+  virtual bool enterRelativeDirectory( const TQString& dirName ) = 0;
   /**
    * Enter a directory where we've been before.
    * It is guaranteed to always exist.
    */
-  virtual bool enterAbsoluteDirectory( const QString& path ) = 0;
+  virtual bool enterAbsoluteDirectory( const TQString& path ) = 0;
 
   /**
    * Check if a file exists inside the store.
    * @param absPath the absolute path inside the store, i.e. not relative to the current directory
    */
-  virtual bool fileExists( const QString& absPath ) const = 0;
+  virtual bool fileExists( const TQString& absPath ) const = 0;
 
 private:
-  static Backend determineBackend( QIODevice* dev );
+  static Backend determineBackend( TQIODevice* dev );
 
   /**
    * Conversion routine
@@ -319,18 +319,18 @@ private:
    *
    * see specification (koffice/lib/store/SPEC) for details.
    */
-  QString toExternalNaming( const QString & _internalNaming ) const;
+  TQString toExternalNaming( const TQString & _internalNaming ) const;
 
   /**
    *  Expands a full path name for a stream (directories+filename)
    */
-  QString expandEncodedPath( QString intern ) const;
+  TQString expandEncodedPath( TQString intern ) const;
 
   /**
    * Expands only directory names(!)
    * Needed for the path handling code, as we only operate on internal names
    */
-  QString expandEncodedDirectory( QString intern ) const;
+  TQString expandEncodedDirectory( TQString intern ) const;
 
   mutable enum
   {
@@ -343,28 +343,28 @@ private:
    * Enter *one* single directory. Nothing like foo/bar/bleh allowed.
    * Performs some checking when in Read mode
    */
-  bool enterDirectoryInternal( const QString& directory );
+  bool enterDirectoryInternal( const TQString& directory );
 
 protected:
 
   Mode m_mode;
 
   /// Store the filenames (with full path inside the archive) when writing, to avoid duplicates
-  QStringList m_strFiles;
+  TQStringList m_strFiles;
 
   /// The "current directory" (path)
-  QStringList m_currentPath;
+  TQStringList m_currentPath;
 
   /// Used to push/pop directories to make it easy to save/restore the state
-  QValueStack<QString> m_directoryStack;
+  TQValueStack<TQString> m_directoryStack;
 
   /// Current filename (between an open() and a close())
-  QString m_sName;
+  TQString m_sName;
   /// Current size of the file named m_sName
-  QIODevice::Offset m_iSize;
+  TQIODevice::Offset m_iSize;
 
   /// The stream for the current read or write operation
-  QIODevice * m_stream;
+  TQIODevice * m_stream;
 
   bool m_bIsOpen;
   /// Must be set by the constructor.

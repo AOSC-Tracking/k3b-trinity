@@ -28,9 +28,10 @@ class KProcess;
 class LIBK3B_EXPORT K3bVideoDVDTitleDetectClippingJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, QObject* parent );
+  K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, TQObject* tqparent );
   ~K3bVideoDVDTitleDetectClippingJob();
 
   const K3bVideoDVD::VideoDVD& videoDVD() const { return m_dvd; }
@@ -82,7 +83,7 @@ class LIBK3B_EXPORT K3bVideoDVDTitleDetectClippingJob : public K3bJob
   void setLowPriority( bool b ) { m_lowPriority = b; }
 
  private slots:
-  void slotTranscodeStderr( const QString& );
+  void slotTranscodeStderr( const TQString& );
   void slotTranscodeExited( KProcess* );
 
  private:

@@ -26,9 +26,9 @@
 #include <k3bcore.h>
 #include <k3bexternalbinmanager.h>
 
-#include <qcursor.h>
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqcursor.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 
 #include <kapplication.h>
 #include <kmessagebox.h>
@@ -37,24 +37,24 @@
 #include <kconfig.h>
 
 
-K3bVideoDVDRippingView::K3bVideoDVDRippingView( QWidget* parent, const char * name )
+K3bVideoDVDRippingView::K3bVideoDVDRippingView( TQWidget* tqparent, const char * name )
   : K3bMediaContentsView( true,
 			  K3bMedium::CONTENT_VIDEO_DVD,
 			  K3bDevice::MEDIA_DVD_ALL,
 			  K3bDevice::STATE_INCOMPLETE|K3bDevice::STATE_COMPLETE,
-			  parent, name )
+			  tqparent, name )
 {
-  QGridLayout* mainGrid = new QGridLayout( mainWidget() );
+  TQGridLayout* mainGrid = new TQGridLayout( mainWidget() );
 
   // toolbox
   // ----------------------------------------------------------------------------------
-  QHBoxLayout* toolBoxLayout = new QHBoxLayout( 0, 0, 0, "toolBoxLayout" );
+  TQHBoxLayout* toolBoxLayout = new TQHBoxLayout( 0, 0, 0, "toolBoxLayout" );
   m_toolBox = new K3bToolBox( mainWidget() );
   toolBoxLayout->addWidget( m_toolBox );
-  QSpacerItem* spacer = new QSpacerItem( 10, 10, QSizePolicy::Expanding, QSizePolicy::Minimum );
+  TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
   toolBoxLayout->addItem( spacer );
-  m_labelLength = new QLabel( mainWidget() );
-  m_labelLength->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
+  m_labelLength = new TQLabel( mainWidget() );
+  m_labelLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   toolBoxLayout->addWidget( m_labelLength );
 
 
@@ -62,10 +62,10 @@ K3bVideoDVDRippingView::K3bVideoDVDRippingView( QWidget* parent, const char * na
   // ----------------------------------------------------------------------------------
   m_titleView = new K3bVideoDVDRippingTitleListView( mainWidget() );
 
-  connect( m_titleView, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
-	   this, SLOT(slotContextMenu(KListView*, QListViewItem*, const QPoint&)) );
+  connect( m_titleView, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem*, const TQPoint&)) );
 
-  // general layout
+  // general tqlayout
   // ----------------------------------------------------------------------------------
   mainGrid->addLayout( toolBoxLayout, 0, 0 );
   mainGrid->addWidget( m_titleView, 1, 0 );
@@ -113,13 +113,13 @@ void K3bVideoDVDRippingView::reloadMedium()
       delete css;
   }
 
-  QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
+  TQApplication::setOverrideCursor( TQCursor(TQt::WaitCursor) );
 
   if( m_dvd.open( device() ) ) {
     setTitle( medium().beautifiedVolumeId() + " (" + i18n("Video DVD") + ")" );
     m_labelLength->setText( i18n("%n title", "%n titles", m_dvd.numTitles() ) );
     m_titleView->setVideoDVD( m_dvd );
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
 
     bool transcodeUsable = true;
 
@@ -150,7 +150,7 @@ void K3bVideoDVDRippingView::reloadMedium()
     actionCollection()->action("start_rip")->setEnabled( transcodeUsable );
   }
   else {
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
 
     KMessageBox::error( this, i18n("Unable to read Video DVD contents.") );
   }
@@ -159,9 +159,9 @@ void K3bVideoDVDRippingView::reloadMedium()
 
 void K3bVideoDVDRippingView::slotStartRipping()
 {
-  QValueList<int> titles;
+  TQValueList<int> titles;
   int i = 1;
-  for( QListViewItemIterator it( m_titleView ); *it; ++it, ++i )
+  for( TQListViewItemIterator it( m_titleView ); *it; ++it, ++i )
     if( static_cast<K3bCheckListViewItem*>( *it )->isChecked() )
       titles.append( i );
 
@@ -176,7 +176,7 @@ void K3bVideoDVDRippingView::slotStartRipping()
 }
 
 
-void K3bVideoDVDRippingView::slotContextMenu( KListView*, QListViewItem*, const QPoint& p )
+void K3bVideoDVDRippingView::slotContextMenu( KListView*, TQListViewItem*, const TQPoint& p )
 {
   m_popupMenu->popup(p);
 }
@@ -184,22 +184,22 @@ void K3bVideoDVDRippingView::slotContextMenu( KListView*, QListViewItem*, const 
 
 void K3bVideoDVDRippingView::slotCheckAll()
 {
-  for( QListViewItemIterator it( m_titleView ); it.current(); ++it )
+  for( TQListViewItemIterator it( m_titleView ); it.current(); ++it )
     dynamic_cast<K3bCheckListViewItem*>(it.current())->setChecked(true);
 }
 
 
 void K3bVideoDVDRippingView::slotUncheckAll()
 {
-  for( QListViewItemIterator it( m_titleView ); it.current(); ++it )
+  for( TQListViewItemIterator it( m_titleView ); it.current(); ++it )
     dynamic_cast<K3bCheckListViewItem*>(it.current())->setChecked(false);
 }
 
 
 void K3bVideoDVDRippingView::slotCheck()
 {
-  QPtrList<QListViewItem> items( m_titleView->selectedItems() );
-  for( QPtrListIterator<QListViewItem> it( items );
+  TQPtrList<TQListViewItem> items( m_titleView->selectedItems() );
+  for( TQPtrListIterator<TQListViewItem> it( items );
        it.current(); ++it )
     dynamic_cast<K3bCheckListViewItem*>(it.current())->setChecked(true);
 }
@@ -207,8 +207,8 @@ void K3bVideoDVDRippingView::slotCheck()
 
 void K3bVideoDVDRippingView::slotUncheck()
 {
-  QPtrList<QListViewItem> items( m_titleView->selectedItems() );
-  for( QPtrListIterator<QListViewItem> it( items );
+  TQPtrList<TQListViewItem> items( m_titleView->selectedItems() );
+  for( TQPtrListIterator<TQListViewItem> it( items );
        it.current(); ++it )
     dynamic_cast<K3bCheckListViewItem*>(it.current())->setChecked(false);
 }
@@ -219,19 +219,19 @@ void K3bVideoDVDRippingView::initActions()
   m_actionCollection = new KActionCollection( this );
 
   KAction* actionSelectAll = new KAction( i18n("Check All"), 0, 0, this,
-					  SLOT(slotCheckAll()), actionCollection(),
+					  TQT_SLOT(slotCheckAll()), actionCollection(),
 					  "check_all" );
   KAction* actionDeselectAll = new KAction( i18n("Uncheck All"), 0, 0, this,
-					    SLOT(slotUncheckAll()), actionCollection(),
+					    TQT_SLOT(slotUncheckAll()), actionCollection(),
 					    "uncheck_all" );
   KAction* actionSelect = new KAction( i18n("Check Track"), 0, 0, this,
-				       SLOT(slotCheck()), actionCollection(),
+				       TQT_SLOT(slotCheck()), actionCollection(),
 				       "select_track" );
   KAction* actionDeselect = new KAction( i18n("Uncheck Track"), 0, 0, this,
-					 SLOT(slotUncheck()), actionCollection(),
+					 TQT_SLOT(slotUncheck()), actionCollection(),
 					 "deselect_track" );
   KAction* actionStartRip = new KAction( i18n("Start Ripping"), "gear", 0, this,
-					 SLOT(slotStartRipping()), m_actionCollection, "start_rip" );
+					 TQT_SLOT(slotStartRipping()), m_actionCollection, "start_rip" );
 
   actionStartRip->setToolTip( i18n("Open the Video DVD ripping dialog") );
 

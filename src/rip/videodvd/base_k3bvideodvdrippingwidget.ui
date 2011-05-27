@@ -1,11 +1,11 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bVideoDVDRippingWidget</class>
 <author>Seastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Form1</cstring>
     </property>
-    <property name="geometry">
+    <property name="tqgeometry">
         <rect>
             <x>0</x>
             <y>0</y>
@@ -20,7 +20,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QLabel">
+        <widget class="TQLabel">
             <property name="name">
                 <cstring>textLabel4</cstring>
             </property>
@@ -39,11 +39,11 @@
                 <bool>true</bool>
             </property>
         </widget>
-        <widget class="QTabWidget">
+        <widget class="TQTabWidget">
             <property name="name">
                 <cstring>tabWidget2</cstring>
             </property>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -54,7 +54,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QGroupBox" row="0" column="1">
+                    <widget class="TQGroupBox" row="0" column="1">
                         <property name="name">
                             <cstring>groupBox6</cstring>
                         </property>
@@ -65,15 +65,15 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLayoutWidget">
+                            <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout9</cstring>
+                                    <cstring>tqlayout9</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QLabel">
+                                    <widget class="TQLabel">
                                         <property name="name">
                                             <cstring>textLabel2_2</cstring>
                                         </property>
@@ -81,7 +81,7 @@
                                             <string>Video Size:</string>
                                         </property>
                                     </widget>
-                                    <widget class="QComboBox">
+                                    <widget class="TQComboBox">
                                         <property name="name">
                                             <cstring>m_comboVideoSize</cstring>
                                         </property>
@@ -94,7 +94,7 @@
                                             </sizepolicy>
                                         </property>
                                     </widget>
-                                    <widget class="QPushButton">
+                                    <widget class="TQPushButton">
                                         <property name="name">
                                             <cstring>m_buttonCustomPictureSize</cstring>
                                         </property>
@@ -104,15 +104,15 @@
                                     </widget>
                                 </hbox>
                             </widget>
-                            <widget class="QLayoutWidget">
+                            <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout9</cstring>
+                                    <cstring>tqlayout9</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QLabel">
+                                    <widget class="TQLabel">
                                         <property name="name">
                                             <cstring>textLabel2_3</cstring>
                                         </property>
@@ -120,7 +120,7 @@
                                             <string>Video Bitrate:</string>
                                         </property>
                                     </widget>
-                                    <widget class="QSpinBox">
+                                    <widget class="TQSpinBox">
                                         <property name="name">
                                             <cstring>m_spinVideoBitrate</cstring>
                                         </property>
@@ -149,7 +149,7 @@
                             </widget>
                         </vbox>
                     </widget>
-                    <widget class="QGroupBox" row="1" column="0">
+                    <widget class="TQGroupBox" row="1" column="0">
                         <property name="name">
                             <cstring>groupBox1_2</cstring>
                         </property>
@@ -168,7 +168,7 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel" row="1" column="0">
+                            <widget class="TQLabel" row="1" column="0">
                                 <property name="name">
                                     <cstring>textLabel1_2</cstring>
                                 </property>
@@ -181,18 +181,18 @@
                                     <cstring>m_editBaseDir</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="1" column="1">
+                            <widget class="TQLabel" row="1" column="1">
                                 <property name="name">
                                     <cstring>m_labelFreeSpace</cstring>
                                 </property>
                                 <property name="text">
                                     <string>-</string>
                                 </property>
-                                <property name="alignment">
+                                <property name="tqalignment">
                                     <set>AlignVCenter|AlignRight</set>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="2" column="0">
+                            <widget class="TQLabel" row="2" column="0">
                                 <property name="name">
                                     <cstring>textLabel1_2_2</cstring>
                                 </property>
@@ -200,20 +200,20 @@
                                     <string>Space needed:</string>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="2" column="1">
+                            <widget class="TQLabel" row="2" column="1">
                                 <property name="name">
                                     <cstring>m_labelNeededSpace</cstring>
                                 </property>
                                 <property name="text">
                                     <string>-</string>
                                 </property>
-                                <property name="alignment">
+                                <property name="tqalignment">
                                     <set>AlignVCenter|AlignRight</set>
                                 </property>
                             </widget>
                         </grid>
                     </widget>
-                    <widget class="QGroupBox" row="1" column="1">
+                    <widget class="TQGroupBox" row="1" column="1">
                         <property name="name">
                             <cstring>groupBox4</cstring>
                         </property>
@@ -224,11 +224,11 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QWidgetStack">
+                            <widget class="TQWidgetStack">
                                 <property name="name">
                                     <cstring>m_stackAudioQuality</cstring>
                                 </property>
-                                <widget class="QWidget">
+                                <widget class="TQWidget">
                                     <property name="name">
                                         <cstring>m_stackPageAudioQualityMp3</cstring>
                                     </property>
@@ -242,7 +242,7 @@
                                         <property name="margin">
                                             <number>0</number>
                                         </property>
-                                        <widget class="QCheckBox">
+                                        <widget class="TQCheckBox">
                                             <property name="name">
                                                 <cstring>m_checkAudioVBR</cstring>
                                             </property>
@@ -250,15 +250,15 @@
                                                 <string>Variable &amp;Bitrate</string>
                                             </property>
                                         </widget>
-                                        <widget class="QLayoutWidget">
+                                        <widget class="TQLayoutWidget">
                                             <property name="name">
-                                                <cstring>layout4</cstring>
+                                                <cstring>tqlayout4</cstring>
                                             </property>
                                             <hbox>
                                                 <property name="name">
                                                     <cstring>unnamed</cstring>
                                                 </property>
-                                                <widget class="QLabel">
+                                                <widget class="TQLabel">
                                                     <property name="name">
                                                         <cstring>m_labelAudioBitrate</cstring>
                                                     </property>
@@ -266,7 +266,7 @@
                                                         <string>Audio Bitrate:</string>
                                                     </property>
                                                 </widget>
-                                                <widget class="QComboBox">
+                                                <widget class="TQComboBox">
                                                     <property name="name">
                                                         <cstring>m_comboAudioBitrate</cstring>
                                                     </property>
@@ -278,7 +278,7 @@
                                         </widget>
                                     </vbox>
                                 </widget>
-                                <widget class="QWidget">
+                                <widget class="TQWidget">
                                     <property name="name">
                                         <cstring>m_stackPageAudioQualityAC3Pt</cstring>
                                     </property>
@@ -310,7 +310,7 @@
                                         </widget>
                                     </hbox>
                                 </widget>
-                                <widget class="QWidget">
+                                <widget class="TQWidget">
                                     <property name="name">
                                         <cstring>m_stackPageAudioQualityAC3</cstring>
                                     </property>
@@ -324,15 +324,15 @@
                                         <property name="margin">
                                             <number>0</number>
                                         </property>
-                                        <widget class="QLayoutWidget">
+                                        <widget class="TQLayoutWidget">
                                             <property name="name">
-                                                <cstring>layout8</cstring>
+                                                <cstring>tqlayout8</cstring>
                                             </property>
                                             <hbox>
                                                 <property name="name">
                                                     <cstring>unnamed</cstring>
                                                 </property>
-                                                <widget class="QLabel">
+                                                <widget class="TQLabel">
                                                     <property name="name">
                                                         <cstring>textLabel1_3</cstring>
                                                     </property>
@@ -340,7 +340,7 @@
                                                         <string>Audio Bitrate:</string>
                                                     </property>
                                                 </widget>
-                                                <widget class="QSpinBox">
+                                                <widget class="TQSpinBox">
                                                     <property name="name">
                                                         <cstring>m_spinAudioBitrate</cstring>
                                                     </property>
@@ -372,7 +372,7 @@
                                             <property name="sizeType">
                                                 <enum>Expanding</enum>
                                             </property>
-                                            <property name="sizeHint">
+                                            <property name="tqsizeHint">
                                                 <size>
                                                     <width>20</width>
                                                     <height>0</height>
@@ -384,7 +384,7 @@
                             </widget>
                         </vbox>
                     </widget>
-                    <widget class="QGroupBox" row="0" column="0">
+                    <widget class="TQGroupBox" row="0" column="0">
                         <property name="name">
                             <cstring>groupBox1</cstring>
                         </property>
@@ -395,15 +395,15 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLayoutWidget">
+                            <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout10</cstring>
+                                    <cstring>tqlayout10</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QLabel">
+                                    <widget class="TQLabel">
                                         <property name="name">
                                             <cstring>textLabel1</cstring>
                                         </property>
@@ -421,15 +421,15 @@
                                     </widget>
                                 </hbox>
                             </widget>
-                            <widget class="QLayoutWidget">
+                            <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout9</cstring>
+                                    <cstring>tqlayout9</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QLabel">
+                                    <widget class="TQLabel">
                                         <property name="name">
                                             <cstring>textLabel2</cstring>
                                         </property>
@@ -451,7 +451,7 @@
                     </widget>
                 </grid>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>TabPage</cstring>
                 </property>
@@ -462,15 +462,15 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QLayoutWidget">
+                    <widget class="TQLayoutWidget">
                         <property name="name">
-                            <cstring>layout14</cstring>
+                            <cstring>tqlayout14</cstring>
                         </property>
                         <hbox>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel">
+                            <widget class="TQLabel">
                                 <property name="name">
                                     <cstring>textLabel1_4</cstring>
                                 </property>
@@ -478,7 +478,7 @@
                                     <string>Ripped files pattern:</string>
                                 </property>
                             </widget>
-                            <widget class="QComboBox">
+                            <widget class="TQComboBox">
                                 <property name="name">
                                     <cstring>m_comboFilenamePattern</cstring>
                                 </property>
@@ -509,19 +509,19 @@
                         <property name="text">
                             <string>See special strings</string>
                         </property>
-                        <property name="alignment">
+                        <property name="tqalignment">
                             <set>AlignVCenter|AlignRight</set>
                         </property>
                     </widget>
-                    <widget class="QLayoutWidget">
+                    <widget class="TQLayoutWidget">
                         <property name="name">
-                            <cstring>layout8</cstring>
+                            <cstring>tqlayout8</cstring>
                         </property>
                         <hbox>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QCheckBox">
+                            <widget class="TQCheckBox">
                                 <property name="name">
                                     <cstring>m_checkBlankReplace</cstring>
                                 </property>
@@ -560,7 +560,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>5</width>
                                 <height>1</height>
@@ -569,7 +569,7 @@
                     </spacer>
                 </vbox>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -580,7 +580,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>m_checkTwoPassEncoding</cstring>
                         </property>
@@ -602,7 +602,7 @@
 &lt;p&gt;2-pass encoding results in a doubled encoding time.</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>m_checkAutoClipping</cstring>
                         </property>
@@ -621,7 +621,7 @@
 &lt;p&gt;Although this method is very reliable there may be problems if the source material is exceptionally short or dark.</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>m_checkAudioResampling</cstring>
                         </property>
@@ -642,7 +642,7 @@
 &lt;p&gt;If this option is checked K3b will change the sampling rate of the audio stream to 44100 Hz.</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>m_checkLowPriority</cstring>
                         </property>
@@ -663,7 +663,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>20</width>
                                 <height>1</height>
@@ -706,7 +706,7 @@
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
     <includehint>kurlrequester.h</includehint>

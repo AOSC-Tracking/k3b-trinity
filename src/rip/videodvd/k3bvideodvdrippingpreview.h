@@ -16,8 +16,8 @@
 #ifndef _K3B_VIDEODVD_RIPPING_PREVIEW_H_
 #define _K3B_VIDEODVD_RIPPING_PREVIEW_H_
 
-#include <qobject.h>
-#include <qimage.h>
+#include <tqobject.h>
+#include <tqimage.h>
 
 #include <k3bvideodvd.h>
 
@@ -25,15 +25,16 @@
 class KTempDir;
 class KProcess;
 
-class K3bVideoDVDRippingPreview : public QObject
+class K3bVideoDVDRippingPreview : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingPreview( QObject* parent = 0 );
+  K3bVideoDVDRippingPreview( TQObject* tqparent = 0 );
   ~K3bVideoDVDRippingPreview();
 
-  const QImage& preview() const { return m_preview; }
+  const TQImage& preview() const { return m_preview; }
 
  public slots:
   /**
@@ -53,7 +54,7 @@ class K3bVideoDVDRippingPreview : public QObject
   void slotTranscodeFinished( KProcess* );
 
  private:
-  QImage m_preview;
+  TQImage m_preview;
   KTempDir* m_tempDir;
   KProcess* m_process;
   int m_title;

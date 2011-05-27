@@ -26,9 +26,9 @@
 #include <k3bview.h>
 #include <k3bvalidators.h>
 
-#include <qdragobject.h>
-#include <qheader.h>
-#include <qtimer.h>
+#include <tqdragobject.h>
+#include <tqheader.h>
+#include <tqtimer.h>
 
 #include <klocale.h>
 #include <kaction.h>
@@ -51,21 +51,21 @@ public:
   K3bDataDirViewItem* animatedDirItem;
   K3bDataDirViewItem* dropDirItem;
   int animationCounter;
-  QPixmap beforeAniPixmap;
+  TQPixmap beforeAniPixmap;
 
   // used for the urladdingdialog hack
   KURL::List addUrls;
   K3bDirItem* addParentDir;
 
-  QString lastUpdateVolumeId;
+  TQString lastUpdateVolumeId;
 
-  QValidator* iso9660Validator;
-  QValidator* asciiValidator;
+  TQValidator* iso9660Validator;
+  TQValidator* asciiValidator;
 };
 
 
-K3bDataDirTreeView::K3bDataDirTreeView( K3bView* view, K3bDataDoc* doc, QWidget* parent )
-  : K3bListView( parent ), m_view(view)
+K3bDataDirTreeView::K3bDataDirTreeView( K3bView* view, K3bDataDoc* doc, TQWidget* tqparent )
+  : K3bListView( tqparent ), m_view(view)
 {
   d = new Private();
 
@@ -78,7 +78,7 @@ K3bDataDirTreeView::K3bDataDirTreeView( K3bView* view, K3bDataDoc* doc, QWidget*
   setFullWidth( true );
   setDragEnabled( true );
   setItemsMovable( false );
-  setAlternateBackground( QColor() );
+  setAlternateBackground( TQColor() );
   //  setSorting(-1);
 
   addColumn( i18n("Directory") );
@@ -89,15 +89,15 @@ K3bDataDirTreeView::K3bDataDirTreeView( K3bView* view, K3bDataDoc* doc, QWidget*
   m_root = new K3bDataRootViewItem( doc, this );
   m_itemMap.insert( doc->root(), m_root );
 
-  connect( m_doc, SIGNAL(changed()), this, SLOT(slotDocChanged()) );
-  connect( this, SIGNAL(clicked(QListViewItem*)), this, SLOT(slotExecuted(QListViewItem*)) );
-  connect( this, SIGNAL(selectionChanged(QListViewItem*)), this, SLOT(slotExecuted(QListViewItem*)) );
-  connect( m_doc, SIGNAL(itemRemoved(K3bDataItem*)), this, SLOT(slotDataItemRemoved(K3bDataItem*)) );
-  connect( m_doc, SIGNAL(itemAdded(K3bDataItem*)), this, SLOT(slotItemAdded(K3bDataItem*)) );
-  connect( this, SIGNAL(contextMenu(KListView*,QListViewItem*, const QPoint&)),
-	   this, SLOT(showPopupMenu(KListView*,QListViewItem*, const QPoint&)) );
-  connect( this, SIGNAL(dropped(QDropEvent*, QListViewItem*, QListViewItem*)),
-	   this, SLOT(slotDropped(QDropEvent*, QListViewItem*, QListViewItem*)) );
+  connect( m_doc, TQT_SIGNAL(changed()), TQT_TQOBJECT(this), TQT_SLOT(slotDocChanged()) );
+  connect( this, TQT_SIGNAL(clicked(TQListViewItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotExecuted(TQListViewItem*)) );
+  connect( this, TQT_SIGNAL(selectionChanged(TQListViewItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotExecuted(TQListViewItem*)) );
+  connect( m_doc, TQT_SIGNAL(itemRemoved(K3bDataItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotDataItemRemoved(K3bDataItem*)) );
+  connect( m_doc, TQT_SIGNAL(itemAdded(K3bDataItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotItemAdded(K3bDataItem*)) );
+  connect( this, TQT_SIGNAL(contextMenu(KListView*,TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(showPopupMenu(KListView*,TQListViewItem*, const TQPoint&)) );
+  connect( this, TQT_SIGNAL(dropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)),
+	   this, TQT_SLOT(slotDropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)) );
 
   setupActions();
 }
@@ -109,20 +109,20 @@ K3bDataDirTreeView::~K3bDataDirTreeView()
 }
 
 
-void K3bDataDirTreeView::slotExecuted( QListViewItem* item )
+void K3bDataDirTreeView::slotExecuted( TQListViewItem* item )
 {
   if( K3bDataDirViewItem* viewItem = dynamic_cast<K3bDataDirViewItem*>(item) )
     emit dirSelected( viewItem->dirItem() );
 }
 
 
-bool K3bDataDirTreeView::acceptDrag(QDropEvent* e) const{
+bool K3bDataDirTreeView::acceptDrag(TQDropEvent* e) const{
   return ( e->source() == viewport() || KURLDrag::canDecode(e) ||
 	   ( m_fileView && e->source() == m_fileView->viewport() ) );
 }
 
 
-void K3bDataDirTreeView::contentsDragMoveEvent( QDragMoveEvent* e )
+void K3bDataDirTreeView::contentsDragMoveEvent( TQDragMoveEvent* e )
 {
   K3bListView::contentsDragMoveEvent( e );
 
@@ -138,7 +138,7 @@ void K3bDataDirTreeView::contentsDragMoveEvent( QDragMoveEvent* e )
 }
 
 
-void K3bDataDirTreeView::contentsDragLeaveEvent( QDragLeaveEvent* e )
+void K3bDataDirTreeView::contentsDragLeaveEvent( TQDragLeaveEvent* e )
 {
   K3bListView::contentsDragLeaveEvent( e );
 
@@ -150,7 +150,7 @@ void K3bDataDirTreeView::contentsDragLeaveEvent( QDragLeaveEvent* e )
 }
 
 
-void K3bDataDirTreeView::slotDropped( QDropEvent* e, QListViewItem*, QListViewItem* )
+void K3bDataDirTreeView::slotDropped( TQDropEvent* e, TQListViewItem*, TQListViewItem* )
 {
   // remove any highlighting
   if( d->dropDirItem ) {
@@ -171,15 +171,15 @@ void K3bDataDirTreeView::slotDropped( QDropEvent* e, QListViewItem*, QListViewIt
 
   if( d->addParentDir ) {
 
-    //    startDropAnimation( parent );
+    //    startDropAnimation( tqparent );
 
     // check if items have been moved
     if( m_fileView &&
 	e->source() == m_fileView->viewport() ) {
       // move all selected items
-      QPtrList<QListViewItem> selectedViewItems = m_fileView->selectedItems();
-      QValueList<K3bDataItem*> selectedDataItems;
-      QPtrListIterator<QListViewItem> it( selectedViewItems );
+      TQPtrList<TQListViewItem> selectedViewItems = m_fileView->selectedItems();
+      TQValueList<K3bDataItem*> selectedDataItems;
+      TQPtrListIterator<TQListViewItem> it( selectedViewItems );
       for( ; it.current(); ++it ) {
 	K3bDataViewItem* dataViewItem = dynamic_cast<K3bDataViewItem*>( it.current() );
 	if( dataViewItem )
@@ -188,14 +188,14 @@ void K3bDataDirTreeView::slotDropped( QDropEvent* e, QListViewItem*, QListViewIt
 	  kdDebug() << "no dataviewitem" << endl;
       }
 
-      K3bDataUrlAddingDialog::copyMoveItems( selectedDataItems, d->addParentDir, this, e->action() == QDropEvent::Copy );
+      K3bDataUrlAddingDialog::copyMoveItems( selectedDataItems, d->addParentDir, this, e->action() == TQDropEvent::Copy );
     }
     else if( e->source() == viewport() ) {
       // move the selected dir
       if( K3bDataDirViewItem* dirItem = dynamic_cast<K3bDataDirViewItem*>( selectedItem() ) ) {
-	QValueList<K3bDataItem*> selectedDataItems;
+	TQValueList<K3bDataItem*> selectedDataItems;
 	selectedDataItems.append( dirItem->dirItem() );
-	K3bDataUrlAddingDialog::copyMoveItems( selectedDataItems, d->addParentDir, this, e->action() == QDropEvent::Copy );
+	K3bDataUrlAddingDialog::copyMoveItems( selectedDataItems, d->addParentDir, this, e->action() == TQDropEvent::Copy );
       }
     }
     else {
@@ -207,7 +207,7 @@ void K3bDataDirTreeView::slotDropped( QDropEvent* e, QListViewItem*, QListViewIt
 	// event queues: the url adding dialog will be non-modal regardless of
 	// the settings in case we open it directly.
 	//
-	QTimer::singleShot( 0, this, SLOT(slotAddUrls()) );
+	TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT(slotAddUrls()) );
       }
     }
   }
@@ -231,8 +231,8 @@ void K3bDataDirTreeView::slotItemAdded( K3bDataItem* item )
     // should only be emitted once for every item
     //
     K3bDirItem* dirItem = static_cast<K3bDirItem*>( item );
-    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->parent()];
-    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, parentViewItem );
+    K3bDataDirViewItem* tqparentViewItem = m_itemMap[dirItem->tqparent()];
+    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, tqparentViewItem );
     m_itemMap.insert( dirItem, newDirItem );
   }
 }
@@ -242,14 +242,14 @@ void K3bDataDirTreeView::slotDataItemRemoved( K3bDataItem* item )
 {
   if( item->isDir() ) {
     K3bDirItem* dirItem = static_cast<K3bDirItem*>( item );
-    QMapIterator<K3bDirItem*, K3bDataDirViewItem*> it = m_itemMap.find( dirItem );
+    TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> it = m_itemMap.tqfind( dirItem );
     if( it != m_itemMap.end() ) {
       K3bDataDirViewItem* viewItem = it.data();
       m_itemMap.remove( it );
 
       // we don't get removedInfo for the child items
       // so we need to remove them here
-      QPtrListIterator<K3bDataItem> it( dirItem->children() );
+      TQPtrListIterator<K3bDataItem> it( dirItem->tqchildren() );
       for( ; it.current(); ++it ) {
 	if( it.current()->isDir() )
 	  slotDataItemRemoved( it.current() );
@@ -263,12 +263,12 @@ void K3bDataDirTreeView::slotDataItemRemoved( K3bDataItem* item )
 
 void K3bDataDirTreeView::setCurrentDir( K3bDirItem* dirItem )
 {
-  QMapIterator<K3bDirItem*, K3bDataDirViewItem*> it = m_itemMap.find( dirItem );
+  TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> it = m_itemMap.tqfind( dirItem );
   if( it != m_itemMap.end() ) {
     setCurrentItem( it.data() );
     it.data()->setOpen(true);
     if( it.data() != root() )
-      it.data()->parent()->setOpen(true);
+      it.data()->tqparent()->setOpen(true);
   }
   else {
     kdDebug() << "Tried to set unknown dirItem to current" << endl;
@@ -280,29 +280,29 @@ void K3bDataDirTreeView::setupActions()
 {
   m_actionCollection = new KActionCollection( this );
 
-  m_actionProperties = new KAction( i18n("Properties"), "misc", 0, this, SLOT(slotProperties()),
+  m_actionProperties = new KAction( i18n("Properties"), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
 				    actionCollection(), "properties" );
-  m_actionNewDir = new KAction( i18n("New Directory..."), "folder_new", CTRL+Key_N, this, SLOT(slotNewDir()),
+  m_actionNewDir = new KAction( i18n("New Directory..."), "folder_new", CTRL+Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotNewDir()),
 				actionCollection(), "new_dir" );
-  m_actionRemove = new KAction( i18n("Remove"), "editdelete", Key_Delete, this, SLOT(slotRemoveItem()),
+  m_actionRemove = new KAction( i18n("Remove"), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItem()),
 				actionCollection(), "remove" );
   KShortcut renameShortCut( Key_F2 );
   renameShortCut.append( KShortcut(CTRL+Key_R) ); // backwards compatibility
-  m_actionRename = new KAction( i18n("Rename"), "edit", renameShortCut, this, SLOT(slotRenameItem()),
+  m_actionRename = new KAction( i18n("Rename"), "edit", renameShortCut, TQT_TQOBJECT(this), TQT_SLOT(slotRenameItem()),
 				actionCollection(), "rename" );
 
   m_popupMenu = new KActionMenu( m_actionCollection, "contextMenu" );
   m_popupMenu->insert( m_actionRename );
   m_popupMenu->insert( m_actionRemove );
   m_popupMenu->insert( m_actionNewDir );
-  m_popupMenu->insert( new KActionSeparator( this ) );
+  m_popupMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
   m_popupMenu->insert( m_actionProperties );
-  m_popupMenu->insert( new KActionSeparator( this ) );
+  m_popupMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
   m_popupMenu->insert( m_view->actionCollection()->action("project_burn") );
 }
 
 
-void K3bDataDirTreeView::showPopupMenu( KListView*, QListViewItem* item, const QPoint& point )
+void K3bDataDirTreeView::showPopupMenu( KListView*, TQListViewItem* item, const TQPoint& point )
 {
   if( item ) {
     if( K3bDataViewItem* di = dynamic_cast<K3bDataViewItem*>(item) ) {
@@ -328,16 +328,16 @@ void K3bDataDirTreeView::showPopupMenu( KListView*, QListViewItem* item, const Q
 void K3bDataDirTreeView::slotNewDir()
 {
   if( K3bDataDirViewItem* vI = dynamic_cast<K3bDataDirViewItem*>(currentItem()) ) {
-    K3bDirItem* parent = vI->dirItem();
+    K3bDirItem* tqparent = vI->dirItem();
 
-    QString name;
+    TQString name;
     bool ok;
 
     name = KInputDialog::getText( i18n("New Directory"),
 				  i18n("Please insert the name for the new directory:"),
 				  i18n("New Directory"), &ok, this );
 
-    while( ok && K3bDataDoc::nameAlreadyInDir( name, parent ) ) {
+    while( ok && K3bDataDoc::nameAlreadyInDir( name, tqparent ) ) {
       name = KInputDialog::getText( i18n("New Directory"),
                                     i18n("A file with that name already exists. "
 					 "Please insert the name for the new directory:"),
@@ -348,7 +348,7 @@ void K3bDataDirTreeView::slotNewDir()
       return;
 
 
-    m_doc->addEmptyDir( name, parent );
+    m_doc->addEmptyDir( name, tqparent );
   }
 }
 
@@ -374,9 +374,9 @@ void K3bDataDirTreeView::slotProperties()
   if(  viewItem && currentItem() != root() ) {
     K3bDataPropertiesDialog d( viewItem->dataItem(), this );
     if( d.exec() ) {
-      repaint();
+      tqrepaint();
       if( m_fileView )
-	m_fileView->repaint();
+	m_fileView->tqrepaint();
     }
   }
   else
@@ -392,8 +392,8 @@ void K3bDataDirTreeView::startDropAnimation( K3bDirItem* dir )
   if( vI ) {
     d->animationCounter = 0;
     d->animatedDirItem = vI;
-    d->beforeAniPixmap = QPixmap( *vI->pixmap(0) );
-    QTimer::singleShot( 0, this, SLOT(slotDropAnimate()) );
+    d->beforeAniPixmap = TQPixmap( *vI->pixmap(0) );
+    TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT(slotDropAnimate()) );
   }
 }
 
@@ -426,7 +426,7 @@ void K3bDataDirTreeView::slotDropAnimate()
       }
 
       d->animationCounter++;
-      QTimer::singleShot( 300, this, SLOT(slotDropAnimate()) );
+      TQTimer::singleShot( 300, TQT_TQOBJECT(this), TQT_SLOT(slotDropAnimate()) );
     }
   }
 }
@@ -448,26 +448,26 @@ void K3bDataDirTreeView::checkForNewItems()
   while( item != 0 )
     {
       // check if we have an entry and if not, create one
-      // we can assume that a listViewItem for the parent exists
+      // we can assume that a listViewItem for the tqparent exists
       // since we go top to bottom
       if( item->isDir() )
 	{
 	  K3bDirItem* dirItem = dynamic_cast<K3bDirItem*>( item );
 
-	  QMapIterator<K3bDirItem*, K3bDataDirViewItem*> itDirItem = m_itemMap.find( dirItem );
+	  TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> itDirItem = m_itemMap.tqfind( dirItem );
 	  if( itDirItem == m_itemMap.end() ) {
-	    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->parent()];
-	    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, parentViewItem );
+	    K3bDataDirViewItem* tqparentViewItem = m_itemMap[dirItem->tqparent()];
+	    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, tqparentViewItem );
 	    m_itemMap.insert( dirItem, newDirItem );
 	  }
 	  else {
-	    // check if parent still correct (to get moved items)
+	    // check if tqparent still correct (to get moved items)
 	    K3bDataDirViewItem* dirViewItem = itDirItem.data();
-	    K3bDataDirViewItem* parentViewItem = (K3bDataDirViewItem*)dirViewItem->parent();
-	    K3bDataDirViewItem* dirParentViewItem = m_itemMap[dirItem->parent()];
-	    if( dirParentViewItem != parentViewItem ) {
+	    K3bDataDirViewItem* tqparentViewItem = (K3bDataDirViewItem*)dirViewItem->tqparent();
+	    K3bDataDirViewItem* dirParentViewItem = m_itemMap[dirItem->tqparent()];
+	    if( dirParentViewItem != tqparentViewItem ) {
 	      // reparent it
-	      parentViewItem->takeItem( dirViewItem );
+	      tqparentViewItem->takeItem( dirViewItem );
 	      dirParentViewItem->insertItem( dirViewItem );
 	    }
 	  }
@@ -478,7 +478,7 @@ void K3bDataDirTreeView::checkForNewItems()
 
 
   // check the directory depth
-  QListViewItemIterator it(root());
+  TQListViewItemIterator it(root());
   while( it.current() != 0 ) {
     if( K3bDataDirViewItem* dirViewItem = dynamic_cast<K3bDataDirViewItem*>(it.current()) )
       if( it.current() != m_root ) {
@@ -499,7 +499,7 @@ void K3bDataDirTreeView::slotDocChanged()
   // avoid flicker
   if( d->lastUpdateVolumeId != m_doc->isoOptions().volumeID() ) {
     d->lastUpdateVolumeId = m_doc->isoOptions().volumeID();
-    root()->repaint();
+    root()->tqrepaint();
   }
 }
 

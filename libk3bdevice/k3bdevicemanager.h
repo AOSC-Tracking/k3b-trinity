@@ -17,11 +17,11 @@
 #ifndef K3BDEVICEMANAGER_H
 #define K3BDEVICEMANAGER_H
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qmemarray.h>
-#include <qptrlist.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqmemarray.h>
+#include <tqptrlist.h>
 
 #include "k3bdevice_export.h"
 #include <kdebug.h>
@@ -47,15 +47,16 @@ namespace K3bDevice {
    *   K3bDevice::Device* dev = manager->findDevice( "/dev/cdrom" );
    * \endcode
    */
-  class LIBK3BDEVICE_EXPORT DeviceManager : public QObject
+  class LIBK3BDEVICE_EXPORT DeviceManager : public TQObject
     {
       Q_OBJECT
+  TQ_OBJECT
 
     public:
       /**
        * Creates a new DeviceManager
        */
-      DeviceManager( QObject* parent = 0, const char* name = 0 );
+      DeviceManager( TQObject* tqparent = 0, const char* name = 0 );
       virtual ~DeviceManager();
 
       /**
@@ -72,15 +73,15 @@ namespace K3bDevice {
       void setCheckWritingModes( bool b );
 
       /**
-       * \deprecated use findDevice( const QString& )
+       * \deprecated use findDevice( const TQString& )
        */
-      Device* deviceByName( const QString& );
+      Device* deviceByName( const TQString& );
 
       /**
        * Search an SCSI device by SCSI bus, id, and lun.
        *
        * \note This method does not initialize new devices.
-       *       Devices cannot be found until they have been added via addDevice(const QString&)
+       *       Devices cannot be found until they have been added via addDevice(const TQString&)
        *       or scanBus().
        *
        * \return The corresponding device or 0 if there is no such device.
@@ -91,81 +92,81 @@ namespace K3bDevice {
        * Search a device by blockdevice name.
        *
        * \note This method does not initialize new devices.
-       *       Devices cannot be found until they have been added via addDevice(const QString&)
+       *       Devices cannot be found until they have been added via addDevice(const TQString&)
        *       or scanBus().
        *
        * \return The corresponding device or 0 if there is no such device.
        */
-      Device* findDevice( const QString& devicename );
+      Device* findDevice( const TQString& devicename );
 
       /**
        * Before getting the devices do a @ref scanBus().
        * \return List of all cd writer devices.
        * \deprecated use cdWriter()
        */
-      const QPtrList<Device>& burningDevices() const;
+      const TQPtrList<Device>& burningDevices() const;
 
       /**
        * \return List of all reader devices without writer devices.
        * \deprecated use cdReader()
        **/
-      const QPtrList<Device>& readingDevices() const;
+      const TQPtrList<Device>& readingDevices() const;
 
       /**
        * Before getting the devices do a @ref scanBus() or add 
-       * devices via addDevice( const QString& ).
+       * devices via addDevice( const TQString& ).
        *
        * \return List of all devices.
        */
-      const QPtrList<Device>& allDevices() const;
+      const TQPtrList<Device>& allDevices() const;
 
       /**
        * Before getting the devices do a @ref scanBus() or add 
-       * devices via addDevice( const QString& ).
+       * devices via addDevice( const TQString& ).
        *
        * \return List of all cd writer devices.
        */
-      const QPtrList<Device>& cdWriter() const;
+      const TQPtrList<Device>& cdWriter() const;
 
       /**
        * Before getting the devices do a @ref scanBus() or add 
-       * devices via addDevice( const QString& ).
+       * devices via addDevice( const TQString& ).
        *
        * \return List of all cd reader devices.
        */
-      const QPtrList<Device>& cdReader() const;
+      const TQPtrList<Device>& cdReader() const;
 
       /**
        * Before getting the devices do a @ref scanBus() or add 
-       * devices via addDevice( const QString& ).
+       * devices via addDevice( const TQString& ).
        *
        * \return List of all DVD writer devices.
        */
-      const QPtrList<Device>& dvdWriter() const;
+      const TQPtrList<Device>& dvdWriter() const;
 
       /**
        * Before getting the devices do a @ref scanBus() or add 
-       * devices via addDevice( const QString& ).
+       * devices via addDevice( const TQString& ).
        *
        * \return List of all DVD reader devices.
        */
-      const QPtrList<Device>& dvdReader() const;
+      const TQPtrList<Device>& dvdReader() const;
 
       /**
        * Before getting the devices do a @ref scanBus() or add 
-       * devices via addDevice( const QString& ).
+       * devices via addDevice( const TQString& ).
        *
        * \return List of all Blue Ray reader devices.
        */
-      const QPtrList<Device>& blueRayReader() const;
+      const TQPtrList<Device>& blueRayReader() const;
 
       /**
        * Before getting the devices do a @ref scanBus() or add 
-       * devices via addDevice( const QString& ).
+       * devices via addDevice( const TQString& ).
        *
        * \return List of all Blue Ray writer devices.
        */
-      const QPtrList<Device>& blueRayWriters() const;
+      const TQPtrList<Device>& blueRayWriters() const;
 
       /**
        * Reads the device information from the config file.
@@ -209,14 +210,14 @@ namespace K3bDevice {
        *
        * \return The device if it could be found or 0 otherwise.
        */
-      virtual Device* addDevice( const QString& dev );
+      virtual Device* addDevice( const TQString& dev );
 
       /**
        * Remove a device from the device manager. Basicly this method
        * only makes sense in combination with the HalConnection. Connect
        * it to the deviceRemoved signal.
        */
-      virtual void removeDevice( const QString& dev );
+      virtual void removeDevice( const TQString& dev );
 
     signals:
       /**
@@ -226,9 +227,9 @@ namespace K3bDevice {
       void changed();
 
     private:
-      bool testForCdrom( const QString& );
-      bool determineBusIdLun( const QString &dev, int& bus, int& id, int& lun );
-      QString resolveSymLink( const QString& path );
+      bool testForCdrom( const TQString& );
+      bool determineBusIdLun( const TQString &dev, int& bus, int& id, int& lun );
+      TQString resolveSymLink( const TQString& path );
 
       class Private;
       Private* d;

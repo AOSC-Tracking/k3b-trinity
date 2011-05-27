@@ -25,18 +25,19 @@
 class LIBK3B_EXPORT K3bAudioOutputPlugin : public K3bPlugin
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   virtual ~K3bAudioOutputPlugin() {
   }
 
-  QString group() const { return "AudioOutput"; }
+  TQString group() const { return "AudioOutput"; }
 
   /**
    * This is the short name of the sound system which can be used
    * to specify the sound system on the command line (like "arts", "alsa", or "oss")
    */
-  virtual QCString soundSystem() const = 0;
+  virtual TQCString soundSystem() const = 0;
 
   /**
    * Initialize the plugin.
@@ -51,7 +52,7 @@ class LIBK3B_EXPORT K3bAudioOutputPlugin : public K3bPlugin
    */
   virtual void cleanup() {}
 
-  virtual QString lastErrorMessage() const { return QString::null; }
+  virtual TQString lastErrorMessage() const { return TQString(); }
 
   /**
    * Let there be sound...
@@ -61,8 +62,8 @@ class LIBK3B_EXPORT K3bAudioOutputPlugin : public K3bPlugin
   virtual int write( char* data, int len ) = 0;
 
  protected:
-  K3bAudioOutputPlugin( QObject* parent = 0, const char* name = 0 )
-    : K3bPlugin( parent, name ) {
+  K3bAudioOutputPlugin( TQObject* tqparent = 0, const char* name = 0 )
+    : K3bPlugin( tqparent, name ) {
   }
 };
 

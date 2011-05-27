@@ -28,8 +28,8 @@
 #include <kurldrag.h>
 #include <klocale.h>
 
-#include <qevent.h>
-#include <qtabbar.h>
+#include <tqevent.h>
+#include <tqtabbar.h>
 
 
 class K3bProjectTabWidget::ProjectData
@@ -54,13 +54,13 @@ public:
 
 
 
-K3bProjectTabWidget::K3bProjectTabWidget( QWidget *parent, const char *name, WFlags f )
-  : QTabWidget( parent, name, f )
+K3bProjectTabWidget::K3bProjectTabWidget( TQWidget *tqparent, const char *name, WFlags f )
+  : TQTabWidget( tqparent, name, f )
 {
   tabBar()->setAcceptDrops(true);
   tabBar()->installEventFilter( this );
 
-  m_projectActionMenu = new KActionMenu( i18n("Project"), this );
+  m_projectActionMenu = new KActionMenu( i18n("Project"), TQT_TQOBJECT(this) );
 }
 
 
@@ -69,60 +69,60 @@ K3bProjectTabWidget::~K3bProjectTabWidget()
 }
 
 
-void K3bProjectTabWidget::addTab( QWidget* child, const QString& label )
+void K3bProjectTabWidget::addTab( TQWidget* child, const TQString& label )
 {
-  QTabWidget::addTab( child, label );
+  TQTabWidget::addTab( child, label );
   tabBar()->setShown( count() != 1 );
 }
 
 
-void K3bProjectTabWidget::addTab( QWidget* child, const QIconSet& iconset, const QString& label )
+void K3bProjectTabWidget::addTab( TQWidget* child, const TQIconSet& iconset, const TQString& label )
 {
-  QTabWidget::addTab( child, iconset, label );
+  TQTabWidget::addTab( child, iconset, label );
   tabBar()->setShown( count() != 1 );
 }
 
 
-void K3bProjectTabWidget::addTab( QWidget* child, QTab* tab )
+void K3bProjectTabWidget::addTab( TQWidget* child, TQTab* tab )
 {
-  QTabWidget::addTab( child, tab );
+  TQTabWidget::addTab( child, tab );
   tabBar()->setShown( count() != 1 );
 }
 
 
-void K3bProjectTabWidget::insertTab( QWidget* child, const QString& label, int index )
+void K3bProjectTabWidget::insertTab( TQWidget* child, const TQString& label, int index )
 {
-  QTabWidget::insertTab( child, label, index );
+  TQTabWidget::insertTab( child, label, index );
   tabBar()->setShown( count() != 1 );
 }
 
 
-void K3bProjectTabWidget::insertTab( QWidget* child, const QIconSet& iconset, const QString& label, int index )
+void K3bProjectTabWidget::insertTab( TQWidget* child, const TQIconSet& iconset, const TQString& label, int index )
 {
-  QTabWidget::insertTab( child, iconset, label, index );
+  TQTabWidget::insertTab( child, iconset, label, index );
   tabBar()->setShown( count() != 1 );
 }
 
 
-void K3bProjectTabWidget::insertTab( QWidget* child, QTab* tab, int index )
+void K3bProjectTabWidget::insertTab( TQWidget* child, TQTab* tab, int index )
 {
-  QTabWidget::insertTab( child, tab, index );
+  TQTabWidget::insertTab( child, tab, index );
   tabBar()->setShown( count() != 1 );
 }
 
 
-void K3bProjectTabWidget::removePage( QWidget* w )
+void K3bProjectTabWidget::removePage( TQWidget* w )
 {
-  QTabWidget::removePage( w );
+  TQTabWidget::removePage( w );
   tabBar()->setShown( count() != 1 );
 }
 
 
 void K3bProjectTabWidget::insertTab( K3bDoc* doc )
 {
-  QTabWidget::insertTab( doc->view(), doc->URL().fileName() );
-  connect( k3bappcore->projectManager(), SIGNAL(projectSaved(K3bDoc*)), this, SLOT(slotDocSaved(K3bDoc*)) );
-  connect( doc, SIGNAL(changed(K3bDoc*)), this, SLOT(slotDocChanged(K3bDoc*)) );
+  TQTabWidget::insertTab( doc->view(), doc->URL().fileName() );
+  connect( k3bappcore->projectManager(), TQT_SIGNAL(projectSaved(K3bDoc*)), this, TQT_SLOT(slotDocSaved(K3bDoc*)) );
+  connect( doc, TQT_SIGNAL(changed(K3bDoc*)), this, TQT_SLOT(slotDocChanged(K3bDoc*)) );
 
   m_projectDataMap[doc] = ProjectData( doc );
 
@@ -154,16 +154,16 @@ void K3bProjectTabWidget::slotDocChanged( K3bDoc* doc )
 
 void K3bProjectTabWidget::slotDocSaved( K3bDoc* doc )
 {
-  setTabIconSet( doc->view(), QIconSet() );
+  setTabIconSet( doc->view(), TQIconSet() );
   changeTab( doc->view(), doc->URL().fileName() );
 }
 
 
-K3bDoc* K3bProjectTabWidget::projectAt( const QPoint& pos ) const
+K3bDoc* K3bProjectTabWidget::projectAt( const TQPoint& pos ) const
 {
-  QTab* tab = tabBar()->selectTab( pos );
+  TQTab* tab = tabBar()->selectTab( pos );
   if( tab ) {
-    QWidget* w = page( tabBar()->indexOf( tab->identifier() ) );
+    TQWidget* w = page( tabBar()->indexOf( tab->identifier() ) );
     if( K3bView* view = dynamic_cast<K3bView*>(w) )
       return view->doc();
   }
@@ -172,15 +172,15 @@ K3bDoc* K3bProjectTabWidget::projectAt( const QPoint& pos ) const
 }
 
 
-bool K3bProjectTabWidget::eventFilter( QObject* o, QEvent* e )
+bool K3bProjectTabWidget::eventFilter( TQObject* o, TQEvent* e )
 {
-  if( o == tabBar() ) {
-    if( e->type() == QEvent::MouseButtonPress ) {
-      QMouseEvent* me = static_cast<QMouseEvent*>(e);
+  if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(tabBar()) ) {
+    if( e->type() == TQEvent::MouseButtonPress ) {
+      TQMouseEvent* me = TQT_TQMOUSEEVENT(e);
       if( me->button() == Qt::RightButton ) {
 	if( projectAt( me->pos() ) ) {
 	  // we need change the tab because the actions work on the current tab
-	  QTab* clickedTab = tabBar()->selectTab( me->pos() );
+	  TQTab* clickedTab = tabBar()->selectTab( me->pos() );
 	  if( clickedTab ) {
 	    tabBar()->setCurrentTab( clickedTab );
 	    
@@ -192,14 +192,14 @@ bool K3bProjectTabWidget::eventFilter( QObject* o, QEvent* e )
       }
     }
 
-    else if( e->type() == QEvent::DragMove ) {
-      QDragMoveEvent* de = static_cast<QDragMoveEvent*>(e);
+    else if( e->type() == TQEvent::DragMove ) {
+      TQDragMoveEvent* de = static_cast<TQDragMoveEvent*>(e);
       de->accept( KURLDrag::canDecode(de) && projectAt(de->pos()) );
       return true;
     }
 
-    else if( e->type() == QEvent::Drop ) {
-      QDropEvent* de = static_cast<QDropEvent*>(e);
+    else if( e->type() == TQEvent::Drop ) {
+      TQDropEvent* de = static_cast<TQDropEvent*>(e);
       KURL::List l;
       if( KURLDrag::decode( de, l ) ) {
 	if( K3bDoc* doc = projectAt( de->pos() ) )
@@ -209,7 +209,7 @@ bool K3bProjectTabWidget::eventFilter( QObject* o, QEvent* e )
     }
   }
 
-  return QTabWidget::eventFilter( o, e );
+  return TQTabWidget::eventFilter( o, e );
 }
 
 #include "k3bprojecttabwidget.moc"

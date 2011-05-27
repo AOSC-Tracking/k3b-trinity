@@ -15,16 +15,16 @@
 
 #include <config.h>
 
-#include <qlayout.h>
-#include <qmap.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qcheckbox.h>
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qscrollview.h>
-#include <qtimer.h>
+#include <tqlayout.h>
+#include <tqmap.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqcheckbox.h>
+#include <tqlineedit.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqscrollview.h>
+#include <tqtimer.h>
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -95,19 +95,19 @@ public:
 
   bool changesNeeded;
 
-  QMap<QCheckListItem*, QString> listDeviceMap;
-  QMap<QString, QCheckListItem*> deviceListMap;
+  TQMap<TQCheckListItem*, TQString> listDeviceMap;
+  TQMap<TQString, TQCheckListItem*> deviceListMap;
 
-  QMap<QCheckListItem*, K3bExternalBin*> listBinMap;
-  QMap<K3bExternalBin*, QCheckListItem*> binListMap;
+  TQMap<TQCheckListItem*, K3bExternalBin*> listBinMap;
+  TQMap<K3bExternalBin*, TQCheckListItem*> binListMap;
 
   KConfig* config;
 };
 
 
 
-K3bSetup2::K3bSetup2( QWidget *parent, const char *, const QStringList& )
-  : KCModule( parent, "k3bsetup" )
+K3bSetup2::K3bSetup2( TQWidget *tqparent, const char *, const TQStringList& )
+  : KCModule( tqparent, "k3bsetup" )
 {
   d = new Private();
   d->config = new KConfig( "k3bsetup2rc" );
@@ -120,7 +120,7 @@ K3bSetup2::K3bSetup2( QWidget *parent, const char *, const QStringList& )
 
   setButtons( KCModule::Apply|KCModule::Cancel|KCModule::Ok|KCModule::Default );
 
-  QHBoxLayout* box = new QHBoxLayout( this );
+  TQHBoxLayout* box = new TQHBoxLayout( this );
   box->setAutoAdd(true);
   box->setMargin(0);
   box->setSpacing( KDialog::spacingHint() );
@@ -144,14 +144,14 @@ K3bSetup2::K3bSetup2( QWidget *parent, const char *, const QStringList& )
   w->textLabel2->hide();
 
 
-  connect( w->m_checkUseBurningGroup, SIGNAL(toggled(bool)),
-	   this, SLOT(updateViews()) );
-  connect( w->m_editBurningGroup, SIGNAL(textChanged(const QString&)),
-	   this, SLOT(updateViews()) );
-  connect( w->m_editSearchPath, SIGNAL(changed()),
-	   this, SLOT(slotSearchPrograms()) );
-  connect( w->m_buttonAddDevice, SIGNAL(clicked()),
-	   this, SLOT(slotAddDevice()) );
+  connect( w->m_checkUseBurningGroup, TQT_SIGNAL(toggled(bool)),
+	   this, TQT_SLOT(updateViews()) );
+  connect( w->m_editBurningGroup, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SLOT(updateViews()) );
+  connect( w->m_editSearchPath, TQT_SIGNAL(changed()),
+	   this, TQT_SLOT(slotSearchPrograms()) );
+  connect( w->m_buttonAddDevice, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotAddDevice()) );
 
 
   d->externalBinManager = new K3bExternalBinManager( this );
@@ -171,7 +171,7 @@ K3bSetup2::K3bSetup2( QWidget *parent, const char *, const QStringList& )
   // This is a hack to work around a kcm bug which makes the faulty assumption that
   // every module starts without anything to apply
   //
-  QTimer::singleShot( 0, this, SLOT(updateViews()) );
+  TQTimer::singleShot( 0, this, TQT_SLOT(updateViews()) );
 
   if( getuid() != 0 || !d->config->checkConfigFilesWritable( true ) )
     makeReadOnly();
@@ -200,33 +200,33 @@ void K3bSetup2::updateViews()
 void K3bSetup2::updatePrograms()
 {
   // first save which were checked
-  QMap<K3bExternalBin*, bool> checkMap;
-  QListViewItemIterator listIt( w->m_viewPrograms );
+  TQMap<K3bExternalBin*, bool> checkMap;
+  TQListViewItemIterator listIt( w->m_viewPrograms );
   for( ; listIt.current(); ++listIt )
-    checkMap.insert( d->listBinMap[(QCheckListItem*)*listIt], ((QCheckListItem*)*listIt)->isOn() );
+    checkMap.insert( d->listBinMap[(TQCheckListItem*)*listIt], ((TQCheckListItem*)*listIt)->isOn() );
 
   w->m_viewPrograms->clear();
   d->binListMap.clear();
   d->listBinMap.clear();
 
   // load programs
-  const QMap<QString, K3bExternalProgram*>& map = d->externalBinManager->programs();
-  for( QMap<QString, K3bExternalProgram*>::const_iterator it = map.begin(); it != map.end(); ++it ) {
+  const TQMap<TQString, K3bExternalProgram*>& map = d->externalBinManager->programs();
+  for( TQMap<TQString, K3bExternalProgram*>::const_iterator it = map.begin(); it != map.end(); ++it ) {
     K3bExternalProgram* p = it.data();
 
-    QPtrListIterator<K3bExternalBin> binIt( p->bins() );
+    TQPtrListIterator<K3bExternalBin> binIt( p->bins() );
     for( ; binIt.current(); ++binIt ) {
       K3bExternalBin* b = *binIt;
 
-      QFileInfo fi( b->path );
-      // we need the uid bit which is not supported by QFileInfo
+      TQFileInfo fi( b->path );
+      // we need the uid bit which is not supported by TQFileInfo
       struct stat s;
-      if( ::stat( QFile::encodeName(b->path), &s ) ) {
+      if( ::stat( TQFile::encodeName(b->path), &s ) ) {
 	kdDebug() << "(K3bSetup2) unable to stat " << b->path << endl;
       }
       else {
 	// create a checkviewitem
-	QCheckListItem* bi = new QCheckListItem( w->m_viewPrograms, b->name(), QCheckListItem::CheckBox );
+	TQCheckListItem* bi = new TQCheckListItem( w->m_viewPrograms, b->name(), TQCheckListItem::CheckBox );
 	bi->setText( 1, b->version );
 	bi->setText( 2, b->path );
 
@@ -234,11 +234,11 @@ void K3bSetup2::updatePrograms()
 	d->binListMap.insert( b, bi );
 
 	// check the item on first insertion or if it was checked before
-	bi->setOn( checkMap.contains(b) ? checkMap[b] : true );
+	bi->setOn( checkMap.tqcontains(b) ? checkMap[b] : true );
 
 	int perm = s.st_mode & 0007777;
 
-	QString wantedGroup("root");
+	TQString wantedGroup("root");
 	if( w->m_checkUseBurningGroup->isChecked() )
 	  wantedGroup = burningGroup();
 
@@ -256,11 +256,11 @@ void K3bSetup2::updatePrograms()
 	    wantedPerm = 0000755;
 	}
 
-	bi->setText( 3, QString::number( perm, 8 ).rightJustify( 4, '0' ) + " " + fi.owner() + "." + fi.group() );
+	bi->setText( 3, TQString::number( perm, 8 ).rightJustify( 4, '0' ) + " " + fi.owner() + "." + fi.group() );
 	if( perm != wantedPerm ||
 	    fi.owner() != "root" ||
 	    fi.group() != wantedGroup ) {
-	  bi->setText( 4, QString("%1 root.%2").arg(wantedPerm,0,8).arg(wantedGroup) );
+	  bi->setText( 4, TQString("%1 root.%2").tqarg(wantedPerm,0,8).tqarg(wantedGroup) );
 	  if( bi->isOn() )
 	    d->changesNeeded = true;
 	}
@@ -275,45 +275,45 @@ void K3bSetup2::updatePrograms()
 void K3bSetup2::updateDevices()
 {
   // first save which were checked
-  QMap<QString, bool> checkMap;
-  QListViewItemIterator listIt( w->m_viewDevices );
+  TQMap<TQString, bool> checkMap;
+  TQListViewItemIterator listIt( w->m_viewDevices );
   for( ; listIt.current(); ++listIt )
-    checkMap.insert( d->listDeviceMap[(QCheckListItem*)*listIt], ((QCheckListItem*)*listIt)->isOn() );
+    checkMap.insert( d->listDeviceMap[(TQCheckListItem*)*listIt], ((TQCheckListItem*)*listIt)->isOn() );
 
   w->m_viewDevices->clear();
   d->listDeviceMap.clear();
   d->deviceListMap.clear();
 
-  QPtrListIterator<K3bDevice::Device> it( d->deviceManager->allDevices() );
+  TQPtrListIterator<K3bDevice::Device> it( d->deviceManager->allDevices() );
   for( ; it.current(); ++it ) {
     K3bDevice::Device* device = *it;
     // check the item on first insertion or if it was checked before
-    QCheckListItem* item = createDeviceItem( device->blockDeviceName() );
-    item->setOn( checkMap.contains(device->blockDeviceName()) ? checkMap[device->blockDeviceName()] : true );
+    TQCheckListItem* item = createDeviceItem( device->blockDeviceName() );
+    item->setOn( checkMap.tqcontains(device->blockDeviceName()) ? checkMap[device->blockDeviceName()] : true );
     item->setText( 0, device->vendor() + " " + device->description() );
   
     if( !device->genericDevice().isEmpty() ) {
-      QCheckListItem* item = createDeviceItem( device->genericDevice() );
-      item->setOn( checkMap.contains(device->genericDevice()) ? checkMap[device->genericDevice()] : true );
+      TQCheckListItem* item = createDeviceItem( device->genericDevice() );
+      item->setOn( checkMap.tqcontains(device->genericDevice()) ? checkMap[device->genericDevice()] : true );
       item->setText( 0, device->vendor() + " " + device->description() + " (" + i18n("Generic SCSI Device") + ")" );
     }
   }
 }
 
 
-QCheckListItem* K3bSetup2::createDeviceItem( const QString& deviceNode )
+TQCheckListItem* K3bSetup2::createDeviceItem( const TQString& deviceNode )
 {
-  QFileInfo fi( deviceNode );
+  TQFileInfo fi( deviceNode );
   struct stat s;
-  if( ::stat( QFile::encodeName(deviceNode), &s ) ) {
+  if( ::stat( TQFile::encodeName(deviceNode), &s ) ) {
     kdDebug() << "(K3bSetup2) unable to stat " << deviceNode << endl;
     return 0;
   }
   else {
     // create a checkviewitem
-    QCheckListItem* bi = new QCheckListItem( w->m_viewDevices,
+    TQCheckListItem* bi = new TQCheckListItem( w->m_viewDevices,
 					     deviceNode,
-					     QCheckListItem::CheckBox );
+					     TQCheckListItem::CheckBox );
 
     d->listDeviceMap.insert( bi, deviceNode );
     d->deviceListMap.insert( deviceNode, bi );
@@ -322,7 +322,7 @@ QCheckListItem* K3bSetup2::createDeviceItem( const QString& deviceNode )
 
     int perm = s.st_mode & 0000777;
 
-    bi->setText( 2, QString::number( perm, 8 ).rightJustify( 3, '0' ) + " " + fi.owner() + "." + fi.group() );
+    bi->setText( 2, TQString::number( perm, 8 ).rightJustify( 3, '0' ) + " " + fi.owner() + "." + fi.group() );
     if( w->m_checkUseBurningGroup->isChecked() ) {
       // we ignore the device's owner here
       if( perm != 0000660 ||
@@ -383,7 +383,7 @@ void K3bSetup2::defaults()
   // This is a hack to work around a kcm bug which makes the faulty assumption that
   // every module defaults to a state where nothing is to be applied
   //
-  QTimer::singleShot( 0, this, SLOT(updateViews()) );
+  TQTimer::singleShot( 0, this, TQT_SLOT(updateViews()) );
 }
 
 
@@ -405,30 +405,30 @@ void K3bSetup2::save()
     // TODO: create the group if it's not there
     g = getgrnam( burningGroup().local8Bit() );
     if( !g ) {
-      KMessageBox::error( this, i18n("There is no group %1.").arg(burningGroup()) );
+      KMessageBox::error( this, i18n("There is no group %1.").tqarg(burningGroup()) );
       return;
     }
   }
 
 
   // save the device permissions
-  QListViewItemIterator listIt( w->m_viewDevices );
+  TQListViewItemIterator listIt( w->m_viewDevices );
   for( ; listIt.current(); ++listIt ) {
 
-    QCheckListItem* checkItem = (QCheckListItem*)listIt.current();
+    TQCheckListItem* checkItem = (TQCheckListItem*)listIt.current();
 
     if( checkItem->isOn() ) {
-      QString dev = d->listDeviceMap[checkItem];
+      TQString dev = d->listDeviceMap[checkItem];
 
       if( w->m_checkUseBurningGroup->isChecked() ) {
-	if( ::chmod( QFile::encodeName(dev), S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP ) )
+	if( ::chmod( TQFile::encodeName(dev), S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP ) )
 	  success = false;
 
-	if( ::chown( QFile::encodeName(dev), (gid_t)-1, g->gr_gid ) )
+	if( ::chown( TQFile::encodeName(dev), (gid_t)-1, g->gr_gid ) )
 	  success = false;
       }
       else {
-	if( ::chmod( QFile::encodeName(dev), S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH ) )
+	if( ::chmod( TQFile::encodeName(dev), S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH ) )
 	  success = false;
       }
     }
@@ -436,17 +436,17 @@ void K3bSetup2::save()
 
 
   // save the program permissions
-  listIt = QListViewItemIterator( w->m_viewPrograms );
+  listIt = TQListViewItemIterator( w->m_viewPrograms );
   for( ; listIt.current(); ++listIt ) {
 
-    QCheckListItem* checkItem = (QCheckListItem*)listIt.current();
+    TQCheckListItem* checkItem = (TQCheckListItem*)listIt.current();
 
     if( checkItem->isOn() ) {
 
       K3bExternalBin* bin = d->listBinMap[checkItem];
 
       if( w->m_checkUseBurningGroup->isChecked() ) {
-	if( ::chown( QFile::encodeName(bin->path), (gid_t)0, g->gr_gid ) )
+	if( ::chown( TQFile::encodeName(bin->path), (gid_t)0, g->gr_gid ) )
 	  success = false;
 
 	int perm = 0;
@@ -455,11 +455,11 @@ void K3bSetup2::save()
 	else
 	  perm = S_IRWXU|S_IXGRP|S_IRGRP;
 
-	if( ::chmod( QFile::encodeName(bin->path), perm ) )
+	if( ::chmod( TQFile::encodeName(bin->path), perm ) )
 	  success = false;
       }
       else {
-	if( ::chown( QFile::encodeName(bin->path), 0, 0 ) )
+	if( ::chown( TQFile::encodeName(bin->path), 0, 0 ) )
 	  success = false;
 
 	int perm = 0;
@@ -468,7 +468,7 @@ void K3bSetup2::save()
 	else
 	  perm = S_IRWXU|S_IXGRP|S_IRGRP|S_IXOTH|S_IROTH;
 
-	if( ::chmod( QFile::encodeName(bin->path), perm ) )
+	if( ::chmod( TQFile::encodeName(bin->path), perm ) )
 	  success = false;
       }
     }
@@ -490,7 +490,7 @@ void K3bSetup2::save()
 }
 
 
-QString K3bSetup2::quickHelp() const
+TQString K3bSetup2::quickHelp() const
 {
   return i18n("<h2>K3bSetup 2</h2>"
 	      "<p>This simple setup assistant is able to set the permissions needed by K3b in order to "
@@ -504,10 +504,10 @@ QString K3bSetup2::quickHelp() const
 }
 
 
-QString K3bSetup2::burningGroup() const
+TQString K3bSetup2::burningGroup() const
 {
-  QString g = w->m_editBurningGroup->text();
-  return g.isEmpty() ? QString("burning") : g;
+  TQString g = w->m_editBurningGroup->text();
+  return g.isEmpty() ? TQString("burning") : g;
 }
 
 
@@ -524,7 +524,7 @@ void K3bSetup2::slotSearchPrograms()
 void K3bSetup2::slotAddDevice()
 {
   bool ok;
-  QString newDevicename = KInputDialog::getText( i18n("Location of New Drive"),
+  TQString newDevicename = KInputDialog::getText( i18n("Location of New Drive"),
                                                  i18n("Please enter the device name where K3b should search\n"
 						 "for a new drive (example: /dev/mebecdrom):"),
 						 "/dev/", &ok, this );
@@ -536,7 +536,7 @@ void K3bSetup2::slotAddDevice()
       emit changed( d->changesNeeded );
     }
     else
-      KMessageBox::error( this, i18n("Could not find an additional device at\n%1").arg(newDevicename),
+      KMessageBox::error( this, i18n("Could not find an additional device at\n%1").tqarg(newDevicename),
 			  i18n("Error"), false );
   }
 }
@@ -553,7 +553,7 @@ void K3bSetup2::makeReadOnly()
 }
 
 
-typedef KGenericFactory<K3bSetup2, QWidget> K3bSetup2Factory;
+typedef KGenericFactory<K3bSetup2, TQWidget> K3bSetup2Factory;
 K_EXPORT_COMPONENT_FACTORY( kcm_k3bsetup2, K3bSetup2Factory("k3bsetup") )
 
 

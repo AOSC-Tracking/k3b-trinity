@@ -16,31 +16,31 @@
 #include "k3bmpcwrapper.h"
 
 #include <kdebug.h>
-#include <qfile.h>
+#include <tqfile.h>
 
 
 mpc_int32_t read_impl( void* data, void* ptr, mpc_int32_t size )
 {
-  QFile* input = static_cast<QFile*>( data );
+  TQFile* input = static_cast<TQFile*>( data );
   return input->readBlock( (char*)ptr, size );
 }
 
 
 mpc_bool_t seek_impl( void* data, mpc_int32_t offset )
 {
-  QFile* input = static_cast<QFile*>( data );
+  TQFile* input = static_cast<TQFile*>( data );
   return input->at( offset );
 }
 
 mpc_int32_t tell_impl( void* data )
 {
-  QFile* input = static_cast<QFile*>( data );
+  TQFile* input = static_cast<TQFile*>( data );
   return input->at();
 }
 
 mpc_int32_t get_size_impl( void* data )
 {
-  QFile* input = static_cast<QFile*>( data );
+  TQFile* input = static_cast<TQFile*>( data );
   return input->size();
 }
 
@@ -64,7 +64,7 @@ static int shift_signed( MPC_SAMPLE_FORMAT val, int shift )
 
 K3bMpcWrapper::K3bMpcWrapper()
 {
-  m_input = new QFile();
+  m_input = new TQFile();
 
   m_reader           = new mpc_reader;
   m_reader->read     = read_impl;
@@ -91,7 +91,7 @@ K3bMpcWrapper::~K3bMpcWrapper()
 }
 
 
-bool K3bMpcWrapper::open( const QString& filename )
+bool K3bMpcWrapper::open( const TQString& filename )
 {
   close();
 

@@ -16,21 +16,22 @@
 #ifndef _K3B_SIGNAL_WAITER_H_
 #define _K3B_SIGNAL_WAITER_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 
 #include <k3b_export.h>
 
 class K3bJob;
 
-class K3bSignalWaiter : public QObject
+class K3bSignalWaiter : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
    * Use this to syncroneously wait for a signal.
    */
-  LIBK3B_EXPORT static void waitForSignal( QObject* o, const char* signal );
+  LIBK3B_EXPORT static void waitForSignal( TQObject* o, const char* signal );
 
   /**
    * Use this to syncroneously wait for a job to finish.

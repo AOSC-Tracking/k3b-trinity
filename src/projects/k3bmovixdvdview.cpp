@@ -22,8 +22,8 @@
 #include <klocale.h>
 
 
-K3bMovixDvdView::K3bMovixDvdView( K3bMovixDvdDoc* doc, QWidget *parent, const char *name )
-  : K3bMovixView( doc, parent, name )
+K3bMovixDvdView::K3bMovixDvdView( K3bMovixDvdDoc* doc, TQWidget *tqparent, const char *name )
+  : K3bMovixView( doc, tqparent, name )
 {
   m_doc = doc;
 
@@ -40,9 +40,9 @@ K3bMovixDvdView::~K3bMovixDvdView()
 }
 
 
-K3bProjectBurnDialog* K3bMovixDvdView::newBurnDialog( QWidget* parent, const char* name )
+K3bProjectBurnDialog* K3bMovixDvdView::newBurnDialog( TQWidget* tqparent, const char* name )
 {
-  return new K3bMovixDvdBurnDialog( m_doc, parent, name, true );
+  return new K3bMovixDvdBurnDialog( m_doc, tqparent, name, true );
 }
 
 #include "k3bmovixdvdview.moc"

@@ -16,8 +16,8 @@
 #ifndef _K3B_FILE_SPLITTER_H_
 #define _K3B_FILE_SPLITTER_H_
 
-#include <qiodevice.h>
-#include <qstring.h>
+#include <tqiodevice.h>
+#include <tqstring.h>
 
 #include <kio/global.h>
 
@@ -25,7 +25,7 @@
 
 
 /**
- * QFile replacement which splits
+ * TQFile replacement which splits
  * big files according to the underlying file system's
  * maximum file size.
  *
@@ -39,11 +39,11 @@
  * ...
  * </pre>
  */
-class LIBK3B_EXPORT K3bFileSplitter : public QIODevice
+class LIBK3B_EXPORT K3bFileSplitter : public TQIODevice
 {
  public:
   K3bFileSplitter();
-  K3bFileSplitter( const QString& filename );
+  K3bFileSplitter( const TQString& filename );
   ~K3bFileSplitter();
 
   /**
@@ -55,13 +55,18 @@ class LIBK3B_EXPORT K3bFileSplitter : public QIODevice
    */
   void setMaxFileSize( KIO::filesize_t size );
 
-  const QString& name() const;
+  const TQString& name() const;
 
-  void setName( const QString& filename );
+  void setName( const TQString& filename );
 
   virtual bool open( int mode );
 
   virtual void close();
+
+#ifdef USE_QT4
+	inline qint64 readData ( char * data, qint64 maxSize ) { return readBlock(data, maxSize); }
+	inline qint64 writeData ( const char * data, qint64 maxSize ) { return writeBlock(data, maxSize); }
+#endif // USE_QT4
 
   /**
    * File descriptor to read from and write to.
@@ -74,7 +79,11 @@ class LIBK3B_EXPORT K3bFileSplitter : public QIODevice
   /**
    * Not implemented
    */
+#ifdef USE_QT4
+  virtual qint64 size() const;
+#else // USE_QT4
   virtual Offset size() const;
+#endif // USE_QT4
 
   /**
    * Not implemented
@@ -87,8 +96,8 @@ class LIBK3B_EXPORT K3bFileSplitter : public QIODevice
   virtual bool at( Offset );
 
   virtual bool atEnd() const;
-  virtual Q_LONG readBlock( char *data, Q_ULONG maxlen );
-  virtual Q_LONG writeBlock( const char *data, Q_ULONG len );
+  virtual TQ_LONG readBlock( char *data, TQ_ULONG maxlen );
+  virtual TQ_LONG writeBlock( const char *data, TQ_ULONG len );
   virtual int getch();
   virtual int putch( int );
   virtual int ungetch( int );

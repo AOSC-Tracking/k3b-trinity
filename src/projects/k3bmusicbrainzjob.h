@@ -27,7 +27,7 @@
 
 class K3bAudioTrack;
 class K3bThreadJob;
-class QWidget;
+class TQWidget;
 
 
 /**
@@ -37,13 +37,14 @@ class QWidget;
 class K3bMusicBrainzJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
-   * \param parent since we do not use this job with a normal progressdialog we need a widget
-   *        as parent
+   * \param tqparent since we do not use this job with a normal progressdialog we need a widget
+   *        as tqparent
    */
-  K3bMusicBrainzJob( QWidget* parent = 0, const char* name = 0 );
+  K3bMusicBrainzJob( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bMusicBrainzJob();
 
   bool hasBeenCanceled() const { return m_canceled; }
@@ -62,7 +63,7 @@ class K3bMusicBrainzJob : public K3bJob
   void start();
   void cancel();
 
-  void setTracks( const QPtrList<K3bAudioTrack>& tracks ) { m_tracks = tracks; }
+  void setTracks( const TQPtrList<K3bAudioTrack>& tracks ) { m_tracks = tracks; }
 
  private slots:
   void slotTrmPercent( int p );
@@ -78,7 +79,7 @@ class K3bMusicBrainzJob : public K3bJob
   K3bThreadJob* m_trmJob;
   K3bThreadJob* m_mbJob;
 
-  QPtrList<K3bAudioTrack> m_tracks;
+  TQPtrList<K3bAudioTrack> m_tracks;
 
   bool m_canceled;
 };

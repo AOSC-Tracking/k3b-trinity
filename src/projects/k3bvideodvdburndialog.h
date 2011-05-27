@@ -22,15 +22,16 @@
 
 class K3bVideoDvdDoc;
 class K3bDataImageSettingsWidget;
-class QCheckBox;
+class TQCheckBox;
 
 
 class K3bVideoDvdBurnDialog : public K3bProjectBurnDialog
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
-   K3bVideoDvdBurnDialog( K3bVideoDvdDoc*, QWidget *parent = 0, const char *name = 0, bool modal = true );
+   K3bVideoDvdBurnDialog( K3bVideoDvdDoc*, TQWidget *tqparent = 0, const char *name = 0, bool modal = true );
    ~K3bVideoDvdBurnDialog();
 
  protected slots:
@@ -47,7 +48,7 @@ class K3bVideoDvdBurnDialog : public K3bProjectBurnDialog
  private:
    K3bDataImageSettingsWidget* m_imageSettingsWidget;
 
-   QCheckBox* m_checkVerify;
+   TQCheckBox* m_checkVerify;
 
    K3bVideoDvdDoc* m_doc;
 };

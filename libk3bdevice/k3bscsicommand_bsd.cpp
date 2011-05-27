@@ -83,14 +83,14 @@ int K3bDevice::ScsiCommand::transport( TransportDirection dir,
   d->ccb.ccb_h.target_id  = m_device->handle()->target_id;
   d->ccb.ccb_h.target_lun = m_device->handle()->target_lun;
 
-  k3bDebug() << "(K3bDevice::ScsiCommand) transport command " << QString::number((int)d->ccb.csio.cdb_io.cdb_bytes[0], 16) << ", length: " << (int)d->ccb.csio.cdb_len << endl;
+  k3bDebug() << "(K3bDevice::ScsiCommand) transport command " << TQString::number((int)d->ccb.csio.cdb_io.cdb_bytes[0], 16) << ", length: " << (int)d->ccb.csio.cdb_len << endl;
   int ret=0;
-  int direction = CAM_DEV_QFRZDIS;
+  int direction = CAM_DEV_TQFRZDIS;
   if (!len)
     direction |= CAM_DIR_NONE;
   else
     direction |= (dir & TR_DIR_READ)?CAM_DIR_IN : CAM_DIR_OUT;
-  cam_fill_csio (&(d->ccb.csio), 1, 0 /* NULL */, direction, MSG_SIMPLE_Q_TAG, (u_int8_t *)data, len, sizeof(d->ccb.csio.sense_data), d->ccb.csio.cdb_len, 30*1000);
+  cam_fill_csio (&(d->ccb.csio), 1, 0 /* NULL */, direction, MSG_SIMPLE_TQ_TAG, (u_int8_t *)data, len, sizeof(d->ccb.csio.sense_data), d->ccb.csio.cdb_len, 30*1000);
   unsigned char * sense = (unsigned char *)&d->ccb.csio.sense_data;
 
   ret = cam_send_ccb(m_device->handle(), &d->ccb);
@@ -118,7 +118,7 @@ int K3bDevice::ScsiCommand::transport( TransportDirection dir,
       return result ? result : ret;
   }
 
-  else if ((d->ccb.ccb_h.status & CAM_STATUS_MASK) == CAM_REQ_CMP) {
+  else if ((d->ccb.ccb_h.status & CAM_STATUS_MASK) == CAM_RETQ_CMP) {
       if( needToClose )
           m_device->close();
       m_device->usageUnlock();
@@ -165,7 +165,7 @@ int K3bDevice::ScsiCommand::transport( TransportDirection dir,
 
 	  return -1;
 	}
-      if ((d->ccb.ccb_h.status&CAM_STATUS_MASK) != CAM_REQ_CMP)
+      if ((d->ccb.ccb_h.status&CAM_STATUS_MASK) != CAM_RETQ_CMP)
 	{
 	  k3bDebug() << "(K3bDevice::ScsiCommand) transport failed (3): " << ret << endl;
 	  errno=EIO,-1;

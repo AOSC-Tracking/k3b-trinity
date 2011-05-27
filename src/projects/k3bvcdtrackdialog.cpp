@@ -13,22 +13,22 @@
 * See the file "COPYING" for the exact licensing terms.
 */
 
-// Qt Includes
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qframe.h>
-#include <qgroupbox.h>
-#include <qhbox.h>
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qmultilineedit.h>
-#include <qpixmap.h>
-#include <qradiobutton.h>
-#include <qtable.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+// TQt Includes
+#include <tqbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqframe.h>
+#include <tqgroupbox.h>
+#include <tqhbox.h>
+#include <tqlineedit.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqmultilineedit.h>
+#include <tqpixmap.h>
+#include <tqradiobutton.h>
+#include <tqtable.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 
 // Kde Includes
 #include <kiconloader.h>
@@ -47,9 +47,9 @@
 #include <k3bcutcombobox.h>
 
 
-K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, QPtrList<K3bVcdTrack>& tracks, QPtrList<K3bVcdTrack>& selectedTracks, QWidget* parent, const char* name )
+K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, TQPtrList<K3bVcdTrack>& tracks, TQPtrList<K3bVcdTrack>& selectedTracks, TQWidget* tqparent, const char* name )
         : KDialogBase( KDialogBase::Plain, i18n( "Video Track Properties" ), KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Apply,
-                       KDialogBase::Ok, parent, name )
+                       KDialogBase::Ok, tqparent, name )
 {
     prepareGui();
 
@@ -70,7 +70,7 @@ K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, QPtrList<K3bVcdTrack>& tr
         m_displayFileName->setText( selectedTrack->fileName() );
         m_displayLength->setText( selectedTrack->duration() );
         m_displaySize->setText( KIO::convertSize( selectedTrack->size() ) );
-        m_muxrate->setText( i18n( "%1 bit/s" ).arg( selectedTrack->muxrate() ) );
+        m_muxrate->setText( i18n( "%1 bit/s" ).tqarg( selectedTrack->muxrate() ) );
 
         if ( selectedTrack->isSegment() )
             m_labelMimeType->setPixmap( SmallIcon( "image", KIcon::SizeMedium ) );
@@ -93,7 +93,7 @@ void K3bVcdTrackDialog::slotOk()
 void K3bVcdTrackDialog::setPbcTrack( K3bVcdTrack* selected, K3bCutComboBox* box, int which )
 {
     // TODO: Unset Userdefined on default settings
-    kdDebug() << QString( "K3bVcdTrackDialog::setPbcTrack: currentItem = %1, count = %2" ).arg( box->currentItem() ).arg( m_tracks.count() ) << endl;
+    kdDebug() << TQString( "K3bVcdTrackDialog::setPbcTrack: currentItem = %1, count = %2" ).tqarg( box->currentItem() ).tqarg( m_tracks.count() ) << endl;
 
     int count = m_tracks.count();
 
@@ -142,7 +142,7 @@ void K3bVcdTrackDialog::slotApply()
     selectedTrack->delDefinedNumKey();
 
     if ( m_check_overwritekeys->isChecked() ) {
-        QListViewItemIterator it( m_list_keys );
+        TQListViewItemIterator it( m_list_keys );
         int skiped = 0;
         int startkey = 0;
         while ( it.current() ) {
@@ -158,8 +158,8 @@ void K3bVcdTrackDialog::slotApply()
                     startkey = it.current() ->text( 0 ).toInt();
                 }
 
-                QMap<QString, K3bVcdTrack*>::Iterator mit;
-                mit = m_numkeysmap.find( it.current() ->text( 1 ) );
+                TQMap<TQString, K3bVcdTrack*>::Iterator mit;
+                mit = m_numkeysmap.tqfind( it.current() ->text( 1 ) );
                 if ( mit != m_numkeysmap.end() )
                     if ( mit.data() ) {
                         selectedTrack->setDefinedNumKey( it.current() ->text( 0 ).toInt(), mit.data() );
@@ -198,50 +198,50 @@ void K3bVcdTrackDialog::fillGui()
     fillPbcGui();
 
 
-    QToolTip::add
+    TQToolTip::add
         ( m_pbc_previous, i18n( "May also look like | << on the remote control. " ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_pbc_next, i18n( "May also look like >> | on the remote control." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_pbc_return, i18n( "This key may be mapped to the STOP key." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_pbc_default, i18n( "This key is usually mapped to the > or PLAY key." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_comboAfterTimeout, i18n( "Target to be jumped to on time-out of <wait>." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_check_reactivity, i18n( "Delay reactivity of keys." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_check_pbc, i18n( "Playback control, PBC, is available for Video CD 2.0 and Super Video CD 1.0 disc formats." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_check_usekeys, i18n( "Activate the use of numeric keys." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_check_overwritekeys, i18n( "Overwrite default numeric keys." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_list_keys, i18n( "Numeric keys." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_spin_times, i18n( "Times to repeat the playback of 'play track'." ) );
-    QToolTip::add
+    TQToolTip::add
         ( m_spin_waittime, i18n( "Time in seconds to wait after playback of 'play track'." ) );
 
-    QWhatsThis::add
+    TQWhatsThis::add
         ( m_comboAfterTimeout, i18n( "<p>Target to be jumped to on time-out of <wait>."
                                      "<p>If omitted (and <wait> is not set to an infinite time) one of the targets is selected at random." ) );
-    QWhatsThis::add
+    TQWhatsThis::add
         ( m_check_reactivity, i18n( "<p>When reactivity is set to delayed, it is recommended that the length of the referenced 'play track' is not more than 5 seconds."
                                     "<p>The recommended setting for a play item consisting of one still picture and no audio is to loop once and have a delayed reactivity." ) );
-    QWhatsThis::add
+    TQWhatsThis::add
         ( m_check_pbc, i18n( "<p>Playback control, PBC, is available for Video CD 2.0 and Super Video CD 1.0 disc formats."
                              "<p>PBC allows control of the playback of play items and the possibility of interaction with the user through the remote control or some other input device available." ) );
-    QWhatsThis::add
+    TQWhatsThis::add
         ( m_check_usekeys, i18n( "These are actually pseudo keys, representing the numeric keys 0, 1, ..., 9." ) );
-    QWhatsThis::add
+    TQWhatsThis::add
         ( m_check_overwritekeys, i18n( "<p>If numeric keys enabled, you can overwrite the default settings." ) );
-    QWhatsThis::add
+    TQWhatsThis::add
         ( m_spin_times, i18n( "<p>Times to repeat the playback of 'play track'."
                               "<p>The reactivity attribute controls whether the playback of 'play track' is finished, thus delayed, before executing user triggered action or an immediate jump is performed."
                               "<p>After the specified number of repetitions have completed, the <wait> time begins to count down, unless set to an infinite wait time."
                               "<p>If this element is omitted, a default of `1' is used, i.e. the 'play track' will be displayed once." ) );
-    QWhatsThis::add
+    TQWhatsThis::add
         ( m_spin_waittime, i18n( "Time in seconds to wait after playback of 'play track' before triggering the <timeout> action (unless the user triggers some action before time ran up)." ) );
 
 }
@@ -263,13 +263,13 @@ void K3bVcdTrackDialog::fillPbcGui()
     m_numkeysmap.insert( displayName( selectedTrack ) , selectedTrack );
 
     for ( track = m_tracks.first(); track; track = m_tracks.next() ) {
-        QPixmap pm;
+        TQPixmap pm;
         if ( track->isSegment() )
             pm = SmallIcon( "image" );
         else
             pm = SmallIcon( "video" );
 
-        QString s = displayName( track );
+        TQString s = displayName( track );
         if ( track != selectedTrack )              // donot insert selectedTrack, it was as "ItSelf" inserted to the begin of map
             m_numkeysmap.insert( s, track );
 
@@ -296,8 +296,8 @@ void K3bVcdTrackDialog::fillPbcGui()
     }
 
     // add Event Disabled
-    QPixmap pmDisabled = SmallIcon( "stop" );
-    QString txtDisabled = i18n( "Event Disabled" );
+    TQPixmap pmDisabled = SmallIcon( "stop" );
+    TQString txtDisabled = i18n( "Event Disabled" );
     m_pbc_previous->insertItem( pmDisabled, txtDisabled );
     m_pbc_next->insertItem( pmDisabled, txtDisabled );
     m_pbc_return->insertItem( pmDisabled, txtDisabled );
@@ -305,8 +305,8 @@ void K3bVcdTrackDialog::fillPbcGui()
     m_comboAfterTimeout->insertItem( pmDisabled, txtDisabled );
 
     // add VideoCD End
-    QPixmap pmEnd = SmallIcon( "cdrom_unmount" );
-    QString txtEnd = i18n( "VideoCD END" );
+    TQPixmap pmEnd = SmallIcon( "cdrom_unmount" );
+    TQString txtEnd = i18n( "VideoCD END" );
     m_pbc_previous->insertItem( pmEnd, txtEnd );
     m_pbc_next->insertItem( pmEnd, txtEnd );
     m_pbc_return->insertItem( pmEnd, txtEnd );
@@ -315,7 +315,7 @@ void K3bVcdTrackDialog::fillPbcGui()
     m_numkeysmap.insert( txtEnd, 0L );
 
     for ( int i = 99; i > 0; i-- ) {
-        item = new K3bListViewItem( m_list_keys, QString::number( i ) + " ", "" );
+        item = new K3bListViewItem( m_list_keys, TQString::number( i ) + " ", "" );
         item->setEditor( 1, K3bListViewItem::COMBO , m_numkeysmap.keys() );
     }
 
@@ -363,50 +363,50 @@ void K3bVcdTrackDialog::fillPbcGui()
 
 void K3bVcdTrackDialog::prepareGui()
 {
-    QFrame * frame = plainPage();
+    TQFrame * frame = plainPage();
 
-    QGridLayout* mainLayout = new QGridLayout( frame );
+    TQGridLayout* mainLayout = new TQGridLayout( frame );
     mainLayout->setSpacing( spacingHint() );
     mainLayout->setMargin( 0 );
 
-    m_mainTabbed = new QTabWidget( frame );
+    m_mainTabbed = new TQTabWidget( frame );
 
     ///////////////////////////////////////////////////
     // FILE-INFO BOX
     ///////////////////////////////////////////////////
-    QGroupBox* groupFileInfo = new QGroupBox( 0, Qt::Vertical, i18n( "File Info" ), frame, "groupFileInfo" );
-    groupFileInfo->layout() ->setSpacing( 0 );
-    groupFileInfo->layout() ->setMargin( 0 );
+    TQGroupBox* groupFileInfo = new TQGroupBox( 0, Qt::Vertical, i18n( "File Info" ), frame, "groupFileInfo" );
+    groupFileInfo->tqlayout() ->setSpacing( 0 );
+    groupFileInfo->tqlayout() ->setMargin( 0 );
 
-    QGridLayout* groupFileInfoLayout = new QGridLayout( groupFileInfo->layout() );
-    groupFileInfoLayout->setAlignment( Qt::AlignTop );
+    TQGridLayout* groupFileInfoLayout = new TQGridLayout( groupFileInfo->tqlayout() );
+    groupFileInfoLayout->tqsetAlignment( TQt::AlignTop );
     groupFileInfoLayout->setSpacing( spacingHint() );
     groupFileInfoLayout->setMargin( marginHint() );
 
-    m_labelMimeType = new QLabel( groupFileInfo, "m_labelMimeType" );
+    m_labelMimeType = new TQLabel( groupFileInfo, "m_labelMimeType" );
 
     m_displayFileName = new KCutLabel( groupFileInfo );
     m_displayFileName->setText( i18n( "Filename" ) );
-    m_displayFileName->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
+    m_displayFileName->tqsetAlignment( int( TQLabel::AlignTop | TQLabel::AlignLeft ) );
 
-    QLabel* labelSize = new QLabel( i18n( "Size:" ), groupFileInfo, "labelSize" );
-    QLabel* labelLength = new QLabel( i18n( "Length:" ), groupFileInfo, "labelLength" );
-    QLabel* labelMuxrate = new QLabel( i18n( "Muxrate:" ), groupFileInfo, "labelMuxrate" );
+    TQLabel* labelSize = new TQLabel( i18n( "Size:" ), groupFileInfo, "labelSize" );
+    TQLabel* labelLength = new TQLabel( i18n( "Length:" ), groupFileInfo, "labelLength" );
+    TQLabel* labelMuxrate = new TQLabel( i18n( "Muxrate:" ), groupFileInfo, "labelMuxrate" );
 
-    m_displaySize = new QLabel( groupFileInfo, "m_displaySize" );
+    m_displaySize = new TQLabel( groupFileInfo, "m_displaySize" );
     m_displaySize->setText( "0.0 MB" );
-    m_displaySize->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
+    m_displaySize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
-    m_displayLength = new QLabel( groupFileInfo, "m_displayLength" );
+    m_displayLength = new TQLabel( groupFileInfo, "m_displayLength" );
     m_displayLength->setText( "0:0:0" );
-    m_displayLength->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
+    m_displayLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
-    m_muxrate = new QLabel( groupFileInfo, "m_muxrate" );
-    m_muxrate->setText( i18n( "%1 bit/s" ).arg( 0 ) );
-    m_muxrate->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
+    m_muxrate = new TQLabel( groupFileInfo, "m_muxrate" );
+    m_muxrate->setText( i18n( "%1 bit/s" ).tqarg( 0 ) );
+    m_muxrate->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
-    QFrame* fileInfoLine = new QFrame( groupFileInfo );
-    fileInfoLine->setFrameStyle( QFrame::HLine | QFrame::Sunken );
+    TQFrame* fileInfoLine = new TQFrame( groupFileInfo );
+    fileInfoLine->setFrameStyle( TQFrame::HLine | TQFrame::Sunken );
 
     groupFileInfoLayout->addWidget( m_labelMimeType, 0, 0 );
     groupFileInfoLayout->addMultiCellWidget( m_displayFileName, 0, 1, 1, 1 );
@@ -421,7 +421,7 @@ void K3bVcdTrackDialog::prepareGui()
     groupFileInfoLayout->setRowStretch( 6, 1 );
     groupFileInfoLayout->setColStretch( 1, 1 );
 
-    QFont f( m_displayLength->font() );
+    TQFont f( m_displayLength->font() );
     f.setBold( true );
     m_displayLength->setFont( f );
     m_displaySize->setFont( f );
@@ -440,54 +440,54 @@ void K3bVcdTrackDialog::setupPbcTab()
     // /////////////////////////////////////////////////
     // Playback Control TAB
     // /////////////////////////////////////////////////
-    QWidget * w = new QWidget( m_mainTabbed );
+    TQWidget * w = new TQWidget( m_mainTabbed );
 
-    QGridLayout* grid = new QGridLayout( w );
-    grid->setAlignment( Qt::AlignTop );
+    TQGridLayout* grid = new TQGridLayout( w );
+    grid->tqsetAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    QGroupBox* groupOptions = new QGroupBox( 3, Qt::Vertical, i18n( "Settings" ), w );
-    groupOptions->layout() ->setSpacing( spacingHint() );
-    groupOptions->layout() ->setMargin( marginHint() );
+    TQGroupBox* groupOptions = new TQGroupBox( 3, Qt::Vertical, i18n( "Settings" ), w );
+    groupOptions->tqlayout() ->setSpacing( spacingHint() );
+    groupOptions->tqlayout() ->setMargin( marginHint() );
 
-    m_check_pbc = new QCheckBox( i18n( "Enable playback control (for the whole CD)" ), groupOptions, "m_check_pbc" );
+    m_check_pbc = new TQCheckBox( i18n( "Enable playback control (for the whole CD)" ), groupOptions, "m_check_pbc" );
 
-    m_check_usekeys = new QCheckBox( i18n( "Use numeric keys" ), groupOptions, "m_check_usekeys" );
+    m_check_usekeys = new TQCheckBox( i18n( "Use numeric keys" ), groupOptions, "m_check_usekeys" );
     m_check_usekeys->setEnabled( false );
 
-    m_check_reactivity = new QCheckBox( i18n( "Reactivity delayed to the end of playing track" ), groupOptions, "m_check_reactivity" );
+    m_check_reactivity = new TQCheckBox( i18n( "Reactivity delayed to the end of playing track" ), groupOptions, "m_check_reactivity" );
     m_check_reactivity->setEnabled( false );
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    m_groupPlay = new QGroupBox( 0, Qt::Vertical, i18n( "Playing" ), w );
-    m_groupPlay->layout() ->setSpacing( spacingHint() );
-    m_groupPlay->layout() ->setMargin( marginHint() );
+    m_groupPlay = new TQGroupBox( 0, Qt::Vertical, i18n( "Playing" ), w );
+    m_groupPlay->tqlayout() ->setSpacing( spacingHint() );
+    m_groupPlay->tqlayout() ->setMargin( marginHint() );
 
-    QGridLayout* groupPlayLayout = new QGridLayout( m_groupPlay->layout() );
-    groupPlayLayout->setAlignment( Qt::AlignTop );
+    TQGridLayout* groupPlayLayout = new TQGridLayout( m_groupPlay->tqlayout() );
+    groupPlayLayout->tqsetAlignment( TQt::AlignTop );
 
-    QLabel* labelPlaying = new QLabel( i18n( "Playing track" ) , m_groupPlay, "labelPlaying" );
+    TQLabel* labelPlaying = new TQLabel( i18n( "Playing track" ) , m_groupPlay, "labelPlaying" );
 
-    m_spin_times = new QSpinBox( m_groupPlay, "m_spin_times" );
+    m_spin_times = new TQSpinBox( m_groupPlay, "m_spin_times" );
     m_spin_times->setValue( 1 );
     m_spin_times->setSuffix( i18n( " time(s)" ) );
     m_spin_times->setSpecialValueText( i18n( "forever" ) );
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    m_labelWait = new QLabel( i18n( "then wait" ), m_groupPlay, "m_labelWait" );
-    m_spin_waittime = new QSpinBox( m_groupPlay, "m_spinSeconds" );
+    m_labelWait = new TQLabel( i18n( "then wait" ), m_groupPlay, "m_labelWait" );
+    m_spin_waittime = new TQSpinBox( m_groupPlay, "m_spinSeconds" );
     m_spin_waittime->setMinValue( -1 );
     m_spin_waittime->setValue( 0 );
     // m_spin_waittime->setEnabled( false );
     m_spin_waittime->setSuffix( i18n( " seconds" ) );
     m_spin_waittime->setSpecialValueText( i18n( "infinite" ) );
 
-    m_labelAfterTimeout = new QLabel( i18n( "after timeout playing" ), m_groupPlay, "m_labelTimeout" );
+    m_labelAfterTimeout = new TQLabel( i18n( "after timeout playing" ), m_groupPlay, "m_labelTimeout" );
     // m_labelAfterTimeout->setEnabled( false );
-    m_comboAfterTimeout = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPlay, "m_comboAfterTimeout" );
+    m_comboAfterTimeout = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPlay, "m_comboAfterTimeout" );
     // m_comboAfterTimeout->setEnabled( false );
 
     groupPlayLayout->addWidget( labelPlaying, 1, 0 );
@@ -498,22 +498,22 @@ void K3bVcdTrackDialog::setupPbcTab()
     groupPlayLayout->addMultiCellWidget( m_comboAfterTimeout, 3, 3, 1, 3 );
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    m_groupPbc = new QGroupBox( 0, Qt::Vertical, i18n( "Key Pressed Interaction" ), w );
-    m_groupPbc->layout() ->setSpacing( spacingHint() );
-    m_groupPbc->layout() ->setMargin( marginHint() );
+    m_groupPbc = new TQGroupBox( 0, Qt::Vertical, i18n( "Key Pressed Interaction" ), w );
+    m_groupPbc->tqlayout() ->setSpacing( spacingHint() );
+    m_groupPbc->tqlayout() ->setMargin( marginHint() );
 
-    QGridLayout* groupPbcLayout = new QGridLayout( m_groupPbc->layout() );
-    groupPbcLayout->setAlignment( Qt::AlignTop );
+    TQGridLayout* groupPbcLayout = new TQGridLayout( m_groupPbc->tqlayout() );
+    groupPbcLayout->tqsetAlignment( TQt::AlignTop );
 
-    QLabel* labelPbc_previous = new QLabel( i18n( "Previous:" ), m_groupPbc, "labelPbc_previous" );
-    QLabel* labelPbc_next = new QLabel( i18n( "Next:" ), m_groupPbc, "labelPbc_next" );
-    QLabel* labelPbc_return = new QLabel( i18n( "Return:" ), m_groupPbc, "labelPbc_return" );
-    QLabel* labelPbc_default = new QLabel( i18n( "Default:" ), m_groupPbc, "labelPbc_default" );
+    TQLabel* labelPbc_previous = new TQLabel( i18n( "Previous:" ), m_groupPbc, "labelPbc_previous" );
+    TQLabel* labelPbc_next = new TQLabel( i18n( "Next:" ), m_groupPbc, "labelPbc_next" );
+    TQLabel* labelPbc_return = new TQLabel( i18n( "Return:" ), m_groupPbc, "labelPbc_return" );
+    TQLabel* labelPbc_default = new TQLabel( i18n( "Default:" ), m_groupPbc, "labelPbc_default" );
 
-    m_pbc_previous = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPbc, "m_pbc_previous" );
-    m_pbc_next = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPbc, "m_pbc_next" );
-    m_pbc_return = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPbc, "m_pbc_return" );
-    m_pbc_default = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPbc, "m_pbc_default" );
+    m_pbc_previous = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPbc, "m_pbc_previous" );
+    m_pbc_next = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPbc, "m_pbc_next" );
+    m_pbc_return = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPbc, "m_pbc_return" );
+    m_pbc_default = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPbc, "m_pbc_default" );
 
     groupPbcLayout->addWidget( labelPbc_previous, 1, 0 );
     groupPbcLayout->addMultiCellWidget( m_pbc_previous, 1, 1, 1, 3 );
@@ -539,10 +539,10 @@ void K3bVcdTrackDialog::setupPbcTab()
     m_groupPlay->setEnabled( false );
     m_groupPbc->setEnabled( false );
 
-    connect( m_check_pbc, SIGNAL( toggled( bool ) ), this, SLOT( slotPbcToggled( bool ) ) );
-    connect( m_spin_times, SIGNAL( valueChanged( int ) ), this, SLOT( slotPlayTimeChanged( int ) ) );
-    connect( m_spin_waittime, SIGNAL( valueChanged( int ) ), this, SLOT( slotWaitTimeChanged( int ) ) );
-    connect( m_check_usekeys, SIGNAL( toggled( bool ) ), this, SLOT( slotUseKeysToggled( bool ) ) );
+    connect( m_check_pbc, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotPbcToggled( bool ) ) );
+    connect( m_spin_times, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotPlayTimeChanged( int ) ) );
+    connect( m_spin_waittime, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotWaitTimeChanged( int ) ) );
+    connect( m_check_usekeys, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotUseKeysToggled( bool ) ) );
 }
 
 void K3bVcdTrackDialog::setupPbcKeyTab()
@@ -550,35 +550,35 @@ void K3bVcdTrackDialog::setupPbcKeyTab()
     // /////////////////////////////////////////////////
     // Playback Control Numeric Key's TAB
     // /////////////////////////////////////////////////
-    m_widgetnumkeys = new QWidget( m_mainTabbed );
+    m_widgetnumkeys = new TQWidget( m_mainTabbed );
 
-    QGridLayout* grid = new QGridLayout( m_widgetnumkeys );
-    grid->setAlignment( Qt::AlignTop );
+    TQGridLayout* grid = new TQGridLayout( m_widgetnumkeys );
+    grid->tqsetAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
-    m_groupKey = new QGroupBox( 3, Qt::Vertical, i18n( "Numeric Keys" ), m_widgetnumkeys );
+    m_groupKey = new TQGroupBox( 3, Qt::Vertical, i18n( "Numeric Keys" ), m_widgetnumkeys );
     m_groupKey->setEnabled( false );
-    m_groupKey->layout() ->setSpacing( spacingHint() );
-    m_groupKey->layout() ->setMargin( marginHint() );
+    m_groupKey->tqlayout() ->setSpacing( spacingHint() );
+    m_groupKey->tqlayout() ->setMargin( marginHint() );
 
     m_list_keys = new K3bListView( m_groupKey, "m_list_keys" );
     m_list_keys->setAllColumnsShowFocus( true );
     m_list_keys->setDoubleClickForEdit( false );
-    m_list_keys->setColumnAlignment( 0, Qt::AlignRight );
-    m_list_keys->setSelectionMode( QListView::NoSelection );
+    m_list_keys->setColumnAlignment( 0, TQt::AlignRight );
+    m_list_keys->setSelectionMode( TQListView::NoSelection );
     m_list_keys->setSorting( -1 );
     m_list_keys->addColumn( i18n( "Key" ) );
     m_list_keys->addColumn( i18n( "Playing" ) );
-    m_list_keys->setResizeMode( QListView::LastColumn );
-    m_check_overwritekeys = new QCheckBox( i18n( "Overwrite default assignment" ), m_widgetnumkeys, "m_check_overwritekeys" );
+    m_list_keys->setResizeMode( TQListView::LastColumn );
+    m_check_overwritekeys = new TQCheckBox( i18n( "Overwrite default assignment" ), m_widgetnumkeys, "m_check_overwritekeys" );
 
     grid->addWidget( m_groupKey, 1, 0 );
     grid->addWidget( m_check_overwritekeys, 2, 0 );
 
     m_mainTabbed->addTab( m_widgetnumkeys, i18n( "Numeric Keys" ) );
 
-    connect( m_check_overwritekeys, SIGNAL( toggled( bool ) ), this, SLOT( slotGroupkeyToggled( bool ) ) );
+    connect( m_check_overwritekeys, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotGroupkeyToggled( bool ) ) );
 
 }
 
@@ -587,36 +587,36 @@ void K3bVcdTrackDialog::setupAudioTab()
     // /////////////////////////////////////////////////
     // AUDIO TAB
     // /////////////////////////////////////////////////
-    QWidget * w = new QWidget( m_mainTabbed );
+    TQWidget * w = new TQWidget( m_mainTabbed );
 
-    QGridLayout* grid = new QGridLayout( w );
-    grid->setAlignment( Qt::AlignTop );
+    TQGridLayout* grid = new TQGridLayout( w );
+    grid->tqsetAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
-    QLabel* labelMpegVer_Audio = new QLabel( i18n( "Type:" ), w, "labelMpegVer_Audio" );
-    QLabel* labelRate_Audio = new QLabel( i18n( "Rate:" ), w, "labelRate_Audio" );
-    QLabel* labelSampling_Frequency_Audio = new QLabel( i18n( "Sampling frequency:" ), w, "labelSampling_Frequency_Audio" );
-    QLabel* labelMode_Audio = new QLabel( i18n( "Mode:" ), w, "labelMode_Audio" );
-    QLabel* labelCopyright_Audio = new QLabel( i18n( "Copyright:" ), w, "labelCopyright_Audio" );
+    TQLabel* labelMpegVer_Audio = new TQLabel( i18n( "Type:" ), w, "labelMpegVer_Audio" );
+    TQLabel* labelRate_Audio = new TQLabel( i18n( "Rate:" ), w, "labelRate_Audio" );
+    TQLabel* labelSampling_Frequency_Audio = new TQLabel( i18n( "Sampling frequency:" ), w, "labelSampling_Frequency_Audio" );
+    TQLabel* labelMode_Audio = new TQLabel( i18n( "Mode:" ), w, "labelMode_Audio" );
+    TQLabel* labelCopyright_Audio = new TQLabel( i18n( "Copyright:" ), w, "labelCopyright_Audio" );
 
-    m_mpegver_audio = new QLabel( w, "m_mpegver_audio" );
-    m_rate_audio = new QLabel( w, "m_rate_audio" );
-    m_sampling_frequency_audio = new QLabel( w, "m_sampling_frequency_audio" );
-    m_mode_audio = new QLabel( w, "m_mode_audio" );
-    m_copyright_audio = new QLabel( w, "m_copyright_audio" );
+    m_mpegver_audio = new TQLabel( w, "m_mpegver_audio" );
+    m_rate_audio = new TQLabel( w, "m_rate_audio" );
+    m_sampling_frequency_audio = new TQLabel( w, "m_sampling_frequency_audio" );
+    m_mode_audio = new TQLabel( w, "m_mode_audio" );
+    m_copyright_audio = new TQLabel( w, "m_copyright_audio" );
 
-    m_mpegver_audio->setFrameShape( QLabel::LineEditPanel );
-    m_rate_audio->setFrameShape( QLabel::LineEditPanel );
-    m_sampling_frequency_audio->setFrameShape( QLabel::LineEditPanel );
-    m_mode_audio->setFrameShape( QLabel::LineEditPanel );
-    m_copyright_audio->setFrameShape( QLabel::LineEditPanel );
+    m_mpegver_audio->setFrameShape( TQLabel::LineEditPanel );
+    m_rate_audio->setFrameShape( TQLabel::LineEditPanel );
+    m_sampling_frequency_audio->setFrameShape( TQLabel::LineEditPanel );
+    m_mode_audio->setFrameShape( TQLabel::LineEditPanel );
+    m_copyright_audio->setFrameShape( TQLabel::LineEditPanel );
 
-    m_mpegver_audio->setFrameShadow( QLabel::Sunken );
-    m_rate_audio->setFrameShadow( QLabel::Sunken );
-    m_sampling_frequency_audio->setFrameShadow( QLabel::Sunken );
-    m_mode_audio->setFrameShadow( QLabel::Sunken );
-    m_copyright_audio->setFrameShadow( QLabel::Sunken );
+    m_mpegver_audio->setFrameShadow( TQLabel::Sunken );
+    m_rate_audio->setFrameShadow( TQLabel::Sunken );
+    m_sampling_frequency_audio->setFrameShadow( TQLabel::Sunken );
+    m_mode_audio->setFrameShadow( TQLabel::Sunken );
+    m_copyright_audio->setFrameShadow( TQLabel::Sunken );
 
     grid->addWidget( labelMpegVer_Audio, 1, 0 );
     grid->addMultiCellWidget( m_mpegver_audio, 1, 1, 1, 4 );
@@ -644,40 +644,40 @@ void K3bVcdTrackDialog::setupVideoTab()
     // /////////////////////////////////////////////////
     // VIDEO TAB
     // /////////////////////////////////////////////////
-    QWidget * w = new QWidget( m_mainTabbed );
+    TQWidget * w = new TQWidget( m_mainTabbed );
 
-    QGridLayout* grid = new QGridLayout( w );
-    grid->setAlignment( Qt::AlignTop );
+    TQGridLayout* grid = new TQGridLayout( w );
+    grid->tqsetAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
-    QLabel* labelMpegVer_Video = new QLabel( i18n( "Type:" ), w, "labelMpegVer_Video" );
-    QLabel* labelRate_Video = new QLabel( i18n( "Rate:" ), w, "labelRate_Video" );
-    QLabel* labelChromaFormat_Video = new QLabel( i18n( "Chroma format:" ), w, "labelChromaFormat_Video" );
-    QLabel* labelFormat_Video = new QLabel( i18n( "Video format:" ), w, "labelFormat_Video" );
-    QLabel* labelResolution_Video = new QLabel( i18n( "Resolution:" ), w, "labelSize_Video" );
-    QLabel* labelHighResolution_Video = new QLabel( i18n( "High resolution:" ), w, "labelHighResolution_Video" );
+    TQLabel* labelMpegVer_Video = new TQLabel( i18n( "Type:" ), w, "labelMpegVer_Video" );
+    TQLabel* labelRate_Video = new TQLabel( i18n( "Rate:" ), w, "labelRate_Video" );
+    TQLabel* labelChromaFormat_Video = new TQLabel( i18n( "Chroma format:" ), w, "labelChromaFormat_Video" );
+    TQLabel* labelFormat_Video = new TQLabel( i18n( "Video format:" ), w, "labelFormat_Video" );
+    TQLabel* labelResolution_Video = new TQLabel( i18n( "Resolution:" ), w, "labelSize_Video" );
+    TQLabel* labelHighResolution_Video = new TQLabel( i18n( "High resolution:" ), w, "labelHighResolution_Video" );
 
-    m_mpegver_video = new QLabel( w, "m_mpegver_video" );
-    m_rate_video = new QLabel( w, "m_rate_video" );
-    m_chromaformat_video = new QLabel( w, "m_chromaformat_video" );
-    m_format_video = new QLabel( w, "m_format_video" );
-    m_resolution_video = new QLabel( w, "m_resolution_video" );
-    m_highresolution_video = new QLabel( w, "m_highresolution_video" );
+    m_mpegver_video = new TQLabel( w, "m_mpegver_video" );
+    m_rate_video = new TQLabel( w, "m_rate_video" );
+    m_chromaformat_video = new TQLabel( w, "m_chromaformat_video" );
+    m_format_video = new TQLabel( w, "m_format_video" );
+    m_resolution_video = new TQLabel( w, "m_resolution_video" );
+    m_highresolution_video = new TQLabel( w, "m_highresolution_video" );
 
-    m_mpegver_video->setFrameShape( QLabel::LineEditPanel );
-    m_rate_video->setFrameShape( QLabel::LineEditPanel );
-    m_chromaformat_video->setFrameShape( QLabel::LineEditPanel );
-    m_format_video->setFrameShape( QLabel::LineEditPanel );
-    m_resolution_video->setFrameShape( QLabel::LineEditPanel );
-    m_highresolution_video->setFrameShape( QLabel::LineEditPanel );
+    m_mpegver_video->setFrameShape( TQLabel::LineEditPanel );
+    m_rate_video->setFrameShape( TQLabel::LineEditPanel );
+    m_chromaformat_video->setFrameShape( TQLabel::LineEditPanel );
+    m_format_video->setFrameShape( TQLabel::LineEditPanel );
+    m_resolution_video->setFrameShape( TQLabel::LineEditPanel );
+    m_highresolution_video->setFrameShape( TQLabel::LineEditPanel );
 
-    m_mpegver_video->setFrameShadow( QLabel::Sunken );
-    m_rate_video->setFrameShadow( QLabel::Sunken );
-    m_chromaformat_video->setFrameShadow( QLabel::Sunken );
-    m_format_video->setFrameShadow( QLabel::Sunken );
-    m_resolution_video->setFrameShadow( QLabel::Sunken );
-    m_highresolution_video->setFrameShadow( QLabel::Sunken );
+    m_mpegver_video->setFrameShadow( TQLabel::Sunken );
+    m_rate_video->setFrameShadow( TQLabel::Sunken );
+    m_chromaformat_video->setFrameShadow( TQLabel::Sunken );
+    m_format_video->setFrameShadow( TQLabel::Sunken );
+    m_resolution_video->setFrameShadow( TQLabel::Sunken );
+    m_highresolution_video->setFrameShadow( TQLabel::Sunken );
 
     grid->addWidget( labelMpegVer_Video, 1, 0 );
     grid->addMultiCellWidget( m_mpegver_video, 1, 1, 1, 4 );
@@ -712,17 +712,17 @@ void K3bVcdTrackDialog::setDefinedNumKeys( )
 
     }
 
-    QListViewItemIterator it( m_list_keys );
-    QMap<int, K3bVcdTrack*> definedkeysmap = selectedTrack->DefinedNumKey();
+    TQListViewItemIterator it( m_list_keys );
+    TQMap<int, K3bVcdTrack*> definedkeysmap = selectedTrack->DefinedNumKey();
 
     while ( it.current() ) {
         int itemId = it.current() ->text( 0 ).toInt();
 
-        QMap<int, K3bVcdTrack*>::const_iterator keyit = definedkeysmap.find( itemId );
+        TQMap<int, K3bVcdTrack*>::const_iterator keyit = definedkeysmap.tqfind( itemId );
 
         if ( keyit != definedkeysmap.end() ) {
             if ( keyit.data() ) {
-                if ( m_tracks.findRef( keyit.data() ) >= 0 ) {
+                if ( m_tracks.tqfindRef( keyit.data() ) >= 0 ) {
                     it.current() ->setText( 1 , displayName( keyit.data() ) ) ;
                 } else {
                     it.current() ->setText( 1 , "" ) ;
@@ -738,15 +738,15 @@ void K3bVcdTrackDialog::setDefinedNumKeys( )
     }
 }
 
-QString K3bVcdTrackDialog::displayName( K3bVcdTrack * track )
+TQString K3bVcdTrackDialog::displayName( K3bVcdTrack * track )
 {
     if ( track == m_selectedTracks.first() )
         return i18n( "ItSelf" );
 
     if ( track->isSegment() )
-        return i18n( "Segment-%1 - %2" ).arg( QString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).arg( track->title() );
+        return i18n( "Segment-%1 - %2" ).tqarg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).tqarg( track->title() );
 
-    return i18n( "Sequence-%1 - %2" ).arg( QString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).arg( track->title() );
+    return i18n( "Sequence-%1 - %2" ).tqarg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).tqarg( track->title() );
 }
 
 void K3bVcdTrackDialog::slotPlayTimeChanged( int value )

@@ -16,8 +16,8 @@
 #ifndef _K3B_TOC_FILE_WRITER_H_
 #define _K3B_TOC_FILE_WRITER_H_
 
-#include <qtextstream.h>
-#include <qstringlist.h>
+#include <tqtextstream.h>
+#include <tqstringlist.h>
 
 #include <k3btoc.h>
 #include <k3bcdtext.h>
@@ -31,12 +31,12 @@ class K3bTocFileWriter
  public:
   K3bTocFileWriter();
 
-  bool save( QTextStream& );
-  bool save( const QString& filename );
+  bool save( TQTextStream& );
+  bool save( const TQString& filename );
 
   void setData( const K3bDevice::Toc& toc ) { m_toc = toc; }
   void setCdText( const K3bDevice::CdText& text ) { m_cdText = text; }
-  void setFilenames( const QStringList& names ) { m_filenames = names; }
+  void setFilenames( const TQStringList& names ) { m_filenames = names; }
   void setHideFirstTrack( bool b ) { m_hideFirstTrack = b; }
 
   /**
@@ -45,16 +45,16 @@ class K3bTocFileWriter
   void setSession( int s ) { m_sessionToWrite = s; }
 
  private:
-  void writeHeader( QTextStream& t );
-  void writeGlobalCdText( QTextStream& t );
-  void writeTrackCdText( const K3bDevice::TrackCdText& track, QTextStream& t );
-  void writeTrack( unsigned int index, const K3b::Msf& offset, QTextStream& t );
-  void writeDataSource( unsigned int trackNumber, QTextStream& t );
+  void writeHeader( TQTextStream& t );
+  void writeGlobalCdText( TQTextStream& t );
+  void writeTrackCdText( const K3bDevice::TrackCdText& track, TQTextStream& t );
+  void writeTrack( unsigned int index, const K3b::Msf& offset, TQTextStream& t );
+  void writeDataSource( unsigned int trackNumber, TQTextStream& t );
   bool readFromStdin() const;
 
   K3bDevice::Toc m_toc;
   K3bDevice::CdText m_cdText;
-  QStringList m_filenames;
+  TQStringList m_filenames;
   bool m_hideFirstTrack;
   int m_sessionToWrite;
 };

@@ -31,30 +31,30 @@ class K3bAudioProjectInterface : public K3bProjectInterface
 
  k_dcop:
   int trackCount() const;
-  QString title() const;
-  QString artist() const;
-  QString trackTitle( int trackNum ) const;
-  QString trackArtist( int trackNum ) const;
+  TQString title() const;
+  TQString artist() const;
+  TQString trackTitle( int trackNum ) const;
+  TQString trackArtist( int trackNum ) const;
   
   /**
    * Set the global CD-Text title field.
    */
-  void setTitle( const QString& title );
+  void setTitle( const TQString& title );
 
   /**
    * Set the global CD-Text artist field.
    */
-  void setArtist( const QString& artist );
+  void setArtist( const TQString& artist );
 
   /**
    * Set the track CD-Text title field.
    */
-  void setTrackTitle( int trackNum, const QString& title );
+  void setTrackTitle( int trackNum, const TQString& title );
 
   /**
    * Set the track CD-Text artist field.
    */
-  void setTrackArtist( int trackNum, const QString& artist );
+  void setTrackArtist( int trackNum, const TQString& artist );
 
  private:
   K3bAudioDoc* m_audioDoc;

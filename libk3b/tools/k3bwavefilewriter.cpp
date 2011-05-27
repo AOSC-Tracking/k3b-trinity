@@ -29,7 +29,7 @@ K3bWaveFileWriter::~K3bWaveFileWriter()
 }
 
 
-bool K3bWaveFileWriter::open( const QString& filename )
+bool K3bWaveFileWriter::open( const TQString& filename )
 {
   close();
 
@@ -65,7 +65,7 @@ void K3bWaveFileWriter::close()
     }
   }
 
-  m_filename = QString::null;
+  m_filename = TQString();
 }
 
 
@@ -75,7 +75,7 @@ bool K3bWaveFileWriter::isOpen()
 }
 
 
-const QString& K3bWaveFileWriter::filename() const 
+const TQString& K3bWaveFileWriter::filename() const 
 {
   return m_filename;
 }
@@ -135,8 +135,8 @@ void K3bWaveFileWriter::updateHeader()
 
     m_outputFile.flush();
 
-    Q_INT32 dataSize( m_outputFile.at() - 44 );
-    Q_INT32 wavSize(dataSize + 44 - 8);
+    TQ_INT32 dataSize( m_outputFile.at() - 44 );
+    TQ_INT32 wavSize(dataSize + 44 - 8);
     char c[4];
 
     // jump to the wavSize position in the header

@@ -17,29 +17,29 @@
 #ifndef _K3B_INT_VALIDATOR_H_
 #define _K3B_INT_VALIDATOR_H_
 
-#include <qvalidator.h>
+#include <tqvalidator.h>
 #include "k3b_export.h"
-class QWidget;
-class QString;
+class TQWidget;
+class TQString;
 
 /**
- * QValidator for integers.
+ * TQValidator for integers.
  *
- * It differs from QIntValidator and KIntValidator in the fact that
+ * It differs from TQIntValidator and KIntValidator in the fact that
  * it also accepts hex numbers prefixed with 0x.
  */
-class LIBK3B_EXPORT K3bIntValidator : public QValidator
+class LIBK3B_EXPORT K3bIntValidator : public TQValidator
 {
  public:
   /**
    * Constuctor.  Also sets the base value.
    */
-  K3bIntValidator ( QWidget * parent, const char * name = 0 );
+  K3bIntValidator ( TQWidget * tqparent, const char * name = 0 );
 
   /**
    * Constructor.  Also sets the minimum, maximum, and numeric base values.
    */
-  K3bIntValidator ( int bottom, int top, QWidget * parent, const char * name = 0 );
+  K3bIntValidator ( int bottom, int top, TQWidget * tqparent, const char * name = 0 );
 
   /**
    * Destructs the validator.
@@ -49,12 +49,12 @@ class LIBK3B_EXPORT K3bIntValidator : public QValidator
   /**
    * Validates the text, and return the result.  Does not modify the parameters.
    */
-  virtual State validate ( QString &, int & ) const;
+  virtual State validate ( TQString &, int & ) const;
 
   /**
    * Fixes the text if possible, providing a valid string.  The parameter may be modified.
    */
-  virtual void fixup ( QString & ) const;
+  virtual void fixup ( TQString & ) const;
 
   /**
    * Sets the minimum and maximum values allowed.
@@ -74,7 +74,7 @@ class LIBK3B_EXPORT K3bIntValidator : public QValidator
   /**
    * If the string starts with 0x it's assumed to be a hex number.
    */
-  static int toInt( const QString&, bool* ok = 0 );
+  static int toInt( const TQString&, bool* ok = 0 );
 
  private:
   int m_min;

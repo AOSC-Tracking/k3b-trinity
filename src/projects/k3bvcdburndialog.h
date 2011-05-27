@@ -17,17 +17,17 @@
 #define K3BVCDBURNDIALOG_H
 
 #include "k3bprojectburndialog.h"
-#include <qmultilineedit.h>
+#include <tqmultilineedit.h>
 
-class QCheckBox;
-class QGroupBox;
-class QButtonGroup;
-class QSpinBox;
-class QRadioButton;
-class QLabel;
-class QLineEdit;
-class QMultiLineEdit;
-class QToolButton;
+class TQCheckBox;
+class TQGroupBox;
+class TQButtonGroup;
+class TQSpinBox;
+class TQRadioButton;
+class TQLabel;
+class TQLineEdit;
+class TQMultiLineEdit;
+class TQToolButton;
 class K3bWriterSelectionWidget;
 class K3bTempDirSelectionWidget;
 class K3bVcdDoc;
@@ -36,9 +36,10 @@ class K3bVcdOptions;
 class K3bVcdBurnDialog : public K3bProjectBurnDialog
 {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        K3bVcdBurnDialog( K3bVcdDoc* doc, QWidget *parent = 0, const char *name = 0, bool modal = true );
+        K3bVcdBurnDialog( K3bVcdDoc* doc, TQWidget *tqparent = 0, const char *name = 0, bool modal = true );
         ~K3bVcdBurnDialog();
 
         K3bVcdDoc* vcdDoc() const
@@ -61,62 +62,62 @@ class K3bVcdBurnDialog : public K3bProjectBurnDialog
         // the video-cd-tab
         // -----------------------------------------------------------
 
-        QButtonGroup* m_groupVcdFormat;
-        QRadioButton* m_radioVcd11;
-        QRadioButton* m_radioVcd20;
-        QRadioButton* m_radioSvcd10;
-        QRadioButton* m_radioHqVcd10;
+        TQButtonGroup* m_groupVcdFormat;
+        TQRadioButton* m_radioVcd11;
+        TQRadioButton* m_radioVcd20;
+        TQRadioButton* m_radioSvcd10;
+        TQRadioButton* m_radioHqVcd10;
 
-        QGroupBox* m_groupOptions;
-        QCheckBox* m_checkAutoDetect;
-        QCheckBox* m_checkNonCompliant;
-        QCheckBox* m_checkVCD30interpretation;
-        QCheckBox* m_check2336;
+        TQGroupBox* m_groupOptions;
+        TQCheckBox* m_checkAutoDetect;
+        TQCheckBox* m_checkNonCompliant;
+        TQCheckBox* m_checkVCD30interpretation;
+        TQCheckBox* m_check2336;
 
         // CD-i
-        QGroupBox* m_groupCdi;
-        QCheckBox* m_checkCdiSupport;
-        QMultiLineEdit* m_editCdiCfg;
+        TQGroupBox* m_groupCdi;
+        TQCheckBox* m_checkCdiSupport;
+        TQMultiLineEdit* m_editCdiCfg;
 
 
         // -----------------------------------------------------------
         // the video-label-tab
         // -----------------------------------------------------------
 
-        QLineEdit* m_editVolumeId;
-        QLineEdit* m_editPublisher;
-        QLineEdit* m_editAlbumId;
+        TQLineEdit* m_editVolumeId;
+        TQLineEdit* m_editPublisher;
+        TQLineEdit* m_editAlbumId;
 
-        QSpinBox* m_spinVolumeCount;
-        QSpinBox* m_spinVolumeNumber;
+        TQSpinBox* m_spinVolumeCount;
+        TQSpinBox* m_spinVolumeNumber;
 
         // -----------------------------------------------------------
         // the advanced-tab
         // -----------------------------------------------------------
 
-        QGroupBox* m_groupGeneric;
-        QGroupBox* m_groupGaps;
-        QGroupBox* m_groupMisc;
+        TQGroupBox* m_groupGeneric;
+        TQGroupBox* m_groupGaps;
+        TQGroupBox* m_groupMisc;
 
-        QCheckBox* m_checkPbc;
-        QCheckBox* m_checkSegmentFolder;
-        QCheckBox* m_checkRelaxedAps;
-        QCheckBox* m_checkUpdateScanOffsets;
-        QCheckBox* m_checkGaps;
+        TQCheckBox* m_checkPbc;
+        TQCheckBox* m_checkSegmentFolder;
+        TQCheckBox* m_checkRelaxedAps;
+        TQCheckBox* m_checkUpdateScanOffsets;
+        TQCheckBox* m_checkGaps;
 
-        QSpinBox* m_spinRestriction;
-        QSpinBox* m_spinPreGapLeadout;
-        QSpinBox* m_spinPreGapTrack;
-        QSpinBox* m_spinFrontMarginTrack;
-        QSpinBox* m_spinRearMarginTrack;
-        QSpinBox* m_spinFrontMarginTrackSVCD;
-        QSpinBox* m_spinRearMarginTrackSVCD;
+        TQSpinBox* m_spinRestriction;
+        TQSpinBox* m_spinPreGapLeadout;
+        TQSpinBox* m_spinPreGapTrack;
+        TQSpinBox* m_spinFrontMarginTrack;
+        TQSpinBox* m_spinRearMarginTrack;
+        TQSpinBox* m_spinFrontMarginTrackSVCD;
+        TQSpinBox* m_spinRearMarginTrackSVCD;
 
-        QLabel* m_labelRestriction;
-        QLabel* m_labelPreGapLeadout;
-        QLabel* m_labelPreGapTrack;
-        QLabel* m_labelFrontMarginTrack;
-        QLabel* m_labelRearMarginTrack;
+        TQLabel* m_labelRestriction;
+        TQLabel* m_labelPreGapLeadout;
+        TQLabel* m_labelPreGapTrack;
+        TQLabel* m_labelFrontMarginTrack;
+        TQLabel* m_labelRearMarginTrack;
 
         // -----------------------------------------------------------
 

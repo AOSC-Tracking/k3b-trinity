@@ -16,7 +16,7 @@
 #ifndef _K3B_MKISOfS_HANDLER_H_
 #define _K3B_MKISOfS_HANDLER_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 
 class K3bExternalBin;
 
@@ -45,13 +45,13 @@ class K3bMkisofsHandler
    */
   const K3bExternalBin* initMkisofs();
 
-  void parseMkisofsOutput( const QString& line );
+  void parseMkisofsOutput( const TQString& line );
 
   /**
    * Used internally by handleMkisofsOutput.
    * May be used in case handleMkisofsOutput is not sufficient.
    */
-  int parseMkisofsProgress( const QString& line );
+  int parseMkisofsProgress( const TQString& line );
 
   /**
    * Called by handleMkisofsOutput
@@ -63,7 +63,7 @@ class K3bMkisofsHandler
    *
    * Uses K3bJob::MessageType
    */
-  virtual void handleMkisofsInfoMessage( const QString&, int ) = 0;
+  virtual void handleMkisofsInfoMessage( const TQString&, int ) = 0;
 
  private:
   class Private;

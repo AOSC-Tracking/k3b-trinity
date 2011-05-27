@@ -28,9 +28,9 @@
 #include <klocale.h>
 #include <kconfig.h>
 
-#include <qregexp.h>
-#include <qvaluelist.h>
-#include <qstringlist.h>
+#include <tqregexp.h>
+#include <tqvaluelist.h>
+#include <tqstringlist.h>
 
 
 
@@ -60,8 +60,8 @@ public:
 
 
 
-K3bReadcdReader::K3bReadcdReader( K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bJob( jh, parent, name ),
+K3bReadcdReader::K3bReadcdReader( K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bJob( jh, tqparent, name ),
     m_noCorr(false),
     m_clone(false),
     m_noError(false),
@@ -104,7 +104,7 @@ void K3bReadcdReader::start()
   // the first thing to do is to check for readcd
   d->readcdBinObject = k3bcore->externalBinManager()->binObject( "readcd" );
   if( !d->readcdBinObject ) {
-    emit infoMessage( i18n("Could not find %1 executable.").arg("readcd"), ERROR );
+    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("readcd"), ERROR );
     jobFinished(false);
     return;
   }
@@ -116,11 +116,11 @@ void K3bReadcdReader::start()
     if( !d->readcdBinObject->hasFeature( "clone" ) ) {
       // search all readcd installations
       K3bExternalProgram* readcdProgram = k3bcore->externalBinManager()->program( "readcd" );
-      const QPtrList<K3bExternalBin>& readcdBins = readcdProgram->bins();
-      for( QPtrListIterator<K3bExternalBin> it( readcdBins ); it.current(); ++it ) {
+      const TQPtrList<K3bExternalBin>& readcdBins = readcdProgram->bins();
+      for( TQPtrListIterator<K3bExternalBin> it( readcdBins ); it.current(); ++it ) {
 	if( it.current()->hasFeature( "clone" ) ) {
 	  d->readcdBinObject = it.current();
-	  emit infoMessage( i18n("Using readcd %1 instead of default version for clone support.").arg(d->readcdBinObject->version), INFO );
+	  emit infoMessage( i18n("Using readcd %1 instead of default version for clone support.").tqarg(d->readcdBinObject->version), INFO );
 	  foundCloneSupport = true;
 	  break;
 	}
@@ -138,8 +138,8 @@ void K3bReadcdReader::start()
   // create the commandline
   delete d->process;
   d->process = new K3bProcess();
-  connect( d->process, SIGNAL(stderrLine(const QString&)), this, SLOT(slotStdLine(const QString&)) );
-  connect( d->process, SIGNAL(processExited(KProcess*)), this, SLOT(slotProcessExited(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
+  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
 
 
   *d->process << d->readcdBinObject;
@@ -148,10 +148,10 @@ void K3bReadcdReader::start()
   *d->process << "-v";
 
   // Again we assume the device to be set!
-  *d->process << QString("dev=%1").arg(K3b::externalBinDeviceParameter(m_readDevice, 
+  *d->process << TQString("dev=%1").tqarg(K3b::externalBinDeviceParameter(m_readDevice, 
 									      d->readcdBinObject));
   if( m_speed > 0 )
-    *d->process << QString("speed=%1").arg(m_speed);
+    *d->process << TQString("speed=%1").tqarg(m_speed);
 
 
   // output
@@ -160,8 +160,8 @@ void K3bReadcdReader::start()
     d->process->dupStdout( d->fdToWriteTo );
   }
   else {
-    emit newTask( i18n("Writing image to %1.").arg(m_imagePath) );
-    emit infoMessage( i18n("Writing image to %1.").arg(m_imagePath), INFO );
+    emit newTask( i18n("Writing image to %1.").tqarg(m_imagePath) );
+    emit infoMessage( i18n("Writing image to %1.").tqarg(m_imagePath), INFO );
     *d->process << "f=" + m_imagePath;
   }
 
@@ -177,25 +177,25 @@ void K3bReadcdReader::start()
   if( m_c2Scan )
     *d->process << "-c2scan";
 
-  *d->process << QString("retries=%1").arg(m_retries);
+  *d->process << TQString("retries=%1").tqarg(m_retries);
 
   // readcd does not read the last sector specified
   if( d->firstSector < d->lastSector )
-    *d->process << QString("sectors=%1-%2").arg(d->firstSector.lba()).arg(d->lastSector.lba()+1);
+    *d->process << TQString("sectors=%1-%2").tqarg(d->firstSector.lba()).tqarg(d->lastSector.lba()+1);
 
   // Joerg sais it is a Linux kernel bug, anyway, with the default value it does not work
   *d->process << "ts=128k";
 
   // additional user parameters from config
-  const QStringList& params = d->readcdBinObject->userParameters();
-  for( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+  const TQStringList& params = d->readcdBinObject->userParameters();
+  for( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
     *d->process << *it;
 
 
   kdDebug() << "***** readcd parameters:\n";
-  const QValueList<QCString>& args = d->process->args();
-  QString s;
-  for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+  const TQValueList<TQCString>& args = d->process->args();
+  TQString s;
+  for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
     s += *it + " ";
   }
   kdDebug() << s << endl << flush;
@@ -225,7 +225,7 @@ void K3bReadcdReader::cancel()
 }
 
 
-void K3bReadcdReader::slotStdLine( const QString& line )
+void K3bReadcdReader::slotStdLine( const TQString& line )
 {
   emit debuggingOutput( "readcd", line );
 
@@ -243,7 +243,7 @@ void K3bReadcdReader::slotStdLine( const QString& line )
 
   else if( line.startsWith( "addr:" ) ) {
     bool ok;
-    long currentReadBlock = line.mid( 6, line.find("cnt")-7 ).toInt(&ok);
+    long currentReadBlock = line.mid( 6, line.tqfind("cnt")-7 ).toInt(&ok);
     if( d->firstSector < d->lastSector )
       currentReadBlock -= d->firstSector.lba();
     if( ok ) {
@@ -260,41 +260,41 @@ void K3bReadcdReader::slotStdLine( const QString& line )
     }
     else
       kdError() << "(K3bReadcdReader) currentReadBlock parsing error in line: " 
-		<< line.mid( 6, line.find("cnt")-7 ) << endl;
+		<< line.mid( 6, line.tqfind("cnt")-7 ) << endl;
   }
 
-  else if( line.contains("Cannot read source disk") ) {
+  else if( line.tqcontains("Cannot read source disk") ) {
     emit infoMessage( i18n("Cannot read source disk."), ERROR );
   }
 
-  else if( (pos = line.find("Retrying from sector")) >= 0 ) {
+  else if( (pos = line.tqfind("Retrying from sector")) >= 0 ) {
     // parse the sector
     pos += 21;
     bool ok;
-    int problemSector = line.mid( pos, line.find( QRegExp("\\D"), pos )-pos ).toInt(&ok);
+    int problemSector = line.mid( pos, line.tqfind( TQRegExp("\\D"), pos )-pos ).toInt(&ok);
     if( !ok ) {
       kdError() << "(K3bReadcdReader) problemSector parsing error in line: " 
-		<< line.mid( pos, line.find( QRegExp("\\D"), pos )-pos ) << endl;
+		<< line.mid( pos, line.tqfind( TQRegExp("\\D"), pos )-pos ) << endl;
     }
-    emit infoMessage( i18n("Retrying from sector %1.").arg(problemSector), INFO );
+    emit infoMessage( i18n("Retrying from sector %1.").tqarg(problemSector), INFO );
   }
 
-  else if( (pos = line.find("Error on sector")) >= 0 ) {
+  else if( (pos = line.tqfind("Error on sector")) >= 0 ) {
     d->unreadableBlocks++;
 
     pos += 16;
     bool ok;
-    int problemSector = line.mid( pos, line.find( QRegExp("\\D"), pos )-pos ).toInt(&ok);
+    int problemSector = line.mid( pos, line.tqfind( TQRegExp("\\D"), pos )-pos ).toInt(&ok);
     if( !ok ) {
       kdError() << "(K3bReadcdReader) problemSector parsing error in line: " 
-		<< line.mid( pos, line.find( QRegExp("\\D"), pos )-pos ) << endl;
+		<< line.mid( pos, line.tqfind( TQRegExp("\\D"), pos )-pos ) << endl;
     }
 
-    if( line.contains( "not corrected") ) {
-      emit infoMessage( i18n("Uncorrected error in sector %1").arg(problemSector), ERROR );
+    if( line.tqcontains( "not corrected") ) {
+      emit infoMessage( i18n("Uncorrected error in sector %1").tqarg(problemSector), ERROR );
     }
     else {
-      emit infoMessage( i18n("Corrected error in sector %1").arg(problemSector), ERROR );
+      emit infoMessage( i18n("Corrected error in sector %1").tqarg(problemSector), ERROR );
     }
   }
 
@@ -314,7 +314,7 @@ void K3bReadcdReader::slotProcessExited( KProcess* p )
       jobFinished( true );
     }
     else {
-      emit infoMessage( i18n("%1 returned error: %2").arg("Readcd").arg(p->exitStatus()), ERROR );
+      emit infoMessage( i18n("%1 returned error: %2").tqarg("Readcd").tqarg(p->exitStatus()), ERROR );
       jobFinished( false );
     }
   }

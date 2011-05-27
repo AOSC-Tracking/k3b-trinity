@@ -38,8 +38,8 @@
 #include <k3bprojectplugin.h>
 
 // QT-includes
-#include <qlayout.h>
-#include <qstring.h>
+#include <tqlayout.h>
+#include <tqstring.h>
 
 // KDE-includes
 #include <klocale.h>
@@ -49,8 +49,8 @@
 
 
 
-K3bAudioView::K3bAudioView( K3bAudioDoc* pDoc, QWidget* parent, const char *name )
-  : K3bView( pDoc, parent, name )
+K3bAudioView::K3bAudioView( K3bAudioDoc* pDoc, TQWidget* tqparent, const char *name )
+  : K3bView( pDoc, tqparent, name )
 {
   m_doc = pDoc;
 
@@ -59,7 +59,7 @@ K3bAudioView::K3bAudioView( K3bAudioDoc* pDoc, QWidget* parent, const char *name
   fillStatusDisplay()->showTime();
 
   // add button for the audio conversion
-  KAction* conversionAction = new KAction( i18n("Convert Tracks"), "redo", 0, this, SLOT(slotAudioConversion()), 
+  KAction* conversionAction = new KAction( i18n("Convert Tracks"), "redo", 0, TQT_TQOBJECT(this), TQT_SLOT(slotAudioConversion()), 
 					   actionCollection(), "project_audio_convert" );
   conversionAction->setToolTip( i18n("Convert audio tracks to other audio formats." ) );
 
@@ -115,9 +115,9 @@ void K3bAudioView::init()
 }
 
 
-K3bProjectBurnDialog* K3bAudioView::newBurnDialog( QWidget* parent, const char* name )
+K3bProjectBurnDialog* K3bAudioView::newBurnDialog( TQWidget* tqparent, const char* name )
 {
-  return new K3bAudioBurnDialog( m_doc, parent, name, true );
+  return new K3bAudioBurnDialog( m_doc, tqparent, name, true );
 }
 
 

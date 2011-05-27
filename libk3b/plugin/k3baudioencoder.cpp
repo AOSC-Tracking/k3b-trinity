@@ -15,7 +15,7 @@
 
 #include "k3baudioencoder.h"
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <kdebug.h>
 
@@ -27,15 +27,15 @@ public:
     : outputFile(0) {
   }
 
-  QFile* outputFile;
-  QString outputFilename;
+  TQFile* outputFile;
+  TQString outputFilename;
 
-  QString lastErrorString;
+  TQString lastErrorString;
 };
 
 
-K3bAudioEncoder::K3bAudioEncoder( QObject* parent, const char* name )
-  : K3bPlugin( parent, name )
+K3bAudioEncoder::K3bAudioEncoder( TQObject* tqparent, const char* name )
+  : K3bPlugin( tqparent, name )
 {
   d = new Private();
 }
@@ -48,11 +48,11 @@ K3bAudioEncoder::~K3bAudioEncoder()
 }
 
 
-bool K3bAudioEncoder::openFile( const QString& ext, const QString& filename, const K3b::Msf& length )
+bool K3bAudioEncoder::openFile( const TQString& ext, const TQString& filename, const K3b::Msf& length )
 {
   closeFile();
 
-  d->outputFile = new QFile( filename );
+  d->outputFile = new TQFile( filename );
   if( d->outputFile->open( IO_WriteOnly ) ) {
     return initEncoder( ext, length );
   }
@@ -81,35 +81,35 @@ void K3bAudioEncoder::closeFile()
       d->outputFile->close();
     delete d->outputFile;
     d->outputFile = 0;
-    d->outputFilename = QString::null;
+    d->outputFilename = TQString();
   }
 }
 
 
-const QString& K3bAudioEncoder::filename() const
+const TQString& K3bAudioEncoder::filename() const
 {
   if( d->outputFile )
     return d->outputFilename;
   else
-    return QString::null;
+    return TQString();
 }
 
 
 
-void K3bAudioEncoder::setMetaData( K3bAudioEncoder::MetaDataField f, const QString& data )
+void K3bAudioEncoder::setMetaData( K3bAudioEncoder::MetaDataField f, const TQString& data )
 {
   if( !data.isEmpty() )
     return setMetaDataInternal( f, data );
 }
 
 
-long K3bAudioEncoder::encode( const char* data, Q_ULONG len )
+long K3bAudioEncoder::encode( const char* data, TQ_ULONG len )
 {
   return encodeInternal( data, len );
 }
 
 
-bool K3bAudioEncoder::initEncoder( const QString& ext, const K3b::Msf& length )
+bool K3bAudioEncoder::initEncoder( const TQString& ext, const K3b::Msf& length )
 {
   if( !isOpen() ) {
     kdDebug() << "(K3bAudioEncoder) call to initEncoder without openFile!" << endl;
@@ -120,7 +120,7 @@ bool K3bAudioEncoder::initEncoder( const QString& ext, const K3b::Msf& length )
 }
 
 
-Q_LONG K3bAudioEncoder::writeData( const char* data, Q_ULONG len )
+TQ_LONG K3bAudioEncoder::writeData( const char* data, TQ_ULONG len )
 {
   if( d->outputFile ) {
     return d->outputFile->writeBlock( data, len );
@@ -132,14 +132,14 @@ Q_LONG K3bAudioEncoder::writeData( const char* data, Q_ULONG len )
 }
 
 
-bool K3bAudioEncoder::initEncoderInternal( const QString&, const K3b::Msf& )
+bool K3bAudioEncoder::initEncoderInternal( const TQString&, const K3b::Msf& )
 {
   // do nothing
   return true;
 }
 
 
-void K3bAudioEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField, const QString& )
+void K3bAudioEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField, const TQString& )
 {
   // do nothing
 }
@@ -158,13 +158,13 @@ void K3bAudioEncoder::finishEncoderInternal()
 }
 
 
-void K3bAudioEncoder::setLastError( const QString& e )
+void K3bAudioEncoder::setLastError( const TQString& e )
 {
   d->lastErrorString = e;
 }
 
 
-QString K3bAudioEncoder::lastErrorString() const
+TQString K3bAudioEncoder::lastErrorString() const
 {
   if( d->lastErrorString.isEmpty() )
     return i18n("An unknown error occurred.");

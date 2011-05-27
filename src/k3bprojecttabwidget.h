@@ -17,7 +17,7 @@
 #ifndef K3BPROJECTTABWIDGET_H
 #define K3BPROJECTTABWIDGET_H
 
-#include <qtabwidget.h>
+#include <tqtabwidget.h>
 #include <kurl.h>
 
 class KAction;
@@ -31,38 +31,39 @@ class K3bDoc;
  *
  * @author Sebastian Trueg
  */
-class K3bProjectTabWidget : public QTabWidget
+class K3bProjectTabWidget : public TQTabWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bProjectTabWidget( QWidget *parent = 0, const char *name = 0, WFlags = 0 );
+  K3bProjectTabWidget( TQWidget *tqparent = 0, const char *name = 0, WFlags = 0 );
   ~K3bProjectTabWidget();
 
   void insertTab( K3bDoc* );
   
-  void addTab( QWidget * child, const QString & label );
-  void addTab( QWidget * child, const QIconSet & iconset, const QString & label );
-  void addTab( QWidget * child, QTab * tab );
-  void insertTab( QWidget * child, const QString & label, int index = -1 );
-  void insertTab( QWidget * child, const QIconSet & iconset, const QString & label, int index = -1 );
-  void insertTab( QWidget * child, QTab * tab, int index = -1 );
+  void addTab( TQWidget * child, const TQString & label );
+  void addTab( TQWidget * child, const TQIconSet & iconset, const TQString & label );
+  void addTab( TQWidget * child, TQTab * tab );
+  void insertTab( TQWidget * child, const TQString & label, int index = -1 );
+  void insertTab( TQWidget * child, const TQIconSet & iconset, const TQString & label, int index = -1 );
+  void insertTab( TQWidget * child, TQTab * tab, int index = -1 );
 
   /**
    * \return the project for the tab at position \p pos or 0 in case the tab is
    * not a project tab.
    */
-  K3bDoc* projectAt( const QPoint& pos ) const;
+  K3bDoc* projectAt( const TQPoint& pos ) const;
 
   /**
    * inserts the given action into the popup menu for the tabs
    */
   void insertAction( KAction* );
 
-  bool eventFilter( QObject* o, QEvent* e );
+  bool eventFilter( TQObject* o, TQEvent* e );
 
  public slots:
-  void removePage( QWidget* );
+  void removePage( TQWidget* );
 
  private slots:
   void slotDocChanged( K3bDoc* );
@@ -72,7 +73,7 @@ class K3bProjectTabWidget : public QTabWidget
   KActionMenu* m_projectActionMenu;
 
   class ProjectData;
-  QMap<K3bDoc*, ProjectData> m_projectDataMap;
+  TQMap<K3bDoc*, ProjectData> m_projectDataMap;
 };
 
 #endif

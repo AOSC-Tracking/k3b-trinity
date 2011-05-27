@@ -47,19 +47,19 @@ K3bAudioFile::~K3bAudioFile()
 }
 
 
-QString K3bAudioFile::type() const
+TQString K3bAudioFile::type() const
 {
   return m_decoder->fileType();
 }
 
 
-QString K3bAudioFile::sourceComment() const
+TQString K3bAudioFile::sourceComment() const
 {
   return m_decoder->filename().section( "/", -1 );
 }
 
 
-const QString& K3bAudioFile::filename() const
+const TQString& K3bAudioFile::filename() const
 {
   return m_decoder->filename();
 }

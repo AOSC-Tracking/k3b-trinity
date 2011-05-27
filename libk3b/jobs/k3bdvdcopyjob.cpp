@@ -36,9 +36,9 @@
 #include <klocale.h>
 #include <kio/global.h>
 
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qapplication.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqapplication.h>
 
 
 class K3bDvdCopyJob::Private
@@ -83,8 +83,8 @@ public:
 };
 
 
-K3bDvdCopyJob::K3bDvdCopyJob( K3bJobHandler* hdl, QObject* parent, const char* name )
-  : K3bBurnJob( hdl, parent, name ),
+K3bDvdCopyJob::K3bDvdCopyJob( K3bJobHandler* hdl, TQObject* tqparent, const char* name )
+  : K3bBurnJob( hdl, tqparent, name ),
     m_writerDevice(0),
     m_readerDevice(0),
     m_onTheFly(false),
@@ -122,7 +122,7 @@ void K3bDvdCopyJob::start()
       k3bcore->externalBinManager()->binObject( "growisofs" )->version < K3bVersion( 5, 12 ) ) {
     m_onTheFly = false;
     emit infoMessage( i18n("K3b does not support writing on-the-fly with growisofs %1.")
-		      .arg(k3bcore->externalBinManager()->binObject( "growisofs" )->version), ERROR );
+		      .tqarg(k3bcore->externalBinManager()->binObject( "growisofs" )->version), ERROR );
     emit infoMessage( i18n("Disabling on-the-fly writing."), INFO );
   }
 
@@ -141,9 +141,9 @@ void K3bDvdCopyJob::start()
   emit newSubTask( i18n("Checking source medium") );
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::DISKINFO, m_readerDevice ),
-           SIGNAL(finished(K3bDevice::DeviceHandler*)),
+           TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
            this,
-           SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
+           TQT_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -293,19 +293,19 @@ void K3bDvdCopyJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
       //
       // Check the image path
       //
-      QFileInfo fi( m_imagePath );
+      TQFileInfo fi( m_imagePath );
       if( !fi.isFile() ||
-	  questionYesNo( i18n("Do you want to overwrite %1?").arg(m_imagePath),
+	  questionYesNo( i18n("Do you want to overwrite %1?").tqarg(m_imagePath),
 			 i18n("File Exists") ) ) {
 	if( fi.isDir() )
 	  m_imagePath = K3b::findTempFile( "iso", m_imagePath );
-	else if( !QFileInfo( m_imagePath.section( '/', 0, -2 ) ).isDir() ) {
+	else if( !TQFileInfo( m_imagePath.section( '/', 0, -2 ) ).isDir() ) {
 	  emit infoMessage( i18n("Specified an unusable temporary path. Using default."), WARNING );
 	  m_imagePath = K3b::findTempFile( "iso" );
 	}
 	// else the user specified a file in an existing dir
 
-	emit infoMessage( i18n("Writing image file to %1.").arg(m_imagePath), INFO );
+	emit infoMessage( i18n("Writing image file to %1.").tqarg(m_imagePath), INFO );
 	emit newSubTask( i18n("Reading source medium.") );
       }
 
@@ -314,9 +314,9 @@ void K3bDvdCopyJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
       //
       KIO::filesize_t imageSpaceNeeded = (KIO::filesize_t)(d->lastSector.lba()+1)*2048;
       unsigned long avail, size;
-      QString pathToTest = m_imagePath.left( m_imagePath.findRev( '/' ) );
+      TQString pathToTest = m_imagePath.left( m_imagePath.tqfindRev( '/' ) );
       if( !K3b::kbFreeOnFs( pathToTest, size, avail ) ) {
-	emit infoMessage( i18n("Unable to determine free space in temporary directory '%1'.").arg(pathToTest), ERROR );
+	emit infoMessage( i18n("Unable to determine free space in temporary directory '%1'.").tqarg(pathToTest), ERROR );
 	jobFinished(false);
 	d->running = false;
 	return;
@@ -332,7 +332,7 @@ void K3bDvdCopyJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
 
       d->imageFile.setName( m_imagePath );
       if( !d->imageFile.open( IO_WriteOnly ) ) {
-	emit infoMessage( i18n("Unable to open '%1' for writing.").arg(m_imagePath), ERROR );
+	emit infoMessage( i18n("Unable to open '%1' for writing.").tqarg(m_imagePath), ERROR );
 	jobFinished( false );
 	d->running = false;
 	return;
@@ -353,7 +353,7 @@ void K3bDvdCopyJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
 	if( m_simulate )
 	  emit newTask( i18n("Simulating DVD copy") );
 	else if( m_copies > 1 )
-	  emit newTask( i18n("Writing DVD copy %1").arg(d->doneCopies+1) );
+	  emit newTask( i18n("Writing DVD copy %1").tqarg(d->doneCopies+1) );
 	else
 	  emit newTask( i18n("Writing DVD copy") );
 
@@ -399,13 +399,13 @@ void K3bDvdCopyJob::prepareReader()
 {
   if( !d->dataTrackReader ) {
     d->dataTrackReader = new K3bDataTrackReader( this );
-    connect( d->dataTrackReader, SIGNAL(percent(int)), this, SLOT(slotReaderProgress(int)) );
-    connect( d->dataTrackReader, SIGNAL(processedSize(int, int)), this, SLOT(slotReaderProcessedSize(int, int)) );
-    connect( d->dataTrackReader, SIGNAL(finished(bool)), this, SLOT(slotReaderFinished(bool)) );
-    connect( d->dataTrackReader, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-    connect( d->dataTrackReader, SIGNAL(newTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-    connect( d->dataTrackReader, SIGNAL(debuggingOutput(const QString&, const QString&)),
-             this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+    connect( d->dataTrackReader, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotReaderProgress(int)) );
+    connect( d->dataTrackReader, TQT_SIGNAL(processedSize(int, int)), this, TQT_SLOT(slotReaderProcessedSize(int, int)) );
+    connect( d->dataTrackReader, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotReaderFinished(bool)) );
+    connect( d->dataTrackReader, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( d->dataTrackReader, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+    connect( d->dataTrackReader, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+             this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   d->dataTrackReader->setDevice( m_readerDevice );
@@ -430,18 +430,18 @@ void K3bDvdCopyJob::prepareWriter()
 
   d->writerJob = new K3bGrowisofsWriter( m_writerDevice, this );
 
-  connect( d->writerJob, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( d->writerJob, SIGNAL(percent(int)), this, SLOT(slotWriterProgress(int)) );
-  connect( d->writerJob, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSize(int, int)) );
-  connect( d->writerJob, SIGNAL(processedSubSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-  connect( d->writerJob, SIGNAL(buffer(int)), this, SIGNAL(bufferStatus(int)) );
-  connect( d->writerJob, SIGNAL(deviceBuffer(int)), this, SIGNAL(deviceBuffer(int)) );
-  connect( d->writerJob, SIGNAL(writeSpeed(int, int)), this, SIGNAL(writeSpeed(int, int)) );
-  connect( d->writerJob, SIGNAL(finished(bool)), this, SLOT(slotWriterFinished(bool)) );
-  //  connect( d->writerJob, SIGNAL(newTask(const QString&)), this, SIGNAL(newTask(const QString&)) );
-  connect( d->writerJob, SIGNAL(newSubTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-  connect( d->writerJob, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+  connect( d->writerJob, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( d->writerJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterProgress(int)) );
+  connect( d->writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
+  connect( d->writerJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+  connect( d->writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( d->writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
+  connect( d->writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
+  connect( d->writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
+  //  connect( d->writerJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
+  connect( d->writerJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+  connect( d->writerJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   // these do only make sense with DVD-R(W)
   d->writerJob->setSimulate( m_simulate );
@@ -462,7 +462,7 @@ void K3bDvdCopyJob::prepareWriter()
     d->writerJob->setTrackSize( d->lastSector.lba()+1 );
   }
 
-  d->writerJob->setImageToWrite( QString::null ); // write to stdin
+  d->writerJob->setImageToWrite( TQString() ); // write to stdin
 }
 
 
@@ -548,7 +548,7 @@ void K3bDvdCopyJob::slotReaderFinished( bool success )
 	if( waitForDvd() ) {
 	  prepareWriter();
 	  if( m_copies > 1 )
-	    emit newTask( i18n("Writing DVD copy %1").arg(d->doneCopies+1) );
+	    emit newTask( i18n("Writing DVD copy %1").tqarg(d->doneCopies+1) );
 	  else
 	    emit newTask( i18n("Writing DVD copy") );
 
@@ -597,30 +597,30 @@ void K3bDvdCopyJob::slotWriterFinished( bool success )
   }
 
   if( success ) {
-    emit infoMessage( i18n("Successfully written DVD copy %1.").arg(d->doneCopies+1), INFO );
+    emit infoMessage( i18n("Successfully written DVD copy %1.").tqarg(d->doneCopies+1), INFO );
 
     if( d->verifyData && !m_simulate ) {
       if( !d->verificationJob ) {
 	d->verificationJob = new K3bVerificationJob( this, this );
-	connect( d->verificationJob, SIGNAL(infoMessage(const QString&, int)),
-		 this, SIGNAL(infoMessage(const QString&, int)) );
-	connect( d->verificationJob, SIGNAL(newTask(const QString&)),
-		 this, SIGNAL(newSubTask(const QString&)) );
-	connect( d->verificationJob, SIGNAL(percent(int)),
-		 this, SLOT(slotVerificationProgress(int)) );
-	connect( d->verificationJob, SIGNAL(percent(int)),
-		 this, SIGNAL(subPercent(int)) );
-	connect( d->verificationJob, SIGNAL(finished(bool)),
-		 this, SLOT(slotVerificationFinished(bool)) );
-	connect( d->verificationJob, SIGNAL(debuggingOutput(const QString&, const QString&)),
-		 this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+	connect( d->verificationJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
+		 this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+	connect( d->verificationJob, TQT_SIGNAL(newTask(const TQString&)),
+		 this, TQT_SIGNAL(newSubTask(const TQString&)) );
+	connect( d->verificationJob, TQT_SIGNAL(percent(int)),
+		 this, TQT_SLOT(slotVerificationProgress(int)) );
+	connect( d->verificationJob, TQT_SIGNAL(percent(int)),
+		 this, TQT_SIGNAL(subPercent(int)) );
+	connect( d->verificationJob, TQT_SIGNAL(finished(bool)),
+		 this, TQT_SLOT(slotVerificationFinished(bool)) );
+	connect( d->verificationJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+		 this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
       }
       d->verificationJob->setDevice( m_writerDevice );
       d->verificationJob->addTrack( 1, d->inPipe.checksum(), d->lastSector+1 );
 
       if( m_copies > 1 )
-	emit newTask( i18n("Verifying DVD copy %1").arg(d->doneCopies+1) );
+	emit newTask( i18n("Verifying DVD copy %1").tqarg(d->doneCopies+1) );
       else
 	emit newTask( i18n("Verifying DVD copy") );
 
@@ -637,7 +637,7 @@ void K3bDvdCopyJob::slotWriterFinished( bool success )
 
       if( waitForDvd() ) {
 	prepareWriter();
-	emit newTask( i18n("Writing DVD copy %1").arg(d->doneCopies+1) );
+	emit newTask( i18n("Writing DVD copy %1").tqarg(d->doneCopies+1) );
 
 	emit burning(true);
 
@@ -686,7 +686,7 @@ void K3bDvdCopyJob::slotVerificationFinished( bool success )
 
     if( waitForDvd() ) {
       prepareWriter();
-      emit newTask( i18n("Writing DVD copy %1").arg(d->doneCopies+1) );
+      emit newTask( i18n("Writing DVD copy %1").tqarg(d->doneCopies+1) );
 
       emit burning(true);
 
@@ -790,8 +790,8 @@ bool K3bDvdCopyJob::waitForDvd()
 	if( !questionYesNo( i18n("Your writer (%1 %2) does not support simulation with DVD-R(W) media. "
 				 "Do you really want to continue? The media will be written "
 				 "for real.")
-			   .arg(m_writerDevice->vendor())
-			   .arg(m_writerDevice->description()),
+			   .tqarg(m_writerDevice->vendor())
+			   .tqarg(m_writerDevice->description()),
 			   i18n("No Simulation with DVD-R(W)") ) ) {
 	  cancel();
 	  return false;
@@ -839,11 +839,11 @@ bool K3bDvdCopyJob::waitForDvd()
 	if( m_writingMode == K3b::DAO ) {
 // 	    ( m_writingMode ==  K3b::WRITING_MODE_AUTO &&
 // 	      ( sizeWithDao || !m_onTheFly ) ) ) {
-	  emit infoMessage( i18n("Writing %1 in DAO mode.").arg( K3bDevice::mediaTypeString(m, true) ), INFO );
+	  emit infoMessage( i18n("Writing %1 in DAO mode.").tqarg( K3bDevice::mediaTypeString(m, true) ), INFO );
 	  d->usedWritingMode = K3b::DAO;
 	}
 	else {
-	  emit infoMessage( i18n("Writing %1 in incremental mode.").arg( K3bDevice::mediaTypeString(m, true) ), INFO );
+	  emit infoMessage( i18n("Writing %1 in incremental mode.").tqarg( K3bDevice::mediaTypeString(m, true) ), INFO );
 	  d->usedWritingMode = K3b::WRITING_MODE_INCR_SEQ;
 	}
       }
@@ -857,14 +857,14 @@ bool K3bDvdCopyJob::waitForDvd()
 
 void K3bDvdCopyJob::removeImageFiles()
 {
-  if( QFile::exists( m_imagePath ) ) {
+  if( TQFile::exists( m_imagePath ) ) {
     d->imageFile.remove();
-    emit infoMessage( i18n("Removed image file %1").arg(m_imagePath), K3bJob::SUCCESS );
+    emit infoMessage( i18n("Removed image file %1").tqarg(m_imagePath), K3bJob::SUCCESS );
   }
 }
 
 
-QString K3bDvdCopyJob::jobDescription() const
+TQString K3bDvdCopyJob::jobDescription() const
 {
   if( m_onlyCreateImage ) {
     return i18n("Creating DVD Image");
@@ -878,7 +878,7 @@ QString K3bDvdCopyJob::jobDescription() const
 }
 
 
-QString K3bDvdCopyJob::jobDetails() const
+TQString K3bDvdCopyJob::jobDetails() const
 {
   return i18n("Creating 1 copy",
 	      "Creating %n copies",

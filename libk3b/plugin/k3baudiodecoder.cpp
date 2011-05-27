@@ -23,7 +23,7 @@
 #include <kdebug.h>
 #include <kfilemetainfo.h>
 
-#include <qmap.h>
+#include <tqmap.h>
 
 #include <math.h>
 
@@ -98,16 +98,16 @@ public:
   char* decodingBufferPos;
   int decodingBufferFill;
 
-  QMap<QString, QString> technicalInfoMap;
-  QMap<MetaDataField, QString> metaInfoMap;
+  TQMap<TQString, TQString> technicalInfoMap;
+  TQMap<MetaDataField, TQString> metaInfoMap;
 
   bool valid;
 };
 
 
 
-K3bAudioDecoder::K3bAudioDecoder( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bAudioDecoder::K3bAudioDecoder( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private();
 }
@@ -129,7 +129,7 @@ K3bAudioDecoder::~K3bAudioDecoder()
 }
 
 
-void K3bAudioDecoder::setFilename( const QString& filename )
+void K3bAudioDecoder::setFilename( const TQString& filename )
 {
   m_fileName = filename;
   delete d->metaInfo;
@@ -302,7 +302,7 @@ int K3bAudioDecoder::decode( char* _data, int maxLen )
 
 
   // clear out the decoding buffer
-  read = QMIN( maxLen, d->decodingBufferFill );
+  read = TQMIN( maxLen, d->decodingBufferFill );
   ::memcpy( _data, d->decodingBufferPos, read );
   d->decodingBufferPos += read;
   d->decodingBufferFill -= read;
@@ -321,7 +321,7 @@ int K3bAudioDecoder::decode( char* _data, int maxLen )
 int K3bAudioDecoder::resample( char* data, int maxLen )
 {
   if( !d->resampleState ) {
-    d->resampleState = src_new( SRC_SINC_MEDIUM_QUALITY, d->channels, 0 );
+    d->resampleState = src_new( SRC_SINC_MEDIUM_TQUALITY, d->channels, 0 );
     if( !d->resampleState ) {
       kdDebug() << "(K3bAudioDecoder) unable to initialize resampler." << endl;
       return -1;
@@ -375,7 +375,7 @@ void K3bAudioDecoder::from16bitBeSignedToFloat( char* src, float* dest, int samp
 {
   while( samples ) {
     samples--;
-    dest[samples] = static_cast<float>( Q_INT16(((src[2*samples]<<8)&0xff00)|(src[2*samples+1]&0x00ff)) / 32768.0 );
+    dest[samples] = static_cast<float>( TQ_INT16(((src[2*samples]<<8)&0xff00)|(src[2*samples+1]&0x00ff)) / 32768.0 );
   }
 }
 
@@ -386,7 +386,7 @@ void K3bAudioDecoder::fromFloatTo16BitBeSigned( float* src, char* dest, int samp
     samples--;
 
     float scaled = src[samples] * 32768.0;
-    Q_INT16 val = 0;
+    TQ_INT16 val = 0;
 
     // clipping
     if( scaled >= ( 1.0 * 0x7FFF ) )
@@ -407,8 +407,8 @@ void K3bAudioDecoder::from8BitTo16BitBeSigned( char* src, char* dest, int sample
   while( samples ) {
     samples--;
 
-    float scaled = static_cast<float>(Q_UINT8(src[samples])-128) / 128.0 * 32768.0;
-    Q_INT16 val = 0;
+    float scaled = static_cast<float>(TQ_UINT8(src[samples])-128) / 128.0 * 32768.0;
+    TQ_INT16 val = 0;
       
     // clipping
     if( scaled >= ( 1.0 * 0x7FFF ) )
@@ -462,7 +462,7 @@ bool K3bAudioDecoder::seek( const K3b::Msf& pos )
     kdDebug() << "(K3bAudioDecoder) seeking " << bytesToDecode << " bytes." << endl;
     char buffi[10*2352];
     while( bytesToDecode > 0 ) {
-      int read = decode( buffi, QMIN(10*2352, bytesToDecode) );
+      int read = decode( buffi, TQMIN(10*2352, bytesToDecode) );
       if( read <= 0 )
 	return false;
       
@@ -502,9 +502,9 @@ void K3bAudioDecoder::cleanup()
 }
 
 
-QString K3bAudioDecoder::metaInfo( MetaDataField f )
+TQString K3bAudioDecoder::metaInfo( MetaDataField f )
 {
-  if( d->metaInfoMap.contains( f ) )
+  if( d->metaInfoMap.tqcontains( f ) )
     return d->metaInfoMap[f];
 
   // fall back to KFileMetaInfo
@@ -512,7 +512,7 @@ QString K3bAudioDecoder::metaInfo( MetaDataField f )
     d->metaInfo = new KFileMetaInfo( filename() );
 
   if( d->metaInfo->isValid() ) {
-    QString tag;
+    TQString tag;
     switch( f ) {
     case META_TITLE:
       tag = "Title";
@@ -536,11 +536,11 @@ QString K3bAudioDecoder::metaInfo( MetaDataField f )
       return item.string();
   }
 
-  return QString::null;
+  return TQString();
 }
 
 
-void K3bAudioDecoder::addMetaInfo( MetaDataField f, const QString& value )
+void K3bAudioDecoder::addMetaInfo( MetaDataField f, const TQString& value )
 {
   if( !value.isEmpty() )
     d->metaInfoMap[f] = value;
@@ -549,23 +549,23 @@ void K3bAudioDecoder::addMetaInfo( MetaDataField f, const QString& value )
 }
 
 
-QStringList K3bAudioDecoder::supportedTechnicalInfos() const
+TQStringList K3bAudioDecoder::supportedTechnicalInfos() const
 {
-  QStringList l;
-  for( QMap<QString, QString>::const_iterator it = d->technicalInfoMap.begin();
+  TQStringList l;
+  for( TQMap<TQString, TQString>::const_iterator it = d->technicalInfoMap.begin();
        it != d->technicalInfoMap.end(); ++it )
     l.append( it.key() );
   return l;
 }
 
 
-QString K3bAudioDecoder::technicalInfo( const QString& key ) const
+TQString K3bAudioDecoder::technicalInfo( const TQString& key ) const
 {
   return d->technicalInfoMap[key];
 }
 
 
-void K3bAudioDecoder::addTechnicalInfo( const QString& key, const QString& value )
+void K3bAudioDecoder::addTechnicalInfo( const TQString& key, const TQString& value )
 {
   d->technicalInfoMap[key] = value;
 }
@@ -574,17 +574,17 @@ void K3bAudioDecoder::addTechnicalInfo( const QString& key, const QString& value
 K3bAudioDecoder* K3bAudioDecoderFactory::createDecoder( const KURL& url )
 {
   kdDebug() << "(K3bAudioDecoderFactory::createDecoder( " << url.path() << " )" << endl;
-  QPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioDecoder" );
+  TQPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioDecoder" );
 
   // first search for a single format decoder
-  for( QPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
     K3bAudioDecoderFactory* f = dynamic_cast<K3bAudioDecoderFactory*>( it.current() );
     if( f && !f->multiFormatDecoder() && f->canDecode( url ) ) {
       kdDebug() << "1" << endl; return f->createDecoder();}
   }
   
   // no single format decoder. Search for a multi format decoder
-  for( QPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
     K3bAudioDecoderFactory* f = dynamic_cast<K3bAudioDecoderFactory*>( it.current() );
     if( f && f->multiFormatDecoder() && f->canDecode( url ) ) {
       kdDebug() << "2" << endl; return f->createDecoder();}

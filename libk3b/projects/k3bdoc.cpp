@@ -14,10 +14,10 @@
  */
 
 
-// include files for Qt
-#include <qwidget.h>
-#include <qstring.h>
-#include <qdom.h>
+// include files for TQt
+#include <tqwidget.h>
+#include <tqstring.h>
+#include <tqdom.h>
 
 // include files for KDE
 #include <klocale.h>
@@ -40,12 +40,12 @@
 #include <k3bdevicemanager.h>
 
 
-K3bDoc::K3bDoc( QObject* parent )
-  : QObject( parent ),
+K3bDoc::K3bDoc( TQObject* tqparent )
+  : TQObject( tqparent ),
     m_modified(false),
     m_view(0)
 {
-  connect( this, SIGNAL(changed()), this, SLOT(slotChanged()) );
+  connect( this, TQT_SIGNAL(changed()), this, TQT_SLOT(slotChanged()) );
 }
 
 
@@ -107,7 +107,7 @@ const KURL& K3bDoc::URL() const
 }
 
 
-QString K3bDoc::name() const
+TQString K3bDoc::name() const
 {
   return URL().path().section( '/', -1 );
 }
@@ -132,12 +132,12 @@ bool K3bDoc::newDocument()
 }
 
 
-bool K3bDoc::saveGeneralDocumentData( QDomElement* part )
+bool K3bDoc::saveGeneralDocumentData( TQDomElement* part )
 {
-  QDomDocument doc = part->ownerDocument();
-  QDomElement mainElem = doc.createElement( "general" );
+  TQDomDocument doc = part->ownerDocument();
+  TQDomElement mainElem = doc.createElement( "general" );
 
-  QDomElement propElem = doc.createElement( "writing_mode" );
+  TQDomElement propElem = doc.createElement( "writing_mode" );
   switch( writingMode() ) {
   case K3b::DAO:
     propElem.appendChild( doc.createTextNode( "dao" ) );
@@ -176,20 +176,20 @@ bool K3bDoc::saveGeneralDocumentData( QDomElement* part )
 }
 
 
-bool K3bDoc::readGeneralDocumentData( const QDomElement& elem )
+bool K3bDoc::readGeneralDocumentData( const TQDomElement& elem )
 {
   if( elem.nodeName() != "general" )
     return false;
 
-  QDomNodeList nodes = elem.childNodes();
+  TQDomNodeList nodes = elem.childNodes();
   for( uint i = 0; i < nodes.count(); i++ ) {
 
-    QDomElement e = nodes.item(i).toElement();
+    TQDomElement e = nodes.item(i).toElement();
     if( e.isNull() )
       return false;
 
     if( e.nodeName() == "writing_mode") {
-      QString mode = e.text();
+      TQString mode = e.text();
       if( mode == "dao" )
 	setWritingMode( K3b::DAO );
       else if( mode == "tao" )

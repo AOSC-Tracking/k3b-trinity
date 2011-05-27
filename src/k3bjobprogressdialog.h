@@ -23,25 +23,25 @@
 
 #include <k3bjobhandler.h>
 
-#include <qdatetime.h>
-#include <qfile.h>
+#include <tqdatetime.h>
+#include <tqfile.h>
 
-class QVBoxLayout;
-class QHBoxLayout;
-class QGridLayout;
+class TQVBoxLayout;
+class TQHBoxLayout;
+class TQGridLayout;
 class KListView;
-class QFrame;
-class QGroupBox;
-class QLabel;
-class QListViewItem;
+class TQFrame;
+class TQGroupBox;
+class TQLabel;
+class TQListViewItem;
 class KProgress;
-class QPushButton;
-class QTimer;
+class TQPushButton;
+class TQTimer;
 class K3bJob;
 class KCutLabel;
-class QCloseEvent;
-class QGridLayout;
-class QKeyEvent;
+class TQCloseEvent;
+class TQGridLayout;
+class TQKeyEvent;
 class K3bJobProgressOSD;
 class K3bThemedLabel;
 
@@ -49,9 +49,10 @@ class K3bThemedLabel;
 class K3bJobProgressDialog : public KDialog, public K3bJobHandler
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bJobProgressDialog( QWidget* parent = 0, 
+  K3bJobProgressDialog( TQWidget* tqparent = 0, 
 			const char* name = 0, 
 			bool showSubProgress = true, 
 			bool modal = FALSE, 
@@ -59,7 +60,7 @@ class K3bJobProgressDialog : public KDialog, public K3bJobHandler
   virtual ~K3bJobProgressDialog();
 
   virtual void setJob( K3bJob* job );
-  void setExtraInfo( QWidget *extra );
+  void setExtraInfo( TQWidget *extra );
 
   /**
    * reimplemented for internal reasons
@@ -78,7 +79,7 @@ class K3bJobProgressDialog : public KDialog, public K3bJobHandler
    */
   int startJob( K3bJob* job = 0 );
 
-  QSize sizeHint() const;
+  TQSize tqsizeHint() const;
 
   /**
    * @reimplemented from K3bJobHandler
@@ -86,29 +87,29 @@ class K3bJobProgressDialog : public KDialog, public K3bJobHandler
   int waitForMedia( K3bDevice::Device*,
 		    int mediaState = K3bDevice::STATE_EMPTY,
 		    int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		    const QString& message = QString::null );
+		    const TQString& message = TQString() );
   
   /**
    * @reimplemented from K3bJobHandler
    */
-  bool questionYesNo( const QString& text,
-		      const QString& caption = QString::null,
-		      const QString& yesText = QString::null,
-		      const QString& noText = QString::null );
+  bool questionYesNo( const TQString& text,
+		      const TQString& caption = TQString(),
+		      const TQString& yesText = TQString(),
+		      const TQString& noText = TQString() );
 
   /**
    * reimplemented from K3bJobHandler
    */
-  void blockingInformation( const QString& text,
-			    const QString& caption = QString::null );
+  void blockingInformation( const TQString& text,
+			    const TQString& caption = TQString() );
   
  protected slots:
   virtual void slotProcessedSize( int processed, int size );
   virtual void slotProcessedSubSize( int processed, int size );
-  virtual void slotInfoMessage( const QString& infoString, int type );
-  virtual void slotDebuggingOutput( const QString&, const QString& );
-  virtual void slotNewSubTask(const QString& name);
-  virtual void slotNewTask(const QString& name);
+  virtual void slotInfoMessage( const TQString& infoString, int type );
+  virtual void slotDebuggingOutput( const TQString&, const TQString& );
+  virtual void slotNewSubTask(const TQString& name);
+  virtual void slotNewTask(const TQString& name);
   virtual void slotFinished(bool);
   virtual void slotCanceled();
   virtual void slotStarted();
@@ -123,8 +124,8 @@ class K3bJobProgressDialog : public KDialog, public K3bJobHandler
   virtual void slotThemeChanged();
 
  protected:
-  void closeEvent( QCloseEvent* );
-  void keyPressEvent( QKeyEvent* e );
+  void closeEvent( TQCloseEvent* );
+  void keyPressEvent( TQKeyEvent* e );
 
   void setupGUI();
   void setupConnections();
@@ -135,34 +136,34 @@ class K3bJobProgressDialog : public KDialog, public K3bJobHandler
   K3bThemedLabel* m_labelTask;
   K3bThemedLabel* m_labelElapsedTime;
   KCutLabel* m_labelSubTask;
-  QLabel* m_labelSubProcessedSize;
+  TQLabel* m_labelSubProcessedSize;
   KProgress* m_progressSubPercent;
-  QLabel* m_labelProcessedSize;
+  TQLabel* m_labelProcessedSize;
   KProgress* m_progressPercent;
-  QFrame* m_frameExtraInfo;
-  QPushButton* m_buttonCancel;
-  QPushButton* m_buttonClose;
-  QPushButton* m_buttonShowDebug;
+  TQFrame* m_frameExtraInfo;
+  TQPushButton* m_buttonCancel;
+  TQPushButton* m_buttonClose;
+  TQPushButton* m_buttonShowDebug;
   K3bThemedLabel* m_pixLabel;
 
-  QGridLayout* m_frameExtraInfoLayout;
+  TQGridLayout* m_frameExtraInfoLayout;
 
  private:
   class Private;
   Private* d;
 
   K3bJob* m_job;
-  QTimer* m_timer;
-  QTime m_startTime;
-  QTime m_lastProgressUpdateTime;
+  TQTimer* m_timer;
+  TQTime m_startTime;
+  TQTime m_lastProgressUpdateTime;
 
   K3bDebuggingOutputFile m_logFile;
 
-  QMap<QString, QStringList> m_debugOutputMap;
+  TQMap<TQString, TQStringList> m_debugOutputMap;
 
   bool m_bCanceled;
 
-  QString m_plainCaption;
+  TQString m_plainCaption;
 
   bool in_loop;
 

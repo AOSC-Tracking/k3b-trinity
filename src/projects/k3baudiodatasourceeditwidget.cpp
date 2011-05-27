@@ -19,27 +19,27 @@
 
 #include <k3baudiodatasource.h>
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqtooltip.h>
 
 #include <klocale.h>
 #include <kdialog.h>
 
 
-K3bAudioDataSourceEditWidget::K3bAudioDataSourceEditWidget( QWidget* parent, const char* name )
-  : QWidget( parent, name ),
+K3bAudioDataSourceEditWidget::K3bAudioDataSourceEditWidget( TQWidget* tqparent, const char* name )
+  : TQWidget( tqparent, name ),
     m_source(0)
 {
   m_editor = new K3bAudioEditorWidget( this );
   m_editStartOffset = new K3bMsfEdit( this );
   m_editEndOffset = new K3bMsfEdit( this );
 
-  QLabel* startLabel = new QLabel( i18n("Start Offset") + ":", this );
-  QLabel* endLabel = new QLabel( i18n("End Offset") + ":", this );
-  endLabel->setAlignment( Qt::AlignRight );
+  TQLabel* startLabel = new TQLabel( i18n("Start Offset") + ":", this );
+  TQLabel* endLabel = new TQLabel( i18n("End Offset") + ":", this );
+  endLabel->tqsetAlignment( TQt::AlignRight );
 
-  QGridLayout* grid = new QGridLayout( this );
+  TQGridLayout* grid = new TQGridLayout( this );
   grid->setMargin( 0 );
   grid->setSpacing( KDialog::spacingHint() );
 
@@ -51,16 +51,16 @@ K3bAudioDataSourceEditWidget::K3bAudioDataSourceEditWidget( QWidget* parent, con
   grid->setColStretch( 1, 1 );
 
   // setup connections between the msfedits and the editor
-  connect( m_editor, SIGNAL(rangeChanged(int, const K3b::Msf&, const K3b::Msf&)),
-	   this, SLOT(slotRangeModified(int, const K3b::Msf&, const K3b::Msf&)) );
+  connect( m_editor, TQT_SIGNAL(rangeChanged(int, const K3b::Msf&, const K3b::Msf&)),
+	   this, TQT_SLOT(slotRangeModified(int, const K3b::Msf&, const K3b::Msf&)) );
 
-  connect( m_editStartOffset, SIGNAL(valueChanged(const K3b::Msf&)),
-	   this, SLOT(slotStartOffsetEdited(const K3b::Msf&)) );
+  connect( m_editStartOffset, TQT_SIGNAL(valueChanged(const K3b::Msf&)),
+	   this, TQT_SLOT(slotStartOffsetEdited(const K3b::Msf&)) );
 
-  connect( m_editEndOffset, SIGNAL(valueChanged(const K3b::Msf&)),
-	   this, SLOT(slotEndOffsetEdited(const K3b::Msf&)) );
+  connect( m_editEndOffset, TQT_SIGNAL(valueChanged(const K3b::Msf&)),
+	   this, TQT_SLOT(slotEndOffsetEdited(const K3b::Msf&)) );
 
-  QToolTip::add( m_editor, i18n("Drag the edges of the highlighted area to define the portion of the "
+  TQToolTip::add( m_editor, i18n("Drag the edges of the highlighted area to define the portion of the "
 				"audio source you want to include in the Audio CD track. "
 				"You can also use the input windows to fine-tune your selection.") );
 }
@@ -101,7 +101,7 @@ void K3bAudioDataSourceEditWidget::loadSource( K3bAudioDataSource* source )
 				  false, 
 				  false,
 				  i18n("Used part of the audio source"),
-				  colorGroup().highlight() );
+				  tqcolorGroup().highlight() );
 
   m_editStartOffset->setMaxValue( source->originalLength().lba() );
   m_editEndOffset->setMaxValue( source->originalLength().lba() );

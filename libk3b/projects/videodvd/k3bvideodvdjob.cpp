@@ -30,8 +30,8 @@
 
 
 
-K3bVideoDvdJob::K3bVideoDvdJob( K3bVideoDvdDoc* doc, K3bJobHandler* jh, QObject* parent )
-  : K3bDvdJob( doc, jh, parent ),
+K3bVideoDvdJob::K3bVideoDvdJob( K3bVideoDvdDoc* doc, K3bJobHandler* jh, TQObject* tqparent )
+  : K3bDvdJob( doc, jh, tqparent ),
     m_doc(doc)
 {
 }
@@ -64,7 +64,7 @@ bool K3bVideoDvdJob::prepareWriterJob()
   writer->setCloseDvd( true );
 
   if( m_doc->onTheFly() ) {
-    writer->setImageToWrite( QString::null );  // read from stdin
+    writer->setImageToWrite( TQString() );  // read from stdin
     writer->setTrackSize( m_isoImager->size() );
   }
   else
@@ -76,7 +76,7 @@ bool K3bVideoDvdJob::prepareWriterJob()
 }
 
 
-QString K3bVideoDvdJob::jobDescription() const
+TQString K3bVideoDvdJob::jobDescription() const
 {
   if( m_doc->onlyCreateImages() ) {
     return i18n("Creating Video DVD Image File");
@@ -84,18 +84,18 @@ QString K3bVideoDvdJob::jobDescription() const
   else {
     return i18n("Writing Video DVD")
       + ( m_doc->isoOptions().volumeID().isEmpty()
-	  ? QString::null
-	  : QString( " (%1)" ).arg(m_doc->isoOptions().volumeID()) );
+	  ? TQString()
+	  : TQString( " (%1)" ).tqarg(m_doc->isoOptions().volumeID()) );
   }
 }
 
 
-QString K3bVideoDvdJob::jobDetails() const
+TQString K3bVideoDvdJob::jobDetails() const
 {
-  return ( i18n("ISO9660/Udf Filesystem (Size: %1)").arg(KIO::convertSize( doc()->size() ))
+  return ( i18n("ISO9660/Udf Filesystem (Size: %1)").tqarg(KIO::convertSize( doc()->size() ))
 	   + ( m_doc->copies() > 1 
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
-	       : QString::null ) );
+	       : TQString() ) );
 }
 
 #include "k3bvideodvdjob.moc"

@@ -21,14 +21,15 @@
  */
 #include <kfilemetainfo.h>
 
-class QStringList;
+class TQStringList;
 
 class K3bProjectFilePlugin: public KFilePlugin
 {
   Q_OBJECT
+  TQ_OBJECT
     
  public:
-  K3bProjectFilePlugin( QObject *parent, const char *name, const QStringList& args );
+  K3bProjectFilePlugin( TQObject *tqparent, const char *name, const TQStringList& args );
   
   virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

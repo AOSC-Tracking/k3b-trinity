@@ -27,22 +27,22 @@
 #include <klocale.h>
 #include <kiconloader.h>
 
-#include <qintdict.h>
-#include <qmap.h>
-#include <qlabel.h>
-#include <qtimer.h>
-#include <qtoolbutton.h>
-#include <qcheckbox.h>
+#include <tqintdict.h>
+#include <tqmap.h>
+#include <tqlabel.h>
+#include <tqtimer.h>
+#include <tqtoolbutton.h>
+#include <tqcheckbox.h>
 
 
 
 class K3bAudioConvertingOptionWidget::Private
 {
 public:
-  QIntDict<K3bAudioEncoder> encoderMap;
-  QMap<int, QString> extensionMap;
+  TQIntDict<K3bAudioEncoder> encoderMap;
+  TQMap<int, TQString> extensionMap;
 
-  QTimer freeSpaceUpdateTimer;
+  TQTimer freeSpaceUpdateTimer;
 
   KIO::filesize_t neededSize;
 
@@ -55,7 +55,7 @@ public:
     int ogg = -1;
     int mp3 = -1;
     int flac = -1;
-    for( QMap<int, QString>::const_iterator it = extensionMap.constBegin();
+    for( TQMap<int, TQString>::const_iterator it = extensionMap.constBegin();
 	 it != extensionMap.constEnd(); ++it ) {
       if( it.data() == "ogg" )
 	ogg = it.key();
@@ -77,23 +77,23 @@ public:
 };
 
 
-K3bAudioConvertingOptionWidget::K3bAudioConvertingOptionWidget( QWidget* parent, const char* name )
-  : base_K3bAudioRippingOptionWidget( parent, name )
+K3bAudioConvertingOptionWidget::K3bAudioConvertingOptionWidget( TQWidget* tqparent, const char* name )
+  : base_K3bAudioRippingOptionWidget( tqparent, name )
 {
   d = new Private();
 
-  connect( m_editBaseDir, SIGNAL(textChanged(const QString&)),
-	   this, SLOT(slotUpdateFreeTempSpace()) );
-  connect( m_comboFileType, SIGNAL(activated(int)), 
-	   this, SLOT(slotEncoderChanged()) );
-  connect( &d->freeSpaceUpdateTimer, SIGNAL(timeout()),
-	   this, SLOT(slotUpdateFreeTempSpace()) );
-  connect( m_checkCreatePlaylist, SIGNAL(toggled(bool)), this, SIGNAL(changed()) );
-  connect( m_checkSingleFile, SIGNAL(toggled(bool)), this, SIGNAL(changed()) );
-  connect( m_checkWriteCueFile, SIGNAL(toggled(bool)), this, SIGNAL(changed()) );
-  connect( m_comboFileType, SIGNAL(activated(int)), this, SIGNAL(changed()) );
-  connect( m_editBaseDir, SIGNAL(textChanged(const QString&)), this, SIGNAL(changed()) );
-  connect( m_buttonConfigurePlugin, SIGNAL(clicked()), this, SLOT(slotConfigurePlugin()) );
+  connect( m_editBaseDir, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SLOT(slotUpdateFreeTempSpace()) );
+  connect( m_comboFileType, TQT_SIGNAL(activated(int)), 
+	   this, TQT_SLOT(slotEncoderChanged()) );
+  connect( &d->freeSpaceUpdateTimer, TQT_SIGNAL(timeout()),
+	   this, TQT_SLOT(slotUpdateFreeTempSpace()) );
+  connect( m_checkCreatePlaylist, TQT_SIGNAL(toggled(bool)), this, TQT_SIGNAL(changed()) );
+  connect( m_checkSingleFile, TQT_SIGNAL(toggled(bool)), this, TQT_SIGNAL(changed()) );
+  connect( m_checkWriteCueFile, TQT_SIGNAL(toggled(bool)), this, TQT_SIGNAL(changed()) );
+  connect( m_comboFileType, TQT_SIGNAL(activated(int)), this, TQT_SIGNAL(changed()) );
+  connect( m_editBaseDir, TQT_SIGNAL(textChanged(const TQString&)), this, TQT_SIGNAL(changed()) );
+  connect( m_buttonConfigurePlugin, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotConfigurePlugin()) );
 
   m_editBaseDir->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
   m_buttonConfigurePlugin->setIconSet( SmallIconSet( "gear" ) );
@@ -108,12 +108,12 @@ K3bAudioConvertingOptionWidget::K3bAudioConvertingOptionWidget( QWidget* parent,
   d->extensionMap[0] = "wav";
 
   // check the available encoding plugins
-  QPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioEncoder" );
-  for( QPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
+  TQPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioEncoder" );
+  for( TQPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
     K3bAudioEncoder* f = (K3bAudioEncoder*)it.current();
-    QStringList exL = f->extensions();
+    TQStringList exL = f->extensions();
 
-    for( QStringList::const_iterator exIt = exL.begin();
+    for( TQStringList::const_iterator exIt = exL.begin();
 	 exIt != exL.end(); ++exIt ) {
       d->extensionMap.insert( m_comboFileType->count(), *exIt );
       d->encoderMap.insert( m_comboFileType->count(), f );
@@ -133,13 +133,13 @@ K3bAudioConvertingOptionWidget::~K3bAudioConvertingOptionWidget()
 }
 
 
-QString K3bAudioConvertingOptionWidget::baseDir() const
+TQString K3bAudioConvertingOptionWidget::baseDir() const
 {
   return m_editBaseDir->url();
 }
 
 
-void K3bAudioConvertingOptionWidget::setBaseDir( const QString& path )
+void K3bAudioConvertingOptionWidget::setBaseDir( const TQString& path )
 {
   m_editBaseDir->setURL( path );
 }
@@ -168,16 +168,16 @@ void K3bAudioConvertingOptionWidget::slotConfigurePlugin()
 
 void K3bAudioConvertingOptionWidget::slotUpdateFreeTempSpace()
 {
-  QString path = m_editBaseDir->url();
+  TQString path = m_editBaseDir->url();
 
-  if( !QFile::exists( path ) )
-    path.truncate( path.findRev('/') );
+  if( !TQFile::exists( path ) )
+    path.truncate( path.tqfindRev('/') );
 
   unsigned long size, avail;
   if( K3b::kbFreeOnFs( path, size, avail ) ) {
     m_labelFreeSpace->setText( KIO::convertSizeFromKB(avail) );
     if( avail < d->neededSize/1024 )
-      m_labelNeededSpace->setPaletteForegroundColor( Qt::red );
+      m_labelNeededSpace->setPaletteForegroundColor( TQt::red );
     else
       m_labelNeededSpace->setPaletteForegroundColor( paletteForegroundColor() );
   }
@@ -201,7 +201,7 @@ K3bAudioEncoder* K3bAudioConvertingOptionWidget::encoder() const
 }
 
 
-QString K3bAudioConvertingOptionWidget::extension() const
+TQString K3bAudioConvertingOptionWidget::extension() const
 {
   return d->extensionMap[m_comboFileType->currentItem()];
 }
@@ -209,7 +209,7 @@ QString K3bAudioConvertingOptionWidget::extension() const
 
 void K3bAudioConvertingOptionWidget::loadDefaults()
 {
-  m_editBaseDir->setURL( QDir::homeDirPath() );
+  m_editBaseDir->setURL( TQDir::homeDirPath() );
   m_checkSingleFile->setChecked( false );
   m_checkWriteCueFile->setChecked( false );
   m_comboFileType->setCurrentItem( d->getDefaultFormat() );
@@ -222,7 +222,7 @@ void K3bAudioConvertingOptionWidget::loadDefaults()
 
 void K3bAudioConvertingOptionWidget::loadConfig( KConfigBase* c )
 {
-  m_editBaseDir->setURL( c->readPathEntry( "last ripping directory", QDir::homeDirPath() ) );
+  m_editBaseDir->setURL( c->readPathEntry( "last ripping directory", TQDir::homeDirPath() ) );
 
   m_checkSingleFile->setChecked( c->readBoolEntry( "single_file", false ) );
   m_checkWriteCueFile->setChecked( c->readBoolEntry( "write_cue_file", false ) );
@@ -230,11 +230,11 @@ void K3bAudioConvertingOptionWidget::loadConfig( KConfigBase* c )
   m_checkCreatePlaylist->setChecked( c->readBoolEntry( "create_playlist", false ) );
   m_checkPlaylistRelative->setChecked( c->readBoolEntry( "relative_path_in_playlist", false ) );
 
-  QString filetype = c->readEntry( "filetype", d->extensionMap[d->getDefaultFormat()] );
+  TQString filetype = c->readEntry( "filetype", d->extensionMap[d->getDefaultFormat()] );
   if( filetype == "wav" )
     m_comboFileType->setCurrentItem(0);
   else {
-    for( QMap<int, QString>::iterator it = d->extensionMap.begin();
+    for( TQMap<int, TQString>::iterator it = d->extensionMap.begin();
 	 it != d->extensionMap.end(); ++it ) {
       if( it.data() == filetype ) {
 	m_comboFileType->setCurrentItem( it.key() );
@@ -257,7 +257,7 @@ void K3bAudioConvertingOptionWidget::saveConfig( KConfigBase* c )
   c->writeEntry( "create_playlist", m_checkCreatePlaylist->isChecked() );
   c->writeEntry( "relative_path_in_playlist", m_checkPlaylistRelative->isChecked() );
 
-  if( d->extensionMap.contains(m_comboFileType->currentItem()) )
+  if( d->extensionMap.tqcontains(m_comboFileType->currentItem()) )
     c->writeEntry( "filetype", d->extensionMap[m_comboFileType->currentItem()] );
   else
     c->writeEntry( "filetype", "wav" );

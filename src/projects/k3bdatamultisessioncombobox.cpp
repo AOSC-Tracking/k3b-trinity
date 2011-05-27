@@ -18,8 +18,8 @@
 #include <klocale.h>
 #include <kconfig.h>
 
-#include <qwhatsthis.h>
-#include <qtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqtooltip.h>
 
 
 static const int s_autoIndex = 0;
@@ -29,14 +29,14 @@ static const int s_continueIndex = 3;
 static const int s_finishIndex = 4;
 
 
-K3bDataMultiSessionCombobox::K3bDataMultiSessionCombobox( QWidget* parent, const char* name )
-  : QComboBox( parent, name ),
+K3bDataMultiSessionCombobox::K3bDataMultiSessionCombobox( TQWidget* tqparent, const char* name )
+  : TQComboBox( tqparent, name ),
     m_forceNoMultiSession(false)
 {
   init( false );
 
-  QToolTip::add( this, i18n("Select the Multisession Mode for the project.") );
-  QWhatsThis::add( this, i18n("<p><b>Multisession Mode</b>"
+  TQToolTip::add( this, i18n("Select the Multisession Mode for the project.") );
+  TQWhatsThis::add( this, i18n("<p><b>Multisession Mode</b>"
 			      "<p><b>Auto</b><br>"
 			      "Let K3b decide which mode to use. The decision will be based "
 			      "on the size of the project (does it fill the whole media) and "
@@ -101,7 +101,7 @@ K3bDataDoc::MultiSessionMode K3bDataMultiSessionCombobox::multiSessionMode() con
 
 void K3bDataMultiSessionCombobox::saveConfig( KConfigBase* c )
 {
-  QString s;
+  TQString s;
   switch( currentItem() ) {
   case s_autoIndex:
     s = "auto";
@@ -126,7 +126,7 @@ void K3bDataMultiSessionCombobox::saveConfig( KConfigBase* c )
 
 void K3bDataMultiSessionCombobox::loadConfig( KConfigBase* c )
 {
-  QString s = c->readEntry( "multisession mode" );
+  TQString s = c->readEntry( "multisession mode" );
   if( s == "none" )
     setMultiSessionMode( K3bDataDoc::NONE );
   else if( s == "start" )

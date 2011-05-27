@@ -17,8 +17,8 @@
 #include "k3bplugin.h"
 
 
-K3bPlugin::K3bPlugin( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bPlugin::K3bPlugin( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
 }
 
@@ -28,7 +28,7 @@ K3bPlugin::~K3bPlugin()
 }
 
 
-K3bPluginConfigWidget* K3bPlugin::createConfigWidget( QWidget*, const char* ) const
+K3bPluginConfigWidget* K3bPlugin::createConfigWidget( TQWidget*, const char* ) const
 {
   return 0;
 }

@@ -38,9 +38,9 @@
 #include <dcopref.h>
 #include <kprocess.h>
 
-#include <qdatastream.h>
-#include <qdir.h>
-#include <qfile.h>
+#include <tqdatastream.h>
+#include <tqdir.h>
+#include <tqfile.h>
 
 #include <cmath>
 #include <sys/utsname.h>
@@ -88,13 +88,13 @@ struct Sample {
 };
 */
 
-QString K3b::framesToString( int h, bool showFrames )
+TQString K3b::framesToString( int h, bool showFrames )
 {
   int m = h / 4500;
   int s = (h % 4500) / 75;
   int f = h % 75;
 
-  QString str;
+  TQString str;
 
   if( showFrames ) {
     // cdrdao needs the MSF format where 1 second has 75 frames!
@@ -106,28 +106,28 @@ QString K3b::framesToString( int h, bool showFrames )
   return str;
 }
 
-/*QString K3b::sizeToTime(long size)
+/*TQString K3b::sizeToTime(long size)
 {
   int h = size / sizeof(Sample) / 588;
   return framesToString(h, false);
 }*/
 
 
-Q_INT16 K3b::swapByteOrder( const Q_INT16& i )
+TQ_INT16 K3b::swapByteOrder( const TQ_INT16& i )
 {
   return bswap_16( i );
   //((i << 8) & 0xff00) | ((i >> 8 ) & 0xff);
 }
 
 
-Q_INT32 K3b::swapByteOrder( const Q_INT32& i )
+TQ_INT32 K3b::swapByteOrder( const TQ_INT32& i )
 {
   //return ((i << 24) & 0xff000000) | ((i << 8) & 0xff0000) | ((i >> 8) & 0xff00) | ((i >> 24) & 0xff );
   return bswap_32( i );
 }
 
 
-Q_INT64 K3b::swapByteOrder( const Q_INT64& i )
+TQ_INT64 K3b::swapByteOrder( const TQ_INT64& i )
 {
   return bswap_64( i );
 }
@@ -139,75 +139,75 @@ int K3b::round( double d )
 }
 
 
-QString K3b::findUniqueFilePrefix( const QString& _prefix, const QString& path )
+TQString K3b::findUniqueFilePrefix( const TQString& _prefix, const TQString& path )
 {
-  QString url;
-  if( path.isEmpty() || !QFile::exists(path) )
+  TQString url;
+  if( path.isEmpty() || !TQFile::exists(path) )
     url = defaultTempPath();
   else
     url = prepareDir( path );
 
-  QString prefix = _prefix;
+  TQString prefix = _prefix;
   if( prefix.isEmpty() )
     prefix = "k3b_";
 
   // now create the unique prefix
-  QDir dir( url );
-  QStringList entries = dir.entryList( QDir::DefaultFilter, QDir::Name );
+  TQDir dir( url );
+  TQStringList entries = dir.entryList( TQDir::DefaultFilter, TQDir::Name );
   int i = 0;
-  for( QStringList::iterator it = entries.begin();
+  for( TQStringList::iterator it = entries.begin();
        it != entries.end(); ++it ) {
-    if( (*it).startsWith( prefix + QString::number(i) ) ) {
+    if( (*it).startsWith( prefix + TQString::number(i) ) ) {
       i++;
       it = entries.begin();
     }
   }
 
-  return url + prefix + QString::number(i);
+  return url + prefix + TQString::number(i);
 }
 
 
-QString K3b::findTempFile( const QString& ending, const QString& d )
+TQString K3b::findTempFile( const TQString& ending, const TQString& d )
 {
-  return findUniqueFilePrefix( "k3b_", d ) + ( ending.isEmpty() ? QString::null : (QString::fromLatin1(".") + ending) );
+  return findUniqueFilePrefix( "k3b_", d ) + ( ending.isEmpty() ? TQString() : (TQString::tqfromLatin1(".") + ending) );
 }
 
 
-QString K3b::defaultTempPath()
+TQString K3b::defaultTempPath()
 {
-  QString oldGroup = kapp->config()->group();
+  TQString oldGroup = kapp->config()->group();
   kapp->config()->setGroup( "General Options" );
-  QString url = kapp->config()->readPathEntry( "Temp Dir", KGlobal::dirs()->resourceDirs( "tmp" ).first() );
+  TQString url = kapp->config()->readPathEntry( "Temp Dir", KGlobal::dirs()->resourceDirs( "tmp" ).first() );
   kapp->config()->setGroup( oldGroup );
   return prepareDir(url);
 }
 
 
-QString K3b::prepareDir( const QString& dir )
+TQString K3b::prepareDir( const TQString& dir )
 {
   return (dir + (dir[dir.length()-1] != '/' ? "/" : ""));
 }
 
 
-QString K3b::parentDir( const QString& path )
+TQString K3b::tqparentDir( const TQString& path )
 {
-  QString parent = path;
+  TQString tqparent = path;
   if( path[path.length()-1] == '/' )
-    parent.truncate( parent.length()-1 );
+    tqparent.truncate( tqparent.length()-1 );
 
-  int pos = parent.findRev( '/' );
+  int pos = tqparent.tqfindRev( '/' );
   if( pos >= 0 )
-    parent.truncate( pos+1 );
+    tqparent.truncate( pos+1 );
   else // relative path, do anything...
-    parent = "/";
+    tqparent = "/";
 
-  return parent;
+  return tqparent;
 }
 
 
-QString K3b::fixupPath( const QString& path )
+TQString K3b::fixupPath( const TQString& path )
 {
-  QString s;
+  TQString s;
   bool lastWasSlash = false;
   for( unsigned int i = 0; i < path.length(); ++i ) {
     if( path[i] == '/' ) {
@@ -232,7 +232,7 @@ K3bVersion K3b::kernelVersion()
   K3bVersion v;
   utsname unameinfo;
   if( ::uname(&unameinfo) == 0 ) {
-    v = QString::fromLocal8Bit( unameinfo.release );
+    v = TQString::fromLocal8Bit( unameinfo.release );
     kdDebug() << "kernel version: " << v << endl;
   }
   else
@@ -247,12 +247,12 @@ K3bVersion K3b::simpleKernelVersion()
 }
 
 
-QString K3b::systemName()
+TQString K3b::systemName()
 {
-  QString v;
+  TQString v;
   utsname unameinfo;
   if( ::uname(&unameinfo) == 0 ) {
-    v = QString::fromLocal8Bit( unameinfo.sysname );
+    v = TQString::fromLocal8Bit( unameinfo.sysname );
   }
   else
     kdError() << "could not determine system name." << endl;
@@ -260,10 +260,10 @@ QString K3b::systemName()
 }
 
 
-bool K3b::kbFreeOnFs( const QString& path, unsigned long& size, unsigned long& avail )
+bool K3b::kbFreeOnFs( const TQString& path, unsigned long& size, unsigned long& avail )
 {
   struct statvfs fs;
-  if( ::statvfs( QFile::encodeName(path), &fs ) == 0 ) {
+  if( ::statvfs( TQFile::encodeName(path), &fs ) == 0 ) {
     unsigned long kBfak = fs.f_frsize/1024;
 
     size = fs.f_blocks*kBfak;
@@ -280,7 +280,7 @@ KIO::filesize_t K3b::filesize( const KURL& url )
 {
     if( url.isLocalFile() ) {
         k3b_struct_stat buf;
-        if ( !k3b_stat( QFile::encodeName( url.path() ), &buf ) ) {
+        if ( !k3b_stat( TQFile::encodeName( url.path() ), &buf ) ) {
             return (KIO::filesize_t)buf.st_size;
         }
     }
@@ -301,19 +301,19 @@ KIO::filesize_t K3b::imageFilesize( const KURL& url )
 {
   KIO::filesize_t size = K3b::filesize( url );
   int cnt = 0;
-  while( KIO::NetAccess::exists( KURL::fromPathOrURL( url.url() + '.' + QString::number(cnt).rightJustify( 3, '0' ) ), true ) )
-    size += K3b::filesize( KURL::fromPathOrURL( url.url() + '.' + QString::number(cnt++).rightJustify( 3, '0' ) ) );
+  while( KIO::NetAccess::exists( KURL::fromPathOrURL( url.url() + '.' + TQString::number(cnt).rightJustify( 3, '0' ) ), true ) )
+    size += K3b::filesize( KURL::fromPathOrURL( url.url() + '.' + TQString::number(cnt++).rightJustify( 3, '0' ) ) );
   return size;
 }
 
 
-QString K3b::cutFilename( const QString& name, unsigned int len )
+TQString K3b::cutFilename( const TQString& name, unsigned int len )
 {
   if( name.length() > len ) {
-    QString ret = name;
+    TQString ret = name;
 
     // determine extension (we think of an extension to be at most 5 chars in length)
-    int pos = name.find( '.', -6 );
+    int pos = name.tqfind( '.', -6 );
     if( pos > 0 )
       len -= (name.length() - pos);
 
@@ -329,28 +329,28 @@ QString K3b::cutFilename( const QString& name, unsigned int len )
 }
 
 
-QString K3b::removeFilenameExtension( const QString& name )
+TQString K3b::removeFilenameExtension( const TQString& name )
 {
-  QString v = name;
-  int dotpos = v.findRev( '.' );
+  TQString v = name;
+  int dotpos = v.tqfindRev( '.' );
   if( dotpos > 0 )
     v.truncate( dotpos );
   return v;
 }
 
 
-QString K3b::appendNumberToFilename( const QString& name, int num, unsigned int maxlen )
+TQString K3b::appendNumberToFilename( const TQString& name, int num, unsigned int maxlen )
 {
   // determine extension (we think of an extension to be at most 5 chars in length)
-  QString result = name;
-  QString ext;
-  int pos = name.find( '.', -6 );
+  TQString result = name;
+  TQString ext;
+  int pos = name.tqfind( '.', -6 );
   if( pos > 0 ) {
     ext = name.mid(pos);
     result.truncate( pos );
   }
 
-  ext.prepend( QString::number(num) );
+  ext.prepend( TQString::number(num) );
   result.truncate( maxlen - ext.length() );
 
   return result + ext;
@@ -372,7 +372,7 @@ bool K3b::hackedAtapiSupport()
 }
 
 
-QString K3b::externalBinDeviceParameter( K3bDevice::Device* dev, const K3bExternalBin* bin )
+TQString K3b::externalBinDeviceParameter( K3bDevice::Device* dev, const K3bExternalBin* bin )
 {
 #ifdef Q_OS_LINUX
   //
@@ -387,11 +387,11 @@ QString K3b::externalBinDeviceParameter( K3bDevice::Device* dev, const K3bExtern
   else if( (plainAtapiSupport() && bin->hasFeature("plain-atapi") ) )
     return dev->blockDeviceName();
   else
-    return QString("ATAPI:%1").arg(dev->blockDeviceName());
+    return TQString("ATAPI:%1").tqarg(dev->blockDeviceName());
 }
 
 
-int K3b::writingAppFromString( const QString& s )
+int K3b::writingAppFromString( const TQString& s )
 {
   if( s.lower() == "cdrdao" )
     return K3b::CDRDAO;
@@ -408,7 +408,7 @@ int K3b::writingAppFromString( const QString& s )
 }
 
 
-QString K3b::writingModeString( int mode )
+TQString K3b::writingModeString( int mode )
 {
   if( mode == WRITING_MODE_AUTO )
     return i18n("Auto");
@@ -417,16 +417,16 @@ QString K3b::writingModeString( int mode )
 }
 
 
-QString K3b::resolveLink( const QString& file )
+TQString K3b::resolveLink( const TQString& file )
 {
-  QFileInfo f( file );
-  QStringList steps( f.absFilePath() );
+  TQFileInfo f( file );
+  TQStringList steps( f.absFilePath() );
   while( f.isSymLink() ) {
-    QString p = f.readLink();
+    TQString p = f.readLink();
     if( !p.startsWith( "/" ) )
       p.prepend( f.dirPath(true) + "/" );
     f.setFile( p );
-    if( steps.contains( f.absFilePath() ) ) {
+    if( steps.tqcontains( f.absFilePath() ) ) {
       kdDebug() << "(K3b) symlink loop detected." << endl;
       break;
     }
@@ -442,8 +442,8 @@ K3bDevice::Device* K3b::urlToDevice( const KURL& deviceUrl )
   if( deviceUrl.protocol() == "media" || deviceUrl.protocol() == "system" ) {
     kdDebug() << "(K3b) Asking mediamanager for " << deviceUrl.fileName() << endl;
     DCOPRef mediamanager("kded", "mediamanager");
-    DCOPReply reply = mediamanager.call("properties(QString)", deviceUrl.fileName());
-    QStringList properties = reply;
+    DCOPReply reply = mediamanager.call("properties(TQString)", deviceUrl.fileName());
+    TQStringList properties = reply;
     if( !reply.isValid() || properties.count() < 6 ) {
       kdError() << "(K3b) Invalid reply from mediamanager" << endl;
       return 0;
@@ -493,40 +493,40 @@ KURL::List K3b::convertToLocalUrls( const KURL::List& urls )
 }
 
 
-Q_INT16 K3b::fromLe16( char* data )
+TQ_INT16 K3b::fromLe16( char* data )
 {
 #ifdef WORDS_BIGENDIAN // __BYTE_ORDER == __BIG_ENDIAN
-  return swapByteOrder( *((Q_INT16*)data) );
+  return swapByteOrder( *((TQ_INT16*)data) );
 #else
-  return *((Q_INT16*)data);
+  return *((TQ_INT16*)data);
 #endif
 }
 
 
-Q_INT32 K3b::fromLe32( char* data )
+TQ_INT32 K3b::fromLe32( char* data )
 {
 #ifdef WORDS_BIGENDIAN // __BYTE_ORDER == __BIG_ENDIAN
-  return swapByteOrder( *((Q_INT32*)data) );
+  return swapByteOrder( *((TQ_INT32*)data) );
 #else
-  return *((Q_INT32*)data);
+  return *((TQ_INT32*)data);
 #endif
 }
 
 
-Q_INT64 K3b::fromLe64( char* data )
+TQ_INT64 K3b::fromLe64( char* data )
 {
 #ifdef WORDS_BIGENDIAN // __BYTE_ORDER == __BIG_ENDIAN
-  return swapByteOrder( *((Q_INT64*)data) );
+  return swapByteOrder( *((TQ_INT64*)data) );
 #else
-  return *((Q_INT64*)data);
+  return *((TQ_INT64*)data);
 #endif
 }
 
 
-QString K3b::findExe( const QString& name )
+TQString K3b::findExe( const TQString& name )
 {
   // first we search the path
-  QString bin = KStandardDirs::findExe( name );
+  TQString bin = KStandardDirs::findExe( name );
 
   // then go on with our own little list
   if( bin.isEmpty() )
@@ -550,7 +550,7 @@ bool K3b::unmount( K3bDevice::Device* dev )
   if( !dev )
     return false;
 
-  QString mntDev = dev->blockDeviceName();
+  TQString mntDev = dev->blockDeviceName();
 
 #if KDE_IS_VERSION(3,4,0)
   // first try to unmount it the standard way
@@ -558,7 +558,7 @@ bool K3b::unmount( K3bDevice::Device* dev )
     return true;
 #endif
 
-  QString umountBin = K3b::findExe( "umount" );
+  TQString umountBin = K3b::findExe( "umount" );
   if( !umountBin.isEmpty() ) {
     KProcess p;
     p << umountBin;
@@ -570,7 +570,7 @@ bool K3b::unmount( K3bDevice::Device* dev )
   }
 
   // now try pmount
-  QString pumountBin = K3b::findExe( "pumount" );
+  TQString pumountBin = K3b::findExe( "pumount" );
   if( !pumountBin.isEmpty() ) {
     KProcess p;
     p << pumountBin;
@@ -594,7 +594,7 @@ bool K3b::mount( K3bDevice::Device* dev )
   if( !dev )
     return false;
 
-  QString mntDev = dev->blockDeviceName();
+  TQString mntDev = dev->blockDeviceName();
 
 #if KDE_IS_VERSION(3,4,0)
   // first try to mount it the standard way
@@ -608,7 +608,7 @@ bool K3b::mount( K3bDevice::Device* dev )
 #endif
 
   // now try pmount
-  QString pmountBin = K3b::findExe( "pmount" );
+  TQString pmountBin = K3b::findExe( "pmount" );
   if( !pmountBin.isEmpty() ) {
     KProcess p;
     p << pmountBin;

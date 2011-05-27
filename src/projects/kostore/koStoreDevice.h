@@ -23,11 +23,11 @@
 #include "koStore.h"
 
 /**
- * This class implements a QIODevice around KoStore, so that
- * it can be used to create a QDomDocument from it, to be written or read
- * using QDataStream or to be written using QTextStream
+ * This class implements a TQIODevice around KoStore, so that
+ * it can be used to create a TQDomDocument from it, to be written or read
+ * using TQDataStream or to be written using TQTextStream
  */
-class KoStoreDevice : public QIODevice
+class KoStoreDevice : public TQIODevice
 {
 public:
   /// Note: KoStore::open() should be called before calling this.
@@ -46,17 +46,26 @@ public:
   void close() { }
   void flush() { }
 
+#ifdef USE_QT4
+  inline qint64 readData ( char * data, qint64 maxSize ) { return readBlock(data, maxSize); }
+  inline qint64 writeData ( const char * data, qint64 maxSize ) { return writeBlock(data, maxSize); }
+#endif // USE_QT4
+
+#ifdef USE_QT4
+  qint64 size() const {
+#else // USE_QT4
   Offset size() const {
+#endif // USE_QT4
     if ( m_store->mode() == KoStore::Read )
       return m_store->size();
     else
       return 0xffffffff;
   }
 
-  virtual Q_LONG readBlock( char *data, Q_ULONG maxlen ) { return m_store->read(data, maxlen); }
-  virtual Q_LONG writeBlock( const char *data, Q_ULONG len ) { return m_store->write( data, len ); }
+  virtual TQ_LONG readBlock( char *data, TQ_ULONG maxlen ) { return m_store->read(data, maxlen); }
+  virtual TQ_LONG writeBlock( const char *data, TQ_ULONG len ) { return m_store->write( data, len ); }
   // Not virtual, only to uncover shadow
-  Q_LONG writeBlock( const QByteArray& data ) { return QIODevice::writeBlock( data ); }
+  TQ_LONG writeBlock( const TQByteArray& data ) { return TQIODevice::writeBlock( data ); }
 
   int getch() {
     char c[2];
@@ -76,7 +85,7 @@ public:
   }
   int ungetch( int ) { return -1; } // unsupported
 
-  // See QIODevice
+  // See TQIODevice
   virtual bool at( Offset pos ) { return m_store->at(pos); }
   virtual Offset at() const { return m_store->at(); }
   virtual bool atEnd() const { return m_store->atEnd(); }

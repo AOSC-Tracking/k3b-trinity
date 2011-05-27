@@ -21,7 +21,7 @@
 
 #include <kdialogbase.h>
 #include "k3b_export.h"
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 namespace K3bDevice {
   class Device;
@@ -31,28 +31,29 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bDeviceSelectionDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDeviceSelectionDialog( QWidget* parent = 0, 
+  K3bDeviceSelectionDialog( TQWidget* tqparent = 0, 
 			    const char* name = 0, 
-			    const QString& text = QString::null, 
+			    const TQString& text = TQString(), 
 			    bool modal = false );
   ~K3bDeviceSelectionDialog();
 
   void addDevice( K3bDevice::Device* );
-  void addDevices( const QPtrList<K3bDevice::Device>& );
+  void addDevices( const TQPtrList<K3bDevice::Device>& );
 
   void setSelectedDevice( K3bDevice::Device* );
 
   K3bDevice::Device* selectedDevice() const;
 
-  static K3bDevice::Device* selectWriter( QWidget* parent, 
-					  const QString& text = QString::null );
-  static K3bDevice::Device* selectDevice( QWidget* parent, 
-					  const QString& text = QString::null );
-  static K3bDevice::Device* selectDevice( QWidget* parent, 
-					  const QPtrList<K3bDevice::Device>& devices,
-					  const QString& text = QString::null );
+  static K3bDevice::Device* selectWriter( TQWidget* tqparent, 
+					  const TQString& text = TQString() );
+  static K3bDevice::Device* selectDevice( TQWidget* tqparent, 
+					  const TQString& text = TQString() );
+  static K3bDevice::Device* selectDevice( TQWidget* tqparent, 
+					  const TQPtrList<K3bDevice::Device>& devices,
+					  const TQString& text = TQString() );
 
  private:
   class Private;

@@ -22,9 +22,9 @@
 
 #include "k3bisooptions.h"
 
-#include <qptrlist.h>
-#include <qfileinfo.h>
-#include <qstringlist.h>
+#include <tqptrlist.h>
+#include <tqfileinfo.h>
+#include <tqstringlist.h>
 
 #include <kurl.h>
 #include <kio/global.h>
@@ -41,11 +41,11 @@ class K3bFileCompilationSizeHandler;
 class KProgressDialog;
 //class K3bView;
 class KConfig;
-class QString;
-class QStringList;
-class QWidget;
-class QDomDocument;
-class QDomElement;
+class TQString;
+class TQStringList;
+class TQWidget;
+class TQDomDocument;
+class TQDomElement;
 class K3bIso9660Directory;
 
 namespace K3bDevice {
@@ -61,15 +61,16 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDataDoc( QObject* parent = 0 );
+  K3bDataDoc( TQObject* tqparent = 0 );
   virtual ~K3bDataDoc();
 
   virtual int type() const { return DATA; }
-  virtual QString typeString() const;
+  virtual TQString typeString() const;
 
-  virtual QString name() const;
+  virtual TQString name() const;
 
   enum MultiSessionMode { 
     /**
@@ -108,13 +109,13 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
    * Simply calls reparent.
    */
   void moveItem( K3bDataItem* item, K3bDirItem* newParent );
-  void moveItems( QPtrList<K3bDataItem> itemList, K3bDirItem* newParent );
+  void moveItems( TQPtrList<K3bDataItem> itemList, K3bDirItem* newParent );
 
-  K3bDirItem* addEmptyDir( const QString& name, K3bDirItem* parent );
+  K3bDirItem* addEmptyDir( const TQString& name, K3bDirItem* tqparent );
 	
-  QString treatWhitespace( const QString& );
+  TQString treatWhitespace( const TQString& );
 	
-  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, QObject* parent = 0 );
+  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent = 0 );
 	
   MultiSessionMode multiSessionMode() const { return m_multisessionMode; }
   void setMultiSessionMode( MultiSessionMode mode );
@@ -125,7 +126,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
   void setVerifyData( bool b ) { m_verifyData = b; }
   bool verifyData() const { return m_verifyData; }
 
-  static bool nameAlreadyInDir( const QString&, K3bDirItem* );
+  static bool nameAlreadyInDir( const TQString&, K3bDirItem* );
 
   /**
    * Most of the options that map to the mkisofs parameters are grouped
@@ -135,7 +136,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
   const K3bIsoOptions& isoOptions() const { return m_isoOptions; }
   void setIsoOptions( const K3bIsoOptions& );
 
-  const QPtrList<K3bBootItem>& bootImages() { return m_bootImages; }
+  const TQPtrList<K3bBootItem>& bootImages() { return m_bootImages; }
   K3bDataItem* bootCataloge() { return m_bootCataloge; }
 
   K3bDirItem* bootImageDir();
@@ -150,7 +151,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
    * \return The new boot item on success or 0 in case a file with the same
    *         name already exists.
    */
-  K3bBootItem* createBootItem( const QString& filename, K3bDirItem* bootDir = 0 );
+  K3bBootItem* createBootItem( const TQString& filename, K3bDirItem* bootDir = 0 );
 
   /**
    * Create a new boot catalog item.
@@ -178,7 +179,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
    */
   bool needToCutFilenames() const { return m_needToCutFilenames; }
 
-  const QValueList<K3bDataItem*>& needToCutFilenameItems() const { return m_needToCutFilenameItems; }
+  const TQValueList<K3bDataItem*>& needToCutFilenameItems() const { return m_needToCutFilenameItems; }
 
   /**
    * Imports a session into the project. This will create K3bSessionImportItems
@@ -203,7 +204,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
    *
    * \return The items that correspond to the specified local path.
    */
-  QValueList<K3bDataItem*> findItemByLocalPath( const QString& path ) const;
+  TQValueList<K3bDataItem*> findItemByLocalPath( const TQString& path ) const;
 
  public slots:
   virtual void addUrls( const KURL::List& urls );
@@ -221,7 +222,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
    * Just a convience method to prevent using setIsoOptions for this
    * often used value.
    */
-  void setVolumeID( const QString& );
+  void setVolumeID( const TQString& );
 
  signals:
   void itemRemoved( K3bDataItem* );
@@ -229,14 +230,14 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
 
  protected:
   /** reimplemented from K3bDoc */
-  virtual bool loadDocumentData( QDomElement* root );
+  virtual bool loadDocumentData( TQDomElement* root );
   /** reimplemented from K3bDoc */
-  virtual bool saveDocumentData( QDomElement* );
+  virtual bool saveDocumentData( TQDomElement* );
 
-  void saveDocumentDataOptions( QDomElement& optionsElem );
-  void saveDocumentDataHeader( QDomElement& headerElem );
-  bool loadDocumentDataOptions( QDomElement optionsElem );
-  bool loadDocumentDataHeader( QDomElement optionsElem );
+  void saveDocumentDataOptions( TQDomElement& optionsElem );
+  void saveDocumentDataHeader( TQDomElement& headerElem );
+  bool loadDocumentDataOptions( TQDomElement optionsElem );
+  bool loadDocumentDataHeader( TQDomElement optionsElem );
 
   K3bFileCompilationSizeHandler* m_sizeHandler;
 
@@ -245,27 +246,27 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
 
  private:
   void prepareFilenamesInDir( K3bDirItem* dir );
-  void createSessionImportItems( const K3bIso9660Directory*, K3bDirItem* parent );
+  void createSessionImportItems( const K3bIso9660Directory*, K3bDirItem* tqparent );
 
   /**
    * used by K3bDirItem to inform about removed items.
    */
-  void itemRemovedFromDir( K3bDirItem* parent, K3bDataItem* removedItem );
-  void itemAddedToDir( K3bDirItem* parent, K3bDataItem* addedItem );
+  void itemRemovedFromDir( K3bDirItem* tqparent, K3bDataItem* removedItem );
+  void itemAddedToDir( K3bDirItem* tqparent, K3bDataItem* addedItem );
 
   /**
    * load recursivly
    */
-  bool loadDataItem( QDomElement& e, K3bDirItem* parent );
+  bool loadDataItem( TQDomElement& e, K3bDirItem* tqparent );
   /**
    * save recursivly
    */
-  void saveDataItem( K3bDataItem* item, QDomDocument* doc, QDomElement* parent );
+  void saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomElement* tqparent );
 
   void informAboutNotFoundFiles();
 
-  QStringList m_notFoundFiles;
-  QStringList m_noPermissionFiles;
+  TQStringList m_notFoundFiles;
+  TQStringList m_noPermissionFiles;
 
   K3bRootItem* m_root;
 
@@ -278,17 +279,17 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
   K3bIsoOptions m_isoOptions;
 
   MultiSessionMode m_multisessionMode;
-  QPtrList<K3bDataItem> m_oldSession;
+  TQPtrList<K3bDataItem> m_oldSession;
 
   // boot cd stuff
   K3bDataItem* m_bootCataloge;
-  QPtrList<K3bBootItem> m_bootImages;
+  TQPtrList<K3bBootItem> m_bootImages;
 
   bool m_bExistingItemsReplaceAll;
   bool m_bExistingItemsIgnoreAll;
 
   bool m_needToCutFilenames;
-  QValueList<K3bDataItem*> m_needToCutFilenameItems;
+  TQValueList<K3bDataItem*> m_needToCutFilenameItems;
 
   friend class K3bMixedDoc;
   friend class K3bDirItem;

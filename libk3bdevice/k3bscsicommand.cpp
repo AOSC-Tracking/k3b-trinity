@@ -19,7 +19,7 @@
 #include <k3bdebug.h>
 
 
-QString K3bDevice::commandString( const unsigned char& command )
+TQString K3bDevice::commandString( const unsigned char& command )
 {
   if( command == MMC_BLANK )
     return "BLANK";
@@ -35,8 +35,8 @@ QString K3bDevice::commandString( const unsigned char& command )
     return "GET EVENT STATUS NOTIFICATION";
   if( command == MMC_GET_PERFORMANCE )
     return "GET PERFORMANCE";
-  if( command == MMC_INQUIRY )
-    return "INQUIRY";
+  if( command == MMC_INTQUIRY )
+    return "INTQUIRY";
   if( command == MMC_LOAD_UNLOAD_MEDIUM )
     return "LOAD/UNLOAD MEDIUM";
   if( command == MMC_MECHANISM_STATUS )
@@ -130,7 +130,7 @@ QString K3bDevice::commandString( const unsigned char& command )
 }
 
 
-QString K3bDevice::ScsiCommand::senseKeyToString( int key )
+TQString K3bDevice::ScsiCommand::senseKeyToString( int key )
 {
   switch( key ) {
   case 0x0:
@@ -168,13 +168,13 @@ QString K3bDevice::ScsiCommand::senseKeyToString( int key )
 void K3bDevice::ScsiCommand::debugError( int command, int errorCode, int senseKey, int asc, int ascq ) {
   if( m_printErrors ) {
     k3bDebug() << "(K3bDevice::ScsiCommand) failed: " << endl
-	      << "                           command:    " << QString("%1 (%2)")
-      .arg( K3bDevice::commandString( command ) )
-      .arg( QString::number(command, 16) ) << endl
-	      << "                           errorcode:  " << QString::number(errorCode, 16) << endl
+	      << "                           command:    " << TQString("%1 (%2)")
+      .tqarg( K3bDevice::commandString( command ) )
+      .tqarg( TQString::number(command, 16) ) << endl
+	      << "                           errorcode:  " << TQString::number(errorCode, 16) << endl
 	      << "                           sense key:  " << senseKeyToString(senseKey) << endl
-	      << "                           asc:        " << QString::number(asc, 16) << endl
-	      << "                           ascq:       " << QString::number(ascq, 16) << endl;
+	      << "                           asc:        " << TQString::number(asc, 16) << endl
+	      << "                           ascq:       " << TQString::number(ascq, 16) << endl;
   }
 }
 

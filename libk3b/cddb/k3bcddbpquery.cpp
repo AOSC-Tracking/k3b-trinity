@@ -15,9 +15,9 @@
 
 #include "k3bcddbpquery.h"
 
-#include <qstringlist.h>
-#include <qsocket.h>
-#include <qtextstream.h>
+#include <tqstringlist.h>
+#include <tqsocket.h>
+#include <tqtextstream.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -25,18 +25,18 @@
 
 
 
-K3bCddbpQuery::K3bCddbpQuery( QObject* parent, const char* name )
-  :K3bCddbQuery( parent, name )
+K3bCddbpQuery::K3bCddbpQuery( TQObject* tqparent, const char* name )
+  :K3bCddbQuery( tqparent, name )
 {
-  m_socket = new QSocket( this );
+  m_socket = new TQSocket( this );
   m_stream.setDevice( m_socket );
-  m_stream.setEncoding( QTextStream::UnicodeUTF8 );
+  m_stream.setEncoding( TQTextStream::UnicodeUTF8 );
 
-  connect( m_socket, SIGNAL(connected()), this, SLOT(slotConnected()) );
-  connect( m_socket, SIGNAL(hostFound()), this, SLOT(slotHostFound()) );
-  connect( m_socket, SIGNAL(connectionClosed()), this, SLOT(slotConnectionClosed()) );
-  connect( m_socket, SIGNAL(error(int)), this, SLOT(slotError(int)) );
-  connect( m_socket, SIGNAL(readyRead()), this, SLOT(slotReadyRead()) );
+  connect( m_socket, TQT_SIGNAL(connected()), this, TQT_SLOT(slotConnected()) );
+  connect( m_socket, TQT_SIGNAL(hostFound()), this, TQT_SLOT(slotHostFound()) );
+  connect( m_socket, TQT_SIGNAL(connectionClosed()), this, TQT_SLOT(slotConnectionClosed()) );
+  connect( m_socket, TQT_SIGNAL(error(int)), this, TQT_SLOT(slotError(int)) );
+  connect( m_socket, TQT_SIGNAL(readyRead()), this, TQT_SLOT(slotReadyRead()) );
 }
 
 
@@ -54,7 +54,7 @@ void K3bCddbpQuery::doQuery()
   // connect to the server
 
   m_socket->connectToHost( m_server, m_port );
-  emit infoMessage( i18n("Searching %1 on port %2").arg(m_server).arg(m_port) );
+  emit infoMessage( i18n("Searching %1 on port %2").tqarg(m_server).tqarg(m_port) );
 }
 
 
@@ -63,7 +63,7 @@ void K3bCddbpQuery::doMatchQuery()
   // we should still be connected
   // TODO: check this
 
-  QString read = QString( "cddb read %1 %2").arg( header().category ).arg( header().discid );
+  TQString read = TQString( "cddb read %1 %2").tqarg( header().category ).tqarg( header().discid );
   
   m_state = READ;
   m_parsingBuffer = "";
@@ -95,7 +95,7 @@ void K3bCddbpQuery::slotConnectionClosed()
 
 void K3bCddbpQuery::cddbpQuit()
 {
-  m_state = QUIT;
+  m_state = TQUIT;
   m_stream << "quit" << endl << flush;
 }
 
@@ -103,7 +103,7 @@ void K3bCddbpQuery::cddbpQuit()
 void K3bCddbpQuery::slotReadyRead()
 {
   while( m_socket->canReadLine() ) {
-    QString line = m_stream.readLine();
+    TQString line = m_stream.readLine();
 
     //    kdDebug() << "(K3bCddbpQuery) line: " << line << endl;
 
@@ -146,13 +146,13 @@ void K3bCddbpQuery::slotReadyRead()
 	}
 	
 	// just ignore the reply since it's not important for the functionality
-	m_state = QUERY;
+	m_state = TQUERY;
 	
 	m_stream << queryString() << endl << flush;
 	break;
       }
 
-    case QUERY:
+    case TQUERY:
       if( getCode( line ) == 200 ) {
 	// parse exact match and send a read command
 	K3bCddbResultHeader header;
@@ -169,7 +169,7 @@ void K3bCddbpQuery::slotReadyRead()
 
 	emit infoMessage( i18n("Found multiple exact matches") );
 
-	m_state = QUERY_DATA;
+	m_state = TQUERY_DATA;
       }
 
       else if( getCode( line ) == 211 ) {
@@ -177,7 +177,7 @@ void K3bCddbpQuery::slotReadyRead()
 
 	emit infoMessage( i18n("Found inexact matches") );
 
-	m_state = QUERY_DATA;
+	m_state = TQUERY_DATA;
       }
 
       else if( getCode( line ) == 202 ) {
@@ -190,12 +190,12 @@ void K3bCddbpQuery::slotReadyRead()
       else {
 	kdDebug() << "(K3bCddbpQuery) Error while querying: " << line << endl;
 	emit infoMessage( i18n("Error while querying") );
-	setError( QUERY_ERROR );
+	setError( TQUERY_ERROR );
 	cddbpQuit();
       }
       break;
 
-    case QUERY_DATA:
+    case TQUERY_DATA:
       if( line.startsWith( "." ) ) {
 	// finished query
 	// go on reading
@@ -234,7 +234,7 @@ void K3bCddbpQuery::slotReadyRead()
 	
 	kdDebug() << "(K3bCddbpQuery) query finished." << endl;
 
-	QTextStream strStream( m_parsingBuffer, IO_ReadOnly );
+	TQTextStream strStream( m_parsingBuffer, IO_ReadOnly );
 	parseEntry( strStream, result() );
 
 	setError( SUCCESS );
@@ -246,7 +246,7 @@ void K3bCddbpQuery::slotReadyRead()
       }
       break;
 
-    case QUIT:
+    case TQUIT:
       // no parsing needed
       break;
     }
@@ -257,17 +257,17 @@ void K3bCddbpQuery::slotReadyRead()
 void K3bCddbpQuery::slotError( int e )
 {
   switch(e) {
-  case QSocket::ErrConnectionRefused:
-    kdDebug() <<  i18n("Connection to %1 refused").arg( m_server ) << endl;
-    emit infoMessage( i18n("Connection to %1 refused").arg( m_server ) );
+  case TQSocket::ErrConnectionRefused:
+    kdDebug() <<  i18n("Connection to %1 refused").tqarg( m_server ) << endl;
+    emit infoMessage( i18n("Connection to %1 refused").tqarg( m_server ) );
     break;
-  case QSocket::ErrHostNotFound:
-    kdDebug() <<  i18n("Could not find host %1").arg( m_server ) << endl;
-    emit infoMessage( i18n("Could not find host %1").arg( m_server ) );
+  case TQSocket::ErrHostNotFound:
+    kdDebug() <<  i18n("Could not find host %1").tqarg( m_server ) << endl;
+    emit infoMessage( i18n("Could not find host %1").tqarg( m_server ) );
     break;
-  case QSocket::ErrSocketRead:
-    kdDebug() <<  i18n("Error while reading from %1").arg( m_server ) << endl;
-    emit infoMessage( i18n("Error while reading from %1").arg( m_server ) );
+  case TQSocket::ErrSocketRead:
+    kdDebug() <<  i18n("Error while reading from %1").tqarg( m_server ) << endl;
+    emit infoMessage( i18n("Error while reading from %1").tqarg( m_server ) );
     break;
   }
 

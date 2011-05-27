@@ -35,24 +35,24 @@
 #include <kapplication.h>
 #include <kglobalsettings.h>
 
-#include <qdir.h>
-#include <qevent.h>
-#include <qdragobject.h>
-#include <qcursor.h>
-#include <qnamespace.h>
-#include <qmap.h>
-#include <qptrdict.h>
-#include <qpainter.h>
-#include <qfont.h>
-#include <qstyle.h>
-#include <qlabel.h>
-#include <qlayout.h>
+#include <tqdir.h>
+#include <tqevent.h>
+#include <tqdragobject.h>
+#include <tqcursor.h>
+#include <tqnamespace.h>
+#include <tqmap.h>
+#include <tqptrdict.h>
+#include <tqpainter.h>
+#include <tqfont.h>
+#include <tqstyle.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
 
 
 K3bDeviceBranch::K3bDeviceBranch( KFileTreeView* view, K3bDevice::Device* dev, KFileTreeViewItem* item )
   : KFileTreeBranch( view,
 		     KURL( "media:/" + dev->blockDeviceName() ),
-		     QString("%1 - %2").arg(dev->vendor()).arg(dev->description()),
+		     TQString("%1 - %2").tqarg(dev->vendor()).tqarg(dev->description()),
 		     ( dev->burner()
 		       ? SmallIcon("cdwriter_unmount")
 		       : SmallIcon("cdrom_unmount") ),
@@ -67,8 +67,8 @@ K3bDeviceBranch::K3bDeviceBranch( KFileTreeView* view, K3bDevice::Device* dev, K
   root()->setExpandable(false);
   updateLabel();
 
-  connect( k3bappcore->mediaCache(), SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 }
 
 
@@ -98,14 +98,14 @@ void K3bDeviceBranch::setCurrent( bool c )
 void K3bDeviceBranch::updateLabel()
 {
   if( m_showBlockDeviceName )
-    setName( QString("%1 %2 (%3)")
-	     .arg(m_device->vendor())
-	     .arg(m_device->description())
-	     .arg(m_device->blockDeviceName()) );
+    setName( TQString("%1 %2 (%3)")
+	     .tqarg(m_device->vendor())
+	     .tqarg(m_device->description())
+	     .tqarg(m_device->blockDeviceName()) );
   else
-    setName( QString("%1 %2")
-	     .arg(m_device->vendor())
-	     .arg(m_device->description()) );
+    setName( TQString("%1 %2")
+	     .tqarg(m_device->vendor())
+	     .tqarg(m_device->description()) );
 
   if( k3bappcore->mediaCache() ) {
     root()->setMultiLinesEnabled( true );
@@ -135,8 +135,8 @@ void K3bDeviceBranch::showBlockDeviceName( bool b )
 
 K3bFileTreeBranch::K3bFileTreeBranch( KFileTreeView* view,
 				      const KURL& url,
-				      const QString& name,
-				      const QPixmap& pix,
+				      const TQString& name,
+				      const TQPixmap& pix,
 				      bool showHidden,
 				      KFileTreeViewItem* item )
   : KFileTreeBranch( view, url, name, pix, showHidden,
@@ -151,10 +151,10 @@ K3bFileTreeBranch::K3bFileTreeBranch( KFileTreeView* view,
 
 
 
-K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeViewItem* parent,
+K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeViewItem* tqparent,
 						  K3bDevice::Device* dev,
 						  K3bDeviceBranch* branch )
-  : KFileTreeViewItem( parent,
+  : KFileTreeViewItem( tqparent,
 		       new KFileItem( KURL( "media:/" + dev->blockDeviceName() ),
 				      "inode/directory",
 				      S_IFDIR  ),
@@ -165,10 +165,10 @@ K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeViewItem* parent,
 }
 
 
-K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeView* parent,
+K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeView* tqparent,
 						  K3bDevice::Device* dev,
 						  K3bDeviceBranch* branch )
-  : KFileTreeViewItem( parent,
+  : KFileTreeViewItem( tqparent,
 		       new KFileItem( KURL( "media:/" + dev->blockDeviceName() ),
 				      "inode/directory",
 				      S_IFDIR  ),
@@ -182,21 +182,21 @@ K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeView* parent,
 void K3bDeviceBranchViewItem::setCurrent( bool c )
 {
   m_bCurrent = c;
-  repaint();
+  tqrepaint();
 }
 
 
-void K3bDeviceBranchViewItem::paintCell( QPainter* p, const QColorGroup& cg, int /* col */, int width, int align )
+void K3bDeviceBranchViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int /* col */, int width, int align )
 {
   p->save();
 
   int xpos = 1;
   int ypos = 1;
-  QFontMetrics fm( p->fontMetrics() );
+  TQFontMetrics fm( p->fontMetrics() );
 
   if( isSelected() ) {
     p->fillRect( 0, 0, width, height(),
-		 cg.brush( QColorGroup::Highlight ) );
+		 cg.brush( TQColorGroup::Highlight ) );
     p->setPen( cg.highlightedText() );
   }
   else {
@@ -210,39 +210,39 @@ void K3bDeviceBranchViewItem::paintCell( QPainter* p, const QColorGroup& cg, int
   }
 
   if( m_bCurrent ) {
-    QFont f( listView()->font() );
+    TQFont f( listView()->font() );
     f.setBold( true );
     p->setFont( f );
   }
 
   ypos += fm.ascent();
-  QString line1 = text(0).left( text(0).find('\n') );
+  TQString line1 = text(0).left( text(0).tqfind('\n') );
   p->drawText( xpos, ypos, line1 );
 
-  QFont f( listView()->font() );
+  TQFont f( listView()->font() );
   f.setItalic( true );
   f.setBold( false );
   f.setPointSize( f.pointSize() - 2 );
   p->setFont( f );
 
   ypos += p->fontMetrics().height() + 1;
-  QString line2 = text(0).mid( text(0).find('\n')+1 );
+  TQString line2 = text(0).mid( text(0).tqfind('\n')+1 );
   p->drawText( xpos - p->fontMetrics().leftBearing( line2[0] ), ypos, line2 );
 
 
-  // from QListViewItem
+  // from TQListViewItem
   if( isOpen() && childCount() ) {
     int textheight = fm.size( align, text(0) ).height() + 2 * listView()->itemMargin();
-    textheight = QMAX( textheight, QApplication::globalStrut().height() );
+    textheight = TQMAX( textheight, TQApplication::globalStrut().height() );
     if ( textheight % 2 > 0 )
       textheight++;
     if ( textheight < height() ) {
       int w = listView()->treeStepSize() / 2;
-      listView()->style().drawComplexControl( QStyle::CC_ListView, p, listView(),
-					      QRect( 0, textheight, w + 1, height() - textheight + 1 ), cg,
-					      QStyle::Style_Enabled,
-					      QStyle::SC_ListViewExpand,
-					      (uint)QStyle::SC_All, QStyleOption( this ) );
+      listView()->tqstyle().tqdrawComplexControl( TQStyle::CC_ListView, p, listView(),
+					      TQRect( 0, textheight, w + 1, height() - textheight + 1 ), cg,
+					      TQStyle::Style_Enabled,
+					      TQStyle::SC_ListViewExpand,
+					      (uint)TQStyle::SC_All, TQStyleOption( this ) );
     }
   }
 
@@ -252,16 +252,16 @@ void K3bDeviceBranchViewItem::paintCell( QPainter* p, const QColorGroup& cg, int
 
 int K3bDeviceBranchViewItem::widthHint() const
 {
-  QFont f( listView()->font() );
+  TQFont f( listView()->font() );
   if ( m_bCurrent ) {
       f.setBold( true );
   }
-  int w = QFontMetrics(f).width( text(0).left( text(0).find('\n') ) );
+  int w = TQFontMetrics(f).width( text(0).left( text(0).tqfind('\n') ) );
 
   f.setItalic( true );
   f.setBold( false );
   f.setPointSize( f.pointSize() - 2 );
-  w = QMAX( w, QFontMetrics(f).width( text(0).mid( text(0).find('\n')+1 ) ) );
+  w = TQMAX( w, TQFontMetrics(f).width( text(0).mid( text(0).tqfind('\n')+1 ) ) );
 
   w++; // see paintCell
 
@@ -272,26 +272,26 @@ int K3bDeviceBranchViewItem::widthHint() const
 }
 
 
-QString K3bDeviceBranchViewItem::key( int column, bool ascending ) const
+TQString K3bDeviceBranchViewItem::key( int column, bool ascending ) const
 {
   return "0" + KFileTreeViewItem::key( column, ascending );
 }
 
 
 
-K3bFileTreeViewItem::K3bFileTreeViewItem( KFileTreeViewItem* parent, KFileItem* item, KFileTreeBranch* branch )
-  : KFileTreeViewItem( parent, item, branch )
+K3bFileTreeViewItem::K3bFileTreeViewItem( KFileTreeViewItem* tqparent, KFileItem* item, KFileTreeBranch* branch )
+  : KFileTreeViewItem( tqparent, item, branch )
 {
 }
 
 
-K3bFileTreeViewItem::K3bFileTreeViewItem( KFileTreeView* parent, KFileItem* item, KFileTreeBranch* branch )
-  : KFileTreeViewItem( parent, item, branch )
+K3bFileTreeViewItem::K3bFileTreeViewItem( KFileTreeView* tqparent, KFileItem* item, KFileTreeBranch* branch )
+  : KFileTreeViewItem( tqparent, item, branch )
 {
 }
 
 
-QString K3bFileTreeViewItem::key( int column, bool ascending ) const
+TQString K3bFileTreeViewItem::key( int column, bool ascending ) const
 {
   return "1" + KFileTreeViewItem::key( column, ascending );
 }
@@ -300,26 +300,26 @@ QString K3bFileTreeViewItem::key( int column, bool ascending ) const
 class K3bDeviceTreeToolTip : public K3bToolTip
 {
 public:
-  K3bDeviceTreeToolTip( QWidget* parent, K3bFileTreeView* lv );
+  K3bDeviceTreeToolTip( TQWidget* tqparent, K3bFileTreeView* lv );
 
-  void maybeTip( const QPoint &pos );
+  void maybeTip( const TQPoint &pos );
 
 private:
   K3bFileTreeView* m_view;
 };
 
 
-K3bDeviceTreeToolTip::K3bDeviceTreeToolTip( QWidget* parent, K3bFileTreeView* lv )
-  : K3bToolTip( parent ),
+K3bDeviceTreeToolTip::K3bDeviceTreeToolTip( TQWidget* tqparent, K3bFileTreeView* lv )
+  : K3bToolTip( tqparent ),
     m_view( lv )
 {
   setTipTimeout( 500 );
 }
 
 
-void K3bDeviceTreeToolTip::maybeTip( const QPoint& pos )
+void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
 {
-  if( !parentWidget() || !m_view )
+  if( !tqparentWidget() || !m_view )
     return;
 
   K3bDeviceBranchViewItem* item = dynamic_cast<K3bDeviceBranchViewItem*>( m_view->itemAt( pos ) );
@@ -328,24 +328,24 @@ void K3bDeviceTreeToolTip::maybeTip( const QPoint& pos )
 
   K3bDevice::Device* dev = static_cast<K3bDeviceBranch*>( item->branch() )->device();
 
-  QFrame* tooltip = new QFrame( parentWidget() );
-  tooltip->setFrameStyle( QFrame::Panel | QFrame::Raised );
-  tooltip->setFrameShape( QFrame::StyledPanel );
-  QGridLayout* lay = new QGridLayout( tooltip, 2, 2, tooltip->frameWidth()*2 /*margin*/, 6 /*spacing*/ );
+  TQFrame* tooltip = new TQFrame( tqparentWidget() );
+  tooltip->setFrameStyle( TQFrame::Panel | TQFrame::Raised );
+  tooltip->setFrameShape( TQFrame::StyledPanel );
+  TQGridLayout* lay = new TQGridLayout( tooltip, 2, 2, tooltip->frameWidth()*2 /*margin*/, 6 /*spacing*/ );
 
-  QString text = k3bappcore->mediaCache()->medium( dev ).longString();
-  int detailsStart = text.find( "<p>", 3 );
-  QString details = text.mid( detailsStart );
+  TQString text = k3bappcore->mediaCache()->medium( dev ).longString();
+  int detailsStart = text.tqfind( "<p>", 3 );
+  TQString details = text.mid( detailsStart );
   text.truncate( detailsStart );
 
-  QLabel* label = new QLabel( text, tooltip );
+  TQLabel* label = new TQLabel( text, tooltip );
   label->setMargin( 9 );
   lay->addMultiCellWidget( label, 0, 0, 0, 1 );
-  label = new QLabel( details, tooltip );
+  label = new TQLabel( details, tooltip );
   label->setMargin( 9 );
-  label->setAlignment( Qt::Vertical );
+  label->tqsetAlignment( Qt::Vertical );
   lay->addMultiCellWidget( label, 1, 2, 0, 0 );
-  label = new QLabel( tooltip );
+  label = new TQLabel( tooltip );
   lay->addWidget( label, 2, 1 );
   lay->setColStretch( 0, 1 );
 
@@ -374,7 +374,7 @@ void K3bDeviceTreeToolTip::maybeTip( const QPoint& pos )
   }
 
   // the tooltip will take care of deleting the widget
-  tip( m_view->itemRect( item ), tooltip );
+  tip( m_view->tqitemRect( item ), tooltip );
 }
 
 
@@ -387,8 +387,8 @@ public:
       currentDeviceBranch(0) {
   }
 
-  QPtrDict<K3bDeviceBranch> deviceBranchDict;
-  QMap<KFileTreeBranch*, K3bDevice::Device*> branchDeviceMap;
+  TQPtrDict<K3bDeviceBranch> deviceBranchDict;
+  TQMap<KFileTreeBranch*, K3bDevice::Device*> branchDeviceMap;
 
   K3bDevice::DeviceManager* deviceManager;
   K3bDeviceBranch* currentDeviceBranch;
@@ -396,8 +396,8 @@ public:
   K3bDeviceTreeToolTip* toolTip;
 };
 
-K3bFileTreeView::K3bFileTreeView( QWidget *parent, const char *name )
-  : KFileTreeView( parent,  name )
+K3bFileTreeView::K3bFileTreeView( TQWidget *tqparent, const char *name )
+  : KFileTreeView( tqparent,  name )
 {
   d = new Private();
 
@@ -405,7 +405,7 @@ K3bFileTreeView::K3bFileTreeView( QWidget *parent, const char *name )
 
   addColumn( i18n("Directories") );
   setDragEnabled( true );
-  setAlternateBackground( QColor() );
+  setAlternateBackground( TQColor() );
   setFullWidth(true);
   //  setRootIsDecorated(true);
   setSorting(0);
@@ -413,15 +413,15 @@ K3bFileTreeView::K3bFileTreeView( QWidget *parent, const char *name )
   m_dirOnlyMode = true;
   m_menuEnabled = false;
 
-  connect( this, SIGNAL(executed(QListViewItem*)), this, SLOT(slotItemExecuted(QListViewItem*)) );
-  connect( this, SIGNAL(returnPressed(QListViewItem*)), this, SLOT(slotItemExecuted(QListViewItem*)) );
-  connect( this, SIGNAL(contextMenu(KListView*, QListViewItem* , const QPoint& )),
-	   this, SLOT(slotContextMenu(KListView*, QListViewItem* , const QPoint& )) );
+  connect( this, TQT_SIGNAL(executed(TQListViewItem*)), this, TQT_SLOT(slotItemExecuted(TQListViewItem*)) );
+  connect( this, TQT_SIGNAL(returnPressed(TQListViewItem*)), this, TQT_SLOT(slotItemExecuted(TQListViewItem*)) );
+  connect( this, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem* , const TQPoint& )),
+	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem* , const TQPoint& )) );
 
   // we always simulate the single click
   slotSettingsChangedK3b(KApplication::SETTINGS_MOUSE);
   if( kapp )
-    connect( kapp, SIGNAL(settingsChanged(int)), SLOT(slotSettingsChangedK3b(int)) );
+    connect( kapp, TQT_SIGNAL(settingsChanged(int)), TQT_SLOT(slotSettingsChangedK3b(int)) );
 
   initActions();
 }
@@ -449,11 +449,11 @@ void K3bFileTreeView::initActions()
 //   m_devicePopupMenu = new KActionMenu( m_actionCollection, "device_popup_menu" );
 //   m_urlPopupMenu = new KActionMenu( m_actionCollection, "url_popup_menu" );
 
-//   KAction* actionDiskInfo = new KAction( i18n("&Disk Info"), "info", 0, this, SLOT(slotShowDiskInfo()),
+//   KAction* actionDiskInfo = new KAction( i18n("&Disk Info"), "info", 0, this, TQT_SLOT(slotShowDiskInfo()),
 // 					 m_actionCollection, "disk_info");
-//   KAction* actionUnmount = new KAction( i18n("&Unmount"), "cdrom_unmount", 0, this, SLOT(slotUnmountDisk()),
+//   KAction* actionUnmount = new KAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(slotUnmountDisk()),
 // 					m_actionCollection, "disk_unmount");
-//   KAction* actionEject = new KAction( i18n("&Eject"), "", 0, this, SLOT(slotEjectDisk()),
+//   KAction* actionEject = new KAction( i18n("&Eject"), "", 0, this, TQT_SLOT(slotEjectDisk()),
 // 					m_actionCollection, "disk_eject");
 
 //   m_devicePopupMenu->insert( actionDiskInfo );
@@ -466,7 +466,7 @@ void K3bFileTreeView::initActions()
 
 void K3bFileTreeView::addDefaultBranches()
 {
-  KURL home = KURL::fromPathOrURL( QDir::homeDirPath() );
+  KURL home = KURL::fromPathOrURL( TQDir::homeDirPath() );
   KURL root = KURL( "file:/" );
 
   KFileTreeBranch* treeBranch = addBranch( new K3bFileTreeBranch( this, root, i18n("Root"), SmallIcon("folder_red") ) );
@@ -480,7 +480,7 @@ void K3bFileTreeView::addCdDeviceBranches( K3bDevice::DeviceManager* dm )
   kdDebug() << "(K3bFileTreeView::addCdDeviceBranches)" << endl;
 
   // remove all previous added device branches
-  for( QMap<KFileTreeBranch*, K3bDevice::Device*>::Iterator it = d->branchDeviceMap.begin();
+  for( TQMap<KFileTreeBranch*, K3bDevice::Device*>::Iterator it = d->branchDeviceMap.begin();
        it != d->branchDeviceMap.end(); ++it ) {
     removeBranch( it.key() );
   }
@@ -489,7 +489,7 @@ void K3bFileTreeView::addCdDeviceBranches( K3bDevice::DeviceManager* dm )
   d->branchDeviceMap.clear();
   d->deviceBranchDict.clear();
 
-  for( QPtrListIterator<K3bDevice::Device> it( dm->allDevices() ); *it; ++it )
+  for( TQPtrListIterator<K3bDevice::Device> it( dm->allDevices() ); *it; ++it )
     addDeviceBranch( *it );
 
   if( dm != d->deviceManager ) {
@@ -498,12 +498,12 @@ void K3bFileTreeView::addCdDeviceBranches( K3bDevice::DeviceManager* dm )
     d->deviceManager = dm;
 
     // make sure we get changes to the config
-    connect( dm, SIGNAL(changed(K3bDevice::DeviceManager*)),
-	     this, SLOT(addCdDeviceBranches(K3bDevice::DeviceManager*)) );
+    connect( dm, TQT_SIGNAL(changed(K3bDevice::DeviceManager*)),
+	     this, TQT_SLOT(addCdDeviceBranches(K3bDevice::DeviceManager*)) );
 
     if( K3bAppDeviceManager* appDevM = dynamic_cast<K3bAppDeviceManager*>( dm ) )
-      connect( appDevM, SIGNAL(currentDeviceChanged(K3bDevice::Device*)),
-	       this, SLOT(setCurrentDevice(K3bDevice::Device*)) );
+      connect( appDevM, TQT_SIGNAL(currentDeviceChanged(K3bDevice::Device*)),
+	       this, TQT_SLOT(setCurrentDevice(K3bDevice::Device*)) );
   }
 
   K3bDevice::Device* currentDevice = k3bappcore->appDeviceManager()->currentDevice();
@@ -528,7 +528,7 @@ void K3bFileTreeView::addDeviceBranch( K3bDevice::Device* dev )
   // search for an equal device
   int equalCnt = 0;
   K3bDeviceBranch* equalBranch = 0;
-  for( QMap<KFileTreeBranch*, K3bDevice::Device*>::Iterator it = d->branchDeviceMap.begin();
+  for( TQMap<KFileTreeBranch*, K3bDevice::Device*>::Iterator it = d->branchDeviceMap.begin();
        it != d->branchDeviceMap.end(); ++it ) {
     K3bDevice::Device* itDev = it.data();
     K3bDeviceBranch* itBranch = (K3bDeviceBranch*)it.key();
@@ -566,7 +566,7 @@ KFileTreeBranch* K3bFileTreeView::addBranch( KFileTreeBranch* branch )
 }
 
 
-KFileTreeBranch* K3bFileTreeView::addBranch( const KURL& url, const QString& name, const QPixmap& pix, bool showHidden )
+KFileTreeBranch* K3bFileTreeView::addBranch( const KURL& url, const TQString& name, const TQPixmap& pix, bool showHidden )
 {
   KFileTreeBranch* newBranch = KFileTreeView::addBranch( url, name, pix, showHidden );
   newBranch->setChildRecurse( false );
@@ -576,10 +576,10 @@ KFileTreeBranch* K3bFileTreeView::addBranch( const KURL& url, const QString& nam
 }
 
 
-void K3bFileTreeView::slotItemExecuted( QListViewItem* item )
+void K3bFileTreeView::slotItemExecuted( TQListViewItem* item )
 {
   KFileTreeViewItem* treeItem = static_cast<KFileTreeViewItem*>(item);
-  if( d->branchDeviceMap.contains( treeItem->branch() ) &&
+  if( d->branchDeviceMap.tqcontains( treeItem->branch() ) &&
       treeItem == treeItem->branch()->root() ) {
     K3bDevice::Device* dev = d->branchDeviceMap[treeItem->branch()];
       k3bappcore->appDeviceManager()->setCurrentDevice( dev );
@@ -601,7 +601,7 @@ void K3bFileTreeView::followUrl( const KURL& url )
   // TODO: first try the current branch
   KFileTreeBranchIterator it( branches() );
   for( ; *it; ++it ) {
-    if( !d->branchDeviceMap.contains( *it ) )
+    if( !d->branchDeviceMap.tqcontains( *it ) )
       if( KFileTreeViewItem* item = (*it)->findTVIByURL( url ) ) {
 	setCurrentItem( item );
 	setSelected(item, true);
@@ -612,13 +612,13 @@ void K3bFileTreeView::followUrl( const KURL& url )
 }
 
 
-void K3bFileTreeView::slotContextMenu( KListView*, QListViewItem* item, const QPoint& p )
+void K3bFileTreeView::slotContextMenu( KListView*, TQListViewItem* item, const TQPoint& p )
 {
   KFileTreeViewItem* treeItem = dynamic_cast<KFileTreeViewItem*>(item);
   if( treeItem ) {
     K3bDevice::Device* device = 0;
-    QMap<KFileTreeBranch*, K3bDevice::Device*>::iterator devIt =
-      d->branchDeviceMap.find( treeItem->branch() );
+    TQMap<KFileTreeBranch*, K3bDevice::Device*>::iterator devIt =
+      d->branchDeviceMap.tqfind( treeItem->branch() );
     if( devIt != d->branchDeviceMap.end() )
       device = devIt.data();
 
@@ -641,7 +641,7 @@ K3bDevice::Device* K3bFileTreeView::selectedDevice() const
 {
   KFileTreeViewItem* treeItem = dynamic_cast<KFileTreeViewItem*>(selectedItem());
   if( treeItem ) {
-    if( d->branchDeviceMap.contains( treeItem->branch() ) )
+    if( d->branchDeviceMap.tqcontains( treeItem->branch() ) )
       return d->branchDeviceMap[treeItem->branch()];
   }
   return 0;
@@ -652,7 +652,7 @@ KURL K3bFileTreeView::selectedUrl() const
 {
   KFileTreeViewItem* treeItem = dynamic_cast<KFileTreeViewItem*>(selectedItem());
   if( treeItem ) {
-    if( !d->branchDeviceMap.contains( treeItem->branch() ) )
+    if( !d->branchDeviceMap.tqcontains( treeItem->branch() ) )
       return treeItem->url();
   }
   return KURL();
@@ -684,7 +684,7 @@ void K3bFileTreeView::setSelectedDevice( K3bDevice::Device* dev )
 
 K3bDeviceBranch* K3bFileTreeView::branch( K3bDevice::Device* dev )
 {
-  return d->deviceBranchDict.find( (void*)dev );
+  return d->deviceBranchDict.tqfind( (void*)dev );
 }
 
 
@@ -693,19 +693,19 @@ void K3bFileTreeView::slotSettingsChangedK3b(int category)
   // we force single click like konqueror does. This really should be done in KFileTreeView
 
   if( category == KApplication::SETTINGS_MOUSE ) {
-    disconnect(this, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int)),
-	       this, SLOT(slotMouseButtonClickedK3b(int, QListViewItem*, const QPoint &, int)));
+    disconnect(this, TQT_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
+	       this, TQT_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
 
     if( !KGlobalSettings::singleClick() )
-      connect(this, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int)),
-	      this, SLOT(slotMouseButtonClickedK3b(int, QListViewItem*, const QPoint &, int)));
+      connect(this, TQT_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
+	      this, TQT_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
   }
 }
 
 
-void K3bFileTreeView::slotMouseButtonClickedK3b( int btn, QListViewItem *item, const QPoint &pos, int c )
+void K3bFileTreeView::slotMouseButtonClickedK3b( int btn, TQListViewItem *item, const TQPoint &pos, int c )
 {
-  if( (btn == LeftButton) && item )
+  if( (btn == Qt::LeftButton) && item )
     emitExecute(item, pos, c);
 }
 
@@ -716,13 +716,13 @@ void K3bFileTreeView::updateMinimumWidth()
   // only handle the device branches, we don't care about the folders.
   //
   int w = 0;
-  for( QMap<KFileTreeBranch*, K3bDevice::Device*>::Iterator it = d->branchDeviceMap.begin();
+  for( TQMap<KFileTreeBranch*, K3bDevice::Device*>::Iterator it = d->branchDeviceMap.begin();
        it != d->branchDeviceMap.end(); ++it ) {
-    w = QMAX( w, static_cast<K3bDeviceBranchViewItem*>( it.key()->root() )->widthHint() );
+    w = TQMAX( w, static_cast<K3bDeviceBranchViewItem*>( it.key()->root() )->widthHint() );
   }
 
   // width of the items + scrollbar width + the frame + a little eyecandy spacing
-  setMinimumWidth( w + verticalScrollBar()->sizeHint().width() + 2*frameWidth() + 2 );
+  setMinimumWidth( w + verticalScrollBar()->tqsizeHint().width() + 2*frameWidth() + 2 );
 }
 
 #include "k3bfiletreeview.moc"

@@ -20,9 +20,9 @@
 #include "k3binteractiondialog.h"
 #include <k3bjobhandler.h>
 
-class QGroupBox;
-class QComboBox;
-class QCloseEvent;
+class TQGroupBox;
+class TQComboBox;
+class TQCloseEvent;
 class KListView;
 class K3bWriterSelectionWidget;
 namespace K3bDevice {
@@ -33,9 +33,10 @@ namespace K3bDevice {
 class K3bBlankingDialog : public K3bInteractionDialog, public K3bJobHandler
 {
 Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bBlankingDialog( QWidget*, const char* );
+  K3bBlankingDialog( TQWidget*, const char* );
   ~K3bBlankingDialog();
 
   /**
@@ -44,21 +45,21 @@ Q_OBJECT
   int waitForMedia( K3bDevice::Device*,
 		    int mediaState = K3bDevice::STATE_EMPTY,
 		    int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		    const QString& message = QString::null );
+		    const TQString& message = TQString() );
   
   /**
    * @reimplemented from K3bJobHandler
    */
-  bool questionYesNo( const QString& text,
-		      const QString& caption = QString::null,
-		      const QString& yesText = QString::null,
-		      const QString& noText = QString::null );
+  bool questionYesNo( const TQString& text,
+		      const TQString& caption = TQString(),
+		      const TQString& yesText = TQString(),
+		      const TQString& noText = TQString() );
 
   /**
    * reimplemented from K3bJobHandler
    */
-  void blockingInformation( const QString& text,
-			    const QString& caption = QString::null );
+  void blockingInformation( const TQString& text,
+			    const TQString& caption = TQString() );
 
  public slots:
   void setDevice( K3bDevice::Device* );
@@ -77,7 +78,7 @@ Q_OBJECT
 
   K3bWriterSelectionWidget* m_writerSelectionWidget;
 
-  QComboBox* m_comboEraseMode;
+  TQComboBox* m_comboEraseMode;
 
   class Private;
   Private* d;

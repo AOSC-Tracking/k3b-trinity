@@ -19,15 +19,15 @@
 #include <kstandarddirs.h>
 
 
-static inline QString defaultTempDir()
+static inline TQString defaultTempDir()
 {
   // we need a world-readable temp dir
   
   // FIXME: check if the default is world-readable
-//   QStringList dirs = KGlobal::dirs()->resourceDirs( "tmp" );
-//   for( QStringList::const_iterator it = dirs.begin();
+//   TQStringList dirs = KGlobal::dirs()->resourceDirs( "tmp" );
+//   for( TQStringList::const_iterator it = dirs.begin();
 //        it != dirs.end(); ++it ) {
-//     const QString& dir = *it;
+//     const TQString& dir = *it;
     
 //   }
 
@@ -36,8 +36,8 @@ static inline QString defaultTempDir()
 }
 
 
-K3bTempFile::K3bTempFile( const QString& filePrefix, 
-			  const QString& fileExtension, 
+K3bTempFile::K3bTempFile( const TQString& filePrefix, 
+			  const TQString& fileExtension, 
 			  int mode )
   : KTempFile( filePrefix.isEmpty() ? defaultTempDir() : filePrefix,
 	       fileExtension,

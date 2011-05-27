@@ -18,8 +18,8 @@
 #define K3BDIRITEM_H
 
 
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
 #include <kio/global.h>
 
@@ -34,11 +34,11 @@ class K3bDataDoc;
 class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
 {
  public: 
-  K3bDirItem( const QString& name, K3bDataDoc*, K3bDirItem* parentDir = 0 );
+  K3bDirItem( const TQString& name, K3bDataDoc*, K3bDirItem* tqparentDir = 0 );
 
   /**
-   * Default copy constructor. Copies the dir including all children. However, none of the
-   * children will have set a doc and the copy dir will not have set a parent dir.
+   * Default copy constructor. Copies the dir including all tqchildren. However, none of the
+   * tqchildren will have set a doc and the copy dir will not have set a tqparent dir.
    */
   K3bDirItem( const K3bDirItem& );
 
@@ -48,16 +48,16 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
 	
   K3bDirItem* getDirItem() const;
 
-  const QPtrList<K3bDataItem>& children() const { return m_children; }
+  const TQPtrList<K3bDataItem>& tqchildren() const { return m_tqchildren; }
   K3bDirItem* addDataItem( K3bDataItem* item );
   K3bDataItem* takeDataItem( K3bDataItem* item );
 	
   K3bDataItem* nextSibling() const;
   K3bDataItem* nextChild( K3bDataItem* ) const;
 
-  bool alreadyInDirectory( const QString& fileName ) const;
-  K3bDataItem* find( const QString& filename ) const;
-  K3bDataItem* findByPath( const QString& );
+  bool alreadyInDirectory( const TQString& fileName ) const;
+  K3bDataItem* tqfind( const TQString& filename ) const;
+  K3bDataItem* findByPath( const TQString& );
 
   long numFiles() const;
   long numDirs() const;
@@ -83,10 +83,10 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
   /**
    * Recursively creates a directory.
    */
-  bool mkdir( const QString& dir );
+  bool mkdir( const TQString& dir );
 
-  void setLocalPath( const QString& p ) { m_localPath = p; }
-  QString localPath() const { return m_localPath; }
+  void setLocalPath( const TQString& p ) { m_localPath = p; }
+  TQString localPath() const { return m_localPath; }
 
   /**
    * \reimplemented
@@ -111,7 +111,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
  private:
   /**
    * this recursivly updates the size of the directories.
-   * The size of this dir and the parent dir is updated.
+   * The size of this dir and the tqparent dir is updated.
    * These values are just used for user information.
    */
   void updateSize( K3bDataItem*, bool removed = false );
@@ -121,7 +121,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
    */
   void updateFiles( long files, long dirs );
 
-  mutable QPtrList<K3bDataItem> m_children;
+  mutable TQPtrList<K3bDataItem> m_tqchildren;
 
   // size of the items simply added
   KIO::filesize_t m_size;
@@ -136,7 +136,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
 
   // HACK: store the original path to be able to use it's permissions
   //        ´remove this once we have a backup project
-  QString m_localPath;
+  TQString m_localPath;
 };
 
 
@@ -146,8 +146,8 @@ class K3bRootItem : public K3bDirItem
   K3bRootItem( K3bDataDoc* );
   ~K3bRootItem();
 
-  const QString& k3bName() const;
-  void setK3bName( const QString& );
+  const TQString& k3bName() const;
+  void setK3bName( const TQString& );
 
   bool isMoveable() const { return false; }
   bool isRemoveable() const { return false; }

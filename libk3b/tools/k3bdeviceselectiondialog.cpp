@@ -21,11 +21,11 @@
 #include <k3bcore.h>
 #include <k3bdevicemanager.h>
 
-#include <qcombobox.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qstring.h>
-#include <qframe.h>
+#include <tqcombobox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqstring.h>
+#include <tqframe.h>
 
 #include <klocale.h>
 
@@ -37,23 +37,23 @@ public:
 };
 
 
-K3bDeviceSelectionDialog::K3bDeviceSelectionDialog( QWidget* parent, 
+K3bDeviceSelectionDialog::K3bDeviceSelectionDialog( TQWidget* tqparent, 
 						    const char* name, 
-						    const QString& text,
+						    const TQString& text,
 						    bool modal )
   : KDialogBase( KDialogBase::Plain, 
 		 i18n("Device Selection"), 
 		 Ok|Cancel, 
 		 Ok,
-		 parent,
+		 tqparent,
 		 name,
 		 modal )
 {
   d = new Private();
 
-  QGridLayout* lay = new QGridLayout( plainPage() );
+  TQGridLayout* lay = new TQGridLayout( plainPage() );
 
-  QLabel* label = new QLabel( text.isEmpty() ? i18n("Please select a device:") : text, plainPage() );
+  TQLabel* label = new TQLabel( text.isEmpty() ? i18n("Please select a device:") : text, plainPage() );
   d->comboDevices = new K3bDeviceComboBox( plainPage() );
 
   //  lay->setMargin( marginHint() );
@@ -76,7 +76,7 @@ void K3bDeviceSelectionDialog::addDevice( K3bDevice::Device* dev )
 }
 
 
-void K3bDeviceSelectionDialog::addDevices( const QPtrList<K3bDevice::Device>& list )
+void K3bDeviceSelectionDialog::addDevices( const TQPtrList<K3bDevice::Device>& list )
 {
   d->comboDevices->addDevices( list );
 }
@@ -94,16 +94,16 @@ void K3bDeviceSelectionDialog::setSelectedDevice( K3bDevice::Device* dev )
 }
 
 
-K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( QWidget* parent, 
-							       const QPtrList<K3bDevice::Device>& devices,
-							       const QString& text )
+K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( TQWidget* tqparent, 
+							       const TQPtrList<K3bDevice::Device>& devices,
+							       const TQString& text )
 {
   if( devices.isEmpty() )
     return 0;
   if( devices.count() == 1 )
     return devices.getFirst();
 
-  K3bDeviceSelectionDialog dlg( parent, 0, text );
+  K3bDeviceSelectionDialog dlg( tqparent, 0, text );
   dlg.addDevices( devices );
 
   if( dlg.exec() == Accepted )
@@ -112,18 +112,18 @@ K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( QWidget* parent,
     return 0;
 }
 
-K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( QWidget* parent, 
-							       const QString& text )
+K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( TQWidget* tqparent, 
+							       const TQString& text )
 {
-  return selectDevice( parent, k3bcore->deviceManager()->allDevices(), text );
+  return selectDevice( tqparent, k3bcore->deviceManager()->allDevices(), text );
 
 
 }
 
 
-K3bDevice::Device* K3bDeviceSelectionDialog::selectWriter( QWidget* parent, const QString& text )
+K3bDevice::Device* K3bDeviceSelectionDialog::selectWriter( TQWidget* tqparent, const TQString& text )
 {
-  return selectDevice( parent, k3bcore->deviceManager()->burningDevices(), text );
+  return selectDevice( tqparent, k3bcore->deviceManager()->burningDevices(), text );
 }
 
 

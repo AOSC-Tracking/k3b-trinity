@@ -27,38 +27,39 @@ class KProcess;
 class K3bExternalEncoder : public K3bAudioEncoder
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bExternalEncoder( QObject* parent = 0, const char* name = 0 );
+  K3bExternalEncoder( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bExternalEncoder();
 
-  QStringList extensions() const;
+  TQStringList extensions() const;
   
-  QString fileTypeComment( const QString& ) const;
+  TQString fileTypeComment( const TQString& ) const;
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bPluginConfigWidget* createConfigWidget( QWidget* parent, 
+  K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent, 
 					     const char* name ) const;
 
   /**
    * reimplemented since the external program is intended to write the file
    * TODO: allow writing to stdout.
    */
-  bool openFile( const QString& ext, const QString& filename, const K3b::Msf& length );
+  bool openFile( const TQString& ext, const TQString& filename, const K3b::Msf& length );
   void closeFile();
 
   class Command;
 
  private slots:
   void slotExternalProgramFinished( KProcess* );
-  void slotExternalProgramOutputLine( const QString& );
+  void slotExternalProgramOutputLine( const TQString& );
 
  private:
   void finishEncoderInternal();
-  bool initEncoderInternal( const QString& extension );
-  long encodeInternal( const char* data, Q_ULONG len );
-  void setMetaDataInternal( MetaDataField, const QString& );
+  bool initEncoderInternal( const TQString& extension );
+  long encodeInternal( const char* data, TQ_ULONG len );
+  void setMetaDataInternal( MetaDataField, const TQString& );
   bool writeWaveHeader();
 
   class Private;

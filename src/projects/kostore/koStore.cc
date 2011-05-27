@@ -28,9 +28,9 @@
 #include "koZipStore.h"
 //#include "koDirectoryStore.h"
 
-#include <qfileinfo.h>
-#include <qfile.h>
-#include <qdir.h>
+#include <tqfileinfo.h>
+#include <tqfile.h>
+#include <tqdir.h>
 
 #include <kurl.h>
 #include <kdebug.h>
@@ -44,7 +44,7 @@
 
 const int KoStore::s_area = 30002;
 
-KoStore::Backend KoStore::determineBackend( QIODevice* dev )
+KoStore::Backend KoStore::determineBackend( TQIODevice* dev )
 {
     unsigned char buf[5];
     if ( dev->readBlock( (char *)buf, 4 ) < 4 )
@@ -56,21 +56,21 @@ KoStore::Backend KoStore::determineBackend( QIODevice* dev )
     return DefaultFormat; // fallback
 }
 
-KoStore* KoStore::createStore( const QString& fileName, Mode mode, const QCString & appIdentification, Backend backend )
+KoStore* KoStore::createStore( const TQString& fileName, Mode mode, const TQCString & appIdentification, Backend backend )
 {
   if ( backend == Auto ) {
     if ( mode == KoStore::Write )
       backend = DefaultFormat;
     else
     {
-      QFileInfo inf( fileName );
+      TQFileInfo inf( fileName );
       if ( inf.isDir() )
         backend = Directory;
       else
       {
-        QFile file( fileName );
+        TQFile file( fileName );
         if ( file.open( IO_ReadOnly ) )
-          backend = determineBackend( &file );
+          backend = determineBackend( TQT_TQIODEVICE(&file) );
         else
           backend = DefaultFormat; // will create a "bad" store (bad()==true)
       }
@@ -90,7 +90,7 @@ KoStore* KoStore::createStore( const QString& fileName, Mode mode, const QCStrin
   }
 }
 
-KoStore* KoStore::createStore( QIODevice *device, Mode mode, const QCString & appIdentification, Backend backend )
+KoStore* KoStore::createStore( TQIODevice *device, Mode mode, const TQCString & appIdentification, Backend backend )
 {
   if ( backend == Auto )
   {
@@ -118,12 +118,12 @@ KoStore* KoStore::createStore( QIODevice *device, Mode mode, const QCString & ap
   }
 }
 
-KoStore* KoStore::createStore( QWidget* window, const KURL& url, Mode mode, const QCString & appIdentification, Backend backend )
+KoStore* KoStore::createStore( TQWidget* window, const KURL& url, Mode mode, const TQCString & appIdentification, Backend backend )
 {
   if ( url.isLocalFile() )
     return createStore(url.path(), mode,  appIdentification, backend );
 
-  QString tmpFile;
+  TQString tmpFile;
   if ( mode == KoStore::Write )
   {
     if ( backend == Auto )
@@ -141,10 +141,10 @@ KoStore* KoStore::createStore( QWidget* window, const KURL& url, Mode mode, cons
     }
     else if ( backend == Auto )
     {
-      QFile file( tmpFile );
+      TQFile file( tmpFile );
       if ( file.open( IO_ReadOnly ) )
       {
-        backend = determineBackend( &file );
+        backend = determineBackend( TQT_TQIODEVICE(&file) );
         file.close();
       }
     }
@@ -186,7 +186,7 @@ KoStore::~KoStore()
   delete m_stream;
 }
 
-bool KoStore::open( const QString & _name )
+bool KoStore::open( const TQString & _name )
 {
   // This also converts from relative to absolute, i.e. merges the currentPath()
   m_sName = toExternalNaming( _name );
@@ -208,7 +208,7 @@ bool KoStore::open( const QString & _name )
   if ( m_mode == Write )
   {
     kdDebug(s_area) << "KoStore: opening for writing '" << m_sName << "'" << endl;
-    if ( m_strFiles.findIndex( m_sName ) != -1 ) // just check if it's there
+    if ( m_strFiles.tqfindIndex( m_sName ) != -1 ) // just check if it's there
     {
       kdWarning(s_area) << "KoStore: Duplicate filename " << m_sName << endl;
       //return KIO::ERR_FILE_ALREADY_EXIST;
@@ -259,7 +259,7 @@ bool KoStore::close()
   return ret;
 }
 
-QIODevice* KoStore::device() const
+TQIODevice* KoStore::device() const
 {
   if ( !m_bIsOpen )
     kdWarning(s_area) << "KoStore: You must open before asking for a device" << endl;
@@ -268,9 +268,9 @@ QIODevice* KoStore::device() const
   return m_stream;
 }
 
-QByteArray KoStore::read( unsigned long int max )
+TQByteArray KoStore::read( unsigned long int max )
 {
-  QByteArray data; // Data is a QArray<char>
+  TQByteArray data; // Data is a TQArray<char>
 
   if ( !m_bIsOpen )
   {
@@ -306,12 +306,12 @@ QByteArray KoStore::read( unsigned long int max )
   return data;
 }
 
-Q_LONG KoStore::write( const QByteArray& data )
+TQ_LONG KoStore::write( const TQByteArray& data )
 {
   return write( data.data(), data.size() ); // see below
 }
 
-Q_LONG KoStore::read( char *_buffer, Q_ULONG _len )
+TQ_LONG KoStore::read( char *_buffer, TQ_ULONG _len )
 {
   if ( !m_bIsOpen )
   {
@@ -335,7 +335,7 @@ Q_LONG KoStore::read( char *_buffer, Q_ULONG _len )
   return m_stream->readBlock( _buffer, _len );
 }
 
-Q_LONG KoStore::write( const char* _data, Q_ULONG _len )
+TQ_LONG KoStore::write( const char* _data, TQ_ULONG _len )
 {
   if ( _len == 0L ) return 0;
 
@@ -357,29 +357,29 @@ Q_LONG KoStore::write( const char* _data, Q_ULONG _len )
   return nwritten;
 }
 
-QIODevice::Offset KoStore::size() const
+TQIODevice::Offset KoStore::size() const
 {
   if ( !m_bIsOpen )
   {
     kdWarning(s_area) << "KoStore: You must open before asking for a size" << endl;
-    return static_cast<QIODevice::Offset>(-1);
+    return static_cast<TQIODevice::Offset>(-1);
   }
   if ( m_mode != Read )
   {
     kdWarning(s_area) << "KoStore: Can not get size from store that is opened for writing" << endl;
-    return static_cast<QIODevice::Offset>(-1);
+    return static_cast<TQIODevice::Offset>(-1);
   }
   return m_iSize;
 }
 
-bool KoStore::enterDirectory( const QString& directory )
+bool KoStore::enterDirectory( const TQString& directory )
 {
   //kdDebug(s_area) << "KoStore::enterDirectory " << directory << endl;
   int pos;
   bool success = true;
-  QString tmp( directory );
+  TQString tmp( directory );
 
-  while ( ( pos = tmp.find( '/' ) ) != -1 &&
+  while ( ( pos = tmp.tqfind( '/' ) ) != -1 &&
           ( success = enterDirectoryInternal( tmp.left( pos ) ) ) )
           tmp = tmp.mid( pos + 1 );
 
@@ -398,16 +398,16 @@ bool KoStore::leaveDirectory()
   return enterAbsoluteDirectory( expandEncodedDirectory( currentPath() ) );
 }
 
-QString KoStore::currentDirectory() const
+TQString KoStore::currentDirectory() const
 {
   return expandEncodedDirectory( currentPath() );
 }
 
-QString KoStore::currentPath() const
+TQString KoStore::currentPath() const
 {
-  QString path;
-  QStringList::ConstIterator it = m_currentPath.begin();
-  QStringList::ConstIterator end = m_currentPath.end();
+  TQString path;
+  TQStringList::ConstIterator it = m_currentPath.begin();
+  TQStringList::ConstIterator end = m_currentPath.end();
   for ( ; it != end; ++it ) {
     path += *it;
     path += '/';
@@ -423,15 +423,15 @@ void KoStore::pushDirectory()
 void KoStore::popDirectory()
 {
   m_currentPath.clear();
-  enterAbsoluteDirectory( QString::null );
+  enterAbsoluteDirectory( TQString() );
   enterDirectory( m_directoryStack.pop() );
 }
 
-bool KoStore::addLocalFile( const QString &fileName, const QString &destName )
+bool KoStore::addLocalFile( const TQString &fileName, const TQString &destName )
 {
-  QFileInfo fi( fileName );
+  TQFileInfo fi( fileName );
   uint size = fi.size();
-  QFile file( fileName );
+  TQFile file( fileName );
   if ( !file.open( IO_ReadOnly ))
   {
     return false;
@@ -442,7 +442,7 @@ bool KoStore::addLocalFile( const QString &fileName, const QString &destName )
     return false;
   }
 
-  QByteArray data ( 8 * 1024 );
+  TQByteArray data ( 8 * 1024 );
 
   uint total = 0;
   for ( int block = 0; ( block = file.readBlock ( data.data(), data.size() ) ) > 0; total += block )
@@ -460,12 +460,12 @@ bool KoStore::addLocalFile( const QString &fileName, const QString &destName )
   return true;
 }
 
-bool KoStore::extractFile ( const QString &srcName, const QString &fileName )
+bool KoStore::extractFile ( const TQString &srcName, const TQString &fileName )
 {
   if ( !open ( srcName ) )
     return false;
 
-  QFile file( fileName );
+  TQFile file( fileName );
 
   if( !file.open ( IO_WriteOnly ) )
   {
@@ -473,14 +473,14 @@ bool KoStore::extractFile ( const QString &srcName, const QString &fileName )
     return false;
   }
 
-  QByteArray data ( 8 * 1024 );
+  TQByteArray data ( 8 * 1024 );
   uint total = 0;
   for( int block = 0; ( block = read ( data.data(), data.size() ) ) > 0; total += block )
   {
     file.writeBlock ( data.data(), block );
   }
 
-  if( size() != static_cast<QIODevice::Offset>(-1) )
+  if( size() != static_cast<TQIODevice::Offset>(-1) )
   	Q_ASSERT( total == size() );
 
   file.close();
@@ -489,25 +489,25 @@ bool KoStore::extractFile ( const QString &srcName, const QString &fileName )
   return true;
 }
 
-QStringList KoStore::addLocalDirectory( const QString &dirPath, const QString &destName )
+TQStringList KoStore::addLocalDirectory( const TQString &dirPath, const TQString &destName )
 {
-  QString dot = ".";
-  QString dotdot = "..";
-  QStringList content;
+  TQString dot = ".";
+  TQString dotdot = "..";
+  TQStringList content;
 
-  QDir dir(dirPath);
+  TQDir dir(dirPath);
   if ( !dir.exists() )
     return 0;
 
-  QStringList files = dir.entryList();
-  for ( QStringList::Iterator it = files.begin(); it != files.end(); ++it )
+  TQStringList files = dir.entryList();
+  for ( TQStringList::Iterator it = files.begin(); it != files.end(); ++it )
   {
      if ( *it != dot && *it != dotdot )
      {
-        QString currentFile = dirPath + "/" + *it;
-        QString dest = destName.isEmpty() ? *it : (destName + "/" + *it);
+        TQString currentFile = dirPath + "/" + *it;
+        TQString dest = destName.isEmpty() ? *it : (destName + "/" + *it);
 
-        QFileInfo fi ( currentFile );
+        TQFileInfo fi ( currentFile );
         if ( fi.isFile() )
         {
           addLocalFile ( currentFile, dest );
@@ -524,12 +524,12 @@ QStringList KoStore::addLocalDirectory( const QString &dirPath, const QString &d
 }
 
 
-bool KoStore::at( QIODevice::Offset pos )
+bool KoStore::at( TQIODevice::Offset pos )
 {
   return m_stream->at( pos );
 }
 
-QIODevice::Offset KoStore::at() const
+TQIODevice::Offset KoStore::at() const
 {
   return m_stream->at();
 }
@@ -540,12 +540,12 @@ bool KoStore::atEnd() const
 }
 
 // See the specification for details of what this function does.
-QString KoStore::toExternalNaming( const QString & _internalNaming ) const
+TQString KoStore::toExternalNaming( const TQString & _internalNaming ) const
 {
   if ( _internalNaming == ROOTPART )
     return expandEncodedDirectory( currentPath() ) + MAINNAME;
 
-  QString intern;
+  TQString intern;
   if ( _internalNaming.startsWith( "tar:/" ) ) // absolute reference
     intern = _internalNaming.mid( 5 ); // remove protocol
   else
@@ -554,22 +554,22 @@ QString KoStore::toExternalNaming( const QString & _internalNaming ) const
   return expandEncodedPath( intern );
 }
 
-QString KoStore::expandEncodedPath( QString intern ) const
+TQString KoStore::expandEncodedPath( TQString intern ) const
 {
   if ( m_namingVersion == NAMING_VERSION_RAW )
     return intern;
 
-  QString result;
+  TQString result;
   int pos;
 
-  if ( ( pos = intern.findRev( '/', -1 ) ) != -1 ) {
+  if ( ( pos = intern.tqfindRev( '/', -1 ) ) != -1 ) {
     result = expandEncodedDirectory( intern.left( pos ) ) + '/';
     intern = intern.mid( pos + 1 );
   }
 
   // Now process the filename. If the first character is numeric, we have
   // a main document.
-  if ( QChar(intern.at(0)).isDigit() )
+  if ( TQChar(intern.at(0)).isDigit() )
   {
     // If this is the first part name, check if we have a store with
     // old-style names.
@@ -588,27 +588,27 @@ QString KoStore::expandEncodedPath( QString intern ) const
   return result;
 }
 
-QString KoStore::expandEncodedDirectory( QString intern ) const
+TQString KoStore::expandEncodedDirectory( TQString intern ) const
 {
   if ( m_namingVersion == NAMING_VERSION_RAW )
     return intern;
 
-  QString result;
+  TQString result;
   int pos;
-  while ( ( pos = intern.find( '/' ) ) != -1 ) {
-    if ( QChar(intern.at(0)).isDigit() )
+  while ( ( pos = intern.tqfind( '/' ) ) != -1 ) {
+    if ( TQChar(intern.at(0)).isDigit() )
       result += "part";
     result += intern.left( pos + 1 ); // copy numbers (or "pictures") + "/"
     intern = intern.mid( pos + 1 ); // remove the dir we just processed
   }
 
-  if ( QChar(intern.at(0)).isDigit() )
+  if ( TQChar(intern.at(0)).isDigit() )
     result += "part";
   result += intern;
   return result;
 }
 
-bool KoStore::enterDirectoryInternal( const QString& directory )
+bool KoStore::enterDirectoryInternal( const TQString& directory )
 {
     if ( enterRelativeDirectory( expandEncodedDirectory( directory ) ) )
     {
@@ -623,7 +623,7 @@ void KoStore::disallowNameExpansion( void )
     m_namingVersion = NAMING_VERSION_RAW;
 }
 
-bool KoStore::hasFile( const QString& fileName ) const
+bool KoStore::hasFile( const TQString& fileName ) const
 {
   return fileExists( toExternalNaming( currentPath() + fileName ) );
 }

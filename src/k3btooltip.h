@@ -16,51 +16,52 @@
 #ifndef _K3B_TOOLTIP_H_
 #define _K3B_TOOLTIP_H_
 
-#include <qobject.h>
-#include <qpixmap.h>
+#include <tqobject.h>
+#include <tqpixmap.h>
 
 #include "k3bwidgetshoweffect.h"
 
-class QTimer;
+class TQTimer;
 
 /**
  * More beautiful tooltip
  */
-class K3bToolTip : public QObject
+class K3bToolTip : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bToolTip( QWidget* widget );
+  K3bToolTip( TQWidget* widget );
   ~K3bToolTip();
 
-  QWidget* parentWidget() const { return m_parentWidget; }
+  TQWidget* tqparentWidget() const { return m_parentWidget; }
 
  public slots:
   /**
-   * default is 700 mseconds (same as QToolTip)
+   * default is 700 mseconds (same as TQToolTip)
    */
   void setTipTimeout( int msec ) { m_tipTimeout = msec; }
 
  protected:
   /**
-   * \see QToolTip::maybeTip
+   * \see TQToolTip::maybeTip
    */
-  virtual void maybeTip( const QPoint& ) = 0;
+  virtual void maybeTip( const TQPoint& ) = 0;
 
   /**
    * Show a tooltip.
    */
-  void tip( const QRect&, const QString&, int effect = K3bWidgetShowEffect::Dissolve );
-  void tip( const QRect& rect, const QPixmap& pix, int effect = K3bWidgetShowEffect::Dissolve );
+  void tip( const TQRect&, const TQString&, int effect = K3bWidgetShowEffect::Dissolve );
+  void tip( const TQRect& rect, const TQPixmap& pix, int effect = K3bWidgetShowEffect::Dissolve );
 
   /**
    * Use some arbitrary widget as the tooltip
    * \param effect Use 0 for no effect
    */
-  void tip( const QRect&, QWidget* w, int effect = K3bWidgetShowEffect::Dissolve );
+  void tip( const TQRect&, TQWidget* w, int effect = K3bWidgetShowEffect::Dissolve );
 
-  bool eventFilter( QObject* o, QEvent* e );
+  bool eventFilter( TQObject* o, TQEvent* e );
 
  private slots:
   void slotCheckShowTip();
@@ -68,12 +69,12 @@ class K3bToolTip : public QObject
  private:
   void hideTip();
 
-  QWidget* m_parentWidget;
-  QWidget* m_currentTip;
-  QRect m_currentTipRect;
+  TQWidget* m_parentWidget;
+  TQWidget* m_currentTip;
+  TQRect m_currentTipRect;
 
-  QTimer* m_tipTimer;
-  QPoint m_lastMousePos;
+  TQTimer* m_tipTimer;
+  TQPoint m_lastMousePos;
 
   int m_tipTimeout;
 };

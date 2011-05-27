@@ -22,26 +22,26 @@
 #include <klocale.h>
 #include <kconfig.h>
 
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 
-static const QString s_autoHelp = i18n("Let K3b select the best-suited mode. This is the recommended selection.");
-static const QString s_daoHelp = i18n("<em>Disk At Once</em> or more properly <em>Session At Once</em>. "
+static const TQString s_autoHelp = i18n("Let K3b select the best-suited mode. This is the recommended selection.");
+static const TQString s_daoHelp = i18n("<em>Disk At Once</em> or more properly <em>Session At Once</em>. "
 				      "The laser is never turned off while writing the CD or DVD. "
 				      "This is the preferred mode to write audio CDs since it allows "
 				      "pregaps other than 2 seconds. Not all writers support DAO.<br>"
 				      "DVD-R(W)s written in DAO provide the best DVD-Video compatibility.");
-static const QString s_taoHelp = i18n("<em>Track At Once</em> should be supported by every CD writer. "
+static const TQString s_taoHelp = i18n("<em>Track At Once</em> should be supported by every CD writer. "
 				      "The laser will be turned off after every track.<br>"
 				      "Most CD writers need this mode for writing multisession CDs.");
 // TODO: add something like: "No CD-TEXT writing in TAO mode."
 
-static const QString s_rawHelp = i18n("RAW writing mode. The error correction data is created by the "
+static const TQString s_rawHelp = i18n("RAW writing mode. The error correction data is created by the "
 				      "software instead of the writer device.<br>"
 				      "Try this if your CD writer fails to write in DAO and TAO.");
-static const QString s_seqHelp = i18n("Incremental sequential is the default writing mode for DVD-R(W). "
+static const TQString s_seqHelp = i18n("Incremental sequential is the default writing mode for DVD-R(W). "
 				      "It allows multisession DVD-R(W)s. It only applies to DVD-R(W).");
-static const QString s_ovwHelp = i18n("Restricted Overwrite allows to use a DVD-RW just like a DVD-RAM "
+static const TQString s_ovwHelp = i18n("Restricted Overwrite allows to use a DVD-RW just like a DVD-RAM "
 				      "or a DVD+RW. The media may just be overwritten. It is not possible "
 				      "to write multisession DVD-RWs in this mode but K3b uses growisofs "
 				      "to grow an ISO9660 filesystem within the first session, thus allowing "
@@ -61,16 +61,16 @@ public:
 };
 
 
-K3bWritingModeWidget::K3bWritingModeWidget( int modes, QWidget* parent, const char* name )
-  : K3bIntMapComboBox( parent, name )
+K3bWritingModeWidget::K3bWritingModeWidget( int modes, TQWidget* tqparent, const char* name )
+  : K3bIntMapComboBox( tqparent, name )
 {
   init();
   setSupportedModes( modes );
 }
 
 
-K3bWritingModeWidget::K3bWritingModeWidget( QWidget* parent, const char* name )
-  : K3bIntMapComboBox( parent, name )
+K3bWritingModeWidget::K3bWritingModeWidget( TQWidget* tqparent, const char* name )
+  : K3bIntMapComboBox( tqparent, name )
 {
   init();
   setSupportedModes( K3b::DAO | K3b::TAO | K3b::RAW );   // default: support all CD-R(W) modes
@@ -88,9 +88,9 @@ void K3bWritingModeWidget::init()
   d = new Private();
   d->device = 0;
 
-  connect( this, SIGNAL(valueChanged(int)), this, SIGNAL(writingModeChanged(int)) );
+  connect( this, TQT_SIGNAL(valueChanged(int)), this, TQT_SIGNAL(writingModeChanged(int)) );
 
-  QToolTip::add( this, i18n("Select the writing mode to use") );
+  TQToolTip::add( this, i18n("Select the writing mode to use") );
 
   initWhatsThisHelp();
 }
@@ -192,7 +192,7 @@ void K3bWritingModeWidget::saveConfig( KConfigBase* c )
 
 void K3bWritingModeWidget::loadConfig( KConfigBase* c )
 {
-  QString mode = c->readEntry( "writing_mode" );
+  TQString mode = c->readEntry( "writing_mode" );
   if ( mode == "dao" )
     setWritingMode( K3b::DAO );
   else if( mode == "tao" )

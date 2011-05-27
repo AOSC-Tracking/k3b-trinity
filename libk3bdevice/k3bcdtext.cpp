@@ -20,7 +20,7 @@
 
 #include <k3bdebug.h>
 
-#include <qtextcodec.h>
+#include <tqtextcodec.h>
 
 #include <string.h>
 
@@ -64,30 +64,30 @@ namespace K3bDevice {
     cdtext_pack* pack = (cdtext_pack*)data;
   
     for( int i = 0; i < dataLen/18; ++i ) {
-      QString s;
-      s += QString( " %1 |" ).arg( pack[i].id1, 6, 16 );
-      s += QString( " %1 |" ).arg( pack[i].id2, 6 );
-      s += QString( " %1 |" ).arg( pack[i].id3, 6 );
-      s += QString( " %1 |" ).arg( pack[i].charpos, 6 );
-      s += QString( " %1 |" ).arg( pack[i].blocknum, 6 );
-      s += QString( " %1 |" ).arg( pack[i].dbcc, 4 );
+      TQString s;
+      s += TQString( " %1 |" ).tqarg( pack[i].id1, 6, 16 );
+      s += TQString( " %1 |" ).tqarg( pack[i].id2, 6 );
+      s += TQString( " %1 |" ).tqarg( pack[i].id3, 6 );
+      s += TQString( " %1 |" ).tqarg( pack[i].charpos, 6 );
+      s += TQString( " %1 |" ).tqarg( pack[i].blocknum, 6 );
+      s += TQString( " %1 |" ).tqarg( pack[i].dbcc, 4 );
 //       char str[12];
 //       sprintf( str, "%c%c%c%c%c%c%c%c%c%c%c%c",
-// 	       pack[i].data[0] == '\0' ? '°' : pack[i].data[0],
-// 	       pack[i].data[1] == '\0' ? '°' : pack[i].data[1],
-// 	       pack[i].data[2] == '\0' ? '°' : pack[i].data[2],
-// 	       pack[i].data[3] == '\0' ? '°' : pack[i].data[3],
-// 	       pack[i].data[4] == '\0' ? '°' : pack[i].data[4],
-// 	       pack[i].data[5] == '\0' ? '°' : pack[i].data[5],
-// 	       pack[i].data[6] == '\0' ? '°' : pack[i].data[6],
-// 	       pack[i].data[7] == '\0' ? '°' : pack[i].data[7],
-// 	       pack[i].data[8] == '\0' ? '°' : pack[i].data[8],
-// 	       pack[i].data[9] == '\0' ? '°' : pack[i].data[9],
-// 	       pack[i].data[10] == '\0' ? '°' : pack[i].data[10],
-// 	       pack[i].data[11] == '\0' ? '°' : pack[i].data[11] );
-//       s += QString( " %1 |" ).arg( "'" + QCString(str,13) + "'", 14 );
-//       Q_UINT16 crc = pack[i].crc[0]<<8|pack[i].crc[1];
-//       s += QString( " %1 |" ).arg( crc );
+// 	       pack[i].data[0] == '\0' ? 'ï¿½' : pack[i].data[0],
+// 	       pack[i].data[1] == '\0' ? 'ï¿½' : pack[i].data[1],
+// 	       pack[i].data[2] == '\0' ? 'ï¿½' : pack[i].data[2],
+// 	       pack[i].data[3] == '\0' ? 'ï¿½' : pack[i].data[3],
+// 	       pack[i].data[4] == '\0' ? 'ï¿½' : pack[i].data[4],
+// 	       pack[i].data[5] == '\0' ? 'ï¿½' : pack[i].data[5],
+// 	       pack[i].data[6] == '\0' ? 'ï¿½' : pack[i].data[6],
+// 	       pack[i].data[7] == '\0' ? 'ï¿½' : pack[i].data[7],
+// 	       pack[i].data[8] == '\0' ? 'ï¿½' : pack[i].data[8],
+// 	       pack[i].data[9] == '\0' ? 'ï¿½' : pack[i].data[9],
+// 	       pack[i].data[10] == '\0' ? 'ï¿½' : pack[i].data[10],
+// 	       pack[i].data[11] == '\0' ? 'ï¿½' : pack[i].data[11] );
+//       s += TQString( " %1 |" ).tqarg( "'" + TQCString(str,13) + "'", 14 );
+//       TQ_UINT16 crc = pack[i].crc[0]<<8|pack[i].crc[1];
+//       s += TQString( " %1 |" ).tqarg( crc );
       k3bDebug() << s << endl;
     }
   }
@@ -102,7 +102,7 @@ K3bDevice::CdText::CdText()
 
 
 K3bDevice::CdText::CdText( const K3bDevice::CdText& text )
-  : QValueVector<K3bDevice::TrackCdText>( text ),
+  : TQValueVector<K3bDevice::TrackCdText>( text ),
     m_title( text.title() ),
     m_performer( text.performer() ),
     m_songwriter( text.songwriter() ),
@@ -121,7 +121,7 @@ K3bDevice::CdText::CdText( const unsigned char* data, int len )
 }
 
 
-K3bDevice::CdText::CdText( const QByteArray& b )
+K3bDevice::CdText::CdText( const TQByteArray& b )
 {
   setRawPackData( b );
 }
@@ -135,7 +135,7 @@ K3bDevice::CdText::CdText( int size )
 
 void K3bDevice::CdText::clear()
 {
-  QValueVector<TrackCdText>::clear();
+  TQValueVector<TrackCdText>::clear();
 
   m_title.setLength(0);
   m_performer.setLength(0);
@@ -175,7 +175,7 @@ void K3bDevice::CdText::setRawPackData( const unsigned char* data, int len )
       pack[i].crc[0] ^= 0xff;
       pack[i].crc[1] ^= 0xff;
 
-      Q_UINT16 crc = calcX25( reinterpret_cast<unsigned char*>(&pack[i]), 18 );
+      TQ_UINT16 crc = calcX25( reinterpret_cast<unsigned char*>(&pack[i]), 18 );
 
       pack[i].crc[0] ^= 0xff;
       pack[i].crc[1] ^= 0xff;
@@ -200,11 +200,11 @@ void K3bDevice::CdText::setRawPackData( const unsigned char* data, int len )
 	  resize( trackNo );
 
 	char* nextNullPos = (char*)::memchr( nullPos+1, '\0', 11 - (nullPos - (char*)pack[i].data) );
-	QString txtstr;	    
+	TQString txtstr;	    
 	if( nextNullPos ) // take all chars up to the next null
-	  txtstr = QString::fromLatin1( (char*)nullPos+1, nextNullPos - nullPos - 1 );
+	  txtstr = TQString::tqfromLatin1( (char*)nullPos+1, nextNullPos - nullPos - 1 );
 	else // take all chars to the end of the pack data (12 bytes)
-	  txtstr = QString::fromLatin1( (char*)nullPos+1, 11 - (nullPos - (char*)pack[i].data) );
+	  txtstr = TQString::tqfromLatin1( (char*)nullPos+1, 11 - (nullPos - (char*)pack[i].data) );
 	  
 	//
 	// a tab character means to use the same as for the previous track
@@ -293,12 +293,12 @@ void K3bDevice::CdText::setRawPackData( const unsigned char* data, int len )
 }
 
 
-void K3bDevice::CdText::setRawPackData( const QByteArray& b )
+void K3bDevice::CdText::setRawPackData( const TQByteArray& b )
 {
   setRawPackData( reinterpret_cast<const unsigned char*>(b.data()), b.size() );
 }
 
-QByteArray K3bDevice::CdText::rawPackData() const
+TQByteArray K3bDevice::CdText::rawPackData() const
 { 
   // FIXME: every pack block may only consist of up to 255 packs.
 
@@ -321,7 +321,7 @@ QByteArray K3bDevice::CdText::rawPackData() const
   //
   // create the CD-Text packs
   //
-  QByteArray data(0);
+  TQByteArray data(0);
   for( int i = 0; i <= 6; ++i ) {
     if( textLengthForPackType( 0x80 | i ) ) {
       appendByteArray( data, createPackData( 0x80 | i, pc ) );
@@ -358,7 +358,7 @@ QByteArray K3bDevice::CdText::rawPackData() const
   //
   // add MMC header
   //
-  QByteArray a( 4 );
+  TQByteArray a( 4 );
   a[0] = (data.size()+2)>>8 & 0xff;
   a[1] = (data.size()+2) & 0xff;
   a[2] = a[3] = 0;
@@ -368,7 +368,7 @@ QByteArray K3bDevice::CdText::rawPackData() const
 }
 
 
-void K3bDevice::CdText::appendByteArray( QByteArray& a, const QByteArray& b ) const
+void K3bDevice::CdText::appendByteArray( TQByteArray& a, const TQByteArray& b ) const
 {
   unsigned int oldSize = a.size();
   a.resize( oldSize + b.size() );
@@ -377,11 +377,11 @@ void K3bDevice::CdText::appendByteArray( QByteArray& a, const QByteArray& b ) co
 
 
 // this method also creates completely empty packs
-QByteArray K3bDevice::CdText::createPackData( int packType, unsigned int& packCount ) const
+TQByteArray K3bDevice::CdText::createPackData( int packType, unsigned int& packCount ) const
 {
-  QByteArray data;
+  TQByteArray data;
   unsigned int dataFill = 0;
-  QCString text = encodeCdText( textForPackType( packType, 0 ) );
+  TQCString text = encodeCdText( textForPackType( packType, 0 ) );
   unsigned int currentTrack = 0;
   unsigned int textPos = 0;
   unsigned int packPos = 0;
@@ -401,7 +401,7 @@ QByteArray K3bDevice::CdText::createPackData( int packType, unsigned int& packCo
     //
     // Copy as many bytes as possible into the pack
     //
-    int copyBytes = QMIN( 12-packPos, text.length()-textPos );
+    int copyBytes = TQMIN( 12-packPos, text.length()-textPos );
     ::memcpy( reinterpret_cast<char*>(&pack.data[packPos]), &text.data()[textPos], copyBytes );
     textPos += copyBytes;
     packPos += copyBytes;
@@ -457,10 +457,10 @@ QByteArray K3bDevice::CdText::createPackData( int packType, unsigned int& packCo
 }
 
 
-void K3bDevice::CdText::savePack( cdtext_pack* pack, QByteArray& data, unsigned int& dataFill ) const
+void K3bDevice::CdText::savePack( cdtext_pack* pack, TQByteArray& data, unsigned int& dataFill ) const
 {
   // create CRC
-  Q_UINT16 crc = calcX25( reinterpret_cast<unsigned char*>(pack), sizeof(cdtext_pack)-2 );
+  TQ_UINT16 crc = calcX25( reinterpret_cast<unsigned char*>(pack), sizeof(cdtext_pack)-2 );
 
   // invert for Redbook compliance
   crc ^= 0xffff;
@@ -471,7 +471,7 @@ void K3bDevice::CdText::savePack( cdtext_pack* pack, QByteArray& data, unsigned 
 
   // append the pack to data  
   if( data.size() < dataFill + sizeof(cdtext_pack) )
-    data.resize( dataFill + sizeof(cdtext_pack), QGArray::SpeedOptim );
+    data.tqresize( dataFill + sizeof(cdtext_pack), TQGArray::SpeedOptim );
 
   ::memcpy( &data.data()[dataFill], reinterpret_cast<char*>( pack ), sizeof(cdtext_pack) );
 
@@ -480,7 +480,7 @@ void K3bDevice::CdText::savePack( cdtext_pack* pack, QByteArray& data, unsigned 
 
 
 // track 0 means global cdtext
-const QString& K3bDevice::CdText::textForPackType( int packType, unsigned int track ) const
+const TQString& K3bDevice::CdText::textForPackType( int packType, unsigned int track ) const
 {
   switch( packType ) {
   default:
@@ -524,7 +524,7 @@ const QString& K3bDevice::CdText::textForPackType( int packType, unsigned int tr
     if( track == 0 )
       return discId();
     else 
-      return QString::null;
+      return TQString();
 
 //   case 0x87:
 //     if( track == 0 )
@@ -551,19 +551,19 @@ unsigned int K3bDevice::CdText::textLengthForPackType( int packType ) const
 }
 
 
-QCString K3bDevice::encodeCdText( const QString& s, bool* illegalChars )
+TQCString K3bDevice::encodeCdText( const TQString& s, bool* illegalChars )
 {
   if( illegalChars )
     *illegalChars = false;
 
   // TODO: do this without QT
-  QTextCodec* codec = QTextCodec::codecForName("ISO8859-1");
+  TQTextCodec* codec = TQTextCodec::codecForName("ISO8859-1");
   if( codec ) {
-    QCString encoded = codec->fromUnicode( s );
+    TQCString encoded = codec->fromUnicode( s );
     return encoded;
   }
   else {
-    QCString r(s.length()+1);
+    TQCString r(s.length()+1);
 
     for( unsigned int i = 0; i < s.length(); ++i ) {
       if( s[i].latin1() == 0 ) { // non-ASCII character
@@ -580,7 +580,7 @@ QCString K3bDevice::encodeCdText( const QString& s, bool* illegalChars )
 }
 
 
-bool K3bDevice::CdText::checkCrc( const QByteArray& rawData )
+bool K3bDevice::CdText::checkCrc( const TQByteArray& rawData )
 {
   return checkCrc( reinterpret_cast<const unsigned char*>(rawData.data()), rawData.size() );
 }
@@ -675,7 +675,7 @@ bool K3bDevice::CdText::operator==( const K3bDevice::CdText& other ) const
 	  m_message == other.m_message &&
 	  m_discId == other.m_discId &&
 	  m_upcEan == other.m_upcEan &&
-	  QValueVector<TrackCdText>::operator==( other ) );
+	  TQValueVector<TrackCdText>::operator==( other ) );
 }
 
 

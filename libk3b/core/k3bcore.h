@@ -17,8 +17,8 @@
 #ifndef _K3B_CORE_H_
 #define _K3B_CORE_H_
 
-#include <qobject.h>
-#include <qvaluelist.h>
+#include <tqobject.h>
+#include <tqvaluelist.h>
 
 #include "k3b_export.h"
 
@@ -36,7 +36,7 @@ class K3bJob;
 class K3bBurnJob;
 class K3bGlobalSettings;
 class K3bPluginManager;
-class QCustomEvent;
+class TQCustomEvent;
 
 
 namespace K3bDevice {
@@ -52,19 +52,20 @@ namespace K3bDevice {
  * This is the heart of the K3b system. Every plugin may use this
  * to get the information it needs.
  */
-class LIBK3B_EXPORT K3bCore : public QObject
+class LIBK3B_EXPORT K3bCore : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
    * Although K3bCore is a singlelton it's constructor is not private to make inheritance
    * possible. Just make sure to only create one instance.
    */
-  K3bCore( QObject* parent = 0, const char* name = 0 );
+  K3bCore( TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bCore();
 
-  const QValueList<K3bJob*>& runningJobs() const;
+  const TQValueList<K3bJob*>& runningJobs() const;
 
   /**
    * Equals to !runningJobs().isEmpty()
@@ -169,7 +170,7 @@ class LIBK3B_EXPORT K3bCore : public QObject
   virtual void initDeviceManager();
   virtual void initPluginManager();
 
-  virtual void customEvent( QCustomEvent* e );
+  virtual void customEvent( TQCustomEvent* e );
 
  private:
   class Private;

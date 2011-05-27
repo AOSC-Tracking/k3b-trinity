@@ -27,34 +27,34 @@
 #include <kdebug.h>
 
 
-K3bMovixJob::K3bMovixJob( K3bMovixDoc* doc, K3bJobHandler* jh, QObject* parent )
-  : K3bBurnJob( jh, parent ),
+K3bMovixJob::K3bMovixJob( K3bMovixDoc* doc, K3bJobHandler* jh, TQObject* tqparent )
+  : K3bBurnJob( jh, tqparent ),
     m_doc(doc)
 {
   m_dataJob = new K3bDataJob( doc, this, this );
   m_movixDocPreparer = new K3bMovixDocPreparer( doc, this, this );
 
   // pipe signals
-  connect( m_dataJob, SIGNAL(percent(int)), this, SIGNAL(percent(int)) );
-  connect( m_dataJob, SIGNAL(subPercent(int)), this, SIGNAL(subPercent(int)) );
-  connect( m_dataJob, SIGNAL(processedSubSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-  connect( m_dataJob, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSize(int, int)) );
-  connect( m_dataJob, SIGNAL(bufferStatus(int)), this, SIGNAL(bufferStatus(int)) );
-  connect( m_dataJob, SIGNAL(deviceBuffer(int)), this, SIGNAL(deviceBuffer(int)) );
-  connect( m_dataJob, SIGNAL(writeSpeed(int, int)), this, SIGNAL(writeSpeed(int, int)) );
-  connect( m_dataJob, SIGNAL(newTask(const QString&)), this, SIGNAL(newTask(const QString&)) );
-  connect( m_dataJob, SIGNAL(newSubTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-  connect( m_dataJob, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
-  connect( m_dataJob, SIGNAL(infoMessage(const QString&, int)),
-	   this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_dataJob, SIGNAL(burning(bool)), this, SIGNAL(burning(bool)) );
+  connect( m_dataJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(percent(int)) );
+  connect( m_dataJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
+  connect( m_dataJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+  connect( m_dataJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
+  connect( m_dataJob, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_dataJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
+  connect( m_dataJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
+  connect( m_dataJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
+  connect( m_dataJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_dataJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_dataJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_dataJob, TQT_SIGNAL(burning(bool)), this, TQT_SIGNAL(burning(bool)) );
 
   // we need to clean up here
-  connect( m_dataJob, SIGNAL(finished(bool)), this, SLOT(slotDataJobFinished(bool)) );
+  connect( m_dataJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotDataJobFinished(bool)) );
 
-  connect( m_movixDocPreparer, SIGNAL(infoMessage(const QString&, int)),
-	   this, SIGNAL(infoMessage(const QString&, int)) );
+  connect( m_movixDocPreparer, TQT_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
 }
 
 
@@ -110,23 +110,23 @@ void K3bMovixJob::slotDataJobFinished( bool success )
 }
 
 
-QString K3bMovixJob::jobDescription() const
+TQString K3bMovixJob::jobDescription() const
 {
   if( m_doc->isoOptions().volumeID().isEmpty() )
     return i18n("Writing eMovix CD");
   else
-    return i18n("Writing eMovix CD (%1)").arg(m_doc->isoOptions().volumeID());
+    return i18n("Writing eMovix CD (%1)").tqarg(m_doc->isoOptions().volumeID());
 }
 
 
-QString K3bMovixJob::jobDetails() const
+TQString K3bMovixJob::jobDetails() const
 {
   return ( i18n("1 file (%1) and about 8 MB eMovix data", 
 		"%n files (%1) and about 8 MB eMovix data", 
-		m_doc->movixFileItems().count()).arg(KIO::convertSize(m_doc->size()))
+		m_doc->movixFileItems().count()).tqarg(KIO::convertSize(m_doc->size()))
 	   + ( m_doc->copies() > 1 
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
-	       : QString::null ) );
+	       : TQString() ) );
 }
 
 #include "k3bmovixjob.moc"

@@ -22,9 +22,9 @@
 
 #include "k3bdevice_export.h"
 
-#include <qobject.h>
-#include <qmap.h>
-#include <qstringlist.h>
+#include <tqobject.h>
+#include <tqmap.h>
+#include <tqstringlist.h>
 
 class DBusConnection;
 
@@ -44,9 +44,10 @@ namespace K3bDevice {
    * This class does not deal with K3b devices but with system device names
    * such as /dev/cdrom. These device names can be used in DeviceManager::findDevice().
    */
-  class LIBK3BDEVICE_EXPORT HalConnection : public QObject
+  class LIBK3BDEVICE_EXPORT HalConnection : public TQObject
     {
       Q_OBJECT
+  TQ_OBJECT
 
     public:
       ~HalConnection();
@@ -71,7 +72,7 @@ namespace K3bDevice {
       /**
        * \return a list of optical devices as reported by HAL.
        */
-      QStringList devices() const;
+      TQStringList devices() const;
 
       /**
        * \internal
@@ -143,9 +144,9 @@ namespace K3bDevice {
        * \see ErrorCode
        */
       int mount( Device*, 
-		 const QString& mountPoint = QString::null, 
-		 const QString& fstype = QString::null,
-		 const QStringList& options = QStringList() );
+		 const TQString& mountPoint = TQString(), 
+		 const TQString& fstype = TQString(),
+		 const TQStringList& options = TQStringList() );
 
       /**
        * Unmounts a device via HAL
@@ -159,7 +160,7 @@ namespace K3bDevice {
        * \see ErrorCode
        */
       int unmount( Device*,
-		   const QStringList& options = QStringList() );
+		   const TQStringList& options = TQStringList() );
 
       /**
        * Unmounts a device via HAL
@@ -173,7 +174,7 @@ namespace K3bDevice {
        * \see ErrorCode
        */
       int eject( Device*,
-		 const QStringList& options = QStringList() );
+		 const TQStringList& options = TQStringList() );
 
     signals:
       /**
@@ -181,7 +182,7 @@ namespace K3bDevice {
        *
        * \param dev The block device name of the new drive.
        */
-      void deviceAdded( const QString& dev );
+      void deviceAdded( const TQString& dev );
 
       /**
        * This signal gets emitted whenever HAL detects that an optical drive
@@ -189,7 +190,7 @@ namespace K3bDevice {
        *
        * \param dev The block device name of the drive.
        */
-      void deviceRemoved( const QString& dev );
+      void deviceRemoved( const TQString& dev );
 
       /**
        * This signal gets emitted whenever a new medium is inserted into a
@@ -197,13 +198,13 @@ namespace K3bDevice {
        *
        * \param dev The block device name of the drive the medium is or was inserted into.
        */
-      void mediumChanged( const QString& dev );
+      void mediumChanged( const TQString& dev );
 
     private:
       /**
        * HalConnection is a signelton class. Use the instance() method to create it.
        */
-      HalConnection( QObject* parent = 0, const char* name = 0 );
+      HalConnection( TQObject* tqparent = 0, const char* name = 0 );
 
       /**
        * Tries to open a connection to HAL.
@@ -216,7 +217,7 @@ namespace K3bDevice {
       class Private;
       Private* d;
 
-      void setupDBusQtConnection( DBusConnection* dbusConnection );
+      void setupDBusTQtConnection( DBusConnection* dbusConnection );
     };
 }
 

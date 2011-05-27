@@ -31,8 +31,8 @@
 #include <kpopupmenu.h>
 
 
-K3bAppDeviceManager::K3bAppDeviceManager( QObject* parent, const char* name )
-  : K3bDevice::DeviceManager( parent, name ),
+K3bAppDeviceManager::K3bAppDeviceManager( TQObject* tqparent, const char* name )
+  : K3bDevice::DeviceManager( tqparent, name ),
     m_currentDevice(0),
     m_ejectRequested(false)
 {
@@ -42,21 +42,21 @@ K3bAppDeviceManager::K3bAppDeviceManager( QObject* parent, const char* name )
 
   // setup actions
   KActionMenu* devicePopupMenu = new KActionMenu( m_actionCollection, "device_popup" );
-  m_actionDiskInfo = new KAction( i18n("Media &Info"), "info", 0, this, SLOT(diskInfo()),
+  m_actionDiskInfo = new KAction( i18n("Media &Info"), "info", 0, this, TQT_SLOT(diskInfo()),
 				  m_actionCollection, "device_diskinfo");
-  m_actionUnmount = new KAction( i18n("&Unmount"), "cdrom_unmount", 0, this, SLOT(unmountDisk()),
+  m_actionUnmount = new KAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(unmountDisk()),
 				 m_actionCollection, "device_unmount");
-  m_actionMount = new KAction( i18n("&Mount"), "cdrom_mount", 0, this, SLOT(mountDisk()),
+  m_actionMount = new KAction( i18n("&Mount"), "cdrom_mount", 0, this, TQT_SLOT(mountDisk()),
 			       m_actionCollection, "device_mount");
-  m_actionEject = new KAction( i18n("&Eject"), "", 0, this, SLOT(ejectDisk()),
+  m_actionEject = new KAction( i18n("&Eject"), "", 0, this, TQT_SLOT(ejectDisk()),
 			       m_actionCollection, "device_eject");
-  m_actionLoad = new KAction( i18n("L&oad"), "", 0, this, SLOT(loadDisk()),
+  m_actionLoad = new KAction( i18n("L&oad"), "", 0, this, TQT_SLOT(loadDisk()),
 			      m_actionCollection, "device_load");
-//   KAction* actionUnlock = new KAction( i18n("Un&lock"), "", 0, this, SLOT(unlockDevice()),
+//   KAction* actionUnlock = new KAction( i18n("Un&lock"), "", 0, this, TQT_SLOT(unlockDevice()),
 // 				       m_actionCollection, "device_unlock" );
-//   KAction* actionlock = new KAction( i18n("Loc&k"), "", 0, this, SLOT(lockDevice()),
+//   KAction* actionlock = new KAction( i18n("Loc&k"), "", 0, this, TQT_SLOT(lockDevice()),
 // 				     m_actionCollection, "device_lock" );
-  m_actionSetReadSpeed = new KAction( i18n("Set Read Speed..."), "", 0, this, SLOT(setReadSpeed()),
+  m_actionSetReadSpeed = new KAction( i18n("Set Read Speed..."), "", 0, this, TQT_SLOT(setReadSpeed()),
 				      m_actionCollection, "device_set_read_speed" );
 
   m_actionDiskInfo->setToolTip( i18n("Display generic medium information") );
@@ -85,8 +85,8 @@ K3bAppDeviceManager::K3bAppDeviceManager( QObject* parent, const char* name )
 
 void K3bAppDeviceManager::setMediaCache( K3bMediaCache* c )
 {
-  connect( c, SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( c, TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 }
 
 
@@ -110,7 +110,7 @@ void K3bAppDeviceManager::clear()
 }
 
 
-void K3bAppDeviceManager::removeDevice( const QString& dev )
+void K3bAppDeviceManager::removeDevice( const TQString& dev )
 {
   if( m_currentDevice == findDevice(dev) )
     m_currentDevice = 0;
@@ -230,7 +230,7 @@ void K3bAppDeviceManager::setReadSpeed()
 					   "and the spinning noise is intrusive."
 					   "<p>Be aware that this has no influence on K3b since it will "
 					   "change the reading speed again when copying CDs or DVDs.")
-				      .arg(currentDevice()->vendor() + " " + currentDevice()->description()),
+				      .tqarg(currentDevice()->vendor() + " " + currentDevice()->description()),
 				      12,
 				      1,
 				      currentDevice()->maxReadSpeed(),

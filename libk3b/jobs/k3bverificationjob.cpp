@@ -29,10 +29,10 @@
 #include <kio/job.h>
 #include <kio/netaccess.h>
 
-#include <qcstring.h>
-#include <qapplication.h>
-#include <qvaluelist.h>
-#include <qpair.h>
+#include <tqcstring.h>
+#include <tqapplication.h>
+#include <tqvaluelist.h>
+#include <tqpair.h>
 
 
 class K3bVerificationJobTrackEntry
@@ -42,14 +42,14 @@ public:
     : trackNumber(0) {
   }
 
-  K3bVerificationJobTrackEntry( int tn, const QCString& cs, const K3b::Msf& msf )
+  K3bVerificationJobTrackEntry( int tn, const TQCString& cs, const K3b::Msf& msf )
     : trackNumber(tn),
       checksum(cs),
       length(msf) {
   }
 
   int trackNumber;
-  QCString checksum;
+  TQCString checksum;
   K3b::Msf length;
 };
 
@@ -69,7 +69,7 @@ public:
 
   K3b::Msf grownSessionSize;
 
-  QValueList<K3bVerificationJobTrackEntry> tracks;
+  TQValueList<K3bVerificationJobTrackEntry> tracks;
   int currentTrackIndex;
 
   K3bDevice::DiskInfo diskInfo;
@@ -89,16 +89,16 @@ public:
 };
 
 
-K3bVerificationJob::K3bVerificationJob( K3bJobHandler* hdl, QObject* parent, const char* name )
-  : K3bJob( hdl, parent, name )
+K3bVerificationJob::K3bVerificationJob( K3bJobHandler* hdl, TQObject* tqparent, const char* name )
+  : K3bJob( hdl, tqparent, name )
 {
   d = new Private();
 
   d->md5Job = new K3bMd5Job( this );
-  connect( d->md5Job, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( d->md5Job, SIGNAL(finished(bool)), this, SLOT(slotMd5JobFinished(bool)) );
-  connect( d->md5Job, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+  connect( d->md5Job, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( d->md5Job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMd5JobFinished(bool)) );
+  connect( d->md5Job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 }
 
 
@@ -118,7 +118,7 @@ void K3bVerificationJob::cancel()
 }
 
 
-void K3bVerificationJob::addTrack( int trackNum, const QCString& checksum, const K3b::Msf& length )
+void K3bVerificationJob::addTrack( int trackNum, const TQCString& checksum, const K3b::Msf& length )
 {
   d->tracks.append( K3bVerificationJobTrackEntry( trackNum, checksum, length ) );
 }
@@ -155,9 +155,9 @@ void K3bVerificationJob::start()
 
   d->mediumHasBeenReloaded = false;
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::DISKINFO, d->device ),
-           SIGNAL(finished(K3bDevice::DeviceHandler*)),
+           TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
            this,
-           SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
+           TQT_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -174,9 +174,9 @@ void K3bVerificationJob::slotMediaReloaded( bool /*success*/ )
   emit newTask( i18n("Checking medium") );
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::DISKINFO, d->device ),
-           SIGNAL(finished(K3bDevice::DeviceHandler*)),
+           TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
            this,
-           SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
+           TQT_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -193,7 +193,7 @@ void K3bVerificationJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
 
   // just to be sure check if we actually have all the tracks
   int i = 0;
-  for( QValueList<K3bVerificationJobTrackEntry>::iterator it = d->tracks.begin();
+  for( TQValueList<K3bVerificationJobTrackEntry>::iterator it = d->tracks.begin();
        it != d->tracks.end(); ++i, ++it ) {
 
     // 0 means "last track"
@@ -203,7 +203,7 @@ void K3bVerificationJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
     if( (int)d->toc.count() < (*it).trackNumber ) {
         if ( d->mediumHasBeenReloaded ) {
             emit infoMessage( i18n("Internal Error: Verification job improperly initialized (%1)")
-                              .arg( "Specified track number not found on medium" ), ERROR );
+                              .tqarg( "Specified track number not found on medium" ), ERROR );
             jobFinished( false );
             return;
         }
@@ -211,9 +211,9 @@ void K3bVerificationJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
             // many drives need to reload the medium to return to a proper state
             emit newTask( i18n("Reloading the medium") );
             connect( K3bDevice::reload( d->device ),
-                     SIGNAL(finished(bool)),
+                     TQT_SIGNAL(finished(bool)),
                      this,
-                     SLOT(slotMediaReloaded(bool)) );
+                     TQT_SLOT(slotMediaReloaded(bool)) );
             return;
         }
     }
@@ -236,20 +236,20 @@ void K3bVerificationJob::readTrack( int trackIndex )
     return;
   }
 
-  emit newTask( i18n("Verifying track %1").arg( d->tracks[trackIndex].trackNumber ) );
+  emit newTask( i18n("Verifying track %1").tqarg( d->tracks[trackIndex].trackNumber ) );
 
   d->pipe.open();
 
   if( d->toc[d->tracks[trackIndex].trackNumber-1].type() == K3bDevice::Track::DATA ) {
     if( !d->dataTrackReader ) {
       d->dataTrackReader = new K3bDataTrackReader( this );
-      connect( d->dataTrackReader, SIGNAL(percent(int)), this, SLOT(slotReaderProgress(int)) );
-      //      connect( d->dataTrackReader, SIGNAL(processedSize(int, int)), this, SLOT(slotReaderProcessedSize(int, int)) );
-      connect( d->dataTrackReader, SIGNAL(finished(bool)), this, SLOT(slotReaderFinished(bool)) );
-      connect( d->dataTrackReader, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-      connect( d->dataTrackReader, SIGNAL(newTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-      connect( d->dataTrackReader, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	       this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+      connect( d->dataTrackReader, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotReaderProgress(int)) );
+      //      connect( d->dataTrackReader, TQT_SIGNAL(processedSize(int, int)), this, TQT_SLOT(slotReaderProcessedSize(int, int)) );
+      connect( d->dataTrackReader, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotReaderFinished(bool)) );
+      connect( d->dataTrackReader, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+      connect( d->dataTrackReader, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+      connect( d->dataTrackReader, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	       this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
     }
 
     d->dataTrackReader->setDevice( d->device );
@@ -304,7 +304,7 @@ void K3bVerificationJob::slotMd5JobFinished( bool success )
   if( success && !d->canceled && d->readSuccessful ) {
     // compare the two sums
     if( d->tracks[d->currentTrackIndex].checksum != d->md5Job->hexDigest() ) {
-      emit infoMessage( i18n("Written data in track %1 differs from original.").arg(d->tracks[d->currentTrackIndex].trackNumber), ERROR );
+      emit infoMessage( i18n("Written data in track %1 differs from original.").tqarg(d->tracks[d->currentTrackIndex].trackNumber), ERROR );
       jobFinished(false);
     }
     else {

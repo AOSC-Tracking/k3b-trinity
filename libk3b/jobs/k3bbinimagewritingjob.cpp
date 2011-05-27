@@ -25,13 +25,13 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 
 
-K3bBinImageWritingJob::K3bBinImageWritingJob( K3bJobHandler* hdl, QObject* parent )
-  : K3bBurnJob( hdl, parent ),
+K3bBinImageWritingJob::K3bBinImageWritingJob( K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bBurnJob( hdl, tqparent ),
     m_device(0),
     m_simulate(false),
     m_force(false),
@@ -93,10 +93,10 @@ bool K3bBinImageWritingJob::prepareWriter()
       // TODO: put this into K3bCueFileParser
       // TODO: check K3bCueFileParser::imageFilenameInCue()
       // let's see if cdrecord can handle the cue file
-      QFile f( m_tocFile );
+      TQFile f( m_tocFile );
       if( f.open( IO_ReadOnly ) ) {
-	QTextStream fStr( &f );
-	if( fStr.read().contains( "MODE1/2352" ) ) {
+	TQTextStream fStr( &f );
+	if( fStr.read().tqcontains( "MODE1/2352" ) ) {
 	  kdDebug() << "(K3bBinImageWritingJob) cuefile contains MODE1/2352 track. using cdrdao." << endl;
 	  usedWritingApp = K3b::CDRDAO;
 	}
@@ -144,18 +144,18 @@ bool K3bBinImageWritingJob::prepareWriter()
     m_writer = writer;
   }
 
-  connect( m_writer, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_writer, SIGNAL(percent(int)), this, SLOT(copyPercent(int)) );
-  connect( m_writer, SIGNAL(subPercent(int)), this, SLOT(copySubPercent(int)) );
-  connect( m_writer, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSize(int, int)) );
-  connect( m_writer, SIGNAL(buffer(int)), this, SIGNAL(bufferStatus(int)) );
-  connect( m_writer, SIGNAL(deviceBuffer(int)), this, SIGNAL(deviceBuffer(int)) );
-  connect( m_writer, SIGNAL(writeSpeed(int, int)), this, SIGNAL(writeSpeed(int, int)) );
-  connect( m_writer, SIGNAL(finished(bool)), this, SLOT(writerFinished(bool)) );
-  connect( m_writer, SIGNAL(newTask(const QString&)), this, SIGNAL(newTask(const QString&)) );
-  connect( m_writer, SIGNAL(newSubTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-  connect( m_writer, SIGNAL(nextTrack(int, int)), this, SLOT(slotNextTrack(int, int)) );
-  connect( m_writer, SIGNAL(debuggingOutput(const QString&, const QString&)), this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+  connect( m_writer, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_writer, TQT_SIGNAL(percent(int)), this, TQT_SLOT(copyPercent(int)) );
+  connect( m_writer, TQT_SIGNAL(subPercent(int)), this, TQT_SLOT(copySubPercent(int)) );
+  connect( m_writer, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
+  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_writer, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
+  connect( m_writer, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
+  connect( m_writer, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(writerFinished(bool)) );
+  connect( m_writer, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
+  connect( m_writer, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_writer, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotNextTrack(int, int)) );
+  connect( m_writer, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   return true;
 }
@@ -207,26 +207,26 @@ void K3bBinImageWritingJob::writerFinished(bool ok)
 
 void K3bBinImageWritingJob::slotNextTrack( int t, int tt )
 {
-  emit newSubTask( i18n("Writing track %1 of %2").arg(t).arg(tt) );
+  emit newSubTask( i18n("Writing track %1 of %2").tqarg(t).tqarg(tt) );
 }
 
 
-QString K3bBinImageWritingJob::jobDescription() const
+TQString K3bBinImageWritingJob::jobDescription() const
 {
   return ( i18n("Writing cue/bin Image")
 	   + ( m_copies > 1 
 	       ? i18n(" - %n Copy", " - %n Copies", m_copies) 
-	       : QString::null ) );
+	       : TQString() ) );
 }
 
 
-QString K3bBinImageWritingJob::jobDetails() const
+TQString K3bBinImageWritingJob::jobDetails() const
 {
   return m_tocFile.section("/", -1);
 }
 
 
-void K3bBinImageWritingJob::setTocFile(const QString& s)
+void K3bBinImageWritingJob::setTocFile(const TQString& s)
 {
   m_tocFile = s;
 }

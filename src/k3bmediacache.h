@@ -17,9 +17,9 @@
 #ifndef _K3B_MEDIA_CACHE_H_
 #define _K3B_MEDIA_CACHE_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 #include <k3bdevice.h>
 #include <k3btoc.h>
@@ -32,7 +32,7 @@ namespace K3bDevice {
   class DeviceManager;
 }
 
-class QCustomEvent;
+class TQCustomEvent;
 
 
 /**
@@ -48,12 +48,13 @@ class QCustomEvent;
  *
  * To start the media caching call buildDeviceList().
  */
-class K3bMediaCache : public QObject
+class K3bMediaCache : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMediaCache( QObject* parent = 0 );
+  K3bMediaCache( TQObject* tqparent = 0 );
   ~K3bMediaCache();
 
   /**
@@ -101,12 +102,12 @@ class K3bMediaCache : public QObject
   /**
    * Read cached supported writing speeds.
    */
-  QValueList<int> writingSpeeds( K3bDevice::Device* );
+  TQValueList<int> writingSpeeds( K3bDevice::Device* );
 
   /**
    * \see K3bMedium::shortString()
    */
-  QString mediumString( K3bDevice::Device* device, bool useContent = true );
+  TQString mediumString( K3bDevice::Device* device, bool useContent = true );
 
  signals:
   /**
@@ -139,10 +140,10 @@ class K3bMediaCache : public QObject
   class DeviceEntry;
   class MediaChangeEvent;
 
-  QMap<K3bDevice::Device*, DeviceEntry*> m_deviceMap;
+  TQMap<K3bDevice::Device*, DeviceEntry*> m_deviceMap;
 
   DeviceEntry* findDeviceEntry( K3bDevice::Device* );
-  void customEvent( QCustomEvent* );
+  void customEvent( TQCustomEvent* );
 };
 
 #endif

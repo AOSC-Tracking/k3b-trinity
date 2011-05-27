@@ -18,34 +18,34 @@
 
 #include <k3bstringutils.h>
 
-#include <qtooltip.h>
-#include <qstringlist.h>
+#include <tqtooltip.h>
+#include <tqstringlist.h>
 #include <kdebug.h>
 
 
-KCutLabel::KCutLabel( const QString &text , QWidget *parent, const char *name )
- : QLabel ( parent, name ),
+KCutLabel::KCutLabel( const TQString &text , TQWidget *tqparent, const char *name )
+ : TQLabel ( tqparent, name ),
    m_minChars(1) {
-  QSizePolicy myLabelSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
-  setSizePolicy(myLabelSizePolicy);
+  TQSizePolicy myLabelSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
+  tqsetSizePolicy(myLabelSizePolicy);
   m_fullText = text;
   cutTextToLabel();
 }
 
-KCutLabel::KCutLabel( QWidget *parent, const char *name )
- : QLabel ( parent, name ),
+KCutLabel::KCutLabel( TQWidget *tqparent, const char *name )
+ : TQLabel ( tqparent, name ),
    m_minChars(1) {
-  QSizePolicy myLabelSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
-  setSizePolicy(myLabelSizePolicy);
+  TQSizePolicy myLabelSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
+  tqsetSizePolicy(myLabelSizePolicy);
 }
 
-QSize KCutLabel::minimumSizeHint() const
+TQSize KCutLabel::tqminimumSizeHint() const
 {
-  QSize sh = QLabel::minimumSizeHint();
+  TQSize sh = TQLabel::tqminimumSizeHint();
   if( m_minChars == 0 )
     sh.setWidth(-1);
   else if( m_minChars < (int)m_fullText.length() )
-    sh.setWidth( QMIN( fontMetrics().width( m_fullText.left(m_minChars) + "..." ), 
+    sh.setWidth( TQMIN( fontMetrics().width( m_fullText.left(m_minChars) + "..." ), 
 		       fontMetrics().width( m_fullText ) ) );
 
   return sh;
@@ -59,19 +59,19 @@ void KCutLabel::setMinimumVisibleText( int i )
 }
 
 
-void KCutLabel::resizeEvent( QResizeEvent * )
+void KCutLabel::resizeEvent( TQResizeEvent * )
 {
   cutTextToLabel();
 }
 
-void KCutLabel::setText( const QString &text )
+void KCutLabel::setText( const TQString &text )
 {
   m_fullText = text;
   cutTextToLabel();
 }
 
 
-const QString& KCutLabel::fullText() const
+const TQString& KCutLabel::fullText() const
 {
   return m_fullText;
 }
@@ -79,36 +79,36 @@ const QString& KCutLabel::fullText() const
 
 void KCutLabel::cutTextToLabel()
 {
-  QToolTip::remove( this );
-  QToolTip::hide();
+  TQToolTip::remove( this );
+  TQToolTip::hide();
 
-  if( m_fullText.contains( "\n" ) ) {
-    QString newText;
-    QStringList lines = QStringList::split( "\n", m_fullText );
-    for( QStringList::Iterator it = lines.begin(); it != lines.end(); ++it ) {
-      QString squeezedText = K3b::cutToWidth( fontMetrics(), 
+  if( m_fullText.tqcontains( "\n" ) ) {
+    TQString newText;
+    TQStringList lines = TQStringList::split( "\n", m_fullText );
+    for( TQStringList::Iterator it = lines.begin(); it != lines.end(); ++it ) {
+      TQString squeezedText = K3b::cutToWidth( fontMetrics(), 
 					      *it, 
-					      QMAX( size().width(), 
-						    QMIN( fontMetrics().width( m_fullText.left(m_minChars) + "..." ), 
+					      TQMAX( size().width(), 
+						    TQMIN( fontMetrics().width( m_fullText.left(m_minChars) + "..." ), 
 							  fontMetrics().width( m_fullText ) ) ) );
       newText += squeezedText;
       newText += "\n";
       if( squeezedText != *it )
-	QToolTip::add( this, m_fullText );
+	TQToolTip::add( this, m_fullText );
     }
     newText.truncate( newText.length() - 1 ); // get rid of the last newline
 
-    QLabel::setText( newText );
+    TQLabel::setText( newText );
   }
   else {
-    QString squeezedText = K3b::cutToWidth( fontMetrics(), 
+    TQString squeezedText = K3b::cutToWidth( fontMetrics(), 
 					    m_fullText, 
-					    QMAX( size().width(), 
-						  QMIN( fontMetrics().width( m_fullText.left(m_minChars) + "..." ), 
+					    TQMAX( size().width(), 
+						  TQMIN( fontMetrics().width( m_fullText.left(m_minChars) + "..." ), 
 							fontMetrics().width( m_fullText ) ) ) );
-    QLabel::setText( squeezedText );
+    TQLabel::setText( squeezedText );
     if( squeezedText != m_fullText )
-      QToolTip::add( this, m_fullText );      
+      TQToolTip::add( this, m_fullText );      
   }
 }
 

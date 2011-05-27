@@ -18,29 +18,29 @@
 
 #include "k3b_export.h"
 
-#include <qtoolbutton.h>
+#include <tqtoolbutton.h>
 
-class QPainter;
-class QEvent;
+class TQPainter;
+class TQEvent;
 
 
 /**
- * the K3bToolButton is an enhanced QToolButton which adds two functionalities:
+ * the K3bToolButton is an enhanced TQToolButton which adds two functionalities:
  * <li>A delayed popup menu is shown immiadetely once the mouse is dragged downwards
  *     much like the KToolBarButton
  * <li>If a popup menu is set a little arrow indicates this.
  */
-class LIBK3B_EXPORT K3bToolButton : public QToolButton
+class LIBK3B_EXPORT K3bToolButton : public TQToolButton
 {
  public:
-  K3bToolButton( QWidget* parent = 0 );
+  K3bToolButton( TQWidget* tqparent = 0 );
   ~K3bToolButton();
 
   void setInstantMenu( bool );
 
  protected:
-  virtual void drawButton( QPainter* );
-  virtual bool eventFilter( QObject*, QEvent* );
+  virtual void drawButton( TQPainter* );
+  virtual bool eventFilter( TQObject*, TQEvent* );
 
  private:
   class Private;

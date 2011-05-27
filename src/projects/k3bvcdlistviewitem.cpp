@@ -22,15 +22,15 @@
 #include "k3bvcdtrack.h"
 #include <k3bglobals.h>
 
-K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent )
-        : K3bListViewItem( parent ), m_track( track )
+K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* tqparent )
+        : K3bListViewItem( tqparent ), m_track( track )
 {
     setEditor( 1, LINE );
     animate();
 }
 
-K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent, QListViewItem* after )
-        : K3bListViewItem( parent, after ), m_track( track )
+K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* tqparent, TQListViewItem* after )
+        : K3bListViewItem( tqparent, after ), m_track( track )
 {
     setEditor( 1, LINE );
     animate();
@@ -40,7 +40,7 @@ K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent,
 K3bVcdListViewItem::~K3bVcdListViewItem()
 {}
 
-QString K3bVcdListViewItem::text( int i ) const
+TQString K3bVcdListViewItem::text( int i ) const
 {
     //
     // We add two spaces after all strings (except the once renamable)
@@ -49,7 +49,7 @@ QString K3bVcdListViewItem::text( int i ) const
 
     switch ( i ) {
             case 0:
-            return QString::number( m_track->index() + 1 ).rightJustify( 2, ' ' ) + "  ";
+            return TQString::number( m_track->index() + 1 ).rightJustify( 2, ' ' ) + "  ";
             case 1:
             return m_track->title();
             case 2:
@@ -66,7 +66,7 @@ QString K3bVcdListViewItem::text( int i ) const
             return m_track->video_frate() + "  ";
             case 6:
             // track mpegmbps
-            return QString::number( m_track->muxrate() ) + "  ";
+            return TQString::number( m_track->muxrate() ) + "  ";
             case 7:
             // track mpegduration
             return m_track->duration() + "  ";
@@ -82,7 +82,7 @@ QString K3bVcdListViewItem::text( int i ) const
     }
 }
 
-void K3bVcdListViewItem::setText( int col, const QString& text )
+void K3bVcdListViewItem::setText( int col, const TQString& text )
 {
     if ( col == 1 ) {
         // this is the title field
@@ -93,9 +93,9 @@ void K3bVcdListViewItem::setText( int col, const QString& text )
 }
 
 
-QString K3bVcdListViewItem::key( int, bool ) const
+TQString K3bVcdListViewItem::key( int, bool ) const
 {
-    QString num = QString::number( m_track->index() );
+    TQString num = TQString::number( m_track->index() );
     if ( num.length() == 1 )
         return "00" + num;
     else if ( num.length() == 2 )

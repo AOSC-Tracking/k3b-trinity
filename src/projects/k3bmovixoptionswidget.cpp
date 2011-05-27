@@ -24,29 +24,29 @@
 #include <kglobal.h>
 #include <kdebug.h>
 
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qstringlist.h>
-#include <qmap.h>
-#include <qlabel.h>
+#include <tqcheckbox.h>
+#include <tqspinbox.h>
+#include <tqstringlist.h>
+#include <tqmap.h>
+#include <tqlabel.h>
 
 
 class K3bMovixOptionsWidget::LanguageSelectionHelper
 {
 public:
-  LanguageSelectionHelper( QComboBox* box )
+  LanguageSelectionHelper( TQComboBox* box )
     : m_box(box) {
   }
 
-  void insertLanguages( const QStringList& langs ) {
+  void insertLanguages( const TQStringList& langs ) {
     m_box->clear();
     m_langMap.clear();
 
-    for( QStringList::const_iterator it = langs.begin(); it != langs.end(); ++it ) {
+    for( TQStringList::const_iterator it = langs.begin(); it != langs.end(); ++it ) {
       if( *it == i18n("default") )
 	m_box->insertItem( *it );
       else {
-	QString lang = KGlobal::locale()->twoAlphaToLanguageName( *it );
+	TQString lang = KGlobal::locale()->twoAlphaToLanguageName( *it );
 	if( lang.isEmpty() )
 	  lang = *it;
 
@@ -57,15 +57,15 @@ public:
     }
   }
 
-  QString selectedLanguage() const {
+  TQString selectedLanguage() const {
     if( m_box->currentItem() == 0 )
       return i18n("default");
     else
       return m_langMap[m_box->currentItem()];
   }
 
-  void setLanguage( const QString& l ) {
-    QMap<QString,int>::const_iterator it = m_indexMap.find(l);
+  void setLanguage( const TQString& l ) {
+    TQMap<TQString,int>::const_iterator it = m_indexMap.tqfind(l);
     if( it == m_indexMap.end() )
       m_box->setCurrentItem( 0 );
     else
@@ -73,14 +73,14 @@ public:
   }
 
 private:
-  QComboBox* m_box;
-  QMap<int,QString> m_langMap;
-  QMap<QString,int> m_indexMap;
+  TQComboBox* m_box;
+  TQMap<int,TQString> m_langMap;
+  TQMap<TQString,int> m_indexMap;
 };
 
 
-K3bMovixOptionsWidget::K3bMovixOptionsWidget( QWidget* parent, const char* name )
-  : base_K3bMovixOptionsWidget( parent, name )
+K3bMovixOptionsWidget::K3bMovixOptionsWidget( TQWidget* tqparent, const char* name )
+  : base_K3bMovixOptionsWidget( tqparent, name )
 {
   m_keyboardLangHelper = new LanguageSelectionHelper( m_comboKeyboardLayout );
   m_helpLangHelper = new LanguageSelectionHelper( m_comboBootMessageLanguage );
@@ -151,8 +151,8 @@ void K3bMovixOptionsWidget::loadDefaults()
   m_comboAudioBackground->setCurrentItem( 0 ); // default
   m_comboKeyboardLayout->setCurrentItem( 0 ); // default
   m_spinLoop->setValue( 1 );
-  m_editAdditionalMplayerOptions->setText( QString::null );
-  m_editUnwantedMplayerOptions->setText( QString::null );
+  m_editAdditionalMplayerOptions->setText( TQString() );
+  m_editUnwantedMplayerOptions->setText( TQString() );
   m_comboBootMessageLanguage->setCurrentItem( 0 ); // default
   m_comboDefaultBootLabel->setCurrentItem( 0 );  // default
   m_checkShutdown->setChecked( false );
@@ -165,7 +165,7 @@ void K3bMovixOptionsWidget::loadDefaults()
 
 void K3bMovixOptionsWidget::loadConfig( KConfigBase* c )
 {
-  QString s = c->readEntry("subtitle_fontset");
+  TQString s = c->readEntry("subtitle_fontset");
   if( !s.isEmpty() && s != "none" && m_comboSubtitleFontset->contains(s) )
     m_comboSubtitleFontset->setCurrentItem( s, false );
   else
@@ -176,7 +176,7 @@ void K3bMovixOptionsWidget::loadConfig( KConfigBase* c )
   m_editUnwantedMplayerOptions->setText( c->readEntry( "unwanted_mplayer_options" ) );
 
   s = c->readEntry("boot_message_language");
-  m_helpLangHelper->setLanguage( s == "default" ? QString::null : s );
+  m_helpLangHelper->setLanguage( s == "default" ? TQString() : s );
 
   s = c->readEntry( "default_boot_label" );
   if( !s.isEmpty() && s != "default" && m_comboDefaultBootLabel->contains(s) )
@@ -191,7 +191,7 @@ void K3bMovixOptionsWidget::loadConfig( KConfigBase* c )
     m_comboAudioBackground->setCurrentItem( 0 ); // default
 
   s = c->readEntry("keyboard_layout");
-  m_keyboardLangHelper->setLanguage( s == "default" ? QString::null : s );
+  m_keyboardLangHelper->setLanguage( s == "default" ? TQString() : s );
 
   m_checkShutdown->setChecked( c->readBoolEntry( "shutdown", false) );
   m_checkReboot->setChecked( c->readBoolEntry( "reboot", false ) );

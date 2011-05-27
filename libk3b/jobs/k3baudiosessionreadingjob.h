@@ -18,7 +18,7 @@
 
 #include <k3bthreadjob.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 
 namespace K3bDevice {
@@ -30,9 +30,10 @@ namespace K3bDevice {
 class K3bAudioSessionReadingJob : public K3bThreadJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioSessionReadingJob( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bAudioSessionReadingJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bAudioSessionReadingJob();
 
   /**
@@ -55,7 +56,7 @@ class K3bAudioSessionReadingJob : public K3bThreadJob
   /**
    * Used if fd == -1
    */
-  void setImageNames( const QStringList& l );
+  void setImageNames( const TQStringList& l );
 
   void setParanoiaMode( int m );
   void setReadRetries( int );

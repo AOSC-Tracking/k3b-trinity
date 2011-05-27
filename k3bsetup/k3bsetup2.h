@@ -22,18 +22,19 @@
 
 
 class base_K3bSetup2;
-class QCheckListItem;
+class TQCheckListItem;
 
 
 class K3bSetup2: public KCModule
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bSetup2( QWidget* parent = 0, const char* name = 0, const QStringList& args = QStringList() );
+  K3bSetup2( TQWidget* tqparent = 0, const char* name = 0, const TQStringList& args = TQStringList() );
   ~K3bSetup2();
 
-  QString quickHelp() const;
+  TQString quickHelp() const;
   const KAboutData* aboutData() { return m_aboutData; };
 
   void load();
@@ -50,9 +51,9 @@ class K3bSetup2: public KCModule
  private:
   void updatePrograms();
   void updateDevices();
-  QString burningGroup() const;
+  TQString burningGroup() const;
   void makeReadOnly();
-  QCheckListItem* createDeviceItem( const QString& deviceNode );
+  TQCheckListItem* createDeviceItem( const TQString& deviceNode );
 
   class Private;
   Private* d;

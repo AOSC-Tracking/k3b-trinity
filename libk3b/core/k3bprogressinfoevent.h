@@ -16,27 +16,27 @@
 #ifndef K3B_PROGRESS_INFO_EVENT_H
 #define K3B_PROGRESS_INFO_EVENT_H
 
-#include <qevent.h>
-#include <qstring.h>
+#include <tqevent.h>
+#include <tqstring.h>
 
 
 /**
  * Custom event class for posting events corresponding to the
  * K3bJob signals. This is useful for a threaded job since
  * in that case it's not possible to emit signals that directly
- * change the GUI (see QThread docu).
+ * change the GUI (see TQThread docu).
  */
-class K3bProgressInfoEvent : public QCustomEvent
+class K3bProgressInfoEvent : public TQCustomEvent
 {
  public:
   K3bProgressInfoEvent( int type )
-    : QCustomEvent( type ),
+    : TQCustomEvent( type ),
     m_type(type)
     {}
 
-  K3bProgressInfoEvent( int type, const QString& v1, const QString& v2 = QString::null, 
+  K3bProgressInfoEvent( int type, const TQString& v1, const TQString& v2 = TQString(), 
 			int value1 = 0, int value2 = 0 )
-    : QCustomEvent( type ),
+    : TQCustomEvent( type ),
     m_type( type),
     m_firstValue(value1),
     m_secondValue(value2),
@@ -45,20 +45,20 @@ class K3bProgressInfoEvent : public QCustomEvent
     {}
 
   K3bProgressInfoEvent( int type, int value1, int value2 = 0 )
-    : QCustomEvent( type ),
+    : TQCustomEvent( type ),
     m_type( type),
     m_firstValue(value1),
     m_secondValue(value2)
     {}
 
   int type() const { return m_type; }
-  const QString& firstString() const { return m_firstString; }
-  const QString& secondString() const { return m_secondString; }
+  const TQString& firstString() const { return m_firstString; }
+  const TQString& secondString() const { return m_secondString; }
   int firstValue() const { return m_firstValue; }
   int secondValue() const { return m_secondValue; }
 
   enum K3bProgressInfoEventType {
-    Progress = QEvent::User + 1,
+    Progress = TQEvent::User + 1,
     SubProgress,
     ProcessedSize,
     ProcessedSubSize,
@@ -69,7 +69,7 @@ class K3bProgressInfoEvent : public QCustomEvent
     NewTask,
     NewSubTask,
     DebuggingOutput,
-    BufferStatus,
+    BuffertqStatus,
     WriteSpeed,
     NextTrack
   };
@@ -78,8 +78,8 @@ class K3bProgressInfoEvent : public QCustomEvent
   int m_type;
   int m_firstValue;
   int m_secondValue;
-  QString m_firstString;
-  QString m_secondString;
+  TQString m_firstString;
+  TQString m_secondString;
 };
 
 #endif

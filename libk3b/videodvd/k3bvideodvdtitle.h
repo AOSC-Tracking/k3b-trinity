@@ -24,7 +24,7 @@
 #include <k3bvideodvdsubpicturestream.h>
 #include <k3bvideodvdptt.h>
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 
 
 namespace K3bVideoDVD
@@ -85,7 +85,7 @@ namespace K3bVideoDVD
       /**
        * \return A video capture
        */
-      //      QBitmap videoCapture( const Time& ) const;
+      //      TQBitmap videoCapture( const Time& ) const;
       
     private:
       unsigned int m_titleNum;
@@ -98,10 +98,10 @@ namespace K3bVideoDVD
       Time m_playbackTime;
       
       VideoStream m_videoStream;
-      QValueVector<AudioStream> m_audioStreams;
-      QValueVector<SubPictureStream> m_subPictureStreams;
+      TQValueVector<AudioStream> m_audioStreams;
+      TQValueVector<SubPictureStream> m_subPictureStreams;
 
-      QValueVector<PTT> m_ptts;
+      TQValueVector<PTT> m_ptts;
 
       //      VideoDVD* m_videoDVD;
 

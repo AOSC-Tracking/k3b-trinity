@@ -24,16 +24,17 @@ class KURL;
 class K3bFLACDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bFLACDecoderFactory( QObject* parent = 0, const char* name = 0 );
+  K3bFLACDecoderFactory( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bFLACDecoderFactory();
 
   bool canDecode( const KURL& filename );
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bAudioDecoder* createDecoder( QObject* parent = 0, 
+  K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, 
 				  const char* name = 0 ) const;
 };
 
@@ -41,18 +42,19 @@ class K3bFLACDecoderFactory : public K3bAudioDecoderFactory
 class K3bFLACDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bFLACDecoder( QObject* parent = 0, const char* name = 0 );
+  K3bFLACDecoder( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bFLACDecoder();
 
   void cleanup();
 
   bool seekInternal( const K3b::Msf& );
 
-  QString fileType() const;
-  QStringList supportedTechnicalInfos() const;
-  QString technicalInfo( const QString& ) const;
+  TQString fileType() const;
+  TQStringList supportedTechnicalInfos() const;
+  TQString technicalInfo( const TQString& ) const;
 
  protected:
   bool analyseFileInternal( K3b::Msf& frames, int& samplerate, int& ch );

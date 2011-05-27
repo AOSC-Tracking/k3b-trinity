@@ -31,12 +31,12 @@ namespace K3bDevice {
 class K3bWriterSelectionWidget;
 class K3bTempDirSelectionWidget;
 class K3bMediaSelectionComboBox;
-class QCheckBox;
-class QSpinBox;
-class QComboBox;
+class TQCheckBox;
+class TQSpinBox;
+class TQComboBox;
 class K3bWritingModeWidget;
-class QButtonGroup;
-class QGroupBox;
+class TQButtonGroup;
+class TQGroupBox;
 
 
 /**
@@ -45,9 +45,10 @@ class QGroupBox;
 class K3bCdCopyDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bCdCopyDialog(QWidget *parent = 0, const char *name = 0, bool modal = true );
+  K3bCdCopyDialog(TQWidget *tqparent = 0, const char *name = 0, bool modal = true );
   ~K3bCdCopyDialog();
 
   void setReadingDevice( K3bDevice::Device* );
@@ -72,25 +73,25 @@ class K3bCdCopyDialog : public K3bInteractionDialog
 
   K3bWriterSelectionWidget* m_writerSelectionWidget;
   K3bTempDirSelectionWidget* m_tempDirSelectionWidget;
-  QCheckBox* m_checkSimulate;
-  QCheckBox* m_checkCacheImage;
-  QCheckBox* m_checkDeleteImages;
-  QCheckBox* m_checkOnlyCreateImage;
-  QCheckBox* m_checkReadCdText;
-  QCheckBox* m_checkPrefereCdText;
-  QCheckBox* m_checkIgnoreDataReadErrors;
-  QCheckBox* m_checkIgnoreAudioReadErrors;
-  QCheckBox* m_checkNoCorrection;
+  TQCheckBox* m_checkSimulate;
+  TQCheckBox* m_checkCacheImage;
+  TQCheckBox* m_checkDeleteImages;
+  TQCheckBox* m_checkOnlyCreateImage;
+  TQCheckBox* m_checkReadCdText;
+  TQCheckBox* m_checkPrefereCdText;
+  TQCheckBox* m_checkIgnoreDataReadErrors;
+  TQCheckBox* m_checkIgnoreAudioReadErrors;
+  TQCheckBox* m_checkNoCorrection;
   K3bMediaSelectionComboBox* m_comboSourceDevice;
-  QComboBox* m_comboParanoiaMode;
-  QSpinBox* m_spinCopies;
-  QSpinBox* m_spinDataRetries;
-  QSpinBox* m_spinAudioRetries;
+  TQComboBox* m_comboParanoiaMode;
+  TQSpinBox* m_spinCopies;
+  TQSpinBox* m_spinDataRetries;
+  TQSpinBox* m_spinAudioRetries;
   K3bWritingModeWidget* m_writingModeWidget;
-  QComboBox* m_comboCopyMode;
+  TQComboBox* m_comboCopyMode;
 
-  QGroupBox* m_groupAdvancedDataOptions;
-  QGroupBox* m_groupAdvancedAudioOptions;
+  TQGroupBox* m_groupAdvancedDataOptions;
+  TQGroupBox* m_groupAdvancedAudioOptions;
 };
 
 #endif

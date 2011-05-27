@@ -32,9 +32,10 @@ class K3bVideoDvdDoc;
 class K3bVideoDvdImager : public K3bIsoImager
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDvdImager( K3bVideoDvdDoc* doc, K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bVideoDvdImager( K3bVideoDvdDoc* doc, K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bVideoDvdImager();
 
  public slots:
@@ -46,10 +47,10 @@ class K3bVideoDvdImager : public K3bIsoImager
   bool addMkisofsParameters( bool printSize = false );
   int writePathSpec();
   void cleanup();
-  int writePathSpecForDir( K3bDirItem* dirItem, QTextStream& stream );
+  int writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& stream );
 
  protected slots:
-  virtual void slotReceivedStderr( const QString& );
+  virtual void slotReceivedStderr( const TQString& );
 
  private:
   void fixVideoDVDSettings();

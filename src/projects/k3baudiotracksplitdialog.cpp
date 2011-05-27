@@ -25,49 +25,49 @@
 #include <kaction.h>
 #include <kpopupmenu.h>
 
-#include <qlabel.h>
-#include <qframe.h>
-#include <qlayout.h>
+#include <tqlabel.h>
+#include <tqframe.h>
+#include <tqlayout.h>
 
 
-K3bAudioTrackSplitDialog::K3bAudioTrackSplitDialog( K3bAudioTrack* track, QWidget* parent, const char* name )
+K3bAudioTrackSplitDialog::K3bAudioTrackSplitDialog( K3bAudioTrack* track, TQWidget* tqparent, const char* name )
   : KDialogBase( KDialogBase::Plain, i18n("Split Audio Track"), 
 		 KDialogBase::Ok|KDialogBase::Cancel,
-		 KDialogBase::Ok, parent, name ),
+		 KDialogBase::Ok, tqparent, name ),
     m_track(track)
 {
-  QFrame* frame = plainPage();
+  TQFrame* frame = plainPage();
   
   m_editorWidget = new K3bAudioEditorWidget( frame );
   m_msfEditStart = new K3bMsfEdit( frame );
   m_msfEditEnd = new K3bMsfEdit( frame );
 
-  QGridLayout* layout = new QGridLayout( frame );
-  layout->setMargin( 0 );
-  layout->setSpacing( spacingHint() );
+  TQGridLayout* tqlayout = new TQGridLayout( frame );
+  tqlayout->setMargin( 0 );
+  tqlayout->setSpacing( spacingHint() );
 
   // FIXME: After the string freeze replace the text with a better one explaning how to use this dialog
-  layout->addMultiCellWidget( new QLabel( i18n("Please select the position where the track should be split."),
+  tqlayout->addMultiCellWidget( new TQLabel( i18n("Please select the position where the track should be split."),
 			      frame ), 0, 0, 0, 3 );
-  layout->addMultiCellWidget( m_editorWidget, 1, 1, 0, 3 );
-  layout->addWidget( m_msfEditStart, 2, 1 );
-  layout->addWidget( new QLabel( " - ", frame ), 2, 2 );
-  layout->addWidget( m_msfEditEnd, 2, 3 );
-  layout->addWidget( new QLabel( i18n("Split track at:"), frame ), 2, 0 );
-  layout->setColStretch( 0, 1 );
+  tqlayout->addMultiCellWidget( m_editorWidget, 1, 1, 0, 3 );
+  tqlayout->addWidget( m_msfEditStart, 2, 1 );
+  tqlayout->addWidget( new TQLabel( " - ", frame ), 2, 2 );
+  tqlayout->addWidget( m_msfEditEnd, 2, 3 );
+  tqlayout->addWidget( new TQLabel( i18n("Split track at:"), frame ), 2, 0 );
+  tqlayout->setColStretch( 0, 1 );
 
   m_editorWidget->setAllowOverlappingRanges( false );
   m_editorWidget->enableRangeSelection( true );
   m_editorWidget->installEventFilter( this );
 
-  connect( m_editorWidget, SIGNAL(rangeChanged(int, const K3b::Msf&, const K3b::Msf&)),
-	   this, SLOT(slotRangeModified(int, const K3b::Msf&, const K3b::Msf&)) );
-  connect( m_editorWidget, SIGNAL(selectedRangeChanged(int)),
-	   this, SLOT(slotRangeSelectionChanged(int)) );
-  connect( m_msfEditStart, SIGNAL(valueChanged(const K3b::Msf&)),
-	   this, SLOT(slotMsfEditChanged(const K3b::Msf&)) );
-  connect( m_msfEditEnd, SIGNAL(valueChanged(const K3b::Msf&)),
-	   this, SLOT(slotMsfEditChanged(const K3b::Msf&)) );
+  connect( m_editorWidget, TQT_SIGNAL(rangeChanged(int, const K3b::Msf&, const K3b::Msf&)),
+	   this, TQT_SLOT(slotRangeModified(int, const K3b::Msf&, const K3b::Msf&)) );
+  connect( m_editorWidget, TQT_SIGNAL(selectedRangeChanged(int)),
+	   this, TQT_SLOT(slotRangeSelectionChanged(int)) );
+  connect( m_msfEditStart, TQT_SIGNAL(valueChanged(const K3b::Msf&)),
+	   this, TQT_SLOT(slotMsfEditChanged(const K3b::Msf&)) );
+  connect( m_msfEditEnd, TQT_SIGNAL(valueChanged(const K3b::Msf&)),
+	   this, TQT_SLOT(slotMsfEditChanged(const K3b::Msf&)) );
 
   setupActions();
 
@@ -94,11 +94,11 @@ void K3bAudioTrackSplitDialog::setupActions()
   m_popupMenu = new KPopupMenu( this );
 
   KAction* actionSplitHere = new KAction( i18n("Split Here"), 0,
-					  KShortcut(), this, SLOT(slotSplitHere()),
+					  KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotSplitHere()),
 					  actionCollection(), "range_split" );
   // FIXME: after the message freeze give this action a proper name like "Remove track part"
   KAction* actionRemoveRange = new KAction( i18n("Remove this Range"), 0,
-					    KShortcut(), this, SLOT(slotRemoveRange()),
+					    KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotRemoveRange()),
 					    actionCollection(), "range_remove" );
 
   actionSplitHere->plug( m_popupMenu );
@@ -148,7 +148,7 @@ void K3bAudioTrackSplitDialog::slotRangeSelectionChanged( int id )
 }
 
 
-void K3bAudioTrackSplitDialog::splitAt( const QPoint& p )
+void K3bAudioTrackSplitDialog::splitAt( const TQPoint& p )
 {
   int id = m_editorWidget->findRange( p.x() );
   if( id ) {
@@ -160,15 +160,15 @@ void K3bAudioTrackSplitDialog::splitAt( const QPoint& p )
 }
 
 
-bool K3bAudioTrackSplitDialog::eventFilter( QObject* o, QEvent* e )
+bool K3bAudioTrackSplitDialog::eventFilter( TQObject* o, TQEvent* e )
 {
-  if( o == m_editorWidget ) {
-    if( e->type() == QEvent::MouseButtonDblClick ) {
-      QMouseEvent* me = static_cast<QMouseEvent*>( e );
+  if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorWidget) ) {
+    if( e->type() == TQEvent::MouseButtonDblClick ) {
+      TQMouseEvent* me = TQT_TQMOUSEEVENT( e );
       splitAt( me->pos() );
     }
-    else if( e->type() == QEvent::ContextMenu ) {
-      QContextMenuEvent* ce = static_cast<QContextMenuEvent*>( e );
+    else if( e->type() == TQEvent::ContextMenu ) {
+      TQContextMenuEvent* ce = TQT_TQCONTEXTMENUEVENT( e );
       ce->consume();
       m_lastClickPosition = ce->pos();
       if( m_editorWidget->findRange( ce->pos().x() ) > 0 )
@@ -193,15 +193,15 @@ void K3bAudioTrackSplitDialog::slotRemoveRange()
 
 
 void K3bAudioTrackSplitDialog::splitTrack( K3bAudioTrack* track,
-					   QWidget* parent, 
+					   TQWidget* tqparent, 
 					   const char* name )
 {
-  K3bAudioTrackSplitDialog d( track, parent, name );
-  if( d.exec() == QDialog::Accepted ) {
-    QValueList<int> ranges = d.m_editorWidget->allRanges();
+  K3bAudioTrackSplitDialog d( track, tqparent, name );
+  if( d.exec() == TQDialog::Accepted ) {
+    TQValueList<int> ranges = d.m_editorWidget->allRanges();
     // we split the track at all range ends and just delete those that relate to the gaps in between
     K3b::Msf pos = 0;
-    for( QValueList<int>::const_iterator it = ranges.constBegin();
+    for( TQValueList<int>::const_iterator it = ranges.constBegin();
 	 it != ranges.constEnd(); ++it ) {
 
       // delete the unwanted part

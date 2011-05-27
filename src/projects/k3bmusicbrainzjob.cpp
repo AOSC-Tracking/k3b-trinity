@@ -43,7 +43,7 @@ public:
   }
   void run();
   void cancel();
-  const QCString& signature() const {
+  const TQCString& signature() const {
     return m_trm.signature();
   }
 
@@ -63,7 +63,7 @@ public:
 
   void run();
 
-  void setSignature( const QCString& sig ) {
+  void setSignature( const TQCString& sig ) {
     m_sig = sig;
   }
 
@@ -71,18 +71,18 @@ public:
     return m_results;
   }
 
-  const QString& title( unsigned int i = 0 ) const {
+  const TQString& title( unsigned int i = 0 ) const {
     return m_mb.title( i );
   }
 
-  const QString& artist( unsigned int i = 0 ) const {
+  const TQString& artist( unsigned int i = 0 ) const {
     return m_mb.artist( i );
   }
 
 private:
   K3bMusicBrainz m_mb;
   int m_results;
-  QCString m_sig;
+  TQCString m_sig;
 };
 
 
@@ -152,9 +152,9 @@ void K3bMusicBrainzJob::MusicBrainzThread::run()
 
 
 
-// cannot use this as parent for the K3bSimpleJobHandler since this has not been constructed yet
-K3bMusicBrainzJob::K3bMusicBrainzJob( QWidget* parent, const char* name )
-  : K3bJob( new K3bSimpleJobHandler( 0 ), parent, name ),
+// cannot use this as tqparent for the K3bSimpleJobHandler since this has not been constructed yet
+K3bMusicBrainzJob::K3bMusicBrainzJob( TQWidget* tqparent, const char* name )
+  : K3bJob( new K3bSimpleJobHandler( 0 ), tqparent, name ),
     m_canceled( false )
 {
   m_trmThread = new TRMThread();
@@ -162,10 +162,10 @@ K3bMusicBrainzJob::K3bMusicBrainzJob( QWidget* parent, const char* name )
   m_trmJob = new K3bThreadJob( m_trmThread, this, this );
   m_mbJob = new K3bThreadJob( m_mbThread, this, this );
 
-  connect( m_trmJob, SIGNAL(percent(int)), this, SIGNAL(subPercent(int)) );
-  connect( m_trmJob, SIGNAL(percent(int)), this, SLOT(slotTrmPercent(int)) );
-  connect( m_trmJob, SIGNAL(finished(bool)), this, SLOT(slotTrmJobFinished(bool)) );
-  connect( m_mbJob, SIGNAL(finished(bool)), this, SLOT(slotMbJobFinished(bool)) );
+  connect( m_trmJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
+  connect( m_trmJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotTrmPercent(int)) );
+  connect( m_trmJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotTrmJobFinished(bool)) );
+  connect( m_mbJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMbJobFinished(bool)) );
 }
 
 
@@ -188,7 +188,7 @@ void K3bMusicBrainzJob::start()
   m_trmThread->track = m_tracks.first();
 
   emit infoMessage( i18n("Generating fingerprint for track %1.")
-		    .arg(m_tracks.current()->trackNumber()), INFO );
+		    .tqarg(m_tracks.current()->trackNumber()), INFO );
 
   m_trmJob->start();  
 }
@@ -215,7 +215,7 @@ void K3bMusicBrainzJob::slotTrmJobFinished( bool success )
     // now query musicbrainz
     m_mbThread->setSignature( m_trmThread->signature() );
     emit infoMessage( i18n("Querying MusicBrainz for track %1.")
-		      .arg(m_tracks.current()->trackNumber()), INFO );
+		      .tqarg(m_tracks.current()->trackNumber()), INFO );
     m_mbJob->start();    
   }
   else {
@@ -237,29 +237,29 @@ void K3bMusicBrainzJob::slotMbJobFinished( bool success )
 
     if( success ) {
       // found entries
-      QStringList resultStrings, resultStringsUnique;
+      TQStringList resultStrings, resultStringsUnique;
       for( unsigned int i = 0; i < m_mbThread->results(); ++i )
 	resultStrings.append( m_mbThread->artist(i) + " - " + m_mbThread->title(i) );
 
       // since we are only using the title and the artist a lot of entries are alike to us
       // so to not let the user have to choose between two equal entries we trim the list down
-      for( QStringList::const_iterator it = resultStrings.begin();
+      for( TQStringList::const_iterator it = resultStrings.begin();
 	   it != resultStrings.end(); ++it )
-	if( resultStringsUnique.find( *it ) == resultStringsUnique.end() )
+	if( resultStringsUnique.tqfind( *it ) == resultStringsUnique.end() )
 	  resultStringsUnique.append( *it );
 
-      QString s;
+      TQString s;
       bool ok = true;
       if( resultStringsUnique.count() > 1 )
 	s = KInputDialog::getItem( i18n("MusicBrainz Query"),
 				   i18n("Found multiple matches for track %1 (%2). Please select one.")
-				   .arg(m_tracks.current()->trackNumber())
-				   .arg(m_tracks.current()->firstSource()->sourceComment()),
+				   .tqarg(m_tracks.current()->trackNumber())
+				   .tqarg(m_tracks.current()->firstSource()->sourceComment()),
 				   resultStringsUnique,
 				   0,
 				   false,
 				   &ok,
-				   dynamic_cast<QWidget*>(parent()) );
+				   dynamic_cast<TQWidget*>(tqparent()) );
       else
 	s = resultStringsUnique.first();
 
@@ -273,7 +273,7 @@ void K3bMusicBrainzJob::slotMbJobFinished( bool success )
     // query next track
     if( m_tracks.next() ) {
       emit infoMessage( i18n("Generating fingerprint for track %1.")
-			.arg(m_tracks.current()->trackNumber()), INFO );
+			.tqarg(m_tracks.current()->trackNumber()), INFO );
       m_trmThread->track = m_tracks.current();
       m_trmJob->start();  
     }

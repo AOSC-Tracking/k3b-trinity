@@ -26,14 +26,14 @@
 
 class K3bListView;
 class KListView;
-class QListViewItem;
-class QPoint;
+class TQListViewItem;
+class TQPoint;
 class KActionCollection;
 class KActionMenu;
 class K3bCddb;
-class QLabel;
+class TQLabel;
 class K3bToolBox;
-class QDragObject;
+class TQDragObject;
 
 
 namespace K3bDevice {
@@ -44,9 +44,10 @@ namespace K3bDevice {
 class K3bAudioCdView : public K3bMediaContentsView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioCdView( QWidget* parent = 0, const char * name = 0 );
+  K3bAudioCdView( TQWidget* tqparent = 0, const char * name = 0 );
   ~K3bAudioCdView();
 
   KActionCollection* actionCollection() const { return m_actionCollection; }
@@ -54,16 +55,16 @@ class K3bAudioCdView : public K3bMediaContentsView
   /**
    * internal
    */
-  QDragObject* dragObject();
+  TQDragObject* dragObject();
 
  public slots:
   void queryCddb();
 
  private slots:
-  void slotContextMenu( KListView*, QListViewItem*, const QPoint& );
-  void slotItemRenamed( QListViewItem*, const QString&, int );
+  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& );
+  void slotItemRenamed( TQListViewItem*, const TQString&, int );
   void slotCddbQueryFinished( int );
-  void slotTrackSelectionChanged( QListViewItem* );
+  void slotTrackSelectionChanged( TQListViewItem* );
   void slotSaveCddbLocally();
 
   void slotEditTrackCddb();
@@ -92,7 +93,7 @@ class K3bAudioCdView : public K3bMediaContentsView
 
   K3bListView* m_trackView;
   K3bToolBox* m_toolBox;
-  QLabel* m_labelLength;
+  TQLabel* m_labelLength;
 
   class AudioTrackViewItem;
 
@@ -100,7 +101,7 @@ class K3bAudioCdView : public K3bMediaContentsView
 
   K3bDevice::CdText m_cdText;
 
-  QLabel* m_busyInfoLabel;
+  TQLabel* m_busyInfoLabel;
 };
 
 

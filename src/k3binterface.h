@@ -19,7 +19,7 @@
 
 #include <dcopobject.h>
 #include <dcopref.h>
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 #include <kurl.h>
 
@@ -63,7 +63,7 @@ class K3bInterface : public DCOPObject
 
   DCOPRef openProject( const KURL& url );
 
-  QValueList<DCOPRef> projects();
+  TQValueList<DCOPRef> projects();
 
   void copyCd();
   void copyDvd();

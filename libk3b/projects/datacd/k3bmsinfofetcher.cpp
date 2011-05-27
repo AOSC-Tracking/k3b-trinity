@@ -27,11 +27,11 @@
 #include <kprocess.h>
 #include <kdebug.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 
-K3bMsInfoFetcher::K3bMsInfoFetcher( K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bJob( jh, parent, name ),
+K3bMsInfoFetcher::K3bMsInfoFetcher( K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bJob( jh, tqparent, name ),
     m_process(0),
     m_device(0),
     m_dvd(false)
@@ -53,7 +53,7 @@ void K3bMsInfoFetcher::start()
 
   if( !k3bcore->externalBinManager()->foundBin( "cdrecord" ) ) {
     kdDebug() << "(K3bMsInfoFetcher) could not find cdrecord executable" << endl;
-    emit infoMessage( i18n("Could not find %1 executable.").arg("cdrecord"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("cdrecord"), K3bJob::ERROR );
     jobFinished(false);
     return;
   }
@@ -70,9 +70,9 @@ void K3bMsInfoFetcher::start()
   //
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::NG_DISKINFO, m_device ),
-	   SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	   TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	   this,
-	   SLOT(slotMediaDetectionFinished(K3bDevice::DeviceHandler*)) );
+	   TQT_SLOT(slotMediaDetectionFinished(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -89,7 +89,7 @@ void K3bMsInfoFetcher::getMsInfo()
     bin = k3bcore->externalBinManager()->binObject( "cdrecord" );
  
     if( !bin ) {
-      emit infoMessage( i18n("Could not find %1 executable.").arg( m_dvd ? "dvdrecord" : "cdrecord" ), ERROR );
+      emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg( m_dvd ? "dvdrecord" : "cdrecord" ), ERROR );
       jobFinished(false);
       return;
     }
@@ -97,38 +97,38 @@ void K3bMsInfoFetcher::getMsInfo()
     *m_process << bin->path;
 
     // add the device (e.g. /dev/sg1)
-    *m_process << QString("dev=%1").arg( K3b::externalBinDeviceParameter(m_device, bin) );
+    *m_process << TQString("dev=%1").tqarg( K3b::externalBinDeviceParameter(m_device, bin) );
 
     *m_process << "-msinfo";
 
     // additional user parameters from config
-    const QStringList& params = bin->userParameters();
-    for( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+    const TQStringList& params = bin->userParameters();
+    for( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
       *m_process << *it;
 
     kdDebug() << "***** " << bin->name() << " parameters:\n";
-    const QValueList<QCString>& args = m_process->args();
-    QString s;
-    for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+    const TQValueList<TQCString>& args = m_process->args();
+    TQString s;
+    for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
       s += *it + " ";
     }
     kdDebug() << s << flush << endl;
     emit debuggingOutput( "msinfo command:", s );
 
 
-    //   connect( m_process, SIGNAL(receivedStderr(KProcess*, char*, int)),
-    // 	   this, SLOT(slotCollectOutput(KProcess*, char*, int)) );
-    connect( m_process, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	     this, SLOT(slotCollectOutput(KProcess*, char*, int)) );
-    connect( m_process, SIGNAL(processExited(KProcess*)),
-	     this, SLOT(slotProcessExited()) );
+    //   connect( m_process, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+    // 	   this, TQT_SLOT(slotCollectOutput(KProcess*, char*, int)) );
+    connect( m_process, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	     this, TQT_SLOT(slotCollectOutput(KProcess*, char*, int)) );
+    connect( m_process, TQT_SIGNAL(processExited(KProcess*)),
+	     this, TQT_SLOT(slotProcessExited()) );
 
-    m_msInfo = QString::null;
-    m_collectedOutput = QString::null;
+    m_msInfo = TQString();
+    m_collectedOutput = TQString();
     m_canceled = false;
 
     if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
-      emit infoMessage( i18n("Could not start %1.").arg(bin->name()), K3bJob::ERROR );
+      emit infoMessage( i18n("Could not start %1.").tqarg(bin->name()), K3bJob::ERROR );
       jobFinished(false);
     }
   }
@@ -161,7 +161,7 @@ void K3bMsInfoFetcher::slotMediaDetectionFinished( K3bDevice::DeviceHandler* h )
       }
       else {
 	emit infoMessage( i18n("Could not open Iso9660 filesystem in %1.")
-			  .arg( m_device->vendor() + " " + m_device->description() ), ERROR );
+			  .tqarg( m_device->vendor() + " " + m_device->description() ), ERROR );
 	jobFinished( false );
       }
     }
@@ -190,8 +190,8 @@ void K3bMsInfoFetcher::slotProcessExited()
   kdDebug() << "(K3bMsInfoFetcher) msinfo fetched" << endl;
 
   // now parse the output
-  QString firstLine = m_collectedOutput.left( m_collectedOutput.find("\n") );
-  QStringList list = QStringList::split( ",",  firstLine );
+  TQString firstLine = m_collectedOutput.left( m_collectedOutput.tqfind("\n") );
+  TQStringList list = TQStringList::split( ",",  firstLine );
   if( list.count() == 2 ) {
     bool ok1, ok2;
     m_lastSessionStart = list.first().toInt( &ok1 );
@@ -199,10 +199,10 @@ void K3bMsInfoFetcher::slotProcessExited()
     if( ok1 && ok2 )
       m_msInfo = firstLine.stripWhiteSpace();
     else
-      m_msInfo = QString::null;
+      m_msInfo = TQString();
   }
   else {
-    m_msInfo = QString::null;
+    m_msInfo = TQString();
   }
 
   kdDebug() << "(K3bMsInfoFetcher) msinfo parsed: " << m_msInfo << endl;
@@ -220,9 +220,9 @@ void K3bMsInfoFetcher::slotProcessExited()
 
 void K3bMsInfoFetcher::slotCollectOutput( KProcess*, char* output, int len )
 {
-  emit debuggingOutput( "msinfo", QString::fromLocal8Bit( output, len ) );
+  emit debuggingOutput( "msinfo", TQString::fromLocal8Bit( output, len ) );
 
-  m_collectedOutput += QString::fromLocal8Bit( output, len );
+  m_collectedOutput += TQString::fromLocal8Bit( output, len );
 }
 
 

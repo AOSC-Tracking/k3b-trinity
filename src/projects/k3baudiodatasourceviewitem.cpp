@@ -23,23 +23,23 @@
 #include <kiconloader.h>
 
 
-K3bAudioDataSourceViewItem::K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* parent, 
+K3bAudioDataSourceViewItem::K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* tqparent, 
 							K3bAudioDataSourceViewItem* after, 
 							K3bAudioDataSource* source )
-  : K3bListViewItem( parent, after ),
-    m_trackViewItem( parent ),
+  : K3bListViewItem( tqparent, after ),
+    m_trackViewItem( tqparent ),
     m_source( source ),
     m_animationCounter(1)
 {
   // italic type
-  QFont f(listView()->font());
+  TQFont f(listView()->font());
   f.setItalic( true );
   setFont( 3, f );
 
   //  setMarginVertical( 2 );
 
   // gray out filename
-  setForegroundColor( 5, listView()->palette().disabled().foreground() );
+  setForegroundColor( 5, listView()->tqpalette().disabled().foreground() );
 
   // smaller filename
   f = listView()->font();
@@ -52,7 +52,7 @@ K3bAudioDataSourceViewItem::K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* p
 }
 
 
-QString K3bAudioDataSourceViewItem::text( int i ) const
+TQString K3bAudioDataSourceViewItem::text( int i ) const
 {
   switch( i ) {
   case 3:
@@ -62,12 +62,12 @@ QString K3bAudioDataSourceViewItem::text( int i ) const
   case 5:
     return m_source->sourceComment();
   default:
-    return QString::null;
+    return TQString();
   }
 }
 
 
-void K3bAudioDataSourceViewItem::setText( int col, const QString& text )
+void K3bAudioDataSourceViewItem::setText( int col, const TQString& text )
 {
   //
   // See K3bAudioTrackViewItem::setText for an explanation why we have to check if
@@ -89,7 +89,7 @@ void K3bAudioDataSourceViewItem::setText( int col, const QString& text )
 bool K3bAudioDataSourceViewItem::animate()
 {
   if( source()->length() == 0 && source()->isValid() ) {
-    QString icon = QString( "kde%1" ).arg( m_animationCounter );
+    TQString icon = TQString( "kde%1" ).tqarg( m_animationCounter );
     setPixmap( 4, SmallIcon( icon ) );
     m_animationCounter++;
     if ( m_animationCounter > 6 )

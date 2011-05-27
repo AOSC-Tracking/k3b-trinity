@@ -23,8 +23,8 @@
 K_EXPORT_COMPONENT_FACTORY( libk3b<name>decoder, K3bPluginFactory<K3b<name>DecoderFactory>( "libk3b<name>decoder" ) )
 
 
-K3b<name>DecoderFactory::K3b<name>DecoderFactory( QObject* parent, const char* name )
-  : K3bAudioDecoderFactory( parent, name )
+K3b<name>DecoderFactory::K3b<name>DecoderFactory( TQObject* tqparent, const char* name )
+  : K3bAudioDecoderFactory( tqparent, name )
 {
 }
 
@@ -34,10 +34,10 @@ K3b<name>DecoderFactory::~K3b<name>DecoderFactory()
 }
 
 
-K3bAudioDecoder* K3b<name>DecoderFactory::createDecoder( QObject* parent, 
+K3bAudioDecoder* K3b<name>DecoderFactory::createDecoder( TQObject* tqparent, 
 							 const char* name ) const
 {
-  return new K3b<name>Decoder( parent, name );
+  return new K3b<name>Decoder( tqparent, name );
 }
 
 
@@ -52,8 +52,8 @@ bool K3b<name>DecoderFactory::canDecode( const KURL& url )
 
 
 
-K3b<name>Decoder::K3b<name>Decoder( QObject* parent, const char* name )
-  : K3bAudioDecoder( parent, name )
+K3b<name>Decoder::K3b<name>Decoder( TQObject* tqparent, const char* name )
+  : K3bAudioDecoder( tqparent, name )
 {
 }
 
@@ -63,7 +63,7 @@ K3b<name>Decoder::~K3b<name>Decoder()
 }
 
 
-QString K3b<name>Decoder::fileType() const
+TQString K3b<name>Decoder::fileType() const
 {
   // PUT YOUR CODE HERE
 }

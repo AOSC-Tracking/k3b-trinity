@@ -19,7 +19,7 @@
 
 #include "base_k3bmiscoptiontab.h"
 
-class QCheckBox;
+class TQCheckBox;
 class KURLRequester;
 
 /**
@@ -28,9 +28,10 @@ class KURLRequester;
 class K3bMiscOptionTab : public base_K3bMiscOptionTab
 {
    Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bMiscOptionTab(QWidget *parent=0, const char *name=0);
+  K3bMiscOptionTab(TQWidget *tqparent=0, const char *name=0);
   ~K3bMiscOptionTab();
 
   void readSettings();

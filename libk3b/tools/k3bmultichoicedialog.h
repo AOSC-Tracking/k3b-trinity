@@ -20,20 +20,21 @@
 #include <kstdguiitem.h>
 #include "k3b_export.h"
 
-#include <qmessagebox.h>
+#include <tqmessagebox.h>
 
 
-class QCloseEvent;
+class TQCloseEvent;
 
 class LIBK3B_EXPORT K3bMultiChoiceDialog : public KDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMultiChoiceDialog( const QString& caption,
-			const QString& text,
-			QMessageBox::Icon = QMessageBox::Information,
-			QWidget* parent = 0, const char* name = 0 );
+  K3bMultiChoiceDialog( const TQString& caption,
+			const TQString& text,
+			TQMessageBox::Icon = TQMessageBox::Information,
+			TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bMultiChoiceDialog();
 
   /**
@@ -41,10 +42,10 @@ class LIBK3B_EXPORT K3bMultiChoiceDialog : public KDialog
    */
   int addButton( const KGuiItem& );
 
-  static int choose( const QString& caption,
-		     const QString& text,
-		     QMessageBox::Icon = QMessageBox::Information,
-		     QWidget* parent = 0, 
+  static int choose( const TQString& caption,
+		     const TQString& text,
+		     TQMessageBox::Icon = TQMessageBox::Information,
+		     TQWidget* tqparent = 0, 
 		     const char* name = 0,
 		     int buttonCount = 2,
 		     const KGuiItem& b1 = KStdGuiItem::yes(),
@@ -64,7 +65,7 @@ class LIBK3B_EXPORT K3bMultiChoiceDialog : public KDialog
   void slotButtonClicked( int );
 
  private:
-  void closeEvent( QCloseEvent* );
+  void closeEvent( TQCloseEvent* );
 
   class Private;
   Private* d;

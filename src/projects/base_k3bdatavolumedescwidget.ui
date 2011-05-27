@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>base_K3bDataVolumeDescWidget</class>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>base_K3bDataVolumeDescWidget</cstring>
     </property>
@@ -18,7 +18,7 @@
         <property name="spacing">
             <number>6</number>
         </property>
-        <widget class="QLineEdit" row="0" column="1">
+        <widget class="TQLineEdit" row="0" column="1">
             <property name="name">
                 <cstring>m_editVolumeName</cstring>
             </property>
@@ -26,7 +26,7 @@
                 <number>32</number>
             </property>
         </widget>
-        <widget class="QLineEdit" row="1" column="1">
+        <widget class="TQLineEdit" row="1" column="1">
             <property name="name">
                 <cstring>m_editVolumeSetName</cstring>
             </property>
@@ -34,7 +34,7 @@
                 <number>128</number>
             </property>
         </widget>
-        <widget class="QLabel" row="1" column="0">
+        <widget class="TQLabel" row="1" column="0">
             <property name="name">
                 <cstring>TextLabel2</cstring>
             </property>
@@ -45,7 +45,7 @@
                 <cstring>m_editVolumeSetName</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>TextLabel1</cstring>
             </property>
@@ -56,7 +56,7 @@
                 <cstring>m_editVolumeName</cstring>
             </property>
         </widget>
-        <widget class="QLineEdit" row="3" column="1">
+        <widget class="TQLineEdit" row="3" column="1">
             <property name="name">
                 <cstring>m_editPublisher</cstring>
             </property>
@@ -64,7 +64,7 @@
                 <number>128</number>
             </property>
         </widget>
-        <widget class="QLineEdit" row="4" column="1">
+        <widget class="TQLineEdit" row="4" column="1">
             <property name="name">
                 <cstring>m_editPreparer</cstring>
             </property>
@@ -72,7 +72,7 @@
                 <number>128</number>
             </property>
         </widget>
-        <widget class="QLabel" row="4" column="0">
+        <widget class="TQLabel" row="4" column="0">
             <property name="name">
                 <cstring>TextLabel4</cstring>
             </property>
@@ -83,7 +83,7 @@
                 <cstring>m_editPreparer</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="3" column="0">
+        <widget class="TQLabel" row="3" column="0">
             <property name="name">
                 <cstring>TextLabel3</cstring>
             </property>
@@ -94,7 +94,7 @@
                 <cstring>m_editPublisher</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="2" column="0">
+        <widget class="TQLabel" row="2" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -105,15 +105,15 @@
                 <cstring>m_spinVolumeSetSize</cstring>
             </property>
         </widget>
-        <widget class="QLayoutWidget" row="2" column="1">
+        <widget class="TQLayoutWidget" row="2" column="1">
             <property name="name">
-                <cstring>layout1</cstring>
+                <cstring>tqlayout1</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QSpinBox">
+                <widget class="TQSpinBox">
                     <property name="name">
                         <cstring>m_spinVolumeSetSize</cstring>
                     </property>
@@ -127,21 +127,21 @@
                         <number>1</number>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>textLabel2</cstring>
                     </property>
                     <property name="text">
                         <string>Volume set &amp;number:</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                     <property name="buddy" stdset="0">
                         <cstring>m_spinVolumeSetNumber</cstring>
                     </property>
                 </widget>
-                <widget class="QSpinBox">
+                <widget class="TQSpinBox">
                     <property name="name">
                         <cstring>m_spinVolumeSetNumber</cstring>
                     </property>
@@ -160,7 +160,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QLabel" row="6" column="0">
+        <widget class="TQLabel" row="6" column="0">
             <property name="name">
                 <cstring>TextLabel5</cstring>
             </property>
@@ -171,7 +171,7 @@
                 <cstring>m_editSystem</cstring>
             </property>
         </widget>
-        <widget class="QLineEdit" row="6" column="1">
+        <widget class="TQLineEdit" row="6" column="1">
             <property name="name">
                 <cstring>m_editSystem</cstring>
             </property>
@@ -179,7 +179,7 @@
                 <number>32</number>
             </property>
         </widget>
-        <widget class="QLabel" row="7" column="0">
+        <widget class="TQLabel" row="7" column="0">
             <property name="name">
                 <cstring>TextLabel6</cstring>
             </property>
@@ -200,7 +200,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>0</height>
@@ -221,7 +221,7 @@
                 <enum>Horizontal</enum>
             </property>
         </widget>
-        <widget class="QLineEdit" row="7" column="1">
+        <widget class="TQLineEdit" row="7" column="1">
             <property name="name">
                 <cstring>m_editApplication</cstring>
             </property>
@@ -229,15 +229,15 @@
                 <number>128</number>
             </property>
         </widget>
-        <widget class="QLayoutWidget" row="11" column="1">
+        <widget class="TQLayoutWidget" row="11" column="1">
             <property name="name">
-                <cstring>layout4</cstring>
+                <cstring>tqlayout4</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLineEdit">
+                <widget class="TQLineEdit">
                     <property name="name">
                         <cstring>m_editBiblio</cstring>
                     </property>
@@ -245,7 +245,7 @@
                         <number>37</number>
                     </property>
                 </widget>
-                <widget class="QToolButton">
+                <widget class="TQToolButton">
                     <property name="name">
                         <cstring>m_buttonFindBiblio</cstring>
                     </property>
@@ -258,15 +258,15 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QLayoutWidget" row="9" column="1">
+        <widget class="TQLayoutWidget" row="9" column="1">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLineEdit">
+                <widget class="TQLineEdit">
                     <property name="name">
                         <cstring>m_editAbstract</cstring>
                     </property>
@@ -274,7 +274,7 @@
                         <number>37</number>
                     </property>
                 </widget>
-                <widget class="QToolButton">
+                <widget class="TQToolButton">
                     <property name="name">
                         <cstring>m_buttonFindAbstract</cstring>
                     </property>
@@ -287,15 +287,15 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QLayoutWidget" row="10" column="1">
+        <widget class="TQLayoutWidget" row="10" column="1">
             <property name="name">
-                <cstring>layout3</cstring>
+                <cstring>tqlayout3</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLineEdit">
+                <widget class="TQLineEdit">
                     <property name="name">
                         <cstring>m_editCopyright</cstring>
                     </property>
@@ -303,7 +303,7 @@
                         <number>37</number>
                     </property>
                 </widget>
-                <widget class="QToolButton">
+                <widget class="TQToolButton">
                     <property name="name">
                         <cstring>m_buttonFindCopyright</cstring>
                     </property>
@@ -316,7 +316,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QLabel" row="9" column="0">
+        <widget class="TQLabel" row="9" column="0">
             <property name="name">
                 <cstring>textLabel1_2</cstring>
             </property>
@@ -324,7 +324,7 @@
                 <string>Abstract file:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="10" column="0">
+        <widget class="TQLabel" row="10" column="0">
             <property name="name">
                 <cstring>textLabel2_2</cstring>
             </property>
@@ -332,7 +332,7 @@
                 <string>Copyright file:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="11" column="0">
+        <widget class="TQLabel" row="11" column="0">
             <property name="name">
                 <cstring>textLabel3</cstring>
             </property>
@@ -366,5 +366,5 @@
     <tabstop>m_editSystem</tabstop>
     <tabstop>m_editApplication</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

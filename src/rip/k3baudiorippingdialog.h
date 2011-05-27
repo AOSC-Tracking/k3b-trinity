@@ -19,7 +19,7 @@
 
 #include <k3binteractiondialog.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include <k3bcddbquery.h>
 
@@ -30,11 +30,11 @@ namespace K3bDevice {
 
 
 class KListView;
-class QCheckBox;
-class QSpinBox;
-class QComboBox;
+class TQCheckBox;
+class TQSpinBox;
+class TQComboBox;
 class K3bCddbPatternWidget;
-class QToolButton;
+class TQToolButton;
 class K3bAudioConvertingOptionWidget;
 
 
@@ -44,16 +44,17 @@ class K3bAudioConvertingOptionWidget;
 class K3bAudioRippingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
   K3bAudioRippingDialog( const K3bDevice::Toc&, 
 			 K3bDevice::Device*,
 			 const K3bCddbResultEntry&, 
-			 const QValueList<int>&, 
-			 QWidget *parent = 0, const char *name = 0 );
+			 const TQValueList<int>&, 
+			 TQWidget *tqparent = 0, const char *name = 0 );
   ~K3bAudioRippingDialog();
 
-  void setStaticDir( const QString& path );
+  void setStaticDir( const TQString& path );
 
  public slots:  
   void refresh();
@@ -63,14 +64,14 @@ class K3bAudioRippingDialog : public K3bInteractionDialog
   K3bDevice::Toc m_toc;
   K3bDevice::Device* m_device;
   K3bCddbResultEntry m_cddbEntry;
-  QValueList<int> m_trackNumbers;
+  TQValueList<int> m_trackNumbers;
 
   KListView*    m_viewTracks;
 
-  QComboBox* m_comboParanoiaMode;
-  QSpinBox* m_spinRetries;
-  QCheckBox* m_checkIgnoreReadErrors;
-  QCheckBox* m_checkUseIndex0;
+  TQComboBox* m_comboParanoiaMode;
+  TQSpinBox* m_spinRetries;
+  TQCheckBox* m_checkIgnoreReadErrors;
+  TQCheckBox* m_checkUseIndex0;
 
   K3bCddbPatternWidget* m_patternWidget;
   K3bAudioConvertingOptionWidget* m_optionWidget;

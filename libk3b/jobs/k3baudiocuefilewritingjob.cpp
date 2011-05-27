@@ -50,35 +50,35 @@ private:
 };
 
 
-K3bAudioCueFileWritingJob::K3bAudioCueFileWritingJob( K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bBurnJob( jh, parent, name ),
+K3bAudioCueFileWritingJob::K3bAudioCueFileWritingJob( K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bBurnJob( jh, tqparent, name ),
     m_decoder(0)
 {
   m_analyserThread = new AnalyserThread();
   m_analyserJob = new K3bThreadJob( m_analyserThread, this, this );
-  connect( m_analyserJob, SIGNAL(finished(bool)), this, SLOT(slotAnalyserThreadFinished(bool)) );
+  connect( m_analyserJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotAnalyserThreadFinished(bool)) );
 
   m_audioDoc = new K3bAudioDoc( this );
   m_audioDoc->newDocument();
   m_audioJob = new K3bAudioJob( m_audioDoc, this, this );
 
   // just loop all through
-  connect( m_audioJob, SIGNAL(newTask(const QString&)), this, SIGNAL(newTask(const QString&)) );
-  connect( m_audioJob, SIGNAL(newSubTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-  connect( m_audioJob, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
-  connect( m_audioJob, SIGNAL(infoMessage(const QString&, int)),
-	   this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_audioJob, SIGNAL(finished(bool)), this, SIGNAL(finished(bool)) );
-  connect( m_audioJob, SIGNAL(canceled()), this, SIGNAL(canceled()) );
-  connect( m_audioJob, SIGNAL(percent(int)), this, SIGNAL(percent(int)) );
-  connect( m_audioJob, SIGNAL(subPercent(int)), this, SIGNAL(subPercent(int)) );
-  connect( m_audioJob, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-  connect( m_audioJob, SIGNAL(processedSubSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-  connect( m_audioJob, SIGNAL(burning(bool)), this, SIGNAL(burning(bool)) );
-  connect( m_audioJob, SIGNAL(bufferStatus(int)), this, SIGNAL(bufferStatus(int)) );
-  connect( m_audioJob, SIGNAL(deviceBuffer(int)), this, SIGNAL(deviceBuffer(int)) );
-  connect( m_audioJob, SIGNAL(writeSpeed(int, int)), this, SIGNAL(writeSpeed(int, int)) );
+  connect( m_audioJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
+  connect( m_audioJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_audioJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_audioJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_audioJob, TQT_SIGNAL(finished(bool)), this, TQT_SIGNAL(finished(bool)) );
+  connect( m_audioJob, TQT_SIGNAL(canceled()), this, TQT_SIGNAL(canceled()) );
+  connect( m_audioJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(percent(int)) );
+  connect( m_audioJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
+  connect( m_audioJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+  connect( m_audioJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+  connect( m_audioJob, TQT_SIGNAL(burning(bool)), this, TQT_SIGNAL(burning(bool)) );
+  connect( m_audioJob, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_audioJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
+  connect( m_audioJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
 
   m_canceled = false;
   m_audioJobRunning = false;
@@ -98,13 +98,13 @@ K3bDevice::Device* K3bAudioCueFileWritingJob::writer() const
 }
 
 
-QString K3bAudioCueFileWritingJob::jobDescription() const
+TQString K3bAudioCueFileWritingJob::jobDescription() const
 {
   return i18n("Writing Audio Cue File");
 }
 
 
-QString K3bAudioCueFileWritingJob::jobDetails() const
+TQString K3bAudioCueFileWritingJob::jobDetails() const
 {
   return m_cueFile.section( '/', -1 );
 }
@@ -131,7 +131,7 @@ void K3bAudioCueFileWritingJob::cancel()
 }
 
 
-void K3bAudioCueFileWritingJob::setCueFile( const QString& s )
+void K3bAudioCueFileWritingJob::setCueFile( const TQString& s )
 {
   m_cueFile = s;
 }
@@ -173,7 +173,7 @@ void K3bAudioCueFileWritingJob::setCopies( int c )
 }
 
 
-void K3bAudioCueFileWritingJob::setTempDir( const QString& s )
+void K3bAudioCueFileWritingJob::setTempDir( const TQString& s )
 {
   m_audioDoc->setTempDir( s );
 }
@@ -252,19 +252,19 @@ void K3bAudioCueFileWritingJob::importCueInProject()
 
       // now analyze the source
       emit newTask( i18n("Analysing the audio file") );
-      emit newSubTask( i18n("Analysing %1").arg( parser.imageFilename() ) );
+      emit newSubTask( i18n("Analysing %1").tqarg( parser.imageFilename() ) );
 
       // start the analyser thread
       m_analyserThread->setDecoder( m_decoder );
       m_analyserJob->start();
     }
     else {
-      emit infoMessage( i18n("Unable to handle '%1' due to an unsupported format.").arg( m_cueFile ), ERROR );
+      emit infoMessage( i18n("Unable to handle '%1' due to an unsupported format.").tqarg( m_cueFile ), ERROR );
       jobFinished(false);
     }
   }
   else {
-    emit infoMessage( i18n("No valid audio cue file: '%1'").arg( m_cueFile ), ERROR );
+    emit infoMessage( i18n("No valid audio cue file: '%1'").tqarg( m_cueFile ), ERROR );
     jobFinished(false);
   }
 }

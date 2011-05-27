@@ -17,10 +17,10 @@
 #ifndef K3BAUDIOTRACK_H
 #define K3BAUDIOTRACK_H
 
-#include <qstring.h>
-#include <qfileinfo.h>
-#include <qfile.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqfileinfo.h>
+#include <tqfile.h>
+#include <tqptrlist.h>
 
 #include <kio/global.h>
 
@@ -45,7 +45,7 @@ class LIBK3B_EXPORT K3bAudioTrack
 
  public:
   K3bAudioTrack();
-  K3bAudioTrack( K3bAudioDoc* parent );
+  K3bAudioTrack( K3bAudioDoc* tqparent );
   ~K3bAudioTrack();
 
   K3bAudioDoc* doc() const { return m_parent; }
@@ -58,14 +58,14 @@ class LIBK3B_EXPORT K3bAudioTrack
   K3b::Msf length() const;
   KIO::filesize_t size() const;
 
-  const QString& artist() const { return m_cdText.performer(); }
-  const QString& performer() const { return m_cdText.performer(); }
-  const QString& title() const { return m_cdText.title(); }
-  const QString& arranger() const { return m_cdText.arranger(); }
-  const QString& songwriter() const { return m_cdText.songwriter(); }
-  const QString& composer() const { return m_cdText.composer(); }
-  const QString& isrc() const { return m_cdText.isrc(); }
-  const QString& cdTextMessage() const { return m_cdText.message(); }
+  const TQString& artist() const { return m_cdText.performer(); }
+  const TQString& performer() const { return m_cdText.performer(); }
+  const TQString& title() const { return m_cdText.title(); }
+  const TQString& arranger() const { return m_cdText.arranger(); }
+  const TQString& songwriter() const { return m_cdText.songwriter(); }
+  const TQString& composer() const { return m_cdText.composer(); }
+  const TQString& isrc() const { return m_cdText.isrc(); }
+  const TQString& cdTextMessage() const { return m_cdText.message(); }
   const K3bDevice::TrackCdText& cdText() const { return m_cdText; }
 	
   bool copyProtection() const { return m_copy; }
@@ -74,14 +74,14 @@ class LIBK3B_EXPORT K3bAudioTrack
   /**
    * @obsolete use setPerformer
    **/
-  void setArtist( const QString& a );
-  void setPerformer( const QString& a );
-  void setTitle( const QString& t );
-  void setArranger( const QString& t );
-  void setSongwriter( const QString& t );
-  void setComposer( const QString& t );
-  void setIsrc( const QString& t );
-  void setCdTextMessage( const QString& t );
+  void setArtist( const TQString& a );
+  void setPerformer( const TQString& a );
+  void setTitle( const TQString& t );
+  void setArranger( const TQString& t );
+  void setSongwriter( const TQString& t );
+  void setComposer( const TQString& t );
+  void setIsrc( const TQString& t );
+  void setCdTextMessage( const TQString& t );
 
   void setCdText( const K3bDevice::TrackCdText& cdtext );
 

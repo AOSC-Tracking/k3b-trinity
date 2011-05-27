@@ -21,7 +21,7 @@
 #define CD_FRAMESIZE_RAW 2352
 
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <sys/types.h>
 #include "k3b_export.h"
@@ -76,7 +76,7 @@ class LIBK3B_EXPORT K3bCdparanoiaLib
 
   /**
    * This will read the Toc and initialize some stuff.
-   * It will also call paranoiaInit( const QString& )
+   * It will also call paranoiaInit( const TQString& )
    */
   bool initParanoia( K3bDevice::Device* dev );
 
@@ -122,7 +122,7 @@ class LIBK3B_EXPORT K3bCdparanoiaLib
    */
   int status() const;
 
-  enum Status {
+  enum tqStatus {
     S_OK,
     S_ERROR
     // to be extended with Jitter and stuff...

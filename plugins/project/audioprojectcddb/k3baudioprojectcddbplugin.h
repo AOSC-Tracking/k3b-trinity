@@ -22,19 +22,20 @@
 class K3bCddb;
 class K3bAudioDoc;
 class K3bProgressDialog;
-class QWidget;
+class TQWidget;
 
 class K3bAudioProjectCddbPlugin : public K3bProjectPlugin
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioProjectCddbPlugin( QObject* parent, const char* name );
+  K3bAudioProjectCddbPlugin( TQObject* tqparent, const char* name );
   ~K3bAudioProjectCddbPlugin();
 
   int pluginSystemVersion() const { return 3; }
 
-  void activate( K3bDoc* doc, QWidget* parent );
+  void activate( K3bDoc* doc, TQWidget* tqparent );
 
  private slots:
   void slotCddbQueryFinished( int result );
@@ -44,7 +45,7 @@ class K3bAudioProjectCddbPlugin : public K3bProjectPlugin
   K3bCddb* m_cddb;
   K3bAudioDoc* m_doc;
   K3bProgressDialog* m_progress;
-  QWidget* m_parentWidget;
+  TQWidget* m_parentWidget;
 
   bool m_canceled;
 };

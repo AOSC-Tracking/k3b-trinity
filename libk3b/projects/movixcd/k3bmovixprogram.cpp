@@ -21,9 +21,9 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <qdir.h>
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 
 K3bMovixProgram::K3bMovixProgram()
@@ -31,17 +31,17 @@ K3bMovixProgram::K3bMovixProgram()
 {
 }
 
-bool K3bMovixProgram::scan( const QString& p )
+bool K3bMovixProgram::scan( const TQString& p )
 {
   if( p.isEmpty() )
     return false;
 
-  QString path = p;
+  TQString path = p;
   if( path[path.length()-1] != '/' )
     path.append("/");
 
   // first test if we have a version info (eMovix >= 0.8.0pre3)
-  if( !QFile::exists( path + "movix-version" ) )
+  if( !TQFile::exists( path + "movix-version" ) )
     return false;
 
   K3bMovixBin* bin = 0;
@@ -74,19 +74,19 @@ bool K3bMovixProgram::scan( const QString& p )
 }
 
 
-bool K3bMovixProgram::scanNewEMovix( K3bMovixBin* bin, const QString& path )
+bool K3bMovixProgram::scanNewEMovix( K3bMovixBin* bin, const TQString& path )
 {
-  QStringList files = bin->files();
-  for( QStringList::iterator it = files.begin();
+  TQStringList files = bin->files();
+  for( TQStringList::iterator it = files.begin();
        it != files.end(); ++it ) {
-    if( (*it).contains( "isolinux.cfg" ) ) {
-      bin->m_supportedBootLabels = determineSupportedBootLabels( QStringList::split( " ", *it )[1] );
+    if( (*it).tqcontains( "isolinux.cfg" ) ) {
+      bin->m_supportedBootLabels = determineSupportedBootLabels( TQStringList::split( " ", *it )[1] );
       break;
     }
   }
 
   // here we simply check for the movix-conf program
-  if( QFile::exists( path + "movix-conf" ) ) {
+  if( TQFile::exists( path + "movix-conf" ) ) {
     bin->addFeature( "newfiles" );
     addBin(bin);
     return true;
@@ -98,29 +98,29 @@ bool K3bMovixProgram::scanNewEMovix( K3bMovixBin* bin, const QString& path )
 }
 
 
-bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const QString& path )
+bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const TQString& path )
 {
   //
   // first check if all necessary directories are present
   //
-  QDir dir( bin->movixDataDir() );
-  QStringList subdirs = dir.entryList( QDir::Dirs );
-  if( !subdirs.contains( "boot-messages" ) ) {
+  TQDir dir( bin->movixDataDir() );
+  TQStringList subdirs = dir.entryList( TQDir::Dirs );
+  if( !subdirs.tqcontains( "boot-messages" ) ) {
     kdDebug() << "(K3bMovixProgram) could not find subdir 'boot-messages'" << endl;
     delete bin;
     return false;
   }
-  if( !subdirs.contains( "isolinux" ) ) {
+  if( !subdirs.tqcontains( "isolinux" ) ) {
     kdDebug() << "(K3bMovixProgram) could not find subdir 'isolinux'" << endl;
     delete bin;
     return false;
   }
-  if( !subdirs.contains( "movix" ) ) {
+  if( !subdirs.tqcontains( "movix" ) ) {
     kdDebug() << "(K3bMovixProgram) could not find subdir 'movix'" << endl;
     delete bin;
     return false;
   }
-  if( !subdirs.contains( "mplayer-fonts" ) ) {
+  if( !subdirs.tqcontains( "mplayer-fonts" ) ) {
     kdDebug() << "(K3bMovixProgram) could not find subdir 'mplayer-fonts'" << endl;
     delete bin;
     return false;
@@ -130,14 +130,14 @@ bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const QString& path )
   //
   // check if we have a version of eMovix which contains the movix-files script
   //
-  if( QFile::exists( path + "movix-files" ) ) {
+  if( TQFile::exists( path + "movix-files" ) ) {
     bin->addFeature( "files" );
 
     KProcess p;
     K3bProcessOutputCollector out( &p );
     p << bin->path + "movix-files";
     if( p.start( KProcess::Block, KProcess::AllOutput ) ) {
-      bin->m_movixFiles = QStringList::split( "\n", out.output() );
+      bin->m_movixFiles = TQStringList::split( "\n", out.output() );
     }
   }
 
@@ -145,8 +145,8 @@ bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const QString& path )
   // fallback: to be compatible with 0.8.0rc2 we just add all files in the movix directory
   //
   if( bin->m_movixFiles.isEmpty() ) {
-    QDir dir( bin->movixDataDir() + "/movix" );
-    bin->m_movixFiles = dir.entryList(QDir::Files);
+    TQDir dir( bin->movixDataDir() + "/movix" );
+    bin->m_movixFiles = dir.entryList(TQDir::Files);
   }
 
   //
@@ -164,9 +164,9 @@ bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const QString& path )
   //
   // check every single necessary file :(
   //
-  for( QStringList::const_iterator it = bin->m_isolinuxFiles.begin();
+  for( TQStringList::const_iterator it = bin->m_isolinuxFiles.begin();
        it != bin->m_isolinuxFiles.end(); ++it ) {
-    if( !QFile::exists( bin->movixDataDir() + "/isolinux/" + *it ) ) {
+    if( !TQFile::exists( bin->movixDataDir() + "/isolinux/" + *it ) ) {
       kdDebug() << "(K3bMovixProgram) Could not find file " << *it << endl;
       delete bin;
       return false;
@@ -177,7 +177,7 @@ bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const QString& path )
   // now check the boot-messages languages
   //
   dir.cd( "boot-messages" );
-  bin->m_supportedLanguages = dir.entryList(QDir::Dirs);
+  bin->m_supportedLanguages = dir.entryList(TQDir::Dirs);
   bin->m_supportedLanguages.remove(".");
   bin->m_supportedLanguages.remove("..");
   bin->m_supportedLanguages.remove("CVS");  // the eMovix makefile stuff seems not perfect ;)
@@ -189,12 +189,12 @@ bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const QString& path )
   // FIXME: every font dir needs to contain the "font.desc" file!
   //
   dir.cd( "mplayer-fonts" );
-  bin->m_supportedSubtitleFonts = dir.entryList( QDir::Dirs );
+  bin->m_supportedSubtitleFonts = dir.entryList( TQDir::Dirs );
   bin->m_supportedSubtitleFonts.remove(".");
   bin->m_supportedSubtitleFonts.remove("..");
   bin->m_supportedSubtitleFonts.remove("CVS");  // the eMovix makefile stuff seems not perfect ;)
   // new ttf fonts in 0.8.0rc2
-  bin->m_supportedSubtitleFonts += dir.entryList( "*.ttf", QDir::Files );
+  bin->m_supportedSubtitleFonts += dir.entryList( "*.ttf", TQDir::Files );
   bin->m_supportedSubtitleFonts.prepend( i18n("none") );
   dir.cdUp();
   
@@ -213,17 +213,17 @@ bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const QString& path )
 }
 
 
-QStringList K3bMovixProgram::determineSupportedBootLabels( const QString& isoConfigFile ) const
+TQStringList K3bMovixProgram::determineSupportedBootLabels( const TQString& isoConfigFile ) const
 {
-  QStringList list( i18n("default") );
+  TQStringList list( i18n("default") );
 
-  QFile f( isoConfigFile );
+  TQFile f( isoConfigFile );
   if( !f.open( IO_ReadOnly ) ) {
     kdDebug() << "(K3bMovixProgram) could not open file '" << f.name() << "'" << endl;
   }
   else {
-    QTextStream fs( &f );
-    QString line = fs.readLine();
+    TQTextStream fs( &f );
+    TQString line = fs.readLine();
     while( !line.isNull() ) {
       if( line.startsWith( "label" ) )
 	list.append( line.mid( 5 ).stripWhiteSpace() );
@@ -237,84 +237,84 @@ QStringList K3bMovixProgram::determineSupportedBootLabels( const QString& isoCon
 }
 
 
-QString K3bMovixBin::subtitleFontDir( const QString& font ) const
+TQString K3bMovixBin::subtitleFontDir( const TQString& font ) const
 {
   if( font == i18n("none" ) )
     return "";
-  else if( m_supportedSubtitleFonts.contains( font ) )
+  else if( m_supportedSubtitleFonts.tqcontains( font ) )
     return path + "/mplayer-fonts/" + font;
   else
     return "";
 }
 
 
-QString K3bMovixBin::languageDir( const QString& lang ) const
+TQString K3bMovixBin::languageDir( const TQString& lang ) const
 {
   if( lang == i18n("default") )
     return languageDir( "en" );
-  else if( m_supportedLanguages.contains( lang ) )
+  else if( m_supportedLanguages.tqcontains( lang ) )
     return path + "/boot-messages/" + lang;
   else
     return "";
 }
 
 
-QStringList K3bMovixBin::supportedSubtitleFonts() const
+TQStringList K3bMovixBin::supportedSubtitleFonts() const
 {
   if( version >= K3bVersion( 0, 9, 0 ) )
-    return QStringList( i18n("default") ) += supported( "font" );
+    return TQStringList( i18n("default") ) += supported( "font" );
   else
     return m_supportedSubtitleFonts;
 }
 
 
-QStringList K3bMovixBin::supportedLanguages() const
+TQStringList K3bMovixBin::supportedLanguages() const
 {
   if( version >= K3bVersion( 0, 9, 0 ) )
-    return QStringList( i18n("default") ) += supported( "lang" );
+    return TQStringList( i18n("default") ) += supported( "lang" );
   else
     return m_supportedLanguages;
 }
 
 
 // only used for eMovix >= 0.9.0
-QStringList K3bMovixBin::supportedKbdLayouts() const
+TQStringList K3bMovixBin::supportedKbdLayouts() const
 {
-  return QStringList( i18n("default") ) += supported( "kbd" );
+  return TQStringList( i18n("default") ) += supported( "kbd" );
 }
 
 
 // only used for eMovix >= 0.9.0
-QStringList K3bMovixBin::supportedBackgrounds() const
+TQStringList K3bMovixBin::supportedBackgrounds() const
 {
-  return QStringList( i18n("default") ) += supported( "background" );
+  return TQStringList( i18n("default") ) += supported( "background" );
 }
 
 
 // only used for eMovix >= 0.9.0
-QStringList K3bMovixBin::supportedCodecs() const
+TQStringList K3bMovixBin::supportedCodecs() const
 {
   return supported( "codecs" );
 }
 
 
-QStringList K3bMovixBin::supported( const QString& type ) const
+TQStringList K3bMovixBin::supported( const TQString& type ) const
 {
   KProcess p;
   K3bProcessOutputCollector out( &p );
   p << path + "movix-conf" << "--supported=" + type;
   if( p.start( KProcess::Block, KProcess::AllOutput ) )
-    return QStringList::split( "\n", out.output() );
+    return TQStringList::split( "\n", out.output() );
   else
-    return QStringList();
+    return TQStringList();
 }
 
 
-QStringList K3bMovixBin::files( const QString& kbd,
-				const QString& font,
-				const QString& bg,
-				const QString& lang,
-				const QStringList& codecs ) const
+TQStringList K3bMovixBin::files( const TQString& kbd,
+				const TQString& font,
+				const TQString& bg,
+				const TQString& lang,
+				const TQStringList& codecs ) const
 {
   KProcess p;
   K3bProcessOutputCollector out( &p );
@@ -333,7 +333,7 @@ QStringList K3bMovixBin::files( const QString& kbd,
     p << "--codecs" << codecs.join( "," );
 
   if( p.start( KProcess::Block, KProcess::AllOutput ) )
-    return QStringList::split( "\n", out.output() );
+    return TQStringList::split( "\n", out.output() );
   else
-    return QStringList();
+    return TQStringList();
 }

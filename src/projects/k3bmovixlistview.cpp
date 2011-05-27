@@ -24,17 +24,17 @@
 #include <kio/global.h>
 #include <kurldrag.h>
 
-#include <qdragobject.h>
-#include <qptrlist.h>
-#include <qevent.h>
-#include <qheader.h>
+#include <tqdragobject.h>
+#include <tqptrlist.h>
+#include <tqevent.h>
+#include <tqheader.h>
 
 
 K3bMovixListViewItem::K3bMovixListViewItem( K3bMovixDoc* doc, 
 					    K3bMovixFileItem* item, 
-					    QListView* parent, 
-					    QListViewItem* after )
-  : K3bListViewItem( parent, after ),
+					    TQListView* tqparent, 
+					    TQListViewItem* after )
+  : K3bListViewItem( tqparent, after ),
     m_doc(doc),
     m_fileItem(item)
 {
@@ -43,8 +43,8 @@ K3bMovixListViewItem::K3bMovixListViewItem( K3bMovixDoc* doc,
 
 K3bMovixListViewItem::K3bMovixListViewItem( K3bMovixDoc* doc, 
 					    K3bMovixFileItem* item, 
-					    QListViewItem* parent )
-  : K3bListViewItem( parent ),
+					    TQListViewItem* tqparent )
+  : K3bListViewItem( tqparent ),
     m_doc(doc),
     m_fileItem(item)
 {
@@ -58,9 +58,9 @@ K3bMovixListViewItem::~K3bMovixListViewItem()
 
 K3bMovixFileViewItem::K3bMovixFileViewItem( K3bMovixDoc* doc, 
 					    K3bMovixFileItem* item, 
-					    QListView* parent, 
-					    QListViewItem* after )
-  : K3bMovixListViewItem( doc, item, parent, after ),
+					    TQListView* tqparent, 
+					    TQListViewItem* after )
+  : K3bMovixListViewItem( doc, item, tqparent, after ),
     KFileItem( 0, 0, KURL::fromPathOrURL(item->localPath()) )
 {
   setPixmap( 1, KFileItem::pixmap( 16, KIcon::DefaultState ) );
@@ -68,7 +68,7 @@ K3bMovixFileViewItem::K3bMovixFileViewItem( K3bMovixDoc* doc,
 }
 
 
-QString K3bMovixFileViewItem::text( int col ) const
+TQString K3bMovixFileViewItem::text( int col ) const
 {
   //
   // We add two spaces after all strings (except the once renamable)
@@ -78,13 +78,13 @@ QString K3bMovixFileViewItem::text( int col ) const
   switch( col ) {
   case 0:
     // allowing 999 files to be added. 
-    return QString::number( doc()->indexOf( fileItem() ) ).rightJustify( 3, ' ' );
+    return TQString::number( doc()->indexOf( fileItem() ) ).rightJustify( 3, ' ' );
   case 1:
     return fileItem()->k3bName();
   case 2:
     {
       if( fileItem()->isSymLink() )
-	return i18n("Link to %1").arg(const_cast<K3bMovixFileViewItem*>(this)->mimeComment()) + "  ";
+	return i18n("Link to %1").tqarg(const_cast<K3bMovixFileViewItem*>(this)->mimeComment()) + "  ";
       else
 	return const_cast<K3bMovixFileViewItem*>(this)->mimeComment() + "  ";
     }
@@ -100,7 +100,7 @@ QString K3bMovixFileViewItem::text( int col ) const
 }
 
 
-void K3bMovixFileViewItem::setText( int col, const QString& text )
+void K3bMovixFileViewItem::setText( int col, const TQString& text )
 {
   if( col == 1 )
     fileItem()->setK3bName( text );
@@ -109,9 +109,9 @@ void K3bMovixFileViewItem::setText( int col, const QString& text )
 }
 
 
-QString K3bMovixFileViewItem::key( int, bool ) const
+TQString K3bMovixFileViewItem::key( int, bool ) const
 {
-  return QString::number( doc()->indexOf( fileItem() ) ).rightJustify( 10, '0' );
+  return TQString::number( doc()->indexOf( fileItem() ) ).rightJustify( 10, '0' );
 }
 
 
@@ -119,8 +119,8 @@ QString K3bMovixFileViewItem::key( int, bool ) const
 
 K3bMovixSubTitleViewItem::K3bMovixSubTitleViewItem( K3bMovixDoc* doc, 
 						    K3bMovixFileItem* item, 
-						    K3bMovixListViewItem* parent )
-  : K3bMovixListViewItem( doc, item, parent ),
+						    K3bMovixListViewItem* tqparent )
+  : K3bMovixListViewItem( doc, item, tqparent ),
     KFileItem( 0, 0, KURL::fromPathOrURL(item->subTitleItem()->localPath()) )
 {
 }
@@ -131,7 +131,7 @@ K3bMovixSubTitleViewItem::~K3bMovixSubTitleViewItem()
 }
   
   
-QString K3bMovixSubTitleViewItem::text( int c ) const
+TQString K3bMovixSubTitleViewItem::text( int c ) const
 {
   switch( c ) {
   case 1:
@@ -139,7 +139,7 @@ QString K3bMovixSubTitleViewItem::text( int c ) const
   case 2:
     {
       if( fileItem()->subTitleItem()->isSymLink() )
-	return i18n("Link to %1").arg(const_cast<K3bMovixSubTitleViewItem*>(this)->mimeComment());
+	return i18n("Link to %1").tqarg(const_cast<K3bMovixSubTitleViewItem*>(this)->mimeComment());
       else
 	return const_cast<K3bMovixSubTitleViewItem*>(this)->mimeComment();
     }
@@ -166,8 +166,8 @@ QString K3bMovixSubTitleViewItem::text( int c ) const
 
 
 
-K3bMovixListView::K3bMovixListView( K3bMovixDoc* doc, QWidget* parent, const char* name )
-  : K3bListView( parent, name ),
+K3bMovixListView::K3bMovixListView( K3bMovixDoc* doc, TQWidget* tqparent, const char* name )
+  : K3bListView( tqparent, name ),
     m_doc(doc)
 {
   addColumn( i18n("No.") );
@@ -189,12 +189,12 @@ K3bMovixListView::K3bMovixListView( K3bMovixDoc* doc, QWidget* parent, const cha
 		 + i18n("To remove or rename files use the context menu.") + "\n"
 		 + i18n("After that press the burn button to write the CD.") );
 
-  connect( m_doc, SIGNAL(changed()), this, SLOT(slotChanged()) );
-  connect( m_doc, SIGNAL(newMovixFileItems()), this, SLOT(slotNewFileItems()) );
-  connect( m_doc, SIGNAL(movixItemRemoved(K3bMovixFileItem*)), this, SLOT(slotFileItemRemoved(K3bMovixFileItem*)) );
-  connect( m_doc, SIGNAL(subTitleItemRemoved(K3bMovixFileItem*)), this, SLOT(slotSubTitleItemRemoved(K3bMovixFileItem*)) );
-  connect( this, SIGNAL(dropped(KListView*, QDropEvent*, QListViewItem*)),
-	   this, SLOT(slotDropped(KListView*, QDropEvent*, QListViewItem*)) );
+  connect( m_doc, TQT_SIGNAL(changed()), this, TQT_SLOT(slotChanged()) );
+  connect( m_doc, TQT_SIGNAL(newMovixFileItems()), this, TQT_SLOT(slotNewFileItems()) );
+  connect( m_doc, TQT_SIGNAL(movixItemRemoved(K3bMovixFileItem*)), this, TQT_SLOT(slotFileItemRemoved(K3bMovixFileItem*)) );
+  connect( m_doc, TQT_SIGNAL(subTitleItemRemoved(K3bMovixFileItem*)), this, TQT_SLOT(slotSubTitleItemRemoved(K3bMovixFileItem*)) );
+  connect( this, TQT_SIGNAL(dropped(KListView*, TQDropEvent*, TQListViewItem*)),
+	   this, TQT_SLOT(slotDropped(KListView*, TQDropEvent*, TQListViewItem*)) );
 
   // let's see what the doc already has
   slotNewFileItems();
@@ -207,7 +207,7 @@ K3bMovixListView::~K3bMovixListView()
 }
 
 
-bool K3bMovixListView::acceptDrag(QDropEvent* e) const
+bool K3bMovixListView::acceptDrag(TQDropEvent* e) const
 {
   // the first is for built-in item moving, the second for dropping urls
   return ( K3bListView::acceptDrag(e) || KURLDrag::canDecode(e) );
@@ -217,9 +217,9 @@ bool K3bMovixListView::acceptDrag(QDropEvent* e) const
 void K3bMovixListView::slotNewFileItems()
 {
   K3bMovixFileItem* lastItem = 0;
-  for( QPtrListIterator<K3bMovixFileItem> it( m_doc->movixFileItems() ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bMovixFileItem> it( m_doc->movixFileItems() ); it.current(); ++it ) {
     K3bMovixFileItem* item = it.current();
-    if( !m_itemMap.contains( item ) )
+    if( !m_itemMap.tqcontains( item ) )
       m_itemMap.insert( item, new K3bMovixFileViewItem( m_doc, item, this, lastItem ? m_itemMap[lastItem] : 0L ) );
 
     if( item->subTitleItem() ) {
@@ -240,7 +240,7 @@ void K3bMovixListView::slotNewFileItems()
 
 void K3bMovixListView::slotFileItemRemoved( K3bMovixFileItem* item )
 {
-  if( m_itemMap.contains( item ) ) {
+  if( m_itemMap.tqcontains( item ) ) {
     K3bMovixFileViewItem* vi = m_itemMap[item];
     m_itemMap.erase(item);
     delete vi;
@@ -250,7 +250,7 @@ void K3bMovixListView::slotFileItemRemoved( K3bMovixFileItem* item )
 
 void K3bMovixListView::slotSubTitleItemRemoved( K3bMovixFileItem* item )
 {
-  if( m_itemMap.contains( item ) ) {
+  if( m_itemMap.tqcontains( item ) ) {
     K3bMovixFileViewItem* vi = m_itemMap[item];
     if( vi->childCount() >= 1 )
       delete vi->firstChild();
@@ -258,7 +258,7 @@ void K3bMovixListView::slotSubTitleItemRemoved( K3bMovixFileItem* item )
 }
 
 
-void K3bMovixListView::slotDropped( KListView*, QDropEvent* e, QListViewItem* after )
+void K3bMovixListView::slotDropped( KListView*, TQDropEvent* e, TQListViewItem* after )
 {
   if( !e->isAccepted() )
     return;
@@ -270,8 +270,8 @@ void K3bMovixListView::slotDropped( KListView*, QDropEvent* e, QListViewItem* af
     pos = m_doc->indexOf( ((K3bMovixListViewItem*)after)->fileItem() );
 
   if( e->source() == viewport() ) {
-    QPtrList<QListViewItem> sel = selectedItems();
-    QPtrListIterator<QListViewItem> it(sel);
+    TQPtrList<TQListViewItem> sel = selectedItems();
+    TQPtrListIterator<TQListViewItem> it(sel);
     K3bMovixFileItem* itemAfter = ( after ? ((K3bMovixListViewItem*)after)->fileItem() : 0 );
     while( it.current() ) {
       K3bMovixListViewItem* vi = (K3bMovixListViewItem*)it.current();
@@ -302,14 +302,14 @@ void K3bMovixListView::slotDropped( KListView*, QDropEvent* e, QListViewItem* af
 }
 
 
-QDragObject* K3bMovixListView::dragObject()
+TQDragObject* K3bMovixListView::dragObject()
 {
-  QPtrList<QListViewItem> list = selectedItems();
+  TQPtrList<TQListViewItem> list = selectedItems();
 
   if( list.isEmpty() )
     return 0;
 
-  QPtrListIterator<QListViewItem> it(list);
+  TQPtrListIterator<TQListViewItem> it(list);
   KURL::List urls;
 
   for( ; it.current(); ++it )

@@ -37,25 +37,25 @@
 
 #include <unistd.h>
 // QT-includes
-#include <qdir.h>
-#include <qlistview.h>
-#include <qstring.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qpixmap.h>
-#include <qstringlist.h>
-#include <qstrlist.h>
-#include <qheader.h>
-#include <qsplitter.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qiconset.h>
-#include <qvaluelist.h>
-#include <qlabel.h>
-#include <qwidgetstack.h>
-#include <qscrollview.h>
-#include <qpainter.h>
-#include <qsimplerichtext.h>
+#include <tqdir.h>
+#include <tqlistview.h>
+#include <tqstring.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqpixmap.h>
+#include <tqstringlist.h>
+#include <tqstrlist.h>
+#include <tqheader.h>
+#include <tqsplitter.h>
+#include <tqpushbutton.h>
+#include <tqlayout.h>
+#include <tqiconset.h>
+#include <tqvaluelist.h>
+#include <tqlabel.h>
+#include <tqwidgetstack.h>
+#include <tqscrollview.h>
+#include <tqpainter.h>
+#include <tqsimplerichtext.h>
 
 // KDE-includes
 #include <kmimetype.h>
@@ -90,8 +90,8 @@ public:
 
 
 
-K3bDirView::K3bDirView(K3bFileTreeView* treeView, QWidget *parent, const char *name )
-  : QVBox(parent, name),
+K3bDirView::K3bDirView(K3bFileTreeView* treeView, TQWidget *tqparent, const char *name )
+  : TQVBox(tqparent, name),
     m_fileTreeView(treeView),
     m_bViewDiskInfo(false)
 {
@@ -99,12 +99,12 @@ K3bDirView::K3bDirView(K3bFileTreeView* treeView, QWidget *parent, const char *n
   d->contextMediaInfoRequested = false;
 
   if( !m_fileTreeView ) {
-    m_mainSplitter = new QSplitter( this );
+    m_mainSplitter = new TQSplitter( this );
     m_fileTreeView = new K3bFileTreeView( m_mainSplitter );
-    m_viewStack    = new QWidgetStack( m_mainSplitter );
+    m_viewStack    = new TQWidgetStack( m_mainSplitter );
   }
   else {
-    m_viewStack    = new QWidgetStack( this );
+    m_viewStack    = new TQWidgetStack( this );
     m_mainSplitter = 0;
   }
 
@@ -128,31 +128,31 @@ K3bDirView::K3bDirView(K3bFileTreeView* treeView, QWidget *parent, const char *n
 
   if( m_mainSplitter ) {
     // split
-    QValueList<int> sizes = m_mainSplitter->sizes();
+    TQValueList<int> sizes = m_mainSplitter->sizes();
     int all = sizes[0] + sizes[1];
     sizes[1] = all*2/3;
     sizes[0] = all - sizes[1];
     m_mainSplitter->setSizes( sizes );
   }
 
-  connect( m_fileTreeView, SIGNAL(urlExecuted(const KURL&)),
-	   this, SLOT(slotDirActivated(const KURL&)) );
-  connect( m_fileTreeView, SIGNAL(deviceExecuted(K3bDevice::Device*)),
-	   this, SLOT(showDevice(K3bDevice::Device*)) );
-  connect( m_fileTreeView, SIGNAL(deviceExecuted(K3bDevice::Device*)),
-	   this, SIGNAL(deviceSelected(K3bDevice::Device*)) );
-  connect( m_fileTreeView, SIGNAL(contextMenu(K3bDevice::Device*, const QPoint&)),
-	   this, SLOT(slotFileTreeContextMenu(K3bDevice::Device*, const QPoint&)) );
+  connect( m_fileTreeView, TQT_SIGNAL(urlExecuted(const KURL&)),
+	   this, TQT_SLOT(slotDirActivated(const KURL&)) );
+  connect( m_fileTreeView, TQT_SIGNAL(deviceExecuted(K3bDevice::Device*)),
+	   this, TQT_SLOT(showDevice(K3bDevice::Device*)) );
+  connect( m_fileTreeView, TQT_SIGNAL(deviceExecuted(K3bDevice::Device*)),
+	   this, TQT_SIGNAL(deviceSelected(K3bDevice::Device*)) );
+  connect( m_fileTreeView, TQT_SIGNAL(contextMenu(K3bDevice::Device*, const TQPoint&)),
+	   this, TQT_SLOT(slotFileTreeContextMenu(K3bDevice::Device*, const TQPoint&)) );
 
-  connect( m_fileView, SIGNAL(urlEntered(const KURL&)), m_fileTreeView, SLOT(followUrl(const KURL&)) );
-  connect( m_fileView, SIGNAL(urlEntered(const KURL&)), this, SIGNAL(urlEntered(const KURL&)) );
+  connect( m_fileView, TQT_SIGNAL(urlEntered(const KURL&)), m_fileTreeView, TQT_SLOT(followUrl(const KURL&)) );
+  connect( m_fileView, TQT_SIGNAL(urlEntered(const KURL&)), this, TQT_SIGNAL(urlEntered(const KURL&)) );
 
-  connect( k3bappcore->appDeviceManager(), SIGNAL(mountFinished(const QString&)),
-	   this, SLOT(slotMountFinished(const QString&)) );
-  connect( k3bappcore->appDeviceManager(), SIGNAL(unmountFinished(bool)),
-	   this, SLOT(slotUnmountFinished(bool)) );
-  connect( k3bappcore->appDeviceManager(), SIGNAL(detectingDiskInfo(K3bDevice::Device*)),
-	   this, SLOT(slotDetectingDiskInfo(K3bDevice::Device*)) );
+  connect( k3bappcore->appDeviceManager(), TQT_SIGNAL(mountFinished(const TQString&)),
+	   this, TQT_SLOT(slotMountFinished(const TQString&)) );
+  connect( k3bappcore->appDeviceManager(), TQT_SIGNAL(unmountFinished(bool)),
+	   this, TQT_SLOT(slotUnmountFinished(bool)) );
+  connect( k3bappcore->appDeviceManager(), TQT_SIGNAL(detectingDiskInfo(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotDetectingDiskInfo(K3bDevice::Device*)) );
 }
 
 K3bDirView::~K3bDirView()
@@ -247,7 +247,7 @@ void K3bDirView::showMediumInfo( const K3bMedium& medium )
       else {
 	if( KMessageBox::questionYesNo( this,
 					i18n("Found %1. Do you want K3b to mount the data part "
-					     "or show all the tracks?").arg( i18n("Video CD") ),
+					     "or show all the tracks?").tqarg( i18n("Video CD") ),
 					i18n("Video CD"),
 					i18n("Mount CD"),
 					i18n("Show Video Tracks") ) == KMessageBox::No ) {
@@ -260,7 +260,7 @@ void K3bDirView::showMediumInfo( const K3bMedium& medium )
     else if( medium.content() & K3bMedium::CONTENT_AUDIO ) {
       if( KMessageBox::questionYesNo( this,
 				      i18n("Found %1. Do you want K3b to mount the data part "
-					   "or show all the tracks?").arg( i18n("Audio CD") ),
+					   "or show all the tracks?").tqarg( i18n("Audio CD") ),
 				      i18n("Audio CD"),
 				      i18n("Mount CD"),
 				      i18n("Show Audio Tracks") ) == KMessageBox::No ) {
@@ -289,7 +289,7 @@ void K3bDirView::showMediumInfo( const K3bMedium& medium )
 }
 
 
-void K3bDirView::slotMountFinished( const QString& mp )
+void K3bDirView::slotMountFinished( const TQString& mp )
 {
   if( !mp.isEmpty() ) {
     slotDirActivated( mp );
@@ -298,9 +298,9 @@ void K3bDirView::slotMountFinished( const QString& mp )
   else {
     m_viewStack->raiseWidget( m_fileView );
     K3bPassivePopup::showPopup( i18n("<p>K3b was unable to mount medium <b>%1</b> in device <em>%2 - %3</em>")
-				.arg( k3bappcore->mediaCache()->medium( k3bappcore->appDeviceManager()->currentDevice() ).shortString() )
-				.arg( k3bappcore->appDeviceManager()->currentDevice()->vendor() )
-				.arg( k3bappcore->appDeviceManager()->currentDevice()->description() ),
+				.tqarg( k3bappcore->mediaCache()->medium( k3bappcore->appDeviceManager()->currentDevice() ).shortString() )
+				.tqarg( k3bappcore->appDeviceManager()->currentDevice()->vendor() )
+				.tqarg( k3bappcore->appDeviceManager()->currentDevice()->description() ),
 				i18n("Mount Failed"),
 				K3bPassivePopup::Warning );
   }
@@ -314,16 +314,16 @@ void K3bDirView::slotUnmountFinished( bool success )
   }
   else {
     K3bPassivePopup::showPopup( i18n("<p>K3b was unable to unmount medium <b>%1</b> in device <em>%2 - %3</em>")
-				.arg( k3bappcore->mediaCache()->medium( k3bappcore->appDeviceManager()->currentDevice() ).shortString() )
-				.arg( k3bappcore->appDeviceManager()->currentDevice()->vendor() )
-				.arg( k3bappcore->appDeviceManager()->currentDevice()->description() ),
+				.tqarg( k3bappcore->mediaCache()->medium( k3bappcore->appDeviceManager()->currentDevice() ).shortString() )
+				.tqarg( k3bappcore->appDeviceManager()->currentDevice()->vendor() )
+				.tqarg( k3bappcore->appDeviceManager()->currentDevice()->description() ),
 				i18n("Unmount Failed"),
 				K3bPassivePopup::Warning );
   }
 }
 
 
-void K3bDirView::slotFileTreeContextMenu( K3bDevice::Device* /*dev*/, const QPoint& p )
+void K3bDirView::slotFileTreeContextMenu( K3bDevice::Device* /*dev*/, const TQPoint& p )
 {
   KAction* a = k3bappcore->appDeviceManager()->actionCollection()->action( "device_popup" );
   if( KActionMenu* m = dynamic_cast<KActionMenu*>(a) )
@@ -331,7 +331,7 @@ void K3bDirView::slotFileTreeContextMenu( K3bDevice::Device* /*dev*/, const QPoi
 }
 
 
-void K3bDirView::slotDirActivated( const QString& url )
+void K3bDirView::slotDirActivated( const TQString& url )
 {
 //   m_urlCombo->insertItem( url, 0 );
   slotDirActivated( KURL::fromPathOrURL(url) );
@@ -349,7 +349,7 @@ void K3bDirView::slotDirActivated( const KURL& url )
 
 void K3bDirView::home()
 {
-  slotDirActivated( QDir::homeDirPath() );
+  slotDirActivated( TQDir::homeDirPath() );
 }
 
 

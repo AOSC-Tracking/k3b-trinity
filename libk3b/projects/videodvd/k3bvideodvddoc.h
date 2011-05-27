@@ -23,12 +23,12 @@ class KConfig;
 class LIBK3B_EXPORT K3bVideoDvdDoc : public K3bDvdDoc
 {
  public:
-  K3bVideoDvdDoc( QObject* parent = 0 );
+  K3bVideoDvdDoc( TQObject* tqparent = 0 );
   virtual ~K3bVideoDvdDoc();
 
   virtual int type() const { return VIDEODVD; }
 
-  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, QObject* parent );
+  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent );
 
   virtual bool newDocument();
 
@@ -37,7 +37,7 @@ class LIBK3B_EXPORT K3bVideoDvdDoc : public K3bDvdDoc
   // TODO: implement load- and saveDocumentData since we do not need all those options
 
  protected:
-  virtual QString typeString() const { return "video_dvd"; }
+  virtual TQString typeString() const { return "video_dvd"; }
 
  private:
   K3bDirItem* m_videoTsDir;

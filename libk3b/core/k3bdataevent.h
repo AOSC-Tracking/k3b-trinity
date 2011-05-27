@@ -16,23 +16,23 @@
 #ifndef K3B_DATA_EVENT_H
 #define K3B_DATA_EVENT_H
 
-#include <qevent.h>
+#include <tqevent.h>
 
 
 /**
  * Custom event class for posting events corresponding to the
  * K3bJob signals. This is useful for a threaded job since
  * in that case it's not possible to emit signals that directly
- * change the GUI (see QThread docu).
+ * change the GUI (see TQThread docu).
  */
-class K3bDataEvent : public QCustomEvent
+class K3bDataEvent : public TQCustomEvent
 {
  public:
   // make sure we get not in the way of K3bProgressInfoEvent
-  static const int EVENT_TYPE = QEvent::User + 100;
+  static const int EVENT_TYPE = TQEvent::User + 100;
 
   K3bDataEvent( const char* data, int len )
-    : QCustomEvent( EVENT_TYPE ),
+    : TQCustomEvent( EVENT_TYPE ),
     m_data(data),
     m_length(len)
     {}

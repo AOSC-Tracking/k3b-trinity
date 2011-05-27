@@ -23,8 +23,8 @@
 #include <kdebug.h>
 #include <kglobal.h>
 
-#include <qfileinfo.h>
-#include <qdir.h>
+#include <tqfileinfo.h>
+#include <tqdir.h>
 
 
 class K3bDirSizeJob::WorkThread : public K3bThread
@@ -51,7 +51,7 @@ public:
   void run() {
     emitStarted();
 
-    QStringList l;
+    TQStringList l;
     for( KURL::List::const_iterator it = urls.begin();
 	 it != urls.end(); ++it ) {
       const KURL& url = *it;
@@ -65,13 +65,13 @@ public:
       l.append( url.path() );
     }
 
-    emitFinished( countFiles( l, QString() ) );
+    emitFinished( countFiles( l, TQString() ) );
   }
   
-  bool countDir( const QString& dir ) {
-    const QString& dot = KGlobal::staticQString( "." );
-    const QString& dotdot = KGlobal::staticQString( ".." );
-    QStringList l = QDir(dir).entryList( QDir::All|QDir::Hidden|QDir::System );
+  bool countDir( const TQString& dir ) {
+    const TQString& dot = KGlobal::staticQString( "." );
+    const TQString& dotdot = KGlobal::staticQString( ".." );
+    TQStringList l = TQDir(dir).entryList( TQDir::All|TQDir::Hidden|TQDir::System );
     l.remove( dot );
     l.remove( dotdot );
 
@@ -79,21 +79,21 @@ public:
   }
 
 
-  bool countFiles( const QStringList& l, const QString& dir ) {
-    for( QStringList::const_iterator it = l.begin();
+  bool countFiles( const TQStringList& l, const TQString& dir ) {
+    for( TQStringList::const_iterator it = l.begin();
 	 it != l.end(); ++it ) {
 
       if( m_canceled )
 	return false;
 
       k3b_struct_stat s;
-      if( k3b_lstat( QFile::encodeName( dir + *it ), &s ) )
+      if( k3b_lstat( TQFile::encodeName( dir + *it ), &s ) )
 	return false;	
 
       if( S_ISLNK( s.st_mode ) ) {
 	++totalSymlinks;
 	if( followSymlinks ) {
-	  if( k3b_stat( QFile::encodeName( dir + *it ), &s ) )
+	  if( k3b_stat( TQFile::encodeName( dir + *it ), &s ) )
 	    return false;	
 	}
       }
@@ -131,8 +131,8 @@ private:
 };
 
 
-K3bDirSizeJob::K3bDirSizeJob( QObject* parent )
-  : K3bThreadJob( new K3bSimpleJobHandler(), parent )
+K3bDirSizeJob::K3bDirSizeJob( TQObject* tqparent )
+  : K3bThreadJob( new K3bSimpleJobHandler(), tqparent )
 {
   d = new WorkThread;
   setThread( d );

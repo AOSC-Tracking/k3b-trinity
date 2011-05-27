@@ -35,7 +35,7 @@ class LIBK3B_EXPORT K3bCdrecordProgram : public K3bExternalProgram
  public:
   K3bCdrecordProgram( bool dvdPro );
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 
  private:
   bool m_dvdPro;
@@ -47,7 +47,7 @@ class LIBK3B_EXPORT K3bMkisofsProgram : public K3bExternalProgram
  public:
   K3bMkisofsProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 };
 
 
@@ -56,7 +56,7 @@ class LIBK3B_EXPORT K3bReadcdProgram : public K3bExternalProgram
  public:
   K3bReadcdProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 };
 
 
@@ -65,34 +65,34 @@ class LIBK3B_EXPORT K3bCdrdaoProgram : public K3bExternalProgram
  public:
   K3bCdrdaoProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 };
 
 
 class LIBK3B_EXPORT K3bTranscodeProgram : public K3bExternalProgram
 {
  public:
-  K3bTranscodeProgram( const QString& transcodeProgram );
+  K3bTranscodeProgram( const TQString& transcodeProgram );
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 
   // no user parameters (yet)
   bool supportsUserParameters() const { return false; }
 
  private:
-  QString m_transcodeProgram;
+  TQString m_transcodeProgram;
 };
 
 
 class LIBK3B_EXPORT K3bVcdbuilderProgram : public K3bExternalProgram
 {
  public:
-  K3bVcdbuilderProgram( const QString& );
+  K3bVcdbuilderProgram( const TQString& );
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 
  private:
-  QString m_vcdbuilderProgram;
+  TQString m_vcdbuilderProgram;
 };
 
 
@@ -101,7 +101,7 @@ class LIBK3B_EXPORT K3bNormalizeProgram : public K3bExternalProgram
  public:
   K3bNormalizeProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 };
 
 
@@ -110,7 +110,7 @@ class LIBK3B_EXPORT K3bGrowisofsProgram : public K3bExternalProgram
  public:
   K3bGrowisofsProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 };
 
 
@@ -119,7 +119,7 @@ class LIBK3B_EXPORT K3bDvdformatProgram : public K3bExternalProgram
  public:
   K3bDvdformatProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 };
 
 
@@ -128,7 +128,7 @@ class LIBK3B_EXPORT K3bDvdBooktypeProgram : public K3bExternalProgram
  public:
   K3bDvdBooktypeProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 };
 
 
@@ -137,7 +137,7 @@ class LIBK3B_EXPORT K3bCdda2wavProgram : public K3bExternalProgram
  public:
   K3bCdda2wavProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 };
 
 #endif

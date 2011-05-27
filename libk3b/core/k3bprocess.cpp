@@ -18,10 +18,10 @@
 #include "k3bprocess.h"
 #include "k3bexternalbinmanager.h"
 
-#include <qstringlist.h>
-#include <qsocketnotifier.h>
-#include <qptrqueue.h>
-#include <qapplication.h>
+#include <tqstringlist.h>
+#include <tqsocketnotifier.h>
+#include <tqptrqueue.h>
+#include <tqapplication.h>
 
 #include <kdebug.h>
 
@@ -37,8 +37,8 @@
 class K3bProcess::Data
 {
 public:
-  QString unfinishedStdoutLine;
-  QString unfinishedStderrLine;
+  TQString unfinishedStdoutLine;
+  TQString unfinishedStderrLine;
 
   int dupStdoutFd;
   int dupStdinFd;
@@ -76,7 +76,7 @@ K3bProcess& K3bProcess::operator<<( const K3bExternalBin* bin )
   return this->operator<<( bin->path );
 }
 
-K3bProcess& K3bProcess::operator<<( const QString& arg )
+K3bProcess& K3bProcess::operator<<( const TQString& arg )
 {
   static_cast<KProcess*>(this)->operator<<( arg );
   return *this;
@@ -88,13 +88,13 @@ K3bProcess& K3bProcess::operator<<( const char* arg )
   return *this;
 }
 
-K3bProcess& K3bProcess::operator<<( const QCString& arg )
+K3bProcess& K3bProcess::operator<<( const TQCString& arg )
 {
   static_cast<KProcess*>(this)->operator<<( arg );
   return *this;
 }
 
-K3bProcess& K3bProcess::operator<<( const QStringList& args )
+K3bProcess& K3bProcess::operator<<( const TQStringList& args )
 {
   static_cast<KProcess*>(this)->operator<<( args );
   return *this;
@@ -104,12 +104,12 @@ K3bProcess& K3bProcess::operator<<( const QStringList& args )
 bool K3bProcess::start( RunMode run, Communication com )
 {
   if( com & Stderr ) {
-    connect( this, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	     this, SLOT(slotSplitStderr(KProcess*, char*, int)) );
+    connect( this, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	     this, TQT_SLOT(slotSplitStderr(KProcess*, char*, int)) );
   }
   if( com & Stdout ) {
-    connect( this, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	     this, SLOT(slotSplitStdout(KProcess*, char*, int)) );
+    connect( this, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	     this, TQT_SLOT(slotSplitStdout(KProcess*, char*, int)) );
   }
 
   return KProcess::start( run, com );
@@ -119,10 +119,10 @@ bool K3bProcess::start( RunMode run, Communication com )
 void K3bProcess::slotSplitStdout( KProcess*, char* data, int len )
 {
   if( m_bSplitStdout ) {
-    QStringList lines = splitOutput( data, len, d->unfinishedStdoutLine, d->suppressEmptyLines );
+    TQStringList lines = splitOutput( data, len, d->unfinishedStdoutLine, d->suppressEmptyLines );
 
-    for( QStringList::iterator it = lines.begin(); it != lines.end(); ++it ) {
-      QString& str = *it;
+    for( TQStringList::iterator it = lines.begin(); it != lines.end(); ++it ) {
+      TQString& str = *it;
       
       // just to be sure since something in splitOutput does not do this right
       if( d->suppressEmptyLines && str.isEmpty() )
@@ -136,10 +136,10 @@ void K3bProcess::slotSplitStdout( KProcess*, char* data, int len )
 
 void K3bProcess::slotSplitStderr( KProcess*, char* data, int len )
 {
-  QStringList lines = splitOutput( data, len, d->unfinishedStderrLine, d->suppressEmptyLines );
+  TQStringList lines = splitOutput( data, len, d->unfinishedStderrLine, d->suppressEmptyLines );
 
-  for( QStringList::iterator it = lines.begin(); it != lines.end(); ++it ) {
-    QString& str = *it;
+  for( TQStringList::iterator it = lines.begin(); it != lines.end(); ++it ) {
+    TQString& str = *it;
 
     // just to be sure since something in splitOutput does not do this right
     if( d->suppressEmptyLines && str.isEmpty() )
@@ -150,15 +150,15 @@ void K3bProcess::slotSplitStderr( KProcess*, char* data, int len )
 }
 
 
-QStringList K3bProcess::splitOutput( char* data, int len, 
-				     QString& unfinishedLine, bool suppressEmptyLines )
+TQStringList K3bProcess::splitOutput( char* data, int len, 
+				     TQString& unfinishedLine, bool suppressEmptyLines )
 {
   //
   // The stderr splitting is mainly used for parsing of messages
   // That's why we simplify the data before proceeding
   //
 
-  QString buffer;
+  TQString buffer;
   for( int i = 0; i < len; i++ ) {
     if( data[i] == '\b' ) {
       while( data[i] == '\b' )  // we replace multiple backspaces with a single line feed
@@ -173,12 +173,12 @@ QStringList K3bProcess::splitOutput( char* data, int len,
       buffer += data[i];
   }
 
-  QStringList lines = QStringList::split( '\n', buffer, !suppressEmptyLines );
+  TQStringList lines = TQStringList::split( '\n', buffer, !suppressEmptyLines );
 
   // in case we suppress empty lines we need to handle the following separately
   // to make sure we join unfinished lines correctly
   if( suppressEmptyLines && buffer[0] == '\n' )
-    lines.prepend( QString::null );
+    lines.prepend( TQString() );
 
   if( !unfinishedLine.isEmpty() ) {
     lines.first().prepend( unfinishedLine );
@@ -187,12 +187,12 @@ QStringList K3bProcess::splitOutput( char* data, int len,
     kdDebug() << "(K3bProcess)           joined line: '" << (lines.first()) << "'" << endl;
   }
 
-  QStringList::iterator it;
+  TQStringList::iterator it;
 
   // check if line ends with a newline
   // if not save the last line because it is not finished
-  QChar c = buffer.right(1).at(0);
-  bool hasUnfinishedLine = ( c != '\n' && c != '\r' && c != QChar(46) );  // What is unicode 46?? It is printed as a point
+  TQChar c = buffer.right(1).at(0);
+  bool hasUnfinishedLine = ( c != '\n' && c != '\r' && c != TQChar(46) );  // What is tqunicode 46?? It is printed as a point
   if( hasUnfinishedLine ) {
     kdDebug() << "(K3bProcess) found unfinished line: '" << lines.last() << "'" << endl;
     kdDebug() << "(K3bProcess)             last char: '" << buffer.right(1) << "'" << endl;
@@ -425,10 +425,10 @@ void K3bProcessOutputCollector::setProcess( KProcess* p )
 
   m_process = p;
   if( p ) {
-    connect( p, SIGNAL(receivedStdout(KProcess*, char*, int)), 
-	     this, SLOT(slotGatherStdout(KProcess*, char*, int)) );
-    connect( p, SIGNAL(receivedStderr(KProcess*, char*, int)), 
-	     this, SLOT(slotGatherStderr(KProcess*, char*, int)) );
+    connect( p, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)), 
+	     this, TQT_SLOT(slotGatherStdout(KProcess*, char*, int)) );
+    connect( p, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)), 
+	     this, TQT_SLOT(slotGatherStderr(KProcess*, char*, int)) );
   }
 
   m_gatheredOutput.truncate( 0 );
@@ -438,14 +438,14 @@ void K3bProcessOutputCollector::setProcess( KProcess* p )
 
 void K3bProcessOutputCollector::slotGatherStderr( KProcess*, char* data, int len )
 {
-  m_gatheredOutput.append( QString::fromLocal8Bit( data, len ) );
-  m_stderrOutput.append( QString::fromLocal8Bit( data, len ) );
+  m_gatheredOutput.append( TQString::fromLocal8Bit( data, len ) );
+  m_stderrOutput.append( TQString::fromLocal8Bit( data, len ) );
 }
 
 void K3bProcessOutputCollector::slotGatherStdout( KProcess*, char* data, int len )
 {
-  m_gatheredOutput.append( QString::fromLocal8Bit( data, len ) );
-  m_stdoutOutput.append( QString::fromLocal8Bit( data, len ) );
+  m_gatheredOutput.append( TQString::fromLocal8Bit( data, len ) );
+  m_stdoutOutput.append( TQString::fromLocal8Bit( data, len ) );
 }
 
 

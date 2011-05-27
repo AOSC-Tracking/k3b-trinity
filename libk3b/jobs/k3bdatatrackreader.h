@@ -41,7 +41,7 @@ namespace K3bDevice {
 class K3bDataTrackReader : public K3bThreadJob
 {
  public:
-  K3bDataTrackReader( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bDataTrackReader( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bDataTrackReader();
 
   enum SectorSize {
@@ -77,7 +77,7 @@ class K3bDataTrackReader : public K3bThreadJob
    */
   void writeToFd( int fd );
 
-  void setImagePath( const QString& p );
+  void setImagePath( const TQString& p );
 
  private:
   class WorkThread;

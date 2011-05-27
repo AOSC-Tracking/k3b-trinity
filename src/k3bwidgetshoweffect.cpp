@@ -21,12 +21,12 @@
 
 #include "k3bwidgetshoweffect.h"
 
-#include <qpainter.h>
-#include <qwidget.h>
+#include <tqpainter.h>
+#include <tqwidget.h>
 
 
-K3bWidgetShowEffect::K3bWidgetShowEffect( QWidget* widget, Effect e )
-  : QObject( widget ),
+K3bWidgetShowEffect::K3bWidgetShowEffect( TQWidget* widget, Effect e )
+  : TQObject( widget ),
     m_effect( e ),
     m_widget( widget ),
     m_dissolveSize( 0 ),
@@ -63,14 +63,14 @@ void K3bWidgetShowEffect::show( bool effectOnly )
   m_widget->polish();
 
   if( m_effect == Dissolve ) {
-    // necessary to create the mask
-    m_mask.resize( m_widget->width(), m_widget->height() );
-    // make the mask empty and hence will not show widget with show() called below
+    // necessary to create the tqmask
+    m_tqmask.resize( m_widget->width(), m_widget->height() );
+    // make the tqmask empty and hence will not show widget with show() called below
     dissolveMask();
     m_timerId = startTimer( 1000 / 30 );
   }
   else {
-    m_widget->move( 0, m_widget->parentWidget()->height() );
+    m_widget->move( 0, m_widget->tqparentWidget()->height() );
     m_timerId = startTimer( 6 );
   }
   
@@ -79,7 +79,7 @@ void K3bWidgetShowEffect::show( bool effectOnly )
 }
 
 
-void K3bWidgetShowEffect::timerEvent( QTimerEvent* )
+void K3bWidgetShowEffect::timerEvent( TQTimerEvent* )
 {
   switch( m_effect ) {
   case Slide:
@@ -96,19 +96,19 @@ void K3bWidgetShowEffect::timerEvent( QTimerEvent* )
 void K3bWidgetShowEffect::dissolveMask()
 {
   if( m_bShow ) {
-    m_widget->repaint( false );
-    QPainter maskPainter(&m_mask);
+    m_widget->tqrepaint( false );
+    TQPainter tqmaskPainter(&m_tqmask);
 
-    m_mask.fill(Qt::black);
+    m_tqmask.fill(TQt::black);
 
-    maskPainter.setBrush(Qt::white);
-    maskPainter.setPen(Qt::white);
-    maskPainter.drawRect( m_mask.rect() );
+    tqmaskPainter.setBrush(TQt::white);
+    tqmaskPainter.setPen(TQt::white);
+    tqmaskPainter.drawRect( m_tqmask.rect() );
     
     m_dissolveSize += m_dissolveDelta;
 
     if( m_dissolveSize > 0 ) {
-      maskPainter.setRasterOp( Qt::EraseROP );
+      tqmaskPainter.setRasterOp( TQt::EraseROP );
 
       int x, y, s;
       const int size = 16;
@@ -121,7 +121,7 @@ void K3bWidgetShowEffect::dissolveMask()
 	  if( s < 0 )
 	    break;
 
-	  maskPainter.drawEllipse(x - s / 2, y - s / 2, s, s);
+	  tqmaskPainter.drawEllipse(x - s / 2, y - s / 2, s, s);
 	}
       }
     }
@@ -135,7 +135,7 @@ void K3bWidgetShowEffect::dissolveMask()
 	deleteLater();
     }
 
-    m_widget->setMask( m_mask );
+    m_widget->setMask( m_tqmask );
   }
 
   else {
@@ -153,7 +153,7 @@ void K3bWidgetShowEffect::dissolveMask()
 void K3bWidgetShowEffect::slideMask()
 {
   if( m_bShow ) {
-    m_widget->move( 0, m_widget->parentWidget()->height() - m_offset );
+    m_widget->move( 0, m_widget->tqparentWidget()->height() - m_offset );
     
     m_offset++;
     if( m_offset > m_widget->height() ) {
@@ -167,7 +167,7 @@ void K3bWidgetShowEffect::slideMask()
   }
   else {
     m_offset--;
-    m_widget->move( 0, m_widget->parentWidget()->height() - m_offset );
+    m_widget->move( 0, m_widget->tqparentWidget()->height() - m_offset );
     
     if( m_offset < 0 ) {
       // finally hide the widget
@@ -183,7 +183,7 @@ void K3bWidgetShowEffect::slideMask()
 
 
 
-K3bWidgetShowEffect* K3bWidgetShowEffect::showWidget( QWidget* w, Effect m )
+K3bWidgetShowEffect* K3bWidgetShowEffect::showWidget( TQWidget* w, Effect m )
 {
   K3bWidgetShowEffect* e = new K3bWidgetShowEffect( w, m );
   e->m_deleteSelf = true;
@@ -192,7 +192,7 @@ K3bWidgetShowEffect* K3bWidgetShowEffect::showWidget( QWidget* w, Effect m )
 }
 
 
-K3bWidgetShowEffect* K3bWidgetShowEffect::hideWidget( QWidget* w, Effect m )
+K3bWidgetShowEffect* K3bWidgetShowEffect::hideWidget( TQWidget* w, Effect m )
 {
   K3bWidgetShowEffect* e = new K3bWidgetShowEffect( w, m );
   e->m_deleteSelf = true;

@@ -18,7 +18,7 @@
 
 #include <k3b_export.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
 namespace K3bVideoDVD
@@ -37,14 +37,14 @@ namespace K3bVideoDVD
   };
 
   enum AudioQuantization {
-    AUDIO_QUANTIZATION_16BIT = 0,
-    AUDIO_QUANTIZATION_20BIT = 1,
-    AUDIO_QUANTIZATION_24BIT = 2
+    AUDIO_TQUANTIZATION_16BIT = 0,
+    AUDIO_TQUANTIZATION_20BIT = 1,
+    AUDIO_TQUANTIZATION_24BIT = 2
   };
 
   enum AudioSampleFrequency {
-    AUDIO_SAMPLE_FREQ_48HZ = 0,
-    AUDIO_SAMPLE_FREQ_96HZ = 1
+    AUDIO_SAMPLE_FRETQ_48HZ = 0,
+    AUDIO_SAMPLE_FRETQ_96HZ = 1
   };
 
   enum AudioCodeExtension {
@@ -64,7 +64,7 @@ namespace K3bVideoDVD
        * \return A two chars language code or the empty string
        * if the language is undefined.
        */
-      const QString& langCode() const { return m_langCode; }
+      const TQString& langCode() const { return m_langCode; }
       
       /**
        * \see AudioFormat
@@ -103,7 +103,7 @@ namespace K3bVideoDVD
       unsigned short m_codeExtension;
       bool m_multiChannelExt;
       unsigned short m_channels:3;
-      QString m_langCode;
+      TQString m_langCode;
 
       friend class VideoDVD;
     };

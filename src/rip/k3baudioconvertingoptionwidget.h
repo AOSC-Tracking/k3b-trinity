@@ -18,7 +18,7 @@
 
 #include "base_k3baudiorippingoptionwidget.h"
 
-#include <qcheckbox.h>
+#include <tqcheckbox.h>
 #include <kio/global.h>
 
 class K3bAudioEncoder;
@@ -31,12 +31,13 @@ class KConfigBase;
 class K3bAudioConvertingOptionWidget : public base_K3bAudioRippingOptionWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioConvertingOptionWidget( QWidget* parent, const char* name = 0 );
+  K3bAudioConvertingOptionWidget( TQWidget* tqparent, const char* name = 0 );
   ~K3bAudioConvertingOptionWidget();
 
-  void setBaseDir( const QString& path );
+  void setBaseDir( const TQString& path );
 
   void setNeededSize( KIO::filesize_t );
 
@@ -44,9 +45,9 @@ class K3bAudioConvertingOptionWidget : public base_K3bAudioRippingOptionWidget
    * @returns 0 if wave is selected
    */
   K3bAudioEncoder* encoder() const;
-  QString extension() const;
+  TQString extension() const;
 
-  QString baseDir() const;
+  TQString baseDir() const;
 
   bool createPlaylist() const { return m_checkCreatePlaylist->isChecked(); }
   bool playlistRelativePath() const { return m_checkPlaylistRelative->isChecked(); }

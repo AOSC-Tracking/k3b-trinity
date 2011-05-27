@@ -23,15 +23,15 @@
 
 
 
-K3bThreadJob::K3bThreadJob( K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bJob( jh, parent, name ),
+K3bThreadJob::K3bThreadJob( K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bJob( jh, tqparent, name ),
     m_running(false)
 {
 }
 
 
-K3bThreadJob::K3bThreadJob( K3bThread* thread, K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bJob( jh, parent, name ),
+K3bThreadJob::K3bThreadJob( K3bThread* thread, K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bJob( jh, tqparent, name ),
     m_running(false)
 {
   setThread(thread);
@@ -43,21 +43,21 @@ K3bThreadJob::~K3bThreadJob()
 }
 
 
-QString K3bThreadJob::jobDescription() const
+TQString K3bThreadJob::jobDescription() const
 {
   if( m_thread )
     return m_thread->jobDescription();
   else
-    return QString::null;
+    return TQString();
 }
 
 
-QString K3bThreadJob::jobDetails() const
+TQString K3bThreadJob::jobDetails() const
 {
   if( m_thread )
     return m_thread->jobDetails();
   else
-    return QString::null;
+    return TQString();
 }
 
 
@@ -101,7 +101,7 @@ void K3bThreadJob::cleanupJob( bool success )
 }
 
 
-void K3bThreadJob::customEvent( QCustomEvent* e )
+void K3bThreadJob::customEvent( TQCustomEvent* e )
 {
   if( K3bDataEvent* de = dynamic_cast<K3bDataEvent*>(e) ) {
     emit data( de->data(), de->length() );

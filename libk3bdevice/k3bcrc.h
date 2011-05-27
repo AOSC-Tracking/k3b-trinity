@@ -16,7 +16,7 @@
 #ifndef _K3B_CRC_H_
 #define _K3B_CRC_H_
 
-#include <qglobal.h>
+#include <tqglobal.h>
 
 namespace K3bDevice
 {
@@ -24,12 +24,12 @@ namespace K3bDevice
 
   // bool check( unsigned char* message, unsigned int len, unsigned char* crc, unsigned int crcLen );
 
-  Q_UINT16 calcX25( unsigned char* message, unsigned int len, Q_UINT16 start = 0x0000 );
+  TQ_UINT16 calcX25( unsigned char* message, unsigned int len, TQ_UINT16 start = 0x0000 );
 
   /**
    * subdata is 12 bytes in long.
    */
-  bool checkQCrc( unsigned char* subdata );
+  bool checkTQCrc( unsigned char* subdata );
 };
 
 #endif

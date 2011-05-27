@@ -30,15 +30,15 @@
 #include <kglobalsettings.h>
 #include <kdeversion.h>
 
-#include <qstringlist.h>
-#include <qpushbutton.h>
+#include <tqstringlist.h>
+#include <tqpushbutton.h>
 
 
 class K3bPluginOptionTab::PluginViewItem : public K3bListViewItem
 {
 public:
-  PluginViewItem( K3bPlugin* p, KListViewItem* parent )
-    : K3bListViewItem( parent ),
+  PluginViewItem( K3bPlugin* p, KListViewItem* tqparent )
+    : K3bListViewItem( tqparent ),
       plugin(p) {
     const K3bPluginInfo& info = p->pluginInfo();
     setText( 0, info.name() );
@@ -58,8 +58,8 @@ public:
 
 
 
-K3bPluginOptionTab::K3bPluginOptionTab( QWidget* parent, const char* name )
-  : base_K3bPluginOptionTab( parent, name )
+K3bPluginOptionTab::K3bPluginOptionTab( TQWidget* tqparent, const char* name )
+  : base_K3bPluginOptionTab( tqparent, name )
 {
 #if KDE_IS_VERSION(3,4,0)
   m_viewPlugins->setShadeSortColumn( false );
@@ -69,12 +69,12 @@ K3bPluginOptionTab::K3bPluginOptionTab( QWidget* parent, const char* name )
   m_viewPlugins->addColumn( i18n("Version") );
   m_viewPlugins->addColumn( i18n("Description") );
   m_viewPlugins->addColumn( i18n("License") );
-  m_viewPlugins->setAlternateBackground( QColor() );
+  m_viewPlugins->setAlternateBackground( TQColor() );
   m_viewPlugins->setAllColumnsShowFocus(true);
 
-  connect( m_viewPlugins, SIGNAL(doubleClicked(QListViewItem*, const QPoint&, int)), this, SLOT(slotConfigureButtonClicked()) );
-  connect( m_buttonConfigure, SIGNAL(clicked()), this, SLOT(slotConfigureButtonClicked()) );
-  connect( m_viewPlugins, SIGNAL(selectionChanged()), this, SLOT(slotSelectionChanged()) );
+  connect( m_viewPlugins, TQT_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)), this, TQT_SLOT(slotConfigureButtonClicked()) );
+  connect( m_buttonConfigure, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotConfigureButtonClicked()) );
+  connect( m_viewPlugins, TQT_SIGNAL(selectionChanged()), this, TQT_SLOT(slotSelectionChanged()) );
 }
 
 
@@ -86,15 +86,15 @@ K3bPluginOptionTab::~K3bPluginOptionTab()
 void K3bPluginOptionTab::readSettings()
 {
   m_viewPlugins->clear();
-  QStringList groups = k3bcore->pluginManager()->groups();
-  for( QStringList::const_iterator it = groups.begin();
+  TQStringList groups = k3bcore->pluginManager()->groups();
+  for( TQStringList::const_iterator it = groups.begin();
        it != groups.end(); ++it ) {
-    const QString& group = *it;
+    const TQString& group = *it;
 
     K3bListViewItem* groupViewItem = new K3bListViewItem( m_viewPlugins,
 							  m_viewPlugins->lastChild(),
 							  group );
-    QFont f( font() );
+    TQFont f( font() );
     f.setBold(true);
     groupViewItem->setFont( 0, f );
     groupViewItem->setBackgroundColor( 0, KGlobalSettings::alternateBackgroundColor() );
@@ -104,8 +104,8 @@ void K3bPluginOptionTab::readSettings()
     groupViewItem->setBackgroundColor( 4, KGlobalSettings::alternateBackgroundColor() );
     groupViewItem->setSelectable( false );
 
-    QPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( group );
-    for( QPtrListIterator<K3bPlugin> fit( fl ); fit.current(); ++fit )
+    TQPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( group );
+    for( TQPtrListIterator<K3bPlugin> fit( fl ); fit.current(); ++fit )
       (void)new PluginViewItem( fit.current(), groupViewItem );
 
     groupViewItem->setOpen(true);
@@ -123,7 +123,7 @@ bool K3bPluginOptionTab::saveSettings()
 
 void K3bPluginOptionTab::slotConfigureButtonClicked()
 {
-  QListViewItem* item = m_viewPlugins->selectedItem();
+  TQListViewItem* item = m_viewPlugins->selectedItem();
   if( PluginViewItem* pi = dynamic_cast<PluginViewItem*>( item ) )
     k3bcore->pluginManager()->execPluginDialog( pi->plugin, this );
 }

@@ -19,7 +19,7 @@
 
 #include "k3bprojectinterface.h"
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 class K3bDataDoc;
 
@@ -37,20 +37,20 @@ class K3bDataProjectInterface : public K3bProjectInterface
    * Create a new folder in the root of the doc.
    * This is the same as calling createFolder( name, "/" )
    */
-  bool createFolder( const QString& name );
+  bool createFolder( const TQString& name );
 
   /**
    * Create a new folder with name @p name in the folder with the
-   * absolute path @p parent. 
+   * absolute path @p tqparent. 
    *
    * \return true if the folder was created successfully, false if 
-   *         an item with the same name already exists or the parent
+   *         an item with the same name already exists or the tqparent
    *         directory could not be found.
    *
    * Example: createFolder( "test", "/foo/bar" ) will create the
    *          folder /foo/bar/test.
    */
-  bool createFolder( const QString& name, const QString& parent );
+  bool createFolder( const TQString& name, const TQString& tqparent );
 
   /**
    * Add urls to a specific folder in the project.
@@ -58,15 +58,15 @@ class K3bDataProjectInterface : public K3bProjectInterface
    * Example: addUrl( "test.txt", "/foo/bar" ) will add the file test.txt
    *          to folder /foo/bar.
    */
-  void addUrl( const QString& url, const QString& parent );
+  void addUrl( const TQString& url, const TQString& tqparent );
 
-  void addUrls( const QStringList& urls, const QString& parent );
+  void addUrls( const TQStringList& urls, const TQString& tqparent );
 
   /**
    * Remove an item
    * \return true if the item was successfully removed.
    */
-  bool removeItem( const QString& path );
+  bool removeItem( const TQString& path );
 
   /**
    * Rename an item
@@ -74,29 +74,29 @@ class K3bDataProjectInterface : public K3bProjectInterface
    *         no item could be found at \p path, \p newName is empty,
    *         or the item cannot be renamed for some reason.
    */
-  bool renameItem( const QString& path, const QString& newName );
+  bool renameItem( const TQString& path, const TQString& newName );
 
   /**
    * Set the volume ID of the data project. This is the name shown by Windows
    * when the CD is inserted.
    */
-  void setVolumeID( const QString& id );
+  void setVolumeID( const TQString& id );
 
   /**
    * \return true if the specified path exists in the project and it is a folder.
    */
-  bool isFolder( const QString& path ) const;
+  bool isFolder( const TQString& path ) const;
 
   /**
    * \return the names of the child elements of the item determined by path.
    */
-  QStringList children( const QString& path ) const;
+  TQStringList tqchildren( const TQString& path ) const;
 
   /**
    * Set the sort weight of an item
    * \return false if the item at \p could not be found.
    */
-  bool setSortWeight( const QString& path, long weight ) const;
+  bool setSortWeight( const TQString& path, long weight ) const;
 
  private:
   K3bDataDoc* m_dataDoc;

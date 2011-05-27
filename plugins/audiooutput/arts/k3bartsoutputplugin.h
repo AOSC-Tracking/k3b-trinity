@@ -24,16 +24,16 @@
 class K3bArtsOutputPlugin : public K3bAudioOutputPlugin
 {
  public:
-  K3bArtsOutputPlugin( QObject* parent = 0, const char* name = 0 );
+  K3bArtsOutputPlugin( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bArtsOutputPlugin();
 
   int pluginSystemVersion() const { return 3; }
-  QCString soundSystem() const { return "arts"; }
+  TQCString soundSystem() const { return "arts"; }
 
   bool init();
   void cleanup();
 
-  QString lastErrorMessage() const;
+  TQString lastErrorMessage() const;
 
   int write( char* data, int len );
 

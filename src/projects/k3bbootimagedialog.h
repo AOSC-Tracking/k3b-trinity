@@ -26,10 +26,11 @@ class K3bDataDoc;
 class K3bBootImageDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   K3bBootImageDialog( K3bDataDoc*, 
-		      QWidget* parent = 0, 
+		      TQWidget* tqparent = 0, 
 		      const char* name = 0, 
 		      bool modal = true );
   ~K3bBootImageDialog();

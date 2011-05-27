@@ -24,9 +24,10 @@ class K3bAudioDoc;
 class K3bAudioMaxSpeedJob : public K3bThreadJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioMaxSpeedJob( K3bAudioDoc* doc, K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bAudioMaxSpeedJob( K3bAudioDoc* doc, K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bAudioMaxSpeedJob();
 
   /**

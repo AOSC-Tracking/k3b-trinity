@@ -26,58 +26,58 @@ class LIBK3B_EXPORT K3bMovixBin : public K3bExternalBin
     : K3bExternalBin( p ) {
   }
 
-  const QString& movixDataDir() const { return m_movixPath; }
+  const TQString& movixDataDir() const { return m_movixPath; }
 
-  const QStringList& supportedBootLabels() const { return m_supportedBootLabels; }
-  QStringList supportedSubtitleFonts() const;
-  QStringList supportedLanguages() const;
-  QStringList supportedKbdLayouts() const;
-  QStringList supportedBackgrounds() const;
-  QStringList supportedCodecs() const;
-
-  /*
-   * Unused for eMovix versions 0.9.0 and above
-   */
-  const QStringList& movixFiles() const { return m_movixFiles; }
+  const TQStringList& supportedBootLabels() const { return m_supportedBootLabels; }
+  TQStringList supportedSubtitleFonts() const;
+  TQStringList supportedLanguages() const;
+  TQStringList supportedKbdLayouts() const;
+  TQStringList supportedBackgrounds() const;
+  TQStringList supportedCodecs() const;
 
   /*
    * Unused for eMovix versions 0.9.0 and above
    */
-  const QStringList& isolinuxFiles() const { return m_isolinuxFiles; }
+  const TQStringList& movixFiles() const { return m_movixFiles; }
+
+  /*
+   * Unused for eMovix versions 0.9.0 and above
+   */
+  const TQStringList& isolinuxFiles() const { return m_isolinuxFiles; }
 
   /**
    * returnes empty string if font was not found
    *
    * Unused for eMovix versions 0.9.0 and above
    */
-  QString subtitleFontDir( const QString& font ) const;
+  TQString subtitleFontDir( const TQString& font ) const;
 
   /**
    * returnes empty string if lang was not found
    *
    * Unused for eMovix versions 0.9.0 and above
    */
-  QString languageDir( const QString& lang ) const;
+  TQString languageDir( const TQString& lang ) const;
 
   /**
    * Interface for the movix-conf --files interface for
    * versions >= 0.9.0
    */
-  QStringList files( const QString& kbd = QString::null,
-		     const QString& font = QString::null,
-		     const QString& bg = QString::null,
-		     const QString& lang = QString::null,
-		     const QStringList& codecs = QStringList() ) const;
+  TQStringList files( const TQString& kbd = TQString(),
+		     const TQString& font = TQString(),
+		     const TQString& bg = TQString(),
+		     const TQString& lang = TQString(),
+		     const TQStringList& codecs = TQStringList() ) const;
 
  private:
-  QStringList supported( const QString& ) const;
+  TQStringList supported( const TQString& ) const;
 
-  QString m_movixPath;
-  QStringList m_movixFiles;
-  QStringList m_isolinuxFiles;
-  QStringList m_supportedBootLabels;
-  QStringList m_supportedSubtitleFonts;
-  QStringList m_supportedLanguages;
+  TQString m_movixPath;
+  TQStringList m_movixFiles;
+  TQStringList m_isolinuxFiles;
+  TQStringList m_supportedBootLabels;
+  TQStringList m_supportedSubtitleFonts;
+  TQStringList m_supportedLanguages;
 
   friend class K3bMovixProgram;
 };
@@ -88,14 +88,14 @@ class LIBK3B_EXPORT K3bMovixProgram : public K3bExternalProgram
  public:
   K3bMovixProgram();
 
-  bool scan( const QString& );
+  bool scan( const TQString& );
 
   bool supportsUserParameters() const { return false; }
 
  private:
-  bool scanNewEMovix( K3bMovixBin* bin, const QString& );
-  bool scanOldEMovix( K3bMovixBin* bin, const QString& );
-  QStringList determineSupportedBootLabels( const QString& ) const;
+  bool scanNewEMovix( K3bMovixBin* bin, const TQString& );
+  bool scanOldEMovix( K3bMovixBin* bin, const TQString& );
+  TQStringList determineSupportedBootLabels( const TQString& ) const;
 };
 
 

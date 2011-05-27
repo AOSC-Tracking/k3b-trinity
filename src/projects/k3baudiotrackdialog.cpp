@@ -14,15 +14,15 @@
  */
 
 
-#include <qtextedit.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qframe.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qhbox.h>
-#include <qwhatsthis.h>
+#include <tqtextedit.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqframe.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqhbox.h>
+#include <tqwhatsthis.h>
 
 #include <kiconloader.h>
 #include <klocale.h>
@@ -54,10 +54,10 @@
 //         do only show cd-text and options (eventuelle index0)
 
 
-K3bAudioTrackDialog::K3bAudioTrackDialog( QPtrList<K3bAudioTrack>& tracks, QWidget *parent, const char *name )
+K3bAudioTrackDialog::K3bAudioTrackDialog( TQPtrList<K3bAudioTrack>& tracks, TQWidget *tqparent, const char *name )
   : KDialogBase( KDialogBase::Plain, i18n("Audio Track Properties"), 
 		 KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Apply,
-		 KDialogBase::Ok, parent, name )
+		 KDialogBase::Ok, tqparent, name )
 {
   m_tracks = tracks;
 
@@ -86,9 +86,9 @@ void K3bAudioTrackDialog::slotApply()
 
 void K3bAudioTrackDialog::setupGui()
 {
-  QFrame* frame = plainPage();
+  TQFrame* frame = plainPage();
 
-  QGridLayout* mainLayout = new QGridLayout( frame );
+  TQGridLayout* mainLayout = new TQGridLayout( frame );
   mainLayout->setSpacing( spacingHint() );
   mainLayout->setMargin( 0 );
 

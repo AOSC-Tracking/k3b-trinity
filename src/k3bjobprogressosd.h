@@ -16,11 +16,11 @@
 #ifndef _K3B_JOB_PROGRESS_OSD_H_
 #define _K3B_JOB_PROGRESS_OSD_H_
 
-#include <qwidget.h>
-#include <qpixmap.h>
+#include <tqwidget.h>
+#include <tqpixmap.h>
 
-class QPaintEvent;
-class QMouseEvent;
+class TQPaintEvent;
+class TQMouseEvent;
 class KConfigBase;
 
 /**
@@ -28,23 +28,24 @@ class KConfigBase;
  *
  * Insprired by Amarok's OSD (I also took a bit of their code. :)
  */
-class K3bJobProgressOSD : public QWidget
+class K3bJobProgressOSD : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bJobProgressOSD( QWidget* parent = 0, const char* name = 0 );
+  K3bJobProgressOSD( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bJobProgressOSD();
 
   int screen() const { return m_screen; }
-  const QPoint& position() const { return m_position; }
+  const TQPoint& position() const { return m_position; }
 
   void readSettings( KConfigBase* );
   void saveSettings( KConfigBase* );
 
  public slots:
   void setScreen( int );
-  void setText( const QString& );
+  void setText( const TQString& );
   void setProgress( int );
 
   /**
@@ -53,17 +54,17 @@ class K3bJobProgressOSD : public QWidget
    * If for example the x coordinate is bigger than half the screen
    * width it refers to the left edge of the widget.
    */
-  void setPosition( const QPoint& );
+  void setPosition( const TQPoint& );
 
   void show();
 
  protected:
-  void paintEvent( QPaintEvent* );
-  void mousePressEvent( QMouseEvent* );
-  void mouseReleaseEvent( QMouseEvent* );
-  void mouseMoveEvent( QMouseEvent* );
+  void paintEvent( TQPaintEvent* );
+  void mousePressEvent( TQMouseEvent* );
+  void mouseReleaseEvent( TQMouseEvent* );
+  void mouseMoveEvent( TQMouseEvent* );
   void renderOSD();
-  void reposition( QSize size = QSize() );
+  void reposition( TQSize size = TQSize() );
 
  protected slots:
   void refresh();
@@ -72,17 +73,17 @@ class K3bJobProgressOSD : public QWidget
   /**
    * Ensure that the position is inside m_screen 
    */
-  QPoint fixupPosition( const QPoint& p );
+  TQPoint fixupPosition( const TQPoint& p );
   static const int s_outerMargin = 15;
 
-  QPixmap m_osdBuffer;
+  TQPixmap m_osdBuffer;
   bool m_dirty;
-  QString m_text;
+  TQString m_text;
   int m_progress;
   bool m_dragging;
-  QPoint m_dragOffset;
+  TQPoint m_dragOffset;
   int m_screen;
-  QPoint m_position;
+  TQPoint m_position;
 };
 
 #endif

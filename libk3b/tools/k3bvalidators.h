@@ -16,74 +16,74 @@
 #ifndef _K3B_VALIDATORS_H_
 #define _K3B_VALIDATORS_H_
 
-#include <qvalidator.h>
+#include <tqvalidator.h>
 #include "k3b_export.h"
 
 
 /**
  * Simple validator that validates a string char by char
  */
-class LIBK3B_EXPORT K3bCharValidator : public QValidator
+class LIBK3B_EXPORT K3bCharValidator : public TQValidator
 {
  public:
-  K3bCharValidator( QObject* parent = 0, const char* name = 0 );
+  K3bCharValidator( TQObject* tqparent = 0, const char* name = 0 );
 
-  virtual State validateChar( const QChar& ) const = 0;
+  virtual State validateChar( const TQChar& ) const = 0;
 
-  virtual State validate( QString& s, int& pos ) const;
+  virtual State validate( TQString& s, int& pos ) const;
 
   /**
    * Replaces all invalid chars with the repplace char
    */
-  virtual void fixup( QString& ) const;
+  virtual void fixup( TQString& ) const;
 
   /**
    * Default to '_'
    */
-  void setReplaceChar( const QChar& c ) { m_replaceChar = c; }
+  void setReplaceChar( const TQChar& c ) { m_replaceChar = c; }
 
  private:
-  QChar m_replaceChar;
+  TQChar m_replaceChar;
 };
 
 
 class LIBK3B_EXPORT K3bLatin1Validator : public K3bCharValidator
 {
  public:
-  K3bLatin1Validator( QObject* parent = 0, const char* name = 0 );
+  K3bLatin1Validator( TQObject* tqparent = 0, const char* name = 0 );
 
-  virtual State validateChar( const QChar& ) const;
+  virtual State validateChar( const TQChar& ) const;
 };
 
 
 class LIBK3B_EXPORT K3bAsciiValidator : public K3bLatin1Validator
 {
  public:
-  K3bAsciiValidator( QObject* parent = 0, const char* name = 0 );
+  K3bAsciiValidator( TQObject* tqparent = 0, const char* name = 0 );
 
-  virtual State validateChar( const QChar& ) const;
+  virtual State validateChar( const TQChar& ) const;
 };
 
 
 /**
- * The K3bValidator extends QRegExpValidator with a fixup method
+ * The K3bValidator extends TQRegExpValidator with a fixup method
  * that just replaces all characters that are not allowed with the 
- * replace character. It only makes sense for QRegExps that simply
+ * replace character. It only makes sense for TQRegExps that simply
  * allow or forbid some characters.
  */
-class LIBK3B_EXPORT K3bValidator : public QRegExpValidator
+class LIBK3B_EXPORT K3bValidator : public TQRegExpValidator
 {
  public:
-  K3bValidator( QObject* parent, const char * name = 0 );
-  K3bValidator( const QRegExp& rx, QObject* parent, const char* name = 0 );
+  K3bValidator( TQObject* tqparent, const char * name = 0 );
+  K3bValidator( const TQRegExp& rx, TQObject* tqparent, const char* name = 0 );
 
-  void setReplaceChar( const QChar& s ) { m_replaceChar = s; }
-  const QChar& replaceChar() const { return m_replaceChar; }
+  void setReplaceChar( const TQChar& s ) { m_replaceChar = s; }
+  const TQChar& replaceChar() const { return m_replaceChar; }
 
-  virtual void fixup( QString& ) const;
+  virtual void fixup( TQString& ) const;
 
  private:
-  QChar m_replaceChar;
+  TQChar m_replaceChar;
 };
 
 
@@ -91,10 +91,10 @@ namespace K3bValidators
 {
   /**
    * just replaces all characters that are not allowed with the 
-   * replace character. It only makes sense for QRegExps that simply
+   * replace character. It only makes sense for TQRegExps that simply
    * allow or forbid some characters.
    */
-  LIBK3B_EXPORT QString fixup( const QString&, const QRegExp&, const QChar& replaceChar = '_' );
+  LIBK3B_EXPORT TQString fixup( const TQString&, const TQRegExp&, const TQChar& replaceChar = '_' );
 
   /**
    * Validates an ISRC code of the form "CCOOOYYSSSSS" where:
@@ -105,13 +105,13 @@ namespace K3bValidators
    * <li>S: serial number (digits)</li>
    * </ul>
    */
-  LIBK3B_EXPORT K3bValidator* isrcValidator( QObject* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT K3bValidator* isrcValidator( TQObject* tqparent = 0, const char* name = 0 );
   
   /**
    * This needs to be replaced by something better in the future...
    * Even the name sucks!
    */
-  LIBK3B_EXPORT K3bValidator* iso9660Validator( bool allowEmpty = true, QObject* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT K3bValidator* iso9660Validator( bool allowEmpty = true, TQObject* tqparent = 0, const char* name = 0 );
 
   /**
    * (1) d-characters are: A-Z, 0-9, _ (see ISO-9660:1988, Annex A, Table 15)
@@ -125,7 +125,7 @@ namespace K3bValidators
 
   LIBK3B_EXPORT K3bValidator* iso646Validator( int type = Iso646_a, 
 				 bool AllowLowerCase = false, 
-				 QObject* parent = 0, const char* name = 0 );
+				 TQObject* tqparent = 0, const char* name = 0 );
 }
 
 #endif

@@ -17,7 +17,7 @@
 #define _K3B_PROJECT_PLUGIN_H_
 
 #include <k3bplugin.h>
-#include <qstring.h>
+#include <tqstring.h>
 #include "k3b_export.h"
 class K3bDoc;
 
@@ -26,8 +26,8 @@ class K3bDoc;
  * K3bProjectPluginGUIBase interface. That way K3b can embed the GUI into 
  * a fancy dialog which fits the overall look.
  *
- * This is not derived from QWidget to make it possible to inherit
- * from other QWidget derivates.
+ * This is not derived from TQWidget to make it possible to inherit
+ * from other TQWidget derivates.
  */
 class K3bProjectPluginGUIBase
 {
@@ -35,13 +35,13 @@ class K3bProjectPluginGUIBase
   K3bProjectPluginGUIBase() {}
   virtual ~K3bProjectPluginGUIBase() {}
 
-  virtual QWidget* qWidget() = 0;
+  virtual TQWidget* qWidget() = 0;
 
   /**
    * Title used for the GUI
    */
-  virtual QString title() const = 0;
-  virtual QString subTitle() const { return QString::null; }
+  virtual TQString title() const = 0;
+  virtual TQString subTitle() const { return TQString(); }
 
   virtual void readSettings( KConfigBase* ) {}
   virtual void saveSettings( KConfigBase* ) {}
@@ -68,6 +68,7 @@ class K3bProjectPluginGUIBase
 class LIBK3B_EXPORT K3bProjectPlugin : public K3bPlugin
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
@@ -76,8 +77,8 @@ class LIBK3B_EXPORT K3bProjectPlugin : public K3bPlugin
    *            @p activate() will not be used. A plugin has a GUI if it's functionality is started 
    *            by some user input.
    */
-  K3bProjectPlugin( int type, bool gui = false, QObject* parent = 0, const char* name = 0 )
-  : K3bPlugin( parent, name ),
+  K3bProjectPlugin( int type, bool gui = false, TQObject* tqparent = 0, const char* name = 0 )
+  : K3bPlugin( tqparent, name ),
     m_type(type),
     m_hasGUI(gui) {
   }
@@ -100,7 +101,7 @@ class LIBK3B_EXPORT K3bProjectPlugin : public K3bPlugin
   };
 
   // TODO: maybe we should use something like "ProjectPlugin/AudioCD" based on the type?
-  QString group() const { return "ProjectPlugin"; }
+  TQString group() const { return "ProjectPlugin"; }
 
   /**
    * audio, data, videocd, or videodvd
@@ -112,23 +113,23 @@ class LIBK3B_EXPORT K3bProjectPlugin : public K3bPlugin
   /**
    * Text used for menu entries and the like.
    */
-  const QString& text() const { return m_text; }
-  const QString& toolTip() const { return m_toolTip; }
-  const QString& whatsThis() const { return m_whatsThis; }
-  const QString& icon() const { return m_icon; }
+  const TQString& text() const { return m_text; }
+  const TQString& toolTip() const { return m_toolTip; }
+  const TQString& whatsThis() const { return m_whatsThis; }
+  const TQString& icon() const { return m_icon; }
 
   bool hasGUI() const { return m_hasGUI; }
 
   /**
    * Create the GUI which provides the features for the plugin.
    * This only needs to be implemented in case hasGUI returns true.
-   * The returned object has to be a QWidget based class.
+   * The returned object has to be a TQWidget based class.
    *
    * @param doc based on the type returned by the factory
    *            this will be the doc to work on. It should
    *            be dynamically casted to the needed project type.
    */
-  virtual K3bProjectPluginGUIBase* createGUI( K3bDoc* doc, QWidget* = 0, const char* = 0 ) { Q_UNUSED(doc); return 0; }
+  virtual K3bProjectPluginGUIBase* createGUI( K3bDoc* doc, TQWidget* = 0, const char* = 0 ) { Q_UNUSED(doc); return 0; }
 
   /**
    * This is where the action happens.
@@ -138,23 +139,23 @@ class LIBK3B_EXPORT K3bProjectPlugin : public K3bPlugin
    *            this will be the doc to work on. It should
    *            be dynamically casted to the needed project type.
    *
-   * @param parent the parent widget to be used for things like progress dialogs.
+   * @param tqparent the tqparent widget to be used for things like progress dialogs.
    */
-  virtual void activate( K3bDoc* doc, QWidget* parent ) { Q_UNUSED(doc); Q_UNUSED(parent); }
+  virtual void activate( K3bDoc* doc, TQWidget* tqparent ) { Q_UNUSED(doc); Q_UNUSED(tqparent); }
 
  protected:
-  void setText( const QString& s ) { m_text = s; }
-  void setToolTip( const QString& s ) { m_toolTip = s; }
-  void setWhatsThis( const QString& s ) { m_whatsThis = s; }
-  void setIcon( const QString& s ) { m_icon = s; }
+  void setText( const TQString& s ) { m_text = s; }
+  void setToolTip( const TQString& s ) { m_toolTip = s; }
+  void setWhatsThis( const TQString& s ) { m_whatsThis = s; }
+  void setIcon( const TQString& s ) { m_icon = s; }
 
  private:
   int m_type;
   bool m_hasGUI;
-  QString m_text;
-  QString m_toolTip;
-  QString m_whatsThis;
-  QString m_icon;
+  TQString m_text;
+  TQString m_toolTip;
+  TQString m_whatsThis;
+  TQString m_icon;
 };
 
 

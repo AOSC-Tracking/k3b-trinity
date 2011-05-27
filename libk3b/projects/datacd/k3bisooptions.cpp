@@ -20,12 +20,12 @@
 
 #include <kconfig.h>
 #include <klocale.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 
 K3bIsoOptions::K3bIsoOptions()
   : m_volumeID( "K3b data project" ),
-    m_applicationID( QString("K3B THE CD KREATOR (C) 1998-2006 SEBASTIAN TRUEG AND THE K3B TEAM") ),
+    m_applicationID( TQString("K3B THE CD KREATOR (C) 1998-2006 SEBASTIAN TRUEG AND THE K3B TEAM") ),
     m_systemId( K3b::systemName().upper() ),
     m_inputCharset( "iso8859-1" ),
     m_whiteSpaceTreatmentReplaceString( "_" )
@@ -118,8 +118,8 @@ void K3bIsoOptions::save( KConfigBase* c, bool saveVolumeDesc )
   case extended:
     c->writeEntry( "white_space_treatment", "extended" );
     break;
-  case replace:
-    c->writeEntry( "white_space_treatment", "replace" );
+  case tqreplace:
+    c->writeEntry( "white_space_treatment", "tqreplace" );
     break;
   default:
     c->writeEntry( "white_space_treatment", "noChange" );
@@ -188,9 +188,9 @@ K3bIsoOptions K3bIsoOptions::load( KConfigBase* c, bool loadVolumeDesc )
 
   options.setDoNotCacheInodes( c->readBoolEntry( "do not cache inodes", options.doNotCacheInodes() ) );
 
-  QString w = c->readEntry( "white_space_treatment", "noChange" );
-  if( w == "replace" )
-    options.setWhiteSpaceTreatment( replace );
+  TQString w = c->readEntry( "white_space_treatment", "noChange" );
+  if( w == "tqreplace" )
+    options.setWhiteSpaceTreatment( tqreplace );
   else if( w == "strip" )
     options.setWhiteSpaceTreatment( strip );
   else if( w == "extended" )

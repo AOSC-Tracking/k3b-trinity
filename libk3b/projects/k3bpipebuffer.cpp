@@ -115,7 +115,7 @@ public:
       //
       // wait for data
       //
-      int ret = select( QMAX(usedInFd, outFd) + 1, &readFds, &writeFds, NULL, NULL);
+      int ret = select( TQMAX(usedInFd, outFd) + 1, &readFds, &writeFds, NULL, NULL);
 
       //
       // Do the buffering
@@ -128,7 +128,7 @@ public:
 	// Read from the buffer and write to the output
 	//
 	if( FD_ISSET(outFd, &writeFds) ) {
-	  unsigned int maxLen = QMIN(bufSize - bufPos, dataLen);
+	  unsigned int maxLen = TQMIN(bufSize - bufPos, dataLen);
 
 	  ret = ::write( outFd, &buffer[bufPos], maxLen );
 	  
@@ -155,7 +155,7 @@ public:
 	//
 	else if( FD_ISSET(usedInFd, &readFds) ) {
 	  unsigned int readPos = (bufPos + dataLen) % bufSize;
-	  unsigned int maxLen = QMIN(bufSize - readPos, bufSize - dataLen);
+	  unsigned int maxLen = TQMIN(bufSize - readPos, bufSize - dataLen);
 	  //
 	  // never read more than xxx bytes
 	  // This is some tuning to prevent the reading from blocking the whole thread
@@ -221,8 +221,8 @@ public:
 };
 
 
-K3bPipeBuffer::K3bPipeBuffer( K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bThreadJob( jh, parent, name )
+K3bPipeBuffer::K3bPipeBuffer( K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bThreadJob( jh, tqparent, name )
 {
   m_thread = new WorkThread();
   setThread( m_thread );

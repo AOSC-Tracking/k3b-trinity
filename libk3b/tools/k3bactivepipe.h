@@ -16,12 +16,12 @@
 #ifndef _K3B_ACTIVE_PIPE_H_
 #define _K3B_ACTIVE_PIPE_H_
 
-#include <qcstring.h>
+#include <tqcstring.h>
 
 #include <k3b_export.h>
 
 
-class QIODevice;
+class TQIODevice;
 
 
 /**
@@ -74,18 +74,18 @@ class LIBK3B_EXPORT K3bActivePipe
   void writeToFd( int fd, bool close = false );
 
   /**
-   * Read from a QIODevice instead of a file descriptor.
+   * Read from a TQIODevice instead of a file descriptor.
    * The device will be opened IO_ReadOnly and closed
    * afterwards.
    */
-  void readFromIODevice( QIODevice* dev );
+  void readFromIODevice( TQIODevice* dev );
 
   /**
-   * Write to a QIODevice instead of a file descriptor.
+   * Write to a TQIODevice instead of a file descriptor.
    * The device will be opened IO_WriteOnly and closed
    * afterwards.
    */
-  void writeToIODevice( QIODevice* dev );
+  void writeToIODevice( TQIODevice* dev );
 
   /**
    * The file descriptor to write into
@@ -102,12 +102,12 @@ class LIBK3B_EXPORT K3bActivePipe
   /**
    * The number of bytes that have been read.
    */
-  Q_UINT64 bytesRead() const;
+  TQ_UINT64 bytesRead() const;
 
   /**
    * The number of bytes that have been written.
    */
-  Q_UINT64 bytesWritten() const;
+  TQ_UINT64 bytesWritten() const;
 
  protected:
   /**

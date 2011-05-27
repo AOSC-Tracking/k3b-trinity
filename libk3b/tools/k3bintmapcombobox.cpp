@@ -15,30 +15,30 @@
 
 #include "k3bintmapcombobox.h"
 
-#include <qwhatsthis.h>
-#include <qmap.h>
-#include <qvaluevector.h>
+#include <tqwhatsthis.h>
+#include <tqmap.h>
+#include <tqvaluevector.h>
 
 
 class K3bIntMapComboBox::Private
 {
 public:
-  QMap<int, int> valueIndexMap;
-  QMap<int, QPair<int, QString> > indexValueDescriptionMap;
+  TQMap<int, int> valueIndexMap;
+  TQMap<int, TQPair<int, TQString> > indexValueDescriptionMap;
 
-  QString topWhatsThis;
-  QString bottomWhatsThis;
+  TQString topWhatsThis;
+  TQString bottomWhatsThis;
 };
 
 
-K3bIntMapComboBox::K3bIntMapComboBox( QWidget* parent, const char* name )
-  : KComboBox( parent, name )
+K3bIntMapComboBox::K3bIntMapComboBox( TQWidget* tqparent, const char* name )
+  : KComboBox( tqparent, name )
 {
   d = new Private;
-  connect( this, SIGNAL(highlighted(int)),
-	   this, SLOT(slotItemHighlighted(int)) );
-  connect( this, SIGNAL(activated(int)),
-	   this, SLOT(slotItemActivated(int)) );
+  connect( this, TQT_SIGNAL(highlighted(int)),
+	   this, TQT_SLOT(slotItemHighlighted(int)) );
+  connect( this, TQT_SIGNAL(activated(int)),
+	   this, TQT_SLOT(slotItemActivated(int)) );
 }
 
 
@@ -59,7 +59,7 @@ int K3bIntMapComboBox::selectedValue() const
 
 void K3bIntMapComboBox::setSelectedValue( int value )
 {
-  if( d->valueIndexMap.contains( value ) )
+  if( d->valueIndexMap.tqcontains( value ) )
     KComboBox::setCurrentItem( d->valueIndexMap[value] );
 }
 
@@ -73,16 +73,16 @@ void K3bIntMapComboBox::clear()
 }
 
 
-bool K3bIntMapComboBox::insertItem( int value, const QString& text, const QString& description, int index )
+bool K3bIntMapComboBox::insertItem( int value, const TQString& text, const TQString& description, int index )
 {
-  if( d->valueIndexMap.contains( value ) )
+  if( d->valueIndexMap.tqcontains( value ) )
     return false;
 
   // FIXME: allow inserition at any index
   index = KComboBox::count();
 
   d->valueIndexMap[value] = index;
-  d->indexValueDescriptionMap[index] = qMakePair<int, QString>( value, description );
+  d->indexValueDescriptionMap[index] = tqMakePair<int, TQString>( value, description );
 
   KComboBox::insertItem( text );
 
@@ -94,14 +94,14 @@ bool K3bIntMapComboBox::insertItem( int value, const QString& text, const QStrin
 
 void K3bIntMapComboBox::updateWhatsThis()
 {
-  QString ws( d->topWhatsThis );
+  TQString ws( d->topWhatsThis );
   for( unsigned int i = 0; i < d->indexValueDescriptionMap.count(); ++i ) {
     ws += "<p><b>" + KComboBox::text( i ) + "</b><br>";
     ws += d->indexValueDescriptionMap[i].second;
   }  
   ws += "<p>" + d->bottomWhatsThis;
 
-  QWhatsThis::add( this, ws );
+  TQWhatsThis::add( this, ws );
 }
 
 
@@ -117,7 +117,7 @@ void K3bIntMapComboBox::slotItemActivated( int index )
 }
 
 
-void K3bIntMapComboBox::addGlobalWhatsThisText( const QString& top, const QString& bottom )
+void K3bIntMapComboBox::addGlobalWhatsThisText( const TQString& top, const TQString& bottom )
 {
   d->topWhatsThis = top;
   d->bottomWhatsThis = bottom;

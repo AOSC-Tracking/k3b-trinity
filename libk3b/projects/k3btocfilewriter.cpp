@@ -20,9 +20,9 @@
 #include <k3bcore.h>
 #include <k3bversion.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qdatetime.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqdatetime.h>
 
 
 K3bTocFileWriter::K3bTocFileWriter()
@@ -32,22 +32,22 @@ K3bTocFileWriter::K3bTocFileWriter()
 }
 
 
-bool K3bTocFileWriter::save( const QString& filename )
+bool K3bTocFileWriter::save( const TQString& filename )
 {
-  QFile f( filename );
+  TQFile f( filename );
 
   if( !f.open( IO_WriteOnly ) ) {
     kdDebug() << "(K3bCueFileWriter) could not open file " << f.name() << endl;
     return false;
   }
 
-  QTextStream s( &f );
+  TQTextStream s( &f );
 
   return save( s );
 }
 
 
-bool K3bTocFileWriter::save( QTextStream& t )
+bool K3bTocFileWriter::save( TQTextStream& t )
 {
   writeHeader(t);
 
@@ -149,15 +149,15 @@ bool K3bTocFileWriter::save( QTextStream& t )
     trackIndex++;
   }
 
-  return ( t.device()->status() == IO_Ok );
+  return ( t.tqdevice()->status() == IO_Ok );
 }
 
 
-void K3bTocFileWriter::writeHeader( QTextStream& t )
+void K3bTocFileWriter::writeHeader( TQTextStream& t )
 {
   // little comment
   t << "// TOC-file to use with cdrdao created by K3b " << k3bcore->version()
-    << ", " << QDateTime::currentDateTime().toString() << endl << endl;
+    << ", " << TQDateTime::tqcurrentDateTime().toString() << endl << endl;
 
   t << "// " << m_toc.count() << " tracks" << endl;
   if( m_toc.back().session() > 0 ) {
@@ -193,7 +193,7 @@ void K3bTocFileWriter::writeHeader( QTextStream& t )
 }
 
 
-void K3bTocFileWriter::writeTrack( unsigned int index, const K3b::Msf& offset, QTextStream& t )
+void K3bTocFileWriter::writeTrack( unsigned int index, const K3b::Msf& offset, TQTextStream& t )
 {
   const K3bDevice::Track& track = m_toc[index];
 
@@ -305,7 +305,7 @@ void K3bTocFileWriter::writeTrack( unsigned int index, const K3b::Msf& offset, Q
 }
 
 
-void K3bTocFileWriter::writeGlobalCdText( QTextStream& t )
+void K3bTocFileWriter::writeGlobalCdText( TQTextStream& t )
 {
   t << "CD_TEXT {" << endl;
   t << "  LANGUAGE_MAP { 0: EN }" << endl;
@@ -325,7 +325,7 @@ void K3bTocFileWriter::writeGlobalCdText( QTextStream& t )
 }
 
 
-void K3bTocFileWriter::writeTrackCdText( const K3bDevice::TrackCdText& track, QTextStream& t )
+void K3bTocFileWriter::writeTrackCdText( const K3bDevice::TrackCdText& track, TQTextStream& t )
 {
   t << "CD_TEXT {" << endl;
   t << "  LANGUAGE 0 {" << endl;
@@ -341,7 +341,7 @@ void K3bTocFileWriter::writeTrackCdText( const K3bDevice::TrackCdText& track, QT
 }
 
 
-void K3bTocFileWriter::writeDataSource( unsigned int trackIndex, QTextStream& t )
+void K3bTocFileWriter::writeDataSource( unsigned int trackIndex, TQTextStream& t )
 {
   if( readFromStdin() )
     t << "\"-\" ";

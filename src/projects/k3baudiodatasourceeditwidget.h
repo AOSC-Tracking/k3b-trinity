@@ -16,7 +16,7 @@
 #ifndef _K3B_AUDIODATASOURCE_EDITWIDGET_H_
 #define _K3B_AUDIODATASOURCE_EDITWIDGET_H_
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include <k3bmsf.h>
 
 class K3bAudioDataSource;
@@ -27,12 +27,13 @@ class K3bMsfEdit;
  * Widget to modify the start and end offset of a source or simply change
  * the length of a silence source.
  */
-class K3bAudioDataSourceEditWidget : public QWidget
+class K3bAudioDataSourceEditWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioDataSourceEditWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bAudioDataSourceEditWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bAudioDataSourceEditWidget();
 
   K3b::Msf startOffset() const;

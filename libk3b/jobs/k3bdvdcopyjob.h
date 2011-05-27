@@ -18,7 +18,7 @@
 
 #include <k3bjob.h>
 #include "k3b_export.h"
-#include <qstring.h>
+#include <tqstring.h>
 
 
 namespace K3bDevice {
@@ -30,16 +30,17 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bDvdCopyJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDvdCopyJob( K3bJobHandler* hdl, QObject* parent = 0, const char* name = 0 );
+  K3bDvdCopyJob( K3bJobHandler* hdl, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bDvdCopyJob();
 
   K3bDevice::Device* writer() const { return m_onlyCreateImage ? 0 : m_writerDevice; }
   K3bDevice::Device* readingDevice() const { return m_readerDevice; }
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
  public slots:
   void start();
@@ -47,7 +48,7 @@ class LIBK3B_EXPORT K3bDvdCopyJob : public K3bBurnJob
 
   void setWriterDevice( K3bDevice::Device* w ) { m_writerDevice = w; }
   void setReaderDevice( K3bDevice::Device* w ) { m_readerDevice = w; }
-  void setImagePath( const QString& p ) { m_imagePath = p; }
+  void setImagePath( const TQString& p ) { m_imagePath = p; }
   void setRemoveImageFiles( bool b ) { m_removeImageFiles = b; }
   void setOnlyCreateImage( bool b ) { m_onlyCreateImage = b; }
   void setSimulate( bool b ) { m_simulate = b; }
@@ -77,7 +78,7 @@ class LIBK3B_EXPORT K3bDvdCopyJob : public K3bBurnJob
 
   K3bDevice::Device* m_writerDevice;
   K3bDevice::Device* m_readerDevice;
-  QString m_imagePath;
+  TQString m_imagePath;
 
   bool m_onTheFly;
   bool m_removeImageFiles;

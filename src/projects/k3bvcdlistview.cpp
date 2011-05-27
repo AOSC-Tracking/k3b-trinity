@@ -13,15 +13,15 @@
 * See the file "COPYING" for the exact licensing terms.
 */
 
-#include <qheader.h>
-#include <qtimer.h>
-#include <qdragobject.h>
-#include <qpoint.h>
-#include <qptrlist.h>
-#include <qstringlist.h>
-#include <qevent.h>
-#include <qpainter.h>
-#include <qfontmetrics.h>
+#include <tqheader.h>
+#include <tqtimer.h>
+#include <tqdragobject.h>
+#include <tqpoint.h>
+#include <tqptrlist.h>
+#include <tqstringlist.h>
+#include <tqevent.h>
+#include <tqpainter.h>
+#include <tqfontmetrics.h>
 
 #include <kiconloader.h>
 #include <kurl.h>
@@ -39,8 +39,8 @@
 #include "k3bvcddoc.h"
 #include <k3bview.h>
 
-K3bVcdListView::K3bVcdListView( K3bView* view, K3bVcdDoc* doc, QWidget *parent, const char *name )
-        : K3bListView( parent, name ), m_doc( doc ), m_view( view )
+K3bVcdListView::K3bVcdListView( K3bView* view, K3bVcdDoc* doc, TQWidget *tqparent, const char *name )
+        : K3bListView( tqparent, name ), m_doc( doc ), m_view( view )
 {
     setAcceptDrops( true );
     setDropVisualizer( true );
@@ -60,15 +60,15 @@ K3bVcdListView::K3bVcdListView( K3bView* view, K3bVcdDoc* doc, QWidget *parent, 
     setupColumns();
     header() ->setClickEnabled( false );
 
-    connect( this, SIGNAL( dropped( KListView*, QDropEvent*, QListViewItem* ) ),
-             this, SLOT( slotDropped( KListView*, QDropEvent*, QListViewItem* ) ) );
-    connect( this, SIGNAL( contextMenu( KListView*, QListViewItem*, const QPoint& ) ),
-             this, SLOT( showPopupMenu( KListView*, QListViewItem*, const QPoint& ) ) );
-    connect( this, SIGNAL( doubleClicked( QListViewItem*, const QPoint&, int ) ),
-             this, SLOT( showPropertiesDialog() ) );
+    connect( this, TQT_SIGNAL( dropped( KListView*, TQDropEvent*, TQListViewItem* ) ),
+             this, TQT_SLOT( slotDropped( KListView*, TQDropEvent*, TQListViewItem* ) ) );
+    connect( this, TQT_SIGNAL( contextMenu( KListView*, TQListViewItem*, const TQPoint& ) ),
+             this, TQT_SLOT( showPopupMenu( KListView*, TQListViewItem*, const TQPoint& ) ) );
+    connect( this, TQT_SIGNAL( doubleClicked( TQListViewItem*, const TQPoint&, int ) ),
+             this, TQT_SLOT( showPropertiesDialog() ) );
 
-    connect( m_doc, SIGNAL( changed() ), this, SLOT( slotUpdateItems() ) );
-    connect( m_doc, SIGNAL( trackRemoved( K3bVcdTrack* ) ), this, SLOT( slotTrackRemoved( K3bVcdTrack* ) ) );
+    connect( m_doc, TQT_SIGNAL( changed() ), TQT_TQOBJECT(this), TQT_SLOT( slotUpdateItems() ) );
+    connect( m_doc, TQT_SIGNAL( trackRemoved( K3bVcdTrack* ) ), TQT_TQOBJECT(this), TQT_SLOT( slotTrackRemoved( K3bVcdTrack* ) ) );
 
     slotUpdateItems();
 }
@@ -94,8 +94,8 @@ void K3bVcdListView::setupColumns()
 void K3bVcdListView::setupActions()
 {
     m_actionCollection = new KActionCollection( this );
-    m_actionProperties = new KAction( i18n( "Properties" ), "misc", 0, this, SLOT( showPropertiesDialog() ), actionCollection() );
-    m_actionRemove = new KAction( i18n( "Remove" ), "editdelete", Key_Delete, this, SLOT( slotRemoveTracks() ), actionCollection() );
+    m_actionProperties = new KAction( i18n( "Properties" ), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT( showPropertiesDialog() ), actionCollection() );
+    m_actionRemove = new KAction( i18n( "Remove" ), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT( slotRemoveTracks() ), actionCollection() );
 
     // disabled by default
     m_actionRemove->setEnabled( false );
@@ -113,21 +113,21 @@ void K3bVcdListView::setupPopupMenu()
 }
 
 
-bool K3bVcdListView::acceptDrag( QDropEvent* e ) const
+bool K3bVcdListView::acceptDrag( TQDropEvent* e ) const
 {
     // the first is for built-in item moving, the second for dropping urls
     return ( KListView::acceptDrag( e ) || KURLDrag::canDecode( e ) );
 }
 
 
-QDragObject* K3bVcdListView::dragObject()
+TQDragObject* K3bVcdListView::dragObject()
 {
-    QPtrList<QListViewItem> list = selectedItems();
+    TQPtrList<TQListViewItem> list = selectedItems();
 
     if ( list.isEmpty() )
         return 0;
 
-    QPtrListIterator<QListViewItem> it( list );
+    TQPtrListIterator<TQListViewItem> it( list );
     KURL::List urls;
 
     for ( ; it.current(); ++it )
@@ -137,7 +137,7 @@ QDragObject* K3bVcdListView::dragObject()
 }
 
 
-void K3bVcdListView::slotDropped( KListView*, QDropEvent* e, QListViewItem* after )
+void K3bVcdListView::slotDropped( KListView*, TQDropEvent* e, TQListViewItem* after )
 {
     if ( !e->isAccepted() )
         return ;
@@ -149,8 +149,8 @@ void K3bVcdListView::slotDropped( KListView*, QDropEvent* e, QListViewItem* afte
         pos = ( ( K3bVcdListViewItem* ) after ) ->vcdTrack() ->index() + 1;
 
     if ( e->source() == viewport() ) {
-        QPtrList<QListViewItem> sel = selectedItems();
-        QPtrListIterator<QListViewItem> it( sel );
+        TQPtrList<TQListViewItem> sel = selectedItems();
+        TQPtrListIterator<TQListViewItem> it( sel );
         K3bVcdTrack* trackAfter = ( after ? ( ( K3bVcdListViewItem* ) after ) ->vcdTrack() : 0 );
         while ( it.current() ) {
             K3bVcdTrack * track = ( ( K3bVcdListViewItem* ) it.current() ) ->vcdTrack();
@@ -170,7 +170,7 @@ void K3bVcdListView::slotDropped( KListView*, QDropEvent* e, QListViewItem* afte
 }
 
 
-void K3bVcdListView::insertItem( QListViewItem* item )
+void K3bVcdListView::insertItem( TQListViewItem* item )
 {
     KListView::insertItem( item );
 
@@ -180,7 +180,7 @@ void K3bVcdListView::insertItem( QListViewItem* item )
     }
 }
 
-void K3bVcdListView::showPopupMenu( KListView*, QListViewItem* _item, const QPoint& _point )
+void K3bVcdListView::showPopupMenu( KListView*, TQListViewItem* _item, const TQPoint& _point )
 {
     if ( _item ) {
         m_actionRemove->setEnabled( true );
@@ -193,23 +193,23 @@ void K3bVcdListView::showPopupMenu( KListView*, QListViewItem* _item, const QPoi
 
 void K3bVcdListView::showPropertiesDialog()
 {
-    QPtrList<K3bVcdTrack> selected = selectedTracks();
+    TQPtrList<K3bVcdTrack> selected = selectedTracks();
     if ( !selected.isEmpty() && selected.count() == 1 ) {
-        QPtrList<K3bVcdTrack> tracks = *m_doc->tracks();
+        TQPtrList<K3bVcdTrack> tracks = *m_doc->tracks();
         K3bVcdTrackDialog d( m_doc, tracks, selected, this );
         if ( d.exec() ) {
-            repaint();
+            tqrepaint();
         }
     } else {
       m_view->slotProperties();
     }
 }
 
-QPtrList<K3bVcdTrack> K3bVcdListView::selectedTracks()
+TQPtrList<K3bVcdTrack> K3bVcdListView::selectedTracks()
 {
-    QPtrList<K3bVcdTrack> selectedTracks;
-    QPtrList<QListViewItem> selectedVI( selectedItems() );
-    for ( QListViewItem * item = selectedVI.first(); item != 0; item = selectedVI.next() ) {
+    TQPtrList<K3bVcdTrack> selectedTracks;
+    TQPtrList<TQListViewItem> selectedVI( selectedItems() );
+    for ( TQListViewItem * item = selectedVI.first(); item != 0; item = selectedVI.next() ) {
         K3bVcdListViewItem * vcdItem = dynamic_cast<K3bVcdListViewItem*>( item );
         if ( vcdItem ) {
             selectedTracks.append( vcdItem->vcdTrack() );
@@ -222,7 +222,7 @@ QPtrList<K3bVcdTrack> K3bVcdListView::selectedTracks()
 
 void K3bVcdListView::slotRemoveTracks()
 {
-    QPtrList<K3bVcdTrack> selected = selectedTracks();
+    TQPtrList<K3bVcdTrack> selected = selectedTracks();
     if ( !selected.isEmpty() ) {
 
         for ( K3bVcdTrack * track = selected.first(); track != 0; track = selected.next() ) {
@@ -238,7 +238,7 @@ void K3bVcdListView::slotRemoveTracks()
 
 void K3bVcdListView::slotTrackRemoved( K3bVcdTrack* track )
 {
-    QListViewItem * viewItem = m_itemMap[ track ];
+    TQListViewItem * viewItem = m_itemMap[ track ];
     m_itemMap.remove( track );
     delete viewItem;
 }
@@ -250,7 +250,7 @@ void K3bVcdListView::slotUpdateItems()
     K3bVcdTrack * track = m_doc->first();
     K3bVcdTrack* lastTrack = 0;
     while ( track != 0 ) {
-        if ( !m_itemMap.contains( track ) )
+        if ( !m_itemMap.tqcontains( track ) )
             m_itemMap.insert( track, new K3bVcdListViewItem( track, this, m_itemMap[ lastTrack ] ) );
 
         lastTrack = track;

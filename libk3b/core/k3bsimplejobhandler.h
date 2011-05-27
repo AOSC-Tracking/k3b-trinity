@@ -18,7 +18,7 @@
 
 #include <k3b_export.h>
 
-#include <qobject.h>
+#include <tqobject.h>
 #include <k3bjobhandler.h>
 
 
@@ -28,12 +28,13 @@
  * Use it for very simple jobs that don't need the job handler
  * methods.
  */
-class LIBK3B_EXPORT K3bSimpleJobHandler : public QObject, public K3bJobHandler
+class LIBK3B_EXPORT K3bSimpleJobHandler : public TQObject, public K3bJobHandler
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bSimpleJobHandler( QObject* parent = 0 );
+  K3bSimpleJobHandler( TQObject* tqparent = 0 );
   ~K3bSimpleJobHandler();
 
   /*
@@ -42,20 +43,20 @@ class LIBK3B_EXPORT K3bSimpleJobHandler : public QObject, public K3bJobHandler
   int waitForMedia( K3bDevice::Device*,
 		    int mediaState = K3bDevice::STATE_EMPTY,
 		    int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		    const QString& message = QString::null );
+		    const TQString& message = TQString() );
   /**
    * \return true
    */
-  bool questionYesNo( const QString& text,
-		      const QString& caption = QString::null,
-		      const QString& yesText = QString::null,
-		      const QString& noText = QString::null );
+  bool questionYesNo( const TQString& text,
+		      const TQString& caption = TQString(),
+		      const TQString& yesText = TQString(),
+		      const TQString& noText = TQString() );
 
   /**
    * Does nothing
    */
-  void blockingInformation( const QString& text,
-			    const QString& caption = QString::null );
+  void blockingInformation( const TQString& text,
+			    const TQString& caption = TQString() );
 };
 
 #endif

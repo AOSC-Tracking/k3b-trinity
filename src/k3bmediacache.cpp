@@ -25,22 +25,22 @@
 #include <kapplication.h>
 #include <klocale.h>
 
-#include <qthread.h>
-#include <qmutex.h>
-#include <qevent.h>
+#include <tqthread.h>
+#include <tqmutex.h>
+#include <tqevent.h>
 
 
 // ////////////////////////////////////////////////////////////////////////////////
 // MEDIA CACHE SUPPORT CLASSES
 // ////////////////////////////////////////////////////////////////////////////////
 
-class K3bMediaCache::MediaChangeEvent : public QCustomEvent
+class K3bMediaCache::MediaChangeEvent : public TQCustomEvent
 {
 public:
   static const int EventCode;
 
   MediaChangeEvent( K3bDevice::Device* dev )
-    : QCustomEvent( EventCode ),
+    : TQCustomEvent( EventCode ),
       m_device( dev ) {}
 
   K3bDevice::Device* device() const { return m_device; }
@@ -49,7 +49,7 @@ private:
   K3bDevice::Device* m_device;
 };
 
-const int K3bMediaCache::MediaChangeEvent::EventCode = QEvent::User + 22;
+const int K3bMediaCache::MediaChangeEvent::EventCode = TQEvent::User + 22;
 
 
 class K3bMediaCache::DeviceEntry
@@ -62,7 +62,7 @@ public:
 
   int blockedId;
   
-  QMutex mutex;
+  TQMutex mutex;
 
   K3bMediaCache::PollThread* thread;
 
@@ -74,7 +74,7 @@ public:
 };
 
 
-class K3bMediaCache::PollThread : public QThread
+class K3bMediaCache::PollThread : public TQThread
 {
 public:
   PollThread( K3bMediaCache::DeviceEntry* de )
@@ -140,7 +140,7 @@ void K3bMediaCache::PollThread::run()
       // inform the media cache about the media change
       //
       if( m_deviceEntry->blockedId == 0 )
-	QApplication::postEvent( m_deviceEntry->cache,
+	TQApplication::postEvent( m_deviceEntry->cache,
 				 new K3bMediaCache::MediaChangeEvent( m_deviceEntry->medium.device() ) );
       
       // the information is valid. let the info go.
@@ -148,7 +148,7 @@ void K3bMediaCache::PollThread::run()
     }
       
     if( m_deviceEntry->blockedId == 0 )
-      QThread::sleep( 2 );
+      TQThread::sleep( 2 );
   }
 }
 
@@ -161,8 +161,8 @@ void K3bMediaCache::PollThread::run()
 // ////////////////////////////////////////////////////////////////////////////////
 
 
-K3bMediaCache::K3bMediaCache( QObject* parent )
-  : QObject( parent )
+K3bMediaCache::K3bMediaCache( TQObject* tqparent )
+  : TQObject( tqparent )
 {
 }
 
@@ -282,26 +282,26 @@ K3bDevice::CdText K3bMediaCache::cdText( K3bDevice::Device* dev )
 }
 
 
-QValueList<int> K3bMediaCache::writingSpeeds( K3bDevice::Device* dev )
+TQValueList<int> K3bMediaCache::writingSpeeds( K3bDevice::Device* dev )
 {
   if( DeviceEntry* e = findDeviceEntry( dev ) ) {
     e->mutex.lock();
-    QValueList<int> ws = e->medium.writingSpeeds();
+    TQValueList<int> ws = e->medium.writingSpeeds();
     e->mutex.unlock();
     return ws;
   }
   else
-    return QValueList<int>();
+    return TQValueList<int>();
 }
 
 
-QString K3bMediaCache::mediumString( K3bDevice::Device* device, bool useContent )
+TQString K3bMediaCache::mediumString( K3bDevice::Device* device, bool useContent )
 {
   if( DeviceEntry* e = findDeviceEntry( device ) ) {
     return e->medium.shortString( useContent );
   }
   else
-    return QString::null;
+    return TQString();
 }
 
 
@@ -310,13 +310,13 @@ void K3bMediaCache::clearDeviceList()
   kdDebug() << k_funcinfo << endl;
 
   // make all the threads stop
-  for( QMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.begin(); 
+  for( TQMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.begin(); 
        it != m_deviceMap.end(); ++it ) {
     it.data()->blockedId = 1;
   }
 
   // and remove them
-  for( QMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.begin(); 
+  for( TQMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.begin(); 
        it != m_deviceMap.end(); ++it ) {
     kdDebug() << k_funcinfo << " waiting for info thread " << it.key()->blockDeviceName() << " to finish" << endl;
     it.data()->thread->wait();
@@ -330,23 +330,23 @@ void K3bMediaCache::clearDeviceList()
 void K3bMediaCache::buildDeviceList( K3bDevice::DeviceManager* dm )
 {
   // remember blocked ids
-  QMap<K3bDevice::Device*, int> blockedIds;
-  for( QMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.begin(); 
+  TQMap<K3bDevice::Device*, int> blockedIds;
+  for( TQMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.begin(); 
        it != m_deviceMap.end(); ++it )
     blockedIds.insert( it.key(), it.data()->blockedId );
 
   clearDeviceList();
 
-  const QPtrList<K3bDevice::Device>& devices = dm->allDevices();
-  for( QPtrListIterator<K3bDevice::Device> it( devices ); *it; ++it ) {
+  const TQPtrList<K3bDevice::Device>& devices = dm->allDevices();
+  for( TQPtrListIterator<K3bDevice::Device> it( devices ); *it; ++it ) {
     m_deviceMap.insert( *it, new DeviceEntry( this, *it ) );
-    QMap<K3bDevice::Device*, int>::const_iterator bi_it = blockedIds.find( *it );
+    TQMap<K3bDevice::Device*, int>::const_iterator bi_it = blockedIds.tqfind( *it );
     if( bi_it != blockedIds.end() )
       m_deviceMap[*it]->blockedId = bi_it.data();
   }
 
   // start all the polling threads
-  for( QMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.begin(); 
+  for( TQMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.begin(); 
        it != m_deviceMap.end(); ++it ) {
     if( !it.data()->blockedId )
       it.data()->thread->start();
@@ -356,7 +356,7 @@ void K3bMediaCache::buildDeviceList( K3bDevice::DeviceManager* dm )
 
 K3bMediaCache::DeviceEntry* K3bMediaCache::findDeviceEntry( K3bDevice::Device* dev )
 {
-  QMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.find( dev );
+  TQMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.tqfind( dev );
   if( it != m_deviceMap.end() )
     return it.data();
   else
@@ -364,7 +364,7 @@ K3bMediaCache::DeviceEntry* K3bMediaCache::findDeviceEntry( K3bDevice::Device* d
 }
 
 
-void K3bMediaCache::customEvent( QCustomEvent* e )
+void K3bMediaCache::customEvent( TQCustomEvent* e )
 {
   if( e->type() == MediaChangeEvent::EventCode )
     emit mediumChanged( static_cast<MediaChangeEvent*>( e )->device() );

@@ -15,11 +15,11 @@
 
 
 
-#include <qstring.h>
-#include <qvaluelist.h>
-#include <qstringlist.h>
-#include <qtimer.h>
-#include <qdom.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
+#include <tqstringlist.h>
+#include <tqtimer.h>
+#include <tqdom.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -31,8 +31,8 @@
 #include <k3bexternalbinmanager.h>
 
 
-K3bVideoCdInfo::K3bVideoCdInfo( QObject* parent, const char* name )
-        : QObject( parent, name )
+K3bVideoCdInfo::K3bVideoCdInfo( TQObject* tqparent, const char* name )
+        : TQObject( tqparent, name )
 {
     m_process = 0L;
     m_isXml = false;
@@ -52,7 +52,7 @@ void K3bVideoCdInfo::cancelAll()
     }
 }
 
-void K3bVideoCdInfo::info( const QString& device )
+void K3bVideoCdInfo::info( const TQString& device )
 {
     if ( !k3bcore ->externalBinManager() ->foundBin( "vcdxrip" ) ) {
         kdDebug() << "(K3bVideoCdInfo::info) could not find vcdxrip executable" << endl;
@@ -67,12 +67,12 @@ void K3bVideoCdInfo::info( const QString& device )
 
     *m_process << "-q" << "--norip" << "-i" << device << "-o" << "-";
 
-    connect( m_process, SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-             this, SLOT( slotParseOutput( KProcess*, char*, int ) ) );
-    connect( m_process, SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-             this, SLOT( slotParseOutput( KProcess*, char*, int ) ) );
-    connect( m_process, SIGNAL( processExited( KProcess* ) ),
-             this, SLOT( slotInfoFinished() ) );
+    connect( m_process, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseOutput( KProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseOutput( KProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( processExited( KProcess* ) ),
+             this, TQT_SLOT( slotInfoFinished() ) );
 
     if ( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
         kdDebug() << "(K3bVideoCdInfo::info) could not start vcdxrip" << endl;
@@ -83,14 +83,14 @@ void K3bVideoCdInfo::info( const QString& device )
 
 void K3bVideoCdInfo::slotParseOutput( KProcess*, char* output, int len )
 {
-    QString buffer = QString::fromLocal8Bit( output, len );
+    TQString buffer = TQString::fromLocal8Bit( output, len );
 
     // split to lines
-    QStringList lines = QStringList::split( "\n", buffer );
-    QStringList::Iterator end( lines.end());
-    for ( QStringList::Iterator str = lines.begin(); str != end; ++str ) {
+    TQStringList lines = TQStringList::split( "\n", buffer );
+    TQStringList::Iterator end( lines.end());
+    for ( TQStringList::Iterator str = lines.begin(); str != end; ++str ) {
 
-        if ( ( *str ).contains( "<?xml" ) )
+        if ( ( *str ).tqcontains( "<?xml" ) )
             m_isXml = true;
 
         if ( m_isXml )
@@ -98,7 +98,7 @@ void K3bVideoCdInfo::slotParseOutput( KProcess*, char* output, int len )
         else
             kdDebug() << "(K3bVideoCdInfo::slotParseOutput) " << *str << endl;
 
-        if ( ( *str ).contains( "</videocd>" ) )
+        if ( ( *str ).tqcontains( "</videocd>" ) )
             m_isXml = false;
     }
 }
@@ -132,8 +132,8 @@ void K3bVideoCdInfo::slotInfoFinished()
 
 void K3bVideoCdInfo::parseXmlData()
 {
-    QDomDocument xml_doc;
-    QDomElement xml_root;
+    TQDomDocument xml_doc;
+    TQDomElement xml_root;
 
     m_Result.xmlData = m_xmlData;
 
@@ -143,23 +143,23 @@ void K3bVideoCdInfo::parseXmlData()
     m_Result.type = xml_root.attribute( "class" );
     m_Result.version = xml_root.attribute( "version" );
 
-    for ( QDomNode node = xml_root.firstChild(); !node.isNull(); node = node.nextSibling() ) {
-        QDomElement el = node.toElement();
-        QString tagName = el.tagName().lower();
+    for ( TQDomNode node = xml_root.firstChild(); !node.isNull(); node = node.nextSibling() ) {
+        TQDomElement el = node.toElement();
+        TQString tagName = el.tagName().lower();
 
         if ( tagName == "pvd" ) {
-            for ( QDomNode snode = node.firstChild(); !snode.isNull(); snode = snode.nextSibling() ) {
-                QDomElement sel = snode.toElement();
-                QString pvdElement = sel.tagName().lower();
-                QString pvdElementText = sel.text();
+            for ( TQDomNode snode = node.firstChild(); !snode.isNull(); snode = snode.nextSibling() ) {
+                TQDomElement sel = snode.toElement();
+                TQString pvdElement = sel.tagName().lower();
+                TQString pvdElementText = sel.text();
                 if ( pvdElement == "volume-id" )
                     m_Result.volumeId = pvdElementText;
             }
 
         } else if ( tagName == "sequence-items" ) {
-            for ( QDomNode snode = node.firstChild(); !snode.isNull(); snode = snode.nextSibling() ) {
-                QDomElement sel = snode.toElement();
-                QString seqElement = sel.tagName().lower();
+            for ( TQDomNode snode = node.firstChild(); !snode.isNull(); snode = snode.nextSibling() ) {
+                TQDomElement sel = snode.toElement();
+                TQString seqElement = sel.tagName().lower();
                 m_Result.addEntry( K3bVideoCdInfoResultEntry(
                                        sel.attribute( "src" ),
                                        sel.attribute( "id" ) ),
@@ -167,9 +167,9 @@ void K3bVideoCdInfo::parseXmlData()
                                  );
             }
         } else if ( tagName == "segment-items" ) {
-            for ( QDomNode snode = node.firstChild(); !snode.isNull(); snode = snode.nextSibling() ) {
-                QDomElement sel = snode.toElement();
-                QString seqElement = sel.tagName().lower();
+            for ( TQDomNode snode = node.firstChild(); !snode.isNull(); snode = snode.nextSibling() ) {
+                TQDomElement sel = snode.toElement();
+                TQString seqElement = sel.tagName().lower();
                 m_Result.addEntry( K3bVideoCdInfoResultEntry(
                                        sel.attribute( "src" ),
                                        sel.attribute( "id" ) ),
@@ -177,7 +177,7 @@ void K3bVideoCdInfo::parseXmlData()
                                  );
             }
         } else {
-            kdDebug() << QString( "(K3bVideoCdInfo::parseXmlData) tagName '%1' not used" ).arg( tagName ) << endl;
+            kdDebug() << TQString( "(K3bVideoCdInfo::parseXmlData) tagName '%1' not used" ).tqarg( tagName ) << endl;
         }
     }
 }

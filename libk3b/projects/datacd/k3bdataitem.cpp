@@ -29,7 +29,7 @@ public:
 };
 
 
-K3bDataItem::K3bDataItem( K3bDataDoc* doc, K3bDataItem* parent, int flags )
+K3bDataItem::K3bDataItem( K3bDataDoc* doc, K3bDataItem* tqparent, int flags )
   : m_bHideOnRockRidge(false),
     m_bHideOnJoliet(false),
     m_bRemoveable(true),
@@ -45,8 +45,8 @@ K3bDataItem::K3bDataItem( K3bDataDoc* doc, K3bDataItem* parent, int flags )
   m_doc = doc;
   m_bHideOnRockRidge = m_bHideOnJoliet = false;
 
-  if( parent )
-    m_parentDir = parent->getDirItem();
+  if( tqparent )
+    m_parentDir = tqparent->getDirItem();
   else
     m_parentDir = 0;
 }
@@ -113,16 +113,16 @@ K3b::Msf K3bDataItem::itemBlocks( bool followSymbolicLinks ) const
 }
 
 
-void K3bDataItem::setK3bName( const QString& name ) {
+void K3bDataItem::setK3bName( const TQString& name ) {
     if ( name != m_k3bName ) {
   // test for not-allowed characters
-  if( name.contains('/') ) {
+  if( name.tqcontains('/') ) {
     kdDebug() << "(K3bDataItem) name contained invalid characters!" << endl;
     return;
   }
    
-  if( parent() ) {
-    K3bDataItem* item = parent()->find( name );
+  if( tqparent() ) {
+    K3bDataItem* item = tqparent()->tqfind( name );
     if( item && item != this ) {
       kdDebug() << "(K3bDataItem) item with that name already exists." << endl;
       return;
@@ -135,7 +135,7 @@ void K3bDataItem::setK3bName( const QString& name ) {
 }
 
 
-const QString& K3bDataItem::k3bName() const
+const TQString& K3bDataItem::k3bName() const
 {
   return m_k3bName;
 }
@@ -143,17 +143,17 @@ const QString& K3bDataItem::k3bName() const
 
 K3bDataItem* K3bDataItem::take()
 {
-  if( parent() )
-    parent()->takeDataItem( this );
+  if( tqparent() )
+    tqparent()->takeDataItem( this );
 
   return this;
 }
 
 
-QString K3bDataItem::k3bPath() const
+TQString K3bDataItem::k3bPath() const
 {
   if( !getParent() )
-    return QString::null;  // the root item is the only one not having a parent
+    return TQString();  // the root item is the only one not having a tqparent
   else if( isDir() )
     return getParent()->k3bPath() + k3bName() + "/";
   else
@@ -161,10 +161,10 @@ QString K3bDataItem::k3bPath() const
 }
 
 
-QString K3bDataItem::writtenPath() const
+TQString K3bDataItem::writtenPath() const
 {
   if( !getParent() )
-    return QString::null;  // the root item is the only one not having a parent
+    return TQString();  // the root item is the only one not having a tqparent
   else if( isDir() )
     return getParent()->writtenPath() + writtenName() + "/";
   else
@@ -172,10 +172,10 @@ QString K3bDataItem::writtenPath() const
 }
 
 
-QString K3bDataItem::iso9660Path() const
+TQString K3bDataItem::iso9660Path() const
 {
   if( !getParent() )
-    return QString::null;  // the root item is the only one not having a parent
+    return TQString();  // the root item is the only one not having a tqparent
   else if( isDir() )
     return getParent()->iso9660Path() + iso9660Name() + "/";
   else
@@ -186,14 +186,14 @@ QString K3bDataItem::iso9660Path() const
 K3bDataItem* K3bDataItem::nextSibling() const
 {
   K3bDataItem* item = const_cast<K3bDataItem*>(this); // urg, but we know that we don't mess with it, so...
-  K3bDirItem* parentItem = getParent();
+  K3bDirItem* tqparentItem = getParent();
 	
-  while( parentItem ) {
-    if( K3bDataItem* i = parentItem->nextChild( item ) )
+  while( tqparentItem ) {
+    if( K3bDataItem* i = tqparentItem->nextChild( item ) )
       return i;
 		
-    item = parentItem;
-    parentItem = item->getParent();
+    item = tqparentItem;
+    tqparentItem = item->getParent();
   }
 
   return 0;
@@ -232,7 +232,7 @@ bool K3bDataItem::hideOnJoliet() const
 void K3bDataItem::setHideOnRockRidge( bool b )
 {
   // there is no use in changing the value if 
-  // it is already set by the parent
+  // it is already set by the tqparent
     if( ( !getParent() || !getParent()->hideOnRockRidge() ) &&
         b != m_bHideOnRockRidge ) {
     m_bHideOnRockRidge = b;
@@ -245,7 +245,7 @@ void K3bDataItem::setHideOnRockRidge( bool b )
 void K3bDataItem::setHideOnJoliet( bool b ) 
 { 
   // there is no use in changing the value if 
-  // it is already set by the parent
+  // it is already set by the tqparent
     if( ( !getParent() || !getParent()->hideOnJoliet() ) &&
         b != m_bHideOnJoliet ) {
     m_bHideOnJoliet = b;

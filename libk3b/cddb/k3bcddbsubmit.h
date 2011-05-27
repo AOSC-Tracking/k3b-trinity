@@ -17,19 +17,20 @@
 #ifndef K3BCDDB_SUBMIT_H
 #define K3BCDDB_SUBMIT_H
 
-#include <qobject.h>
-#include <qstring.h>
+#include <tqobject.h>
+#include <tqstring.h>
 
 #include "k3bcddbresult.h"
 
 
 
-class K3bCddbSubmit : public QObject
+class K3bCddbSubmit : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCddbSubmit( QObject* parent = 0, const char* name = 0 );
+  K3bCddbSubmit( TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bCddbSubmit();
 
   int error() const { return m_error; }
@@ -40,7 +41,7 @@ class K3bCddbSubmit : public QObject
   void submit( const K3bCddbResultEntry& );
 
  signals:
-  void infoMessage( const QString& );
+  void infoMessage( const TQString& );
   void submitFinished( K3bCddbSubmit* );
 
  protected slots:

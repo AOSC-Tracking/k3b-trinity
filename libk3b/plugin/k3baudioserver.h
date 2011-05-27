@@ -16,7 +16,7 @@
 #ifndef _K3B_AUDIO_SERVER_H_
 #define _K3B_AUDIO_SERVER_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 #include "k3b_export.h"
 class K3bAudioOutputPlugin;
 class K3bAudioClient;
@@ -26,18 +26,19 @@ class K3bAudioClient;
  * The AudioServer manages AudioClients to play audio data through
  * some output plugin.
  */
-class LIBK3B_EXPORT K3bAudioServer : public QObject
+class LIBK3B_EXPORT K3bAudioServer : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioServer( QObject* parent = 0, const char* name = 0 );
+  K3bAudioServer( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bAudioServer();
 
   /**
    * Returns false in case the named output method could not be found.
    */
-  bool setOutputMethod( const QCString& name );
+  bool setOutputMethod( const TQCString& name );
   void setOutputPlugin( K3bAudioOutputPlugin* p );
 
   /**
@@ -62,13 +63,13 @@ class LIBK3B_EXPORT K3bAudioServer : public QObject
   /**
    * Find a plugin by classname.
    */
-  static K3bAudioOutputPlugin* findOutputPlugin( const QCString& name );
+  static K3bAudioOutputPlugin* findOutputPlugin( const TQCString& name );
 
  signals:
-  void error( const QString& );
+  void error( const TQString& );
 
  private:
-  void customEvent( QCustomEvent* e );
+  void customEvent( TQCustomEvent* e );
 
   class Private;
   friend class Private;

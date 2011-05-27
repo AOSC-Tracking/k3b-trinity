@@ -1,11 +1,11 @@
 <!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>base_K3bSoxEncoderConfigWidget</class>
 <author>Sebastian Trueg</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Form1</cstring>
     </property>
-    <property name="geometry">
+    <property name="tqgeometry">
         <rect>
             <x>0</x>
             <y>0</y>
@@ -20,7 +20,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QCheckBox">
+        <widget class="TQCheckBox">
             <property name="name">
                 <cstring>m_checkManual</cstring>
             </property>
@@ -28,9 +28,9 @@
                 <string>Manual settings (used for all file types)</string>
             </property>
         </widget>
-        <widget class="QLayoutWidget">
+        <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -46,22 +46,22 @@
                     <property name="sizeType">
                         <enum>Fixed</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>20</width>
                             <height>10</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>tqlayout1</cstring>
                     </property>
                     <grid>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLabel" row="1" column="0">
+                        <widget class="TQLabel" row="1" column="0">
                             <property name="name">
                                 <cstring>textLabel2</cstring>
                             </property>
@@ -69,7 +69,7 @@
                                 <string>Sample rate:</string>
                             </property>
                         </widget>
-                        <widget class="QComboBox" row="2" column="1">
+                        <widget class="TQComboBox" row="2" column="1">
                             <item>
                                 <property name="text">
                                     <string>Signed Linear</string>
@@ -121,7 +121,7 @@
 &lt;p&gt;&lt;b&gt;U-law&lt;/b&gt; (actually shorthand for mu-law) and &lt;b&gt;A-law&lt;/b&gt; are the U.S. and international standards for logarithmic telephone sound compression. When uncompressed u-law has roughly the precision of 14-bit PCM audio and A-law has roughly the precision of 13-bit PCM audio. A-law and u-law data is sometimes encoded using a reversed bit-ordering (i.e. MSB becomes LSB).&lt;br&gt; &lt;b&gt;ADPCM &lt;/b&gt; is a form of sound compression that has a good compromise between good sound quality and fast encoding/decoding time. It is used for telephone sound compression and places where full fidelity is not as important. When uncompressed it has roughly the precision of 16-bit PCM audio. Popular versions of ADPCM include G.726, MS ADPCM, and IMA ADPCM. It has different meanings in different file handlers. In .wav files it represents MS ADPCM files, in all others it means G.726 ADPCM. &lt;br&gt; &lt;b&gt;IMA ADPCM&lt;/b&gt; is a specific form of ADPCM compression, slightly simpler and slightly lower fidelity than Microsoft's flavor of ADPCM. IMA ADPCM is also called DVI ADPCM.&lt;br&gt; &lt;b&gt;GSM&lt;/b&gt; is a standard used for telephone sound compression in European countries and is gaining popularity because of its good quality. It is usually CPU intensive to work with GSM audio data.&lt;/p&gt; &lt;p&gt;&lt;em&gt;Description based on the SoX manpage&lt;/em&gt;&lt;/p&gt;</string>
                             </property>
                         </widget>
-                        <widget class="QLineEdit" row="1" column="1">
+                        <widget class="TQLineEdit" row="1" column="1">
                             <property name="name">
                                 <cstring>m_editSamplerate</cstring>
                             </property>
@@ -135,7 +135,7 @@
                                 <string></string>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="3" column="0">
+                        <widget class="TQLabel" row="3" column="0">
                             <property name="name">
                                 <cstring>textLabel4</cstring>
                             </property>
@@ -143,7 +143,7 @@
                                 <string>Data size:</string>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="2" column="0">
+                        <widget class="TQLabel" row="2" column="0">
                             <property name="name">
                                 <cstring>textLabel3</cstring>
                             </property>
@@ -151,7 +151,7 @@
                                 <string>Data encoding:</string>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="0" column="0">
+                        <widget class="TQLabel" row="0" column="0">
                             <property name="name">
                                 <cstring>textLabel1</cstring>
                             </property>
@@ -159,7 +159,7 @@
                                 <string>Channels:</string>
                             </property>
                         </widget>
-                        <widget class="QComboBox" row="0" column="1">
+                        <widget class="TQComboBox" row="0" column="1">
                             <item>
                                 <property name="text">
                                     <string>1 (mono)</string>
@@ -182,7 +182,7 @@
                                 <bool>false</bool>
                             </property>
                         </widget>
-                        <widget class="QComboBox" row="3" column="1">
+                        <widget class="TQComboBox" row="3" column="1">
                             <item>
                                 <property name="text">
                                     <string>Bytes</string>
@@ -219,7 +219,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>250</width>
                     <height>16</height>
@@ -254,5 +254,5 @@
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

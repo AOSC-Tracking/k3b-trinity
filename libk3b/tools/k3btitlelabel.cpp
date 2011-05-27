@@ -17,11 +17,11 @@
 
 #include <k3bstringutils.h>
 
-#include <qpainter.h>
-#include <qevent.h>
-#include <qfontmetrics.h>
-#include <qfont.h>
-#include <qtooltip.h>
+#include <tqpainter.h>
+#include <tqevent.h>
+#include <tqfontmetrics.h>
+#include <tqfont.h>
+#include <tqtooltip.h>
 
 
 class K3bTitleLabel::Private
@@ -30,18 +30,18 @@ public:
   Private() {
     titleLength = subTitleLength = 0;
     margin = 2;
-    alignment = Qt::AlignLeft;
+    tqalignment = TQt::AlignLeft;
     cachedMinimumWidth = 0;
     titleBaseLine = 0;
   }
 
-  QString title;
-  QString subTitle;
+  TQString title;
+  TQString subTitle;
 
-  QString displayTitle;
-  QString displaySubTitle;
+  TQString displayTitle;
+  TQString displaySubTitle;
 
-  int alignment;
+  int tqalignment;
 
   int titleLength;
   int subTitleLength;
@@ -55,36 +55,36 @@ public:
 };
 
 
-class K3bTitleLabel::ToolTip : public QToolTip
+class K3bTitleLabel::ToolTip : public TQToolTip
 {
 public:
   ToolTip( K3bTitleLabel* label )
-    : QToolTip( label ),
+    : TQToolTip( label ),
       m_label(label) {
   }
   
-  void maybeTip( const QPoint &pos ) {
-    QRect r = m_label->contentsRect();
+  void maybeTip( const TQPoint &pos ) {
+    TQRect r = m_label->contentsRect();
 
     int neededWidth = m_label->d->displayTitleLength;
     if( !m_label->d->displaySubTitle.isEmpty() )
       neededWidth += m_label->d->displaySubTitleLength + 5;
 
     int startPos = 0;
-    if( m_label->d->alignment & Qt::AlignHCenter )
+    if( m_label->d->tqalignment & TQt::AlignHCenter )
       startPos = r.left() + ( r.width() - 2*m_label->d->margin - neededWidth ) / 2;
-    else if( m_label->d->alignment & Qt::AlignRight )
+    else if( m_label->d->tqalignment & TQt::AlignRight )
       startPos = r.right() - m_label->d->margin - neededWidth;
     else
       startPos = r.left() + m_label->d->margin;
     
-    QRect titleTipRect( startPos, 0, m_label->d->displayTitleLength, m_label->height() );
-    QRect subTitleTipRect( startPos + m_label->d->displayTitleLength, 0, m_label->d->displaySubTitleLength, m_label->height() );
+    TQRect titleTipRect( startPos, 0, m_label->d->displayTitleLength, m_label->height() );
+    TQRect subTitleTipRect( startPos + m_label->d->displayTitleLength, 0, m_label->d->displaySubTitleLength, m_label->height() );
 
-    if( titleTipRect.contains( pos ) &&
+    if( titleTipRect.tqcontains( pos ) &&
 	m_label->d->displayTitle != m_label->d->title )
       tip( titleTipRect, m_label->d->title );
-    else if( subTitleTipRect.contains( pos ) &&
+    else if( subTitleTipRect.tqcontains( pos ) &&
 	m_label->d->displaySubTitle != m_label->d->subTitle )
       tip( subTitleTipRect, m_label->d->subTitle );
   }
@@ -94,8 +94,8 @@ public:
 
 
 
-K3bTitleLabel::K3bTitleLabel( QWidget* parent, const char* name )
-  : QFrame( parent, name )
+K3bTitleLabel::K3bTitleLabel( TQWidget* tqparent, const char* name )
+  : TQFrame( tqparent, name )
 {
   d = new Private();
   m_toolTip = new ToolTip( this );
@@ -109,7 +109,7 @@ K3bTitleLabel::~K3bTitleLabel()
 }
 
 
-void K3bTitleLabel::setTitle( const QString& title, const QString& subTitle )
+void K3bTitleLabel::setTitle( const TQString& title, const TQString& subTitle )
 {
   d->title = title;
   d->subTitle = subTitle;
@@ -118,7 +118,7 @@ void K3bTitleLabel::setTitle( const QString& title, const QString& subTitle )
 }
 
 
-void K3bTitleLabel::setSubTitle( const QString& subTitle )
+void K3bTitleLabel::setSubTitle( const TQString& subTitle )
 {
   d->subTitle = subTitle;
   updatePositioning();
@@ -126,38 +126,38 @@ void K3bTitleLabel::setSubTitle( const QString& subTitle )
 }
 
 
-void K3bTitleLabel::setAlignment( int align )
+void K3bTitleLabel::tqsetAlignment( int align )
 {
-  d->alignment = align;
+  d->tqalignment = align;
   update();
 }
 
 
-QSize K3bTitleLabel::sizeHint() const
+TQSize K3bTitleLabel::tqsizeHint() const
 {
-  return QSize( d->titleLength + d->subTitleLength + 2*d->margin, d->titleBaseLine );
+  return TQSize( d->titleLength + d->subTitleLength + 2*d->margin, d->titleBaseLine );
 }
 
-QSize K3bTitleLabel::minimumSizeHint() const
+TQSize K3bTitleLabel::tqminimumSizeHint() const
 {
-  return QSize( d->cachedMinimumWidth, d->titleBaseLine );
+  return TQSize( d->cachedMinimumWidth, d->titleBaseLine );
 }
 
-void K3bTitleLabel::resizeEvent( QResizeEvent* e )
+void K3bTitleLabel::resizeEvent( TQResizeEvent* e )
 {
-  QFrame::resizeEvent( e );
+  TQFrame::resizeEvent( e );
   updatePositioning();
   update();
 }
 
-void K3bTitleLabel::drawContents( QPainter* p )
+void K3bTitleLabel::drawContents( TQPainter* p )
 {
   p->save();
 
-  QRect r = contentsRect();
+  TQRect r = contentsRect();
   p->eraseRect( r );
 
-  QFont f(font());
+  TQFont f(font());
   f.setBold(true);
   f.setPointSize( f.pointSize() + 2 );
 
@@ -168,9 +168,9 @@ void K3bTitleLabel::drawContents( QPainter* p )
     neededWidth += d->displaySubTitleLength + 5;
 
   int startPos = 0;
-  if( d->alignment & Qt::AlignHCenter )
+  if( d->tqalignment & TQt::AlignHCenter )
     startPos = r.left() + ( r.width() - 2*d->margin - neededWidth ) / 2;
-  else if( d->alignment & Qt::AlignRight )
+  else if( d->tqalignment & TQt::AlignRight )
     startPos = r.right() - d->margin - neededWidth;
   else
     startPos = r.left() + d->margin;
@@ -199,14 +199,14 @@ void K3bTitleLabel::setMargin( int m )
 
 void K3bTitleLabel::updatePositioning()
 {
-  QFont f(font());
+  TQFont f(font());
   f.setBold(true);
   f.setPointSize( f.pointSize() + 2 );
-  QFontMetrics titleFm(f);
+  TQFontMetrics titleFm(f);
 
   f.setBold(false);
   f.setPointSize( f.pointSize() - 4 );
-  QFontMetrics subTitleFm(f);
+  TQFontMetrics subTitleFm(f);
 
   d->titleBaseLine = contentsRect().height()/2 + titleFm.height()/2 - titleFm.descent();
   d->titleLength = titleFm.width( d->title );
@@ -246,12 +246,12 @@ void K3bTitleLabel::updatePositioning()
   //
   d->cachedMinimumWidth = 2*d->margin;
   
-  QString cutTitle = d->title;
+  TQString cutTitle = d->title;
   if( cutTitle.length() > 2 ) {
     cutTitle.truncate( 2 );
     cutTitle += "...";
   }
-  QString cutSubTitle = d->subTitle;
+  TQString cutSubTitle = d->subTitle;
   if( cutSubTitle.length() > 2 ) {
     cutSubTitle.truncate( 2 );
     cutSubTitle += "...";

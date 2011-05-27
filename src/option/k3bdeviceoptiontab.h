@@ -17,18 +17,19 @@
 #ifndef K3B_DEVICE_OPTIONTAB_H
 #define K3B_DEVICE_OPTIONTAB_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
-class QLabel;
+class TQLabel;
 class K3bDeviceWidget;
 
 
-class K3bDeviceOptionTab : public QWidget
+class K3bDeviceOptionTab : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDeviceOptionTab( QWidget*, const char* name = 0 );
+  K3bDeviceOptionTab( TQWidget*, const char* name = 0 );
   ~K3bDeviceOptionTab();
 
   void readDevices();
@@ -38,7 +39,7 @@ Q_OBJECT
   void slotRefreshButtonClicked();
 
  private:
-  QLabel*          m_labelDevicesInfo;
+  TQLabel*          m_labelDevicesInfo;
   K3bDeviceWidget* m_deviceWidget;
 };
 

@@ -19,7 +19,7 @@
 
 #include <k3bdatajob.h>
 
-#include <qfile.h>
+#include <tqfile.h>
 
 class K3bDataDoc;
 class K3bGrowisofsWriter;
@@ -28,16 +28,17 @@ class K3bGrowisofsWriter;
 class K3bDvdJob : public K3bDataJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /**
    * To be more flexible we allow writing of any data doc
    */
-  K3bDvdJob( K3bDataDoc*, K3bJobHandler*, QObject* parent = 0 );
+  K3bDvdJob( K3bDataDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
   virtual ~K3bDvdJob();
 
-  virtual QString jobDescription() const;
-  virtual QString jobDetails() const;
+  virtual TQString jobDescription() const;
+  virtual TQString jobDetails() const;
 
  protected:
   void prepareData();

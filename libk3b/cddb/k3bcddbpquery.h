@@ -13,28 +13,29 @@
  */
 
 
-#ifndef K3BCDDBP_QUERY_H
-#define K3BCDDBP_QUERY_H
+#ifndef K3BCDDBP_TQUERY_H
+#define K3BCDDBP_TQUERY_H
 
 #include "k3bcddbquery.h"
 #include "k3bcddbresult.h"
 
-#include <qstring.h>
-#include <qvaluelist.h>
-#include <qtextstream.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
+#include <tqtextstream.h>
 
-class QSocket;
+class TQSocket;
 
 class K3bCddbpQuery : public K3bCddbQuery
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCddbpQuery( QObject* parent = 0, const char* name = 0 );
+  K3bCddbpQuery( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bCddbpQuery();
 
  public slots:
-  void setServer( const QString& s, int port = 8080 ) { m_server = s; m_port = port; }
+  void setServer( const TQString& s, int port = 8080 ) { m_server = s; m_port = port; }
 
  protected slots:
   void slotHostFound();
@@ -47,16 +48,16 @@ class K3bCddbpQuery : public K3bCddbQuery
 
  private:
   void cddbpQuit();
-  enum State { GREETING, HANDSHAKE, PROTO, QUERY, QUERY_DATA, READ, READ_DATA, QUIT };
+  enum State { GREETING, HANDSHAKE, PROTO, TQUERY, TQUERY_DATA, READ, READ_DATA, TQUIT };
 
   int m_state;
-  QString m_server;
+  TQString m_server;
   int m_port;
 
-  QSocket* m_socket;
-  QTextStream m_stream;
+  TQSocket* m_socket;
+  TQTextStream m_stream;
 
-  QString m_parsingBuffer;
+  TQString m_parsingBuffer;
 };
 
 #endif

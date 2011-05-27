@@ -19,19 +19,19 @@
 
 #include <k3btitlelabel.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
 
 
-K3bThemedHeader::K3bThemedHeader( QWidget* parent )
-  : QFrame( parent )
+K3bThemedHeader::K3bThemedHeader( TQWidget* tqparent )
+  : TQFrame( tqparent )
 {
   init();
 }
 
 
-K3bThemedHeader::K3bThemedHeader( const QString& title, const QString& subtitle, QWidget* parent )
-  : QFrame( parent )
+K3bThemedHeader::K3bThemedHeader( const TQString& title, const TQString& subtitle, TQWidget* tqparent )
+  : TQFrame( tqparent )
 {
   setTitle( title );
   setSubTitle( subtitle );
@@ -45,13 +45,13 @@ K3bThemedHeader::~K3bThemedHeader()
 }
 
  
-void K3bThemedHeader::setTitle( const QString& title, const QString& subtitle )
+void K3bThemedHeader::setTitle( const TQString& title, const TQString& subtitle )
 {
   m_titleLabel->setTitle( title, subtitle );
 }
 
 
-void K3bThemedHeader::setSubTitle( const QString& subtitle )
+void K3bThemedHeader::setSubTitle( const TQString& subtitle )
 {
   m_titleLabel->setSubTitle( subtitle );
 }
@@ -71,43 +71,43 @@ void K3bThemedHeader::setRightPixmap( K3bTheme::PixmapType p )
 }
 
 
-void K3bThemedHeader::setAlignment( int align )
+void K3bThemedHeader::tqsetAlignment( int align )
 {
-  m_titleLabel->setAlignment( align );
+  m_titleLabel->tqsetAlignment( align );
 }
 
 
 void K3bThemedHeader::init()
 {
-  setFrameShape( QFrame::StyledPanel );
-  setFrameShadow( QFrame::Sunken );
+  setFrameShape( TQFrame::StyledPanel );
+  setFrameShadow( TQFrame::Sunken );
   setLineWidth( 1 );
   setMargin( 1 );
 
-  QHBoxLayout* layout = new QHBoxLayout( this );
-  layout->setMargin( 2 ); // to make sure the frame gets displayed
-  layout->setSpacing( 0 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( this );
+  tqlayout->setMargin( 2 ); // to make sure the frame gets displayed
+  tqlayout->setSpacing( 0 );
 
-  m_leftLabel = new QLabel( this );
+  m_leftLabel = new TQLabel( this );
   m_leftLabel->setScaledContents( false );
   m_titleLabel = new K3bTitleLabel( this );
-  m_rightLabel = new QLabel( this );
+  m_rightLabel = new TQLabel( this );
   m_rightLabel->setScaledContents( false );
 
-  layout->addWidget( m_leftLabel );
-  layout->addWidget( m_titleLabel );
-  layout->setStretchFactor( m_titleLabel, 1 );
-  layout->addWidget( m_rightLabel );
+  tqlayout->addWidget( m_leftLabel );
+  tqlayout->addWidget( m_titleLabel );
+  tqlayout->setStretchFactor( m_titleLabel, 1 );
+  tqlayout->addWidget( m_rightLabel );
 
   m_leftPix = K3bTheme::DIALOG_LEFT;
   m_rightPix = K3bTheme::DIALOG_RIGHT;
 
   slotThemeChanged();
 
-  connect( k3bappcore->themeManager(), SIGNAL(themeChanged()),
-	   this, SLOT(slotThemeChanged()) );
-  connect( kapp, SIGNAL(appearanceChanged()),
-	   this, SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
+	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( kapp, TQT_SIGNAL(appearanceChanged()),
+	   this, TQT_SLOT(slotThemeChanged()) );
 }
 
 

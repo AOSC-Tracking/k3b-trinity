@@ -19,25 +19,25 @@
 
 #include "k3bmsfedit.h"
 
-#include <qstringlist.h>
-#include <qfontmetrics.h>
-#include <qpainter.h>
-#include <qheader.h>
-#include <qrect.h>
-#include <qpushbutton.h>
-#include <qiconset.h>
-#include <qcombobox.h>
-#include <qspinbox.h>
-#include <qlineedit.h>
-#include <qlistbox.h>
-#include <qevent.h>
-#include <qvalidator.h>
-#include <qfont.h>
-#include <qpalette.h>
-#include <qstyle.h>
-#include <qapplication.h>
-#include <qprogressbar.h>
-#include <qimage.h>
+#include <tqstringlist.h>
+#include <tqfontmetrics.h>
+#include <tqpainter.h>
+#include <tqheader.h>
+#include <tqrect.h>
+#include <tqpushbutton.h>
+#include <tqiconset.h>
+#include <tqcombobox.h>
+#include <tqspinbox.h>
+#include <tqlineedit.h>
+#include <tqlistbox.h>
+#include <tqevent.h>
+#include <tqvalidator.h>
+#include <tqfont.h>
+#include <tqpalette.h>
+#include <tqstyle.h>
+#include <tqapplication.h>
+#include <tqprogressbar.h>
+#include <tqimage.h>
 
 #include <kpixmapeffect.h>
 
@@ -77,14 +77,14 @@ public:
 
   bool button;
   int editorType;
-  QStringList comboItems;
+  TQStringList comboItems;
   bool comboEditable;
   bool fontSet;
   bool backgroundColorSet;
   bool foregroundColorSet;
-  QFont font;
-  QColor backgroundColor;
-  QColor foregroundColor;
+  TQFont font;
+  TQColor backgroundColor;
+  TQColor foregroundColor;
   ColumnInfo* next;
 
   bool showProgress;
@@ -92,75 +92,75 @@ public:
   int totalProgressSteps;
   int margin;
 
-  QValidator* validator;
+  TQValidator* validator;
 };
 
 
 
-K3bListViewItem::K3bListViewItem(QListView *parent)
-  : KListViewItem( parent )
+K3bListViewItem::K3bListViewItem(TQListView *tqparent)
+  : KListViewItem( tqparent )
 {
   init();
 }
 
-K3bListViewItem::K3bListViewItem(QListViewItem *parent)
-  : KListViewItem( parent )
+K3bListViewItem::K3bListViewItem(TQListViewItem *tqparent)
+  : KListViewItem( tqparent )
 {
   init();
 }
 
-K3bListViewItem::K3bListViewItem(QListView *parent, QListViewItem *after)
-  : KListViewItem( parent, after )
+K3bListViewItem::K3bListViewItem(TQListView *tqparent, TQListViewItem *after)
+  : KListViewItem( tqparent, after )
 {
   init();
 }
 
-K3bListViewItem::K3bListViewItem(QListViewItem *parent, QListViewItem *after)
-  : KListViewItem( parent, after )
-{
-  init();
-}
-
-
-K3bListViewItem::K3bListViewItem(QListView *parent,
-				 const QString& s1, const QString& s2,
-				 const QString& s3, const QString& s4,
-				 const QString& s5, const QString& s6,
-				 const QString& s7, const QString& s8)
-  : KListViewItem( parent, s1, s2, s3, s4, s5, s6, s7, s8 )
+K3bListViewItem::K3bListViewItem(TQListViewItem *tqparent, TQListViewItem *after)
+  : KListViewItem( tqparent, after )
 {
   init();
 }
 
 
-K3bListViewItem::K3bListViewItem(QListViewItem *parent,
-				 const QString& s1, const QString& s2,
-				 const QString& s3, const QString& s4,
-				 const QString& s5, const QString& s6,
-				 const QString& s7, const QString& s8)
-  : KListViewItem( parent, s1, s2, s3, s4, s5, s6, s7, s8 )
+K3bListViewItem::K3bListViewItem(TQListView *tqparent,
+				 const TQString& s1, const TQString& s2,
+				 const TQString& s3, const TQString& s4,
+				 const TQString& s5, const TQString& s6,
+				 const TQString& s7, const TQString& s8)
+  : KListViewItem( tqparent, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
 
 
-K3bListViewItem::K3bListViewItem(QListView *parent, QListViewItem *after,
-				 const QString& s1, const QString& s2,
-				 const QString& s3, const QString& s4,
-				 const QString& s5, const QString& s6,
-				 const QString& s7, const QString& s8)
-  : KListViewItem( parent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
+K3bListViewItem::K3bListViewItem(TQListViewItem *tqparent,
+				 const TQString& s1, const TQString& s2,
+				 const TQString& s3, const TQString& s4,
+				 const TQString& s5, const TQString& s6,
+				 const TQString& s7, const TQString& s8)
+  : KListViewItem( tqparent, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
 
 
-K3bListViewItem::K3bListViewItem(QListViewItem *parent, QListViewItem *after,
-				 const QString& s1, const QString& s2,
-				 const QString& s3, const QString& s4,
-				 const QString& s5, const QString& s6,
-				 const QString& s7, const QString& s8)
-  : KListViewItem( parent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
+K3bListViewItem::K3bListViewItem(TQListView *tqparent, TQListViewItem *after,
+				 const TQString& s1, const TQString& s2,
+				 const TQString& s3, const TQString& s4,
+				 const TQString& s5, const TQString& s6,
+				 const TQString& s7, const TQString& s8)
+  : KListViewItem( tqparent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
+{
+  init();
+}
+
+
+K3bListViewItem::K3bListViewItem(TQListViewItem *tqparent, TQListViewItem *after,
+				 const TQString& s1, const TQString& s2,
+				 const TQString& s3, const TQString& s4,
+				 const TQString& s5, const TQString& s6,
+				 const TQString& s7, const TQString& s8)
+  : KListViewItem( tqparent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
@@ -184,13 +184,13 @@ void K3bListViewItem::init()
 }
 
 
-int K3bListViewItem::width( const QFontMetrics& fm, const QListView* lv, int c ) const
+int K3bListViewItem::width( const TQFontMetrics& fm, const TQListView* lv, int c ) const
 {
   return KListViewItem::width( fm, lv, c ) + getColumnInfo(c)->margin*2;
 }
 
 
-void K3bListViewItem::setEditor( int column, int editor, const QStringList& cs )
+void K3bListViewItem::setEditor( int column, int editor, const TQStringList& cs )
 {
   ColumnInfo* colInfo = getColumnInfo(column);
 
@@ -200,13 +200,13 @@ void K3bListViewItem::setEditor( int column, int editor, const QStringList& cs )
 }
 
 
-void K3bListViewItem::setValidator( int column, QValidator* v )
+void K3bListViewItem::setValidator( int column, TQValidator* v )
 {
   getColumnInfo(column)->validator = v;
 }
 
 
-QValidator* K3bListViewItem::validator( int col ) const
+TQValidator* K3bListViewItem::validator( int col ) const
 {
   return getColumnInfo(col)->validator;
 }
@@ -252,14 +252,14 @@ bool K3bListViewItem::needButton( int col ) const
 }
 
 
-const QStringList& K3bListViewItem::comboStrings( int col ) const
+const TQStringList& K3bListViewItem::comboStrings( int col ) const
 {
   ColumnInfo* info = getColumnInfo( col );
   return info->comboItems;
 }
 
 
-void K3bListViewItem::setFont( int col, const QFont& f )
+void K3bListViewItem::setFont( int col, const TQFont& f )
 {
   ColumnInfo* info = getColumnInfo( col );
   info->fontSet = true;
@@ -267,21 +267,21 @@ void K3bListViewItem::setFont( int col, const QFont& f )
 }
 
 
-void K3bListViewItem::setBackgroundColor( int col, const QColor& c )
+void K3bListViewItem::setBackgroundColor( int col, const TQColor& c )
 {
   ColumnInfo* info = getColumnInfo( col );
   info->backgroundColorSet = true;
   info->backgroundColor = c;
-  repaint();
+  tqrepaint();
 }
 
 
-void K3bListViewItem::setForegroundColor( int col, const QColor& c )
+void K3bListViewItem::setForegroundColor( int col, const TQColor& c )
 {
  ColumnInfo* info = getColumnInfo( col );
  info->foregroundColorSet = true;
  info->foregroundColor = c;
- repaint();
+ tqrepaint();
 }
 
 
@@ -299,7 +299,7 @@ void K3bListViewItem::setProgress( int col, int p )
     setDisplayProgressBar( col, true );
   if( info->progressValue != p ) {
     info->progressValue = p;
-    repaint();
+    tqrepaint();
   }
 }
 
@@ -309,7 +309,7 @@ void K3bListViewItem::setTotalSteps( int col, int steps )
   ColumnInfo* info = getColumnInfo( col );
   info->totalProgressSteps = steps;
 
-  repaint();
+  tqrepaint();
 }
 
 
@@ -318,14 +318,14 @@ void K3bListViewItem::setMarginHorizontal( int col, int margin )
   ColumnInfo* info = getColumnInfo( col );
   info->margin = margin;
 
-  repaint();
+  tqrepaint();
 }
 
 
 void K3bListViewItem::setMarginVertical( int margin )
 {
   m_vMargin = margin;
-  repaint();
+  tqrepaint();
 }
 
 
@@ -349,36 +349,36 @@ void K3bListViewItem::setup()
 }
 
 
-void K3bListViewItem::paintCell( QPainter* p, const QColorGroup& cg, int col, int width, int align )
+void K3bListViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align )
 {
   ColumnInfo* info = getColumnInfo( col );
 
   p->save();
 
-  QFont oldFont( p->font() );
-  QFont newFont = info->fontSet ? info->font : oldFont;
+  TQFont oldFont( p->font() );
+  TQFont newFont = info->fontSet ? info->font : oldFont;
   p->setFont( newFont );
-  QColorGroup cgh(cg);
+  TQColorGroup cgh(cg);
   if( info->foregroundColorSet )
-    cgh.setColor( QColorGroup::Text, info->foregroundColor );
+    cgh.setColor( TQColorGroup::Text, info->foregroundColor );
   if( info->backgroundColorSet )
-    cgh.setColor( QColorGroup::Base, info->backgroundColor );
+    cgh.setColor( TQColorGroup::Base, info->backgroundColor );
 
-  // in case this is the selected row has a margin we need to repaint the selection bar
+  // in case this is the selected row has a margin we need to tqrepaint the selection bar
   if( isSelected() &&
       (col == 0 || listView()->allColumnsShowFocus()) &&
       info->margin > 0 ) {
 
     p->fillRect( 0, 0, info->margin, height(),
-		 cgh.brush( QColorGroup::Highlight ) );
+		 cgh.brush( TQColorGroup::Highlight ) );
     p->fillRect( width-info->margin, 0, info->margin, height(),
-		 cgh.brush( QColorGroup::Highlight ) );
+		 cgh.brush( TQColorGroup::Highlight ) );
   }
   else { // in case we use the KListView alternate color stuff
     p->fillRect( 0, 0, info->margin, height(),
-		 cgh.brush( QColorGroup::Base ) );
+		 cgh.brush( TQColorGroup::Base ) );
     p->fillRect( width-info->margin, 0, info->margin, height(),
-		 cgh.brush( QColorGroup::Base ) );
+		 cgh.brush( TQColorGroup::Base ) );
   }
 
   // FIXME: the margin (we can only translate horizontally since height() is used for painting)
@@ -395,39 +395,39 @@ void K3bListViewItem::paintCell( QPainter* p, const QColorGroup& cg, int col, in
 }
 
 
-void K3bListViewItem::paintK3bCell( QPainter* p, const QColorGroup& cg, int col, int width, int align )
+void K3bListViewItem::paintK3bCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align )
 {
-  QListViewItem::paintCell( p, cg, col, width, align );
+  TQListViewItem::paintCell( p, cg, col, width, align );
 }
 
 
-void K3bListViewItem::paintProgressBar( QPainter* p, const QColorGroup& cgh, int col, int width )
+void K3bListViewItem::paintProgressBar( TQPainter* p, const TQColorGroup& cgh, int col, int width )
 {
   ColumnInfo* info = getColumnInfo( col );
 
-  QStyle::SFlags flags = QStyle::Style_Default;
+  TQStyle::SFlags flags = TQStyle::Style_Default;
   if( listView()->isEnabled() )
-    flags |= QStyle::Style_Enabled;
+    flags |= TQStyle::Style_Enabled;
   if( listView()->hasFocus() )
-    flags |= QStyle::Style_HasFocus;
+    flags |= TQStyle::Style_HasFocus;
 
-  // FIXME: the QPainter is translated so 0, m_vMargin is the upper left of our paint rect
-  QRect r( 0, m_vMargin, width, height()-2*m_vMargin );
+  // FIXME: the TQPainter is translated so 0, m_vMargin is the upper left of our paint rect
+  TQRect r( 0, m_vMargin, width, height()-2*m_vMargin );
 
   // create the double buffer pixmap
-  static QPixmap *doubleBuffer = 0;
+  static TQPixmap *doubleBuffer = 0;
   if( !doubleBuffer )
-    doubleBuffer = new QPixmap;
+    doubleBuffer = new TQPixmap;
   doubleBuffer->resize( width, height() );
 
-  QPainter dbPainter( doubleBuffer );
+  TQPainter dbPainter( doubleBuffer );
 
-  // clear the background (we cannot use paintEmptyArea since it's protected in QListView)
+  // clear the background (we cannot use paintEmptyArea since it's protected in TQListView)
   if( K3bListView* lv = dynamic_cast<K3bListView*>(listView()) )
     lv->paintEmptyArea( &dbPainter, r );
   else
     dbPainter.fillRect( 0, 0, width, height(),
-			cgh.brush( QPalette::backgroundRoleFromMode(listView()->viewport()->backgroundMode()) ) );
+			cgh.brush( TQPalette::backgroundRoleFromMode(listView()->viewport()->backgroundMode()) ) );
 
   // we want a little additional margin
   r.setLeft( r.left()+1 );
@@ -437,19 +437,19 @@ void K3bListViewItem::paintProgressBar( QPainter* p, const QColorGroup& cgh, int
 
   // this might be a stupid hack but most styles do not reimplement drawPrimitive PE_ProgressBarChunk
   // so this way the user is happy....
-  static QProgressBar* s_dummyProgressBar = 0;
+  static TQProgressBar* s_dummyProgressBar = 0;
   if( !s_dummyProgressBar ) {
-    s_dummyProgressBar = new QProgressBar();
+    s_dummyProgressBar = new TQProgressBar();
   }
 
   s_dummyProgressBar->setTotalSteps( info->totalProgressSteps );
   s_dummyProgressBar->setProgress( info->progressValue );
 
-  // some styles use the widget's geometry
+  // some styles use the widget's tqgeometry
   s_dummyProgressBar->setGeometry( r );
 
-  listView()->style().drawControl(QStyle::CE_ProgressBarContents, &dbPainter, s_dummyProgressBar, r, cgh, flags );
-  listView()->style().drawControl(QStyle::CE_ProgressBarLabel, &dbPainter, s_dummyProgressBar, r, cgh, flags );
+  listView()->tqstyle().tqdrawControl(TQStyle::CE_ProgressBarContents, &dbPainter, s_dummyProgressBar, r, cgh, flags );
+  listView()->tqstyle().tqdrawControl(TQStyle::CE_ProgressBarLabel, &dbPainter, s_dummyProgressBar, r, cgh, flags );
 
   // now we really paint the progress in the listview
   p->drawPixmap( 0, 0, *doubleBuffer );
@@ -461,29 +461,29 @@ void K3bListViewItem::paintProgressBar( QPainter* p, const QColorGroup& cgh, int
 
 
 
-K3bCheckListViewItem::K3bCheckListViewItem(QListView *parent)
-  : K3bListViewItem( parent ),
+K3bCheckListViewItem::K3bCheckListViewItem(TQListView *tqparent)
+  : K3bListViewItem( tqparent ),
     m_checked(false)
 {
 }
 
 
-K3bCheckListViewItem::K3bCheckListViewItem(QListViewItem *parent)
-  : K3bListViewItem( parent ),
+K3bCheckListViewItem::K3bCheckListViewItem(TQListViewItem *tqparent)
+  : K3bListViewItem( tqparent ),
     m_checked(false)
 {
 }
 
 
-K3bCheckListViewItem::K3bCheckListViewItem(QListView *parent, QListViewItem *after)
-  : K3bListViewItem( parent, after ),
+K3bCheckListViewItem::K3bCheckListViewItem(TQListView *tqparent, TQListViewItem *after)
+  : K3bListViewItem( tqparent, after ),
     m_checked(false)
 {
 }
 
 
-K3bCheckListViewItem::K3bCheckListViewItem(QListViewItem *parent, QListViewItem *after)
-  : K3bListViewItem( parent, after ),
+K3bCheckListViewItem::K3bCheckListViewItem(TQListViewItem *tqparent, TQListViewItem *after)
+  : K3bListViewItem( tqparent, after ),
     m_checked(false)
 {
 }
@@ -498,29 +498,29 @@ bool K3bCheckListViewItem::isChecked() const
 void K3bCheckListViewItem::setChecked( bool checked )
 {
   m_checked = checked;
-  repaint();
+  tqrepaint();
 }
 
 
-void K3bCheckListViewItem::paintK3bCell( QPainter* p, const QColorGroup& cg, int col, int width, int align )
+void K3bCheckListViewItem::paintK3bCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align )
 {
   K3bListViewItem::paintK3bCell( p, cg, col, width, align );
 
   if( col == 0 ) {
     if( m_checked ) {
-      QRect r( 0, marginVertical(), width, /*listView()->style().pixelMetric( QStyle::PM_CheckListButtonSize )*/height()-2*marginVertical() );
+      TQRect r( 0, marginVertical(), width, /*listView()->tqstyle().tqpixelMetric( TQStyle::PM_CheckListButtonSize )*/height()-2*marginVertical() );
 
-      QStyle::SFlags flags = QStyle::Style_Default;
+      TQStyle::SFlags flags = TQStyle::Style_Default;
       if( listView()->isEnabled() )
-	flags |= QStyle::Style_Enabled;
+	flags |= TQStyle::Style_Enabled;
       if( listView()->hasFocus() )
-	flags |= QStyle::Style_HasFocus;
+	flags |= TQStyle::Style_HasFocus;
       if( isChecked() )
-	flags |= QStyle::Style_On;
+	flags |= TQStyle::Style_On;
       else
-	flags |= QStyle::Style_Off;
+	flags |= TQStyle::Style_Off;
 
-      listView()->style().drawPrimitive( QStyle::PE_CheckMark, p, r, cg, flags );
+      listView()->tqstyle().tqdrawPrimitive( TQStyle::PE_CheckMark, p, r, cg, flags );
     }
   }
 }
@@ -540,20 +540,20 @@ void K3bCheckListViewItem::paintK3bCell( QPainter* p, const QColorGroup& cg, int
 class K3bListView::Private
 {
 public:
-  QLineEdit* spinBoxLineEdit;
-  QLineEdit* msfEditLineEdit;
+  TQLineEdit* spinBoxLineEdit;
+  TQLineEdit* msfEditLineEdit;
 };
 
 
-K3bListView::K3bListView( QWidget* parent, const char* name )
-  : KListView( parent, name ),
+K3bListView::K3bListView( TQWidget* tqparent, const char* name )
+  : KListView( tqparent, name ),
     m_noItemVMargin( 20 ),
     m_noItemHMargin( 20 )
 {
   d = new Private;
 
-  connect( header(), SIGNAL( sizeChange( int, int, int ) ),
-	   this, SLOT( updateEditorSize() ) );
+  connect( header(), TQT_SIGNAL( sizeChange( int, int, int ) ),
+	   this, TQT_SLOT( updateEditorSize() ) );
 
   m_editorButton = 0;
   m_editorComboBox = 0;
@@ -572,7 +572,7 @@ K3bListView::~K3bListView()
 }
 
 
-QWidget* K3bListView::editor( K3bListViewItem::EditorType t ) const
+TQWidget* K3bListView::editor( K3bListViewItem::EditorType t ) const
 {
   switch( t ) {
   case K3bListViewItem::COMBO:
@@ -666,16 +666,16 @@ void K3bListView::showEditor( K3bListViewItem* item, int col )
 void K3bListView::placeEditor( K3bListViewItem* item, int col )
 {
   ensureItemVisible( item );
-  QRect r = itemRect( item );
+  TQRect r = tqitemRect( item );
 
-  r.setX( contentsToViewport( QPoint(header()->sectionPos( col ), 0) ).x() );
+  r.setX( contentsToViewport( TQPoint(header()->sectionPos( col ), 0) ).x() );
   r.setWidth( header()->sectionSize( col ) - 1 );
 
   // check if the column is fully visible
   if( visibleWidth() < r.right() )
     r.setRight(visibleWidth());
 
-  r = QRect( viewportToContents( r.topLeft() ), r.size() );
+  r = TQRect( viewportToContents( r.topLeft() ), r.size() );
 
   if( item->pixmap( col ) ) {
     r.setX( r.x() + item->pixmap(col)->width() );
@@ -697,9 +697,9 @@ void K3bListView::placeEditor( K3bListViewItem* item, int col )
     moveChild( m_editorButton, r.right(), r.y() );
   }
 
-  if( QWidget* editor = prepareEditor( item, col ) ) {
+  if( TQWidget* editor = prepareEditor( item, col ) ) {
     editor->resize( r.size() );
-    //    editor->resize( QSize( r.width(), editor->minimumSizeHint().height() ) );
+    //    editor->resize( TQSize( r.width(), editor->tqminimumSizeHint().height() ) );
     moveChild( editor, r.x(), r.y() );
   }
 }
@@ -708,9 +708,9 @@ void K3bListView::placeEditor( K3bListViewItem* item, int col )
 void K3bListView::prepareButton( K3bListViewItem*, int )
 {
   if( !m_editorButton ) {
-    m_editorButton = new QPushButton( viewport() );
-    connect( m_editorButton, SIGNAL(clicked()),
-	     this, SLOT(slotEditorButtonClicked()) );
+    m_editorButton = new TQPushButton( viewport() );
+    connect( m_editorButton, TQT_SIGNAL(clicked()),
+	     this, TQT_SLOT(slotEditorButtonClicked()) );
   }
 
   // TODO: do some useful things
@@ -718,14 +718,14 @@ void K3bListView::prepareButton( K3bListViewItem*, int )
 }
 
 
-QWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
+TQWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
 {
   switch( item->editorType(col) ) {
   case K3bListViewItem::COMBO:
     if( !m_editorComboBox ) {
-      m_editorComboBox = new QComboBox( viewport() );
-      connect( m_editorComboBox, SIGNAL(activated(const QString&)),
-	       this, SLOT(slotEditorComboBoxActivated(const QString&)) );
+      m_editorComboBox = new TQComboBox( viewport() );
+      connect( m_editorComboBox, TQT_SIGNAL(activated(const TQString&)),
+	       this, TQT_SLOT(slotEditorComboBoxActivated(const TQString&)) );
       m_editorComboBox->installEventFilter( this );
     }
     m_editorComboBox->clear();
@@ -734,7 +734,7 @@ QWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
     }
     else {
       m_editorComboBox->insertStringList( item->comboStrings(col) );
-      int current = item->comboStrings(col).findIndex( item->text(col) );
+      int current = item->comboStrings(col).tqfindIndex( item->text(col) );
       if( current != -1 )
 	m_editorComboBox->setCurrentItem( current );
     }
@@ -742,17 +742,17 @@ QWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
 
   case K3bListViewItem::LINE: {
     if( !m_editorLineEdit ) {
-      m_editorLineEdit = new QLineEdit( viewport() );
-      m_editorLineEdit->setFrameStyle( QFrame::Box | QFrame::Plain );
+      m_editorLineEdit = new TQLineEdit( viewport() );
+      m_editorLineEdit->setFrameStyle( TQFrame::Box | TQFrame::Plain );
       m_editorLineEdit->setLineWidth(1);
       m_editorLineEdit->installEventFilter( this );
     }
 
-    QString txt = item->text( col );
+    TQString txt = item->text( col );
     m_editorLineEdit->setText( txt );
 
     // select the edit text (handle extensions while doing so)
-    int pos = txt.findRev( '.' );
+    int pos = txt.tqfindRev( '.' );
     if( pos > 0 )
       m_editorLineEdit->setSelection( 0, pos );
     else
@@ -762,16 +762,16 @@ QWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
   }
 
   //
-  // A QSpinBox (and thus also a K3bMsfEdit) uses a QLineEdit), thus
-  // we have to use this QLineEdit as the actual object to dead with
+  // A TQSpinBox (and thus also a K3bMsfEdit) uses a TQLineEdit), thus
+  // we have to use this TQLineEdit as the actual object to dead with
   //
 
   case K3bListViewItem::SPIN:
     if( !m_editorSpinBox ) {
-      m_editorSpinBox = new QSpinBox( viewport() );
-      d->spinBoxLineEdit = static_cast<QLineEdit*>( m_editorSpinBox->child( 0, "QLineEdit" ) );
-      connect( m_editorSpinBox, SIGNAL(valueChanged(int)),
-	       this, SLOT(slotEditorSpinBoxValueChanged(int)) );
+      m_editorSpinBox = new TQSpinBox( viewport() );
+      d->spinBoxLineEdit = static_cast<TQLineEdit*>(TQT_TQWIDGET( m_editorSpinBox->child( 0, TQLINEEDIT_OBJECT_NAME_STRING ) ));
+      connect( m_editorSpinBox, TQT_SIGNAL(valueChanged(int)),
+	       this, TQT_SLOT(slotEditorSpinBoxValueChanged(int)) );
       //      m_editorSpinBox->installEventFilter( this );
       d->spinBoxLineEdit->installEventFilter( this );
     }
@@ -782,9 +782,9 @@ QWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
   case K3bListViewItem::MSF:
     if( !m_editorMsfEdit ) {
       m_editorMsfEdit = new K3bMsfEdit( viewport() );
-      d->msfEditLineEdit = static_cast<QLineEdit*>( m_editorMsfEdit->child( 0, "QLineEdit" ) );
-      connect( m_editorMsfEdit, SIGNAL(valueChanged(int)),
-	       this, SLOT(slotEditorMsfEditValueChanged(int)) );
+      d->msfEditLineEdit = static_cast<TQLineEdit*>(TQT_TQWIDGET( m_editorMsfEdit->child( 0, TQLINEEDIT_OBJECT_NAME_STRING ) ));
+      connect( m_editorMsfEdit, TQT_SIGNAL(valueChanged(int)),
+	       this, TQT_SLOT(slotEditorMsfEditValueChanged(int)) );
       //      m_editorMsfEdit->installEventFilter( this );
       d->msfEditLineEdit->installEventFilter( this );
     }
@@ -796,13 +796,13 @@ QWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
   }
 }
 
-void K3bListView::setCurrentItem( QListViewItem* i )
+void K3bListView::setCurrentItem( TQListViewItem* i )
 {
   if( !i || i == currentItem() )
     return;
 
   // I cannot remember why I did this here exactly. However, it resets the
-  // m_lastClickedItem and thus invalidates the editing.
+  // m_lastClickedItem and thus tqinvalidates the editing.
 //   doRename();
 //   hideEditor();
 //   m_currentEditItem = 0;
@@ -810,64 +810,64 @@ void K3bListView::setCurrentItem( QListViewItem* i )
 }
 
 
-void K3bListView::setNoItemText( const QString& text )
+void K3bListView::setNoItemText( const TQString& text )
 {
   m_noItemText = text;
   triggerUpdate();
 }
 
 
-void K3bListView::viewportPaintEvent( QPaintEvent* e )
+void K3bListView::viewportPaintEvent( TQPaintEvent* e )
 {
   KListView::viewportPaintEvent( e );
 }
 
 
 // FIXME: move this to viewportPaintEvent
-void K3bListView::drawContentsOffset( QPainter * p, int ox, int oy, int cx, int cy, int cw, int ch )
+void K3bListView::drawContentsOffset( TQPainter * p, int ox, int oy, int cx, int cy, int cw, int ch )
 {
   KListView::drawContentsOffset( p, ox, oy, cx, cy, cw, ch );
 
   if( childCount() == 0 && !m_noItemText.isEmpty()) {
 
-    p->setPen( Qt::darkGray );
+    p->setPen( TQt::darkGray );
 
-    QStringList lines = QStringList::split( "\n", m_noItemText );
+    TQStringList lines = TQStringList::split( "\n", m_noItemText );
     int xpos = m_noItemHMargin;
     int ypos = m_noItemVMargin + p->fontMetrics().height();
 
-    QStringList::Iterator end ( lines.end() );
-    for( QStringList::Iterator str = lines.begin(); str != end; ++str ) {
+    TQStringList::Iterator end ( lines.end() );
+    for( TQStringList::Iterator str = lines.begin(); str != end; ++str ) {
       p->drawText( xpos, ypos, *str );
       ypos += p->fontMetrics().lineSpacing();
     }
   }
 }
 
-void K3bListView::paintEmptyArea( QPainter* p, const QRect& rect )
+void K3bListView::paintEmptyArea( TQPainter* p, const TQRect& rect )
 {
   KListView::paintEmptyArea( p, rect );
 
 //   if( childCount() == 0 && !m_noItemText.isEmpty()) {
 
-//     QPainter pp( viewport() );
+//     TQPainter pp( viewport() );
 //     pp.fillRect( viewport()->rect(), viewport()->paletteBackgroundColor() );
 //     pp.end();
 
-//     p->setPen( Qt::darkGray );
+//     p->setPen( TQt::darkGray );
 
-//     QStringList lines = QStringList::split( "\n", m_noItemText );
+//     TQStringList lines = TQStringList::split( "\n", m_noItemText );
 //     int xpos = m_noItemHMargin;
 //     int ypos = m_noItemVMargin + p->fontMetrics().height();
 
-//     for( QStringList::Iterator str = lines.begin(); str != lines.end(); str++ ) {
+//     for( TQStringList::Iterator str = lines.begin(); str != lines.end(); str++ ) {
 //       p->drawText( xpos, ypos, *str );
 //       ypos += p->fontMetrics().lineSpacing();
 //  }
 //   }
 }
 
-void K3bListView::resizeEvent( QResizeEvent* e )
+void K3bListView::resizeEvent( TQResizeEvent* e )
 {
   KListView::resizeEvent( e );
   updateEditorSize();
@@ -898,7 +898,7 @@ void K3bListView::slotEditorLineEditReturnPressed()
 }
 
 
-void K3bListView::slotEditorComboBoxActivated( const QString& )
+void K3bListView::slotEditorComboBoxActivated( const TQString& )
 {
   doRename();
 //   if( renameItem( m_currentEditItem, m_currentEditColumn, str ) ) {
@@ -918,9 +918,9 @@ void K3bListView::slotEditorComboBoxActivated( const QString& )
 
 void K3bListView::slotEditorSpinBoxValueChanged( int )
 {
-//   if( renameItem( m_currentEditItem, m_currentEditColumn, QString::number(value) ) ) {
-//     m_currentEditItem->setText( m_currentEditColumn, QString::number(value) );
-//     emit itemRenamed( m_currentEditItem, QString::number(value), m_currentEditColumn );
+//   if( renameItem( m_currentEditItem, m_currentEditColumn, TQString::number(value) ) ) {
+//     m_currentEditItem->setText( m_currentEditColumn, TQString::number(value) );
+//     emit itemRenamed( m_currentEditItem, TQString::number(value), m_currentEditColumn );
 //   }
 //   else
 //     m_editorSpinBox->setValue( m_currentEditItem->text( m_currentEditColumn ).toInt() );
@@ -930,9 +930,9 @@ void K3bListView::slotEditorSpinBoxValueChanged( int )
 void K3bListView::slotEditorMsfEditValueChanged( int )
 {
   // FIXME: do we always need to update the value. Isn't it enough to do it at the end?
-//   if( renameItem( m_currentEditItem, m_currentEditColumn, QString::number(value) ) ) {
-//     m_currentEditItem->setText( m_currentEditColumn, QString::number(value) );
-//     emit itemRenamed( m_currentEditItem, QString::number(value), m_currentEditColumn );
+//   if( renameItem( m_currentEditItem, m_currentEditColumn, TQString::number(value) ) ) {
+//     m_currentEditItem->setText( m_currentEditColumn, TQString::number(value) );
+//     emit itemRenamed( m_currentEditItem, TQString::number(value), m_currentEditColumn );
 //   }
 //   else
 //     m_editorMsfEdit->setText( m_currentEditItem->text( m_currentEditColumn ) );
@@ -942,7 +942,7 @@ void K3bListView::slotEditorMsfEditValueChanged( int )
 bool K3bListView::doRename()
 {
   if( m_currentEditItem ) {
-    QString newValue;
+    TQString newValue;
     switch( m_currentEditItem->editorType( m_currentEditColumn ) ) {
     case K3bListViewItem::COMBO:
       newValue = m_editorComboBox->currentText();
@@ -951,10 +951,10 @@ bool K3bListView::doRename()
       newValue = m_editorLineEdit->text();
       break;
     case K3bListViewItem::SPIN:
-      newValue = QString::number(m_editorSpinBox->value());
+      newValue = TQString::number(m_editorSpinBox->value());
       break;
     case K3bListViewItem::MSF:
-      newValue = QString::number(m_editorMsfEdit->value());
+      newValue = TQString::number(m_editorMsfEdit->value());
       break;
     }
 
@@ -997,7 +997,7 @@ void K3bListView::slotEditorButtonClicked()
 }
 
 
-bool K3bListView::renameItem( K3bListViewItem* item, int col, const QString& text )
+bool K3bListView::renameItem( K3bListViewItem* item, int col, const TQString& text )
 {
   Q_UNUSED(item);
   Q_UNUSED(col);
@@ -1012,14 +1012,14 @@ void K3bListView::slotEditorButtonClicked( K3bListViewItem* item, int col )
 }
 
 
-bool K3bListView::eventFilter( QObject* o, QEvent* e )
+bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
 {
-  if( e->type() == QEvent::KeyPress ) {
-     QKeyEvent* ke = static_cast<QKeyEvent*>(e);
+  if( e->type() == TQEvent::KeyPress ) {
+     TQKeyEvent* ke = TQT_TQKEYEVENT(e);
      if( ke->key() == Key_Tab ) {
-       if( o == m_editorLineEdit ||
-	   o == d->msfEditLineEdit ||
-	   o == d->spinBoxLineEdit ) {
+       if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorLineEdit) ||
+	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
+	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ) {
 	 K3bListViewItem* lastEditItem = m_currentEditItem;
 
 	 doRename();
@@ -1059,9 +1059,9 @@ bool K3bListView::eventFilter( QObject* o, QEvent* e )
      }
      if( ke->key() == Key_Return ||
          ke->key() == Key_Enter ) {
-       if( o == m_editorLineEdit ||
-	   o == d->msfEditLineEdit ||
-	   o == d->spinBoxLineEdit ) {
+       if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorLineEdit) ||
+	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
+	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ) {
 	 K3bListViewItem* lastEditItem = m_currentEditItem;
 	 doRename();
 
@@ -1079,9 +1079,9 @@ bool K3bListView::eventFilter( QObject* o, QEvent* e )
        }
      }
      else if( ke->key() == Key_Escape ) {
-       if( o == m_editorLineEdit ||
-	   o == d->msfEditLineEdit ||
-	   o == d->spinBoxLineEdit ) {
+       if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorLineEdit) ||
+	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
+	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ) {
 	 hideEditor();
 
 	 // keep the focus here
@@ -1092,13 +1092,13 @@ bool K3bListView::eventFilter( QObject* o, QEvent* e )
      }
   }
 
-  else if( e->type() == QEvent::MouseButtonPress && o == viewport() ) {
+  else if( e->type() == TQEvent::MouseButtonPress && TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(viewport()) ) {
 
     // first let's grab the focus
     viewport()->setFocus();
 
-    QMouseEvent* me = static_cast<QMouseEvent*>( e );
-    QListViewItem* item = itemAt( me->pos() );
+    TQMouseEvent* me = TQT_TQMOUSEEVENT( e );
+    TQListViewItem* item = itemAt( me->pos() );
     int col = header()->sectionAt( me->pos().x() );
     if( K3bCheckListViewItem* ci = dynamic_cast<K3bCheckListViewItem*>( item ) ) {
       if( col == 0 ) {
@@ -1108,7 +1108,7 @@ bool K3bListView::eventFilter( QObject* o, QEvent* e )
       }
     }
 
-    if( me->button() == QMouseEvent::LeftButton ) {
+    if( me->button() == Qt::LeftButton ) {
       if( item != m_currentEditItem || m_currentEditColumn != col ) {
 	doRename();
 	if( K3bListViewItem* k3bItem = dynamic_cast<K3bListViewItem*>(item) ) {
@@ -1137,13 +1137,13 @@ bool K3bListView::eventFilter( QObject* o, QEvent* e )
     }
   }
 
-  else if( e->type() == QEvent::FocusOut ) {
-    if( o == m_editorLineEdit ||
-	o == d->msfEditLineEdit ||
-	o == d->spinBoxLineEdit ||
-	o == m_editorComboBox ) {
-      // make sure we did not lose the focus to one of the edit widgets' children
-      if( !qApp->focusWidget() || qApp->focusWidget()->parentWidget() != o ) {
+  else if( e->type() == TQEvent::FocusOut ) {
+    if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorLineEdit) ||
+	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
+	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ||
+	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorComboBox) ) {
+      // make sure we did not lose the focus to one of the edit widgets' tqchildren
+      if( !tqApp->tqfocusWidget() || TQT_BASE_OBJECT(tqApp->tqfocusWidget()->tqparentWidget()) != TQT_BASE_OBJECT(o) ) {
 	doRename();
 	hideEditor();
       }
@@ -1154,27 +1154,27 @@ bool K3bListView::eventFilter( QObject* o, QEvent* e )
 }
 
 
-void K3bListView::setK3bBackgroundPixmap( const QPixmap& pix, int pos )
+void K3bListView::setK3bBackgroundPixmap( const TQPixmap& pix, int pos )
 {
   m_backgroundPixmap = pix;
   m_backgroundPixmapPosition = pos;
 }
 
 
-void K3bListView::viewportResizeEvent( QResizeEvent* e )
+void K3bListView::viewportResizeEvent( TQResizeEvent* e )
 {
   if( !m_backgroundPixmap.isNull() ) {
 
-    QSize size = viewport()->size().expandedTo( QSize( contentsWidth(), contentsHeight() ) );
+    TQSize size = viewport()->size().expandedTo( TQSize( contentsWidth(), contentsHeight() ) );
 
-    QPixmap bgPix( size );
+    TQPixmap bgPix( size );
 
     // FIXME: let the user specify the color
-    bgPix.fill( colorGroup().base() );
+    bgPix.fill( tqcolorGroup().base() );
 
     if( bgPix.width() < m_backgroundPixmap.width() ||
 	bgPix.height() < m_backgroundPixmap.height() ) {
-      QPixmap newBgPix( m_backgroundPixmap.convertToImage().scale( bgPix.size(), QImage::ScaleMin ) );
+      TQPixmap newBgPix( m_backgroundPixmap.convertToImage().scale( bgPix.size(), TQ_ScaleMin ) );
       if( m_backgroundPixmapPosition == TOP_LEFT )
 	bitBlt( &bgPix, 0, 0,
 		&newBgPix, 0, 0,
@@ -1206,28 +1206,28 @@ void K3bListView::viewportResizeEvent( QResizeEvent* e )
 }
 
 
-QListViewItem* K3bListView::parentItem( QListViewItem* item )
+TQListViewItem* K3bListView::tqparentItem( TQListViewItem* item )
 {
   if( !item )
     return 0;
-  if( item->parent() )
-    return item->parent();
+  if( item->tqparent() )
+    return item->tqparent();
   else
-    return K3bListView::parentItem( item->itemAbove() );
+    return K3bListView::tqparentItem( item->itemAbove() );
 }
 
 
-KPixmap K3bListView::createDragPixmap( const QPtrList<QListViewItem>& items )
+KPixmap K3bListView::createDragPixmap( const TQPtrList<TQListViewItem>& items )
 {
   //
   // Create drag pixmap.
-  // If there are too many items fade the pixmap using the mask
+  // If there are too many items fade the pixmap using the tqmask
   // always fade invisible items
   //
   int width = header()->width();
   int height = 0;
-  for( QPtrListIterator<QListViewItem> it( items ); *it; ++it ) {
-    QRect r = itemRect( *it );
+  for( TQPtrListIterator<TQListViewItem> it( items ); *it; ++it ) {
+    TQRect r = tqitemRect( *it );
 
     if( r.isValid() ) {
       height += ( *it )->height();
@@ -1244,25 +1244,25 @@ KPixmap K3bListView::createDragPixmap( const QPtrList<QListViewItem>& items )
 
   KPixmap pix;
   pix.resize( width, height );
-  pix.fill( Qt::white );
-  //  QBitmap mask( width, bottom-top );
+  pix.fill( TQt::white );
+  //  TQBitmap tqmask( width, bottom-top );
 
   // now paint all the visible items into the pixmap
   // FIXME: only paint the visible items
-  QPainter p( &pix );
-  for( QListViewItemIterator it( this ); *it; ++it ) {
-    QListViewItem* item = *it;
+  TQPainter p( &pix );
+  for( TQListViewItemIterator it( this ); *it; ++it ) {
+    TQListViewItem* item = *it;
 
     // FIXME: items on other than the top level have a smaller first column
     //        the same goes for all items if root is decorated
     bool alreadyDrawing = false;
-    QRect r = itemRect( item );
+    TQRect r = tqitemRect( item );
     if( r.isValid() ) {
-      if( items.containsRef( item ) ) {
+      if( items.tqcontainsRef( item ) ) {
 	// paint all columns
 	int x = 0;
 	for( int i = 0; i < columns(); ++i ) {
-	  item->paintCell( &p, colorGroup(), i, columnWidth( i ), columnAlignment( i ) );
+	  item->paintCell( &p, tqcolorGroup(), i, columnWidth( i ), columnAlignment( i ) );
 	  p.translate( columnWidth( i ), 0 );
 	  x += columnWidth( i );
 	}
@@ -1274,13 +1274,13 @@ KPixmap K3bListView::createDragPixmap( const QPtrList<QListViewItem>& items )
       else if( alreadyDrawing )
 	p.translate( 0, item->height() );
 
-      if( p.worldMatrix().dy() >= pix.height() )
+      if( p.tqworldMatrix().dy() >= pix.height() )
 	break;
     }
   }
 
   // make it a little lighter
-  KPixmapEffect::fade( pix, 0.3, Qt::white );
+  KPixmapEffect::fade( pix, 0.3, TQt::white );
 
   // FIXME: fade the pixmap at the right side if the items are longer than width
 

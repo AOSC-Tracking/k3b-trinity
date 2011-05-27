@@ -38,7 +38,7 @@ K3bVideoDVDRippingJob::TitleRipInfo::TitleRipInfo()
 
 K3bVideoDVDRippingJob::TitleRipInfo::TitleRipInfo( int _title,
 						   int _audioStream,
-						   const QString& fn,
+						   const TQString& fn,
 						   int _width,
 						   int _height,
 						   int _videoBitrate,
@@ -76,24 +76,24 @@ public:
 
   int failedTitles;
 
-  QValueVector<double> titleProgressParts;
-  QValueVector<double> titleClippingProgressParts;
+  TQValueVector<double> titleProgressParts;
+  TQValueVector<double> titleClippingProgressParts;
 };
 
 
 
-K3bVideoDVDRippingJob::K3bVideoDVDRippingJob( K3bJobHandler* hdl, QObject* parent )
-  : K3bJob( hdl, parent )
+K3bVideoDVDRippingJob::K3bVideoDVDRippingJob( K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bJob( hdl, tqparent )
 {
   d = new Private();
 
   m_transcodingJob = new K3bVideoDVDTitleTranscodingJob( this, this );
   connectSubJob( m_transcodingJob,
-		 SLOT(slotTranscodingJobFinished(bool)),
-		 SIGNAL(newTask(const QString&)),
-		 SIGNAL(newSubTask(const QString&)),
-		 SLOT(slotTranscodingProgress(int)),
-		 SIGNAL(subPercent(int)),
+		 TQT_SLOT(slotTranscodingJobFinished(bool)),
+		 TQT_SIGNAL(newTask(const TQString&)),
+		 TQT_SIGNAL(newSubTask(const TQString&)),
+		 TQT_SLOT(slotTranscodingProgress(int)),
+		 TQT_SIGNAL(subPercent(int)),
 		 0,
 		 0 );
   m_detectClippingJob = 0;
@@ -106,17 +106,17 @@ K3bVideoDVDRippingJob::~K3bVideoDVDRippingJob()
 }
 
 
-QString K3bVideoDVDRippingJob::jobDescription() const
+TQString K3bVideoDVDRippingJob::jobDescription() const
 {
   return i18n("Ripping Video DVD Titles");
 }
 
 
-QString K3bVideoDVDRippingJob::jobDetails() const
+TQString K3bVideoDVDRippingJob::jobDetails() const
 {
   return i18n("Transcoding %n title to %1/%2", "Transcoding %n titles to %1/%2", m_titleRipInfos.count() )
-    .arg( K3bVideoDVDTitleTranscodingJob::videoCodecString( m_transcodingJob->videoCodec() ) )
-    .arg( K3bVideoDVDTitleTranscodingJob::audioCodecString( m_transcodingJob->audioCodec() ) );
+    .tqarg( K3bVideoDVDTitleTranscodingJob::videoCodecString( m_transcodingJob->videoCodec() ) )
+    .tqarg( K3bVideoDVDTitleTranscodingJob::audioCodecString( m_transcodingJob->audioCodec() ) );
 }
 
 
@@ -143,10 +143,10 @@ void K3bVideoDVDRippingJob::slotTranscodingJobFinished( bool success )
   }
   else {
     if( success )
-      emit infoMessage( i18n("Successfully ripped title %1").arg(m_titleRipInfos[d->currentTitleInfoIndex].title), SUCCESS );
+      emit infoMessage( i18n("Successfully ripped title %1").tqarg(m_titleRipInfos[d->currentTitleInfoIndex].title), SUCCESS );
     else {
       d->failedTitles++;
-      emit infoMessage( i18n("Failed to rip title %1").arg(m_titleRipInfos[d->currentTitleInfoIndex].title), ERROR );
+      emit infoMessage( i18n("Failed to rip title %1").tqarg(m_titleRipInfos[d->currentTitleInfoIndex].title), ERROR );
     }
 
     ++d->currentTitleInfoIndex ;
@@ -176,11 +176,11 @@ void K3bVideoDVDRippingJob::slotDetectClippingJobFinished( bool success )
     m_titleRipInfos[d->currentTitleInfoIndex].clipRight = 0;
 
     if( success ) {
-      emit infoMessage( i18n("Determined clipping values for title %1").arg(m_titleRipInfos[d->currentTitleInfoIndex].title), SUCCESS );
+      emit infoMessage( i18n("Determined clipping values for title %1").tqarg(m_titleRipInfos[d->currentTitleInfoIndex].title), SUCCESS );
       emit infoMessage( i18n("Top: %1, Bottom: %2")
-			.arg(m_detectClippingJob->clippingTop()).arg(m_detectClippingJob->clippingBottom()), INFO );
+			.tqarg(m_detectClippingJob->clippingTop()).tqarg(m_detectClippingJob->clippingBottom()), INFO );
       emit infoMessage( i18n("Left: %1, Right: %2")
-			.arg(m_detectClippingJob->clippingLeft()).arg(m_detectClippingJob->clippingRight()), INFO );
+			.tqarg(m_detectClippingJob->clippingLeft()).tqarg(m_detectClippingJob->clippingRight()), INFO );
 
       // let's see if the clipping values make sense
       if( m_detectClippingJob->clippingTop() + m_detectClippingJob->clippingBottom() 
@@ -197,7 +197,7 @@ void K3bVideoDVDRippingJob::slotDetectClippingJobFinished( bool success )
       }
     }
     else
-      emit infoMessage( i18n("Failed to determine clipping values for title %1").arg(m_titleRipInfos[d->currentTitleInfoIndex].title), ERROR );
+      emit infoMessage( i18n("Failed to determine clipping values for title %1").tqarg(m_titleRipInfos[d->currentTitleInfoIndex].title), ERROR );
 
     startTranscoding( d->currentTitleInfoIndex );
   }
@@ -234,11 +234,11 @@ void K3bVideoDVDRippingJob::startDetectClipping( int ripInfoIndex )
   if( !m_detectClippingJob ) {
     m_detectClippingJob = new K3bVideoDVDTitleDetectClippingJob( this, this );
     connectSubJob( m_detectClippingJob,
-		   SLOT(slotDetectClippingJobFinished(bool)),
-		   SIGNAL(newTask(const QString&)),
-		   SIGNAL(newSubTask(const QString&)),
-		   SLOT(slotDetectClippingProgress(int)),
-		   SIGNAL(subPercent(int)),
+		   TQT_SLOT(slotDetectClippingJobFinished(bool)),
+		   TQT_SIGNAL(newTask(const TQString&)),
+		   TQT_SIGNAL(newSubTask(const TQString&)),
+		   TQT_SLOT(slotDetectClippingProgress(int)),
+		   TQT_SIGNAL(subPercent(int)),
 		   0,
 		   0 );
   }

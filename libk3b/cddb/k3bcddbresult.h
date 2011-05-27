@@ -19,17 +19,17 @@
 #define K3B_CDDB_RESULT_H
 
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 #include "k3b_export.h"
 
 
 class LIBK3B_EXPORT K3bCddbResultHeader
 {
  public:
-  QString category;
-  QString title;
-  QString artist;
-  QString discid;
+  TQString category;
+  TQString title;
+  TQString artist;
+  TQString discid;
 };
 
 
@@ -42,20 +42,20 @@ class LIBK3B_EXPORT K3bCddbResultEntry
     year(0) {
   }
 
-  QStringList titles;
-  QStringList artists;
-  QStringList extInfos;
+  TQStringList titles;
+  TQStringList artists;
+  TQStringList extInfos;
 
-  QString cdTitle;
-  QString cdArtist;
-  QString cdExtInfo;
+  TQString cdTitle;
+  TQString cdArtist;
+  TQString cdExtInfo;
 
-  QString genre;
-  QString category;
+  TQString genre;
+  TQString category;
   int year;
-  QString discid;
+  TQString discid;
 
-  QString rawData;
+  TQString rawData;
 };
 
 
@@ -71,7 +71,7 @@ class LIBK3B_EXPORT K3bCddbResult
   int foundEntries() const;
 
  private:
-  QValueList<K3bCddbResultEntry> m_entries;
+  TQValueList<K3bCddbResultEntry> m_entries;
 
   K3bCddbResultEntry m_emptyEntry;
 };

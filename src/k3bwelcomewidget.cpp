@@ -21,16 +21,16 @@
 #include <k3bversion.h>
 #include "k3bthememanager.h"
 
-#include <qpixmap.h>
-#include <qtoolbutton.h>
-#include <qlabel.h>
-#include <qpainter.h>
-#include <qsimplerichtext.h>
-#include <qptrlist.h>
-#include <qmap.h>
-#include <qtooltip.h>
-#include <qcursor.h>
-#include <qimage.h>
+#include <tqpixmap.h>
+#include <tqtoolbutton.h>
+#include <tqlabel.h>
+#include <tqpainter.h>
+#include <tqsimplerichtext.h>
+#include <tqptrlist.h>
+#include <tqmap.h>
+#include <tqtooltip.h>
+#include <tqcursor.h>
+#include <tqimage.h>
 
 #include <kurl.h>
 #include <kurldrag.h>
@@ -76,17 +76,17 @@ static const char* s_allActions[] = {
   0
 };
 
-K3bWelcomeWidget::Display::Display( K3bWelcomeWidget* parent )
-  : QWidget( parent->viewport() )
+K3bWelcomeWidget::Display::Display( K3bWelcomeWidget* tqparent )
+  : TQWidget( tqparent->viewport() )
 {
-  setWFlags( Qt::WNoAutoErase );
+  setWFlags( TQt::WNoAutoErase );
 
-  QFont fnt(font());
+  TQFont fnt(font());
   fnt.setBold(true);
   fnt.setPointSize( 16 );
-  m_header = new QSimpleRichText( i18n("Welcome to K3b - The CD and DVD Kreator"), fnt );
-  m_infoText = new QSimpleRichText( QString::fromUtf8("<qt align=\"center\">K3b %1 (c) 1999 - 2007 Sebastian Trüg")
-				    .arg(kapp->aboutData()->version()), font() );
+  m_header = new TQSimpleRichText( i18n("Welcome to K3b - The CD and DVD Kreator"), fnt );
+  m_infoText = new TQSimpleRichText( TQString::fromUtf8("<qt align=\"center\">K3b %1 (c) 1999 - 2007 Sebastian Trüg")
+				    .tqarg(kapp->aboutData()->version()), font() );
 
   // set a large width just to be sure no linebreak occurs
   m_header->setWidth( 800 );
@@ -96,9 +96,9 @@ K3bWelcomeWidget::Display::Display( K3bWelcomeWidget* parent )
   m_rows = m_cols = 1;
 
   m_buttonMore = new K3bFlatButton( i18n("Further actions..."), this );
-  connect( m_buttonMore, SIGNAL(pressed()), parent, SLOT(slotMoreActions()) );
+  connect( m_buttonMore, TQT_SIGNAL(pressed()), tqparent, TQT_SLOT(slotMoreActions()) );
 
-  connect( k3bappcore->themeManager(), SIGNAL(themeChanged()), this, SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()), this, TQT_SLOT(slotThemeChanged()) );
 
   slotThemeChanged();
 }
@@ -135,7 +135,7 @@ void K3bWelcomeWidget::Display::removeButton( K3bFlatButton* b )
 }
 
 
-void K3bWelcomeWidget::Display::rebuildGui( const QPtrList<KAction>& actions )
+void K3bWelcomeWidget::Display::rebuildGui( const TQPtrList<KAction>& actions )
 {
   m_actions = actions;
   rebuildGui();
@@ -146,7 +146,7 @@ static void calculateButtons( int width, int numActions, int buttonWidth, int& c
 {
   // always try to avoid horizontal scrollbars
   int wa = width - 40;
-  cols = QMAX( 1, QMIN( wa / (buttonWidth+4), numActions ) );
+  cols = TQMAX( 1, TQMIN( wa / (buttonWidth+4), numActions ) );
   rows = numActions/cols;
   int over = numActions%cols;
   if( over ) {
@@ -162,7 +162,7 @@ static void calculateButtons( int width, int numActions, int buttonWidth, int& c
 
 void K3bWelcomeWidget::Display::rebuildGui()
 {
-  // step 1: delete all old buttons in the buttons QPtrList<K3bFlatButton>
+  // step 1: delete all old buttons in the buttons TQPtrList<K3bFlatButton>
   m_buttonMap.clear();
   m_buttons.setAutoDelete(true);
   m_buttons.clear();
@@ -171,7 +171,7 @@ void K3bWelcomeWidget::Display::rebuildGui()
   if( numActions > 0 ) {
 
     // create buttons
-    for( QPtrListIterator<KAction> it( m_actions ); it.current(); ++it ) {
+    for( TQPtrListIterator<KAction> it( m_actions ); it.current(); ++it ) {
       KAction* a = it.current();
 
       K3bFlatButton* b = new K3bFlatButton( a, this );
@@ -182,9 +182,9 @@ void K3bWelcomeWidget::Display::rebuildGui()
 
     // determine the needed button size (since all buttons should be equal in size
     // we use the max of all sizes)
-    m_buttonSize = m_buttons.first()->sizeHint();
-    for( QPtrListIterator<K3bFlatButton> it( m_buttons ); it.current(); ++it ) {
-      m_buttonSize = m_buttonSize.expandedTo( it.current()->sizeHint() );
+    m_buttonSize = m_buttons.first()->tqsizeHint();
+    for( TQPtrListIterator<K3bFlatButton> it( m_buttons ); it.current(); ++it ) {
+      m_buttonSize = m_buttonSize.expandedTo( it.current()->tqsizeHint() );
     }
 
     repositionButtons();
@@ -206,10 +206,10 @@ void K3bWelcomeWidget::Display::repositionButtons()
   int row = 0;
   int col = 0;
 
-  for( QPtrListIterator<K3bFlatButton> it( m_buttons ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bFlatButton> it( m_buttons ); it.current(); ++it ) {
     K3bFlatButton* b = it.current();
 
-    b->setGeometry( QRect( QPoint( leftMargin + (col*(m_buttonSize.width()+4) + 2 ),
+    b->setGeometry( TQRect( TQPoint( leftMargin + (col*(m_buttonSize.width()+4) + 2 ),
 				   topOffset + (row*(m_buttonSize.height()+4)) + 2 ),
 			   m_buttonSize ) );
     b->show();
@@ -223,15 +223,15 @@ void K3bWelcomeWidget::Display::repositionButtons()
   if( col > 0 )
     ++row;
 
-  m_buttonMore->setGeometry( QRect( QPoint( leftMargin + 2,
+  m_buttonMore->setGeometry( TQRect( TQPoint( leftMargin + 2,
 					    topOffset + (row*(m_buttonSize.height()+4)) + 2 ),
-				    QSize( m_cols*(m_buttonSize.width()+4) - 4, m_buttonMore->height() ) ) );
+				    TQSize( m_cols*(m_buttonSize.width()+4) - 4, m_buttonMore->height() ) ) );
 }
 
 
-QSizePolicy K3bWelcomeWidget::Display::sizePolicy () const
+TQSizePolicy K3bWelcomeWidget::Display::sizePolicy () const
 {
-  return QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum, true );
+  return TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Minimum, true );
 }
 
 
@@ -249,19 +249,19 @@ int K3bWelcomeWidget::Display::heightForWidth( int w ) const
 }
 
 
-QSize K3bWelcomeWidget::Display::minimumSizeHint() const
+TQSize K3bWelcomeWidget::Display::tqminimumSizeHint() const
 {
-  QSize size( QMAX(40+m_header->widthUsed(), 40+m_buttonSize.width()),
+  TQSize size( TQMAX(40+m_header->widthUsed(), 40+m_buttonSize.width()),
 	      20 + m_header->height() + 20 + 10 + m_buttonSize.height() + 10 + m_infoText->height() + 20 );
 
   return size;
 }
 
 
-void K3bWelcomeWidget::Display::resizeEvent( QResizeEvent* e )
+void K3bWelcomeWidget::Display::resizeEvent( TQResizeEvent* e )
 {
   m_infoText->setWidth( width() - 20 );
-  QWidget::resizeEvent(e);
+  TQWidget::resizeEvent(e);
   repositionButtons();
   if( e->size() != m_bgPixmap.size() )
     updateBgPix();
@@ -290,10 +290,10 @@ void K3bWelcomeWidget::Display::updateBgPix()
 }
 
 
-void K3bWelcomeWidget::Display::paintEvent( QPaintEvent* )
+void K3bWelcomeWidget::Display::paintEvent( TQPaintEvent* )
 {
   if( K3bTheme* theme = k3bappcore->themeManager()->currentTheme() ) {
-    QPainter p( this );
+    TQPainter p( this );
     p.setPen( theme->foregroundColor() );
 
     // draw the background including first filling with the bg color for transparent images
@@ -301,7 +301,7 @@ void K3bWelcomeWidget::Display::paintEvent( QPaintEvent* )
     p.drawTiledPixmap( rect(), m_bgPixmap );
 
     // rect around the header
-    QRect rect( 10, 10, QMAX( m_header->widthUsed() + 20, width() - 20 ), m_header->height() + 20 );
+    TQRect rect( 10, 10, TQMAX( m_header->widthUsed() + 20, width() - 20 ), m_header->height() + 20 );
     p.fillRect( rect, theme->backgroundColor() );
     p.drawRect( rect );
 
@@ -309,33 +309,33 @@ void K3bWelcomeWidget::Display::paintEvent( QPaintEvent* )
     p.drawRect( 10, 10, width()-20, height()-20 );
 
     // draw the header text
-    QColorGroup grp( colorGroup() );
-    grp.setColor( QColorGroup::Text, theme->foregroundColor() );
+    TQColorGroup grp( tqcolorGroup() );
+    grp.setColor( TQColorGroup::Text, theme->foregroundColor() );
     int pos = 20;
-    pos += QMAX( (width()-40-m_header->widthUsed())/2, 0 );
-    m_header->draw( &p, pos, 20, QRect(), grp );
+    pos += TQMAX( (width()-40-m_header->widthUsed())/2, 0 );
+    m_header->draw( &p, pos, 20, TQRect(), grp );
 
     // draw the info box
     //    int boxWidth = 20 + m_infoText->widthUsed();
     int boxHeight = 10 + m_infoText->height();
-    QRect infoBoxRect( 10/*QMAX( (width()-20-m_infoText->widthUsed())/2, 10 )*/,
+    TQRect infoBoxRect( 10/*TQMAX( (width()-20-m_infoText->widthUsed())/2, 10 )*/,
 		       height()-10-boxHeight,
 		       width()-20/*boxWidth*/,
 		       boxHeight );
     p.fillRect( infoBoxRect, theme->backgroundColor() );
     p.drawRect( infoBoxRect );
-    m_infoText->draw( &p, infoBoxRect.left()+5, infoBoxRect.top()+5, QRect(), grp );
+    m_infoText->draw( &p, infoBoxRect.left()+5, infoBoxRect.top()+5, TQRect(), grp );
   }
 }
 
 
-void K3bWelcomeWidget::Display::dragEnterEvent( QDragEnterEvent* event )
+void K3bWelcomeWidget::Display::dragEnterEvent( TQDragEnterEvent* event )
 {
   event->accept( KURLDrag::canDecode(event) );
 }
 
 
-void K3bWelcomeWidget::Display::dropEvent( QDropEvent* e )
+void K3bWelcomeWidget::Display::dropEvent( TQDropEvent* e )
 {
   KURL::List urls;
   KURLDrag::decode( e, urls );
@@ -344,16 +344,16 @@ void K3bWelcomeWidget::Display::dropEvent( QDropEvent* e )
 
 
 
-K3bWelcomeWidget::K3bWelcomeWidget( K3bMainWindow* mw, QWidget* parent, const char* name )
-  : QScrollView( parent, name ),
+K3bWelcomeWidget::K3bWelcomeWidget( K3bMainWindow* mw, TQWidget* tqparent, const char* name )
+  : TQScrollView( tqparent, name ),
     m_mainWindow( mw )
 {
   main = new Display( this );
   addChild( main );
 
-  connect( main, SIGNAL(dropped(const KURL::List&)), m_mainWindow, SLOT(addUrls(const KURL::List&)) );
+  connect( main, TQT_SIGNAL(dropped(const KURL::List&)), m_mainWindow, TQT_SLOT(addUrls(const KURL::List&)) );
 
-  connect( kapp, SIGNAL(appearanceChanged()), main, SLOT(update()) );
+  connect( kapp, TQT_SIGNAL(appearanceChanged()), main, TQT_SLOT(update()) );
 }
 
 
@@ -364,7 +364,7 @@ K3bWelcomeWidget::~K3bWelcomeWidget()
 
 void K3bWelcomeWidget::loadConfig( KConfigBase* c )
 {
-  QStringList sl = KConfigGroup( c, "Welcome Widget" ).readListEntry( "welcome_actions" );
+  TQStringList sl = KConfigGroup( c, "Welcome Widget" ).readListEntry( "welcome_actions" );
 
   if( sl.isEmpty() ) {
     sl.append( "file_new_audio" );
@@ -375,8 +375,8 @@ void K3bWelcomeWidget::loadConfig( KConfigBase* c )
     sl.append( "tools_write_dvd_iso" );
   }
 
-  QPtrList<KAction> actions;
-  for( QStringList::const_iterator it = sl.begin(); it != sl.end(); ++it )
+  TQPtrList<KAction> actions;
+  for( TQStringList::const_iterator it = sl.begin(); it != sl.end(); ++it )
     if( KAction* a = m_mainWindow->actionCollection()->action( (*it).latin1() ) )
       actions.append(a);
 
@@ -390,49 +390,49 @@ void K3bWelcomeWidget::saveConfig( KConfigBase* c )
 {
   KConfigGroup grp( c, "Welcome Widget" );
 
-  QStringList sl;
-  for( QPtrListIterator<KAction> it( main->m_actions ); it.current(); ++it )
+  TQStringList sl;
+  for( TQPtrListIterator<KAction> it( main->m_actions ); it.current(); ++it )
     sl.append( it.current()->name() );
 
   grp.writeEntry( "welcome_actions", sl );
 }
 
 
-void K3bWelcomeWidget::resizeEvent( QResizeEvent* e )
+void K3bWelcomeWidget::resizeEvent( TQResizeEvent* e )
 {
-  QScrollView::resizeEvent( e );
+  TQScrollView::resizeEvent( e );
   fixSize();
 }
 
 
-void K3bWelcomeWidget::showEvent( QShowEvent* e )
+void K3bWelcomeWidget::showEvent( TQShowEvent* e )
 {
-  QScrollView::showEvent( e );
+  TQScrollView::showEvent( e );
   fixSize();
 }
 
 
 void K3bWelcomeWidget::fixSize()
 {
-  QSize s = contentsRect().size();
-  s.setWidth( QMAX( main->minimumSizeHint().width(), s.width() ) );
-  s.setHeight( QMAX( main->heightForWidth(s.width()), s.height() ) );
+  TQSize s = contentsRect().size();
+  s.setWidth( TQMAX( main->tqminimumSizeHint().width(), s.width() ) );
+  s.setHeight( TQMAX( main->heightForWidth(s.width()), s.height() ) );
 
   main->resize( s );
   viewport()->resize( s );
 }
 
 
-void K3bWelcomeWidget::contentsMousePressEvent( QMouseEvent* e )
+void K3bWelcomeWidget::contentsMousePressEvent( TQMouseEvent* e )
 {
-  if( e->button() == QMouseEvent::RightButton ) {
-    QMap<int, KAction*> map;
+  if( e->button() == Qt::RightButton ) {
+    TQMap<int, KAction*> map;
     KPopupMenu addPop;
 
     for ( int i = 0; s_allActions[i]; ++i ) {
         if ( s_allActions[i][0] != '_' ) {
             KAction* a = m_mainWindow->actionCollection()->action( s_allActions[i] );
-            if ( a && !main->m_actions.containsRef(a) ) {
+            if ( a && !main->m_actions.tqcontainsRef(a) ) {
                 map.insert( addPop.insertItem( a->iconSet(), a->text() ), a );
             }
         }
@@ -443,7 +443,7 @@ void K3bWelcomeWidget::contentsMousePressEvent( QMouseEvent* e )
     int r = 0;
     int removeAction = 0;
 
-    QWidget* widgetAtPos = viewport()->childAt(e->pos());
+    TQWidget* widgetAtPos = viewport()->tqchildAt(e->pos());
     if( widgetAtPos && widgetAtPos->inherits( "K3bFlatButton" ) ) {
       KPopupMenu pop;
       removeAction = pop.insertItem( SmallIcon("remove"), i18n("Remove Button") );
@@ -476,14 +476,14 @@ void K3bWelcomeWidget::slotMoreActions()
 
   for ( int i = 0; s_allActions[i]; ++i ) {
       if ( s_allActions[i][0] == '_' ) {
-          (new KActionSeparator( &popup ))->plug( &popup );
+          (new KActionSeparator( TQT_TQOBJECT(&popup) ))->plug( &popup );
       }
       else {
           m_mainWindow->actionCollection()->action( s_allActions[i] )->plug( &popup );
       }
   }
 
-  popup.exec( QCursor::pos() );
+  popup.exec( TQCursor::pos() );
 }
 
 #include "k3bwelcomewidget.moc"

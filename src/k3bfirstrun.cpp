@@ -22,11 +22,11 @@
 #include <kiconloader.h>
 #include <kconfig.h>
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 
 
-void K3bFirstRun::run( QWidget* parent )
+void K3bFirstRun::run( TQWidget* tqparent )
 {
   if( !k3bcore->config()->readBoolEntry( "First run", true ) )
     return;
@@ -41,18 +41,18 @@ void K3bFirstRun::run( QWidget* parent )
   if( si.allInstalled() )
     return;
 
-  K3bFirstRun dlg( parent );
-  if( dlg.exec() == QDialog::Accepted )
-    si.install( parent );
+  K3bFirstRun dlg( tqparent );
+  if( dlg.exec() == TQDialog::Accepted )
+    si.install( tqparent );
 }
 
 
-K3bFirstRun::K3bFirstRun( QWidget* parent )
+K3bFirstRun::K3bFirstRun( TQWidget* tqparent )
   : KDialogBase( Plain,
 		 i18n("First Run"),
 		 Ok|Cancel,
 		 Ok,
-		 parent,
+		 tqparent,
 		 0,
 		 true,
 		 true )
@@ -60,15 +60,15 @@ K3bFirstRun::K3bFirstRun( QWidget* parent )
   setButtonOK( i18n("Enable Konqueror integration") );
   setButtonCancel( i18n("No Konqueror integration") );
 
-  QFrame* plain = plainPage();
-  QLabel* label = new QLabel( i18n("<p>K3b can integrate itself into Konqueror. This integration "
+  TQFrame* plain = plainPage();
+  TQLabel* label = new TQLabel( i18n("<p>K3b can integrate itself into Konqueror. This integration "
 				   "allows to start K3b from the context menu in the file manager."
 				   "<p><em>The Konqueror integration can always be disabled and "
 				   "enabled again from the K3b settings.</em>"), plain );
-  QLabel* pixLabel = new QLabel( plain );
+  TQLabel* pixLabel = new TQLabel( plain );
   pixLabel->setPixmap( DesktopIcon( "konqueror" ) );
 
-  QHBoxLayout* lay = new QHBoxLayout( plain );
+  TQHBoxLayout* lay = new TQHBoxLayout( plain );
   lay->setMargin( 0 );
   lay->setSpacing( spacingHint() );
   lay->addWidget( pixLabel );

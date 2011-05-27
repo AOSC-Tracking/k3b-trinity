@@ -19,7 +19,7 @@
 
 #include "k3bjob.h"
 #include "k3b_export.h"
-class QCustomEvent;
+class TQCustomEvent;
 class K3bThread;
 
 
@@ -40,10 +40,11 @@ class K3bThread;
 class LIBK3B_EXPORT K3bThreadJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bThreadJob( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
-  K3bThreadJob( K3bThread*, K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bThreadJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bThreadJob( K3bThread*, K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bThreadJob();
 
   void setThread( K3bThread* t );
@@ -57,8 +58,8 @@ class LIBK3B_EXPORT K3bThreadJob : public K3bJob
    */
   virtual bool active() const { return m_running; }
 
-  virtual QString jobDescription() const;
-  virtual QString jobDetails() const;
+  virtual TQString jobDescription() const;
+  virtual TQString jobDetails() const;
 
  public slots:
   virtual void start();
@@ -68,7 +69,7 @@ class LIBK3B_EXPORT K3bThreadJob : public K3bJob
   /**
    * converts K3bThread events to K3bJob signals
    */
-  virtual void customEvent( QCustomEvent* );
+  virtual void customEvent( TQCustomEvent* );
 
   /**
    * Reimplement this method to do some housekeeping once

@@ -22,16 +22,16 @@
 #include <k3bmediacache.h>
 #include <k3b.h>
 
-#include <qpushbutton.h>
-#include <qcursor.h>
-#include <qapplication.h>
+#include <tqpushbutton.h>
+#include <tqcursor.h>
+#include <tqapplication.h>
 
 #include <klocale.h>
 #include <kmessagebox.h>
 
 
-K3bDataSessionImportDialog::K3bDataSessionImportDialog( QWidget* parent )
-  : KDialogBase( parent,
+K3bDataSessionImportDialog::K3bDataSessionImportDialog( TQWidget* tqparent )
+  : KDialogBase( tqparent,
 		 "session_import_dialog",
 		 true, 
 		 i18n("Session Import"), 
@@ -42,8 +42,8 @@ K3bDataSessionImportDialog::K3bDataSessionImportDialog( QWidget* parent )
   m_comboMedia = new K3bMediaSelectionComboBox( this );
   setMainWidget( m_comboMedia );
 
-  connect( m_comboMedia, SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, SLOT(slotSelectionChanged(K3bDevice::Device*)) );
+  connect( m_comboMedia, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotSelectionChanged(K3bDevice::Device*)) );
 }
 
 
@@ -74,7 +74,7 @@ void K3bDataSessionImportDialog::slotOk()
 {
   // find the selected device, show a busy mouse cursor and call K3bDataDoc::importSession
   if( K3bDevice::Device* dev = m_comboMedia->selectedDevice() ) {
-    QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
+    TQApplication::setOverrideCursor( TQCursor(TQt::WaitCursor) );
 
     //
     // Mkisofs does not properly import joliet filenames from an old session
@@ -104,7 +104,7 @@ void K3bDataSessionImportDialog::slotOk()
     m_doc->setBurner( dev );    
     m_doc->importSession( dev );
 
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
 
     done( 0 );
   }
@@ -125,9 +125,9 @@ void K3bDataSessionImportDialog::slotSelectionChanged( K3bDevice::Device* dev )
 }
 
 
-K3bDataDoc* K3bDataSessionImportDialog::importSession( K3bDataDoc* doc, QWidget* parent )
+K3bDataDoc* K3bDataSessionImportDialog::importSession( K3bDataDoc* doc, TQWidget* tqparent )
 {
-  K3bDataSessionImportDialog dlg( parent );
+  K3bDataSessionImportDialog dlg( tqparent );
   dlg.importSession( doc );
   dlg.exec();
   return dlg.m_doc;

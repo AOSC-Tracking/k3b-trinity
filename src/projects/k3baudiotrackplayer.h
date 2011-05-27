@@ -16,7 +16,7 @@
 #ifndef _K3B_AUDIO_TRACK_PLAYER_H_
 #define _K3B_AUDIO_TRACK_PLAYER_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 
 #include <k3baudioclient.h>
 
@@ -27,12 +27,13 @@ class K3bAudioTrack;
 class KAction;
 
 
-class K3bAudioTrackPlayer : public QObject, public K3bAudioClient
+class K3bAudioTrackPlayer : public TQObject, public K3bAudioClient
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioTrackPlayer( K3bAudioDoc* doc, QObject* parent = 0, const char* name = 0 );
+  K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bAudioTrackPlayer();
 
   K3bAudioTrack* currentPlayingTrack() const { return m_currentTrack; }

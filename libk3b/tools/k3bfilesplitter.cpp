@@ -18,7 +18,7 @@
 
 #include <kdebug.h>
 
-#include <qfile.h>
+#include <tqfile.h>
 
 
 class K3bFileSplitter::Private
@@ -28,11 +28,11 @@ public:
     : m_splitter( splitter ) {
   }
 
-  QString filename;
-  QFile file;
+  TQString filename;
+  TQFile file;
   int counter;
 
-  // QIODevice::Offset is too small on most compilations
+  // TQIODevice::Offset is too small on most compilations
   KIO::filesize_t maxFileSize;
 
   KIO::filesize_t currentOverallPos;
@@ -47,14 +47,14 @@ public:
     }
   }
 
-  QString buildFileName( int counter ) {
+  TQString buildFileName( int counter ) {
     if( counter > 0 )
-      return filename + '.' + QString::number(counter).rightJustify( 3, '0' );
+      return filename + '.' + TQString::number(counter).rightJustify( 3, '0' );
     else
       return filename;
   }
 
-  QString currentFileName() {
+  TQString currentFileName() {
     return buildFileName( counter );
   }
 
@@ -91,7 +91,7 @@ K3bFileSplitter::K3bFileSplitter()
 }
 
 
-K3bFileSplitter::K3bFileSplitter( const QString& filename )
+K3bFileSplitter::K3bFileSplitter( const TQString& filename )
 {
   d = new Private( this );
   setName( filename );
@@ -104,13 +104,13 @@ K3bFileSplitter::~K3bFileSplitter()
 }
 
 
-const QString& K3bFileSplitter::name() const
+const TQString& K3bFileSplitter::name() const
 {
   return d->filename;
 }
 
 
-void K3bFileSplitter::setName( const QString& filename )
+void K3bFileSplitter::setName( const TQString& filename )
 {
   close();
   d->maxFileSize = 0;
@@ -155,21 +155,24 @@ void K3bFileSplitter::flush()
   d->file.flush();
 }
 
-
-QIODevice::Offset K3bFileSplitter::size() const
+#ifdef USE_QT4
+qint64 K3bFileSplitter::size() const
+#else // USE_QT4
+TQIODevice::Offset K3bFileSplitter::size() const
+#endif // USE_QT4
 {
   // not implemented due to Offset size limitations
   return 0;
 }
 
 
-QIODevice::Offset K3bFileSplitter::at() const
+TQIODevice::Offset K3bFileSplitter::at() const
 {
   return d->currentOverallPos;
 }
 
 
-bool K3bFileSplitter::at( QIODevice::Offset pos )
+bool K3bFileSplitter::at( TQIODevice::Offset pos )
 {
   Q_UNUSED( pos );
   // not implemented due to Offset size limitations
@@ -179,13 +182,13 @@ bool K3bFileSplitter::at( QIODevice::Offset pos )
 
 bool K3bFileSplitter::atEnd() const
 {
-  return d->file.atEnd() && !QFile::exists( d->buildFileName( d->counter+1 ) );
+  return d->file.atEnd() && !TQFile::exists( d->buildFileName( d->counter+1 ) );
 }
 
 
-Q_LONG K3bFileSplitter::readBlock( char *data, Q_ULONG maxlen )
+TQ_LONG K3bFileSplitter::readBlock( char *data, TQ_ULONG maxlen )
 {
-  Q_LONG r = d->file.readBlock( data, maxlen );
+  TQ_LONG r = d->file.readBlock( data, maxlen );
   if( r == 0 ) {
     if( atEnd() ) {
       return r;
@@ -204,12 +207,12 @@ Q_LONG K3bFileSplitter::readBlock( char *data, Q_ULONG maxlen )
 }
 
 
-Q_LONG K3bFileSplitter::writeBlock( const char *data, Q_ULONG len )
+TQ_LONG K3bFileSplitter::writeBlock( const char *data, TQ_ULONG len )
 {
-  // We cannot rely on QFile::at since it uses long on most copmpilations
-  Q_ULONG max = (Q_ULONG)QMIN( (KIO::filesize_t)len, d->maxFileSize - d->currentFilePos );
+  // We cannot rely on TQFile::at since it uses long on most copmpilations
+  TQ_ULONG max = (TQ_ULONG)TQMIN( (KIO::filesize_t)len, d->maxFileSize - d->currentFilePos );
 
-  Q_LONG r = d->file.writeBlock( data, max );
+  TQ_LONG r = d->file.writeBlock( data, max );
 
   if( r < 0 )
     return r;
@@ -218,7 +221,7 @@ Q_LONG K3bFileSplitter::writeBlock( const char *data, Q_ULONG len )
   d->currentFilePos += r;
 
   // recursively call us
-  if( (Q_ULONG)r < len ) {
+  if( (TQ_ULONG)r < len ) {
     if( d->openNextFile() )
       return r + writeBlock( data+r, len-r );
     else
@@ -296,8 +299,8 @@ int K3bFileSplitter::ungetch( int c )
 void K3bFileSplitter::remove()
 {
   close();
-  while( QFile::exists( d->buildFileName( d->counter ) ) )
-    QFile::remove( d->buildFileName( d->counter++ ) );
+  while( TQFile::exists( d->buildFileName( d->counter ) ) )
+    TQFile::remove( d->buildFileName( d->counter++ ) );
 }
 
 

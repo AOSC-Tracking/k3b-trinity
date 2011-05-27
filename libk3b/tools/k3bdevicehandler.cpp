@@ -129,7 +129,7 @@ public:
   DiskInfo ngInfo;
   Toc toc;
   CdText cdText;
-  QByteArray cdTextRaw;
+  TQByteArray cdTextRaw;
   long long bufferCapacity;
   long long availableBufferCapacity;
   Device* dev;
@@ -139,8 +139,8 @@ private:
 };
 
 
-K3bDevice::DeviceHandler::DeviceHandler( Device* dev, QObject* parent, const char* name )
-  : K3bThreadJob( 0, parent, name ),
+K3bDevice::DeviceHandler::DeviceHandler( Device* dev, TQObject* tqparent, const char* name )
+  : K3bThreadJob( 0, tqparent, name ),
     m_selfDelete(false)
 {
   m_thread = new DeviceHandlerThread();
@@ -149,8 +149,8 @@ K3bDevice::DeviceHandler::DeviceHandler( Device* dev, QObject* parent, const cha
 }
 
 
-K3bDevice::DeviceHandler::DeviceHandler( QObject* parent, const char* name )
-  : K3bThreadJob( 0, parent, name ),
+K3bDevice::DeviceHandler::DeviceHandler( TQObject* tqparent, const char* name )
+  : K3bThreadJob( 0, tqparent, name ),
     m_selfDelete(false)
 {
   m_thread = new DeviceHandlerThread();
@@ -202,7 +202,7 @@ const K3bDevice::CdText& K3bDevice::DeviceHandler::cdText() const
 }
 
 
-const QByteArray& K3bDevice::DeviceHandler::cdTextRaw() const
+const TQByteArray& K3bDevice::DeviceHandler::cdTextRaw() const
 {
   return m_thread->cdTextRaw;
 }
@@ -311,7 +311,7 @@ K3bDevice::DeviceHandler* K3bDevice::sendCommand( int command, Device* dev )
   return new DeviceHandler( command, dev, "DeviceHandler" );
 }
 
-void K3bDevice::DeviceHandler::customEvent( QCustomEvent* e )
+void K3bDevice::DeviceHandler::customEvent( TQCustomEvent* e )
 {
   K3bThreadJob::customEvent(e);
 

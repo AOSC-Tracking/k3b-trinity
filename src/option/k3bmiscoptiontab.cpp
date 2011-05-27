@@ -24,9 +24,9 @@
 #include <k3binteractiondialog.h>
 #include <k3bintmapcombobox.h>
 
-#include <qcheckbox.h>
-#include <qfileinfo.h>
-#include <qradiobutton.h>
+#include <tqcheckbox.h>
+#include <tqfileinfo.h>
+#include <tqradiobutton.h>
 
 #include <kapplication.h>
 #include <klocale.h>
@@ -38,12 +38,12 @@
 #include <kcombobox.h>
 
 
-K3bMiscOptionTab::K3bMiscOptionTab(QWidget *parent, const char *name )
-  : base_K3bMiscOptionTab(parent,name)
+K3bMiscOptionTab::K3bMiscOptionTab(TQWidget *tqparent, const char *name )
+  : base_K3bMiscOptionTab(tqparent,name)
 {
   m_editTempDir->setMode( KFile::Directory );
-  connect( m_buttonConfigureAudioOutput, SIGNAL(clicked()),
-	   this, SLOT(slotConfigureAudioOutput()) );
+  connect( m_buttonConfigureAudioOutput, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotConfigureAudioOutput()) );
 
   m_comboActionDialogSettings->insertItem( K3bInteractionDialog::LOAD_K3B_DEFAULTS, 
 					   i18n("Default Settings"),
@@ -80,7 +80,7 @@ void K3bMiscOptionTab::readSettings()
 								  K3bInteractionDialog::LOAD_SAVED_SETTINGS ) );
   m_checkSystemConfig->setChecked( c->readBoolEntry( "check system config", true ) );
 
-  QString tempdir = c->readPathEntry( "Temp Dir", KGlobal::dirs()->resourceDirs( "tmp" ).first() );
+  TQString tempdir = c->readPathEntry( "Temp Dir", KGlobal::dirs()->resourceDirs( "tmp" ).first() );
   m_editTempDir->setURL( tempdir );
 
 //   if( c->readEntry( "Multiple Instances", "smart" ) == "smart" )
@@ -90,10 +90,10 @@ void K3bMiscOptionTab::readSettings()
 
   // Audio Output
   m_comboAudioOutputSystem->clear();
-  QPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioOutput" );
-  for( QPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
+  TQPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( "AudioOutput" );
+  for( TQPtrListIterator<K3bPlugin> it( fl ); it.current(); ++it ) {
     K3bAudioOutputPlugin* f = static_cast<K3bAudioOutputPlugin*>( it.current() );
-    m_comboAudioOutputSystem->insertItem( QString::fromLocal8Bit(f->soundSystem()) );
+    m_comboAudioOutputSystem->insertItem( TQString(TQString::fromLocal8Bit(f->soundSystem())) );
   }
 
   m_comboAudioOutputSystem->setCurrentItem( c->readEntry( "Audio Output System", "arts" ), false );
@@ -116,18 +116,18 @@ bool K3bMiscOptionTab::saveSettings()
   c->writeEntry( "check system config", m_checkSystemConfig->isChecked() );
   c->writeEntry( "action dialog startup settings", m_comboActionDialogSettings->selectedValue() );
 
-  QString tempDir = m_editTempDir->url();
-  QFileInfo fi( tempDir );
+  TQString tempDir = m_editTempDir->url();
+  TQFileInfo fi( tempDir );
 
   if( fi.isRelative() ) {
     fi.setFile( fi.absFilePath() );
   }
 
   if( !fi.exists() ) {
-    if( KMessageBox::questionYesNo( this, i18n("Directory (%1) does not exist. Create?").arg(tempDir),
+    if( KMessageBox::questionYesNo( this, i18n("Directory (%1) does not exist. Create?").tqarg(tempDir),
 				    i18n("Create Directory"), i18n("Create"), KStdGuiItem::cancel() ) == KMessageBox::Yes ) {
       if( !KStandardDirs::makeDir( fi.absFilePath() ) ) {
-	KMessageBox::error( this, i18n("Unable to create directory %1").arg(tempDir) );
+	KMessageBox::error( this, i18n("Unable to create directory %1").tqarg(tempDir) );
 	return false;
       }
     }
@@ -147,7 +147,7 @@ bool K3bMiscOptionTab::saveSettings()
 
   // check for writing permission
   if( !fi.isWritable() ) {
-    KMessageBox::error( this, i18n("You do not have permission to write to %1.").arg(fi.absFilePath()) );
+    KMessageBox::error( this, i18n("You do not have permission to write to %1.").tqarg(fi.absFilePath()) );
     return false;
   }
 
@@ -178,7 +178,7 @@ bool K3bMiscOptionTab::saveSettings()
 
 void K3bMiscOptionTab::slotConfigureAudioOutput()
 {
-  QString system = m_comboAudioOutputSystem->currentText();
+  TQString system = m_comboAudioOutputSystem->currentText();
   if( K3bAudioOutputPlugin* plugin = K3bAudioServer::findOutputPlugin( system.local8Bit() ) ) {
     k3bcore->pluginManager()->execPluginDialog( plugin, this );
   }

@@ -19,7 +19,7 @@
 #include <k3bdebug.h>
 #include <klocale.h>
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 // We acknowledge the the dbus API is unstable
 #define DBUS_API_SUBJECT_TO_CHANGE
@@ -28,7 +28,7 @@
 #include <hal/libhal.h>
 
 
-static char** qstringListToArray( const QStringList& s )
+static char** qstringListToArray( const TQStringList& s )
 {
   char** a = new char*[s.count()];
   for( unsigned int i = 0; i < s.count(); ++i ) {
@@ -72,20 +72,20 @@ class K3bDevice::HalConnection::Private
 public:
   Private()
     : halContext(0),
-      dBusQtConnection(0),
+      dBusTQtConnection(0),
       bOpen(false) {
   }
 
   LibHalContext* halContext;
   DBusConnection* connection;
-  DBusQt::Connection* dBusQtConnection;
+  DBusTQt::Connection* dBusTQtConnection;
 
   bool bOpen;
 
-  QMap<QCString, QString> udiDeviceMap;
-  QMap<QString, QCString> deviceUdiMap;
+  TQMap<TQCString, TQString> udiDeviceMap;
+  TQMap<TQString, TQCString> deviceUdiMap;
 
-  QMap<QCString, QCString> deviceMediumUdiMap;
+  TQMap<TQCString, TQCString> deviceMediumUdiMap;
 };
 
 
@@ -101,8 +101,8 @@ K3bDevice::HalConnection* K3bDevice::HalConnection::instance()
 }
 
 
-K3bDevice::HalConnection::HalConnection( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bDevice::HalConnection::HalConnection( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private();
 }
@@ -142,7 +142,7 @@ bool K3bDevice::HalConnection::open()
     return false;
   }
 
-  setupDBusQtConnection( d->connection );
+  setupDBusTQtConnection( d->connection );
 
   libhal_ctx_set_dbus_connection( d->halContext, d->connection );
 
@@ -181,18 +181,18 @@ void K3bDevice::HalConnection::close()
     libhal_ctx_free( d->halContext );
 
     // delete the connection (may be 0 if open() failed)
-    delete d->dBusQtConnection;
+    delete d->dBusTQtConnection;
 
     d->halContext = 0;
-    d->dBusQtConnection = 0;
+    d->dBusTQtConnection = 0;
     d->bOpen = false;
   }
 }
 
 
-QStringList K3bDevice::HalConnection::devices() const
+TQStringList K3bDevice::HalConnection::devices() const
 {
-  return QStringList( d->udiDeviceMap.values() );
+  return TQStringList( d->udiDeviceMap.values() );
 }
 
 
@@ -205,7 +205,7 @@ void K3bDevice::HalConnection::addDevice( const char* udi )
   if( libhal_device_query_capability( d->halContext, udi, "storage.cdrom", 0 ) ) {
     char* dev = libhal_device_get_property_string( d->halContext, udi, "block.device", 0 );
     if( dev ) {
-      QString s( dev );
+      TQString s( dev );
       libhal_free_string( dev );
 
       if( !s.isEmpty() ) {
@@ -220,15 +220,15 @@ void K3bDevice::HalConnection::addDevice( const char* udi )
     if( libhal_device_property_exists( d->halContext, udi, "block.storage_device", 0 ) ) {
       char* deviceUdi = libhal_device_get_property_string( d->halContext, udi, "block.storage_device", 0 );
       if( deviceUdi ) {
-	QCString du( deviceUdi );
+	TQCString du( deviceUdi );
 	libhal_free_string( deviceUdi );
 
-	if( d->udiDeviceMap.contains( du ) ) {
+	if( d->udiDeviceMap.tqcontains( du ) ) {
 	  //
 	  // A new medium has been inserted. Save this medium's udi so we can reuse it later
 	  // on for the mount/unmount/eject methods
 	  //
-	  d->deviceMediumUdiMap[du] = QCString( udi );
+	  d->deviceMediumUdiMap[du] = TQCString( udi );
 	  emit mediumChanged( d->udiDeviceMap[du] );
 	}
       }
@@ -239,7 +239,7 @@ void K3bDevice::HalConnection::addDevice( const char* udi )
 
 void K3bDevice::HalConnection::removeDevice( const char* udi )
 {
-  QMapIterator<QCString, QString> it = d->udiDeviceMap.find( udi );
+  TQMapIterator<TQCString, TQString> it = d->udiDeviceMap.tqfind( udi );
   if( it != d->udiDeviceMap.end() ) {
     k3bDebug() << "Unmapping udi " << udi << " from device " << it.data() << endl;
     emit deviceRemoved( it.data() );
@@ -250,10 +250,10 @@ void K3bDevice::HalConnection::removeDevice( const char* udi )
     if( libhal_device_property_exists( d->halContext, udi, "block.storage_device", 0 ) ) {
       char* deviceUdi = libhal_device_get_property_string( d->halContext, udi, "block.storage_device", 0 );
       if( deviceUdi ) {
-	QCString du( deviceUdi );
+	TQCString du( deviceUdi );
 	libhal_free_string( deviceUdi );
 
-	if( d->udiDeviceMap.contains( du ) ) {
+	if( d->udiDeviceMap.tqcontains( du ) ) {
 	  //
 	  // A medium has been removed/ejected.
 	  //
@@ -276,11 +276,11 @@ int K3bDevice::HalConnection::lock( Device* dev )
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) ) {
+  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) ) {
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
   }
 
-  QCString udi = d->deviceUdiMap[dev->blockDeviceName()];
+  TQCString udi = d->deviceUdiMap[dev->blockDeviceName()];
 
   if( !( dmesg = dbus_message_new_method_call( "org.freedesktop.Hal", udi.data(),
 					       "org.freedesktop.Hal.Device",
@@ -335,11 +335,11 @@ int K3bDevice::HalConnection::unlock( Device* dev )
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) ) {
+  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) ) {
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
   }
 
-  QCString udi = d->deviceUdiMap[dev->blockDeviceName()];
+  TQCString udi = d->deviceUdiMap[dev->blockDeviceName()];
 
   if( !( dmesg = dbus_message_new_method_call( "org.freedesktop.Hal", udi.data(),
 					       "org.freedesktop.Hal.Device",
@@ -382,9 +382,9 @@ int K3bDevice::HalConnection::unlock( Device* dev )
 
 
 int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
-				     const QString& mountPoint,
-				     const QString& fstype,
-				     const QStringList& options )
+				     const TQString& mountPoint,
+				     const TQString& fstype,
+				     const TQStringList& options )
 {
   //
   // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the kdebase package
@@ -394,13 +394,13 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) )
+  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) )
     return org_freedesktop_Hal_NoSuchDevice;
 
-  if( !d->deviceMediumUdiMap.contains( d->deviceUdiMap[dev->blockDeviceName()] ) )
+  if( !d->deviceMediumUdiMap.tqcontains( d->deviceUdiMap[dev->blockDeviceName()] ) )
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 
-  QCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];
+  TQCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];
 
   if( !( dmesg = dbus_message_new_method_call( "org.freedesktop.Hal", mediumUdi.data(),
 					       "org.freedesktop.Hal.Device.Volume",
@@ -411,8 +411,8 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
 
   char** poptions = qstringListToArray( options );
 
-  QByteArray strMountPoint = mountPoint.local8Bit();
-  QByteArray strFstype = fstype.local8Bit();
+  TQByteArray strMountPoint = mountPoint.local8Bit();
+  TQByteArray strFstype = fstype.local8Bit();
 
   if( !dbus_message_append_args( dmesg,
 				 DBUS_TYPE_STRING, strMountPoint.data(),
@@ -464,7 +464,7 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
 
 
 int K3bDevice::HalConnection::unmount( K3bDevice::Device* dev,
-				       const QStringList& options )
+				       const TQStringList& options )
 {
   //
   // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the kdebase package
@@ -474,13 +474,13 @@ int K3bDevice::HalConnection::unmount( K3bDevice::Device* dev,
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) )
+  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) )
     return org_freedesktop_Hal_NoSuchDevice;
 
-  if( !d->deviceMediumUdiMap.contains( d->deviceUdiMap[dev->blockDeviceName()] ) )
+  if( !d->deviceMediumUdiMap.tqcontains( d->deviceUdiMap[dev->blockDeviceName()] ) )
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 
-  QCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];
+  TQCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];
 
   if( !( dmesg = dbus_message_new_method_call( "org.freedesktop.Hal", mediumUdi.data(),
 					       "org.freedesktop.Hal.Device.Volume",
@@ -535,7 +535,7 @@ int K3bDevice::HalConnection::unmount( K3bDevice::Device* dev,
 
 
 int K3bDevice::HalConnection::eject( K3bDevice::Device* dev,
-				     const QStringList& options )
+				     const TQStringList& options )
 {
   //
   // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the kdebase package
@@ -545,13 +545,13 @@ int K3bDevice::HalConnection::eject( K3bDevice::Device* dev,
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) )
+  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) )
     return org_freedesktop_Hal_NoSuchDevice;
 
-  if( !d->deviceMediumUdiMap.contains( d->deviceUdiMap[dev->blockDeviceName()] ) )
+  if( !d->deviceMediumUdiMap.tqcontains( d->deviceUdiMap[dev->blockDeviceName()] ) )
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 
-  QCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];
+  TQCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];
 
   if( !( dmesg = dbus_message_new_method_call( "org.freedesktop.Hal", mediumUdi.data(),
 					       "org.freedesktop.Hal.Device.Volume",
@@ -601,10 +601,10 @@ int K3bDevice::HalConnection::eject( K3bDevice::Device* dev,
 }
 
 
-void K3bDevice::HalConnection::setupDBusQtConnection( DBusConnection* dbusConnection )
+void K3bDevice::HalConnection::setupDBusTQtConnection( DBusConnection* dbusConnection )
 {
-  d->dBusQtConnection = new DBusQt::Connection( this );
-  d->dBusQtConnection->dbus_connection_setup_with_qt_main( dbusConnection );
+  d->dBusTQtConnection = new DBusTQt::Connection( this );
+  d->dBusTQtConnection->dbus_connection_setup_with_qt_main( dbusConnection );
 }
 
 #include "k3bhalconnection.moc"

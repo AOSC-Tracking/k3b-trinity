@@ -27,8 +27,8 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <qfile.h>
-#include <qfileinfo.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
 
 
 
@@ -43,8 +43,8 @@ public:
 };
 
 
-K3bCloneJob::K3bCloneJob( K3bJobHandler* hdl, QObject* parent, const char* name )
-  : K3bBurnJob( hdl, parent, name ),
+K3bCloneJob::K3bCloneJob( K3bJobHandler* hdl, TQObject* tqparent, const char* name )
+  : K3bBurnJob( hdl, tqparent, name ),
     m_writerDevice(0),
     m_readerDevice(0),
     m_writerJob(0),
@@ -85,13 +85,13 @@ void K3bCloneJob::start()
   //
   const K3bExternalBin* cdrecordBin = k3bcore->externalBinManager()->binObject( "cdrecord" );
   if( !cdrecordBin ) {
-    emit infoMessage( i18n("Could not find %1 executable.").arg("cdrecord"), ERROR );
+    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("cdrecord"), ERROR );
     jobFinished(false);
     m_running = false;
     return;
   }
   else if( !cdrecordBin->hasFeature( "clone" ) ) {
-    emit infoMessage( i18n("Cdrecord version %1 does not have cloning support.").arg(cdrecordBin->version), ERROR );
+    emit infoMessage( i18n("Cdrecord version %1 does not have cloning support.").tqarg(cdrecordBin->version), ERROR );
     jobFinished(false);
     m_running = false;
     return;
@@ -109,8 +109,8 @@ void K3bCloneJob::start()
     if( !writer()->supportsWritingMode( K3bDevice::RAW_R96R ) &&
 	!writer()->supportsWritingMode( K3bDevice::RAW_R16 ) ) {
       emit infoMessage( i18n("CD writer %1 does not support cloning.")
-			.arg(writer()->vendor())
-			.arg(writer()->description()), ERROR );
+			.tqarg(writer()->vendor())
+			.tqarg(writer()->description()), ERROR );
       m_running = false;
       jobFinished(false);
       return;
@@ -120,7 +120,7 @@ void K3bCloneJob::start()
   if( m_imagePath.isEmpty() ) {
     m_imagePath = K3b::findTempFile( "img" );
   }
-  else if( QFileInfo(m_imagePath).isDir() ) {
+  else if( TQFileInfo(m_imagePath).isDir() ) {
     m_imagePath = K3b::findTempFile( "img", m_imagePath );
   }
 
@@ -152,14 +152,14 @@ void K3bCloneJob::prepareReader()
 {
   if( !m_readcdReader ) {
     m_readcdReader = new K3bReadcdReader( this, this );
-    connect( m_readcdReader, SIGNAL(percent(int)), this, SLOT(slotReadingPercent(int)) );
-    connect( m_readcdReader, SIGNAL(percent(int)), this, SIGNAL(subPercent(int)) );
-    connect( m_readcdReader, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-    connect( m_readcdReader, SIGNAL(finished(bool)), this, SLOT(slotReadingFinished(bool)) );
-    connect( m_readcdReader, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-    connect( m_readcdReader, SIGNAL(newTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-    connect( m_readcdReader, SIGNAL(debuggingOutput(const QString&, const QString&)), 
-	     this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+    connect( m_readcdReader, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotReadingPercent(int)) );
+    connect( m_readcdReader, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
+    connect( m_readcdReader, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+    connect( m_readcdReader, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotReadingFinished(bool)) );
+    connect( m_readcdReader, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( m_readcdReader, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+    connect( m_readcdReader, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	     this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   m_readcdReader->setReadDevice( readingDevice() );
@@ -175,19 +175,19 @@ void K3bCloneJob::prepareWriter()
 {
   if( !m_writerJob ) {
     m_writerJob = new K3bCdrecordWriter( writer(), this, this );
-    connect( m_writerJob, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-    connect( m_writerJob, SIGNAL(percent(int)), this, SLOT(slotWriterPercent(int)) );
-    connect( m_writerJob, SIGNAL(percent(int)), this, SIGNAL(subPercent(int)) );
-    connect( m_writerJob, SIGNAL(nextTrack(int, int)), this, SLOT(slotWriterNextTrack(int, int)) );
-    connect( m_writerJob, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-    connect( m_writerJob, SIGNAL(buffer(int)), this, SIGNAL(bufferStatus(int)) );
-    connect( m_writerJob, SIGNAL(deviceBuffer(int)), this, SIGNAL(deviceBuffer(int)) );
-    connect( m_writerJob, SIGNAL(writeSpeed(int, int)), this, SIGNAL(writeSpeed(int, int)) );
-    connect( m_writerJob, SIGNAL(finished(bool)), this, SLOT(slotWriterFinished(bool)) );
-    //    connect( m_writerJob, SIGNAL(newTask(const QString&)), this, SIGNAL(newTask(const QString&)) );
-    connect( m_writerJob, SIGNAL(newSubTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-    connect( m_writerJob, SIGNAL(debuggingOutput(const QString&, const QString&)), 
-	     this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+    connect( m_writerJob, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( m_writerJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterPercent(int)) );
+    connect( m_writerJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
+    connect( m_writerJob, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
+    connect( m_writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+    connect( m_writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+    connect( m_writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
+    connect( m_writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
+    connect( m_writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
+    //    connect( m_writerJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
+    connect( m_writerJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+    connect( m_writerJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	     this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   m_writerJob->clearArguments();
@@ -222,7 +222,7 @@ void K3bCloneJob::slotWriterPercent( int p )
 
 void K3bCloneJob::slotWriterNextTrack( int t, int tt )
 {
-  emit newSubTask( i18n("Writing Track %1 of %2").arg(t).arg(tt) );
+  emit newSubTask( i18n("Writing Track %1 of %2").tqarg(t).tqarg(tt) );
 }
 
 
@@ -239,7 +239,7 @@ void K3bCloneJob::slotWriterFinished( bool success )
   if( success ) {
     d->doneCopies++;
 
-    emit infoMessage( i18n("Successfully written clone copy %1.").arg(d->doneCopies), INFO );
+    emit infoMessage( i18n("Successfully written clone copy %1.").tqarg(d->doneCopies), INFO );
 
     if( d->doneCopies < m_copies ) {
       K3bDevice::eject( writer() );
@@ -330,7 +330,7 @@ void K3bCloneJob::startWriting()
   if( m_simulate )
     emit newTask( i18n("Simulating clone copy") );
   else
-    emit newTask( i18n("Writing clone copy %1").arg(d->doneCopies+1) );
+    emit newTask( i18n("Writing clone copy %1").tqarg(d->doneCopies+1) );
 
   m_writerJob->start();
 }
@@ -340,15 +340,15 @@ void K3bCloneJob::removeImageFiles()
 {
   if( !m_onlyBurnExistingImage ) {
     emit infoMessage( i18n("Removing image files."), INFO );
-    if( QFile::exists( m_imagePath ) )
-      QFile::remove( m_imagePath );
-    if( QFile::exists( m_imagePath + ".toc" ) )
-      QFile::remove( m_imagePath + ".toc"  );
+    if( TQFile::exists( m_imagePath ) )
+      TQFile::remove( m_imagePath );
+    if( TQFile::exists( m_imagePath + ".toc" ) )
+      TQFile::remove( m_imagePath + ".toc"  );
   }
 }
 
 
-QString K3bCloneJob::jobDescription() const
+TQString K3bCloneJob::jobDescription() const
 {
   if( m_onlyCreateImage )
     return i18n("Creating Clone Image");
@@ -365,7 +365,7 @@ QString K3bCloneJob::jobDescription() const
 }
 
 
-QString K3bCloneJob::jobDetails() const
+TQString K3bCloneJob::jobDetails() const
 {
   return i18n("Creating 1 clone copy", 
 	      "Creating %n clone copies", 

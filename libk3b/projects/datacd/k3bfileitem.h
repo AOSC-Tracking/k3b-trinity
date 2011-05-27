@@ -22,7 +22,7 @@
 #include <k3bglobals.h>
 
 #include <kio/global.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "k3b_export.h"
 
@@ -39,7 +39,7 @@ public:
   /**
    * Creates a new K3bFileItem
    */
-  K3bFileItem( const QString& fileName, K3bDataDoc* doc, K3bDirItem* dir, const QString& k3bName = 0, int flags = 0 );
+  K3bFileItem( const TQString& fileName, K3bDataDoc* doc, K3bDirItem* dir, const TQString& k3bName = 0, int flags = 0 );
 
   /**
    * Constructor for optimized file item creation which does no additional stat.
@@ -48,12 +48,12 @@ public:
    */
   K3bFileItem( const k3b_struct_stat* stat, 
 	       const k3b_struct_stat* followedStat, 
-	       const QString& fileName, K3bDataDoc* doc, K3bDirItem* dir, const QString& k3bName = 0 );
+	       const TQString& fileName, K3bDataDoc* doc, K3bDirItem* dir, const TQString& k3bName = 0 );
 
   /**
    * Default copy constructor
    * Creates a copy of the fileitem. The copy, however, is not an exact duplicate of this item.
-   * The copy does not have a parent dir set and any old session items are set to 0.
+   * The copy does not have a tqparent dir set and any old session items are set to 0.
    */
   K3bFileItem( const K3bFileItem& );
 
@@ -63,10 +63,10 @@ public:
 	
   bool exists() const;
 
-  QString absIsoPath();
+  TQString absIsoPath();
 
   /** reimplemented from K3bDataItem */
-  QString localPath() const;
+  TQString localPath() const;
 
   /**
    * Identification of the files on the local device.
@@ -77,7 +77,7 @@ public:
   };
 
   /**
-   * This is not the normal inode number but it also contains
+   * This is not the normal inode number but it also tqcontains
    * the device number.
    */
   Id localId() const;
@@ -90,7 +90,7 @@ public:
   K3bDirItem* getDirItem() const;
 	
   bool isSymLink() const;
-  QString linkDest() const;
+  TQString linkDest() const;
   bool isFile() const { return true; }
 
   /** returns true if the item is not a link or 
@@ -113,7 +113,7 @@ public:
   Id m_id;
   Id m_idFollowed;
 
-  QString m_localPath;
+  TQString m_localPath;
   bool m_bSymLink;
 };
 

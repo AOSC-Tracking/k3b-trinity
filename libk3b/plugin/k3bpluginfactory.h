@@ -23,7 +23,7 @@
 #include <klocale.h>
 
 /**
- * Template based on KGenericFactory. This is just here to avoid using the QStringList args parameter
+ * Template based on KGenericFactory. This is just here to avoid using the TQStringList args parameter
  * in every plugin's constructor.
  *
  * Use this as follows:
@@ -64,14 +64,14 @@ class K3bPluginFactory : public KLibFactory
     }
   }
 
-  virtual QObject* createObject( QObject *parent, const char *name,
-				 const char*, const QStringList& ) {
+  virtual TQObject* createObject( TQObject *tqparent, const char *name,
+				 const char*, const TQStringList& ) {
     initializeMessageCatalogue();
-    return new T( parent, name );
+    return new T( tqparent, name );
   }
 
  private:
-  QCString m_instanceName;
+  TQCString m_instanceName;
   bool m_catalogueInitialized;
 
   static KInstance* s_instance;

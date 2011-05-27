@@ -21,7 +21,7 @@
 class K3bBootItem : public K3bFileItem
 {
  public:
-  K3bBootItem( const QString& fileName, K3bDataDoc* doc, K3bDirItem* dir, const QString& k3bName = 0 );
+  K3bBootItem( const TQString& fileName, K3bDataDoc* doc, K3bDirItem* dir, const TQString& k3bName = 0 );
   K3bBootItem( const K3bBootItem& );
   ~K3bBootItem();
 
@@ -39,7 +39,7 @@ class K3bBootItem : public K3bFileItem
   void setLoadSize( int s ) { m_loadSize = s; }
   void setImageType( int t ) { m_imageType = t; }
 
-  void setTempPath( const QString& p ) { m_tempPath = p; }
+  void setTempPath( const TQString& p ) { m_tempPath = p; }
 
   bool noBoot() const { return m_noBoot; }
   bool bootInfoTable() const { return m_bootInfoTable; }
@@ -51,7 +51,7 @@ class K3bBootItem : public K3bFileItem
    * mkisofs changes boot images on disk. That is why the iso imager 
    * buffers them and saves the path to the buffered copy here.
    */
-  const QString& tempPath() const { return m_tempPath; }
+  const TQString& tempPath() const { return m_tempPath; }
 
  private:
   bool m_noBoot;
@@ -60,7 +60,7 @@ class K3bBootItem : public K3bFileItem
   int m_loadSize;
   int m_imageType;
 
-  QString m_tempPath;
+  TQString m_tempPath;
 };
 
 #endif

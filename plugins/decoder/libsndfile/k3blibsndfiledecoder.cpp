@@ -20,8 +20,8 @@
 
 #include <k3bpluginfactory.h>
 
-#include <qfile.h>
-#include <qstringlist.h>
+#include <tqfile.h>
+#include <tqstringlist.h>
 
 #include <kurl.h>
 #include <kdebug.h>
@@ -57,8 +57,8 @@ public:
 
 
 
-K3bLibsndfileDecoder::K3bLibsndfileDecoder( QObject* parent, const char* name )
-  : K3bAudioDecoder( parent, name )
+K3bLibsndfileDecoder::K3bLibsndfileDecoder( TQObject* tqparent, const char* name )
+  : K3bAudioDecoder( tqparent, name )
 {
   d = new Private();
 }
@@ -70,10 +70,10 @@ K3bLibsndfileDecoder::~K3bLibsndfileDecoder()
 }
 
 
-QString K3bLibsndfileDecoder::fileType() const
+TQString K3bLibsndfileDecoder::fileType() const
 {
   if( d->format_info.name )
-    return QString::fromLocal8Bit(d->format_info.name);
+    return TQString::fromLocal8Bit(d->format_info.name);
   else
     return "-";
 }
@@ -87,7 +87,7 @@ bool K3bLibsndfileDecoder::openFile()
     cleanup();
     
     d->sndinfo.format = 0;
-    d->sndfile = sf_open (QFile::encodeName(filename()), SFM_READ, &d->sndinfo);
+    d->sndfile = sf_open (TQFile::encodeName(filename()), SFM_READ, &d->sndinfo);
     if ( !d->sndfile ) {
       kdDebug() << "(K3bLibsndfileDecoder::openLibsndfileFile) : " << sf_strerror(d->sndfile) << endl;
       return false;
@@ -124,8 +124,8 @@ bool K3bLibsndfileDecoder::analyseFileInternal( K3b::Msf& frames, int& samplerat
       addMetaInfo( META_ARTIST, sf_get_string(d->sndfile, SF_STR_ARTIST) );
       addMetaInfo( META_COMMENT, sf_get_string(d->sndfile, SF_STR_COMMENT) );
       
-      addTechnicalInfo( i18n("Channels"), QString::number(d->sndinfo.channels) );
-      addTechnicalInfo( i18n("Sampling Rate"), i18n("%1 Hz").arg(d->sndinfo.samplerate) );
+      addTechnicalInfo( i18n("Channels"), TQString::number(d->sndinfo.channels) );
+      addTechnicalInfo( i18n("Sampling Rate"), i18n("%1 Hz").tqarg(d->sndinfo.samplerate) );
       
       frames = (unsigned long)ceil(d->sndinfo.frames / d->sndinfo.samplerate * 75.0); 
       samplerate = d->sndinfo.samplerate;
@@ -202,8 +202,8 @@ void K3bLibsndfileDecoder::cleanup()
 /********************************************************/
 
 
-K3bLibsndfileDecoderFactory::K3bLibsndfileDecoderFactory( QObject* parent, const char* name )
-  : K3bAudioDecoderFactory( parent, name )
+K3bLibsndfileDecoderFactory::K3bLibsndfileDecoderFactory( TQObject* tqparent, const char* name )
+  : K3bAudioDecoderFactory( tqparent, name )
 {
 }
 
@@ -213,10 +213,10 @@ K3bLibsndfileDecoderFactory::~K3bLibsndfileDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bLibsndfileDecoderFactory::createDecoder( QObject* parent, 
+K3bAudioDecoder* K3bLibsndfileDecoderFactory::createDecoder( TQObject* tqparent, 
 							     const char* name ) const
 {
-  return new K3bLibsndfileDecoder( parent, name );
+  return new K3bLibsndfileDecoder( tqparent, name );
 }
 
 
@@ -224,7 +224,7 @@ bool K3bLibsndfileDecoderFactory::canDecode( const KURL& url )
 {
   SF_INFO infos;
   infos.format = 0;
-  SNDFILE* sndfile = sf_open (QFile::encodeName(url.path()), SFM_READ, &infos);
+  SNDFILE* sndfile = sf_open (TQFile::encodeName(url.path()), SFM_READ, &infos);
   
   //is it supported by libsndfile?
   if ( !sndfile ) {

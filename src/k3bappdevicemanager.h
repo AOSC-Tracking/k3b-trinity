@@ -40,9 +40,10 @@ namespace KIO {
 class K3bAppDeviceManager : public K3bDevice::DeviceManager
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAppDeviceManager( QObject* parent = 0, const char* name = 0 );
+  K3bAppDeviceManager( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bAppDeviceManager();
 
   K3bDevice::Device* currentDevice() const;
@@ -59,7 +60,7 @@ class K3bAppDeviceManager : public K3bDevice::DeviceManager
   void detectingDiskInfo( K3bDevice::Device* );
   void diskInfoReady( K3bDevice::DiskInfoDetector* );
 
-  void mountFinished( const QString& mountPoint );
+  void mountFinished( const TQString& mountPoint );
   void unmountFinished( bool success );
 
  public slots:
@@ -71,7 +72,7 @@ class K3bAppDeviceManager : public K3bDevice::DeviceManager
   /**
    * \reimplemeted for internal reasons. The API is unaffected.
    */
-  void removeDevice( const QString& );
+  void removeDevice( const TQString& );
 
   /**
    * \reimplemeted for internal reasons. The API is unaffected.

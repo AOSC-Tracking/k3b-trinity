@@ -20,9 +20,9 @@
 #include <k3binteractiondialog.h>
 
 
-class QCheckBox;
+class TQCheckBox;
 class K3bWriterSelectionWidget;
-class QLabel;
+class TQLabel;
 class KURL;
 class KActiveLabel;
 class KProgress;
@@ -31,15 +31,15 @@ class K3bWritingModeWidget;
 class K3bTempDirSelectionWidget;
 class KURLRequester;
 class K3bListView;
-class QSpinBox;
-class QComboBox;
+class TQSpinBox;
+class TQComboBox;
 class K3bIso9660;
 class K3bCueFileParser;
-class QDragEnterEvent;
-class QDropEvent;
+class TQDragEnterEvent;
+class TQDropEvent;
 class KListView;
-class QListViewItem;
-class QPoint;
+class TQListViewItem;
+class TQPoint;
 
 
 /**
@@ -48,9 +48,10 @@ class QPoint;
 class K3bCdImageWritingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bCdImageWritingDialog( QWidget* = 0, const char* = 0, bool = true );
+  K3bCdImageWritingDialog( TQWidget* = 0, const char* = 0, bool = true );
   ~K3bCdImageWritingDialog();
 
   void setImage( const KURL& url );
@@ -60,18 +61,18 @@ class K3bCdImageWritingDialog : public K3bInteractionDialog
 
   void slotMd5JobPercent( int );
   void slotMd5JobFinished( bool );
-  void slotContextMenu( KListView*, QListViewItem*, const QPoint& pos );
+  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& pos );
 
-  void slotUpdateImage( const QString& );
+  void slotUpdateImage( const TQString& );
 
  protected:
   void loadUserDefaults( KConfigBase* );
   void saveUserDefaults( KConfigBase* );
   void loadK3bDefaults();
 
-  void calculateMd5Sum( const QString& );
-  void dragEnterEvent( QDragEnterEvent* );
-  void dropEvent( QDropEvent* );
+  void calculateMd5Sum( const TQString& );
+  void dragEnterEvent( TQDragEnterEvent* );
+  void dropEvent( TQDropEvent* );
 
   void init();
 
@@ -88,23 +89,23 @@ class K3bCdImageWritingDialog : public K3bInteractionDialog
 
   void setupGui();
   void createIso9660InfoItems( K3bIso9660* );
-  void createCdrecordCloneItems( const QString&, const QString& );
-  void createCueBinItems( const QString&, const QString& );
+  void createCdrecordCloneItems( const TQString&, const TQString& );
+  void createCueBinItems( const TQString&, const TQString& );
   void createAudioCueItems( const K3bCueFileParser& cp );
   int currentImageType();
-  QString imagePath() const;
+  TQString imagePath() const;
 
   K3bWriterSelectionWidget* m_writerSelectionWidget;
-  QCheckBox* m_checkDummy;
-  QCheckBox* m_checkNoFix;
-  QCheckBox* m_checkCacheImage;
-  QCheckBox* m_checkVerify;
+  TQCheckBox* m_checkDummy;
+  TQCheckBox* m_checkNoFix;
+  TQCheckBox* m_checkCacheImage;
+  TQCheckBox* m_checkVerify;
   K3bDataModeWidget* m_dataModeWidget;
   K3bWritingModeWidget* m_writingModeWidget;
-  QSpinBox* m_spinCopies;
+  TQSpinBox* m_spinCopies;
 
   KURLRequester* m_editImagePath;
-  QComboBox* m_comboImageType;
+  TQComboBox* m_comboImageType;
 
   K3bListView* m_infoView;
   K3bTempDirSelectionWidget* m_tempDirSelectionWidget;

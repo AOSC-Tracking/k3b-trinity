@@ -20,22 +20,23 @@
 #include <k3bdiskinfo.h>
 #include "k3bvideocdrippingoptions.h"
 
-class QString;
+class TQString;
 class KProcess;
-class QDataStream;
+class TQDataStream;
 
 class K3bVideoCdRip : public K3bJob
 {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        K3bVideoCdRip( K3bJobHandler*, K3bVideoCdRippingOptions* options, QObject* parent = 0, const char* name = 0 );
+        K3bVideoCdRip( K3bJobHandler*, K3bVideoCdRippingOptions* options, TQObject* tqparent = 0, const char* name = 0 );
         ~K3bVideoCdRip();
 
         enum { CDROM, BIN_IMAGE, NRG_IMAGE };
 
-        QString jobDescription() const;
-        QString jobDetails() const;
+        TQString jobDescription() const;
+        TQString jobDetails() const;
 
     public slots:
         void start();
@@ -50,7 +51,7 @@ class K3bVideoCdRip : public K3bJob
 
     private:
         void vcdxRip();
-        void parseInformation( QString );
+        void parseInformation( TQString );
 
         enum { stageUnknown, stageScan, stageFinished, _stage_max };
 
@@ -61,7 +62,7 @@ class K3bVideoCdRip : public K3bJob
 
         long m_subPosition;
 
-        QString m_collectedOutput;
+        TQString m_collectedOutput;
 
         K3bVideoCdRippingOptions * m_videooptions;
 

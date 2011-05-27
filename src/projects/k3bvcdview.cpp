@@ -14,8 +14,8 @@
 */
 
 // QT-includes
-#include <qlayout.h>
-#include <qstring.h>
+#include <tqlayout.h>
+#include <tqstring.h>
 
 
 // KDE-includes
@@ -34,8 +34,8 @@
 #include <k3bcore.h>
 
 
-K3bVcdView::K3bVcdView( K3bVcdDoc* pDoc, QWidget* parent, const char *name )
-        : K3bView( pDoc, parent, name )
+K3bVcdView::K3bVcdView( K3bVcdDoc* pDoc, TQWidget* tqparent, const char *name )
+        : K3bView( pDoc, tqparent, name )
 {
     m_doc = pDoc;
 
@@ -45,17 +45,17 @@ K3bVcdView::K3bVcdView( K3bVcdDoc* pDoc, QWidget* parent, const char *name )
     setMainWidget( m_vcdlist );
     fillStatusDisplay() ->showSize();
 
-    connect( m_vcdlist, SIGNAL( lengthReady() ), fillStatusDisplay(), SLOT( update() ) );
-    connect( m_doc, SIGNAL( newTracks() ), fillStatusDisplay(), SLOT( update() ) );
+    connect( m_vcdlist, TQT_SIGNAL( lengthReady() ), fillStatusDisplay(), TQT_SLOT( update() ) );
+    connect( m_doc, TQT_SIGNAL( newTracks() ), fillStatusDisplay(), TQT_SLOT( update() ) );
 }
 
 K3bVcdView::~K3bVcdView()
 {}
 
 
-K3bProjectBurnDialog* K3bVcdView::newBurnDialog( QWidget * parent, const char * name )
+K3bProjectBurnDialog* K3bVcdView::newBurnDialog( TQWidget * tqparent, const char * name )
 {
-  return new K3bVcdBurnDialog( m_doc, parent, name, true );
+  return new K3bVcdBurnDialog( m_doc, tqparent, name, true );
 }
 
 

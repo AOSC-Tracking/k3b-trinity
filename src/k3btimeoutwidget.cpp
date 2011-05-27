@@ -19,9 +19,9 @@
 
 #include <kiconloader.h>
 
-#include <qpainter.h>
-#include <qtimer.h>
-#include <qbitmap.h>
+#include <tqpainter.h>
+#include <tqtimer.h>
+#include <tqbitmap.h>
 
 
 class K3bTimeoutWidget::Private
@@ -30,18 +30,18 @@ public:
   int timeout;
   int margin;
 
-  QTimer timer;
+  TQTimer timer;
   int currentTime;
 };
 
 
-K3bTimeoutWidget::K3bTimeoutWidget( QWidget* parent )
-  : QWidget( parent )
+K3bTimeoutWidget::K3bTimeoutWidget( TQWidget* tqparent )
+  : TQWidget( tqparent )
 {
   d = new Private;
   d->timeout = 10000;
   d->margin = 4;
-  connect( &d->timer, SIGNAL(timeout()), this, SLOT(timeStep()) );
+  connect( &d->timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(timeStep()) );
 }
 
 
@@ -88,20 +88,20 @@ void K3bTimeoutWidget::timeStep()
 }
 
 
-QSize K3bTimeoutWidget::sizeHint() const
+TQSize K3bTimeoutWidget::tqsizeHint() const
 {
-  return minimumSizeHint();
+  return tqminimumSizeHint();
 }
 
 
-QSize K3bTimeoutWidget::minimumSizeHint() const
+TQSize K3bTimeoutWidget::tqminimumSizeHint() const
 {
-  int fw = fontMetrics().width( QString::number( d->timeout/1000 ) );
+  int fw = fontMetrics().width( TQString::number( d->timeout/1000 ) );
   int fh = fontMetrics().height();
 
-  int diam = QMAX( fw, fh ) + 2*d->margin;
+  int diam = TQMAX( fw, fh ) + 2*d->margin;
 
-  return QSize( diam, diam );
+  return TQSize( diam, diam );
 }
 
 
@@ -117,32 +117,32 @@ void K3bTimeoutWidget::startTimer()
 }
 
 
-void K3bTimeoutWidget::paintEvent( QPaintEvent* )
+void K3bTimeoutWidget::paintEvent( TQPaintEvent* )
 {
   if( d->timer.isActive() ) {
-    QPainter p(this);
+    TQPainter p(this);
     
     if( K3bTheme* theme = k3bappcore->themeManager()->currentTheme() ) {
       p.setBrush( theme->backgroundColor() );
       p.setPen( theme->backgroundColor() );
     }
 
-    QRect r;
-    r.setSize( minimumSizeHint() );
+    TQRect r;
+    r.setSize( tqminimumSizeHint() );
     r.moveCenter( rect().center() );
 
     p.drawArc( r, 0, 360*16 );    
     p.drawPie( r, 90*16, 360*16*d->currentTime/d->timeout );
     
-    p.setPen( Qt::black );
-    p.drawText( rect(), Qt::AlignCenter, QString::number( (d->timeout - d->currentTime + 500)/1000 ) );
+    p.setPen( TQt::black );
+    p.drawText( rect(), TQt::AlignCenter, TQString::number( (d->timeout - d->currentTime + 500)/1000 ) );
   }
 }
 
 
-void K3bTimeoutWidget::resizeEvent( QResizeEvent* e )
+void K3bTimeoutWidget::resizeEvent( TQResizeEvent* e )
 {
-  QWidget::resizeEvent( e );
+  TQWidget::resizeEvent( e );
 }
 
 

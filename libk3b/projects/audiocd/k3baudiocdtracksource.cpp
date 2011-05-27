@@ -45,8 +45,8 @@ K3bAudioCdTrackSource::K3bAudioCdTrackSource( const K3bDevice::Toc& toc, int cdT
 
 
 K3bAudioCdTrackSource::K3bAudioCdTrackSource( unsigned int discid, const K3b::Msf& length, int cdTrackNumber,
-					      const QString& artist, const QString& title,
-					      const QString& cdArtist, const QString& cdTitle )
+					      const TQString& artist, const TQString& title,
+					      const TQString& cdArtist, const TQString& cdTitle )
   : K3bAudioDataSource(),
     m_discId( discid ),
     m_length( length ),
@@ -56,8 +56,8 @@ K3bAudioCdTrackSource::K3bAudioCdTrackSource( unsigned int discid, const K3b::Ms
     m_initialized( false )
 {
   for( int i = 1; i < cdTrackNumber; ++i ) {
-    m_cddbEntry.titles.append( QString::null );
-    m_cddbEntry.artists.append( QString::null );
+    m_cddbEntry.titles.append( TQString() );
+    m_cddbEntry.artists.append( TQString() );
   }
   m_cddbEntry.titles.append( title );
   m_cddbEntry.artists.append( artist );
@@ -98,10 +98,10 @@ bool K3bAudioCdTrackSource::initParanoia()
       // ask here for the cd since searchForAudioCD() may also be called from outside
       if( !m_lastUsedDevice ) {
 	// could not find the CD, so ask for it
-	QString s = i18n("Please insert Audio CD %1%2")
-	  .arg(m_discId, 0, 16)
-	  .arg(m_cddbEntry.cdTitle.isEmpty() || m_cddbEntry.cdArtist.isEmpty()
-	       ? QString::null
+	TQString s = i18n("Please insert Audio CD %1%2")
+	  .tqarg(m_discId, 0, 16)
+	  .tqarg(m_cddbEntry.cdTitle.isEmpty() || m_cddbEntry.cdArtist.isEmpty()
+	       ? TQString()
 	       : " (" + m_cddbEntry.cdArtist + " - " + m_cddbEntry.cdTitle + ")");
 
 	while( K3bDevice::Device* dev = K3bThreadWidget::selectDevice( track()->doc()->view(), s ) ) {
@@ -163,8 +163,8 @@ K3bDevice::Device* K3bAudioCdTrackSource::searchForAudioCD() const
   if( m_lastUsedDevice && searchForAudioCD( m_lastUsedDevice ) )
     return m_lastUsedDevice;
 
-  const QPtrList<K3bDevice::Device>& devices = k3bcore->deviceManager()->readingDevices();
-  for( QPtrListIterator<K3bDevice::Device> it(devices); *it; ++it ) {
+  const TQPtrList<K3bDevice::Device>& devices = k3bcore->deviceManager()->readingDevices();
+  for( TQPtrListIterator<K3bDevice::Device> it(devices); *it; ++it ) {
     if( searchForAudioCD( *it ) ) {
       return *it;
     }
@@ -244,15 +244,15 @@ int K3bAudioCdTrackSource::read( char* data, unsigned int )
 }
 
 
-QString K3bAudioCdTrackSource::type() const
+TQString K3bAudioCdTrackSource::type() const
 {
   return i18n("CD Track");
 }
 
 
-QString K3bAudioCdTrackSource::sourceComment() const
+TQString K3bAudioCdTrackSource::sourceComment() const
 {
-  return i18n("Track %1 from Audio CD %2").arg(m_cdTrackNumber).arg(m_discId,0,16);
+  return i18n("Track %1 from Audio CD %2").tqarg(m_cdTrackNumber).tqarg(m_discId,0,16);
 }
 
 

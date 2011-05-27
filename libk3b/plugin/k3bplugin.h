@@ -17,7 +17,7 @@
 #ifndef _K3B_PLUGIN_H_
 #define _K3B_PLUGIN_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 #include <kgenericfactory.h>
 #include "k3b_export.h"
 
@@ -25,7 +25,7 @@
 
 
 class K3bPluginConfigWidget;
-class QWidget;
+class TQWidget;
 
 
 
@@ -37,13 +37,13 @@ class K3bPluginInfo
   K3bPluginInfo() {
   }
 
-  K3bPluginInfo( QString libraryName,
-		 QString name,
-		 QString author,
-		 QString email,
-		 QString comment,
-		 QString version,
-		 QString licence )
+  K3bPluginInfo( TQString libraryName,
+		 TQString name,
+		 TQString author,
+		 TQString email,
+		 TQString comment,
+		 TQString version,
+		 TQString licence )
     : m_libraryName(libraryName),
     m_name(name),
     m_author(author),
@@ -53,38 +53,39 @@ class K3bPluginInfo
     m_licence(licence) {
   }
 
-  const QString& name() const { return m_name; }
-  const QString& author() const { return m_author; }
-  const QString& email() const { return m_email; }
-  const QString& comment() const { return m_comment; }
-  const QString& version() const { return m_version; }
-  const QString& licence() const { return m_licence; }
+  const TQString& name() const { return m_name; }
+  const TQString& author() const { return m_author; }
+  const TQString& email() const { return m_email; }
+  const TQString& comment() const { return m_comment; }
+  const TQString& version() const { return m_version; }
+  const TQString& licence() const { return m_licence; }
 
-  const QString& libraryName() const { return m_libraryName; }
+  const TQString& libraryName() const { return m_libraryName; }
 
  private:
-  QString m_libraryName;
+  TQString m_libraryName;
 
-  QString m_name;
-  QString m_author;
-  QString m_email;
-  QString m_comment;
-  QString m_version;
-  QString m_licence;
+  TQString m_name;
+  TQString m_author;
+  TQString m_email;
+  TQString m_comment;
+  TQString m_version;
+  TQString m_licence;
 };
 
 
 /**
  * Base class for all plugins. You may use the K3bPluginFactory to make your plugin available.
  */
-class LIBK3B_EXPORT K3bPlugin : public QObject
+class LIBK3B_EXPORT K3bPlugin : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
     friend class K3bPluginManager;
 
  public:
-  K3bPlugin( QObject* parent = 0, const char* name = 0 );
+  K3bPlugin( TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bPlugin();
 
   const K3bPluginInfo& pluginInfo() const { return m_pluginInfo; }
@@ -97,14 +98,14 @@ class LIBK3B_EXPORT K3bPlugin : public QObject
   /**
    * The plugin group.
    */
-  virtual QString group() const = 0;
+  virtual TQString group() const = 0;
 
   /**
    * Returns a widget which configures the plugin.
    *
    * The caller has to destroy the widget
    */
-  virtual K3bPluginConfigWidget* createConfigWidget( QWidget* parent = 0, const char* name = 0 ) const;
+  virtual K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent = 0, const char* name = 0 ) const;
 
  private:
   K3bPluginInfo m_pluginInfo;

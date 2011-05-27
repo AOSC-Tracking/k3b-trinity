@@ -33,34 +33,34 @@
 #include <kmessagebox.h>
 #include <kurl.h>
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qlineedit.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
 
 
-K3bMovixView::K3bMovixView( K3bMovixDoc* doc, QWidget* parent, const char* name )
-  : K3bView( doc, parent, name ),
+K3bMovixView::K3bMovixView( K3bMovixDoc* doc, TQWidget* tqparent, const char* name )
+  : K3bView( doc, tqparent, name ),
     m_doc(doc)
 {
   m_listView = new K3bMovixListView( m_doc, this );
   setMainWidget( m_listView );
 
-  connect( m_listView, SIGNAL(contextMenuRequested( QListViewItem*, const QPoint& , int )),
-	   this, SLOT(slotContextMenuRequested(QListViewItem*, const QPoint& , int )) );
+  connect( m_listView, TQT_SIGNAL(contextMenuRequested( TQListViewItem*, const TQPoint& , int )),
+	   this, TQT_SLOT(slotContextMenuRequested(TQListViewItem*, const TQPoint& , int )) );
 
 
   // setup actions
   m_actionProperties = new KAction( i18n("Properties"), "misc",
-				    0, this, SLOT(showPropertiesDialog()),
+				    0, TQT_TQOBJECT(this), TQT_SLOT(showPropertiesDialog()),
 				    actionCollection(), "movix_show_props" );
   m_actionRemove = new KAction( i18n( "Remove" ), "editdelete",
-				Key_Delete, this, SLOT(slotRemoveItems()),
+				Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItems()),
 				actionCollection(), "movix_remove_item" );
   m_actionRemoveSubTitle = new KAction( i18n( "Remove Subtitle File" ), "editdelete",
-					0, this, SLOT(slotRemoveSubTitleItems()),
+					0, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveSubTitleItems()),
 					actionCollection(), "movix_remove_subtitle_item" );
   m_actionAddSubTitle = new KAction( i18n("Add Subtitle File..."), "",
-				     0, this, SLOT(slotAddSubTitleFile()),
+				     0, TQT_TQOBJECT(this), TQT_SLOT(slotAddSubTitleFile()),
 				     actionCollection(), "movix_add_subtitle" );
 
   m_popupMenu = new KPopupMenu( this );
@@ -77,15 +77,15 @@ K3bMovixView::K3bMovixView( K3bMovixDoc* doc, QWidget* parent, const char* name 
 
   toolBox()->addStretch();
 
-  m_volumeIDEdit = new QLineEdit( doc->isoOptions().volumeID(), toolBox() );
+  m_volumeIDEdit = new TQLineEdit( doc->isoOptions().volumeID(), toolBox() );
   toolBox()->addLabel( i18n("Volume Name:") );
   toolBox()->addSpacing();
   toolBox()->addWidget( m_volumeIDEdit );
-  connect( m_volumeIDEdit, SIGNAL(textChanged(const QString&)), 
+  connect( m_volumeIDEdit, TQT_SIGNAL(textChanged(const TQString&)), 
 	   m_doc,
-	   SLOT(setVolumeID(const QString&)) );
+	   TQT_SLOT(setVolumeID(const TQString&)) );
 
-  connect( m_doc, SIGNAL(changed()), this, SLOT(slotDocChanged()) );
+  connect( m_doc, TQT_SIGNAL(changed()), TQT_TQOBJECT(this), TQT_SLOT(slotDocChanged()) );
 }
 
 
@@ -94,7 +94,7 @@ K3bMovixView::~K3bMovixView()
 }
 
 
-void K3bMovixView::slotContextMenuRequested(QListViewItem* item, const QPoint& p, int )
+void K3bMovixView::slotContextMenuRequested(TQListViewItem* item, const TQPoint& p, int )
 {
   if( item ) {
     m_actionRemove->setEnabled(true);
@@ -129,8 +129,8 @@ void K3bMovixView::showPropertiesDialog()
 
 void K3bMovixView::slotRemoveItems()
 {
-  QPtrList<QListViewItem> list = m_listView->selectedItems();
-  QPtrListIterator<QListViewItem> it(list);
+  TQPtrList<TQListViewItem> list = m_listView->selectedItems();
+  TQPtrListIterator<TQListViewItem> it(list);
 
   if( list.isEmpty() )
     kdDebug() << "nothing to remove" << endl;
@@ -147,8 +147,8 @@ void K3bMovixView::slotRemoveItems()
 
 void K3bMovixView::slotRemoveSubTitleItems()
 {
-  QPtrList<QListViewItem> list = m_listView->selectedItems();
-  QPtrListIterator<QListViewItem> it(list);
+  TQPtrList<TQListViewItem> list = m_listView->selectedItems();
+  TQPtrListIterator<TQListViewItem> it(list);
 
   if( list.isEmpty() )
     kdDebug() << "nothing to remove" << endl;
@@ -162,7 +162,7 @@ void K3bMovixView::slotRemoveSubTitleItems()
 
 void K3bMovixView::slotAddSubTitleFile()
 {
-  QListViewItem* item = m_listView->selectedItems().first();
+  TQListViewItem* item = m_listView->selectedItems().first();
   if( K3bMovixListViewItem* vi = dynamic_cast<K3bMovixListViewItem*>(item) ) {
 
     KURL url = KFileDialog::getOpenURL();
@@ -176,9 +176,9 @@ void K3bMovixView::slotAddSubTitleFile()
 }
 
 
-K3bProjectBurnDialog* K3bMovixView::newBurnDialog( QWidget* parent, const char* name )
+K3bProjectBurnDialog* K3bMovixView::newBurnDialog( TQWidget* tqparent, const char* name )
 {
-  return new K3bMovixBurnDialog( m_doc, parent, name, true );
+  return new K3bMovixBurnDialog( m_doc, tqparent, name, true );
 }
 
 

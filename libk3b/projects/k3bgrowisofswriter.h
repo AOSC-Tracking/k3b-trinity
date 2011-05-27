@@ -30,10 +30,11 @@ class KProcess;
 class K3bGrowisofsWriter : public K3bAbstractWriter
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   K3bGrowisofsWriter( K3bDevice::Device*, K3bJobHandler*,
-		      QObject* parent = 0, const char* name = 0 );
+		      TQObject* tqparent = 0, const char* name = 0 );
   ~K3bGrowisofsWriter();
 
   bool active() const;
@@ -74,16 +75,16 @@ class K3bGrowisofsWriter : public K3bAbstractWriter
   void setCloseDvd( bool );
 
   /**
-   * set this to QString::null or an empty string to let the writer
+   * set this to TQString() or an empty string to let the writer
    * read it's data from fd()
    */
-  void setImageToWrite( const QString& );
+  void setImageToWrite( const TQString& );
 
   /**
    * While reading the image from stdin growisofs needs 
    * a valid -C parameter for multisession.
    */
-  void setMultiSessionInfo( const QString& );
+  void setMultiSessionInfo( const TQString& );
 
   void setForceNoEject( bool );
 
@@ -91,7 +92,7 @@ class K3bGrowisofsWriter : public K3bAbstractWriter
   bool prepareProcess();
 
  protected slots:
-  void slotReceivedStderr( const QString& );
+  void slotReceivedStderr( const TQString& );
   void slotProcessExited( KProcess* );
   void slotEjectingFinished( K3bDevice::DeviceHandler* dh );
   void slotThroughput( int t );

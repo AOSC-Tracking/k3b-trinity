@@ -16,11 +16,11 @@
 #ifndef K3BVCDTRACK_H
 #define K3BVCDTRACK_H
 
-// Qt Includes
-#include <qstring.h>
-#include <qfileinfo.h>
-#include <qfile.h>
-#include <qptrlist.h>
+// TQt Includes
+#include <tqstring.h>
+#include <tqfileinfo.h>
+#include <tqfile.h>
+#include <tqptrlist.h>
 
 // Kde Includes
 #include <kio/global.h>
@@ -31,25 +31,25 @@
 class LIBK3B_EXPORT K3bVcdTrack
 {
     public:
-        K3bVcdTrack( QPtrList<K3bVcdTrack>* parent, const QString& filename );
+        K3bVcdTrack( TQPtrList<K3bVcdTrack>* tqparent, const TQString& filename );
         ~K3bVcdTrack();
 
-        QString fileName() const
+        TQString fileName() const
         {
-            return QFileInfo( m_file ).fileName();
+            return TQFileInfo( m_file ).fileName();
         }
-        QString absPath() const
+        TQString absPath() const
         {
-            return QFileInfo( m_file ).absFilePath();
+            return TQFileInfo( m_file ).absFilePath();
         }
         KIO::filesize_t size() const;
         int index() const;
 
-        const QString& title() const
+        const TQString& title() const
         {
             return m_title;
         }
-        void setTitle( const QString& t )
+        void setTitle( const TQString& t )
         {
             m_title = t;
         }
@@ -131,21 +131,21 @@ class LIBK3B_EXPORT K3bVcdTrack
         {
             m_definedkeysmap.clear();
         }
-        QMap<int, K3bVcdTrack*> DefinedNumKey()
+        TQMap<int, K3bVcdTrack*> DefinedNumKey()
         {
             return m_definedkeysmap;
         }
 
         // Mpeg Infos
-        const QString resolution();
-        const QString highresolution();
-        const QString video_frate();
-        const QString video_bitrate();
-        const QString audio_layer();
-        const QString audio_bitrate();
-        const QString audio_sampfreq();
+        const TQString resolution();
+        const TQString highresolution();
+        const TQString video_frate();
+        const TQString video_bitrate();
+        const TQString audio_layer();
+        const TQString audio_bitrate();
+        const TQString audio_sampfreq();
 
-        const QString duration()
+        const TQString duration()
         {
             return SecsToHMS( mpeg_info->playing_time );
         };
@@ -157,11 +157,11 @@ class LIBK3B_EXPORT K3bVcdTrack
         {
             return mpeg_info->muxrate;
         };
-        const QString video_format( );
-        const QString video_chroma( );
-        const QString audio_mode( );
-        const QString audio_copyright( );
-        const QString mpegTypeS( bool audio = false );
+        const TQString video_format( );
+        const TQString video_chroma( );
+        const TQString audio_mode( );
+        const TQString audio_copyright( );
+        const TQString mpegTypeS( bool audio = false );
         const int mpegType();
 
         void PrintInfo();
@@ -170,17 +170,17 @@ class LIBK3B_EXPORT K3bVcdTrack
 
     protected:
 
-        const QString audio_type2str( unsigned int , unsigned int, unsigned int );
-        QString SecsToHMS( double );
+        const TQString audio_type2str( unsigned int , unsigned int, unsigned int );
+        TQString SecsToHMS( double );
 
-        QPtrList<K3bVcdTrack>* m_parent;
+        TQPtrList<K3bVcdTrack>* m_parent;
 
         // PBC
-        QPtrList<K3bVcdTrack>* m_revreflist;          // List of Tracks which points to us
-        QMap<int, K3bVcdTrack*> m_pbctrackmap;        // Pbc Tracks (Previous, Next, ...)
-        QMap<int, int> m_pbcnontrackmap;              // Pbc NON Track types (Previous, Next, ...)
-        QMap<int, bool> m_pbcusrdefmap;               // Pbc is userdefined or defaults (Previous, Next, ...)
-        QMap<int, K3bVcdTrack*> m_definedkeysmap;
+        TQPtrList<K3bVcdTrack>* m_revreflist;          // List of Tracks which points to us
+        TQMap<int, K3bVcdTrack*> m_pbctrackmap;        // Pbc Tracks (Previous, Next, ...)
+        TQMap<int, int> m_pbcnontrackmap;              // Pbc NON Track types (Previous, Next, ...)
+        TQMap<int, bool> m_pbcusrdefmap;               // Pbc is userdefined or defaults (Previous, Next, ...)
+        TQMap<int, K3bVcdTrack*> m_definedkeysmap;
 
         bool m_pbcnumkeys;
         bool m_pbcnumkeysuserdefined;
@@ -191,8 +191,8 @@ class LIBK3B_EXPORT K3bVcdTrack
 
         bool m_reactivity;
         int m_filetype;
-        QFile m_file;
-        QString m_title;
+        TQFile m_file;
+        TQString m_title;
 };
 
 #endif

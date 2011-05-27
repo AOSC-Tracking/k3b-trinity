@@ -37,58 +37,58 @@
 #include <kaboutdata.h>
 #include <kaction.h>
 
-#include <qlabel.h>
-#include <qhbox.h>
-#include <qfile.h>
-#include <qtimer.h>
-#include <qevent.h>
-#include <qtooltip.h>
+#include <tqlabel.h>
+#include <tqhbox.h>
+#include <tqfile.h>
+#include <tqtimer.h>
+#include <tqevent.h>
+#include <tqtooltip.h>
 
 
 
-K3bStatusBarManager::K3bStatusBarManager( K3bMainWindow* parent )
-  : QObject(parent),
-    m_mainWindow(parent)
+K3bStatusBarManager::K3bStatusBarManager( K3bMainWindow* tqparent )
+  : TQObject(tqparent),
+    m_mainWindow(tqparent)
 {
   // setup free temp space box
-  QHBox* boxFreeTemp = new QHBox( m_mainWindow->statusBar() );
+  TQHBox* boxFreeTemp = new TQHBox( m_mainWindow->statusBar() );
   boxFreeTemp->setSpacing(2);
 
-  m_labelProjectInfo = new QLabel( m_mainWindow->statusBar() );
+  m_labelProjectInfo = new TQLabel( m_mainWindow->statusBar() );
 
-  m_pixFreeTemp = new QLabel( boxFreeTemp );
-  (void)new QLabel( i18n("Temp:"), boxFreeTemp );
+  m_pixFreeTemp = new TQLabel( boxFreeTemp );
+  (void)new TQLabel( i18n("Temp:"), boxFreeTemp );
   m_pixFreeTemp->setPixmap( SmallIcon("folder_green") );
-  m_labelFreeTemp = new QLabel( boxFreeTemp );
+  m_labelFreeTemp = new TQLabel( boxFreeTemp );
   boxFreeTemp->installEventFilter( this );
 
   // setup info area
-  m_labelInfoMessage = new QLabel( " ", m_mainWindow->statusBar() );
+  m_labelInfoMessage = new TQLabel( " ", m_mainWindow->statusBar() );
 
   // setup version info
-  m_versionBox = new QLabel( QString("K3b %1").arg(kapp->aboutData()->version()), m_mainWindow->statusBar() );
+  m_versionBox = new TQLabel( TQString("K3b %1").tqarg(kapp->aboutData()->version()), m_mainWindow->statusBar() );
   m_versionBox->installEventFilter( this );
 
   // setup the statusbar
   m_mainWindow->statusBar()->addWidget( m_labelInfoMessage, 1 ); // for showing some info
   m_mainWindow->statusBar()->addWidget( m_labelProjectInfo, 0, true );
   // a spacer item
-  m_mainWindow->statusBar()->addWidget( new QLabel( "  ", m_mainWindow->statusBar() ), 0, true );
+  m_mainWindow->statusBar()->addWidget( new TQLabel( "  ", m_mainWindow->statusBar() ), 0, true );
   m_mainWindow->statusBar()->addWidget( boxFreeTemp, 0, true );
   // a spacer item
-  m_mainWindow->statusBar()->addWidget( new QLabel( "  ", m_mainWindow->statusBar() ), 0, true );
+  m_mainWindow->statusBar()->addWidget( new TQLabel( "  ", m_mainWindow->statusBar() ), 0, true );
   m_mainWindow->statusBar()->addWidget( m_versionBox, 0, true );
 
-  connect( m_mainWindow, SIGNAL(configChanged(KConfig*)), this, SLOT(update()) );
-  connect( m_mainWindow->actionCollection(), SIGNAL(actionStatusText(const QString&)),
-	   this, SLOT(showActionStatusText(const QString&)) );
-  connect( m_mainWindow->actionCollection(), SIGNAL(clearStatusText()),
-	   this, SLOT(clearActionStatusText()) );
-  connect( k3bappcore->projectManager(), SIGNAL(activeProjectChanged(K3bDoc*)),
-	   this, SLOT(slotActiveProjectChanged(K3bDoc*)) );
-  connect( k3bappcore->projectManager(), SIGNAL(projectChanged(K3bDoc*)),
-	   this, SLOT(slotActiveProjectChanged(K3bDoc*)) );
-  connect( (m_updateTimer = new QTimer( this )), SIGNAL(timeout()), this, SLOT(slotUpdateProjectStats()) );
+  connect( m_mainWindow, TQT_SIGNAL(configChanged(KConfig*)), this, TQT_SLOT(update()) );
+  connect( m_mainWindow->actionCollection(), TQT_SIGNAL(actionStatusText(const TQString&)),
+	   this, TQT_SLOT(showActionStatusText(const TQString&)) );
+  connect( m_mainWindow->actionCollection(), TQT_SIGNAL(clearStatusText()),
+	   this, TQT_SLOT(clearActionStatusText()) );
+  connect( k3bappcore->projectManager(), TQT_SIGNAL(activeProjectChanged(K3bDoc*)),
+	   this, TQT_SLOT(slotActiveProjectChanged(K3bDoc*)) );
+  connect( k3bappcore->projectManager(), TQT_SIGNAL(projectChanged(K3bDoc*)),
+	   this, TQT_SLOT(slotActiveProjectChanged(K3bDoc*)) );
+  connect( (m_updateTimer = new TQTimer( this )), TQT_SIGNAL(timeout()), this, TQT_SLOT(slotUpdateProjectStats()) );
 
   update();
 }
@@ -101,10 +101,10 @@ K3bStatusBarManager::~K3bStatusBarManager()
 
 void K3bStatusBarManager::update()
 {
-  QString path = K3b::defaultTempPath();
+  TQString path = K3b::defaultTempPath();
 
-  if( !QFile::exists( path ) )
-    path.truncate( path.findRev('/') );
+  if( !TQFile::exists( path ) )
+    path.truncate( path.tqfindRev('/') );
 
   unsigned long size, avail;
   if( K3b::kbFreeOnFs( path, size, avail ) )
@@ -112,14 +112,14 @@ void K3bStatusBarManager::update()
   else
     m_labelFreeTemp->setText(i18n("No info"));
 
-  if( path != QToolTip::textFor( m_labelFreeTemp->parentWidget() ) ) {
-    QToolTip::remove( m_labelFreeTemp->parentWidget() );
-    QToolTip::add( m_labelFreeTemp->parentWidget(), path );
+  if( path != TQToolTip::textFor( m_labelFreeTemp->tqparentWidget() ) ) {
+    TQToolTip::remove( m_labelFreeTemp->tqparentWidget() );
+    TQToolTip::add( m_labelFreeTemp->tqparentWidget(), path );
   }
 }
 
 
-void K3bStatusBarManager::slotFreeTempSpace(const QString&,
+void K3bStatusBarManager::slotFreeTempSpace(const TQString&,
 					    unsigned long kbSize,
 					    unsigned long,
 					    unsigned long kbAvail)
@@ -134,11 +134,11 @@ void K3bStatusBarManager::slotFreeTempSpace(const QString&,
     m_pixFreeTemp->setPixmap( SmallIcon("folder_green") );
 
   // update the display every second
-  QTimer::singleShot( 2000, this, SLOT(update()) );
+  TQTimer::singleShot( 2000, this, TQT_SLOT(update()) );
 }
 
 
-void K3bStatusBarManager::showActionStatusText( const QString& text )
+void K3bStatusBarManager::showActionStatusText( const TQString& text )
 {
   m_mainWindow->statusBar()->message( text );
 }
@@ -150,24 +150,24 @@ void K3bStatusBarManager::clearActionStatusText()
 }
 
 
-bool K3bStatusBarManager::eventFilter( QObject* o, QEvent* e )
+bool K3bStatusBarManager::eventFilter( TQObject* o, TQEvent* e )
 {
-  if( e->type() == QEvent::MouseButtonDblClick ) {
-    if( o == m_labelFreeTemp->parentWidget() )
+  if( e->type() == TQEvent::MouseButtonDblClick ) {
+    if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_labelFreeTemp->tqparentWidget()) )
       m_mainWindow->showOptionDialog( 0 );  // FIXME: use an enumeration for the option pages
-    else if( o == m_versionBox )
+    else if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_versionBox) )
       if( KAction* a = m_mainWindow->action( "help_about_app" ) )
 	a->activate();
   }
 
-  return QObject::eventFilter( o, e );
+  return TQObject::eventFilter( o, e );
 }
 
 
-static QString dataDocStats( K3bDataDoc* dataDoc )
+static TQString dataDocStats( K3bDataDoc* dataDoc )
 {
   return i18n("1 file in %1", "%n files in %1", dataDoc->root()->numFiles() )
-    .arg( i18n("1 folder", "%n folders", dataDoc->root()->numDirs()+1 ) );
+    .tqarg( i18n("1 folder", "%n folders", dataDoc->root()->numDirs()+1 ) );
 }
 
 
@@ -181,7 +181,7 @@ void K3bStatusBarManager::slotActiveProjectChanged( K3bDoc* doc )
     }
   }
   else if( !doc ) {
-    m_labelProjectInfo->setText( QString() );
+    m_labelProjectInfo->setText( TQString() );
   }
 }
 
@@ -199,7 +199,7 @@ void K3bStatusBarManager::slotUpdateProjectStats()
 
     case K3bDoc::DATA: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("Data CD (%1)").arg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("Data CD (%1)").tqarg(dataDocStats(dataDoc)) );
       break;
     }
 
@@ -207,7 +207,7 @@ void K3bStatusBarManager::slotUpdateProjectStats()
       K3bAudioDoc* audioDoc = static_cast<K3bMixedDoc*>( doc )->audioDoc();
       K3bDataDoc* dataDoc = static_cast<K3bMixedDoc*>( doc )->dataDoc();
       m_labelProjectInfo->setText( i18n("Mixed CD (1 track and %1)", "Mixed CD (%n tracks and %1)", audioDoc->numOfTracks() )
-				   .arg( dataDocStats(dataDoc)) );
+				   .tqarg( dataDocStats(dataDoc)) );
       break;
     }
 
@@ -219,31 +219,31 @@ void K3bStatusBarManager::slotUpdateProjectStats()
 
     case K3bDoc::MOVIX: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("eMovix CD (%1)").arg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("eMovix CD (%1)").tqarg(dataDocStats(dataDoc)) );
       break;
     }
 
     case K3bDoc::MOVIX_DVD: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("eMovix DVD (%1)").arg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("eMovix DVD (%1)").tqarg(dataDocStats(dataDoc)) );
       break;
     }
 
     case K3bDoc::DVD: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("Data DVD (%1)").arg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("Data DVD (%1)").tqarg(dataDocStats(dataDoc)) );
       break;
     }
       
     case K3bDoc::VIDEODVD: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("Video DVD (%1)").arg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("Video DVD (%1)").tqarg(dataDocStats(dataDoc)) );
       break;
     }
     }
   }
   else {
-    m_labelProjectInfo->setText( QString() );
+    m_labelProjectInfo->setText( TQString() );
   }
 }
 

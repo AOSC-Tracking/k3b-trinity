@@ -34,9 +34,10 @@ namespace K3b {
 class K3bReadcdReader : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bReadcdReader( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bReadcdReader( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bReadcdReader();
 
   bool active() const;
@@ -59,7 +60,7 @@ class K3bReadcdReader : public K3bJob
 
   void setSectorRange( const K3b::Msf&, const K3b::Msf& );
 
-  void setImagePath( const QString& p ) { m_imagePath = p; }
+  void setImagePath( const TQString& p ) { m_imagePath = p; }
 
   /**
    * the data gets written directly into fd instead of the imagefile.
@@ -69,7 +70,7 @@ class K3bReadcdReader : public K3bJob
   void writeToFd( int fd );
 
  private slots:
-  void slotStdLine( const QString& line );
+  void slotStdLine( const TQString& line );
   void slotProcessExited(KProcess*);
 
  private:
@@ -82,7 +83,7 @@ class K3bReadcdReader : public K3bJob
 
   K3bDevice::Device* m_readDevice;
 
-  QString m_imagePath;
+  TQString m_imagePath;
 
   class Private;
   Private* d;

@@ -32,24 +32,24 @@
 #include <k3bglobals.h>
 #include <k3bwritingmodewidget.h>
 
-#include <qcheckbox.h>
-#include <qframe.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qtoolbutton.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qpoint.h>
-#include <qradiobutton.h>
-#include <qbuttongroup.h>
-#include <qfileinfo.h>
-#include <qtabwidget.h>
-#include <qspinbox.h>
-#include <qfile.h>
+#include <tqcheckbox.h>
+#include <tqframe.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqpushbutton.h>
+#include <tqtoolbutton.h>
+#include <tqlayout.h>
+#include <tqvariant.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqpoint.h>
+#include <tqradiobutton.h>
+#include <tqbuttongroup.h>
+#include <tqfileinfo.h>
+#include <tqtabwidget.h>
+#include <tqspinbox.h>
+#include <tqfile.h>
 
 #include <kmessagebox.h>
 #include <klineedit.h>
@@ -64,18 +64,18 @@
 #include "k3bfilecompilationsizehandler.h"
 
 
-K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, QWidget *parent, const char *name, bool modal )
-  : K3bProjectBurnDialog( _doc, parent, name, modal )
+K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, TQWidget *tqparent, const char *name, bool modal )
+  : K3bProjectBurnDialog( _doc, tqparent, name, modal )
 {
   prepareGui();
 
-  setTitle( i18n("Data Project"), i18n("Size: %1").arg( KIO::convertSize(_doc->size()) ) );
+  setTitle( i18n("Data Project"), i18n("Size: %1").tqarg( KIO::convertSize(_doc->size()) ) );
 
   // for now we just put the verify checkbox on the main page...
   m_checkVerify = K3bStdGuiItems::verifyCheckBox( m_optionGroup );
   m_optionGroupLayout->addWidget( m_checkVerify );
 
-  QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+  TQSpacerItem* spacer = new TQSpacerItem( 20, 20, TQSizePolicy::Minimum, TQSizePolicy::Expanding );
   m_optionGroupLayout->addItem( spacer );
 
   // create image settings tab
@@ -84,13 +84,13 @@ K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, QWidget *parent, const ch
 
   setupSettingsTab();
 
-  connect( m_comboMultisession, SIGNAL(activated(int)),
-	   this, SLOT(slotMultiSessionModeChanged()) );
+  connect( m_comboMultisession, TQT_SIGNAL(activated(int)),
+	   this, TQT_SLOT(slotMultiSessionModeChanged()) );
 
   m_writerSelectionWidget->setWantedMediumState( K3bDevice::STATE_EMPTY|K3bDevice::STATE_INCOMPLETE );
 
   m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::FILE );
-  QString path = _doc->tempDir();
+  TQString path = _doc->tempDir();
   if( !path.isEmpty() ) {
       m_tempDirSelectionWidget->setTempPath( path );
   }
@@ -98,8 +98,8 @@ K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, QWidget *parent, const ch
       m_tempDirSelectionWidget->setDefaultImageFileName( _doc->isoOptions().volumeID() + ".iso" );
   }
 
-  connect( m_imageSettingsWidget->m_editVolumeName, SIGNAL(textChanged(const QString&)),
-           m_tempDirSelectionWidget, SLOT(setDefaultImageFileName(const QString&)) );
+  connect( m_imageSettingsWidget->m_editVolumeName, TQT_SIGNAL(textChanged(const TQString&)),
+           m_tempDirSelectionWidget, TQT_SLOT(setDefaultImageFileName(const TQString&)) );
 }
 
 K3bDataBurnDialog::~K3bDataBurnDialog()
@@ -152,15 +152,15 @@ void K3bDataBurnDialog::readSettings()
 
 void K3bDataBurnDialog::setupSettingsTab()
 {
-  QWidget* frame = new QWidget( this );
-  QGridLayout* frameLayout = new QGridLayout( frame );
+  TQWidget* frame = new TQWidget( this );
+  TQGridLayout* frameLayout = new TQGridLayout( frame );
   frameLayout->setSpacing( spacingHint() );
   frameLayout->setMargin( marginHint() );
 
-  m_groupDataMode = new QGroupBox( 1, Qt::Vertical, i18n("Datatrack Mode"), frame );
+  m_groupDataMode = new TQGroupBox( 1, Qt::Vertical, i18n("Datatrack Mode"), frame );
   m_dataModeWidget = new K3bDataModeWidget( m_groupDataMode );
 
-  QGroupBox* groupMultiSession = new QGroupBox( 1, Qt::Vertical, i18n("Multisession Mode"), frame );
+  TQGroupBox* groupMultiSession = new TQGroupBox( 1, Qt::Vertical, i18n("Multisession Mode"), frame );
   m_comboMultisession = new K3bDataMultiSessionCombobox( groupMultiSession );
 
   frameLayout->addWidget( m_groupDataMode, 0, 0 );
@@ -175,17 +175,17 @@ void K3bDataBurnDialog::slotStartClicked()
 {
   if( m_checkOnlyCreateImage->isChecked() ||
       m_checkCacheImage->isChecked() ) {
-    QFileInfo fi( m_tempDirSelectionWidget->tempPath() );
+    TQFileInfo fi( m_tempDirSelectionWidget->tempPath() );
     if( fi.isDir() )
       m_tempDirSelectionWidget->setTempPath( fi.filePath() + "/image.iso" );
 
-    if( QFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
+    if( TQFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
       if( KMessageBox::warningContinueCancel( this,
-					      i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath()),
+					      i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath()),
 					      i18n("File Exists"), i18n("Overwrite") )
 	  == KMessageBox::Continue ) {
 	// delete the file here to avoid problems with free space in K3bProjectBurnDialog::slotStartClicked
-	QFile::remove( m_tempDirSelectionWidget->tempPath() );
+	TQFile::remove( m_tempDirSelectionWidget->tempPath() );
       }
       else
 	return;

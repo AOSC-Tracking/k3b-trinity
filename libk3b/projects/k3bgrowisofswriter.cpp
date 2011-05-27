@@ -33,8 +33,8 @@
 #include <kdebug.h>
 #include <kglobal.h>
 
-#include <qvaluelist.h>
-#include <qfile.h>
+#include <tqvaluelist.h>
+#include <tqfile.h>
 
 #include <unistd.h>
 
@@ -60,13 +60,13 @@ public:
   bool multiSession;
   K3bProcess* process;
   const K3bExternalBin* growisofsBin;
-  QString image;
+  TQString image;
 
   bool success;
   bool canceled;
   bool finished;
 
-  QTime lastSpeedCalculationTime;
+  TQTime lastSpeedCalculationTime;
   int lastSpeedCalculationBytes;
   int lastProgress;
   unsigned int lastProgressed;
@@ -85,37 +85,37 @@ public:
   unsigned long long overallSizeFromOutput;
   long long firstSizeFromOutput;
 
-  QFile inputFile;
+  TQFile inputFile;
 
   bool usingRingBuffer;
   K3bPipeBuffer* ringBuffer;
 
-  QString multiSessionInfo;
+  TQString multiSessionInfo;
 
     bool forceNoEject;
 };
 
 
 K3bGrowisofsWriter::K3bGrowisofsWriter( K3bDevice::Device* dev, K3bJobHandler* hdl,
-					QObject* parent, const char* name )
-  : K3bAbstractWriter( dev, hdl, parent, name )
+					TQObject* tqparent, const char* name )
+  : K3bAbstractWriter( dev, hdl, tqparent, name )
 {
   d = new Private;
   d->speedEst = new K3bThroughputEstimator( this );
-  connect( d->speedEst, SIGNAL(throughput(int)),
-	   this, SLOT(slotThroughput(int)) );
+  connect( d->speedEst, TQT_SIGNAL(throughput(int)),
+	   this, TQT_SLOT(slotThroughput(int)) );
 
   d->gh = new K3bGrowisofsHandler( this );
-  connect( d->gh, SIGNAL(infoMessage(const QString&, int)),
-	   this,SIGNAL(infoMessage(const QString&, int)) );
-  connect( d->gh, SIGNAL(newSubTask(const QString&)),
-	   this, SIGNAL(newSubTask(const QString&)) );
-  connect( d->gh, SIGNAL(buffer(int)),
-	   this, SIGNAL(buffer(int)) );
-  connect( d->gh, SIGNAL(deviceBuffer(int)),
-	   this, SIGNAL(deviceBuffer(int)) );
-  connect( d->gh, SIGNAL(flushingCache()),
-	   this, SLOT(slotFlushingCache()) );
+  connect( d->gh, TQT_SIGNAL(infoMessage(const TQString&, int)),
+	   this,TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( d->gh, TQT_SIGNAL(newSubTask(const TQString&)),
+	   this, TQT_SIGNAL(newSubTask(const TQString&)) );
+  connect( d->gh, TQT_SIGNAL(buffer(int)),
+	   this, TQT_SIGNAL(buffer(int)) );
+  connect( d->gh, TQT_SIGNAL(deviceBuffer(int)),
+	   this, TQT_SIGNAL(deviceBuffer(int)) );
+  connect( d->gh, TQT_SIGNAL(flushingCache()),
+	   this, TQT_SLOT(slotFlushingCache()) );
 }
 
 
@@ -155,13 +155,13 @@ bool K3bGrowisofsWriter::prepareProcess()
 {
   d->growisofsBin = k3bcore->externalBinManager()->binObject( "growisofs" );
   if( !d->growisofsBin ) {
-    emit infoMessage( i18n("Could not find %1 executable.").arg("growisofs"), ERROR );
+    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("growisofs"), ERROR );
     return false;
   }
 
   if( d->growisofsBin->version < K3bVersion( 5, 10 ) ) {
     emit infoMessage( i18n("Growisofs version %1 is too old. "
-			   "K3b needs at least version 5.10.").arg(d->growisofsBin->version),
+			   "K3b needs at least version 5.10.").tqarg(d->growisofsBin->version),
 		      ERROR );
     return false;
   }
@@ -169,8 +169,8 @@ bool K3bGrowisofsWriter::prepareProcess()
   emit debuggingOutput( "Used versions", "growisofs: " + d->growisofsBin->version );
 
   if( !d->growisofsBin->copyright.isEmpty() )
-    emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3").arg("growisofs")
-		      .arg(d->growisofsBin->version).arg(d->growisofsBin->copyright), INFO );
+    emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3").tqarg("growisofs")
+		      .tqarg(d->growisofsBin->version).tqarg(d->growisofsBin->copyright), INFO );
 
 
   //
@@ -182,9 +182,9 @@ bool K3bGrowisofsWriter::prepareProcess()
   //  d->process->setPriority( KProcess::PrioHighest );
   d->process->setSplitStdout(true);
   d->process->setRawStdin(true);
-  connect( d->process, SIGNAL(stderrLine(const QString&)), this, SLOT(slotReceivedStderr(const QString&)) );
-  connect( d->process, SIGNAL(stdoutLine(const QString&)), this, SLOT(slotReceivedStderr(const QString&)) );
-  connect( d->process, SIGNAL(processExited(KProcess*)), this, SLOT(slotProcessExited(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotReceivedStderr(const TQString&)) );
+  connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotReceivedStderr(const TQString&)) );
+  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
 
 
   //
@@ -212,7 +212,7 @@ bool K3bGrowisofsWriter::prepareProcess()
   // set this var to true to enable the ringbuffer
   d->usingRingBuffer = ( d->growisofsBin->version < K3bVersion( 6, 0 ) );
 
-  QString s = burnDevice()->blockDeviceName() + "=";
+  TQString s = burnDevice()->blockDeviceName() + "=";
   if( d->usingRingBuffer || d->image.isEmpty() ) {
     // we always read from stdin since the ringbuffer does the actual reading from the source
     s += "/dev/fd/0";
@@ -234,7 +234,7 @@ bool K3bGrowisofsWriter::prepareProcess()
     d->inputFile.setName( d->image );
     d->trackSize = (K3b::filesize( d->image ) + 1024) / 2048;
     if( !d->inputFile.open( IO_ReadOnly ) ) {
-      emit infoMessage( i18n("Could not open file %1.").arg(d->image), ERROR );
+      emit infoMessage( i18n("Could not open file %1.").tqarg(d->image), ERROR );
       return false;
     }
   }
@@ -249,13 +249,13 @@ bool K3bGrowisofsWriter::prepareProcess()
 
   // DL writing with forced layer break
   if( d->layerBreak > 0 ) {
-    *d->process << "-use-the-force-luke=break:" + QString::number(d->layerBreak);
+    *d->process << "-use-the-force-luke=break:" + TQString::number(d->layerBreak);
     dvdCompat = true;
   }
 
   // the tracksize parameter takes priority over the dao:tracksize parameter since growisofs 5.18
   else if( d->growisofsBin->version > K3bVersion( 5, 17 ) && d->trackSize > 0 )
-    *d->process << "-use-the-force-luke=tracksize:" + QString::number(d->trackSize + trackSizePadding);
+    *d->process << "-use-the-force-luke=tracksize:" + TQString::number(d->trackSize + trackSizePadding);
 
   if( simulate() )
     *d->process << "-use-the-force-luke=dummy";
@@ -263,7 +263,7 @@ bool K3bGrowisofsWriter::prepareProcess()
   if( d->writingMode == K3b::DAO ) {
     dvdCompat = true;
     if( d->growisofsBin->version >= K3bVersion( 5, 15 ) && d->trackSize > 0 )
-      *d->process << "-use-the-force-luke=dao:" + QString::number(d->trackSize + trackSizePadding);
+      *d->process << "-use-the-force-luke=dao:" + TQString::number(d->trackSize + trackSizePadding);
     else
       *d->process << "-use-the-force-luke=dao";
     d->gh->reset( burnDevice(), true );
@@ -299,9 +299,9 @@ bool K3bGrowisofsWriter::prepareProcess()
 
     // speed may be a float number. example: DVD+R(W): 2.4x
     if( speed != 0 )
-      *d->process << QString("-speed=%1").arg( speed%1385 > 0
-					      ? QString::number( (float)speed/1385.0, 'f', 1 )
-					      : QString::number( speed/1385 ) );
+      *d->process << TQString("-speed=%1").tqarg( speed%1385 > 0
+					      ? TQString::number( (float)speed/1385.0, 'f', 1 )
+					      : TQString::number( speed/1385 ) );
   }
 
   if( k3bcore->globalSettings()->overburn() )
@@ -310,12 +310,12 @@ bool K3bGrowisofsWriter::prepareProcess()
   if( !d->usingRingBuffer && d->growisofsBin->version >= K3bVersion( 6, 0 ) ) {
     bool manualBufferSize = k3bcore->globalSettings()->useManualBufferSize();
     int bufSize = ( manualBufferSize ? k3bcore->globalSettings()->bufferSize() : 32 );
-    *d->process << QString("-use-the-force-luke=bufsize:%1m").arg(bufSize);
+    *d->process << TQString("-use-the-force-luke=bufsize:%1m").tqarg(bufSize);
   }
 
   // additional user parameters from config
-  const QStringList& params = d->growisofsBin->userParameters();
-  for( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+  const TQStringList& params = d->growisofsBin->userParameters();
+  for( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
     *d->process << *it;
 
   emit debuggingOutput( "Burned media", K3bDevice::mediaTypeString(mediaType) );
@@ -332,7 +332,7 @@ void K3bGrowisofsWriter::start()
   d->lastProgressed = 0;
   d->lastProgress = 0;
   d->firstSizeFromOutput = -1;
-  d->lastSpeedCalculationTime = QTime::currentTime();
+  d->lastSpeedCalculationTime = TQTime::currentTime();
   d->lastSpeedCalculationBytes = 0;
   d->writingStarted = false;
   d->canceled = false;
@@ -345,9 +345,9 @@ void K3bGrowisofsWriter::start()
   else {
 
     kdDebug() << "***** " << d->growisofsBin->name() << " parameters:\n";
-    const QValueList<QCString>& args = d->process->args();
-    QString s;
-    for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+    const TQValueList<TQCString>& args = d->process->args();
+    TQString s;
+    for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
       s += *it + " ";
     }
     kdDebug() << s << flush << endl;
@@ -374,7 +374,7 @@ void K3bGrowisofsWriter::start()
       // something went wrong when starting the program
       // it "should" be the executable
       kdDebug() << "(K3bGrowisofsWriter) could not start " << d->growisofsBin->path << endl;
-      emit infoMessage( i18n("Could not start %1.").arg(d->growisofsBin->name()), K3bJob::ERROR );
+      emit infoMessage( i18n("Could not start %1.").tqarg(d->growisofsBin->name()), K3bJob::ERROR );
       jobFinished(false);
     }
     else {
@@ -394,8 +394,8 @@ void K3bGrowisofsWriter::start()
       if( d->usingRingBuffer ) {
 	if( !d->ringBuffer ) {
 	  d->ringBuffer = new K3bPipeBuffer( this, this );
-	  connect( d->ringBuffer, SIGNAL(percent(int)), this, SIGNAL(buffer(int)) );
-	  connect( d->ringBuffer, SIGNAL(finished(bool)), this, SLOT(slotRingBufferFinished(bool)) );
+	  connect( d->ringBuffer, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(buffer(int)) );
+	  connect( d->ringBuffer, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotRingBufferFinished(bool)) );
 	}
 
 	d->ringBuffer->writeToFd( d->process->stdinFd() );
@@ -455,17 +455,17 @@ void K3bGrowisofsWriter::setMultiSession( bool b )
 }
 
 
-void K3bGrowisofsWriter::setImageToWrite( const QString& filename )
+void K3bGrowisofsWriter::setImageToWrite( const TQString& filename )
 {
   d->image = filename;
 }
 
 
-void K3bGrowisofsWriter::slotReceivedStderr( const QString& line )
+void K3bGrowisofsWriter::slotReceivedStderr( const TQString& line )
 {
   emit debuggingOutput( d->growisofsBin->name(), line );
 
-  if( line.contains( "remaining" ) ) {
+  if( line.tqcontains( "remaining" ) ) {
 
     if( !d->writingStarted ) {
       d->writingStarted = true;
@@ -473,10 +473,10 @@ void K3bGrowisofsWriter::slotReceivedStderr( const QString& line )
     }
 
     // parse progress
-    int pos = line.find( "/" );
+    int pos = line.tqfind( "/" );
     unsigned long long done = line.left( pos ).toULongLong();
     bool ok = true;
-    d->overallSizeFromOutput = line.mid( pos+1, line.find( "(", pos ) - pos - 1 ).toULongLong( &ok );
+    d->overallSizeFromOutput = line.mid( pos+1, line.tqfind( "(", pos ) - pos - 1 ).toULongLong( &ok );
     if( d->firstSizeFromOutput == -1 )
       d->firstSizeFromOutput = done;
     done -= d->firstSizeFromOutput;
@@ -495,10 +495,10 @@ void K3bGrowisofsWriter::slotReceivedStderr( const QString& line )
       }
 
       // try parsing write speed (since growisofs 5.11)
-      pos = line.find( '@' );
+      pos = line.tqfind( '@' );
       if( pos != -1 ) {
 	pos += 1;
-	double speed = line.mid( pos, line.find( 'x', pos ) - pos ).toDouble(&ok);
+	double speed = line.mid( pos, line.tqfind( 'x', pos ) - pos ).toDouble(&ok);
 	if( ok ) {
 	  if( d->lastWritingSpeed != speed )
 	    emit writeSpeed( (int)(speed*1385.0), 1385 );
@@ -506,7 +506,7 @@ void K3bGrowisofsWriter::slotReceivedStderr( const QString& line )
 	}
 	else
 	  kdDebug() << "(K3bGrowisofsWriter) speed parsing failed: '"
-		    << line.mid( pos, line.find( 'x', pos ) - pos ) << "'" << endl;
+		    << line.mid( pos, line.tqfind( 'x', pos ) - pos ) << "'" << endl;
       }
       else {
 	d->speedEst->dataWritten( done/1024 );
@@ -514,7 +514,7 @@ void K3bGrowisofsWriter::slotReceivedStderr( const QString& line )
     }
     else
       kdDebug() << "(K3bGrowisofsWriter) progress parsing failed: '"
-		<< line.mid( pos+1, line.find( "(", pos ) - pos - 1 ).stripWhiteSpace() << "'" << endl;
+		<< line.mid( pos+1, line.tqfind( "(", pos ) - pos - 1 ).stripWhiteSpace() << "'" << endl;
   }
 
   //  else
@@ -551,7 +551,7 @@ void K3bGrowisofsWriter::slotProcessExited( KProcess* p )
     int s = d->speedEst->average();
     if( s > 0 )
       emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)")
-                        .arg(s).arg(KGlobal::locale()->formatNumber((double)s/1385.0), 2), INFO );
+                        .tqarg(s).tqarg(KGlobal::locale()->formatNumber((double)s/1385.0), 2), INFO );
 
     if( simulate() )
       emit infoMessage( i18n("Simulation successfully completed"), K3bJob::SUCCESS );
@@ -571,9 +571,9 @@ void K3bGrowisofsWriter::slotProcessExited( KProcess* p )
   else {
     emit newSubTask( i18n("Ejecting DVD") );
     connect( K3bDevice::eject( burnDevice() ),
-	     SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	     TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	     this,
-	     SLOT(slotEjectingFinished(K3bDevice::DeviceHandler*)) );
+	     TQT_SLOT(slotEjectingFinished(K3bDevice::DeviceHandler*)) );
   }
 }
 
@@ -616,7 +616,7 @@ void K3bGrowisofsWriter::slotFlushingCache()
 }
 
 
-void K3bGrowisofsWriter::setMultiSessionInfo( const QString& info )
+void K3bGrowisofsWriter::setMultiSessionInfo( const TQString& info )
 {
   d->multiSessionInfo = info;
 }

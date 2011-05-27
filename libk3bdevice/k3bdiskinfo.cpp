@@ -22,7 +22,7 @@
 #include <k3bdebug.h>
 #include <kio/global.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 
 K3bDevice::DiskInfo::DiskInfo()

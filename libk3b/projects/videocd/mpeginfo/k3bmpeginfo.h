@@ -30,7 +30,7 @@
 #define MPEG_USER_CODE           ((uchar) 0xb2)
 #define MPEG_SEQUENCE_CODE       ((uchar) 0xb3)
 #define MPEG_EXT_CODE            ((uchar) 0xb5)
-#define MPEG_SEQ_END_CODE        ((uchar) 0xb7)
+#define MPEG_SETQ_END_CODE        ((uchar) 0xb7)
 #define MPEG_GOP_CODE            ((uchar) 0xb8)
 #define MPEG_PROGRAM_END_CODE    ((uchar) 0xb9)
 #define MPEG_PACK_HEADER_CODE    ((uchar) 0xba)
@@ -127,7 +127,7 @@ class K3bMpegInfo
         {
             return mpeg_info->version;
         };
-        const QString error_string()
+        const TQString error_string()
         {
             return m_error_string;
         };
@@ -171,7 +171,7 @@ class K3bMpegInfo
         llong m_buffend;
         byte* m_buffer;
         double m_initial_TS;
-        QString m_error_string;
+        TQString m_error_string;
 
 };
 

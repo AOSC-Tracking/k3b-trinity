@@ -18,12 +18,12 @@
 
 #include <kdialogbase.h>
 #include <kurl.h>
-#include <qstringlist.h>
-#include <qpair.h>
-#include <qdir.h>
+#include <tqstringlist.h>
+#include <tqpair.h>
+#include <tqdir.h>
 
 class KProgress;
-class QLabel;
+class TQLabel;
 class K3bDataItem;
 class K3bDirItem;
 class K3bEncodingConverter;
@@ -34,24 +34,25 @@ class K3bDataDoc;
 class K3bDataUrlAddingDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   ~K3bDataUrlAddingDialog();
 
   /**
-   * \return \see QDialog::exec()
+   * \return \see TQDialog::exec()
    */
   static int addUrls( const KURL::List& urls, K3bDirItem* dir = 0,
-		      QWidget* parent = 0 );
+		      TQWidget* tqparent = 0 );
 
-  static int moveItems( const QValueList<K3bDataItem*>& items, K3bDirItem* dir,
-			QWidget* parent = 0 );
+  static int moveItems( const TQValueList<K3bDataItem*>& items, K3bDirItem* dir,
+			TQWidget* tqparent = 0 );
 
-  static int copyItems( const QValueList<K3bDataItem*>& items, K3bDirItem* dir,
-			QWidget* parent = 0 );
+  static int copyItems( const TQValueList<K3bDataItem*>& items, K3bDirItem* dir,
+			TQWidget* tqparent = 0 );
 
-  static int copyMoveItems( const QValueList<K3bDataItem*>& items, K3bDirItem* dir,
-			    QWidget* parent, bool copy );
+  static int copyMoveItems( const TQValueList<K3bDataItem*>& items, K3bDirItem* dir,
+			    TQWidget* tqparent, bool copy );
 
  private slots:
   void slotAddUrls();
@@ -61,26 +62,26 @@ class K3bDataUrlAddingDialog : public KDialogBase
   void updateProgress();
 
  private:
-  K3bDataUrlAddingDialog( K3bDataDoc* doc, QWidget* parent = 0, const char* name = 0 );
+  K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
 
-  bool getNewName( const QString& oldName, K3bDirItem* dir, QString& newName );
+  bool getNewName( const TQString& oldName, K3bDirItem* dir, TQString& newName );
 
   bool addHiddenFiles();
   bool addSystemFiles();
 
-  QString resultMessage() const;
+  TQString resultMessage() const;
 
   KProgress* m_progressWidget;
-  QLabel* m_infoLabel;
-  QLabel* m_counterLabel;
+  TQLabel* m_infoLabel;
+  TQLabel* m_counterLabel;
   K3bEncodingConverter* m_encodingConverter;
 
   KURL::List m_urls;
-  QValueList< QPair<KURL, K3bDirItem*> > m_urlQueue;
+  TQValueList< TQPair<KURL, K3bDirItem*> > m_urlQueue;
 
-  QValueList< QPair<K3bDataItem*, K3bDirItem*> > m_items;
+  TQValueList< TQPair<K3bDataItem*, K3bDirItem*> > m_items;
 
-  QValueList<KURL> m_dirSizeQueue;
+  TQValueList<KURL> m_dirSizeQueue;
 
   bool m_bExistingItemsReplaceAll;
   bool m_bExistingItemsIgnoreAll;
@@ -89,12 +90,12 @@ class K3bDataUrlAddingDialog : public KDialogBase
   int m_iAddHiddenFiles;
   int m_iAddSystemFiles;
 
-  QStringList m_unreadableFiles;
-  QStringList m_notFoundFiles;
-  QStringList m_nonLocalFiles;
-  QStringList m_tooBigFiles;
-  QStringList m_mkisofsLimitationRenamedFiles;
-  QStringList m_invalidFilenameEncodingFiles;
+  TQStringList m_unreadableFiles;
+  TQStringList m_notFoundFiles;
+  TQStringList m_nonLocalFiles;
+  TQStringList m_tooBigFiles;
+  TQStringList m_mkisofsLimitationRenamedFiles;
+  TQStringList m_invalidFilenameEncodingFiles;
 
   bool m_bCanceled;
 

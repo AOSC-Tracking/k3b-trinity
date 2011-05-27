@@ -25,7 +25,7 @@ class K3bFileItem;
 class K3bDirItem;
 class K3bDataDirTreeView;
 class K3bDataFileView;
-class QLineEdit;
+class TQLineEdit;
 
 
 namespace KIO {
@@ -43,9 +43,10 @@ namespace K3bDevice {
 class K3bDataView : public K3bView
 {
    Q_OBJECT
+  TQ_OBJECT
 
  public:
-   K3bDataView(K3bDataDoc* doc, QWidget *parent=0, const char *name=0);
+   K3bDataView(K3bDataDoc* doc, TQWidget *tqparent=0, const char *name=0);
    virtual ~K3bDataView();
 	
    K3bDirItem* currentDir() const;
@@ -63,9 +64,9 @@ class K3bDataView : public K3bView
  protected:
    K3bDataDirTreeView* m_dataDirTree;
    K3bDataFileView* m_dataFileView;
-   QLineEdit* m_volumeIDEdit;
+   TQLineEdit* m_volumeIDEdit;
 
-   virtual K3bProjectBurnDialog* newBurnDialog( QWidget* parent = 0, const char* name = 0 );
+   virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
 		
  private:
    K3bDataDoc* m_doc;

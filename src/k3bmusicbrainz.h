@@ -20,8 +20,8 @@
 
 #ifdef HAVE_MUSICBRAINZ
 
-#include <qcstring.h>
-#include <qstring.h>
+#include <tqcstring.h>
+#include <tqstring.h>
 
 
 /**
@@ -38,10 +38,10 @@ class K3bMusicBrainz
   /**
    * \return number of found results.
    */
-  int query( const QCString& trm );
+  int query( const TQCString& trm );
 
-  const QString& title( unsigned int i = 0 ) const;
-  const QString& artist( unsigned int i = 0 ) const;
+  const TQString& title( unsigned int i = 0 ) const;
+  const TQString& artist( unsigned int i = 0 ) const;
 
  private:
   class Private;

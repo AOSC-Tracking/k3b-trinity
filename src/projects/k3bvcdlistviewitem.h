@@ -24,18 +24,18 @@ class K3bVcdListViewItem : public K3bListViewItem
 {
 
     public:
-        K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent );
-        K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent, QListViewItem* after );
+        K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* tqparent );
+        K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* tqparent, TQListViewItem* after );
         ~K3bVcdListViewItem();
 
-        /** reimplemented from QListViewItem */
-        QString text( int i ) const;
+        /** reimplemented from TQListViewItem */
+        TQString text( int i ) const;
 
-        /** reimplemented from QListViewItem */
-        void setText( int col, const QString& text );
+        /** reimplemented from TQListViewItem */
+        void setText( int col, const TQString& text );
 
-        /** reimplemented from QListViewItem */
-        QString key( int column, bool a ) const;
+        /** reimplemented from TQListViewItem */
+        TQString key( int column, bool a ) const;
         bool animate();
 
         K3bVcdTrack* vcdTrack()

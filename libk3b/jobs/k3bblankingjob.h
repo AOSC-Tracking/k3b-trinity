@@ -19,7 +19,7 @@
 #include <k3bjob.h>
 #include "k3b_export.h"
 class KProcess;
-class QString;
+class TQString;
 class K3bDevice::Device;
 class K3bAbstractWriter;
 
@@ -27,9 +27,10 @@ class K3bAbstractWriter;
 class LIBK3B_EXPORT K3bBlankingJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bBlankingJob( K3bJobHandler*, QObject* parent = 0 );
+  K3bBlankingJob( K3bJobHandler*, TQObject* tqparent = 0 );
   ~K3bBlankingJob();
 
   K3bDevice::Device* writer() const;

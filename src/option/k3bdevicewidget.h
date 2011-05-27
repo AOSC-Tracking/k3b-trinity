@@ -17,34 +17,35 @@
 #ifndef K3BDEVICEWIDGET_H
 #define K3BDEVICEWIDGET_H
 
-#include <qwidget.h>
-#include <qptrlist.h>
+#include <tqwidget.h>
+#include <tqptrlist.h>
 #include "k3bdevice.h"
 #include "k3bdevicemanager.h"
 
-class QComboBox;
-class QLabel;
-class QGroupBox;
-class QPushButton;
-class QCheckBox;
+class TQComboBox;
+class TQLabel;
+class TQGroupBox;
+class TQPushButton;
+class TQCheckBox;
 class K3bListView;
-class QString;
+class TQString;
 class KIntNumInput;
-class QFrame;
-class QListViewItem;
-class QString;
-class QLineEdit;
+class TQFrame;
+class TQListViewItem;
+class TQString;
+class TQLineEdit;
 
 
 /**
   *@author Sebastian Trueg
   */
-class K3bDeviceWidget : public QWidget
+class K3bDeviceWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDeviceWidget( K3bDevice::DeviceManager*, QWidget *parent = 0, const char *name = 0 );
+  K3bDeviceWidget( K3bDevice::DeviceManager*, TQWidget *tqparent = 0, const char *name = 0 );
   ~K3bDeviceWidget();
 
  public slots:
@@ -63,16 +64,16 @@ class K3bDeviceWidget : public QWidget
   class PrivateDeviceViewItem1;
 
   /** list to save changes to the devices before applying */
-  QPtrList<PrivateTempDevice> m_tempDevices;
+  TQPtrList<PrivateTempDevice> m_tempDevices;
 
-  QListViewItem* m_writerParentViewItem;
-  QListViewItem* m_readerParentViewItem;
+  TQListViewItem* m_writerParentViewItem;
+  TQListViewItem* m_readerParentViewItem;
 
   K3bDevice::DeviceManager* m_deviceManager;
 
   K3bListView*    m_viewDevices;
-  QPushButton* m_buttonRefreshDevices;
-  QPushButton* m_buttonAddDevice;
+  TQPushButton* m_buttonRefreshDevices;
+  TQPushButton* m_buttonAddDevice;
 };
 
 #endif

@@ -39,14 +39,14 @@
 #include <kconfig.h>
 #include <kdebug.h>
 
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qfileinfo.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqfileinfo.h>
 
 
-K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, QWidget* parent, const char* name, bool modal )
-  : K3bProjectBurnDialog( doc, parent, name, modal, true ),
+K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, TQWidget* tqparent, const char* name, bool modal )
+  : K3bProjectBurnDialog( doc, tqparent, name, modal, true ),
     m_doc(doc)
 {
   prepareGui();
@@ -54,7 +54,7 @@ K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, QWidget* pare
   m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::FILE );
 
   setTitle( i18n("eMovix DVD Project"),
-	    i18n("1 file (%1)", "%n files (%1)", m_doc->movixFileItems().count()).arg(KIO::convertSize(m_doc->size())) );
+	    i18n("1 file (%1)", "%n files (%1)", m_doc->movixFileItems().count()).tqarg(KIO::convertSize(m_doc->size())) );
 
   m_movixOptionsWidget = new K3bMovixOptionsWidget( this );
   addPage( m_movixOptionsWidget, i18n("eMovix") );
@@ -67,11 +67,11 @@ K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, QWidget* pare
   m_checkVerify = K3bStdGuiItems::verifyCheckBox( m_optionGroup );
   m_optionGroupLayout->addWidget( m_checkVerify );
 
-  QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+  TQSpacerItem* spacer = new TQSpacerItem( 20, 20, TQSizePolicy::Minimum, TQSizePolicy::Expanding );
   m_optionGroupLayout->addItem( spacer );
 
   m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::FILE );
-  QString path = m_doc->tempDir();
+  TQString path = m_doc->tempDir();
   if( !path.isEmpty() ) {
       m_tempDirSelectionWidget->setTempPath( path );
   }
@@ -79,8 +79,8 @@ K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, QWidget* pare
       m_tempDirSelectionWidget->setDefaultImageFileName( m_doc->isoOptions().volumeID() + ".iso" );
   }
 
-  connect( m_imageSettingsWidget->m_editVolumeName, SIGNAL(textChanged(const QString&)),
-           m_tempDirSelectionWidget, SLOT(setDefaultImageFileName(const QString&)) );
+  connect( m_imageSettingsWidget->m_editVolumeName, TQT_SIGNAL(textChanged(const TQString&)),
+           m_tempDirSelectionWidget, TQT_SLOT(setDefaultImageFileName(const TQString&)) );
 }
 
 
@@ -187,13 +187,13 @@ void K3bMovixDvdBurnDialog::slotStartClicked()
 {
   if( m_checkOnlyCreateImage->isChecked() ||
       m_checkCacheImage->isChecked() ) {
-    QFileInfo fi( m_tempDirSelectionWidget->tempPath() );
+    TQFileInfo fi( m_tempDirSelectionWidget->tempPath() );
     if( fi.isDir() )
       m_tempDirSelectionWidget->setTempPath( fi.filePath() + "/image.iso" );
 
-    if( QFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
+    if( TQFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
       if( KMessageBox::warningContinueCancel( this,
-				     i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath()),
+				     i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath()),
 				     i18n("File Exists"), i18n("Overwrite") )
 	  != KMessageBox::Continue )
 	return;

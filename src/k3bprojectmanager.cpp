@@ -38,13 +38,13 @@
 #include <k3bisooptions.h>
 #include <k3bdevicemanager.h>
 
-#include <qptrlist.h>
-#include <qmap.h>
-#include <qtextstream.h>
-#include <qdom.h>
-#include <qfile.h>
-#include <qapplication.h>
-#include <qcursor.h>
+#include <tqptrlist.h>
+#include <tqmap.h>
+#include <tqtextstream.h>
+#include <tqdom.h>
+#include <tqfile.h>
+#include <tqapplication.h>
+#include <tqcursor.h>
 
 #include <kurl.h>
 #include <kdebug.h>
@@ -57,9 +57,9 @@
 class K3bProjectManager::Private
 {
 public:
-  QPtrList<K3bDoc> projects;
+  TQPtrList<K3bDoc> projects;
   K3bDoc* activeProject;
-  QMap<K3bDoc*, K3bProjectInterface*> projectInterfaceMap;
+  TQMap<K3bDoc*, K3bProjectInterface*> projectInterfaceMap;
 
   int audioUntitledCount;
   int dataUntitledCount;
@@ -74,8 +74,8 @@ public:
 
 
 
-K3bProjectManager::K3bProjectManager( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bProjectManager::K3bProjectManager( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private();
   d->activeProject = 0;
@@ -96,7 +96,7 @@ K3bProjectManager::~K3bProjectManager()
 }
 
 
-const QPtrList<K3bDoc>& K3bProjectManager::projects() const
+const TQPtrList<K3bDoc>& K3bProjectManager::projects() const
 {
   return d->projects;
 }
@@ -104,13 +104,13 @@ const QPtrList<K3bDoc>& K3bProjectManager::projects() const
 
 void K3bProjectManager::addProject( K3bDoc* doc )
 {
-  if( !d->projects.containsRef( doc ) ) {
+  if( !d->projects.tqcontainsRef( doc ) ) {
     kdDebug() << "(K3bProjectManager) adding doc " << doc->URL().path() << endl;
     
     d->projects.append(doc);
 
-    connect( doc, SIGNAL(changed(K3bDoc*)),
-	     this, SLOT(slotProjectChanged(K3bDoc*)) );
+    connect( doc, TQT_SIGNAL(changed(K3bDoc*)),
+	     this, TQT_SLOT(slotProjectChanged(K3bDoc*)) );
 
     emit newProject( doc );
   }
@@ -120,15 +120,15 @@ void K3bProjectManager::addProject( K3bDoc* doc )
 void K3bProjectManager::removeProject( K3bDoc* doc )
 {
   //
-  // QPtrList.findRef seems to be buggy. Everytime we search for the
+  // TQPtrList.tqfindRef seems to be buggy. Everytime we search for the
   // first added item it is not found!
   //
-  for( QPtrListIterator<K3bDoc> it( d->projects );
+  for( TQPtrListIterator<K3bDoc> it( d->projects );
        it.current(); ++it ) {
     if( it.current() == doc ) {
 
       // remove the DCOP interface
-      QMap<K3bDoc*, K3bProjectInterface*>::iterator it = d->projectInterfaceMap.find( doc );
+      TQMap<K3bDoc*, K3bProjectInterface*>::iterator it = d->projectInterfaceMap.tqfind( doc );
       if( it != d->projectInterfaceMap.end() ) {
 	// delete the interface
 	delete it.data();
@@ -147,7 +147,7 @@ void K3bProjectManager::removeProject( K3bDoc* doc )
 
 K3bDoc* K3bProjectManager::findByUrl( const KURL& url )
 {
-  for( QPtrListIterator<K3bDoc> it( d->projects );
+  for( TQPtrListIterator<K3bDoc> it( d->projects );
        it.current(); ++it ) {
     K3bDoc* doc = it.current();
     if( doc->URL() == url )
@@ -172,10 +172,10 @@ void K3bProjectManager::setActive( K3bDoc* doc )
   }
 
   //
-  // QPtrList.findRef seems to be buggy. Everytime we search for the
+  // TQPtrList.tqfindRef seems to be buggy. Everytime we search for the
   // first added item it is not found!
   //
-  for( QPtrListIterator<K3bDoc> it( d->projects );
+  for( TQPtrListIterator<K3bDoc> it( d->projects );
        it.current(); ++it ) {
     if( it.current() == doc ) {
       d->activeProject = doc;
@@ -194,54 +194,54 @@ K3bDoc* K3bProjectManager::activeProject() const
 K3bDoc* K3bProjectManager::createEmptyProject( K3bDoc::DocType type )
 {
   K3bDoc* doc = 0;
-  QString fileName;
+  TQString fileName;
 
   switch( type ) {
   case K3bDoc::AUDIO: {
     doc = new K3bAudioDoc( this );
-    fileName = i18n("AudioCD%1").arg(d->audioUntitledCount++);
+    fileName = i18n("AudioCD%1").tqarg(d->audioUntitledCount++);
     break;
   }
 
   case K3bDoc::DATA: {
     doc = new K3bDataDoc( this );
-    fileName = i18n("DataCD%1").arg(d->dataUntitledCount++);
+    fileName = i18n("DataCD%1").tqarg(d->dataUntitledCount++);
     break;
   }
 
   case K3bDoc::MIXED: {
     doc = new K3bMixedDoc( this );
-    fileName=i18n("MixedCD%1").arg(d->mixedUntitledCount++);
+    fileName=i18n("MixedCD%1").tqarg(d->mixedUntitledCount++);
     break;
   }
 
   case K3bDoc::VCD: {
     doc = new K3bVcdDoc( this );
-    fileName=i18n("VideoCD%1").arg(d->vcdUntitledCount++);
+    fileName=i18n("VideoCD%1").tqarg(d->vcdUntitledCount++);
     break;
   }
 
   case K3bDoc::MOVIX: {
     doc = new K3bMovixDoc( this );
-    fileName=i18n("eMovixCD%1").arg(d->movixUntitledCount++);
+    fileName=i18n("eMovixCD%1").tqarg(d->movixUntitledCount++);
     break;
   }
 
   case K3bDoc::MOVIX_DVD: {
     doc = new K3bMovixDvdDoc( this );
-    fileName=i18n("eMovixDVD%1").arg(d->movixDvdUntitledCount++);
+    fileName=i18n("eMovixDVD%1").tqarg(d->movixDvdUntitledCount++);
     break;
   }
 
   case K3bDoc::DVD: {
     doc = new K3bDvdDoc( this );
-    fileName = i18n("DataDVD%1").arg(d->dvdUntitledCount++);
+    fileName = i18n("DataDVD%1").tqarg(d->dvdUntitledCount++);
     break;
   }
       
   case K3bDoc::VIDEODVD: {
     doc = new K3bVideoDvdDoc( this );
-    fileName = i18n("VideoDVD%1").arg(d->videoDvdUntitledCount++);
+    fileName = i18n("VideoDVD%1").tqarg(d->videoDvdUntitledCount++);
     break;
   }
   }
@@ -275,9 +275,9 @@ void K3bProjectManager::loadDefaults( K3bDoc* doc )
 {
   KConfig* c = kapp->config();
 
-  QString oldGroup = c->group();
+  TQString oldGroup = c->group();
 
-  QString cg = "default " + doc->typeString() + " settings";
+  TQString cg = "default " + doc->typeString() + " settings";
 
   // earlier K3b versions loaded the saved settings
   // so that is what we do as a default
@@ -290,7 +290,7 @@ void K3bProjectManager::loadDefaults( K3bDoc* doc )
 
   c->setGroup( cg );
 
-  QString mode = c->readEntry( "writing_mode" );
+  TQString mode = c->readEntry( "writing_mode" );
   if ( mode == "dao" )
     doc->setWritingMode( K3b::DAO );
   else if( mode == "tao" )
@@ -352,7 +352,7 @@ void K3bProjectManager::loadDefaults( K3bDoc* doc )
 
     dataDoc->setIsoOptions( K3bIsoOptions::load( c, false ) );
 
-    QString datamode = c->readEntry( "data_track_mode" );
+    TQString datamode = c->readEntry( "data_track_mode" );
     if( datamode == "mode1" )
       dataDoc->setDataMode( K3b::MODE1 );
     else if( datamode == "mode2" )
@@ -362,7 +362,7 @@ void K3bProjectManager::loadDefaults( K3bDoc* doc )
     
     dataDoc->setVerifyData( c->readBoolEntry( "verify data", false ) );
 
-    QString s = c->readEntry( "multisession mode" );
+    TQString s = c->readEntry( "multisession mode" );
     if( s == "none" )
       dataDoc->setMultiSessionMode( K3bDataDoc::NONE );
     else if( s == "start" )
@@ -399,7 +399,7 @@ void K3bProjectManager::loadDefaults( K3bDoc* doc )
     else
       mixedDoc->setMixedType( K3bMixedDoc::DATA_SECOND_SESSION );
 
-    QString datamode = c->readEntry( "data_track_mode" );
+    TQString datamode = c->readEntry( "data_track_mode" );
     if( datamode == "mode1" )
       mixedDoc->dataDoc()->setDataMode( K3b::MODE1 );
     else if( datamode == "mode2" )
@@ -449,7 +449,7 @@ void K3bProjectManager::loadDefaults( K3bDoc* doc )
 
 K3bProjectInterface* K3bProjectManager::dcopInterface( K3bDoc* doc )
 {
-  QMap<K3bDoc*, K3bProjectInterface*>::iterator it = d->projectInterfaceMap.find( doc );
+  TQMap<K3bDoc*, K3bProjectInterface*>::iterator it = d->projectInterfaceMap.tqfind( doc );
   if( it == d->projectInterfaceMap.end() ) {
     K3bProjectInterface* dcopInterface = 0;
     if( doc->type() == K3bDoc::DATA || doc->type() == K3bDoc::DVD )
@@ -470,15 +470,15 @@ K3bProjectInterface* K3bProjectManager::dcopInterface( K3bDoc* doc )
 
 K3bDoc* K3bProjectManager::openProject( const KURL& url )
 {
-  QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
+  TQApplication::setOverrideCursor( TQCursor(TQt::WaitCursor) );
 
-  QString tmpfile;
+  TQString tmpfile;
   KIO::NetAccess::download( url, tmpfile, 0L );
 
   // ///////////////////////////////////////////////
   // first check if it's a store or an old plain xml file
   bool success = false;
-  QDomDocument xmlDoc;
+  TQDomDocument xmlDoc;
 
   // try opening a store
   KoStore* store = KoStore::createStore( tmpfile, KoStore::Read );
@@ -486,7 +486,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
     if( !store->bad() ) {
       // try opening the document inside the store
       if( store->open( "maindata.xml" ) ) {
-	QIODevice* dev = store->device();
+	TQIODevice* dev = store->device();
 	dev->open( IO_ReadOnly );
 	if( xmlDoc.setContent( dev ) )
 	  success = true;
@@ -500,7 +500,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
 
   if( !success ) {
     // try reading an old plain document
-    QFile f( tmpfile );
+    TQFile f( tmpfile );
     if ( f.open( IO_ReadOnly ) ) {
       //
       // First check if this is really an xml file beacuse if this is a very big file
@@ -510,14 +510,14 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
       if( f.readBlock( test, 5 ) ) {
 	if( ::strncmp( test, "<?xml", 5 ) ) {
 	  kdDebug() << "(K3bDoc) " << url.path() << " seems to be no xml file." << endl;
-	  QApplication::restoreOverrideCursor();
+	  TQApplication::restoreOverrideCursor();
 	  return 0;
 	}
 	f.reset();
       }
       else {
 	kdDebug() << "(K3bDoc) could not read from file." << endl;
-	QApplication::restoreOverrideCursor();
+	TQApplication::restoreOverrideCursor();
 	return 0;
       }
       if( xmlDoc.setContent( &f ) )
@@ -531,7 +531,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
 
   if( !success ) {
     kdDebug() << "(K3bDoc) could not open file " << url.path() << endl;
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
     return 0;
   }
 
@@ -555,7 +555,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
     type = K3bDoc::VIDEODVD;
   else {
     kdDebug() << "(K3bDoc) unknown doc type: " << xmlDoc.doctype().name() << endl;
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
     return 0;
   }
 
@@ -564,7 +564,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
 
   // ---------
   // load the data into the document
-  QDomElement root = xmlDoc.documentElement();
+  TQDomElement root = xmlDoc.documentElement();
   if( newDoc->loadDocumentData( &root ) ) {
     newDoc->setURL( url );
     newDoc->setSaved( true );
@@ -585,7 +585,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
     newDoc = 0;
   }
 
-  QApplication::restoreOverrideCursor();
+  TQApplication::restoreOverrideCursor();
 
   return newDoc;
 }
@@ -593,7 +593,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
 
 bool K3bProjectManager::saveProject( K3bDoc* doc, const KURL& url )
 {
-  QString tmpfile;
+  TQString tmpfile;
   KIO::NetAccess::download( url, tmpfile, 0L );
 
   bool success = false;
@@ -609,16 +609,16 @@ bool K3bProjectManager::saveProject( K3bDoc* doc, const KURL& url )
       store->open( "maindata.xml" );
       
       // save the data in the document
-      QDomDocument xmlDoc( "k3b_" + doc->typeString() + "_project" );
+      TQDomDocument xmlDoc( "k3b_" + doc->typeString() + "_project" );
       
       xmlDoc.appendChild( xmlDoc.createProcessingInstruction( "xml", "version=\"1.0\" encoding=\"UTF-8\"" ) );
-      QDomElement docElem = xmlDoc.createElement( "k3b_" + doc->typeString() + "_project" );
+      TQDomElement docElem = xmlDoc.createElement( "k3b_" + doc->typeString() + "_project" );
       xmlDoc.appendChild( docElem );
       success = doc->saveDocumentData( &docElem );
       if( success ) {
 	KoStoreDevice dev(store);
 	dev.open( IO_WriteOnly );
-	QTextStream xmlStream( &dev );
+	TQTextStream xmlStream( &dev );
 	xmlDoc.save( xmlStream, 0 );
 	
 	doc->setURL( url );

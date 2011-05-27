@@ -26,22 +26,22 @@
 #include <klocale.h>
 #include <kpopupmenu.h>
 
-#include <qpixmap.h>
-#include <qpainter.h>
-#include <qapplication.h>
+#include <tqpixmap.h>
+#include <tqpainter.h>
+#include <tqapplication.h>
 
 #include <X11/Xlib.h>
 
 
-K3bJobProgressOSD::K3bJobProgressOSD( QWidget* parent, const char* name )
-  : QWidget( parent, name, WType_TopLevel | WNoAutoErase | WStyle_Customize | WX11BypassWM | WStyle_StaysOnTop ),
+K3bJobProgressOSD::K3bJobProgressOSD( TQWidget* tqparent, const char* name )
+  : TQWidget( tqparent, name, WType_TopLevel | WNoAutoErase | WStyle_Customize | WX11BypassWM | WStyle_StaysOnTop ),
     m_dirty(true),
     m_progress(0),
     m_dragging(false),
     m_screen(0),
     m_position(s_outerMargin, s_outerMargin)
 {
-  setFocusPolicy( NoFocus );
+  setFocusPolicy( TQ_NoFocus );
   setBackgroundMode( NoBackground );
 
   // dummy size
@@ -50,10 +50,10 @@ K3bJobProgressOSD::K3bJobProgressOSD( QWidget* parent, const char* name )
   // make sure we are always visible
   KWin::setOnAllDesktops( winId(), true );
 
-  connect( k3bappcore->themeManager(), SIGNAL(themeChanged()),
-	   this, SLOT(refresh()) );
-  connect( kapp, SIGNAL(appearanceChanged()),
-	   this, SLOT(refresh()) );
+  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
+	   this, TQT_SLOT(refresh()) );
+  connect( kapp, TQT_SIGNAL(appearanceChanged()),
+	   this, TQT_SLOT(refresh()) );
 }
 
 
@@ -70,11 +70,11 @@ void K3bJobProgressOSD::show()
   if( m_dirty )
     renderOSD();
   
-  QWidget::show();
+  TQWidget::show();
 }
 
 
-void K3bJobProgressOSD::setText( const QString& text )
+void K3bJobProgressOSD::setText( const TQString& text )
 {
   if( m_text != text ) {
     m_text = text;
@@ -92,7 +92,7 @@ void K3bJobProgressOSD::setProgress( int p )
 }
 
 
-void K3bJobProgressOSD::setPosition( const QPoint& p )
+void K3bJobProgressOSD::setPosition( const TQPoint& p )
 {
   m_position = p;
   reposition();
@@ -118,21 +118,21 @@ void K3bJobProgressOSD::renderOSD()
 
   // calculate needed size 
   if( K3bTheme* theme = k3bappcore->themeManager()->currentTheme() ) {
-    QPixmap icon = KGlobal::iconLoader()->loadIcon( "k3b", KIcon::NoGroup, 32 );
+    TQPixmap icon = KGlobal::iconLoader()->loadIcon( "k3b", KIcon::NoGroup, 32 );
     int margin = 10;
     int textWidth = fontMetrics().width( m_text );
 
     // do not change the size every time the text changes, just in case we are too small
-    QSize newSize( QMAX( QMAX( 2*margin + icon.width() + margin + textWidth, 100 ), width() ),
-		   QMAX( 2*margin + icon.height(), 2*margin + fontMetrics().height()*2 ) );
+    TQSize newSize( TQMAX( TQMAX( 2*margin + icon.width() + margin + textWidth, 100 ), width() ),
+		   TQMAX( 2*margin + icon.height(), 2*margin + fontMetrics().height()*2 ) );
     
     m_osdBuffer.resize( newSize );
-    QPainter p( &m_osdBuffer );
+    TQPainter p( &m_osdBuffer );
     
     p.setPen( theme->foregroundColor() );
     
     // draw the background and the frame
-    QRect thisRect( 0, 0, newSize.width(), newSize.height() );
+    TQRect thisRect( 0, 0, newSize.width(), newSize.height() );
     p.fillRect( thisRect, theme->backgroundColor() );
     p.drawRect( thisRect );
     
@@ -140,14 +140,14 @@ void K3bJobProgressOSD::renderOSD()
     p.drawPixmap( margin, (newSize.height()-icon.height())/2, icon );
     
     // draw the text
-    QSize textSize = fontMetrics().size( 0, m_text );
+    TQSize textSize = fontMetrics().size( 0, m_text );
     int textX = 2*margin + icon.width();
     int textY = margin + fontMetrics().ascent();
     p.drawText( textX, textY, m_text );
     
     // draw the progress
     textY += fontMetrics().descent() + 4;
-    QRect progressRect( textX, textY, newSize.width()-textX-margin, newSize.height()-textY-margin );
+    TQRect progressRect( textX, textY, newSize.width()-textX-margin, newSize.height()-textY-margin );
     p.drawRect( progressRect );
     progressRect.setWidth( m_progress > 0 ? m_progress*progressRect.width()/100 : 0 );
     p.fillRect( progressRect, theme->foregroundColor() );
@@ -164,19 +164,19 @@ void K3bJobProgressOSD::renderOSD()
 
 void K3bJobProgressOSD::setScreen( int screen )
 {
-  const int n = QApplication::desktop()->numScreens();
+  const int n = TQApplication::desktop()->numScreens();
   m_screen = (screen >= n) ? n-1 : screen;
   reposition();
 }
 
 
-void K3bJobProgressOSD::reposition( QSize newSize )
+void K3bJobProgressOSD::reposition( TQSize newSize )
 {
   if( !newSize.isValid() )
     newSize = size();
 
-  QPoint newPos = m_position;
-  const QRect& screen = QApplication::desktop()->screenGeometry( m_screen );
+  TQPoint newPos = m_position;
+  const TQRect& screen = TQApplication::desktop()->screenGeometry( m_screen );
 
   // now to properly resize if put into one of the corners we interpret the position
   // depending on the quadrant
@@ -201,21 +201,21 @@ void K3bJobProgressOSD::reposition( QSize newSize )
 }
 
 
-void K3bJobProgressOSD::paintEvent( QPaintEvent* )
+void K3bJobProgressOSD::paintEvent( TQPaintEvent* )
 {
   bitBlt( this, 0, 0, &m_osdBuffer );
 }
 
 
-void K3bJobProgressOSD::mousePressEvent( QMouseEvent* e )
+void K3bJobProgressOSD::mousePressEvent( TQMouseEvent* e )
 {
   m_dragOffset = e->pos();
 
-  if( e->button() == LeftButton && !m_dragging ) {
+  if( e->button() == Qt::LeftButton && !m_dragging ) {
     grabMouse( KCursor::sizeAllCursor() );
     m_dragging = true;
   }
-  else if( e->button() == RightButton ) {
+  else if( e->button() == Qt::RightButton ) {
     KPopupMenu m;
     if( m.insertItem( i18n("Hide OSD") ) == m.exec( e->globalPos() ) )
       hide();
@@ -223,7 +223,7 @@ void K3bJobProgressOSD::mousePressEvent( QMouseEvent* e )
 }
 
 
-void K3bJobProgressOSD::mouseReleaseEvent( QMouseEvent* )
+void K3bJobProgressOSD::mouseReleaseEvent( TQMouseEvent* )
 {
   if( m_dragging ) {
     m_dragging = false;
@@ -232,16 +232,16 @@ void K3bJobProgressOSD::mouseReleaseEvent( QMouseEvent* )
 }
 
 
-void K3bJobProgressOSD::mouseMoveEvent( QMouseEvent* e )
+void K3bJobProgressOSD::mouseMoveEvent( TQMouseEvent* e )
 {
   if( m_dragging && this == mouseGrabber() ) {
 
     // check if the osd has been dragged out of the current screen
-    int currentScreen = QApplication::desktop()->screenNumber( e->globalPos() );
+    int currentScreen = TQApplication::desktop()->screenNumber( e->globalPos() );
     if( currentScreen != -1 )
       m_screen = currentScreen;
 
-    const QRect& screen = QApplication::desktop()->screenGeometry( m_screen );
+    const TQRect& screen = TQApplication::desktop()->screenGeometry( m_screen );
     
     // make sure the position is valid
     m_position = fixupPosition( e->globalPos() - m_dragOffset - screen.topLeft() );
@@ -260,10 +260,10 @@ void K3bJobProgressOSD::mouseMoveEvent( QMouseEvent* e )
 }
 
 
-QPoint K3bJobProgressOSD::fixupPosition( const QPoint& pp )
+TQPoint K3bJobProgressOSD::fixupPosition( const TQPoint& pp )
 {
-  QPoint p(pp);
-  const QRect& screen = QApplication::desktop()->screenGeometry( m_screen );
+  TQPoint p(pp);
+  const TQRect& screen = TQApplication::desktop()->screenGeometry( m_screen );
   int maxY = screen.height() - height() - s_outerMargin;
   int maxX = screen.width() - width() - s_outerMargin;
 

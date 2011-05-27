@@ -14,8 +14,8 @@
  */
 
 
-#include <qwidget.h>
-#include <qstring.h>
+#include <tqwidget.h>
+#include <tqstring.h>
 
 #include "k3bintvalidator.h"
 
@@ -24,15 +24,15 @@
 #include <kdebug.h>
 
 
-K3bIntValidator::K3bIntValidator ( QWidget * parent, const char * name )
-  : QValidator(parent, name)
+K3bIntValidator::K3bIntValidator ( TQWidget * tqparent, const char * name )
+  : TQValidator(TQT_TQOBJECT(tqparent), name)
 {
   m_min = m_max = 0;
 }
 
 
-K3bIntValidator::K3bIntValidator ( int bottom, int top, QWidget * parent, const char * name )
-  : QValidator(parent, name)
+K3bIntValidator::K3bIntValidator ( int bottom, int top, TQWidget * tqparent, const char * name )
+  : TQValidator(TQT_TQOBJECT(tqparent), name)
 {
   m_min = bottom;
   m_max = top;
@@ -44,11 +44,11 @@ K3bIntValidator::~K3bIntValidator ()
 }
 
 
-QValidator::State K3bIntValidator::validate ( QString &str, int & ) const
+TQValidator::State K3bIntValidator::validate ( TQString &str, int & ) const
 {
   bool ok;
   int  val = 0;
-  QString newStr;
+  TQString newStr;
 
   newStr = str.stripWhiteSpace();
   newStr = newStr.upper();
@@ -70,7 +70,7 @@ QValidator::State K3bIntValidator::validate ( QString &str, int & ) const
       if( minus && m_min && m_min >= 0)
 	ok = false;
       else
-	return QValidator::Acceptable;
+	return TQValidator::Acceptable;
     }
 
     val = newStr.toInt( &ok, hex ? 16 : 10 );
@@ -83,22 +83,22 @@ QValidator::State K3bIntValidator::validate ( QString &str, int & ) const
   }
 
   if( !ok )
-    return QValidator::Invalid;
+    return TQValidator::Invalid;
 
   if( m_min && val > 0 && val < m_min )
-    return QValidator::Acceptable;
+    return TQValidator::Acceptable;
 
   if( m_max && val < 0 && val > m_max )
-    return QValidator::Acceptable;
+    return TQValidator::Acceptable;
 
   if( (m_max && val > m_max) || (m_min && val < m_min) )
-    return QValidator::Invalid;
+    return TQValidator::Invalid;
 
-  return QValidator::Valid;
+  return TQValidator::Valid;
 }
 
 
-void K3bIntValidator::fixup ( QString& ) const
+void K3bIntValidator::fixup ( TQString& ) const
 {
   // TODO: remove preceding zeros
 }
@@ -126,7 +126,7 @@ int K3bIntValidator::top () const
 }
 
 
-int K3bIntValidator::toInt( const QString& s, bool* ok )
+int K3bIntValidator::toInt( const TQString& s, bool* ok )
 {
   if( s.lower().startsWith( "0x" ) )
     return s.right( s.length()-2 ).toInt( ok, 16 );

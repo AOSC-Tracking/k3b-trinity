@@ -18,29 +18,30 @@
 #define K3B_MSF_EDIT_H
 
 
-#include <qspinbox.h>
-#include <qstring.h>
-#include <qvalidator.h>
+#include <tqspinbox.h>
+#include <tqstring.h>
+#include <tqvalidator.h>
 
 #include <k3bmsf.h>
 #include "k3b_export.h"
 
-class K3bMsfValidator : public QRegExpValidator
+class K3bMsfValidator : public TQRegExpValidator
 {
  public:
-  K3bMsfValidator( QObject* parent = 0, const char* name = 0 );
+  K3bMsfValidator( TQObject* tqparent = 0, const char* name = 0 );
 };
 
 
-class LIBK3B_EXPORT K3bMsfEdit : public QSpinBox
+class LIBK3B_EXPORT K3bMsfEdit : public TQSpinBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMsfEdit( QWidget* parent = 0, const char* name = 0 );
+  K3bMsfEdit( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bMsfEdit();
 
-  QSize sizeHint() const;
+  TQSize tqsizeHint() const;
 
   void setFrameStyle( int style );
   void setLineWidth(int);
@@ -52,13 +53,13 @@ class LIBK3B_EXPORT K3bMsfEdit : public QSpinBox
 
  public slots:
   void setValue( int v );
-  void setText( const QString& );
+  void setText( const TQString& );
   void setMsfValue( const K3b::Msf& );
   void stepUp();
   void stepDown();
 
  protected:
-  QString mapValueToText( int );
+  TQString mapValueToText( int );
   int mapTextToValue( bool* ok );
   int currentStepValue() const;
 

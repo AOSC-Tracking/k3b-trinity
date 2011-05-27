@@ -20,10 +20,10 @@
 #include <k3bjob.h>
 #include <k3bdatadoc.h>
 
-#include <qfile.h>
+#include <tqfile.h>
 
-class QString;
-class QDataStream;
+class TQString;
+class TQDataStream;
 class K3bAbstractWriter;
 class K3bIsoImager;
 class KTempFile;
@@ -40,9 +40,10 @@ namespace K3bDevice {
 class K3bDataJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 	
  public:
-  K3bDataJob( K3bDataDoc*, K3bJobHandler*, QObject* parent = 0 );
+  K3bDataJob( K3bDataDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
   virtual ~K3bDataJob();
 	
   K3bDoc* doc() const;
@@ -50,8 +51,8 @@ class K3bDataJob : public K3bBurnJob
 
   virtual bool hasBeenCanceled() const;
 
-  virtual QString jobDescription() const;
-  virtual QString jobDetails() const;
+  virtual TQString jobDescription() const;
+  virtual TQString jobDetails() const;
 		
  public slots:
   void cancel();

@@ -28,8 +28,8 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-#include <qregexp.h>
-#include <qfile.h>
+#include <tqregexp.h>
+#include <tqfile.h>
 
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -57,10 +57,10 @@ static const char s_riffHeader[] =
 
 
 
-static K3bExternalEncoderCommand commandByExtension( const QString& extension )
+static K3bExternalEncoderCommand commandByExtension( const TQString& extension )
 {
-  QValueList<K3bExternalEncoderCommand> cmds( K3bExternalEncoderCommand::readCommands() );
-  for( QValueList<K3bExternalEncoderCommand>::iterator it = cmds.begin(); it != cmds.end(); ++it )
+  TQValueList<K3bExternalEncoderCommand> cmds( K3bExternalEncoderCommand::readCommands() );
+  for( TQValueList<K3bExternalEncoderCommand>::iterator it = cmds.begin(); it != cmds.end(); ++it )
     if( (*it).extension == extension )
       return *it;
 
@@ -78,8 +78,8 @@ public:
   }
 
   K3bProcess* process;
-  QString fileName;
-  QString extension;
+  TQString fileName;
+  TQString extension;
   K3b::Msf length;
 
   K3bExternalEncoderCommand cmd;
@@ -87,20 +87,20 @@ public:
   bool initialized;
 
   // the metaData we support
-  QString artist;
-  QString title;
-  QString comment;
-  QString trackNumber;
-  QString cdArtist;
-  QString cdTitle;
-  QString cdComment;
-  QString year;
-  QString genre;
+  TQString artist;
+  TQString title;
+  TQString comment;
+  TQString trackNumber;
+  TQString cdArtist;
+  TQString cdTitle;
+  TQString cdComment;
+  TQString year;
+  TQString genre;
 };
 
 
-K3bExternalEncoder::K3bExternalEncoder( QObject* parent, const char* name )
-  : K3bAudioEncoder( parent, name )
+K3bExternalEncoder::K3bExternalEncoder( TQObject* tqparent, const char* name )
+  : K3bAudioEncoder( tqparent, name )
 {
   d = new Private();
 }
@@ -113,7 +113,7 @@ K3bExternalEncoder::~K3bExternalEncoder()
 }
 
 
-void K3bExternalEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, const QString& value )
+void K3bExternalEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, const TQString& value )
 {
   switch( f ) {
   case META_TRACK_TITLE:
@@ -168,7 +168,7 @@ void K3bExternalEncoder::slotExternalProgramFinished( KProcess* p )
 }
 
 
-bool K3bExternalEncoder::openFile( const QString& ext, const QString& filename, const K3b::Msf& length )
+bool K3bExternalEncoder::openFile( const TQString& ext, const TQString& filename, const K3b::Msf& length )
 {
   d->fileName = filename;
   d->extension = ext;
@@ -176,8 +176,8 @@ bool K3bExternalEncoder::openFile( const QString& ext, const QString& filename, 
   d->length = length;
 
   // delete existing files as some programs (like flac for example) might refuse to overwrite files
-  if( QFile::exists( filename ) )
-    QFile::remove( filename );
+  if( TQFile::exists( filename ) )
+    TQFile::remove( filename );
 
   return true;
 }
@@ -189,7 +189,7 @@ void K3bExternalEncoder::closeFile()
 }
 
 
-bool K3bExternalEncoder::initEncoderInternal( const QString& extension )
+bool K3bExternalEncoder::initEncoderInternal( const TQString& extension )
 {
   d->initialized = true;
 
@@ -207,42 +207,42 @@ bool K3bExternalEncoder::initEncoderInternal( const QString& extension )
   d->process->setSplitStdout(true);
   d->process->setRawStdin(true);
 
-  connect( d->process, SIGNAL(processExited(KProcess*)),
-	   this, SLOT(slotExternalProgramFinished(KProcess*)) );
-  connect( d->process, SIGNAL(stderrLine(const QString&)),
-	   this, SLOT(slotExternalProgramOutputLine(const QString&)) );
-  connect( d->process, SIGNAL(stdoutLine(const QString&)),
-	   this, SLOT(slotExternalProgramOutputLine(const QString&)) );
+  connect( d->process, TQT_SIGNAL(processExited(KProcess*)),
+	   this, TQT_SLOT(slotExternalProgramFinished(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)),
+	   this, TQT_SLOT(slotExternalProgramOutputLine(const TQString&)) );
+  connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)),
+	   this, TQT_SLOT(slotExternalProgramOutputLine(const TQString&)) );
 
 
   // create the commandline
-  QStringList params = QStringList::split( ' ', d->cmd.command, false );
-  for( QStringList::iterator it = params.begin(); it != params.end(); ++it ) {
-    (*it).replace( "%f", d->fileName );
-    (*it).replace( "%a", d->artist );
-    (*it).replace( "%t", d->title );
-    (*it).replace( "%c", d->comment );
-    (*it).replace( "%y", d->year );
-    (*it).replace( "%m", d->cdTitle );
-    (*it).replace( "%r", d->cdArtist );
-    (*it).replace( "%x", d->cdComment );
-    (*it).replace( "%n", d->trackNumber );
-    (*it).replace( "%g", d->genre );
+  TQStringList params = TQStringList::split( ' ', d->cmd.command, false );
+  for( TQStringList::iterator it = params.begin(); it != params.end(); ++it ) {
+    (*it).tqreplace( "%f", d->fileName );
+    (*it).tqreplace( "%a", d->artist );
+    (*it).tqreplace( "%t", d->title );
+    (*it).tqreplace( "%c", d->comment );
+    (*it).tqreplace( "%y", d->year );
+    (*it).tqreplace( "%m", d->cdTitle );
+    (*it).tqreplace( "%r", d->cdArtist );
+    (*it).tqreplace( "%x", d->cdComment );
+    (*it).tqreplace( "%n", d->trackNumber );
+    (*it).tqreplace( "%g", d->genre );
 
     *d->process << *it;
   }
 
 
   kdDebug() << "***** external parameters:" << endl;
-  const QValueList<QCString>& args = d->process->args();
-  QString s;
-  for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+  const TQValueList<TQCString>& args = d->process->args();
+  TQString s;
+  for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
     s += *it + " ";
   }
   kdDebug() << s << flush << endl;
 
   // set one general error message
-  setLastError( i18n("Command failed: %1").arg( s ) );
+  setLastError( i18n("Command failed: %1").tqarg( s ) );
   
   if( d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
     if( d->cmd.writeWaveHeader )
@@ -251,9 +251,9 @@ bool K3bExternalEncoder::initEncoderInternal( const QString& extension )
       return true;
   }
   else {
-    QString commandName = d->cmd.command.section( QRegExp("\\s+"), 0 );
+    TQString commandName = d->cmd.command.section( TQRegExp("\\s+"), 0 );
     if( !KStandardDirs::findExe( commandName ).isEmpty() )
-      setLastError( i18n("Could not find program '%1'").arg(commandName) );
+      setLastError( i18n("Could not find program '%1'").tqarg(commandName) );
 
     return false;
   }
@@ -271,8 +271,8 @@ bool K3bExternalEncoder::writeWaveHeader()
   }
   
   // write the wave size
-  Q_INT32 dataSize( d->length.audioBytes() );
-  Q_INT32 wavSize( dataSize + 44 - 8 );
+  TQ_INT32 dataSize( d->length.audioBytes() );
+  TQ_INT32 wavSize( dataSize + 44 - 8 );
   char c[4];
 
   c[0] = (wavSize   >> 0 ) & 0xff;
@@ -305,7 +305,7 @@ bool K3bExternalEncoder::writeWaveHeader()
 }
 
 
-long K3bExternalEncoder::encodeInternal( const char* data, Q_ULONG len )
+long K3bExternalEncoder::encodeInternal( const char* data, TQ_ULONG len )
 {
   if( !d->initialized )
     if( !initEncoderInternal( d->extension ) )
@@ -347,33 +347,33 @@ long K3bExternalEncoder::encodeInternal( const char* data, Q_ULONG len )
 }
 
 
-void K3bExternalEncoder::slotExternalProgramOutputLine( const QString& line )
+void K3bExternalEncoder::slotExternalProgramOutputLine( const TQString& line )
 {
   kdDebug() << "(" << d->cmd.name << ") " << line << endl;
 }
 
 
-QStringList K3bExternalEncoder::extensions() const
+TQStringList K3bExternalEncoder::extensions() const
 {
-  QStringList el;
-  QValueList<K3bExternalEncoderCommand> cmds( K3bExternalEncoderCommand::readCommands() );
-  for( QValueList<K3bExternalEncoderCommand>::iterator it = cmds.begin(); it != cmds.end(); ++it )
+  TQStringList el;
+  TQValueList<K3bExternalEncoderCommand> cmds( K3bExternalEncoderCommand::readCommands() );
+  for( TQValueList<K3bExternalEncoderCommand>::iterator it = cmds.begin(); it != cmds.end(); ++it )
     el.append( (*it).extension );
 
   return el;
 }
 
 
-QString K3bExternalEncoder::fileTypeComment( const QString& ext ) const
+TQString K3bExternalEncoder::fileTypeComment( const TQString& ext ) const
 {
   return commandByExtension( ext ).name;
 }
 
 
-K3bPluginConfigWidget* K3bExternalEncoder::createConfigWidget( QWidget* parent, 
+K3bPluginConfigWidget* K3bExternalEncoder::createConfigWidget( TQWidget* tqparent, 
 							       const char* name ) const
 {
-  return new K3bExternalEncoderSettingsWidget( parent, name );
+  return new K3bExternalEncoderSettingsWidget( tqparent, name );
 }
 
 

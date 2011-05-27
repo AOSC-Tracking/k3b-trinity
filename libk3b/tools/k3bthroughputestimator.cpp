@@ -16,7 +16,7 @@
 
 #include "k3bthroughputestimator.h"
 
-#include <qdatetime.h>
+#include <tqdatetime.h>
 #include <kdebug.h>
 
 
@@ -27,9 +27,9 @@ public:
     : started(false) {
   }
 
-  QTime firstDataTime;
+  TQTime firstDataTime;
   unsigned long firstData;
-  QTime lastDataTime;
+  TQTime lastDataTime;
   unsigned long lastData;
 
   int lastThroughput;
@@ -38,8 +38,8 @@ public:
 };
 
 
-K3bThroughputEstimator::K3bThroughputEstimator( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bThroughputEstimator::K3bThroughputEstimator( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private();
 }

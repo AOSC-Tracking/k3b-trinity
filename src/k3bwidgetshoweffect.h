@@ -22,16 +22,17 @@
 #ifndef _K3B_WIDGET_SHOW_EFFECT_H_
 #define _K3B_WIDGET_SHOW_EFFECT_H_
 
-#include <qobject.h>
-#include <qbitmap.h>
+#include <tqobject.h>
+#include <tqbitmap.h>
 
 
 /**
  * Helper class to show and hide a widget in a fancy way.
  */
-class K3bWidgetShowEffect : public QObject
+class K3bWidgetShowEffect : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   // FIXME: add an effect direction
@@ -40,7 +41,7 @@ class K3bWidgetShowEffect : public QObject
     Slide
   };
 
-  K3bWidgetShowEffect( QWidget* widget, Effect e = Slide );
+  K3bWidgetShowEffect( TQWidget* widget, Effect e = Slide );
   ~K3bWidgetShowEffect();
 
   void setEffect( Effect e ) { m_effect = e; }
@@ -50,39 +51,39 @@ class K3bWidgetShowEffect : public QObject
    * \returns the K3bWidgetShowEffect instance used to show the widget.
    * Can be used to connect to signals.
    */
-  static K3bWidgetShowEffect* showWidget( QWidget* w, Effect );
+  static K3bWidgetShowEffect* showWidget( TQWidget* w, Effect );
 
   /**
    * Using the widget effects the easy way.
    * \returns the K3bWidgetShowEffect instance used to hide the widget.
    * Can be used to connect to signals.
    */
-  static K3bWidgetShowEffect* hideWidget( QWidget* w, Effect );
+  static K3bWidgetShowEffect* hideWidget( TQWidget* w, Effect );
 
  signals:
-  void widgetShown( QWidget* );
-  void widgetHidden( QWidget* );
+  void widgetShown( TQWidget* );
+  void widgetHidden( TQWidget* );
 
  public slots:
   /**
-   * \param effectOnly If true K3bWidgetShowEffect will not call QWidget::show().
+   * \param effectOnly If true K3bWidgetShowEffect will not call TQWidget::show().
    *                   This is only useful in case onw uses K3bWidgetShowEffect
-   *                   to reimplement QWidget::show(). In that case the caller
+   *                   to reimplement TQWidget::show(). In that case the caller
    *                   has to take care of showing the widget.
    */
   void show( bool effectOnly = false );
 
   /**
-   * \param effectOnly If true K3bWidgetShowEffect will not call QWidget::hide().
+   * \param effectOnly If true K3bWidgetShowEffect will not call TQWidget::hide().
    *                   This is only useful in case onw uses K3bWidgetShowEffect
-   *                   to reimplement QWidget::hide(). In that case the caller
+   *                   to reimplement TQWidget::hide(). In that case the caller
    *                   has to take care of hiding the widget by connecting to
    *                   K3bWidgetShowEffect::widgetHidden()
    */
   void hide( bool effectOnly = false );
 
  private:
-  void timerEvent( QTimerEvent* );
+  void timerEvent( TQTimerEvent* );
   
   /**
    * @short Gradually show widget by dissolving from background
@@ -95,9 +96,9 @@ class K3bWidgetShowEffect : public QObject
   void slideMask();
 
   Effect m_effect;
-  QWidget* m_widget;
+  TQWidget* m_widget;
 
-  QBitmap m_mask;
+  TQBitmap m_tqmask;
 
   int m_dissolveSize;
   int m_dissolveDelta;

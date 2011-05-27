@@ -19,18 +19,18 @@
 #include <k3bstdguiitems.h>
 #include <k3bglobalsettings.h>
 
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qtabwidget.h>
-#include <qradiobutton.h>
-#include <qvalidator.h>
-#include <qbuttongroup.h>
-#include <qspinbox.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqtabwidget.h>
+#include <tqradiobutton.h>
+#include <tqvalidator.h>
+#include <tqbuttongroup.h>
+#include <tqspinbox.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 
 #include <knuminput.h>
 #include <kconfig.h>
@@ -39,8 +39,8 @@
 #include <klineedit.h>
 
 
-K3bBurningOptionTab::K3bBurningOptionTab( QWidget* parent, const char* name )
-  : QWidget( parent, name )
+K3bBurningOptionTab::K3bBurningOptionTab( TQWidget* tqparent, const char* name )
+  : TQWidget( tqparent, name )
 {
   setupGui();
 }
@@ -53,25 +53,25 @@ K3bBurningOptionTab::~K3bBurningOptionTab()
 
 void K3bBurningOptionTab::setupGui()
 {
-  QGridLayout* groupAdvancedLayout = new QGridLayout( this );
-  groupAdvancedLayout->setAlignment( Qt::AlignTop );
+  TQGridLayout* groupAdvancedLayout = new TQGridLayout( this );
+  groupAdvancedLayout->tqsetAlignment( TQt::AlignTop );
   groupAdvancedLayout->setSpacing( KDialog::spacingHint() );
   groupAdvancedLayout->setMargin( 0 );
 
 
-  QGroupBox* groupWritingApp = new QGroupBox( 0, Qt::Vertical, i18n("Burning"), this );
-  groupWritingApp->layout()->setMargin( 0 );
-  QGridLayout* bufferLayout = new QGridLayout( groupWritingApp->layout() );
+  TQGroupBox* groupWritingApp = new TQGroupBox( 0, Qt::Vertical, i18n("Burning"), this );
+  groupWritingApp->tqlayout()->setMargin( 0 );
+  TQGridLayout* bufferLayout = new TQGridLayout( groupWritingApp->tqlayout() );
   bufferLayout->setMargin( KDialog::marginHint() );
   bufferLayout->setSpacing( KDialog::spacingHint() );
 
   m_checkBurnfree = K3bStdGuiItems::burnproofCheckbox( groupWritingApp );
-  m_checkOverburn = new QCheckBox( i18n("Allow overburning (&not supported by cdrecord <= 1.10)"), groupWritingApp );
-  m_checkForceUnsafeOperations = new QCheckBox( i18n("Force unsafe operations"), groupWritingApp );
-  m_checkManualWritingBufferSize = new QCheckBox( i18n("&Manual writing buffer size") + ":", groupWritingApp );
+  m_checkOverburn = new TQCheckBox( i18n("Allow overburning (&not supported by cdrecord <= 1.10)"), groupWritingApp );
+  m_checkForceUnsafeOperations = new TQCheckBox( i18n("Force unsafe operations"), groupWritingApp );
+  m_checkManualWritingBufferSize = new TQCheckBox( i18n("&Manual writing buffer size") + ":", groupWritingApp );
   m_editWritingBufferSize = new KIntNumInput( 4, groupWritingApp );
   m_editWritingBufferSize->setSuffix( " " + i18n("MB") );
-  m_checkAllowWritingAppSelection = new QCheckBox( i18n("Manual writing application &selection"), groupWritingApp );
+  m_checkAllowWritingAppSelection = new TQCheckBox( i18n("Manual writing application &selection"), groupWritingApp );
   bufferLayout->addMultiCellWidget( m_checkBurnfree, 0, 0, 0, 2 );
   bufferLayout->addMultiCellWidget( m_checkOverburn, 1, 1, 0, 2 );
   bufferLayout->addMultiCellWidget( m_checkForceUnsafeOperations, 2, 2, 0, 2 );
@@ -80,32 +80,32 @@ void K3bBurningOptionTab::setupGui()
   bufferLayout->addMultiCellWidget( m_checkAllowWritingAppSelection, 4, 4, 0, 2 );
   bufferLayout->setColStretch( 2, 1 );
 
-  QGroupBox* groupMisc = new QGroupBox( 2, Qt::Vertical, i18n("Miscellaneous"), this );
-  m_checkEject = new QCheckBox( i18n("Do not &eject medium after write process"), groupMisc );
-  m_checkAutoErasingRewritable = new QCheckBox( i18n("Automatically erase CD-RWs and DVD-RWs"), groupMisc );
+  TQGroupBox* groupMisc = new TQGroupBox( 2, Qt::Vertical, i18n("Miscellaneous"), this );
+  m_checkEject = new TQCheckBox( i18n("Do not &eject medium after write process"), groupMisc );
+  m_checkAutoErasingRewritable = new TQCheckBox( i18n("Automatically erase CD-RWs and DVD-RWs"), groupMisc );
 
   groupAdvancedLayout->addWidget( groupWritingApp, 0, 0 );
   groupAdvancedLayout->addWidget( groupMisc, 1, 0 );
   groupAdvancedLayout->setRowStretch( 2, 1 );
 
 
-  connect( m_checkManualWritingBufferSize, SIGNAL(toggled(bool)),
-           m_editWritingBufferSize, SLOT(setEnabled(bool)) );
-  connect( m_checkManualWritingBufferSize, SIGNAL(toggled(bool)),
-           this, SLOT(slotSetDefaultBufferSizes(bool)) );
+  connect( m_checkManualWritingBufferSize, TQT_SIGNAL(toggled(bool)),
+           m_editWritingBufferSize, TQT_SLOT(setEnabled(bool)) );
+  connect( m_checkManualWritingBufferSize, TQT_SIGNAL(toggled(bool)),
+           this, TQT_SLOT(slotSetDefaultBufferSizes(bool)) );
 
 
   m_editWritingBufferSize->setDisabled( true );
   // -----------------------------------------------------------------------
 
 
-  QToolTip::add( m_checkOverburn, i18n("Allow burning more than the official media capacity") );
-  QToolTip::add( m_checkAllowWritingAppSelection, i18n("Allow to choose between cdrecord and cdrdao") );
-  QToolTip::add( m_checkAutoErasingRewritable, i18n("Automatically erase CD-RWs and DVD-RWs without asking") );
-  QToolTip::add( m_checkEject, i18n("Do not eject the burn medium after a completed burn process") );
-  QToolTip::add( m_checkForceUnsafeOperations, i18n("Force K3b to continue some operations otherwise deemed as unsafe") );
+  TQToolTip::add( m_checkOverburn, i18n("Allow burning more than the official media capacity") );
+  TQToolTip::add( m_checkAllowWritingAppSelection, i18n("Allow to choose between cdrecord and cdrdao") );
+  TQToolTip::add( m_checkAutoErasingRewritable, i18n("Automatically erase CD-RWs and DVD-RWs without asking") );
+  TQToolTip::add( m_checkEject, i18n("Do not eject the burn medium after a completed burn process") );
+  TQToolTip::add( m_checkForceUnsafeOperations, i18n("Force K3b to continue some operations otherwise deemed as unsafe") );
 
-  QWhatsThis::add( m_checkAllowWritingAppSelection, i18n("<p>If this option is checked K3b gives "
+  TQWhatsThis::add( m_checkAllowWritingAppSelection, i18n("<p>If this option is checked K3b gives "
                                                          "the possibility to choose between cdrecord "
                                                          "and cdrdao when writing a cd."
                                                          "<p>This may be useful if one of the programs "
@@ -113,7 +113,7 @@ void K3bBurningOptionTab::setupGui()
                                                          "<p><b>Be aware that K3b does not support both "
                                                          "programs in all project types.</b>") );
 
-  QWhatsThis::add( m_checkOverburn, i18n("<p>Each medium has an official maximum capacity which is stored in a read-only "
+  TQWhatsThis::add( m_checkOverburn, i18n("<p>Each medium has an official maximum capacity which is stored in a read-only "
 					 "area of the medium and is guaranteed by the vendor. However, this official "
 					 "maximum is not always the actual maximum. Many media have an "
 					 "actual total capacity that is slightly larger than the official amount."
@@ -124,23 +124,23 @@ void K3bBurningOptionTab::setupGui()
 					 "makes sense to first determine the actual maximum capacity of the media brand "
 					 "with a simulated burn.") );
 
-  QWhatsThis::add( m_checkAutoErasingRewritable, i18n("<p>If this option is checked K3b will automatically "
+  TQWhatsThis::add( m_checkAutoErasingRewritable, i18n("<p>If this option is checked K3b will automatically "
                                                       "erase CD-RWs and format DVD-RWs if one is found instead "
                                                       "of an empty media before writing.") );
 
-  QWhatsThis::add( m_checkManualWritingBufferSize, i18n("<p>K3b uses a software buffer during the burning process to "
+  TQWhatsThis::add( m_checkManualWritingBufferSize, i18n("<p>K3b uses a software buffer during the burning process to "
 							"avoid gaps in the data stream due to high system load. The default "
 							"sizes used are %1 MB for CD and %2 MB for DVD burning."
 							"<p>If this option is checked the value specified will be used for both "
-							"CD and DVD burning.").arg(4).arg(32) );
+							"CD and DVD burning.").tqarg(4).tqarg(32) );
 
-  QWhatsThis::add( m_checkEject, i18n("<p>If this option is checked K3b will not eject the medium once the burn process "
+  TQWhatsThis::add( m_checkEject, i18n("<p>If this option is checked K3b will not eject the medium once the burn process "
 				      "finishes. This can be helpful in case one leaves the computer after starting the "
 				      "burning and does not want the tray to be open all the time."
 				      "<p>However, on Linux systems a freshly burned medium has to be reloaded. Otherwise "
 				      "the system will not detect the changes and still treat it as an empty medium.") );
 
-  QWhatsThis::add( m_checkForceUnsafeOperations, i18n("<p>If this option is checked K3b will continue in some situations "
+  TQWhatsThis::add( m_checkForceUnsafeOperations, i18n("<p>If this option is checked K3b will continue in some situations "
 						      "which would otherwise be deemed as unsafe."
 						      "<p>This setting for example disables the check for medium speed "
 						      "verification. Thus, one can force K3b to burn a high speed medium on "

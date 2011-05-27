@@ -21,13 +21,13 @@
 #include <k3bvalidators.h>
 #include <k3bcdtextvalidator.h>
 
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qwidgetstack.h>
-#include <qgroupbox.h>
-#include <qtabwidget.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqwidgetstack.h>
+#include <tqgroupbox.h>
+#include <tqtabwidget.h>
 
 #include <klineedit.h>
 #include <klocale.h>
@@ -35,27 +35,27 @@
 
 
 
-K3bAudioTrackWidget::K3bAudioTrackWidget( const QPtrList<K3bAudioTrack>& tracks, 
-					  QWidget* parent, const char* name )
-  : base_K3bAudioTrackWidget( parent, name ),
+K3bAudioTrackWidget::K3bAudioTrackWidget( const TQPtrList<K3bAudioTrack>& tracks, 
+					  TQWidget* tqparent, const char* name )
+  : base_K3bAudioTrackWidget( tqparent, name ),
     m_tracks(tracks)
 {
   m_labelPostGap->setBuddy( m_editPostGap );
 
-  QToolTip::add( m_labelPostGap, QToolTip::textFor( m_editPostGap ) );
-  QWhatsThis::add( m_labelPostGap, QWhatsThis::textFor( m_editPostGap ) );
+  TQToolTip::add( m_labelPostGap, TQToolTip::textFor( m_editPostGap ) );
+  TQWhatsThis::add( m_labelPostGap, TQWhatsThis::textFor( m_editPostGap ) );
 
   // no post-gap for the last track
   m_editPostGap->setDisabled( tracks.count() == 1 && !tracks.getFirst()->next() );
 
-  K3bCdTextValidator* val = new K3bCdTextValidator( this );
+  K3bCdTextValidator* val = new K3bCdTextValidator( TQT_TQOBJECT(this) );
   m_editSongwriter->setValidator( val );
   m_editArranger->setValidator( val );
   m_editComposer->setValidator( val );
   m_editMessage->setValidator( val );
   m_editTitle->setValidator( val );
   m_editPerformer->setValidator( val );
-  m_editIsrc->setValidator( K3bValidators::isrcValidator( this ) );
+  m_editIsrc->setValidator( K3bValidators::isrcValidator( TQT_TQOBJECT(this) ) );
 
   load();
 }
@@ -92,25 +92,25 @@ void K3bAudioTrackWidget::load()
       // m_editPostGap->setMsfValue( track->postGap() );
 
       if( track->title() != m_editTitle->text() )
-	m_editTitle->setText( QString::null );
+	m_editTitle->setText( TQString() );
 
       if( track->artist() != m_editPerformer->text() )
-	m_editPerformer->setText( QString::null );
+	m_editPerformer->setText( TQString() );
 
       if( track->arranger() != m_editArranger->text() )
-	m_editArranger->setText( QString::null );
+	m_editArranger->setText( TQString() );
 
       if( track->songwriter() != m_editSongwriter->text() )
-	m_editSongwriter->setText( QString::null );
+	m_editSongwriter->setText( TQString() );
 
       if( track->composer() != m_editComposer->text() )
-	m_editComposer->setText( QString::null );
+	m_editComposer->setText( TQString() );
 
       if( track->isrc() != m_editIsrc->text() )
-	m_editIsrc->setText( QString::null );
+	m_editIsrc->setText( TQString() );
 
       if( track->cdTextMessage() != m_editMessage->text() )
-	m_editMessage->setText( QString::null );
+	m_editMessage->setText( TQString() );
     }
 
     if( m_tracks.count() > 1 ) {
@@ -149,10 +149,10 @@ void K3bAudioTrackWidget::save()
     if( m_editMessage->isModified() )
       track->setCdTextMessage( m_editMessage->text() );
 
-    if( m_checkCopyPermitted->state() != QButton::NoChange )
+    if( m_checkCopyPermitted->state() != TQButton::NoChange )
       track->setCopyProtection( !m_checkCopyPermitted->isChecked() );
 
-    if( m_checkPreemphasis->state() != QButton::NoChange )
+    if( m_checkPreemphasis->state() != TQButton::NoChange )
       track->setPreEmp( m_checkPreemphasis->isChecked() );
 
     track->setIndex0( track->length() - m_editPostGap->msfValue() );

@@ -28,15 +28,15 @@
 #include <kdialogbase.h>
 #include <klineedit.h>
 
-#include <qcombobox.h>
-#include <qspinbox.h>
-#include <qlabel.h>
-#include <qtimer.h>
-#include <qwhatsthis.h>
-#include <qwidgetstack.h>
-#include <qpushbutton.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <tqcombobox.h>
+#include <tqspinbox.h>
+#include <tqlabel.h>
+#include <tqtimer.h>
+#include <tqwhatsthis.h>
+#include <tqwidgetstack.h>
+#include <tqpushbutton.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
 
 
 static const int s_mp3Bitrates[] = {
@@ -72,8 +72,8 @@ static const char* s_pictureSizeNames[] = {
 };
 
 
-K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( QWidget* parent )
-  : base_K3bVideoDVDRippingWidget( parent )
+K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( TQWidget* tqparent )
+  : base_K3bVideoDVDRippingWidget( tqparent )
 {
   m_editBaseDir->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
 
@@ -86,15 +86,15 @@ K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( QWidget* parent )
   //
   // Example filename pattern
   //
-  m_comboFilenamePattern->insertItem( QString( "%b - %1 %t (%n %a %c)" ).arg(i18n("Title") ) );
-  m_comboFilenamePattern->insertItem( QString( "%{volumeid} (%{title})" ) );
+  m_comboFilenamePattern->insertItem( TQString( "%b - %1 %t (%n %a %c)" ).tqarg(i18n("Title") ) );
+  m_comboFilenamePattern->insertItem( TQString( "%{volumeid} (%{title})" ) );
 
 
   //
   // Add the Audio bitrates
   //
   for( int i = 0; s_mp3Bitrates[i]; ++i )
-    m_comboAudioBitrate->insertItem( i18n("%1 kbps" ).arg(s_mp3Bitrates[i]) );
+    m_comboAudioBitrate->insertItem( i18n("%1 kbps" ).tqarg(s_mp3Bitrates[i]) );
 
 
   for( int i = 0; i < K3bVideoDVDTitleTranscodingJob::VIDEO_CODEC_NUM_ENTRIES; ++i ) {
@@ -118,32 +118,32 @@ K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( QWidget* parent )
 
   slotAudioCodecChanged( m_comboAudioCodec->selectedValue() );
 
-  connect( m_comboAudioBitrate, SIGNAL(textChanged(const QString&)),
-	   this, SIGNAL(changed()) );
-  connect( m_spinVideoBitrate, SIGNAL(valueChanged(int)),
-	   this, SIGNAL(changed()) );
-  connect( m_checkBlankReplace, SIGNAL(toggled(bool)),
-	   this, SIGNAL(changed()) );
-  connect( m_editBlankReplace, SIGNAL(textChanged(const QString&)),
-	   this, SIGNAL(changed()) );
-  connect( m_comboFilenamePattern, SIGNAL(textChanged(const QString&)),
-	   this, SIGNAL(changed()) );
-  connect( m_editBaseDir, SIGNAL(textChanged(const QString&)), 
-	   this, SIGNAL(changed()) );
+  connect( m_comboAudioBitrate, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_spinVideoBitrate, TQT_SIGNAL(valueChanged(int)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_checkBlankReplace, TQT_SIGNAL(toggled(bool)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_editBlankReplace, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_comboFilenamePattern, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SIGNAL(changed()) );
+  connect( m_editBaseDir, TQT_SIGNAL(textChanged(const TQString&)), 
+	   this, TQT_SIGNAL(changed()) );
 
-  connect( m_comboAudioCodec, SIGNAL(valueChanged(int)),
-	   this, SLOT(slotAudioCodecChanged(int)) );
-  connect( m_specialStringsLabel, SIGNAL(leftClickedURL()),
-	   this, SLOT(slotSeeSpecialStrings()) );
-  connect( m_buttonCustomPictureSize, SIGNAL(clicked()),
-	   this, SLOT(slotCustomPictureSize()) );
-  connect( m_comboVideoSize, SIGNAL(activated(int)),
-	   this, SLOT(slotVideoSizeChanged(int)) );
+  connect( m_comboAudioCodec, TQT_SIGNAL(valueChanged(int)),
+	   this, TQT_SLOT(slotAudioCodecChanged(int)) );
+  connect( m_specialStringsLabel, TQT_SIGNAL(leftClickedURL()),
+	   this, TQT_SLOT(slotSeeSpecialStrings()) );
+  connect( m_buttonCustomPictureSize, TQT_SIGNAL(clicked()),
+	   this, TQT_SLOT(slotCustomPictureSize()) );
+  connect( m_comboVideoSize, TQT_SIGNAL(activated(int)),
+	   this, TQT_SLOT(slotVideoSizeChanged(int)) );
 
   // refresh every 2 seconds
-  m_freeSpaceUpdateTimer = new QTimer( this );
-  connect( m_freeSpaceUpdateTimer, SIGNAL(timeout()),
-	   this, SLOT(slotUpdateFreeTempSpace()) );
+  m_freeSpaceUpdateTimer = new TQTimer( this );
+  connect( m_freeSpaceUpdateTimer, TQT_SIGNAL(timeout()),
+	   this, TQT_SLOT(slotUpdateFreeTempSpace()) );
   m_freeSpaceUpdateTimer->start(2000);
   slotUpdateFreeTempSpace();
 }
@@ -160,35 +160,35 @@ K3bVideoDVDTitleTranscodingJob::VideoCodec K3bVideoDVDRippingWidget::selectedVid
 }
 
 
-QSize K3bVideoDVDRippingWidget::selectedPictureSize() const
+TQSize K3bVideoDVDRippingWidget::selectedPictureSize() const
 {
   switch( m_comboVideoSize->currentItem() ) {
   case PICTURE_SIZE_ORIGINAL:
-    return QSize(0,0);
+    return TQSize(0,0);
   case PICTURE_SIZE_640:
-    return QSize(640,0);
+    return TQSize(640,0);
   case PICTURE_SIZE_320:
-    return QSize(320,0);
+    return TQSize(320,0);
   default:
     return m_customVideoSize;
   }
 }
 
 
-void K3bVideoDVDRippingWidget::setSelectedPictureSize( const QSize& size )
+void K3bVideoDVDRippingWidget::setSelectedPictureSize( const TQSize& size )
 {
   m_customVideoSize = size;
-  if( size == QSize(0,0) )
+  if( size == TQSize(0,0) )
     m_comboVideoSize->setCurrentItem( PICTURE_SIZE_ORIGINAL );
-  else if( size == QSize(640,0) )
+  else if( size == TQSize(640,0) )
     m_comboVideoSize->setCurrentItem( PICTURE_SIZE_640 );
-  else if( size == QSize(320,0) )
+  else if( size == TQSize(320,0) )
     m_comboVideoSize->setCurrentItem( PICTURE_SIZE_320 );
   else {
     m_comboVideoSize->changeItem( i18n(s_pictureSizeNames[PICTURE_SIZE_CUSTOM])
-				  + QString(" (%1x%2)")
-				  .arg(size.width() == 0 ? i18n("auto") : QString::number(size.width()))
-				  .arg(size.height() == 0 ? i18n("auto") : QString::number(size.height())),
+				  + TQString(" (%1x%2)")
+				  .tqarg(size.width() == 0 ? i18n("auto") : TQString::number(size.width()))
+				  .tqarg(size.height() == 0 ? i18n("auto") : TQString::number(size.height())),
 				  PICTURE_SIZE_CUSTOM );
     m_comboVideoSize->setCurrentItem( PICTURE_SIZE_CUSTOM );
   }
@@ -246,16 +246,16 @@ void K3bVideoDVDRippingWidget::setSelectedAudioBitrate( int bitrate )
 
 void K3bVideoDVDRippingWidget::slotUpdateFreeTempSpace()
 {
-  QString path = m_editBaseDir->url();
+  TQString path = m_editBaseDir->url();
 
-  if( !QFile::exists( path ) )
-    path.truncate( path.findRev('/') );
+  if( !TQFile::exists( path ) )
+    path.truncate( path.tqfindRev('/') );
 
   unsigned long size, avail;
   if( K3b::kbFreeOnFs( path, size, avail ) ) {
     m_labelFreeSpace->setText( KIO::convertSizeFromKB(avail) );
     if( avail < m_neededSize/1024 )
-      m_labelNeededSpace->setPaletteForegroundColor( Qt::red );
+      m_labelNeededSpace->setPaletteForegroundColor( TQt::red );
     else
       m_labelNeededSpace->setPaletteForegroundColor( paletteForegroundColor() );
   }
@@ -280,7 +280,7 @@ void K3bVideoDVDRippingWidget::setNeededSize( KIO::filesize_t size )
 
 void K3bVideoDVDRippingWidget::slotSeeSpecialStrings()
 {
-  QWhatsThis::display( i18n( "<p><b>Pattern special strings:</b>"
+  TQWhatsThis::display( i18n( "<p><b>Pattern special strings:</b>"
 			     "<p>The following strings will be replaced with their respective meaning in every "
 			     "track name.<br>"
                              "<p><table border=\"0\">"
@@ -345,16 +345,16 @@ void K3bVideoDVDRippingWidget::slotCustomPictureSize()
 						       "Be aware that setting both the width and the height to fixed values "
 						       "will result in no aspect ratio correction to be performed."), 
 					  dlg.plainPage() );
-  QSpinBox* spinWidth = new QSpinBox( 0, 20000, 16, dlg.plainPage() );
-  QSpinBox* spinHeight = new QSpinBox( 0, 20000, 16, dlg.plainPage() );
+  TQSpinBox* spinWidth = new TQSpinBox( 0, 20000, 16, dlg.plainPage() );
+  TQSpinBox* spinHeight = new TQSpinBox( 0, 20000, 16, dlg.plainPage() );
   spinWidth->setSpecialValueText( i18n("Auto") );
   spinHeight->setSpecialValueText( i18n("Auto") );
-  QLabel* labelW = new QLabel( spinWidth, i18n("Width") + ':', dlg.plainPage() );
-  QLabel* labelH = new QLabel( spinHeight, i18n("Height") + ':', dlg.plainPage() );
-  labelW->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
-  labelH->setAlignment( Qt::AlignRight|Qt::AlignVCenter );
+  TQLabel* labelW = new TQLabel( spinWidth, i18n("Width") + ':', dlg.plainPage() );
+  TQLabel* labelH = new TQLabel( spinHeight, i18n("Height") + ':', dlg.plainPage() );
+  labelW->tqsetAlignment( TQt::AlignRight|TQt::AlignVCenter );
+  labelH->tqsetAlignment( TQt::AlignRight|TQt::AlignVCenter );
 
-  QGridLayout* grid = new QGridLayout( dlg.plainPage() );
+  TQGridLayout* grid = new TQGridLayout( dlg.plainPage() );
   grid->setMargin( 0 );
   grid->setSpacing( KDialog::spacingHint() );
   grid->addMultiCellWidget( label, 0, 0, 0, 3 );
@@ -367,7 +367,7 @@ void K3bVideoDVDRippingWidget::slotCustomPictureSize()
   spinHeight->setValue( m_customVideoSize.height() );
 
   if( dlg.exec() ) {
-    setSelectedPictureSize( QSize( spinWidth->value(), spinHeight->value() ) );
+    setSelectedPictureSize( TQSize( spinWidth->value(), spinHeight->value() ) );
     emit changed();
   }
 }

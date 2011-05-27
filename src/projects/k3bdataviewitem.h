@@ -26,28 +26,28 @@ class K3bDataDoc;
 class K3bSpecialDataItem;
 class K3bSessionImportItem;
 
-class QPainter;
-class QColorGroup;
+class TQPainter;
+class TQColorGroup;
 
 
 
 class K3bDataViewItem : public K3bListViewItem
 {
  public:
-  K3bDataViewItem( K3bDataItem*, QListView* parent );
-  K3bDataViewItem( K3bDataItem*, QListViewItem* parent );
+  K3bDataViewItem( K3bDataItem*, TQListView* tqparent );
+  K3bDataViewItem( K3bDataItem*, TQListViewItem* tqparent );
   virtual ~K3bDataViewItem();
 	
   virtual K3bDataItem* dataItem() const { return m_dataItem; }
 
-  void setText( int col, const QString& text );
+  void setText( int col, const TQString& text );
 
   /**
    * reimplemented to have directories always sorted before files
    */
-  QString key( int, bool ) const;
+  TQString key( int, bool ) const;
 
-  virtual void paintCell( QPainter* p, const QColorGroup& cg, int column, int width, int align );
+  virtual void paintCell( TQPainter* p, const TQColorGroup& cg, int column, int width, int align );
 
  private:
   void init();
@@ -59,11 +59,11 @@ class K3bDataViewItem : public K3bListViewItem
 class K3bDataDirViewItem : public K3bDataViewItem
 {
  public:
-  K3bDataDirViewItem( K3bDirItem* dir, QListView* parent );
-  K3bDataDirViewItem( K3bDirItem* dir, QListViewItem* parent );
+  K3bDataDirViewItem( K3bDirItem* dir, TQListView* tqparent );
+  K3bDataDirViewItem( K3bDirItem* dir, TQListViewItem* tqparent );
   ~K3bDataDirViewItem();
 	
-  virtual QString text( int ) const;
+  virtual TQString text( int ) const;
 	
   K3bDirItem* dirItem() const { return m_dirItem; }
 
@@ -74,18 +74,18 @@ class K3bDataDirViewItem : public K3bDataViewItem
 
  private:
   K3bDirItem* m_dirItem;
-  QPixmap m_pixmap;
+  TQPixmap m_pixmap;
 };
 
 
 class K3bDataFileViewItem : public K3bDataViewItem
 {
  public:
-  K3bDataFileViewItem( K3bFileItem*, QListView* parent );
-  K3bDataFileViewItem( K3bFileItem*, QListViewItem* parent );
+  K3bDataFileViewItem( K3bFileItem*, TQListView* tqparent );
+  K3bDataFileViewItem( K3bFileItem*, TQListViewItem* tqparent );
   ~K3bDataFileViewItem() {}
 	
-  QString text( int ) const;
+  TQString text( int ) const;
 
   K3bFileItem* fileItem() const { return m_fileItem; }
 
@@ -102,13 +102,13 @@ class K3bDataFileViewItem : public K3bDataViewItem
 class K3bDataRootViewItem : public K3bDataDirViewItem
 {
  public:
-  K3bDataRootViewItem( K3bDataDoc*, QListView* parent );
+  K3bDataRootViewItem( K3bDataDoc*, TQListView* tqparent );
   ~K3bDataRootViewItem();
 	
-  QString text( int ) const;
+  TQString text( int ) const;
 	
-  /** reimplemented from QListViewItem */
-  void setText(int col, const QString& text );
+  /** reimplemented from TQListViewItem */
+  void setText(int col, const TQString& text );
 		
  private:
   K3bDataDoc* m_doc;
@@ -118,18 +118,18 @@ class K3bDataRootViewItem : public K3bDataDirViewItem
 class K3bSpecialDataViewItem : public K3bDataViewItem
 {
  public:
-  K3bSpecialDataViewItem( K3bSpecialDataItem*, QListView* );
+  K3bSpecialDataViewItem( K3bSpecialDataItem*, TQListView* );
 
-  QString text( int ) const;
+  TQString text( int ) const;
 };
 
 
 class K3bSessionImportViewItem : public K3bDataViewItem
 {
  public:
-  K3bSessionImportViewItem( K3bSessionImportItem*, QListView* );
+  K3bSessionImportViewItem( K3bSessionImportItem*, TQListView* );
 
-  QString text( int ) const;
+  TQString text( int ) const;
 };
 
 #endif

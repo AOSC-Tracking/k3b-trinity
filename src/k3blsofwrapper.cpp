@@ -19,13 +19,13 @@
 #include <k3bprocess.h>
 #include <k3bglobals.h>
 
-#include <qfile.h>
-#include <qfileinfo.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
 
 #include <sys/types.h>
 #include <unistd.h>
 
-static K3bLsofWrapper::Process createProcess( const QString& name, int pid )
+static K3bLsofWrapper::Process createProcess( const TQString& name, int pid )
 {
   K3bLsofWrapper::Process p;
   p.name = name;
@@ -37,8 +37,8 @@ static K3bLsofWrapper::Process createProcess( const QString& name, int pid )
 class K3bLsofWrapper::Private
 {
 public:
-  QValueList<Process> apps;
-  QString lsofBin;
+  TQValueList<Process> apps;
+  TQString lsofBin;
 };
 
 
@@ -77,10 +77,10 @@ bool K3bLsofWrapper::checkDevice( K3bDevice::Device* dev )
 
   //
   // now process its output
-  QStringList l = QStringList::split( "\n", out.output() );
-  for( QStringList::iterator it = l.begin(); it != l.end(); ++it ) {
+  TQStringList l = TQStringList::split( "\n", out.output() );
+  for( TQStringList::iterator it = l.begin(); it != l.end(); ++it ) {
     int pid = (*it).mid(1).toInt();
-    QString app = (*(++it)).mid(1);
+    TQString app = (*(++it)).mid(1);
 
     kdDebug() << "(K3bLsofWrapper) matched: app: " << app << " pid: " << pid << endl;
 
@@ -93,7 +93,7 @@ bool K3bLsofWrapper::checkDevice( K3bDevice::Device* dev )
 }
 
 
-const QValueList<K3bLsofWrapper::Process>& K3bLsofWrapper::usingApplications() const
+const TQValueList<K3bLsofWrapper::Process>& K3bLsofWrapper::usingApplications() const
 {
   return d->apps;
 }

@@ -16,41 +16,41 @@
 #include "k3bthemedlabel.h"
 #include "k3bapplication.h"
 
-K3bThemedLabel::K3bThemedLabel( QWidget* parent )
-  : KCutLabel( parent ),
+K3bThemedLabel::K3bThemedLabel( TQWidget* tqparent )
+  : KCutLabel( tqparent ),
     m_themePixmapCode( -1 )
 {
   slotThemeChanged();
 
-  connect( k3bappcore->themeManager(), SIGNAL(themeChanged()),
-	   this, SLOT(slotThemeChanged()) );
-  connect( kapp, SIGNAL(appearanceChanged()),
-	   this, SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
+	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( kapp, TQT_SIGNAL(appearanceChanged()),
+	   this, TQT_SLOT(slotThemeChanged()) );
 }
 
 
-K3bThemedLabel::K3bThemedLabel( const QString& text, QWidget* parent )
-  : KCutLabel( text, parent ),
+K3bThemedLabel::K3bThemedLabel( const TQString& text, TQWidget* tqparent )
+  : KCutLabel( text, tqparent ),
     m_themePixmapCode( -1 )
 {
   slotThemeChanged();
 
-  connect( k3bappcore->themeManager(), SIGNAL(themeChanged()),
-	   this, SLOT(slotThemeChanged()) );
-  connect( kapp, SIGNAL(appearanceChanged()),
-	   this, SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
+	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( kapp, TQT_SIGNAL(appearanceChanged()),
+	   this, TQT_SLOT(slotThemeChanged()) );
 }
 
 
-K3bThemedLabel::K3bThemedLabel( K3bTheme::PixmapType pix, QWidget* parent )
-  : KCutLabel( parent )
+K3bThemedLabel::K3bThemedLabel( K3bTheme::PixmapType pix, TQWidget* tqparent )
+  : KCutLabel( tqparent )
 {
   setThemePixmap( pix );
 
-  connect( k3bappcore->themeManager(), SIGNAL(themeChanged()),
-	   this, SLOT(slotThemeChanged()) );
-  connect( kapp, SIGNAL(appearanceChanged()),
-	   this, SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
+	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( kapp, TQT_SIGNAL(appearanceChanged()),
+	   this, TQT_SLOT(slotThemeChanged()) );
 }
 
 

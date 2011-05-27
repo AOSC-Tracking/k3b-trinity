@@ -74,7 +74,7 @@ bool K3bDevice::Device::getFeature( unsigned char** data, unsigned int& dataLen,
   cmd[7] = dataLen>>8;
   cmd[8] = dataLen;
   if( cmd.transport( TR_DIR_READ, *data, dataLen ) == 0 ) {
-    dataLen = QMIN( dataLen, from4Byte( *data ) + 4 );
+    dataLen = TQMIN( dataLen, from4Byte( *data ) + 4 );
     return true;
   }
   else {
@@ -105,7 +105,7 @@ int K3bDevice::Device::featureCurrent( unsigned int feature ) const
 }
 
 
-bool K3bDevice::Device::readIsrc( unsigned int track, QCString& isrc ) const
+bool K3bDevice::Device::readIsrc( unsigned int track, TQCString& isrc ) const
 {
   unsigned char* data = 0;
   unsigned int dataLen = 0;
@@ -117,7 +117,7 @@ bool K3bDevice::Device::readIsrc( unsigned int track, QCString& isrc ) const
       isrcValid = (data[8+4]>>7 & 0x1);
 
       if( isrcValid ) {
-	isrc = QCString( reinterpret_cast<char*>(data[8+5]), 13 );
+	isrc = TQCString( reinterpret_cast<char*>(data[8+5]), 13 );
 
 	// TODO: check the range of the chars
 
@@ -133,7 +133,7 @@ bool K3bDevice::Device::readIsrc( unsigned int track, QCString& isrc ) const
 }
 
 
-bool K3bDevice::Device::readMcn( QCString& mcn ) const
+bool K3bDevice::Device::readMcn( TQCString& mcn ) const
 {
   unsigned char* data = 0;
   unsigned int dataLen = 0;
@@ -145,7 +145,7 @@ bool K3bDevice::Device::readMcn( QCString& mcn ) const
       mcnValid = (data[8+4]>>7 & 0x1);
 
       if( mcnValid )
-	mcn = QCString( reinterpret_cast<char*>(data[8+5]), 14 );
+	mcn = TQCString( reinterpret_cast<char*>(data[8+5]), 14 );
     }
 
     delete [] data;
@@ -227,7 +227,7 @@ bool K3bDevice::Device::getPerformance( unsigned char** data, unsigned int& data
   if( cmd.transport( TR_DIR_READ, *data, dataLen ) == 0 ) {
       k3bDebug() << "(K3bDevice::Device) " << blockDeviceName()
                  << ": GET PERFORMANCE successful with reported length: " << from4Byte( *data ) << endl;
-      dataLen = QMIN( dataLen, from4Byte( *data ) + 4 );
+      dataLen = TQMIN( dataLen, from4Byte( *data ) + 4 );
       return true;
   }
   else {
@@ -326,7 +326,7 @@ bool K3bDevice::Device::readTrackInformation( unsigned char** data, unsigned int
   cmd[7] = dataLen>>8;
   cmd[8] = dataLen;
   if( cmd.transport( TR_DIR_READ, *data, dataLen ) == 0 ) {
-    dataLen = QMIN( dataLen, from2Byte( *data ) + 2u );
+    dataLen = TQMIN( dataLen, from2Byte( *data ) + 2u );
     return true;
   }
   else {
@@ -526,7 +526,7 @@ bool K3bDevice::Device::readSubChannel( unsigned char** data, unsigned int& data
   cmd[7] = dataLen>>8;
   cmd[8] = dataLen;
   if( cmd.transport( TR_DIR_READ, *data, dataLen ) == 0 ) {
-    dataLen = QMIN( dataLen, from2Byte( (*data)+2 ) + 4u );
+    dataLen = TQMIN( dataLen, from2Byte( (*data)+2 ) + 4u );
     return true;
   }
   else {
@@ -606,7 +606,7 @@ bool K3bDevice::Device::readTocPmaAtip( unsigned char** data, unsigned int& data
   cmd[7] = dataLen>>8;
   cmd[8] = dataLen;
   if( cmd.transport( TR_DIR_READ, *data, dataLen ) == 0 ) {
-    dataLen = QMIN( dataLen, from2Byte( *data ) + 2u );
+    dataLen = TQMIN( dataLen, from2Byte( *data ) + 2u );
     if( (dataLen-4) % descLen || dataLen < 4+descLen ) {
         // useless length
         delete [] *data;
@@ -626,7 +626,7 @@ bool K3bDevice::Device::readTocPmaAtip( unsigned char** data, unsigned int& data
 }
 
 
-bool K3bDevice::Device::mechanismStatus( unsigned char** data, unsigned int& dataLen ) const
+bool K3bDevice::Device::mechanismtqStatus( unsigned char** data, unsigned int& dataLen ) const
 {
   unsigned char header[2048];
   ::memset( header, 0, 2048 );
@@ -663,7 +663,7 @@ bool K3bDevice::Device::mechanismStatus( unsigned char** data, unsigned int& dat
   cmd[8] = dataLen>>8;
   cmd[9] = dataLen;
   if( cmd.transport( TR_DIR_READ, *data, dataLen ) == 0 ) {
-    dataLen = QMIN( dataLen, from4Byte( (*data)+6 ) + 8 );
+    dataLen = TQMIN( dataLen, from4Byte( (*data)+6 ) + 8 );
     return true;
   }
   else {
@@ -712,7 +712,7 @@ bool K3bDevice::Device::modeSense( unsigned char** pageData, unsigned int& pageL
   cmd[7] = pageLen>>8;
   cmd[8] = pageLen;
   if( cmd.transport( TR_DIR_READ, *pageData, pageLen ) == 0 ) {
-    pageLen = QMIN( pageLen, from2Byte( *pageData ) + 2u );
+    pageLen = TQMIN( pageLen, from2Byte( *pageData ) + 2u );
     return true;
   }
   else {
@@ -811,7 +811,7 @@ bool K3bDevice::Device::readFormatCapacity( int wantedFormat, K3b::Msf& r,
 
       if( format == wantedFormat ) {
 	// found the descriptor
-	r = QMAX( (int)from4Byte( &buffer[i] ), r.lba() );
+	r = TQMAX( (int)from4Byte( &buffer[i] ), r.lba() );
 	success = true;
       }
     }
@@ -849,7 +849,7 @@ bool K3bDevice::Device::readDiscInformation( unsigned char** data, unsigned int&
   cmd[7] = dataLen>>8;
   cmd[8] = dataLen;
   if( cmd.transport( TR_DIR_READ, *data, dataLen ) == 0 ) {
-    dataLen = QMIN( dataLen, from2Byte( *data ) + 2u );
+    dataLen = TQMIN( dataLen, from2Byte( *data ) + 2u );
     return true;
   }
   else {
@@ -905,7 +905,7 @@ bool K3bDevice::Device::readDiscStructure( unsigned char** data, unsigned int& d
     cmd[8] = dataLen>>8;
     cmd[9] = dataLen;
     if( cmd.transport( TR_DIR_READ, *data, dataLen ) == 0 ) {
-      dataLen = QMIN( dataLen, from2Byte( *data ) + 2u );
+      dataLen = TQMIN( dataLen, from2Byte( *data ) + 2u );
       return true;
     }
     else {

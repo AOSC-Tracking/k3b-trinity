@@ -21,28 +21,29 @@
 #ifndef _K3B_MINI_BUTTON_H_
 #define _K3B_MINI_BUTTON_H_
 
-#include <qpushbutton.h>
+#include <tqpushbutton.h>
 
-class QPainter;
-class QEvent;
+class TQPainter;
+class TQEvent;
 
 
 /**
  * K3bMiniButton is a minimalistic button mainly used
  * to show a pixmap.
  */
-class K3bMiniButton : public QPushButton
+class K3bMiniButton : public TQPushButton
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMiniButton( QWidget *parent=0, const char *name=0 );
+  K3bMiniButton( TQWidget *tqparent=0, const char *name=0 );
   virtual ~K3bMiniButton();
 
  protected:
-  virtual void drawButton( QPainter * );
-  virtual void enterEvent( QEvent * );
-  virtual void leaveEvent( QEvent * );
+  virtual void drawButton( TQPainter * );
+  virtual void enterEvent( TQEvent * );
+  virtual void leaveEvent( TQEvent * );
   
  private:
   bool m_mouseOver;

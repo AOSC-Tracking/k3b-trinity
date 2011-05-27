@@ -25,7 +25,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <unistd.h>
 
@@ -57,7 +57,7 @@ public:
   K3b::Msf m_lastSector;
   K3b::Msf m_nextReadSector;
   int m_fd;
-  QString m_imagePath;
+  TQString m_imagePath;
   int m_sectorSize;
   bool m_useLibdvdcss;
   K3bLibDvdCss* m_libcss;
@@ -71,8 +71,8 @@ private:
 };
 
 
-K3bDataTrackReader::K3bDataTrackReader( K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bThreadJob( jh, parent, name )
+K3bDataTrackReader::K3bDataTrackReader( K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bThreadJob( jh, tqparent, name )
 {
   m_thread = new WorkThread();
   setThread( m_thread );
@@ -109,7 +109,7 @@ void K3bDataTrackReader::WorkThread::run()
   emitStarted();
 
   if( !m_device->open() ) {
-    emitInfoMessage( i18n("Could not open device %1").arg(m_device->blockDeviceName()), K3bJob::ERROR );
+    emitInfoMessage( i18n("Could not open device %1").tqarg(m_device->blockDeviceName()), K3bJob::ERROR );
     emitFinished(false);
     return;
   }
@@ -142,7 +142,7 @@ void K3bDataTrackReader::WorkThread::run()
       }
 
       if( !m_libcss->open(m_device) ) {
-	emitInfoMessage( i18n("Could not open device %1").arg(m_device->blockDeviceName()), K3bJob::ERROR );
+	emitInfoMessage( i18n("Could not open device %1").tqarg(m_device->blockDeviceName()), K3bJob::ERROR );
 	emitFinished(false);
 	return;
       }
@@ -183,23 +183,23 @@ void K3bDataTrackReader::WorkThread::run()
     }
   }
 
-  emitInfoMessage( i18n("Reading with sector size %1.").arg(m_usedSectorSize), K3bJob::INFO );
+  emitInfoMessage( i18n("Reading with sector size %1.").tqarg(m_usedSectorSize), K3bJob::INFO );
   emitDebuggingOutput( "K3bDataTrackReader",
-		       QString("reading sectors %1 to %2 with sector size %3. Length: %4 sectors, %5 bytes.")
-		       .arg( m_firstSector.lba() )
-		       .arg( m_lastSector.lba() )
-		       .arg( m_usedSectorSize )
-		       .arg( m_lastSector.lba() - m_firstSector.lba() + 1 )
-		       .arg( Q_UINT64(m_usedSectorSize) * (Q_UINT64)(m_lastSector.lba() - m_firstSector.lba() + 1) ) );
+		       TQString("reading sectors %1 to %2 with sector size %3. Length: %4 sectors, %5 bytes.")
+		       .tqarg( m_firstSector.lba() )
+		       .tqarg( m_lastSector.lba() )
+		       .tqarg( m_usedSectorSize )
+		       .tqarg( m_lastSector.lba() - m_firstSector.lba() + 1 )
+		       .tqarg( TQ_UINT64(m_usedSectorSize) * (TQ_UINT64)(m_lastSector.lba() - m_firstSector.lba() + 1) ) );
 
-  QFile file;
+  TQFile file;
   if( m_fd == -1 ) {
     file.setName( m_imagePath );
     if( !file.open( IO_WriteOnly ) ) {
       m_device->close();
       if( m_useLibdvdcss )
 	m_libcss->close();
-      emitInfoMessage( i18n("Unable to open '%1' for writing.").arg(m_imagePath), K3bJob::ERROR );
+      emitInfoMessage( i18n("Unable to open '%1' for writing.").tqarg(m_imagePath), K3bJob::ERROR );
       emitFinished( false );
       return;
     }
@@ -231,7 +231,7 @@ void K3bDataTrackReader::WorkThread::run()
 
   //    s_bufferSizeSectors = K3bDevice::determineMaxReadingBufferSize( m_device, m_firstSector );
   if( s_bufferSizeSectors <= 0 ) {
-    emitInfoMessage( i18n("Error while reading sector %1.").arg(m_firstSector.lba()), K3bJob::ERROR );
+    emitInfoMessage( i18n("Error while reading sector %1.").tqarg(m_firstSector.lba()), K3bJob::ERROR );
     emitFinished(false);
     m_device->block( false );
     k3bcore->unblockDevice( m_device );
@@ -239,7 +239,7 @@ void K3bDataTrackReader::WorkThread::run()
   }
 
   kdDebug() << "(K3bDataTrackReader) using buffer size of " << s_bufferSizeSectors << " blocks." << endl;
-  emitDebuggingOutput( "K3bDataTrackReader", QString("using buffer size of %1 blocks.").arg( s_bufferSizeSectors ) );
+  emitDebuggingOutput( "K3bDataTrackReader", TQString("using buffer size of %1 blocks.").tqarg( s_bufferSizeSectors ) );
 
   // 2. get it on
   K3b::Msf currentSector = m_firstSector;
@@ -253,7 +253,7 @@ void K3bDataTrackReader::WorkThread::run()
   int bufferLen = s_bufferSizeSectors*m_usedSectorSize;
   while( !m_canceled && currentSector <= m_lastSector ) {
 
-    int maxReadSectors = QMIN( bufferLen/m_usedSectorSize, m_lastSector.lba()-currentSector.lba()+1 );
+    int maxReadSectors = TQMIN( bufferLen/m_usedSectorSize, m_lastSector.lba()-currentSector.lba()+1 );
 
     int readSectors = read( buffer,
 			    currentSector.lba(),
@@ -278,8 +278,8 @@ void K3bDataTrackReader::WorkThread::run()
 	kdDebug() << "(K3bDataTrackReader::WorkThread) error while writing to fd " << m_fd
 		  << " current sector: " << (currentSector.lba()-m_firstSector.lba()) << endl;
 	emitDebuggingOutput( "K3bDataTrackReader",
-			     QString("Error while writing to fd %1. Current sector is %2.")
-			     .arg(m_fd).arg(currentSector.lba()-m_firstSector.lba()) );
+			     TQString("Error while writing to fd %1. Current sector is %2.")
+			     .tqarg(m_fd).tqarg(currentSector.lba()-m_firstSector.lba()) );
 	writeError = true;
 	break;
       }
@@ -289,8 +289,8 @@ void K3bDataTrackReader::WorkThread::run()
 	kdDebug() << "(K3bDataTrackReader::WorkThread) error while writing to file " << m_imagePath
 		  << " current sector: " << (currentSector.lba()-m_firstSector.lba()) << endl;
 	emitDebuggingOutput( "K3bDataTrackReader",
-			     QString("Error while writing to file %1. Current sector is %2.")
-			     .arg(m_imagePath).arg(currentSector.lba()-m_firstSector.lba()) );
+			     TQString("Error while writing to file %1. Current sector is %2.")
+			     .tqarg(m_imagePath).tqarg(currentSector.lba()-m_firstSector.lba()) );
 	writeError = true;
 	break;
       }
@@ -330,9 +330,9 @@ void K3bDataTrackReader::WorkThread::run()
   delete [] buffer;
 
   emitDebuggingOutput( "K3bDataTrackReader",
-		       QString("Read a total of %1 sectors (%2 bytes)")
-		       .arg(totalReadSectors.lba())
-		       .arg((Q_UINT64)totalReadSectors.lba()*(Q_UINT64)m_usedSectorSize) );
+		       TQString("Read a total of %1 sectors (%2 bytes)")
+		       .tqarg(totalReadSectors.lba())
+		       .tqarg((TQ_UINT64)totalReadSectors.lba()*(TQ_UINT64)m_usedSectorSize) );
 
   if( m_canceled )
     emitCanceled();
@@ -386,8 +386,8 @@ int K3bDataTrackReader::WorkThread::read( unsigned char* buffer, unsigned long s
 // here we read every single sector for itself to find the troubleing ones
 bool K3bDataTrackReader::WorkThread::retryRead( unsigned char* buffer, unsigned long startSector, unsigned int len )
 {
-  emitDebuggingOutput( "K3bDataTrackReader", QString( "Problem while reading. Retrying from sector %1.").arg(startSector) );
-  emitInfoMessage( i18n("Problem while reading. Retrying from sector %1.").arg(startSector), K3bJob::WARNING );
+  emitDebuggingOutput( "K3bDataTrackReader", TQString( "Problem while reading. Retrying from sector %1.").tqarg(startSector) );
+  emitInfoMessage( i18n("Problem while reading. Retrying from sector %1.").tqarg(startSector), K3bJob::WARNING );
 
   int sectorsRead = -1;
   bool success = true;
@@ -403,16 +403,16 @@ bool K3bDataTrackReader::WorkThread::retryRead( unsigned char* buffer, unsigned 
 
     if( !success ) {
       if( m_ignoreReadErrors ) {
-	emitInfoMessage( i18n("Ignoring read error in sector %1.").arg(sector), K3bJob::ERROR );
-	emitDebuggingOutput( "K3bDataTrackReader", QString( "Ignoring read error in sector %1.").arg(sector) );
+	emitInfoMessage( i18n("Ignoring read error in sector %1.").tqarg(sector), K3bJob::ERROR );
+	emitDebuggingOutput( "K3bDataTrackReader", TQString( "Ignoring read error in sector %1.").tqarg(sector) );
 
 	++m_errorSectorCount;
 	//	  ::memset( &buffer[i], 0, 1 );
 	success = true;
       }
       else {
-	emitInfoMessage( i18n("Error while reading sector %1.").arg(sector), K3bJob::ERROR );
-	emitDebuggingOutput( "K3bDataTrackReader", QString( "Read error in sector %1.").arg(sector) );
+	emitInfoMessage( i18n("Error while reading sector %1.").tqarg(sector), K3bJob::ERROR );
+	emitDebuggingOutput( "K3bDataTrackReader", TQString( "Read error in sector %1.").tqarg(sector) );
 	break;
       }
     }
@@ -502,7 +502,7 @@ void K3bDataTrackReader::writeToFd( int fd )
 }
 
 
-void K3bDataTrackReader::setImagePath( const QString& p )
+void K3bDataTrackReader::setImagePath( const TQString& p )
 {
   m_thread->m_imagePath = p;
   m_thread->m_fd = -1;

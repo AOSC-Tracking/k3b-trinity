@@ -22,7 +22,7 @@
 #include <k3baudiodoc.h>
 #include <k3bdataviewitem.h>
 
-#include <qevent.h>
+#include <tqevent.h>
 
 #include <kdebug.h>
 #include <kiconloader.h>
@@ -33,18 +33,18 @@
 class K3bMixedDirTreeView::PrivateAudioRootViewItem : public K3bListViewItem
 {
 public:
-  PrivateAudioRootViewItem( K3bMixedDoc* doc, QListView* parent, QListViewItem* after )
-    : K3bListViewItem( parent, after ),
+  PrivateAudioRootViewItem( K3bMixedDoc* doc, TQListView* tqparent, TQListViewItem* after )
+    : K3bListViewItem( tqparent, after ),
       m_doc(doc)
   {
     setPixmap( 0, SmallIcon("sound") );
   }
 
-  QString text( int col ) const {
+  TQString text( int col ) const {
     if( col == 0 )
-      return i18n("Audio Tracks") + QString(" (%1)").arg(m_doc->audioDoc()->numOfTracks());
+      return i18n("Audio Tracks") + TQString(" (%1)").tqarg(m_doc->audioDoc()->numOfTracks());
     else
-      return QString::null;
+      return TQString();
   }
 
   private:
@@ -52,14 +52,14 @@ public:
 };
 
 
-K3bMixedDirTreeView::K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, QWidget* parent, const char* )
-  : K3bDataDirTreeView( view, doc->dataDoc(), parent ), m_doc(doc)
+K3bMixedDirTreeView::K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, TQWidget* tqparent, const char* )
+  : K3bDataDirTreeView( view, doc->dataDoc(), tqparent ), m_doc(doc)
 {
   m_audioRootItem = new PrivateAudioRootViewItem( doc, this, root() );
 
-  connect( this, SIGNAL(selectionChanged(QListViewItem*)),
-	   this, SLOT(slotSelectionChanged(QListViewItem*)) );
-  connect( m_doc->audioDoc(), SIGNAL(changed()), this, SLOT(slotNewAudioTracks()) );
+  connect( this, TQT_SIGNAL(selectionChanged(TQListViewItem*)),
+	   this, TQT_SLOT(slotSelectionChanged(TQListViewItem*)) );
+  connect( m_doc->audioDoc(), TQT_SIGNAL(changed()), this, TQT_SLOT(slotNewAudioTracks()) );
 }
 
 
@@ -68,12 +68,12 @@ K3bMixedDirTreeView::~K3bMixedDirTreeView()
 }
 
 
-void K3bMixedDirTreeView::slotDropped( QDropEvent* e, QListViewItem* parent, QListViewItem* after )
+void K3bMixedDirTreeView::slotDropped( TQDropEvent* e, TQListViewItem* tqparent, TQListViewItem* after )
 {
   if( !e->isAccepted() )
     return;
 
-  QListViewItem* droppedItem = itemAt(e->pos());
+  TQListViewItem* droppedItem = itemAt(e->pos());
   if( droppedItem == m_audioRootItem ) {
     KURL::List urls;
     if( KURLDrag::decode( e, urls ) ) {
@@ -81,11 +81,11 @@ void K3bMixedDirTreeView::slotDropped( QDropEvent* e, QListViewItem* parent, QLi
     }
   }
   else
-    K3bDataDirTreeView::slotDropped( e, parent, after );
+    K3bDataDirTreeView::slotDropped( e, tqparent, after );
 }
 
 
-void K3bMixedDirTreeView::slotSelectionChanged( QListViewItem* i )
+void K3bMixedDirTreeView::slotSelectionChanged( TQListViewItem* i )
 {
   if( i == m_audioRootItem )
     emit audioTreeSelected();
@@ -97,7 +97,7 @@ void K3bMixedDirTreeView::slotSelectionChanged( QListViewItem* i )
 void K3bMixedDirTreeView::slotNewAudioTracks()
 {
   // update the tracknumber
-  m_audioRootItem->repaint();
+  m_audioRootItem->tqrepaint();
 }
 
 #include "k3bmixeddirtreeview.moc"

@@ -22,10 +22,10 @@
 #include <k3bversion.h>
 #include <k3bglobals.h>
 
-#include <qtextedit.h>
-#include <qcursor.h>
-#include <qfile.h>
-#include <qclipboard.h>
+#include <tqtextedit.h>
+#include <tqcursor.h>
+#include <tqfile.h>
+#include <tqclipboard.h>
 
 #include <klocale.h>
 #include <kstdguiitem.h>
@@ -35,8 +35,8 @@
 #include <kmessagebox.h>
 
 
-K3bDebuggingOutputDialog::K3bDebuggingOutputDialog( QWidget* parent )
-  : KDialogBase( parent, "debugViewDialog", true, i18n("Debugging Output"), Close|User1|User2, Close, 
+K3bDebuggingOutputDialog::K3bDebuggingOutputDialog( TQWidget* tqparent )
+  : KDialogBase( tqparent, "debugViewDialog", true, i18n("Debugging Output"), Close|User1|User2, Close, 
 		 false, 
 		 KStdGuiItem::saveAs(), 
 		 KGuiItem( i18n("Copy"), "editcopy" ) )
@@ -44,11 +44,11 @@ K3bDebuggingOutputDialog::K3bDebuggingOutputDialog( QWidget* parent )
   setButtonTip( User1, i18n("Save to file") );
   setButtonTip( User2, i18n("Copy to clipboard") );
 
-  debugView = new QTextEdit( this );
+  debugView = new TQTextEdit( this );
   debugView->setReadOnly(true);
-  debugView->setTextFormat( QTextEdit::PlainText );
+  debugView->setTextFormat( TQTextEdit::PlainText );
   debugView->setCurrentFont( KGlobalSettings::fixedFont() );
-  debugView->setWordWrap( QTextEdit::NoWrap );
+  debugView->setWordWrap( TQTextEdit::NoWrap );
 
   setMainWidget( debugView );
 
@@ -56,36 +56,36 @@ K3bDebuggingOutputDialog::K3bDebuggingOutputDialog( QWidget* parent )
 }
 
 
-void K3bDebuggingOutputDialog::setOutput( const QMap<QString, QStringList>& map )
+void K3bDebuggingOutputDialog::setOutput( const TQMap<TQString, TQStringList>& map )
 {
   // the following may take some time
-  QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
+  TQApplication::setOverrideCursor( TQCursor(TQt::WaitCursor) );
 
   clear();
 
   // add the debugging output
-  for( QMap<QString, QStringList>::ConstIterator itMap = map.begin(); itMap != map.end(); ++itMap ) {
-    const QStringList& list = itMap.data();
+  for( TQMap<TQString, TQStringList>::ConstIterator itMap = map.begin(); itMap != map.end(); ++itMap ) {
+    const TQStringList& list = itMap.data();
     debugView->append( itMap.key() + "\n" );
     debugView->append( "-----------------------\n" );
-    for( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
-       QStringList lines = QStringList::split( "\n", *it );
+    for( TQStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
+       TQStringList lines = TQStringList::split( "\n", *it );
        // do every line
-       QStringList::ConstIterator end( lines.end() );
-       for( QStringList::ConstIterator str = lines.begin(); str != end; ++str )
+       TQStringList::ConstIterator end( lines.end() );
+       for( TQStringList::ConstIterator str = lines.begin(); str != end; ++str )
 	 debugView->append( *str + "\n" );
     }
     m_paragraphMap[itMap.key()] = debugView->paragraphs();
     debugView->append( "\n" );
   }
 
-  QApplication::restoreOverrideCursor();
+  TQApplication::restoreOverrideCursor();
 }
 
 
-void K3bDebuggingOutputDialog::addOutput( const QString& app, const QString& msg )
+void K3bDebuggingOutputDialog::addOutput( const TQString& app, const TQString& msg )
 {
-  QMap<QString, int>::Iterator it = m_paragraphMap.find( app );
+  TQMap<TQString, int>::Iterator it = m_paragraphMap.tqfind( app );
 
   if( it == m_paragraphMap.end() ) {
     // create new section
@@ -113,41 +113,41 @@ void K3bDebuggingOutputDialog::clear()
   m_paragraphMap.clear();
 
   addOutput( "System", "K3b Version: " + k3bcore->version() );
-  addOutput( "System", "KDE Version: " + QString(KDE::versionString()) );
-  addOutput( "System", "QT Version:  " + QString(qVersion()) );
+  addOutput( "System", "KDE Version: " + TQString(KDE::versionString()) );
+  addOutput( "System", "QT Version:  " + TQString(qVersion()) );
   addOutput( "System", "Kernel:      " + K3b::kernelVersion() );
   
   // devices in the logfile
-  for( QPtrListIterator<K3bDevice::Device> it( k3bcore->deviceManager()->allDevices() ); *it; ++it ) {
+  for( TQPtrListIterator<K3bDevice::Device> it( k3bcore->deviceManager()->allDevices() ); *it; ++it ) {
     K3bDevice::Device* dev = *it;
     addOutput( "Devices", 
-	       QString( "%1 (%2, %3) [%5] [%6] [%7]" )
-	       .arg( dev->vendor() + " " + dev->description() + " " + dev->version() )
-	       .arg( dev->blockDeviceName() )
-	       .arg( dev->genericDevice() )
-	       .arg( K3bDevice::deviceTypeString( dev->type() ) )
-	       .arg( K3bDevice::mediaTypeString( dev->supportedProfiles() ) )
-	       .arg( K3bDevice::writingModeString( dev->writingModes() ) ) );
+	       TQString( "%1 (%2, %3) [%5] [%6] [%7]" )
+	       .tqarg( dev->vendor() + " " + dev->description() + " " + dev->version() )
+	       .tqarg( dev->blockDeviceName() )
+	       .tqarg( dev->genericDevice() )
+	       .tqarg( K3bDevice::deviceTypeString( dev->type() ) )
+	       .tqarg( K3bDevice::mediaTypeString( dev->supportedProfiles() ) )
+	       .tqarg( K3bDevice::writingModeString( dev->writingModes() ) ) );
   }
 }
 
 
 void K3bDebuggingOutputDialog::slotUser1()
 {
-  QString filename = KFileDialog::getSaveFileName();
+  TQString filename = KFileDialog::getSaveFileName();
   if( !filename.isEmpty() ) {
-    QFile f( filename );
+    TQFile f( filename );
     if( !f.exists() || KMessageBox::warningContinueCancel( this,
-						  i18n("Do you want to overwrite %1?").arg(filename),
+						  i18n("Do you want to overwrite %1?").tqarg(filename),
 						  i18n("File Exists"), i18n("Overwrite") )
 	== KMessageBox::Continue ) {
 
       if( f.open( IO_WriteOnly ) ) {
-	QTextStream t( &f );
+	TQTextStream t( &f );
 	t << debugView->text();
       }
       else {
-	KMessageBox::error( this, i18n("Could not open file %1").arg(filename) );
+	KMessageBox::error( this, i18n("Could not open file %1").tqarg(filename) );
       }
     }
   }
@@ -156,7 +156,7 @@ void K3bDebuggingOutputDialog::slotUser1()
 
 void K3bDebuggingOutputDialog::slotUser2()
 {
-  QApplication::clipboard()->setText( debugView->text(), QClipboard::Clipboard );
+  TQApplication::tqclipboard()->setText( debugView->text(), TQClipboard::Clipboard );
 }
 
 #include "k3bdebuggingoutputdialog.moc"

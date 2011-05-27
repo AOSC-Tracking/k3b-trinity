@@ -16,42 +16,42 @@
 
 #include "k3bcddbmultientriesdialog.h"
 
-#include <qlayout.h>
-#include <qframe.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqframe.h>
+#include <tqlabel.h>
 
 #include <klistbox.h>
 #include <klocale.h>
 
 
 
-K3bCddbMultiEntriesDialog::K3bCddbMultiEntriesDialog( QWidget* parent, const char* name )
-  : KDialogBase( Plain, i18n("CDDB Database Entry"), Ok|Cancel, Ok, parent, name ) 
+K3bCddbMultiEntriesDialog::K3bCddbMultiEntriesDialog( TQWidget* tqparent, const char* name )
+  : KDialogBase( Plain, i18n("CDDB Database Entry"), Ok|Cancel, Ok, tqparent, name ) 
 {
-  QFrame* frame = plainPage();
-  QVBoxLayout* layout = new QVBoxLayout( frame );
-  layout->setAutoAdd( true );
-  layout->setSpacing( spacingHint() );
-  layout->setMargin( 0 );
+  TQFrame* frame = plainPage();
+  TQVBoxLayout* tqlayout = new TQVBoxLayout( frame );
+  tqlayout->setAutoAdd( true );
+  tqlayout->setSpacing( spacingHint() );
+  tqlayout->setMargin( 0 );
 
-  QLabel* infoLabel = new QLabel( i18n("K3b found multiple inexact CDDB entries. Please select one."), frame );
-  infoLabel->setAlignment( WordBreak );
+  TQLabel* infoLabel = new TQLabel( i18n("K3b found multiple inexact CDDB entries. Please select one."), frame );
+  infoLabel->tqsetAlignment( WordBreak );
 
   m_listBox = new KListBox( frame, "list_box");
 
   setMinimumSize( 280, 200 );
 }
 
-K3bCddbResultHeader K3bCddbMultiEntriesDialog::selectCddbEntry( K3bCddbQuery* query, QWidget* parent )
+K3bCddbResultHeader K3bCddbMultiEntriesDialog::selectCddbEntry( K3bCddbQuery* query, TQWidget* tqparent )
 {
-  K3bCddbMultiEntriesDialog d( parent );
+  K3bCddbMultiEntriesDialog d( tqparent );
 
-  const QValueList<K3bCddbResultHeader> headers = query->getInexactMatches();
+  const TQValueList<K3bCddbResultHeader> headers = query->getInexactMatches();
 
   int i = 1;
-  for( QValueListConstIterator<K3bCddbResultHeader> it = headers.begin();
+  for( TQValueListConstIterator<K3bCddbResultHeader> it = headers.begin();
        it != headers.end(); ++it ) {
-    d.m_listBox->insertItem( QString::number(i) + " " + 
+    d.m_listBox->insertItem( TQString::number(i) + " " + 
 			     (*it).artist + " - " + 
 			     (*it).title + " (" + 
 			     (*it).category + ")" );
@@ -60,7 +60,7 @@ K3bCddbResultHeader K3bCddbMultiEntriesDialog::selectCddbEntry( K3bCddbQuery* qu
 
   d.m_listBox->setSelected( 0, true );
 
-  if( d.exec() == QDialog::Accepted )
+  if( d.exec() == TQDialog::Accepted )
     return headers[ d.m_listBox->currentItem() >= 0 ? d.m_listBox->currentItem() : 0 ];
   else
     return K3bCddbResultHeader();

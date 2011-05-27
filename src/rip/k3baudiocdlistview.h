@@ -18,7 +18,7 @@
 
 #include <k3blistview.h>
 
-class QDragObject;
+class TQDragObject;
 class K3bAudioCdView;
 
 /**
@@ -27,16 +27,17 @@ class K3bAudioCdView;
 class K3bAudioCdListView : public K3bListView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioCdListView( K3bAudioCdView*, QWidget* parent = 0, const char* name = 0 );
+  K3bAudioCdListView( K3bAudioCdView*, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bAudioCdListView();
 
  protected:
   /**
    * @reimpl from KListView
    */
-  QDragObject* dragObject();
+  TQDragObject* dragObject();
 
  private:
   K3bAudioCdView* m_view;

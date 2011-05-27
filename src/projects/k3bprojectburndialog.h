@@ -24,11 +24,11 @@ class K3bDoc;
 class K3bBurnJob;
 class K3bWriterSelectionWidget;
 class K3bTempDirSelectionWidget;
-class QGroupBox;
-class QCheckBox;
-class QTabWidget;
-class QSpinBox;
-class QVBoxLayout;
+class TQGroupBox;
+class TQCheckBox;
+class TQTabWidget;
+class TQSpinBox;
+class TQVBoxLayout;
 class K3bWritingModeWidget;
 class KConfigBase;
 
@@ -39,9 +39,10 @@ class KConfigBase;
 class K3bProjectBurnDialog : public K3bInteractionDialog
 {
    Q_OBJECT
+  TQ_OBJECT
 
  public:
-   K3bProjectBurnDialog( K3bDoc* doc, QWidget *parent=0, const char *name=0, 
+   K3bProjectBurnDialog( K3bDoc* doc, TQWidget *tqparent=0, const char *name=0, 
 			 bool modal = true, bool dvd = false );
    ~K3bProjectBurnDialog();
 
@@ -162,7 +163,7 @@ class K3bProjectBurnDialog : public K3bInteractionDialog
 
    void prepareGui();
 
-   void addPage( QWidget*, const QString& title );
+   void addPage( TQWidget*, const TQString& title );
 
    /**
     * Call this if you must reimplement it.
@@ -173,18 +174,18 @@ class K3bProjectBurnDialog : public K3bInteractionDialog
    K3bWriterSelectionWidget* m_writerSelectionWidget;
    K3bTempDirSelectionWidget* m_tempDirSelectionWidget;
    K3bWritingModeWidget* m_writingModeWidget;
-   QGroupBox* m_optionGroup;
-   QVBoxLayout* m_optionGroupLayout;
-   QCheckBox* m_checkCacheImage;
-   QCheckBox* m_checkSimulate;
-   QCheckBox* m_checkRemoveBufferFiles;
-   QCheckBox* m_checkOnlyCreateImage;
-   QSpinBox* m_spinCopies;
+   TQGroupBox* m_optionGroup;
+   TQVBoxLayout* m_optionGroupLayout;
+   TQCheckBox* m_checkCacheImage;
+   TQCheckBox* m_checkSimulate;
+   TQCheckBox* m_checkRemoveBufferFiles;
+   TQCheckBox* m_checkOnlyCreateImage;
+   TQSpinBox* m_spinCopies;
 
  private:
    K3bDoc* m_doc;
    K3bBurnJob* m_job;
-   QTabWidget* m_tabWidget;
+   TQTabWidget* m_tabWidget;
    bool m_dvd;
 };
 

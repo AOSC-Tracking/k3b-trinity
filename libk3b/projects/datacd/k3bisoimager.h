@@ -19,14 +19,14 @@
 #include <k3bjob.h>
 #include "k3bmkisofshandler.h"
 
-#include <qptrqueue.h>
-#include <qstringlist.h>
+#include <tqptrqueue.h>
+#include <tqstringlist.h>
 
 class K3bDataDoc;
 class K3bDirItem;
 class K3bDataItem;
 class K3bFileItem;
-class QTextStream;
+class TQTextStream;
 class K3bProcess;
 class KProcess;
 class K3bDevice::Device;
@@ -36,9 +36,10 @@ class KTempFile;
 class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bIsoImager( K3bDataDoc*, K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bIsoImager( K3bDataDoc*, K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bIsoImager();
 
   virtual bool active() const;
@@ -50,7 +51,7 @@ class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
   /**
    * Get the checksum calculated during the creation of the image.
    */
-  QCString checksum() const;
+  TQCString checksum() const;
 
  public slots:
   /**
@@ -86,20 +87,20 @@ class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
    */
   void writeToFd( int fd );
 
-  void writeToImageFile( const QString& path );
+  void writeToImageFile( const TQString& path );
 
   /**
    * If dev == 0 K3bIsoImager will ignore the data in the previous session. 
    * This is usable for CD-Extra.
    */
-  void setMultiSessionInfo( const QString&, K3bDevice::Device* dev = 0 );
+  void setMultiSessionInfo( const TQString&, K3bDevice::Device* dev = 0 );
 
   K3bDevice::Device* device() const { return m_device; }
   K3bDataDoc* doc() const { return m_doc; }
 
  protected:
   virtual void handleMkisofsProgress( int );
-  virtual void handleMkisofsInfoMessage( const QString&, int );
+  virtual void handleMkisofsInfoMessage( const TQString&, int );
 
   virtual bool addMkisofsParameters( bool printSize = false );
 
@@ -113,7 +114,7 @@ class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
    *
    * @return an empty dummy dir for use with K3bDirItems.
    */
-  QString dummyDir( K3bDirItem* );
+  TQString dummyDir( K3bDirItem* );
 
   void outputData();
   void initVariables();
@@ -129,9 +130,9 @@ class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
   bool writeSortWeightFile();
 
   // used by writePathSpec
-  virtual int writePathSpecForDir( K3bDirItem* dirItem, QTextStream& stream );
-  virtual void writePathSpecForFile( K3bFileItem*, QTextStream& stream );
-  QString escapeGraftPoint( const QString& str );
+  virtual int writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& stream );
+  virtual void writePathSpecForFile( K3bFileItem*, TQTextStream& stream );
+  TQString escapeGraftPoint( const TQString& str );
 
   KTempFile* m_pathSpecFile;
   KTempFile* m_rrHideFile;
@@ -144,12 +145,12 @@ class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
   bool m_canceled;
 
  protected slots:
-  virtual void slotReceivedStderr( const QString& );
+  virtual void slotReceivedStderr( const TQString& );
   virtual void slotProcessExited( KProcess* );
 
  private slots:
   void slotCollectMkisofsPrintSizeStderr(KProcess*, char*, int);
-  void slotCollectMkisofsPrintSizeStdout( const QString& );
+  void slotCollectMkisofsPrintSizeStdout( const TQString& );
   void slotMkisofsPrintSizeFinished();
   void slotDataPreparationDone( bool success );
 
@@ -164,15 +165,15 @@ class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
   bool m_noDeepDirectoryRelocation;
 
   bool m_importSession;
-  QString m_multiSessionInfo;
+  TQString m_multiSessionInfo;
   K3bDevice::Device* m_device;
 
   // used for mkisofs -print-size parsing
-  QString m_collectedMkisofsPrintSizeStdout;
-  QString m_collectedMkisofsPrintSizeStderr;
+  TQString m_collectedMkisofsPrintSizeStdout;
+  TQString m_collectedMkisofsPrintSizeStderr;
   int m_mkisofsPrintSizeResult;
 
-  QStringList m_tempFiles;
+  TQStringList m_tempFiles;
 
   int m_fdToWriteTo;
 

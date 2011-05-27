@@ -18,18 +18,18 @@
 #ifndef K3BFILLSTATUSDISPLAY_H
 #define K3BFILLSTATUSDISPLAY_H
 
-#include <qframe.h>
-#include <qtooltip.h>
+#include <tqframe.h>
+#include <tqtooltip.h>
 
 
-class QPaintEvent;
-class QMouseEvent;
+class TQPaintEvent;
+class TQMouseEvent;
 class K3bDoc;
 class KToggleAction;
 class KAction;
 class KActionCollection;
 class KPopupMenu;
-class QToolButton;
+class TQToolButton;
 
 namespace K3bDevice {
   class Device;
@@ -42,16 +42,17 @@ namespace K3b {
 /**
   *@author Sebastian Trueg
   */
-class K3bFillStatusDisplayWidget : public QWidget
+class K3bFillStatusDisplayWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bFillStatusDisplayWidget( K3bDoc* doc, QWidget* parent );
+  K3bFillStatusDisplayWidget( K3bDoc* doc, TQWidget* tqparent );
   ~K3bFillStatusDisplayWidget();
 
-  QSize sizeHint() const;
-  QSize minimumSizeHint() const;
+  TQSize tqsizeHint() const;
+  TQSize tqminimumSizeHint() const;
 
   const K3b::Msf& cdSize() const;
 
@@ -60,11 +61,11 @@ class K3bFillStatusDisplayWidget : public QWidget
   void setCdSize( const K3b::Msf& );
 
  signals:
-  void contextMenu( const QPoint& );
+  void contextMenu( const TQPoint& );
 
  protected:
-  void mousePressEvent( QMouseEvent* );
-  void paintEvent(QPaintEvent*);
+  void mousePressEvent( TQMouseEvent* );
+  void paintEvent(TQPaintEvent*);
 
  private:
   class Private;
@@ -72,12 +73,13 @@ class K3bFillStatusDisplayWidget : public QWidget
 };
 
 
-class K3bFillStatusDisplay : public QFrame  {
+class K3bFillStatusDisplay : public TQFrame  {
 
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bFillStatusDisplay(K3bDoc* doc, QWidget *parent=0, const char *name=0);
+  K3bFillStatusDisplay(K3bDoc* doc, TQWidget *tqparent=0, const char *name=0);
   ~K3bFillStatusDisplay();
 
  public slots:
@@ -98,7 +100,7 @@ class K3bFillStatusDisplay : public QFrame  {
   void slotWhy44();
   void slotCustomSize();
   void slotMenuButtonClicked();
-  void slotPopupMenu(const QPoint&);
+  void slotPopupMenu(const TQPoint&);
   void slotDetermineSize();
   void slotDocChanged();
   void slotMediumChanged( K3bDevice::Device* dev );

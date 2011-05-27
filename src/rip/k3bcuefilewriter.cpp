@@ -20,9 +20,9 @@
 #include <k3bcore.h>
 #include <k3bversion.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qdatetime.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqdatetime.h>
 
 
 K3bCueFileWriter::K3bCueFileWriter()
@@ -30,22 +30,22 @@ K3bCueFileWriter::K3bCueFileWriter()
 }
 
 
-bool K3bCueFileWriter::save( const QString& filename )
+bool K3bCueFileWriter::save( const TQString& filename )
 {
-  QFile f( filename );
+  TQFile f( filename );
 
   if( !f.open( IO_WriteOnly ) ) {
     kdDebug() << "(K3bCueFileWriter) could not open file " << f.name() << endl;
     return false;
   }
 
-  QTextStream s( &f );
+  TQTextStream s( &f );
 
   return save( s );
 }
 
 
-bool K3bCueFileWriter::save( QTextStream& t )
+bool K3bCueFileWriter::save( TQTextStream& t )
 {
   t << "REM Cue file written by K3b " << k3bcore->version() << endl
     << endl;
@@ -64,7 +64,7 @@ bool K3bCueFileWriter::save( QTextStream& t )
 
     const K3bDevice::Track& track = *it;
 
-    t << "  TRACK " << QString::number(i+1).rightJustify( 2, '0' ) << " AUDIO" << endl;
+    t << "  TRACK " << TQString::number(i+1).rightJustify( 2, '0' ) << " AUDIO" << endl;
 
     if( m_cdText.count() > i && !m_cdText[i].isEmpty() ) {
       t << "    PERFORMER \"" << m_cdText[i].performer() << "\"" << endl;
@@ -87,5 +87,5 @@ bool K3bCueFileWriter::save( QTextStream& t )
     i++;
   }
 
-  return ( t.device()->status() == IO_Ok );
+  return ( t.tqdevice()->status() == IO_Ok );
 }

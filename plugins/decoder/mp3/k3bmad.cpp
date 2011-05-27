@@ -15,7 +15,7 @@
 
 #include "k3bmad.h"
 
-#include <qfile.h>
+#include <tqfile.h>
 #include <kdebug.h>
 
 
@@ -52,7 +52,7 @@ K3bMad::~K3bMad()
 }
 
 
-bool K3bMad::open( const QString& filename )
+bool K3bMad::open( const TQString& filename )
 {
   cleanup();
 
@@ -105,7 +105,7 @@ bool K3bMad::fillStreamBuffer()
     }
 			
     // Fill-in the buffer. 
-    Q_LONG result = m_inputFile.readBlock( (char*)readStart, readSize );
+    TQ_LONG result = m_inputFile.readBlock( (char*)readStart, readSize );
     if( result < 0 ) {
       kdDebug() << "(K3bMad) read error on bitstream)" << endl;
       m_bInputError = true;
@@ -192,7 +192,7 @@ bool K3bMad::seekFirstHeader()
   // take way to long for non-mp3 files.
   //
   bool headerFound = findNextHeader();
-  QIODevice::Offset inputPos = streamPos();
+  TQIODevice::Offset inputPos = streamPos();
   while( !headerFound && 
 	 !m_inputFile.atEnd() && 
 	 streamPos() <= inputPos+1024 ) {
@@ -222,19 +222,19 @@ bool K3bMad::eof() const
 }
 
 
-QIODevice::Offset K3bMad::inputPos() const
+TQIODevice::Offset K3bMad::inputPos() const
 {
   return m_inputFile.at();
 }
 
 
-QIODevice::Offset K3bMad::streamPos() const
+TQIODevice::Offset K3bMad::streamPos() const
 {
   return inputPos() - (madStream->bufend - madStream->this_frame + 1);
 }
 
 
-bool K3bMad::inputSeek( QIODevice::Offset pos )
+bool K3bMad::inputSeek( TQIODevice::Offset pos )
 {
   return m_inputFile.at( pos );
 }

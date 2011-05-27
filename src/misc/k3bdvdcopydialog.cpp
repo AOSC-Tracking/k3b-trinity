@@ -31,18 +31,18 @@
 #include <k3bmediacache.h>
 #include <k3biso9660.h>
 
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qtabwidget.h>
-#include <qspinbox.h>
-#include <qptrlist.h>
-#include <qfile.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qhbox.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqtabwidget.h>
+#include <tqspinbox.h>
+#include <tqptrlist.h>
+#include <tqfile.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqhbox.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -55,8 +55,8 @@
 
 
 
-K3bDvdCopyDialog::K3bDvdCopyDialog( QWidget* parent, const char* name, bool modal )
-  : K3bInteractionDialog( parent, name,
+K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* tqparent, const char* name, bool modal )
+  : K3bInteractionDialog( tqparent, name,
 			  i18n("DVD Copy"),
 			  i18n("No video transcoding!"),
 			  START_BUTTON|CANCEL_BUTTON,
@@ -64,12 +64,12 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( QWidget* parent, const char* name, bool moda
 			  "default dvd copy settings",
 			  modal )
 {
-  QWidget* w = mainWidget();
+  TQWidget* w = mainWidget();
 
   //
   // Source group
   // //////////////////////////////////////////////////////////////////////////
-  QGroupBox* groupSource = new QGroupBox( 1, Qt::Vertical, i18n("Source Medium"), w );
+  TQGroupBox* groupSource = new TQGroupBox( 1, Qt::Vertical, i18n("Source Medium"), w );
   groupSource->setInsideSpacing( spacingHint() );
   groupSource->setInsideMargin( marginHint() );
   m_comboSourceDevice = new K3bMediaSelectionComboBox( groupSource );
@@ -89,19 +89,19 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( QWidget* parent, const char* name, bool moda
   //
   // Option tab
   // //////////////////////////////////////////////////////////////////////////
-  QTabWidget* tabWidget = new QTabWidget( w );
+  TQTabWidget* tabWidget = new TQTabWidget( w );
 
   // option tab --------------------
-  QWidget* optionTab = new QWidget( tabWidget );
-  QGridLayout* optionTabGrid = new QGridLayout( optionTab );
+  TQWidget* optionTab = new TQWidget( tabWidget );
+  TQGridLayout* optionTabGrid = new TQGridLayout( optionTab );
   optionTabGrid->setSpacing( spacingHint() );
   optionTabGrid->setMargin( marginHint() );
 
-  QGroupBox* groupWritingMode = new QGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), optionTab );
+  TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), optionTab );
   groupWritingMode->setInsideMargin( marginHint() );
   m_writingModeWidget = new K3bWritingModeWidget( groupWritingMode );
 
-  QGroupBox* groupOptions = new QGroupBox( 5, Qt::Vertical, i18n("Settings"), optionTab );
+  TQGroupBox* groupOptions = new TQGroupBox( 5, Qt::Vertical, i18n("Settings"), optionTab );
   groupOptions->setInsideSpacing( spacingHint() );
   groupOptions->setInsideMargin( marginHint() );
   m_checkSimulate = K3bStdGuiItems::simulateCheckbox( groupOptions );
@@ -110,13 +110,13 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( QWidget* parent, const char* name, bool moda
   m_checkDeleteImages = K3bStdGuiItems::removeImagesCheckbox( groupOptions );
   m_checkVerifyData = K3bStdGuiItems::verifyCheckBox( groupOptions );
 
-  QGroupBox* groupCopies = new QGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
+  TQGroupBox* groupCopies = new TQGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
-  QLabel* pixLabel = new QLabel( groupCopies );
+  TQLabel* pixLabel = new TQLabel( groupCopies );
   pixLabel->setPixmap( SmallIcon( "cdcopy", KIcon::SizeMedium ) );
   pixLabel->setScaledContents( false );
-  m_spinCopies = new QSpinBox( groupCopies );
+  m_spinCopies = new TQSpinBox( groupCopies );
   m_spinCopies->setMinValue( 1 );
   m_spinCopies->setMaxValue( 999 );
 
@@ -132,8 +132,8 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( QWidget* parent, const char* name, bool moda
   //
   // Image tab
   // //////////////////////////////////////////////////////////////////////////
-  QWidget* imageTab = new QWidget( tabWidget );
-  QGridLayout* imageTabGrid = new QGridLayout( imageTab );
+  TQWidget* imageTab = new TQWidget( tabWidget );
+  TQGridLayout* imageTabGrid = new TQGridLayout( imageTab );
   imageTabGrid->setSpacing( spacingHint() );
   imageTabGrid->setMargin( marginHint() );
 
@@ -148,19 +148,19 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( QWidget* parent, const char* name, bool moda
   //
   // advanced tab ------------------
   // //////////////////////////////////////////////////////////////////////////
-  QWidget* advancedTab = new QWidget( tabWidget );
-  QGridLayout* advancedTabGrid = new QGridLayout( advancedTab );
+  TQWidget* advancedTab = new TQWidget( tabWidget );
+  TQGridLayout* advancedTabGrid = new TQGridLayout( advancedTab );
   advancedTabGrid->setSpacing( spacingHint() );
   advancedTabGrid->setMargin( marginHint() );
 
-  QGroupBox* groupGeneral = new QGroupBox( 2, Qt::Vertical, i18n("General"), advancedTab );
+  TQGroupBox* groupGeneral = new TQGroupBox( 2, Qt::Vertical, i18n("General"), advancedTab );
   groupGeneral->setInsideSpacing( spacingHint() );
   groupGeneral->setInsideMargin( marginHint() );
-  QHBox* box = new QHBox( groupGeneral );
+  TQHBox* box = new TQHBox( groupGeneral );
   box->setSpacing( spacingHint() );
-  box->setStretchFactor( new QLabel( i18n("Read retries:"), box ), 1 );
-  m_spinRetries = new QSpinBox( 1, 128, 1, box );
-  m_checkIgnoreReadErrors = new QCheckBox( i18n("Ignore read errors"), groupGeneral );
+  box->setStretchFactor( new TQLabel( i18n("Read retries:"), box ), 1 );
+  m_spinRetries = new TQSpinBox( 1, 128, 1, box );
+  m_checkIgnoreReadErrors = new TQCheckBox( i18n("Ignore read errors"), groupGeneral );
 
   advancedTabGrid->addWidget( groupGeneral, 0, 0 );
 
@@ -169,9 +169,9 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( QWidget* parent, const char* name, bool moda
 
 
   //
-  // setup layout
+  // setup tqlayout
   // //////////////////////////////////////////////////////////////////////////
-  QGridLayout* grid = new QGridLayout( w );
+  TQGridLayout* grid = new TQGridLayout( w );
   grid->setMargin( 0 );
   grid->setSpacing( spacingHint() );
 
@@ -190,17 +190,17 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( QWidget* parent, const char* name, bool moda
   //
   // setup connections
   // //////////////////////////////////////////////////////////////////////////
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged()), this, SLOT(slotToggleAll()) );
-  connect( m_comboSourceDevice, SIGNAL(selectionChanged(K3bDevice::Device*)), this, SLOT(slotToggleAll()) );
-  connect( m_comboSourceDevice, SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, SLOT(slotSourceMediumChanged(K3bDevice::Device*)) );
-  connect( m_checkSimulate, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_checkCacheImage, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_checkOnlyCreateImage, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_writingModeWidget, SIGNAL(writingModeChanged(int)), this, SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_comboSourceDevice, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_comboSourceDevice, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotSourceMediumChanged(K3bDevice::Device*)) );
+  connect( m_checkSimulate, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkOnlyCreateImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
 
-  QToolTip::add( m_checkIgnoreReadErrors, i18n("Skip unreadable sectors") );
-  QWhatsThis::add( m_checkIgnoreReadErrors, i18n("<p>If this option is checked and K3b is not able to read a sector from the "
+  TQToolTip::add( m_checkIgnoreReadErrors, i18n("Skip unreadable sectors") );
+  TQWhatsThis::add( m_checkIgnoreReadErrors, i18n("<p>If this option is checked and K3b is not able to read a sector from the "
 						 "source CD/DVD it will be replaced with zeros on the resulting copy.") );
 }
 
@@ -253,7 +253,7 @@ void K3bDvdCopyDialog::slotStartClicked()
     dlg = new K3bBurnProgressDialog( kapp->mainWidget() );
   }
 
-  K3bDvdCopyJob* job = new K3bDvdCopyJob( dlg, this );
+  K3bDvdCopyJob* job = new K3bDvdCopyJob( dlg, TQT_TQOBJECT(this) );
 
   job->setWriterDevice( m_writerSelectionWidget->writerDevice() );
   job->setReaderDevice( m_comboSourceDevice->selectedDevice() );
@@ -315,7 +315,7 @@ void K3bDvdCopyDialog::saveUserDefaults( KConfigBase* c )
   m_writingModeWidget->saveConfig( c );
   m_tempDirSelectionWidget->saveConfig( c );
 
-  c->writeEntry( "source_device", m_comboSourceDevice->selectedDevice() ? m_comboSourceDevice->selectedDevice()->devicename() : QString() );
+  c->writeEntry( "source_device", m_comboSourceDevice->selectedDevice() ? m_comboSourceDevice->selectedDevice()->devicename() : TQString() );
 
   c->writeEntry( "simulate", m_checkSimulate->isChecked() );
   c->writeEntry( "on_the_fly", !m_checkCacheImage->isChecked() );

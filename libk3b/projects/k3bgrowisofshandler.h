@@ -16,7 +16,7 @@
 #ifndef _K3B_GROWISOFS_HANDLER_H_
 #define _K3B_GROWISOFS_HANDLER_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 
 namespace K3bDevice {
   class Device;
@@ -29,12 +29,13 @@ namespace K3bDevice {
  * We put it in an extra class since we have two classes
  * using growisofs: the writer and the imager.
  */
-class K3bGrowisofsHandler : public QObject
+class K3bGrowisofsHandler : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bGrowisofsHandler( QObject* parent = 0, const char* name = 0 );
+  K3bGrowisofsHandler( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bGrowisofsHandler();
 
   enum ErrorType {
@@ -57,12 +58,12 @@ class K3bGrowisofsHandler : public QObject
   void reset( K3bDevice::Device* = 0, bool dao = false );
 
   void handleStart();
-  void handleLine( const QString& );
+  void handleLine( const TQString& );
   void handleExit( int exitCode );
 
  signals:
-  void infoMessage( const QString&, int );
-  void newSubTask( const QString& );
+  void infoMessage( const TQString&, int );
+  void newSubTask( const TQString& );
   void buffer( int );
   void deviceBuffer( int );
 
@@ -72,7 +73,7 @@ class K3bGrowisofsHandler : public QObject
   void flushingCache();
 
  private slots:
-  void slotCheckBufferStatus();
+  void slotCheckBuffertqStatus();
   void slotCheckBufferStatusDone( K3bDevice::DeviceHandler* );
 
  private:

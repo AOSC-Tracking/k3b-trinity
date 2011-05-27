@@ -14,12 +14,12 @@
  */
 
 
-#ifndef K3BCDDB_QUERY_H
-#define K3BCDDB_QUERY_H
+#ifndef K3BCDDB_TQUERY_H
+#define K3BCDDB_TQUERY_H
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qtextstream.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqtextstream.h>
 
 #include "k3bcddbresult.h"
 
@@ -27,12 +27,13 @@
 #include "k3b_export.h"
 
 
-class LIBK3B_EXPORT K3bCddbQuery : public QObject
+class LIBK3B_EXPORT K3bCddbQuery : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCddbQuery( QObject* parent = 0, const char* name = 0 );
+  K3bCddbQuery( TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bCddbQuery();
 
   void query( const K3bDevice::Toc& );
@@ -48,15 +49,15 @@ class LIBK3B_EXPORT K3bCddbQuery : public QObject
    * After emitting the signal inexactMatches one has to choose one
    * of these entries and query it with queryInexactMatch
    */
-  const QValueList<K3bCddbResultHeader>& getInexactMatches() const { return m_inexactMatches; }
+  const TQValueList<K3bCddbResultHeader>& getInexactMatches() const { return m_inexactMatches; }
 
-  static const QStringList& categories();
+  static const TQStringList& categories();
 
   enum Error { SUCCESS = 0, 
 	       CANCELED,
 	       NO_ENTRY_FOUND, 
 	       CONNECTION_ERROR,
-	       QUERY_ERROR,
+	       TQUERY_ERROR,
 	       READ_ERROR,
 	       FAILURE, 
 	       WORKING };
@@ -76,7 +77,7 @@ class LIBK3B_EXPORT K3bCddbQuery : public QObject
    */
   void inexactMatches( K3bCddbQuery* );
 
-  void infoMessage( const QString& );
+  void infoMessage( const TQString& );
 
  protected slots:
   virtual void doQuery() = 0;
@@ -88,11 +89,11 @@ class LIBK3B_EXPORT K3bCddbQuery : public QObject
   K3bCddbResultEntry& result() { return m_result; }
   void setError( int e ) { m_error = e; }
 
-  bool parseEntry( QTextStream&, K3bCddbResultEntry& );
-  int getCode( const QString& );
-  QString handshakeString() const;
-  QString queryString() const;
-  bool parseMatchHeader( const QString& line, K3bCddbResultHeader& header );
+  bool parseEntry( TQTextStream&, K3bCddbResultEntry& );
+  int getCode( const TQString& );
+  TQString handshakeString() const;
+  TQString queryString() const;
+  bool parseMatchHeader( const TQString& line, K3bCddbResultHeader& header );
 
   /**
    * since I'm not quite sure when the socket will emit connectionClosed
@@ -101,7 +102,7 @@ class LIBK3B_EXPORT K3bCddbQuery : public QObject
    */
   void emitQueryFinished();
 
-  QValueList<K3bCddbResultHeader> m_inexactMatches;
+  TQValueList<K3bCddbResultHeader> m_inexactMatches;
 
  private:
   K3bDevice::Toc m_toc;

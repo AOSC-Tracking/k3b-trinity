@@ -19,9 +19,9 @@
 
 #include "k3bcddbresult.h"
 
-#include <qstringlist.h>
-#include <qregexp.h>
-#include <qtextstream.h>
+#include <tqstringlist.h>
+#include <tqregexp.h>
+#include <tqtextstream.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -29,8 +29,8 @@
 #include <kio/job.h>
 
 
-K3bCddbHttpQuery::K3bCddbHttpQuery( QObject* parent, const char* name )
-  : K3bCddbQuery( parent, name )
+K3bCddbHttpQuery::K3bCddbHttpQuery( TQObject* tqparent, const char* name )
+  : K3bCddbQuery( tqparent, name )
 {
   m_server = "freedb.org";
   m_port = 80;
@@ -46,7 +46,7 @@ K3bCddbHttpQuery::~K3bCddbHttpQuery()
 void K3bCddbHttpQuery::doQuery()
 {
   setError( WORKING );
-  m_state = QUERY;
+  m_state = TQUERY;
 
   performCommand( queryString() );
 }
@@ -58,11 +58,11 @@ void K3bCddbHttpQuery::doMatchQuery()
   m_state = READ;
   m_parsingBuffer.truncate(0);
 
-  performCommand( QString( "cddb read %1 %2").arg( header().category ).arg( header().discid ) );
+  performCommand( TQString( "cddb read %1 %2").tqarg( header().category ).tqarg( header().discid ) );
 }
 
 
-void K3bCddbHttpQuery::performCommand( const QString& cmd )
+void K3bCddbHttpQuery::performCommand( const TQString& cmd )
 {
   KURL url;
   url.setProtocol( "http" );
@@ -82,23 +82,23 @@ void K3bCddbHttpQuery::performCommand( const QString& cmd )
 
   if( !job ) {
     setError( CONNECTION_ERROR );
-    emit infoMessage( i18n("Could not connect to host %1").arg(m_server) );
+    emit infoMessage( i18n("Could not connect to host %1").tqarg(m_server) );
     emitQueryFinished();
     return;
   }
 
-  connect( job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-	   SLOT(slotData(KIO::Job*, const QByteArray&)) );
-  connect( job, SIGNAL(result(KIO::Job*)),
-	   SLOT(slotResult(KIO::Job*)) );
+  connect( job, TQT_SIGNAL(data(KIO::Job*, const TQByteArray&)),
+	   TQT_SLOT(slotData(KIO::Job*, const TQByteArray&)) );
+  connect( job, TQT_SIGNAL(result(KIO::Job*)),
+	   TQT_SLOT(slotResult(KIO::Job*)) );
 }
 
 
 
-void K3bCddbHttpQuery::slotData( KIO::Job*, const QByteArray& data )
+void K3bCddbHttpQuery::slotData( KIO::Job*, const TQByteArray& data )
 {
   if( data.size() ) {
-    QDataStream stream( m_data, IO_WriteOnly | IO_Append );
+    TQDataStream stream( m_data, IO_WriteOnly | IO_Append );
     stream.writeRawBytes( data.data(), data.size() );
   }
 }
@@ -113,16 +113,16 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
     return;
   }
 
-  QStringList lines = QStringList::split( "\n", QString::fromUtf8( m_data.data(), m_data.size() ) );
+  TQStringList lines = TQStringList::split( "\n", TQString::fromUtf8( m_data.data(), m_data.size() ) );
 
-  for( QStringList::const_iterator it = lines.begin(); it != lines.end(); ++it ) {
-    QString line = *it;
+  for( TQStringList::const_iterator it = lines.begin(); it != lines.end(); ++it ) {
+    TQString line = *it;
 
     //    kdDebug() << "(K3bCddbHttpQuery) line: " << line << endl;
 
     switch( m_state ) {
 
-    case QUERY:
+    case TQUERY:
       if( getCode( line ) == 200 ) {
 	// parse exact match and send a read command
 	K3bCddbResultHeader header;
@@ -137,7 +137,7 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
 
 	emit infoMessage( i18n("Found multiple exact matches") );
 
-	m_state = QUERY_DATA;
+	m_state = TQUERY_DATA;
       }
 
       else if( getCode( line ) == 211 ) {
@@ -145,7 +145,7 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
 
 	emit infoMessage( i18n("Found inexact matches") );
 
-	m_state = QUERY_DATA;
+	m_state = TQUERY_DATA;
       }
 
       else if( getCode( line ) == 202 ) {
@@ -160,14 +160,14 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
       else {
 	kdDebug() << "(K3bCddbHttpQuery) Error while querying: " << line << endl;
 	emit infoMessage( i18n("Error while querying") );
-	setError(QUERY_ERROR);
+	setError(TQUERY_ERROR);
 	m_state = FINISHED;
 	emitQueryFinished();
 	return;
       }
       break;
 
-    case QUERY_DATA:
+    case TQUERY_DATA:
       if( line.startsWith( "." ) ) {
 	// finished query
 	// go on reading
@@ -212,7 +212,7 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
 	
 	kdDebug() << "(K3bCddbHttpQuery query finished." << endl;
 
-	QTextStream strStream( m_parsingBuffer, IO_ReadOnly );
+	TQTextStream strStream( m_parsingBuffer, IO_ReadOnly );
 	parseEntry( strStream, result() );
 
 	setError(SUCCESS);

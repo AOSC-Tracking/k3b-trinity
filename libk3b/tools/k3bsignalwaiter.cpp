@@ -16,12 +16,12 @@
 #include "k3bsignalwaiter.h"
 #include "k3bjob.h"
 
-#include <qeventloop.h>
-#include <qapplication.h>
+#include <tqeventloop.h>
+#include <tqapplication.h>
 
 
 K3bSignalWaiter::K3bSignalWaiter()
-  : QObject(),
+  : TQObject(),
     m_inLoop(true)
 {
 }
@@ -32,13 +32,13 @@ K3bSignalWaiter::~K3bSignalWaiter()
 }
 
 
-void K3bSignalWaiter::waitForSignal( QObject* o, const char* signal )
+void K3bSignalWaiter::waitForSignal( TQObject* o, const char* signal )
 {
   K3bSignalWaiter w;
   connect( o, signal,
-	   &w, SLOT(slotSignal()) );
+	   &w, TQT_SLOT(slotSignal()) );
 
-  QApplication::eventLoop()->enterLoop();
+  TQApplication::eventLoop()->enterLoop();
 }
 
 
@@ -47,7 +47,7 @@ void K3bSignalWaiter::waitForJob( K3bJob* job )
   if( !job->active() )
     return;
 
-  waitForSignal( job, SIGNAL(finished(bool)) );
+  waitForSignal( job, TQT_SIGNAL(finished(bool)) );
 }
 
 
@@ -55,7 +55,7 @@ void K3bSignalWaiter::slotSignal()
 {
   if( m_inLoop ) {
     m_inLoop = false;
-    QApplication::eventLoop()->exitLoop();
+    TQApplication::eventLoop()->exitLoop();
   }
 }
 

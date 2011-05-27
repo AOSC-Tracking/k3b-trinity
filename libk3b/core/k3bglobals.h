@@ -21,8 +21,8 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qfile.h>
+#include <tqstring.h>
+#include <tqfile.h>
 #include <kio/global.h>
 #include <kurl.h>
 #include <k3bdevicetypes.h>
@@ -62,7 +62,7 @@ namespace K3b
     DVD_RW_FORMAT = 32
   };
 
-  LIBK3B_EXPORT int writingAppFromString( const QString& );
+  LIBK3B_EXPORT int writingAppFromString( const TQString& );
 
   /**
    * DATA_MODE_AUTO - let K3b determine the best mode
@@ -106,14 +106,14 @@ namespace K3b
     WRITING_MODE_RES_OVWR = K3bDevice::WRITINGMODE_RES_OVWR // Restricted Overwrite
   };
 
-  LIBK3B_EXPORT QString writingModeString( int );
+  LIBK3B_EXPORT TQString writingModeString( int );
 
-  LIBK3B_EXPORT QString framesToString( int h, bool showFrames = true );
-  /*LIBK3B_EXPORT QString sizeToTime( long size );*/
+  LIBK3B_EXPORT TQString framesToString( int h, bool showFrames = true );
+  /*LIBK3B_EXPORT TQString sizeToTime( long size );*/
 
-  LIBK3B_EXPORT Q_INT16 swapByteOrder( const Q_INT16& i );
-  LIBK3B_EXPORT Q_INT32 swapByteOrder( const Q_INT32& i );
-  LIBK3B_EXPORT Q_INT64 swapByteOrder( const Q_INT64& i );
+  LIBK3B_EXPORT TQ_INT16 swapByteOrder( const TQ_INT16& i );
+  LIBK3B_EXPORT TQ_INT32 swapByteOrder( const TQ_INT32& i );
+  LIBK3B_EXPORT TQ_INT64 swapByteOrder( const TQ_INT64& i );
 
   int round( double );
 
@@ -122,61 +122,61 @@ namespace K3b
    * We use this since we encountered problems with the KDE version.
    * @returns true on success.
    */
-  LIBK3B_EXPORT bool kbFreeOnFs( const QString& path, unsigned long& size, unsigned long& avail );
+  LIBK3B_EXPORT bool kbFreeOnFs( const TQString& path, unsigned long& size, unsigned long& avail );
 
   /**
    * Cut a filename preserving the extension
    */
-  LIBK3B_EXPORT QString cutFilename( const QString& name, unsigned int len );
+  LIBK3B_EXPORT TQString cutFilename( const TQString& name, unsigned int len );
 
-  LIBK3B_EXPORT QString removeFilenameExtension( const QString& name );
+  LIBK3B_EXPORT TQString removeFilenameExtension( const TQString& name );
 
   /**
    * Append a number to a filename preserving the extension.
    * The resulting name's length will not exceed @p maxlen
    */
-  LIBK3B_EXPORT QString appendNumberToFilename( const QString& name, int num, unsigned int maxlen );
+  LIBK3B_EXPORT TQString appendNumberToFilename( const TQString& name, int num, unsigned int maxlen );
 
-  LIBK3B_EXPORT QString findUniqueFilePrefix( const QString& _prefix = QString::null, const QString& path = QString::null );
+  LIBK3B_EXPORT TQString findUniqueFilePrefix( const TQString& _prefix = TQString(), const TQString& path = TQString() );
 
   /**
    * Find a unique filename in directory d (if d is empty the method uses the defaultTempPath)
    */
-  LIBK3B_EXPORT QString findTempFile( const QString& ending = QString::null, const QString& d = QString::null );
+  LIBK3B_EXPORT TQString findTempFile( const TQString& ending = TQString(), const TQString& d = TQString() );
 
   /**
    * Wrapper around KStandardDirs::findExe which searches the PATH and some additional
    * directories to find system tools which are normally only in root's PATH.
    */
-  LIBK3B_EXPORT QString findExe( const QString& name );
+  LIBK3B_EXPORT TQString findExe( const TQString& name );
 
   /**
    * get the default K3b temp path to store image files
    */
-  LIBK3B_EXPORT QString defaultTempPath();
+  LIBK3B_EXPORT TQString defaultTempPath();
 
   /**
    * makes sure a path ends with a "/"
    */
-  LIBK3B_EXPORT QString prepareDir( const QString& dir );
+  LIBK3B_EXPORT TQString prepareDir( const TQString& dir );
 
   /**
-   * returns the parent dir of a path.
+   * returns the tqparent dir of a path.
    * CAUTION: this does only work well with absolut paths.
    *
    * Example: /usr/share/doc -> /usr/share/
    */
-  QString parentDir( const QString& path );
+  TQString tqparentDir( const TQString& path );
 
   /**
    * For now this just replaces multiple occurrences of / with a single /
    */
-  LIBK3B_EXPORT QString fixupPath( const QString& );
+  LIBK3B_EXPORT TQString fixupPath( const TQString& );
 
   /**
    * resolves a symlinks completely. Meaning it also handles links to links to links...
    */
-  LIBK3B_EXPORT QString resolveLink( const QString& );
+  LIBK3B_EXPORT TQString resolveLink( const TQString& );
 
   LIBK3B_EXPORT K3bVersion kernelVersion();
 
@@ -185,7 +185,7 @@ namespace K3b
    */
   LIBK3B_EXPORT K3bVersion simpleKernelVersion();
 
-  QString systemName();
+  TQString systemName();
 
   LIBK3B_EXPORT KIO::filesize_t filesize( const KURL& );
 
@@ -214,7 +214,7 @@ namespace K3b
    * Used to create a parameter for cdrecord, cdrdao or readcd.
    * Takes care of SCSI and ATAPI.
    */
-  QString externalBinDeviceParameter( K3bDevice::Device* dev, const K3bExternalBin* );
+  TQString externalBinDeviceParameter( K3bDevice::Device* dev, const K3bExternalBin* );
 
   /**
    * Convert an url pointing to a local device to a K3bDevice.
@@ -228,9 +228,9 @@ namespace K3b
   LIBK3B_EXPORT KURL convertToLocalUrl( const KURL& url );
   LIBK3B_EXPORT KURL::List convertToLocalUrls( const KURL::List& l );
 
-  LIBK3B_EXPORT Q_INT16 fromLe16( char* );
-  LIBK3B_EXPORT Q_INT32 fromLe32( char* );
-  LIBK3B_EXPORT Q_INT64 fromLe64( char* );
+  LIBK3B_EXPORT TQ_INT16 fromLe16( char* );
+  LIBK3B_EXPORT TQ_INT32 fromLe32( char* );
+  LIBK3B_EXPORT TQ_INT64 fromLe64( char* );
 
   LIBK3B_EXPORT bool isMounted( K3bDevice::Device* );
 

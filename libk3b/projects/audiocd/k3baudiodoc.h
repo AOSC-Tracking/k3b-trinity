@@ -22,21 +22,21 @@
 #include <k3bcdtext.h>
 #include <k3btoc.h>
 
-#include <qptrlist.h>
-#include <qfile.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qdatetime.h>
-#include <qtextstream.h>
+#include <tqptrlist.h>
+#include <tqfile.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqdatetime.h>
+#include <tqtextstream.h>
 #include "k3b_export.h"
 #include <kurl.h>
 
 class K3bApp;
 class K3bAudioTrack;
-class QWidget;
-class QTimer;
-class QDomDocument;
-class QDomElement;
+class TQWidget;
+class TQTimer;
+class TQDomDocument;
+class TQDomElement;
 class K3bThreadJob;
 class KConfig;
 class K3bAudioDataSource;
@@ -50,16 +50,17 @@ class K3bAudioFile;
 class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc  
 {
   Q_OBJECT
+  TQ_OBJECT
 
   friend class K3bMixedDoc;
   friend class K3bAudioTrack;
   friend class K3bAudioFile;
 	
  public:
-  K3bAudioDoc( QObject* );
+  K3bAudioDoc( TQObject* );
   ~K3bAudioDoc();
 
-  QString name() const;
+  TQString name() const;
 	
   bool newDocument();
 
@@ -88,14 +89,14 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
 	
   // CD-Text
   bool cdText() const { return m_cdText; }
-  const QString& title() const { return m_cdTextData.title(); }
-  const QString& artist() const { return m_cdTextData.performer(); }
-  const QString& disc_id() const { return m_cdTextData.discId(); }
-  const QString& arranger() const { return m_cdTextData.arranger(); }
-  const QString& songwriter() const { return m_cdTextData.songwriter(); }
-  const QString& composer() const { return m_cdTextData.composer(); }
-  const QString& upc_ean() const { return m_cdTextData.upcEan(); }
-  const QString& cdTextMessage() const { return m_cdTextData.message(); }
+  const TQString& title() const { return m_cdTextData.title(); }
+  const TQString& artist() const { return m_cdTextData.performer(); }
+  const TQString& disc_id() const { return m_cdTextData.discId(); }
+  const TQString& arranger() const { return m_cdTextData.arranger(); }
+  const TQString& songwriter() const { return m_cdTextData.songwriter(); }
+  const TQString& composer() const { return m_cdTextData.composer(); }
+  const TQString& upc_ean() const { return m_cdTextData.upcEan(); }
+  const TQString& cdTextMessage() const { return m_cdTextData.message(); }
 
   /**
    * Create complete CD-Text including the tracks' data.
@@ -111,7 +112,7 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
    */
   K3bDevice::Toc toToc() const;
 
-  K3bBurnJob* newBurnJob( K3bJobHandler*, QObject* parent = 0 );
+  K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* tqparent = 0 );
 
   /**
    * Shows dialogs.
@@ -130,7 +131,7 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
    *
    * BE AWARE THAT THE DECODER HAS TO FIT THE AUDIO FILE IN THE CUE.
    */
-  K3bAudioTrack* importCueFile( const QString& cuefile, K3bAudioTrack* after, K3bAudioDecoder* decoder = 0 );
+  K3bAudioTrack* importCueFile( const TQString& cuefile, K3bAudioTrack* after, K3bAudioDecoder* decoder = 0 );
 
   /**
    * Create a decoder for a specific url. If another AudioFileSource with this
@@ -158,7 +159,7 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
    */
   void addTrack( K3bAudioTrack* track, uint position = 0 );
 
-  void addSources( K3bAudioTrack* parent, const KURL::List& urls, K3bAudioDataSource* sourceAfter = 0 );
+  void addSources( K3bAudioTrack* tqparent, const KURL::List& urls, K3bAudioDataSource* sourceAfter = 0 );
 
   void removeTrack( K3bAudioTrack* );
   void moveTrack( K3bAudioTrack* track, K3bAudioTrack* after );
@@ -168,15 +169,15 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
 
   // CD-Text
   void writeCdText( bool b ) { m_cdText = b; }
-  void setTitle( const QString& v );
-  void setArtist( const QString& v );
-  void setPerformer( const QString& v );
-  void setDisc_id( const QString& v );
-  void setArranger( const QString& v );
-  void setSongwriter( const QString& v );
-  void setComposer( const QString& v );
-  void setUpc_ean( const QString& v );
-  void setCdTextMessage( const QString& v );
+  void setTitle( const TQString& v );
+  void setArtist( const TQString& v );
+  void setPerformer( const TQString& v );
+  void setDisc_id( const TQString& v );
+  void setArranger( const TQString& v );
+  void setSongwriter( const TQString& v );
+  void setComposer( const TQString& v );
+  void setUpc_ean( const TQString& v );
+  void setCdTextMessage( const TQString& v );
 
   // Audio-CD Ripping
   void setAudioRippingParanoiaMode( int i ) { m_audioRippingParanoiaMode = i; }
@@ -195,11 +196,11 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
 
  protected:
   /** reimplemented from K3bDoc */
-  bool loadDocumentData( QDomElement* );
+  bool loadDocumentData( TQDomElement* );
   /** reimplemented from K3bDoc */
-  bool saveDocumentData( QDomElement* );
+  bool saveDocumentData( TQDomElement* );
 
-  QString typeString() const;
+  TQString typeString() const;
 
  private:
   // the stuff for adding files
@@ -251,9 +252,9 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
   // decoder housekeeping
   // --------------------------------------------------
   // used to check if we may delete a decoder
-  QMap<K3bAudioDecoder*, int> m_decoderUsageCounterMap;
+  TQMap<K3bAudioDecoder*, int> m_decoderUsageCounterMap;
   // used to check if we already have a decoder for a specific file
-  QMap<QString, K3bAudioDecoder*> m_decoderPresenceMap;
+  TQMap<TQString, K3bAudioDecoder*> m_decoderPresenceMap;
 
   class Private;
   Private* d;

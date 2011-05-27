@@ -20,20 +20,20 @@
 
 #include "k3bprojectburndialog.h"
 
-#include <qvariant.h>
-#include <qwidget.h>
+#include <tqvariant.h>
+#include <tqwidget.h>
 
-class QCheckBox;
-class QComboBox;
-class QGroupBox;
-class QLabel;
-class QLineEdit;
-class QSpinBox;
+class TQCheckBox;
+class TQComboBox;
+class TQGroupBox;
+class TQLabel;
+class TQLineEdit;
+class TQSpinBox;
 class K3bWriterSelectionWidget;
 class K3bTempDirSelectionWidget;
 class K3bAudioDoc;
 class K3bAudioCdTextWidget;
-class QShowEvent;
+class TQShowEvent;
 
 
 /**
@@ -42,9 +42,10 @@ class QShowEvent;
 class K3bAudioBurnDialog : public K3bProjectBurnDialog  
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioBurnDialog(K3bAudioDoc* doc, QWidget *parent=0, const char *name=0, bool modal = true );
+  K3bAudioBurnDialog(K3bAudioDoc* doc, TQWidget *tqparent=0, const char *name=0, bool modal = true );
   ~K3bAudioBurnDialog();
    
  protected:
@@ -53,7 +54,7 @@ class K3bAudioBurnDialog : public K3bProjectBurnDialog
   void loadK3bDefaults();
   void loadUserDefaults( KConfigBase* );
   void saveUserDefaults( KConfigBase* );
-  void showEvent( QShowEvent* );
+  void showEvent( TQShowEvent* );
   void toggleAll();
 
  protected slots:
@@ -68,12 +69,12 @@ class K3bAudioBurnDialog : public K3bProjectBurnDialog
   /**
    * We need this here to be able to hide/show the group
    */
-  QGroupBox* m_audioRippingGroup;
-  QCheckBox* m_checkHideFirstTrack;
-  QCheckBox* m_checkNormalize;
-  QCheckBox* m_checkAudioRippingIgnoreReadErrors;
-  QSpinBox* m_spinAudioRippingReadRetries;
-  QComboBox* m_comboParanoiaMode;
+  TQGroupBox* m_audioRippingGroup;
+  TQCheckBox* m_checkHideFirstTrack;
+  TQCheckBox* m_checkNormalize;
+  TQCheckBox* m_checkAudioRippingIgnoreReadErrors;
+  TQSpinBox* m_spinAudioRippingReadRetries;
+  TQComboBox* m_comboParanoiaMode;
   K3bAudioCdTextWidget* m_cdtextWidget;
   K3bAudioDoc* m_doc;
 };

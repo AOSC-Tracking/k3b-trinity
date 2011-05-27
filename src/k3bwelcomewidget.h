@@ -17,32 +17,33 @@
 #ifndef _K3B_WELCOME_WIDGET_H_
 #define _K3B_WELCOME_WIDGET_H_
 
-#include <qscrollview.h>
-#include <qptrlist.h>
-#include <qmap.h>
-#include <qimage.h>
+#include <tqscrollview.h>
+#include <tqptrlist.h>
+#include <tqmap.h>
+#include <tqimage.h>
 
 #include <kurl.h>
 #include <kaction.h>
 
 class K3bMainWindow;
-class QDropEvent;
-class QDragEnterEvent;
+class TQDropEvent;
+class TQDragEnterEvent;
 class K3bFlatButton;
-class QPaintEvent;
-class QResizeEvent;
-class QSimpleRichText;
+class TQPaintEvent;
+class TQResizeEvent;
+class TQSimpleRichText;
 class KConfigBase;
-class QMouseEvent;
-class QShowEvent;
+class TQMouseEvent;
+class TQShowEvent;
 
 
-class K3bWelcomeWidget : public QScrollView
+class K3bWelcomeWidget : public TQScrollView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bWelcomeWidget( K3bMainWindow*, QWidget* parent = 0, const char* name = 0 );
+  K3bWelcomeWidget( K3bMainWindow*, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bWelcomeWidget();
 
   void loadConfig( KConfigBase* c );
@@ -54,9 +55,9 @@ class K3bWelcomeWidget : public QScrollView
   void slotMoreActions();
 
  protected:
-  void resizeEvent( QResizeEvent* );
-  void showEvent( QShowEvent* );
-  void contentsMousePressEvent( QMouseEvent* e );
+  void resizeEvent( TQResizeEvent* );
+  void showEvent( TQShowEvent* );
+  void contentsMousePressEvent( TQMouseEvent* e );
 
  private:
   void fixSize();
@@ -66,32 +67,33 @@ class K3bWelcomeWidget : public QScrollView
 };
 
 
-class K3bWelcomeWidget::Display : public QWidget
+class K3bWelcomeWidget::Display : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  Display( K3bWelcomeWidget* parent );
+  Display( K3bWelcomeWidget* tqparent );
   ~Display();
 
-  QSize minimumSizeHint() const;
-  QSizePolicy sizePolicy () const;
+  TQSize tqminimumSizeHint() const;
+  TQSizePolicy sizePolicy () const;
   int heightForWidth ( int w ) const;
 
   void addAction( KAction* );
   void removeAction( KAction* );
   void removeButton( K3bFlatButton* );
   void rebuildGui();
-  void rebuildGui( const QPtrList<KAction>& );
+  void rebuildGui( const TQPtrList<KAction>& );
 
  signals:
   void dropped( const KURL::List& );
 
  protected:
-  void resizeEvent( QResizeEvent* );
-  void paintEvent( QPaintEvent* );
-  void dropEvent( QDropEvent* event );
-  void dragEnterEvent( QDragEnterEvent* event );
+  void resizeEvent( TQResizeEvent* );
+  void paintEvent( TQPaintEvent* );
+  void dropEvent( TQDropEvent* event );
+  void dragEnterEvent( TQDragEnterEvent* event );
 
  private slots:
   void slotThemeChanged();
@@ -100,23 +102,23 @@ class K3bWelcomeWidget::Display : public QWidget
   void repositionButtons();
   void updateBgPix();
 
-  QSimpleRichText* m_header;
-  QSimpleRichText* m_infoText;
+  TQSimpleRichText* m_header;
+  TQSimpleRichText* m_infoText;
 
-  QSize m_buttonSize;
+  TQSize m_buttonSize;
   int m_cols;
   int m_rows;
 
-  QPtrList<KAction> m_actions;
-  QPtrList<K3bFlatButton> m_buttons;
-  QMap<K3bFlatButton*, KAction*> m_buttonMap;
+  TQPtrList<KAction> m_actions;
+  TQPtrList<K3bFlatButton> m_buttons;
+  TQMap<K3bFlatButton*, KAction*> m_buttonMap;
 
   K3bFlatButton* m_buttonMore;
 
   bool m_infoTextVisible;
 
-  QPixmap m_bgPixmap;
-  QImage m_bgImage;
+  TQPixmap m_bgPixmap;
+  TQImage m_bgImage;
 
   friend class K3bWelcomeWidget;
 };

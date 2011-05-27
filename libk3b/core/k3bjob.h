@@ -17,8 +17,8 @@
 #ifndef K3BJOB_H
 #define K3BJOB_H
 
-#include <qobject.h>
-#include <qptrlist.h>
+#include <tqobject.h>
+#include <tqptrlist.h>
 #include "k3bjobhandler.h"
 #include "k3b_export.h"
 
@@ -30,7 +30,7 @@ namespace K3bDevice {
 
 /**
  * This is the baseclass for all the jobs in K3b which actually do the work like burning a cd!
- * The K3bJob object takes care of registering with the k3bcore or with a parent K3bJob.
+ * The K3bJob object takes care of registering with the k3bcore or with a tqparent K3bJob.
  *
  * Every job has a jobhandler which can be another job (in which case the job is handled as
  * a subjob) or an arbitrary class implementing the K3bJobHandler interface.
@@ -40,9 +40,10 @@ namespace K3bDevice {
  *
  * @author Sebastian Trueg
  */
-class LIBK3B_EXPORT K3bJob : public QObject, public K3bJobHandler
+class LIBK3B_EXPORT K3bJob : public TQObject, public K3bJobHandler
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   virtual ~K3bJob();
@@ -72,8 +73,8 @@ class LIBK3B_EXPORT K3bJob : public QObject, public K3bJobHandler
    */
   virtual bool hasBeenCanceled() const { return m_canceled; }
 
-  virtual QString jobDescription() const { return "K3bJob"; }
-  virtual QString jobDetails() const { return QString::null; }
+  virtual TQString jobDescription() const { return "K3bJob"; }
+  virtual TQString jobDetails() const { return TQString(); }
 
   /**
    * @returns the number of running subjobs.
@@ -81,7 +82,7 @@ class LIBK3B_EXPORT K3bJob : public QObject, public K3bJobHandler
    */
   unsigned int numRunningSubJobs() const;
 
-  const QPtrList<K3bJob>& runningSubJobs() const { return m_runningSubJobs; }
+  const TQPtrList<K3bJob>& runningSubJobs() const { return m_runningSubJobs; }
 
   /**
    * \deprecated
@@ -137,21 +138,21 @@ class LIBK3B_EXPORT K3bJob : public QObject, public K3bJobHandler
   int waitForMedia( K3bDevice::Device*,
 		    int mediaState = K3bDevice::STATE_EMPTY,
 		    int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		    const QString& message = QString::null );
+		    const TQString& message = TQString() );
   
   /**
    * reimplemented from K3bJobHandler
    */
-  bool questionYesNo( const QString& text,
-		      const QString& caption = QString::null,
-		      const QString& yesText = QString::null,
-		      const QString& noText = QString::null );
+  bool questionYesNo( const TQString& text,
+		      const TQString& caption = TQString(),
+		      const TQString& yesText = TQString(),
+		      const TQString& noText = TQString() );
 
   /**
    * reimplemented from K3bJobHandler
    */
-  void blockingInformation( const QString& text,
-			    const QString& caption = QString::null );
+  void blockingInformation( const TQString& text,
+			    const TQString& caption = TQString() );
 
  public slots:
   /**
@@ -176,14 +177,14 @@ class LIBK3B_EXPORT K3bJob : public QObject, public K3bJobHandler
   void setJobHandler( K3bJobHandler* );
 
  signals:
-  void infoMessage( const QString& msg, int type );
+  void infoMessage( const TQString& msg, int type );
   void percent( int p );
   void subPercent( int p );
   void processedSize( int processed, int size );
   void processedSubSize( int processed, int size );
-  void newTask( const QString& job );
-  void newSubTask( const QString& job );
-  void debuggingOutput(const QString&, const QString&);
+  void newTask( const TQString& job );
+  void newSubTask( const TQString& job );
+  void debuggingOutput(const TQString&, const TQString&);
   void data( const char* data, int len );
   void nextTrack( int track, int numTracks );
 
@@ -206,12 +207,12 @@ class LIBK3B_EXPORT K3bJob : public QObject, public K3bJobHandler
    * \param hdl the handler of the job. This allows for some user interaction without
    *            specifying any details (like the GUI).
    *            The job handler can also be another job. In that case this job is a sub job
-   *            and will be part of the parents running sub jobs.
+   *            and will be part of the tqparents running sub jobs.
    *
    * \see runningSubJobs()
    * \see numRunningSubJobs()
    */
-  K3bJob( K3bJobHandler* hdl, QObject* parent = 0, const char* name = 0 );
+  K3bJob( K3bJobHandler* hdl, TQObject* tqparent = 0, const char* name = 0 );
 
   /**
    * Call this in start() to properly register the job and emit the started() signal.
@@ -231,14 +232,14 @@ class LIBK3B_EXPORT K3bJob : public QObject, public K3bJobHandler
 
  private slots:
   void slotCanceled();
-  void slotNewSubTask( const QString& str );
+  void slotNewSubTask( const TQString& str );
 
  private:
   void registerSubJob( K3bJob* );
   void unregisterSubJob( K3bJob* );
 
   K3bJobHandler* m_jobHandler;
-  QPtrList<K3bJob> m_runningSubJobs;
+  TQPtrList<K3bJob> m_runningSubJobs;
 
   bool m_canceled;
   bool m_active;
@@ -256,9 +257,10 @@ class LIBK3B_EXPORT K3bJob : public QObject, public K3bJobHandler
 class LIBK3B_EXPORT K3bBurnJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 	
  public:
-  K3bBurnJob( K3bJobHandler* hdl, QObject* parent = 0, const char* name = 0 );
+  K3bBurnJob( K3bJobHandler* hdl, TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bBurnJob();
 
   /**
@@ -283,7 +285,7 @@ class LIBK3B_EXPORT K3bBurnJob : public K3bJob
   void setWritingApp( int w ) { m_writeMethod = w; }
 
  signals:
-  void bufferStatus( int );
+  void buffertqStatus( int );
 
   void deviceBuffer( int );
 

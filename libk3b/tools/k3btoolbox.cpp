@@ -20,78 +20,79 @@
 #include <ktoolbarbutton.h>
 #include <kiconloader.h>
 
-#include <qtoolbutton.h>
-#include <qsizepolicy.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qtooltip.h>
-#include <qlabel.h>
-#include <qvbox.h>
-#include <qstyle.h>
-#include <qpainter.h>
-#include <qevent.h>
-#include <qobjectlist.h>
+#include <tqtoolbutton.h>
+#include <tqsizepolicy.h>
+#include <tqlayout.h>
+#include <tqwhatsthis.h>
+#include <tqtooltip.h>
+#include <tqlabel.h>
+#include <tqvbox.h>
+#include <tqstyle.h>
+#include <tqpainter.h>
+#include <tqevent.h>
+#include <tqobjectlist.h>
 
 
 /**
  * internal class. Do not use!
  */
-class K3bToolBoxSeparator : public QWidget
+class K3bToolBoxSeparator : public TQWidget
 {
   //  Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bToolBoxSeparator( K3bToolBox* parent );
+  K3bToolBoxSeparator( K3bToolBox* tqparent );
   
-  QSize sizeHint() const;
+  TQSize tqsizeHint() const;
   
  protected:
-  void paintEvent( QPaintEvent * );
+  void paintEvent( TQPaintEvent * );
 };
 
 
-K3bToolBoxSeparator::K3bToolBoxSeparator( K3bToolBox* parent )
-  : QWidget( parent )
+K3bToolBoxSeparator::K3bToolBoxSeparator( K3bToolBox* tqparent )
+  : TQWidget( tqparent )
 {
-  setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );
+  tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum ) );
 }
 
 
-QSize K3bToolBoxSeparator::sizeHint() const
+TQSize K3bToolBoxSeparator::tqsizeHint() const
 {
-  int extent = style().pixelMetric( QStyle::PM_DockWindowSeparatorExtent,
+  int extent = tqstyle().tqpixelMetric( TQStyle::PM_DockWindowSeparatorExtent,
 				    this );
-  return QSize( extent, 0 );
+  return TQSize( extent, 0 );
 }
 
 
-void K3bToolBoxSeparator::paintEvent( QPaintEvent* )
+void K3bToolBoxSeparator::paintEvent( TQPaintEvent* )
 {
-  QPainter p( this );
-  QStyle::SFlags flags = QStyle::Style_Default|QStyle::Style_Horizontal;
+  TQPainter p( this );
+  TQStyle::SFlags flags = TQStyle::Style_Default|TQStyle::Style_Horizontal;
 
-  style().drawPrimitive( QStyle::PE_DockWindowSeparator, &p, rect(),
-			 colorGroup(), flags );
+  tqstyle().tqdrawPrimitive( TQStyle::PE_DockWindowSeparator, &p, rect(),
+			 tqcolorGroup(), flags );
 }
 
 
 
-K3bToolBoxButton::K3bToolBoxButton( KAction* action, QWidget* parent )
-  : QToolButton( parent ),
+K3bToolBoxButton::K3bToolBoxButton( KAction* action, TQWidget* tqparent )
+  : TQToolButton( tqparent ),
     m_popupMenu(0)
 {
-  setSizePolicy( QSizePolicy(QSizePolicy::Fixed, sizePolicy().verData()) );
+  tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, tqsizePolicy().verData()) );
   setAutoRaise( true );
 
   setIconSet( action->iconSet() );
   setTextLabel( action->text() );
   setEnabled( action->isEnabled() );
 
-  QWhatsThis::add( this, action->whatsThis() );
+  TQWhatsThis::add( this, action->whatsThis() );
   if( action->toolTip().isEmpty() )
-    QToolTip::add( this, action->text() );
+    TQToolTip::add( this, action->text() );
   else
-    QToolTip::add( this, action->toolTip() );
+    TQToolTip::add( this, action->toolTip() );
 
 //   if( KToggleAction* ta = dynamic_cast<KToggleAction*>( action ) ) {
 //     setToggleButton( true );
@@ -100,33 +101,33 @@ K3bToolBoxButton::K3bToolBoxButton( KAction* action, QWidget* parent )
 //     if( ta->isChecked() )
 //       toggle();
     
-//     connect( ta, SIGNAL(toggled(bool)), this, SLOT(toggle()) );
-//     connect( this, SIGNAL(toggled(bool)), ta, SLOT(setChecked(bool)) );
+//     connect( ta, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(toggle()) );
+//     connect( this, TQT_SIGNAL(toggled(bool)), ta, TQT_SLOT(setChecked(bool)) );
 //   }
 
 //  else
   if( KActionMenu* am = dynamic_cast<KActionMenu*>( action ) ) {
     m_popupMenu = am->popupMenu();
-    connect( this, SIGNAL(pressed()), this, SLOT(slotPopupActivated()) );
+    connect( this, TQT_SIGNAL(pressed()), this, TQT_SLOT(slotPopupActivated()) );
     setPopup( m_popupMenu );
   }
 
   else {
-    connect( this, SIGNAL(clicked()), action, SLOT(activate()) );
+    connect( this, TQT_SIGNAL(clicked()), action, TQT_SLOT(activate()) );
   }
 
-  connect( action, SIGNAL(enabled(bool)), this, SLOT(setEnabled(bool)) );
+  connect( action, TQT_SIGNAL(enabled(bool)), this, TQT_SLOT(setEnabled(bool)) );
 }
 
 
-K3bToolBoxButton::K3bToolBoxButton( const QString& text, const QString& icon, 
-				    const QString& tooltip, const QString& whatsthis,
-				    QObject* receiver, const char* slot,
-				    QWidget* parent )
-  : QToolButton( parent ),
+K3bToolBoxButton::K3bToolBoxButton( const TQString& text, const TQString& icon, 
+				    const TQString& tooltip, const TQString& whatsthis,
+				    TQObject* receiver, const char* slot,
+				    TQWidget* tqparent )
+  : TQToolButton( tqparent ),
     m_popupMenu(0)
 {
-  setSizePolicy( QSizePolicy(QSizePolicy::Fixed, sizePolicy().verData()) );
+  tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, tqsizePolicy().verData()) );
   setAutoRaise( true );
 
   setTextLabel( text );
@@ -136,11 +137,11 @@ K3bToolBoxButton::K3bToolBoxButton( const QString& text, const QString& icon,
   else
     setIconSet( SmallIconSet( icon ) );
 
-  QWhatsThis::add( this, whatsthis );
-  QToolTip::add( this, tooltip );
+  TQWhatsThis::add( this, whatsthis );
+  TQToolTip::add( this, tooltip );
 
   if( receiver && slot )
-    connect( this, SIGNAL(clicked()), receiver, slot );
+    connect( this, TQT_SIGNAL(clicked()), receiver, slot );
 }
 
 
@@ -151,9 +152,9 @@ void K3bToolBoxButton::slotPopupActivated()
 }
 
 
-void K3bToolBoxButton::resizeEvent( QResizeEvent* e )
+void K3bToolBoxButton::resizeEvent( TQResizeEvent* e )
 {
-  QToolButton::resizeEvent( e );
+  TQToolButton::resizeEvent( e );
 
   // force icon-only buttons to be square
   if( e->oldSize().height() != e->size().height() &&
@@ -167,12 +168,12 @@ void K3bToolBoxButton::resizeEvent( QResizeEvent* e )
 
 
 
-K3bToolBox::K3bToolBox( QWidget* parent, const char* name )
-  : QFrame( parent, name )
+K3bToolBox::K3bToolBox( TQWidget* tqparent, const char* name )
+  : TQFrame( tqparent, name )
 {
-  setSizePolicy( QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed) );
+  tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed) );
 
-  m_mainLayout = new QGridLayout( this );
+  m_mainLayout = new TQGridLayout( this );
   m_mainLayout->setMargin( 1 );
   m_mainLayout->setSpacing( 0 );
 }
@@ -190,7 +191,7 @@ K3bToolBoxButton* K3bToolBox::addButton( KAction* action, bool forceText )
     K3bToolBoxButton* b = new K3bToolBoxButton( action, this );
     if( forceText ) {
       b->setUsesTextLabel( true );
-      b->setTextPosition( QToolButton::BesideIcon );
+      b->setTextPosition( TQToolButton::BesideIcon );
     }
     addWidget( b );
     return b;
@@ -200,15 +201,15 @@ K3bToolBoxButton* K3bToolBox::addButton( KAction* action, bool forceText )
 }
 
 
-K3bToolBoxButton* K3bToolBox::addButton( const QString& text, const QString& icon, 
-					 const QString& tooltip, const QString& whatsthis,
-					 QObject* receiver, const char* slot,
+K3bToolBoxButton* K3bToolBox::addButton( const TQString& text, const TQString& icon, 
+					 const TQString& tooltip, const TQString& whatsthis,
+					 TQObject* receiver, const char* slot,
 					 bool forceText )
 {
   K3bToolBoxButton* b = new K3bToolBoxButton( text, icon, tooltip, whatsthis, receiver, slot, this );
   if( forceText ) {
     b->setUsesTextLabel( true );
-    b->setTextPosition( QToolButton::BesideIcon );
+    b->setTextPosition( TQToolButton::BesideIcon );
   }
   addWidget( b );
   return b;
@@ -234,29 +235,29 @@ void K3bToolBox::addSeparator()
 void K3bToolBox::addStretch()
 {
   // add an empty widget
-  addWidget( new QWidget( this ) );
+  addWidget( new TQWidget( this ) );
   m_mainLayout->setColStretch( m_mainLayout->numCols(), 1 );
 }
 
 
-void K3bToolBox::addLabel( const QString& text )
+void K3bToolBox::addLabel( const TQString& text )
 {
-  QLabel* label = new QLabel( text, this );
-  label->setSizePolicy( QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed) );
+  TQLabel* label = new TQLabel( text, this );
+  label->tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
 
   addWidget( label );
 }
 
 
-void K3bToolBox::addWidget( QWidget* w )
+void K3bToolBox::addWidget( TQWidget* w )
 {
-  w->reparent( this, QPoint() );
+  w->reparent( this, TQPoint() );
 
   m_mainLayout->setColStretch( m_mainLayout->numCols()-1, 0 );
 
   m_mainLayout->addWidget( w, 0, m_mainLayout->numCols()-1 );
 
-  if( w->sizePolicy().horData() == QSizePolicy::Fixed || w->sizePolicy().horData() == QSizePolicy::Maximum )
+  if( w->tqsizePolicy().horData() == TQSizePolicy::Fixed || w->tqsizePolicy().horData() == TQSizePolicy::Maximum )
     m_mainLayout->setColStretch( m_mainLayout->numCols(), 1 );
   else {
     m_mainLayout->setColStretch( m_mainLayout->numCols()-1, 1 );
@@ -282,10 +283,10 @@ void K3bToolBox::clear()
 {
   // we do not want to delete the widgets from the widgetactions becasue they
   // might be used afterwards
-  for( QPtrListIterator<QWidget> it( m_doNotDeleteWidgets ); it.current(); ++it )
-    it.current()->reparent( 0L, QPoint() );
+  for( TQPtrListIterator<TQWidget> it( m_doNotDeleteWidgets ); it.current(); ++it )
+    it.current()->reparent( 0L, TQPoint() );
 
-  for( QObjectListIterator it2( *children() ); it2.current(); ++it2 )
+  for( TQObjectListIterator it2( childrenListObject() ); it2.current(); ++it2 )
     if( it2.current()->isWidgetType() )
       delete it2.current();
 }

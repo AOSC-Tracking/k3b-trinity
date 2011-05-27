@@ -34,19 +34,20 @@ class KPopupMenu;
 class K3bAudioTrackSplitDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioTrackSplitDialog( K3bAudioTrack*, QWidget* parent = 0, const char* name = 0 );
+  K3bAudioTrackSplitDialog( K3bAudioTrack*, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bAudioTrackSplitDialog();
 
-  bool eventFilter( QObject* o, QEvent* e );
+  bool eventFilter( TQObject* o, TQEvent* e );
 
   KActionCollection* actionCollection() const { return m_actionCollection; }
 
   /**
    * if this method returns true val is filled with the user selected value.
    */
-  static void splitTrack( K3bAudioTrack* track, QWidget* parent = 0, const char* name = 0 );
+  static void splitTrack( K3bAudioTrack* track, TQWidget* tqparent = 0, const char* name = 0 );
 
  private slots:
   void slotRangeModified( int, const K3b::Msf& start, const K3b::Msf& );
@@ -54,7 +55,7 @@ class K3bAudioTrackSplitDialog : public KDialogBase
   void slotRangeSelectionChanged( int );
   void slotSplitHere();
   void slotRemoveRange();
-  void splitAt( const QPoint& p );
+  void splitAt( const TQPoint& p );
 
  private:
   void setupActions();
@@ -65,7 +66,7 @@ class K3bAudioTrackSplitDialog : public KDialogBase
   K3bAudioTrack* m_track;
   KActionCollection* m_actionCollection;
   KPopupMenu* m_popupMenu;
-  QPoint m_lastClickPosition;
+  TQPoint m_lastClickPosition;
 };
 
 #endif

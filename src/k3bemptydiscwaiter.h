@@ -38,6 +38,7 @@ namespace K3bDevice {
 class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public: 
   ~K3bEmptyDiscWaiter();
@@ -61,21 +62,21 @@ class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
   int waitForMedia( K3bDevice::Device*,
 		    int mediaState = K3bDevice::STATE_EMPTY,
 		    int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		    const QString& message = QString::null );
+		    const TQString& message = TQString() );
   
   /**
    * @reimplemented from K3bJobHandler
    */
-  bool questionYesNo( const QString& text,
-		      const QString& caption = QString::null,
-		      const QString& yesText = QString::null,
-		      const QString& noText = QString::null );
+  bool questionYesNo( const TQString& text,
+		      const TQString& caption = TQString(),
+		      const TQString& yesText = TQString(),
+		      const TQString& noText = TQString() );
 
   /**
    * reimplemented from K3bJobHandler
    */
-  void blockingInformation( const QString& text,
-			    const QString& caption = QString::null );
+  void blockingInformation( const TQString& text,
+			    const TQString& caption = TQString() );
 
   /**
    * This only openes a dialog if the first check failed.
@@ -83,7 +84,7 @@ class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
   static int wait( K3bDevice::Device* device, 
 		   bool appendable = false, 
 		   int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		   QWidget* parent = 0 );
+		   TQWidget* tqparent = 0 );
 
   /**
    * Starts the emptydiskwaiter.
@@ -95,8 +96,8 @@ class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
   static int wait( K3bDevice::Device*,
 		   int mediaState,
 		   int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		   const QString& message = QString::null,
-		   QWidget* parent = 0 );
+		   const TQString& message = TQString(),
+		   TQWidget* tqparent = 0 );
 
  protected slots:
   void slotCancel();
@@ -113,23 +114,23 @@ class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
   /**
    * Use the static wait methods.
    */
-  explicit K3bEmptyDiscWaiter( K3bDevice::Device* device, QWidget* parent = 0, const char* name = 0 );
+  explicit K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* tqparent = 0, const char* name = 0 );
 
   int waitForDisc( int mediaState = K3bDevice::STATE_EMPTY,
 		   int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		   const QString& message = QString::null );
+		   const TQString& message = TQString() );
 
 
   /**
    * Nobody closes this dialog but itself!
    */
-  void closeEvent( QCloseEvent* ) {}
+  void closeEvent( TQCloseEvent* ) {}
 
  private:
   void finishWaiting( int );
   void prepareErasingDialog();
 
-  QWidget* parentWidgetToUse();
+  TQWidget* tqparentWidgetToUse();
 
   class Private;
   Private* d;

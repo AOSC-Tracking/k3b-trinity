@@ -20,15 +20,15 @@
 
 #include <kdebug.h>
 
-#include <qapplication.h>
+#include <tqapplication.h>
 
 
-static QPtrList<K3bThread> s_threads;
+static TQPtrList<K3bThread> s_threads;
 
 
 void K3bThread::waitUntilFinished()
 {
-  QPtrListIterator<K3bThread> it( s_threads );
+  TQPtrListIterator<K3bThread> it( s_threads );
   while( it.current() ) {
     kdDebug() << "Waiting for thread " << it.current() << endl;
     it.current()->wait();
@@ -46,12 +46,12 @@ public:
     : eventHandler( 0 ) {
   }
 
-  QObject* eventHandler;
+  TQObject* eventHandler;
 };
 
 
-K3bThread::K3bThread( QObject* eventHandler )
-  : QThread()
+K3bThread::K3bThread( TQObject* eventHandler )
+  : TQThread()
 {
   d = new Private;
   d->eventHandler = eventHandler;
@@ -60,8 +60,8 @@ K3bThread::K3bThread( QObject* eventHandler )
 }
 
 
-K3bThread::K3bThread( unsigned int stackSize, QObject* eventHandler )
-  : QThread( stackSize )
+K3bThread::K3bThread( unsigned int stackSize, TQObject* eventHandler )
+  : TQThread( stackSize )
 {
   d = new Private;
   d->eventHandler = eventHandler;
@@ -77,20 +77,20 @@ K3bThread::~K3bThread()
 }
 
 
-void K3bThread::setProgressInfoEventHandler( QObject* eventHandler )
+void K3bThread::setProgressInfoEventHandler( TQObject* eventHandler )
 { 
   d->eventHandler = eventHandler; 
 }
 
-QString K3bThread::jobDescription() const
+TQString K3bThread::jobDescription() const
 {
-  return QString::null;
+  return TQString();
 }
 
 
-QString K3bThread::jobDetails() const
+TQString K3bThread::jobDetails() const
 {
-  return QString::null;
+  return TQString();
 }
 
 
@@ -112,11 +112,11 @@ void K3bThread::cancel()
 }
 
 
-void K3bThread::emitInfoMessage( const QString& msg, int type )
+void K3bThread::emitInfoMessage( const TQString& msg, int type )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler,
-			     new K3bProgressInfoEvent( K3bProgressInfoEvent::InfoMessage, msg, QString::null, type ) );
+    TQApplication::postEvent( d->eventHandler,
+			     new K3bProgressInfoEvent( K3bProgressInfoEvent::InfoMessage, msg, TQString(), type ) );
   else
     kdWarning() << "(K3bThread) call to emitInfoMessage() without eventHandler." << endl;
 }
@@ -124,7 +124,7 @@ void K3bThread::emitInfoMessage( const QString& msg, int type )
 void K3bThread::emitPercent( int p )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler,
+    TQApplication::postEvent( d->eventHandler,
 			     new K3bProgressInfoEvent( K3bProgressInfoEvent::Progress, p ) );
   else
     kdWarning() << "(K3bThread) call to emitPercent() without eventHandler." << endl;
@@ -133,7 +133,7 @@ void K3bThread::emitPercent( int p )
 void K3bThread::emitSubPercent( int p )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler,
+    TQApplication::postEvent( d->eventHandler,
 			     new K3bProgressInfoEvent( K3bProgressInfoEvent::SubProgress, p ) );
   else
     kdWarning() << "(K3bThread) call to emitSubPercent() without eventHandler." << endl;
@@ -142,7 +142,7 @@ void K3bThread::emitSubPercent( int p )
 void K3bThread::emitStarted()
 {
   if( d->eventHandler )
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::Started ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::Started ) );
   else
     kdWarning() << "(K3bThread) call to emitStarted() without eventHandler." << endl;
 }
@@ -150,7 +150,7 @@ void K3bThread::emitStarted()
 void K3bThread::emitCanceled()
 {
   if( d->eventHandler )
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::Canceled ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::Canceled ) );
   else
     kdWarning() << "(K3bThread) call to emitCanceled() without eventHandler." << endl;
 }
@@ -158,7 +158,7 @@ void K3bThread::emitCanceled()
 void K3bThread::emitFinished( bool success )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::Finished, success ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::Finished, success ) );
   else
     kdWarning() << "(K3bThread) call to emitFinished() without eventHandler." << endl;
 }
@@ -166,7 +166,7 @@ void K3bThread::emitFinished( bool success )
 void K3bThread::emitProcessedSize( int p, int size )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::ProcessedSize, p, size ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::ProcessedSize, p, size ) );
   else
     kdWarning() << "(K3bThread) call to emitProcessedSize() without eventHandler." << endl;
 }
@@ -174,31 +174,31 @@ void K3bThread::emitProcessedSize( int p, int size )
 void K3bThread::emitProcessedSubSize( int p, int size )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::ProcessedSubSize, p, size ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::ProcessedSubSize, p, size ) );
   else
     kdWarning() << "(K3bThread) call to emitProcessedSubSize() without eventHandler." << endl;
 }
 
-void K3bThread::emitNewTask( const QString& job )
+void K3bThread::emitNewTask( const TQString& job )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::NewTask, job ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::NewTask, job ) );
   else
     kdWarning() << "(K3bThread) call to emitNewTask() without eventHandler." << endl;
 }
 
-void K3bThread::emitNewSubTask( const QString& job )
+void K3bThread::emitNewSubTask( const TQString& job )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::NewSubTask, job ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::NewSubTask, job ) );
   else
     kdWarning() << "(K3bThread) call to emitNewSubTask() without eventHandler." << endl;
 }
 
-void K3bThread::emitDebuggingOutput(const QString& group, const QString& text)
+void K3bThread::emitDebuggingOutput(const TQString& group, const TQString& text)
 {
   if( d->eventHandler )
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::DebuggingOutput, group, text ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::DebuggingOutput, group, text ) );
   else
     kdWarning() << "(K3bThread) call to emitDebuggingOutput() without eventHandler." << endl;
 }
@@ -206,7 +206,7 @@ void K3bThread::emitDebuggingOutput(const QString& group, const QString& text)
 void K3bThread::emitData( const char* data, int len )
 {
   if( d->eventHandler )
-    QApplication::postEvent( d->eventHandler, new K3bDataEvent( data, len ) );
+    TQApplication::postEvent( d->eventHandler, new K3bDataEvent( data, len ) );
   else
     kdWarning() << "(K3bThread) call to emitData() without eventHandler." << endl;
 }
@@ -214,7 +214,7 @@ void K3bThread::emitData( const char* data, int len )
 void K3bThread::emitNextTrack( int t, int n )
 {
   if( d->eventHandler ) 
-    QApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::NextTrack, t, n ) );
+    TQApplication::postEvent( d->eventHandler, new K3bProgressInfoEvent( K3bProgressInfoEvent::NextTrack, t, n ) );
   else
     kdWarning() << "(K3bThread) call to emitNextTrack() without eventHandler." << endl;
 }

@@ -14,7 +14,7 @@
  */
 
 #include "k3bmsf.h"
-#include <qregexp.h>
+#include <tqregexp.h>
 
 #include <math.h>
 
@@ -156,9 +156,9 @@ K3b::Msf& K3b::Msf::operator--()
 }
 
 
-QString K3b::Msf::toString( bool showFrames ) const
+TQString K3b::Msf::toString( bool showFrames ) const
 {
-  QString str;
+  TQString str;
 
   if( showFrames )
     str.sprintf( "%.2i:%.2i:%.2i", m_minutes, m_seconds, m_frames );
@@ -219,7 +219,7 @@ void K3b::Msf::makeValid()
 
 
 
-QRegExp K3b::Msf::regExp()
+TQRegExp K3b::Msf::regExp()
 {
   //
   // An MSF can have the following formats:
@@ -228,7 +228,7 @@ QRegExp K3b::Msf::regExp()
   // 100:23:72  (minutes:seconds:frames)
   // 100:23.72  (minutes:seconds.frames)
   //
-  static QRegExp rx( "(\\d+)(?::([0-5]?\\d)(?:[:\\.]((?:[0-6]?\\d)|(?:7[0-4])))?)?" );
+  static TQRegExp rx( "(\\d+)(?::([0-5]?\\d)(?:[:\\.]((?:[0-6]?\\d)|(?:7[0-4])))?)?" );
   return rx;
 }
 
@@ -239,9 +239,9 @@ K3b::Msf K3b::Msf::fromSeconds( double ms )
 }
 
 
-K3b::Msf K3b::Msf::fromString( const QString& s, bool* ok )
+K3b::Msf K3b::Msf::fromString( const TQString& s, bool* ok )
 {
-  QRegExp rx = regExp();
+  TQRegExp rx = regExp();
 
   K3b::Msf msf;
 

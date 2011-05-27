@@ -23,9 +23,9 @@
 #include "k3bmsf.h"
 #include "k3bcdtext.h"
 #include "k3b_export.h"
-#include <qcstring.h>
+#include <tqcstring.h>
 
-class QCustomEvent;
+class TQCustomEvent;
 
 
 namespace K3bDevice
@@ -47,10 +47,11 @@ namespace K3bDevice
   class LIBK3B_EXPORT DeviceHandler : public K3bThreadJob
     {
       Q_OBJECT
+  TQ_OBJECT
 
      public:
-      DeviceHandler( Device*, QObject* parent = 0, const char* name = 0 );
-      DeviceHandler( QObject* parent = 0, const char* name = 0 );
+      DeviceHandler( Device*, TQObject* tqparent = 0, const char* name = 0 );
+      DeviceHandler( TQObject* tqparent = 0, const char* name = 0 );
 
       /**
        * This constructor is used by the global "quick" methods and should not be used
@@ -63,7 +64,7 @@ namespace K3bDevice
       const DiskInfo& diskInfo() const;
       const Toc& toc() const;
       const CdText& cdText() const;
-      const QByteArray& cdTextRaw() const;
+      const TQByteArray& cdTextRaw() const;
       K3b::Msf diskSize() const;
       K3b::Msf remainingSize() const;
       int tocType() const;
@@ -164,7 +165,7 @@ namespace K3bDevice
       /**
        * reimplemented from K3bThreadJob for internal reasons
        */
-      virtual void customEvent( QCustomEvent* );
+      virtual void customEvent( TQCustomEvent* );
 
      private:
       class DeviceHandlerThread;
@@ -177,8 +178,8 @@ namespace K3bDevice
    * Usage: 
    * \code 
    *  connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::MOUNT, dev ), 
-   *           SIGNAL(finished(DeviceHandler*)),
-   *           this, SLOT(someSlot(DeviceHandler*)) );
+   *           TQT_SIGNAL(finished(DeviceHandler*)),
+   *           this, TQT_SLOT(someSlot(DeviceHandler*)) );
    *
    *  void someSlot( DeviceHandler* dh ) {
    *     if( dh->success() ) {

@@ -23,10 +23,10 @@
 
 #include "libisofs/isofs.h"
 
-#include <qcstring.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qptrlist.h>
+#include <tqcstring.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqptrlist.h>
 
 #include <kdebug.h>
 
@@ -43,7 +43,7 @@ int K3bIso9660::read_callback( char* buf, sector_t start, int len, void* udata )
 int K3bIso9660::isofs_callback( struct iso_directory_record *idr, void *udata )
 {
   K3bIso9660 *iso = static_cast<K3bIso9660*> (udata);
-  QString path, isoPath,user,group,symlink;
+  TQString path, isoPath,user,group,symlink;
   int i;
   int access;
   int time,cdate,adate;
@@ -84,7 +84,7 @@ int K3bIso9660::isofs_callback( struct iso_directory_record *idr, void *udata )
   if( !iso->plainIso9660() && ParseRR(idr,&rr) > 0 ) {
     iso->m_rr = true;
     if (!special)
-      path = QString::fromLocal8Bit( rr.name );
+      path = TQString::fromLocal8Bit( rr.name );
     symlink=rr.sl;
     access=rr.mode;
     time=0;//rr.st_mtime;
@@ -105,7 +105,7 @@ int K3bIso9660::isofs_callback( struct iso_directory_record *idr, void *udata )
     if (!special) {
       if( !iso->plainIso9660() && iso->jolietLevel() ) {
 	for (i=0;i<(isonum_711(idr->name_len)-1);i+=2) {
-	  QChar ch( be2me_16(*((ushort*)&(idr->name[i]))) );
+	  TQChar ch( be2me_16(*((ushort*)&(idr->name[i]))) );
 	  if (ch==';') break;
 	  path+=ch;
 	}
@@ -115,7 +115,7 @@ int K3bIso9660::isofs_callback( struct iso_directory_record *idr, void *udata )
 	path = isoPath;
 
 	// remove the version field
-	int pos = path.find( ';' );
+	int pos = path.tqfind( ';' );
 	if( pos > 0 )
 	  path.truncate( pos );
       }
@@ -146,15 +146,15 @@ int K3bIso9660::isofs_callback( struct iso_directory_record *idr, void *udata )
 
 
 K3bIso9660Entry::K3bIso9660Entry( K3bIso9660* archive,
-				  const QString& isoName,
-				  const QString& name,
+				  const TQString& isoName,
+				  const TQString& name,
 				  int access,
 				  int date,
 				  int adate,
 				  int cdate,
-				  const QString& user,
-				  const QString& group,
-				  const QString& symlink )
+				  const TQString& user,
+				  const TQString& group,
+				  const TQString& symlink )
   : m_adate( adate ),
     m_cdate( cdate ),
     m_name( name ),
@@ -179,15 +179,15 @@ K3bIso9660Entry::~K3bIso9660Entry()
 
 
 K3bIso9660File::K3bIso9660File( K3bIso9660* archive,
-				const QString& isoName,
-				const QString& name,
+				const TQString& isoName,
+				const TQString& name,
 				int access,
 				int date,
 				int adate,
 				int cdate,
-				const QString& user,
-				const QString& group,
-				const QString& symlink,
+				const TQString& user,
+				const TQString& group,
+				const TQString& symlink,
 				unsigned int pos,
 				unsigned int size )
   : K3bIso9660Entry( archive, isoName, name, access, date, adate, cdate, user, group, symlink ),
@@ -265,9 +265,9 @@ int K3bIso9660File::read( unsigned int pos, char* data, int maxlen ) const
 }
 
 
-bool K3bIso9660File::copyTo( const QString& url ) const
+bool K3bIso9660File::copyTo( const TQString& url ) const
 {
-  QFile of( url );
+  TQFile of( url );
   if( of.open( IO_WriteOnly ) ) {
     char buffer[2048*10];
     unsigned int pos = 0;
@@ -287,15 +287,15 @@ bool K3bIso9660File::copyTo( const QString& url ) const
 
 
 K3bIso9660Directory::K3bIso9660Directory( K3bIso9660* archive,
-					  const QString& isoName,
-					  const QString& name,
+					  const TQString& isoName,
+					  const TQString& name,
 					  int access,
 					  int date,
 					  int adate,
 					  int cdate,
-					  const QString& user,
-					  const QString& group,
-					  const QString& symlink,
+					  const TQString& user,
+					  const TQString& group,
+					  const TQString& symlink,
 					  unsigned int pos,
 					  unsigned int size  )
   : K3bIso9660Entry( archive, isoName, name, access, date, adate, cdate, user, group, symlink ),
@@ -323,14 +323,14 @@ void K3bIso9660Directory::expand()
 }
 
 
-QStringList K3bIso9660Directory::entries() const
+TQStringList K3bIso9660Directory::entries() const
 {
   // create a fake const method to fool the user ;)
   const_cast<K3bIso9660Directory*>(this)->expand();
 
-  QStringList l;
+  TQStringList l;
 
-  QDictIterator<K3bIso9660Entry> it( m_entries );
+  TQDictIterator<K3bIso9660Entry> it( m_entries );
   for( ; it.current(); ++it )
     l.append( it.currentKey() );
 
@@ -338,14 +338,14 @@ QStringList K3bIso9660Directory::entries() const
 }
 
 
-QStringList K3bIso9660Directory::iso9660Entries() const
+TQStringList K3bIso9660Directory::iso9660Entries() const
 {
   // create a fake const method to fool the user ;)
   const_cast<K3bIso9660Directory*>(this)->expand();
 
-  QStringList l;
+  TQStringList l;
 
-  QDictIterator<K3bIso9660Entry> it( m_iso9660Entries );
+  TQDictIterator<K3bIso9660Entry> it( m_iso9660Entries );
   for( ; it.current(); ++it )
     l.append( it.currentKey() );
 
@@ -353,33 +353,33 @@ QStringList K3bIso9660Directory::iso9660Entries() const
 }
 
 
-K3bIso9660Entry* K3bIso9660Directory::entry( const QString& n )
+K3bIso9660Entry* K3bIso9660Directory::entry( const TQString& n )
 {
   if( n.isEmpty() )
     return 0;
 
   expand();
 
-  QString name(n);
+  TQString name(n);
 
   // trailing slash ? -> remove
   if( name.length() > 1 && name[name.length()-1] == '/' ) {
     name.truncate( name.length()-1 );
   }
 
-  int pos = name.find( '/' );
+  int pos = name.tqfind( '/' );
   while( pos == 0 ) {
     if( name.length() > 1 ) {
       name = name.mid( 1 ); // remove leading slash
-      pos = name.find( '/' ); // look again
+      pos = name.tqfind( '/' ); // look again
     }
     else // "/"
       return this;
   }
 
   if ( pos != -1 ) {
-    QString left = name.left( pos );
-    QString right = name.mid( pos + 1 );
+    TQString left = name.left( pos );
+    TQString right = name.mid( pos + 1 );
 
     K3bIso9660Entry* e = m_entries[ left ];
     if ( !e || !e->isDirectory() )
@@ -391,33 +391,33 @@ K3bIso9660Entry* K3bIso9660Directory::entry( const QString& n )
 }
 
 
-K3bIso9660Entry* K3bIso9660Directory::iso9660Entry( const QString& n )
+K3bIso9660Entry* K3bIso9660Directory::iso9660Entry( const TQString& n )
 {
   if( n.isEmpty() )
     return 0;
 
   expand();
 
-  QString name(n);
+  TQString name(n);
 
   // trailing slash ? -> remove
   if( name.length() > 1 && name[name.length()-1] == '/' ) {
     name.truncate( name.length()-1 );
   }
 
-  int pos = name.find( '/' );
+  int pos = name.tqfind( '/' );
   while( pos == 0 ) {
     if( name.length() > 1 ) {
       name = name.mid( 1 ); // remove leading slash
-      pos = name.find( '/' ); // look again
+      pos = name.tqfind( '/' ); // look again
     }
     else // "/"
       return this;
   }
 
   if ( pos != -1 ) {
-    QString left = name.left( pos );
-    QString right = name.mid( pos + 1 );
+    TQString left = name.left( pos );
+    TQString right = name.mid( pos + 1 );
 
     K3bIso9660Entry* e = m_iso9660Entries[ left ];
     if ( !e || !e->isDirectory() )
@@ -429,13 +429,13 @@ K3bIso9660Entry* K3bIso9660Directory::iso9660Entry( const QString& n )
 }
 
 
-const K3bIso9660Entry* K3bIso9660Directory::entry( const QString& name ) const
+const K3bIso9660Entry* K3bIso9660Directory::entry( const TQString& name ) const
 {
   return const_cast<K3bIso9660Directory*>(this)->entry( name );
 }
 
 
-const K3bIso9660Entry* K3bIso9660Directory::iso9660Entry( const QString& name ) const
+const K3bIso9660Entry* K3bIso9660Directory::iso9660Entry( const TQString& name ) const
 {
   return const_cast<K3bIso9660Directory*>(this)->iso9660Entry( name );
 }
@@ -463,10 +463,10 @@ public:
       backend(0) {
   }
 
-  QPtrList<K3bIso9660Directory> elToritoDirs;
-  QPtrList<K3bIso9660Directory> jolietDirs;
-  QPtrList<K3bIso9660Directory> isoDirs;
-  QPtrList<K3bIso9660Directory> rrDirs; // RockRidge
+  TQPtrList<K3bIso9660Directory> elToritoDirs;
+  TQPtrList<K3bIso9660Directory> jolietDirs;
+  TQPtrList<K3bIso9660Directory> isoDirs;
+  TQPtrList<K3bIso9660Directory> rrDirs; // RockRidge
 
   K3bIso9660SimplePrimaryDescriptor primaryDesc;
 
@@ -484,7 +484,7 @@ public:
 };
 
 
-K3bIso9660::K3bIso9660( const QString& filename )
+K3bIso9660::K3bIso9660( const TQString& filename )
   :  m_filename( filename )
 {
   d = new Private();
@@ -553,12 +553,12 @@ void K3bIso9660::addBoot(struct el_torito_boot_descriptor* bootdesc)
   int i,size;
   boot_head boot;
   boot_entry *be;
-  QString path;
+  TQString path;
   K3bIso9660File *entry;
 
   entry=new K3bIso9660File( this, "Catalog", "Catalog", dirent->permissions() & ~S_IFDIR,
 			    dirent->date(), dirent->adate(), dirent->cdate(),
-			    dirent->user(), dirent->group(), QString::null,
+			    dirent->user(), dirent->group(), TQString(),
 			    isonum_731(bootdesc->boot_catalog), 2048 );
   dirent->addEntry(entry);
   if (!ReadBootTable(&K3bIso9660::read_callback,isonum_731(bootdesc->boot_catalog),&boot,this)) {
@@ -571,10 +571,10 @@ void K3bIso9660::addBoot(struct el_torito_boot_descriptor* bootdesc)
 			 isonum_721(((struct default_entry*) be->data)->seccount),
 			 this);
       path="Default Image";
-      if (i>1) path += " (" + QString::number(i) + ")";
+      if (i>1) path += " (" + TQString::number(i) + ")";
       entry=new K3bIso9660File( this, path, path, dirent->permissions() & ~S_IFDIR,
 				dirent->date(), dirent->adate(), dirent->cdate(),
-				dirent->user(), dirent->group(), QString::null,
+				dirent->user(), dirent->group(), TQString(),
 				isonum_731(((struct default_entry*) be->data)->start), size<<9 );
       dirent->addEntry(entry);
       be=be->next;
@@ -624,7 +624,7 @@ bool K3bIso9660::open()
     return false;
 
   iso_vol_desc *desc;
-  QString path,tmp,uid,gid;
+  TQString path,tmp,uid,gid;
   k3b_struct_stat buf;
   int access,c_i,c_j;
   struct el_torito_boot_descriptor* bootdesc;
@@ -633,7 +633,7 @@ bool K3bIso9660::open()
   /* We'll use the permission and user/group of the 'host' file except
    * in Rock Ridge, where the permissions are stored on the file system
    */
-  if ( k3b_stat( QFile::encodeName(m_filename), &buf ) < 0 ) {
+  if ( k3b_stat( TQFile::encodeName(m_filename), &buf ) < 0 ) {
     /* defaults, if stat fails */
     memset(&buf,0,sizeof(k3b_struct_stat));
     buf.st_mode=0777;
@@ -665,10 +665,10 @@ bool K3bIso9660::open()
       if( !memcmp( EL_TORITO_ID, bootdesc->system_id, ISODCL(8,39) ) ) {
 	path="El Torito Boot";
 	if( c_b > 1 )
-	  path += " (" + QString::number(c_b) + ")";
+	  path += " (" + TQString::number(c_b) + ")";
 
 	dirent = new K3bIso9660Directory( this, path, path, access | S_IFDIR,
-					  buf.st_mtime, buf.st_atime, buf.st_ctime, uid, gid, QString::null );
+					  buf.st_mtime, buf.st_atime, buf.st_ctime, uid, gid, TQString() );
 	d->elToritoDirs.append( dirent );
 
 	addBoot(bootdesc);
@@ -691,18 +691,18 @@ bool K3bIso9660::open()
 	  break;
 
 	if (m_joliet) {
-	  path = "Joliet level " + QString::number(m_joliet);
+	  path = "Joliet level " + TQString::number(m_joliet);
 	  if( c_j > 1 )
-	    path += " (" + QString::number(c_j) + ")";
+	    path += " (" + TQString::number(c_j) + ")";
 	}
 	else {
-	  path = QString::fromLocal8Bit( primaryDesc->volume_id, 32 );
+	  path = TQString::fromLocal8Bit( primaryDesc->volume_id, 32 );
 	  if( c_i > 1 )
-	    path += " (" + QString::number(c_i) + ")";
+	    path += " (" + TQString::number(c_i) + ")";
 	}
 
 	dirent = new K3bIso9660Directory( this, path, path, access | S_IFDIR,
-					  buf.st_mtime, buf.st_atime, buf.st_ctime, uid, gid, QString::null );
+					  buf.st_mtime, buf.st_atime, buf.st_ctime, uid, gid, TQString() );
 
 	// expand the root entry
 	ProcessDir( &K3bIso9660::read_callback, isonum_733(idr->extent),isonum_733(idr->size),&K3bIso9660::isofs_callback,this);
@@ -740,12 +740,12 @@ bool K3bIso9660::isOpen() const
 
 void K3bIso9660::createSimplePrimaryDesc( struct iso_primary_descriptor* desc )
 {
-  d->primaryDesc.volumeId = QString::fromLocal8Bit( desc->volume_id, 32 ).stripWhiteSpace();
-  d->primaryDesc.systemId = QString::fromLocal8Bit( desc->system_id, 32 ).stripWhiteSpace();
-  d->primaryDesc.volumeSetId = QString::fromLocal8Bit( desc->volume_set_id, 128 ).stripWhiteSpace();
-  d->primaryDesc.publisherId = QString::fromLocal8Bit( desc->publisher_id, 128 ).stripWhiteSpace();
-  d->primaryDesc.preparerId = QString::fromLocal8Bit( desc->preparer_id, 128 ).stripWhiteSpace();
-  d->primaryDesc.applicationId = QString::fromLocal8Bit( desc->application_id, 128 ).stripWhiteSpace();
+  d->primaryDesc.volumeId = TQString(TQString::fromLocal8Bit( desc->volume_id, 32 )).stripWhiteSpace();
+  d->primaryDesc.systemId = TQString(TQString::fromLocal8Bit( desc->system_id, 32 )).stripWhiteSpace();
+  d->primaryDesc.volumeSetId = TQString(TQString::fromLocal8Bit( desc->volume_set_id, 128 )).stripWhiteSpace();
+  d->primaryDesc.publisherId = TQString(TQString::fromLocal8Bit( desc->publisher_id, 128 )).stripWhiteSpace();
+  d->primaryDesc.preparerId = TQString(TQString::fromLocal8Bit( desc->preparer_id, 128 )).stripWhiteSpace();
+  d->primaryDesc.applicationId = TQString(TQString::fromLocal8Bit( desc->application_id, 128 )).stripWhiteSpace();
   d->primaryDesc.volumeSetSize = isonum_723(desc->volume_set_size);
   d->primaryDesc.volumeSetNumber = isonum_723(desc->volume_set_size);
   d->primaryDesc.logicalBlockSize = isonum_723(desc->logical_block_size);
@@ -845,13 +845,13 @@ void K3bIso9660::debugEntry( const K3bIso9660Entry* entry, int depth ) const
     return;
   }
 
-  QString spacer;
+  TQString spacer;
   spacer.fill( ' ', depth*3 );
   kdDebug() << spacer << "- " << entry->name() << " (" << entry->isoName() << ")" << endl;
   if( entry->isDirectory() ) {
     const K3bIso9660Directory* dir = dynamic_cast<const K3bIso9660Directory*>(entry);
-    QStringList entries = dir->entries();
-    for( QStringList::const_iterator it = entries.begin(); it != entries.end(); ++it ) {
+    TQStringList entries = dir->entries();
+    for( TQStringList::const_iterator it = entries.begin(); it != entries.end(); ++it ) {
       debugEntry( dir->entry( *it ), depth+1 );
     }
   }

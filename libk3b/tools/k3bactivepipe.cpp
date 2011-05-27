@@ -19,13 +19,13 @@
 
 #include <kdebug.h>
 
-#include <qthread.h>
-#include <qiodevice.h>
+#include <tqthread.h>
+#include <tqiodevice.h>
 
 #include <unistd.h>
 
 
-class K3bActivePipe::Private : public QThread
+class K3bActivePipe::Private : public TQThread
 {
 public:
   Private( K3bActivePipe* pipe ) :
@@ -108,17 +108,17 @@ public:
   K3bPipe pipeIn;
   K3bPipe pipeOut;
 
-  QIODevice* sourceIODevice;
-  QIODevice* sinkIODevice;
+  TQIODevice* sourceIODevice;
+  TQIODevice* sinkIODevice;
 
   bool closeWhenDone;
   bool closeFdToReadFrom;
   bool closeFdToWriteTo;
 
-  QByteArray buffer;
+  TQByteArray buffer;
 
-  Q_UINT64 bytesRead;
-  Q_UINT64 bytesWritten;
+  TQ_UINT64 bytesRead;
+  TQ_UINT64 bytesWritten;
 };
 
 
@@ -189,14 +189,14 @@ void K3bActivePipe::writeToFd( int fd, bool close )
 }
 
 
-void K3bActivePipe::readFromIODevice( QIODevice* dev )
+void K3bActivePipe::readFromIODevice( TQIODevice* dev )
 {
   d->fdToReadFrom = -1;
   d->sourceIODevice = dev;
 }
 
 
-void K3bActivePipe::writeToIODevice( QIODevice* dev )
+void K3bActivePipe::writeToIODevice( TQIODevice* dev )
 {
   d->fdToWriteTo = -1;
   d->sinkIODevice = dev;
@@ -243,13 +243,13 @@ bool K3bActivePipe::pumpSync()
 }
 
 
-Q_UINT64 K3bActivePipe::bytesRead() const
+TQ_UINT64 K3bActivePipe::bytesRead() const
 {
   return d->bytesRead;
 }
 
 
-Q_UINT64 K3bActivePipe::bytesWritten() const
+TQ_UINT64 K3bActivePipe::bytesWritten() const
 {
   return d->bytesWritten;
 }

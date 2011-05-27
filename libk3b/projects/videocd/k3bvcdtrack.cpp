@@ -16,8 +16,8 @@
 #include <kapplication.h>
 #include <kconfig.h>
 
-#include <qstring.h>
-#include <qfileinfo.h>
+#include <tqstring.h>
+#include <tqfileinfo.h>
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -30,15 +30,15 @@
 #include "k3bvcdtrack.h"
 #include <k3bglobals.h>
 
-K3bVcdTrack::K3bVcdTrack( QPtrList<K3bVcdTrack>* parent, const QString& filename )
+K3bVcdTrack::K3bVcdTrack( TQPtrList<K3bVcdTrack>* tqparent, const TQString& filename )
         : m_pbcnumkeys( true ),
         m_pbcnumkeysuserdefined( false ),
         m_file( filename )
 {
-    m_parent = parent;
-    m_title = QFileInfo( m_file ).baseName( true );
+    m_parent = tqparent;
+    m_title = TQFileInfo( m_file ).baseName( true );
 
-    m_revreflist = new QPtrList<K3bVcdTrack>;
+    m_revreflist = new TQPtrList<K3bVcdTrack>;
 
     for ( int i = 0; i < K3bVcdTrack::_maxPbcTracks; i++ ) {
         m_pbctrackmap.insert( i, 0L );
@@ -65,9 +65,9 @@ KIO::filesize_t K3bVcdTrack::size() const
 
 int K3bVcdTrack::index() const
 {
-    int i = m_parent->find( this );
+    int i = m_parent->tqfind( this );
     if ( i < 0 )
-        kdDebug() << "(K3bVcdTrack) I'm not part of my parent!" << endl;
+        kdDebug() << "(K3bVcdTrack) I'm not part of my tqparent!" << endl;
     return i;
 }
 
@@ -119,23 +119,23 @@ void K3bVcdTrack::delRefFromUs()
 void K3bVcdTrack::setPbcTrack( int which, K3bVcdTrack* pbctrack )
 {
     kdDebug() << "K3bVcdTrack::setPbcTrack " << which << ", " << pbctrack << endl;
-    m_pbctrackmap.replace( which, pbctrack );
+    m_pbctrackmap.tqreplace( which, pbctrack );
 }
 
 void K3bVcdTrack::setPbcNonTrack( int which, int type )
 {
     kdDebug() << "K3bVcdTrack::setNonPbcTrack " << which << ", " << type << endl;
-    m_pbcnontrackmap.replace( which, type );
+    m_pbcnontrackmap.tqreplace( which, type );
 }
 
 void K3bVcdTrack::setUserDefined( int which, bool ud )
 {
-    m_pbcusrdefmap.replace( which, ud );
+    m_pbcusrdefmap.tqreplace( which, ud );
 }
 
 K3bVcdTrack* K3bVcdTrack::getPbcTrack( const int& which )
 {
-    if ( m_pbctrackmap.find( which ) == m_pbctrackmap.end() )
+    if ( m_pbctrackmap.tqfind( which ) == m_pbctrackmap.end() )
         return 0;
     else
         return m_pbctrackmap[ which ];
@@ -143,7 +143,7 @@ K3bVcdTrack* K3bVcdTrack::getPbcTrack( const int& which )
 
 int K3bVcdTrack::getNonPbcTrack( const int& which )
 {
-    if ( m_pbcnontrackmap.find( which ) == m_pbcnontrackmap.end() )
+    if ( m_pbcnontrackmap.tqfind( which ) == m_pbcnontrackmap.end() )
         return 0;
     else
         return m_pbcnontrackmap[ which ];
@@ -154,12 +154,12 @@ bool K3bVcdTrack::isPbcUserDefined( int which )
     return m_pbcusrdefmap[ which ];
 }
 
-const QString K3bVcdTrack::resolution()
+const TQString K3bVcdTrack::resolution()
 {
     if ( mpeg_info->has_video ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->video[ i ].seen ) {
-                return QString( "%1 x %2" ).arg( mpeg_info->video[ i ].hsize ).arg( mpeg_info->video[ i ].vsize );
+                return TQString( "%1 x %2" ).tqarg( mpeg_info->video[ i ].hsize ).tqarg( mpeg_info->video[ i ].vsize );
             }
         }
     }
@@ -167,22 +167,22 @@ const QString K3bVcdTrack::resolution()
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::highresolution()
+const TQString K3bVcdTrack::highresolution()
 {
     if ( mpeg_info->has_video ) {
         if ( mpeg_info->video[ 2 ].seen ) {
-            return QString( "%1 x %2" ).arg( mpeg_info->video[ 2 ].hsize ).arg( mpeg_info->video[ 2 ].vsize );
+            return TQString( "%1 x %2" ).tqarg( mpeg_info->video[ 2 ].hsize ).tqarg( mpeg_info->video[ 2 ].vsize );
         }
     }
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::video_frate()
+const TQString K3bVcdTrack::video_frate()
 {
     if ( mpeg_info->has_video ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->video[ i ].seen ) {
-                return QString::number( mpeg_info->video[ i ].frate );
+                return TQString::number( mpeg_info->video[ i ].frate );
             }
         }
     }
@@ -190,12 +190,12 @@ const QString K3bVcdTrack::video_frate()
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::video_bitrate()
+const TQString K3bVcdTrack::video_bitrate()
 {
     if ( mpeg_info->has_video ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->video[ i ].seen ) {
-                return i18n( "%1 bit/s" ).arg( mpeg_info->video[ i ].bitrate ) ;
+                return i18n( "%1 bit/s" ).tqarg( mpeg_info->video[ i ].bitrate ) ;
             }
         }
     }
@@ -205,7 +205,7 @@ const QString K3bVcdTrack::video_bitrate()
 
 
 
-const QString K3bVcdTrack::video_format()
+const TQString K3bVcdTrack::video_format()
 {
     if ( mpeg_info->has_video ) {
         for ( int i = 0; i < 2; i++ ) {
@@ -238,24 +238,24 @@ const QString K3bVcdTrack::video_format()
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::video_chroma()
+const TQString K3bVcdTrack::video_chroma()
 {
     if ( mpeg_info->has_video ) {
         // MPEG1 only supports 4:2:0 Format
         if ( version() == K3bMpegInfo::MPEG_VERS_MPEG1 )
-            return QString( "4:2:0" );
+            return TQString( "4:2:0" );
 
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->video[ i ].seen ) {
                 switch ( mpeg_info->video[ i ].chroma_format ) {
                     case 1 :
-                        return QString( "4:2:0" );
+                        return TQString( "4:2:0" );
                         break;
                     case 2 :
-                        return QString( "4:2:2" );
+                        return TQString( "4:2:2" );
                         break;
                     case 3 :
-                        return QString( "4:4:4" );
+                        return TQString( "4:4:4" );
                         break;
 
                 }
@@ -266,12 +266,12 @@ const QString K3bVcdTrack::video_chroma()
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::audio_layer()
+const TQString K3bVcdTrack::audio_layer()
 {
     if ( mpeg_info->has_audio ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->audio[ i ].seen ) {
-                return QString::number( mpeg_info->audio[ i ].layer );
+                return TQString::number( mpeg_info->audio[ i ].layer );
             }
         }
     }
@@ -279,12 +279,12 @@ const QString K3bVcdTrack::audio_layer()
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::audio_bitrate()
+const TQString K3bVcdTrack::audio_bitrate()
 {
     if ( mpeg_info->has_audio ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->audio[ i ].seen ) {
-                return i18n( "%1 bit/s" ).arg( mpeg_info->audio[ i ].bitrate ) ;
+                return i18n( "%1 bit/s" ).tqarg( mpeg_info->audio[ i ].bitrate ) ;
             }
         }
     }
@@ -292,12 +292,12 @@ const QString K3bVcdTrack::audio_bitrate()
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::audio_sampfreq()
+const TQString K3bVcdTrack::audio_sampfreq()
 {
     if ( mpeg_info->has_audio ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->audio[ i ].seen ) {
-                return i18n( "%1 Hz" ).arg( mpeg_info->audio[ i ].sampfreq ) ;
+                return i18n( "%1 Hz" ).tqarg( mpeg_info->audio[ i ].sampfreq ) ;
             }
         }
     }
@@ -305,25 +305,25 @@ const QString K3bVcdTrack::audio_sampfreq()
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::audio_mode( )
+const TQString K3bVcdTrack::audio_mode( )
 {
     if ( mpeg_info->has_audio ) {
         for ( int i = 2; i >= 0; i-- )
             if ( mpeg_info->audio[ i ].seen )
-                return QString( audio_type2str( mpeg_info->audio[ i ].version, mpeg_info->audio[ i ].mode, i ) );
+                return TQString( audio_type2str( mpeg_info->audio[ i ].version, mpeg_info->audio[ i ].mode, i ) );
 
     }
 
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::audio_copyright( )
+const TQString K3bVcdTrack::audio_copyright( )
 {
     if ( mpeg_info->has_audio ) {
         for ( int i = 2; i >= 0; i-- )
             if ( mpeg_info->audio[ i ].seen )
                 if ( mpeg_info->audio[ i ].copyright )
-                    return QString( "(c) " ) + ( mpeg_info->audio[ i ].original ? i18n( "original" ) : i18n( "duplicate" ) );
+                    return TQString( "(c) " ) + ( mpeg_info->audio[ i ].original ? i18n( "original" ) : i18n( "duplicate" ) );
                 else
                     return ( mpeg_info->audio[ i ].original ? i18n( "original" ) : i18n( "duplicate" ) );
     }
@@ -331,22 +331,22 @@ const QString K3bVcdTrack::audio_copyright( )
     return i18n( "n/a" );
 }
 
-const QString K3bVcdTrack::mpegTypeS( bool audio )
+const TQString K3bVcdTrack::mpegTypeS( bool audio )
 {
     if ( mpeg_info->has_video && !audio ) {
         for ( int i = 0; i < 3; i++ )
             if ( mpeg_info->video[ i ].seen ) {
                 if ( i == 0 ) {
-                    return QString( "MPEG%1 " ).arg( mpeg_info->version ) + i18n( "Motion Picture" );
+                    return TQString( "MPEG%1 " ).tqarg( mpeg_info->version ) + i18n( "Motion Picture" );
                 } else {
-                    return QString( "MPEG%1 " ).arg( mpeg_info->version ) + i18n( "Still Picture" );
+                    return TQString( "MPEG%1 " ).tqarg( mpeg_info->version ) + i18n( "Still Picture" );
                 }
             }
     }
     if ( mpeg_info->has_audio && audio ) {
         for ( int i = 0; i < 3; i++ )
             if ( mpeg_info->audio[ i ].seen ) {
-                return QString( "MPEG%1 " ).arg( mpeg_info->audio[ i ].version ) + i18n( "Layer %1" ).arg( mpeg_info->audio[ i ].layer );
+                return TQString( "MPEG%1 " ).tqarg( mpeg_info->audio[ i ].version ) + i18n( "Layer %1" ).tqarg( mpeg_info->audio[ i ].layer );
             }
     }
 
@@ -374,17 +374,17 @@ const int K3bVcdTrack::mpegType( )
     return -1; // MPEG_UNKNOWN;
 }
 
-const QString K3bVcdTrack::audio_type2str( unsigned int version, unsigned int audio_mode, unsigned int audio_type )
+const TQString K3bVcdTrack::audio_type2str( unsigned int version, unsigned int audio_mode, unsigned int audio_type )
 {
     kdDebug() << "K3bVcdTrack::audio_type2str() version:" << version << " audio_mode:" << audio_mode << " audio_type:" << audio_type << endl;
 
-    QString audio_types[ 3 ][ 5 ] = {
+    TQString audio_types[ 3 ][ 5 ] = {
                                         {
                                             i18n( "unknown" ),
                                             i18n( "invalid" ),
-                                            QString::null,
-                                            QString::null,
-                                            QString::null
+                                            TQString(),
+                                            TQString(),
+                                            TQString()
                                         },
                                         {
                                             i18n( "stereo" ),
@@ -393,11 +393,11 @@ const QString K3bVcdTrack::audio_type2str( unsigned int version, unsigned int au
                                             i18n( "single channel" )
                                         },
                                         {
-                                            QString::null,
+                                            TQString(),
                                             i18n( "dual channel" ),
                                             i18n( "surround sound" ),
-                                            QString::null,
-                                            QString::null
+                                            TQString(),
+                                            TQString()
                                         }
                                     };
     switch ( version ) {
@@ -417,18 +417,18 @@ const QString K3bVcdTrack::audio_type2str( unsigned int version, unsigned int au
 }
 
 // convert a time in second to HH:mm:ss notation
-QString K3bVcdTrack::SecsToHMS( double duration )
+TQString K3bVcdTrack::SecsToHMS( double duration )
 {
     byte hours = ( byte ) ( duration / 3600 );
     byte mins = ( byte ) ( ( duration / 60 ) - ( hours * 60 ) );
     float secs = duration - 60 * mins - 3600 * hours;
     if ( hours != 0 ) {
-        return QString( "%1:" ).arg( hours ).rightJustify( 3, ' ' ) + QString( "%1:" ).arg( mins ).rightJustify( 3, '0' ) + QString::number( secs, 'f', 2 );
+        return TQString( "%1:" ).tqarg( hours ).rightJustify( 3, ' ' ) + TQString( "%1:" ).tqarg( mins ).rightJustify( 3, '0' ) + TQString::number( secs, 'f', 2 );
     }
     if ( mins != 0 ) {
-        return QString( "%1:" ).arg( mins ).rightJustify( 3, '0' ) + QString::number( secs, 'f', 2 );
+        return TQString( "%1:" ).tqarg( mins ).rightJustify( 3, '0' ) + TQString::number( secs, 'f', 2 );
     }
-    return QString::number( secs, 'f', 2 );
+    return TQString::number( secs, 'f', 2 );
 }
 
 void K3bVcdTrack::PrintInfo()

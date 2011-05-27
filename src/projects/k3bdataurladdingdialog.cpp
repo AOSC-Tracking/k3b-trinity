@@ -18,11 +18,11 @@
 #include "k3bdataurladdingdialog.h"
 #include "k3bencodingconverter.h"
 
-#include <qtimer.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qdir.h>
-#include <qfileinfo.h>
+#include <tqtimer.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqdir.h>
+#include <tqfileinfo.h>
 
 #include <k3bdatadoc.h>
 #include <k3bdiritem.h>
@@ -55,12 +55,12 @@
 #include <unistd.h>
 
 
-K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, QWidget* parent, const char* name )
+K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* tqparent, const char* name )
   : KDialogBase( Plain,
-		 i18n("Adding files to project '%1'").arg(doc->URL().fileName()),
+		 i18n("Adding files to project '%1'").tqarg(doc->URL().fileName()),
 		 Cancel,
 		 Cancel,
-		 parent,
+		 tqparent,
 		 name,
 		 true,
 		 true ),
@@ -77,26 +77,26 @@ K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, QWidget* parent
 {
   m_encodingConverter = new K3bEncodingConverter();
 
-  QWidget* page = plainPage();
-  QGridLayout* grid = new QGridLayout( page );
+  TQWidget* page = plainPage();
+  TQGridLayout* grid = new TQGridLayout( page );
   grid->setSpacing( spacingHint() );
   grid->setMargin( 0 );
 
-  m_counterLabel = new QLabel( page );
+  m_counterLabel = new TQLabel( page );
   m_infoLabel = new KSqueezedTextLabel( i18n("Adding files to project '%1'")
-					.arg(doc->URL().fileName()) + "...", page );
+					.tqarg(doc->URL().fileName()) + "...", page );
   m_progressWidget = new KProgress( 0, page );
 
   grid->addWidget( m_counterLabel, 0, 1 );
   grid->addWidget( m_infoLabel, 0, 0 );
   grid->addMultiCellWidget( m_progressWidget, 1, 1, 0, 1 );
 
-  m_dirSizeJob = new K3bDirSizeJob( this );
-  connect( m_dirSizeJob, SIGNAL(finished(bool)),
-	   this, SLOT(slotDirSizeDone(bool)) );
+  m_dirSizeJob = new K3bDirSizeJob( TQT_TQOBJECT(this) );
+  connect( m_dirSizeJob, TQT_SIGNAL(finished(bool)),
+	   this, TQT_SLOT(slotDirSizeDone(bool)) );
 
   // try to start with a reasonable size
-  resize( (int)( fontMetrics().width( caption() ) * 1.5 ), sizeHint().height() );
+  resize( (int)( fontMetrics().width( caption() ) * 1.5 ), tqsizeHint().height() );
 }
 
 
@@ -108,7 +108,7 @@ K3bDataUrlAddingDialog::~K3bDataUrlAddingDialog()
 
 int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
 				     K3bDirItem* dir,
-				     QWidget* parent )
+				     TQWidget* tqparent )
 {
   if( urls.isEmpty() )
     return 0;
@@ -120,7 +120,7 @@ int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
   if( urls.count() == 1 ) {
     K3bIso9660 isoF( urls.first().path() );
     if( isoF.open() ) {
-     if( KMessageBox::warningYesNo( parent,
+     if( KMessageBox::warningYesNo( tqparent,
 				    i18n("<p>The file you are about to add to the project is an ISO9660 image. As such "
 					 "it can be burned to a medium directly since it already contains a file "
 					 "system.<br>"
@@ -138,13 +138,13 @@ int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
     }
   }
 
-  K3bDataUrlAddingDialog dlg( dir->doc(), parent );
+  K3bDataUrlAddingDialog dlg( dir->doc(), tqparent );
   dlg.m_urls = urls;
   for( KURL::List::ConstIterator it = urls.begin(); it != urls.end(); ++it )
-    dlg.m_urlQueue.append( qMakePair( K3b::convertToLocalUrl(*it), dir ) );
+    dlg.m_urlQueue.append( tqMakePair( K3b::convertToLocalUrl(*it), dir ) );
 
   dlg.slotAddUrls();
-  int ret = QDialog::Accepted;
+  int ret = TQDialog::Accepted;
   if( !dlg.m_urlQueue.isEmpty() ) {
     dlg.m_dirSizeJob->setUrls( urls );
     dlg.m_dirSizeJob->setFollowSymlinks( dir->doc()->isoOptions().followSymbolicLinks() );
@@ -156,77 +156,77 @@ int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
   dlg.m_dirSizeJob->cancel();
   K3bSignalWaiter::waitForJob( dlg.m_dirSizeJob );
 
-  QString message = dlg.resultMessage();
+  TQString message = dlg.resultMessage();
   if( !message.isEmpty() )
-    KMessageBox::detailedSorry( parent, i18n("Problems while adding files to the project."), message );
+    KMessageBox::detailedSorry( tqparent, i18n("Problems while adding files to the project."), message );
 
   return ret;
 }
 
 
-QString K3bDataUrlAddingDialog::resultMessage() const
+TQString K3bDataUrlAddingDialog::resultMessage() const
 {
-  QString message;
+  TQString message;
   if( !m_unreadableFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("Insufficient permissions to read the following files") )
-      .arg( m_unreadableFiles.join( "<br>" ) );
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("Insufficient permissions to read the following files") )
+      .tqarg( m_unreadableFiles.join( "<br>" ) );
   if( !m_notFoundFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("Unable to find the following files") )
-      .arg( m_notFoundFiles.join( "<br>" ) );
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("Unable to find the following files") )
+      .tqarg( m_notFoundFiles.join( "<br>" ) );
   if( !m_nonLocalFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("No non-local files supported") )
-      .arg( m_unreadableFiles.join( "<br>" ) );
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("No non-local files supported") )
+      .tqarg( m_unreadableFiles.join( "<br>" ) );
   if( !m_tooBigFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("It is not possible to add files bigger than %1").arg(KIO::convertSize(0xFFFFFFFF)) )
-      .arg( m_tooBigFiles.join( "<br>" ) );
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("It is not possible to add files bigger than %1").tqarg(KIO::convertSize(0xFFFFFFFF)) )
+      .tqarg( m_tooBigFiles.join( "<br>" ) );
   if( !m_mkisofsLimitationRenamedFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("Some filenames had to be modified due to limitations in mkisofs") )
-      .arg( m_mkisofsLimitationRenamedFiles.join( "<br>" ) );
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("Some filenames had to be modified due to limitations in mkisofs") )
+      .tqarg( m_mkisofsLimitationRenamedFiles.join( "<br>" ) );
   if( !m_invalidFilenameEncodingFiles.isEmpty() )
-    message += QString("<p><b>%1:</b><br>%2")
-      .arg( i18n("The following filenames have an invalid encoding. You may fix this "
+    message += TQString("<p><b>%1:</b><br>%2")
+      .tqarg( i18n("The following filenames have an invalid encoding. You may fix this "
 		 "with the convmv tool") )
-      .arg( m_invalidFilenameEncodingFiles.join( "<br>" ) );
+      .tqarg( m_invalidFilenameEncodingFiles.join( "<br>" ) );
 
   return message;
 }
 
 
-int K3bDataUrlAddingDialog::moveItems( const QValueList<K3bDataItem*>& items,
+int K3bDataUrlAddingDialog::moveItems( const TQValueList<K3bDataItem*>& items,
 				       K3bDirItem* dir,
-				       QWidget* parent )
+				       TQWidget* tqparent )
 {
-  return copyMoveItems( items, dir, parent, false );
+  return copyMoveItems( items, dir, tqparent, false );
 }
 
 
-int K3bDataUrlAddingDialog::copyItems( const QValueList<K3bDataItem*>& items,
+int K3bDataUrlAddingDialog::copyItems( const TQValueList<K3bDataItem*>& items,
 				       K3bDirItem* dir,
-				       QWidget* parent )
+				       TQWidget* tqparent )
 {
-  return copyMoveItems( items, dir, parent, true );
+  return copyMoveItems( items, dir, tqparent, true );
 }
 
 
-int K3bDataUrlAddingDialog::copyMoveItems( const QValueList<K3bDataItem*>& items,
+int K3bDataUrlAddingDialog::copyMoveItems( const TQValueList<K3bDataItem*>& items,
 					   K3bDirItem* dir,
-					   QWidget* parent,
+					   TQWidget* tqparent,
 					   bool copy )
 {
   if( items.isEmpty() )
     return 0;
 
-  K3bDataUrlAddingDialog dlg( dir->doc(), parent );
-  dlg.m_infoLabel->setText( i18n("Moving files to project \"%1\"...").arg(dir->doc()->URL().fileName()) );
+  K3bDataUrlAddingDialog dlg( dir->doc(), tqparent );
+  dlg.m_infoLabel->setText( i18n("Moving files to project \"%1\"...").tqarg(dir->doc()->URL().fileName()) );
   dlg.m_copyItems = copy;
 
-  for( QValueList<K3bDataItem*>::const_iterator it = items.begin(); it != items.end(); ++it ) {
-    dlg.m_items.append( qMakePair( *it, dir ) );
+  for( TQValueList<K3bDataItem*>::const_iterator it = items.begin(); it != items.end(); ++it ) {
+    dlg.m_items.append( tqMakePair( *it, dir ) );
     ++dlg.m_totalFiles;
     if( (*it)->isDir() ) {
       dlg.m_totalFiles += static_cast<K3bDirItem*>( *it )->numFiles();
@@ -235,7 +235,7 @@ int K3bDataUrlAddingDialog::copyMoveItems( const QValueList<K3bDataItem*>& items
   }
 
   dlg.slotCopyMoveItems();
-  int ret = QDialog::Accepted;
+  int ret = TQDialog::Accepted;
   if( !dlg.m_items.isEmpty() ) {
     dlg.m_progressWidget->setTotalSteps( dlg.m_totalFiles );
     ret = dlg.exec();
@@ -264,13 +264,13 @@ void K3bDataUrlAddingDialog::slotAddUrls()
   m_urlQueue.remove( m_urlQueue.begin() );
   //
   // HINT:
-  // we only use QFileInfo::absFilePath() and QFileInfo::isHidden()
-  // both do not cause QFileInfo to stat, thus no speed improvement
-  // can come from removing QFileInfo usage here.
+  // we only use TQFileInfo::absFilePath() and TQFileInfo::isHidden()
+  // both do not cause TQFileInfo to stat, thus no speed improvement
+  // can come from removing TQFileInfo usage here.
   //
-  QFileInfo info(url.path());
-  QString absFilePath( info.absFilePath() );
-  QString resolved( absFilePath );
+  TQFileInfo info(url.path());
+  TQString absFilePath( info.absFilePath() );
+  TQString resolved( absFilePath );
 
   bool valid = true;
   k3b_struct_stat statBuf, resolvedStatBuf;
@@ -283,9 +283,9 @@ void K3bDataUrlAddingDialog::slotAddUrls()
 #if 0
   m_infoLabel->setText( url.path() );
   if( m_totalFiles == 0 )
-    m_counterLabel->setText( QString("(%1)").arg(m_filesHandled) );
+    m_counterLabel->setText( TQString("(%1)").tqarg(m_filesHandled) );
   else
-    m_counterLabel->setText( QString("(%1/%2)").arg(m_filesHandled).arg(m_totalFiles) );
+    m_counterLabel->setText( TQString("(%1/%2)").tqarg(m_filesHandled).tqarg(m_totalFiles) );
 #endif
 
   //
@@ -297,12 +297,12 @@ void K3bDataUrlAddingDialog::slotAddUrls()
     m_nonLocalFiles.append( url.path() );
   }
 
-  else if( k3b_lstat( QFile::encodeName(absFilePath), &statBuf ) != 0 ) {
+  else if( k3b_lstat( TQFile::encodeName(absFilePath), &statBuf ) != 0 ) {
     valid = false;
     m_notFoundFiles.append( url.path() );
   }
 
-  else if( !m_encodingConverter->encodedLocally( QFile::encodeName( url.path() ) ) ) {
+  else if( !m_encodingConverter->encodedLocally( TQFile::encodeName( url.path() ) ) ) {
     valid = false;
     m_invalidFilenameEncodingFiles.append( url.path() );
   }
@@ -316,12 +316,12 @@ void K3bDataUrlAddingDialog::slotAddUrls()
     // but we need to know if the symlink points to a directory
     if( isSymLink ) {
       resolved = K3b::resolveLink( absFilePath );
-      k3b_stat( QFile::encodeName(resolved), &resolvedStatBuf );
+      k3b_stat( TQFile::encodeName(resolved), &resolvedStatBuf );
       isDir = S_ISDIR(resolvedStatBuf.st_mode);
     }
 
     else {
-      if( ::access( QFile::encodeName( absFilePath ), R_OK ) != 0 ) {
+      if( ::access( TQFile::encodeName( absFilePath ), R_OK ) != 0 ) {
 	valid = false;
 	m_unreadableFiles.append( url.path() );
       }
@@ -362,7 +362,7 @@ void K3bDataUrlAddingDialog::slotAddUrls()
   // 2. Handle the url
   //
 
-  QString newName = url.fileName();
+  TQString newName = url.fileName();
 
   // filenames cannot end in backslashes (mkisofs problem. See comments in k3bisoimager.cpp (escapeGraftPoint()))
   bool bsAtEnd = false;
@@ -384,7 +384,7 @@ void K3bDataUrlAddingDialog::slotAddUrls()
   // and if so handle it properly
   //
   if( valid ) {
-    if( K3bDataItem* oldItem = dir->find( newName ) ) {
+    if( K3bDataItem* oldItem = dir->tqfind( newName ) ) {
       //
       // reuse an existing dir
       //
@@ -425,32 +425,32 @@ void K3bDataUrlAddingDialog::slotAddUrls()
 	switch( K3bMultiChoiceDialog::choose( i18n("File already exists"),
 					      i18n("<p>File <em>%1</em> already exists in "
 						   "project folder <em>%2</em>.")
-					      .arg(newName)
-					      .arg('/' + dir->k3bPath()),
-					      QMessageBox::Warning,
+					      .tqarg(newName)
+					      .tqarg('/' + dir->k3bPath()),
+					      TQMessageBox::Warning,
 					      this,
 					      0,
 					      6,
 					      KGuiItem( i18n("Replace"),
-							QString::null,
+							TQString(),
 							i18n("Replace the existing file") ),
 					      KGuiItem( i18n("Replace All"),
-							QString::null,
+							TQString(),
 							i18n("Always replace existing files") ),
 					      KGuiItem( i18n("Ignore"),
-							QString::null,
+							TQString(),
 							i18n("Keep the existing file") ),
 					      KGuiItem( i18n("Ignore All"),
-							QString::null,
+							TQString(),
 							i18n("Always keep the existing file") ),
 					      KGuiItem( i18n("Rename"),
-							QString::null,
+							TQString(),
 							i18n("Rename the new file") ),
 					      KStdGuiItem::cancel() ) ) {
 	case 2: // replace all
 	  m_bExistingItemsReplaceAll = true;
 	  // fallthrough
-	case 1: // replace
+	case 1: // tqreplace
 	  // if we replace an item from an old session the K3bFileItem constructor takes care
 	  // of replacing the item
 	  if( !oldItem->isFromOldSession() )
@@ -493,9 +493,9 @@ void K3bDataUrlAddingDialog::slotAddUrls()
 						   "K3b project cannot be resolved."
 						   "<p><b>If you do not intend to enable the option <em>follow symbolic links</em> you may safely "
 						   "ignore this warning and choose to add the link to the project.</b>")
-					      .arg(absFilePath)
-					      .arg(resolved ),
-					      QMessageBox::Warning,
+					      .tqarg(absFilePath)
+					      .tqarg(resolved ),
+					      TQMessageBox::Warning,
 					      this,
 					      0,
 					      5,
@@ -558,17 +558,17 @@ void K3bDataUrlAddingDialog::slotAddUrls()
 	newDirItem->setLocalPath( url.path() ); // HACK: see k3bdiritem.h
       }
 
-      QDir newDir( absFilePath );
-      int dirFilter = QDir::All|QDir::Hidden|QDir::System;
+      TQDir newDir( absFilePath );
+      int dirFilter = TQDir::All|TQDir::Hidden|TQDir::System;
 
-      QStringList dlist = newDir.entryList( dirFilter );
-      const QString& dot = KGlobal::staticQString( "." );
-      const QString& dotdot = KGlobal::staticQString( ".." );
+      TQStringList dlist = newDir.entryList( dirFilter );
+      const TQString& dot = KGlobal::staticQString( "." );
+      const TQString& dotdot = KGlobal::staticQString( ".." );
       dlist.remove( dot );
       dlist.remove( dotdot );
 
-      for( QStringList::Iterator it = dlist.begin(); it != dlist.end(); ++it ) {
-	m_urlQueue.append( qMakePair( KURL::fromPathOrURL(absFilePath + '/' + *it), newDirItem ) );
+      for( TQStringList::Iterator it = dlist.begin(); it != dlist.end(); ++it ) {
+	m_urlQueue.append( tqMakePair( KURL::fromPathOrURL(absFilePath + '/' + *it), newDirItem ) );
       }
     }
     else {
@@ -583,7 +583,7 @@ void K3bDataUrlAddingDialog::slotAddUrls()
   }
   else {
     updateProgress();
-    QTimer::singleShot( 0, this, SLOT(slotAddUrls()) );
+    TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
   }
 }
 
@@ -603,13 +603,13 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
   ++m_filesHandled;
   m_infoLabel->setText( item->k3bPath() );
   if( m_totalFiles == 0 )
-    m_counterLabel->setText( QString("(%1)").arg(m_filesHandled) );
+    m_counterLabel->setText( TQString("(%1)").tqarg(m_filesHandled) );
   else
-    m_counterLabel->setText( QString("(%1/%2)").arg(m_filesHandled).arg(m_totalFiles) );
+    m_counterLabel->setText( TQString("(%1/%2)").tqarg(m_filesHandled).tqarg(m_totalFiles) );
 
 
-  if( dir == item->parent() ) {
-    kdDebug() << "(K3bDataUrlAddingDialog) trying to move an item into its own parent dir." << endl;
+  if( dir == item->tqparent() ) {
+    kdDebug() << "(K3bDataUrlAddingDialog) trying to move an item into its own tqparent dir." << endl;
   }
   else if( dir == item ) {
     kdDebug() << "(K3bDataUrlAddingDialog) trying to move an item into itselft." << endl;
@@ -618,14 +618,14 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
     //
     // Let's see if an item with that name alredy exists
     //
-    if( K3bDataItem* oldItem = dir->find( item->k3bName() ) ) {
+    if( K3bDataItem* oldItem = dir->tqfind( item->k3bName() ) ) {
       //
       // reuse an existing dir: move all child items into the old dir
       //
       if( oldItem->isDir() && item->isDir() ) {
-	const QPtrList<K3bDataItem>& cl = dynamic_cast<K3bDirItem*>( item )->children();
-	for( QPtrListIterator<K3bDataItem> it( cl ); *it; ++it )
-	  m_items.append( qMakePair( *it, dynamic_cast<K3bDirItem*>( oldItem ) ) );
+	const TQPtrList<K3bDataItem>& cl = dynamic_cast<K3bDirItem*>( item )->tqchildren();
+	for( TQPtrListIterator<K3bDataItem> it( cl ); *it; ++it )
+	  m_items.append( tqMakePair( *it, dynamic_cast<K3bDirItem*>( oldItem ) ) );
 
 	// FIXME: we need to remove the old dir item
       }
@@ -636,7 +636,7 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
       //
       else if( oldItem->isFromOldSession() &&
 	       item->isDir() != oldItem->isDir() ) {
-	QString newName;
+	TQString newName;
 	if( getNewName( newName, dir, newName ) ) {
 	  if( m_copyItems )
 	    item = item->copy();
@@ -661,32 +661,32 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
 	switch( K3bMultiChoiceDialog::choose( i18n("File already exists"),
 					      i18n("<p>File <em>%1</em> already exists in "
 						   "project folder <em>%2</em>.")
-					      .arg( item->k3bName() )
-					      .arg("/" + dir->k3bPath()),
-					      QMessageBox::Warning,
+					      .tqarg( item->k3bName() )
+					      .tqarg("/" + dir->k3bPath()),
+					      TQMessageBox::Warning,
 					      this,
 					      0,
 					      6,
 					      KGuiItem( i18n("Replace"),
-							QString::null,
+							TQString(),
 							i18n("Replace the existing file") ),
 					      KGuiItem( i18n("Replace All"),
-							QString::null,
+							TQString(),
 							i18n("Always replace existing files") ),
 					      KGuiItem( i18n("Ignore"),
-							QString::null,
+							TQString(),
 							i18n("Keep the existing file") ),
 					      KGuiItem( i18n("Ignore All"),
-							QString::null,
+							TQString(),
 							i18n("Always keep the existing file") ),
 					      KGuiItem( i18n("Rename"),
-							QString::null,
+							TQString(),
 							i18n("Rename the new file") ),
 					      KStdGuiItem::cancel() ) ) {
 	case 2: // replace all
 	  m_bExistingItemsReplaceAll = true;
 	  // fallthrough
-	case 1: // replace
+	case 1: // tqreplace
 	  //
 	  // if we replace an item from an old session K3bDirItem::addDataItem takes care
 	  // of replacing the item
@@ -704,7 +704,7 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
 	  // do nothing
 	  break;
 	case 5: {// rename
-	  QString newName;
+	  TQString newName;
 	  if( getNewName( newName, dir, newName ) ) {
 	    if( m_copyItems )
 	      item = item->copy();
@@ -736,22 +736,22 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
   }
   else {
     updateProgress();
-    QTimer::singleShot( 0, this, SLOT(slotCopyMoveItems()) );
+    TQTimer::singleShot( 0, this, TQT_SLOT(slotCopyMoveItems()) );
   }
 }
 
 
-bool K3bDataUrlAddingDialog::getNewName( const QString& oldName, K3bDirItem* dir, QString& newName )
+bool K3bDataUrlAddingDialog::getNewName( const TQString& oldName, K3bDirItem* dir, TQString& newName )
 {
   bool ok = true;
   newName = oldName;
-  QValidator* validator = K3bValidators::iso9660Validator( false, this );
+  TQValidator* validator = K3bValidators::iso9660Validator( false, TQT_TQOBJECT(this) );
   do {
     newName = KInputDialog::getText( i18n("Enter New Filename"),
 				     i18n("A file with that name already exists. Please enter a new name:"),
 				     newName, &ok, this, "renamedialog", validator );
 
-  } while( ok && dir->find( newName ) );
+  } while( ok && dir->tqfind( newName ) );
 
   delete validator;
 
@@ -763,7 +763,7 @@ bool K3bDataUrlAddingDialog::addHiddenFiles()
 {
   if( m_iAddHiddenFiles == 0 ) {
     // FIXME: the isVisible() stuff makes the static addUrls method not return (same below)
-    if( KMessageBox::questionYesNo( /*isVisible() ? */this/* : parentWidget()*/,
+    if( KMessageBox::questionYesNo( /*isVisible() ? */this/* : tqparentWidget()*/,
 				    i18n("Do you also want to add hidden files?"),
 				    i18n("Hidden Files"), i18n("Add"), i18n("Do Not Add") ) == KMessageBox::Yes )
       m_iAddHiddenFiles = 1;
@@ -778,7 +778,7 @@ bool K3bDataUrlAddingDialog::addHiddenFiles()
 bool K3bDataUrlAddingDialog::addSystemFiles()
 {
   if( m_iAddSystemFiles == 0 ) {
-    if( KMessageBox::questionYesNo( /*isVisible() ? */this/* : parentWidget()*/,
+    if( KMessageBox::questionYesNo( /*isVisible() ? */this/* : tqparentWidget()*/,
 				    i18n("Do you also want to add system files "
 					 "(FIFOs, sockets, device files, and broken symlinks)?"),
 				    i18n("System Files"), i18n("Add"), i18n("Do Not Add") ) == KMessageBox::Yes )

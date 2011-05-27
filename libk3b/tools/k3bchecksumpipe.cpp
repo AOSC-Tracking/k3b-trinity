@@ -81,14 +81,14 @@ bool K3bChecksumPipe::open( Type type, bool closeWhenDone )
 }
 
 
-QCString K3bChecksumPipe::checksum() const
+TQCString K3bChecksumPipe::checksum() const
 {
   switch( d->checksumType ) {
   case MD5:
     return d->md5.hexDigest();
   }
 
-  return QCString();
+  return TQCString();
 }
 
 

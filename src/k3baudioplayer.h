@@ -26,14 +26,14 @@
 #include <arts/kartsdispatcher.h>
 #endif
 
-class QTimer;
-class QLabel;
-class QToolButton;
-class QSlider;
-class QPainter;
-class QColorGroup;
-class QDropEvent;
-class QDragObject;
+class TQTimer;
+class TQLabel;
+class TQToolButton;
+class TQSlider;
+class TQPainter;
+class TQColorGroup;
+class TQDropEvent;
+class TQDragObject;
 class KAction;
 class KActionMenu;
 
@@ -45,30 +45,30 @@ class KActionMenu;
 class K3bPlayListViewItem : public KListViewItem
 {
  public:
-  K3bPlayListViewItem( const QString&, QListView* parent );
-  K3bPlayListViewItem( const QString&, QListView* parent, QListViewItem* after );
+  K3bPlayListViewItem( const TQString&, TQListView* tqparent );
+  K3bPlayListViewItem( const TQString&, TQListView* tqparent, TQListViewItem* after );
   ~K3bPlayListViewItem();
 
   /** @returns the filename for the first column and the 
    *           length in format 00:00.00 for the second column
    */
-  virtual QString text( int c ) const;
+  virtual TQString text( int c ) const;
 
   void setLength( unsigned long l ) { m_length = l; }
   unsigned long length() const { return m_length; }
-  const QString& filename() const { return m_filename; }
+  const TQString& filename() const { return m_filename; }
 
   /**
-   * reimplemented from QListViewItem
+   * reimplemented from TQListViewItem
    * takes the m_bActive flag into account.
    */
-  virtual void paintCell( QPainter*, const QColorGroup&, int, int, int );
+  virtual void paintCell( TQPainter*, const TQColorGroup&, int, int, int );
 
   void setActive( bool a ) { m_bActive = a; }
 
  protected:
   /** path to the associated file */
-  QString m_filename;
+  TQString m_filename;
 
   /** length in frames (1/75 second) */
   unsigned long m_length;
@@ -85,14 +85,15 @@ class K3bPlayListViewItem : public KListViewItem
 class K3bPlayListView : public KListView
 {
 Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bPlayListView( QWidget* parent = 0, const char* name = 0 );
+  K3bPlayListView( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bPlayListView();
 
  protected:
-  bool acceptDrag( QDropEvent* e ) const;
-  QDragObject* dragObject();
+  bool acceptDrag( TQDropEvent* e ) const;
+  TQDragObject* dragObject();
 };
 
 
@@ -101,15 +102,16 @@ Q_OBJECT
 /**
  * @author Sebastian Trueg
  */
-class K3bAudioPlayer : public QWidget
+class K3bAudioPlayer : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bAudioPlayer( QWidget* parent = 0, const char* name = 0 );
+  K3bAudioPlayer( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bAudioPlayer();
 
-  bool supportsMimetype( const QString& mimetype );
+  bool supportsMimetype( const TQString& mimetype );
 
   /**
    * length of current playing in seconds
@@ -129,17 +131,17 @@ Q_OBJECT
   int state();
 
  signals:
-  void started( const QString& filename );
+  void started( const TQString& filename );
   void started();
   void stopped();
   void paused();
   void ended();
 
  public slots:
-  void playFile( const QString& filename );
-  void playFiles( const QStringList& files );
-  void enqueueFile( const QString& filename );
-  void enqueueFiles( const QStringList& files );
+  void playFile( const TQString& filename );
+  void playFiles( const TQStringList& files );
+  void enqueueFile( const TQString& filename );
+  void enqueueFiles( const TQStringList& files );
 
   /** clears the playlist */
   void clear();
@@ -152,8 +154,8 @@ Q_OBJECT
   void seek( int pos );
 
 /*  protected: */
-/*   void dragEnterEvent( QDragEnterEvent* e ); */
-/*   void dropEvent( QDropEvent* e ); */
+/*   void dragEnterEvent( TQDragEnterEvent* e ); */
+/*   void dropEvent( TQDropEvent* e ); */
 
  private slots:
   void slotCheckEnd();
@@ -161,39 +163,39 @@ Q_OBJECT
   void slotUpdateCurrentTime( int time );
   void slotUpdateLength( long time );
   void slotUpdateFilename();
-  void slotPlayItem( QListViewItem* item );
-  void slotDropped( QDropEvent* e, QListViewItem* after );
+  void slotPlayItem( TQListViewItem* item );
+  void slotDropped( TQDropEvent* e, TQListViewItem* after );
 
   /**
    * set the actual item. Will set m_currentItem and 
    * handle highlighting of the current item
    */
-  void setCurrentItem( QListViewItem* item );
+  void setCurrentItem( TQListViewItem* item );
   void slotRemoveSelected();
-  void slotShowContextMenu( KListView*, QListViewItem* item, const QPoint& p );
+  void slotShowContextMenu( KListView*, TQListViewItem* item, const TQPoint& p );
 
  private:
 #ifdef WITH_ARTS
   Arts::PlayObject m_playObject;
   KArtsDispatcher m_dispatcher;
 #endif
-  QString m_filename;
+  TQString m_filename;
 
-  QLabel* m_labelFilename;
-  QLabel* m_labelCurrentTime;
-  QLabel* m_labelOverallTime;
+  TQLabel* m_labelFilename;
+  TQLabel* m_labelCurrentTime;
+  TQLabel* m_labelOverallTime;
   
-  QToolButton* m_buttonPlay;
-  QToolButton* m_buttonPause;
-  QToolButton* m_buttonStop;
-  QToolButton* m_buttonForward;
-  QToolButton* m_buttonBack;
+  TQToolButton* m_buttonPlay;
+  TQToolButton* m_buttonPause;
+  TQToolButton* m_buttonStop;
+  TQToolButton* m_buttonForward;
+  TQToolButton* m_buttonBack;
   
   K3bPlayListView* m_viewPlayList;
   
-  QSlider* m_seekSlider;
+  TQSlider* m_seekSlider;
   
-  QTimer* m_updateTimer;
+  TQTimer* m_updateTimer;
 
   K3bPlayListViewItem* m_currentItem;
 

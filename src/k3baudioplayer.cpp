@@ -18,20 +18,20 @@
 #include <k3bmsf.h>
 #include "kcutlabel.h"
 
-#include <qlabel.h>
-#include <qtoolbutton.h>
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qdatetime.h>
-#include <qfont.h>
-#include <qslider.h>
-#include <qlistview.h>
-#include <qfile.h>
-#include <qpalette.h>
-#include <qheader.h>
-#include <qevent.h>
-#include <qdragobject.h>
-#include <qptrlist.h>
+#include <tqlabel.h>
+#include <tqtoolbutton.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
+#include <tqdatetime.h>
+#include <tqfont.h>
+#include <tqslider.h>
+#include <tqlistview.h>
+#include <tqfile.h>
+#include <tqpalette.h>
+#include <tqheader.h>
+#include <tqevent.h>
+#include <tqdragobject.h>
+#include <tqptrlist.h>
 #include <kurldrag.h>
 
 #include <kiconloader.h>
@@ -49,16 +49,16 @@
 
 using namespace std;
 
-K3bPlayListViewItem::K3bPlayListViewItem( const QString& filename, QListView* parent )
-  : KListViewItem( parent ), m_filename( filename )
+K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* tqparent )
+  : KListViewItem( tqparent ), m_filename( filename )
 {
   m_length = 0;
   m_bActive = false;
 }
 
 
-K3bPlayListViewItem::K3bPlayListViewItem( const QString& filename, QListView* parent, QListViewItem* after )
-  : KListViewItem( parent, after ), m_filename( filename )
+K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* tqparent, TQListViewItem* after )
+  : KListViewItem( tqparent, after ), m_filename( filename )
 {
   m_length = 0;
   m_bActive = false;
@@ -70,12 +70,12 @@ K3bPlayListViewItem::~K3bPlayListViewItem()
 }
 
 
-QString K3bPlayListViewItem::text( int c ) const
+TQString K3bPlayListViewItem::text( int c ) const
 {
   switch( c ) {
   case 0:
     {
-      int pos = m_filename.findRev("/");
+      int pos = m_filename.tqfindRev("/");
       if( pos >= 0 )
 	return m_filename.mid(pos+1);
       return m_filename;
@@ -91,17 +91,17 @@ QString K3bPlayListViewItem::text( int c ) const
 }
 
 
-void K3bPlayListViewItem::paintCell( QPainter* p, const QColorGroup& cg, int c, int w, int a )
+void K3bPlayListViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int c, int w, int a )
 {
   if( m_bActive ) {
     // change the color of the text:
     // change roles: Text, HighlightedText, HighLight
-    QColorGroup newCg( cg );
+    TQColorGroup newCg( cg );
 
     // we assume the user has not configured a very dark color as base color
-    newCg.setColor( QColorGroup::Text, red );
-    newCg.setColor( QColorGroup::Highlight, red );
-    newCg.setColor( QColorGroup::HighlightedText, white );
+    newCg.setColor( TQColorGroup::Text, red );
+    newCg.setColor( TQColorGroup::Highlight, red );
+    newCg.setColor( TQColorGroup::HighlightedText, white );
 
     KListViewItem::paintCell( p, newCg, c, w, a );
   }
@@ -110,8 +110,8 @@ void K3bPlayListViewItem::paintCell( QPainter* p, const QColorGroup& cg, int c, 
 }
 
 
-K3bPlayListView::K3bPlayListView( QWidget* parent, const char* name )
-  : KListView( parent, name )
+K3bPlayListView::K3bPlayListView( TQWidget* tqparent, const char* name )
+  : KListView( tqparent, name )
 {
   addColumn( i18n("Filename") );
   addColumn( i18n("Length") );
@@ -130,21 +130,21 @@ K3bPlayListView::~K3bPlayListView()
 }
 
 
-bool K3bPlayListView::acceptDrag( QDropEvent* e ) const
+bool K3bPlayListView::acceptDrag( TQDropEvent* e ) const
 {
   // we accept textdrag (urls) and moved items (supported by KListView)
   return KURLDrag::canDecode(e) || KListView::acceptDrag(e);
 }
 
 
-QDragObject* K3bPlayListView::dragObject()
+TQDragObject* K3bPlayListView::dragObject()
 {
-  QPtrList<QListViewItem> list = selectedItems();
+  TQPtrList<TQListViewItem> list = selectedItems();
 
   if( list.isEmpty() )
     return 0;
 
-  QPtrListIterator<QListViewItem> it(list);
+  TQPtrListIterator<TQListViewItem> it(list);
   KURL::List urls;
 
   for( ; it.current(); ++it )
@@ -154,8 +154,8 @@ QDragObject* K3bPlayListView::dragObject()
 }
 
 
-K3bAudioPlayer::K3bAudioPlayer( QWidget* parent, const char* name )
-  : QWidget( parent, name )
+K3bAudioPlayer::K3bAudioPlayer( TQWidget* tqparent, const char* name )
+  : TQWidget( tqparent, name )
 #ifdef WITH_ARTS
 , m_playObject( Arts::PlayObject::null() )
 #endif
@@ -164,39 +164,39 @@ K3bAudioPlayer::K3bAudioPlayer( QWidget* parent, const char* name )
   // initialize
   // ------------------------------------------------------------------------
   m_labelFilename    = new KCutLabel( i18n("no file"), this );
-  m_labelOverallTime = new QLabel( "00:00", this );
-  m_labelCurrentTime = new QLabel( "00:00", this );
+  m_labelOverallTime = new TQLabel( "00:00", this );
+  m_labelCurrentTime = new TQLabel( "00:00", this );
 
   m_viewPlayList = new K3bPlayListView( this );
 
-  m_labelOverallTime->setAlignment( AlignHCenter | AlignVCenter );
-  m_labelCurrentTime->setAlignment( AlignHCenter | AlignVCenter );
-  m_labelOverallTime->setFrameStyle( QFrame::StyledPanel | QFrame::Plain );
-  m_labelCurrentTime->setFrameStyle( QFrame::StyledPanel | QFrame::Plain );
-  m_labelFilename->setFrameStyle( QFrame::StyledPanel | QFrame::Plain );
-  m_labelOverallTime->setPalette( QPalette( QColor(238, 238, 205) ) );
-  m_labelCurrentTime->setPalette( QPalette( QColor(238, 238, 205) ) );
-  m_labelFilename->setPalette( QPalette( QColor(238, 238, 205) ) );
+  m_labelOverallTime->tqsetAlignment( AlignHCenter | AlignVCenter );
+  m_labelCurrentTime->tqsetAlignment( AlignHCenter | AlignVCenter );
+  m_labelOverallTime->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );
+  m_labelCurrentTime->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );
+  m_labelFilename->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );
+  m_labelOverallTime->setPalette( TQPalette( TQColor(238, 238, 205) ) );
+  m_labelCurrentTime->setPalette( TQPalette( TQColor(238, 238, 205) ) );
+  m_labelFilename->setPalette( TQPalette( TQColor(238, 238, 205) ) );
 
-  m_buttonPlay = new QToolButton( this );
-  m_buttonPause = new QToolButton( this );
-  m_buttonStop = new QToolButton( this );
+  m_buttonPlay = new TQToolButton( this );
+  m_buttonPause = new TQToolButton( this );
+  m_buttonStop = new TQToolButton( this );
   m_buttonPlay->setIconSet( SmallIconSet("player_play") );
   m_buttonPause->setIconSet( SmallIconSet("player_pause") );
   m_buttonStop->setIconSet( SmallIconSet("player_stop") );
-  m_buttonForward = new QToolButton( this );
-  m_buttonBack = new QToolButton( this );
+  m_buttonForward = new TQToolButton( this );
+  m_buttonBack = new TQToolButton( this );
   m_buttonForward->setIconSet( SmallIconSet("player_end") );
   m_buttonBack->setIconSet( SmallIconSet("player_start") );
 
-  m_seekSlider = new QSlider( QSlider::Horizontal, this );
+  m_seekSlider = new TQSlider( TQSlider::Horizontal, this );
 
-  m_updateTimer = new QTimer( this );
+  m_updateTimer = new TQTimer( this );
   // ------------------------------------------------------------------------
 
-  // layout
+  // tqlayout
   // ------------------------------------------------------------------------
-  QGridLayout* grid = new QGridLayout( this );
+  TQGridLayout* grid = new TQGridLayout( this );
   grid->setSpacing( 2 );
   grid->setMargin( 0 );
 
@@ -223,10 +223,10 @@ K3bAudioPlayer::K3bAudioPlayer( QWidget* parent, const char* name )
   // actions
   // ------------------------------------------------------------------------
   m_actionRemove = new KAction( i18n( "Remove" ), "editdelete",
-				Key_Delete, this, SLOT(slotRemoveSelected()),
+				Key_Delete, this, TQT_SLOT(slotRemoveSelected()),
 				this, "audioplayer_remove" );
   m_actionClear = new KAction( i18n( "Clear List" ), "editclear",
-			       0, this, SLOT(clear()),
+			       0, this, TQT_SLOT(clear()),
 			       this, "audioplayer_clear" );
 
   m_contextMenu = new KActionMenu( this, "audio_player_menu" );
@@ -237,26 +237,26 @@ K3bAudioPlayer::K3bAudioPlayer( QWidget* parent, const char* name )
 
   // connections
   // ------------------------------------------------------------------------
-  connect( m_viewPlayList, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
-	   this, SLOT(slotShowContextMenu(KListView*, QListViewItem*, const QPoint&)) );
+  connect( m_viewPlayList, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(slotShowContextMenu(KListView*, TQListViewItem*, const TQPoint&)) );
 
-  connect( m_buttonPlay, SIGNAL(clicked()), this, SLOT(play()) );
-  connect( m_buttonStop, SIGNAL(clicked()), this, SLOT(stop()) );
-  connect( m_buttonPause, SIGNAL(clicked()), this, SLOT(pause()) );
+  connect( m_buttonPlay, TQT_SIGNAL(clicked()), this, TQT_SLOT(play()) );
+  connect( m_buttonStop, TQT_SIGNAL(clicked()), this, TQT_SLOT(stop()) );
+  connect( m_buttonPause, TQT_SIGNAL(clicked()), this, TQT_SLOT(pause()) );
 
-  connect( m_buttonForward, SIGNAL(clicked()), this, SLOT(forward()) );
-  connect( m_buttonBack, SIGNAL(clicked()), this, SLOT(back()) );
+  connect( m_buttonForward, TQT_SIGNAL(clicked()), this, TQT_SLOT(forward()) );
+  connect( m_buttonBack, TQT_SIGNAL(clicked()), this, TQT_SLOT(back()) );
 
-  connect( m_seekSlider, SIGNAL(sliderMoved(int)), this, SLOT(seek(int)) );
-  connect( m_seekSlider, SIGNAL(valueChanged(int)), this, SLOT(slotUpdateCurrentTime(int)) );
+  connect( m_seekSlider, TQT_SIGNAL(sliderMoved(int)), this, TQT_SLOT(seek(int)) );
+  connect( m_seekSlider, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(slotUpdateCurrentTime(int)) );
 
-  connect( m_updateTimer, SIGNAL(timeout()), this, SLOT(slotUpdateDisplay()) );
-  connect( m_updateTimer, SIGNAL(timeout()), this, SLOT(slotCheckEnd()) );
+  connect( m_updateTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotUpdateDisplay()) );
+  connect( m_updateTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotCheckEnd()) );
 
-  connect( m_viewPlayList, SIGNAL(doubleClicked(QListViewItem*)),
-	   this, SLOT(slotPlayItem(QListViewItem*)) );
-  connect( m_viewPlayList, SIGNAL(dropped(QDropEvent*,QListViewItem*)),
-	   this, SLOT(slotDropped(QDropEvent*,QListViewItem*)) );
+  connect( m_viewPlayList, TQT_SIGNAL(doubleClicked(TQListViewItem*)),
+	   this, TQT_SLOT(slotPlayItem(TQListViewItem*)) );
+  connect( m_viewPlayList, TQT_SIGNAL(dropped(TQDropEvent*,TQListViewItem*)),
+	   this, TQT_SLOT(slotDropped(TQDropEvent*,TQListViewItem*)) );
   // ------------------------------------------------------------------------
 
 
@@ -295,10 +295,10 @@ int K3bAudioPlayer::state()
 }
 
 
-void K3bAudioPlayer::playFile( const QString& filename )
+void K3bAudioPlayer::playFile( const TQString& filename )
 {
   clear();
-  if( QFile::exists( filename ) ) {
+  if( TQFile::exists( filename ) ) {
     K3bPlayListViewItem* item = new K3bPlayListViewItem( filename, m_viewPlayList );
     setCurrentItem( item );
     play();
@@ -307,10 +307,10 @@ void K3bAudioPlayer::playFile( const QString& filename )
 }
 
 
-void K3bAudioPlayer::playFiles( const QStringList& files )
+void K3bAudioPlayer::playFiles( const TQStringList& files )
 {
   clear();
-  QStringList::ConstIterator it = files.begin();
+  TQStringList::ConstIterator it = files.begin();
   playFile( *it );
   ++it;
 
@@ -319,16 +319,16 @@ void K3bAudioPlayer::playFiles( const QStringList& files )
 }
 
 
-void K3bAudioPlayer::enqueueFile( const QString& filename )
+void K3bAudioPlayer::enqueueFile( const TQString& filename )
 {
-  if( QFile::exists( filename ) )
+  if( TQFile::exists( filename ) )
     (void)new K3bPlayListViewItem( filename, m_viewPlayList, m_viewPlayList->lastChild() );
 }
 
 
-void K3bAudioPlayer::enqueueFiles( const QStringList& files )
+void K3bAudioPlayer::enqueueFiles( const TQStringList& files )
 {
-  for( QStringList::ConstIterator it = files.begin(); it != files.end(); ++it )
+  for( TQStringList::ConstIterator it = files.begin(); it != files.end(); ++it )
     enqueueFile( *it );
 }
 
@@ -349,7 +349,7 @@ void K3bAudioPlayer::play()
 	return;
       }
 
-      m_playObject = factory.createPlayObject( string(QFile::encodeName(m_currentItem->filename()) ) );
+      m_playObject = factory.createPlayObject( string(TQFile::encodeName(m_currentItem->filename()) ) );
       if( m_playObject.isNull() ) {
 	kdDebug() << "(K3bAudioPlayer) no aRts module available for: " << m_currentItem->filename() << endl;
 	m_labelFilename->setText( i18n("Unknown file format") );
@@ -374,7 +374,7 @@ void K3bAudioPlayer::play()
 }
 
 
-void K3bAudioPlayer::slotPlayItem( QListViewItem* item )
+void K3bAudioPlayer::slotPlayItem( TQListViewItem* item )
 {
   setCurrentItem( item );
   play();
@@ -511,9 +511,9 @@ long K3bAudioPlayer::position()
 
 
 // FIXME: let my do some useful stuff!
-bool K3bAudioPlayer::supportsMimetype( const QString& mimetype )
+bool K3bAudioPlayer::supportsMimetype( const TQString& mimetype )
 {
-  if( mimetype.contains("audio") || mimetype.contains("ogg") )
+  if( mimetype.tqcontains("audio") || mimetype.tqcontains("ogg") )
     return true;
   else
     return false;
@@ -539,7 +539,7 @@ void K3bAudioPlayer::slotCheckEnd()
 }
 
 
-void K3bAudioPlayer::setCurrentItem( QListViewItem* item )
+void K3bAudioPlayer::setCurrentItem( TQListViewItem* item )
 {
   if( item == 0 ) {
     stop();
@@ -579,20 +579,20 @@ void K3bAudioPlayer::slotUpdateLength( long time )
 void K3bAudioPlayer::slotUpdateFilename()
 {
   if( m_currentItem ) {
-    QString display = m_currentItem->filename();
-    int pos = display.findRev("/");
+    TQString display = m_currentItem->filename();
+    int pos = display.tqfindRev("/");
     if( pos >= 0 )
       display = display.mid(pos+1);
 
     switch( state() ) {
     case PLAYING:
-      display.prepend( QString("(%1) ").arg(i18n("playing")) );
+      display.prepend( TQString("(%1) ").tqarg(i18n("playing")) );
       break;
     case PAUSED:
-      display.prepend( QString("(%1) ").arg(i18n("paused")) );
+      display.prepend( TQString("(%1) ").tqarg(i18n("paused")) );
       break;
     case STOPPED:
-      display.prepend( QString("(%1) ").arg(i18n("stopped")) );
+      display.prepend( TQString("(%1) ").tqarg(i18n("stopped")) );
       break;
     default:
       break;
@@ -621,7 +621,7 @@ void K3bAudioPlayer::slotUpdateDisplay()
 }
 
 
-void K3bAudioPlayer::slotDropped( QDropEvent* e, QListViewItem* after )
+void K3bAudioPlayer::slotDropped( TQDropEvent* e, TQListViewItem* after )
 {
   if( !after )
     after = m_viewPlayList->lastChild();
@@ -630,8 +630,8 @@ void K3bAudioPlayer::slotDropped( QDropEvent* e, QListViewItem* after )
   KURLDrag::decode( e, urls );
 
   for( KURL::List::ConstIterator it = urls.begin(); it != urls.end(); ++it ) {
-    if( QFile::exists( (*it).path() ) ) {
-      QListViewItem* newItem = new K3bPlayListViewItem( (*it).path(), m_viewPlayList, after );
+    if( TQFile::exists( (*it).path() ) ) {
+      TQListViewItem* newItem = new K3bPlayListViewItem( (*it).path(), m_viewPlayList, after );
       after = newItem;
     }
   }
@@ -640,8 +640,8 @@ void K3bAudioPlayer::slotDropped( QDropEvent* e, QListViewItem* after )
 
 void K3bAudioPlayer::slotRemoveSelected()
 {
-  QPtrList<QListViewItem> selected = m_viewPlayList->selectedItems();
-  for( QListViewItem* item = selected.first(); item; item = selected.next() ) {
+  TQPtrList<TQListViewItem> selected = m_viewPlayList->selectedItems();
+  for( TQListViewItem* item = selected.first(); item; item = selected.next() ) {
     if( item == m_currentItem )
       setCurrentItem(0);
     delete item;
@@ -649,7 +649,7 @@ void K3bAudioPlayer::slotRemoveSelected()
 }
 
 
-void K3bAudioPlayer::slotShowContextMenu( KListView*, QListViewItem* item, const QPoint& p )
+void K3bAudioPlayer::slotShowContextMenu( KListView*, TQListViewItem* item, const TQPoint& p )
 {
   if( item )
     m_actionRemove->setEnabled( true );

@@ -17,29 +17,30 @@
 #ifndef _K3B_AUDIO_JOB_TEMPDATA_H_
 #define _K3B_AUDIO_JOB_TEMPDATA_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 #include <k3bmsf.h>
 
 class K3bAudioTrack;
 class K3bAudioDoc;
-class QTextStream;
+class TQTextStream;
 
 
-class K3bAudioJobTempData : public QObject
+class K3bAudioJobTempData : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioJobTempData( K3bAudioDoc* doc, QObject* parent = 0, const char* name = 0 );
+  K3bAudioJobTempData( K3bAudioDoc* doc, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bAudioJobTempData();
 
-  const QString& bufferFileName( int track );
-  const QString& bufferFileName( K3bAudioTrack* track );
+  const TQString& bufferFileName( int track );
+  const TQString& bufferFileName( K3bAudioTrack* track );
   
-  const QString& infFileName( int track );
-  const QString& infFileName( K3bAudioTrack* track );
+  const TQString& infFileName( int track );
+  const TQString& infFileName( K3bAudioTrack* track );
   
-  const QString& tocFileName();
+  const TQString& tocFileName();
 
   K3bAudioDoc* doc() const;
 
@@ -48,7 +49,7 @@ class K3bAudioJobTempData : public QObject
    * a specific directory
    * it defaults to the default K3b temp dir
    */
-  void prepareTempFileNames( const QString& path = QString::null );
+  void prepareTempFileNames( const TQString& path = TQString() );
 
   /**
    * remove all temp files (this does not include the audio buffer files

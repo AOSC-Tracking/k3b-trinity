@@ -37,14 +37,14 @@
 #include <kstandarddirs.h>
 #include <kapplication.h>
 
-#include <qptrlist.h>
-#include <qthread.h>
-#include <qmutex.h>
+#include <tqptrlist.h>
+#include <tqthread.h>
+#include <tqmutex.h>
 
 
-static Qt::HANDLE s_guiThreadHandle = QThread::currentThread();
+static TQt::HANDLE s_guiThreadHandle = TQThread::currentThread();
 
-// We cannot use QWaitCondition here since the event might be handled faster
+// We cannot use TQWaitCondition here since the event might be handled faster
 // than the thread starts the waiting
 class DeviceBlockingEventDoneCondition {
 public:
@@ -69,15 +69,15 @@ public:
   }
 
 private:
-  QMutex m_doneMutex;
+  TQMutex m_doneMutex;
   bool m_done;
 };
 
-class DeviceBlockingEvent : public QCustomEvent
+class DeviceBlockingEvent : public TQCustomEvent
 {
 public:
   DeviceBlockingEvent( bool block_, K3bDevice::Device* dev, DeviceBlockingEventDoneCondition* cond_, bool* success_ )
-    : QCustomEvent( QEvent::User + 33 ),
+    : TQCustomEvent( TQEvent::User + 33 ),
       block(block_),
       device(dev),
       cond(cond_),
@@ -111,8 +111,8 @@ public:
   K3bPluginManager* pluginManager;
   K3bGlobalSettings* globalSettings;
 
-  QValueList<K3bJob*> runningJobs;
-  QValueList<K3bDevice::Device*> blockedDevices;
+  TQValueList<K3bJob*> runningJobs;
+  TQValueList<K3bDevice::Device*> blockedDevices;
 };
 
 
@@ -121,8 +121,8 @@ K3bCore* K3bCore::s_k3bCore = 0;
 
 
 
-K3bCore::K3bCore( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bCore::K3bCore( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private();
 
@@ -205,11 +205,11 @@ void K3bCore::init()
   externalBinManager()->search();
 
 #ifdef HAVE_HAL
-  connect( K3bDevice::HalConnection::instance(), SIGNAL(deviceAdded(const QString&)),
-	   deviceManager(), SLOT(addDevice(const QString&)) );
-  connect( K3bDevice::HalConnection::instance(), SIGNAL(deviceRemoved(const QString&)),
-	   deviceManager(), SLOT(removeDevice(const QString&)) );
-  QStringList devList = K3bDevice::HalConnection::instance()->devices();
+  connect( K3bDevice::HalConnection::instance(), TQT_SIGNAL(deviceAdded(const TQString&)),
+	   deviceManager(), TQT_SLOT(addDevice(const TQString&)) );
+  connect( K3bDevice::HalConnection::instance(), TQT_SIGNAL(deviceRemoved(const TQString&)),
+	   deviceManager(), TQT_SLOT(removeDevice(const TQString&)) );
+  TQStringList devList = K3bDevice::HalConnection::instance()->devices();
   if( devList.isEmpty() )
     deviceManager()->scanBus();
   else
@@ -257,7 +257,7 @@ void K3bCore::readSettings( KConfig* cnf )
   if( !c )
     c = config();
 
-  QString oldGrp = c->group();
+  TQString oldGrp = c->group();
 
   globalSettings()->readSettings( c );
   deviceManager()->readConfig( c );
@@ -273,7 +273,7 @@ void K3bCore::saveSettings( KConfig* cnf )
   if( !c )
     c = config();
 
-  QString oldGrp = c->group();
+  TQString oldGrp = c->group();
 
   c->setGroup( "General Options" );
   c->writeEntry( "config version", version() );
@@ -310,7 +310,7 @@ bool K3bCore::jobsRunning() const
 }
 
 
-const QValueList<K3bJob*>& K3bCore::runningJobs() const
+const TQValueList<K3bJob*>& K3bCore::runningJobs() const
 {
   return d->runningJobs;
 }
@@ -318,13 +318,13 @@ const QValueList<K3bJob*>& K3bCore::runningJobs() const
 
 bool K3bCore::blockDevice( K3bDevice::Device* dev )
 {
-  if( QThread::currentThread() == s_guiThreadHandle ) {
+  if( TQThread::currentThread() == s_guiThreadHandle ) {
     return internalBlockDevice( dev );
   }
   else {
     bool success = false;
     DeviceBlockingEventDoneCondition w;
-    QApplication::postEvent( this, new DeviceBlockingEvent( true, dev, &w, &success ) );
+    TQApplication::postEvent( this, new DeviceBlockingEvent( true, dev, &w, &success ) );
     w.wait();
     return success;
   }
@@ -333,12 +333,12 @@ bool K3bCore::blockDevice( K3bDevice::Device* dev )
 
 void K3bCore::unblockDevice( K3bDevice::Device* dev )
 {
-  if( QThread::currentThread() == s_guiThreadHandle ) {
+  if( TQThread::currentThread() == s_guiThreadHandle ) {
     internalUnblockDevice( dev );
   }
   else {
     DeviceBlockingEventDoneCondition w;
-    QApplication::postEvent( this, new DeviceBlockingEvent( false, dev, &w, 0 ) );
+    TQApplication::postEvent( this, new DeviceBlockingEvent( false, dev, &w, 0 ) );
     w.wait();
   }
 }
@@ -346,7 +346,7 @@ void K3bCore::unblockDevice( K3bDevice::Device* dev )
 
 bool K3bCore::internalBlockDevice( K3bDevice::Device* dev )
 {
-  if( !d->blockedDevices.contains( dev ) ) {
+  if( !d->blockedDevices.tqcontains( dev ) ) {
     d->blockedDevices.append( dev );
     return true;
   }
@@ -361,7 +361,7 @@ void K3bCore::internalUnblockDevice( K3bDevice::Device* dev )
 }
 
 
-void K3bCore::customEvent( QCustomEvent* e )
+void K3bCore::customEvent( TQCustomEvent* e )
 {
   if( DeviceBlockingEvent* de = dynamic_cast<DeviceBlockingEvent*>(e) ) {
     if( de->block )

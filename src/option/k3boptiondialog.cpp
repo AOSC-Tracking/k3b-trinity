@@ -26,10 +26,10 @@
 #include <k3bsystemproblemdialog.h>
 
 
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qtabwidget.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqtabwidget.h>
 
 #include <klocale.h>
 #include <kiconloader.h>
@@ -40,8 +40,8 @@
 
 // TODO: handle the default-settings
 
-K3bOptionDialog::K3bOptionDialog(QWidget *parent, const char *name, bool modal )
-  : KDialogBase( IconList, i18n("Settings"), Apply|Ok|Cancel, Ok, parent,name, modal, true)
+K3bOptionDialog::K3bOptionDialog(TQWidget *tqparent, const char *name, bool modal )
+  : KDialogBase( IconList, i18n("Settings"), Apply|Ok|Cancel, Ok, tqparent,name, modal, true)
 {
   setupMiscPage();
   setupDevicePage();	
@@ -126,10 +126,10 @@ void K3bOptionDialog::slotDefault()
 
 void K3bOptionDialog::setupBurningPage()
 {
-  QFrame* frame = addPage( i18n("Advanced"), i18n("Advanced Settings"),
+  TQFrame* frame = addPage( i18n("Advanced"), i18n("Advanced Settings"),
 			   KGlobal::instance()->iconLoader()->loadIcon( "cdwriter_unmount", KIcon::NoGroup, KIcon::SizeMedium ) );
 
-  QGridLayout* _frameLayout = new QGridLayout( frame );
+  TQGridLayout* _frameLayout = new TQGridLayout( frame );
   _frameLayout->setSpacing( 0 );
   _frameLayout->setMargin( 0 );
 
@@ -140,10 +140,10 @@ void K3bOptionDialog::setupBurningPage()
 
 void K3bOptionDialog::setupProgramsPage()
 {
-  QFrame* frame = addPage( i18n("Programs"), i18n("Setup External Programs"),
+  TQFrame* frame = addPage( i18n("Programs"), i18n("Setup External Programs"),
 			   KGlobal::instance()->iconLoader()->loadIcon( "exec", KIcon::NoGroup, KIcon::SizeMedium ) );
 
-  QGridLayout* _frameLayout = new QGridLayout( frame );
+  TQGridLayout* _frameLayout = new TQGridLayout( frame );
   _frameLayout->setSpacing( 0 );
   _frameLayout->setMargin( 0 );
 
@@ -154,13 +154,13 @@ void K3bOptionDialog::setupProgramsPage()
 
 void K3bOptionDialog::setupCddbPage()
 {
-  QFrame* frame = addPage( i18n("CDDB"), i18n("Setup the CDDB Server"),
+  TQFrame* frame = addPage( i18n("CDDB"), i18n("Setup the CDDB Server"),
 			   KGlobal::instance()->iconLoader()->loadIcon( "connect_established", KIcon::NoGroup, KIcon::SizeMedium ) );
 
-  QGridLayout* mainGrid = new QGridLayout( frame );
+  TQGridLayout* mainGrid = new TQGridLayout( frame );
   mainGrid->setSpacing(0);
   mainGrid->setMargin(0);
-  //  QTabWidget *_tab = new QTabWidget( frame );
+  //  TQTabWidget *_tab = new TQTabWidget( frame );
   m_cddbOptionTab = new K3bCddbOptionTab( frame, "cddbremotepage");
   //  m_cddbLocalTab = new K3bCddbLocalDBTab( frame, "cddblocalpage");
 //   _tab->addTab( m_cddbOptionTab, i18n("Remote") );
@@ -172,10 +172,10 @@ void K3bOptionDialog::setupCddbPage()
 
 void K3bOptionDialog::setupDevicePage()
 {
-  QFrame* frame = addPage( i18n("Devices"), i18n("Setup Devices"),
+  TQFrame* frame = addPage( i18n("Devices"), i18n("Setup Devices"),
 			   KGlobal::instance()->iconLoader()->loadIcon( "blockdevice", KIcon::NoGroup, KIcon::SizeMedium ) );
 
-  QHBoxLayout* box = new QHBoxLayout( frame );
+  TQHBoxLayout* box = new TQHBoxLayout( frame );
   box->setSpacing(0);
   box->setMargin(0);
   m_deviceOptionTab = new K3bDeviceOptionTab( frame, "deviceOptionTab" );
@@ -185,10 +185,10 @@ void K3bOptionDialog::setupDevicePage()
 
 void K3bOptionDialog::setupMiscPage()
 {
-  QFrame* frame = addPage( i18n("Misc"), i18n("Miscellaneous Settings"),
+  TQFrame* frame = addPage( i18n("Misc"), i18n("Miscellaneous Settings"),
 			   KGlobal::instance()->iconLoader()->loadIcon( "misc", KIcon::NoGroup, KIcon::SizeMedium ) );
 
-  QVBoxLayout* box = new QVBoxLayout( frame );
+  TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );
   box->setMargin( 0 );
 
@@ -199,10 +199,10 @@ void K3bOptionDialog::setupMiscPage()
 
 void K3bOptionDialog::setupNotifyPage()
 {
-  QFrame* frame = addPage( i18n("Notifications"), i18n("System Notifications"),
+  TQFrame* frame = addPage( i18n("Notifications"), i18n("System Notifications"),
 			   KGlobal::instance()->iconLoader()->loadIcon( "knotify", 
 									KIcon::NoGroup, KIcon::SizeMedium ) );
-  QVBoxLayout* box = new QVBoxLayout( frame );
+  TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );
   box->setMargin( 0 );
 
@@ -213,10 +213,10 @@ void K3bOptionDialog::setupNotifyPage()
 
 void K3bOptionDialog::setupPluginPage()
 {
-  QFrame* frame = addPage( i18n("Plugins"), i18n("K3b Plugin Configuration"),
+  TQFrame* frame = addPage( i18n("Plugins"), i18n("K3b Plugin Configuration"),
 			   KGlobal::instance()->iconLoader()->loadIcon( "gear",
 									KIcon::NoGroup, KIcon::SizeMedium ) );
-  QVBoxLayout* box = new QVBoxLayout( frame );
+  TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );
   box->setMargin( 0 );
 
@@ -227,10 +227,10 @@ void K3bOptionDialog::setupPluginPage()
 
 void K3bOptionDialog::setupThemePage()
 {
-  QFrame* frame = addPage( i18n("Themes"), i18n("K3b GUI Themes"),
+  TQFrame* frame = addPage( i18n("Themes"), i18n("K3b GUI Themes"),
 			   KGlobal::instance()->iconLoader()->loadIcon( "style",
 									KIcon::NoGroup, KIcon::SizeMedium ) );
-  QVBoxLayout* box = new QVBoxLayout( frame );
+  TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );
   box->setMargin( 0 );
 
@@ -239,14 +239,14 @@ void K3bOptionDialog::setupThemePage()
 }
 
 
-// void K3bOptionDialog::addOptionPage( QWidget* widget,
-// 				     const QString& name,
-// 				     const QString& header,
-// 				     const QPixmap& icon )
+// void K3bOptionDialog::addOptionPage( TQWidget* widget,
+// 				     const TQString& name,
+// 				     const TQString& header,
+// 				     const TQPixmap& icon )
 // {
-//   QFrame* frame = addPage( name, header, icon );
+//   TQFrame* frame = addPage( name, header, icon );
 
-//   QVBoxLayout* box = new QVBoxLayout( frame );
+//   TQVBoxLayout* box = new TQVBoxLayout( frame );
 //   box->setSpacing( 0 );
 //   box->setMargin( 0 );
 

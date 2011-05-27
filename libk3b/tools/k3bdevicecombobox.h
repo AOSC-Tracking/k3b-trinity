@@ -34,9 +34,10 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bDeviceComboBox : public KComboBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDeviceComboBox( QWidget* parent = 0, const char* name = 0 );
+  K3bDeviceComboBox( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bDeviceComboBox();
 
   K3bDevice::Device* selectedDevice() const;
@@ -46,11 +47,11 @@ class LIBK3B_EXPORT K3bDeviceComboBox : public KComboBox
 
  public slots:
   void addDevice( K3bDevice::Device* );
-  void addDevices( const QPtrList<K3bDevice::Device>& );
+  void addDevices( const TQPtrList<K3bDevice::Device>& );
   /**
    * Clears the device combo and tries to keep the current selection
    */
-  void refreshDevices( const QPtrList<K3bDevice::Device>& );
+  void refreshDevices( const TQPtrList<K3bDevice::Device>& );
   void removeDevice( K3bDevice::Device* );
   void setSelectedDevice( K3bDevice::Device* );
   void clear();

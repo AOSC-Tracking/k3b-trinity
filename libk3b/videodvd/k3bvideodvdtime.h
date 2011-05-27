@@ -18,7 +18,7 @@
 
 #include <k3b_export.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 /**
  * This should not be confused with K3b::Msf
@@ -45,7 +45,7 @@ namespace K3bVideoDVD
       // FIXME: is this useful?
       double frameRate() const;
 
-      QString toString( bool includeFrames = true ) const;
+      TQString toString( bool includeFrames = true ) const;
 
     private:
       void makeValid();

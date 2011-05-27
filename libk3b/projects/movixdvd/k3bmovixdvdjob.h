@@ -31,16 +31,17 @@ class K3bFileItem;
 class K3bMovixDvdJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler*, QObject* parent = 0 );
+  K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler*, TQObject* tqparent = 0 );
   ~K3bMovixDvdJob();
 
   K3bDoc* doc() const;
   K3bDevice::Device* writer() const;
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 		
  public slots:
   void start();

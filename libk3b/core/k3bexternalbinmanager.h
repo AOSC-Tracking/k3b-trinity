@@ -16,11 +16,11 @@
 #ifndef K3B_EXTERNAL_BIN_MANAGER_H
 #define K3B_EXTERNAL_BIN_MANAGER_H
 
-#include <qmap.h>
-#include <qobject.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qptrlist.h>
+#include <tqmap.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqptrlist.h>
 #include "k3b_export.h"
 #include "k3bversion.h"
 
@@ -44,21 +44,21 @@ class LIBK3B_EXPORT K3bExternalBin
   virtual ~K3bExternalBin() {}
 
   K3bVersion version;
-  QString path;
-  QString copyright;
+  TQString path;
+  TQString copyright;
 
-  const QString& name() const;
+  const TQString& name() const;
   bool isEmpty() const;
-  const QStringList& userParameters() const;
-  const QStringList& features() const { return m_features; }
+  const TQStringList& userParameters() const;
+  const TQStringList& features() const { return m_features; }
 
-  bool hasFeature( const QString& ) const;
-  void addFeature( const QString& );
+  bool hasFeature( const TQString& ) const;
+  void addFeature( const TQString& );
 
   K3bExternalProgram* program() const { return m_program; }
 
  private:
-  QStringList m_features;
+  TQStringList m_features;
   K3bExternalProgram* m_program;
 };
 
@@ -72,31 +72,31 @@ class LIBK3B_EXPORT K3bExternalBin
 class LIBK3B_EXPORT K3bExternalProgram
 {
  public:
-  K3bExternalProgram( const QString& name );
+  K3bExternalProgram( const TQString& name );
   virtual ~K3bExternalProgram();
 
   const K3bExternalBin* defaultBin() const { return m_bins.getFirst(); }
   const K3bExternalBin* mostRecentBin() const;
 
-  void addUserParameter( const QString& );
-  void setUserParameters( const QStringList& list ) { m_userParameters = list; }
+  void addUserParameter( const TQString& );
+  void setUserParameters( const TQStringList& list ) { m_userParameters = list; }
 
-  const QStringList& userParameters() const { return m_userParameters; }
-  const QString& name() const { return m_name; }
+  const TQStringList& userParameters() const { return m_userParameters; }
+  const TQString& name() const { return m_name; }
 
   void addBin( K3bExternalBin* );
   void clear() { m_bins.clear(); }
   void setDefault( const K3bExternalBin* );
-  void setDefault( const QString& path );
+  void setDefault( const TQString& path );
 
-  const QPtrList<K3bExternalBin>& bins() const { return m_bins; }
+  const TQPtrList<K3bExternalBin>& bins() const { return m_bins; }
 
   /**
    * this scans for the program in the given path,
    * adds the found bin object to the list and returnes true.
    * if nothing could be found false is returned.
    */
-  virtual bool scan( const QString& ) {return false;}//= 0;
+  virtual bool scan( const TQString& ) {return false;}//= 0;
 
   /**
    * reimplement this if it does not make sense to have the user be able
@@ -105,18 +105,19 @@ class LIBK3B_EXPORT K3bExternalProgram
   virtual bool supportsUserParameters() const { return true; }
 
  private:
-  QString m_name;
-  QStringList m_userParameters;
-  QPtrList<K3bExternalBin> m_bins;
+  TQString m_name;
+  TQStringList m_userParameters;
+  TQPtrList<K3bExternalBin> m_bins;
 };
 
 
-class LIBK3B_EXPORT K3bExternalBinManager : public QObject
+class LIBK3B_EXPORT K3bExternalBinManager : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bExternalBinManager( QObject* parent = 0, const char* name = 0 );
+  K3bExternalBinManager( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bExternalBinManager();
 
   void search();
@@ -132,31 +133,31 @@ class LIBK3B_EXPORT K3bExternalBinManager : public QObject
    */
   bool saveConfig( KConfig* );
 
-  bool foundBin( const QString& name );
-  const QString& binPath( const QString& name );
-  const K3bExternalBin* binObject( const QString& name );
-  const K3bExternalBin* mostRecentBinObject( const QString& name );
+  bool foundBin( const TQString& name );
+  const TQString& binPath( const TQString& name );
+  const K3bExternalBin* binObject( const TQString& name );
+  const K3bExternalBin* mostRecentBinObject( const TQString& name );
 
-  K3bExternalProgram* program( const QString& ) const;
-  const QMap<QString, K3bExternalProgram*>& programs() const { return m_programs; }
+  K3bExternalProgram* program( const TQString& ) const;
+  const TQMap<TQString, K3bExternalProgram*>& programs() const { return m_programs; }
 
   /** always extends the default searchpath */
-  void setSearchPath( const QStringList& );
-  void addSearchPath( const QString& );
+  void setSearchPath( const TQStringList& );
+  void addSearchPath( const TQString& );
   void loadDefaultSearchPath();
 
-  const QStringList& searchPath() const { return m_searchPath; }
+  const TQStringList& searchPath() const { return m_searchPath; }
 
   void addProgram( K3bExternalProgram* );
   void clear();
 
  private:
-  QMap<QString, K3bExternalProgram*> m_programs;
-  QStringList m_searchPath;
+  TQMap<TQString, K3bExternalProgram*> m_programs;
+  TQStringList m_searchPath;
 
-  static QString m_noPath;  // used for binPath() to return const string
+  static TQString m_noPath;  // used for binPath() to return const string
 
-  QString m_gatheredOutput;
+  TQString m_gatheredOutput;
 };
 
 #endif

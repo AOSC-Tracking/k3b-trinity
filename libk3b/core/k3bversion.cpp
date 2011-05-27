@@ -15,7 +15,7 @@
 
 #include "k3bversion.h"
 
-#include <qregexp.h>
+#include <tqregexp.h>
 #include <kdebug.h>
 
 
@@ -35,7 +35,7 @@ K3bVersion::K3bVersion( const K3bVersion& v )
 {
 }
 
-K3bVersion::K3bVersion( const QString& version )
+K3bVersion::K3bVersion( const TQString& version )
 {
   setVersion( version );
 }
@@ -43,14 +43,14 @@ K3bVersion::K3bVersion( const QString& version )
 K3bVersion::K3bVersion( int majorVersion, 
 			int minorVersion, 
 			int patchlevel, 
-			const QString& suffix )
+			const TQString& suffix )
 {
   setVersion( majorVersion, minorVersion, patchlevel, suffix );
 }
 
-void K3bVersion::setVersion( const QString& v )
+void K3bVersion::setVersion( const TQString& v )
 {
-  QString suffix;
+  TQString suffix;
   splitVersionString( v.stripWhiteSpace(), m_majorVersion, suffix );
   if( m_majorVersion >= 0 ) {
     if( suffix.startsWith(".") ) {
@@ -99,9 +99,9 @@ void K3bVersion::setVersion( const QString& v )
 // the dot is removed and the rest put in suffix
 // if s does not start with a digit or the first non-digit char is not a dot
 // suffix = s and num = -1 is returned
-void K3bVersion::splitVersionString( const QString& s, int& num, QString& suffix )
+void K3bVersion::splitVersionString( const TQString& s, int& num, TQString& suffix )
 {
-  int pos = s.find( QRegExp("\\D") );
+  int pos = s.tqfind( TQRegExp("\\D") );
   if( pos < 0 ) {
     num = s.toInt();
     suffix = "";
@@ -126,7 +126,7 @@ bool K3bVersion::isValid() const
 void K3bVersion::setVersion( int majorVersion, 
 			     int minorVersion, 
 			     int patchlevel, 
-			     const QString& suffix )
+			     const TQString& suffix )
 {
   m_majorVersion = majorVersion;
   m_minorVersion = minorVersion;
@@ -135,7 +135,7 @@ void K3bVersion::setVersion( int majorVersion,
   m_versionString = createVersionString( majorVersion, minorVersion, patchlevel, suffix );
 }
 
-K3bVersion& K3bVersion::operator=( const QString& v )
+K3bVersion& K3bVersion::operator=( const TQString& v )
 {
   setVersion( v );
   return *this;
@@ -148,18 +148,18 @@ K3bVersion K3bVersion::simplify() const
   return v;
 }
 
-QString K3bVersion::createVersionString( int majorVersion, 
+TQString K3bVersion::createVersionString( int majorVersion, 
 					 int minorVersion, 
 					 int patchlevel, 
-					 const QString& suffix )
+					 const TQString& suffix )
 {
   if( majorVersion >= 0 ) {
-    QString s = QString::number(majorVersion);
+    TQString s = TQString::number(majorVersion);
     
     if( minorVersion > -1 ) {
-      s.append( QString(".%1").arg(minorVersion) );
+      s.append( TQString(".%1").tqarg(minorVersion) );
       if( patchlevel > -1 )
-	s.append( QString(".%1").arg(patchlevel) );
+	s.append( TQString(".%1").tqarg(patchlevel) );
     }
     
     if( !suffix.isNull() )
@@ -172,12 +172,12 @@ QString K3bVersion::createVersionString( int majorVersion,
 }
 
 
-int K3bVersion::compareSuffix( const QString& suffix1, const QString& suffix2 )
+int K3bVersion::compareSuffix( const TQString& suffix1, const TQString& suffix2 )
 {
-  static QRegExp rcRx( "rc(\\d+)" );
-  static QRegExp preRx( "pre(\\d+)" );
-  static QRegExp betaRx( "beta(\\d+)" );
-  static QRegExp alphaRx( "a(?:lpha)?(\\d+)" );
+  static TQRegExp rcRx( "rc(\\d+)" );
+  static TQRegExp preRx( "pre(\\d+)" );
+  static TQRegExp betaRx( "beta(\\d+)" );
+  static TQRegExp alphaRx( "a(?:lpha)?(\\d+)" );
 
   // first we check if one of the suffixes (or both are empty) becasue that case if simple
   if( suffix1.isEmpty() ) {
@@ -202,7 +202,7 @@ int K3bVersion::compareSuffix( const QString& suffix1, const QString& suffix2 )
 	     alphaRx.exactMatch( suffix2 ) )
       return 1; // rc > than all the others
     else
-      return QString::compare( suffix1, suffix2 );
+      return TQString::compare( suffix1, suffix2 );
   }
 
   else if( preRx.exactMatch( suffix1 ) ) {
@@ -219,7 +219,7 @@ int K3bVersion::compareSuffix( const QString& suffix1, const QString& suffix2 )
 	     alphaRx.exactMatch( suffix2 ) )
       return 1; // pre is greater than beta or alpha
     else
-      return QString::compare( suffix1, suffix2 );
+      return TQString::compare( suffix1, suffix2 );
   }
 
   else if( betaRx.exactMatch( suffix1 ) ) {
@@ -235,7 +235,7 @@ int K3bVersion::compareSuffix( const QString& suffix1, const QString& suffix2 )
     else if( alphaRx.exactMatch( suffix2 ) )
       return 1; // beta is greater then alpha
     else
-      return QString::compare( suffix1, suffix2 );
+      return TQString::compare( suffix1, suffix2 );
   }
 
   else if( alphaRx.exactMatch( suffix1 ) ) {
@@ -250,11 +250,11 @@ int K3bVersion::compareSuffix( const QString& suffix1, const QString& suffix2 )
       return ( v1 == v2 ? 0 : ( v1 < v2 ? -1 : 1 ) );
     }
     else
-      return QString::compare( suffix1, suffix2 );
+      return TQString::compare( suffix1, suffix2 );
   }
 
   else
-    return QString::compare( suffix1, suffix2 );
+    return TQString::compare( suffix1, suffix2 );
 }
 
 

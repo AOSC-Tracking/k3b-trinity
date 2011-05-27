@@ -18,9 +18,9 @@
 #define K3B_AUDIO_RIP_THREAD_H
 
 #include <k3bthread.h>
-#include <qobject.h>
-#include <qvaluevector.h>
-#include <qpair.h>
+#include <tqobject.h>
+#include <tqvaluevector.h>
+#include <tqpair.h>
 
 #include <k3bcddbquery.h>
 
@@ -32,16 +32,17 @@ namespace K3bDevice {
 }
 
 
-class K3bAudioRipThread : public QObject, public K3bThread
+class K3bAudioRipThread : public TQObject, public K3bThread
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   K3bAudioRipThread();
   ~K3bAudioRipThread();
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
   // paranoia settings
   void setParanoiaMode( int mode );
@@ -62,15 +63,15 @@ class K3bAudioRipThread : public QObject, public K3bThread
   /**
    * Used for encoders that support multiple formats
    */
-  void setFileType( const QString& );
+  void setFileType( const TQString& );
 
   /**
    * 1 is the first track
    */
-  void setTracksToRip( const QValueVector<QPair<int, QString> >& t ) { m_tracks = t; }
+  void setTracksToRip( const TQValueVector<TQPair<int, TQString> >& t ) { m_tracks = t; }
 
   void setWritePlaylist( bool b ) { m_writePlaylist = b; }
-  void setPlaylistFilename( const QString& s ) { m_playlistFilename = s; }
+  void setPlaylistFilename( const TQString& s ) { m_playlistFilename = s; }
   void setUseRelativePathInPlaylist( bool b ) { m_relativePathInPlaylist = b; }
   void setWriteCueFile( bool b ) { m_writeCueFile = b; }
 
@@ -80,10 +81,10 @@ class K3bAudioRipThread : public QObject, public K3bThread
   void slotCheckIfThreadStillRunning();
 
  private:
-  /** reimplemented from QThread. Does the work */
+  /** reimplemented from TQThread. Does the work */
   void run();
 
-  bool ripTrack( int track, const QString& filename );
+  bool ripTrack( int track, const TQString& filename );
   void cleanupAfterCancellation();
   bool writePlaylist();
   bool writeCueFile();
@@ -91,7 +92,7 @@ class K3bAudioRipThread : public QObject, public K3bThread
   /**
    * Finds a relative path from baseDir to absPath
    */
-  QString findRelativePath( const QString& absPath, const QString& baseDir );
+  TQString findRelativePath( const TQString& absPath, const TQString& baseDir );
 
   K3bCddbResultEntry m_cddbEntry;
   K3bDevice::Device* m_device;
@@ -102,11 +103,11 @@ class K3bAudioRipThread : public QObject, public K3bThread
 
   bool m_writePlaylist;
   bool m_relativePathInPlaylist;
-  QString m_playlistFilename;
+  TQString m_playlistFilename;
 
   bool m_writeCueFile;
 
-  QValueVector<QPair<int, QString> > m_tracks;
+  TQValueVector<TQPair<int, TQString> > m_tracks;
 
   friend class K3bAudioRipJob;
 

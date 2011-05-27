@@ -26,8 +26,8 @@
 K_EXPORT_COMPONENT_FACTORY( libk3bmpcdecoder, K3bPluginFactory<K3bMpcDecoderFactory>( "libk3bmpcdecoder" ) )
 
 
-K3bMpcDecoderFactory::K3bMpcDecoderFactory( QObject* parent, const char* name )
-  : K3bAudioDecoderFactory( parent, name )
+K3bMpcDecoderFactory::K3bMpcDecoderFactory( TQObject* tqparent, const char* name )
+  : K3bAudioDecoderFactory( tqparent, name )
 {
 }
 
@@ -37,10 +37,10 @@ K3bMpcDecoderFactory::~K3bMpcDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bMpcDecoderFactory::createDecoder( QObject* parent, 
+K3bAudioDecoder* K3bMpcDecoderFactory::createDecoder( TQObject* tqparent, 
 							 const char* name ) const
 {
-  return new K3bMpcDecoder( parent, name );
+  return new K3bMpcDecoder( tqparent, name );
 }
 
 
@@ -55,8 +55,8 @@ bool K3bMpcDecoderFactory::canDecode( const KURL& url )
 
 
 
-K3bMpcDecoder::K3bMpcDecoder( QObject* parent, const char* name )
-  : K3bAudioDecoder( parent, name )
+K3bMpcDecoder::K3bMpcDecoder( TQObject* tqparent, const char* name )
+  : K3bAudioDecoder( tqparent, name )
 {
   m_mpc = new K3bMpcWrapper();
 }
@@ -68,7 +68,7 @@ K3bMpcDecoder::~K3bMpcDecoder()
 }
 
 
-QString K3bMpcDecoder::fileType() const
+TQString K3bMpcDecoder::fileType() const
 {
   return i18n("Musepack");
 }

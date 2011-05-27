@@ -20,29 +20,29 @@
 #include <k3btrack.h>
 #include <k3bcdtext.h>
 
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qtextstream.h>
-#include <qregexp.h>
-#include <qdir.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqtextstream.h>
+#include <tqregexp.h>
+#include <tqdir.h>
 
 #include <kdebug.h>
 
 
-// avoid usage of QTextStream since K3b often
+// avoid usage of TQTextStream since K3b often
 // tries to open big files (iso images) in a 
 // cue file parser to test it.
-static QString readLine( QFile* f )
+static TQString readLine( TQFile* f )
 {
-  QString s;
-  Q_LONG r = f->readLine( s, 1024 );
+  TQString s;
+  TQ_LONG r = f->readLine( s, 1024 );
   if( r >= 0 ) {
     // remove the trailing newline
     return s.stripWhiteSpace();
   }
   else {
     // end of file or error
-    return QString::null;
+    return TQString();
   }
 }
 
@@ -70,7 +70,7 @@ public:
 
 
 
-K3bCueFileParser::K3bCueFileParser( const QString& filename )
+K3bCueFileParser::K3bCueFileParser( const TQString& filename )
   : K3bImageFileReader()
 {
   d = new Private;
@@ -94,9 +94,9 @@ void K3bCueFileParser::readFile()
   d->cdText.clear();
   d->currentParsedTrack = 0;
 
-  QFile f( filename() );
+  TQFile f( filename() );
   if( f.open( IO_ReadOnly ) ) {
-    QString line = readLine( &f );
+    TQString line = readLine( &f );
     while( !line.isNull() ) {
       
       if( !parseLine(line) ) {
@@ -136,33 +136,33 @@ void K3bCueFileParser::readFile()
 }
 
 
-bool K3bCueFileParser::parseLine( QString& line )
+bool K3bCueFileParser::parseLine( TQString& line )
 {
   // use cap(1) for the filename
-  static QRegExp fileRx( "FILE\\s\"?([^\"]*)\"?\\s[^\"\\s]*" );
+  static TQRegExp fileRx( "FILE\\s\"?([^\"]*)\"?\\s[^\"\\s]*" );
 
   // use cap(1) for the flags
-  static QRegExp flagsRx( "FLAGS(\\s(DCP|4CH|PRE|SCMS)){1,4}" );
+  static TQRegExp flagsRx( "FLAGS(\\s(DCP|4CH|PRE|SCMS)){1,4}" );
 
   // use cap(1) for the tracknumber and cap(2) for the datatype
-  static QRegExp trackRx( "TRACK\\s(\\d{1,2})\\s(AUDIO|CDG|MODE1/2048|MODE1/2352|MODE2/2336|MODE2/2352|CDI/2336|CDI/2352)" );
+  static TQRegExp trackRx( "TRACK\\s(\\d{1,2})\\s(AUDIO|CDG|MODE1/2048|MODE1/2352|MODE2/2336|MODE2/2352|CDI/2336|CDI/2352)" );
 
   // use cap(1) for the index number, cap(3) for the minutes, cap(4) for the seconds, cap(5) for the frames,
   // and cap(2) for the MSF value string
-  static QRegExp indexRx( "INDEX\\s(\\d{1,2})\\s((\\d+):([0-5]\\d):((?:[0-6]\\d)|(?:7[0-4])))" );
+  static TQRegExp indexRx( "INDEX\\s(\\d{1,2})\\s((\\d+):([0-5]\\d):((?:[0-6]\\d)|(?:7[0-4])))" );
 
   // use cap(1) for the MCN
-  static QRegExp catalogRx( "CATALOG\\s(\\w{13,13})" );
+  static TQRegExp catalogRx( "CATALOG\\s(\\w{13,13})" );
 
   // use cap(1) for the ISRC
-  static QRegExp isrcRx( "ISRC\\s(\\w{5,5}\\d{7,7})" );
+  static TQRegExp isrcRx( "ISRC\\s(\\w{5,5}\\d{7,7})" );
 
-  static QString cdTextRxStr = "\"?([^\"]{0,80})\"?";
+  static TQString cdTextRxStr = "\"?([^\"]{0,80})\"?";
 
   // use cap(1) for the string
-  static QRegExp titleRx( "TITLE\\s" + cdTextRxStr );
-  static QRegExp performerRx( "PERFORMER\\s" + cdTextRxStr );
-  static QRegExp songwriterRx( "SONGWRITER\\s" + cdTextRxStr );
+  static TQRegExp titleRx( "TITLE\\s" + cdTextRxStr );
+  static TQRegExp performerRx( "PERFORMER\\s" + cdTextRxStr );
+  static TQRegExp songwriterRx( "SONGWRITER\\s" + cdTextRxStr );
 
 
   // simplify all white spaces except those in filenames and CD-TEXT
@@ -235,7 +235,7 @@ bool K3bCueFileParser::parseLine( QString& line )
 	d->rawData = (trackRx.cap(2) == "MODE2/2352");
       }
       else {
-	kdDebug() << "(K3bCueFileParser) unsupported track type: " << trackRx.cap(2) << endl;
+	kdDebug() << "(K3bCueFileParser) unsupported track type: " << TQString(trackRx.cap(2)) << endl;
 	return false;
       }
     }
@@ -360,7 +360,7 @@ bool K3bCueFileParser::parseLine( QString& line )
 }
 
 
-void K3bCueFileParser::simplifyWhiteSpace( QString& s )
+void K3bCueFileParser::simplifyWhiteSpace( TQString& s )
 {
   s = s.stripWhiteSpace();
 
@@ -392,7 +392,7 @@ const K3bDevice::CdText& K3bCueFileParser::cdText() const
 }
 
 
-bool K3bCueFileParser::findImageFileName( const QString& dataFile )
+bool K3bCueFileParser::findImageFileName( const TQString& dataFile )
 {
   //
   // CDRDAO does not use this image filename but replaces the extension from the cue file
@@ -402,21 +402,21 @@ bool K3bCueFileParser::findImageFileName( const QString& dataFile )
   m_imageFilenameInCue = true;
 
   // first try filename as a hole (absolut)
-  if( QFile::exists( dataFile ) ) {
-    setImageFilename( QFileInfo(dataFile).absFilePath() );
+  if( TQFile::exists( dataFile ) ) {
+    setImageFilename( TQFileInfo(dataFile).absFilePath() );
     return true;
   }
 
   // try the filename in the cue's directory
-  if( QFileInfo( K3b::parentDir(filename()) + dataFile.section( '/', -1 ) ).isFile() ) {
-    setImageFilename( K3b::parentDir(filename()) + dataFile.section( '/', -1 ) );
+  if( TQFileInfo( K3b::tqparentDir(filename()) + dataFile.section( '/', -1 ) ).isFile() ) {
+    setImageFilename( K3b::tqparentDir(filename()) + dataFile.section( '/', -1 ) );
     kdDebug() << "(K3bCueFileParser) found image file: " << imageFilename() << endl;
     return true;
   }
 
   // try the filename ignoring case
-  if( QFileInfo( K3b::parentDir(filename()) + dataFile.section( '/', -1 ).lower() ).isFile() ) {
-    setImageFilename( K3b::parentDir(filename()) + dataFile.section( '/', -1 ).lower() );
+  if( TQFileInfo( K3b::tqparentDir(filename()) + TQString(dataFile.section( '/', -1 )).lower() ).isFile() ) {
+    setImageFilename( K3b::tqparentDir(filename()) + TQString(dataFile.section( '/', -1 )).lower() );
     kdDebug() << "(K3bCueFileParser) found image file: " << imageFilename() << endl;
     return true;
   }
@@ -424,7 +424,7 @@ bool K3bCueFileParser::findImageFileName( const QString& dataFile )
   m_imageFilenameInCue = false;
 
   // try removing the ending from the cue file (image.bin.cue and image.bin)
-  if( QFileInfo( filename().left( filename().length()-4 ) ).isFile() ) {
+  if( TQFileInfo( filename().left( filename().length()-4 ) ).isFile() ) {
     setImageFilename( filename().left( filename().length()-4 ) );
     kdDebug() << "(K3bCueFileParser) found image file: " << imageFilename() << endl;
     return true;
@@ -435,21 +435,21 @@ bool K3bCueFileParser::findImageFileName( const QString& dataFile )
   // Search for another one having the same filename as the cue but a different extension
   //
 
-  QDir parentDir( K3b::parentDir(filename()) );
-  QString filenamePrefix = filename().section( '/', -1 );
+  TQDir tqparentDir( K3b::tqparentDir(filename()) );
+  TQString filenamePrefix = filename().section( '/', -1 );
   filenamePrefix.truncate( filenamePrefix.length() - 3 ); // remove cue extension
-  kdDebug() << "(K3bCueFileParser) checking folder " << parentDir.path() << " for files: " << filenamePrefix << "*" << endl;
+  kdDebug() << "(K3bCueFileParser) checking folder " << tqparentDir.path() << " for files: " << filenamePrefix << "*" << endl;
 
   //
-  // we cannot use the nameFilter in QDir because of the spaces that may occur in filenames
+  // we cannot use the nameFilter in TQDir because of the spaces that may occur in filenames
   //
-  QStringList possibleImageFiles = parentDir.entryList( QDir::Files );
+  TQStringList possibleImageFiles = tqparentDir.entryList( TQDir::Files );
   int cnt = 0;
-  for( QStringList::const_iterator it = possibleImageFiles.constBegin(); it != possibleImageFiles.constEnd(); ++it ) {
-    if( (*it).lower() == dataFile.section( '/', -1 ).lower() ||
+  for( TQStringList::const_iterator it = possibleImageFiles.constBegin(); it != possibleImageFiles.constEnd(); ++it ) {
+    if( (*it).lower() == TQString(dataFile.section( '/', -1 )).lower() ||
 	(*it).startsWith( filenamePrefix ) && !(*it).endsWith( "cue" ) ) {
       ++cnt;
-      setImageFilename( K3b::parentDir(filename()) + *it );
+      setImageFilename( K3b::tqparentDir(filename()) + *it );
     }
   }
 
@@ -457,5 +457,5 @@ bool K3bCueFileParser::findImageFileName( const QString& dataFile )
   // we only do this if there is one unique file which fits the requirements. 
   // Otherwise we cannot be certain to have the right file.
   //
-  return ( cnt == 1 && QFileInfo( imageFilename() ).isFile() );
+  return ( cnt == 1 && TQFileInfo( imageFilename() ).isFile() );
 }

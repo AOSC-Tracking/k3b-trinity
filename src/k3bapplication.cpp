@@ -54,10 +54,10 @@
 #include <kstartupinfo.h>
 #include <kmessagebox.h>
 
-#include <qguardedptr.h>
-#include <qtimer.h>
-#include <qvaluelist.h>
-#include <qcstring.h>
+#include <tqguardedptr.h>
+#include <tqtimer.h>
+#include <tqvaluelist.h>
+#include <tqcstring.h>
 
 
 K3bApplication::Core* K3bApplication::Core::s_k3bAppCore = 0;
@@ -72,22 +72,22 @@ K3bApplication::K3bApplication()
   KGlobal::locale()->insertCatalogue( "libk3bdevice" );
   KGlobal::locale()->insertCatalogue( "libk3b" );
 
-  m_core = new Core( this );
+  m_core = new Core( TQT_TQOBJECT(this) );
 
   // TODO: move to K3bCore?
   // from this point on available through K3bAudioServer::instance()
-  m_audioServer = new K3bAudioServer( this, "K3bAudioServer" );
+  m_audioServer = new K3bAudioServer( TQT_TQOBJECT(this), "K3bAudioServer" );
 
-  connect( m_core, SIGNAL(initializationInfo(const QString&)),
-	   SIGNAL(initializationInfo(const QString&)) );
+  connect( m_core, TQT_SIGNAL(initializationInfo(const TQString&)),
+	   TQT_SIGNAL(initializationInfo(const TQString&)) );
 
-  connect( this, SIGNAL(shutDown()), SLOT(slotShutDown()) );
+  connect( this, TQT_SIGNAL(shutDown()), TQT_SLOT(slotShutDown()) );
 }
 
 
 K3bApplication::~K3bApplication()
 {
-  // we must not delete m_mainWindow here, QApplication takes care of it
+  // we must not delete m_mainWindow here, TQApplication takes care of it
 }
 
 
@@ -95,7 +95,7 @@ void K3bApplication::init()
 {
   KConfigGroup generalOptions( config(), "General Options" );
 
-  QGuardedPtr<K3bSplash> splash;
+  TQGuardedPtr<K3bSplash> splash;
   if( !isRestored() ) {
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
@@ -104,13 +104,13 @@ void K3bApplication::init()
       m_core->m_themeManager->readConfig( config() );
 
       splash = new K3bSplash( 0 );
-      splash->connect( this, SIGNAL(initializationInfo(const QString&)), SLOT(addInfo(const QString&)) );
+      splash->connect( this, TQT_SIGNAL(initializationInfo(const TQString&)), TQT_SLOT(addInfo(const TQString&)) );
 
       // kill the splash after 5 seconds
-      QTimer::singleShot( 5000, splash, SLOT(close()) );
+      TQTimer::singleShot( 5000, splash, TQT_SLOT(close()) );
 
       splash->show();
-      qApp->processEvents();
+      tqApp->processEvents();
     }
   }
 
@@ -232,20 +232,20 @@ bool K3bApplication::processCmdLineArgs()
     showTips = false;
     dialogOpen = true;
     if( k3bcore->jobsRunning() == 0 ) {
-      m_mainWindow->slotWriteCdImage( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "cdimage" ) ) ) );
+      m_mainWindow->slotWriteCdImage( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "cdimage" ) ) ) );
     }
   }
   else if( args->isSet( "dvdimage" ) ) {
     showTips = false;
     dialogOpen = true;
     if( k3bcore->jobsRunning() == 0 ) {
-      m_mainWindow->slotWriteDvdIsoImage( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "dvdimage" ) ) ) );
+      m_mainWindow->slotWriteDvdIsoImage( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "dvdimage" ) ) ) );
     }
   }
   else if( args->isSet( "image" ) ) {
     showTips = false;
     dialogOpen = true;
-    KURL url = KURL::fromPathOrURL( QFile::decodeName( args->getOption( "image" ) ) );
+    KURL url = KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "image" ) ) );
     if( k3bcore->jobsRunning() == 0 ) {
       if( K3b::filesize( url ) > 1000*1024*1024 )
 	m_mainWindow->slotWriteDvdIsoImage( url );
@@ -256,34 +256,34 @@ bool K3bApplication::processCmdLineArgs()
   else if( args->isSet("copycd") ) {
     showTips = false;
     dialogOpen = true;
-      qApp->processEvents();
-    m_mainWindow->cdCopy( K3b::urlToDevice( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "copycd" ) ) ) ) );
+      tqApp->processEvents();
+    m_mainWindow->cdCopy( K3b::urlToDevice( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "copycd" ) ) ) ) );
   }
   else if( args->isSet("copydvd") ) {
     showTips = false;
     dialogOpen = true;
-    m_mainWindow->dvdCopy( K3b::urlToDevice( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "copydvd" ) ) ) ) );
+    m_mainWindow->dvdCopy( K3b::urlToDevice( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "copydvd" ) ) ) ) );
   }
   else if( args->isSet("erasecd") ) {
     showTips = false;
     dialogOpen = true;
-    m_mainWindow->blankCdrw( K3b::urlToDevice( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "erasecd" ) ) ) ) );
+    m_mainWindow->blankCdrw( K3b::urlToDevice( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "erasecd" ) ) ) ) );
   }
   else if( args->isSet("formatdvd") ) {
     showTips = false;
     dialogOpen = true;
-    m_mainWindow->formatDvd( K3b::urlToDevice( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "formatdvd" ) ) ) ) );
+    m_mainWindow->formatDvd( K3b::urlToDevice( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "formatdvd" ) ) ) ) );
   }
 
   // no dialog used here
   if( args->isSet( "cddarip" ) ) {
-    m_mainWindow->cddaRip( K3b::urlToDevice( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "cddarip" ) ) ) ) );
+    m_mainWindow->cddaRip( K3b::urlToDevice( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "cddarip" ) ) ) ) );
   }
   else if( args->isSet( "videodvdrip" ) ) {
-    m_mainWindow->videoDvdRip( K3b::urlToDevice( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "videodvdrip" ) ) ) ) );
+    m_mainWindow->videoDvdRip( K3b::urlToDevice( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "videodvdrip" ) ) ) ) );
   }
   else if( args->isSet( "videocdrip" ) ) {
-    m_mainWindow->videoCdRip( K3b::urlToDevice( KURL::fromPathOrURL( QFile::decodeName( args->getOption( "videocdrip" ) ) ) ) );
+    m_mainWindow->videoCdRip( K3b::urlToDevice( KURL::fromPathOrURL( TQFile::decodeName( args->getOption( "videocdrip" ) ) ) ) );
   }
 
   if( !dialogOpen && args->isSet( "burn" ) ) {
@@ -297,7 +297,7 @@ bool K3bApplication::processCmdLineArgs()
   // FIXME: seems not like the right place...
   if( args->isSet( "ao" ) )
     if( !m_audioServer->setOutputMethod( args->getOption( "ao" ) ) )
-      K3bPassivePopup::showPopup( i18n("Could not find Audio Output plugin '%1'").arg( args->getOption("ao") ),
+      K3bPassivePopup::showPopup( i18n("Could not find Audio Output plugin '%1'").tqarg( args->getOption("ao").data() ),
 				  i18n("Initialization Problem"),
 				  K3bPassivePopup::Warning );
 
@@ -315,8 +315,8 @@ void K3bApplication::slotShutDown()
 
 
 
-K3bApplication::Core::Core( QObject* parent )
-  : K3bCore( parent ),
+K3bApplication::Core::Core( TQObject* tqparent )
+  : K3bCore( tqparent ),
     m_appDeviceManager(0),
     m_mediaCache(0)
 {
@@ -382,8 +382,8 @@ void K3bApplication::Core::init()
 
   mediaCache()->buildDeviceList( deviceManager() );
 
-  connect( deviceManager(), SIGNAL(changed(K3bDevice::DeviceManager*)),
-           mediaCache(), SLOT(buildDeviceList(K3bDevice::DeviceManager*)) );
+  connect( deviceManager(), TQT_SIGNAL(changed(K3bDevice::DeviceManager*)),
+           mediaCache(), TQT_SLOT(buildDeviceList(K3bDevice::DeviceManager*)) );
 }
 
 
@@ -424,7 +424,7 @@ bool K3bApplication::Core::internalBlockDevice( K3bDevice::Device* dev )
     //
     // Check if the device is in use
     //
-    // FIXME: Use the top level widget as parent
+    // FIXME: Use the top level widget as tqparent
     K3bLsofWrapperDialog::checkDevice( dev );
 
     return true;

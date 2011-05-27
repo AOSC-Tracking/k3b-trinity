@@ -19,7 +19,7 @@
 
 #include <dcopobject.h>
 #include <kio/global.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 class K3bDoc;
 
@@ -36,11 +36,11 @@ class K3bProjectInterface : public DCOPObject
 
   // Generate a name for this interface. Automatically used if name=0 is
   // passed to the constructor
-  static QCString newIfaceName();
+  static TQCString newIfaceName();
 
  k_dcop:
-  virtual void addUrls( const QStringList& urls );
-  virtual void addUrl( const QString& url );
+  virtual void addUrls( const TQStringList& urls );
+  virtual void addUrl( const TQString& url );
 
   /**
    * Opens the burn dialog
@@ -55,7 +55,7 @@ class K3bProjectInterface : public DCOPObject
    */
   virtual bool directBurn();
 
-  virtual void setBurnDevice( const QString& blockdevicename );
+  virtual void setBurnDevice( const TQString& blockdevicename );
 
   /**
    * \return the length of the project in blocks (frames).
@@ -67,7 +67,7 @@ class K3bProjectInterface : public DCOPObject
    */
   virtual KIO::filesize_t size() const;
 
-  virtual const QString& imagePath() const;
+  virtual const TQString& imagePath() const;
 
   /**
    * \return A string representation of the project type. One of:
@@ -82,7 +82,7 @@ class K3bProjectInterface : public DCOPObject
    *
    * Be aware that this is not the same as K3bDoc::documentType for historical reasons.
    */
-  virtual QString projectType() const;
+  virtual TQString projectType() const;
 
  private:
   K3bDoc* m_doc;

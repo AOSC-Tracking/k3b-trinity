@@ -16,56 +16,58 @@
 #ifndef K3B_TOOLBOX_H
 #define K3B_TOOLBOX_H
 
-#include <qframe.h>
-#include <qstring.h>
-#include <qtoolbutton.h>
-#include <qptrlist.h>
+#include <tqframe.h>
+#include <tqstring.h>
+#include <tqtoolbutton.h>
+#include <tqptrlist.h>
 #include "k3b_export.h"
 
 class KAction;
 class KToggleAction;
 class KWidgetAction;
-class QGridLayout;
-class QPopupMenu;
-class QResizeEvent;
+class TQGridLayout;
+class TQPopupMenu;
+class TQResizeEvent;
 
 
 /**
  * internal class. Do not use!
  */
-class LIBK3B_EXPORT K3bToolBoxButton : public QToolButton
+class LIBK3B_EXPORT K3bToolBoxButton : public TQToolButton
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bToolBoxButton( KAction*, QWidget* parent );
-  K3bToolBoxButton( const QString& text, const QString& icon, 
-		    const QString& tooltip, const QString& whatsthis,
-		    QObject* receiver, const char* slot,
-		    QWidget* parent );
+  K3bToolBoxButton( KAction*, TQWidget* tqparent );
+  K3bToolBoxButton( const TQString& text, const TQString& icon, 
+		    const TQString& tooltip, const TQString& whatsthis,
+		    TQObject* receiver, const char* slot,
+		    TQWidget* tqparent );
 
  private slots:
   void slotPopupActivated();
 
  protected:
-  void resizeEvent( QResizeEvent* );
+  void resizeEvent( TQResizeEvent* );
 
  private:
-  QPopupMenu* m_popupMenu;
+  TQPopupMenu* m_popupMenu;
 };
 
 
-class LIBK3B_EXPORT K3bToolBox : public QFrame
+class LIBK3B_EXPORT K3bToolBox : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bToolBox( QWidget* parent = 0, const char* name = 0 );
+  K3bToolBox( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bToolBox();
 
-  K3bToolBoxButton* addButton( const QString& text, const QString& icon, 
-			       const QString& tooltip = QString::null, const QString& whatsthis = QString::null,
-			       QObject* receiver = 0, const char* slot = 0,
+  K3bToolBoxButton* addButton( const TQString& text, const TQString& icon, 
+			       const TQString& tooltip = TQString(), const TQString& whatsthis = TQString(),
+			       TQObject* receiver = 0, const char* slot = 0,
 			       bool forceTextLabel = false );
   K3bToolBoxButton* addButton( KAction*, bool forceTextLabel = false );
   K3bToolBoxButton* addToggleButton( KToggleAction* );
@@ -76,8 +78,8 @@ class LIBK3B_EXPORT K3bToolBox : public QFrame
    * and destroy it on destruction. Becasue of this it is not fitted
    * for WidgetActions.
    */
-  void addWidget( QWidget* );
-  void addLabel( const QString& );
+  void addWidget( TQWidget* );
+  void addLabel( const TQString& );
   void addSpacing();
   void addSeparator();
   void addStretch();
@@ -85,8 +87,8 @@ class LIBK3B_EXPORT K3bToolBox : public QFrame
   void clear();
 
  protected:
-  QGridLayout* m_mainLayout;
-  QPtrList<QWidget> m_doNotDeleteWidgets;
+  TQGridLayout* m_mainLayout;
+  TQPtrList<TQWidget> m_doNotDeleteWidgets;
 };
 
 

@@ -36,21 +36,21 @@
 #include <k3baudiotrackplayer.h>
 #include <k3bintmapcombobox.h>
 
-#include <qtabwidget.h>
-#include <qcheckbox.h>
-#include <qframe.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qtoolbutton.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qvbox.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
+#include <tqtabwidget.h>
+#include <tqcheckbox.h>
+#include <tqframe.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqpushbutton.h>
+#include <tqtoolbutton.h>
+#include <tqlayout.h>
+#include <tqvariant.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqvbox.h>
+#include <tqbuttongroup.h>
+#include <tqradiobutton.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -59,14 +59,14 @@
 #include <kmessagebox.h>
 
 
-K3bMixedBurnDialog::K3bMixedBurnDialog( K3bMixedDoc* doc, QWidget *parent, const char *name, bool modal )
-  : K3bProjectBurnDialog( doc, parent, name, modal ), m_doc(doc)
+K3bMixedBurnDialog::K3bMixedBurnDialog( K3bMixedDoc* doc, TQWidget *tqparent, const char *name, bool modal )
+  : K3bProjectBurnDialog( doc, tqparent, name, modal ), m_doc(doc)
 {
   prepareGui();
 
   setTitle( i18n("Mixed Project"), i18n("1 track (%1 minutes)",
 					"%n tracks (%1 minutes)",
-					m_doc->numOfTracks()).arg(m_doc->length().toString()) );
+					m_doc->numOfTracks()).tqarg(m_doc->length().toString()) );
 
   m_checkOnlyCreateImage->hide();
 
@@ -80,27 +80,27 @@ K3bMixedBurnDialog::K3bMixedBurnDialog( K3bMixedDoc* doc, QWidget *parent, const
 
   setupSettingsPage();
 
-  QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+  TQSpacerItem* spacer = new TQSpacerItem( 20, 20, TQSizePolicy::Minimum, TQSizePolicy::Expanding );
   m_optionGroupLayout->addItem( spacer );
 
-  connect( m_checkNormalize, SIGNAL(toggled(bool)), this, SLOT(slotNormalizeToggled(bool)) );
-  connect( m_checkCacheImage, SIGNAL(toggled(bool)), this, SLOT(slotCacheImageToggled(bool)) );
-  connect( m_writerSelectionWidget, SIGNAL(writingAppChanged(int)), this, SLOT(slotToggleAll()) );
-  connect( m_writingModeWidget, SIGNAL(writingModeChanged(int)), this, SLOT(slotToggleAll()) );
+  connect( m_checkNormalize, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotNormalizeToggled(bool)) );
+  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotCacheImageToggled(bool)) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
 }
 
 
 void K3bMixedBurnDialog::setupSettingsPage()
 {
-  QWidget* w = new QWidget( this );
+  TQWidget* w = new TQWidget( this );
 
-  QGroupBox* groupDataMode = new QGroupBox( 1, Qt::Vertical, i18n("Datatrack Mode"), w );
+  TQGroupBox* groupDataMode = new TQGroupBox( 1, Qt::Vertical, i18n("Datatrack Mode"), w );
   m_dataModeWidget = new K3bDataModeWidget( groupDataMode );
 
-  QGroupBox* groupNormalize = new QGroupBox( 1, Qt::Vertical, i18n("Misc"), w );
+  TQGroupBox* groupNormalize = new TQGroupBox( 1, Qt::Vertical, i18n("Misc"), w );
   m_checkNormalize = K3bStdGuiItems::normalizeCheckBox( groupNormalize );
 
-  QGroupBox* groupMixedType = new QGroupBox( 1, Qt::Vertical, i18n("Mixed Mode Type"), w );
+  TQGroupBox* groupMixedType = new TQGroupBox( 1, Qt::Vertical, i18n("Mixed Mode Type"), w );
   m_comboMixedModeType = new K3bIntMapComboBox( groupMixedType );
 
   m_comboMixedModeType->insertItem( K3bMixedDoc::DATA_SECOND_SESSION,
@@ -128,13 +128,13 @@ void K3bMixedBurnDialog::setupSettingsPage()
 				    i18n("Data in last track"),
 				    i18n("K3b will write the data track after all "
 					 "audio tracks.") );
-  m_comboMixedModeType->addGlobalWhatsThisText( QString(),
+  m_comboMixedModeType->addGlobalWhatsThisText( TQString(),
 						i18n("<b>Caution:</b> The last two modes should only be used for CDs that are unlikely to "
 						     "be played on a hifi audio CD player."
 						     "<br>It could lead to problems with some older "
 						     "hifi audio CD players that try to play the data track.") );
 				    
-  QGridLayout* grid = new QGridLayout( w );
+  TQGridLayout* grid = new TQGridLayout( w );
   grid->setMargin( marginHint() );
   grid->setSpacing( spacingHint() );
   grid->addWidget( groupMixedType, 0, 0 );
@@ -318,7 +318,7 @@ void K3bMixedBurnDialog::slotNormalizeToggled( bool on )
       if( KMessageBox::warningYesNo( this, i18n("<p>K3b is not able to normalize audio tracks when burning on-the-fly. "
 						"The external program used for this task only supports normalizing a set "
 						"of audio files."),
-				     QString::null,
+				     TQString(),
 				     i18n("Disable normalization"),
 				     i18n("Disable on-the-fly burning"),
 				     "audioProjectNormalizeOrOnTheFly" ) == KMessageBox::Yes )
@@ -337,7 +337,7 @@ void K3bMixedBurnDialog::slotCacheImageToggled( bool on )
       if( KMessageBox::warningYesNo( this, i18n("<p>K3b is not able to normalize audio tracks when burning on-the-fly. "
 						"The external program used for this task only supports normalizing a set "
 						"of audio files."),
-				     QString::null,
+				     TQString(),
 				     i18n("Disable normalization"),
 				     i18n("Disable on-the-fly burning"),
 				     "audioProjectNormalizeOrOnTheFly" ) == KMessageBox::Yes )

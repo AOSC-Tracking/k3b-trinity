@@ -43,7 +43,7 @@ typedef struct _rr_entry {
 	int		serno;
 	int		dev_major;
 	int		dev_minor;
-	int		pl;	/* parent location */
+	int		pl;	/* tqparent location */
 	int		cl; /* child location */
 	int		re; /* relocated */
 	char	z_algo[2]; /* zizofs algorithm */
@@ -60,7 +60,7 @@ typedef struct _iso_vol_desc {
 typedef struct _boot_entry {
 	struct _boot_entry	*next;
 	struct _boot_entry	*prev;
-	struct _boot_entry  *parent;
+	struct _boot_entry  *tqparent;
 	struct _boot_entry  *child;
 	char	data[32];
 } boot_entry;

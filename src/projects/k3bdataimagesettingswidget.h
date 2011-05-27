@@ -25,9 +25,10 @@ class K3bIsoOptions;
 class K3bDataImageSettingsWidget : public base_K3bDataImageSettings
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDataImageSettingsWidget( QWidget* parent = 0, const char* name =  0 );
+  K3bDataImageSettingsWidget( TQWidget* tqparent = 0, const char* name =  0 );
   ~K3bDataImageSettingsWidget();
 
   void load( const K3bIsoOptions& );

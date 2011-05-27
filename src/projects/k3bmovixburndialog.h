@@ -23,16 +23,17 @@
 class K3bMovixDoc;
 class K3bMovixOptionsWidget;
 class K3bDataImageSettingsWidget;
-class QCheckBox;
+class TQCheckBox;
 class K3bDataModeWidget;
 
 
 class K3bMovixBurnDialog : public K3bProjectBurnDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMovixBurnDialog( K3bMovixDoc* doc, QWidget* parent = 0, const char* name = 0, bool modal = true );
+  K3bMovixBurnDialog( K3bMovixDoc* doc, TQWidget* tqparent = 0, const char* name = 0, bool modal = true );
   ~K3bMovixBurnDialog();
 
  protected slots:
@@ -53,10 +54,10 @@ class K3bMovixBurnDialog : public K3bProjectBurnDialog
   K3bMovixOptionsWidget* m_movixOptionsWidget;
   K3bDataImageSettingsWidget* m_imageSettingsWidget;
 
-  QCheckBox* m_checkStartMultiSesssion;
+  TQCheckBox* m_checkStartMultiSesssion;
   K3bDataModeWidget* m_dataModeWidget;
 
-  QCheckBox* m_checkVerify;
+  TQCheckBox* m_checkVerify;
 };
 
 

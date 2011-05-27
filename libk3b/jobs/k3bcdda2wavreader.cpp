@@ -24,8 +24,8 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <qvaluevector.h>
-#include <qregexp.h>
+#include <tqvaluevector.h>
+#include <tqregexp.h>
 
 
 class K3bCdda2wavReader::Private
@@ -48,12 +48,12 @@ public:
   int fdToWriteTo;
 
   int currentTrack;
-  QValueVector<int> trackOffsets;
+  TQValueVector<int> trackOffsets;
 };
 
 
-K3bCdda2wavReader::K3bCdda2wavReader( QObject* parent, const char* name )
-  : K3bJob( parent, name )
+K3bCdda2wavReader::K3bCdda2wavReader( TQObject* tqparent, const char* name )
+  : K3bJob( tqparent, name )
 {
   d = new Private();
 }
@@ -95,7 +95,7 @@ void K3bCdda2wavReader::start( bool onlyInfo )
 
   d->cdda2wavBin = k3bcore->externalBinManager()->binObject( "cdda2wav" );
   if( !d->cdda2wavBin ) {
-    emit infoMessage( i18n("Could not find %1 executable.").arg("cdda2wav"), ERROR );
+    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("cdda2wav"), ERROR );
     jobFinished(false);
     d->running = false;
     return;
@@ -107,15 +107,15 @@ void K3bCdda2wavReader::start( bool onlyInfo )
   d->process->setSplitStdout(true);
   d->process->setSuppressEmptyLines(true);
   d->process->setWorkingDirectory( m_imagePath );
-  connect( d->process, SIGNAL(stdoutLine(const QString&)), this, SLOT(slotProcessLine(const QString&)) );
-  connect( d->process, SIGNAL(stderrLine(const QString&)), this, SLOT(slotProcessLine(const QString&)) );
-  connect( d->process, SIGNAL(processExited(KProcess*)), this, SLOT(slotProcessExited(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotProcessLine(const TQString&)) );
+  connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotProcessLine(const TQString&)) );
+  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
 
   // create the command line
   *d->process << d->cdda2wavBin->path;
   *d->process << "-vall" << ( d->cdda2wavBin->hasFeature( "gui" ) ? "-gui" : "-g" );
   if( d->cdda2wavBin->hasFeature( "dev" ) )
-    *d->process << QString("dev=%1").arg(K3bDevice::externalBinDeviceParameter(m_device, d->cdda2wavBin));
+    *d->process << TQString("dev=%1").tqarg(K3bDevice::externalBinDeviceParameter(m_device, d->cdda2wavBin));
   else
     *d->process << "-D" << K3bDevice::externalBinDeviceParameter(m_device, d->cdda2wavBin);
   *d->process << ( d->cdda2wavBin->hasFeature( "bulk" ) ? "-bulk" : "-B" );
@@ -125,8 +125,8 @@ void K3bCdda2wavReader::start( bool onlyInfo )
     *d->process << ( d->cdda2wavBin->hasFeature( "no-infofile" ) ? "-no-infofile" : "-H" );
 
   // additional user parameters from config
-  const QStringList& params = d->cdda2wavBin->userParameters();
-  for( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+  const TQStringList& params = d->cdda2wavBin->userParameters();
+  for( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
     *d->process << *it;
 
   // start the thing
@@ -134,7 +134,7 @@ void K3bCdda2wavReader::start( bool onlyInfo )
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bCdda2wavReader) could not start cdda2wav" << endl;
-    emit infoMessage( i18n("Could not start %1.").arg("cdda2wav"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").tqarg("cdda2wav"), K3bJob::ERROR );
     d->running = false;
     jobFinished(false);
   }
@@ -152,7 +152,7 @@ void K3bCdda2wavReader::cancel()
 }
 
 
-void K3bCdda2wavReader::slotProcessLine( const QString& line )
+void K3bCdda2wavReader::slotProcessLine( const TQString& line )
 {
   // Tracks:11 44:37.30
   // CDINDEX discid: ZvzBXv614ACgzn1bWWy107cs0nA-
@@ -179,11 +179,11 @@ void K3bCdda2wavReader::slotProcessLine( const QString& line )
 
 
 
-  static QRegExp rx( "T\\d\\d:" );
+  static TQRegExp rx( "T\\d\\d:" );
   if( rx.exactMatch( line.left(4) ) || line.startsWith( "Leadout" ) ) {
-    int pos = line.find( " " );
-    int endpos = line.find( QRegExp( "\\d" ), pos );
-    endpos = line.find( " ", endpos );
+    int pos = line.tqfind( " " );
+    int endpos = line.tqfind( TQRegExp( "\\d" ), pos );
+    endpos = line.tqfind( " ", endpos );
     bool ok;
     int offset = line.mid( pos, endpos-pos ).toInt(&ok);
     if( ok )
@@ -198,12 +198,12 @@ void K3bCdda2wavReader::slotProcessLine( const QString& line )
     emit nextTrack( d->currentTrack, d->trackOffsets.count() );
   }
 
-  else if( line.contains("successfully recorded") ) {
+  else if( line.tqcontains("successfully recorded") ) {
     d->currentTrack++;
     emit nextTrack( d->currentTrack, d->trackOffsets.count() );
   }
 
-  else if( line.contains("%") ) {
+  else if( line.tqcontains("%") ) {
     // parse progress
     bool ok;
     int p = line.left(3).toInt(&ok);
@@ -240,12 +240,12 @@ void K3bCdda2wavReader::slotProcessExited( KProcess* p )
     }
     else {
       emit infoMessage( i18n("%1 returned an unknown error (code %2).")
-			.arg("Cdda2wav").arg(p->exitStatus()), ERROR );
+			.tqarg("Cdda2wav").tqarg(p->exitStatus()), ERROR );
       jobFinished( false );
     }
   }
   else {
-    emit infoMessage( i18n("%1 did not exit cleanly.").arg("Cdda2wav"), 
+    emit infoMessage( i18n("%1 did not exit cleanly.").tqarg("Cdda2wav"), 
 		      ERROR );
     jobFinished( false );
   }

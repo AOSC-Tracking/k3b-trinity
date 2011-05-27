@@ -16,8 +16,8 @@
 #ifndef _K3B_INF_FILE_WRITER_H_
 #define _K3B_INF_FILE_WRITER_H_
 
-#include <qvaluevector.h>
-#include <qtextstream.h>
+#include <tqvaluevector.h>
+#include <tqtextstream.h>
 
 #include <k3bmsf.h>
 
@@ -34,8 +34,8 @@ class K3bInfFileWriter
  public:
   K3bInfFileWriter();
 
-  bool save( QTextStream& );
-  bool save( const QString& filename );
+  bool save( TQTextStream& );
+  bool save( const TQString& filename );
 
   /**
    * Use this to set:
@@ -76,24 +76,24 @@ class K3bInfFileWriter
   void setBigEndian( bool b ) { m_bigEndian = b; }
 
   void setTrackCdText( const K3bDevice::TrackCdText& );
-  void setTrackTitle( const QString& s ) { m_trackTitle = s; }
-  void setTrackPerformer( const QString& s ) { m_trackPerformer = s; }
-  void setTrackSongwriter( const QString& s ) { m_trackSongwriter = s; }
-  void setTrackComposer( const QString& s ) { m_trackComposer = s; }
-  void setTrackArranger( const QString& s ) { m_trackArranger = s; }
-  void setTrackMessage( const QString& s ) { m_trackMessage = s; }
+  void setTrackTitle( const TQString& s ) { m_trackTitle = s; }
+  void setTrackPerformer( const TQString& s ) { m_trackPerformer = s; }
+  void setTrackSongwriter( const TQString& s ) { m_trackSongwriter = s; }
+  void setTrackComposer( const TQString& s ) { m_trackComposer = s; }
+  void setTrackArranger( const TQString& s ) { m_trackArranger = s; }
+  void setTrackMessage( const TQString& s ) { m_trackMessage = s; }
 
   void setCdText( const K3bDevice::CdText& );
-  void setAlbumTitle( const QString& s ) { m_albumTitle = s; }
-  void setAlbumPerformer( const QString& s ) { m_albumPerformer = s; }
+  void setAlbumTitle( const TQString& s ) { m_albumTitle = s; }
+  void setAlbumPerformer( const TQString& s ) { m_albumPerformer = s; }
 
-  void setIsrc( const QCString& s ) { m_isrc = s; }
-  void setMcn( const QCString& s ) { m_mcn = s; }
+  void setIsrc( const TQCString& s ) { m_isrc = s; }
+  void setMcn( const TQCString& s ) { m_mcn = s; }
 
  private:
   long m_index0;
 
-  QValueVector<long> m_indices;
+  TQValueVector<long> m_indices;
 
   int m_trackNumber;
   K3b::Msf m_trackStart;
@@ -102,18 +102,18 @@ class K3bInfFileWriter
   bool m_copyPermitted;
   bool m_bigEndian;
 
-  QString m_trackTitle;
-  QString m_trackPerformer;
-  QString m_trackSongwriter;
-  QString m_trackComposer;
-  QString m_trackArranger;
-  QString m_trackMessage;
+  TQString m_trackTitle;
+  TQString m_trackPerformer;
+  TQString m_trackSongwriter;
+  TQString m_trackComposer;
+  TQString m_trackArranger;
+  TQString m_trackMessage;
 
-  QString m_albumTitle;
-  QString m_albumPerformer;
+  TQString m_albumTitle;
+  TQString m_albumPerformer;
 
-  QCString m_isrc;
-  QCString m_mcn;
+  TQCString m_isrc;
+  TQCString m_mcn;
 };
 
 #endif

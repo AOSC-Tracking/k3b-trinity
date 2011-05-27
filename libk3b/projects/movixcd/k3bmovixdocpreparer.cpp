@@ -31,8 +31,8 @@
 #include <ktempfile.h>
 #include <kio/global.h>
 
-#include <qtextstream.h>
-#include <qdir.h>
+#include <tqtextstream.h>
+#include <tqdir.h>
 
 
 class K3bMovixDocPreparer::Private
@@ -62,14 +62,14 @@ public:
   K3bDirItem* mplayerDir;
   K3bFileItem* playlistFileItem;
 
-  QPtrList<K3bDataItem> newMovixItems;
+  TQPtrList<K3bDataItem> newMovixItems;
 
   bool structuresCreated;
 };
 
 
-K3bMovixDocPreparer::K3bMovixDocPreparer( K3bMovixDoc* doc, K3bJobHandler* jh, QObject* parent, const char* name )
-  : K3bJob( jh, parent, name )
+K3bMovixDocPreparer::K3bMovixDocPreparer( K3bMovixDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
+  : K3bJob( jh, tqparent, name )
 {
   d = new Private();
   d->doc = doc;
@@ -175,11 +175,11 @@ bool K3bMovixDocPreparer::writePlaylistFile()
   d->playlistFile = new KTempFile();
   d->playlistFile->setAutoDelete(true);
 
-  if( QTextStream* s = d->playlistFile->textStream() ) {
+  if( TQTextStream* s = d->playlistFile->textStream() ) {
 
-    const QPtrList<K3bMovixFileItem>& movixFileItems = d->doc->movixFileItems();
+    const TQPtrList<K3bMovixFileItem>& movixFileItems = d->doc->movixFileItems();
 
-    for( QPtrListIterator<K3bMovixFileItem> it( movixFileItems );
+    for( TQPtrListIterator<K3bMovixFileItem> it( movixFileItems );
 	 *it; ++it ) {
       *s << "/cdrom/";
       *s << it.current()->writtenName();
@@ -190,33 +190,33 @@ bool K3bMovixDocPreparer::writePlaylistFile()
     return true;
   }
   else {
-    emit infoMessage( i18n("Could not write to temporary file %1").arg(d->playlistFile->name()), ERROR );
+    emit infoMessage( i18n("Could not write to temporary file %1").tqarg(d->playlistFile->name()), ERROR );
     return false;
   }
 }
 
 
-bool K3bMovixDocPreparer::writeIsolinuxConfigFile( const QString& originalPath )
+bool K3bMovixDocPreparer::writeIsolinuxConfigFile( const TQString& originalPath )
 {
   delete d->isolinuxConfigFile;
   d->isolinuxConfigFile = new KTempFile();
   d->isolinuxConfigFile->setAutoDelete(true);
 
-  if( QTextStream* s = d->isolinuxConfigFile->textStream() ) {
+  if( TQTextStream* s = d->isolinuxConfigFile->textStream() ) {
 
-    // now open the default isolinux.cfg and copy everything except the first line which contains
+    // now open the default isolinux.cfg and copy everything except the first line which tqcontains
     // the default boot label
-    QFile f( originalPath );
+    TQFile f( originalPath );
     if( f.open( IO_ReadOnly ) ) {
 
-      QTextStream isolinuxConfigOrig( &f );
+      TQTextStream isolinuxConfigOrig( &f );
 
       if(  d->doc->defaultBootLabel() != i18n("default") ) {
 	isolinuxConfigOrig.readLine(); // skip first line
 	*s << "default " << d->doc->defaultBootLabel()  << endl;
       }
 
-      QString line = isolinuxConfigOrig.readLine();
+      TQString line = isolinuxConfigOrig.readLine();
       while( !line.isNull() ) {
 	*s << line << endl;
 	line = isolinuxConfigOrig.readLine();
@@ -229,7 +229,7 @@ bool K3bMovixDocPreparer::writeIsolinuxConfigFile( const QString& originalPath )
       return false;
   }
   else {
-    emit infoMessage( i18n("Could not write to temporary file %1").arg(d->isolinuxConfigFile->name()), ERROR );
+    emit infoMessage( i18n("Could not write to temporary file %1").tqarg(d->isolinuxConfigFile->name()), ERROR );
     return false;
   }
 }
@@ -241,7 +241,7 @@ bool K3bMovixDocPreparer::writeMovixRcFile()
   d->movixRcFile = new KTempFile();
   d->movixRcFile->setAutoDelete(true);
 
-  if( QTextStream* s = d->movixRcFile->textStream() ) {
+  if( TQTextStream* s = d->movixRcFile->textStream() ) {
 
     if( !d->doc->additionalMPlayerOptions().isEmpty() )
       *s << "extra-mplayer-options=" << d->doc->additionalMPlayerOptions() << endl;
@@ -263,7 +263,7 @@ bool K3bMovixDocPreparer::writeMovixRcFile()
     return true;
   }
   else {
-    emit infoMessage( i18n("Could not write to temporary file %1").arg(d->movixRcFile->name()), ERROR );
+    emit infoMessage( i18n("Could not write to temporary file %1").tqarg(d->movixRcFile->name()), ERROR );
     return false;
   }
 }
@@ -297,28 +297,28 @@ bool K3bMovixDocPreparer::addMovixFiles()
   // the following sucks! Redesign it!
 
   // add all the isolinux files
-  QStringList isolinuxFiles = d->eMovixBin->isolinuxFiles();
+  TQStringList isolinuxFiles = d->eMovixBin->isolinuxFiles();
   isolinuxFiles.remove( "isolinux.bin" );
   isolinuxFiles.remove( "isolinux.cfg" );
   isolinuxFiles.remove( "kernel/vmlinuz" );
-  for( QStringList::const_iterator it = isolinuxFiles.begin();
+  for( TQStringList::const_iterator it = isolinuxFiles.begin();
        it != isolinuxFiles.end(); ++it ) {
-    QString path = d->eMovixBin->path + "/isolinux/" + *it;
+    TQString path = d->eMovixBin->path + "/isolinux/" + *it;
     (void)new K3bFileItem( path, d->doc, d->isolinuxDir );
   }
 
-  const QStringList& movixFiles = d->eMovixBin->movixFiles();
-  for( QStringList::const_iterator it = movixFiles.begin();
+  const TQStringList& movixFiles = d->eMovixBin->movixFiles();
+  for( TQStringList::const_iterator it = movixFiles.begin();
        it != movixFiles.end(); ++it ) {
-    QString path = d->eMovixBin->path + "/movix/" + *it;
+    TQString path = d->eMovixBin->path + "/movix/" + *it;
     (void)new K3bFileItem( path, d->doc, d->movixDir );
   }
 
   // add doku files
-  QString path = d->eMovixBin->languageDir( d->doc->bootMessageLanguage() );
-  QDir dir(path);
-  QStringList helpFiles = dir.entryList(QDir::Files);
-  for( QStringList::const_iterator it = helpFiles.begin();
+  TQString path = d->eMovixBin->languageDir( d->doc->bootMessageLanguage() );
+  TQDir dir(path);
+  TQStringList helpFiles = dir.entryList(TQDir::Files);
+  for( TQStringList::const_iterator it = helpFiles.begin();
        it != helpFiles.end(); ++it ) {
     // some emovix installations include backup-files, no one's perfect ;)
     if( !(*it).endsWith( "~" ) )
@@ -331,13 +331,13 @@ bool K3bMovixDocPreparer::addMovixFiles()
       d->doc->subtitleFontset() != i18n("none") ) {
     d->mplayerDir = new K3bDirItem( "mplayer", d->doc, d->doc->root() );
 
-    QString fontPath = d->eMovixBin->subtitleFontDir( d->doc->subtitleFontset() );
-    QFileInfo fontType( fontPath );
+    TQString fontPath = d->eMovixBin->subtitleFontDir( d->doc->subtitleFontset() );
+    TQFileInfo fontType( fontPath );
     if( fontType.isDir() ) {
       K3bDirItem* fontDir = new K3bDirItem( "font", d->doc, d->mplayerDir );
-      QDir dir( fontPath );
-      QStringList fontFiles = dir.entryList( QDir::Files );
-      for( QStringList::const_iterator it = fontFiles.begin();
+      TQDir dir( fontPath );
+      TQStringList fontFiles = dir.entryList( TQDir::Files );
+      for( TQStringList::const_iterator it = fontFiles.begin();
 	   it != fontFiles.end(); ++it ) {
 	(void)new K3bFileItem( fontPath + "/" + *it, d->doc, fontDir );
       }
@@ -378,16 +378,16 @@ bool K3bMovixDocPreparer::addMovixFilesNew()
   // 4. set weights for isolinux files
 
   // FIXME: use the settings from the doc
-  QStringList files = d->eMovixBin->files( d->doc->keyboardLayout(),
+  TQStringList files = d->eMovixBin->files( d->doc->keyboardLayout(),
 					   d->doc->subtitleFontset(),
 					   d->doc->audioBackground(),
 					   d->doc->bootMessageLanguage(),
 					   "all" /*d->doc->codecs()*/ ); // for now we simply don't allow selection
 
-  for( QStringList::iterator it = files.begin(); it != files.end(); ++it ) {
-    QString docPath = (*it).section( ' ', 0, 0 );
-    QString filePath = (*it).section( ' ', 1, 1 );
-    QString fileName = filePath.section( '/', -1 );
+  for( TQStringList::iterator it = files.begin(); it != files.end(); ++it ) {
+    TQString docPath = (*it).section( ' ', 0, 0 );
+    TQString filePath = (*it).section( ' ', 1, 1 );
+    TQString fileName = filePath.section( '/', -1 );
 
     if( fileName == "isolinux.cfg" ) {
       // replace the local file with our modified one
@@ -406,7 +406,7 @@ bool K3bMovixDocPreparer::addMovixFilesNew()
 
       // set the proper sort weight
       bootItem->setSortWeight( 200 );
-      bootItem->parent()->setSortWeight( 100 );
+      bootItem->tqparent()->setSortWeight( 100 );
     }
     else if( fileName != "movixrc" ) { // we create our own movixrc
       K3bFileItem* item = createItem( filePath, docPath );
@@ -424,10 +424,10 @@ bool K3bMovixDocPreparer::addMovixFilesNew()
   // eMovix supplied codecs. These codecs are not picked up by the movix-conf script
   K3bDirItem* codecDir = dynamic_cast<K3bDirItem*>( d->doc->root()->findByPath( "/eMoviX/codecs" ) );
   if( !codecDir || codecDir->isEmpty() ) {
-    QDir localCodecDir( d->eMovixBin->movixDataDir() + "/codecs" );
+    TQDir localCodecDir( d->eMovixBin->movixDataDir() + "/codecs" );
     if( localCodecDir.exists() ) {
-      QStringList codecFiles = localCodecDir.entryList( QDir::Files );
-      for( QStringList::const_iterator it = codecFiles.begin(); it != codecFiles.end(); ++it )
+      TQStringList codecFiles = localCodecDir.entryList( TQDir::Files );
+      for( TQStringList::const_iterator it = codecFiles.begin(); it != codecFiles.end(); ++it )
 	createItem( localCodecDir.path() + '/' + *it, "/eMoviX/codecs" );
     }
   }
@@ -443,7 +443,7 @@ bool K3bMovixDocPreparer::addMovixFilesNew()
 }
 
 
-K3bFileItem* K3bMovixDocPreparer::createItem( const QString& localPath, const QString& docPath )
+K3bFileItem* K3bMovixDocPreparer::createItem( const TQString& localPath, const TQString& docPath )
 {
   // make sure the path in the doc exists
   K3bDirItem* dir = createDir( docPath );
@@ -459,12 +459,12 @@ K3bFileItem* K3bMovixDocPreparer::createItem( const QString& localPath, const QS
 }
 
 
-K3bDirItem* K3bMovixDocPreparer::createDir( const QString& docPath )
+K3bDirItem* K3bMovixDocPreparer::createDir( const TQString& docPath )
 {
-  QStringList docPathSections = QStringList::split( '/', docPath );
+  TQStringList docPathSections = TQStringList::split( '/', docPath );
   K3bDirItem* dir = d->doc->root();
-  for( QStringList::iterator it = docPathSections.begin(); it != docPathSections.end(); ++it ) {
-    K3bDataItem* next = dir->find( *it );
+  for( TQStringList::iterator it = docPathSections.begin(); it != docPathSections.end(); ++it ) {
+    K3bDataItem* next = dir->tqfind( *it );
     if( !next )
       dir = new K3bDirItem( *it, d->doc, dir );
     else if( next->isDir() )
@@ -478,9 +478,9 @@ K3bDirItem* K3bMovixDocPreparer::createDir( const QString& docPath )
   // remember the dir to remove it
   if( dir != d->doc->root() ) {
     K3bDirItem* delDir = dir;
-    while( delDir->parent() != d->doc->root() )
-      delDir = delDir->parent();
-    if( d->newMovixItems.findRef( delDir ) == -1 )
+    while( delDir->tqparent() != d->doc->root() )
+      delDir = delDir->tqparent();
+    if( d->newMovixItems.tqfindRef( delDir ) == -1 )
       d->newMovixItems.append( delDir );
   }
 

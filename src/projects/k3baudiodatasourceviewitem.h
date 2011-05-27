@@ -25,15 +25,15 @@ class K3bAudioTrackViewItem;
 class K3bAudioDataSourceViewItem : public K3bListViewItem
 {
  public:
-  K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* parent, 
+  K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* tqparent, 
 			      K3bAudioDataSourceViewItem* after, 
 			      K3bAudioDataSource* );
 
   K3bAudioDataSource* source() const { return m_source; }
   K3bAudioTrackViewItem* trackViewItem() const { return m_trackViewItem; }
 
-  QString text( int i ) const;
-  void setText( int col, const QString& text );
+  TQString text( int i ) const;
+  void setText( int col, const TQString& text );
 
   bool animate();
 
@@ -42,7 +42,7 @@ class K3bAudioDataSourceViewItem : public K3bListViewItem
   /**
    * Does nothing becasue we don't want no branches here.
    */
-  void paintBranches( QPainter*, const QColorGroup &,
+  void paintBranches( TQPainter*, const TQColorGroup &,
 		      int, int, int ) {}
 
  private:

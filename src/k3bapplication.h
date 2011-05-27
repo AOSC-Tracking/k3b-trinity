@@ -20,7 +20,7 @@
 #include <kuniqueapplication.h>
 #include <k3bcore.h>
 
-#include <qmap.h>
+#include <tqmap.h>
 
 #define k3bappcore K3bApplication::Core::k3bAppCore()
 
@@ -38,6 +38,7 @@ class K3bMediaCache;
 class K3bApplication : public KUniqueApplication
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   K3bApplication();
@@ -51,7 +52,7 @@ class K3bApplication : public KUniqueApplication
   void init();
 
  signals:
-  void initializationInfo( const QString& );
+  void initializationInfo( const TQString& );
   void initializationDone();
 
  private slots:
@@ -75,9 +76,10 @@ class K3bApplication : public KUniqueApplication
 class K3bApplication::Core : public K3bCore
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  Core( QObject* parent );
+  Core( TQObject* tqparent );
   ~Core();
 
   void init();
@@ -115,7 +117,7 @@ class K3bApplication::Core : public K3bCore
   /**
    * This is used for showing info in the K3b splashscreen
    */
-  void initializationInfo( const QString& );
+  void initializationInfo( const TQString& );
 
   /**
    * Any component may request busy info
@@ -124,7 +126,7 @@ class K3bApplication::Core : public K3bCore
    *
    * FIXME: this is bad design
    */
-  void busyInfoRequested( const QString& );
+  void busyInfoRequested( const TQString& );
 
   /**
    * FIXME: this is bad design
@@ -146,7 +148,7 @@ class K3bApplication::Core : public K3bCore
   K3bAppDeviceManager* m_appDeviceManager;
   K3bMediaCache* m_mediaCache;
 
-  QMap<K3bDevice::Device*, int> m_deviceBlockMap;
+  TQMap<K3bDevice::Device*, int> m_deviceBlockMap;
 
   static Core* s_k3bAppCore;
 

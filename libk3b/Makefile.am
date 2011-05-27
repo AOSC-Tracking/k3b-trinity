@@ -1,3 +1,5 @@
+AM_CPPFLAGS = $(all_includes)
+
 if include_videodvdrip
 VIDEODVDDIR = videodvd
 VIDEODVDLIB = videodvd/libvideodvd.la

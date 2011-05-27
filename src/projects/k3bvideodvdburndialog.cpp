@@ -32,27 +32,27 @@
 #include <kio/global.h>
 #include <kmessagebox.h>
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 
 
-K3bVideoDvdBurnDialog::K3bVideoDvdBurnDialog( K3bVideoDvdDoc* doc, QWidget *parent, const char *name, bool modal )
-  : K3bProjectBurnDialog( doc, parent, name, modal, true ),
+K3bVideoDvdBurnDialog::K3bVideoDvdBurnDialog( K3bVideoDvdDoc* doc, TQWidget *tqparent, const char *name, bool modal )
+  : K3bProjectBurnDialog( doc, tqparent, name, modal, true ),
     m_doc( doc )
 {
   prepareGui();
 
-  setTitle( i18n("Video DVD Project"), i18n("Size: %1").arg( KIO::convertSize(doc->size()) ) );
+  setTitle( i18n("Video DVD Project"), i18n("Size: %1").tqarg( KIO::convertSize(doc->size()) ) );
 
   // for now we just put the verify checkbox on the main page...
   m_checkVerify = K3bStdGuiItems::verifyCheckBox( m_optionGroup );
   m_optionGroupLayout->addWidget( m_checkVerify );
 
-  QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+  TQSpacerItem* spacer = new TQSpacerItem( 20, 20, TQSizePolicy::Minimum, TQSizePolicy::Expanding );
   m_optionGroupLayout->addItem( spacer );
 
   // create image settings tab
@@ -63,7 +63,7 @@ K3bVideoDvdBurnDialog::K3bVideoDvdBurnDialog( K3bVideoDvdDoc* doc, QWidget *pare
 
   m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::FILE );
 
-  QString path = m_doc->tempDir();
+  TQString path = m_doc->tempDir();
   if( path.isEmpty() ) {
     path = K3b::defaultTempPath();
     if( m_doc->isoOptions().volumeID().isEmpty() )
@@ -175,17 +175,17 @@ void K3bVideoDvdBurnDialog::slotStartClicked()
 {
   if( m_checkOnlyCreateImage->isChecked() ||
       m_checkCacheImage->isChecked() ) {
-    QFileInfo fi( m_tempDirSelectionWidget->tempPath() );
+    TQFileInfo fi( m_tempDirSelectionWidget->tempPath() );
     if( fi.isDir() )
       m_tempDirSelectionWidget->setTempPath( fi.filePath() + "/image.iso" );
 
-    if( QFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
+    if( TQFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
       if( KMessageBox::warningContinueCancel( this,
-					      i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath()),
+					      i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath()),
 					      i18n("File Exists"), i18n("Overwrite") )
 	  == KMessageBox::Continue ) {
 	// delete the file here to avoid problems with free space in K3bProjectBurnDialog::slotStartClicked
-	QFile::remove( m_tempDirSelectionWidget->tempPath() );
+	TQFile::remove( m_tempDirSelectionWidget->tempPath() );
       }
       else
 	return;

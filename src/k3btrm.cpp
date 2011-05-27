@@ -29,8 +29,8 @@ class K3bTRM::Private
 {
 public:
   trm_t trm;
-  QCString sig;
-  QCString rawSig;
+  TQCString sig;
+  TQCString rawSig;
 };
 
 
@@ -79,13 +79,13 @@ bool K3bTRM::finalize()
 }
 
 
-const QCString& K3bTRM::rawSignature() const
+const TQCString& K3bTRM::rawSignature() const
 {
   return d->rawSig;
 }
 
 
-const QCString& K3bTRM::signature() const
+const TQCString& K3bTRM::signature() const
 {
   return d->sig;
 }

@@ -16,8 +16,8 @@
 #ifndef _K3B_EXTERNAL_ENCODER_COMMAND_H_
 #define _K3B_EXTERNAL_ENCODER_COMMAND_H_
 
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
 
 class K3bExternalEncoderCommand
 {
@@ -27,14 +27,14 @@ public:
       writeWaveHeader(false) {
   }
 
-  QString name;
-  QString extension;
-  QString command;
+  TQString name;
+  TQString extension;
+  TQString command;
 
   bool swapByteOrder;
   bool writeWaveHeader;
 
-  static QValueList<K3bExternalEncoderCommand> readCommands();
+  static TQValueList<K3bExternalEncoderCommand> readCommands();
 };
 
 #endif

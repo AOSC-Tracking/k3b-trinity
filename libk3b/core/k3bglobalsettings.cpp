@@ -31,7 +31,7 @@ K3bGlobalSettings::K3bGlobalSettings()
 
 void K3bGlobalSettings::readSettings( KConfig* c )
 {
-  QString lastG = c->group();
+  TQString lastG = c->group();
   c->setGroup( "General Options" );
 
   m_eject = !c->readBoolEntry( "No cd eject", false );
@@ -47,7 +47,7 @@ void K3bGlobalSettings::readSettings( KConfig* c )
 
 void K3bGlobalSettings::saveSettings( KConfig* c )
 {
-  QString lastG = c->group();
+  TQString lastG = c->group();
   c->setGroup( "General Options" );
 
   c->writeEntry( "No cd eject", !m_eject );

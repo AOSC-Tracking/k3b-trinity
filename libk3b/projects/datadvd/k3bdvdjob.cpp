@@ -39,8 +39,8 @@ public:
 };
 
 
-K3bDvdJob::K3bDvdJob( K3bDataDoc* doc, K3bJobHandler* hdl, QObject* parent )
-  : K3bDataJob( doc, hdl, parent ),
+K3bDvdJob::K3bDvdJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bDataJob( doc, hdl, tqparent ),
     m_doc( doc )
 {
   d = new Private();
@@ -79,7 +79,7 @@ bool K3bDvdJob::prepareWriterJob()
   writer->setCloseDvd( usedMultiSessionMode() == K3bDataDoc::NONE ||
 		       usedMultiSessionMode() == K3bDataDoc::FINISH );
 
-  writer->setImageToWrite( QString::null );  // read from stdin
+  writer->setImageToWrite( TQString() );  // read from stdin
   writer->setTrackSize( m_isoImager->size() );
 
   if( usedMultiSessionMode() != K3bDataDoc::NONE ) {
@@ -105,9 +105,9 @@ void K3bDvdJob::determineMultiSessionMode()
   }
   else {
      connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::NG_DISKINFO, m_doc->burner() ),
-	     SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	     TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	     this,
-	     SLOT(slotDetermineMultiSessionMode(K3bDevice::DeviceHandler*)) );
+	     TQT_SLOT(slotDetermineMultiSessionMode(K3bDevice::DeviceHandler*)) );
   }
 }
 
@@ -243,8 +243,8 @@ bool K3bDvdJob::waitForMedium()
 	if( !questionYesNo( i18n("Your writer (%1 %2) does not support simulation with DVD-R(W) media. "
 				 "Do you really want to continue? The media will be written "
 				 "for real.")
-			    .arg(m_doc->burner()->vendor())
-			    .arg(m_doc->burner()->description()),
+			    .tqarg(m_doc->burner()->vendor())
+			    .tqarg(m_doc->burner()->description()),
 			    i18n("No Simulation with DVD-R(W)") ) ) {
 	  return false;
 	}
@@ -271,7 +271,7 @@ bool K3bDvdJob::waitForMedium()
 	if( m_doc->writingMode() == K3b::DAO )
 	    // || ( m_doc->writingMode() == K3b::WRITING_MODE_AUTO &&
 // 	      usedMultiSessionMode() == K3bDataDoc::NONE ) )
-	  emit infoMessage( i18n("Writing %1 in DAO mode.").arg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
+	  emit infoMessage( i18n("Writing %1 in DAO mode.").tqarg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
 
 	else {
 	  // check if the writer supports writing sequential and thus multisession (on -1 the burner cannot handle
@@ -279,14 +279,14 @@ bool K3bDvdJob::waitForMedium()
 	  if( m_doc->burner()->featureCurrent( K3bDevice::FEATURE_INCREMENTAL_STREAMING_WRITABLE ) == 0 ) {
 	    if( !questionYesNo( i18n("Your writer (%1 %2) does not support Incremental Streaming with %3 "
 				     "media. Multisession will not be possible. Continue anyway?")
-				.arg(m_doc->burner()->vendor())
-				.arg(m_doc->burner()->description())
-				.arg( K3bDevice::mediaTypeString(foundMedium, true) ),
+				.tqarg(m_doc->burner()->vendor())
+				.tqarg(m_doc->burner()->description())
+				.tqarg( K3bDevice::mediaTypeString(foundMedium, true) ),
 				i18n("No Incremental Streaming") ) ) {
 	      return false;
 	    }
 	    else {
-	      emit infoMessage( i18n("Writing %1 in DAO mode.").arg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
+	      emit infoMessage( i18n("Writing %1 in DAO mode.").tqarg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
 	    }
 	  }
 	  else {
@@ -294,7 +294,7 @@ bool K3bDvdJob::waitForMedium()
 		m_doc->writingMode() == K3b::WRITING_MODE_RES_OVWR )
 	      emit infoMessage( i18n("Restricted Overwrite is not possible with DVD-R media."), INFO );
 
-	    emit infoMessage( i18n("Writing %1 in incremental mode.").arg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
+	    emit infoMessage( i18n("Writing %1 in incremental mode.").tqarg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
 	  }
 	}
       }
@@ -305,7 +305,7 @@ bool K3bDvdJob::waitForMedium()
 }
 
 
-QString K3bDvdJob::jobDescription() const
+TQString K3bDvdJob::jobDescription() const
 {
   if( m_doc->onlyCreateImages() ) {
     return i18n("Creating Data Image File");
@@ -314,19 +314,19 @@ QString K3bDvdJob::jobDescription() const
 	   m_doc->multiSessionMode() == K3bDataDoc::AUTO ) {
     return i18n("Writing Data DVD")
       + ( m_doc->isoOptions().volumeID().isEmpty()
-	  ? QString::null
-	  : QString( " (%1)" ).arg(m_doc->isoOptions().volumeID()) );
+	  ? TQString()
+	  : TQString( " (%1)" ).tqarg(m_doc->isoOptions().volumeID()) );
   }
   else {
     return i18n("Writing Multisession DVD")
       + ( m_doc->isoOptions().volumeID().isEmpty()
-	  ? QString::null
-	  : QString( " (%1)" ).arg(m_doc->isoOptions().volumeID()) );
+	  ? TQString()
+	  : TQString( " (%1)" ).tqarg(m_doc->isoOptions().volumeID()) );
   }
 }
 
 
-QString K3bDvdJob::jobDetails() const
+TQString K3bDvdJob::jobDetails() const
 {
   if( m_doc->copies() > 1 &&
       !m_doc->dummy() &&
@@ -335,10 +335,10 @@ QString K3bDvdJob::jobDetails() const
     return i18n("ISO9660 Filesystem (Size: %1) - %n copy",
 		"ISO9660 Filesystem (Size: %1) - %n copies",
 		m_doc->copies())
-      .arg(KIO::convertSize( m_doc->size() ));
+      .tqarg(KIO::convertSize( m_doc->size() ));
   else
     return i18n("ISO9660 Filesystem (Size: %1)")
-      .arg(KIO::convertSize( m_doc->size() ));
+      .tqarg(KIO::convertSize( m_doc->size() ));
 }
 
 #include "k3bdvdjob.moc"

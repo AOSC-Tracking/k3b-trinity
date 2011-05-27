@@ -46,8 +46,8 @@ public:
 
 
 
-K3bVideoDVDTitleDetectClippingJob::K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, QObject* parent )
-  : K3bJob( hdl, parent ),
+K3bVideoDVDTitleDetectClippingJob::K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bJob( hdl, tqparent ),
     m_clippingTop( 0 ),
     m_clippingBottom( 0 ),
     m_clippingLeft( 0 ),
@@ -88,15 +88,15 @@ void K3bVideoDVDTitleDetectClippingJob::start()
 
   d->usedTranscodeBin = k3bcore->externalBinManager()->binObject("transcode");
   if( !d->usedTranscodeBin ) {
-    emit infoMessage( i18n("%1 executable could not be found.").arg("transcode"), ERROR );
+    emit infoMessage( i18n("%1 executable could not be found.").tqarg("transcode"), ERROR );
     jobFinished( false );
     return;
   }
 
   if( d->usedTranscodeBin->version < K3bVersion( 1, 0, 0 ) ){
     emit infoMessage( i18n("%1 version %2 is too old.")
-		      .arg("transcode")
-		      .arg(d->usedTranscodeBin->version), ERROR );
+		      .tqarg("transcode")
+		      .tqarg(d->usedTranscodeBin->version), ERROR );
     jobFinished( false );
     return;
   }
@@ -105,11 +105,11 @@ void K3bVideoDVDTitleDetectClippingJob::start()
 
   if( !d->usedTranscodeBin->copyright.isEmpty() )
     emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3")
-		      .arg(d->usedTranscodeBin->name())
-		      .arg(d->usedTranscodeBin->version)
-		      .arg(d->usedTranscodeBin->copyright), INFO );
+		      .tqarg(d->usedTranscodeBin->name())
+		      .tqarg(d->usedTranscodeBin->version)
+		      .tqarg(d->usedTranscodeBin->copyright), INFO );
 
-  emit newTask( i18n("Analysing Title %1 of Video DVD %2").arg(m_titleNumber).arg(m_dvd.volumeIdentifier()) );
+  emit newTask( i18n("Analysing Title %1 of Video DVD %2").tqarg(m_titleNumber).tqarg(m_dvd.volumeIdentifier()) );
 
   startTranscode( 1 );
 }
@@ -125,9 +125,9 @@ void K3bVideoDVDTitleDetectClippingJob::startTranscode( int chapter )
   // use the whole chapter
   //
   if( d->totalChapters == 1 )
-    d->currentFrames = QMIN( 3000, QMAX( 1, m_dvd[m_titleNumber-1][d->currentChapter-1].playbackTime().totalFrames() ) );
+    d->currentFrames = TQMIN( 3000, TQMAX( 1, m_dvd[m_titleNumber-1][d->currentChapter-1].playbackTime().totalFrames() ) );
   else
-    d->currentFrames = QMIN( 200, QMAX( 1, m_dvd[m_titleNumber-1][d->currentChapter-1].playbackTime().totalFrames() ) );
+    d->currentFrames = TQMIN( 200, TQMAX( 1, m_dvd[m_titleNumber-1][d->currentChapter-1].playbackTime().totalFrames() ) );
 
   //
   // prepare the process
@@ -136,9 +136,9 @@ void K3bVideoDVDTitleDetectClippingJob::startTranscode( int chapter )
   d->process = new K3bProcess();
   d->process->setSuppressEmptyLines(true);
   d->process->setSplitStdout(true);
-  //  connect( d->process, SIGNAL(stderrLine(const QString&)), this, SLOT(slotTranscodeStderr(const QString&)) );
-  connect( d->process, SIGNAL(stdoutLine(const QString&)), this, SLOT(slotTranscodeStderr(const QString&)) );
-  connect( d->process, SIGNAL(processExited(KProcess*)), this, SLOT(slotTranscodeExited(KProcess*)) );
+  //  connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotTranscodeStderr(const TQString&)) );
+  connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotTranscodeStderr(const TQString&)) );
+  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotTranscodeExited(KProcess*)) );
 
   // the executable
   *d->process << d->usedTranscodeBin;
@@ -151,27 +151,27 @@ void K3bVideoDVDTitleDetectClippingJob::startTranscode( int chapter )
   *d->process << "-i" << m_dvd.device()->blockDeviceName();
 
   // select the title number and chapter
-  *d->process << "-T" << QString("%1,%2").arg(m_titleNumber).arg(chapter);
+  *d->process << "-T" << TQString("%1,%2").tqarg(m_titleNumber).tqarg(chapter);
 
   // null output
   *d->process << "-y" << "null,null" << "-o" << "/dev/null";
 
   // analyze the first 200 frames
-  *d->process << "-J" << QString("detectclipping=range=0-%1/5").arg(d->currentFrames);
+  *d->process << "-J" << TQString("detectclipping=range=0-%1/5").tqarg(d->currentFrames);
 
   // also only decode the first 200 frames
-  *d->process << "-c" << QString("0-%1").arg(d->currentFrames+1);
+  *d->process << "-c" << TQString("0-%1").tqarg(d->currentFrames+1);
 
   // additional user parameters from config
-  const QStringList& params = d->usedTranscodeBin->userParameters();
-  for( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+  const TQStringList& params = d->usedTranscodeBin->userParameters();
+  for( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
     *d->process << *it;
 
   // produce some debugging output
   kdDebug() << "***** transcode parameters:\n";
-  const QValueList<QCString>& args = d->process->args();
-  QString s;
-  for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+  const TQValueList<TQCString>& args = d->process->args();
+  TQString s;
+  for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
     s += *it + " ";
   }
   kdDebug() << s << flush << endl;
@@ -181,11 +181,11 @@ void K3bVideoDVDTitleDetectClippingJob::startTranscode( int chapter )
   if( !d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
     // something went wrong when starting the program
     // it "should" be the executable
-    emit infoMessage( i18n("Could not start %1.").arg(d->usedTranscodeBin->name()), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").tqarg(d->usedTranscodeBin->name()), K3bJob::ERROR );
     jobFinished(false);
   }
   else {
-    emit newSubTask( i18n("Analysing Chapter %1 of %2").arg(chapter).arg(m_dvd[m_titleNumber-1].numPTTs()) );
+    emit newSubTask( i18n("Analysing Chapter %1 of %2").tqarg(chapter).tqarg(m_dvd[m_titleNumber-1].numPTTs()) );
     emit subPercent( 0 );
   }
 }
@@ -199,15 +199,15 @@ void K3bVideoDVDTitleDetectClippingJob::cancel()
 }
 
 
-void K3bVideoDVDTitleDetectClippingJob::slotTranscodeStderr( const QString& line )
+void K3bVideoDVDTitleDetectClippingJob::slotTranscodeStderr( const TQString& line )
 {
   emit debuggingOutput( "transcode", line );
 
   // parse progress
   // encoding frame [185],  24.02 fps, 93.0%, ETA: 0:00:00, ( 0| 0| 0)
   if( line.startsWith( "encoding frame" ) ) {
-    int pos1 = line.find( '[', 15 );
-    int pos2 = line.find( ']', pos1+1 );
+    int pos1 = line.tqfind( '[', 15 );
+    int pos2 = line.tqfind( ']', pos1+1 );
     if( pos1 > 0 && pos2 > 0 ) {
       bool ok;
       int encodedFrames = line.mid( pos1+1, pos2-pos1-1 ).toInt( &ok );
@@ -235,13 +235,13 @@ void K3bVideoDVDTitleDetectClippingJob::slotTranscodeStderr( const QString& line
 
   // [detectclipping#0] valid area: X: 5..719 Y: 72..507  -> -j 72,6,68,0
   else if( line.startsWith( "[detectclipping" ) ) {
-    int pos = line.find( "-j" );
+    int pos = line.tqfind( "-j" );
     if( pos > 0 ) {
-      QStringList values = QStringList::split( ',', line.mid( pos+3 ) );
-      m_clippingTop = QMIN( m_clippingTop, values[0].toInt() );
-      m_clippingLeft = QMIN( m_clippingLeft, values[1].toInt() );
-      m_clippingBottom = QMIN( m_clippingBottom, values[2].toInt() );
-      m_clippingRight = QMIN( m_clippingRight, values[3].toInt() );
+      TQStringList values = TQStringList::split( ',', line.mid( pos+3 ) );
+      m_clippingTop = TQMIN( m_clippingTop, values[0].toInt() );
+      m_clippingLeft = TQMIN( m_clippingLeft, values[1].toInt() );
+      m_clippingBottom = TQMIN( m_clippingBottom, values[2].toInt() );
+      m_clippingRight = TQMIN( m_clippingRight, values[3].toInt() );
     }
     else
       kdDebug() << "(K3bVideoDVDTitleDetectClippingJob) failed to parse line: " << line << endl;
@@ -279,7 +279,7 @@ void K3bVideoDVDTitleDetectClippingJob::slotTranscodeExited( KProcess* p )
     }
     else {
       emit infoMessage( i18n("%1 returned an unknown error (code %2).")
-			.arg(d->usedTranscodeBin->name()).arg(p->exitStatus()), 
+			.tqarg(d->usedTranscodeBin->name()).tqarg(p->exitStatus()), 
 			K3bJob::ERROR );
       emit infoMessage( i18n("Please send me an email with the last output."), K3bJob::ERROR );
     }

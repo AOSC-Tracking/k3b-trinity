@@ -18,14 +18,14 @@
 #include <k3bglobals.h>
 #include <k3bcore.h>
 
-#include <qlabel.h>
-#include <qgroupbox.h>
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qhbox.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qfileinfo.h>
+#include <tqlabel.h>
+#include <tqgroupbox.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
+#include <tqhbox.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqfileinfo.h>
 
 #include <kconfig.h>
 #include <klocale.h>
@@ -39,32 +39,32 @@
 #include <klineedit.h>
 
 
-K3bTempDirSelectionWidget::K3bTempDirSelectionWidget( QWidget *parent, const char *name )
-  : QGroupBox( 4, Qt::Vertical, parent, name ),
+K3bTempDirSelectionWidget::K3bTempDirSelectionWidget( TQWidget *tqparent, const char *name )
+  : TQGroupBox( 4, Qt::Vertical, tqparent, name ),
     m_labelCdSize(0),
     m_defaultImageFileName( "k3b_image.iso" )
 {
-  layout()->setSpacing( KDialog::spacingHint() );
-  layout()->setMargin( KDialog::marginHint() );
+  tqlayout()->setSpacing( KDialog::spacingHint() );
+  tqlayout()->setMargin( KDialog::marginHint() );
 
-  m_imageFileLabel = new QLabel( this );
+  m_imageFileLabel = new TQLabel( this );
   m_editDirectory = new KURLRequester( this, "m_editDirectory" );
 
   m_imageFileLabel->setBuddy( m_editDirectory );
 
-  QHBox* freeTempSpaceBox = new QHBox( this );
+  TQHBox* freeTempSpaceBox = new TQHBox( this );
   freeTempSpaceBox->setSpacing( KDialog::spacingHint() );
-  (void)new QLabel( i18n( "Free space in temporary directory:" ), freeTempSpaceBox, "TextLabel2" );
-  m_labelFreeSpace = new QLabel( "                       ",freeTempSpaceBox, "m_labelFreeSpace" );
-  m_labelFreeSpace->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
+  (void)new TQLabel( i18n( "Free space in temporary directory:" ), freeTempSpaceBox, "TextLabel2" );
+  m_labelFreeSpace = new TQLabel( "                       ",freeTempSpaceBox, "m_labelFreeSpace" );
+  m_labelFreeSpace->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
 
-  connect( m_editDirectory, SIGNAL(openFileDialog(KURLRequester*)),
-	   this, SLOT(slotTempDirButtonPressed(KURLRequester*)) );
-  connect( m_editDirectory, SIGNAL(textChanged(const QString&)),
-	   this, SLOT(slotUpdateFreeTempSpace()) );
-  connect( m_editDirectory->lineEdit(), SIGNAL(lostFocus()),
-           this, SLOT(slotFixTempPath()) );
+  connect( m_editDirectory, TQT_SIGNAL(openFileDialog(KURLRequester*)),
+	   this, TQT_SLOT(slotTempDirButtonPressed(KURLRequester*)) );
+  connect( m_editDirectory, TQT_SIGNAL(textChanged(const TQString&)),
+	   this, TQT_SLOT(slotUpdateFreeTempSpace()) );
+  connect( m_editDirectory->lineEdit(), TQT_SIGNAL(lostFocus()),
+           this, TQT_SLOT(slotFixTempPath()) );
 
   // choose a default
   setSelectionMode( DIR );
@@ -74,11 +74,11 @@ K3bTempDirSelectionWidget::K3bTempDirSelectionWidget( QWidget *parent, const cha
 
   // ToolTips
   // --------------------------------------------------------------------------------
-  QToolTip::add( m_editDirectory, i18n("The directory in which to save the image files") );
+  TQToolTip::add( m_editDirectory, i18n("The directory in which to save the image files") );
 
   // What's This info
   // --------------------------------------------------------------------------------
-  QWhatsThis::add( m_editDirectory, i18n("<p>This is the directory in which K3b will save the <em>image files</em>."
+  TQWhatsThis::add( m_editDirectory, i18n("<p>This is the directory in which K3b will save the <em>image files</em>."
 					 "<p>Please make sure that it resides on a partition that has enough free space.") );
 }
 
@@ -90,10 +90,10 @@ K3bTempDirSelectionWidget::~K3bTempDirSelectionWidget()
 
 unsigned long K3bTempDirSelectionWidget::freeTempSpace() const
 {
-  QString path = m_editDirectory->url();
+  TQString path = m_editDirectory->url();
 
-  if( !QFile::exists( path ) )
-    path.truncate( path.findRev('/') );
+  if( !TQFile::exists( path ) )
+    path.truncate( path.tqfindRev('/') );
 
   unsigned long size;
   K3b::kbFreeOnFs( path, size, m_freeTempSpace );
@@ -115,7 +115,7 @@ void K3bTempDirSelectionWidget::slotUpdateFreeTempSpace()
     else
       m_labelCdSize->setPaletteForegroundColor( m_labelFreeSpace->paletteForegroundColor() );
   }
-  QTimer::singleShot( 1000, this, SLOT(slotUpdateFreeTempSpace()) );
+  TQTimer::singleShot( 1000, this, TQT_SLOT(slotUpdateFreeTempSpace()) );
 }
 
 
@@ -133,16 +133,16 @@ void K3bTempDirSelectionWidget::slotTempDirButtonPressed( KURLRequester* r )
 }
 
 
-void K3bTempDirSelectionWidget::setTempPath( const QString& dir )
+void K3bTempDirSelectionWidget::setTempPath( const TQString& dir )
 {
   m_editDirectory->setURL( dir );
   slotUpdateFreeTempSpace();
 }
 
 
-QString K3bTempDirSelectionWidget::tempPath() const
+TQString K3bTempDirSelectionWidget::tempPath() const
 {
-  QFileInfo fi( m_editDirectory->url() );
+  TQFileInfo fi( m_editDirectory->url() );
 
   if( fi.exists() ) {
     if( m_mode == DIR ) {
@@ -164,27 +164,27 @@ QString K3bTempDirSelectionWidget::tempPath() const
 }
 
 
-QString K3bTempDirSelectionWidget::plainTempPath() const
+TQString K3bTempDirSelectionWidget::plainTempPath() const
 {
   return m_editDirectory->url();
 }
 
 
-QString K3bTempDirSelectionWidget::tempDirectory() const
+TQString K3bTempDirSelectionWidget::tempDirectory() const
 {
-  QString td( m_editDirectory->url() );
+  TQString td( m_editDirectory->url() );
 
   // remove a trailing slash
   while( !td.isEmpty() && td[td.length()-1] == '/' )
     td.truncate( td.length()-1 );
 
-  QFileInfo fi( td );
+  TQFileInfo fi( td );
   if( fi.exists() && fi.isDir() )
     return td + "/";
 
   // now we treat the last section as a filename and return the path
   // in front of it
-  td.truncate( td.findRev( '/' ) + 1 );
+  td.truncate( td.tqfindRev( '/' ) + 1 );
   return td;
 }
 
@@ -208,11 +208,11 @@ void K3bTempDirSelectionWidget::setNeededSize( KIO::filesize_t bytes )
 {
   m_requestedSize = bytes;
   if( !m_labelCdSize ) {
-    QHBox* cdSizeBox = new QHBox( this );
+    TQHBox* cdSizeBox = new TQHBox( this );
     cdSizeBox->setSpacing( KDialog::spacingHint() );
-    (void)new QLabel( i18n( "Size of project:" ), cdSizeBox, "TextLabel4" );
-    m_labelCdSize = new QLabel( KIO::convertSize(bytes), cdSizeBox, "m_labelCdSize" );
-    m_labelCdSize->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
+    (void)new TQLabel( i18n( "Size of project:" ), cdSizeBox, "TextLabel4" );
+    m_labelCdSize = new TQLabel( KIO::convertSize(bytes), cdSizeBox, "m_labelCdSize" );
+    m_labelCdSize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   }
   m_labelCdSize->setText( KIO::convertSize(bytes) );
 }
@@ -237,7 +237,7 @@ void K3bTempDirSelectionWidget::saveConfig( KConfigBase* c )
 }
 
 
-void K3bTempDirSelectionWidget::setDefaultImageFileName( const QString& name )
+void K3bTempDirSelectionWidget::setDefaultImageFileName( const TQString& name )
 {
     if ( !name.isEmpty() ) {
         bool changeImageName = false;
@@ -248,7 +248,7 @@ void K3bTempDirSelectionWidget::setDefaultImageFileName( const QString& name )
         }
 
         m_defaultImageFileName = name;
-        if ( !m_defaultImageFileName.contains( '.' ) ) {
+        if ( !m_defaultImageFileName.tqcontains( '.' ) ) {
             m_defaultImageFileName += ".iso";
         }
         fixTempPath( changeImageName );
@@ -268,7 +268,7 @@ void K3bTempDirSelectionWidget::fixTempPath( bool forceNewImageName )
     // forceNewImageName is true set the default image file name
     if ( selectionMode() == FILE ) {
         if ( forceNewImageName ||
-             QFileInfo( plainTempPath() ).isDir() ) {
+             TQFileInfo( plainTempPath() ).isDir() ) {
             setTempPath( tempDirectory() + m_defaultImageFileName );
         }
     }

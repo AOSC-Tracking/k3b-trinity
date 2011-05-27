@@ -30,32 +30,33 @@ class KDialogBase;
 class K3bLameEncoder : public K3bAudioEncoder
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bLameEncoder( QObject* parent = 0, const char* name = 0 );
+  K3bLameEncoder( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bLameEncoder();
 
-  bool openFile( const QString& extension, const QString& filename, const K3b::Msf& length );
+  bool openFile( const TQString& extension, const TQString& filename, const K3b::Msf& length );
   bool isOpen() const;
   void closeFile();
-  const QString& filename() const;
+  const TQString& filename() const;
 
-  QStringList extensions() const;
+  TQStringList extensions() const;
   
-  QString fileTypeComment( const QString& ) const;
+  TQString fileTypeComment( const TQString& ) const;
 
-  long long fileSize( const QString&, const K3b::Msf& msf ) const;
+  long long fileSize( const TQString&, const K3b::Msf& msf ) const;
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bPluginConfigWidget* createConfigWidget( QWidget* parent = 0, 
+  K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent = 0, 
 					     const char* name = 0 ) const;
 
  private:
   void finishEncoderInternal();
-  bool initEncoderInternal( const QString& extension, const K3b::Msf& length );
-  long encodeInternal( const char* data, Q_ULONG len );
-  void setMetaDataInternal( MetaDataField, const QString& );
+  bool initEncoderInternal( const TQString& extension, const K3b::Msf& length );
+  long encodeInternal( const char* data, TQ_ULONG len );
+  void setMetaDataInternal( MetaDataField, const TQString& );
 
   class Private;
   Private* d;
@@ -65,9 +66,10 @@ class K3bLameEncoder : public K3bAudioEncoder
 class K3bLameEncoderSettingsWidget : public K3bPluginConfigWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bLameEncoderSettingsWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bLameEncoderSettingsWidget( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bLameEncoderSettingsWidget();
 
  public slots:

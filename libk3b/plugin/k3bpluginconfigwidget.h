@@ -17,15 +17,16 @@
 #ifndef _K3B_PLUGIN_CONFIG_WIDGET_H_
 #define _K3B_PLUGIN_CONFIG_WIDGET_H_
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include "k3b_export.h"
 
-class LIBK3B_EXPORT K3bPluginConfigWidget : public QWidget
+class LIBK3B_EXPORT K3bPluginConfigWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bPluginConfigWidget( QWidget* parent = 0, const char* name = 0 );
+  K3bPluginConfigWidget( TQWidget* tqparent = 0, const char* name = 0 );
   virtual ~K3bPluginConfigWidget();
 
  public slots:

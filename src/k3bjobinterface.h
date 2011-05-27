@@ -16,7 +16,7 @@
 #ifndef _K3B_JOB_INTERFACE_H_
 #define _K3B_JOB_INTERFACE_H_
 
-#include <qobject.h>
+#include <tqobject.h>
 #include <dcopobject.h>
 
 class K3bJob;
@@ -28,31 +28,32 @@ class K3bJob;
  * This may be used for example in a karamba theme with a non-volitile
  * DCOP connection.
  */
-class K3bJobInterface : public QObject, public DCOPObject
+class K3bJobInterface : public TQObject, public DCOPObject
 {
   Q_OBJECT
+//  TQ_OBJECT
   K_DCOP
 
  public:
-  K3bJobInterface( QObject* parent );
+  K3bJobInterface( TQObject* tqparent );
 
   void setJob( K3bJob* );
 
  k_dcop:
   bool jobRunning() const;
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
  k_dcop_signals:
   void started();
   void canceled();
   void finished( bool );
-  void infoMessage( const QString&, int );
+  void infoMessage( const TQString&, int );
   void progress( int );
   void subProgress( int );
-  void newTask( const QString& );
-  void newSubTask( const QString& );
+  void newTask( const TQString& );
+  void newSubTask( const TQString& );
   void buffer( int );
   void deviceBuffer( int );
   void nextTrack( int track, int numTracks );
@@ -61,11 +62,11 @@ class K3bJobInterface : public QObject, public DCOPObject
   void slotStarted();
   void slotCanceled();
   void slotFinished( bool );
-  void slotInfoMessage( const QString&, int );
+  void slotInfoMessage( const TQString&, int );
   void slotProgress( int );
   void slotSubProgress( int );
-  void slotNewTask( const QString& );
-  void slotNewSubTask( const QString& );
+  void slotNewTask( const TQString& );
+  void slotNewSubTask( const TQString& );
   void slotBuffer( int );
   void slotDeviceBuffer( int );
   void slotNextTrack( int track, int numTracks );

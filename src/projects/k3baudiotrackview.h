@@ -18,8 +18,8 @@
 
 #include <k3blistview.h>
 
-#include <qmap.h>
-#include <qptrlist.h>
+#include <tqmap.h>
+#include <tqptrlist.h>
 #include <kurl.h>
 
 class K3bAudioTrack;
@@ -28,14 +28,14 @@ class K3bAudioDataSource;
 class K3bAudioDoc;
 class KActionCollection;
 class KAction;
-class QDropEvent;
-class QKeyEvent;
-class QFocusEvent;
-class QMouseEvent;
-class QDragMoveEvent;
-class QTimer;
+class TQDropEvent;
+class TQKeyEvent;
+class TQFocusEvent;
+class TQMouseEvent;
+class TQDragMoveEvent;
+class TQTimer;
 class KPopupMenu;
-class QPainter;
+class TQPainter;
 class K3bListViewItemAnimator;
 class K3bAudioTrackPlayer;
 
@@ -43,17 +43,18 @@ class K3bAudioTrackPlayer;
 class K3bAudioTrackView : public K3bListView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioTrackView( K3bAudioDoc*, QWidget* parent, const char* name = 0 );
+  K3bAudioTrackView( K3bAudioDoc*, TQWidget* tqparent, const char* name = 0 );
   ~K3bAudioTrackView();
 
   KActionCollection* actionCollection() const { return m_actionCollection; }
 
   K3bAudioTrackPlayer* player() const { return m_player; }
 
-  void getSelectedItems( QPtrList<K3bAudioTrack>& tracks, 
-			 QPtrList<K3bAudioDataSource>& sources );
+  void getSelectedItems( TQPtrList<K3bAudioTrack>& tracks, 
+			 TQPtrList<K3bAudioDataSource>& sources );
 
  public slots:
   void showPlayerIndicator( K3bAudioTrack* );
@@ -64,7 +65,7 @@ class K3bAudioTrackView : public K3bListView
   void setupColumns();
   void setupActions();
   void showAllSources();
-  K3bAudioTrackViewItem* findTrackItem( const QPoint& pos ) const;
+  K3bAudioTrackViewItem* findTrackItem( const TQPoint& pos ) const;
   K3bAudioTrackViewItem* getTrackViewItem( K3bAudioTrack* track, bool* isNew = 0 );
 
   K3bAudioDoc* m_doc;
@@ -81,11 +82,11 @@ class K3bAudioTrackView : public K3bListView
 
   bool m_updatingColumnWidths;
 
-  QMap<K3bAudioTrack*, K3bAudioTrackViewItem*> m_trackItemMap;
+  TQMap<K3bAudioTrack*, K3bAudioTrackViewItem*> m_trackItemMap;
 
   K3bAudioTrackViewItem* m_currentMouseOverItem;
-  QTimer* m_autoOpenTrackTimer;
-  QTimer* m_animationTimer;
+  TQTimer* m_autoOpenTrackTimer;
+  TQTimer* m_animationTimer;
 
   KPopupMenu* m_popupMenu;
 
@@ -105,7 +106,7 @@ class K3bAudioTrackView : public K3bListView
 
  private slots:
   void slotAnimation();
-  void slotDropped( QDropEvent* e, QListViewItem* parent, QListViewItem* after );
+  void slotDropped( TQDropEvent* e, TQListViewItem* tqparent, TQListViewItem* after );
   void slotChanged();
   void slotTrackChanged( K3bAudioTrack* );
   void slotTrackRemoved( K3bAudioTrack* );
@@ -117,7 +118,7 @@ class K3bAudioTrackView : public K3bListView
   void slotMergeTracks();
   void slotSplitSource();
   void slotSplitTrack();
-  void showPopupMenu( KListView*, QListViewItem* item, const QPoint& pos );
+  void showPopupMenu( KListView*, TQListViewItem* item, const TQPoint& pos );
   void slotProperties();
   void slotPlayTrack();
   void slotQueryMusicBrainz();
@@ -127,16 +128,16 @@ class K3bAudioTrackView : public K3bListView
   void slotAddUrls();
 
  protected:
-  void keyPressEvent( QKeyEvent* e );
-  void keyReleaseEvent( QKeyEvent* e );
-  void focusOutEvent( QFocusEvent* e );
-  void contentsMouseMoveEvent( QMouseEvent* e );
-  void contentsDragMoveEvent( QDragMoveEvent* e );
-  void contentsDragLeaveEvent( QDragLeaveEvent* e );
-  void resizeEvent( QResizeEvent* e );
+  void keyPressEvent( TQKeyEvent* e );
+  void keyReleaseEvent( TQKeyEvent* e );
+  void focusOutEvent( TQFocusEvent* e );
+  void contentsMouseMoveEvent( TQMouseEvent* e );
+  void contentsDragMoveEvent( TQDragMoveEvent* e );
+  void contentsDragLeaveEvent( TQDragLeaveEvent* e );
+  void resizeEvent( TQResizeEvent* e );
   void resizeColumns();
-  bool acceptDrag(QDropEvent* e) const;
-  QDragObject* dragObject();
+  bool acceptDrag(TQDropEvent* e) const;
+  TQDragObject* dragObject();
 };
 
 #endif

@@ -21,7 +21,7 @@
 #include "k3bmediacontentsview.h"
 #include "k3bmedium.h"
 
-class QLabel;
+class TQLabel;
 class KListView;
 class K3bIso9660;
 
@@ -33,9 +33,10 @@ namespace K3bDevice {
 class K3bDiskInfoView : public K3bMediaContentsView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDiskInfoView( QWidget* parent = 0, const char* name = 0 );
+  K3bDiskInfoView( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bDiskInfoView();
 
   void enableInteraction( bool enable );

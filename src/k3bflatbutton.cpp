@@ -21,22 +21,22 @@
 #include <kiconloader.h>
 #include <kglobal.h>
 
-#include <qpainter.h>
-#include <qtooltip.h>
-#include <qfontmetrics.h>
-#include <qpixmap.h>
+#include <tqpainter.h>
+#include <tqtooltip.h>
+#include <tqfontmetrics.h>
+#include <tqpixmap.h>
 
 
-K3bFlatButton::K3bFlatButton( QWidget *parent, const char *name )
-  : QFrame( parent, name/*, WNoAutoErase*/ ),
+K3bFlatButton::K3bFlatButton( TQWidget *tqparent, const char *name )
+  : TQFrame( tqparent, name/*, WNoAutoErase*/ ),
     m_pressed(false)
 {
   init();
 }
 
 
-K3bFlatButton::K3bFlatButton( const QString& text, QWidget *parent, const char *name )
-  : QFrame( parent, name/*, WNoAutoErase*/ ),
+K3bFlatButton::K3bFlatButton( const TQString& text, TQWidget *tqparent, const char *name )
+  : TQFrame( tqparent, name/*, WNoAutoErase*/ ),
     m_pressed(false)
 {
   init();
@@ -44,16 +44,16 @@ K3bFlatButton::K3bFlatButton( const QString& text, QWidget *parent, const char *
 }
 
 
-K3bFlatButton::K3bFlatButton( KAction* a, QWidget *parent, const char *name )
-  : QFrame( parent, name/*, WNoAutoErase*/ ),
+K3bFlatButton::K3bFlatButton( KAction* a, TQWidget *tqparent, const char *name )
+  : TQFrame( tqparent, name/*, WNoAutoErase*/ ),
     m_pressed(false)
 {
   init();
 
   setText( a->text() );
-  QToolTip::add( this, a->toolTip() );
+  TQToolTip::add( this, a->toolTip() );
   setPixmap( KGlobal::iconLoader()->loadIcon( a->icon(), KIcon::NoGroup, 32 ) );
-  connect( this, SIGNAL(clicked()), a, SLOT(activate()) );
+  connect( this, TQT_SIGNAL(clicked()), a, TQT_SLOT(activate()) );
 }
 
 
@@ -64,15 +64,15 @@ void K3bFlatButton::init()
 {
   setHover(false);
   setMargin(5);
-  setFrameStyle( QFrame::Box|QFrame::Plain );
+  setFrameStyle( TQFrame::Box|TQFrame::Plain );
 
-  connect( k3bappcore->themeManager(), SIGNAL(themeChanged()), this, SLOT(slotThemeChanged()) );
-  connect( kapp, SIGNAL(appearanceChanged()), this, SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()), this, TQT_SLOT(slotThemeChanged()) );
+  connect( kapp, TQT_SIGNAL(appearanceChanged()), this, TQT_SLOT(slotThemeChanged()) );
   slotThemeChanged();
 }
 
 
-void K3bFlatButton::setText( const QString& s )
+void K3bFlatButton::setText( const TQString& s )
 {
   m_text = s;
   m_text.remove( '&' );
@@ -81,28 +81,28 @@ void K3bFlatButton::setText( const QString& s )
 }
 
 
-void K3bFlatButton::setPixmap( const QPixmap& p )
+void K3bFlatButton::setPixmap( const TQPixmap& p )
 {
   m_pixmap = p;
   update();
 }
 
 
-void K3bFlatButton::enterEvent( QEvent* )
+void K3bFlatButton::enterEvent( TQEvent* )
 {
   setHover(true);
 }
 
 
-void K3bFlatButton::leaveEvent( QEvent* )
+void K3bFlatButton::leaveEvent( TQEvent* )
 {
   setHover(false);
 }
 
 
-void K3bFlatButton::mousePressEvent( QMouseEvent* e )
+void K3bFlatButton::mousePressEvent( TQMouseEvent* e )
 {
-  if( e->button() == QMouseEvent::LeftButton ) {
+  if( e->button() == Qt::LeftButton ) {
     emit pressed();
     m_pressed = true;
   }
@@ -111,9 +111,9 @@ void K3bFlatButton::mousePressEvent( QMouseEvent* e )
 }
 
 
-void K3bFlatButton::mouseReleaseEvent( QMouseEvent* e )
+void K3bFlatButton::mouseReleaseEvent( TQMouseEvent* e )
 {
-  if( e->button() == QMouseEvent::LeftButton ) {
+  if( e->button() == Qt::LeftButton ) {
     if( m_pressed  )
       emit clicked();
     m_pressed = false;
@@ -139,52 +139,52 @@ void K3bFlatButton::setHover( bool b )
 }
 
 
-QSize K3bFlatButton::sizeHint() const
+TQSize K3bFlatButton::tqsizeHint() const
 {
   // height: pixmap + 5 spacing + font height + frame width
   // width: max( pixmap, text) + frame width
-  return QSize( QMAX( m_pixmap.width(), fontMetrics().width( m_text ) ) + frameWidth()*2, 
+  return TQSize( TQMAX( m_pixmap.width(), fontMetrics().width( m_text ) ) + frameWidth()*2, 
 		m_pixmap.height() + fontMetrics().height() + 5 + frameWidth()*2 );
 }
 
 
-void K3bFlatButton::drawContents( QPainter* p )
+void K3bFlatButton::drawContents( TQPainter* p )
 {
-  QRect rect = contentsRect();
+  TQRect rect = contentsRect();
 
 //   if( m_hover )
 //     p->fillRect( rect, m_foreColor );
-//   else if( parentWidget() ) {
-//     QRect r( mapToParent( QPoint(lineWidth(), lineWidth()) ), 
-// 	     mapToParent( QPoint(width()-2*lineWidth(), height()-2*lineWidth() )) );
+//   else if( tqparentWidget() ) {
+//     TQRect r( mapToParent( TQPoint(lineWidth(), lineWidth()) ), 
+// 	     mapToParent( TQPoint(width()-2*lineWidth(), height()-2*lineWidth() )) );
     
-//     parentWidget()->repaint( r );
+//     tqparentWidget()->tqrepaint( r );
 //   }
 
   p->save();
 
-  QRect textRect = fontMetrics().boundingRect( m_text );
-  int textX = QMAX( 0, ( rect.width() - textRect.width() ) / 2 );
+  TQRect textRect = fontMetrics().boundingRect( m_text );
+  int textX = TQMAX( 0, ( rect.width() - textRect.width() ) / 2 );
   int textY = textRect.height();
 
   if( !m_pixmap.isNull() ) {
     p->translate( rect.left(), rect.top() );
-    textX = QMAX( textX, (m_pixmap.width() - textRect.width()) / 2 );
+    textX = TQMAX( textX, (m_pixmap.width() - textRect.width()) / 2 );
     textY += 5 + m_pixmap.height();
 
-    int pixX = QMAX( QMAX( 0, (textRect.width() - m_pixmap.width()) / 2 ), 
+    int pixX = TQMAX( TQMAX( 0, (textRect.width() - m_pixmap.width()) / 2 ), 
 		     ( rect.width() - m_pixmap.width() ) / 2 );
     p->drawPixmap( pixX, 0, m_pixmap );
     p->drawText( textX, textY, m_text ); 
   }
   else
-    p->drawText( rect, Qt::AlignCenter, m_text );
+    p->drawText( rect, TQt::AlignCenter, m_text );
 
   p->restore();
 }
 
 
-void K3bFlatButton::setColors( const QColor& fore, const QColor& back )
+void K3bFlatButton::setColors( const TQColor& fore, const TQColor& back )
 {
   m_foreColor = fore;
   m_backColor = back;

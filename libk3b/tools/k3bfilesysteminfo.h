@@ -18,18 +18,18 @@
 
 #include <k3b_export.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 class LIBK3B_EXPORT K3bFileSystemInfo
 {
  public:
   K3bFileSystemInfo();
-  K3bFileSystemInfo( const QString& path );
+  K3bFileSystemInfo( const TQString& path );
   K3bFileSystemInfo( const K3bFileSystemInfo& );
   ~K3bFileSystemInfo();
 
-  QString path() const;
-  void setPath( const QString& path );
+  TQString path() const;
+  void setPath( const TQString& path );
 
   enum FileSystemType {
     FS_UNKNOWN,
@@ -46,7 +46,7 @@ class LIBK3B_EXPORT K3bFileSystemInfo
    * For now it only replaces characters like * or [
    * on FAT file systems.
    */
-  QString fixupPath( const QString& );
+  TQString fixupPath( const TQString& );
 
  private:
   class Private;

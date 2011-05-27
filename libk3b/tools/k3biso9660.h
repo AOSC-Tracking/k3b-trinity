@@ -20,10 +20,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include <qdatetime.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qdict.h>
+#include <tqdatetime.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqdict.h>
 
 #include "k3b_export.h"
 
@@ -54,12 +54,12 @@ class LIBK3B_EXPORT K3bIso9660SimplePrimaryDescriptor
    */
   K3bIso9660SimplePrimaryDescriptor();
 
-  QString volumeId;
-  QString systemId;
-  QString volumeSetId;
-  QString publisherId;
-  QString preparerId;
-  QString applicationId;
+  TQString volumeId;
+  TQString systemId;
+  TQString volumeSetId;
+  TQString publisherId;
+  TQString preparerId;
+  TQString applicationId;
   int volumeSetSize;
   int volumeSetNumber;
   long logicalBlockSize;
@@ -81,15 +81,15 @@ class LIBK3B_EXPORT K3bIso9660Entry
 {
  public:
   K3bIso9660Entry( K3bIso9660* archive,
-		   const QString& isoName,
-		   const QString& name,
+		   const TQString& isoName,
+		   const TQString& name,
 		   int access,
 		   int date,
 		   int adate,
 		   int cdate, 
-		   const QString& user,
-		   const QString& group,
-		   const QString& symlink );
+		   const TQString& user,
+		   const TQString& group,
+		   const TQString& symlink );
   virtual ~K3bIso9660Entry();
 
   int adate() const { return m_adate; }
@@ -99,7 +99,7 @@ class LIBK3B_EXPORT K3bIso9660Entry
    * Creation date of the file.
    * @return the creation date
    */
-  QDateTime datetime() const;
+  TQDateTime datetime() const;
 
   /**
    * Creation date of the file.
@@ -111,12 +111,12 @@ class LIBK3B_EXPORT K3bIso9660Entry
    * Name of the file without path.
    * @return The file name without path.
    */
-  const QString& name() const { return m_name; }
+  const TQString& name() const { return m_name; }
 
   /**
    * \return The raw name as saved in the ISO9660 tree
    */
-  const QString& isoName() const { return m_isoName; }
+  const TQString& isoName() const { return m_isoName; }
 
   /**
    * The permissions and mode flags as returned by the stat() function
@@ -129,19 +129,19 @@ class LIBK3B_EXPORT K3bIso9660Entry
    * User who created the file.
    * @return the owner of the file
    */
-  const QString& user() const { return m_user; }
+  const TQString& user() const { return m_user; }
 
   /**
    * Group of the user who created the file.
    * @return the group of the file
    */
-  const QString& group() const { return m_group; }
+  const TQString& group() const { return m_group; }
 
   /**
    * Symlink if there is one.
-   * @return the symlink, or QString::null
+   * @return the symlink, or TQString()
    */
-  const QString& symlink() const { return m_symlink; }
+  const TQString& symlink() const { return m_symlink; }
 
   /**
    * Checks whether the entry is a file.
@@ -160,13 +160,13 @@ class LIBK3B_EXPORT K3bIso9660Entry
  private:
   int m_adate;
   int m_cdate;
-  QString m_name;
-  QString m_isoName;
+  TQString m_name;
+  TQString m_isoName;
   int m_date;
   mode_t m_access;
-  QString m_user;
-  QString m_group;
-  QString m_symlink;
+  TQString m_user;
+  TQString m_group;
+  TQString m_symlink;
   K3bIso9660* m_archive;
 };
 
@@ -175,15 +175,15 @@ class LIBK3B_EXPORT K3bIso9660Directory : public K3bIso9660Entry
 {
  public: 
   K3bIso9660Directory( K3bIso9660* archive, 
-		       const QString& isoName,
-		       const QString& name, 
+		       const TQString& isoName,
+		       const TQString& name, 
 		       int access, 
 		       int date,
 		       int adate,
 		       int cdate, 
-		       const QString& user,
-		       const QString& group,
-		       const QString& symlink,
+		       const TQString& user,
+		       const TQString& group,
+		       const TQString& symlink,
 		       unsigned int pos = 0, 
 		       unsigned int size = 0 );
   ~K3bIso9660Directory();
@@ -192,28 +192,28 @@ class LIBK3B_EXPORT K3bIso9660Directory : public K3bIso9660Entry
    * Returns a list of sub-entries.
    * @return the names of all entries in this directory (filenames, no path).
    */
-  QStringList entries() const;
+  TQStringList entries() const;
 
   /**
    * Returns the entry with the given name.
    * @param name may be "test1", "mydir/test3", "mydir/mysubdir/test3", etc.
    * @return a pointer to the entry in the directory.
    */
-  K3bIso9660Entry* entry( const QString& name );
+  K3bIso9660Entry* entry( const TQString& name );
 
   /**
    * Returns the entry with the given name.
    * @param name may be "test1", "mydir/test3", "mydir/mysubdir/test3", etc.
    * @return a pointer to the entry in the directory.
    */
-  const K3bIso9660Entry* entry( const QString& name ) const;
+  const K3bIso9660Entry* entry( const TQString& name ) const;
 
   /**
    * Returns a list of sub-entries.
    * Searches for Iso9660 names.
    * @return the names of all entries in this directory (filenames, no path).
    */
-  QStringList iso9660Entries() const;
+  TQStringList iso9660Entries() const;
 
   /**
    * Returns the entry with the given name.
@@ -221,7 +221,7 @@ class LIBK3B_EXPORT K3bIso9660Directory : public K3bIso9660Entry
    * @param name may be "test1", "mydir/test3", "mydir/mysubdir/test3", etc.
    * @return a pointer to the entry in the directory.
    */
-  K3bIso9660Entry* iso9660Entry( const QString& name );
+  K3bIso9660Entry* iso9660Entry( const TQString& name );
 
   /**
    * Returns the entry with the given name.
@@ -229,7 +229,7 @@ class LIBK3B_EXPORT K3bIso9660Directory : public K3bIso9660Entry
    * @param name may be "test1", "mydir/test3", "mydir/mysubdir/test3", etc.
    * @return a pointer to the entry in the directory.
    */
-  const K3bIso9660Entry* iso9660Entry( const QString& name ) const;
+  const K3bIso9660Entry* iso9660Entry( const TQString& name ) const;
 
   /**
    * @internal
@@ -246,8 +246,8 @@ class LIBK3B_EXPORT K3bIso9660Directory : public K3bIso9660Entry
  private:
   void expand();
 
-  QDict<K3bIso9660Entry> m_entries;
-  QDict<K3bIso9660Entry> m_iso9660Entries;
+  TQDict<K3bIso9660Entry> m_entries;
+  TQDict<K3bIso9660Entry> m_iso9660Entries;
 
   bool m_bExpanded;
   unsigned int m_startSector;
@@ -262,15 +262,15 @@ class LIBK3B_EXPORT K3bIso9660File : public K3bIso9660Entry
    * @param pos start sector
    */
   K3bIso9660File( K3bIso9660* archive, 
-		  const QString& isoName,
-		  const QString& name, 
+		  const TQString& isoName,
+		  const TQString& name, 
 		  int access, 
 		  int date,
 		  int adate,
 		  int cdate, 
-		  const QString& user, 
-		  const QString& group,
-		  const QString& symlink, 
+		  const TQString& user, 
+		  const TQString& group,
+		  const TQString& symlink, 
 		  unsigned int pos, 
 		  unsigned int size );
   ~K3bIso9660File();
@@ -304,7 +304,7 @@ class LIBK3B_EXPORT K3bIso9660File : public K3bIso9660Entry
   /**
    * Copy this file to a url.
    */
-  bool copyTo( const QString& url ) const;
+  bool copyTo( const TQString& url ) const;
 
  private:
   char m_algo[2];
@@ -323,8 +323,8 @@ class LIBK3B_EXPORT K3bIso9660File : public K3bIso9660Entry
  * A lot has been changed and bugfixed.
  * The API has been improved to be useful.
  *
- * Due to the stupid Qt which does not support large files as default
- * we cannot use QIODevice with DVDs! That's why we have our own 
+ * Due to the stupid TQt which does not support large files as default
+ * we cannot use TQIODevice with DVDs! That's why we have our own 
  * reading code which is not allowed by KArchive (which is limited to int
  * by the way... who the hell designed this?)
  * I also removed the KArchive inheritance because of the named reasons.
@@ -344,7 +344,7 @@ class LIBK3B_EXPORT K3bIso9660
    *
    * @param filename is a local path (e.g. "/home/weis/myfile.tgz")
    */
-  K3bIso9660( const QString& filename );
+  K3bIso9660( const TQString& filename );
 
   /**
    * Special case which always reads the TOC from the specified sector
@@ -406,9 +406,9 @@ class LIBK3B_EXPORT K3bIso9660
 
   /**
    * The name of the os file, as passed to the constructor
-   * Null if you did not use the QString constructor.
+   * Null if you did not use the TQString constructor.
    */
-  const QString& fileName() { return m_filename; }
+  const TQString& fileName() { return m_filename; }
 
   const K3bIso9660Directory* firstJolietDirEntry() const;
   const K3bIso9660Directory* firstRRDirEntry() const;
@@ -444,7 +444,7 @@ class LIBK3B_EXPORT K3bIso9660
   friend class K3bIso9660Directory;
   
  private:
-  QString m_filename;
+  TQString m_filename;
 
   class Private;
   Private * d;

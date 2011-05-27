@@ -38,15 +38,15 @@
 #include <klocale.h>
 #include <kconfig.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
 K_EXPORT_COMPONENT_FACTORY( libk3baudioprojectcddbplugin, K3bPluginFactory<K3bAudioProjectCddbPlugin>( "libk3baudioprojectcddbplugin" ) )
 
 
-K3bAudioProjectCddbPlugin::K3bAudioProjectCddbPlugin( QObject* parent, 
+K3bAudioProjectCddbPlugin::K3bAudioProjectCddbPlugin( TQObject* tqparent, 
 						      const char* name )
-  : K3bProjectPlugin( AUDIO_CD, false, parent, name ),
+  : K3bProjectPlugin( AUDIO_CD, false, tqparent, name ),
     m_cddb(0),
     m_progress(0)
 {
@@ -61,25 +61,25 @@ K3bAudioProjectCddbPlugin::~K3bAudioProjectCddbPlugin()
 }
 
 
-void K3bAudioProjectCddbPlugin::activate( K3bDoc* doc, QWidget* parent )
+void K3bAudioProjectCddbPlugin::activate( K3bDoc* doc, TQWidget* tqparent )
 {
   m_doc = dynamic_cast<K3bAudioDoc*>( doc );
-  m_parentWidget = parent;
+  m_parentWidget = tqparent;
   m_canceled = false;
 
   if( !m_doc || m_doc->numOfTracks() == 0 ) {
-    KMessageBox::sorry( parent, i18n("Please select a non-empty audio project for a cddb query.") );
+    KMessageBox::sorry( tqparent, i18n("Please select a non-empty audio project for a cddb query.") );
   }
   else {
     if( !m_cddb ) {
       m_cddb = new K3bCddb( this );
-      connect( m_cddb, SIGNAL(queryFinished(int)),
-	       this, SLOT(slotCddbQueryFinished(int)) );
+      connect( m_cddb, TQT_SIGNAL(queryFinished(int)),
+	       this, TQT_SLOT(slotCddbQueryFinished(int)) );
     }
     if( !m_progress ) {
-      m_progress = new K3bProgressDialog( i18n("Query Cddb"), parent, i18n("Audio Project") );
-      connect( m_progress, SIGNAL(cancelClicked()),
-	       this, SLOT(slotCancelClicked()) );
+      m_progress = new K3bProgressDialog( i18n("Query Cddb"), tqparent, i18n("Audio Project") );
+      connect( m_progress, TQT_SIGNAL(cancelClicked()),
+	       this, TQT_SLOT(slotCancelClicked()) );
     }
 
     // read the k3b config :)
@@ -141,7 +141,7 @@ void K3bAudioProjectCddbPlugin::slotCddbQueryFinished( int error )
     }
   }
 
-  // make sure the progress dialog does not get deleted by it's parent
+  // make sure the progress dialog does not get deleted by it's tqparent
   delete m_progress;
   m_doc = 0;
   m_parentWidget = 0;

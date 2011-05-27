@@ -20,20 +20,20 @@
 
 #include <klistview.h>
 #include "k3b_export.h"
-#include <qptrvector.h>
-#include <qptrlist.h>
-#include <qstringlist.h>
+#include <tqptrvector.h>
+#include <tqptrlist.h>
+#include <tqstringlist.h>
 #include <kpixmap.h>
 
-class QPainter;
-class QPushButton;
-class QIconSet;
-class QResizeEvent;
-class QComboBox;
-class QSpinBox;
-class QLineEdit;
-class QEvent;
-class QValidator;
+class TQPainter;
+class TQPushButton;
+class TQIconSet;
+class TQResizeEvent;
+class TQComboBox;
+class TQSpinBox;
+class TQLineEdit;
+class TQEvent;
+class TQValidator;
 class K3bMsfEdit;
 
 class K3bListView;
@@ -42,34 +42,34 @@ class K3bListView;
 class LIBK3B_EXPORT K3bListViewItem : public KListViewItem
 {
  public:
-  K3bListViewItem(QListView *parent);
-  K3bListViewItem(QListViewItem *parent);
-  K3bListViewItem(QListView *parent, QListViewItem *after);
-  K3bListViewItem(QListViewItem *parent, QListViewItem *after);
+  K3bListViewItem(TQListView *tqparent);
+  K3bListViewItem(TQListViewItem *tqparent);
+  K3bListViewItem(TQListView *tqparent, TQListViewItem *after);
+  K3bListViewItem(TQListViewItem *tqparent, TQListViewItem *after);
 
-  K3bListViewItem(QListView *parent,
-		  const QString&, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null);
+  K3bListViewItem(TQListView *tqparent,
+		  const TQString&, const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString());
 
-  K3bListViewItem(QListViewItem *parent,
-		  const QString&, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null);
+  K3bListViewItem(TQListViewItem *tqparent,
+		  const TQString&, const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString());
 
-  K3bListViewItem(QListView *parent, QListViewItem *after,
-		  const QString&, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null);
+  K3bListViewItem(TQListView *tqparent, TQListViewItem *after,
+		  const TQString&, const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString());
 
-  K3bListViewItem(QListViewItem *parent, QListViewItem *after,
-		  const QString&, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null,
-		  const QString& = QString::null, const QString& = QString::null);
+  K3bListViewItem(TQListViewItem *tqparent, TQListViewItem *after,
+		  const TQString&, const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString(),
+		  const TQString& = TQString(), const TQString& = TQString());
 
   virtual ~K3bListViewItem();
 
@@ -78,23 +78,23 @@ class LIBK3B_EXPORT K3bListViewItem : public KListViewItem
    */
   void setup();
 
-  virtual int width( const QFontMetrics& fm, const QListView* lv, int c ) const;
+  virtual int width( const TQFontMetrics& fm, const TQListView* lv, int c ) const;
 
-  void setEditor( int col, int type, const QStringList& = QStringList() );
+  void setEditor( int col, int type, const TQStringList& = TQStringList() );
   void setButton( int col, bool );
 
-  void setValidator( int col, QValidator* v );
-  QValidator* validator( int col ) const;
+  void setValidator( int col, TQValidator* v );
+  TQValidator* validator( int col ) const;
 
   int editorType( int col ) const;
   bool needButton( int col ) const;
-  const QStringList& comboStrings( int col ) const;
+  const TQStringList& comboStrings( int col ) const;
 
   enum EditorType { NONE, COMBO, LINE, SPIN, MSF };
 
-  void setFont( int col, const QFont& f );
-  void setBackgroundColor( int col, const QColor& );
-  void setForegroundColor( int col, const QColor& );
+  void setFont( int col, const TQFont& f );
+  void setBackgroundColor( int col, const TQColor& );
+  void setForegroundColor( int col, const TQColor& );
 
   void setDisplayProgressBar( int col, bool );
   void setProgress( int, int );
@@ -116,12 +116,12 @@ class LIBK3B_EXPORT K3bListViewItem : public KListViewItem
   /**
    * Do not reimplement this but paintK3bCell to use the margin and background stuff.
    */
-  virtual void paintCell( QPainter* p, const QColorGroup& cg, int col, int width, int align );
+  virtual void paintCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align );
 
-  virtual void paintK3bCell( QPainter* p, const QColorGroup& cg, int col, int width, int align );
+  virtual void paintK3bCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align );
 
  private:
-  void paintProgressBar( QPainter* p, const QColorGroup& cgh, int col, int width );
+  void paintProgressBar( TQPainter* p, const TQColorGroup& cgh, int col, int width );
 
   class ColumnInfo;
   mutable ColumnInfo* m_columns;
@@ -136,16 +136,16 @@ class LIBK3B_EXPORT K3bListViewItem : public KListViewItem
 class LIBK3B_EXPORT K3bCheckListViewItem : public K3bListViewItem
 {
  public:
-  K3bCheckListViewItem(QListView *parent);
-  K3bCheckListViewItem(QListViewItem *parent);
-  K3bCheckListViewItem(QListView *parent, QListViewItem *after);
-  K3bCheckListViewItem(QListViewItem *parent, QListViewItem *after);
+  K3bCheckListViewItem(TQListView *tqparent);
+  K3bCheckListViewItem(TQListViewItem *tqparent);
+  K3bCheckListViewItem(TQListView *tqparent, TQListViewItem *after);
+  K3bCheckListViewItem(TQListViewItem *tqparent, TQListViewItem *after);
 
   virtual bool isChecked() const;
   virtual void setChecked( bool checked );
 
  protected:
-  virtual void paintK3bCell( QPainter* p, const QColorGroup& cg, int col, int width, int align );
+  virtual void paintK3bCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align );
 
  private:
   bool m_checked;
@@ -158,16 +158,17 @@ class LIBK3B_EXPORT K3bListView : public KListView
   friend class K3bListViewItem;
 
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bListView (QWidget *parent = 0, const char *name = 0);
+  K3bListView (TQWidget *tqparent = 0, const char *name = 0);
   virtual ~K3bListView();
 
-  virtual void setCurrentItem( QListViewItem* );
+  virtual void setCurrentItem( TQListViewItem* );
 
   K3bListViewItem* currentlyEditedItem() const { return m_currentEditItem; }
 
-  QWidget* editor( K3bListViewItem::EditorType ) const;
+  TQWidget* editor( K3bListViewItem::EditorType ) const;
 
   enum BgPixPosition {
     TOP_LEFT,
@@ -178,25 +179,25 @@ class LIBK3B_EXPORT K3bListView : public KListView
    * This will set a background pixmap which is not tiled.
    * @param pos position on the viewport.
    */
-  void setK3bBackgroundPixmap( const QPixmap&, int pos = CENTER );
+  void setK3bBackgroundPixmap( const TQPixmap&, int pos = CENTER );
 
   /**
    * Create a faded pixmap showing the items.
    */
-  KPixmap createDragPixmap( const QPtrList<QListViewItem>& items );
+  KPixmap createDragPixmap( const TQPtrList<TQListViewItem>& items );
 
   /**
    * Searches for the first item above @p i which is one level higher.
    * For 1st level items this will always be the listview's root item.
    */
-  static QListViewItem* parentItem( QListViewItem* i );
+  static TQListViewItem* tqparentItem( TQListViewItem* i );
 
  signals:
   void editorButtonClicked( K3bListViewItem*, int );
 
  public slots:
-  void setNoItemText( const QString& );
-  //  void setNoItemPixmap( const QPixmap& );
+  void setNoItemText( const TQString& );
+  //  void setNoItemPixmap( const TQPixmap& );
   void setNoItemVerticalMargin( int i ) { m_noItemVMargin = i; }
   void setNoItemHorizontalMargin( int i ) { m_noItemHMargin = i; }
   void setDoubleClickForEdit( bool b ) { m_doubleClickForEdit = b; }
@@ -208,7 +209,7 @@ class LIBK3B_EXPORT K3bListView : public KListView
  private slots:
   void updateEditorSize();
   virtual void slotEditorLineEditReturnPressed();
-  virtual void slotEditorComboBoxActivated( const QString& );
+  virtual void slotEditorComboBoxActivated( const TQString& );
   virtual void slotEditorSpinBoxValueChanged( int );
   virtual void slotEditorMsfEditValueChanged( int );
   virtual void slotEditorButtonClicked();
@@ -223,7 +224,7 @@ class LIBK3B_EXPORT K3bListView : public KListView
    *
    * FIXME: should be called something like mayRename
    */
-  virtual bool renameItem( K3bListViewItem*, int, const QString& );
+  virtual bool renameItem( K3bListViewItem*, int, const TQString& );
 
   /**
    * default impl just emits signal
@@ -236,9 +237,9 @@ class LIBK3B_EXPORT K3bListView : public KListView
    * calls KListView::drawContentsOffset
    * and paints a the noItemText if no item is in the list
    */
-  virtual void drawContentsOffset ( QPainter * p, int ox, int oy, int cx, int cy, int cw, int ch );
-  virtual void resizeEvent( QResizeEvent* );
-  virtual void paintEmptyArea( QPainter*, const QRect& rect );
+  virtual void drawContentsOffset ( TQPainter * p, int ox, int oy, int cx, int cy, int cw, int ch );
+  virtual void resizeEvent( TQResizeEvent* );
+  virtual void paintEmptyArea( TQPainter*, const TQRect& rect );
 
   /**
    * Reimplemented for internal reasons.
@@ -247,7 +248,7 @@ class LIBK3B_EXPORT K3bListView : public KListView
    *
    * The API is unaffected.
    */
-  virtual void viewportResizeEvent( QResizeEvent* );
+  virtual void viewportResizeEvent( TQResizeEvent* );
 
   /**
    * Reimplemented for internal reasons.
@@ -256,20 +257,20 @@ class LIBK3B_EXPORT K3bListView : public KListView
    *
    * The API is unaffected.
    */
-  virtual void viewportPaintEvent(QPaintEvent*);
+  virtual void viewportPaintEvent(TQPaintEvent*);
 
-  virtual bool eventFilter( QObject*, QEvent* );
+  virtual bool eventFilter( TQObject*, TQEvent* );
 
   K3bListViewItem* currentEditItem() const { return m_currentEditItem; }
   int currentEditColumn() const { return m_currentEditColumn; }
 
  private:
-  QWidget* prepareEditor( K3bListViewItem* item, int col );
+  TQWidget* prepareEditor( K3bListViewItem* item, int col );
   void prepareButton( K3bListViewItem* item, int col );
   bool doRename();
 
-  QString m_noItemText;
-  //  QPixmap m_noItemPixmap;
+  TQString m_noItemText;
+  //  TQPixmap m_noItemPixmap;
   int m_noItemVMargin;
   int m_noItemHMargin;
 
@@ -277,15 +278,15 @@ class LIBK3B_EXPORT K3bListView : public KListView
   int m_currentEditColumn;
 
   bool m_doubleClickForEdit;
-  QListViewItem* m_lastClickedItem;
+  TQListViewItem* m_lastClickedItem;
 
-  QPushButton* m_editorButton;
-  QComboBox* m_editorComboBox;
-  QSpinBox* m_editorSpinBox;
-  QLineEdit* m_editorLineEdit;
+  TQPushButton* m_editorButton;
+  TQComboBox* m_editorComboBox;
+  TQSpinBox* m_editorSpinBox;
+  TQLineEdit* m_editorLineEdit;
   K3bMsfEdit* m_editorMsfEdit;
 
-  QPixmap m_backgroundPixmap;
+  TQPixmap m_backgroundPixmap;
   int m_backgroundPixmapPosition;
 
   class Private;

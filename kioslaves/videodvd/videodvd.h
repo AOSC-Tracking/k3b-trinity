@@ -17,14 +17,14 @@
 #ifndef _videodvd_H_
 #define _videodvd_H_
 
-#include <qstring.h>
-#include <qcstring.h>
+#include <tqstring.h>
+#include <tqcstring.h>
 
 #include <kurl.h>
 #include <kio/global.h>
 #include <kio/slavebase.h>
 
-class QCString;
+class TQCString;
 class K3bIso9660Entry;
 class K3bIso9660;
 namespace K3bDevice
@@ -35,7 +35,7 @@ namespace K3bDevice
 class kio_videodvdProtocol : public KIO::SlaveBase
 {
 public:
-  kio_videodvdProtocol(const QCString &pool_socket, const QCString &app_socket);
+  kio_videodvdProtocol(const TQCString &pool_socket, const TQCString &app_socket);
   ~kio_videodvdProtocol();
 
   void mimetype( const KURL& url );
@@ -44,7 +44,7 @@ public:
   void listDir( const KURL& url );
 
 private:
-  K3bIso9660* openIso( const KURL&, QString& plainIsoPath );
+  K3bIso9660* openIso( const KURL&, TQString& plainIsoPath );
   KIO::UDSEntry createUDSEntry( const K3bIso9660Entry* e ) const;
   void listVideoDVDs();
 

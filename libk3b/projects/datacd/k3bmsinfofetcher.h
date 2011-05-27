@@ -27,12 +27,13 @@ class KProcess;
 class K3bMsInfoFetcher : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMsInfoFetcher( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bMsInfoFetcher( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bMsInfoFetcher();
 
-  const QString& msInfo() const { return m_msInfo; }
+  const TQString& msInfo() const { return m_msInfo; }
   int lastSessionStart() const { return m_lastSessionStart; }
   int nextSessionStart() const { return m_nextSessionStart; }
 
@@ -49,10 +50,10 @@ class K3bMsInfoFetcher : public K3bJob
   void getMsInfo();
 
  private:
-  QString m_msInfo;
+  TQString m_msInfo;
   int m_lastSessionStart;
   int m_nextSessionStart;
-  QString m_collectedOutput;
+  TQString m_collectedOutput;
 
   KProcess* m_process;
   K3bDevice::Device* m_device;

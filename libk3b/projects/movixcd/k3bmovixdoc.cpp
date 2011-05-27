@@ -30,15 +30,15 @@
 #include <kconfig.h>
 #include <kapplication.h>
 
-#include <qdom.h>
-#include <qfileinfo.h>
+#include <tqdom.h>
+#include <tqfileinfo.h>
 
 
-K3bMovixDoc::K3bMovixDoc( QObject* parent )
-  : K3bDataDoc( parent )
+K3bMovixDoc::K3bMovixDoc( TQObject* tqparent )
+  : K3bDataDoc( tqparent )
 {
-  connect( this, SIGNAL(itemRemoved(K3bDataItem*)),
-	   this, SLOT(slotDataItemRemoved(K3bDataItem*)) );
+  connect( this, TQT_SIGNAL(itemRemoved(K3bDataItem*)),
+	   this, TQT_SLOT(slotDataItemRemoved(K3bDataItem*)) );
 }
 
 
@@ -47,9 +47,9 @@ K3bMovixDoc::~K3bMovixDoc()
 }
 
 
-K3bBurnJob* K3bMovixDoc::newBurnJob( K3bJobHandler* hdl, QObject* parent )
+K3bBurnJob* K3bMovixDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
 {
-  return new K3bMovixJob( this, hdl, parent );
+  return new K3bMovixJob( this, hdl, tqparent );
 }
 
 
@@ -79,11 +79,11 @@ void K3bMovixDoc::addMovixFile( const KURL& _url, int pos )
 {
   KURL url = K3b::convertToLocalUrl( _url );
 
-  QFileInfo f( url.path() );
+  TQFileInfo f( url.path() );
   if( !f.isFile() || !url.isLocalFile() )
     return;
 
-  QString newName = f.fileName();
+  TQString newName = f.fileName();
   if( nameAlreadyInDir( newName, root() ) ) {
     kapp->config()->setGroup("Data project settings");
     bool dropDoubles = kapp->config()->readBoolEntry( "Drop doubles", false );
@@ -113,15 +113,15 @@ void K3bMovixDoc::addMovixFile( const KURL& _url, int pos )
 }
 
 
-bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
+bool K3bMovixDoc::loadDocumentData( TQDomElement* rootElem )
 {
   if( !root() )
     newDocument();
 
-  QDomNodeList nodes = rootElem->childNodes();
+  TQDomNodeList nodes = rootElem->childNodes();
 
   if( nodes.item(0).nodeName() != "general" ) {
-    kdDebug() << "(K3bMovixDoc) could not find 'general' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not tqfind 'general' section." << endl;
     return false;
   }
   if( !readGeneralDocumentData( nodes.item(0).toElement() ) )
@@ -131,7 +131,7 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
   // parse options
   // -----------------------------------------------------------------
   if( nodes.item(1).nodeName() != "data_options" ) {
-    kdDebug() << "(K3bMovixDoc) could not find 'data_options' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not tqfind 'data_options' section." << endl;
     return false;
   }
   if( !loadDocumentDataOptions( nodes.item(1).toElement() ) )
@@ -143,7 +143,7 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
   // parse header
   // -----------------------------------------------------------------
   if( nodes.item(2).nodeName() != "data_header" ) {
-    kdDebug() << "(K3bMovixDoc) could not find 'data_header' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not tqfind 'data_header' section." << endl;
     return false;
   }
   if( !loadDocumentDataHeader( nodes.item(2).toElement() ) )
@@ -155,15 +155,15 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
   // parse movix options
   // -----------------------------------------------------------------
   if( nodes.item(3).nodeName() != "movix_options" ) {
-    kdDebug() << "(K3bMovixDoc) could not find 'movix_options' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not tqfind 'movix_options' section." << endl;
     return false;
   }
 
   // load the options
-  QDomNodeList optionList = nodes.item(3).childNodes();
+  TQDomNodeList optionList = nodes.item(3).childNodes();
   for( uint i = 0; i < optionList.count(); i++ ) {
 
-    QDomElement e = optionList.item(i).toElement();
+    TQDomElement e = optionList.item(i).toElement();
     if( e.isNull() )
       return false;
 
@@ -186,7 +186,7 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
     else if( e.nodeName() == "keyboard_language")
       setKeyboardLayout( e.text() );
     else if( e.nodeName() == "codecs")
-      setCodecs( QStringList::split( ',', e.text() ) );
+      setCodecs( TQStringList::split( ',', e.text() ) );
     else if( e.nodeName() == "default_boot_label")
       setDefaultBootLabel( e.text() );
     else if( e.nodeName() == "additional_mplayer_options")
@@ -203,15 +203,15 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
   // parse files
   // -----------------------------------------------------------------
   if( nodes.item(4).nodeName() != "movix_files" ) {
-    kdDebug() << "(K3bMovixDoc) could not find 'movix_files' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not tqfind 'movix_files' section." << endl;
     return false;
   }
 
   // load file items
-  QDomNodeList fileList = nodes.item(4).childNodes();
+  TQDomNodeList fileList = nodes.item(4).childNodes();
   for( uint i = 0; i < fileList.count(); i++ ) {
 
-    QDomElement e = fileList.item(i).toElement();
+    TQDomElement e = fileList.item(i).toElement();
     if( e.isNull() )
       return false;
 
@@ -221,7 +221,7 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
 	return false;
       }
 
-      QDomElement urlElem = e.firstChild().toElement();
+      TQDomElement urlElem = e.firstChild().toElement();
       if( urlElem.isNull() ) {
 	kdDebug() << "(K3bMovixDoc) found file tag without url child." << endl;
 	return false;
@@ -235,7 +235,7 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
       m_movixFiles.append( newK3bItem );
 
       // subtitle file?
-      QDomElement subTitleElem = e.childNodes().item(1).toElement();
+      TQDomElement subTitleElem = e.childNodes().item(1).toElement();
       if( !subTitleElem.isNull() && subTitleElem.nodeName() == "subtitle_file" ) {
 	urlElem = subTitleElem.firstChild().toElement();
 	if( urlElem.isNull() ) {
@@ -243,7 +243,7 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
 	  return false;
 	}
 
-	QString name = K3bMovixFileItem::subTitleFileName( newK3bItem->k3bName() );
+	TQString name = K3bMovixFileItem::subTitleFileName( newK3bItem->k3bName() );
 	K3bFileItem* subItem = new K3bFileItem( urlElem.text(), this, root(), name );
 	newK3bItem->setSubTitleItem( subItem );
       }
@@ -262,24 +262,24 @@ bool K3bMovixDoc::loadDocumentData( QDomElement* rootElem )
 }
 
 
-bool K3bMovixDoc::saveDocumentData( QDomElement* docElem )
+bool K3bMovixDoc::saveDocumentData( TQDomElement* docElem )
 {
-  QDomDocument doc = docElem->ownerDocument();
+  TQDomDocument doc = docElem->ownerDocument();
 
   saveGeneralDocumentData( docElem );
 
-  QDomElement optionsElem = doc.createElement( "data_options" );
+  TQDomElement optionsElem = doc.createElement( "data_options" );
   saveDocumentDataOptions( optionsElem );
 
-  QDomElement headerElem = doc.createElement( "data_header" );
+  TQDomElement headerElem = doc.createElement( "data_header" );
   saveDocumentDataHeader( headerElem );
 
-  QDomElement movixOptElem = doc.createElement( "movix_options" );
-  QDomElement movixFilesElem = doc.createElement( "movix_files" );
+  TQDomElement movixOptElem = doc.createElement( "movix_options" );
+  TQDomElement movixFilesElem = doc.createElement( "movix_files" );
 
 
   // save the movix options
-  QDomElement propElem = doc.createElement( "shutdown" );
+  TQDomElement propElem = doc.createElement( "shutdown" );
   propElem.setAttribute( "activated", shutdown() ? "yes" : "no" );
   movixOptElem.appendChild( propElem );
 
@@ -332,22 +332,22 @@ bool K3bMovixDoc::saveDocumentData( QDomElement* docElem )
   movixOptElem.appendChild( propElem );
 
   propElem = doc.createElement( "loop_playlist" );
-  propElem.appendChild( doc.createTextNode( QString::number(loopPlaylist()) ) );
+  propElem.appendChild( doc.createTextNode( TQString::number(loopPlaylist()) ) );
   movixOptElem.appendChild( propElem );
 
 
   // save the movix items
-  for( QPtrListIterator<K3bMovixFileItem> it( m_movixFiles );
+  for( TQPtrListIterator<K3bMovixFileItem> it( m_movixFiles );
        *it; ++it ) {
     K3bMovixFileItem* item = *it;
 
-    QDomElement topElem = doc.createElement( "file" );
+    TQDomElement topElem = doc.createElement( "file" );
     topElem.setAttribute( "name", item->k3bName() );
-    QDomElement urlElem = doc.createElement( "url" );
+    TQDomElement urlElem = doc.createElement( "url" );
     urlElem.appendChild( doc.createTextNode( item->localPath() ) );
     topElem.appendChild( urlElem );
     if( item->subTitleItem() ) {
-      QDomElement subElem = doc.createElement( "subtitle_file" );
+      TQDomElement subElem = doc.createElement( "subtitle_file" );
       urlElem = doc.createElement( "url" );
       urlElem.appendChild( doc.createTextNode( item->subTitleItem()->localPath() ) );
       subElem.appendChild( urlElem );
@@ -370,7 +370,7 @@ void K3bMovixDoc::slotDataItemRemoved( K3bDataItem* item )
 {
   // check if it's a movix item
   if( K3bMovixFileItem* fi = dynamic_cast<K3bMovixFileItem*>(item) )
-    if( m_movixFiles.containsRef( fi ) ) {
+    if( m_movixFiles.tqcontainsRef( fi ) ) {
       emit movixItemRemoved( fi );
       m_movixFiles.removeRef( fi );
       setModified(true);
@@ -380,7 +380,7 @@ void K3bMovixDoc::slotDataItemRemoved( K3bDataItem* item )
 
 int K3bMovixDoc::indexOf( K3bMovixFileItem* item )
 {
-  return m_movixFiles.findRef(item)+1;
+  return m_movixFiles.tqfindRef(item)+1;
 }
 
 
@@ -390,12 +390,12 @@ void K3bMovixDoc::moveMovixItem( K3bMovixFileItem* item, K3bMovixFileItem* itemA
     return;
 
   // set the current item to track
-  m_movixFiles.findRef( item );
+  m_movixFiles.tqfindRef( item );
   // take the current item
   item = m_movixFiles.take();
 
-  // if after == 0 findRef returnes -1
-  int pos = m_movixFiles.findRef( itemAfter );
+  // if after == 0 tqfindRef returnes -1
+  int pos = m_movixFiles.tqfindRef( itemAfter );
   m_movixFiles.insert( pos+1, item );
 
   emit newMovixFileItems();
@@ -409,15 +409,15 @@ void K3bMovixDoc::addSubTitleItem( K3bMovixFileItem* item, const KURL& url )
   if( item->subTitleItem() )
     removeSubTitleItem( item );
 
-  QFileInfo f( url.path() );
+  TQFileInfo f( url.path() );
   if( !f.isFile() || !url.isLocalFile() )
     return;
 
   // check if there already is a file named like we want to name the subTitle file
-  QString name = K3bMovixFileItem::subTitleFileName( item->k3bName() );
+  TQString name = K3bMovixFileItem::subTitleFileName( item->k3bName() );
 
   if( nameAlreadyInDir( name, root() ) ) {
-    KMessageBox::error( 0, i18n("Could not rename subtitle file. File with requested name %1 already exists.").arg(name) );
+    KMessageBox::error( 0, i18n("Could not rename subtitle file. File with requested name %1 already exists.").tqarg(name) );
     return;
   }
 

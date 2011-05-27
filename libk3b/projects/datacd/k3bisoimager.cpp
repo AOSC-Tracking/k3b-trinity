@@ -39,11 +39,11 @@
 #include <kio/job.h>
 #include <kstringhandler.h>
 
-#include <qfile.h>
-#include <qregexp.h>
-#include <qdir.h>
-#include <qapplication.h>
-#include <qvaluestack.h>
+#include <tqfile.h>
+#include <tqregexp.h>
+#include <tqdir.h>
+#include <tqapplication.h>
+#include <tqvaluestack.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -65,7 +65,7 @@ public:
     delete pipe;
   }
 
-  QString imagePath;
+  TQString imagePath;
   K3bFileSplitter imageFile;
   const K3bExternalBin* mkisofsBin;
 
@@ -85,8 +85,8 @@ public:
 };
 
 
-K3bIsoImager::K3bIsoImager( K3bDataDoc* doc, K3bJobHandler* hdl, QObject* parent, const char* name )
-  : K3bJob( hdl, parent, name ),
+K3bIsoImager::K3bIsoImager( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent, const char* name )
+  : K3bJob( hdl, tqparent, name ),
     m_pathSpecFile(0),
     m_rrHideFile(0),
     m_jolietHideFile(0),
@@ -103,7 +103,7 @@ K3bIsoImager::K3bIsoImager( K3bDataDoc* doc, K3bJobHandler* hdl, QObject* parent
   d = new Private();
   d->dataPreparationJob = new K3bDataPreparationJob( doc, this, this );
   connectSubJob( d->dataPreparationJob,
-		 SLOT(slotDataPreparationDone(bool)),
+		 TQT_SLOT(slotDataPreparationDone(bool)),
 		 DEFAULT_SIGNAL_CONNECTION );
 }
 
@@ -127,14 +127,14 @@ void K3bIsoImager::writeToFd( int fd )
 }
 
 
-void K3bIsoImager::writeToImageFile( const QString& path )
+void K3bIsoImager::writeToImageFile( const TQString& path )
 {
   d->imagePath = path;
   m_fdToWriteTo = -1;
 }
 
 
-void K3bIsoImager::slotReceivedStderr( const QString& line )
+void K3bIsoImager::slotReceivedStderr( const TQString& line )
 {
   parseMkisofsOutput( line );
   emit debuggingOutput( "mkisofs", line );
@@ -147,7 +147,7 @@ void K3bIsoImager::handleMkisofsProgress( int p )
 }
 
 
-void K3bIsoImager::handleMkisofsInfoMessage( const QString& line, int type )
+void K3bIsoImager::handleMkisofsInfoMessage( const TQString& line, int type )
 {
   emit infoMessage( line, type );
   if( type == ERROR )
@@ -164,15 +164,15 @@ void K3bIsoImager::slotProcessExited( KProcess* p )
   d->pipe->close();
 
   emit debuggingOutput( "K3bIsoImager",
-			QString("Pipe throughput: %1 bytes read, %2 bytes written.")
-			.arg(d->pipe->bytesRead()).arg(d->pipe->bytesWritten()) );
+			TQString("Pipe throughput: %1 bytes read, %2 bytes written.")
+			.tqarg(d->pipe->bytesRead()).tqarg(d->pipe->bytesWritten()) );
 
   if( d->imageFile.isOpen() ) {
     d->imageFile.close();
 
     if( m_canceled || p->exitStatus() != 0 ) {
       d->imageFile.remove();
-      emit infoMessage( i18n("Removed incomplete image file %1.").arg(d->imageFile.name()), WARNING );
+      emit infoMessage( i18n("Removed incomplete image file %1.").tqarg(d->imageFile.name()), WARNING );
     }
   }
 
@@ -210,7 +210,7 @@ void K3bIsoImager::slotProcessExited( KProcess* p )
 
 	default:
 	  if( !d->knownError && !mkisofsReadError() ) {
-	    emit infoMessage( i18n("%1 returned an unknown error (code %2).").arg("mkisofs").arg(p->exitStatus()),
+	    emit infoMessage( i18n("%1 returned an unknown error (code %2).").tqarg("mkisofs").tqarg(p->exitStatus()),
 			      K3bJob::ERROR );
 	    emit infoMessage( i18n("Please send me an email with the last output."), K3bJob::ERROR );
 	  }
@@ -220,7 +220,7 @@ void K3bIsoImager::slotProcessExited( KProcess* p )
       }
     }
     else {
-      emit infoMessage( i18n("%1 did not exit cleanly.").arg("mkisofs"), ERROR );
+      emit infoMessage( i18n("%1 did not exit cleanly.").tqarg("mkisofs"), ERROR );
       jobFinished( false );
     }
   }
@@ -238,9 +238,9 @@ void K3bIsoImager::cleanup()
   delete m_sortWeightFile;
 
   // remove boot-images-temp files
-  for( QStringList::iterator it = m_tempFiles.begin();
+  for( TQStringList::iterator it = m_tempFiles.begin();
        it != m_tempFiles.end(); ++it )
-    QFile::remove( *it );
+    TQFile::remove( *it );
   m_tempFiles.clear();
 
   m_pathSpecFile = m_jolietHideFile = m_rrHideFile = m_sortWeightFile = 0;
@@ -319,9 +319,9 @@ void K3bIsoImager::startSizeCalculation()
   //  *m_process << dummyDir();
 
   kdDebug() << "***** mkisofs calculate size parameters:\n";
-  const QValueList<QCString>& args = m_process->args();
-  QString s;
-  for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+  const TQValueList<TQCString>& args = m_process->args();
+  TQString s;
+  for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
     s += *it + " ";
   }
   kdDebug() << s << endl << flush;
@@ -340,23 +340,23 @@ void K3bIsoImager::startSizeCalculation()
 
   // TODO: use K3bProcess::OutputCollector instead iof our own two slots.
 
-  connect( m_process, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, SLOT(slotCollectMkisofsPrintSizeStderr(KProcess*, char*, int)) );
-  connect( m_process, SIGNAL(stdoutLine(const QString&)),
-	   this, SLOT(slotCollectMkisofsPrintSizeStdout(const QString&)) );
-  connect( m_process, SIGNAL(processExited(KProcess*)),
-	   this, SLOT(slotMkisofsPrintSizeFinished()) );
+  connect( m_process, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotCollectMkisofsPrintSizeStderr(KProcess*, char*, int)) );
+  connect( m_process, TQT_SIGNAL(stdoutLine(const TQString&)),
+	   this, TQT_SLOT(slotCollectMkisofsPrintSizeStdout(const TQString&)) );
+  connect( m_process, TQT_SIGNAL(processExited(KProcess*)),
+	   this, TQT_SLOT(slotMkisofsPrintSizeFinished()) );
 
   // we also want error messages
-  connect( m_process, SIGNAL(stderrLine( const QString& )),
-	   this, SLOT(slotReceivedStderr( const QString& )) );
+  connect( m_process, TQT_SIGNAL(stderrLine( const TQString& )),
+	   this, TQT_SLOT(slotReceivedStderr( const TQString& )) );
 
-  m_collectedMkisofsPrintSizeStdout = QString::null;
-  m_collectedMkisofsPrintSizeStderr = QString::null;
+  m_collectedMkisofsPrintSizeStdout = TQString();
+  m_collectedMkisofsPrintSizeStderr = TQString();
   m_mkisofsPrintSizeResult = 0;
 
   if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
-    emit infoMessage( i18n("Could not start %1.").arg("mkisofs"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").tqarg("mkisofs"), K3bJob::ERROR );
     cleanup();
 
     jobFinished( false );
@@ -367,12 +367,12 @@ void K3bIsoImager::startSizeCalculation()
 
 void K3bIsoImager::slotCollectMkisofsPrintSizeStderr(KProcess*, char* data , int len)
 {
-  emit debuggingOutput( "mkisofs", QString::fromLocal8Bit( data, len ) );
-  m_collectedMkisofsPrintSizeStderr.append( QString::fromLocal8Bit( data, len ) );
+  emit debuggingOutput( "mkisofs", TQString::fromLocal8Bit( data, len ) );
+  m_collectedMkisofsPrintSizeStderr.append( TQString::fromLocal8Bit( data, len ) );
 }
 
 
-void K3bIsoImager::slotCollectMkisofsPrintSizeStdout( const QString& line )
+void K3bIsoImager::slotCollectMkisofsPrintSizeStdout( const TQString& line )
 {
   // newer versions of mkisofs outut additional lines of junk before the size :(
   // so we only use the last line
@@ -400,7 +400,7 @@ void K3bIsoImager::slotMkisofsPrintSizeFinished()
   else {
     // parse the stderr output
     // I hope parsing the last line is enough!
-    int pos = m_collectedMkisofsPrintSizeStderr.findRev( "extents scheduled to be written" );
+    int pos = m_collectedMkisofsPrintSizeStderr.tqfindRev( "extents scheduled to be written" );
 
     if( pos == -1 )
       success = false;
@@ -409,9 +409,9 @@ void K3bIsoImager::slotMkisofsPrintSizeFinished()
   }
 
   emit debuggingOutput( "K3bIsoImager",
-			QString("mkisofs print size result: %1 (%2 bytes)")
-			.arg(m_mkisofsPrintSizeResult)
-			.arg(Q_UINT64(m_mkisofsPrintSizeResult)*2048ULL) );
+			TQString("mkisofs print size result: %1 (%2 bytes)")
+			.tqarg(m_mkisofsPrintSizeResult)
+			.tqarg(TQ_UINT64(m_mkisofsPrintSizeResult)*2048ULL) );
 
   cleanup();
 
@@ -485,18 +485,18 @@ void K3bIsoImager::start()
     return;
   }
 
-  connect( m_process, SIGNAL(processExited(KProcess*)),
-	   this, SLOT(slotProcessExited(KProcess*)) );
+  connect( m_process, TQT_SIGNAL(processExited(KProcess*)),
+	   this, TQT_SLOT(slotProcessExited(KProcess*)) );
 
-  connect( m_process, SIGNAL(stderrLine( const QString& )),
-	   this, SLOT(slotReceivedStderr( const QString& )) );
+  connect( m_process, TQT_SIGNAL(stderrLine( const TQString& )),
+	   this, TQT_SLOT(slotReceivedStderr( const TQString& )) );
 
   //
   // Check the image file
   if( m_fdToWriteTo == -1 ) {
     d->imageFile.setName( d->imagePath );
     if( !d->imageFile.open( IO_WriteOnly ) ) {
-      emit infoMessage( i18n("Could not open %1 for writing").arg(d->imagePath), ERROR );
+      emit infoMessage( i18n("Could not open %1 for writing").tqarg(d->imagePath), ERROR );
       cleanup();
       jobFinished(false);
       return;
@@ -520,9 +520,9 @@ void K3bIsoImager::start()
 
 
   kdDebug() << "***** mkisofs parameters:\n";
-  const QValueList<QCString>& args = m_process->args();
-  QString s;
-  for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+  const TQValueList<TQCString>& args = m_process->args();
+  TQString s;
+  for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
     s += *it + " ";
   }
   kdDebug() << s << endl << flush;
@@ -532,7 +532,7 @@ void K3bIsoImager::start()
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bIsoImager) could not start mkisofs" << endl;
-    emit infoMessage( i18n("Could not start %1.").arg("mkisofs"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").tqarg("mkisofs"), K3bJob::ERROR );
     jobFinished( false );
     cleanup();
   }
@@ -553,7 +553,7 @@ void K3bIsoImager::cancel()
 }
 
 
-void K3bIsoImager::setMultiSessionInfo( const QString& info, K3bDevice::Device* dev )
+void K3bIsoImager::setMultiSessionInfo( const TQString& info, K3bDevice::Device* dev )
 {
   m_multiSessionInfo = info;
   m_device = dev;
@@ -563,11 +563,11 @@ void K3bIsoImager::setMultiSessionInfo( const QString& info, K3bDevice::Device* 
 // iso9660 + RR use some latin1 variant. So we need to cut the desc fields
 // counting 8bit chars. The GUI should take care of restricting the length
 // and the charset
-static void truncateTheHardWay( QString& s, int max )
+static void truncateTheHardWay( TQString& s, int max )
 {
-  QCString cs = s.utf8();
+  TQCString cs = s.utf8();
   cs.truncate(max);
-  s = QString::fromUtf8( cs );
+  s = TQString::fromUtf8( cs );
 }
 
 
@@ -588,7 +588,7 @@ bool K3bIsoImager::addMkisofsParameters( bool printSize )
     *m_process << "-print-size" << "-quiet";
 
   if( !m_doc->isoOptions().volumeID().isEmpty() ) {
-    QString s = m_doc->isoOptions().volumeID();
+    TQString s = m_doc->isoOptions().volumeID();
     truncateTheHardWay(s, 32);  // ensure max length
     *m_process << "-volid" << s;
   }
@@ -597,7 +597,7 @@ bool K3bIsoImager::addMkisofsParameters( bool printSize )
     *m_process << "-volid" << "CDROM";
   }
 
-  QString s = m_doc->isoOptions().volumeSetId();
+  TQString s = m_doc->isoOptions().volumeSetId();
   truncateTheHardWay(s, 128);  // ensure max length
   *m_process << "-volset" << s;
 
@@ -639,8 +639,8 @@ bool K3bIsoImager::addMkisofsParameters( bool printSize )
 	      << " with volume set size: " << volsetSize << endl;
     volsetSeqNo = volsetSize;
   }
-  *m_process << "-volset-size" << QString::number(volsetSize);
-  *m_process << "-volset-seqno" << QString::number(volsetSeqNo);
+  *m_process << "-volset-size" << TQString::number(volsetSize);
+  *m_process << "-volset-seqno" << TQString::number(volsetSeqNo);
 
   if( m_sortWeightFile ) {
     *m_process << "-sort" << m_sortWeightFile->name();
@@ -733,18 +733,18 @@ bool K3bIsoImager::addMkisofsParameters( bool printSize )
   if( m_doc->isoOptions().hideTRANS_TBL()  )
     *m_process << "-hide-joliet-trans-tbl";
 
-  *m_process << "-iso-level" << QString::number(m_doc->isoOptions().ISOLevel());
+  *m_process << "-iso-level" << TQString::number(m_doc->isoOptions().ISOLevel());
 
   if( m_doc->isoOptions().forceInputCharset() )
     *m_process << "-input-charset" << m_doc->isoOptions().inputCharset();
 
-  *m_process << "-path-list" << QFile::encodeName(m_pathSpecFile->name());
+  *m_process << "-path-list" << TQFile::encodeName(m_pathSpecFile->name()).data();
 
 
   // boot stuff
   if( !m_doc->bootImages().isEmpty() ) {
     bool first = true;
-    for( QPtrListIterator<K3bBootItem> it( m_doc->bootImages() );
+    for( TQPtrListIterator<K3bBootItem> it( m_doc->bootImages() );
 	 *it; ++it ) {
       if( !first )
 	*m_process << "-eltorito-alt-boot";
@@ -760,9 +760,9 @@ bool K3bIsoImager::addMkisofsParameters( bool printSize )
       else if( bootItem->imageType() == K3bBootItem::NONE ) {
 	*m_process << "-no-emul-boot";
 	if( bootItem->loadSegment() > 0 )
-	  *m_process << "-boot-load-seg" << QString::number(bootItem->loadSegment());
+	  *m_process << "-boot-load-seg" << TQString::number(bootItem->loadSegment());
 	if( bootItem->loadSize() > 0 )
-	  *m_process << "-boot-load-size" << QString::number(bootItem->loadSize());
+	  *m_process << "-boot-load-size" << TQString::number(bootItem->loadSize());
       }
 
       if( bootItem->imageType() != K3bBootItem::NONE && bootItem->noBoot() )
@@ -778,8 +778,8 @@ bool K3bIsoImager::addMkisofsParameters( bool printSize )
 
 
   // additional parameters from config
-  const QStringList& params = k3bcore->externalBinManager()->binObject( "mkisofs" )->userParameters();
-  for( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+  const TQStringList& params = k3bcore->externalBinManager()->binObject( "mkisofs" )->userParameters();
+  for( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
     *m_process << *it;
 
   return true;
@@ -792,7 +792,7 @@ int K3bIsoImager::writePathSpec()
   m_pathSpecFile = new KTempFile();
   m_pathSpecFile->setAutoDelete(true);
 
-  if( QTextStream* t = m_pathSpecFile->textStream() ) {
+  if( TQTextStream* t = m_pathSpecFile->textStream() ) {
     // recursive path spec writing
     int num = writePathSpecForDir( m_doc->root(), *t );
 
@@ -805,7 +805,7 @@ int K3bIsoImager::writePathSpec()
 }
 
 
-int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, QTextStream& stream )
+int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& stream )
 {
   if( !m_noDeepDirectoryRelocation && dirItem->depth() > 7 ) {
     kdDebug() << "(K3bIsoImager) found directory depth > 7. Enabling no deep directory relocation." << endl;
@@ -814,7 +814,7 @@ int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, QTextStream& stream 
 
   // now create the graft points
   int num = 0;
-  for( QPtrListIterator<K3bDataItem> it( dirItem->children() ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( dirItem->tqchildren() ); it.current(); ++it ) {
     K3bDataItem* item = it.current();
     bool writeItem = item->writeToCd();
 
@@ -825,29 +825,29 @@ int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, QTextStream& stream 
 	writeItem = false;
 
       else if( d->usedLinkHandling == Private::FOLLOW ) {
-	QFileInfo f( K3b::resolveLink( item->localPath() ) );
+	TQFileInfo f( K3b::resolveLink( item->localPath() ) );
 	if( !f.exists() ) {
 	  emit infoMessage( i18n("Could not follow link %1 to non-existing file %2. Skipping...")
-			    .arg(item->k3bName())
-			    .arg(f.filePath()), WARNING );
+			    .tqarg(item->k3bName())
+			    .tqarg(f.filePath()), WARNING );
 	  writeItem = false;
 	}
 	else if( f.isDir() ) {
 	  emit infoMessage( i18n("Ignoring link %1 to folder %2. K3b is unable to follow links to folders.")
-			    .arg(item->k3bName())
-			    .arg(f.filePath()), WARNING );
+			    .tqarg(item->k3bName())
+			    .tqarg(f.filePath()), WARNING );
 	  writeItem = false;
 	}
       }
     }
     else if( item->isFile() ) {
-      QFileInfo f( item->localPath() );
+      TQFileInfo f( item->localPath() );
       if( !f.exists() ) {
-	emit infoMessage( i18n("Could not find file %1. Skipping...").arg(item->localPath()), WARNING );
+	emit infoMessage( i18n("Could not find file %1. Skipping...").tqarg(item->localPath()), WARNING );
 	writeItem = false;
       }
       else if( !f.isReadable() ) {
-	emit infoMessage( i18n("Could not read file %1. Skipping...").arg(item->localPath()), WARNING );
+	emit infoMessage( i18n("Could not read file %1. Skipping...").tqarg(item->localPath()), WARNING );
 	writeItem = false;
       }
     }
@@ -857,7 +857,7 @@ int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, QTextStream& stream 
 
       // some versions of mkisofs seem to have a bug that prevents to use filenames
       // that contain one or more backslashes
-      if( item->writtenPath().contains("\\") )
+      if( item->writtenPath().tqcontains("\\") )
 	m_containsFilesWithMultibleBackslashes = true;
 
 
@@ -882,20 +882,20 @@ int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, QTextStream& stream 
 }
 
 
-void K3bIsoImager::writePathSpecForFile( K3bFileItem* item, QTextStream& stream )
+void K3bIsoImager::writePathSpecForFile( K3bFileItem* item, TQTextStream& stream )
 {
   stream << escapeGraftPoint( item->writtenPath() )
 	 << "=";
 
-  if( m_doc->bootImages().containsRef( dynamic_cast<K3bBootItem*>(item) ) ) { // boot-image-backup-hack
+  if( m_doc->bootImages().tqcontainsRef( dynamic_cast<K3bBootItem*>(item) ) ) { // boot-image-backup-hack
 
     // create temp file
     KTempFile temp;
-    QString tempPath = temp.name();
+    TQString tempPath = temp.name();
     temp.unlink();
 
     if( !KIO::NetAccess::copy( KURL(item->localPath()), KURL::fromPathOrURL(tempPath) ) ) {
-      emit infoMessage( i18n("Failed to backup boot image file %1").arg(item->localPath()), ERROR );
+      emit infoMessage( i18n("Failed to backup boot image file %1").tqarg(item->localPath()), ERROR );
       return;
     }
 
@@ -917,7 +917,7 @@ bool K3bIsoImager::writeRRHideFile()
   m_rrHideFile = new KTempFile();
   m_rrHideFile->setAutoDelete(true);
 
-  if( QTextStream* t = m_rrHideFile->textStream() ) {
+  if( TQTextStream* t = m_rrHideFile->textStream() ) {
 
     K3bDataItem* item = m_doc->root();
     while( item ) {
@@ -942,7 +942,7 @@ bool K3bIsoImager::writeJolietHideFile()
   m_jolietHideFile = new KTempFile();
   m_jolietHideFile->setAutoDelete(true);
 
-  if( QTextStream* t = m_jolietHideFile->textStream() ) {
+  if( TQTextStream* t = m_jolietHideFile->textStream() ) {
 
     K3bDataItem* item = m_doc->root();
     while( item ) {
@@ -967,7 +967,7 @@ bool K3bIsoImager::writeSortWeightFile()
   m_sortWeightFile = new KTempFile();
   m_sortWeightFile->setAutoDelete(true);
 
-  if( QTextStream* t = m_sortWeightFile->textStream() ) {
+  if( TQTextStream* t = m_sortWeightFile->textStream() ) {
     //
     // We need to write the local path in combination with the sort weight
     // mkisofs will take care of multiple entries for one local file and always
@@ -976,7 +976,7 @@ bool K3bIsoImager::writeSortWeightFile()
     K3bDataItem* item = m_doc->root();
     while( (item = item->nextSibling()) ) {  // we skip the root here
       if( item->sortWeight() != 0 ) {
-	if( m_doc->bootImages().containsRef( dynamic_cast<K3bBootItem*>(item) ) ) { // boot-image-backup-hack
+	if( m_doc->bootImages().tqcontainsRef( dynamic_cast<K3bBootItem*>(item) ) ) { // boot-image-backup-hack
 	  *t << escapeGraftPoint( static_cast<K3bBootItem*>(item)->tempPath() ) << " " << item->sortWeight() << endl;
 	}
 	else if( item->isDir() ) {
@@ -999,9 +999,9 @@ bool K3bIsoImager::writeSortWeightFile()
 }
 
 
-QString K3bIsoImager::escapeGraftPoint( const QString& str )
+TQString K3bIsoImager::escapeGraftPoint( const TQString& str )
 {
-  QString enc = str;
+  TQString enc = str;
 
   //
   // mkisofs manpage (-graft-points) is incorrect (as of mkisofs 2.01.01)
@@ -1018,8 +1018,8 @@ QString K3bIsoImager::escapeGraftPoint( const QString& str )
   //
 
   //
-  // we do not use QString::replace to have full control
-  // this might be slow since QString::insert is slow but we don't care
+  // we do not use TQString::replace to have full control
+  // this might be slow since TQString::insert is slow but we don't care
   // since this is only called to prepare the iso creation which is not
   // time critical. :)
   //
@@ -1049,8 +1049,8 @@ QString K3bIsoImager::escapeGraftPoint( const QString& str )
       ++pos;
   }
 
-//   enc.replace( "\\\\", "\\\\\\\\" );
-//   enc.replace( "=", "\\=" );
+//   enc.tqreplace( "\\\\", "\\\\\\\\" );
+//   enc.tqreplace( "=", "\\=" );
 
   return enc;
 }
@@ -1093,43 +1093,43 @@ bool K3bIsoImager::prepareMkisofsFiles()
 }
 
 
-QString K3bIsoImager::dummyDir( K3bDirItem* dir )
+TQString K3bIsoImager::dummyDir( K3bDirItem* dir )
 {
   //
   // since we use virtual folders in order to have folders with different weight factors and different
   // permissions we create different dummy dirs to be passed to mkisofs
   //
 
-  QDir _appDir( locateLocal( "appdata", "temp/" ) );
+  TQDir _appDir( locateLocal( "appdata", "temp/" ) );
 
   //
   // create a unique isoimager session id
   // This might become important in case we will allow multiple instances of the isoimager
   // to run at the same time.
   //
-  QString jobId = qApp->sessionId() + "_" + QString::number( m_sessionNumber );
+  TQString jobId = tqApp->sessionId() + "_" + TQString::number( m_sessionNumber );
 
   if( !_appDir.cd( jobId ) ) {
     _appDir.mkdir( jobId );
     _appDir.cd( jobId );
   }
 
-  QString name( "dummydir_" );
-  name += QString::number( dir->sortWeight() );
+  TQString name( "dummydir_" );
+  name += TQString::number( dir->sortWeight() );
 
   bool perm = false;
   k3b_struct_stat statBuf;
   if( !dir->localPath().isEmpty() ) {
     // permissions
-    if( k3b_stat( QFile::encodeName(dir->localPath()), &statBuf ) == 0 ) {
+    if( k3b_stat( TQFile::encodeName(dir->localPath()), &statBuf ) == 0 ) {
       name += "_";
-      name += QString::number( statBuf.st_uid );
+      name += TQString::number( statBuf.st_uid );
       name += "_";
-      name += QString::number( statBuf.st_gid );
+      name += TQString::number( statBuf.st_gid );
       name += "_";
-      name += QString::number( statBuf.st_mode );
+      name += TQString::number( statBuf.st_mode );
       name += "_";
-      name += QString::number( statBuf.st_mtime );
+      name += TQString::number( statBuf.st_mtime );
 
       perm = true;
     }
@@ -1144,11 +1144,11 @@ QString K3bIsoImager::dummyDir( K3bDirItem* dir )
     _appDir.cd( name );
 
     if( perm ) {
-      ::chmod( QFile::encodeName( _appDir.absPath() ), statBuf.st_mode );
-      ::chown( QFile::encodeName( _appDir.absPath() ), statBuf.st_uid, statBuf.st_gid );
+      ::chmod( TQFile::encodeName( _appDir.absPath() ), statBuf.st_mode );
+      ::chown( TQFile::encodeName( _appDir.absPath() ), statBuf.st_uid, statBuf.st_gid );
       struct utimbuf tb;
       tb.actime = tb.modtime = statBuf.st_mtime;
-      ::utime( QFile::encodeName( _appDir.absPath() ), &tb );
+      ::utime( TQFile::encodeName( _appDir.absPath() ), &tb );
     }
   }
 
@@ -1158,11 +1158,11 @@ QString K3bIsoImager::dummyDir( K3bDirItem* dir )
 
 void K3bIsoImager::clearDummyDirs()
 {
-  QString jobId = qApp->sessionId() + "_" + QString::number( m_sessionNumber );
-  QDir appDir( locateLocal( "appdata", "temp/" ) );
+  TQString jobId = tqApp->sessionId() + "_" + TQString::number( m_sessionNumber );
+  TQDir appDir( locateLocal( "appdata", "temp/" ) );
   if( appDir.cd( jobId ) ) {
-    QStringList dummyDirEntries = appDir.entryList( "dummydir*", QDir::Dirs );
-    for( QStringList::iterator it = dummyDirEntries.begin(); it != dummyDirEntries.end(); ++it )
+    TQStringList dummyDirEntries = appDir.entryList( "dummydir*", TQDir::Dirs );
+    for( TQStringList::iterator it = dummyDirEntries.begin(); it != dummyDirEntries.end(); ++it )
       appDir.rmdir( *it );
     appDir.cdUp();
     appDir.rmdir( jobId );
@@ -1170,12 +1170,12 @@ void K3bIsoImager::clearDummyDirs()
 }
 
 
-QCString K3bIsoImager::checksum() const
+TQCString K3bIsoImager::checksum() const
 {
   if( K3bChecksumPipe* p = dynamic_cast<K3bChecksumPipe*>( d->pipe ) )
     return p->checksum();
   else
-    return QCString();
+    return TQCString();
 }
 
 

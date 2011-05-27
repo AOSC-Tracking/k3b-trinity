@@ -31,9 +31,10 @@
 class LIBK3B_EXPORT K3bDirSizeJob : public K3bThreadJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDirSizeJob( QObject* parent = 0 );
+  K3bDirSizeJob( TQObject* tqparent = 0 );
   ~K3bDirSizeJob();
 
   KIO::filesize_t totalSize() const;

@@ -29,25 +29,25 @@
 #include <kconfig.h>
 #include <kapplication.h>
 
-#include <qgroupbox.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qframe.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqgroupbox.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqframe.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 
 
-K3bDvdFormattingDialog::K3bDvdFormattingDialog( QWidget* parent, const char* name, bool modal )
-  : K3bInteractionDialog( parent, name,
+K3bDvdFormattingDialog::K3bDvdFormattingDialog( TQWidget* tqparent, const char* name, bool modal )
+  : K3bInteractionDialog( tqparent, name,
 			  i18n("DVD Formatting"),
-			  i18n("DVD%1RW").arg("±"),
+			  i18n("DVD%1RW").tqarg("ï¿½"),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  "DVD Formatting", // config group
 			  modal )
 {
-  QWidget* frame = mainWidget();
+  TQWidget* frame = mainWidget();
 
   m_writerSelectionWidget = new K3bWriterSelectionWidget( frame );
   m_writerSelectionWidget->setWantedMediumType( K3bDevice::MEDIA_REWRITABLE_DVD );
@@ -58,20 +58,20 @@ K3bDvdFormattingDialog::K3bDvdFormattingDialog( QWidget* parent, const char* nam
   m_writerSelectionWidget->setSupportedWritingApps( K3b::DVD_RW_FORMAT );
   m_writerSelectionWidget->setForceAutoSpeed(true);
 
-  QGroupBox* groupWritingMode = new QGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), frame );
-  groupWritingMode->layout()->setMargin( marginHint() );
-  groupWritingMode->layout()->setSpacing( spacingHint() );
+  TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), frame );
+  groupWritingMode->tqlayout()->setMargin( marginHint() );
+  groupWritingMode->tqlayout()->setSpacing( spacingHint() );
   m_writingModeWidget = new K3bWritingModeWidget( K3b::WRITING_MODE_INCR_SEQ|K3b::WRITING_MODE_RES_OVWR,
 						  groupWritingMode );
 
 
-  QGroupBox* groupOptions = new QGroupBox( 2, Qt::Vertical, i18n("Settings"), frame );
-  groupOptions->layout()->setMargin( marginHint() );
-  groupOptions->layout()->setSpacing( spacingHint() );
-  m_checkForce = new QCheckBox( i18n("Force"), groupOptions );
-  m_checkQuickFormat = new QCheckBox( i18n("Quick format"), groupOptions );
+  TQGroupBox* groupOptions = new TQGroupBox( 2, Qt::Vertical, i18n("Settings"), frame );
+  groupOptions->tqlayout()->setMargin( marginHint() );
+  groupOptions->tqlayout()->setSpacing( spacingHint() );
+  m_checkForce = new TQCheckBox( i18n("Force"), groupOptions );
+  m_checkQuickFormat = new TQCheckBox( i18n("Quick format"), groupOptions );
 
-  QGridLayout* grid = new QGridLayout( frame );
+  TQGridLayout* grid = new TQGridLayout( frame );
   grid->setMargin( 0 );
   grid->setSpacing( spacingHint() );
 
@@ -81,8 +81,8 @@ K3bDvdFormattingDialog::K3bDvdFormattingDialog( QWidget* parent, const char* nam
   grid->setRowStretch( 1, 1 );
 
 
-  QToolTip::add( m_checkForce, i18n("Force formatting of empty DVDs") );
-  QWhatsThis::add( m_checkForce, i18n("<p>If this option is checked K3b will format a "
+  TQToolTip::add( m_checkForce, i18n("Force formatting of empty DVDs") );
+  TQWhatsThis::add( m_checkForce, i18n("<p>If this option is checked K3b will format a "
 				      "DVD-RW even if it is empty. It may also be used to "
 				      "force K3b to format a DVD+RW or a DVD-RW in restricted "
 				      "overwrite mode."
@@ -92,16 +92,16 @@ K3bDvdFormattingDialog::K3bDvdFormattingDialog( QWidget* parent, const char* nam
 				      "just needs to be overwritten. The same applies to DVD-RW in "
 				      "restricted overwrite mode.") );
 
-  QToolTip::add( m_checkQuickFormat, i18n("Try to perform quick formatting") );
-  QWhatsThis::add( m_checkQuickFormat, i18n("<p>If this option is checked K3b will tell the writer "
+  TQToolTip::add( m_checkQuickFormat, i18n("Try to perform quick formatting") );
+  TQWhatsThis::add( m_checkQuickFormat, i18n("<p>If this option is checked K3b will tell the writer "
 					    "to perform a quick format."
 					    "<p>Formatting a DVD-RW completely can take a very long "
 					    "time and some DVD writers perform a full format even if "
 					    "quick format is enabled." ) );
 
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged()), this, SLOT(slotWriterChanged()) );
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged(K3bDevice::Device*)),
-	   m_writingModeWidget, SLOT(determineSupportedModesFromMedium(K3bDevice::Device*)) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged(K3bDevice::Device*)),
+	   m_writingModeWidget, TQT_SLOT(determineSupportedModesFromMedium(K3bDevice::Device*)) );
 
   slotWriterChanged();
 } 
@@ -128,7 +128,7 @@ void K3bDvdFormattingDialog::slotStartClicked()
 
   K3bJobProgressDialog d( kapp->mainWidget(), "formattingProgress", false );
 
-  K3bDvdFormattingJob*  job = new K3bDvdFormattingJob( &d, this );
+  K3bDvdFormattingJob*  job = new K3bDvdFormattingJob( &d, TQT_TQOBJECT(this) );
   job->setDevice( m_writerSelectionWidget->writerDevice() );
   job->setMode( m_writingModeWidget->writingMode() );
   job->setForce( m_checkForce->isChecked() );

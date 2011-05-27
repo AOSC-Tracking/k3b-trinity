@@ -17,25 +17,26 @@
 #ifndef K3B_BURNING_OPTION_TAB_H
 #define K3B_BURNING_OPTION_TAB_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
-class QCheckBox;
-class QLabel;
-class QGroupBox;
-class QComboBox;
-class QString;
-class QSpinBox;
+class TQCheckBox;
+class TQLabel;
+class TQGroupBox;
+class TQComboBox;
+class TQString;
+class TQSpinBox;
 class KIntNumInput;
-class QRadioButton;
+class TQRadioButton;
 
 
 
-class K3bBurningOptionTab : public QWidget
+class K3bBurningOptionTab : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bBurningOptionTab( QWidget* parent = 0, const char* name = 0 );
+  K3bBurningOptionTab( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bBurningOptionTab();
 
   void saveSettings();
@@ -47,14 +48,14 @@ Q_OBJECT
  private:
   void setupGui();
 
-  QCheckBox*    m_checkBurnfree;
-  QCheckBox*    m_checkEject;
-  QCheckBox*    m_checkAutoErasingRewritable;
-  QCheckBox*    m_checkOverburn;
-  QCheckBox*    m_checkManualWritingBufferSize;
+  TQCheckBox*    m_checkBurnfree;
+  TQCheckBox*    m_checkEject;
+  TQCheckBox*    m_checkAutoErasingRewritable;
+  TQCheckBox*    m_checkOverburn;
+  TQCheckBox*    m_checkManualWritingBufferSize;
   KIntNumInput* m_editWritingBufferSize;
-  QCheckBox*    m_checkAllowWritingAppSelection;
-  QCheckBox*    m_checkForceUnsafeOperations;
+  TQCheckBox*    m_checkAllowWritingAppSelection;
+  TQCheckBox*    m_checkForceUnsafeOperations;
 };
 
 

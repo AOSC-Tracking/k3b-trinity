@@ -17,11 +17,11 @@
 #ifndef K3BTEMPDIRSELECTIONWIDGET_H
 #define K3BTEMPDIRSELECTIONWIDGET_H
 
-#include <qgroupbox.h>
+#include <tqgroupbox.h>
 #include <kio/global.h>
 
-class QTimer;
-class QLabel;
+class TQTimer;
+class TQLabel;
 class KURLRequester;
 class KConfigBase;
 
@@ -29,12 +29,13 @@ class KConfigBase;
 /**
   *@author Sebastian Trueg
   */
-class K3bTempDirSelectionWidget : public QGroupBox
+class K3bTempDirSelectionWidget : public TQGroupBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bTempDirSelectionWidget( QWidget *parent = 0, const char *name = 0 );
+  K3bTempDirSelectionWidget( TQWidget *tqparent = 0, const char *name = 0 );
   ~K3bTempDirSelectionWidget();
 
   /** determines if the selection dialog should ask for a dir or a file */
@@ -47,17 +48,17 @@ class K3bTempDirSelectionWidget : public QGroupBox
    * FIXME: use KIO::filesize_t and return the number of bytes
    */
   unsigned long freeTempSpace() const;
-  QString tempPath() const;
-  QString tempDirectory() const;
+  TQString tempPath() const;
+  TQString tempDirectory() const;
 
   /**
    * Use this if you don't want K3bTempDirSelectionWidget to modify the
    * user input based on the mode.
    */
-  QString plainTempPath() const;
+  TQString plainTempPath() const;
 
  public slots:
-  void setTempPath( const QString& );
+  void setTempPath( const TQString& );
   void setSelectionMode( int mode );
   void setNeededSize( KIO::filesize_t bytes );
 
@@ -66,7 +67,7 @@ class K3bTempDirSelectionWidget : public QGroupBox
    * automatically be expended to this filename.
    * Default is k3b_image.iso
    */
-  void setDefaultImageFileName( const QString& name );
+  void setDefaultImageFileName( const TQString& name );
 
   /**
    * saves the current path as the global default tempd dir.
@@ -84,9 +85,9 @@ class K3bTempDirSelectionWidget : public QGroupBox
  private:
   void fixTempPath( bool forceNewImageName );
 
-  QLabel* m_imageFileLabel;
-  QLabel* m_labelCdSize;
-  QLabel* m_labelFreeSpace;
+  TQLabel* m_imageFileLabel;
+  TQLabel* m_labelCdSize;
+  TQLabel* m_labelFreeSpace;
   KURLRequester* m_editDirectory;
 
   mutable unsigned long m_freeTempSpace;
@@ -94,7 +95,7 @@ class K3bTempDirSelectionWidget : public QGroupBox
 
   int m_mode;
 
-  QString m_defaultImageFileName;
+  TQString m_defaultImageFileName;
 };
 
 #endif

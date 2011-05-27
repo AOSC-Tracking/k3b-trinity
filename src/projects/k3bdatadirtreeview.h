@@ -21,7 +21,7 @@
 #include <k3blistview.h>
 #include <kurl.h>
 
-#include <qmap.h>
+#include <tqmap.h>
 
 class K3bDataView;
 class K3bDataDoc;
@@ -33,8 +33,8 @@ class KActionCollection;
 class KActionMenu;
 class KAction;
 class K3bView;
-class QDragMoveEvent;
-class QDragLeaveEvent;
+class TQDragMoveEvent;
+class TQDragLeaveEvent;
 
 
 /**
@@ -44,9 +44,10 @@ class QDragLeaveEvent;
 class K3bDataDirTreeView : public K3bListView  
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDataDirTreeView( K3bView*, K3bDataDoc*, QWidget* parent );
+  K3bDataDirTreeView( K3bView*, K3bDataDoc*, TQWidget* tqparent );
   virtual ~K3bDataDirTreeView();
 
   K3bDataDirViewItem* root() { return m_root; }
@@ -60,13 +61,13 @@ class K3bDataDirTreeView : public K3bListView
   void setCurrentDir( K3bDirItem* );
 
  signals:
-  //  void urlsDropped( const KURL::List&, QListViewItem* parent );
+  //  void urlsDropped( const KURL::List&, TQListViewItem* tqparent );
   void dirSelected( K3bDirItem* );
 
  protected:
-  bool acceptDrag(QDropEvent* e) const;
-  void contentsDragMoveEvent( QDragMoveEvent* e );
-  void contentsDragLeaveEvent( QDragLeaveEvent* e );
+  bool acceptDrag(TQDropEvent* e) const;
+  void contentsDragMoveEvent( TQDragMoveEvent* e );
+  void contentsDragLeaveEvent( TQDragLeaveEvent* e );
 
   KActionCollection* m_actionCollection;
   KActionMenu* m_popupMenu;
@@ -76,7 +77,7 @@ class K3bDataDirTreeView : public K3bListView
   KAction* m_actionProperties;
 
  protected slots:
-  virtual void slotDropped( QDropEvent* e, QListViewItem* after, QListViewItem* parent );
+  virtual void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* tqparent );
 
  private:
   void setupActions();
@@ -93,15 +94,15 @@ class K3bDataDirTreeView : public K3bListView
    * We save the dirItems in a map to have a fast way
    * for checking for new or removed items
    */
-  QMap<K3bDirItem*, K3bDataDirViewItem*> m_itemMap;
+  TQMap<K3bDirItem*, K3bDataDirViewItem*> m_itemMap;
 
   class Private;
   Private* d;
 
  private slots:
-  void slotExecuted( QListViewItem* );
+  void slotExecuted( TQListViewItem* );
   void slotDataItemRemoved( K3bDataItem* );
-  void showPopupMenu( KListView*, QListViewItem* _item, const QPoint& );
+  void showPopupMenu( KListView*, TQListViewItem* _item, const TQPoint& );
   void slotRenameItem();
   void slotRemoveItem();
   void slotNewDir();

@@ -24,17 +24,18 @@ class KConfig;
 class LIBK3B_EXPORT K3bMovixDvdDoc : public K3bMovixDoc
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMovixDvdDoc( QObject* parent = 0 );
+  K3bMovixDvdDoc( TQObject* tqparent = 0 );
   ~K3bMovixDvdDoc();
 
   int type() const { return MOVIX_DVD; }
 
-  K3bBurnJob* newBurnJob( K3bJobHandler* hdl, QObject* parent );
+  K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent );
 
  protected:
-  QString typeString() const { return "movixdvd"; }
+  TQString typeString() const { return "movixdvd"; }
 };
 
 #endif

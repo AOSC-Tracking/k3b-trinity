@@ -26,8 +26,8 @@
 #include <klocale.h>
 #include <kstringhandler.h>
 
-#include <qfile.h>
-#include <qvaluelist.h>
+#include <tqfile.h>
+#include <tqvaluelist.h>
 
 
 class K3bDataPreparationJob::Private : public K3bThread
@@ -40,9 +40,9 @@ public:
 
   K3bDataDoc* doc;
 
-  QValueList<K3bDataItem*> nonExistingItems;
-  QString listOfRenamedItems;
-  QValueList<K3bDataItem*> folderSymLinkItems;
+  TQValueList<K3bDataItem*> nonExistingItems;
+  TQString listOfRenamedItems;
+  TQValueList<K3bDataItem*> folderSymLinkItems;
 
   K3bThreadJob* threadJob;
 
@@ -71,14 +71,14 @@ void K3bDataPreparationJob::Private::run()
   // create the message string for the renamed files
   if( doc->needToCutFilenames() ) {
     int maxlines = 10;
-    QValueList<K3bDataItem*>::const_iterator it;
+    TQValueList<K3bDataItem*>::const_iterator it;
     for( it = doc->needToCutFilenameItems().begin(); 
 	 maxlines > 0 && it != doc->needToCutFilenameItems().end();
 	 ++it, --maxlines ) {
       K3bDataItem* item = *it;
       listOfRenamedItems += i18n("<em>%1</em> renamed to <em>%2</em>")
-	.arg( KStringHandler::csqueeze( item->k3bName(), 30 ) )
-	.arg( KStringHandler::csqueeze( item->writtenName(), 30 ) );
+	.tqarg( KStringHandler::csqueeze( item->k3bName(), 30 ) )
+	.tqarg( KStringHandler::csqueeze( item->writtenName(), 30 ) );
       listOfRenamedItems += "<br>";
     }
     if( it != doc->needToCutFilenameItems().end() )
@@ -93,7 +93,7 @@ void K3bDataPreparationJob::Private::run()
 
     if( item->isSymLink() ) {
       if( doc->isoOptions().followSymbolicLinks() ) {
-	QFileInfo f( K3b::resolveLink( item->localPath() ) );
+	TQFileInfo f( K3b::resolveLink( item->localPath() ) );
 	if( !f.exists() ) {
 	  nonExistingItems.append( item );
 	}
@@ -102,7 +102,7 @@ void K3bDataPreparationJob::Private::run()
 	}
       }
     }
-    else if( item->isFile() && !QFile::exists( item->localPath() ) ) {
+    else if( item->isFile() && !TQFile::exists( item->localPath() ) ) {
       nonExistingItems.append( item );
     }
 
@@ -126,11 +126,11 @@ void K3bDataPreparationJob::Private::cancel()
 
 
 
-static QString createItemsString( const QValueList<K3bDataItem*>& items, unsigned int max )
+static TQString createItemsString( const TQValueList<K3bDataItem*>& items, unsigned int max )
 {
-  QString s;
+  TQString s;
   unsigned int cnt = 0;
-  for( QValueList<K3bDataItem*>::const_iterator it = items.begin();
+  for( TQValueList<K3bDataItem*>::const_iterator it = items.begin();
        it != items.end(); ++it ) {
 
     s += KStringHandler::csqueeze( (*it)->localPath(), 60 );
@@ -149,12 +149,12 @@ static QString createItemsString( const QValueList<K3bDataItem*>& items, unsigne
 }
 
 
-K3bDataPreparationJob::K3bDataPreparationJob( K3bDataDoc* doc, K3bJobHandler* hdl, QObject* parent )
-  : K3bJob( hdl, parent )
+K3bDataPreparationJob::K3bDataPreparationJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bJob( hdl, tqparent )
 {
   d = new Private( doc );
   d->threadJob = new K3bThreadJob( d, this, this );
-  connectSubJob( d->threadJob, SLOT(slotWorkDone(bool)), K3bJob::DEFAULT_SIGNAL_CONNECTION );
+  connectSubJob( d->threadJob, TQT_SLOT(slotWorkDone(bool)), K3bJob::DEFAULT_SIGNAL_CONNECTION );
 }
 
 
@@ -182,7 +182,7 @@ void K3bDataPreparationJob::slotWorkDone( bool success )
 				       "of the Joliet extensions. If the Joliet extensions are disabled filenames "
 				       "do not have to be shortened but long filenames will not be available on "
 				       "Windows systems.")
-			  .arg( d->doc->isoOptions().jolietLong() ? 103 : 64 )
+			  .tqarg( d->doc->isoOptions().jolietLong() ? 103 : 64 )
 			  + "<p>" + d->listOfRenamedItems,
 			  i18n("Warning"),
 			  i18n("Shorten Filenames"),
@@ -207,7 +207,7 @@ void K3bDataPreparationJob::slotWorkDone( bool success )
 				       "restrict the length of the volume descriptior (the name of the filesystem) "
 				       "to %1 characters. The selected descriptor '%2' is longer than that. Do you "
 				       "want it to be cut or do you want to go back and change it manually?")
-			  .arg( 16 ).arg( d->doc->isoOptions().volumeID() ),
+			  .tqarg( 16 ).tqarg( d->doc->isoOptions().volumeID() ),
 			  i18n("Warning"),
 			  i18n("Cut volume descriptor in the Joliet tree"),
 			  i18n("Cancel and go back") ) ) {
@@ -228,7 +228,7 @@ void K3bDataPreparationJob::slotWorkDone( bool success )
 			 i18n("Warning"),
 			 i18n("Remove missing files and continue"),
 			 i18n("Cancel and go back") ) ) {
-	for( QValueList<K3bDataItem*>::const_iterator it = d->nonExistingItems.begin();
+	for( TQValueList<K3bDataItem*>::const_iterator it = d->nonExistingItems.begin();
 	     it != d->nonExistingItems.end(); ++it ) {
 	  delete *it;
 	}

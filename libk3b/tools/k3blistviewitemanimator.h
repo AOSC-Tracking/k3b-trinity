@@ -16,48 +16,49 @@
 #ifndef _K3B_LISTVIEWITEM_ANIMATOR_H_
 #define _K3B_LISTVIEWITEM_ANIMATOR_H_
 
-#include <qobject.h>
-#include <qpixmap.h>
+#include <tqobject.h>
+#include <tqpixmap.h>
 #include "k3b_export.h"
 
-class QListViewItem;
-class QTimer;
+class TQListViewItem;
+class TQTimer;
 
 
 /**
  * Fades an icon on a listview item in and out.
  */
-class LIBK3B_EXPORT K3bListViewItemAnimator : public QObject
+class LIBK3B_EXPORT K3bListViewItemAnimator : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bListViewItemAnimator( QObject* parent = 0, const char* name = 0 );
+  K3bListViewItemAnimator( TQObject* tqparent = 0, const char* name = 0 );
   /**
    * Will use the items pixmap.
    */
-  K3bListViewItemAnimator( QListViewItem* item, int col, QObject* parent = 0, const char* name = 0 );
+  K3bListViewItemAnimator( TQListViewItem* item, int col, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bListViewItemAnimator();
 
-  QListViewItem* item() const;
+  TQListViewItem* item() const;
 
  public slots:
   void start();
   void stop();
 
-  void setItem( QListViewItem*, int col );
+  void setItem( TQListViewItem*, int col );
 
   /**
    * Default is the pixmap from the item.
    */
-  void setPixmap( const QPixmap& );
+  void setPixmap( const TQPixmap& );
 
   void setColumn( int col );
 
   /**
    * Default is the base color of the listview.
    */
-  void setFadeColor( const QColor& );
+  void setFadeColor( const TQColor& );
 
  private slots:
   void slotAnimate();
@@ -67,12 +68,12 @@ class LIBK3B_EXPORT K3bListViewItemAnimator : public QObject
 
   int m_animationStep;
   bool m_animationBack;
-  QPixmap m_pixmap;
-  QColor m_fadeColor;
-  QListViewItem* m_item;
+  TQPixmap m_pixmap;
+  TQColor m_fadeColor;
+  TQListViewItem* m_item;
   int m_column;
 
-  QTimer* m_timer;
+  TQTimer* m_timer;
 };
 
 #endif

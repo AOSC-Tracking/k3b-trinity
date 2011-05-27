@@ -27,17 +27,17 @@
 #include <k3bglobals.h>
 #include <k3bcore.h>
 
-#include <qstring.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qlayout.h>
-#include <qvbox.h>
-#include <qcheckbox.h>
-#include <qtabwidget.h>
-#include <qgroupbox.h>
-#include <qspinbox.h>
-#include <qlabel.h>
+#include <tqstring.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqlayout.h>
+#include <tqvbox.h>
+#include <tqcheckbox.h>
+#include <tqtabwidget.h>
+#include <tqgroupbox.h>
+#include <tqspinbox.h>
+#include <tqlabel.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -51,8 +51,8 @@
 #include <kiconloader.h>
 
 
-K3bProjectBurnDialog::K3bProjectBurnDialog( K3bDoc* doc, QWidget *parent, const char *name, bool modal, bool dvd )
-  : K3bInteractionDialog( parent, name, i18n("Project"), QString::null, 
+K3bProjectBurnDialog::K3bProjectBurnDialog( K3bDoc* doc, TQWidget *tqparent, const char *name, bool modal, bool dvd )
+  : K3bInteractionDialog( tqparent, name, i18n("Project"), TQString(), 
 			  START_BUTTON|SAVE_BUTTON|CANCEL_BUTTON, START_BUTTON, 
 			  "default " + doc->typeString() + " settings", modal ),
     m_writerSelectionWidget(0),
@@ -197,12 +197,12 @@ void K3bProjectBurnDialog::slotStartClicked()
       //
       // check if the temp dir exists
       //
-      QString tempDir = m_tempDirSelectionWidget->tempDirectory();
-      if( !QFile::exists( tempDir ) ) {
-	if( KMessageBox::warningYesNo( this, i18n("Image folder '%1' does not exist. Do you want K3b to create it?").arg( tempDir ) )
+      TQString tempDir = m_tempDirSelectionWidget->tempDirectory();
+      if( !TQFile::exists( tempDir ) ) {
+	if( KMessageBox::warningYesNo( this, i18n("Image folder '%1' does not exist. Do you want K3b to create it?").tqarg( tempDir ) )
 	    == KMessageBox::Yes ) {
 	  if( !KStandardDirs::makeDir( tempDir ) ) {
-	    KMessageBox::error( this, i18n("Failed to create folder '%1'.").arg( tempDir ) );
+	    KMessageBox::error( this, i18n("Failed to create folder '%1'.").tqarg( tempDir ) );
 	    return;
 	  }
 	}
@@ -223,9 +223,9 @@ void K3bProjectBurnDialog::slotStartClicked()
 
   K3bJobProgressDialog* dlg = 0;
   if( m_checkOnlyCreateImage && m_checkOnlyCreateImage->isChecked() )
-    dlg = new K3bJobProgressDialog( parentWidget() );
+    dlg = new K3bJobProgressDialog( tqparentWidget() );
   else
-    dlg = new K3bBurnProgressDialog( parentWidget() );
+    dlg = new K3bBurnProgressDialog( tqparentWidget() );
 
   m_job = m_doc->newBurnJob( dlg );
 
@@ -250,7 +250,7 @@ void K3bProjectBurnDialog::slotStartClicked()
 
 void K3bProjectBurnDialog::prepareGui()
 {
-  QVBoxLayout* mainLay = new QVBoxLayout( mainWidget() );
+  TQVBoxLayout* mainLay = new TQVBoxLayout( mainWidget() );
   mainLay->setAutoAdd( true );
   mainLay->setMargin( 0 );
   mainLay->setSpacing( KDialog::spacingHint() );
@@ -259,19 +259,19 @@ void K3bProjectBurnDialog::prepareGui()
   m_writerSelectionWidget->setWantedMediumType( m_dvd ? K3bDevice::MEDIA_WRITABLE_DVD : K3bDevice::MEDIA_WRITABLE_CD );
   m_writerSelectionWidget->setWantedMediumState( K3bDevice::STATE_EMPTY );
 
-  m_tabWidget = new QTabWidget( mainWidget() );
+  m_tabWidget = new TQTabWidget( mainWidget() );
 
-  QWidget* w = new QWidget( m_tabWidget );
+  TQWidget* w = new TQWidget( m_tabWidget );
   m_tabWidget->addTab( w, i18n("Writing") );
 
-  QGroupBox* groupWritingMode = new QGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), w );
+  TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), w );
   groupWritingMode->setInsideMargin( marginHint() );
   m_writingModeWidget = new K3bWritingModeWidget( groupWritingMode );
 
-  m_optionGroup = new QGroupBox( 0, Qt::Vertical, i18n("Settings"), w );
-  m_optionGroup->layout()->setMargin(0);
-  m_optionGroup->layout()->setSpacing(0);
-  m_optionGroupLayout = new QVBoxLayout( m_optionGroup->layout() );
+  m_optionGroup = new TQGroupBox( 0, Qt::Vertical, i18n("Settings"), w );
+  m_optionGroup->tqlayout()->setMargin(0);
+  m_optionGroup->tqlayout()->setSpacing(0);
+  m_optionGroupLayout = new TQVBoxLayout( m_optionGroup->tqlayout() );
   m_optionGroupLayout->setMargin( KDialog::marginHint() );
   m_optionGroupLayout->setSpacing( KDialog::spacingHint() );
 
@@ -286,16 +286,16 @@ void K3bProjectBurnDialog::prepareGui()
   m_optionGroupLayout->addWidget(m_checkOnlyCreateImage);
   m_optionGroupLayout->addWidget(m_checkRemoveBufferFiles);
 
-  QGroupBox* groupCopies = new QGroupBox( 2, Qt::Horizontal, i18n("Copies"), w );
+  TQGroupBox* groupCopies = new TQGroupBox( 2, Qt::Horizontal, i18n("Copies"), w );
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
-  QLabel* pixLabel = new QLabel( groupCopies );
+  TQLabel* pixLabel = new TQLabel( groupCopies );
   pixLabel->setPixmap( SmallIcon( "cdcopy", KIcon::SizeMedium ) );
   pixLabel->setScaledContents( false );
-  m_spinCopies = new QSpinBox( 1, 999, 1, groupCopies );
+  m_spinCopies = new TQSpinBox( 1, 999, 1, groupCopies );
 
   // arrange it
-  QGridLayout* grid = new QGridLayout( w );
+  TQGridLayout* grid = new TQGridLayout( w );
   grid->setMargin( KDialog::marginHint() );
   grid->setSpacing( KDialog::spacingHint() );
 
@@ -306,8 +306,8 @@ void K3bProjectBurnDialog::prepareGui()
   grid->setRowStretch( 1, 1 );
   grid->setColStretch( 1, 1 );
 
-  QWidget* tempW = new QWidget( m_tabWidget );
-  grid = new QGridLayout( tempW );
+  TQWidget* tempW = new TQWidget( m_tabWidget );
+  grid = new TQGridLayout( tempW );
   grid->setMargin( KDialog::marginHint() );
   grid->setSpacing( KDialog::spacingHint() );
   m_tabWidget->addTab( tempW, i18n("Image") );
@@ -321,18 +321,18 @@ void K3bProjectBurnDialog::prepareGui()
   setTabOrder( groupCopies, m_optionGroup );
 
   // some default connections that should always be useful
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged()), this, SLOT(slotWriterChanged()) );
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged(K3bDevice::Device*)), 
-	   m_writingModeWidget, SLOT(determineSupportedModesFromMedium(K3bDevice::Device*)) );
-  connect( m_writerSelectionWidget, SIGNAL(writingAppChanged(int)), this, SLOT(slotWritingAppChanged(int)) );
-  connect( m_checkCacheImage, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_checkSimulate, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_checkOnlyCreateImage, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_writingModeWidget, SIGNAL(writingModeChanged(int)), this, SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged(K3bDevice::Device*)), 
+	   m_writingModeWidget, TQT_SLOT(determineSupportedModesFromMedium(K3bDevice::Device*)) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)), this, TQT_SLOT(slotWritingAppChanged(int)) );
+  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkSimulate, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkOnlyCreateImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
 }
 
 
-void K3bProjectBurnDialog::addPage( QWidget* page, const QString& title )
+void K3bProjectBurnDialog::addPage( TQWidget* page, const TQString& title )
 {
   m_tabWidget->addTab( page, title );
 }

@@ -23,15 +23,15 @@ class KConfig;
 class LIBK3B_EXPORT K3bDvdDoc : public K3bDataDoc
 {
  public:
-  K3bDvdDoc( QObject* parent = 0 );
+  K3bDvdDoc( TQObject* tqparent = 0 );
   virtual ~K3bDvdDoc();
 
   virtual int type() const { return DVD; }
 
-  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, QObject* parent = 0 );
+  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent = 0 );
 
  protected:
-  virtual QString typeString() const { return "dvd"; }
+  virtual TQString typeString() const { return "dvd"; }
 };
 
 #endif

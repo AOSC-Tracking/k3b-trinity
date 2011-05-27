@@ -16,12 +16,12 @@
 #ifndef _K3B_THEME_MANAGER_H_
 #define _K3B_THEME_MANAGER_H_
 
-#include <qobject.h>
-#include <qvaluelist.h>
-#include <qstring.h>
-#include <qmap.h>
-#include <qcolor.h>
-#include <qpixmap.h>
+#include <tqobject.h>
+#include <tqvaluelist.h>
+#include <tqstring.h>
+#include <tqmap.h>
+#include <tqcolor.h>
+#include <tqpixmap.h>
 
 
 
@@ -33,8 +33,8 @@ class K3bTheme
  public:
   K3bTheme();
 
-  QColor backgroundColor() const;
-  QColor foregroundColor() const;
+  TQColor backgroundColor() const;
+  TQColor foregroundColor() const;
 
   enum PixmapType {
     MEDIA_AUDIO,      /**< Media information header, right side when showing an audio CD. */
@@ -61,19 +61,19 @@ class K3bTheme
     BG_SCALE         /**< Scale the pixmap to fill the welcome widget. */
   };
 
-  const QPixmap& pixmap( PixmapType ) const;
+  const TQPixmap& pixmap( PixmapType ) const;
 
   /**
    * \deprecated use pixmap( PixmapType )
    */
-  const QPixmap& pixmap( const QString& name ) const;
+  const TQPixmap& pixmap( const TQString& name ) const;
 
   BackgroundMode backgroundMode() const;
 
-  const QString& name() const { return m_name; }
-  const QString& author() const { return m_author; }
-  const QString& comment() const { return m_comment; }
-  const QString& version() const { return m_version; }
+  const TQString& name() const { return m_name; }
+  const TQString& author() const { return m_author; }
+  const TQString& comment() const { return m_comment; }
+  const TQString& version() const { return m_version; }
 
   /**
    * Global themes are installed for all users and cannot be deleted.
@@ -85,45 +85,46 @@ class K3bTheme
    */
   bool local() const { return m_local; }
 
-  const QString& path() const { return m_path; }
+  const TQString& path() const { return m_path; }
 
-  static QString filenameForPixmapType( PixmapType );
+  static TQString filenameForPixmapType( PixmapType );
 
  private:
-  QString m_path;
+  TQString m_path;
   bool m_local;
-  QString m_name;
-  QString m_author;
-  QString m_comment;
-  QString m_version;
-  QColor m_bgColor;
-  QColor m_fgColor;
+  TQString m_name;
+  TQString m_author;
+  TQString m_comment;
+  TQString m_version;
+  TQColor m_bgColor;
+  TQColor m_fgColor;
   BackgroundMode m_bgMode;
 
-  mutable QMap<QString, QPixmap> m_pixmapMap;
+  mutable TQMap<TQString, TQPixmap> m_pixmapMap;
 
-  QPixmap m_emptyPixmap;
+  TQPixmap m_emptyPixmap;
 
   friend class K3bThemeManager;
 };
 
 
-class K3bThemeManager : public QObject
+class K3bThemeManager : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bThemeManager( QObject* parent = 0, const char* name = 0 );
+  K3bThemeManager( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bThemeManager();
 
-  const QValueList<K3bTheme*>& themes() const;
+  const TQValueList<K3bTheme*>& themes() const;
 
   /**
    * This is never null. If no theme could be found an empty dummy theme
    * will be returnes which does not contains any pixmaps.
    */
   K3bTheme* currentTheme() const;
-  K3bTheme* findTheme( const QString& ) const;
+  K3bTheme* findTheme( const TQString& ) const;
 
  signals:
   void themeChanged();
@@ -132,12 +133,12 @@ class K3bThemeManager : public QObject
  public slots:
   void readConfig( KConfigBase* );
   void saveConfig( KConfigBase* );
-  void setCurrentTheme( const QString& );
+  void setCurrentTheme( const TQString& );
   void setCurrentTheme( K3bTheme* );
   void loadThemes();
 
  private:
-  void loadTheme( const QString& name );
+  void loadTheme( const TQString& name );
 
   class Private;
   Private* d;

@@ -23,14 +23,14 @@
 #include <k3bdevicemanager.h>
 #include <k3bjob.h>
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 
 //static
-QCString K3bProjectInterface::newIfaceName()
+TQCString K3bProjectInterface::newIfaceName()
 {
   static int s_docIFNumber = 0;
-  QCString name;
+  TQCString name;
   name.setNum( s_docIFNumber++ ); 
   name.prepend("K3bProject-");
   return name;
@@ -38,7 +38,7 @@ QCString K3bProjectInterface::newIfaceName()
 
 
 K3bProjectInterface::K3bProjectInterface( K3bDoc* doc, const char* name )
-  : DCOPObject( name ? QCString(name) : newIfaceName() ),
+  : DCOPObject( name ? TQCString(name) : newIfaceName() ),
     m_doc( doc )
 {
 }
@@ -48,12 +48,12 @@ K3bProjectInterface::~K3bProjectInterface()
 {
 }
 
-void K3bProjectInterface::addUrls( const QStringList& urls )
+void K3bProjectInterface::addUrls( const TQStringList& urls )
 {
   m_doc->addUrls( KURL::List(urls) );
 }
 
-void K3bProjectInterface::addUrl( const QString& url )
+void K3bProjectInterface::addUrl( const TQString& url )
 {
   m_doc->addUrl( KURL(url) );
 }
@@ -61,7 +61,7 @@ void K3bProjectInterface::addUrl( const QString& url )
 void K3bProjectInterface::burn()
 {
   // we want to return this method immediately
-  QTimer::singleShot( 0, m_doc->view(), SLOT(slotBurn()) );
+  TQTimer::singleShot( 0, m_doc->view(), TQT_SLOT(slotBurn()) );
 }
 
 
@@ -88,7 +88,7 @@ bool K3bProjectInterface::directBurn()
 }
 
 
-void K3bProjectInterface::setBurnDevice( const QString& name )
+void K3bProjectInterface::setBurnDevice( const TQString& name )
 {
   if( K3bDevice::Device* dev = k3bcore->deviceManager()->findDevice( name ) )
     m_doc->setBurner( dev );
@@ -107,13 +107,13 @@ KIO::filesize_t K3bProjectInterface::size() const
 }
 
 
-const QString& K3bProjectInterface::imagePath() const
+const TQString& K3bProjectInterface::imagePath() const
 {
   return m_doc->tempDir();
 }
 
 
-QString K3bProjectInterface::projectType() const
+TQString K3bProjectInterface::projectType() const
 {
   switch( m_doc->type() ) {
   case K3bDoc::AUDIO:

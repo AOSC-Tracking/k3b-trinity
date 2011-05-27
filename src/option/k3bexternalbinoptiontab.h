@@ -17,23 +17,24 @@
 #ifndef K3B_EXTERNALBIN_OPTIONTAB_H
 #define K3B_EXTERNALBIN_OPTIONTAB_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 
 
-class QPushButton;
-class QListViewItem;
+class TQPushButton;
+class TQListViewItem;
 class KListView;
 class K3bExternalBinManager;
 class K3bExternalBinWidget;
 
 
-class K3bExternalBinOptionTab : public QWidget
+class K3bExternalBinOptionTab : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bExternalBinOptionTab( K3bExternalBinManager*, QWidget*, const char* name = 0 );
+  K3bExternalBinOptionTab( K3bExternalBinManager*, TQWidget*, const char* name = 0 );
   ~K3bExternalBinOptionTab();
 
   void readSettings();

@@ -30,30 +30,31 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bAudioCueFileWritingJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bAudioCueFileWritingJob( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bAudioCueFileWritingJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bAudioCueFileWritingJob();
 
   K3bDevice::Device* writer() const;
 	
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
-  const QString& cueFile() const { return m_cueFile; }
+  const TQString& cueFile() const { return m_cueFile; }
 
  public slots:
   void start();
   void cancel();
 
-  void setCueFile( const QString& );
+  void setCueFile( const TQString& );
   void setSpeed( int s );
   void setBurnDevice( K3bDevice::Device* dev );
   void setWritingMode( int mode );
   void setSimulate( bool b );
   void setCopies( int c );
   void setOnTheFly( bool b );
-  void setTempDir( const QString& );
+  void setTempDir( const TQString& );
 
  private slots:
   void slotAnalyserThreadFinished(bool);
@@ -63,7 +64,7 @@ class LIBK3B_EXPORT K3bAudioCueFileWritingJob : public K3bBurnJob
 
   K3bDevice::Device* m_device;
 
-  QString m_cueFile;
+  TQString m_cueFile;
   K3bAudioDoc* m_audioDoc;
   K3bAudioJob* m_audioJob;
   K3bAudioDecoder* m_decoder;

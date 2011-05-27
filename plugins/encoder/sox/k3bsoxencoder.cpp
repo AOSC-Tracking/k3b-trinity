@@ -27,13 +27,13 @@
 #include <kconfig.h>
 #include <klocale.h>
 
-#include <qfileinfo.h>
-#include <qfile.h>
-#include <qvalidator.h>
-#include <qlineedit.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <tqfileinfo.h>
+#include <tqfile.h>
+#include <tqvalidator.h>
+#include <tqlineedit.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
 
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -50,19 +50,19 @@ class K3bSoxProgram : public K3bExternalProgram
     : K3bExternalProgram( "sox" ) {
   }
 
-  bool scan( const QString& p ) {
+  bool scan( const TQString& p ) {
     if( p.isEmpty() )
       return false;
 
-    QString path = p;
-    QFileInfo fi( path );
+    TQString path = p;
+    TQFileInfo fi( path );
     if( fi.isDir() ) {
       if( path[path.length()-1] != '/' )
 	path.append("/");
       path.append("sox");
     }
 
-    if( !QFile::exists( path ) )
+    if( !TQFile::exists( path ) )
       return false;
 
     K3bExternalBin* bin = 0;
@@ -73,10 +73,10 @@ class K3bSoxProgram : public K3bExternalProgram
 
     vp << path << "-h";
     if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
-      int pos = out.output().find( "sox: SoX Version" );
+      int pos = out.output().tqfind( "sox: SoX Version" );
       if ( pos < 0 )
-          pos = out.output().find( "sox: SoX v" ); // newer sox versions
-      int endPos = out.output().find( "\n", pos );
+          pos = out.output().tqfind( "sox: SoX v" ); // newer sox versions
+      int endPos = out.output().tqfind( "\n", pos );
       if( pos > 0 && endPos > 0 ) {
 	pos += 17;
 	bin = new K3bExternalBin( this );
@@ -88,8 +88,8 @@ class K3bSoxProgram : public K3bExternalProgram
 	return true;
       }
       else {
-        pos = out.output().find( "sox: Version" );
-        endPos = out.output().find( "\n", pos );
+        pos = out.output().tqfind( "sox: Version" );
+        endPos = out.output().tqfind( "\n", pos );
         if( pos > 0 && endPos > 0 ) {
 	pos += 13;
 	bin = new K3bExternalBin( this );
@@ -118,12 +118,12 @@ public:
   }
 
   K3bProcess* process;
-  QString fileName;
+  TQString fileName;
 };
 
 
-K3bSoxEncoder::K3bSoxEncoder( QObject* parent, const char* name )
-  : K3bAudioEncoder( parent, name )
+K3bSoxEncoder::K3bSoxEncoder( TQObject* tqparent, const char* name )
+  : K3bAudioEncoder( tqparent, name )
 {
   if( k3bcore->externalBinManager()->program( "sox" ) == 0 )
     k3bcore->externalBinManager()->addProgram( new K3bSoxProgram() );
@@ -160,7 +160,7 @@ void K3bSoxEncoder::slotSoxFinished( KProcess* p )
 }
 
 
-bool K3bSoxEncoder::openFile( const QString& ext, const QString& filename, const K3b::Msf& )
+bool K3bSoxEncoder::openFile( const TQString& ext, const TQString& filename, const K3b::Msf& )
 {
   d->fileName = filename;
   return initEncoderInternal( ext );
@@ -173,7 +173,7 @@ void K3bSoxEncoder::closeFile()
 }
 
 
-bool K3bSoxEncoder::initEncoderInternal( const QString& extension )
+bool K3bSoxEncoder::initEncoderInternal( const TQString& extension )
 {
   const K3bExternalBin* soxBin = k3bcore->externalBinManager()->binObject( "sox" );
   if( soxBin ) {
@@ -182,12 +182,12 @@ bool K3bSoxEncoder::initEncoderInternal( const QString& extension )
     d->process->setSplitStdout(true);
     d->process->setRawStdin(true);
 
-    connect( d->process, SIGNAL(processExited(KProcess*)),
-	     this, SLOT(slotSoxFinished(KProcess*)) );
-    connect( d->process, SIGNAL(stderrLine(const QString&)),
-	     this, SLOT(slotSoxOutputLine(const QString&)) );
-    connect( d->process, SIGNAL(stdoutLine(const QString&)),
-	     this, SLOT(slotSoxOutputLine(const QString&)) );
+    connect( d->process, TQT_SIGNAL(processExited(KProcess*)),
+	     this, TQT_SLOT(slotSoxFinished(KProcess*)) );
+    connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)),
+	     this, TQT_SLOT(slotSoxOutputLine(const TQString&)) );
+    connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)),
+	     this, TQT_SLOT(slotSoxOutputLine(const TQString&)) );
 
     // input settings
     *d->process << soxBin->path
@@ -204,13 +204,13 @@ bool K3bSoxEncoder::initEncoderInternal( const QString& extension )
     KConfig* c = k3bcore->config();
     c->setGroup( "K3bSoxEncoderPlugin" );
     if( c->readBoolEntry( "manual settings", false ) ) {
-      *d->process << "-r" << QString::number( c->readNumEntry( "samplerate", 44100 ) )
-		  << "-c" << QString::number( c->readNumEntry( "channels", 2 ) );
+      *d->process << "-r" << TQString::number( c->readNumEntry( "samplerate", 44100 ) )
+		  << "-c" << TQString::number( c->readNumEntry( "channels", 2 ) );
 
       int size = c->readNumEntry( "data size", 16 );
-      *d->process << ( size == 8 ? QString("-b") : ( size == 32 ? QString("-l") : QString("-w") ) );
+      *d->process << ( size == 8 ? TQString("-b") : ( size == 32 ? TQString("-l") : TQString("-w") ) );
 
-      QString encoding = c->readEntry( "data encoding", "signed" );
+      TQString encoding = c->readEntry( "data encoding", "signed" );
       if( encoding == "unsigned" )
 	*d->process << "-u";
       else if( encoding == "u-law" )
@@ -232,9 +232,9 @@ bool K3bSoxEncoder::initEncoderInternal( const QString& extension )
     *d->process << d->fileName;
 
     kdDebug() << "***** sox parameters:" << endl;
-    const QValueList<QCString>& args = d->process->args();
-    QString s;
-    for( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+    const TQValueList<TQCString>& args = d->process->args();
+    TQString s;
+    for( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
       s += *it + " ";
     }
     kdDebug() << s << flush << endl;
@@ -249,7 +249,7 @@ bool K3bSoxEncoder::initEncoderInternal( const QString& extension )
 }
 
 
-long K3bSoxEncoder::encodeInternal( const char* data, Q_ULONG len )
+long K3bSoxEncoder::encodeInternal( const char* data, TQ_ULONG len )
 {
   if( d->process ) {
     if( d->process->isRunning() )
@@ -262,15 +262,15 @@ long K3bSoxEncoder::encodeInternal( const char* data, Q_ULONG len )
 }
 
 
-void K3bSoxEncoder::slotSoxOutputLine( const QString& line )
+void K3bSoxEncoder::slotSoxOutputLine( const TQString& line )
 {
   kdDebug() << "(sox) " << line << endl;
 }
 
 
-QStringList K3bSoxEncoder::extensions() const
+TQStringList K3bSoxEncoder::extensions() const
 {
-  static QStringList s_extensions;
+  static TQStringList s_extensions;
   if( s_extensions.isEmpty() ) {
     s_extensions << "au"
 		 << "8svx"
@@ -296,11 +296,11 @@ QStringList K3bSoxEncoder::extensions() const
   if( k3bcore->externalBinManager()->foundBin( "sox" ) )
     return s_extensions;
   else
-    return QStringList(); // no sox -> no encoding
+    return TQStringList(); // no sox -> no encoding
 }
 
 
-QString K3bSoxEncoder::fileTypeComment( const QString& ext ) const
+TQString K3bSoxEncoder::fileTypeComment( const TQString& ext ) const
 {
   if( ext == "au" )
     return i18n("Sun AU");
@@ -345,7 +345,7 @@ QString K3bSoxEncoder::fileTypeComment( const QString& ext ) const
 }
 
 
-long long K3bSoxEncoder::fileSize( const QString&, const K3b::Msf& msf ) const
+long long K3bSoxEncoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 {
   // for now we make a rough assumption based on the settings
     KConfig* c = k3bcore->config();
@@ -364,21 +364,21 @@ long long K3bSoxEncoder::fileSize( const QString&, const K3b::Msf& msf ) const
 }
 
 
-K3bPluginConfigWidget* K3bSoxEncoder::createConfigWidget( QWidget* parent,
+K3bPluginConfigWidget* K3bSoxEncoder::createConfigWidget( TQWidget* tqparent,
 							  const char* name ) const
 {
-  return new K3bSoxEncoderSettingsWidget( parent, name );
+  return new K3bSoxEncoderSettingsWidget( tqparent, name );
 }
 
 
 
-K3bSoxEncoderSettingsWidget::K3bSoxEncoderSettingsWidget( QWidget* parent, const char* name )
-  : K3bPluginConfigWidget( parent, name )
+K3bSoxEncoderSettingsWidget::K3bSoxEncoderSettingsWidget( TQWidget* tqparent, const char* name )
+  : K3bPluginConfigWidget( tqparent, name )
 {
   w = new base_K3bSoxEncoderConfigWidget( this );
-  w->m_editSamplerate->setValidator( new QIntValidator( w->m_editSamplerate ) );
+  w->m_editSamplerate->setValidator( new TQIntValidator( TQT_TQOBJECT(w->m_editSamplerate) ) );
 
-  QHBoxLayout* lay = new QHBoxLayout( this );
+  TQHBoxLayout* lay = new TQHBoxLayout( this );
   lay->setMargin( 0 );
 
   lay->addWidget( w );
@@ -401,9 +401,9 @@ void K3bSoxEncoderSettingsWidget::loadConfig()
   int channels = c->readNumEntry( "channels", 2 );
   w->m_comboChannels->setCurrentItem( channels == 4 ? 2 : channels-1 );
 
-  w->m_editSamplerate->setText( QString::number( c->readNumEntry( "samplerate", 44100 ) ) );
+  w->m_editSamplerate->setText( TQString::number( c->readNumEntry( "samplerate", 44100 ) ) );
 
-  QString encoding = c->readEntry( "data encoding", "signed" );
+  TQString encoding = c->readEntry( "data encoding", "signed" );
   if( encoding == "unsigned" )
     w->m_comboEncoding->setCurrentItem(1);
   else if( encoding == "u-law" )
@@ -448,7 +448,7 @@ void K3bSoxEncoderSettingsWidget::saveConfig()
 
   c->writeEntry( "samplerate", w->m_editSamplerate->text().toInt() );
 
-  QString enc;
+  TQString enc;
   switch( w->m_comboEncoding->currentItem() ) {
   case 1:
     enc = "unsigned";

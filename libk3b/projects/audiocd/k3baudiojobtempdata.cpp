@@ -21,9 +21,9 @@
 #include <k3bmsf.h>
 #include <k3bcore.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qvaluevector.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqvaluevector.h>
 
 #include <kdebug.h>
 
@@ -35,16 +35,16 @@ public:
     : doc(_doc) {
   }
 
-  QValueVector<QString> bufferFiles;
-  QValueVector<QString> infFiles;
-  QString tocFile;
+  TQValueVector<TQString> bufferFiles;
+  TQValueVector<TQString> infFiles;
+  TQString tocFile;
 
   K3bAudioDoc* doc;
 };
 
 
-K3bAudioJobTempData::K3bAudioJobTempData( K3bAudioDoc* doc, QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bAudioJobTempData::K3bAudioJobTempData( K3bAudioDoc* doc, TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
   d = new Private( doc );
 }
@@ -56,20 +56,20 @@ K3bAudioJobTempData::~K3bAudioJobTempData()
 }
 
 
-const QString& K3bAudioJobTempData::bufferFileName( int track )
+const TQString& K3bAudioJobTempData::bufferFileName( int track )
 {
   if( (int)d->bufferFiles.count() < track )
     prepareTempFileNames();
   return d->bufferFiles.at(track-1);
 }
 
-const QString& K3bAudioJobTempData::bufferFileName( K3bAudioTrack* track )
+const TQString& K3bAudioJobTempData::bufferFileName( K3bAudioTrack* track )
 {
   return bufferFileName( track->trackNumber() );
 }
 
 
-const QString& K3bAudioJobTempData::tocFileName()
+const TQString& K3bAudioJobTempData::tocFileName()
 {
   if( d->tocFile.isEmpty() )
     prepareTempFileNames();
@@ -77,14 +77,14 @@ const QString& K3bAudioJobTempData::tocFileName()
 }
 
 
-const QString& K3bAudioJobTempData::infFileName( int track )
+const TQString& K3bAudioJobTempData::infFileName( int track )
 {
   if( (int)d->infFiles.count() < track )
     prepareTempFileNames();
   return d->infFiles.at( track - 1 );
 }
 
-const QString& K3bAudioJobTempData::infFileName( K3bAudioTrack* track )
+const TQString& K3bAudioJobTempData::infFileName( K3bAudioTrack* track )
 {
   return infFileName( track->trackNumber() );
 }
@@ -96,16 +96,16 @@ K3bAudioDoc* K3bAudioJobTempData::doc() const
 }
 
 
-void K3bAudioJobTempData::prepareTempFileNames( const QString& path ) 
+void K3bAudioJobTempData::prepareTempFileNames( const TQString& path ) 
 {
   d->bufferFiles.clear();
   d->infFiles.clear();
 
-  QString prefix = K3b::findUniqueFilePrefix( "k3b_audio_", path ) + "_";
+  TQString prefix = K3b::findUniqueFilePrefix( "k3b_audio_", path ) + "_";
 
   for( int i = 0; i < d->doc->numOfTracks(); i++ ) {
-    d->bufferFiles.append( prefix + QString::number( i+1 ).rightJustify( 2, '0' ) + ".wav" );
-    d->infFiles.append( prefix + QString::number( i+1 ).rightJustify( 2, '0' ) + ".inf" );
+    d->bufferFiles.append( prefix + TQString::number( i+1 ).rightJustify( 2, '0' ) + ".wav" );
+    d->infFiles.append( prefix + TQString::number( i+1 ).rightJustify( 2, '0' ) + ".inf" );
   }
 
   d->tocFile = prefix + ".toc";
@@ -115,17 +115,17 @@ void K3bAudioJobTempData::prepareTempFileNames( const QString& path )
 void K3bAudioJobTempData::cleanup()
 {
   for( uint i = 0; i < d->infFiles.count(); ++i ) {
-    if( QFile::exists( d->infFiles[i] ) )
-      QFile::remove(  d->infFiles[i] );
+    if( TQFile::exists( d->infFiles[i] ) )
+      TQFile::remove(  d->infFiles[i] );
   }
 
   for( uint i = 0; i < d->bufferFiles.count(); ++i ) {
-    if( QFile::exists( d->bufferFiles[i] ) )
-      QFile::remove(  d->bufferFiles[i] );
+    if( TQFile::exists( d->bufferFiles[i] ) )
+      TQFile::remove(  d->bufferFiles[i] );
   }
 
-  if( QFile::exists( d->tocFile ) )
-    QFile::remove(  d->tocFile );
+  if( TQFile::exists( d->tocFile ) )
+    TQFile::remove(  d->tocFile );
 }
 
 

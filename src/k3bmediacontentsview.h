@@ -34,6 +34,7 @@ class K3bThemedHeader;
 class K3bMediaContentsView : public K3bContentsView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   virtual ~K3bMediaContentsView();
@@ -90,7 +91,7 @@ class K3bMediaContentsView : public K3bContentsView
 			int mediumContent,
 			int mediumTypes,
 			int mediumState,
-			QWidget* parent = 0, 
+			TQWidget* tqparent = 0, 
 			const char* name = 0 );
 
   /**

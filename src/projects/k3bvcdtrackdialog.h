@@ -17,19 +17,19 @@
 #define K3BVCDTRACKDIALOG_H
 
 #include <kdialogbase.h>
-#include <qptrlist.h>
-#include <qtabwidget.h>
+#include <tqptrlist.h>
+#include <tqtabwidget.h>
 
 #include <k3bvcddoc.h>
 #include <k3blistview.h>
 
 class K3bVcdTrack;
-class QLabel;
-class QCheckBox;
-class QComboBox;
-class QGroupBox;
-class QRadioButton;
-class QButtonGroup;
+class TQLabel;
+class TQCheckBox;
+class TQComboBox;
+class TQGroupBox;
+class TQRadioButton;
+class TQButtonGroup;
 class KCutLabel;
 class K3bCutComboBox;
 
@@ -37,9 +37,10 @@ class K3bCutComboBox;
 class K3bVcdTrackDialog : public KDialogBase
 {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        K3bVcdTrackDialog( K3bVcdDoc*, QPtrList<K3bVcdTrack>& tracks, QPtrList<K3bVcdTrack>& selectedTracks, QWidget* parent = 0, const char* name = 0 );
+        K3bVcdTrackDialog( K3bVcdDoc*, TQPtrList<K3bVcdTrack>& tracks, TQPtrList<K3bVcdTrack>& selectedTracks, TQWidget* tqparent = 0, const char* name = 0 );
         ~K3bVcdTrackDialog();
 
     protected slots:
@@ -56,37 +57,37 @@ class K3bVcdTrackDialog : public KDialogBase
 
     private:
         K3bVcdDoc* m_vcdDoc;
-        QPtrList<K3bVcdTrack> m_tracks;
-        QPtrList<K3bVcdTrack> m_selectedTracks;
-        QMap<QString, K3bVcdTrack*> m_numkeysmap;
-        QTabWidget* m_mainTabbed;
+        TQPtrList<K3bVcdTrack> m_tracks;
+        TQPtrList<K3bVcdTrack> m_selectedTracks;
+        TQMap<TQString, K3bVcdTrack*> m_numkeysmap;
+        TQTabWidget* m_mainTabbed;
 
         KCutLabel* m_displayFileName;
-        QLabel* m_labelMimeType;
-        QLabel* m_displaySize;
-        QLabel* m_displayLength;
-        QLabel* m_muxrate;
+        TQLabel* m_labelMimeType;
+        TQLabel* m_displaySize;
+        TQLabel* m_displayLength;
+        TQLabel* m_muxrate;
 
-        QLabel* m_mpegver_audio;
-        QLabel* m_rate_audio;
-        QLabel* m_sampling_frequency_audio;
-        QLabel* m_mode_audio;
-        QLabel* m_copyright_audio;
+        TQLabel* m_mpegver_audio;
+        TQLabel* m_rate_audio;
+        TQLabel* m_sampling_frequency_audio;
+        TQLabel* m_mode_audio;
+        TQLabel* m_copyright_audio;
 
-        QLabel* m_mpegver_video;
-        QLabel* m_rate_video;
-        QLabel* m_chromaformat_video;
-        QLabel* m_format_video;
-        QLabel* m_resolution_video;
-        QLabel* m_highresolution_video;
+        TQLabel* m_mpegver_video;
+        TQLabel* m_rate_video;
+        TQLabel* m_chromaformat_video;
+        TQLabel* m_format_video;
+        TQLabel* m_resolution_video;
+        TQLabel* m_highresolution_video;
 
-        QLabel* m_labelAfterTimeout;
-        QLabel* m_labelWait;
+        TQLabel* m_labelAfterTimeout;
+        TQLabel* m_labelWait;
 
-        QGroupBox* m_groupPlay;
-        QGroupBox* m_groupPbc;
-        QGroupBox* m_groupKey;
-        QWidget* m_widgetnumkeys;
+        TQGroupBox* m_groupPlay;
+        TQGroupBox* m_groupPbc;
+        TQGroupBox* m_groupKey;
+        TQWidget* m_widgetnumkeys;
 
         K3bCutComboBox* m_pbc_previous;
         K3bCutComboBox* m_pbc_next;
@@ -94,14 +95,14 @@ class K3bVcdTrackDialog : public KDialogBase
         K3bCutComboBox* m_pbc_default;
         K3bCutComboBox* m_comboAfterTimeout;
 
-        QCheckBox* m_check_reactivity;
-        QCheckBox* m_check_pbc;
-        QCheckBox* m_check_usekeys;
-        QCheckBox* m_check_overwritekeys;
+        TQCheckBox* m_check_reactivity;
+        TQCheckBox* m_check_pbc;
+        TQCheckBox* m_check_usekeys;
+        TQCheckBox* m_check_overwritekeys;
         K3bListView* m_list_keys;
 
-        QSpinBox* m_spin_times;
-        QSpinBox* m_spin_waittime;
+        TQSpinBox* m_spin_times;
+        TQSpinBox* m_spin_waittime;
 
         void prepareGui();
         void setupPbcTab();
@@ -113,7 +114,7 @@ class K3bVcdTrackDialog : public KDialogBase
 
         void setPbcTrack( K3bVcdTrack*, K3bCutComboBox*, int );
         void setDefinedNumKeys( );
-        QString displayName( K3bVcdTrack* );
+        TQString displayName( K3bVcdTrack* );
         K3bVcdOptions* VcdOptions()
         {
             return m_vcdDoc->vcdOptions();

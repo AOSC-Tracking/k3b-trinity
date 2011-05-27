@@ -30,13 +30,14 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bDvdFormattingJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDvdFormattingJob( K3bJobHandler*, QObject* parent = 0, const char* name = 0 );
+  K3bDvdFormattingJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
   ~K3bDvdFormattingJob();
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
   K3bDevice::Device* writer() const;
 
@@ -75,7 +76,7 @@ class LIBK3B_EXPORT K3bDvdFormattingJob : public K3bBurnJob
   void setForceNoEject( bool );
 
  private slots:
-  void slotStderrLine( const QString& );
+  void slotStderrLine( const TQString& );
   void slotProcessFinished( KProcess* );
   void slotDeviceHandlerFinished( K3bDevice::DeviceHandler* );
   void slotEjectingFinished( K3bDevice::DeviceHandler* );

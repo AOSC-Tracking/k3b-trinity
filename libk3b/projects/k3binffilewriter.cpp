@@ -21,9 +21,9 @@
 #include <k3bcore.h>
 #include <k3bversion.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qdatetime.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqdatetime.h>
 
 
 
@@ -39,28 +39,28 @@ K3bInfFileWriter::K3bInfFileWriter()
 }
 
 
-bool K3bInfFileWriter::save( const QString& filename )
+bool K3bInfFileWriter::save( const TQString& filename )
 {
-  QFile f( filename );
+  TQFile f( filename );
 
   if( !f.open( IO_WriteOnly ) ) {
     kdDebug() << "(K3bInfFileWriter) could not open file " << f.name() << endl;
     return false;
   }
 
-  QTextStream s( &f );
+  TQTextStream s( &f );
 
   return save( s );
 }
 
 
-bool K3bInfFileWriter::save( QTextStream& s )
+bool K3bInfFileWriter::save( TQTextStream& s )
 {
   // now write the inf data
   // ----------------------
   // header
   s << "# Cdrecord-Inf-File written by K3b " << k3bcore->version() 
-    << ", " << QDateTime::currentDateTime().toString() << endl
+    << ", " << TQDateTime::tqcurrentDateTime().toString() << endl
     << "#" << endl;
 
   s << "ISRC=\t\t" << m_isrc << endl;
@@ -130,7 +130,7 @@ bool K3bInfFileWriter::save( QTextStream& s )
 
   s << "Index0=\t\t" << m_index0 << endl;
 
-  return ( s.device()->status() == IO_Ok );
+  return ( s.tqdevice()->status() == IO_Ok );
 }
 
 
@@ -141,7 +141,7 @@ void K3bInfFileWriter::setTrack( const K3bDevice::Track& track )
   // the first index always has to be a zero (cdrecord manpage)
   m_indices.append( 0 );
 
-  const QValueVector<K3b::Msf>& indexList = track.indices();
+  const TQValueVector<K3b::Msf>& indexList = track.indices();
   for( unsigned int i = 0; i < indexList.count(); ++i )
     m_indices.append( indexList[i].lba() );
 

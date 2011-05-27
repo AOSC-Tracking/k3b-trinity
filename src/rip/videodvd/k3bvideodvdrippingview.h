@@ -22,18 +22,19 @@
 
 class K3bVideoDVDRippingTitleListView;
 class K3bToolBox;
-class QLabel;
+class TQLabel;
 class KActionCollection;
 class KActionMenu;
 class KListView;
-class QListViewItem;
+class TQListViewItem;
 
 class K3bVideoDVDRippingView : public K3bMediaContentsView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingView( QWidget* parent = 0, const char * name = 0 );
+  K3bVideoDVDRippingView( TQWidget* tqparent = 0, const char * name = 0 );
   ~K3bVideoDVDRippingView();
 
   KActionCollection* actionCollection() const { return m_actionCollection; }
@@ -41,7 +42,7 @@ class K3bVideoDVDRippingView : public K3bMediaContentsView
  private slots:
   void slotStartRipping();
 
-  void slotContextMenu( KListView*, QListViewItem*, const QPoint& );
+  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& );
 
   void slotCheckAll();
   void slotUncheckAll();
@@ -57,7 +58,7 @@ class K3bVideoDVDRippingView : public K3bMediaContentsView
   KActionMenu* m_popupMenu;
 
   K3bToolBox* m_toolBox;
-  QLabel* m_labelLength;
+  TQLabel* m_labelLength;
   K3bVideoDVDRippingTitleListView* m_titleView;  
 
   K3bVideoDVD::VideoDVD m_dvd;

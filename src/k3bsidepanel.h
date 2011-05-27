@@ -16,20 +16,21 @@
 #ifndef _K3B_SIDE_PANEL_H_
 #define _K3B_SIDE_PANEL_H_
 
-#include <qtoolbox.h>
+#include <tqtoolbox.h>
 
 class K3bMainWindow;
 class K3bFileTreeView;
-class QFrame;
+class TQFrame;
 class KAction;
 
 
-class K3bSidePanel : public QToolBox
+class K3bSidePanel : public TQToolBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bSidePanel( K3bMainWindow*, QWidget* parent = 0, const char* name = 0 );
+  K3bSidePanel( K3bMainWindow*, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bSidePanel();
 
   /**
@@ -42,8 +43,8 @@ class K3bSidePanel : public QToolBox
   K3bMainWindow* m_mainWindow;
   K3bFileTreeView* m_fileTreeView;
 
-  QFrame* createPanel();
-  void addButton( QFrame* frame, KAction* action );
+  TQFrame* createPanel();
+  void addButton( TQFrame* frame, KAction* action );
 };
 
 #endif

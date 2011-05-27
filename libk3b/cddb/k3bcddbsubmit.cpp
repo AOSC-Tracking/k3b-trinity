@@ -16,11 +16,11 @@
 
 #include "k3bcddbsubmit.h"
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 
-K3bCddbSubmit::K3bCddbSubmit( QObject* parent, const char* name )
-  : QObject( parent, name )
+K3bCddbSubmit::K3bCddbSubmit( TQObject* tqparent, const char* name )
+  : TQObject( tqparent, name )
 {
 }
 
@@ -37,7 +37,7 @@ void K3bCddbSubmit::submit( const K3bCddbResultEntry& entry )
   if( m_resultEntry.rawData.isEmpty() )
     createDataStream( m_resultEntry );
 
-  QTimer::singleShot( 0, this, SLOT(doSubmit()) );
+  TQTimer::singleShot( 0, this, TQT_SLOT(doSubmit()) );
 }
 
 
@@ -45,7 +45,7 @@ void K3bCddbSubmit::createDataStream( K3bCddbResultEntry& entry )
 {
   entry.rawData.truncate(0);
   
-  QTextStream ts( &entry.rawData, IO_WriteOnly );
+  TQTextStream ts( &entry.rawData, IO_WriteOnly );
 
   ts << "#" << endl
      << "# Submitted via: K3b" << endl

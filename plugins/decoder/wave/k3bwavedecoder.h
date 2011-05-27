@@ -20,25 +20,26 @@
 #include <k3b_export.h>
 
 #include <kurl.h>
-#include <qcstring.h>
+#include <tqcstring.h>
 
 
-class QFile;
+class TQFile;
 
 
 class LIBK3B_EXPORT K3bWaveDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bWaveDecoderFactory( QObject* parent = 0, const char* name = 0 );
+  K3bWaveDecoderFactory( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bWaveDecoderFactory();
 
   bool canDecode( const KURL& filename );
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bAudioDecoder* createDecoder( QObject* parent = 0, 
+  K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, 
 				  const char* name = 0 ) const;
 };
 
@@ -46,20 +47,21 @@ class LIBK3B_EXPORT K3bWaveDecoderFactory : public K3bAudioDecoderFactory
 class LIBK3B_EXPORT K3bWaveDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bWaveDecoder( QObject* parent = 0, const char* name = 0 );
+  K3bWaveDecoder( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bWaveDecoder();
 
   void cleanup();
 
   bool seekInternal( const K3b::Msf& );
 
-  QString fileType() const;
+  TQString fileType() const;
 
-  QStringList supportedTechnicalInfos() const;
+  TQStringList supportedTechnicalInfos() const;
 
-  QString technicalInfo( const QString& ) const;
+  TQString technicalInfo( const TQString& ) const;
 
  protected:
   bool analyseFileInternal( K3b::Msf& frames, int& samplerate, int& channels );

@@ -24,21 +24,22 @@ class K3bMovixDoc;
 class K3bMovixListView;
 class KAction;
 class KPopupMenu;
-class QListViewItem;
-class QPoint;
-class QLineEdit;
+class TQListViewItem;
+class TQPoint;
+class TQLineEdit;
 
 
 class K3bMovixView : public K3bView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMovixView( K3bMovixDoc* doc, QWidget* parent = 0, const char* name = 0 );
+  K3bMovixView( K3bMovixDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
   virtual ~K3bMovixView();
 
  private slots:
-  void slotContextMenuRequested(QListViewItem*, const QPoint& , int );
+  void slotContextMenuRequested(TQListViewItem*, const TQPoint& , int );
   void slotRemoveItems();
   void slotRemoveSubTitleItems();
   void showPropertiesDialog();
@@ -46,7 +47,7 @@ class K3bMovixView : public K3bView
   void slotDocChanged();
 
  protected:
-  virtual K3bProjectBurnDialog* newBurnDialog( QWidget* parent = 0, const char* name = 0 );
+  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
 
   K3bMovixListView* m_listView;
 
@@ -59,7 +60,7 @@ class K3bMovixView : public K3bView
   KAction* m_actionAddSubTitle;
   KPopupMenu* m_popupMenu;
 
-  QLineEdit* m_volumeIDEdit;
+  TQLineEdit* m_volumeIDEdit;
 };
 
 #endif

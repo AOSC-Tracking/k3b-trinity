@@ -22,16 +22,17 @@
 
 class K3bView;
 class K3bMixedDoc;
-class QDropEvent;
-class QListViewItem;
+class TQDropEvent;
+class TQListViewItem;
 
 
 class K3bMixedDirTreeView : public K3bDataDirTreeView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, QWidget* parent = 0, const char* name = 0 );
+  K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bMixedDirTreeView();
 
  signals:
@@ -39,10 +40,10 @@ class K3bMixedDirTreeView : public K3bDataDirTreeView
   void dataTreeSelected();
 
  protected slots:
-  void slotDropped( QDropEvent* e, QListViewItem* after, QListViewItem* parent );
+  void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* tqparent );
   
  private slots:
-  void slotSelectionChanged( QListViewItem* i );
+  void slotSelectionChanged( TQListViewItem* i );
   void slotNewAudioTracks();
 
  private:

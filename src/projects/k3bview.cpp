@@ -14,13 +14,13 @@
  */
 
 
-// include files for Qt
-#include <qlayout.h>
-#include <qtoolbutton.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qptrlist.h>
-#include <qtoolbutton.h>
+// include files for TQt
+#include <tqlayout.h>
+#include <tqtoolbutton.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqptrlist.h>
+#include <tqtoolbutton.h>
 
 #include <kaction.h>
 #include <kiconloader.h>
@@ -40,11 +40,11 @@
 #include <k3bcore.h>
 
 
-K3bView::K3bView( K3bDoc* pDoc, QWidget *parent, const char* name )
-  : QWidget( parent, name ),
+K3bView::K3bView( K3bDoc* pDoc, TQWidget *tqparent, const char* name )
+  : TQWidget( tqparent, name ),
     m_doc( pDoc )
 {
-  QGridLayout* grid = new QGridLayout( this );
+  TQGridLayout* grid = new TQGridLayout( this );
 
   m_toolBox = new K3bToolBox( this, "toolbox" );
   m_fillStatusDisplay = new K3bFillStatusDisplay( m_doc, this );
@@ -57,10 +57,10 @@ K3bView::K3bView( K3bDoc* pDoc, QWidget *parent, const char* name )
   grid->setSpacing( 5 );
   grid->setMargin( 2 );
 
-  KAction* burnAction = new KAction( i18n("&Burn"), "cdburn", CTRL + Key_B, this, SLOT(slotBurn()),
+  KAction* burnAction = new KAction( i18n("&Burn"), "cdburn", CTRL + Key_B, TQT_TQOBJECT(this), TQT_SLOT(slotBurn()),
 				     actionCollection(), "project_burn");
   burnAction->setToolTip( i18n("Open the burn dialog for the current project") );
-  KAction* propAction = new KAction( i18n("&Properties"), "edit", CTRL + Key_P, this, SLOT(slotProperties()),
+  KAction* propAction = new KAction( i18n("&Properties"), "edit", CTRL + Key_P, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
 				     actionCollection(), "project_properties");
   propAction->setToolTip( i18n("Open the properties dialog") );
 
@@ -85,9 +85,9 @@ K3bView::~K3bView()
 }
 
 
-void K3bView::setMainWidget( QWidget* w )
+void K3bView::setMainWidget( TQWidget* w )
 {
-  static_cast<QGridLayout*>(layout())->addMultiCellWidget( w, 1, 1, 0, 1 );
+  static_cast<TQGridLayout*>(tqlayout())->addMultiCellWidget( w, 1, 1, 0, 1 );
 }
 
 
@@ -95,7 +95,7 @@ void K3bView::slotBurn()
 {
   if( m_doc->numOfTracks() == 0 || m_doc->size() == 0 ) {
     KMessageBox::information( this, i18n("Please add files to your project first."),
-			      i18n("No Data to Burn"), QString::null, false );
+			      i18n("No Data to Burn"), TQString(), false );
   }
   else {
     K3bProjectBurnDialog* dlg = newBurnDialog( this );
@@ -131,16 +131,16 @@ void K3bView::slotProperties()
 
 void K3bView::addPluginButtons( int projectType )
 {
-  QPtrList<K3bPlugin> pl = k3bcore->pluginManager()->plugins( "ProjectPlugin" );
-  for( QPtrListIterator<K3bPlugin> it( pl ); *it; ++it ) {
+  TQPtrList<K3bPlugin> pl = k3bcore->pluginManager()->plugins( "ProjectPlugin" );
+  for( TQPtrListIterator<K3bPlugin> it( pl ); *it; ++it ) {
     K3bProjectPlugin* pp = dynamic_cast<K3bProjectPlugin*>( *it );
     if( pp && (pp->type() & projectType) ) {
-      QToolButton* button = toolBox()->addButton( pp->text(),
+      TQToolButton* button = toolBox()->addButton( pp->text(),
 						  pp->icon(),
 						  pp->toolTip(),
 						  pp->whatsThis(),
-						  this, 
-						  SLOT(slotPluginButtonClicked()) );
+						  TQT_TQOBJECT(this), 
+						  TQT_SLOT(slotPluginButtonClicked()) );
       m_plugins.insert( static_cast<void*>(button), pp );
     }
   }
@@ -149,7 +149,7 @@ void K3bView::addPluginButtons( int projectType )
 
 void K3bView::slotPluginButtonClicked()
 {
-  QObject* o = const_cast<QObject*>(sender());
+  TQObject* o = TQT_TQOBJECT(const_cast<TQT_BASE_OBJECT_NAME*>(sender()));
   if( K3bProjectPlugin* p = m_plugins[static_cast<void*>(o)] ) {
     if( p->hasGUI() ) {
       K3bProjectPluginDialog dlg( p, doc(), this );

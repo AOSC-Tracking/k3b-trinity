@@ -20,24 +20,25 @@
 #include <k3bvideodvd.h>
 #include "k3bvideodvdrippingjob.h"
 
-#include <qvaluelist.h>
-#include <qmap.h>
+#include <tqvaluelist.h>
+#include <tqmap.h>
 
 
 class K3bVideoDVDRippingWidget;
-class QCheckListItem;
+class TQCheckListItem;
 
 class K3bVideoDVDRippingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
   K3bVideoDVDRippingDialog( const K3bVideoDVD::VideoDVD& dvd, 
-			    const QValueList<int>& titles,
-			    QWidget *parent = 0, const char *name = 0 );
+			    const TQValueList<int>& titles,
+			    TQWidget *tqparent = 0, const char *name = 0 );
   ~K3bVideoDVDRippingDialog();
 
-  void setBaseDir( const QString& path );
+  void setBaseDir( const TQString& path );
 
   enum FileNamingPattern {
     PATTERN_TITLE_NUMBER         = 't',
@@ -60,9 +61,9 @@ class K3bVideoDVDRippingDialog : public K3bInteractionDialog
   void slotUpdateVideoSizes();
 
  private:
-  void populateTitleView( const QValueList<int>& titles );
+  void populateTitleView( const TQValueList<int>& titles );
 
-  QString createFilename( const K3bVideoDVDRippingJob::TitleRipInfo& info, const QString& pattern ) const;
+  TQString createFilename( const K3bVideoDVDRippingJob::TitleRipInfo& info, const TQString& pattern ) const;
 
   void loadK3bDefaults();
   void loadUserDefaults( KConfigBase* );
@@ -71,7 +72,7 @@ class K3bVideoDVDRippingDialog : public K3bInteractionDialog
   K3bVideoDVDRippingWidget* m_w;
 
   K3bVideoDVD::VideoDVD m_dvd;
-  QMap<QCheckListItem*, K3bVideoDVDRippingJob::TitleRipInfo> m_titleRipInfos;
+  TQMap<TQCheckListItem*, K3bVideoDVDRippingJob::TitleRipInfo> m_titleRipInfos;
 
   class AudioStreamViewItem;
 

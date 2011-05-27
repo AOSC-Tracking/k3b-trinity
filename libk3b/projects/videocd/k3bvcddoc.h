@@ -16,14 +16,14 @@
 #ifndef K3BVCDDOC_H
 #define K3BVCDDOC_H
 
-// Qt Includes
-#include <qptrqueue.h>
-#include <qfile.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qdatetime.h>
-#include <qtextstream.h>
-#include <qimage.h>
+// TQt Includes
+#include <tqptrqueue.h>
+#include <tqfile.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqdatetime.h>
+#include <tqtextstream.h>
+#include <tqimage.h>
 
 // Kde Includes
 #include <kurl.h>
@@ -37,10 +37,10 @@ class K3bApp;
 class K3bVcdTrack;
 class K3bVcdJob;
 //class K3bView;
-class QWidget;
-class QTimer;
-class QDomDocument;
-class QDomElement;
+class TQWidget;
+class TQTimer;
+class TQDomDocument;
+class TQDomElement;
 class KConfig;
 
 
@@ -48,16 +48,17 @@ class KConfig;
 class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
 {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        K3bVcdDoc( QObject* );
+        K3bVcdDoc( TQObject* );
         ~K3bVcdDoc();
 
 	int type() const { return VCD; }
 
-	QString name() const;
+	TQString name() const;
 
-        enum vcdTypes { VCD11, VCD20, SVCD10, HQVCD, NONE};
+        enum vcdTypes { VCD11, VCD20, SVCD10, HTQVCD, NONE};
 
         bool newDocument();
         int numOfTracks() const
@@ -65,11 +66,11 @@ class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
             return m_tracks->count();
         }
 
-        const QString& vcdImage() const
+        const TQString& vcdImage() const
         {
             return m_vcdImage;
         }
-        void setVcdImage( const QString& s )
+        void setVcdImage( const TQString& s )
         {
             m_vcdImage = s;
         }
@@ -99,7 +100,7 @@ class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
             return m_tracks->take( i );
         }
 
-        const QPtrList<K3bVcdTrack>* tracks() const
+        const TQPtrList<K3bVcdTrack>* tracks() const
         {
             return m_tracks;
         }
@@ -108,7 +109,7 @@ class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
         KIO::filesize_t size() const;
         K3b::Msf length() const;
 
-        K3bBurnJob* newBurnJob( K3bJobHandler* hdl, QObject* parent );
+        K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent );
         K3bVcdOptions* vcdOptions() const
         {
             return m_vcdOptions;
@@ -149,18 +150,18 @@ class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
 
     protected:
         /** reimplemented from K3bDoc */
-        bool loadDocumentData( QDomElement* root );
+        bool loadDocumentData( TQDomElement* root );
         /** reimplemented from K3bDoc */
-        bool saveDocumentData( QDomElement* );
+        bool saveDocumentData( TQDomElement* );
 
-        QString typeString() const;
+        TQString typeString() const;
 
     private:
         K3bVcdTrack* createTrack( const KURL& url );
         void informAboutNotFoundFiles();
 
-        QStringList m_notFoundFiles;
-        QString m_vcdImage;
+        TQStringList m_notFoundFiles;
+        TQString m_vcdImage;
 
         class PrivateUrlToAdd
         {
@@ -173,10 +174,10 @@ class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
         };
 
         /** Holds all the urls that have to be added to the list of tracks. **/
-        QPtrQueue<PrivateUrlToAdd> urlsToAdd;
-        QTimer* m_urlAddingTimer;
+        TQPtrQueue<PrivateUrlToAdd> urlsToAdd;
+        TQTimer* m_urlAddingTimer;
 
-        QPtrList<K3bVcdTrack>* m_tracks;
+        TQPtrList<K3bVcdTrack>* m_tracks;
         KIO::filesize_t calcTotalSize() const;
         KIO::filesize_t ISOsize() const;
 

@@ -48,8 +48,8 @@ class K3bTRM
    */
   bool finalize();
 
-  const QCString& rawSignature() const;
-  const QCString& signature() const;
+  const TQCString& rawSignature() const;
+  const TQCString& signature() const;
 
  private:
   class Private;

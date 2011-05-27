@@ -22,8 +22,8 @@
 #include <kdebug.h>
 
 
-K3bPluginConfigWidget::K3bPluginConfigWidget( QWidget* parent, const char* name )
-  : QWidget( parent, name )
+K3bPluginConfigWidget::K3bPluginConfigWidget( TQWidget* tqparent, const char* name )
+  : TQWidget( tqparent, name )
 {
 }
 

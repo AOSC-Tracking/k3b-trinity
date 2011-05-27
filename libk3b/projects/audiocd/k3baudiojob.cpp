@@ -38,8 +38,8 @@
 #include <k3btocfilewriter.h>
 #include <k3binffilewriter.h>
 
-#include <qfile.h>
-#include <qvaluevector.h>
+#include <tqfile.h>
+#include <tqvaluevector.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -48,11 +48,11 @@
 
 
 
-static QString createNonExistingFilesString( const QValueList<K3bAudioFile*>& items, unsigned int max )
+static TQString createNonExistingFilesString( const TQValueList<K3bAudioFile*>& items, unsigned int max )
 {
-  QString s;
+  TQString s;
   unsigned int cnt = 0;
-  for( QValueList<K3bAudioFile*>::const_iterator it = items.begin();
+  for( TQValueList<K3bAudioFile*>::const_iterator it = items.begin();
        it != items.end(); ++it ) {
 
     s += KStringHandler::csqueeze( (*it)->filename(), 60 );
@@ -92,8 +92,8 @@ class K3bAudioJob::Private
 };
 
 
-K3bAudioJob::K3bAudioJob( K3bAudioDoc* doc, K3bJobHandler* hdl, QObject* parent )
-  : K3bBurnJob( hdl, parent ),
+K3bAudioJob::K3bAudioJob( K3bAudioDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bBurnJob( hdl, tqparent ),
     m_doc( doc ),
     m_normalizeJob(0),
     m_maxSpeedJob(0)
@@ -101,16 +101,16 @@ K3bAudioJob::K3bAudioJob( K3bAudioDoc* doc, K3bJobHandler* hdl, QObject* parent 
   d = new Private;
 
   m_audioImager = new K3bAudioImager( m_doc, this, this );
-  connect( m_audioImager, SIGNAL(infoMessage(const QString&, int)), 
-	   this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_audioImager, SIGNAL(percent(int)), 
-	   this, SLOT(slotAudioDecoderPercent(int)) );
-  connect( m_audioImager, SIGNAL(subPercent(int)), 
-	   this, SLOT(slotAudioDecoderSubPercent(int)) );
-  connect( m_audioImager, SIGNAL(finished(bool)), 
-	   this, SLOT(slotAudioDecoderFinished(bool)) );
-  connect( m_audioImager, SIGNAL(nextTrack(int, int)), 
-	   this, SLOT(slotAudioDecoderNextTrack(int, int)) );
+  connect( m_audioImager, TQT_SIGNAL(infoMessage(const TQString&, int)), 
+	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_audioImager, TQT_SIGNAL(percent(int)), 
+	   this, TQT_SLOT(slotAudioDecoderPercent(int)) );
+  connect( m_audioImager, TQT_SIGNAL(subPercent(int)), 
+	   this, TQT_SLOT(slotAudioDecoderSubPercent(int)) );
+  connect( m_audioImager, TQT_SIGNAL(finished(bool)), 
+	   this, TQT_SLOT(slotAudioDecoderFinished(bool)) );
+  connect( m_audioImager, TQT_SIGNAL(nextTrack(int, int)), 
+	   this, TQT_SLOT(slotAudioDecoderNextTrack(int, int)) );
 
   m_writer = 0;
   m_tempData = new K3bAudioJobTempData( m_doc, this );
@@ -159,13 +159,13 @@ void K3bAudioJob::start()
   //
   // Check if all files exist
   //
-  QValueList<K3bAudioFile*> nonExistingFiles;
+  TQValueList<K3bAudioFile*> nonExistingFiles;
   K3bAudioTrack* track = m_doc->firstTrack();
   while( track ) {
     K3bAudioDataSource* source = track->firstSource();
     while( source ) {
       if( K3bAudioFile* file = dynamic_cast<K3bAudioFile*>( source ) ) {
-	if( !QFile::exists( file->filename() ) )
+	if( !TQFile::exists( file->filename() ) )
 	  nonExistingFiles.append( file );
       }
       source = source->next();
@@ -179,7 +179,7 @@ void K3bAudioJob::start()
 		       i18n("Warning"),
 		       i18n("Remove missing files and continue"),
 		       i18n("Cancel and go back") ) ) {
-      for( QValueList<K3bAudioFile*>::const_iterator it = nonExistingFiles.begin();
+      for( TQValueList<K3bAudioFile*>::const_iterator it = nonExistingFiles.begin();
 	   it != nonExistingFiles.end(); ++it ) {
 	delete *it;
       }
@@ -297,7 +297,7 @@ void K3bAudioJob::start()
 	d->useCdText ) {
       if( !cdrecordCdText ) {
 	emit infoMessage( i18n("Cdrecord %1 does not support CD-Text writing.")
-			  .arg(k3bcore->externalBinManager()->binObject("cdrecord")->version), ERROR );
+			  .tqarg(k3bcore->externalBinManager()->binObject("cdrecord")->version), ERROR );
 	d->useCdText = false;
       }
       else if( m_usedWritingMode == K3b::TAO ) {
@@ -314,10 +314,10 @@ void K3bAudioJob::start()
       emit newSubTask( i18n("Determining maximum writing speed") );
       if( !m_maxSpeedJob ) {
 	m_maxSpeedJob = new K3bAudioMaxSpeedJob( m_doc, this, this );
-	connect( m_maxSpeedJob, SIGNAL(percent(int)), 
-		 this, SIGNAL(subPercent(int)) );
-	connect( m_maxSpeedJob, SIGNAL(finished(bool)), 
-		 this, SLOT(slotMaxSpeedJobFinished(bool)) );
+	connect( m_maxSpeedJob, TQT_SIGNAL(percent(int)), 
+		 this, TQT_SIGNAL(subPercent(int)) );
+	connect( m_maxSpeedJob, TQT_SIGNAL(finished(bool)), 
+		 this, TQT_SLOT(slotMaxSpeedJobFinished(bool)) );
       }
       m_maxSpeedJob->start();
       return;
@@ -346,10 +346,10 @@ void K3bAudioJob::start()
   }
   else {
     emit burning(false);
-    emit infoMessage( i18n("Creating image files in %1").arg(m_doc->tempDir()), INFO );
+    emit infoMessage( i18n("Creating image files in %1").tqarg(m_doc->tempDir()), INFO );
     emit newTask( i18n("Creating image files") );
     m_tempData->prepareTempFileNames( doc()->tempDir() );
-    QStringList filenames;
+    TQStringList filenames;
     for( int i = 1; i <= m_doc->numOfTracks(); ++i )
       filenames += m_tempData->bufferFileName( i );
     m_audioImager->setImageFilenames( filenames );
@@ -480,10 +480,10 @@ void K3bAudioJob::slotAudioDecoderNextTrack( int t, int tt )
   if( m_doc->onlyCreateImages() || !m_doc->onTheFly() ) {
     K3bAudioTrack* track = m_doc->getTrack(t);
     emit newSubTask( i18n("Decoding audio track %1 of %2%3")
-		     .arg(t)
-		     .arg(tt)
-		     .arg( track->title().isEmpty() || track->artist().isEmpty() 
-			   ? QString::null
+		     .tqarg(t)
+		     .tqarg(tt)
+		     .tqarg( track->title().isEmpty() || track->artist().isEmpty() 
+			   ? TQString()
 			   : " (" + track->artist() + " - " + track->title() + ")" ) );
   }
 }
@@ -533,10 +533,10 @@ bool K3bAudioJob::prepareWriter()
     while( track ) {
       if( m_doc->onTheFly() ) {
 	// this is only supported by cdrecord versions >= 2.01a13
-	writer->addArgument( QFile::encodeName( m_tempData->infFileName( track ) ) );
+	writer->addArgument( TQFile::encodeName( m_tempData->infFileName( track ) ) );
       }
       else {
-	writer->addArgument( QFile::encodeName( m_tempData->bufferFileName( track ) ) );
+	writer->addArgument( TQFile::encodeName( m_tempData->bufferFileName( track ) ) );
       }
       track = track->next();
     }
@@ -562,20 +562,20 @@ bool K3bAudioJob::prepareWriter()
     m_writer = writer;
   }
 
-  connect( m_writer, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_writer, SIGNAL(percent(int)), this, SLOT(slotWriterJobPercent(int)) );
-  connect( m_writer, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSize(int, int)) );
-  connect( m_writer, SIGNAL(subPercent(int)), this, SIGNAL(subPercent(int)) );
-  connect( m_writer, SIGNAL(processedSubSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-  connect( m_writer, SIGNAL(nextTrack(int, int)), this, SLOT(slotWriterNextTrack(int, int)) );
-  connect( m_writer, SIGNAL(buffer(int)), this, SIGNAL(bufferStatus(int)) );
-  connect( m_writer, SIGNAL(deviceBuffer(int)), this, SIGNAL(deviceBuffer(int)) );
-  connect( m_writer, SIGNAL(writeSpeed(int, int)), this, SIGNAL(writeSpeed(int, int)) );
-  connect( m_writer, SIGNAL(finished(bool)), this, SLOT(slotWriterFinished(bool)) );
-  //  connect( m_writer, SIGNAL(newTask(const QString&)), this, SIGNAL(newTask(const QString&)) );
-  connect( m_writer, SIGNAL(newSubTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-  connect( m_writer, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+  connect( m_writer, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_writer, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterJobPercent(int)) );
+  connect( m_writer, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
+  connect( m_writer, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
+  connect( m_writer, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+  connect( m_writer, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
+  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_writer, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
+  connect( m_writer, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
+  connect( m_writer, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
+  //  connect( m_writer, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
+  connect( m_writer, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_writer, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   return true;
 }
@@ -588,10 +588,10 @@ void K3bAudioJob::slotWriterNextTrack( int t, int tt )
   if( m_doc->hideFirstTrack() )
     track = m_doc->getTrack(t+1);
   emit newSubTask( i18n("Writing track %1 of %2%3")
-		   .arg(t)
-		   .arg(tt)
-		   .arg( track->title().isEmpty() || track->artist().isEmpty() 
-			 ? QString::null
+		   .tqarg(t)
+		   .tqarg(tt)
+		   .tqarg( track->title().isEmpty() || track->artist().isEmpty() 
+			 ? TQString()
 			 : " (" + track->artist() + " - " + track->title() + ")" ) );
 }
 
@@ -650,7 +650,7 @@ bool K3bAudioJob::startWriting()
   if( m_doc->dummy() )
     emit newTask( i18n("Simulating") );
   else if( d->copies > 1 )
-    emit newTask( i18n("Writing Copy %1").arg(d->copiesDone+1) );
+    emit newTask( i18n("Writing Copy %1").tqarg(d->copiesDone+1) );
   else
     emit newTask( i18n("Writing") );
 
@@ -706,19 +706,19 @@ void K3bAudioJob::normalizeFiles()
   if( !m_normalizeJob ) {
     m_normalizeJob = new K3bAudioNormalizeJob( this, this );
 
-    connect( m_normalizeJob, SIGNAL(infoMessage(const QString&, int)),
-	     this, SIGNAL(infoMessage(const QString&, int)) );
-    connect( m_normalizeJob, SIGNAL(percent(int)), this, SLOT(slotNormalizeProgress(int)) );
-    connect( m_normalizeJob, SIGNAL(subPercent(int)), this, SLOT(slotNormalizeSubProgress(int)) );
-    connect( m_normalizeJob, SIGNAL(finished(bool)), this, SLOT(slotNormalizeJobFinished(bool)) );
-    connect( m_normalizeJob, SIGNAL(newTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-    connect( m_normalizeJob, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	     this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+    connect( m_normalizeJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
+	     this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( m_normalizeJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotNormalizeProgress(int)) );
+    connect( m_normalizeJob, TQT_SIGNAL(subPercent(int)), this, TQT_SLOT(slotNormalizeSubProgress(int)) );
+    connect( m_normalizeJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotNormalizeJobFinished(bool)) );
+    connect( m_normalizeJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+    connect( m_normalizeJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	     this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   // add all the files
   // TODO: we may need to split the wave files and put them back together!
-  QValueVector<QString> files;
+  TQValueVector<TQString> files;
   K3bAudioTrack* track = m_doc->firstTrack();
   while( track ) {
     files.append( m_tempData->bufferFileName(track) );
@@ -779,7 +779,7 @@ bool K3bAudioJob::writeTocFile()
   if( d->useCdText )
     tocWriter.setCdText( m_doc->cdTextData() );
   if( !m_doc->onTheFly() ) {
-    QStringList filenames;
+    TQStringList filenames;
     for( int i = 1; i <= m_doc->numOfTracks(); ++i )
       filenames += m_tempData->bufferFileName( i );
     tocWriter.setFilenames( filenames );
@@ -842,23 +842,23 @@ bool K3bAudioJob::checkAudioSources()
 }
 
 
-QString K3bAudioJob::jobDescription() const
+TQString K3bAudioJob::jobDescription() const
 {
   return i18n("Writing Audio CD")
     + ( m_doc->title().isEmpty() 
-	? QString::null
-	: QString( " (%1)" ).arg(m_doc->title()) );
+	? TQString()
+	: TQString( " (%1)" ).tqarg(m_doc->title()) );
 }
 
 
-QString K3bAudioJob::jobDetails() const
+TQString K3bAudioJob::jobDetails() const
 {
   return ( i18n( "1 track (%1 minutes)", 
 		 "%n tracks (%1 minutes)", 
-		 m_doc->numOfTracks() ).arg(m_doc->length().toString())
+		 m_doc->numOfTracks() ).tqarg(m_doc->length().toString())
 	   + ( m_doc->copies() > 1 && !m_doc->dummy()
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
-	       : QString::null ) );
+	       : TQString() ) );
 }
 
 #include "k3baudiojob.moc"

@@ -28,23 +28,23 @@
 #include <kmessagebox.h>
 #include <kactioncollection.h>
 
-#include <qsplitter.h>
+#include <tqsplitter.h>
 
 
-K3bVideoDvdView::K3bVideoDvdView( K3bVideoDvdDoc* doc, QWidget *parent, const char *name )
-  : K3bView( doc, parent, name ),
+K3bVideoDvdView::K3bVideoDvdView( K3bVideoDvdDoc* doc, TQWidget *tqparent, const char *name )
+  : K3bView( doc, tqparent, name ),
     m_doc(doc)
 {
   fillStatusDisplay()->showDvdSizes(true);
 
   // --- setup GUI ---------------------------------------------------
-  QSplitter* mainSplitter = new QSplitter( this );
+  TQSplitter* mainSplitter = new TQSplitter( this );
   m_dataDirTree = new K3bDataDirTreeView( this, doc, mainSplitter );
   m_dataFileView = new K3bDataFileView( this, m_dataDirTree, doc, mainSplitter );
   m_dataDirTree->setFileView( m_dataFileView );
   setMainWidget( mainSplitter );
 
-  connect( m_dataFileView, SIGNAL(dirSelected(K3bDirItem*)), m_dataDirTree, SLOT(setCurrentDir(K3bDirItem*)) );
+  connect( m_dataFileView, TQT_SIGNAL(dirSelected(K3bDirItem*)), m_dataDirTree, TQT_SLOT(setCurrentDir(K3bDirItem*)) );
 
   m_dataDirTree->checkForNewItems();
   m_dataFileView->checkForNewItems();
@@ -58,9 +58,9 @@ K3bVideoDvdView::~K3bVideoDvdView()
 }
 
 
-K3bProjectBurnDialog* K3bVideoDvdView::newBurnDialog( QWidget* parent, const char* name )
+K3bProjectBurnDialog* K3bVideoDvdView::newBurnDialog( TQWidget* tqparent, const char* name )
 {
-  return new K3bVideoDvdBurnDialog( m_doc, parent, name, true );
+  return new K3bVideoDvdBurnDialog( m_doc, tqparent, name, true );
 }
 
 

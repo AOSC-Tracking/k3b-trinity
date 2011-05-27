@@ -30,9 +30,10 @@
 class LIBK3B_EXPORT K3bIntMapComboBox : public KComboBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bIntMapComboBox( QWidget* parent = 0, const char* name = 0 );
+  K3bIntMapComboBox( TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bIntMapComboBox();
 
   int selectedValue() const;
@@ -65,9 +66,9 @@ class LIBK3B_EXPORT K3bIntMapComboBox : public KComboBox
    *
    * \return true if the item could be inserted. False if the value had already been inserted.
    */
-  bool insertItem( int value, const QString& text, const QString& description, int index = -1 );
+  bool insertItem( int value, const TQString& text, const TQString& description, int index = -1 );
 
-  void addGlobalWhatsThisText( const QString& top, const QString& bottom );
+  void addGlobalWhatsThisText( const TQString& top, const TQString& bottom );
 
  private slots:
   void slotItemActivated( int );

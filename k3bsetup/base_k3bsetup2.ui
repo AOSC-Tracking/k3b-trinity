@@ -1,10 +1,10 @@
 <!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>base_K3bSetup2</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Form1</cstring>
     </property>
-    <property name="geometry">
+    <property name="tqgeometry">
         <rect>
             <x>0</x>
             <y>0</y>
@@ -19,15 +19,15 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QLayoutWidget">
+        <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>layout6</cstring>
+                <cstring>tqlayout6</cstring>
             </property>
             <vbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox3</cstring>
                     </property>
@@ -38,15 +38,15 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLayoutWidget">
+                        <widget class="TQLayoutWidget">
                             <property name="name">
-                                <cstring>layout1</cstring>
+                                <cstring>tqlayout1</cstring>
                             </property>
                             <hbox>
                                 <property name="name">
                                     <cstring>unnamed</cstring>
                                 </property>
-                                <widget class="QCheckBox">
+                                <widget class="TQCheckBox">
                                     <property name="name">
                                         <cstring>m_checkUseBurningGroup</cstring>
                                     </property>
@@ -58,7 +58,7 @@
 &lt;p&gt;Otherwise all users on the system have access to the devices and to all K3b functionality.</string>
                                     </property>
                                 </widget>
-                                <widget class="QLineEdit">
+                                <widget class="TQLineEdit">
                                     <property name="name">
                                         <cstring>m_editBurningGroup</cstring>
                                     </property>
@@ -71,9 +71,9 @@
                                 </widget>
                             </hbox>
                         </widget>
-                        <widget class="QLayoutWidget">
+                        <widget class="TQLayoutWidget">
                             <property name="name">
-                                <cstring>layout2</cstring>
+                                <cstring>tqlayout2</cstring>
                             </property>
                             <hbox>
                                 <property name="name">
@@ -89,14 +89,14 @@
                                     <property name="sizeType">
                                         <enum>Fixed</enum>
                                     </property>
-                                    <property name="sizeHint">
+                                    <property name="tqsizeHint">
                                         <size>
                                             <width>20</width>
                                             <height>10</height>
                                         </size>
                                     </property>
                                 </spacer>
-                                <widget class="QLabel">
+                                <widget class="TQLabel">
                                     <property name="name">
                                         <cstring>textLabel2</cstring>
                                     </property>
@@ -104,7 +104,7 @@
                                         <string>Users allowed to burn (separated by space):</string>
                                     </property>
                                 </widget>
-                                <widget class="QLineEdit">
+                                <widget class="TQLineEdit">
                                     <property name="name">
                                         <cstring>m_editUsers</cstring>
                                     </property>
@@ -116,7 +116,7 @@
                         </widget>
                     </vbox>
                 </widget>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox1</cstring>
                     </property>
@@ -127,7 +127,7 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLabel">
+                        <widget class="TQLabel">
                             <property name="name">
                                 <cstring>textLabel1_2</cstring>
                             </property>
@@ -184,9 +184,9 @@
                                 <cstring>m_viewDevices</cstring>
                             </property>
                         </widget>
-                        <widget class="QLayoutWidget">
+                        <widget class="TQLayoutWidget">
                             <property name="name">
-                                <cstring>layout3</cstring>
+                                <cstring>tqlayout3</cstring>
                             </property>
                             <hbox>
                                 <property name="name">
@@ -202,14 +202,14 @@
                                     <property name="sizeType">
                                         <enum>Expanding</enum>
                                     </property>
-                                    <property name="sizeHint">
+                                    <property name="tqsizeHint">
                                         <size>
                                             <width>40</width>
                                             <height>20</height>
                                         </size>
                                     </property>
                                 </spacer>
-                                <widget class="QPushButton">
+                                <widget class="TQPushButton">
                                     <property name="name">
                                         <cstring>m_buttonAddDevice</cstring>
                                     </property>
@@ -221,7 +221,7 @@
                         </widget>
                     </vbox>
                 </widget>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox2</cstring>
                     </property>
@@ -232,11 +232,11 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QTabWidget">
+                        <widget class="TQTabWidget">
                             <property name="name">
                                 <cstring>tabWidget2</cstring>
                             </property>
-                            <widget class="QWidget">
+                            <widget class="TQWidget">
                                 <property name="name">
                                     <cstring>tab</cstring>
                                 </property>
@@ -247,7 +247,7 @@
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QLabel">
+                                    <widget class="TQLabel">
                                         <property name="name">
                                             <cstring>textLabel1</cstring>
                                         </property>
@@ -317,7 +317,7 @@
                                     </widget>
                                 </vbox>
                             </widget>
-                            <widget class="QWidget">
+                            <widget class="TQWidget">
                                 <property name="name">
                                     <cstring>tab</cstring>
                                 </property>
@@ -339,7 +339,7 @@
                                             <bool>false</bool>
                                         </property>
                                     </widget>
-                                    <widget class="QLabel">
+                                    <widget class="TQLabel">
                                         <property name="name">
                                             <cstring>textLabel1_3</cstring>
                                         </property>
@@ -370,7 +370,7 @@
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
     <includehint>klistview.h</includehint>

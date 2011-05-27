@@ -18,44 +18,45 @@
 #ifndef K3B_STATUSBAR_MANAGER_H
 #define K3B_STATUSBAR_MANAGER_H
 
-#include <qobject.h>
+#include <tqobject.h>
 
-class QLabel;
+class TQLabel;
 class K3bMainWindow;
-class QEvent;
+class TQEvent;
 class K3bDoc;
-class QTimer;
+class TQTimer;
 
-class K3bStatusBarManager : public QObject
+class K3bStatusBarManager : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bStatusBarManager( K3bMainWindow* parent );
+  K3bStatusBarManager( K3bMainWindow* tqparent );
   ~K3bStatusBarManager();
 
  public slots:
   void update();
 
  private slots:
-  void slotFreeTempSpace( const QString&, unsigned long, unsigned long, unsigned long );
-  void showActionStatusText( const QString& text );
+  void slotFreeTempSpace( const TQString&, unsigned long, unsigned long, unsigned long );
+  void showActionStatusText( const TQString& text );
   void clearActionStatusText();
   void slotActiveProjectChanged( K3bDoc* doc );
   void slotUpdateProjectStats();
 
  private:
-  bool eventFilter( QObject* o, QEvent* e );
+  bool eventFilter( TQObject* o, TQEvent* e );
 
-  QLabel* m_labelInfoMessage;
-  QLabel* m_pixFreeTemp;
-  QLabel* m_labelFreeTemp;
-  QLabel* m_versionBox;
-  QLabel* m_labelProjectInfo;
+  TQLabel* m_labelInfoMessage;
+  TQLabel* m_pixFreeTemp;
+  TQLabel* m_labelFreeTemp;
+  TQLabel* m_versionBox;
+  TQLabel* m_labelProjectInfo;
 
   K3bMainWindow* m_mainWindow;
 
-  QTimer* m_updateTimer;
+  TQTimer* m_updateTimer;
 };
 
 #endif

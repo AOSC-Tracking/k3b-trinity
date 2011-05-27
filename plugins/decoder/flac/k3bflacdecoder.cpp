@@ -17,9 +17,9 @@
 
 #include <k3bpluginfactory.h>
 
-#include <qbuffer.h>
-#include <qfile.h>
-#include <qstringlist.h>
+#include <tqbuffer.h>
+#include <tqfile.h>
+#include <tqstringlist.h>
 
 #include <kurl.h>
 #include <kdebug.h>
@@ -52,7 +52,7 @@ class K3bFLACDecoder::Private
 #endif
 {
 public:
-  void open(QFile* f) {
+  void open(TQFile* f) {
     file = f;
     file->open(IO_ReadOnly);
     
@@ -72,14 +72,14 @@ public:
     comments = 0;
   }
 
-  Private(QFile* f)
+  Private(TQFile* f)
 #ifdef LEGACY_FLAC
     : FLAC::Decoder::SeekableStream(),
 #else
     : FLAC::Decoder::Stream(),
 #endif
       comments(0) {
-    internalBuffer = new QBuffer();
+    internalBuffer = new TQBuffer();
     internalBuffer->open(IO_ReadWrite);
 
     open(f);
@@ -93,8 +93,8 @@ public:
   
   bool seekToFrame(int frame);
 
-  QFile* file;
-  QBuffer* internalBuffer;
+  TQFile* file;
+  TQBuffer* internalBuffer;
   FLAC::Metadata::VorbisComment* comments;
   unsigned rate;
   unsigned channels;
@@ -240,8 +240,8 @@ FLAC__StreamDecoderWriteStatus K3bFLACDecoder::Private::write_callback(const FLA
   return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
 }
 
-K3bFLACDecoder::K3bFLACDecoder( QObject* parent, const char* name )
-  : K3bAudioDecoder( parent, name )
+K3bFLACDecoder::K3bFLACDecoder( TQObject* tqparent, const char* name )
+  : K3bAudioDecoder( tqparent, name )
 {
   d = 0;
 }
@@ -256,10 +256,10 @@ void K3bFLACDecoder::cleanup()
 {
   if (d) {
     d->cleanup();
-    d->open(new QFile(filename()));
+    d->open(new TQFile(filename()));
   }
   else
-    d = new Private(new QFile(filename()));
+    d = new Private(new TQFile(filename()));
 }
 
 bool K3bFLACDecoder::analyseFileInternal( K3b::Msf& frames, int& samplerate, int& ch )
@@ -274,9 +274,9 @@ bool K3bFLACDecoder::analyseFileInternal( K3b::Msf& frames, int& samplerate, int
   if( d->comments != 0 ) {
     kdDebug() << "(K3bFLACDecoder) unpacking Vorbis tags" << endl;
     for( unsigned int i = 0; i < d->comments->get_num_comments(); ++i ) {
-      QString key = QString::fromUtf8( d->comments->get_comment(i).get_field_name(),
+      TQString key = TQString::fromUtf8( d->comments->get_comment(i).get_field_name(),
                                        d->comments->get_comment(i).get_field_name_length() );
-      QString value = QString::fromUtf8( d->comments->get_comment(i).get_field_value(),
+      TQString value = TQString::fromUtf8( d->comments->get_comment(i).get_field_value(),
                                          d->comments->get_comment(i).get_field_value_length() );
 
       if( key.upper() == "TITLE" )
@@ -291,7 +291,7 @@ bool K3bFLACDecoder::analyseFileInternal( K3b::Msf& frames, int& samplerate, int
   if ((d->comments == 0) || (d->comments->get_num_comments() == 0)) {
     // no Vorbis comments, check for ID3 tags
     kdDebug() << "(K3bFLACDecoder) using taglib to read tag" << endl;
-    TagLib::FLAC::File f( QFile::encodeName(filename()) );
+    TagLib::FLAC::File f( TQFile::encodeName(filename()) );
     if( f.isOpen() ) {
       addMetaInfo( META_TITLE, TStringToQString( f.tag()->title() ) );
       addMetaInfo( META_ARTIST, TStringToQString( f.tag()->artist() ) );
@@ -348,7 +348,7 @@ int K3bFLACDecoder::decodeInternal( char* _data, int maxLen )
 #endif
   
   bytesAvailable = d->internalBuffer->size() - d->internalBuffer->at();
-  bytesToCopy = QMIN(maxLen, bytesAvailable);
+  bytesToCopy = TQMIN(maxLen, bytesAvailable);
   bytesCopied = (int)d->internalBuffer->readBlock(_data, bytesToCopy);
 
   if(bytesCopied == bytesAvailable) {
@@ -367,45 +367,45 @@ bool K3bFLACDecoder::seekInternal( const K3b::Msf& pos )
 }
 
 
-QString K3bFLACDecoder::fileType() const
+TQString K3bFLACDecoder::fileType() const
 {
   return i18n("FLAC");
 }
 
 
-QStringList K3bFLACDecoder::supportedTechnicalInfos() const
+TQStringList K3bFLACDecoder::supportedTechnicalInfos() const
 {
-  return QStringList::split( ";", 
+  return TQStringList::split( ";", 
                              i18n("Channels") + ";" +
                              i18n("Sampling Rate") + ";" +
                              i18n("Sample Size") );
 }
 
 
-QString K3bFLACDecoder::technicalInfo( const QString& info ) const
+TQString K3bFLACDecoder::technicalInfo( const TQString& info ) const
 {
   if( d->comments != 0 ) {
     if( info == i18n("Vendor") )
 #ifdef FLAC_NEWER_THAN_1_1_1
-      return QString::fromUtf8((char*)d->comments->get_vendor_string());
+      return TQString::fromUtf8((char*)d->comments->get_vendor_string());
 #else
-      return QString::fromUtf8(d->comments->get_vendor_string().get_field());
+      return TQString::fromUtf8(d->comments->get_vendor_string().get_field());
 #endif
     else if( info == i18n("Channels") )
-      return QString::number(d->channels);
+      return TQString::number(d->channels);
     else if( info == i18n("Sampling Rate") )
-      return i18n("%1 Hz").arg(d->rate);
+      return i18n("%1 Hz").tqarg(d->rate);
     else if( info == i18n("Sample Size") )
-      return i18n("%1 bits").arg(d->bitsPerSample);
+      return i18n("%1 bits").tqarg(d->bitsPerSample);
   }
 
-  return QString::null;
+  return TQString();
 }
 
 
 
-K3bFLACDecoderFactory::K3bFLACDecoderFactory( QObject* parent, const char* name )
-  : K3bAudioDecoderFactory( parent, name )
+K3bFLACDecoderFactory::K3bFLACDecoderFactory( TQObject* tqparent, const char* name )
+  : K3bAudioDecoderFactory( tqparent, name )
 {
 }
 
@@ -415,10 +415,10 @@ K3bFLACDecoderFactory::~K3bFLACDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bFLACDecoderFactory::createDecoder( QObject* parent, 
+K3bAudioDecoder* K3bFLACDecoderFactory::createDecoder( TQObject* tqparent, 
 						 const char* name ) const
 {
-  return new K3bFLACDecoder( parent, name );
+  return new K3bFLACDecoder( tqparent, name );
 }
 
 
@@ -429,7 +429,7 @@ bool K3bFLACDecoderFactory::canDecode( const KURL& url )
 
   // Note: since file is created on the stack it will be closed automatically
   // by its destructor when this method (i.e. canDecode) returns.
-  QFile file(url.path());
+  TQFile file(url.path());
 
   if(!file.open(IO_ReadOnly)) {
     kdDebug() << "(K3bFLACDecoder) Could not open file " << url.path() << endl;
@@ -482,11 +482,11 @@ bool K3bFLACDecoderFactory::canDecode( const KURL& url )
   } else {
     kdDebug() << "(K3bFLACDecoder) " << url.path() << ": wrong format:" << endl
               << "                channels:    " 
-              << QString::number(info.get_channels()) << endl
+              << TQString::number(info.get_channels()) << endl
               << "                samplerate:  "
-              << QString::number(info.get_sample_rate()) << endl
+              << TQString::number(info.get_sample_rate()) << endl
               << "                bits/sample: "
-              << QString::number(info.get_bits_per_sample()) << endl;
+              << TQString::number(info.get_bits_per_sample()) << endl;
     return false;
   }
 }

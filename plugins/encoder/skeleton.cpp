@@ -25,8 +25,8 @@
 K_EXPORT_COMPONENT_FACTORY( libk3b<name>encoder, K3bPluginFactory<K3b<name>Encoder>( "libk3b<name>encoder" ) )
 
 
-K3b<name>Encoder::K3b<name>Encoder( QObject* parent, const char* name )
-  : K3bAudioEncoder( parent, name )
+K3b<name>Encoder::K3b<name>Encoder( TQObject* tqparent, const char* name )
+  : K3bAudioEncoder( tqparent, name )
 {
 }
 
@@ -36,14 +36,14 @@ K3b<name>Encoder::~K3b<name>Encoder()
 }
 
 
-bool K3b<name>Encoder::initEncoderInternal( const QString& )
+bool K3b<name>Encoder::initEncoderInternal( const TQString& )
 {
   // PUT YOUR CODE HERE
   return false;
 }
 
 
-long K3b<name>Encoder::encodeInternal( const char* data, Q_ULONG len )
+long K3b<name>Encoder::encodeInternal( const char* data, TQ_ULONG len )
 {
   // PUT YOUR CODE HERE
   return false;
@@ -56,43 +56,43 @@ void K3b<name>Encoder::finishEncoderInternal()
 }
 
 
-void K3b<name>Encoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, const QString& value )
+void K3b<name>Encoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, const TQString& value )
 {
   // PUT YOUR CODE HERE
 }
 
 
-QStringList K3b<name>Encoder::extensions() const
+TQStringList K3b<name>Encoder::extensions() const
 {
   // PUT YOUR CODE HERE
-  return QStringList( "" );
+  return TQStringList( "" );
 }
 
 
-QString K3b<name>Encoder::fileTypeComment( const QString& ) const
+TQString K3b<name>Encoder::fileTypeComment( const TQString& ) const
 {
   // PUT YOUR CODE HERE
   return "";
 }
 
 
-long long K3b<name>Encoder::fileSize( const QString&, const K3b::Msf& msf ) const
+long long K3b<name>Encoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 {
   // PUT YOUR CODE HERE
   return -1;
 }
 
 
-K3bPluginConfigWidget* K3b<name>Encoder::createConfigWidget( QWidget* parent, 
+K3bPluginConfigWidget* K3b<name>Encoder::createConfigWidget( TQWidget* tqparent, 
 							     const char* name ) const
 {
-  return new K3b<name>EncoderSettingsWidget( parent, name );
+  return new K3b<name>EncoderSettingsWidget( tqparent, name );
 }
 
 
 
-K3b<name>EncoderSettingsWidget::K3b<name>EncoderSettingsWidget( QWidget* parent, const char* name )
-  : K3bPluginConfigWidget( parent, name )
+K3b<name>EncoderSettingsWidget::K3b<name>EncoderSettingsWidget( TQWidget* tqparent, const char* name )
+  : K3bPluginConfigWidget( tqparent, name )
 {
 }
 

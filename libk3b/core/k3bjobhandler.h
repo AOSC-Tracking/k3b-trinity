@@ -44,20 +44,20 @@ class K3bJobHandler
   virtual int waitForMedia( K3bDevice::Device*,
 			    int mediaState = K3bDevice::STATE_EMPTY,
 			    int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-			    const QString& message = QString::null ) = 0;
+			    const TQString& message = TQString() ) = 0;
 
   // FIXME: use KGuiItem  
-  virtual bool questionYesNo( const QString& text,
-			      const QString& caption = QString::null,
-			      const QString& yesText = QString::null,
-			      const QString& noText = QString::null ) = 0;
+  virtual bool questionYesNo( const TQString& text,
+			      const TQString& caption = TQString(),
+			      const TQString& yesText = TQString(),
+			      const TQString& noText = TQString() ) = 0;
 
   /**
    * Use this if you need the user to do something before the job is able to continue.
    * In all other cases an infoMessage should be used.
    */
-  virtual void blockingInformation( const QString& text,
-				    const QString& caption = QString::null ) = 0;
+  virtual void blockingInformation( const TQString& text,
+				    const TQString& caption = TQString() ) = 0;
 
 };
 

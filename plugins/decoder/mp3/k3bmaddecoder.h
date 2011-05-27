@@ -27,16 +27,17 @@ extern "C" {
 class K3bMadDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMadDecoderFactory( QObject* parent = 0, const char* name = 0 );
+  K3bMadDecoderFactory( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bMadDecoderFactory();
 
   bool canDecode( const KURL& filename );
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bAudioDecoder* createDecoder( QObject* parent = 0, 
+  K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, 
 				  const char* name = 0 ) const;
 };
 
@@ -44,20 +45,21 @@ class K3bMadDecoderFactory : public K3bAudioDecoderFactory
 class K3bMadDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMadDecoder( QObject* parent = 0, const char* name = 0 );
+  K3bMadDecoder( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bMadDecoder();
 
-  QString metaInfo( MetaDataField );
+  TQString metaInfo( MetaDataField );
 
   void cleanup();
 
   bool seekInternal( const K3b::Msf& );
 
-  QString fileType() const;
-  QStringList supportedTechnicalInfos() const;
-  QString technicalInfo( const QString& ) const;
+  TQString fileType() const;
+  TQStringList supportedTechnicalInfos() const;
+  TQString technicalInfo( const TQString& ) const;
 
  protected:
   bool analyseFileInternal( K3b::Msf& frames, int& samplerate, int& ch );

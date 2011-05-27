@@ -18,9 +18,9 @@
 
 #include <kdebug.h>
 
-#include <qfile.h>
-#include <qmap.h>
-#include <qptrlist.h>
+#include <tqfile.h>
+#include <tqmap.h>
+#include <tqptrlist.h>
 
 
 // TODO: remove the items from the project if the savedSize differs
@@ -71,7 +71,7 @@ public:
    */
   K3b::Msf blocks() const { return K3b::Msf( usedBlocks(savedSize) ); }
 
-  QPtrList<K3bDataItem> items;
+  TQPtrList<K3bDataItem> items;
 };
 
 
@@ -114,7 +114,7 @@ public:
   void removeFile( K3bFileItem* item, bool followSymlinks ) {
     InodeInfo& inodeInfo = inodeMap[item->localId(followSymlinks)];
     
-    if( inodeInfo.items.findRef( item ) == -1 ) {
+    if( inodeInfo.items.tqfindRef( item ) == -1 ) {
       kdError() << "(K3bFileCompilationSizeHandler) " 
 		<< item->localPath()
 		<< " has been removed without being added!" << endl;
@@ -136,7 +136,7 @@ public:
   void removeSpecialItem( K3bDataItem* item ) {
     // special files do not have a corresponding local file
     // so we just substract their k3bSize
-    if( specialItems.findRef( item ) == -1 ) {
+    if( specialItems.tqfindRef( item ) == -1 ) {
       kdError() << "(K3bFileCompilationSizeHandler) Special item "
 		<< item->k3bName()
 		<< " has been removed without being added!" << endl;
@@ -152,12 +152,12 @@ public:
   /**
    * This maps from inodes to the number of occurrences of the inode.
    */
-  QMap<K3bFileItem::Id, InodeInfo> inodeMap;
+  TQMap<K3bFileItem::Id, InodeInfo> inodeMap;
 
   KIO::filesize_t size;
   K3b::Msf blocks;
 
-  QPtrList<K3bDataItem> specialItems;
+  TQPtrList<K3bDataItem> specialItems;
 };
 
 

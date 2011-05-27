@@ -32,16 +32,17 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bCdCopyJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bCdCopyJob( K3bJobHandler* hdl, QObject* parent = 0 );
+  K3bCdCopyJob( K3bJobHandler* hdl, TQObject* tqparent = 0 );
   ~K3bCdCopyJob();
 
   K3bDevice::Device* writer() const { return m_onlyCreateImages ? 0 : m_writerDevice; }
   K3bDevice::Device* reader() const { return m_readerDevice; }
 	
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 
  public slots:
   void start();
@@ -56,7 +57,7 @@ class LIBK3B_EXPORT K3bCdCopyJob : public K3bBurnJob
   void setKeepImage( bool b ) { m_keepImage = b; }
   void setOnlyCreateImage( bool b ) { m_onlyCreateImages = b; }
   void setSimulate( bool b ) { m_simulate = b; }
-  void setTempPath( const QString& path ) { m_tempPath= path; }
+  void setTempPath( const TQString& path ) { m_tempPath= path; }
   void setCopies( unsigned int c ) { m_copies = c; }
   void setParanoiaMode( int i ) { m_paranoiaMode = i; }
   void setIgnoreDataReadErrors( bool b ) { m_ignoreDataReadErrors = b; }
@@ -107,7 +108,7 @@ class LIBK3B_EXPORT K3bCdCopyJob : public K3bBurnJob
   int m_audioReadRetries;
   bool m_preferCdText;
   bool m_copyCdText;
-  QString m_tempPath;
+  TQString m_tempPath;
   int m_writingMode;
 
   class Private;

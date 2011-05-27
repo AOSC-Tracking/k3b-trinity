@@ -19,11 +19,11 @@
 #include <k3bjobhandler.h>
 #include <kdialogbase.h>
 #include <kurl.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 
 class K3bBusyWidget;
-class QLabel;
+class TQLabel;
 class K3bAudioTrack;
 class K3bAudioDataSource;
 class K3bThreadJob;
@@ -33,6 +33,7 @@ class K3bAudioDoc;
 class K3bAudioTrackAddingDialog : public KDialogBase, public K3bJobHandler
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   ~K3bAudioTrackAddingDialog();
@@ -43,31 +44,31 @@ class K3bAudioTrackAddingDialog : public KDialogBase, public K3bJobHandler
   int waitForMedia( K3bDevice::Device*,
 		    int = K3bDevice::STATE_EMPTY,
 		    int = K3bDevice::MEDIA_WRITABLE_CD,
-		    const QString& = QString::null ) { return 0; }
+		    const TQString& = TQString() ) { return 0; }
   
   /**
    * @reimplemented from K3bJobHandler
    */
-  bool questionYesNo( const QString&,
-		      const QString& = QString::null,
-		      const QString& = QString::null,
-		      const QString& = QString::null ) { return false; }
+  bool questionYesNo( const TQString&,
+		      const TQString& = TQString(),
+		      const TQString& = TQString(),
+		      const TQString& = TQString() ) { return false; }
 
   /**
    * reimplemented from K3bJobHandler
    */
-  void blockingInformation( const QString&,
-			    const QString& = QString::null ) {}
+  void blockingInformation( const TQString&,
+			    const TQString& = TQString() ) {}
 
   /**
-   * \return \see QDialog::exec()
+   * \return \see TQDialog::exec()
    */
   static int addUrls( const KURL::List& urls, 
 		      K3bAudioDoc* doc,
 		      K3bAudioTrack* afterTrack = 0,
-		      K3bAudioTrack* parentTrack = 0,
+		      K3bAudioTrack* tqparentTrack = 0,
 		      K3bAudioDataSource* afterSource = 0,
-		      QWidget* parent = 0 );
+		      TQWidget* tqparent = 0 );
 
  private slots:
   void slotAddUrls();
@@ -75,17 +76,17 @@ class K3bAudioTrackAddingDialog : public KDialogBase, public K3bJobHandler
   void slotCancel();
 
  private:
-  K3bAudioTrackAddingDialog( QWidget* parent = 0, const char* name = 0 );
+  K3bAudioTrackAddingDialog( TQWidget* tqparent = 0, const char* name = 0 );
 
   static KURL::List extractUrlList( const KURL::List& urls );
 
   K3bBusyWidget* m_busyWidget;
-  QLabel* m_infoLabel;
+  TQLabel* m_infoLabel;
 
-  QStringList m_unreadableFiles;
-  QStringList m_notFoundFiles;
-  QStringList m_nonLocalFiles;
-  QStringList m_unsupportedFiles;
+  TQStringList m_unreadableFiles;
+  TQStringList m_notFoundFiles;
+  TQStringList m_nonLocalFiles;
+  TQStringList m_unsupportedFiles;
 
   KURL::List m_urls;
 

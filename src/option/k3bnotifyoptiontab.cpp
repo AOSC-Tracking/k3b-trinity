@@ -21,16 +21,16 @@
 #include <knotifydialog.h>
 #include <kdebug.h>
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
 
 
-K3bNotifyOptionTab::K3bNotifyOptionTab( QWidget* parent, const char* name )
-  : QWidget( parent, name )
+K3bNotifyOptionTab::K3bNotifyOptionTab( TQWidget* tqparent, const char* name )
+  : TQWidget( tqparent, name )
 {
   m_notifyWidget = new KNotify::KNotifyWidget( this );
 
-  QHBoxLayout* box = new QHBoxLayout( this );
+  TQHBoxLayout* box = new TQHBoxLayout( this );
   box->addWidget( m_notifyWidget );
 }
 

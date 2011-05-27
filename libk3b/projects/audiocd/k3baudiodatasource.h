@@ -79,12 +79,12 @@ class LIBK3B_EXPORT K3bAudioDataSource
   /**
    * Type of the data in readable form.
    */
-  virtual QString type() const = 0;
+  virtual TQString type() const = 0;
 
   /**
    * The source in readable form (this is the filename for files)
    */
-  virtual QString sourceComment() const = 0;
+  virtual TQString sourceComment() const = 0;
 
   /**
    * Used in case an error occurred. For now this is used if the
@@ -150,7 +150,7 @@ class LIBK3B_EXPORT K3bAudioDataSource
 
  protected:
   /**
-   * Informs the parent track about changes.
+   * Informs the tqparent track about changes.
    */
   void emitChange();
 

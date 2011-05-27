@@ -34,17 +34,17 @@
 #include <kstdguiitem.h>
 #include <kconfig.h>
 
-#include <qgroupbox.h>
-#include <qpushbutton.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qtextview.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qheader.h>
-#include <qmap.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqgroupbox.h>
+#include <tqpushbutton.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqtextview.h>
+#include <tqcombobox.h>
+#include <tqlabel.h>
+#include <tqheader.h>
+#include <tqmap.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 
 
 
@@ -60,17 +60,17 @@ public:
   K3bProgressDialog* erasingDlg;
   K3bDebuggingOutputDialog* debugDialog;
   K3bDebuggingOutputFile debugFile;
-  QMap<int, int> comboTypeMap;
-  QMap<int, int> typeComboMap;
+  TQMap<int, int> comboTypeMap;
+  TQMap<int, int> typeComboMap;
 
   bool jobRunning;
 };
 
 
-K3bBlankingDialog::K3bBlankingDialog( QWidget* parent, const char* name )
-  : K3bInteractionDialog( parent, name, 
+K3bBlankingDialog::K3bBlankingDialog( TQWidget* tqparent, const char* name )
+  : K3bInteractionDialog( tqparent, name, 
 			  i18n("Erase CD-RW"),
-			  QString::null,
+			  TQString(),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  "CDRW Erasing" )
@@ -80,8 +80,8 @@ K3bBlankingDialog::K3bBlankingDialog( QWidget* parent, const char* name )
 
   setupGui();
 
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged()), this, SLOT(slotWriterChanged()) );
-  connect( m_writerSelectionWidget, SIGNAL(writingAppChanged(int)), this, SLOT(slotWritingAppChanged(int)) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)), this, TQT_SLOT(slotWritingAppChanged(int)) );
   slotWriterChanged();
 	slotWritingAppChanged( m_writerSelectionWidget->writingApp() );
 }
@@ -101,21 +101,21 @@ void K3bBlankingDialog::setDevice( K3bDevice::Device* dev )
 
 void K3bBlankingDialog::setupGui()
 {
-  QWidget* frame = mainWidget();
+  TQWidget* frame = mainWidget();
 
   m_writerSelectionWidget = new K3bWriterSelectionWidget( frame );
   m_writerSelectionWidget->setWantedMediumType( K3bDevice::MEDIA_CD_RW );
   m_writerSelectionWidget->setWantedMediumState( K3bDevice::STATE_COMPLETE|K3bDevice::STATE_INCOMPLETE );
 
   // --- setup the blanking type button group -----------------------------
-  QGroupBox* groupBlankType = new QGroupBox( 1, Qt::Vertical, i18n("&Erase Type"), frame );
-  groupBlankType->layout()->setSpacing( spacingHint() );
-  groupBlankType->layout()->setMargin( marginHint() );
+  TQGroupBox* groupBlankType = new TQGroupBox( 1, Qt::Vertical, i18n("&Erase Type"), frame );
+  groupBlankType->tqlayout()->setSpacing( spacingHint() );
+  groupBlankType->tqlayout()->setMargin( marginHint() );
 
-  m_comboEraseMode = new QComboBox( groupBlankType );
+  m_comboEraseMode = new TQComboBox( groupBlankType );
   // ----------------------------------------------------------------------
 
-  QGridLayout* grid = new QGridLayout( frame );
+  TQGridLayout* grid = new TQGridLayout( frame );
   grid->setSpacing( spacingHint() );
   grid->setMargin( 0 );
   grid->addWidget( m_writerSelectionWidget, 0, 0 );
@@ -131,13 +131,13 @@ void K3bBlankingDialog::slotStartClicked()
   d->debugFile.open();
 
   if( d->job == 0 ) {
-    d->job = new K3bBlankingJob( this, this );
-    connect( d->job, SIGNAL(debuggingOutput(const QString&, const QString&)), 
-	     d->debugDialog, SLOT(addOutput(const QString&, const QString&)) );
-    connect( d->job, SIGNAL(debuggingOutput(const QString&, const QString&)), 
-	     &d->debugFile, SLOT(addOutput(const QString&, const QString&)) );
-    connect( d->job, SIGNAL(finished(bool)), 
-	     this, SLOT(slotJobFinished(bool)) );
+    d->job = new K3bBlankingJob( this, TQT_TQOBJECT(this) );
+    connect( d->job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	     d->debugDialog, TQT_SLOT(addOutput(const TQString&, const TQString&)) );
+    connect( d->job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	     &d->debugFile, TQT_SLOT(addOutput(const TQString&, const TQString&)) );
+    connect( d->job, TQT_SIGNAL(finished(bool)), 
+	     this, TQT_SLOT(slotJobFinished(bool)) );
   }
 
   d->job->setDevice( m_writerSelectionWidget->writerDevice() );
@@ -150,7 +150,7 @@ void K3bBlankingDialog::slotStartClicked()
   if( !d->erasingDlg )
     d->erasingDlg = new K3bProgressDialog( i18n("Erasing CD-RW"), this );
 
-  connect( d->erasingDlg, SIGNAL(cancelClicked()), d->job, SLOT(cancel()) );
+  connect( d->erasingDlg, TQT_SIGNAL(cancelClicked()), d->job, TQT_SLOT(cancel()) );
 
   if( !exitLoopOnHide() )
     hide();
@@ -200,22 +200,22 @@ void K3bBlankingDialog::slotWriterChanged()
     setButtonEnabled( START_BUTTON, true );
   else {
     setButtonEnabled( START_BUTTON, false );
-    KMessageBox::sorry( this, i18n("%1 does not support CD-RW writing.").arg(dev->devicename()) );
+    KMessageBox::sorry( this, i18n("%1 does not support CD-RW writing.").tqarg(dev->devicename()) );
   }
 }
 
 void K3bBlankingDialog::slotWritingAppChanged(int app)
 {
-  QWhatsThis::remove( m_comboEraseMode );
-  QString whatsThisInfo;
+  TQWhatsThis::remove( m_comboEraseMode );
+  TQString whatsThisInfo;
 
-  static QString wsComplete = i18n("Erases the complete disk. This takes as long "
+  static TQString wsComplete = i18n("Erases the complete disk. This takes as long "
 				   "as writing the complete CD.");
-  static QString wsFast = i18n("Erases just the TOC, the PMA, and the pregap.");
-  static QString wsTrack = i18n("Erases just the last track.");
-  static QString wsUnclose = i18n("Reopen the last session to make it possible to append "
+  static TQString wsFast = i18n("Erases just the TOC, the PMA, and the pregap.");
+  static TQString wsTrack = i18n("Erases just the last track.");
+  static TQString wsUnclose = i18n("Reopen the last session to make it possible to append "
 				  "further data.");
-  static QString wsSession = i18n("Erases the last session of a multisession CD.");
+  static TQString wsSession = i18n("Erases the last session of a multisession CD.");
 
   int lastMode = d->comboTypeMap[m_comboEraseMode->currentItem()];
 
@@ -249,10 +249,10 @@ void K3bBlankingDialog::slotWritingAppChanged(int app)
     whatsThisInfo += "<p><b>" + i18n("Erase Last Session") + "</b><br>" + wsSession;
   }
 
-  QWhatsThis::add( m_comboEraseMode, whatsThisInfo );
+  TQWhatsThis::add( m_comboEraseMode, whatsThisInfo );
 
   // try to reset last mode
-  if( d->typeComboMap.contains( lastMode ) )
+  if( d->typeComboMap.tqcontains( lastMode ) )
     m_comboEraseMode->setCurrentItem( d->typeComboMap[lastMode] );
   else
     m_comboEraseMode->setCurrentItem( d->typeComboMap[K3bBlankingJob::Fast] );
@@ -270,7 +270,7 @@ void K3bBlankingDialog::loadUserDefaults( KConfigBase* c )
   m_writerSelectionWidget->loadConfig( c );
   slotWritingAppChanged( m_writerSelectionWidget->writingApp() );
 
-  QString mode = c->readEntry( "erase_mode" );
+  TQString mode = c->readEntry( "erase_mode" );
   kdDebug() << "(K3bBlankingDialog) slotWritingAppChanged mode: " << mode << endl;
   m_comboEraseMode->setCurrentItem( d->typeComboMap[K3bBlankingJob::Fast] );
   if( mode == "complete" )
@@ -287,7 +287,7 @@ void K3bBlankingDialog::loadUserDefaults( KConfigBase* c )
 
 void K3bBlankingDialog::saveUserDefaults( KConfigBase* c )
 {
-  QString mode;
+  TQString mode;
   switch( d->comboTypeMap[m_comboEraseMode->currentItem()] ) {
   case K3bBlankingJob::Complete:
     mode = "complete";
@@ -314,17 +314,17 @@ void K3bBlankingDialog::saveUserDefaults( KConfigBase* c )
 int K3bBlankingDialog::waitForMedia( K3bDevice::Device* device,
 				     int mediaState,
 				     int mediaType,
-				     const QString& message )
+				     const TQString& message )
 {
   // this is only needed for the formatting
   return K3bEmptyDiscWaiter::wait( device, mediaState, mediaType, message, this );
 }
 
   
-bool K3bBlankingDialog::questionYesNo( const QString& text,
-				       const QString& caption,
-				       const QString& yesText,
-				       const QString& noText )
+bool K3bBlankingDialog::questionYesNo( const TQString& text,
+				       const TQString& caption,
+				       const TQString& yesText,
+				       const TQString& noText )
 {
   return ( KMessageBox::questionYesNo( this, 
 				       text, 
@@ -334,8 +334,8 @@ bool K3bBlankingDialog::questionYesNo( const QString& text,
 }
 
 
-void K3bBlankingDialog::blockingInformation( const QString& text,
-					     const QString& caption )
+void K3bBlankingDialog::blockingInformation( const TQString& text,
+					     const TQString& caption )
 {
   KMessageBox::information( this, text, caption );
 }

@@ -20,7 +20,7 @@
 #include <k3bview.h>
 #include "k3baudiotrackview.h"
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 
 class K3bAudioDoc;
@@ -34,9 +34,10 @@ class K3bAudioTrackView;
 class K3bAudioView : public K3bView
 {
   Q_OBJECT
+  TQ_OBJECT
 	
  public: 
-  K3bAudioView( K3bAudioDoc* pDoc, QWidget* parent, const char *name = 0 );
+  K3bAudioView( K3bAudioDoc* pDoc, TQWidget* tqparent, const char *name = 0 );
   ~K3bAudioView();
 
   K3bAudioTrackPlayer* player() const { return m_songlist->player(); }
@@ -45,7 +46,7 @@ class K3bAudioView : public K3bView
   void addUrls( const KURL::List& );
 
  protected:
-  K3bProjectBurnDialog* newBurnDialog( QWidget* parent = 0, const char* name = 0 );
+  K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
 
   void init();
 

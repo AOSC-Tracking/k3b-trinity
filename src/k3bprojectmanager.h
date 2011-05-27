@@ -16,8 +16,8 @@
 #ifndef _K3B_PROJECT_MANAGER_H_
 #define _K3B_PROJECT_MANAGER_H_
 
-#include <qobject.h>
-#include <qptrlist.h>
+#include <tqobject.h>
+#include <tqptrlist.h>
 #include <k3bdoc.h>
 
 
@@ -25,15 +25,16 @@ class KURL;
 class K3bProjectInterface;
 
 
-class K3bProjectManager : public QObject
+class K3bProjectManager : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bProjectManager( QObject* parent = 0, const char* name = 0 );
+  K3bProjectManager( TQObject* tqparent = 0, const char* name = 0 );
   virtual ~K3bProjectManager();
 
-  const QPtrList<K3bDoc>& projects() const;
+  const TQPtrList<K3bDoc>& projects() const;
 
   /**
    * Create a new project including loading user defaults and creating

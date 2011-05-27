@@ -17,24 +17,24 @@
 #ifndef _K3B_DEVICE_GLOBALS_H_
 #define _K3B_DEVICE_GLOBALS_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 #include <k3bmsf.h>
 #include "k3bdevice_export.h"
 
 namespace K3bDevice 
 {
-  typedef Q_UINT8 uint8;
-  typedef Q_UINT16 uint16;
-  typedef Q_UINT32 uint32;
+  typedef TQ_UINT8 uint8;
+  typedef TQ_UINT16 uint16;
+  typedef TQ_UINT32 uint32;
 
   class Device;
 
-  LIBK3BDEVICE_EXPORT QString deviceTypeString( int );
-  LIBK3BDEVICE_EXPORT QString writingModeString( int );
+  LIBK3BDEVICE_EXPORT TQString deviceTypeString( int );
+  LIBK3BDEVICE_EXPORT TQString writingModeString( int );
   /**
    * @param simplyfied if true the formatting state of DVD media is left out.
    */
-  LIBK3BDEVICE_EXPORT QString mediaTypeString( int, bool simplyfied = false );
+  LIBK3BDEVICE_EXPORT TQString mediaTypeString( int, bool simplyfied = false );
   LIBK3BDEVICE_EXPORT void debugBitfield( unsigned char* data, long len );
 
   LIBK3BDEVICE_EXPORT uint16 from2Byte( unsigned char* );

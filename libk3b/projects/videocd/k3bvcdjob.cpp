@@ -20,13 +20,13 @@
 #include <ktempfile.h>
 #include <kio/global.h>
 
-#include <qstring.h>
-#include <qdatetime.h>
-#include <qfile.h>
-#include <qtimer.h>
+#include <tqstring.h>
+#include <tqdatetime.h>
+#include <tqfile.h>
+#include <tqtimer.h>
 #include <kdebug.h>
-#include <qregexp.h>
-#include <qdom.h>
+#include <tqregexp.h>
+#include <tqdom.h>
 
 #include "k3bvcdjob.h"
 
@@ -43,8 +43,8 @@
 #include <k3bcdrecordwriter.h>
 #include <k3bcdrdaowriter.h>
 
-K3bVcdJob::K3bVcdJob( K3bVcdDoc* doc, K3bJobHandler* jh, QObject* parent, const char* name )
-        : K3bBurnJob( jh, parent, name )
+K3bVcdJob::K3bVcdJob( K3bVcdDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
+        : K3bBurnJob( jh, tqparent, name )
 {
     m_doc = doc;
     m_doc->setCopies( m_doc->dummy() || m_doc->onlyCreateImages() ? 1 : m_doc->copies() );
@@ -104,20 +104,20 @@ void K3bVcdJob::cancelAll()
     }
 
     // remove bin-file if it is unfinished or the user selected to remove image
-    if ( QFile::exists( m_doc->vcdImage() ) ) {
+    if ( TQFile::exists( m_doc->vcdImage() ) ) {
         if ( !m_doc->onTheFly() && m_doc->removeImages() || !m_imageFinished ) {
-            emit infoMessage( i18n( "Removing Binary file %1" ).arg( m_doc->vcdImage() ), K3bJob::SUCCESS );
-            QFile::remove
+            emit infoMessage( i18n( "Removing Binary file %1" ).tqarg( m_doc->vcdImage() ), K3bJob::SUCCESS );
+            TQFile::remove
                 ( m_doc->vcdImage() );
             m_doc->setVcdImage( "" );
         }
     }
 
     // remove cue-file if it is unfinished or the user selected to remove image
-    if ( QFile::exists( m_cueFile ) ) {
+    if ( TQFile::exists( m_cueFile ) ) {
         if ( !m_doc->onTheFly() && m_doc->removeImages() || !m_imageFinished ) {
-            emit infoMessage( i18n( "Removing Cue file %1" ).arg( m_cueFile ), K3bJob::SUCCESS );
-            QFile::remove
+            emit infoMessage( i18n( "Removing Cue file %1" ).tqarg( m_cueFile ), K3bJob::SUCCESS );
+            TQFile::remove
                 ( m_cueFile );
             m_cueFile = "";
         }
@@ -133,7 +133,7 @@ void K3bVcdJob::start()
     emit burning( false );
     m_canceled = false;
 
-    int pos = QString( m_doc->vcdImage() ).find( ".bin", QString( m_doc->vcdImage() ).length() - 4 );
+    int pos = TQString( m_doc->vcdImage() ).tqfind( ".bin", TQString( m_doc->vcdImage() ).length() - 4 );
     if ( pos > 0 ) {
         m_cueFile = m_doc->vcdImage().left( pos ) + ".cue";
     } else {
@@ -184,8 +184,8 @@ void K3bVcdJob::vcdxBuild()
     const K3bExternalBin* bin = k3bcore ->externalBinManager() ->binObject( "vcdxbuild" );
     if ( !bin ) {
         kdDebug() << "(K3bVcdJob) could not find vcdxbuild executable" << endl;
-        emit infoMessage( i18n( "Could not find %1 executable." ).arg( "vcdxbuild" ), K3bJob::ERROR );
-        emit infoMessage( i18n( "To create VideoCDs you must install VcdImager Version %1." ).arg( ">= 0.7.12" ), K3bJob::INFO );
+        emit infoMessage( i18n( "Could not tqfind %1 executable." ).tqarg( "vcdxbuild" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "To create VideoCDs you must install VcdImager Version %1." ).tqarg( ">= 0.7.12" ), K3bJob::INFO );
         emit infoMessage( i18n( "You can find this on your distribution disks or download it from http://www.vcdimager.org" ), K3bJob::INFO );
         cancelAll();
         jobFinished( false );
@@ -194,7 +194,7 @@ void K3bVcdJob::vcdxBuild()
 
     if ( bin->version < K3bVersion( "0.7.12" ) ) {
         kdDebug() << "(K3bVcdJob) vcdxbuild executable too old!" << endl;
-        emit infoMessage( i18n( "%1 executable too old: need version %2 or greater." ).arg( "Vcdxbuild" ).arg( "0.7.12" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "%1 executable too old: need version %2 or greater." ).tqarg( "Vcdxbuild" ).tqarg( "0.7.12" ), K3bJob::ERROR );
         emit infoMessage( i18n( "You can find this on your distribution disks or download it from http://www.vcdimager.org" ), K3bJob::INFO );
         cancelAll();
         jobFinished( false );
@@ -202,13 +202,13 @@ void K3bVcdJob::vcdxBuild()
     }
 
     if ( !bin->copyright.isEmpty() )
-        emit infoMessage( i18n( "Using %1 %2 - Copyright (C) %3" ).arg( bin->name() ).arg( bin->version ).arg( bin->copyright ), INFO );
+        emit infoMessage( i18n( "Using %1 %2 - Copyright (C) %3" ).tqarg( bin->name() ).tqarg( bin->version ).tqarg( bin->copyright ), INFO );
 
     *m_process << bin;
 
     // additional user parameters from config
-    const QStringList& params = k3bcore->externalBinManager() ->program( "vcdxbuild" ) ->userParameters();
-    for ( QStringList::const_iterator it = params.begin(); it != params.end(); ++it )
+    const TQStringList& params = k3bcore->externalBinManager() ->program( "vcdxbuild" ) ->userParameters();
+    for ( TQStringList::const_iterator it = params.begin(); it != params.end(); ++it )
         *m_process << *it;
 
 
@@ -219,25 +219,25 @@ void K3bVcdJob::vcdxBuild()
 
     *m_process << "--progress" << "--gui";
 
-    *m_process << QString( "--cue-file=%1" ).arg( m_cueFile );
+    *m_process << TQString( "--cue-file=%1" ).tqarg( m_cueFile );
 
-    *m_process << QString( "--bin-file=%1" ).arg( m_doc->vcdImage() );
+    *m_process << TQString( "--bin-file=%1" ).tqarg( m_doc->vcdImage() );
 
-    *m_process << QString( "%1" ).arg( QFile::encodeName( m_xmlFile ) );
+    *m_process << TQString( "%1" ).tqarg( TQFile::encodeName( m_xmlFile ).data() );
 
-    connect( m_process, SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-             this, SLOT( slotParseVcdxBuildOutput( KProcess*, char*, int ) ) );
-    connect( m_process, SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-             this, SLOT( slotParseVcdxBuildOutput( KProcess*, char*, int ) ) );
-    connect( m_process, SIGNAL( processExited( KProcess* ) ),
-             this, SLOT( slotVcdxBuildFinished() ) );
+    connect( m_process, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseVcdxBuildOutput( KProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseVcdxBuildOutput( KProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( processExited( KProcess* ) ),
+             this, TQT_SLOT( slotVcdxBuildFinished() ) );
 
     // vcdxbuild commandline parameters
     kdDebug() << "***** vcdxbuild parameters:" << endl;
     ;
-    const QValueList<QCString>& args = m_process->args();
-    QString s;
-    for ( QValueList<QCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
+    const TQValueList<TQCString>& args = m_process->args();
+    TQString s;
+    for ( TQValueList<TQCString>::const_iterator it = args.begin(); it != args.end(); ++it ) {
         s += *it + " ";
     }
     kdDebug() << s << flush << endl;
@@ -245,7 +245,7 @@ void K3bVcdJob::vcdxBuild()
 
     if ( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
         kdDebug() << "(K3bVcdJob) could not start vcdxbuild" << endl;
-        emit infoMessage( i18n( "Could not start %1." ).arg( "vcdxbuild" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "Could not start %1." ).tqarg( "vcdxbuild" ), K3bJob::ERROR );
         cancelAll();
         jobFinished( false );
     }
@@ -253,44 +253,44 @@ void K3bVcdJob::vcdxBuild()
 
 void K3bVcdJob::slotParseVcdxBuildOutput( KProcess*, char* output, int len )
 {
-    QString buffer = QString::fromLocal8Bit( output, len );
+    TQString buffer = TQString::fromLocal8Bit( output, len );
 
     // split to lines
-    QStringList lines = QStringList::split( "\n", buffer );
+    TQStringList lines = TQStringList::split( "\n", buffer );
 
-    QDomDocument xml_doc;
-    QDomElement xml_root;
+    TQDomDocument xml_doc;
+    TQDomElement xml_root;
 
     // do every line
-    for ( QStringList::Iterator str = lines.begin(); str != lines.end(); ++str ) {
+    for ( TQStringList::Iterator str = lines.begin(); str != lines.end(); ++str ) {
         *str = ( *str ).stripWhiteSpace();
 
         emit debuggingOutput( "vcdxbuild", *str );
 
-        xml_doc.setContent( QString( "<?xml version='1.0'?><vcdxbuild>" ) + *str + "</vcdxbuild>" );
+        xml_doc.setContent( TQString( "<?xml version='1.0'?><vcdxbuild>" ) + *str + "</vcdxbuild>" );
 
         xml_root = xml_doc.documentElement();
 
         // There should be only one... but ...
-        for ( QDomNode node = xml_root.firstChild(); !node.isNull(); node = node.nextSibling() ) {
-            QDomElement el = node.toElement();
+        for ( TQDomNode node = xml_root.firstChild(); !node.isNull(); node = node.nextSibling() ) {
+            TQDomElement el = node.toElement();
             if ( el.isNull() )
                 continue;
 
-            const QString tagName = el.tagName().lower();
+            const TQString tagName = el.tagName().lower();
 
             if ( tagName == "progress" ) {
-                const QString oper = el.attribute( "operation" ).lower();
+                const TQString oper = el.attribute( "operation" ).lower();
                 const unsigned long long pos = el.attribute( "position" ).toLong();
                 const long long size = el.attribute( "size" ).toLong();
 
                 if ( oper == "scan" ) {
                     // Scan Video Files
                     if ( m_stage == stageUnknown || pos < m_bytesFinished ) {
-                        const uint index = el.attribute( "id" ).replace( QRegExp( "sequence-" ), "" ).toUInt();
+                        const uint index = el.attribute( "id" ).tqreplace( TQRegExp( "sequence-" ), "" ).toUInt();
 
                         m_currentWrittenTrack = m_doc->at( m_currentWrittenTrackNumber );
-                        emit newSubTask( i18n( "Scanning video file %1 of %2 (%3)" ).arg( index + 1 ).arg( doc() ->numOfTracks() ).arg( m_currentWrittenTrack->fileName() ) );
+                        emit newSubTask( i18n( "Scanning video file %1 of %2 (%3)" ).tqarg( index + 1 ).tqarg( doc() ->numOfTracks() ).tqarg( m_currentWrittenTrack->fileName() ) );
                         m_bytesFinished = 0;
 
                         if ( !firstTrack ) {
@@ -319,20 +319,20 @@ void K3bVcdJob::slotParseVcdxBuildOutput( KProcess*, char* output, int len )
                     return ;
                 }
             } else if ( tagName == "log" ) {
-                QDomText tel = el.firstChild().toText();
-                const QString level = el.attribute( "level" ).lower();
+                TQDomText tel = el.firstChild().toText();
+                const TQString level = el.attribute( "level" ).lower();
                 if ( tel.isText() ) {
-                    const QString text = tel.data();
+                    const TQString text = tel.data();
                     if ( m_stage == stageWrite && level == "information" )
-                        kdDebug() << QString( "(K3bVcdJob) VcdxBuild information, %1" ).arg( text ) << endl;
+                        kdDebug() << TQString( "(K3bVcdJob) VcdxBuild information, %1" ).tqarg( text ) << endl;
                     if ( ( text ).startsWith( "writing track" ) )
-                        emit newSubTask( i18n( "Creating Image for track %1" ).arg( ( text ).mid( 14 ) ) );
+                        emit newSubTask( i18n( "Creating Image for track %1" ).tqarg( ( text ).mid( 14 ) ) );
                     else {
                         if ( level != "error" ) {
-                            kdDebug() << QString( "(K3bVcdJob) vcdxbuild warning, %1" ).arg( text ) << endl;
+                            kdDebug() << TQString( "(K3bVcdJob) vcdxbuild warning, %1" ).tqarg( text ) << endl;
                             parseInformation( text );
                         } else {
-                            kdDebug() << QString( "(K3bVcdJob) vcdxbuild error, %1" ).arg( text ) << endl;
+                            kdDebug() << TQString( "(K3bVcdJob) vcdxbuild error, %1" ).tqarg( text ) << endl;
                             emit infoMessage( text, K3bJob::ERROR );
                         }
                     }
@@ -353,7 +353,7 @@ void K3bVcdJob::slotVcdxBuildFinished()
                 m_imageFinished = true;
                 break;
             default:
-                emit infoMessage( i18n( "%1 returned an unknown error (code %2)." ).arg( "vcdxbuild" ).arg( m_process->exitStatus() ),
+                emit infoMessage( i18n( "%1 returned an unknown error (code %2)." ).tqarg( "vcdxbuild" ).tqarg( m_process->exitStatus() ),
                                   K3bJob::ERROR );
                 emit infoMessage( i18n( "Please send me an email with the last output." ), K3bJob::ERROR );
                 cancelAll();
@@ -361,18 +361,18 @@ void K3bVcdJob::slotVcdxBuildFinished()
                 return ;
         }
     } else {
-        emit infoMessage( i18n( "%1 did not exit cleanly." ).arg( "Vcdxbuild" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "%1 did not exit cleanly." ).tqarg( "Vcdxbuild" ), K3bJob::ERROR );
         cancelAll();
         jobFinished( false );
         return ;
     }
 
     //remove xml-file
-    if ( QFile::exists( m_xmlFile ) )
-        QFile::remove
+    if ( TQFile::exists( m_xmlFile ) )
+        TQFile::remove
             ( m_xmlFile );
 
-    kdDebug() << QString( "(K3bVcdJob) create only image: %1" ).arg( vcdDoc() ->onlyCreateImages() ) << endl;
+    kdDebug() << TQString( "(K3bVcdJob) create only image: %1" ).tqarg( vcdDoc() ->onlyCreateImages() ) << endl;
     if ( !vcdDoc() ->onlyCreateImages() )
         startWriterjob();
     else
@@ -381,7 +381,7 @@ void K3bVcdJob::slotVcdxBuildFinished()
 
 void K3bVcdJob::startWriterjob()
 {
-    kdDebug() << QString( "(K3bVcdJob) writing copy %1 of %2" ).arg( m_currentcopy ).arg( m_doc->copies() ) << endl;
+    kdDebug() << TQString( "(K3bVcdJob) writing copy %1 of %2" ).tqarg( m_currentcopy ).tqarg( m_doc->copies() ) << endl;
     if ( prepareWriterJob() ) {
         if ( waitForMedia( m_doc->burner() ) < 0 ) {
             cancel();
@@ -392,7 +392,7 @@ void K3bVcdJob::startWriterjob()
             return ;
 
         if ( m_doc->copies() > 1 )
-            emit newTask( i18n( "Writing Copy %1 of %2" ).arg( m_currentcopy ).arg( m_doc->copies() ) );
+            emit newTask( i18n( "Writing Copy %1 of %2" ).tqarg( m_currentcopy ).tqarg( m_doc->copies() ) );
 
         emit burning( true );
         m_writerJob->start();
@@ -432,19 +432,19 @@ bool K3bVcdJob::prepareWriterJob()
 
     }
 
-    connect( m_writerJob, SIGNAL( infoMessage( const QString&, int ) ), this, SIGNAL( infoMessage( const QString&, int ) ) );
-    connect( m_writerJob, SIGNAL( percent( int ) ), this, SLOT( slotWriterJobPercent( int ) ) );
-    connect( m_writerJob, SIGNAL( processedSize( int, int ) ), this, SLOT( slotProcessedSize( int, int ) ) );
-    connect( m_writerJob, SIGNAL( subPercent( int ) ), this, SIGNAL( subPercent( int ) ) );
-    connect( m_writerJob, SIGNAL( processedSubSize( int, int ) ), this, SIGNAL( processedSubSize( int, int ) ) );
-    connect( m_writerJob, SIGNAL( nextTrack( int, int ) ), this, SLOT( slotWriterNextTrack( int, int ) ) );
-    connect( m_writerJob, SIGNAL( buffer( int ) ), this, SIGNAL( bufferStatus( int ) ) );
-    connect( m_writerJob, SIGNAL( deviceBuffer( int ) ), this, SIGNAL( deviceBuffer( int ) ) );
-    connect( m_writerJob, SIGNAL( writeSpeed( int, int ) ), this, SIGNAL( writeSpeed( int, int ) ) );
-    connect( m_writerJob, SIGNAL( finished( bool ) ), this, SLOT( slotWriterJobFinished( bool ) ) );
-    connect( m_writerJob, SIGNAL( newTask( const QString& ) ), this, SIGNAL( newTask( const QString& ) ) );
-    connect( m_writerJob, SIGNAL( newSubTask( const QString& ) ), this, SIGNAL( newSubTask( const QString& ) ) );
-    connect( m_writerJob, SIGNAL( debuggingOutput( const QString&, const QString& ) ), this, SIGNAL( debuggingOutput( const QString&, const QString& ) ) );
+    connect( m_writerJob, TQT_SIGNAL( infoMessage( const TQString&, int ) ), this, TQT_SIGNAL( infoMessage( const TQString&, int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( percent( int ) ), this, TQT_SLOT( slotWriterJobPercent( int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( processedSize( int, int ) ), this, TQT_SLOT( slotProcessedSize( int, int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( subPercent( int ) ), this, TQT_SIGNAL( subPercent( int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( processedSubSize( int, int ) ), this, TQT_SIGNAL( processedSubSize( int, int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( nextTrack( int, int ) ), this, TQT_SLOT( slotWriterNextTrack( int, int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( buffer( int ) ), this, TQT_SIGNAL( buffertqStatus( int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( deviceBuffer( int ) ), this, TQT_SIGNAL( deviceBuffer( int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( writeSpeed( int, int ) ), this, TQT_SIGNAL( writeSpeed( int, int ) ) );
+    connect( m_writerJob, TQT_SIGNAL( finished( bool ) ), this, TQT_SLOT( slotWriterJobFinished( bool ) ) );
+    connect( m_writerJob, TQT_SIGNAL( newTask( const TQString& ) ), this, TQT_SIGNAL( newTask( const TQString& ) ) );
+    connect( m_writerJob, TQT_SIGNAL( newSubTask( const TQString& ) ), this, TQT_SIGNAL( newSubTask( const TQString& ) ) );
+    connect( m_writerJob, TQT_SIGNAL( debuggingOutput( const TQString&, const TQString& ) ), this, TQT_SIGNAL( debuggingOutput( const TQString&, const TQString& ) ) );
 
     return true;
 }
@@ -461,7 +461,7 @@ void K3bVcdJob::slotProcessedSize( int cs, int ts )
 
 void K3bVcdJob::slotWriterNextTrack( int t, int tt )
 {
-    emit newSubTask( i18n( "Writing Track %1 of %2" ).arg( t ).arg( tt ) );
+    emit newSubTask( i18n( "Writing Track %1 of %2" ).tqarg( t ).tqarg( tt ) );
 }
 
 void K3bVcdJob::slotWriterJobFinished( bool success )
@@ -471,20 +471,20 @@ void K3bVcdJob::slotWriterJobFinished( bool success )
 
     if ( m_currentcopy >= m_doc->copies() ) {
         // remove bin-file if it is unfinished or the user selected to remove image
-        if ( QFile::exists( m_doc->vcdImage() ) ) {
+        if ( TQFile::exists( m_doc->vcdImage() ) ) {
             if ( !m_doc->onTheFly() && m_doc->removeImages() || !m_imageFinished ) {
-                emit infoMessage( i18n( "Removing Binary file %1" ).arg( m_doc->vcdImage() ), K3bJob::SUCCESS );
-                QFile::remove
+                emit infoMessage( i18n( "Removing Binary file %1" ).tqarg( m_doc->vcdImage() ), K3bJob::SUCCESS );
+                TQFile::remove
                     ( m_doc->vcdImage() );
                 m_doc->setVcdImage( "" );
             }
         }
 
         // remove cue-file if it is unfinished or the user selected to remove image
-        if ( QFile::exists( m_cueFile ) ) {
+        if ( TQFile::exists( m_cueFile ) ) {
             if ( !m_doc->onTheFly() && m_doc->removeImages() || !m_imageFinished ) {
-                emit infoMessage( i18n( "Removing Cue file %1" ).arg( m_cueFile ), K3bJob::SUCCESS );
-                QFile::remove
+                emit infoMessage( i18n( "Removing Cue file %1" ).tqarg( m_cueFile ), K3bJob::SUCCESS );
+                TQFile::remove
                     ( m_cueFile );
                 m_cueFile = "";
             }
@@ -506,38 +506,38 @@ void K3bVcdJob::slotWriterJobFinished( bool success )
     }
 }
 
-void K3bVcdJob::parseInformation( const QString &text )
+void K3bVcdJob::parseInformation( const TQString &text )
 {
     // parse warning
-    if ( text.contains( "mpeg user scan data: one or more BCD fields out of range for" ) ) {
-        int index = text.find( " for" );
+    if ( text.tqcontains( "mpeg user scan data: one or more BCD fields out of range for" ) ) {
+        int index = text.tqfind( " for" );
 
-        emit infoMessage( i18n( "One or more BCD fields out of range for %1" ).arg( text.mid( index + 4 ).stripWhiteSpace() ), K3bJob::WARNING );
+        emit infoMessage( i18n( "One or more BCD fields out of range for %1" ).tqarg( text.mid( index + 4 ).stripWhiteSpace() ), K3bJob::WARNING );
 
-    } else if ( text.contains( "mpeg user scan data: from now on, scan information data errors will not be reported anymore" ) ) {
+    } else if ( text.tqcontains( "mpeg user scan data: from now on, scan information data errors will not be reported anymore" ) ) {
         emit infoMessage( i18n( "From now on, scan information data errors will not be reported anymore" ), K3bJob::INFO );
         emit infoMessage( i18n( "Consider enabling the 'update scan offsets' option, if it is not enabled already." ), K3bJob::INFO );
 
-    } else if ( text.contains( "APS' pts seems out of order (actual pts" ) ) {
-        int index = text.find( "(actual pts" );
-        int index2 = text.find( ", last seen pts" );
-        int index3 = text.find( ") -- ignoring this aps" );
+    } else if ( text.tqcontains( "APS' pts seems out of order (actual pts" ) ) {
+        int index = text.tqfind( "(actual pts" );
+        int index2 = text.tqfind( ", last seen pts" );
+        int index3 = text.tqfind( ") -- ignoring this aps" );
 
-        emit infoMessage( i18n( "APS' pts seems out of order (actual pts %1, last seen pts %2)" ).arg( text.mid( index + 12, index2 - index - 12 ).stripWhiteSpace() ).arg( text.mid( index2 + 14, index3 - index2 - 14 ).stripWhiteSpace() ), K3bJob::WARNING );
+        emit infoMessage( i18n( "APS' pts seems out of order (actual pts %1, last seen pts %2)" ).tqarg( text.mid( index + 12, index2 - index - 12 ).stripWhiteSpace() ).tqarg( text.mid( index2 + 14, index3 - index2 - 14 ).stripWhiteSpace() ), K3bJob::WARNING );
         emit infoMessage( i18n( "Ignoring this aps" ), K3bJob::INFO );
 
-    } else if ( text.contains( "bad packet at packet" ) ) {
-        int index = text.find( "at packet #" );
-        int index2 = text.find( "(stream byte offset" );
-        int index3 = text.find( ") -- remaining " );
-        int index4 = text.find( "bytes of stream will be ignored" );
+    } else if ( text.tqcontains( "bad packet at packet" ) ) {
+        int index = text.tqfind( "at packet #" );
+        int index2 = text.tqfind( "(stream byte offset" );
+        int index3 = text.tqfind( ") -- remaining " );
+        int index4 = text.tqfind( "bytes of stream will be ignored" );
 
-        emit infoMessage( i18n( "Bad packet at packet #%1 (stream byte offset %2)" ).arg( text.mid( index + 11, index2 - index - 11 ).stripWhiteSpace() ).arg( text.mid( index2 + 19, index3 - index2 - 19 ).stripWhiteSpace() ), K3bJob::WARNING );
-        emit infoMessage( i18n( "Remaining %1 bytes of stream will be ignored." ).arg( text.mid( index3 + 15, index4 - index3 - 15 ).stripWhiteSpace() ), K3bJob::WARNING );
+        emit infoMessage( i18n( "Bad packet at packet #%1 (stream byte offset %2)" ).tqarg( text.mid( index + 11, index2 - index - 11 ).stripWhiteSpace() ).tqarg( text.mid( index2 + 19, index3 - index2 - 19 ).stripWhiteSpace() ), K3bJob::WARNING );
+        emit infoMessage( i18n( "Remaining %1 bytes of stream will be ignored." ).tqarg( text.mid( index3 + 15, index4 - index3 - 15 ).stripWhiteSpace() ), K3bJob::WARNING );
     }
 }
 
-QString K3bVcdJob::jobDescription() const
+TQString K3bVcdJob::jobDescription() const
 {
     switch ( m_doc->vcdType() ) {
         case K3bVcdDoc::VCD11:
@@ -546,7 +546,7 @@ QString K3bVcdJob::jobDescription() const
             return i18n( "Writing Video CD (Version 2.0)" );
         case K3bVcdDoc::SVCD10:
             return i18n( "Writing Super Video CD" );
-        case K3bVcdDoc::HQVCD:
+        case K3bVcdDoc::HTQVCD:
             return i18n( "Writing High-Quality Video CD" );
         default:
             return i18n( "Writing Video CD" );
@@ -554,14 +554,14 @@ QString K3bVcdJob::jobDescription() const
 }
 
 
-QString K3bVcdJob::jobDetails() const
+TQString K3bVcdJob::jobDetails() const
 {
     return ( i18n( "1 MPEG (%1)",
                    "%n MPEGs (%1)",
-                   m_doc->tracks() ->count() ).arg( KIO::convertSize( m_doc->size() ) )
+                   m_doc->tracks() ->count() ).tqarg( KIO::convertSize( m_doc->size() ) )
              + ( m_doc->copies() > 1
                  ? i18n( " - %n copy", " - %n copies", m_doc->copies() )
-                 : QString::null ) );
+                 : TQString() ) );
 }
 
 #include "k3bvcdjob.moc"

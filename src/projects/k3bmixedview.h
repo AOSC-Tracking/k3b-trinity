@@ -21,11 +21,11 @@
 #include <kurl.h>
 
 class K3bMixedDoc;
-class QWidgetStack;
+class TQWidgetStack;
 class K3bDataFileView;
 class K3bMixedDirTreeView;
 class K3bAudioTrackView;
-class QListViewItem;
+class TQListViewItem;
 class K3bDirItem;
 class K3bAudioTrackPlayer;
 
@@ -33,9 +33,10 @@ class K3bAudioTrackPlayer;
 class K3bMixedView : public K3bView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bMixedView( K3bMixedDoc* doc, QWidget* parent = 0, const char* name = 0 );
+  K3bMixedView( K3bMixedDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
   ~K3bMixedView();
 
   K3bDirItem* currentDir() const;
@@ -47,7 +48,7 @@ class K3bMixedView : public K3bView
   void addUrls( const KURL::List& );
 
  protected:
-  K3bProjectBurnDialog* newBurnDialog( QWidget* parent = 0, const char* name = 0 );
+  K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
 
  private slots:
   void slotAudioTreeSelected();
@@ -56,7 +57,7 @@ class K3bMixedView : public K3bView
  private:
   K3bMixedDoc* m_doc;
 
-  QWidgetStack* m_widgetStack;
+  TQWidgetStack* m_widgetStack;
 
   K3bMixedDirTreeView* m_mixedDirTreeView;
   K3bDataFileView* m_dataFileView;

@@ -14,7 +14,7 @@ noinst_HEADERS   = kfile_k3bprojectfileplugin.h
 kde_module_LTLIBRARIES = kfile_k3b.la
 
 kfile_k3b_la_SOURCES = kfile_k3bprojectfileplugin.cpp
-kfile_k3b_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
+kfile_k3b_la_LDFLAGS = $(all_libraries) $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI) $(LIB_KIO) -module $(KDE_PLUGIN)
 kfile_k3b_la_LIBADD = $(LIB_KIO) ../../libk3b/libk3b.la ../../src/projects/kostore/libkostore.la
 
 # let automoc handle all of the meta source files (moc)

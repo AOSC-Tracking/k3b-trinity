@@ -16,17 +16,17 @@
 
 #include "k3bcddblocalquery.h"
 
-#include <qdir.h>
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 #include <kapplication.h>
 #include <klocale.h>
 #include <kdebug.h>
 
 
-K3bCddbLocalQuery::K3bCddbLocalQuery( QObject* parent , const char* name )
-  : K3bCddbQuery( parent, name )
+K3bCddbLocalQuery::K3bCddbLocalQuery( TQObject* tqparent , const char* name )
+  : K3bCddbQuery( tqparent, name )
 {
 }
 
@@ -38,33 +38,33 @@ K3bCddbLocalQuery::~K3bCddbLocalQuery()
 
 void K3bCddbLocalQuery::doQuery()
 {
-  emit infoMessage( i18n("Searching entry in %1").arg( m_cddbDir ) );
+  emit infoMessage( i18n("Searching entry in %1").tqarg( m_cddbDir ) );
   kapp->processEvents(); //BAD!
 
-  QString path = preparePath( m_cddbDir );
+  TQString path = preparePath( m_cddbDir );
 
   kdDebug() << "(K3bCddbLocalQuery) searching in dir " << path << " for " 
-	    << QString::number( toc().discId(), 16 ).rightJustify( 8, '0' ) << endl;
+	    << TQString::number( toc().discId(), 16 ).rightJustify( 8, '0' ) << endl;
 
-  for( QStringList::const_iterator it = categories().begin();
+  for( TQStringList::const_iterator it = categories().begin();
        it != categories().end(); ++it ) {
 
-    QString file = path + *it + "/" +  QString::number( toc().discId(), 16 ).rightJustify( 8, '0' );
+    TQString file = path + *it + "/" +  TQString::number( toc().discId(), 16 ).rightJustify( 8, '0' );
 
-    if( QFile::exists( file ) ) {
+    if( TQFile::exists( file ) ) {
       // found file
       
-      QFile f( file );
+      TQFile f( file );
       if( !f.open( IO_ReadOnly ) ) {
 	kdDebug() << "(K3bCddbLocalQuery) Could not open file" << endl;
       }
       else {
-	QTextStream t( &f );
+	TQTextStream t( &f );
 
 	K3bCddbResultEntry entry;
 	parseEntry( t, entry );
 	K3bCddbResultHeader header;
-	header.discid = QString::number( toc().discId(), 16 ).rightJustify( 8, '0' );
+	header.discid = TQString::number( toc().discId(), 16 ).rightJustify( 8, '0' );
 	header.category = *it;
 	header.title = entry.cdTitle;
 	header.artist = entry.cdArtist;
@@ -94,15 +94,15 @@ void K3bCddbLocalQuery::doQuery()
 
 void K3bCddbLocalQuery::doMatchQuery()
 {
-  QString path = preparePath( m_cddbDir ) + header().category + "/" + header().discid;
+  TQString path = preparePath( m_cddbDir ) + header().category + "/" + header().discid;
 
-  QFile f( path );
+  TQFile f( path );
   if( !f.open( IO_ReadOnly ) ) {
     kdDebug() << "(K3bCddbLocalQuery) Could not open file" << endl;
     setError( READ_ERROR );
   }
   else {
-    QTextStream t( &f );
+    TQTextStream t( &f );
     
     parseEntry( t, result() );
     result().discid = header().discid;
@@ -113,13 +113,13 @@ void K3bCddbLocalQuery::doMatchQuery()
 }
 
 
-QString K3bCddbLocalQuery::preparePath( const QString& p ) 
+TQString K3bCddbLocalQuery::preparePath( const TQString& p ) 
 {
-  QString path = p;
+  TQString path = p;
   if( path.startsWith( "~" ) )
-    path.replace( 0, 1, QDir::homeDirPath() );
+    path.tqreplace( 0, 1, TQDir::homeDirPath() );
   else if( !path.startsWith( "/" ) )
-    path.prepend( QDir::homeDirPath() );
+    path.prepend( TQDir::homeDirPath() );
   if( path[path.length()-1] != '/' )
     path.append( "/" );
 

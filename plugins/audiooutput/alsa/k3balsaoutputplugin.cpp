@@ -25,8 +25,8 @@
 #include <kconfig.h>
 #include <kdialog.h>
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 
 #include <alsa/asoundlib.h>
 #include <alsa/pcm.h>
@@ -46,7 +46,7 @@ public:
   snd_pcm_t *pcm_playback;
 
   bool error;  
-  QString lastErrorMessage;
+  TQString lastErrorMessage;
 
   bool swap;
 
@@ -54,8 +54,8 @@ public:
 };
 
 
-K3bAlsaOutputPlugin::K3bAlsaOutputPlugin( QObject* parent, const char* name )
-  : K3bAudioOutputPlugin( parent, name )
+K3bAlsaOutputPlugin::K3bAlsaOutputPlugin( TQObject* tqparent, const char* name )
+  : K3bAudioOutputPlugin( tqparent, name )
 {
   d = new Private;
 }
@@ -109,7 +109,7 @@ bool K3bAlsaOutputPlugin::recoverFromError( int err )
   if( err == -EPIPE ) {
     err = snd_pcm_prepare( d->pcm_playback );
     if( err < 0 ) {
-      d->lastErrorMessage = i18n("Internal Alsa problem: %1").arg(snd_strerror(err));
+      d->lastErrorMessage = i18n("Internal Alsa problem: %1").tqarg(snd_strerror(err));
       return false;
     }
   }
@@ -121,7 +121,7 @@ bool K3bAlsaOutputPlugin::recoverFromError( int err )
       // unable to wake up pcm device, restart it
       err = snd_pcm_prepare( d->pcm_playback );
       if( err < 0 ) {
-	d->lastErrorMessage = i18n("Internal Alsa problem: %1").arg(snd_strerror(err));
+	d->lastErrorMessage = i18n("Internal Alsa problem: %1").tqarg(snd_strerror(err));
 	return false;
       }
     }
@@ -149,11 +149,11 @@ bool K3bAlsaOutputPlugin::init()
   cleanup();
 
   KConfigGroup c( k3bcore->config(), "Alsa Output Plugin" );
-  QString alsaDevice = c.readEntry( "output device", "default" );
+  TQString alsaDevice = c.readEntry( "output device", "default" );
 
   int err = snd_pcm_open( &d->pcm_playback, alsaDevice.local8Bit(), SND_PCM_STREAM_PLAYBACK, 0 );
   if( err < 0 ) {
-    d->lastErrorMessage = i18n("Could not open alsa audio device '%1' (%2).").arg(alsaDevice).arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not open alsa audio device '%1' (%2).").tqarg(alsaDevice).tqarg(snd_strerror(err));
     d->error = true;
     return false;
   }
@@ -174,20 +174,20 @@ bool K3bAlsaOutputPlugin::setupHwParams()
   int err = 0;
 
   if( ( err = snd_pcm_hw_params_malloc( &hw_params ) ) < 0 ) {
-    d->lastErrorMessage = i18n("Could not allocate hardware parameter structure (%1)").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not allocate hardware parameter structure (%1)").tqarg(snd_strerror(err));
     d->error = true;
     return false;
   }
                                  
   if( (err = snd_pcm_hw_params_any( d->pcm_playback, hw_params )) < 0) {
-    d->lastErrorMessage = i18n("Could not initialize hardware parameter structure (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not initialize hardware parameter structure (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
   }
         
   if( (err = snd_pcm_hw_params_set_access( d->pcm_playback, hw_params, SND_PCM_ACCESS_RW_INTERLEAVED)) < 0) {
-    d->lastErrorMessage = i18n("Could not set access type (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not set access type (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
@@ -195,7 +195,7 @@ bool K3bAlsaOutputPlugin::setupHwParams()
 
   if( (err = snd_pcm_hw_params_set_format( d->pcm_playback, hw_params, SND_PCM_FORMAT_S16_BE)) < 0) {
     if( (err = snd_pcm_hw_params_set_format( d->pcm_playback, hw_params, SND_PCM_FORMAT_S16_LE)) < 0) {
-      d->lastErrorMessage = i18n("Could not set sample format (%1).").arg(snd_strerror(err));
+      d->lastErrorMessage = i18n("Could not set sample format (%1).").tqarg(snd_strerror(err));
       snd_pcm_hw_params_free( hw_params );
       d->error = true;
       return false;
@@ -208,7 +208,7 @@ bool K3bAlsaOutputPlugin::setupHwParams()
 
   d->sampleRate = 44100;
   if( (err = snd_pcm_hw_params_set_rate_near( d->pcm_playback, hw_params, &d->sampleRate, 0)) < 0) {
-    d->lastErrorMessage = i18n("Could not set sample rate (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not set sample rate (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
@@ -217,14 +217,14 @@ bool K3bAlsaOutputPlugin::setupHwParams()
   kdDebug() << "(K3bAlsaOutputPlugin) samplerate set to " << d->sampleRate << endl;
 
   if( (err = snd_pcm_hw_params_set_channels( d->pcm_playback, hw_params, 2)) < 0) {
-    d->lastErrorMessage = i18n("Could not set channel count (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not set channel count (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
   }
 
   if( (err = snd_pcm_hw_params( d->pcm_playback, hw_params )) < 0) {
-    d->lastErrorMessage = i18n("Could not set parameters (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not set parameters (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
@@ -236,28 +236,28 @@ bool K3bAlsaOutputPlugin::setupHwParams()
 }
 
 
-QString K3bAlsaOutputPlugin::lastErrorMessage() const
+TQString K3bAlsaOutputPlugin::lastErrorMessage() const
 {
   return d->lastErrorMessage;
 }
 
 
-K3bPluginConfigWidget* K3bAlsaOutputPlugin::createConfigWidget( QWidget* parent, 
+K3bPluginConfigWidget* K3bAlsaOutputPlugin::createConfigWidget( TQWidget* tqparent, 
 								const char* name ) const
 {
-  return new K3bAlsaOutputPluginConfigWidget( parent, name );
+  return new K3bAlsaOutputPluginConfigWidget( tqparent, name );
 }
 
 
 
-K3bAlsaOutputPluginConfigWidget::K3bAlsaOutputPluginConfigWidget( QWidget* parent, const char* name )
-  : K3bPluginConfigWidget( parent, name )
+K3bAlsaOutputPluginConfigWidget::K3bAlsaOutputPluginConfigWidget( TQWidget* tqparent, const char* name )
+  : K3bPluginConfigWidget( tqparent, name )
 {
-  QHBoxLayout* l = new QHBoxLayout( this );
+  TQHBoxLayout* l = new TQHBoxLayout( this );
   l->setSpacing( KDialog::spacingHint() );
   l->setAutoAdd( true );
 
-  (void)new QLabel( i18n("Alsa device:"), this );
+  (void)new TQLabel( i18n("Alsa device:"), this );
 
   m_comboDevice = new KComboBox( this );
   m_comboDevice->setEditable( true );

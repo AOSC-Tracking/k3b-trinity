@@ -20,18 +20,19 @@
 #include <k3bvideodvd.h>
 #include <k3bmedium.h>
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 
 
 class K3bVideoDVDRippingPreview;
-class QHideEvent;
+class TQHideEvent;
 
 class K3bVideoDVDRippingTitleListView : public K3bListView
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingTitleListView( QWidget* parent );
+  K3bVideoDVDRippingTitleListView( TQWidget* tqparent );
   ~K3bVideoDVDRippingTitleListView();
 
   void setVideoDVD( const K3bVideoDVD::VideoDVD& dvd );
@@ -40,14 +41,14 @@ class K3bVideoDVDRippingTitleListView : public K3bListView
   void slotPreviewDone( bool );
 
  private:
-  void hideEvent( QHideEvent* );
+  void hideEvent( TQHideEvent* );
 
   class TitleViewItem;
   class TitleToolTip;
 
   TitleToolTip* m_toolTip;
 
-  QValueVector<TitleViewItem*> m_itemMap;
+  TQValueVector<TitleViewItem*> m_itemMap;
   K3bVideoDVDRippingPreview* m_previewGen;
   unsigned int m_currentPreviewTitle;
 

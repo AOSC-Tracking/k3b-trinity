@@ -61,7 +61,7 @@ const K3bExternalBin* K3bMkisofsHandler::initMkisofs()
   if( d->mkisofsBin ) {
     if( !d->mkisofsBin->copyright.isEmpty() )
       handleMkisofsInfoMessage( i18n("Using %1 %2 - Copyright (C) %3")
-				.arg("mkisofs").arg(d->mkisofsBin->version).arg(d->mkisofsBin->copyright),
+				.tqarg("mkisofs").tqarg(d->mkisofsBin->version).tqarg(d->mkisofsBin->copyright),
 				K3bJob::INFO );
 
     d->firstProgressValue = -1;
@@ -76,14 +76,14 @@ const K3bExternalBin* K3bMkisofsHandler::initMkisofs()
 }
 
 
-void K3bMkisofsHandler::parseMkisofsOutput( const QString& line )
+void K3bMkisofsHandler::parseMkisofsOutput( const TQString& line )
 {
   if( !line.isEmpty() ) {
     if( line.startsWith( d->mkisofsBin->path ) ) {
       // error or warning
-      QString errorLine = line.mid( d->mkisofsBin->path.length() + 2 );
+      TQString errorLine = line.mid( d->mkisofsBin->path.length() + 2 );
       if( errorLine.startsWith( "Input/output error. Cannot read from" ) ) {
-	handleMkisofsInfoMessage( i18n("Read error from file '%1'").arg( errorLine.mid( 38, errorLine.length()-40 ) ),
+	handleMkisofsInfoMessage( i18n("Read error from file '%1'").tqarg( errorLine.mid( 38, errorLine.length()-40 ) ),
 				  K3bJob::ERROR );
 	d->readError = true;
       }
@@ -93,17 +93,17 @@ void K3bMkisofsHandler::parseMkisofsOutput( const QString& line )
 	d->readError = true;
       }
     }
-    else if( line.contains( "done, estimate" ) ) {
+    else if( line.tqcontains( "done, estimate" ) ) {
       int p = parseMkisofsProgress( line );
       if( p != -1 )
 	handleMkisofsProgress( p );
     }
-    else if( line.contains( "extents written" ) ) {
+    else if( line.tqcontains( "extents written" ) ) {
       handleMkisofsProgress( 100 );
     }
     else if( line.startsWith( "Incorrectly encoded string" ) ) {
       handleMkisofsInfoMessage( i18n("Encountered an incorrectly encoded filename '%1'")
-				.arg(line.section( QRegExp("[\\(\\)]"), 1, 1 )), K3bJob::ERROR );
+				.tqarg(line.section( TQRegExp("[\\(\\)]"), 1, 1 )), K3bJob::ERROR );
       handleMkisofsInfoMessage( i18n("This may be caused by a system update which changed the local character set."), K3bJob::ERROR );
       handleMkisofsInfoMessage( i18n("You may use convmv (http://j3e.de/linux/convmv/) to fix the filename encoding."), K3bJob::ERROR );
       d->readError = true;
@@ -124,7 +124,7 @@ void K3bMkisofsHandler::parseMkisofsOutput( const QString& line )
 }
 
 
-int K3bMkisofsHandler::parseMkisofsProgress( const QString& line )
+int K3bMkisofsHandler::parseMkisofsProgress( const TQString& line )
 {
   //
   // in multisession mode mkisofs' progress does not start at 0 but at (X+Y)/X
@@ -133,8 +133,8 @@ int K3bMkisofsHandler::parseMkisofsProgress( const QString& line )
   // We just save the first emitted progress value and to some math ;)
   //
 
-  QString perStr = line;
-  perStr.truncate( perStr.find('%') );
+  TQString perStr = line;
+  perStr.truncate( perStr.tqfind('%') );
   bool ok;
   double p = perStr.toDouble( &ok );
   if( !ok ) {

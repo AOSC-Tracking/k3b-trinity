@@ -16,7 +16,7 @@
 #ifndef K3B_VCD_OPTIONS_H
 #define K3B_VCD_OPTIONS_H
 
-#include <qstring.h>
+#include <tqstring.h>
 #include "k3b_export.h"
 
 class KConfigBase;
@@ -25,41 +25,41 @@ class LIBK3B_EXPORT K3bVcdOptions
 {
     public:
         K3bVcdOptions();
-        const QString& volumeId() const
+        const TQString& volumeId() const
         {
             return m_volumeID;
         }
-        const QString& albumId() const
+        const TQString& albumId() const
         {
             return m_albumID;
         }
-        const QString& volumeSetId() const
+        const TQString& volumeSetId() const
         {
             return m_volumeSetId;
         }
-        const QString& preparer() const
+        const TQString& preparer() const
         {
             return m_preparer;
         }
-        const QString& publisher() const
+        const TQString& publisher() const
         {
             return m_publisher;
         }
 
-        const QString& applicationId() const
+        const TQString& applicationId() const
         {
             return m_applicationId;
         }
-        const QString& systemId() const
+        const TQString& systemId() const
         {
             return m_systemId;
         }
 
-        const QString& vcdClass() const
+        const TQString& vcdClass() const
         {
             return m_vcdclass;
         }
-        const QString& vcdVersion() const
+        const TQString& vcdVersion() const
         {
             return m_vcdversion;
         }
@@ -140,32 +140,32 @@ class LIBK3B_EXPORT K3bVcdOptions
             return m_cdisize;
         }
 
-        void setAlbumId( const QString& s )
+        void setAlbumId( const TQString& s )
         {
             m_albumID = s;
         }
-        void setVolumeId( const QString& s )
+        void setVolumeId( const TQString& s )
         {
             m_volumeID = s;
         }
-        void setVolumeSetId( const QString& s )
+        void setVolumeSetId( const TQString& s )
         {
             m_volumeSetId = s;
         }
-        void setPreparer( const QString& s )
+        void setPreparer( const TQString& s )
         {
             m_preparer = s;
         }
-        void setPublisher( const QString& s )
+        void setPublisher( const TQString& s )
         {
             m_publisher = s;
         }
 
-        void setVcdClass( const QString& s )
+        void setVcdClass( const TQString& s )
         {
             m_vcdclass = s;
         }
-        void setVcdVersion( const QString& s )
+        void setVcdVersion( const TQString& s )
         {
             m_vcdversion = s;
         }
@@ -335,18 +335,18 @@ class LIBK3B_EXPORT K3bVcdOptions
         bool m_pbcnumkeysenabled;
 
         // volume descriptor
-        QString m_volumeID;
-        QString m_albumID;
-        QString m_volumeSetId;
+        TQString m_volumeID;
+        TQString m_albumID;
+        TQString m_volumeSetId;
 
-        QString m_preparer;
-        QString m_publisher;
+        TQString m_preparer;
+        TQString m_publisher;
 
-        QString m_applicationId;
-        QString m_systemId;
+        TQString m_applicationId;
+        TQString m_systemId;
 
-        QString m_vcdclass;
-        QString m_vcdversion;
+        TQString m_vcdclass;
+        TQString m_vcdversion;
 
         int m_pregapleadout;
         int m_pregaptrack;

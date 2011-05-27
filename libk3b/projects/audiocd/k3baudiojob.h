@@ -22,8 +22,8 @@
 
 class K3bAudioDoc;
 class K3bAudioImager;
-class QFile;
-class QDataStream;
+class TQFile;
+class TQDataStream;
 class K3bAbstractWriter;
 class KTempFile;
 class K3bCdrecordWriter;
@@ -38,16 +38,17 @@ class K3bAudioMaxSpeedJob;
 class K3bAudioJob : public K3bBurnJob
 {
   Q_OBJECT
+  TQ_OBJECT
 	
  public:
-  K3bAudioJob( K3bAudioDoc*, K3bJobHandler*, QObject* parent = 0 );
+  K3bAudioJob( K3bAudioDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
   ~K3bAudioJob();
 	
   K3bDoc* doc() const;
   K3bDevice::Device* writer() const;
 
-  QString jobDescription() const;
-  QString jobDetails() const;
+  TQString jobDescription() const;
+  TQString jobDetails() const;
 		
  public slots:
   void cancel();

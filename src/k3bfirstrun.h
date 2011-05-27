@@ -22,12 +22,13 @@
 class K3bFirstRun : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  static void run( QWidget* parent = 0 );
+  static void run( TQWidget* tqparent = 0 );
 
  private:
-  K3bFirstRun( QWidget* parent );
+  K3bFirstRun( TQWidget* tqparent );
   ~K3bFirstRun();
 };
 

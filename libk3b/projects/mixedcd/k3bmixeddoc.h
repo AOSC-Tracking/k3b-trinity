@@ -22,23 +22,24 @@
 
 #include <k3btoc.h>
 #include "k3b_export.h"
-class QDomDocument;
-class QDomElement;
+class TQDomDocument;
+class TQDomElement;
 class K3bBurnJob;
 //class K3bView;
-class QWidget;
+class TQWidget;
 class KConfig;
 
 
 class LIBK3B_EXPORT K3bMixedDoc : public K3bDoc
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public: 
-  K3bMixedDoc( QObject* parent = 0 );
+  K3bMixedDoc( TQObject* tqparent = 0 );
   ~K3bMixedDoc();
 
-  QString name() const;
+  TQString name() const;
 
   bool newDocument();
 
@@ -50,7 +51,7 @@ class LIBK3B_EXPORT K3bMixedDoc : public K3bDoc
 
   int numOfTracks() const;
 
-  K3bBurnJob* newBurnJob( K3bJobHandler*, QObject* parent = 0 );
+  K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* tqparent = 0 );
 
   K3bAudioDoc* audioDoc() const { return m_audioDoc; }
   K3bDataDoc* dataDoc() const { return m_dataDoc; }
@@ -80,9 +81,9 @@ class LIBK3B_EXPORT K3bMixedDoc : public K3bDoc
   void addUrls( const KURL::List& urls );
 
  protected:
-  bool loadDocumentData( QDomElement* );
-  bool saveDocumentData( QDomElement* );
-  QString typeString() const { return "mixed"; }
+  bool loadDocumentData( TQDomElement* );
+  bool saveDocumentData( TQDomElement* );
+  TQString typeString() const { return "mixed"; }
   
  private:
   K3bDataDoc* m_dataDoc;

@@ -23,17 +23,17 @@
 #include <klocale.h>
 
 
-K3bAudioRipJob::K3bAudioRipJob( K3bJobHandler* hdl, QObject* parent )
-  : K3bJob( hdl, parent )
+K3bAudioRipJob::K3bAudioRipJob( K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bJob( hdl, tqparent )
 {
   m_thread = new K3bAudioRipThread();
   m_threadJob = new K3bThreadJob( m_thread, this, this );
   connectSubJob( m_threadJob,
-		 SLOT(slotRippingFinished(bool)),
-		 SIGNAL(newTask(const QString&)),
-		 SIGNAL(newSubTask(const QString&)),
-		 SIGNAL(percent(int)),
-		 SIGNAL(subPercent(int)) );
+		 TQT_SLOT(slotRippingFinished(bool)),
+		 TQT_SIGNAL(newTask(const TQString&)),
+		 TQT_SIGNAL(newSubTask(const TQString&)),
+		 TQT_SIGNAL(percent(int)),
+		 TQT_SIGNAL(subPercent(int)) );
 }
 
 
@@ -42,13 +42,13 @@ K3bAudioRipJob::~K3bAudioRipJob()
 }
 
 
-QString K3bAudioRipJob::jobDescription() const
+TQString K3bAudioRipJob::jobDescription() const
 {
   return m_thread->jobDescription();
 }
 
 
-QString K3bAudioRipJob::jobDetails() const
+TQString K3bAudioRipJob::jobDetails() const
 {
   return m_thread->jobDetails();
 }

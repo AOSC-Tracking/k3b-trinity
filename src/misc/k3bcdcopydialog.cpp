@@ -44,39 +44,39 @@
 #include <kapplication.h>
 #include <kiconloader.h>
 
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qcombobox.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qptrlist.h>
-#include <qlabel.h>
-#include <qtooltip.h>
-#include <qtabwidget.h>
-#include <qwhatsthis.h>
-#include <qhbox.h>
-#include <qpushbutton.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
-#include <qsizepolicy.h>
-#include <qfile.h>
-#include <qfileinfo.h>
+#include <tqcheckbox.h>
+#include <tqspinbox.h>
+#include <tqcombobox.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqptrlist.h>
+#include <tqlabel.h>
+#include <tqtooltip.h>
+#include <tqtabwidget.h>
+#include <tqwhatsthis.h>
+#include <tqhbox.h>
+#include <tqpushbutton.h>
+#include <tqbuttongroup.h>
+#include <tqradiobutton.h>
+#include <tqsizepolicy.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
 
 
-K3bCdCopyDialog::K3bCdCopyDialog( QWidget *parent, const char *name, bool modal )
-  : K3bInteractionDialog( parent, name, i18n("CD Copy"), i18n("and CD Cloning"),
+K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *tqparent, const char *name, bool modal )
+  : K3bInteractionDialog( tqparent, name, i18n("CD Copy"), i18n("and CD Cloning"),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  "CD Copy",
 			  modal )
 {
-  QWidget* main = mainWidget();
+  TQWidget* main = mainWidget();
 
-  QGridLayout* mainGrid = new QGridLayout( main );
+  TQGridLayout* mainGrid = new TQGridLayout( main );
   mainGrid->setSpacing( spacingHint() );
   mainGrid->setMargin( 0 );
 
-  QGroupBox* groupSource = new QGroupBox( 1, Qt::Vertical, i18n("Source Medium"), main );
+  TQGroupBox* groupSource = new TQGroupBox( 1, Qt::Vertical, i18n("Source Medium"), main );
   groupSource->setInsideSpacing( spacingHint() );
   groupSource->setInsideMargin( marginHint() );
   m_comboSourceDevice = new K3bMediaSelectionComboBox( groupSource );
@@ -89,36 +89,36 @@ K3bCdCopyDialog::K3bCdCopyDialog( QWidget *parent, const char *name, bool modal 
   m_writerSelectionWidget->setSupportedWritingApps( K3b::CDRECORD );
 
   // tab widget --------------------
-  QTabWidget* tabWidget = new QTabWidget( main );
+  TQTabWidget* tabWidget = new TQTabWidget( main );
 
   //
   // option tab --------------------
   //
-  QWidget* optionTab = new QWidget( tabWidget );
-  QGridLayout* optionTabGrid = new QGridLayout( optionTab );
+  TQWidget* optionTab = new TQWidget( tabWidget );
+  TQGridLayout* optionTabGrid = new TQGridLayout( optionTab );
   optionTabGrid->setSpacing( spacingHint() );
   optionTabGrid->setMargin( marginHint() );
 
-  QGroupBox* groupCopyMode = new QGroupBox( 1, Qt::Vertical, i18n("Copy Mode"), optionTab );
+  TQGroupBox* groupCopyMode = new TQGroupBox( 1, Qt::Vertical, i18n("Copy Mode"), optionTab );
   groupCopyMode->setInsideMargin( marginHint() );
   groupCopyMode->setInsideSpacing( spacingHint() );
-  m_comboCopyMode = new QComboBox( groupCopyMode );
+  m_comboCopyMode = new TQComboBox( groupCopyMode );
   m_comboCopyMode->insertItem( i18n("Normal Copy") );
   m_comboCopyMode->insertItem( i18n("Clone Copy") );
 
-  QGroupBox* groupWritingMode = new QGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), optionTab );
+  TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), optionTab );
   groupWritingMode->setInsideMargin( marginHint() );
   m_writingModeWidget = new K3bWritingModeWidget( groupWritingMode );
 
-  QGroupBox* groupCopies = new QGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
+  TQGroupBox* groupCopies = new TQGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
-  QLabel* pixLabel = new QLabel( groupCopies );
+  TQLabel* pixLabel = new TQLabel( groupCopies );
   pixLabel->setPixmap( SmallIcon( "cdcopy", KIcon::SizeMedium ) );
   pixLabel->setScaledContents( false );
-  m_spinCopies = new QSpinBox( 1, 999, 1, groupCopies );
+  m_spinCopies = new TQSpinBox( 1, 999, 1, groupCopies );
 
-  QGroupBox* groupOptions = new QGroupBox( 5, Qt::Vertical, i18n("Settings"), optionTab );
+  TQGroupBox* groupOptions = new TQGroupBox( 5, Qt::Vertical, i18n("Settings"), optionTab );
   groupOptions->setInsideSpacing( spacingHint() );
   groupOptions->setInsideMargin( marginHint() );
   m_checkSimulate = K3bStdGuiItems::simulateCheckbox( groupOptions );
@@ -139,8 +139,8 @@ K3bCdCopyDialog::K3bCdCopyDialog( QWidget *parent, const char *name, bool modal 
   //
   // image tab ------------------
   //
-  QWidget* imageTab = new QWidget( tabWidget );
-  QGridLayout* imageTabGrid = new QGridLayout( imageTab );
+  TQWidget* imageTab = new TQWidget( tabWidget );
+  TQGridLayout* imageTabGrid = new TQGridLayout( imageTab );
   imageTabGrid->setSpacing( spacingHint() );
   imageTabGrid->setMargin( marginHint() );
 
@@ -154,35 +154,35 @@ K3bCdCopyDialog::K3bCdCopyDialog( QWidget *parent, const char *name, bool modal 
   //
   // advanced tab ------------------
   //
-  QWidget* advancedTab = new QWidget( tabWidget );
-  QGridLayout* advancedTabGrid = new QGridLayout( advancedTab );
+  TQWidget* advancedTab = new TQWidget( tabWidget );
+  TQGridLayout* advancedTabGrid = new TQGridLayout( advancedTab );
   advancedTabGrid->setSpacing( spacingHint() );
   advancedTabGrid->setMargin( marginHint() );
 
-  m_groupAdvancedDataOptions = new QGroupBox( 3, Qt::Vertical, i18n("Data"), advancedTab, "data_options" );
+  m_groupAdvancedDataOptions = new TQGroupBox( 3, Qt::Vertical, i18n("Data"), advancedTab, "data_options" );
   m_groupAdvancedDataOptions->setInsideSpacing( spacingHint() );
   m_groupAdvancedDataOptions->setInsideMargin( marginHint() );
-  QHBox* box = new QHBox( m_groupAdvancedDataOptions );
+  TQHBox* box = new TQHBox( m_groupAdvancedDataOptions );
   box->setSpacing( spacingHint() );
-  box->setStretchFactor( new QLabel( i18n("Read retries:"), box ), 1 );
-  m_spinDataRetries = new QSpinBox( 1, 128, 1, box );
+  box->setStretchFactor( new TQLabel( i18n("Read retries:"), box ), 1 );
+  m_spinDataRetries = new TQSpinBox( 1, 128, 1, box );
   m_checkIgnoreDataReadErrors = K3bStdGuiItems::ignoreAudioReadErrorsCheckBox( m_groupAdvancedDataOptions );
-  m_checkNoCorrection = new QCheckBox( i18n("No error correction"), m_groupAdvancedDataOptions );
+  m_checkNoCorrection = new TQCheckBox( i18n("No error correction"), m_groupAdvancedDataOptions );
 
-  m_groupAdvancedAudioOptions = new QGroupBox( 5, Qt::Vertical, i18n("Audio"), advancedTab, "audio_options" );
+  m_groupAdvancedAudioOptions = new TQGroupBox( 5, Qt::Vertical, i18n("Audio"), advancedTab, "audio_options" );
   m_groupAdvancedAudioOptions->setInsideSpacing( spacingHint() );
   m_groupAdvancedAudioOptions->setInsideMargin( marginHint() );
-  box = new QHBox( m_groupAdvancedAudioOptions );
+  box = new TQHBox( m_groupAdvancedAudioOptions );
   box->setSpacing( spacingHint() );
-  box->setStretchFactor( new QLabel( i18n("Read retries:"), box ), 1 );
-  m_spinAudioRetries = new QSpinBox( 1, 128, 1, box );
+  box->setStretchFactor( new TQLabel( i18n("Read retries:"), box ), 1 );
+  m_spinAudioRetries = new TQSpinBox( 1, 128, 1, box );
   m_checkIgnoreAudioReadErrors = K3bStdGuiItems::ignoreAudioReadErrorsCheckBox( m_groupAdvancedAudioOptions );
-  box = new QHBox( m_groupAdvancedAudioOptions );
+  box = new TQHBox( m_groupAdvancedAudioOptions );
   box->setSpacing( spacingHint() );
-  box->setStretchFactor(new QLabel( i18n("Paranoia mode:"), box ), 1 );
+  box->setStretchFactor(new TQLabel( i18n("Paranoia mode:"), box ), 1 );
   m_comboParanoiaMode = K3bStdGuiItems::paranoiaModeComboBox( box );
-  m_checkReadCdText = new QCheckBox( i18n("Copy CD-Text"), m_groupAdvancedAudioOptions );
-  m_checkPrefereCdText = new QCheckBox( i18n("Prefer CD-Text"), m_groupAdvancedAudioOptions );
+  m_checkReadCdText = new TQCheckBox( i18n("Copy CD-Text"), m_groupAdvancedAudioOptions );
+  m_checkPrefereCdText = new TQCheckBox( i18n("Prefer CD-Text"), m_groupAdvancedAudioOptions );
 
   advancedTabGrid->addWidget( m_groupAdvancedDataOptions, 0, 1 );
   advancedTabGrid->addWidget( m_groupAdvancedAudioOptions, 0, 0 );
@@ -195,38 +195,38 @@ K3bCdCopyDialog::K3bCdCopyDialog( QWidget *parent, const char *name, bool modal 
   mainGrid->setRowStretch( 2, 1 );
 
 
-  connect( m_comboSourceDevice, SIGNAL(selectionChanged(K3bDevice::Device*)), this, SLOT(slotToggleAll()) );
-  connect( m_comboSourceDevice, SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, SLOT(slotSourceMediumChanged(K3bDevice::Device*)) );
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged()), this, SLOT(slotToggleAll()) );
-  connect( m_writerSelectionWidget, SIGNAL(writerChanged(K3bDevice::Device*)),
-	   m_writingModeWidget, SLOT(setDevice(K3bDevice::Device*)) );
-  connect( m_writingModeWidget, SIGNAL(writingModeChanged(int)), this, SLOT(slotToggleAll()) );
-  connect( m_checkCacheImage, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_checkSimulate, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_checkOnlyCreateImage, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
-  connect( m_comboCopyMode, SIGNAL(activated(int)), this, SLOT(slotToggleAll()) );
-  connect( m_checkReadCdText, SIGNAL(toggled(bool)), this, SLOT(slotToggleAll()) );
+  connect( m_comboSourceDevice, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_comboSourceDevice, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQT_SLOT(slotSourceMediumChanged(K3bDevice::Device*)) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged(K3bDevice::Device*)),
+	   m_writingModeWidget, TQT_SLOT(setDevice(K3bDevice::Device*)) );
+  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkSimulate, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkOnlyCreateImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_comboCopyMode, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkReadCdText, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
 
-  QToolTip::add( m_checkIgnoreDataReadErrors, i18n("Skip unreadable data sectors") );
-  QToolTip::add( m_checkNoCorrection, i18n("Disable the source drive's error correction") );
-  QToolTip::add( m_checkPrefereCdText, i18n("Use CD-Text instead of cddb if available.") );
-  QToolTip::add( m_checkReadCdText, i18n("Copy CD-Text from the source CD if available.") );
+  TQToolTip::add( m_checkIgnoreDataReadErrors, i18n("Skip unreadable data sectors") );
+  TQToolTip::add( m_checkNoCorrection, i18n("Disable the source drive's error correction") );
+  TQToolTip::add( m_checkPrefereCdText, i18n("Use CD-Text instead of cddb if available.") );
+  TQToolTip::add( m_checkReadCdText, i18n("Copy CD-Text from the source CD if available.") );
 
-  QWhatsThis::add( m_checkNoCorrection, i18n("<p>If this option is checked K3b will disable the "
+  TQWhatsThis::add( m_checkNoCorrection, i18n("<p>If this option is checked K3b will disable the "
 					     "source drive's ECC/EDC error correction. This way sectors "
 					     "that are unreadable by intention can be read."
 					     "<p>This may be useful for cloning CDs with copy "
 					     "protection based on corrupted sectors.") );
-  QWhatsThis::add( m_checkReadCdText, i18n("<p>If this option is checked K3b will search for CD-Text on the source CD. "
+  TQWhatsThis::add( m_checkReadCdText, i18n("<p>If this option is checked K3b will search for CD-Text on the source CD. "
 					   "Disable it if your CD drive has problems with reading CD-Text or you want "
 					   "to stick to Cddb info.") );
-  QWhatsThis::add( m_checkPrefereCdText, i18n("<p>If this option is checked and K3b finds CD-Text on the source media it will be "
+  TQWhatsThis::add( m_checkPrefereCdText, i18n("<p>If this option is checked and K3b finds CD-Text on the source media it will be "
 					      "copied to the resulting CD ignoring any potentially existing Cddb entries.") );
-  QWhatsThis::add( m_checkIgnoreDataReadErrors, i18n("<p>If this option is checked and K3b is not able to read a data sector from the "
+  TQWhatsThis::add( m_checkIgnoreDataReadErrors, i18n("<p>If this option is checked and K3b is not able to read a data sector from the "
 						     "source CD/DVD it will be replaced with zeros on the resulting copy.") );
 
-  QWhatsThis::add( m_comboCopyMode,
+  TQWhatsThis::add( m_comboCopyMode,
 		   "<p><b>" + i18n("Normal Copy") + "</b>"
 		   + i18n("<p>This is the normal copy mode recommended for most CD types. "
 			  "It allows copying Audio CDs, multi and single session Data CDs, and "
@@ -293,23 +293,23 @@ void K3bCdCopyDialog::slotStartClicked()
     // check for m_tempDirSelectionWidget->tempPath() and
     // m_tempDirSelectionWidget-tempPath() + ".toc"
     //
-    if( QFileInfo( m_tempDirSelectionWidget->tempPath() ).isFile() ) {
+    if( TQFileInfo( m_tempDirSelectionWidget->tempPath() ).isFile() ) {
       if( KMessageBox::warningContinueCancel( this,
-				     i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath()),
+				     i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath()),
 				     i18n("File Exists"), i18n("Overwrite") )
 	  != KMessageBox::Continue )
 	return;
     }
 
-    if( QFileInfo( m_tempDirSelectionWidget->tempPath() + ".toc" ).isFile() ) {
+    if( TQFileInfo( m_tempDirSelectionWidget->tempPath() + ".toc" ).isFile() ) {
       if( KMessageBox::warningContinueCancel( this,
-				     i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath() + ".toc"),
+				     i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath() + ".toc"),
 				     i18n("File Exists"), i18n("Overwrite") )
 	  != KMessageBox::Continue )
 	return;
     }
 
-    K3bCloneJob* job = new K3bCloneJob( dlg, this );
+    K3bCloneJob* job = new K3bCloneJob( dlg, TQT_TQOBJECT(this) );
 
     job->setWriterDevice( m_writerSelectionWidget->writerDevice() );
     job->setReaderDevice( m_comboSourceDevice->selectedDevice() );
@@ -325,7 +325,7 @@ void K3bCdCopyDialog::slotStartClicked()
     burnJob = job;
   }
   else {
-    K3bCdCopyJob* job = new K3bCdCopyJob( dlg, this );
+    K3bCdCopyJob* job = new K3bCdCopyJob( dlg, TQT_TQOBJECT(this) );
 
     job->setWriterDevice( m_writerSelectionWidget->writerDevice() );
     job->setReaderDevice( m_comboSourceDevice->selectedDevice() );
@@ -392,7 +392,7 @@ void K3bCdCopyDialog::toggleAll()
 
 
 
-  static_cast<QWidget*>( child( "audio_options" ) )->setDisabled( m_comboCopyMode->currentItem() == 1 );
+  TQT_TQWIDGET( child( "audio_options" ) )->setDisabled( m_comboCopyMode->currentItem() == 1 );
 
   m_checkIgnoreDataReadErrors->setDisabled( m_comboCopyMode->currentItem() == 1 );
 
@@ -419,7 +419,7 @@ void K3bCdCopyDialog::slotSourceMediumChanged( K3bDevice::Device* dev )
   if( k3bappcore->mediaCache()->toc( dev ).contentType() == K3bDevice::DATA ) {
     m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::FILE );
     m_tempDirSelectionWidget->setDefaultImageFileName( medium.volumeId().lower()
-                                                       + ( medium.toc().count() == 1 ? QString(".iso") : QString::null ) );
+                                                       + ( medium.toc().count() == 1 ? TQString(".iso") : TQString() ) );
   }
   else {
     m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::DIR );
@@ -502,7 +502,7 @@ void K3bCdCopyDialog::saveUserDefaults( KConfigBase* c )
   m_writerSelectionWidget->saveConfig( c );
   m_tempDirSelectionWidget->saveConfig( c );
 
-  c->writeEntry( "source_device", m_comboSourceDevice->selectedDevice() ? m_comboSourceDevice->selectedDevice()->devicename() : QString() );
+  c->writeEntry( "source_device", m_comboSourceDevice->selectedDevice() ? m_comboSourceDevice->selectedDevice()->devicename() : TQString() );
 
   c->writeEntry( "copy cdtext", m_checkReadCdText->isChecked() );
   c->writeEntry( "prefer cdtext", m_checkPrefereCdText->isChecked() );
@@ -512,7 +512,7 @@ void K3bCdCopyDialog::saveUserDefaults( KConfigBase* c )
   c->writeEntry( "data retries", m_spinDataRetries->value() );
   c->writeEntry( "audio retries", m_spinAudioRetries->value() );
 
-  QString s;
+  TQString s;
   if( m_comboCopyMode->currentItem() == 1 )
     s = "clone";
   else

@@ -16,7 +16,7 @@
 #ifndef _K3B_ISO9660_BACKEND_H_
 #define _K3B_ISO9660_BACKEND_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "k3b_export.h"
 
@@ -60,7 +60,7 @@ class K3bIso9660DeviceBackend : public K3bIso9660Backend
 class K3bIso9660FileBackend : public K3bIso9660Backend
 {
  public:
-  LIBK3B_EXPORT K3bIso9660FileBackend( const QString& filename );
+  LIBK3B_EXPORT K3bIso9660FileBackend( const TQString& filename );
   K3bIso9660FileBackend( int fd );
   ~K3bIso9660FileBackend();
 
@@ -70,7 +70,7 @@ class K3bIso9660FileBackend : public K3bIso9660Backend
   int read( unsigned int sector, char* data, int len );
 
  private:
-  QString m_filename;
+  TQString m_filename;
   int m_fd;
   bool m_closeFd;
 };

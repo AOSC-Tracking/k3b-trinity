@@ -32,16 +32,16 @@ K3bDataProjectInterface::~K3bDataProjectInterface()
 }
 
 
-bool K3bDataProjectInterface::createFolder( const QString& name )
+bool K3bDataProjectInterface::createFolder( const TQString& name )
 {
   return createFolder( name, "/" );
 }
 
 
-bool K3bDataProjectInterface::createFolder( const QString& name, const QString& parent )
+bool K3bDataProjectInterface::createFolder( const TQString& name, const TQString& tqparent )
 {
-  K3bDataItem* p = m_dataDoc->root()->findByPath( parent );
-  if( p && p->isDir() && !static_cast<K3bDirItem*>(p)->find( name ) ) {
+  K3bDataItem* p = m_dataDoc->root()->findByPath( tqparent );
+  if( p && p->isDir() && !static_cast<K3bDirItem*>(p)->tqfind( name ) ) {
     m_dataDoc->addEmptyDir( name, static_cast<K3bDirItem*>(p) );
     return true;
   }
@@ -49,21 +49,21 @@ bool K3bDataProjectInterface::createFolder( const QString& name, const QString& 
 }
 
 
-void K3bDataProjectInterface::addUrl( const QString& url, const QString& parent )
+void K3bDataProjectInterface::addUrl( const TQString& url, const TQString& tqparent )
 {
-  addUrls( QStringList(url), parent );
+  addUrls( TQStringList(url), tqparent );
 }
 
 
-void K3bDataProjectInterface::addUrls( const QStringList& urls, const QString& parent )
+void K3bDataProjectInterface::addUrls( const TQStringList& urls, const TQString& tqparent )
 {
-  K3bDataItem* p = m_dataDoc->root()->findByPath( parent );
+  K3bDataItem* p = m_dataDoc->root()->findByPath( tqparent );
   if( p && p->isDir() )
     m_dataDoc->addUrls( KURL::List(urls), static_cast<K3bDirItem*>(p) );
 }
 
 
-bool K3bDataProjectInterface::removeItem( const QString& path )
+bool K3bDataProjectInterface::removeItem( const TQString& path )
 {
   K3bDataItem* p = m_dataDoc->root()->findByPath( path );
   if( p && p->isRemoveable() ) {
@@ -75,7 +75,7 @@ bool K3bDataProjectInterface::removeItem( const QString& path )
 }
 
 
-bool K3bDataProjectInterface::renameItem( const QString& path, const QString& newName )
+bool K3bDataProjectInterface::renameItem( const TQString& path, const TQString& newName )
 {
   K3bDataItem* p = m_dataDoc->root()->findByPath( path );
   if( p && p->isRenameable() && !newName.isEmpty() ) {
@@ -87,12 +87,12 @@ bool K3bDataProjectInterface::renameItem( const QString& path, const QString& ne
 }
 
 
-void K3bDataProjectInterface::setVolumeID( const QString& id )
+void K3bDataProjectInterface::setVolumeID( const TQString& id )
 {
   m_dataDoc->setVolumeID( id );
 }
 
-bool K3bDataProjectInterface::isFolder( const QString& path ) const
+bool K3bDataProjectInterface::isFolder( const TQString& path ) const
 {
   K3bDataItem* p =  m_dataDoc->root()->findByPath( path );
   if( p )
@@ -102,13 +102,13 @@ bool K3bDataProjectInterface::isFolder( const QString& path ) const
 }
 
 
-QStringList K3bDataProjectInterface::children( const QString& path ) const
+TQStringList K3bDataProjectInterface::tqchildren( const TQString& path ) const
 {
-  QStringList l;
+  TQStringList l;
   K3bDataItem* item =  m_dataDoc->root()->findByPath( path );
   if( item && item->isDir() ) {
-    const QPtrList<K3bDataItem>& cl = static_cast<K3bDirItem*>(item)->children();
-    for( QPtrListIterator<K3bDataItem> it( cl ); *it; ++it )
+    const TQPtrList<K3bDataItem>& cl = static_cast<K3bDirItem*>(item)->tqchildren();
+    for( TQPtrListIterator<K3bDataItem> it( cl ); *it; ++it )
       l.append( it.current()->k3bName() );
   }
 
@@ -116,7 +116,7 @@ QStringList K3bDataProjectInterface::children( const QString& path ) const
 }
 
 
-bool K3bDataProjectInterface::setSortWeight( const QString& path, long weight ) const
+bool K3bDataProjectInterface::setSortWeight( const TQString& path, long weight ) const
 {
   K3bDataItem* item =  m_dataDoc->root()->findByPath( path );
   if( item ) {

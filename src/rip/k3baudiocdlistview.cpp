@@ -18,12 +18,12 @@
 
 #include <klocale.h>
 
-#include <qheader.h>
-#include <qtooltip.h>
+#include <tqheader.h>
+#include <tqtooltip.h>
 
 
-K3bAudioCdListView::K3bAudioCdListView( K3bAudioCdView* view, QWidget* parent, const char* name )
-  : K3bListView( parent, name ),
+K3bAudioCdListView::K3bAudioCdListView( K3bAudioCdView* view, TQWidget* tqparent, const char* name )
+  : K3bListView( tqparent, name ),
     m_view(view)
 {
   setFullWidth(true);
@@ -41,13 +41,13 @@ K3bAudioCdListView::K3bAudioCdListView( K3bAudioCdView* view, QWidget* parent, c
   setDoubleClickForEdit( true );
 
   header()->setClickEnabled(false);
-  setColumnWidthMode( 0, QListView::Manual );
+  setColumnWidthMode( 0, TQListView::Manual );
   setColumnWidth( 0, 20 );
   header()->setResizeEnabled( false,0 );
 
-  setColumnAlignment( 4, Qt::AlignHCenter );
+  setColumnAlignment( 4, TQt::AlignHCenter );
 
-  QToolTip::add( viewport(), i18n("Check the tracks that should be ripped") );
+  TQToolTip::add( viewport(), i18n("Check the tracks that should be ripped") );
 }
 
 
@@ -56,7 +56,7 @@ K3bAudioCdListView::~K3bAudioCdListView()
 }
 
 
-QDragObject* K3bAudioCdListView::dragObject()
+TQDragObject* K3bAudioCdListView::dragObject()
 {
   return m_view->dragObject();
 }

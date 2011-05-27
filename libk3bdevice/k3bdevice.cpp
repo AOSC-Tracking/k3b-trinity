@@ -25,11 +25,11 @@
 #include "k3bscsicommand.h"
 #include "k3bcrc.h"
 
-#include <qstringlist.h>
-#include <qfile.h>
-#include <qglobal.h>
-#include <qvaluevector.h>
-#include <qmutex.h>
+#include <tqstringlist.h>
+#include <tqfile.h>
+#include <tqglobal.h>
+#include <tqvaluevector.h>
+#include <tqmutex.h>
 
 #include <k3bdebug.h>
 
@@ -162,7 +162,7 @@ public:
   int readCapabilities;
   int writeCapabilities;
   int supportedProfiles;
-  QStringList allNodes;
+  TQStringList allNodes;
 #ifdef Q_OS_LINUX
   int deviceFd;
 #endif
@@ -175,12 +175,12 @@ public:
   bool openedReadWrite;
   bool burnfree;
 
-  QMutex mutex;
-    QMutex openCloseMutex;
+  TQMutex mutex;
+    TQMutex openCloseMutex;
 };
 
 
-K3bDevice::Device::Device( const QString& devname )
+K3bDevice::Device::Device( const TQString& devname )
   : m_bus(-1),
     m_target(-1),
     m_lun(-1),
@@ -231,7 +231,7 @@ bool K3bDevice::Device::init( bool bCheckWritingModes )
   cmd.clear();
   ::memset( buf, 0, sizeof(buf) );
   struct inquiry* inq = (struct inquiry*)buf;
-  cmd[0] = MMC_INQUIRY;
+  cmd[0] = MMC_INTQUIRY;
   cmd[4] = sizeof(buf);
   cmd[5] = 0;
   if( cmd.transport( TR_DIR_READ, buf, sizeof(buf) ) ) {
@@ -240,9 +240,9 @@ bool K3bDevice::Device::init( bool bCheckWritingModes )
     return false;
   }
   else {
-    m_vendor = QString::fromLatin1( (char*)(inq->vendor), 8 ).stripWhiteSpace();
-    m_description = QString::fromLatin1( (char*)(inq->product), 16 ).stripWhiteSpace();
-    m_version = QString::fromLatin1( (char*)(inq->revision), 4 ).stripWhiteSpace();
+    m_vendor = TQString::tqfromLatin1( (char*)(inq->vendor), 8 ).stripWhiteSpace();
+    m_description = TQString::tqfromLatin1( (char*)(inq->product), 16 ).stripWhiteSpace();
+    m_version = TQString::tqfromLatin1( (char*)(inq->revision), 4 ).stripWhiteSpace();
   }
 
   if( m_vendor.isEmpty() )
@@ -555,15 +555,15 @@ int K3bDevice::Device::writeCapabilities() const
 }
 
 
-const QString& K3bDevice::Device::devicename() const
+const TQString& K3bDevice::Device::devicename() const
 {
   return blockDeviceName();
 }
 
 
-QString K3bDevice::Device::busTargetLun() const
+TQString K3bDevice::Device::busTargetLun() const
 {
-  return QString("%1,%2,%3").arg(m_bus).arg(m_target).arg(m_lun);
+  return TQString("%1,%2,%3").tqarg(m_bus).tqarg(m_target).tqarg(m_lun);
 }
 
 
@@ -843,7 +843,7 @@ K3bDevice::Toc K3bDevice::Device::readToc() const
 void K3bDevice::Device::readIsrcMcn( K3bDevice::Toc& toc ) const
 {
   // read MCN and ISRC of all tracks
-  QCString mcn;
+  TQCString mcn;
   if( readMcn( mcn ) ) {
     toc.setMcn( mcn );
     k3bDebug() << "(K3bDevice::Device) found MCN: " << mcn << endl;
@@ -852,7 +852,7 @@ void K3bDevice::Device::readIsrcMcn( K3bDevice::Toc& toc ) const
     k3bDebug() << "(K3bDevice::Device) no MCN found." << endl;
 
   for( unsigned int i = 1; i <= toc.count(); ++i ) {
-    QCString isrc;
+    TQCString isrc;
     if( toc[i-1].type() == Track::AUDIO ) {
       if( readIsrc( i, isrc ) ) {
 	k3bDebug() << "(K3bDevice::Device) found ISRC for track " << i << ": " << isrc << endl;
@@ -1055,19 +1055,19 @@ bool K3bDevice::Device::readRawToc( K3bDevice::Toc& toc ) const
 	//
 	k3bDebug() << "Session |  ADR   | CONTROL|  TNO   | POINT  |  Min   |  Sec   | Frame  |  Zero  |  PMIN  |  PSEC  | PFRAME |" << endl;
 	for( unsigned int i = 0; i < (dataLen-4)/(int)sizeof(toc_raw_track_descriptor); ++i ) {
-	  QString s;
-	  s += QString( " %1 |" ).arg( (int)tr[i].session_number, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].adr, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].control, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].tno, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].point, 6, 16 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].min, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].sec, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].frame, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].zero, 6, 16 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].p_min, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].p_sec, 6 );
-	  s += QString( " %1 |" ).arg( (int)tr[i].p_frame, 6 );
+	  TQString s;
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].session_number, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].adr, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].control, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].tno, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].point, 6, 16 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].min, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].sec, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].frame, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].zero, 6, 16 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].p_min, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].p_sec, 6 );
+	  s += TQString( " %1 |" ).tqarg( (int)tr[i].p_frame, 6 );
 	  k3bDebug() << s << endl;
 	}
 
@@ -1649,14 +1649,14 @@ bool K3bDevice::Device::setAutoEjectEnabled( bool enabled ) const
 }
 
 
-void K3bDevice::Device::addDeviceNode( const QString& n )
+void K3bDevice::Device::addDeviceNode( const TQString& n )
 {
-  if( !d->allNodes.contains( n ) )
+  if( !d->allNodes.tqcontains( n ) )
     d->allNodes.append( n );
 }
 
 
-const QStringList& K3bDevice::Device::deviceNodes() const
+const TQStringList& K3bDevice::Device::deviceNodes() const
 {
   return d->allNodes;
 }
@@ -1677,7 +1677,7 @@ bool K3bDevice::Device::open( bool write ) const
   if( d->openedReadWrite != write )
     close();
 
-  QMutexLocker ml( &d->openCloseMutex );
+  TQMutexLocker ml( &d->openCloseMutex );
 
   d->openedReadWrite = write;
 
@@ -1692,7 +1692,7 @@ bool K3bDevice::Device::open( bool write ) const
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_NETBSD)
   if( d->deviceFd == -1 )
-    d->deviceFd = openDevice( QFile::encodeName(devicename()), write );
+    d->deviceFd = openDevice( TQFile::encodeName(devicename()), write );
 
   return ( d->deviceFd != -1 );
 #endif
@@ -1701,7 +1701,7 @@ bool K3bDevice::Device::open( bool write ) const
 
 void K3bDevice::Device::close() const
 {
-  QMutexLocker ml( &d->openCloseMutex );
+  TQMutexLocker ml( &d->openCloseMutex );
 
 #ifdef Q_OS_FREEBSD
   if( d->cam ) {
@@ -1967,24 +1967,24 @@ K3bDevice::DiskInfo K3bDevice::Device::diskInfo() const
 	  ea0 = ( data[4+13]<<16 | data[4+14] << 8 | data[4+15] );
 
 	  k3bDebug() << "First sec data area: " << sda.toString()
-		    << " (LBA " << QString::number(sda.lba())
-		    << ") (" << QString::number(sda.mode1Bytes()) << endl;
+		    << " (LBA " << TQString::number(sda.lba())
+		    << ") (" << TQString::number(sda.mode1Bytes()) << endl;
 	  k3bDebug() << "Last sec data area: " << eda.toString()
-		    << " (LBA " << QString::number(eda.lba())
-		    << ") (" << QString::number(eda.mode1Bytes()) << " Bytes)" << endl;
+		    << " (LBA " << TQString::number(eda.lba())
+		    << ") (" << TQString::number(eda.mode1Bytes()) << " Bytes)" << endl;
 	  k3bDebug() << "Last sec layer 1: " << ea0.toString()
-		    << " (LBA " << QString::number(ea0.lba())
-		    << ") (" << QString::number(ea0.mode1Bytes()) << " Bytes)" << endl;
+		    << " (LBA " << TQString::number(ea0.lba())
+		    << ") (" << TQString::number(ea0.mode1Bytes()) << " Bytes)" << endl;
 
 
 	  K3b::Msf da0 = ea0 - sda + 1;
 	  K3b::Msf da1 = eda - ea0;
 	  k3bDebug() << "Layer 1 length: " << da0.toString()
-		    << " (LBA " << QString::number(da0.lba())
-		    << ") (" << QString::number(da0.mode1Bytes()) << " Bytes)" << endl;
+		    << " (LBA " << TQString::number(da0.lba())
+		    << ") (" << TQString::number(da0.mode1Bytes()) << " Bytes)" << endl;
 	  k3bDebug() << "Layer 2 length: " << da1.toString()
-		    << " (LBA " << QString::number(da1.lba())
-		    << ") (" << QString::number(da1.mode1Bytes()) << " Bytes)" << endl;
+		    << " (LBA " << TQString::number(da1.lba())
+		    << ") (" << TQString::number(da1.mode1Bytes()) << " Bytes)" << endl;
 
 	  inf.m_numLayers = ((data[6]&0x60) == 0 ? 1 : 2);
 
@@ -2294,7 +2294,7 @@ int K3bDevice::Device::mediaType() const
 	case 0xA0: m = MEDIA_DVD_PLUS_R; break;
 	case 0xE0: m = MEDIA_DVD_PLUS_R_DL; break;
 	default:
-	  k3bDebug() << "(K3bDevice::Device) unknown dvd media type: " << QString::number(data[4]&0xF0, 8) << endl;
+	  k3bDebug() << "(K3bDevice::Device) unknown dvd media type: " << TQString::number(data[4]&0xF0, 8) << endl;
 	  break; // unknown
 	}
 
@@ -3089,10 +3089,10 @@ int K3bDevice::Device::determineMaximalWriteSpeed() const
     }
   }
 
-  QValueList<int> list = determineSupportedWriteSpeeds();
+  TQValueList<int> list = determineSupportedWriteSpeeds();
   if( !list.isEmpty() ) {
-    for( QValueList<int>::const_iterator it = list.constBegin(); it != list.constEnd(); ++it )
-      ret = QMAX( ret, *it );
+    for( TQValueList<int>::const_iterator it = list.constBegin(); it != list.constEnd(); ++it )
+      ret = TQMAX( ret, *it );
   }
 
   if( ret > 0 )
@@ -3102,9 +3102,9 @@ int K3bDevice::Device::determineMaximalWriteSpeed() const
 }
 
 
-QValueList<int> K3bDevice::Device::determineSupportedWriteSpeeds() const
+TQValueList<int> K3bDevice::Device::determineSupportedWriteSpeeds() const
 {
-  QValueList<int> ret;
+  TQValueList<int> ret;
 
   if( burner() ) {
     //
@@ -3148,7 +3148,7 @@ QValueList<int> K3bDevice::Device::determineSupportedWriteSpeeds() const
 }
 
 
-bool K3bDevice::Device::getSupportedWriteSpeedsVia2A( QValueList<int>& list, bool dvd ) const
+bool K3bDevice::Device::getSupportedWriteSpeedsVia2A( TQValueList<int>& list, bool dvd ) const
 {
   unsigned char* data = 0;
   unsigned int dataLen = 0;
@@ -3194,7 +3194,7 @@ bool K3bDevice::Device::getSupportedWriteSpeedsVia2A( QValueList<int>& list, boo
 	    s = fixupDvdWritingSpeed( s );
 
 	  // sort the list
-	  QValueList<int>::iterator it = list.begin();
+	  TQValueList<int>::iterator it = list.begin();
 	  while( it != list.end() && *it < s )
 	    ++it;
 	  list.insert( it, s );
@@ -3209,7 +3209,7 @@ bool K3bDevice::Device::getSupportedWriteSpeedsVia2A( QValueList<int>& list, boo
 }
 
 
-bool K3bDevice::Device::getSupportedWriteSpeedsViaGP( QValueList<int>& list, bool dvd ) const
+bool K3bDevice::Device::getSupportedWriteSpeedsViaGP( TQValueList<int>& list, bool dvd ) const
 {
   unsigned char* data = 0;
   unsigned int dataLen = 0;
@@ -3243,7 +3243,7 @@ bool K3bDevice::Device::getSupportedWriteSpeedsViaGP( QValueList<int>& list, boo
 	if( dvd )
 	  s = fixupDvdWritingSpeed( s );
 
-	QValueList<int>::iterator it = list.begin();
+	TQValueList<int>::iterator it = list.begin();
 	while( it != list.end() && *it < s )
 	  ++it;
 	// the speed might already have been found in the 2a modepage
@@ -3578,9 +3578,9 @@ int K3bDevice::Device::nextWritableAddress() const
 }
 
 
-QCString K3bDevice::Device::mediaId( int mediaType ) const
+TQCString K3bDevice::Device::mediaId( int mediaType ) const
 {
-  QCString id;
+  TQCString id;
 
   if( mediaType & MEDIA_CD_ALL ) {
     // FIXME:

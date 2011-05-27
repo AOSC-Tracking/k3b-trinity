@@ -16,8 +16,8 @@
 #ifndef _K3B_CUE_FILE_WRITER_H_
 #define _K3B_CUE_FILE_WRITER_H_
 
-#include <qtextstream.h>
-#include <qstringlist.h>
+#include <tqtextstream.h>
+#include <tqstringlist.h>
 
 #include <k3btoc.h>
 #include <k3bcdtext.h>
@@ -37,18 +37,18 @@ class K3bCueFileWriter
  public:
   K3bCueFileWriter();
 
-  bool save( QTextStream& );
-  bool save( const QString& filename );
+  bool save( TQTextStream& );
+  bool save( const TQString& filename );
 
   void setData( const K3bDevice::Toc& toc ) { m_toc = toc; }
   void setCdText( const K3bDevice::CdText& text ) { m_cdText = text; }
-  void setImage( const QString& name, const QString& type ) { m_image = name; m_dataType = type; }
+  void setImage( const TQString& name, const TQString& type ) { m_image = name; m_dataType = type; }
 
  private:
   K3bDevice::Toc m_toc;
   K3bDevice::CdText m_cdText;
-  QString m_image;
-  QString m_dataType;
+  TQString m_image;
+  TQString m_dataType;
 };
 
 #endif

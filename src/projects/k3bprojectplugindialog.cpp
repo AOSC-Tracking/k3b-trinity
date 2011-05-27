@@ -17,13 +17,13 @@
 
 #include <k3bprojectplugin.h>
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 
-K3bProjectPluginDialog::K3bProjectPluginDialog( K3bProjectPlugin* plugin, K3bDoc* doc, QWidget* parent, const char* name )
-  : K3bInteractionDialog( parent, name,
-			  QString::null,
-			  QString::null,
+K3bProjectPluginDialog::K3bProjectPluginDialog( K3bProjectPlugin* plugin, K3bDoc* doc, TQWidget* tqparent, const char* name )
+  : K3bInteractionDialog( tqparent, name,
+			  TQString(),
+			  TQString(),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  plugin->className() ),

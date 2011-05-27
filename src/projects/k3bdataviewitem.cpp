@@ -30,20 +30,20 @@
 #include <kpixmapeffect.h>
 #include <kpixmap.h>
 
-#include <qpainter.h>
-#include <qpalette.h>
-#include <qfileinfo.h>
+#include <tqpainter.h>
+#include <tqpalette.h>
+#include <tqfileinfo.h>
 
 
-K3bDataViewItem::K3bDataViewItem( K3bDataItem* item, QListView* parent )
-  : K3bListViewItem( parent ),
+K3bDataViewItem::K3bDataViewItem( K3bDataItem* item, TQListView* tqparent )
+  : K3bListViewItem( tqparent ),
     m_dataItem(item)
 {
   init();
 }
 
-K3bDataViewItem::K3bDataViewItem( K3bDataItem* item, QListViewItem* parent )
-  : K3bListViewItem( parent ),
+K3bDataViewItem::K3bDataViewItem( K3bDataItem* item, TQListViewItem* tqparent )
+  : K3bListViewItem( tqparent ),
     m_dataItem(item)
 {
   init();
@@ -56,36 +56,36 @@ K3bDataViewItem::~K3bDataViewItem()
 void K3bDataViewItem::init()
 {
   setEditor( 0, LINE );
-  static QValidator* s_validator = K3bValidators::iso9660Validator();
+  static TQValidator* s_validator = K3bValidators::iso9660Validator();
   setValidator( 0, s_validator );
 }
 
-void K3bDataViewItem::paintCell( QPainter* p, const QColorGroup& cg, int column, int width, int align )
+void K3bDataViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int column, int width, int align )
 {
-  QColorGroup _cg = cg;
+  TQColorGroup _cg = cg;
 
   if( !dataItem()->isRemoveable() && dataItem()->doc()->root() != dataItem() ) {
-    _cg.setColor( QColorGroup::Text, listView()->palette().disabled().foreground() );
+    _cg.setColor( TQColorGroup::Text, listView()->tqpalette().disabled().foreground() );
   }
 
   if( column == 0 ) {
-    QFontMetrics fm = p->fontMetrics();
+    TQFontMetrics fm = p->fontMetrics();
 
     if( dataItem()->hideOnRockRidge() ) {
-      int tw = QMAX( fm.width( "rr" ) + 2*listView()->itemMargin(), height() );
-      p->fillRect( width-tw, 0, tw, height(), isSelected() ? _cg.highlight() : _cg.brush(QColorGroup::Base) );
+      int tw = TQMAX( fm.width( "rr" ) + 2*listView()->itemMargin(), height() );
+      p->fillRect( width-tw, 0, tw, height(), isSelected() ? _cg.highlight() : _cg.brush(TQColorGroup::Base) );
       p->setPen( isSelected() ? _cg.highlightedText() : red );
       p->drawEllipse( width-tw, 0, tw, height() );
-      p->drawText( width-tw, 0, tw, height(), Qt::AlignCenter, "rr" );
+      p->drawText( width-tw, 0, tw, height(), TQt::AlignCenter, "rr" );
       width -= tw;
     }
 
     if( dataItem()->hideOnJoliet() ) {
-      int tw = QMAX( fm.width( "j" ) + 2*listView()->itemMargin(), height() );
-      p->fillRect( width-tw, 0, tw, height(), isSelected() ? _cg.highlight() : _cg.brush(QColorGroup::Base) );
+      int tw = TQMAX( fm.width( "j" ) + 2*listView()->itemMargin(), height() );
+      p->fillRect( width-tw, 0, tw, height(), isSelected() ? _cg.highlight() : _cg.brush(TQColorGroup::Base) );
       p->setPen( isSelected() ? _cg.highlightedText() : blue );
       p->drawEllipse( width-tw, 0, tw, height() );
-      p->drawText( width-tw, 0, tw, height(), Qt::AlignCenter, "j" );
+      p->drawText( width-tw, 0, tw, height(), TQt::AlignCenter, "j" );
       width -= tw;
     }
   }
@@ -95,7 +95,7 @@ void K3bDataViewItem::paintCell( QPainter* p, const QColorGroup& cg, int column,
 	  dataItem()->doc()->isoOptions().createRockRidge() &&
 	  !dataItem()->isValid() ) {
 	// paint the link in red
-	_cg.setColor( QColorGroup::Text, Qt::red );
+	_cg.setColor( TQColorGroup::Text, TQt::red );
       }
     }
   }
@@ -104,7 +104,7 @@ void K3bDataViewItem::paintCell( QPainter* p, const QColorGroup& cg, int column,
 }
 
 
-void K3bDataViewItem::setText( int col, const QString& text )
+void K3bDataViewItem::setText( int col, const TQString& text )
 {
   if( col == 0 && dataItem()->isRenameable() ) {
     dataItem()->setK3bName( text );
@@ -113,37 +113,37 @@ void K3bDataViewItem::setText( int col, const QString& text )
 }
 
 
-QString K3bDataViewItem::key( int col, bool a ) const
+TQString K3bDataViewItem::key( int col, bool a ) const
 {
   if( col == 2 ) {
     // to have correct sorting we need to justify the size in bytes
     // 100 TB should be enough for the next year... ;-)
 
     if( a )
-      return ( dataItem()->isDir() ? QString("0") : QString("1") )
-	+ QString::number( dataItem()->size() ).rightJustify( 16, '0' );
+      return ( dataItem()->isDir() ? TQString("0") : TQString("1") )
+	+ TQString::number( dataItem()->size() ).rightJustify( 16, '0' );
     else
-      return ( dataItem()->isDir() ? QString("1") : QString("0") )
-	+ QString::number( dataItem()->size() ).rightJustify( 16, '0' );
+      return ( dataItem()->isDir() ? TQString("1") : TQString("0") )
+	+ TQString::number( dataItem()->size() ).rightJustify( 16, '0' );
   }
 
   if( a )
-    return ( dataItem()->isDir() ? QString("0") : QString("1") ) + text(col);
+    return ( dataItem()->isDir() ? TQString("0") : TQString("1") ) + text(col);
   else
-    return ( dataItem()->isDir() ? QString("1") : QString("0") ) + text(col);
+    return ( dataItem()->isDir() ? TQString("1") : TQString("0") ) + text(col);
 }
 
 
-K3bDataDirViewItem::K3bDataDirViewItem( K3bDirItem* dir, QListView* parent )
-  : K3bDataViewItem( dir, parent )
+K3bDataDirViewItem::K3bDataDirViewItem( K3bDirItem* dir, TQListView* tqparent )
+  : K3bDataViewItem( dir, tqparent )
 {
   m_dirItem = dir;
   setPixmap( 0, dir->depth() > 7 ? SmallIcon( "folder_red" ) : SmallIcon( "folder" ) );
 }
 
 
-K3bDataDirViewItem::K3bDataDirViewItem( K3bDirItem* dir, QListViewItem* parent )
-  : K3bDataViewItem( dir, parent )
+K3bDataDirViewItem::K3bDataDirViewItem( K3bDirItem* dir, TQListViewItem* tqparent )
+  : K3bDataViewItem( dir, tqparent )
 {
   m_dirItem = dir;
   setPixmap( 0, dir->depth() > 7 ? SmallIcon( "folder_red" ) : SmallIcon( "folder" ) );
@@ -161,7 +161,7 @@ void K3bDataDirViewItem::dragEntered()
 }
 
 
-QString K3bDataDirViewItem::text( int index ) const
+TQString K3bDataDirViewItem::text( int index ) const
 {
   switch( index ) {
   case 0:
@@ -182,22 +182,22 @@ void K3bDataDirViewItem::highlightIcon( bool b )
     m_pixmap = *pixmap(0);
 
   if( b )
-    setPixmap( 0, KPixmapEffect::selectedPixmap( m_pixmap, listView()->colorGroup().highlight() ) );
+    setPixmap( 0, KPixmapEffect::selectedPixmap( m_pixmap, listView()->tqcolorGroup().highlight() ) );
   else
     setPixmap( 0, m_pixmap );
 }
 
 
 
-K3bDataFileViewItem::K3bDataFileViewItem( K3bFileItem* file, QListView* parent )
-  : K3bDataViewItem( file, parent )
+K3bDataFileViewItem::K3bDataFileViewItem( K3bFileItem* file, TQListView* tqparent )
+  : K3bDataViewItem( file, tqparent )
 {
   init( file );
 }
 
 
-K3bDataFileViewItem::K3bDataFileViewItem( K3bFileItem* file, QListViewItem* parent )
-  : K3bDataViewItem( file, parent )
+K3bDataFileViewItem::K3bDataFileViewItem( K3bFileItem* file, TQListViewItem* tqparent )
+  : K3bDataViewItem( file, tqparent )
 {
   init( file );
 }
@@ -216,19 +216,19 @@ void K3bDataFileViewItem::init( K3bFileItem* file )
 }
 
 
-QString K3bDataFileViewItem::text( int index ) const
+TQString K3bDataFileViewItem::text( int index ) const
 {
   switch( index ) {
   case 0:
     return m_fileItem->k3bName();
   case 1:
     {
-      QString comment = m_pMimeType->comment( KURL::fromPathOrURL(m_fileItem->localPath()), true );
+      TQString comment = m_pMimeType->comment( KURL::fromPathOrURL(m_fileItem->localPath()), true );
       if( comment.isEmpty() )
 	comment = m_pMimeType->name();
 
       if( m_fileItem->isSymLink() )
-	return i18n("Link to %1").arg(comment);
+	return i18n("Link to %1").tqarg(comment);
       else
 	return comment;
     }
@@ -238,15 +238,15 @@ QString K3bDataFileViewItem::text( int index ) const
       return m_fileItem->localPath();
   case 4: {
       if( !m_fileItem->isSymLink() ) {
-          return QString::null;
+          return TQString();
       }
 
-      QString s;
+      TQString s;
       if ( m_fileItem->doc()->isoOptions().followSymbolicLinks() ) {
           s = K3b::resolveLink( m_fileItem->localPath() );
       }
       else {
-          s = QFileInfo( m_fileItem->localPath() ).readLink();
+          s = TQFileInfo( m_fileItem->localPath() ).readLink();
       }
 
       if( !m_fileItem->isValid() ) {
@@ -262,8 +262,8 @@ QString K3bDataFileViewItem::text( int index ) const
 
 
 
-K3bDataRootViewItem::K3bDataRootViewItem( K3bDataDoc* doc, QListView* parent )
-  : K3bDataDirViewItem( doc->root(), parent )
+K3bDataRootViewItem::K3bDataRootViewItem( K3bDataDoc* doc, TQListView* tqparent )
+  : K3bDataDirViewItem( doc->root(), tqparent )
 {
   m_doc = doc;
   setPixmap( 0, SmallIcon( "cdrom_unmount" ) );
@@ -277,7 +277,7 @@ K3bDataRootViewItem::~K3bDataRootViewItem()
 }
 
 
-QString K3bDataRootViewItem::text( int index ) const
+TQString K3bDataRootViewItem::text( int index ) const
 {
   switch( index ) {
   case 0:
@@ -288,7 +288,7 @@ QString K3bDataRootViewItem::text( int index ) const
 }
 
 
-void K3bDataRootViewItem::setText( int col, const QString& text )
+void K3bDataRootViewItem::setText( int col, const TQString& text )
 {
   if( col == 0 )
     m_doc->setVolumeID( text );
@@ -297,13 +297,13 @@ void K3bDataRootViewItem::setText( int col, const QString& text )
 }
 
 
-K3bSpecialDataViewItem::K3bSpecialDataViewItem( K3bSpecialDataItem* item, QListView* parent )
-  : K3bDataViewItem( item, parent )
+K3bSpecialDataViewItem::K3bSpecialDataViewItem( K3bSpecialDataItem* item, TQListView* tqparent )
+  : K3bDataViewItem( item, tqparent )
 {
   setPixmap( 0, SmallIcon("unknown") );
 }
 
-QString K3bSpecialDataViewItem::text( int col ) const
+TQString K3bSpecialDataViewItem::text( int col ) const
 {
   switch( col ) {
   case 0:
@@ -319,13 +319,13 @@ QString K3bSpecialDataViewItem::text( int col ) const
 
 
 
-K3bSessionImportViewItem::K3bSessionImportViewItem( K3bSessionImportItem* item, QListView* parent )
-  : K3bDataViewItem( item, parent )
+K3bSessionImportViewItem::K3bSessionImportViewItem( K3bSessionImportItem* item, TQListView* tqparent )
+  : K3bDataViewItem( item, tqparent )
 {
   setPixmap( 0, SmallIcon("unknown") );
 }
 
-QString K3bSessionImportViewItem::text( int col ) const
+TQString K3bSessionImportViewItem::text( int col ) const
 {
   switch( col ) {
   case 0:

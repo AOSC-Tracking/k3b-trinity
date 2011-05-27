@@ -15,37 +15,37 @@
 
 #include "k3brichtextlabel.h"
 
-#include <qtooltip.h>
-#include <qstylesheet.h>
-#include <qsimplerichtext.h>
+#include <tqtooltip.h>
+#include <tqstylesheet.h>
+#include <tqsimplerichtext.h>
 
 #include <kglobalsettings.h>
 
-static QString qrichtextify( const QString& text )
+static TQString qrichtextify( const TQString& text )
 {
   if ( text.isEmpty() || text[0] == '<' )
     return text;
 
-  QStringList lines = QStringList::split('\n', text);
-  for(QStringList::Iterator it = lines.begin(); it != lines.end(); ++it)
+  TQStringList lines = TQStringList::split('\n', text);
+  for(TQStringList::Iterator it = lines.begin(); it != lines.end(); ++it)
   {
-    *it = QStyleSheet::convertFromPlainText( *it, QStyleSheetItem::WhiteSpaceNormal );
+    *it = TQStyleSheet::convertFromPlainText( *it, TQStyleSheetItem::WhiteSpaceNormal );
   }
 
-  return lines.join(QString::null);
+  return lines.join(TQString());
 }
 
-K3bRichTextLabel::K3bRichTextLabel( const QString &text , QWidget *parent, const char *name )
- : QLabel ( parent, name ) {
-  m_defaultWidth = QMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
-  setAlignment( Qt::WordBreak );
+K3bRichTextLabel::K3bRichTextLabel( const TQString &text , TQWidget *tqparent, const char *name )
+ : TQLabel ( tqparent, name ) {
+  m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
+  tqsetAlignment( TQt::WordBreak );
   setText(text);
 }
 
-K3bRichTextLabel::K3bRichTextLabel( QWidget *parent, const char *name )
- : QLabel ( parent, name ) {
-  m_defaultWidth = QMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
-  setAlignment( Qt::WordBreak );
+K3bRichTextLabel::K3bRichTextLabel( TQWidget *tqparent, const char *name )
+ : TQLabel ( tqparent, name ) {
+  m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
+  tqsetAlignment( TQt::WordBreak );
 }
 
 void K3bRichTextLabel::setDefaultWidth(int defaultWidth)
@@ -54,17 +54,17 @@ void K3bRichTextLabel::setDefaultWidth(int defaultWidth)
   updateGeometry();
 }
 
-QSizePolicy K3bRichTextLabel::sizePolicy() const
+TQSizePolicy K3bRichTextLabel::sizePolicy() const
 {
-  return QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum, false);
+  return TQSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Minimum, false);
 }
 
-QSize K3bRichTextLabel::minimumSizeHint() const
+TQSize K3bRichTextLabel::tqminimumSizeHint() const
 {
-  QString qt_text = qrichtextify( text() );
+  TQString qt_text = qrichtextify( text() );
   int pref_width = 0;
   int pref_height = 0;
-  QSimpleRichText rt(qt_text, font());
+  TQSimpleRichText rt(qt_text, font());
   pref_width = m_defaultWidth;
   rt.setWidth(pref_width);
   int used_width = rt.widthUsed();
@@ -91,16 +91,16 @@ QSize K3bRichTextLabel::minimumSizeHint() const
       pref_width = used_width;
   }
 
-  return QSize(pref_width, rt.height());
+  return TQSize(pref_width, rt.height());
 }
 
-QSize K3bRichTextLabel::sizeHint() const
+TQSize K3bRichTextLabel::tqsizeHint() const
 {
-  return minimumSizeHint();
+  return tqminimumSizeHint();
 }
 
-void K3bRichTextLabel::setText( const QString &text ) {
-  QLabel::setText(text);
+void K3bRichTextLabel::setText( const TQString &text ) {
+  TQLabel::setText(text);
 }
 
 void K3bRichTextLabel::virtual_hook( int, void* )

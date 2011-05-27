@@ -25,7 +25,7 @@ class K3bAudioTrack;
 class K3bAudioTrackViewItem : public K3bListViewItem
 {
  public:
-  K3bAudioTrackViewItem( K3bAudioTrackView* parent, 
+  K3bAudioTrackViewItem( K3bAudioTrackView* tqparent, 
 			 K3bAudioTrackViewItem* after, 
 			 K3bAudioTrack* track );
   ~K3bAudioTrackViewItem();
@@ -40,8 +40,8 @@ class K3bAudioTrackViewItem : public K3bListViewItem
   void updateSourceItems();
   bool showingSources() const { return m_showingSources; }
   void showSources( bool show );
-  void setText( int col, const QString& text );
-  QString text( int i ) const;
+  void setText( int col, const TQString& text );
+  TQString text( int i ) const;
 
   /**
    * @reimpl
@@ -50,10 +50,10 @@ class K3bAudioTrackViewItem : public K3bListViewItem
   /**
    * @reimpl
    */
-  void insertItem( QListViewItem* item );
+  void insertItem( TQListViewItem* item );
 
-  void paintBranches( QPainter*, const QColorGroup &, int, int, int );
-  void paintCell( QPainter* p, const QColorGroup& cg, int col, int width, int align );
+  void paintBranches( TQPainter*, const TQColorGroup &, int, int, int );
+  void paintCell( TQPainter* p, const TQColorGroup& cg, int col, int width, int align );
 
  private:
   K3bAudioTrack* m_track;

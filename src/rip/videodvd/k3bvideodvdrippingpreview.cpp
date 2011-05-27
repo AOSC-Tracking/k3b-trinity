@@ -23,12 +23,12 @@
 #include <ktempdir.h>
 #include <kdebug.h>
 
-#include <qdir.h>
+#include <tqdir.h>
 
 
 
-K3bVideoDVDRippingPreview::K3bVideoDVDRippingPreview( QObject* parent )
-  : QObject( parent ),
+K3bVideoDVDRippingPreview::K3bVideoDVDRippingPreview( TQObject* tqparent )
+  : TQObject( tqparent ),
     m_tempDir( 0 ),
     m_process( 0 )
 {
@@ -60,7 +60,7 @@ void K3bVideoDVDRippingPreview::generatePreview( const K3bVideoDVD::VideoDVD& dv
   // auto-select a chapter
   // choose the center chapter, but not the first or last if possible
   if( chapter == 0 )
-    chapter = QMIN( QMAX( dvd[title-1].numChapters()/2, 2 ), QMAX( dvd[title-1].numChapters() - 1, 1 ) );
+    chapter = TQMIN( TQMAX( dvd[title-1].numChapters()/2, 2 ), TQMAX( dvd[title-1].numChapters() - 1, 1 ) );
 
   // select a frame number
   unsigned int frame = 30;
@@ -77,16 +77,16 @@ void K3bVideoDVDRippingPreview::generatePreview( const K3bVideoDVD::VideoDVD& dv
   m_process = new KProcess();
   *m_process << bin->path;
   *m_process << "-i" << dvd.device()->blockDeviceName();
-  *m_process << "-T" << QString("%1,%2").arg(title).arg(chapter);
+  *m_process << "-T" << TQString("%1,%2").tqarg(title).tqarg(chapter);
   *m_process << "-x" << "dvd,null";
   *m_process << "--dvd_access_delay" << "0";
   *m_process << "-y" << "ppm,null";
-  *m_process << "-c" << QString("%1-%2").arg( frame ).arg( frame+1 );
+  *m_process << "-c" << TQString("%1-%2").tqarg( frame ).tqarg( frame+1 );
   *m_process << "-Z" << "x200";
   *m_process << "-o" << m_tempDir->name();
 
-  connect( m_process, SIGNAL(processExited(KProcess*)),
-	   this, SLOT(slotTranscodeFinished(KProcess*)) );
+  connect( m_process, TQT_SIGNAL(processExited(KProcess*)),
+	   this, TQT_SLOT(slotTranscodeFinished(KProcess*)) );
   if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) { // we use AllOutput to not pollute stdout
     // something went wrong when starting the program
     // it "should" be the executable
@@ -112,9 +112,9 @@ void K3bVideoDVDRippingPreview::cancel()
 void K3bVideoDVDRippingPreview::slotTranscodeFinished( KProcess* )
 {
   // read the image
-  QString filename = m_tempDir->name() + "000000.ppm";// + tempQDir->entryList( QDir::Files ).first();
+  TQString filename = m_tempDir->name() + "000000.ppm";// + tempTQDir->entryList( TQDir::Files ).first();
   kdDebug() << "(K3bVideoDVDRippingPreview) reading from file " << filename << endl;
-  m_preview = QImage( filename );
+  m_preview = TQImage( filename );
   bool success = !m_preview.isNull() && !m_canceled;
 
   // remove temp files

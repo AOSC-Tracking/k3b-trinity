@@ -43,11 +43,11 @@
 #include <kio/global.h>
 #include <kio/job.h>
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qdatetime.h>
-#include <qfile.h>
-#include <qdatastream.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqdatetime.h>
+#include <tqfile.h>
+#include <tqdatastream.h>
 #include <kdebug.h>
 
 
@@ -83,8 +83,8 @@ public:
 };
 
 
-K3bDataJob::K3bDataJob( K3bDataDoc* doc, K3bJobHandler* hdl, QObject* parent )
-  : K3bBurnJob( hdl, parent )
+K3bDataJob::K3bDataJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
+  : K3bBurnJob( hdl, tqparent )
 {
   d = new Private;
 
@@ -95,10 +95,10 @@ K3bDataJob::K3bDataJob( K3bDataDoc* doc, K3bJobHandler* hdl, QObject* parent )
   m_isoImager = 0;
 
   m_msInfoFetcher = new K3bMsInfoFetcher( this, this );
-  connect( m_msInfoFetcher, SIGNAL(finished(bool)), this, SLOT(slotMsInfoFetched(bool)) );
-  connect( m_msInfoFetcher, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_msInfoFetcher, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+  connect( m_msInfoFetcher, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMsInfoFetched(bool)) );
+  connect( m_msInfoFetcher, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_msInfoFetcher, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   d->imageFinished = true;
 }
@@ -179,7 +179,7 @@ void K3bDataJob::prepareWriting()
     m_msInfoFetcher->start();
   }
   else {
-    m_isoImager->setMultiSessionInfo( QString::null );
+    m_isoImager->setMultiSessionInfo( TQString() );
     prepareData();
 
     d->initializingImager = true;
@@ -196,7 +196,7 @@ void K3bDataJob::slotMsInfoFetched(bool success)
     prepareData();
 
     if( d->usedWritingApp == K3b::CDRDAO )  // cdrdao seems to write a 150 blocks pregap that is not used by cdrecord
-      m_isoImager->setMultiSessionInfo( QString("%1,%2").arg(m_msInfoFetcher->lastSessionStart()).arg(m_msInfoFetcher->nextSessionStart()+150), d->doc->burner() );
+      m_isoImager->setMultiSessionInfo( TQString("%1,%2").tqarg(m_msInfoFetcher->lastSessionStart()).tqarg(m_msInfoFetcher->nextSessionStart()+150), d->doc->burner() );
     else
       m_isoImager->setMultiSessionInfo( m_msInfoFetcher->msInfo(), d->doc->burner() );
 
@@ -226,7 +226,7 @@ void K3bDataJob::writeImage()
 
   emit newTask( i18n("Creating image file") );
   emit newSubTask( i18n("Track 1 of 1") );
-  emit infoMessage( i18n("Creating image file in %1").arg(d->doc->tempDir()), INFO );
+  emit infoMessage( i18n("Creating image file in %1").tqarg(d->doc->tempDir()), INFO );
 
   m_isoImager->writeToImageFile( d->doc->tempDir() );
   m_isoImager->start();
@@ -324,7 +324,7 @@ void K3bDataJob::slotIsoImagerFinished( bool success )
 	d->doc->onlyCreateImages() ) {
 
       if( success ) {
-	emit infoMessage( i18n("Image successfully created in %1").arg(d->doc->tempDir()), K3bJob::SUCCESS );
+	emit infoMessage( i18n("Image successfully created in %1").tqarg(d->doc->tempDir()), K3bJob::SUCCESS );
 	d->imageFinished = true;
 
 	if( d->doc->onlyCreateImages() ) {
@@ -370,7 +370,7 @@ bool K3bDataJob::startWriterJob()
   if( d->doc->dummy() )
     emit newTask( i18n("Simulating") );
   else if( d->copies > 1 )
-    emit newTask( i18n("Writing Copy %1").arg(d->copiesDone+1) );
+    emit newTask( i18n("Writing Copy %1").tqarg(d->copiesDone+1) );
   else
     emit newTask( i18n("Writing") );
 
@@ -408,7 +408,7 @@ void K3bDataJob::slotWriterJobPercent( int p )
 
 void K3bDataJob::slotWriterNextTrack( int t, int tt )
 {
-  emit newSubTask( i18n("Writing Track %1 of %2").arg(t).arg(tt) );
+  emit newSubTask( i18n("Writing Track %1 of %2").tqarg(t).tqarg(tt) );
 }
 
 
@@ -432,20 +432,20 @@ void K3bDataJob::slotWriterJobFinished( bool success )
     if( d->doc->verifyData() ) {
       if( !d->verificationJob ) {
 	d->verificationJob = new K3bVerificationJob( this, this );
-	connect( d->verificationJob, SIGNAL(infoMessage(const QString&, int)),
-		 this, SIGNAL(infoMessage(const QString&, int)) );
- 	connect( d->verificationJob, SIGNAL(newTask(const QString&)),
- 		 this, SIGNAL(newSubTask(const QString&)) );
-	connect( d->verificationJob, SIGNAL(newSubTask(const QString&)),
-		 this, SIGNAL(newSubTask(const QString&)) );
-	connect( d->verificationJob, SIGNAL(percent(int)),
-		 this, SLOT(slotVerificationProgress(int)) );
-	connect( d->verificationJob, SIGNAL(percent(int)),
-		 this, SIGNAL(subPercent(int)) );
-	connect( d->verificationJob, SIGNAL(finished(bool)),
-		 this, SLOT(slotVerificationFinished(bool)) );
-	connect( d->verificationJob, SIGNAL(debuggingOutput(const QString&, const QString&)),
-		 this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+	connect( d->verificationJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
+		 this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+ 	connect( d->verificationJob, TQT_SIGNAL(newTask(const TQString&)),
+ 		 this, TQT_SIGNAL(newSubTask(const TQString&)) );
+	connect( d->verificationJob, TQT_SIGNAL(newSubTask(const TQString&)),
+		 this, TQT_SIGNAL(newSubTask(const TQString&)) );
+	connect( d->verificationJob, TQT_SIGNAL(percent(int)),
+		 this, TQT_SLOT(slotVerificationProgress(int)) );
+	connect( d->verificationJob, TQT_SIGNAL(percent(int)),
+		 this, TQT_SIGNAL(subPercent(int)) );
+	connect( d->verificationJob, TQT_SIGNAL(finished(bool)),
+		 this, TQT_SLOT(slotVerificationFinished(bool)) );
+	connect( d->verificationJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+		 this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
       }
       d->verificationJob->clear();
@@ -541,19 +541,19 @@ void K3bDataJob::setWriterJob( K3bAbstractWriter* writer )
 {
   // FIXME: progressedsize for multiple copies
   m_writerJob = writer;
-  connect( m_writerJob, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_writerJob, SIGNAL(percent(int)), this, SLOT(slotWriterJobPercent(int)) );
-  connect( m_writerJob, SIGNAL(processedSize(int, int)), this, SIGNAL(processedSize(int, int)) );
-  connect( m_writerJob, SIGNAL(subPercent(int)), this, SIGNAL(subPercent(int)) );
-  connect( m_writerJob, SIGNAL(processedSubSize(int, int)), this, SIGNAL(processedSubSize(int, int)) );
-  connect( m_writerJob, SIGNAL(nextTrack(int, int)), this, SLOT(slotWriterNextTrack(int, int)) );
-  connect( m_writerJob, SIGNAL(buffer(int)), this, SIGNAL(bufferStatus(int)) );
-  connect( m_writerJob, SIGNAL(deviceBuffer(int)), this, SIGNAL(deviceBuffer(int)) );
-  connect( m_writerJob, SIGNAL(writeSpeed(int, int)), this, SIGNAL(writeSpeed(int, int)) );
-  connect( m_writerJob, SIGNAL(finished(bool)), this, SLOT(slotWriterJobFinished(bool)) );
-  connect( m_writerJob, SIGNAL(newSubTask(const QString&)), this, SIGNAL(newSubTask(const QString&)) );
-  connect( m_writerJob, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+  connect( m_writerJob, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_writerJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterJobPercent(int)) );
+  connect( m_writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
+  connect( m_writerJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
+  connect( m_writerJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+  connect( m_writerJob, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
+  connect( m_writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
+  connect( m_writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
+  connect( m_writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterJobFinished(bool)) );
+  connect( m_writerJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_writerJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 }
 
 
@@ -572,11 +572,11 @@ void K3bDataJob::setImager( K3bIsoImager* imager )
 void K3bDataJob::connectImager()
 {
   m_isoImager->disconnect( this );
-  connect( m_isoImager, SIGNAL(infoMessage(const QString&, int)), this, SIGNAL(infoMessage(const QString&, int)) );
-  connect( m_isoImager, SIGNAL(percent(int)), this, SLOT(slotIsoImagerPercent(int)) );
-  connect( m_isoImager, SIGNAL(finished(bool)), this, SLOT(slotIsoImagerFinished(bool)) );
-  connect( m_isoImager, SIGNAL(debuggingOutput(const QString&, const QString&)),
-	   this, SIGNAL(debuggingOutput(const QString&, const QString&)) );
+  connect( m_isoImager, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_isoImager, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotIsoImagerPercent(int)) );
+  connect( m_isoImager, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotIsoImagerFinished(bool)) );
+  connect( m_isoImager, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 }
 
 
@@ -632,7 +632,7 @@ bool K3bDataJob::prepareWriterJob()
 	writer->addArgument( "-xa1" );
     }
 
-    writer->addArgument( QString("-tsize=%1s").arg(m_isoImager->size()) )->addArgument("-");
+    writer->addArgument( TQString("-tsize=%1s").tqarg(m_isoImager->size()) )->addArgument("-");
 
     setWriterJob( writer );
   }
@@ -648,10 +648,10 @@ bool K3bDataJob::prepareWriterJob()
 
     // now write the tocfile
     if( d->tocFile ) delete d->tocFile;
-    d->tocFile = new KTempFile( QString::null, "toc" );
+    d->tocFile = new KTempFile( TQString(), "toc" );
     d->tocFile->setAutoDelete(true);
 
-    if( QTextStream* s = d->tocFile->textStream() ) {
+    if( TQTextStream* s = d->tocFile->textStream() ) {
       if( d->usedDataMode == K3b::MODE1 ) {
 	*s << "CD_ROM" << "\n";
 	*s << "\n";
@@ -790,9 +790,9 @@ void K3bDataJob::determineMultiSessionMode()
     else {
       // now we need to determine the media's size
       connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::NG_DISKINFO, d->doc->burner() ),
-	       SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	       TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	       this,
-	       SLOT(slotDetermineMultiSessionMode(K3bDevice::DeviceHandler*)) );
+	       TQT_SLOT(slotDetermineMultiSessionMode(K3bDevice::DeviceHandler*)) );
     }
   }
   else {
@@ -905,7 +905,7 @@ bool K3bDataJob::waitForMedium()
 }
 
 
-QString K3bDataJob::jobDescription() const
+TQString K3bDataJob::jobDescription() const
 {
   if( d->doc->onlyCreateImages() ) {
     return i18n("Creating Data Image File");
@@ -914,19 +914,19 @@ QString K3bDataJob::jobDescription() const
 	   d->doc->multiSessionMode() == K3bDataDoc::AUTO ) {
     return i18n("Writing Data CD")
       + ( d->doc->isoOptions().volumeID().isEmpty()
-	  ? QString::null
-	  : QString( " (%1)" ).arg(d->doc->isoOptions().volumeID()) );
+	  ? TQString()
+	  : TQString( " (%1)" ).tqarg(d->doc->isoOptions().volumeID()) );
   }
   else {
     return i18n("Writing Multisession CD")
       + ( d->doc->isoOptions().volumeID().isEmpty()
-	  ? QString::null
-	  : QString( " (%1)" ).arg(d->doc->isoOptions().volumeID()) );
+	  ? TQString()
+	  : TQString( " (%1)" ).tqarg(d->doc->isoOptions().volumeID()) );
   }
 }
 
 
-QString K3bDataJob::jobDetails() const
+TQString K3bDataJob::jobDetails() const
 {
   if( d->doc->copies() > 1 &&
       !d->doc->dummy() &&
@@ -935,10 +935,10 @@ QString K3bDataJob::jobDetails() const
     return i18n("ISO9660 Filesystem (Size: %1) - %n copy",
 		"ISO9660 Filesystem (Size: %1) - %n copies",
 		d->doc->copies() )
-      .arg(KIO::convertSize( d->doc->size() ));
+      .tqarg(KIO::convertSize( d->doc->size() ));
   else
     return i18n("ISO9660 Filesystem (Size: %1)")
-      .arg(KIO::convertSize( d->doc->size() ));
+      .tqarg(KIO::convertSize( d->doc->size() ));
 }
 
 
@@ -951,9 +951,9 @@ K3bDataDoc::MultiSessionMode K3bDataJob::usedMultiSessionMode() const
 void K3bDataJob::cleanup()
 {
   if( !d->doc->onTheFly() && d->doc->removeImages() ) {
-    if( QFile::exists( d->doc->tempDir() ) ) {
+    if( TQFile::exists( d->doc->tempDir() ) ) {
       d->imageFile.remove();
-      emit infoMessage( i18n("Removed image file %1").arg(d->doc->tempDir()), K3bJob::SUCCESS );
+      emit infoMessage( i18n("Removed image file %1").tqarg(d->doc->tempDir()), K3bJob::SUCCESS );
     }
   }
 

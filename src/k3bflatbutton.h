@@ -16,36 +16,37 @@
 #ifndef FLATBUTTON_H
 #define FLATBUTTON_H
 
-#include <qframe.h>
-#include <qcolor.h>
-#include <qpixmap.h>
+#include <tqframe.h>
+#include <tqcolor.h>
+#include <tqpixmap.h>
 
-class QEvent;
-class QMouseEvent;
-class QPainter;
+class TQEvent;
+class TQMouseEvent;
+class TQPainter;
 class KAction;
 
 
 /**
 @author Sebastian Trueg
 */
-class K3bFlatButton : public QFrame
+class K3bFlatButton : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bFlatButton( QWidget *parent = 0, const char *name = 0 );
-  K3bFlatButton( const QString& text, QWidget *parent = 0, const char *name = 0 );
-  K3bFlatButton( KAction*, QWidget *parent = 0, const char *name = 0 );
+  K3bFlatButton( TQWidget *tqparent = 0, const char *name = 0 );
+  K3bFlatButton( const TQString& text, TQWidget *tqparent = 0, const char *name = 0 );
+  K3bFlatButton( KAction*, TQWidget *tqparent = 0, const char *name = 0 );
   
   ~K3bFlatButton();
 
-  QSize sizeHint() const;
+  TQSize tqsizeHint() const;
 
  public slots:
-  void setColors( const QColor& fore, const QColor& back );
-  void setText( const QString& );
-  void setPixmap( const QPixmap& );
+  void setColors( const TQColor& fore, const TQColor& back );
+  void setText( const TQString& );
+  void setPixmap( const TQPixmap& );
 
  signals:
   void pressed();
@@ -57,19 +58,19 @@ class K3bFlatButton : public QFrame
  private:
   void init();
 
-  void mousePressEvent(QMouseEvent* e);
-  void mouseReleaseEvent(QMouseEvent* e);
-  void enterEvent( QEvent* );
-  void leaveEvent( QEvent* );
-  void drawContents( QPainter* );
+  void mousePressEvent(TQMouseEvent* e);
+  void mouseReleaseEvent(TQMouseEvent* e);
+  void enterEvent( TQEvent* );
+  void leaveEvent( TQEvent* );
+  void drawContents( TQPainter* );
 
   void setHover( bool );
 
   bool m_pressed;
-  QColor m_backColor;
-  QColor m_foreColor;
-  QString m_text;
-  QPixmap m_pixmap;
+  TQColor m_backColor;
+  TQColor m_foreColor;
+  TQString m_text;
+  TQPixmap m_pixmap;
 
   bool m_hover;
 };

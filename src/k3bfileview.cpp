@@ -20,13 +20,13 @@
 #include "k3btoolbox.h"
 #include "k3bapplication.h"
 
-#include <qwidget.h>
-#include <qdragobject.h>
-#include <qlayout.h>
-#include <qdir.h>
-#include <qvbox.h>
-#include <qlabel.h>
-#include <qtoolbutton.h>
+#include <tqwidget.h>
+#include <tqdragobject.h>
+#include <tqlayout.h>
+#include <tqdir.h>
+#include <tqvbox.h>
+#include <tqlabel.h>
+#include <tqtoolbutton.h>
 
 #include <kfiledetailview.h>
 #include <klistview.h>
@@ -43,8 +43,8 @@
 #include <kprogress.h>
 
 
-K3bFileView::K3bFileView(QWidget *parent, const char *name ) 
-  : K3bContentsView( false, parent, name)
+K3bFileView::K3bFileView(TQWidget *tqparent, const char *name ) 
+  : K3bContentsView( false, tqparent, name)
 {
   setupGUI();
 }
@@ -63,15 +63,15 @@ KActionCollection* K3bFileView::actionCollection() const
 
 void K3bFileView::setupGUI()
 {
-  QVBoxLayout* layout = new QVBoxLayout( this );
-  //  layout->setAutoAdd( true );
+  TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
+  //  tqlayout->setAutoAdd( true );
 
-  m_dirOp = new K3bDirOperator( KURL::fromPathOrURL(QDir::home().absPath()), this );
+  m_dirOp = new K3bDirOperator( KURL::fromPathOrURL(TQDir::home().absPath()), this );
   m_toolBox = new K3bToolBox( this );
 
-  layout->addWidget( m_toolBox );
-  layout->addWidget( m_dirOp );
-  layout->setStretchFactor( m_dirOp, 1 );
+  tqlayout->addWidget( m_toolBox );
+  tqlayout->addWidget( m_dirOp );
+  tqlayout->setStretchFactor( m_dirOp, 1 );
 
   // setup actions
   KAction* actionHome = m_dirOp->actionCollection()->action("home");
@@ -100,7 +100,7 @@ void K3bFileView::setupGUI()
   m_toolBox->addWidget( m_dirOp->progressBar() );
 
   m_filterWidget->setEditable( true );
-  QString filter = i18n("*|All Files");
+  TQString filter = i18n("*|All Files");
   filter += "\n" + i18n("audio/x-mp3 audio/x-wav application/x-ogg |Sound Files");
   filter += "\n" + i18n("audio/x-wav |Wave Sound Files");
   filter += "\n" + i18n("audio/x-mp3 |MP3 Sound Files");
@@ -108,16 +108,16 @@ void K3bFileView::setupGUI()
   filter += "\n" + i18n("video/mpeg |MPEG Video Files");
   m_filterWidget->setFilter(filter);
 
-  connect( m_filterWidget, SIGNAL(filterChanged()), SLOT(slotFilterChanged()) );
+  connect( m_filterWidget, TQT_SIGNAL(filterChanged()), TQT_SLOT(slotFilterChanged()) );
 
-  connect( m_dirOp, SIGNAL(fileHighlighted(const KFileItem*)), this, SLOT(slotFileHighlighted(const KFileItem*)) );
-  connect( m_dirOp, SIGNAL(urlEntered(const KURL&)), this, SIGNAL(urlEntered(const KURL&)) );
-  connect( m_dirOp, SIGNAL(fileSelected(const KFileItem*)), m_dirOp, SLOT(slotAddFilesToProject()) );
+  connect( m_dirOp, TQT_SIGNAL(fileHighlighted(const KFileItem*)), this, TQT_SLOT(slotFileHighlighted(const KFileItem*)) );
+  connect( m_dirOp, TQT_SIGNAL(urlEntered(const KURL&)), this, TQT_SIGNAL(urlEntered(const KURL&)) );
+  connect( m_dirOp, TQT_SIGNAL(fileSelected(const KFileItem*)), m_dirOp, TQT_SLOT(slotAddFilesToProject()) );
 
   slotFileHighlighted(0);
 }
 
-void K3bFileView::setDir( const QString& dir )
+void K3bFileView::setDir( const TQString& dir )
 {
   KURL url;
   url.setPath(dir);
@@ -147,11 +147,11 @@ void K3bFileView::slotFileHighlighted( const KFileItem* )
 
 void K3bFileView::slotFilterChanged()
 {
-  QString filter = m_filterWidget->currentFilter();
+  TQString filter = m_filterWidget->currentFilter();
   m_dirOp->clearFilter();
 
-  if( filter.find( '/' ) > -1 ) {
-    QStringList types = QStringList::split( " ", filter );
+  if( filter.tqfind( '/' ) > -1 ) {
+    TQStringList types = TQStringList::split( " ", filter );
     types.prepend( "inode/directory" );
     m_dirOp->setMimeFilter( types );
   }

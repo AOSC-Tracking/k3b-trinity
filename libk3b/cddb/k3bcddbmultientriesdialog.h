@@ -23,7 +23,7 @@
 #include "k3bcddbresult.h"
 
 
-class QStringList;
+class TQStringList;
 class KListBox;
 
 /**
@@ -32,14 +32,15 @@ class KListBox;
 class K3bCddbMultiEntriesDialog : public KDialogBase  
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   ~K3bCddbMultiEntriesDialog();
   
-  static K3bCddbResultHeader selectCddbEntry( K3bCddbQuery* query, QWidget* parent = 0 );
+  static K3bCddbResultHeader selectCddbEntry( K3bCddbQuery* query, TQWidget* tqparent = 0 );
 
  protected:
-  K3bCddbMultiEntriesDialog( QWidget* parent = 0, const char* name = 0);
+  K3bCddbMultiEntriesDialog( TQWidget* tqparent = 0, const char* name = 0);
 
  private:
   KListBox *m_listBox;

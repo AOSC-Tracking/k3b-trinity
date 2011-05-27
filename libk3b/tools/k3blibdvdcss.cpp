@@ -21,10 +21,10 @@
 #include <k3biso9660.h>
 #include <k3biso9660backend.h>
 
-#include <qfile.h>
-#include <qcstring.h>
-#include <qvaluevector.h>
-#include <qpair.h>
+#include <tqfile.h>
+#include <tqcstring.h>
+#include <tqvaluevector.h>
+#include <tqpair.h>
 
 #include <dlfcn.h>
 
@@ -54,7 +54,7 @@ public:
 
   dvdcss_t dvd;
   K3bDevice::Device* device;
-  QValueVector< QPair<int,int> > titleOffsets;
+  TQValueVector< TQPair<int,int> > titleOffsets;
   int currentSector;
   bool currentSectorInTitle;
 };
@@ -82,7 +82,7 @@ bool K3bLibDvdCss::open( K3bDevice::Device* dev )
 {
   d->device = dev;
   dev->close();
-  d->dvd = k3b_dvdcss_open( const_cast<char*>( QFile::encodeName(dev->blockDeviceName()).data() ) );
+  d->dvd = k3b_dvdcss_open( const_cast<char*>( TQFile::encodeName(dev->blockDeviceName()).data() ) );
   d->currentSector = 0;
   d->currentSectorInTitle = false;
   return ( d->dvd != 0 );
@@ -216,7 +216,7 @@ bool K3bLibDvdCss::crackAllKeys()
 
   int title = 0;
   for( ; title < 100; ++title ) {
-    QString filename;
+    TQString filename;
 
     // first we get the menu vob
     if( title == 0 )
@@ -226,7 +226,7 @@ bool K3bLibDvdCss::crackAllKeys()
 
     const K3bIso9660File* file = dynamic_cast<const K3bIso9660File*>( dir->entry( filename ) );
     if( file && file->size() > 0 ) {
-      d->titleOffsets.append( qMakePair( (int)file->startSector(), (int)(file->size() / 2048U) ) );
+      d->titleOffsets.append( tqMakePair( (int)file->startSector(), (int)(file->size() / 2048U) ) );
       kdDebug() << "(K3bLibDvdCss) Get key for /" << filename << " at " << file->startSector() << endl;
       if( seek( (int)file->startSector(), DVDCSS_SEEK_KEY ) < 0 ) {
 	kdDebug() << "(K3bLibDvdCss) unable to seek to " << file->startSector() << endl;
@@ -235,7 +235,7 @@ bool K3bLibDvdCss::crackAllKeys()
     }
 
     if( title > 0 ) {
-      QPair<int,int> p;
+      TQPair<int,int> p;
       int vob = 1;
       for( ; vob < 100; ++vob ) {
 	filename.sprintf( "VIDEO_TS/VTS_%02d_%d.VOB", title, vob );

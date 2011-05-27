@@ -43,27 +43,27 @@
 #include <kmessagebox.h>
 #include <kurllabel.h>
 
-#include <qgroupbox.h>
-#include <qheader.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qdir.h>
-#include <qstringlist.h>
-#include <qmessagebox.h>
-#include <qfont.h>
-#include <qhbox.h>
-#include <qtoolbutton.h>
-#include <qtabwidget.h>
-#include <qspinbox.h>
-#include <qptrlist.h>
-#include <qintdict.h>
-#include <qpair.h>
-#include <qvalidator.h>
+#include <tqgroupbox.h>
+#include <tqheader.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqlayout.h>
+#include <tqvariant.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqdir.h>
+#include <tqstringlist.h>
+#include <tqmessagebox.h>
+#include <tqfont.h>
+#include <tqhbox.h>
+#include <tqtoolbutton.h>
+#include <tqtabwidget.h>
+#include <tqspinbox.h>
+#include <tqptrlist.h>
+#include <tqintdict.h>
+#include <tqpair.h>
+#include <tqvalidator.h>
 
 
 class K3bAudioRippingDialog::Private
@@ -72,8 +72,8 @@ public:
   Private() {
   }
 
-  QValueVector<QString> filenames;
-  QString playlistFilename;
+  TQValueVector<TQString> filenames;
+  TQString playlistFilename;
   K3bFileSystemInfo fsInfo;
 };
 
@@ -81,11 +81,11 @@ public:
 K3bAudioRippingDialog::K3bAudioRippingDialog(const K3bDevice::Toc& toc, 
 					     K3bDevice::Device* device,
 					     const K3bCddbResultEntry& entry, 
-					     const QValueList<int>& tracks,
-					     QWidget *parent, const char *name )
-  : K3bInteractionDialog( parent, name,
-			  QString::null,
-			  QString::null,
+					     const TQValueList<int>& tracks,
+					     TQWidget *tqparent, const char *name )
+  : K3bInteractionDialog( tqparent, name,
+			  TQString(),
+			  TQString(),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  "Audio Ripping" ), // config group
@@ -100,13 +100,13 @@ K3bAudioRippingDialog::K3bAudioRippingDialog(const K3bDevice::Toc& toc,
   setupContextHelp();
 
   K3b::Msf length;
-  for( QValueList<int>::const_iterator it = m_trackNumbers.begin();
+  for( TQValueList<int>::const_iterator it = m_trackNumbers.begin();
        it != m_trackNumbers.end(); ++it ) {
     length += m_toc[*it-1].length();
   }
   setTitle( i18n("CD Ripping"), 
 	    i18n("1 track (%1)", "%n tracks (%1)", 
-		 m_trackNumbers.count()).arg(length.toString()) );
+		 m_trackNumbers.count()).tqarg(length.toString()) );
 }
 
 
@@ -118,8 +118,8 @@ K3bAudioRippingDialog::~K3bAudioRippingDialog()
 
 void K3bAudioRippingDialog::setupGui()
 {
-  QWidget *frame = mainWidget();
-  QGridLayout* Form1Layout = new QGridLayout( frame );
+  TQWidget *frame = mainWidget();
+  TQGridLayout* Form1Layout = new TQGridLayout( frame );
   Form1Layout->setSpacing( KDialog::spacingHint() );
   Form1Layout->setMargin( 0 );
 
@@ -132,7 +132,7 @@ void K3bAudioRippingDialog::setupGui()
   m_viewTracks->setAllColumnsShowFocus(true);
   m_viewTracks->setFullWidth(true);
 
-  QTabWidget* mainTab = new QTabWidget( frame );
+  TQTabWidget* mainTab = new TQTabWidget( frame );
 
   m_optionWidget = new K3bAudioConvertingOptionWidget( mainTab );
   mainTab->addTab( m_optionWidget, i18n("Settings") );
@@ -142,25 +142,25 @@ void K3bAudioRippingDialog::setupGui()
   // -------------------------------------------------------------------------------------------
   m_patternWidget = new K3bCddbPatternWidget( mainTab );
   mainTab->addTab( m_patternWidget, i18n("File Naming") );
-  connect( m_patternWidget, SIGNAL(changed()), this, SLOT(refresh()) );
+  connect( m_patternWidget, TQT_SIGNAL(changed()), this, TQT_SLOT(refresh()) );
 
 
   // setup advanced page
   // -------------------------------------------------------------------------------------------
-  QWidget* advancedPage = new QWidget( mainTab );
-  QGridLayout* advancedPageLayout = new QGridLayout( advancedPage );
+  TQWidget* advancedPage = new TQWidget( mainTab );
+  TQGridLayout* advancedPageLayout = new TQGridLayout( advancedPage );
   advancedPageLayout->setMargin( marginHint() );
   advancedPageLayout->setSpacing( spacingHint() );
   mainTab->addTab( advancedPage, i18n("Advanced") );
 
   m_comboParanoiaMode = K3bStdGuiItems::paranoiaModeComboBox( advancedPage );
-  m_spinRetries = new QSpinBox( advancedPage );
-  m_checkIgnoreReadErrors = new QCheckBox( i18n("Ignore read errors"), advancedPage );
-  m_checkUseIndex0 = new QCheckBox( i18n("Don't read pregaps"), advancedPage );
+  m_spinRetries = new TQSpinBox( advancedPage );
+  m_checkIgnoreReadErrors = new TQCheckBox( i18n("Ignore read errors"), advancedPage );
+  m_checkUseIndex0 = new TQCheckBox( i18n("Don't read pregaps"), advancedPage );
 
-  advancedPageLayout->addWidget( new QLabel( i18n("Paranoia mode:"), advancedPage ), 0, 0 );
+  advancedPageLayout->addWidget( new TQLabel( i18n("Paranoia mode:"), advancedPage ), 0, 0 );
   advancedPageLayout->addWidget( m_comboParanoiaMode, 0, 1 );
-  advancedPageLayout->addWidget( new QLabel( i18n("Read retries:"), advancedPage ), 1, 0 );
+  advancedPageLayout->addWidget( new TQLabel( i18n("Read retries:"), advancedPage ), 1, 0 );
   advancedPageLayout->addWidget( m_spinRetries, 1, 1 );
   advancedPageLayout->addMultiCellWidget( m_checkIgnoreReadErrors, 2, 2, 0, 1 );
   advancedPageLayout->addMultiCellWidget( m_checkUseIndex0, 3, 3, 0, 1 );
@@ -176,20 +176,20 @@ void K3bAudioRippingDialog::setupGui()
 
   setStartButtonText( i18n( "Start Ripping" ), i18n( "Starts copying the selected tracks") );
   
-  connect( m_checkUseIndex0, SIGNAL(toggled(bool)), this, SLOT(refresh()) );
-  connect( m_optionWidget, SIGNAL(changed()), this, SLOT(refresh()) );
+  connect( m_checkUseIndex0, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(refresh()) );
+  connect( m_optionWidget, TQT_SIGNAL(changed()), this, TQT_SLOT(refresh()) );
 }
 
 
 void K3bAudioRippingDialog::setupContextHelp()
 {
-  QToolTip::add( m_spinRetries, i18n("Maximal number of read retries") );
-  QWhatsThis::add( m_spinRetries, i18n("<p>This specifies the maximum number of retries to "
+  TQToolTip::add( m_spinRetries, i18n("Maximal number of read retries") );
+  TQWhatsThis::add( m_spinRetries, i18n("<p>This specifies the maximum number of retries to "
 				       "read a sector of audio data from the cd. After that "
 				       "K3b will either skip the sector if the <em>Ignore Read Errors</em> "
 				       "option is enabled or stop the process.") );
-  QToolTip::add( m_checkUseIndex0, i18n("Do not read the pregaps at the end of every track") );
-  QWhatsThis::add( m_checkUseIndex0, i18n("<p>If this option is checked K3b will not rip the audio "
+  TQToolTip::add( m_checkUseIndex0, i18n("Do not read the pregaps at the end of every track") );
+  TQWhatsThis::add( m_checkUseIndex0, i18n("<p>If this option is checked K3b will not rip the audio "
 					  "data in the pregaps. Most audio tracks contain an empty "
 					  "pregap which does not belong to the track itself.</p>"
 					  "<p>Although the default behaviour of nearly all ripping "
@@ -227,14 +227,14 @@ void K3bAudioRippingDialog::slotStartClicked()
   }
 
   // check if we need to overwrite some files...
-  QListViewItemIterator it( m_viewTracks );
-  QStringList filesToOverwrite;
+  TQListViewItemIterator it( m_viewTracks );
+  TQStringList filesToOverwrite;
   for( unsigned int i = 0; i < d->filenames.count(); ++i ) {
-    if( QFile::exists( d->filenames[i] ) )
+    if( TQFile::exists( d->filenames[i] ) )
       filesToOverwrite.append( d->filenames[i] );
   }
 
-  if( m_optionWidget->createPlaylist() && QFile::exists( d->playlistFilename ) )
+  if( m_optionWidget->createPlaylist() && TQFile::exists( d->playlistFilename ) )
     filesToOverwrite.append( d->playlistFilename );
 
   if( !filesToOverwrite.isEmpty() )
@@ -246,18 +246,18 @@ void K3bAudioRippingDialog::slotStartClicked()
 
 
   // prepare list of tracks to rip
-  QValueVector<QPair<int, QString> > tracksToRip;
+  TQValueVector<TQPair<int, TQString> > tracksToRip;
   unsigned int i = 0;
-  for( QValueList<int>::const_iterator trackIt = m_trackNumbers.begin();
+  for( TQValueList<int>::const_iterator trackIt = m_trackNumbers.begin();
        trackIt != m_trackNumbers.end(); ++trackIt ) {
-    tracksToRip.append( qMakePair( *trackIt, d->filenames[(m_optionWidget->createSingleFile() ? 0 : i)] ) );
+    tracksToRip.append( tqMakePair( *trackIt, d->filenames[(m_optionWidget->createSingleFile() ? 0 : i)] ) );
     ++i;
   }
 
-  K3bJobProgressDialog ripDialog( parentWidget(), "Ripping" );
+  K3bJobProgressDialog ripDialog( tqparentWidget(), "Ripping" );
 
   K3bAudioEncoder* encoder = m_optionWidget->encoder();
-  K3bAudioRipJob* job = new K3bAudioRipJob( &ripDialog, this );
+  K3bAudioRipJob* job = new K3bAudioRipJob( &ripDialog, TQT_TQOBJECT(this) );
   job->setDevice( m_device );
   job->setCddbEntry( m_cddbEntry );
   job->setTracksToRip( tracksToRip );
@@ -289,22 +289,22 @@ void K3bAudioRippingDialog::refresh()
   m_viewTracks->clear();
   d->filenames.clear();
 
-  QString baseDir = K3b::prepareDir( m_optionWidget->baseDir() );
+  TQString baseDir = K3b::prepareDir( m_optionWidget->baseDir() );
   d->fsInfo.setPath( baseDir );
 
   KIO::filesize_t overallSize = 0;
 
   if( m_optionWidget->createSingleFile() ) {
     long length = 0;
-    for( QValueList<int>::const_iterator it = m_trackNumbers.begin();
+    for( TQValueList<int>::const_iterator it = m_trackNumbers.begin();
 	 it != m_trackNumbers.end(); ++it ) {
       length += ( m_checkUseIndex0->isChecked() 
 		  ? m_toc[*it-1].realAudioLength().lba()
 		  : m_toc[*it-1].length().lba() );
     }
 
-    QString filename;
-    QString extension;
+    TQString filename;
+    TQString extension;
     long long fileSize = 0;
     if( m_optionWidget->encoder() == 0 ) {
       extension = "wav";
@@ -347,11 +347,11 @@ void K3bAudioRippingDialog::refresh()
 			       i18n("Cue-file") );
   }
   else {
-    for( QValueList<int>::const_iterator it = m_trackNumbers.begin();
+    for( TQValueList<int>::const_iterator it = m_trackNumbers.begin();
 	 it != m_trackNumbers.end(); ++it ) {
       int index = *it - 1;
 
-      QString extension;
+      TQString extension;
       long long fileSize = 0;
       K3b::Msf trackLength = ( m_checkUseIndex0->isChecked() 
 			       ? m_toc[index].realAudioLength()
@@ -374,7 +374,7 @@ void K3bAudioRippingDialog::refresh()
       }
 
 
-      QString filename;
+      TQString filename;
 
       if( (int)m_cddbEntry.titles.count() >= *it ) {
 	filename = K3bPatternParser::parsePattern( m_cddbEntry, *it,
@@ -383,7 +383,7 @@ void K3bAudioRippingDialog::refresh()
 						   m_patternWidget->blankReplaceString() ) + "." + extension;
       }
       else {
-	filename = i18n("Track%1").arg( QString::number( *it ).rightJustify( 2, '0' ) ) + "." + extension;
+	filename = i18n("Track%1").tqarg( TQString::number( *it ).rightJustify( 2, '0' ) ) + "." + extension;
       }
 
       filename = d->fsInfo.fixupPath( filename );
@@ -401,7 +401,7 @@ void K3bAudioRippingDialog::refresh()
 
   // create playlist item
   if( m_optionWidget->createPlaylist() ) {
-    QString filename = K3bPatternParser::parsePattern( m_cddbEntry, 1,
+    TQString filename = K3bPatternParser::parsePattern( m_cddbEntry, 1,
 						       m_patternWidget->playlistPattern(),
 						       m_patternWidget->replaceBlanks(),
 						       m_patternWidget->blankReplaceString() ) + ".m3u";
@@ -423,7 +423,7 @@ void K3bAudioRippingDialog::refresh()
 }
 
 
-void K3bAudioRippingDialog::setStaticDir( const QString& path )
+void K3bAudioRippingDialog::setStaticDir( const TQString& path )
 {
   m_optionWidget->setBaseDir( path );
 }

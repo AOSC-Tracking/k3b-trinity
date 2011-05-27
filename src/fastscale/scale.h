@@ -1,7 +1,7 @@
 // vim: set tabstop=4 shiftwidth=4 noexpandtab
 /*
 Gwenview - A simple image viewer for KDE
-Copyright 2000-2004 Aurélien Gâteau
+Copyright 2000-2004 Aurï¿½lien Gï¿½teau
  
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -21,14 +21,14 @@ Copyright 2000-2004 Aurélien Gâteau
 #ifndef FAST_SCALE_H
 #define FAST_SCALE_H
 
-// Qt
-#include <qimage.h>
+// TQt
+#include <tqimage.h>
 
 namespace ImageUtils {
 	enum SmoothAlgorithm { SMOOTH_NONE, SMOOTH_FAST, SMOOTH_NORMAL, SMOOTH_BEST };
 
-	QImage scale(const QImage& image, int width, int height,
-		SmoothAlgorithm alg, QImage::ScaleMode mode = QImage::ScaleFree, double blur = 1.0);
+	TQImage scale(const TQImage& image, int width, int height,
+		SmoothAlgorithm alg, TQ_ScaleMode mode = TQ_ScaleFree, double blur = 1.0);
 }
 
 #endif

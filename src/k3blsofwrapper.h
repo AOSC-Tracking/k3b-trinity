@@ -16,7 +16,7 @@
 #ifndef _K3B_LSOF_WRAPPER_H_
 #define _K3B_LSOF_WRAPPER_H_
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 namespace K3bDevice {
   class Device;
@@ -38,7 +38,7 @@ class K3bLsofWrapper
   bool checkDevice( K3bDevice::Device* );
 
   struct Process {
-    QString name;
+    TQString name;
     int pid;
   };
 
@@ -47,7 +47,7 @@ class K3bLsofWrapper
    * handle on the device used in the last successful call
    * to checkDevice.
    */
-  const QValueList<Process>& usingApplications() const;
+  const TQValueList<Process>& usingApplications() const;
 
  private:
   bool findLsofExecutable();

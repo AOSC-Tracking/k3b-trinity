@@ -29,9 +29,10 @@ class K3bJobHandler;
 class K3bDataPreparationJob : public K3bJob
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bDataPreparationJob( K3bDataDoc* doc, K3bJobHandler* hdl, QObject* parent );
+  K3bDataPreparationJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent );
   ~K3bDataPreparationJob();
 
   bool hasBeenCanceled() const;

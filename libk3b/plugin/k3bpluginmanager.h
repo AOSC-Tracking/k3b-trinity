@@ -16,14 +16,14 @@
 #ifndef _K3B_PLUGIN_MANAGER_H_
 #define _K3B_PLUGIN_MANAGER_H_
 
-#include <qobject.h>
-#include <qptrlist.h>
-#include <qstringlist.h>
+#include <tqobject.h>
+#include <tqptrlist.h>
+#include <tqstringlist.h>
 #include "k3b_export.h"
 
 
 class K3bPlugin;
-class QWidget;
+class TQWidget;
 
 
 /**
@@ -32,23 +32,24 @@ class QWidget;
  * Like the K3bCore the single instance (which has to be created manually)
  * can be obtained with the k3bpluginmanager macro.
  */
-class LIBK3B_EXPORT K3bPluginManager : public QObject
+class LIBK3B_EXPORT K3bPluginManager : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
-  K3bPluginManager( QObject* parent = 0, const char* name = 0 );
+  K3bPluginManager( TQObject* tqparent = 0, const char* name = 0 );
   ~K3bPluginManager();
 
   /**
    * if group is empty all plugins are returned
    */
-  QPtrList<K3bPlugin> plugins( const QString& group = QString::null ) const;
+  TQPtrList<K3bPlugin> plugins( const TQString& group = TQString() ) const;
 
   /**
    * Returnes a list of the available groups.
    */
-  QStringList groups() const;
+  TQStringList groups() const;
 
   int pluginSystemVersion() const;
 
@@ -58,9 +59,9 @@ class LIBK3B_EXPORT K3bPluginManager : public QObject
    */
   void loadAll();
 
-  void loadPlugin( const QString& fileName );
+  void loadPlugin( const TQString& fileName );
 
-  int execPluginDialog( K3bPlugin*, QWidget* parent = 0, const char* name = 0 );
+  int execPluginDialog( K3bPlugin*, TQWidget* tqparent = 0, const char* name = 0 );
 
  private:
   class Private;
