@@ -1,4 +1,4 @@
-/* 
+/*
  *
  * $Id: k3bmusicbrainzjob.h 630384 2007-02-05 09:33:17Z mlaurent $
  * Copyright (C) 2005 Sebastian Trueg <trueg@k3b.org>
@@ -19,6 +19,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#ifdef Q_MOC_RUN
+#define HAVE_MUSICBRAINZ
+#endif // Q_MOC_RUN
 
 #ifdef HAVE_MUSICBRAINZ
 
