@@ -993,7 +993,7 @@ void K3bAudioTrackView::slotQueryMusicBrainz()
 
   // only one may use the tracks at the same time
   if( m_currentlyPlayingTrack &&
-      tracks.containsRef( m_currentlyPlayingTrack ) )
+      tracks.tqcontainsRef( m_currentlyPlayingTrack ) )
     m_player->stop();
 
   // now do the lookup on the files.
