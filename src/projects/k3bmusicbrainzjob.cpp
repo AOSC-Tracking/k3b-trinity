@@ -154,7 +154,7 @@ void K3bMusicBrainzJob::MusicBrainzThread::run()
 
 // cannot use this as tqparent for the K3bSimpleJobHandler since this has not been constructed yet
 K3bMusicBrainzJob::K3bMusicBrainzJob( TQWidget* tqparent, const char* name )
-  : K3bJob( new K3bSimpleJobHandler( 0 ), tqparent, name ),
+  : K3bJob( new K3bSimpleJobHandler( 0 ), TQT_TQOBJECT(tqparent), name ),
     m_canceled( false )
 {
   m_trmThread = new TRMThread();
@@ -264,7 +264,7 @@ void K3bMusicBrainzJob::slotMbJobFinished( bool success )
 	s = resultStringsUnique.first();
 
       if( ok ) {
-	int i = resultStrings.findIndex( s );
+	int i = resultStrings.tqfindIndex( s );
 	m_tracks.current()->setTitle( m_mbThread->title(i) );
 	m_tracks.current()->setArtist( m_mbThread->artist(i) );
       }
