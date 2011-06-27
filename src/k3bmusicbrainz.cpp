@@ -62,7 +62,7 @@ int K3bMusicBrainz::query( const TQCString& trm )
   }
 
   char* args[2];
-  args[0] = trm.data();
+  args[0] = const_cast<TQCString&>(trm).data();
   args[1] = 0;
 
   if( mb_QueryWithArgs( d->mb, (char*)MBQ_TrackInfoFromTRMId, (char**)args ) ) {
