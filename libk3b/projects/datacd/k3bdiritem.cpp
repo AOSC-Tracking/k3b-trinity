@@ -25,8 +25,8 @@
 #include <kdebug.h>
 
 
-K3bDirItem::K3bDirItem(const TQString& name, K3bDataDoc* doc, K3bDirItem* tqparentDir)
-  : K3bDataItem( doc, tqparentDir ),
+K3bDirItem::K3bDirItem(const TQString& name, K3bDataDoc* doc, K3bDirItem* parentDir)
+  : K3bDataItem( doc, parentDir ),
     m_size(0),
     m_followSymlinksSize(0),
     m_blocks(0),

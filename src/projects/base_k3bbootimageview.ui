@@ -387,7 +387,7 @@
 <Q_SLOTS>
     <slot access="protected">slotOptionsChanged()</slot>
 </Q_SLOTS>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
 </includehints>

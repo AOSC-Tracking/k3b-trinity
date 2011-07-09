@@ -259,7 +259,7 @@ void K3bExternalBinWidget::save()
   while( progIt.current() ) {
     if( K3bExternalBinViewItem* bV = dynamic_cast<K3bExternalBinViewItem*>( progIt.current() ) ) {
       if( bV->isDefault() )
-	bV->tqparentProgramItem()->program()->setDefault( bV->bin() );
+	bV->parentProgramItem()->program()->setDefault( bV->bin() );
     }
 
     ++progIt;
@@ -290,9 +290,9 @@ void K3bExternalBinWidget::slotSetDefaultButtonClicked()
   K3bExternalBinViewItem* item = dynamic_cast<K3bExternalBinViewItem*>( m_programView->selectedItem() );
   if( item ) {
     // remove all default flags
-    K3bExternalBinViewItem* bi = (K3bExternalBinViewItem*)item->tqparentProgramItem()->firstChild();
+    K3bExternalBinViewItem* bi = (K3bExternalBinViewItem*)item->parentProgramItem()->firstChild();
     TQListViewItemIterator it( bi );
-    while( it.current() && it.current()->tqparent() == item->tqparentProgramItem() ) {
+    while( it.current() && it.current()->tqparent() == item->parentProgramItem() ) {
       ((K3bExternalBinViewItem*)it.current())->setDefault(false);
       ++it;
     }

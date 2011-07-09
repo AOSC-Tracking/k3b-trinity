@@ -270,5 +270,5 @@ Example: 'my good file.ext' becomes 'my_good_file.ext'</string>
 <tabstops>
     <tabstop>m_editReplace</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 </UI>

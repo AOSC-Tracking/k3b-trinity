@@ -47,7 +47,7 @@ class K3bSpecialDataItem : public K3bDataItem
     }
 
   ~K3bSpecialDataItem() {
-    // remove this from tqparentdir
+    // remove this from parentdir
     if( tqparent() )
       tqparent()->takeDataItem( this );
   }

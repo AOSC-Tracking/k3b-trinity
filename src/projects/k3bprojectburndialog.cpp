@@ -223,9 +223,9 @@ void K3bProjectBurnDialog::slotStartClicked()
 
   K3bJobProgressDialog* dlg = 0;
   if( m_checkOnlyCreateImage && m_checkOnlyCreateImage->isChecked() )
-    dlg = new K3bJobProgressDialog( tqparentWidget() );
+    dlg = new K3bJobProgressDialog( parentWidget() );
   else
-    dlg = new K3bBurnProgressDialog( tqparentWidget() );
+    dlg = new K3bBurnProgressDialog( parentWidget() );
 
   m_job = m_doc->newBurnJob( dlg );
 

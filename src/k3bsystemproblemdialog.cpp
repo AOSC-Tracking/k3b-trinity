@@ -210,7 +210,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* tqparent,
       // Since kernel 2.6.8 older cdrecord versions are not able to use the SCSI subsystem when running suid root anymore
       // So far we ignore the suid root issue with kernel >= 2.6.8 and cdrecord < 2.01.01a02
       //
-      // Kernel 2.6.16.something seems to introduce another problem which was aptqparently worked around in cdrecord 2.01.01a05
+      // Kernel 2.6.16.something seems to introduce another problem which was apparently worked around in cdrecord 2.01.01a05
       //
       if( K3b::simpleKernelVersion() >= K3bVersion( 2, 6, 8 ) &&
 	  k3bcore->externalBinManager()->binObject( "cdrecord" )->version < K3bVersion( 2, 1, 1, "a05" ) &&

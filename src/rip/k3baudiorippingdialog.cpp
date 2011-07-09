@@ -254,7 +254,7 @@ void K3bAudioRippingDialog::slotStartClicked()
     ++i;
   }
 
-  K3bJobProgressDialog ripDialog( tqparentWidget(), "Ripping" );
+  K3bJobProgressDialog ripDialog( parentWidget(), "Ripping" );
 
   K3bAudioEncoder* encoder = m_optionWidget->encoder();
   K3bAudioRipJob* job = new K3bAudioRipJob( &ripDialog, TQT_TQOBJECT(this) );

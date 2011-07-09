@@ -184,7 +184,7 @@
     <tabstop>m_checkRockRidge</tabstop>
     <tabstop>m_checkJoliet</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
     <includehint>kcombobox.h</includehint>

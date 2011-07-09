@@ -473,7 +473,7 @@ This  results  in  many  wasted bits for high bitrate encodings but will ensure 
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>
 </includehints>

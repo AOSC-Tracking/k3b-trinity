@@ -207,7 +207,7 @@ class LIBK3B_EXPORT K3bJob : public TQObject, public K3bJobHandler
    * \param hdl the handler of the job. This allows for some user interaction without
    *            specifying any details (like the GUI).
    *            The job handler can also be another job. In that case this job is a sub job
-   *            and will be part of the tqparents running sub jobs.
+   *            and will be part of the parents running sub jobs.
    *
    * \see runningSubJobs()
    * \see numRunningSubJobs()

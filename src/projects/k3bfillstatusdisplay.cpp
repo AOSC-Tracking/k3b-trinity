@@ -285,7 +285,7 @@ public:
   }
 
   void maybeTip( const TQPoint& ) {
-    tip( tqparentWidget()->rect(),
+    tip( parentWidget()->rect(),
 	 KIO::convertSize( m_doc->size() ) +
 	 " (" + KGlobal::locale()->formatNumber( m_doc->size(), 0 ) + "), " +
 	 m_doc->length().toString(false) + " " + i18n("min") +
@@ -597,7 +597,7 @@ void K3bFillStatusDisplay::slotDetermineSize()
   bool canceled = false;
   K3bDevice::Device* dev = K3bMediaSelectionDialog::selectMedium( d->showDvdSizes ? K3bDevice::MEDIA_WRITABLE_DVD : K3bDevice::MEDIA_WRITABLE_CD,
 								  K3bDevice::STATE_EMPTY|K3bDevice::STATE_INCOMPLETE,
-								  tqparentWidget(),
+								  parentWidget(),
 								  TQString(), TQString(), &canceled );
 
   if( dev ) {
@@ -608,10 +608,10 @@ void K3bFillStatusDisplay::slotDetermineSize()
       update();
     }
     else
-      KMessageBox::error( tqparentWidget(), i18n("Medium is not empty.") );
+      KMessageBox::error( parentWidget(), i18n("Medium is not empty.") );
   }
   else if( !canceled )
-    KMessageBox::error( tqparentWidget(), i18n("No usable medium found.") );
+    KMessageBox::error( parentWidget(), i18n("No usable medium found.") );
 }
 
 

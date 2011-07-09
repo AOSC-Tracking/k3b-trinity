@@ -326,7 +326,7 @@
         <slot>setDisabled(bool)</slot>
     </connection>
 </connections>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kcombobox.h</includehint>
     <includehint>kcombobox.h</includehint>

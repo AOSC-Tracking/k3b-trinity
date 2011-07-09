@@ -112,9 +112,9 @@ void K3bStatusBarManager::update()
   else
     m_labelFreeTemp->setText(i18n("No info"));
 
-  if( path != TQToolTip::textFor( m_labelFreeTemp->tqparentWidget() ) ) {
-    TQToolTip::remove( m_labelFreeTemp->tqparentWidget() );
-    TQToolTip::add( m_labelFreeTemp->tqparentWidget(), path );
+  if( path != TQToolTip::textFor( m_labelFreeTemp->parentWidget() ) ) {
+    TQToolTip::remove( m_labelFreeTemp->parentWidget() );
+    TQToolTip::add( m_labelFreeTemp->parentWidget(), path );
   }
 }
 
@@ -153,7 +153,7 @@ void K3bStatusBarManager::clearActionStatusText()
 bool K3bStatusBarManager::eventFilter( TQObject* o, TQEvent* e )
 {
   if( e->type() == TQEvent::MouseButtonDblClick ) {
-    if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_labelFreeTemp->tqparentWidget()) )
+    if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_labelFreeTemp->parentWidget()) )
       m_mainWindow->showOptionDialog( 0 );  // FIXME: use an enumeration for the option pages
     else if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_versionBox) )
       if( KAction* a = m_mainWindow->action( "help_about_app" ) )

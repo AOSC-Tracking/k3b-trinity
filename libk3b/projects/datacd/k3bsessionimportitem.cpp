@@ -47,7 +47,7 @@ K3bSessionImportItem::~K3bSessionImportItem()
   if( m_replaceItem )
     m_replaceItem->setReplacedItemFromOldSession(0);
 
-  // remove this from tqparentdir
+  // remove this from parentdir
   if( tqparent() )
     tqparent()->takeDataItem( this );
 }

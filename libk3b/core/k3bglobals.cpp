@@ -189,7 +189,7 @@ TQString K3b::prepareDir( const TQString& dir )
 }
 
 
-TQString K3b::tqparentDir( const TQString& path )
+TQString K3b::parentDir( const TQString& path )
 {
   TQString tqparent = path;
   if( path[path.length()-1] == '/' )

@@ -802,7 +802,7 @@ void K3bListView::setCurrentItem( TQListViewItem* i )
     return;
 
   // I cannot remember why I did this here exactly. However, it resets the
-  // m_lastClickedItem and thus tqinvalidates the editing.
+  // m_lastClickedItem and thus invalidates the editing.
 //   doRename();
 //   hideEditor();
 //   m_currentEditItem = 0;
@@ -1143,7 +1143,7 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
 	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ||
 	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorComboBox) ) {
       // make sure we did not lose the focus to one of the edit widgets' tqchildren
-      if( !tqApp->tqfocusWidget() || TQT_BASE_OBJECT(tqApp->tqfocusWidget()->tqparentWidget()) != TQT_BASE_OBJECT(o) ) {
+      if( !tqApp->tqfocusWidget() || TQT_BASE_OBJECT(tqApp->tqfocusWidget()->parentWidget()) != TQT_BASE_OBJECT(o) ) {
 	doRename();
 	hideEditor();
       }
@@ -1206,14 +1206,14 @@ void K3bListView::viewportResizeEvent( TQResizeEvent* e )
 }
 
 
-TQListViewItem* K3bListView::tqparentItem( TQListViewItem* item )
+TQListViewItem* K3bListView::parentItem( TQListViewItem* item )
 {
   if( !item )
     return 0;
   if( item->tqparent() )
     return item->tqparent();
   else
-    return K3bListView::tqparentItem( item->itemAbove() );
+    return K3bListView::parentItem( item->itemAbove() );
 }
 
 

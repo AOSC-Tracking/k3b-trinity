@@ -172,7 +172,7 @@
     <tabstop>m_checkBlankReplace</tabstop>
     <tabstop>m_editBlankReplace</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kurllabel.h</includehint>
     <includehint>kurllabel.h</includehint>

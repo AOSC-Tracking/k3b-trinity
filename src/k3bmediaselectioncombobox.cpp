@@ -54,7 +54,7 @@ K3bMediaSelectionComboBox::ToolTip::ToolTip( K3bMediaSelectionComboBox* box )
 
 void K3bMediaSelectionComboBox::ToolTip::maybeTip( const TQPoint& pos )
 {
-  if( !tqparentWidget() || !m_box )
+  if( !parentWidget() || !m_box )
     return;
 
   TQListBoxItem* item = m_box->listBox()->itemAt( pos );

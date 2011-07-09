@@ -319,7 +319,7 @@ K3bDeviceTreeToolTip::K3bDeviceTreeToolTip( TQWidget* tqparent, K3bFileTreeView*
 
 void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
 {
-  if( !tqparentWidget() || !m_view )
+  if( !parentWidget() || !m_view )
     return;
 
   K3bDeviceBranchViewItem* item = dynamic_cast<K3bDeviceBranchViewItem*>( m_view->itemAt( pos ) );
@@ -328,7 +328,7 @@ void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
 
   K3bDevice::Device* dev = static_cast<K3bDeviceBranch*>( item->branch() )->device();
 
-  TQFrame* tooltip = new TQFrame( tqparentWidget() );
+  TQFrame* tooltip = new TQFrame( parentWidget() );
   tooltip->setFrameStyle( TQFrame::Panel | TQFrame::Raised );
   tooltip->setFrameShape( TQFrame::StyledPanel );
   TQGridLayout* lay = new TQGridLayout( tooltip, 2, 2, tooltip->frameWidth()*2 /*margin*/, 6 /*spacing*/ );

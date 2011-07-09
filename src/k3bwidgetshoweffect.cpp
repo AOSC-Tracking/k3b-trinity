@@ -70,7 +70,7 @@ void K3bWidgetShowEffect::show( bool effectOnly )
     m_timerId = startTimer( 1000 / 30 );
   }
   else {
-    m_widget->move( 0, m_widget->tqparentWidget()->height() );
+    m_widget->move( 0, m_widget->parentWidget()->height() );
     m_timerId = startTimer( 6 );
   }
   
@@ -97,18 +97,18 @@ void K3bWidgetShowEffect::dissolveMask()
 {
   if( m_bShow ) {
     m_widget->tqrepaint( false );
-    TQPainter tqmaskPainter(&m_tqmask);
+    TQPainter maskPainter(&m_tqmask);
 
     m_tqmask.fill(TQt::black);
 
-    tqmaskPainter.setBrush(TQt::white);
-    tqmaskPainter.setPen(TQt::white);
-    tqmaskPainter.drawRect( m_tqmask.rect() );
+    maskPainter.setBrush(TQt::white);
+    maskPainter.setPen(TQt::white);
+    maskPainter.drawRect( m_tqmask.rect() );
     
     m_dissolveSize += m_dissolveDelta;
 
     if( m_dissolveSize > 0 ) {
-      tqmaskPainter.setRasterOp( TQt::EraseROP );
+      maskPainter.setRasterOp( TQt::EraseROP );
 
       int x, y, s;
       const int size = 16;
@@ -121,7 +121,7 @@ void K3bWidgetShowEffect::dissolveMask()
 	  if( s < 0 )
 	    break;
 
-	  tqmaskPainter.drawEllipse(x - s / 2, y - s / 2, s, s);
+	  maskPainter.drawEllipse(x - s / 2, y - s / 2, s, s);
 	}
       }
     }
@@ -153,7 +153,7 @@ void K3bWidgetShowEffect::dissolveMask()
 void K3bWidgetShowEffect::slideMask()
 {
   if( m_bShow ) {
-    m_widget->move( 0, m_widget->tqparentWidget()->height() - m_offset );
+    m_widget->move( 0, m_widget->parentWidget()->height() - m_offset );
     
     m_offset++;
     if( m_offset > m_widget->height() ) {
@@ -167,7 +167,7 @@ void K3bWidgetShowEffect::slideMask()
   }
   else {
     m_offset--;
-    m_widget->move( 0, m_widget->tqparentWidget()->height() - m_offset );
+    m_widget->move( 0, m_widget->parentWidget()->height() - m_offset );
     
     if( m_offset < 0 ) {
       // finally hide the widget

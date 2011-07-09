@@ -133,7 +133,7 @@ void K3bMediaContentsView::slotMediumChanged( K3bDevice::Device* dev )
 {
   // FIXME: derive a K3bContentsStack from TQWidgetStack and let it set an active flag
   // to replace this hack
-  if( TQWidgetStack* stack = dynamic_cast<TQWidgetStack*>( tqparentWidget() ) )
+  if( TQWidgetStack* stack = dynamic_cast<TQWidgetStack*>( parentWidget() ) )
     if( stack->visibleWidget() != this )
       return;
 

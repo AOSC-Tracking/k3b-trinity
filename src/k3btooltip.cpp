@@ -47,7 +47,7 @@ K3bToolTip::~K3bToolTip()
 
 void K3bToolTip::tip( const TQRect& rect, const TQString& text, int effect )
 {
-  TQLabel* label = new TQLabel( text, tqparentWidget() );
+  TQLabel* label = new TQLabel( text, parentWidget() );
   label->setMargin( 6 );
   if( K3bTheme* theme = k3bappcore->themeManager()->currentTheme() ) {
     label->setPaletteBackgroundColor( theme->backgroundColor() );
@@ -59,7 +59,7 @@ void K3bToolTip::tip( const TQRect& rect, const TQString& text, int effect )
 
 void K3bToolTip::tip( const TQRect& rect, const TQPixmap& pix, int effect )
 {
-  TQLabel* label = new TQLabel( tqparentWidget() );
+  TQLabel* label = new TQLabel( parentWidget() );
   label->setMargin( 6 );
   if( K3bTheme* theme = k3bappcore->themeManager()->currentTheme() ) {
     label->setPaletteBackgroundColor( theme->backgroundColor() );
@@ -134,7 +134,7 @@ void K3bToolTip::hideTip()
 
 bool K3bToolTip::eventFilter( TQObject* o, TQEvent* e )
 {
-  if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(tqparentWidget()) ) {
+  if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(parentWidget()) ) {
     switch( e->type() ) {
     case TQEvent::MouseButtonPress:
     case TQEvent::MouseButtonRelease:

@@ -330,7 +330,7 @@ void K3bDataFileView::setupActions()
   m_actionRename = new KAction( i18n("Rename"), "edit", renameShortCut, TQT_TQOBJECT(this), TQT_SLOT(slotRenameItem()),
 				actionCollection(), "rename" );
   m_actionParentDir = new KAction( i18n("Parent Directory"), "up", 0, TQT_TQOBJECT(this), TQT_SLOT(slotParentDir()),
-				   actionCollection(), "tqparent_dir" );
+				   actionCollection(), "parent_dir" );
   m_actionOpen = new KAction( i18n("Open"), "fileopen", 0, TQT_TQOBJECT(this), TQT_SLOT(slotOpen()),
 				   actionCollection(), "open" );
 

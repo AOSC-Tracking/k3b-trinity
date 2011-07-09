@@ -231,8 +231,8 @@ void K3bDataDirTreeView::slotItemAdded( K3bDataItem* item )
     // should only be emitted once for every item
     //
     K3bDirItem* dirItem = static_cast<K3bDirItem*>( item );
-    K3bDataDirViewItem* tqparentViewItem = m_itemMap[dirItem->tqparent()];
-    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, tqparentViewItem );
+    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->tqparent()];
+    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, parentViewItem );
     m_itemMap.insert( dirItem, newDirItem );
   }
 }
@@ -456,18 +456,18 @@ void K3bDataDirTreeView::checkForNewItems()
 
 	  TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> itDirItem = m_itemMap.tqfind( dirItem );
 	  if( itDirItem == m_itemMap.end() ) {
-	    K3bDataDirViewItem* tqparentViewItem = m_itemMap[dirItem->tqparent()];
-	    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, tqparentViewItem );
+	    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->tqparent()];
+	    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, parentViewItem );
 	    m_itemMap.insert( dirItem, newDirItem );
 	  }
 	  else {
 	    // check if tqparent still correct (to get moved items)
 	    K3bDataDirViewItem* dirViewItem = itDirItem.data();
-	    K3bDataDirViewItem* tqparentViewItem = (K3bDataDirViewItem*)dirViewItem->tqparent();
+	    K3bDataDirViewItem* parentViewItem = (K3bDataDirViewItem*)dirViewItem->tqparent();
 	    K3bDataDirViewItem* dirParentViewItem = m_itemMap[dirItem->tqparent()];
-	    if( dirParentViewItem != tqparentViewItem ) {
+	    if( dirParentViewItem != parentViewItem ) {
 	      // reparent it
-	      tqparentViewItem->takeItem( dirViewItem );
+	      parentViewItem->takeItem( dirViewItem );
 	      dirParentViewItem->insertItem( dirViewItem );
 	    }
 	  }

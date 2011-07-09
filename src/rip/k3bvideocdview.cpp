@@ -470,17 +470,17 @@ void K3bVideoCdView::enableInteraction( bool b )
   actionCollection()->action( "start_rip" )->setEnabled( b );
 }
 
-void K3bVideoCdView::buildTree( TQListViewItem *tqparentItem, const TQDomElement &tqparentElement, const TQString& pname )
+void K3bVideoCdView::buildTree( TQListViewItem *parentItem, const TQDomElement &parentElement, const TQString& pname )
 {
     VideoTrackViewItem * thisItem = 0;
-    TQDomNode node = tqparentElement.firstChild();
+    TQDomNode node = parentElement.firstChild();
 
     while ( !node.isNull() ) {
         if ( node.isElement() && node.nodeName() == "folder" || node.nodeName() == "file" ) {
-            if ( tqparentItem == 0 )
+            if ( parentItem == 0 )
                 thisItem = new VideoTrackViewItem( m_trackView, thisItem );
             else
-                thisItem = new VideoTrackViewItem( tqparentItem, thisItem );
+                thisItem = new VideoTrackViewItem( parentItem, thisItem );
 
             TQString txt = node.firstChild().toElement().text();
             thisItem->setText( 0, txt);
@@ -492,10 +492,10 @@ void K3bVideoCdView::buildTree( TQListViewItem *tqparentItem, const TQDomElement
 		buildTree( thisItem, node.toElement(), pname );
             }
         } else if ( node.isElement() && node.nodeName() == "segment-item" || node.nodeName() == "sequence-item" ) {
-            if ( tqparentItem == 0 )
+            if ( parentItem == 0 )
                 thisItem = new VideoTrackViewItem( m_trackView, thisItem );
             else
-                thisItem = new VideoTrackViewItem( tqparentItem, thisItem );
+                thisItem = new VideoTrackViewItem( parentItem, thisItem );
 
             thisItem->setText( 0, node.toElement().attribute( "src" ) );
 

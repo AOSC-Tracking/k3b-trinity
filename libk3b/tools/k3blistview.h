@@ -190,7 +190,7 @@ class LIBK3B_EXPORT K3bListView : public KListView
    * Searches for the first item above @p i which is one level higher.
    * For 1st level items this will always be the listview's root item.
    */
-  static TQListViewItem* tqparentItem( TQListViewItem* i );
+  static TQListViewItem* parentItem( TQListViewItem* i );
 
  signals:
   void editorButtonClicked( K3bListViewItem*, int );

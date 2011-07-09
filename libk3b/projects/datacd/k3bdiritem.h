@@ -34,7 +34,7 @@ class K3bDataDoc;
 class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
 {
  public: 
-  K3bDirItem( const TQString& name, K3bDataDoc*, K3bDirItem* tqparentDir = 0 );
+  K3bDirItem( const TQString& name, K3bDataDoc*, K3bDirItem* parentDir = 0 );
 
   /**
    * Default copy constructor. Copies the dir including all tqchildren. However, none of the

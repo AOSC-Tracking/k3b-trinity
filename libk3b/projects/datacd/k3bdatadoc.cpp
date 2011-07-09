@@ -944,7 +944,7 @@ void K3bDataDoc::itemAddedToDir( K3bDirItem*, K3bDataItem* item )
 void K3bDataDoc::moveItem( K3bDataItem* item, K3bDirItem* newParent )
 {
   if( !item || !newParent ) {
-    kdDebug() << "(K3bDataDoc) item or tqparentitem was NULL while moving." << endl;
+    kdDebug() << "(K3bDataDoc) item or parentitem was NULL while moving." << endl;
     return;
   }
 

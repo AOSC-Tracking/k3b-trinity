@@ -45,7 +45,7 @@ class LIBK3B_EXPORT K3bTitleLabel : public TQFrame
   void setSubTitle( const TQString& subTitle );
 
   /**
-   * The title label only supports tqalignments left, hcenter, and right
+   * The title label only supports alignments left, hcenter, and right
    *
    * Default tqalignment is left.
    */

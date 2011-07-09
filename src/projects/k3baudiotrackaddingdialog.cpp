@@ -91,7 +91,7 @@ K3bAudioTrackAddingDialog::~K3bAudioTrackAddingDialog()
 int K3bAudioTrackAddingDialog::addUrls( const KURL::List& urls, 
 					K3bAudioDoc* doc,
 					K3bAudioTrack* afterTrack,
-					K3bAudioTrack* tqparentTrack,
+					K3bAudioTrack* parentTrack,
 					K3bAudioDataSource* afterSource,
 					TQWidget* tqparent )
 {
@@ -102,7 +102,7 @@ int K3bAudioTrackAddingDialog::addUrls( const KURL::List& urls,
   dlg.m_urls = extractUrlList( urls );
   dlg.m_doc = doc;
   dlg.m_trackAfter = afterTrack;
-  dlg.m_parentTrack = tqparentTrack;
+  dlg.m_parentTrack = parentTrack;
   dlg.m_sourceAfter = afterSource;
   dlg.m_infoLabel->setText( i18n("Adding files to project \"%1\"...").tqarg(doc->URL().fileName()) );
 

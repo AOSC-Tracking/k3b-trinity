@@ -79,7 +79,7 @@ class K3bVideoCdView : public K3bMediaContentsView
         void initActions();
         void updateDisplay();
         void enableInteraction( bool );
-        void buildTree( TQListViewItem *tqparentItem, const TQDomElement &tqparentElement, const TQString& pname = TQString() );
+        void buildTree( TQListViewItem *parentItem, const TQDomElement &parentElement, const TQString& pname = TQString() );
 
         K3bDevice::Toc m_toc;
 

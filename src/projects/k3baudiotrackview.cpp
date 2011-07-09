@@ -208,8 +208,8 @@ TQDragObject* K3bAudioTrackView::dragObject()
     TQListViewItem* item = *it;
     // we simply ignore open track items to not include files twice
     // we also don't want the invisible source items
-    TQListViewItem* tqparentItem = K3bListView::tqparentItem(item);
-    if( !item->isOpen() && ( !tqparentItem || tqparentItem->isOpen() ) ) {
+    TQListViewItem* parentItem = K3bListView::parentItem(item);
+    if( !item->isOpen() && ( !parentItem || parentItem->isOpen() ) ) {
       if( K3bAudioDataSourceViewItem* sourceItem = dynamic_cast<K3bAudioDataSourceViewItem*>( item ) ) {
 	if( K3bAudioFile* file = dynamic_cast<K3bAudioFile*>( sourceItem->source() ) )
 	  urls.append( KURL::fromPathOrURL(file->filename()) );

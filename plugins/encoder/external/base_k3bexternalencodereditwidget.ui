@@ -154,7 +154,7 @@ Please insert the command used to encode the audio data. The command has to read
     <tabstop>m_editExtension</tabstop>
     <tabstop>m_editCommand</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klineedit.h</includehint>
     <includehint>klineedit.h</includehint>

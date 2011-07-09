@@ -763,7 +763,7 @@ bool K3bDataUrlAddingDialog::addHiddenFiles()
 {
   if( m_iAddHiddenFiles == 0 ) {
     // FIXME: the isVisible() stuff makes the static addUrls method not return (same below)
-    if( KMessageBox::questionYesNo( /*isVisible() ? */this/* : tqparentWidget()*/,
+    if( KMessageBox::questionYesNo( /*isVisible() ? */this/* : parentWidget()*/,
 				    i18n("Do you also want to add hidden files?"),
 				    i18n("Hidden Files"), i18n("Add"), i18n("Do Not Add") ) == KMessageBox::Yes )
       m_iAddHiddenFiles = 1;
@@ -778,7 +778,7 @@ bool K3bDataUrlAddingDialog::addHiddenFiles()
 bool K3bDataUrlAddingDialog::addSystemFiles()
 {
   if( m_iAddSystemFiles == 0 ) {
-    if( KMessageBox::questionYesNo( /*isVisible() ? */this/* : tqparentWidget()*/,
+    if( KMessageBox::questionYesNo( /*isVisible() ? */this/* : parentWidget()*/,
 				    i18n("Do you also want to add system files "
 					 "(FIFOs, sockets, device files, and broken symlinks)?"),
 				    i18n("System Files"), i18n("Add"), i18n("Do Not Add") ) == KMessageBox::Yes )

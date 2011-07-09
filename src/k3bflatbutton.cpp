@@ -154,11 +154,11 @@ void K3bFlatButton::drawContents( TQPainter* p )
 
 //   if( m_hover )
 //     p->fillRect( rect, m_foreColor );
-//   else if( tqparentWidget() ) {
+//   else if( parentWidget() ) {
 //     TQRect r( mapToParent( TQPoint(lineWidth(), lineWidth()) ), 
 // 	     mapToParent( TQPoint(width()-2*lineWidth(), height()-2*lineWidth() )) );
     
-//     tqparentWidget()->tqrepaint( r );
+//     parentWidget()->tqrepaint( r );
 //   }
 
   p->save();

@@ -35,7 +35,7 @@ class K3bToolTip : public TQObject
   K3bToolTip( TQWidget* widget );
   ~K3bToolTip();
 
-  TQWidget* tqparentWidget() const { return m_parentWidget; }
+  TQWidget* parentWidget() const { return m_parentWidget; }
 
  public slots:
   /**

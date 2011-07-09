@@ -186,14 +186,14 @@ TQString K3bDataItem::iso9660Path() const
 K3bDataItem* K3bDataItem::nextSibling() const
 {
   K3bDataItem* item = const_cast<K3bDataItem*>(this); // urg, but we know that we don't mess with it, so...
-  K3bDirItem* tqparentItem = getParent();
+  K3bDirItem* parentItem = getParent();
 	
-  while( tqparentItem ) {
-    if( K3bDataItem* i = tqparentItem->nextChild( item ) )
+  while( parentItem ) {
+    if( K3bDataItem* i = parentItem->nextChild( item ) )
       return i;
 		
-    item = tqparentItem;
-    tqparentItem = item->getParent();
+    item = parentItem;
+    parentItem = item->getParent();
   }
 
   return 0;

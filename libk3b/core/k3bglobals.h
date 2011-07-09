@@ -166,7 +166,7 @@ namespace K3b
    *
    * Example: /usr/share/doc -> /usr/share/
    */
-  TQString tqparentDir( const TQString& path );
+  TQString parentDir( const TQString& path );
 
   /**
    * For now this just replaces multiple occurrences of / with a single /

@@ -201,7 +201,7 @@
 </widget>
 <customwidgets>
 </customwidgets>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
 </includehints>

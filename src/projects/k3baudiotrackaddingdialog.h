@@ -66,7 +66,7 @@ class K3bAudioTrackAddingDialog : public KDialogBase, public K3bJobHandler
   static int addUrls( const KURL::List& urls, 
 		      K3bAudioDoc* doc,
 		      K3bAudioTrack* afterTrack = 0,
-		      K3bAudioTrack* tqparentTrack = 0,
+		      K3bAudioTrack* parentTrack = 0,
 		      K3bAudioDataSource* afterSource = 0,
 		      TQWidget* tqparent = 0 );
 

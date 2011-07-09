@@ -130,7 +130,7 @@ class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
   void finishWaiting( int );
   void prepareErasingDialog();
 
-  TQWidget* tqparentWidgetToUse();
+  TQWidget* parentWidgetToUse();
 
   class Private;
   Private* d;

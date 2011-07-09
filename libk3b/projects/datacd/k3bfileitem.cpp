@@ -171,7 +171,7 @@ K3bFileItem::K3bFileItem( const K3bFileItem& item )
 
 K3bFileItem::~K3bFileItem()
 {
-  // remove this from tqparentdir
+  // remove this from parentdir
   take();
 }
 

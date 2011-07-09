@@ -88,7 +88,7 @@ class K3bExternalBinWidget::K3bExternalBinViewItem : public K3bListViewItem
   K3bExternalBinViewItem( K3bExternalBin* bin, K3bExternalProgramViewItem* tqparent );
 
   K3bExternalBin* bin() const { return m_bin; }
-  K3bExternalProgramViewItem* tqparentProgramItem() const { return m_parent; }
+  K3bExternalProgramViewItem* parentProgramItem() const { return m_parent; }
 
   bool isDefault() const { return m_default; }
   void setDefault( bool b );

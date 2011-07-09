@@ -408,15 +408,15 @@ bool K3bCueFileParser::findImageFileName( const TQString& dataFile )
   }
 
   // try the filename in the cue's directory
-  if( TQFileInfo( K3b::tqparentDir(filename()) + dataFile.section( '/', -1 ) ).isFile() ) {
-    setImageFilename( K3b::tqparentDir(filename()) + dataFile.section( '/', -1 ) );
+  if( TQFileInfo( K3b::parentDir(filename()) + dataFile.section( '/', -1 ) ).isFile() ) {
+    setImageFilename( K3b::parentDir(filename()) + dataFile.section( '/', -1 ) );
     kdDebug() << "(K3bCueFileParser) found image file: " << imageFilename() << endl;
     return true;
   }
 
   // try the filename ignoring case
-  if( TQFileInfo( K3b::tqparentDir(filename()) + TQString(dataFile.section( '/', -1 )).lower() ).isFile() ) {
-    setImageFilename( K3b::tqparentDir(filename()) + TQString(dataFile.section( '/', -1 )).lower() );
+  if( TQFileInfo( K3b::parentDir(filename()) + TQString(dataFile.section( '/', -1 )).lower() ).isFile() ) {
+    setImageFilename( K3b::parentDir(filename()) + TQString(dataFile.section( '/', -1 )).lower() );
     kdDebug() << "(K3bCueFileParser) found image file: " << imageFilename() << endl;
     return true;
   }
@@ -435,21 +435,21 @@ bool K3bCueFileParser::findImageFileName( const TQString& dataFile )
   // Search for another one having the same filename as the cue but a different extension
   //
 
-  TQDir tqparentDir( K3b::tqparentDir(filename()) );
+  TQDir parentDir( K3b::parentDir(filename()) );
   TQString filenamePrefix = filename().section( '/', -1 );
   filenamePrefix.truncate( filenamePrefix.length() - 3 ); // remove cue extension
-  kdDebug() << "(K3bCueFileParser) checking folder " << tqparentDir.path() << " for files: " << filenamePrefix << "*" << endl;
+  kdDebug() << "(K3bCueFileParser) checking folder " << parentDir.path() << " for files: " << filenamePrefix << "*" << endl;
 
   //
   // we cannot use the nameFilter in TQDir because of the spaces that may occur in filenames
   //
-  TQStringList possibleImageFiles = tqparentDir.entryList( TQDir::Files );
+  TQStringList possibleImageFiles = parentDir.entryList( TQDir::Files );
   int cnt = 0;
   for( TQStringList::const_iterator it = possibleImageFiles.constBegin(); it != possibleImageFiles.constEnd(); ++it ) {
     if( (*it).lower() == TQString(dataFile.section( '/', -1 )).lower() ||
 	(*it).startsWith( filenamePrefix ) && !(*it).endsWith( "cue" ) ) {
       ++cnt;
-      setImageFilename( K3b::tqparentDir(filename()) + *it );
+      setImageFilename( K3b::parentDir(filename()) + *it );
     }
   }
 

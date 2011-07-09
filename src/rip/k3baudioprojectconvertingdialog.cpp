@@ -194,7 +194,7 @@ void K3bAudioProjectConvertingDialog::slotStartClicked()
   if( encoder )
     thread->setFileType( m_optionWidget->extension() );
 
-  K3bJobProgressDialog progressDialog( tqparentWidget() );
+  K3bJobProgressDialog progressDialog( parentWidget() );
 
   K3bThreadJob job( thread, &progressDialog, TQT_TQOBJECT(this) );
 

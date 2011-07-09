@@ -36,7 +36,7 @@ K3bMovixFileItem::~K3bMovixFileItem()
   if( m_subTitleItem )
     m_doc->removeSubTitleItem( this );
 
-  // remove this from tqparentdir
+  // remove this from parentdir
   // it is important to do it here and not
   // rely on the K3bFileItem destructor becasue
   // otherwise the doc is not informed early enough

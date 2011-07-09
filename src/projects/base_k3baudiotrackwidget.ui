@@ -322,7 +322,7 @@ This does not mean that K3b adds an additional gap of silence to the track. This
     <tabstop>m_checkPreemphasis</tabstop>
     <tabstop>m_checkCopyPermitted</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klineedit.h</includehint>
     <includehint>klineedit.h</includehint>

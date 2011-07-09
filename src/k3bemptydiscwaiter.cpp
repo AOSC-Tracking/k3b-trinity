@@ -337,7 +337,7 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 
 	if( formatWithoutAsking ||
 	    !hasIso ||
-	    KMessageBox::warningContinueCancel( tqparentWidgetToUse(),
+	    KMessageBox::warningContinueCancel( parentWidgetToUse(),
 						i18n("Found %1 media in %2 - %3. "
 						     "Should it be overwritten?")
 						.tqarg("DVD+RW")
@@ -407,7 +407,7 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 
 	if( formatWithoutAsking ||
 	    !hasIso ||
-	    KMessageBox::warningContinueCancel( tqparentWidgetToUse(),
+	    KMessageBox::warningContinueCancel( parentWidgetToUse(),
 						i18n("Found %1 media in %2 - %3. "
 						     "Should it be overwritten?")
 						.tqarg(K3bDevice::mediaTypeString(medium.diskInfo().mediaType()))
@@ -464,7 +464,7 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
       kdDebug() << "(K3bEmptyDiscWaiter) ------ DVD-RW needs to be formated." << endl;
 
       if( formatWithoutAsking ||
-	  KMessageBox::warningContinueCancel( tqparentWidgetToUse(),
+	  KMessageBox::warningContinueCancel( parentWidgetToUse(),
 					      i18n("Found %1 media in %2 - %3. "
 						   "Should it be formatted?")
 					      .tqarg( K3bDevice::mediaTypeString(medium.diskInfo().mediaType()) )
@@ -540,7 +540,7 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	   medium.diskInfo().rewritable() ) {
 
     if( formatWithoutAsking ||
-	KMessageBox::questionYesNo( tqparentWidgetToUse(),
+	KMessageBox::questionYesNo( parentWidgetToUse(),
 				    i18n("Found rewritable media in %1 - %2. "
 					 "Should it be erased?").tqarg(d->device->vendor()).tqarg(d->device->description()),
 				    i18n("Found Rewritable Disk"),
@@ -707,7 +707,7 @@ void K3bEmptyDiscWaiter::prepareErasingDialog()
 {
   // we hide the emptydiskwaiter so the info dialog needs to have the same tqparent
   if( !d->erasingInfoDialog )
-    d->erasingInfoDialog = new K3bProgressDialog( TQString(), tqparentWidget() );
+    d->erasingInfoDialog = new K3bProgressDialog( TQString(), parentWidget() );
 
   //
   // hide the dialog
@@ -719,13 +719,13 @@ void K3bEmptyDiscWaiter::prepareErasingDialog()
 }
 
 
-TQWidget* K3bEmptyDiscWaiter::tqparentWidgetToUse()
+TQWidget* K3bEmptyDiscWaiter::parentWidgetToUse()
 {
   // we might also show dialogs if the discwaiter widget is not visible yet
   if( d->dialogVisible )
     return this;
   else
-    return tqparentWidget();
+    return parentWidget();
 }
 
 
@@ -744,7 +744,7 @@ bool K3bEmptyDiscWaiter::questionYesNo( const TQString& text,
 					const TQString& yesText,
 					const TQString& noText )
 {
-  return ( KMessageBox::questionYesNo( tqparentWidgetToUse(),
+  return ( KMessageBox::questionYesNo( parentWidgetToUse(),
 				       text,
 				       caption,
 				       yesText.isEmpty() ? KStdGuiItem::yes() : KGuiItem(yesText),

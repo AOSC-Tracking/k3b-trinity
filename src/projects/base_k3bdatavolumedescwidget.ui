@@ -366,5 +366,5 @@
     <tabstop>m_editSystem</tabstop>
     <tabstop>m_editApplication</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 </UI>
