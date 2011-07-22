@@ -123,8 +123,8 @@ const char* src_strerror (int error) ;
 
 enum
 {
-	SRC_SINC_BEST_TQUALITY		= 0,
-	SRC_SINC_MEDIUM_TQUALITY		= 1,
+	SRC_SINC_BEST_QUALITY		= 0,
+	SRC_SINC_MEDIUM_QUALITY		= 1,
 	SRC_SINC_FASTEST			= 2,
 	SRC_ZERO_ORDER_HOLD			= 3,
 	SRC_LINEAR					= 4

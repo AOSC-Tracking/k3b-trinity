@@ -114,10 +114,10 @@ const char*
 sinc_get_name (int src_enum)
 {
 	switch (src_enum)
-	{	case SRC_SINC_BEST_TQUALITY :
+	{	case SRC_SINC_BEST_QUALITY :
 			return "Best Sinc Interpolator" ;
 
-		case SRC_SINC_MEDIUM_TQUALITY :
+		case SRC_SINC_MEDIUM_QUALITY :
 			return "Medium Sinc Interpolator" ;
 
 		case SRC_SINC_FASTEST :
@@ -131,10 +131,10 @@ const char*
 sinc_get_description (int src_enum)
 {
 	switch (src_enum)
-	{	case SRC_SINC_BEST_TQUALITY :
+	{	case SRC_SINC_BEST_QUALITY :
 			return "Band limitied sinc interpolation, best quality, 97dB SNR, 96% BW." ;
 
-		case SRC_SINC_MEDIUM_TQUALITY :
+		case SRC_SINC_MEDIUM_QUALITY :
 			return "Band limitied sinc interpolation, medium quality, 97dB SNR, 90% BW." ;
 
 		case SRC_SINC_FASTEST :
@@ -170,7 +170,7 @@ sinc_set_converter (SRC_PRIVATE *psrc, int src_enum)
 	psrc->reset = sinc_reset ;
 
 	switch (src_enum)
-	{	case SRC_SINC_BEST_TQUALITY :
+	{	case SRC_SINC_BEST_QUALITY :
 				temp_filter.coeffs = high_qual_coeffs ;
 				temp_filter.coeff_half_len = (sizeof (high_qual_coeffs) / sizeof (coeff_t)) - 1 ;
 				temp_filter.index_inc = 128 ;
@@ -178,7 +178,7 @@ sinc_set_converter (SRC_PRIVATE *psrc, int src_enum)
 				temp_filter.coeff_len = sizeof (high_qual_coeffs) / sizeof (coeff_t) ;
 				break ;
 
-		case SRC_SINC_MEDIUM_TQUALITY :
+		case SRC_SINC_MEDIUM_QUALITY :
 				temp_filter.coeffs = mid_qual_coeffs ;
 				temp_filter.coeff_half_len = (sizeof (mid_qual_coeffs) / sizeof (coeff_t)) - 1 ;
 				temp_filter.index_inc = 128 ;
