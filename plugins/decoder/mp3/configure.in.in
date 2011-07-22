@@ -9,7 +9,7 @@ AC_ARG_WITH(
 if test "$ac_cv_use_libmad" = "yes"; then
   MAD_LIB=""
   KDE_CHECK_HEADER(mad.h, [
-	AC_CHECK_LIB(mad, mad_synth_frame, [
+	KDE_CHECK_LIB(mad, mad_synth_frame, [
 		MAD_LIB="-lmad"
 		AC_DEFINE(HAVE_LIBMAD,1,[defined if you have libmad headers and libraries])],
 		[],

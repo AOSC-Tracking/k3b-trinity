@@ -9,7 +9,7 @@ AC_ARG_WITH(
 have_lame=no
 if test "$ac_cv_use_lame" = "yes"; then
   KDE_CHECK_HEADERS(lame/lame.h, [
-  	AC_CHECK_LIB(mp3lame, lame_init, [
+  	KDE_CHECK_LIB(mp3lame, lame_init, [
   		have_lame=yes
   		AC_DEFINE(HAVE_LAME,1,[defined if you have the lame header and lib])
   		], [], $all_libraries -lm)

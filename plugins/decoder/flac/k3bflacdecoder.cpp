@@ -56,7 +56,7 @@ public:
     file = f;
     file->open(IO_ReadOnly);
     
-    internalBuffer->flush();
+    TQT_TQIODEVICE(internalBuffer)->flush();
     
     set_metadata_respond(FLAC__METADATA_TYPE_STREAMINFO);
     set_metadata_respond(FLAC__METADATA_TYPE_VORBIS_COMMENT);

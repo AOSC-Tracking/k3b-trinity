@@ -11,7 +11,7 @@ have_libdvdread=no
 if test "$ac_cv_use_libdvdread" = "yes"; then
 	KDE_CHECK_HEADERS(dvdread/dvd_reader.h, 
 	[
-		AC_CHECK_LIB(dvdread,
+		KDE_CHECK_LIB(dvdread,
 			DVDOpen,
 			[
         	           AC_DEFINE(HAVE_LIBDVDREAD,1,[Defined if you have libdvdread headers and libs installed.])

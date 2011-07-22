@@ -15,7 +15,7 @@ if test "$ac_cv_use_mpc" = "yes"; then
   dnl - search for both the new and the old naming -
 
   KDE_CHECK_HEADERS(mpcdec/mpcdec.h, [
-  	AC_CHECK_LIB(mpcdec, mpc_decoder_setup, [
+  	KDE_CHECK_LIB(mpcdec, mpc_decoder_setup, [
   		have_mpc=yes
 		MPC_LIBS="-lmpcdec"
 		AC_DEFINE(
@@ -28,7 +28,7 @@ if test "$ac_cv_use_mpc" = "yes"; then
 
   if test "$have_mpc" = "no"; then
     KDE_CHECK_HEADERS(mpc/mpcdec.h, [
-        AC_CHECK_LIB(mpcdec, mpc_decoder_setup, [
+        KDE_CHECK_LIB(mpcdec, mpc_decoder_setup, [
                 have_mpc=yes
                 MPC_LIBS="-lmpcdec"
                 AC_DEFINE(
@@ -42,7 +42,7 @@ if test "$ac_cv_use_mpc" = "yes"; then
 	
   if test "$have_mpc" = "no"; then
     KDE_CHECK_HEADERS(musepack/musepack.h, [
-    	  AC_CHECK_LIB(musepack, mpc_decoder_setup, [
+    	  KDE_CHECK_LIB(musepack, mpc_decoder_setup, [
   		  have_mpc=yes
 		  MPC_LIBS="-lmusepack"
 		  AC_DEFINE(

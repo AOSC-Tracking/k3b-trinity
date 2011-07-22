@@ -321,7 +321,7 @@ int K3bAudioDecoder::decode( char* _data, int maxLen )
 int K3bAudioDecoder::resample( char* data, int maxLen )
 {
   if( !d->resampleState ) {
-    d->resampleState = src_new( SRC_SINC_MEDIUM_TQUALITY, d->channels, 0 );
+    d->resampleState = src_new( SRC_SINC_MEDIUM_QUALITY, d->channels, 0 );
     if( !d->resampleState ) {
       kdDebug() << "(K3bAudioDecoder) unable to initialize resampler." << endl;
       return -1;
