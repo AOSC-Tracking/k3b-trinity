@@ -233,7 +233,7 @@ void K3bVideoDVDRippingDialog::populateTitleView( const TQValueList<int>& titles
 
       if( m_dvd[*it-1].audioStream(i).format() == K3bVideoDVD::AUDIO_FORMAT_DTS ) {
 	// width of the radio button from TQCheckListItem::paintCell
-	int buttonSize = style().tqpixelMetric( TQStyle::PM_CheckListButtonSize, m_w->m_titleView ) + 4;
+	int buttonSize = tqstyle().tqpixelMetric( TQStyle::PM_CheckListButtonSize, m_w->m_titleView ) + 4;
 	int spaceWidth = fontMetrics().width( ' ' );
 	int numSpaces = buttonSize/spaceWidth;
 	asI = new TQListViewItem( titleItem, asI, TQString().fill( ' ', numSpaces ) + text + " (" + i18n("not supported") + ")" );
@@ -612,7 +612,7 @@ void K3bVideoDVDRippingDialog::slotStartClicked()
 
   // start the job
   K3bJobProgressDialog dlg( parentWidget() );
-  K3bVideoDVDRippingJob* job = new K3bVideoDVDRippingJob( &dlg, &dlg );
+  K3bVideoDVDRippingJob* job = new K3bVideoDVDRippingJob( &dlg, TQT_TQOBJECT(&dlg) );
   job->setVideoDVD( m_dvd );
   job->setTitles( titles );
 
