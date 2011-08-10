@@ -38,7 +38,7 @@ class LIBK3B_EXPORT  K3bProgressDialog : public KDialogBase
 
  public:
   K3bProgressDialog( const TQString& text = TQString(),
-		     TQWidget* tqparent = 0, 
+		     TQWidget* parent = 0, 
 		     const TQString& caption = TQString(),
 		     const char* name = 0 );
   ~K3bProgressDialog();

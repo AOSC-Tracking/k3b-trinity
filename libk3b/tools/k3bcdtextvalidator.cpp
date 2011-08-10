@@ -16,8 +16,8 @@
 
 #include "k3bcdtextvalidator.h"
 
-K3bCdTextValidator::K3bCdTextValidator(TQObject *tqparent, const char *name)
-  : K3bLatin1Validator(tqparent, name)
+K3bCdTextValidator::K3bCdTextValidator(TQObject *parent, const char *name)
+  : K3bLatin1Validator(parent, name)
 {
 }
 

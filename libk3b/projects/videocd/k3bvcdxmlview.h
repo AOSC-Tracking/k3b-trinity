@@ -43,7 +43,7 @@ class K3bVcdXmlView
     private:
         TQString m_xmlstring;
 
-        void addComment( TQDomDocument& doc, TQDomElement& tqparent, const TQString& text );
+        void addComment( TQDomDocument& doc, TQDomElement& parent, const TQString& text );
         TQDomElement addSubElement( TQDomDocument&, TQDomElement&, const TQString& name, const TQString& value = TQString() );
         TQDomElement addSubElement( TQDomDocument&, TQDomElement&, const TQString& name, const int& value );
 

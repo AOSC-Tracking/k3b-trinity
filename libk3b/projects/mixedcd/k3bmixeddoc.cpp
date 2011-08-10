@@ -31,8 +31,8 @@
 
 
 
-K3bMixedDoc::K3bMixedDoc( TQObject* tqparent )
-  : K3bDoc( tqparent )
+K3bMixedDoc::K3bMixedDoc( TQObject* parent )
+  : K3bDoc( parent )
 {
   m_dataDoc = new K3bDataDoc( this );
   m_audioDoc = new K3bAudioDoc( this );
@@ -102,9 +102,9 @@ int K3bMixedDoc::numOfTracks() const
 }
 
 
-K3bBurnJob* K3bMixedDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
+K3bBurnJob* K3bMixedDoc::newBurnJob( K3bJobHandler* hdl, TQObject* parent )
 {
-  return new K3bMixedJob( this, hdl, tqparent  );
+  return new K3bMixedJob( this, hdl, parent  );
 }
 
 

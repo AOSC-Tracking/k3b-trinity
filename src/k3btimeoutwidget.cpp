@@ -35,8 +35,8 @@ public:
 };
 
 
-K3bTimeoutWidget::K3bTimeoutWidget( TQWidget* tqparent )
-  : TQWidget( tqparent )
+K3bTimeoutWidget::K3bTimeoutWidget( TQWidget* parent )
+  : TQWidget( parent )
 {
   d = new Private;
   d->timeout = 10000;

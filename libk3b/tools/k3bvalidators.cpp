@@ -19,8 +19,8 @@
 #include <ctype.h>
 
 
-K3bCharValidator::K3bCharValidator( TQObject* tqparent, const char* name )
-  : TQValidator( tqparent, name ),
+K3bCharValidator::K3bCharValidator( TQObject* parent, const char* name )
+  : TQValidator( parent, name ),
     m_replaceChar( '_' )
 {
 }
@@ -49,8 +49,8 @@ void K3bCharValidator::fixup( TQString& s ) const
 }
 
 
-K3bLatin1Validator::K3bLatin1Validator( TQObject* tqparent, const char* name )
-  : K3bCharValidator( tqparent, name )
+K3bLatin1Validator::K3bLatin1Validator( TQObject* parent, const char* name )
+  : K3bCharValidator( parent, name )
 {
 }
 
@@ -64,8 +64,8 @@ TQValidator::State K3bLatin1Validator::validateChar( const TQChar& c ) const
 }
 
 
-K3bAsciiValidator::K3bAsciiValidator( TQObject* tqparent, const char* name )
-  : K3bLatin1Validator( tqparent, name )
+K3bAsciiValidator::K3bAsciiValidator( TQObject* parent, const char* name )
+  : K3bLatin1Validator( parent, name )
 {
 }
 
@@ -82,15 +82,15 @@ TQValidator::State K3bAsciiValidator::validateChar( const TQChar& c ) const
 
 
 
-K3bValidator::K3bValidator( TQObject* tqparent, const char* name )
-  : TQRegExpValidator( tqparent, name ),
+K3bValidator::K3bValidator( TQObject* parent, const char* name )
+  : TQRegExpValidator( parent, name ),
     m_replaceChar('_')
 {
 }
 
 
-K3bValidator::K3bValidator( const TQRegExp& rx, TQObject* tqparent, const char* name )
-  : TQRegExpValidator( rx, tqparent, name ),
+K3bValidator::K3bValidator( const TQRegExp& rx, TQObject* parent, const char* name )
+  : TQRegExpValidator( rx, parent, name ),
     m_replaceChar('_')
 {
 }
@@ -116,22 +116,22 @@ TQString K3bValidators::fixup( const TQString& input, const TQRegExp& rx, const 
 }
 
 
-K3bValidator* K3bValidators::isrcValidator( TQObject* tqparent, const char* name )
+K3bValidator* K3bValidators::isrcValidator( TQObject* parent, const char* name )
 {
-  return new K3bValidator( TQRegExp("^[A-Z\\d]{2,2}-[A-Z\\d]{3,3}-\\d{2,2}-\\d{5,5}$"), tqparent, name );
+  return new K3bValidator( TQRegExp("^[A-Z\\d]{2,2}-[A-Z\\d]{3,3}-\\d{2,2}-\\d{5,5}$"), parent, name );
 }
 
 
-K3bValidator* K3bValidators::iso9660Validator( bool allowEmpty, TQObject* tqparent, const char* name )
+K3bValidator* K3bValidators::iso9660Validator( bool allowEmpty, TQObject* parent, const char* name )
 {
   if( allowEmpty )
-    return new K3bValidator( TQRegExp( "[^/]*" ), tqparent, name );
+    return new K3bValidator( TQRegExp( "[^/]*" ), parent, name );
   else
-    return new K3bValidator( TQRegExp( "[^/]+" ), tqparent, name );
+    return new K3bValidator( TQRegExp( "[^/]+" ), parent, name );
 }
 
 
-K3bValidator* K3bValidators::iso646Validator( int type, bool AllowLowerCase, TQObject* tqparent, const char* name )
+K3bValidator* K3bValidators::iso646Validator( int type, bool AllowLowerCase, TQObject* parent, const char* name )
 {
   TQRegExp rx;
   switch ( type ) {
@@ -150,5 +150,5 @@ K3bValidator* K3bValidators::iso646Validator( int type, bool AllowLowerCase, TQO
     break;
   }
 
-  return new K3bValidator( rx, tqparent, name );
+  return new K3bValidator( rx, parent, name );
 }

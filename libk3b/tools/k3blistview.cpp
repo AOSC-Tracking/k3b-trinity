@@ -97,70 +97,70 @@ public:
 
 
 
-K3bListViewItem::K3bListViewItem(TQListView *tqparent)
-  : KListViewItem( tqparent )
+K3bListViewItem::K3bListViewItem(TQListView *parent)
+  : KListViewItem( parent )
 {
   init();
 }
 
-K3bListViewItem::K3bListViewItem(TQListViewItem *tqparent)
-  : KListViewItem( tqparent )
+K3bListViewItem::K3bListViewItem(TQListViewItem *parent)
+  : KListViewItem( parent )
 {
   init();
 }
 
-K3bListViewItem::K3bListViewItem(TQListView *tqparent, TQListViewItem *after)
-  : KListViewItem( tqparent, after )
+K3bListViewItem::K3bListViewItem(TQListView *parent, TQListViewItem *after)
+  : KListViewItem( parent, after )
 {
   init();
 }
 
-K3bListViewItem::K3bListViewItem(TQListViewItem *tqparent, TQListViewItem *after)
-  : KListViewItem( tqparent, after )
+K3bListViewItem::K3bListViewItem(TQListViewItem *parent, TQListViewItem *after)
+  : KListViewItem( parent, after )
 {
   init();
 }
 
 
-K3bListViewItem::K3bListViewItem(TQListView *tqparent,
+K3bListViewItem::K3bListViewItem(TQListView *parent,
 				 const TQString& s1, const TQString& s2,
 				 const TQString& s3, const TQString& s4,
 				 const TQString& s5, const TQString& s6,
 				 const TQString& s7, const TQString& s8)
-  : KListViewItem( tqparent, s1, s2, s3, s4, s5, s6, s7, s8 )
+  : KListViewItem( parent, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
 
 
-K3bListViewItem::K3bListViewItem(TQListViewItem *tqparent,
+K3bListViewItem::K3bListViewItem(TQListViewItem *parent,
 				 const TQString& s1, const TQString& s2,
 				 const TQString& s3, const TQString& s4,
 				 const TQString& s5, const TQString& s6,
 				 const TQString& s7, const TQString& s8)
-  : KListViewItem( tqparent, s1, s2, s3, s4, s5, s6, s7, s8 )
+  : KListViewItem( parent, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
 
 
-K3bListViewItem::K3bListViewItem(TQListView *tqparent, TQListViewItem *after,
+K3bListViewItem::K3bListViewItem(TQListView *parent, TQListViewItem *after,
 				 const TQString& s1, const TQString& s2,
 				 const TQString& s3, const TQString& s4,
 				 const TQString& s5, const TQString& s6,
 				 const TQString& s7, const TQString& s8)
-  : KListViewItem( tqparent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
+  : KListViewItem( parent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
 
 
-K3bListViewItem::K3bListViewItem(TQListViewItem *tqparent, TQListViewItem *after,
+K3bListViewItem::K3bListViewItem(TQListViewItem *parent, TQListViewItem *after,
 				 const TQString& s1, const TQString& s2,
 				 const TQString& s3, const TQString& s4,
 				 const TQString& s5, const TQString& s6,
 				 const TQString& s7, const TQString& s8)
-  : KListViewItem( tqparent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
+  : KListViewItem( parent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
@@ -461,29 +461,29 @@ void K3bListViewItem::paintProgressBar( TQPainter* p, const TQColorGroup& cgh, i
 
 
 
-K3bCheckListViewItem::K3bCheckListViewItem(TQListView *tqparent)
-  : K3bListViewItem( tqparent ),
+K3bCheckListViewItem::K3bCheckListViewItem(TQListView *parent)
+  : K3bListViewItem( parent ),
     m_checked(false)
 {
 }
 
 
-K3bCheckListViewItem::K3bCheckListViewItem(TQListViewItem *tqparent)
-  : K3bListViewItem( tqparent ),
+K3bCheckListViewItem::K3bCheckListViewItem(TQListViewItem *parent)
+  : K3bListViewItem( parent ),
     m_checked(false)
 {
 }
 
 
-K3bCheckListViewItem::K3bCheckListViewItem(TQListView *tqparent, TQListViewItem *after)
-  : K3bListViewItem( tqparent, after ),
+K3bCheckListViewItem::K3bCheckListViewItem(TQListView *parent, TQListViewItem *after)
+  : K3bListViewItem( parent, after ),
     m_checked(false)
 {
 }
 
 
-K3bCheckListViewItem::K3bCheckListViewItem(TQListViewItem *tqparent, TQListViewItem *after)
-  : K3bListViewItem( tqparent, after ),
+K3bCheckListViewItem::K3bCheckListViewItem(TQListViewItem *parent, TQListViewItem *after)
+  : K3bListViewItem( parent, after ),
     m_checked(false)
 {
 }
@@ -545,8 +545,8 @@ public:
 };
 
 
-K3bListView::K3bListView( TQWidget* tqparent, const char* name )
-  : KListView( tqparent, name ),
+K3bListView::K3bListView( TQWidget* parent, const char* name )
+  : KListView( parent, name ),
     m_noItemVMargin( 20 ),
     m_noItemHMargin( 20 )
 {
@@ -1210,8 +1210,8 @@ TQListViewItem* K3bListView::parentItem( TQListViewItem* item )
 {
   if( !item )
     return 0;
-  if( item->tqparent() )
-    return item->tqparent();
+  if( item->parent() )
+    return item->parent();
   else
     return K3bListView::parentItem( item->itemAbove() );
 }
@@ -1221,7 +1221,7 @@ KPixmap K3bListView::createDragPixmap( const TQPtrList<TQListViewItem>& items )
 {
   //
   // Create drag pixmap.
-  // If there are too many items fade the pixmap using the tqmask
+  // If there are too many items fade the pixmap using the mask
   // always fade invisible items
   //
   int width = header()->width();
@@ -1245,7 +1245,7 @@ KPixmap K3bListView::createDragPixmap( const TQPtrList<TQListViewItem>& items )
   KPixmap pix;
   pix.resize( width, height );
   pix.fill( TQt::white );
-  //  TQBitmap tqmask( width, bottom-top );
+  //  TQBitmap mask( width, bottom-top );
 
   // now paint all the visible items into the pixmap
   // FIXME: only paint the visible items

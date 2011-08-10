@@ -29,7 +29,7 @@ public:
 };
 
 
-K3bDataItem::K3bDataItem( K3bDataDoc* doc, K3bDataItem* tqparent, int flags )
+K3bDataItem::K3bDataItem( K3bDataDoc* doc, K3bDataItem* parent, int flags )
   : m_bHideOnRockRidge(false),
     m_bHideOnJoliet(false),
     m_bRemoveable(true),
@@ -45,8 +45,8 @@ K3bDataItem::K3bDataItem( K3bDataDoc* doc, K3bDataItem* tqparent, int flags )
   m_doc = doc;
   m_bHideOnRockRidge = m_bHideOnJoliet = false;
 
-  if( tqparent )
-    m_parentDir = tqparent->getDirItem();
+  if( parent )
+    m_parentDir = parent->getDirItem();
   else
     m_parentDir = 0;
 }
@@ -121,8 +121,8 @@ void K3bDataItem::setK3bName( const TQString& name ) {
     return;
   }
    
-  if( tqparent() ) {
-    K3bDataItem* item = tqparent()->find( name );
+  if( parent() ) {
+    K3bDataItem* item = parent()->find( name );
     if( item && item != this ) {
       kdDebug() << "(K3bDataItem) item with that name already exists." << endl;
       return;
@@ -143,8 +143,8 @@ const TQString& K3bDataItem::k3bName() const
 
 K3bDataItem* K3bDataItem::take()
 {
-  if( tqparent() )
-    tqparent()->takeDataItem( this );
+  if( parent() )
+    parent()->takeDataItem( this );
 
   return this;
 }
@@ -153,7 +153,7 @@ K3bDataItem* K3bDataItem::take()
 TQString K3bDataItem::k3bPath() const
 {
   if( !getParent() )
-    return TQString();  // the root item is the only one not having a tqparent
+    return TQString();  // the root item is the only one not having a parent
   else if( isDir() )
     return getParent()->k3bPath() + k3bName() + "/";
   else
@@ -164,7 +164,7 @@ TQString K3bDataItem::k3bPath() const
 TQString K3bDataItem::writtenPath() const
 {
   if( !getParent() )
-    return TQString();  // the root item is the only one not having a tqparent
+    return TQString();  // the root item is the only one not having a parent
   else if( isDir() )
     return getParent()->writtenPath() + writtenName() + "/";
   else
@@ -175,7 +175,7 @@ TQString K3bDataItem::writtenPath() const
 TQString K3bDataItem::iso9660Path() const
 {
   if( !getParent() )
-    return TQString();  // the root item is the only one not having a tqparent
+    return TQString();  // the root item is the only one not having a parent
   else if( isDir() )
     return getParent()->iso9660Path() + iso9660Name() + "/";
   else
@@ -232,7 +232,7 @@ bool K3bDataItem::hideOnJoliet() const
 void K3bDataItem::setHideOnRockRidge( bool b )
 {
   // there is no use in changing the value if 
-  // it is already set by the tqparent
+  // it is already set by the parent
     if( ( !getParent() || !getParent()->hideOnRockRidge() ) &&
         b != m_bHideOnRockRidge ) {
     m_bHideOnRockRidge = b;
@@ -245,7 +245,7 @@ void K3bDataItem::setHideOnRockRidge( bool b )
 void K3bDataItem::setHideOnJoliet( bool b ) 
 { 
   // there is no use in changing the value if 
-  // it is already set by the tqparent
+  // it is already set by the parent
     if( ( !getParent() || !getParent()->hideOnJoliet() ) &&
         b != m_bHideOnJoliet ) {
     m_bHideOnJoliet = b;

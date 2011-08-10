@@ -37,7 +37,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public TQObject
   TQ_OBJECT
 
  public:
-  K3bAudioDecoder( TQObject* tqparent = 0, const char* name = 0 );
+  K3bAudioDecoder( TQObject* parent = 0, const char* name = 0 );
   virtual ~K3bAudioDecoder();
 
 
@@ -213,8 +213,8 @@ class LIBK3B_EXPORT K3bAudioDecoderFactory : public K3bPlugin
   TQ_OBJECT
 
  public:
-  K3bAudioDecoderFactory( TQObject* tqparent = 0, const char* name = 0 )
-    : K3bPlugin( tqparent, name ) {
+  K3bAudioDecoderFactory( TQObject* parent = 0, const char* name = 0 )
+    : K3bPlugin( parent, name ) {
   }
 
   virtual ~K3bAudioDecoderFactory() {
@@ -241,7 +241,7 @@ class LIBK3B_EXPORT K3bAudioDecoderFactory : public K3bPlugin
    */
   virtual bool canDecode( const KURL& filename ) = 0;
 
-  virtual K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, const char* name = 0 ) const = 0;
+  virtual K3bAudioDecoder* createDecoder( TQObject* parent = 0, const char* name = 0 ) const = 0;
 
   /**
    * Searching for an audiodecoder for @p filename.

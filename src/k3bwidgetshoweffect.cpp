@@ -63,9 +63,9 @@ void K3bWidgetShowEffect::show( bool effectOnly )
   m_widget->polish();
 
   if( m_effect == Dissolve ) {
-    // necessary to create the tqmask
-    m_tqmask.resize( m_widget->width(), m_widget->height() );
-    // make the tqmask empty and hence will not show widget with show() called below
+    // necessary to create the mask
+    m_mask.resize( m_widget->width(), m_widget->height() );
+    // make the mask empty and hence will not show widget with show() called below
     dissolveMask();
     m_timerId = startTimer( 1000 / 30 );
   }
@@ -97,13 +97,13 @@ void K3bWidgetShowEffect::dissolveMask()
 {
   if( m_bShow ) {
     m_widget->tqrepaint( false );
-    TQPainter maskPainter(&m_tqmask);
+    TQPainter maskPainter(&m_mask);
 
-    m_tqmask.fill(TQt::black);
+    m_mask.fill(TQt::black);
 
     maskPainter.setBrush(TQt::white);
     maskPainter.setPen(TQt::white);
-    maskPainter.drawRect( m_tqmask.rect() );
+    maskPainter.drawRect( m_mask.rect() );
     
     m_dissolveSize += m_dissolveDelta;
 
@@ -135,7 +135,7 @@ void K3bWidgetShowEffect::dissolveMask()
 	deleteLater();
     }
 
-    m_widget->setMask( m_tqmask );
+    m_widget->setMask( m_mask );
   }
 
   else {

@@ -25,21 +25,21 @@ class TQFrame;
 
 namespace K3bStdGuiItems
 {
-  LIBK3B_EXPORT TQCheckBox* simulateCheckbox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* daoCheckbox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* burnproofCheckbox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* onlyCreateImagesCheckbox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* createCacheImageCheckbox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* removeImagesCheckbox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* onTheFlyCheckbox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* cdTextCheckbox( TQWidget* tqparent = 0, const char* name = 0);
-  LIBK3B_EXPORT TQComboBox* paranoiaModeComboBox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* startMultisessionCheckBox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* normalizeCheckBox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* verifyCheckBox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQCheckBox* ignoreAudioReadErrorsCheckBox( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQFrame* horizontalLine( TQWidget* tqparent = 0, const char* name = 0 );
-  LIBK3B_EXPORT TQFrame* verticalLine( TQWidget* tqparent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* simulateCheckbox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* daoCheckbox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* burnproofCheckbox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* onlyCreateImagesCheckbox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* createCacheImageCheckbox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* removeImagesCheckbox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* onTheFlyCheckbox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* cdTextCheckbox( TQWidget* parent = 0, const char* name = 0);
+  LIBK3B_EXPORT TQComboBox* paranoiaModeComboBox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* startMultisessionCheckBox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* normalizeCheckBox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* verifyCheckBox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQCheckBox* ignoreAudioReadErrorsCheckBox( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQFrame* horizontalLine( TQWidget* parent = 0, const char* name = 0 );
+  LIBK3B_EXPORT TQFrame* verticalLine( TQWidget* parent = 0, const char* name = 0 );
 }
 
 #endif

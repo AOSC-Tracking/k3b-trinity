@@ -49,24 +49,24 @@
 class K3bVideoCdView::VideoTrackViewItem : public TQListViewItem
 {
     public:
-        VideoTrackViewItem( TQListViewItem* tqparent, TQListViewItem* after )
-                : TQListViewItem( tqparent, after )
+        VideoTrackViewItem( TQListViewItem* parent, TQListViewItem* after )
+                : TQListViewItem( parent, after )
         {
             setSelectable( false );
         }
 
-        VideoTrackViewItem( TQListView* tqparent, TQListViewItem* after )
-                : TQListViewItem( tqparent, after )
+        VideoTrackViewItem( TQListView* parent, TQListViewItem* after )
+                : TQListViewItem( parent, after )
         {
             setSelectable( false );
         }
         
-        VideoTrackViewItem( TQListViewItem* tqparent,
+        VideoTrackViewItem( TQListViewItem* parent,
                             const TQString& name,
                             const TQString& id,
                             int _trackNumber,
                             const K3b::Msf& length )
-                : TQListViewItem( tqparent )
+                : TQListViewItem( parent )
         {
             setText( 0, TQString( "%1. %2" ).tqarg( _trackNumber ).tqarg( id ) );
             setText( 1, name );
@@ -92,9 +92,9 @@ class K3bVideoCdView::VideoTrackViewItem : public TQListViewItem
 class K3bVideoCdView::VideoTrackViewCheckItem : public TQCheckListItem
 {
     public:
-        VideoTrackViewCheckItem( TQListViewItem* tqparent,
+        VideoTrackViewCheckItem( TQListViewItem* parent,
                                  const TQString& desc )
-                : TQCheckListItem( tqparent,
+                : TQCheckListItem( parent,
                                   TQString(),
                                   TQCheckListItem::CheckBox )
         {
@@ -103,9 +103,9 @@ class K3bVideoCdView::VideoTrackViewCheckItem : public TQCheckListItem
             setOn( true );
         }
 
-        VideoTrackViewCheckItem( TQListView* tqparent,
+        VideoTrackViewCheckItem( TQListView* parent,
                                  const TQString& desc )
-                : TQCheckListItem( tqparent,
+                : TQCheckListItem( parent,
                                   TQString(),
                                   TQCheckListItem::CheckBox )
         {
@@ -114,9 +114,9 @@ class K3bVideoCdView::VideoTrackViewCheckItem : public TQCheckListItem
             setOn( true );
         }
 
-        VideoTrackViewCheckItem( VideoTrackViewCheckItem* tqparent,
+        VideoTrackViewCheckItem( VideoTrackViewCheckItem* parent,
                                  const TQString& desc )
-                : TQCheckListItem( tqparent,
+                : TQCheckListItem( parent,
                                   TQString(),
                                   TQCheckListItem::CheckBox )
         {
@@ -136,12 +136,12 @@ class K3bVideoCdView::VideoTrackViewCheckItem : public TQCheckListItem
 
 };
 
-K3bVideoCdView::K3bVideoCdView( TQWidget* tqparent, const char *name )
+K3bVideoCdView::K3bVideoCdView( TQWidget* parent, const char *name )
         : K3bMediaContentsView( true,
 				K3bMedium::CONTENT_VIDEO_CD,
 				K3bDevice::MEDIA_CD_ALL,
 				K3bDevice::STATE_INCOMPLETE|K3bDevice::STATE_COMPLETE,
-				tqparent, name )
+				parent, name )
 {
     TQGridLayout * mainGrid = new TQGridLayout( mainWidget() );
 

@@ -38,9 +38,9 @@ bool K3bDataProjectInterface::createFolder( const TQString& name )
 }
 
 
-bool K3bDataProjectInterface::createFolder( const TQString& name, const TQString& tqparent )
+bool K3bDataProjectInterface::createFolder( const TQString& name, const TQString& parent )
 {
-  K3bDataItem* p = m_dataDoc->root()->findByPath( tqparent );
+  K3bDataItem* p = m_dataDoc->root()->findByPath( parent );
   if( p && p->isDir() && !static_cast<K3bDirItem*>(p)->find( name ) ) {
     m_dataDoc->addEmptyDir( name, static_cast<K3bDirItem*>(p) );
     return true;
@@ -49,15 +49,15 @@ bool K3bDataProjectInterface::createFolder( const TQString& name, const TQString
 }
 
 
-void K3bDataProjectInterface::addUrl( const TQString& url, const TQString& tqparent )
+void K3bDataProjectInterface::addUrl( const TQString& url, const TQString& parent )
 {
-  addUrls( TQStringList(url), tqparent );
+  addUrls( TQStringList(url), parent );
 }
 
 
-void K3bDataProjectInterface::addUrls( const TQStringList& urls, const TQString& tqparent )
+void K3bDataProjectInterface::addUrls( const TQStringList& urls, const TQString& parent )
 {
-  K3bDataItem* p = m_dataDoc->root()->findByPath( tqparent );
+  K3bDataItem* p = m_dataDoc->root()->findByPath( parent );
   if( p && p->isDir() )
     m_dataDoc->addUrls( KURL::List(urls), static_cast<K3bDirItem*>(p) );
 }

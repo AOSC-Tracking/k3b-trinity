@@ -45,8 +45,8 @@
 #include <tqfileinfo.h>
 
 
-K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, TQWidget* tqparent, const char* name, bool modal )
-  : K3bProjectBurnDialog( doc, tqparent, name, modal, true ),
+K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, TQWidget* parent, const char* name, bool modal )
+  : K3bProjectBurnDialog( doc, parent, name, modal, true ),
     m_doc(doc)
 {
   prepareGui();

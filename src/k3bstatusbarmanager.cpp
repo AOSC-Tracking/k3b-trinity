@@ -46,9 +46,9 @@
 
 
 
-K3bStatusBarManager::K3bStatusBarManager( K3bMainWindow* tqparent )
-  : TQObject(tqparent),
-    m_mainWindow(tqparent)
+K3bStatusBarManager::K3bStatusBarManager( K3bMainWindow* parent )
+  : TQObject(parent),
+    m_mainWindow(parent)
 {
   // setup free temp space box
   TQHBox* boxFreeTemp = new TQHBox( m_mainWindow->statusBar() );

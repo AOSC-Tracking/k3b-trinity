@@ -35,7 +35,7 @@ class K3bVideoDVDRippingJob : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingJob( K3bJobHandler* hdl, TQObject* tqparent );
+  K3bVideoDVDRippingJob( K3bJobHandler* hdl, TQObject* parent );
   ~K3bVideoDVDRippingJob();
 
   class TitleRipInfo {

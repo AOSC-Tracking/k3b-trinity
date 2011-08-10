@@ -27,8 +27,8 @@
 #include <kdebug.h>
 
 
-K3bMovixDvdJob::K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler* jh, TQObject* tqparent )
-  : K3bBurnJob( jh, tqparent ),
+K3bMovixDvdJob::K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler* jh, TQObject* parent )
+  : K3bBurnJob( jh, parent ),
     m_doc(doc)
 {
   m_dvdJob = new K3bDvdJob( doc, this, this );

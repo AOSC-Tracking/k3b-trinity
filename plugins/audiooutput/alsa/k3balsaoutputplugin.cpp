@@ -54,8 +54,8 @@ public:
 };
 
 
-K3bAlsaOutputPlugin::K3bAlsaOutputPlugin( TQObject* tqparent, const char* name )
-  : K3bAudioOutputPlugin( tqparent, name )
+K3bAlsaOutputPlugin::K3bAlsaOutputPlugin( TQObject* parent, const char* name )
+  : K3bAudioOutputPlugin( parent, name )
 {
   d = new Private;
 }
@@ -242,16 +242,16 @@ TQString K3bAlsaOutputPlugin::lastErrorMessage() const
 }
 
 
-K3bPluginConfigWidget* K3bAlsaOutputPlugin::createConfigWidget( TQWidget* tqparent, 
+K3bPluginConfigWidget* K3bAlsaOutputPlugin::createConfigWidget( TQWidget* parent, 
 								const char* name ) const
 {
-  return new K3bAlsaOutputPluginConfigWidget( tqparent, name );
+  return new K3bAlsaOutputPluginConfigWidget( parent, name );
 }
 
 
 
-K3bAlsaOutputPluginConfigWidget::K3bAlsaOutputPluginConfigWidget( TQWidget* tqparent, const char* name )
-  : K3bPluginConfigWidget( tqparent, name )
+K3bAlsaOutputPluginConfigWidget::K3bAlsaOutputPluginConfigWidget( TQWidget* parent, const char* name )
+  : K3bPluginConfigWidget( parent, name )
 {
   TQHBoxLayout* l = new TQHBoxLayout( this );
   l->setSpacing( KDialog::spacingHint() );

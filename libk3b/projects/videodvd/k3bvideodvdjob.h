@@ -31,7 +31,7 @@ class K3bVideoDvdJob : public K3bDvdJob
   TQ_OBJECT
 
  public:
-  K3bVideoDvdJob( K3bVideoDvdDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bVideoDvdJob( K3bVideoDvdDoc*, K3bJobHandler*, TQObject* parent = 0 );
   virtual ~K3bVideoDvdJob();
 
   virtual TQString jobDescription() const;

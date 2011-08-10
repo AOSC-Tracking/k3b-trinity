@@ -30,7 +30,7 @@ class K3bMsInfoFetcher : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bMsInfoFetcher( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bMsInfoFetcher( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   ~K3bMsInfoFetcher();
 
   const TQString& msInfo() const { return m_msInfo; }

@@ -28,7 +28,7 @@ class K3bAudioCdTextWidget : public base_K3bAudioCdTextWidget
   TQ_OBJECT
 
  public:
-  K3bAudioCdTextWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bAudioCdTextWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bAudioCdTextWidget();
 
   bool isChecked() const;

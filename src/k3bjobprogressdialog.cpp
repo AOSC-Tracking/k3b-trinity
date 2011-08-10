@@ -78,11 +78,11 @@ public:
 
 
 
-K3bJobProgressDialog::K3bJobProgressDialog( TQWidget* tqparent, 
+K3bJobProgressDialog::K3bJobProgressDialog( TQWidget* parent, 
 					    const char* name, 
 					    bool showSubProgress,
 					    bool modal, WFlags fl )
-  : KDialog( tqparent, name, modal, fl ),
+  : KDialog( parent, name, modal, fl ),
     in_loop(false),
     m_osd(0)
 {

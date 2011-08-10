@@ -45,7 +45,7 @@ class K3bThreadWidget : public TQObject
   /**
    * Call this from a thread to show a device selection dialog.
    */
-  static K3bDevice::Device* selectDevice( TQWidget* tqparent, 
+  static K3bDevice::Device* selectDevice( TQWidget* parent, 
 					  const TQString& text = TQString() );
 
  protected:

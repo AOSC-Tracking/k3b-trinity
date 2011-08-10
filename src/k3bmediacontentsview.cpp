@@ -40,9 +40,9 @@ K3bMediaContentsView::K3bMediaContentsView( bool withHeader,
 					    int mediumContent,
 					    int mediumTypes,
 					    int mediumState,
-					    TQWidget* tqparent,
+					    TQWidget* parent,
 					    const char* name )
-  : K3bContentsView( withHeader, tqparent, name )
+  : K3bContentsView( withHeader, parent, name )
 {
   d = new Private;
   d->supportedMediumContent = mediumContent;

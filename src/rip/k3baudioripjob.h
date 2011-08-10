@@ -35,7 +35,7 @@ class K3bAudioRipJob : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bAudioRipJob( K3bJobHandler* hdl, TQObject* tqparent );
+  K3bAudioRipJob( K3bJobHandler* hdl, TQObject* parent );
   ~K3bAudioRipJob();
 
   TQString jobDescription() const;

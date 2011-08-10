@@ -161,8 +161,8 @@ void K3bMediaCache::PollThread::run()
 // ////////////////////////////////////////////////////////////////////////////////
 
 
-K3bMediaCache::K3bMediaCache( TQObject* tqparent )
-  : TQObject( tqparent )
+K3bMediaCache::K3bMediaCache( TQObject* parent )
+  : TQObject( parent )
 {
 }
 

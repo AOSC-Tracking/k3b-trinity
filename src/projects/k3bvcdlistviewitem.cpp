@@ -22,15 +22,15 @@
 #include "k3bvcdtrack.h"
 #include <k3bglobals.h>
 
-K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* tqparent )
-        : K3bListViewItem( tqparent ), m_track( track )
+K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent )
+        : K3bListViewItem( parent ), m_track( track )
 {
     setEditor( 1, LINE );
     animate();
 }
 
-K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* tqparent, TQListViewItem* after )
-        : K3bListViewItem( tqparent, after ), m_track( track )
+K3bVcdListViewItem::K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent, TQListViewItem* after )
+        : K3bListViewItem( parent, after ), m_track( track )
 {
     setEditor( 1, LINE );
     animate();

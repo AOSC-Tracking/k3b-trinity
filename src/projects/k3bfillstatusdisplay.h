@@ -48,7 +48,7 @@ class K3bFillStatusDisplayWidget : public TQWidget
   TQ_OBJECT
 
  public:
-  K3bFillStatusDisplayWidget( K3bDoc* doc, TQWidget* tqparent );
+  K3bFillStatusDisplayWidget( K3bDoc* doc, TQWidget* parent );
   ~K3bFillStatusDisplayWidget();
 
   TQSize tqsizeHint() const;
@@ -79,7 +79,7 @@ class K3bFillStatusDisplay : public TQFrame  {
   TQ_OBJECT
 
  public:
-  K3bFillStatusDisplay(K3bDoc* doc, TQWidget *tqparent=0, const char *name=0);
+  K3bFillStatusDisplay(K3bDoc* doc, TQWidget *parent=0, const char *name=0);
   ~K3bFillStatusDisplay();
 
  public slots:

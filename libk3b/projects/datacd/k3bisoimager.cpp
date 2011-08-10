@@ -85,8 +85,8 @@ public:
 };
 
 
-K3bIsoImager::K3bIsoImager( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent, const char* name )
-  : K3bJob( hdl, tqparent, name ),
+K3bIsoImager::K3bIsoImager( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* parent, const char* name )
+  : K3bJob( hdl, parent, name ),
     m_pathSpecFile(0),
     m_rrHideFile(0),
     m_jolietHideFile(0),

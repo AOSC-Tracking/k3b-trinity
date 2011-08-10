@@ -34,8 +34,8 @@ public:
 const char* K3bJob::DEFAULT_SIGNAL_CONNECTION = "K3bJobDefault";
 
 
-K3bJob::K3bJob( K3bJobHandler* handler, TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name ),
+K3bJob::K3bJob( K3bJobHandler* handler, TQObject* parent, const char* name )
+  : TQObject( parent, name ),
     m_jobHandler( handler ),
     m_canceled(false),
     m_active(false)
@@ -231,8 +231,8 @@ public:
 
 
 
-K3bBurnJob::K3bBurnJob( K3bJobHandler* handler, TQObject* tqparent, const char* name )
-  : K3bJob( handler, tqparent, name ),
+K3bBurnJob::K3bBurnJob( K3bJobHandler* handler, TQObject* parent, const char* name )
+  : K3bJob( handler, parent, name ),
     m_writeMethod( K3b::DEFAULT )
 {
   d = new Private;

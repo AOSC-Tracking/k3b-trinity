@@ -33,9 +33,9 @@
 #include <tqframe.h>
 
 
-K3bBurnProgressDialog::K3bBurnProgressDialog( TQWidget *tqparent, const char *name, bool showSubProgress,
+K3bBurnProgressDialog::K3bBurnProgressDialog( TQWidget *parent, const char *name, bool showSubProgress,
 					      bool modal, WFlags wf )
-  : K3bJobProgressDialog(tqparent,name, showSubProgress, modal, wf)
+  : K3bJobProgressDialog(parent,name, showSubProgress, modal, wf)
 {
   m_labelWritingSpeed = new TQLabel( m_frameExtraInfo, "m_labelWritingSpeed" );
   //  m_labelWritingSpeed->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );

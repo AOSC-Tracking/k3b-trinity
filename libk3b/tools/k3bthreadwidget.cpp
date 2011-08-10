@@ -34,14 +34,14 @@ public:
 class K3bThreadWidget::DeviceSelectionEvent : public TQCustomEvent
 {
 public:
-  DeviceSelectionEvent( TQWidget* tqparent, const TQString& text, int id )
+  DeviceSelectionEvent( TQWidget* parent, const TQString& text, int id )
     : TQCustomEvent( TQEvent::User + 22 ),
-      m_parent(tqparent),
+      m_parent(parent),
       m_text(text),
       m_id(id) {
   }
 
-  TQWidget* tqparent() const { return m_parent; }
+  TQWidget* parent() const { return m_parent; }
   const TQString& text() const { return m_text; }
   int id() const { return m_id; }
 
@@ -102,7 +102,7 @@ K3bThreadWidget* K3bThreadWidget::instance()
 
 
 // static
-K3bDevice::Device* K3bThreadWidget::selectDevice( TQWidget* tqparent, 
+K3bDevice::Device* K3bThreadWidget::selectDevice( TQWidget* parent, 
 						  const TQString& text )
 {
   // request a new data set
@@ -110,7 +110,7 @@ K3bDevice::Device* K3bThreadWidget::selectDevice( TQWidget* tqparent,
 
   // inform the instance about the request
   TQApplication::postEvent( K3bThreadWidget::instance(),
-			   new K3bThreadWidget::DeviceSelectionEvent( tqparent, text, data->id ) );
+			   new K3bThreadWidget::DeviceSelectionEvent( parent, text, data->id ) );
 
   // wait for the result to be ready
   data->con.wait();
@@ -128,7 +128,7 @@ void K3bThreadWidget::customEvent( TQCustomEvent* e )
 {
   if( DeviceSelectionEvent* dse = dynamic_cast<DeviceSelectionEvent*>(e) ) {
     // create dialog
-    K3bDevice::Device* dev = K3bDeviceSelectionDialog::selectDevice( dse->tqparent(), dse->text() );
+    K3bDevice::Device* dev = K3bDeviceSelectionDialog::selectDevice( dse->parent(), dse->text() );
 
     // return it to the thread
     Data* dat = data( dse->id() );

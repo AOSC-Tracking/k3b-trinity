@@ -43,7 +43,7 @@ class K3bWelcomeWidget : public TQScrollView
   TQ_OBJECT
 
  public:
-  K3bWelcomeWidget( K3bMainWindow*, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bWelcomeWidget( K3bMainWindow*, TQWidget* parent = 0, const char* name = 0 );
   ~K3bWelcomeWidget();
 
   void loadConfig( KConfigBase* c );
@@ -73,7 +73,7 @@ class K3bWelcomeWidget::Display : public TQWidget
   TQ_OBJECT
 
  public:
-  Display( K3bWelcomeWidget* tqparent );
+  Display( K3bWelcomeWidget* parent );
   ~Display();
 
   TQSize tqminimumSizeHint() const;

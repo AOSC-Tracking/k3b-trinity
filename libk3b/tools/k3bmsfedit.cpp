@@ -26,15 +26,15 @@
 
 
 
-K3bMsfValidator::K3bMsfValidator( TQObject* tqparent, const char* name )
-  : TQRegExpValidator( K3b::Msf::regExp(), tqparent, name )
+K3bMsfValidator::K3bMsfValidator( TQObject* parent, const char* name )
+  : TQRegExpValidator( K3b::Msf::regExp(), parent, name )
 {
 }
 
 
 
-K3bMsfEdit::K3bMsfEdit( TQWidget* tqparent, const char* name )
-  : TQSpinBox( tqparent, name )
+K3bMsfEdit::K3bMsfEdit( TQWidget* parent, const char* name )
+  : TQSpinBox( parent, name )
 {
   setValidator( new K3bMsfValidator( TQT_TQOBJECT(this) ) );
   setMinValue( 0 );

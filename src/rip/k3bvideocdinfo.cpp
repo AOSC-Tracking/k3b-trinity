@@ -31,8 +31,8 @@
 #include <k3bexternalbinmanager.h>
 
 
-K3bVideoCdInfo::K3bVideoCdInfo( TQObject* tqparent, const char* name )
-        : TQObject( tqparent, name )
+K3bVideoCdInfo::K3bVideoCdInfo( TQObject* parent, const char* name )
+        : TQObject( parent, name )
 {
     m_process = 0L;
     m_isXml = false;

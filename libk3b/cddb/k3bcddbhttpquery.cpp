@@ -29,8 +29,8 @@
 #include <kio/job.h>
 
 
-K3bCddbHttpQuery::K3bCddbHttpQuery( TQObject* tqparent, const char* name )
-  : K3bCddbQuery( tqparent, name )
+K3bCddbHttpQuery::K3bCddbHttpQuery( TQObject* parent, const char* name )
+  : K3bCddbQuery( parent, name )
 {
   m_server = "freedb.org";
   m_port = 80;

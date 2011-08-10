@@ -45,7 +45,7 @@ class LIBK3B_EXPORT K3bAudioTrack
 
  public:
   K3bAudioTrack();
-  K3bAudioTrack( K3bAudioDoc* tqparent );
+  K3bAudioTrack( K3bAudioDoc* parent );
   ~K3bAudioTrack();
 
   K3bAudioDoc* doc() const { return m_parent; }

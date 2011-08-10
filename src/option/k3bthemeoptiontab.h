@@ -29,7 +29,7 @@ class K3bThemeOptionTab : public base_K3bThemeOptionTab
   TQ_OBJECT
 
  public:
-  K3bThemeOptionTab( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bThemeOptionTab( TQWidget* parent = 0, const char* name = 0 );
   ~K3bThemeOptionTab();
 
   void readSettings();

@@ -32,7 +32,7 @@ class K3bVideoDVDRippingTitleListView : public K3bListView
   TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingTitleListView( TQWidget* tqparent );
+  K3bVideoDVDRippingTitleListView( TQWidget* parent );
   ~K3bVideoDVDRippingTitleListView();
 
   void setVideoDVD( const K3bVideoDVD::VideoDVD& dvd );

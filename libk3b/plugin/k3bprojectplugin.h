@@ -77,8 +77,8 @@ class LIBK3B_EXPORT K3bProjectPlugin : public K3bPlugin
    *            @p activate() will not be used. A plugin has a GUI if it's functionality is started 
    *            by some user input.
    */
-  K3bProjectPlugin( int type, bool gui = false, TQObject* tqparent = 0, const char* name = 0 )
-  : K3bPlugin( tqparent, name ),
+  K3bProjectPlugin( int type, bool gui = false, TQObject* parent = 0, const char* name = 0 )
+  : K3bPlugin( parent, name ),
     m_type(type),
     m_hasGUI(gui) {
   }
@@ -139,9 +139,9 @@ class LIBK3B_EXPORT K3bProjectPlugin : public K3bPlugin
    *            this will be the doc to work on. It should
    *            be dynamically casted to the needed project type.
    *
-   * @param tqparent the tqparent widget to be used for things like progress dialogs.
+   * @param parent the parent widget to be used for things like progress dialogs.
    */
-  virtual void activate( K3bDoc* doc, TQWidget* tqparent ) { Q_UNUSED(doc); Q_UNUSED(tqparent); }
+  virtual void activate( K3bDoc* doc, TQWidget* parent ) { Q_UNUSED(doc); Q_UNUSED(parent); }
 
  protected:
   void setText( const TQString& s ) { m_text = s; }

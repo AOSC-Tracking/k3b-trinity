@@ -33,8 +33,8 @@
 class K3bMixedDirTreeView::PrivateAudioRootViewItem : public K3bListViewItem
 {
 public:
-  PrivateAudioRootViewItem( K3bMixedDoc* doc, TQListView* tqparent, TQListViewItem* after )
-    : K3bListViewItem( tqparent, after ),
+  PrivateAudioRootViewItem( K3bMixedDoc* doc, TQListView* parent, TQListViewItem* after )
+    : K3bListViewItem( parent, after ),
       m_doc(doc)
   {
     setPixmap( 0, SmallIcon("sound") );
@@ -52,8 +52,8 @@ public:
 };
 
 
-K3bMixedDirTreeView::K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, TQWidget* tqparent, const char* )
-  : K3bDataDirTreeView( view, doc->dataDoc(), tqparent ), m_doc(doc)
+K3bMixedDirTreeView::K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, TQWidget* parent, const char* )
+  : K3bDataDirTreeView( view, doc->dataDoc(), parent ), m_doc(doc)
 {
   m_audioRootItem = new PrivateAudioRootViewItem( doc, this, root() );
 
@@ -68,7 +68,7 @@ K3bMixedDirTreeView::~K3bMixedDirTreeView()
 }
 
 
-void K3bMixedDirTreeView::slotDropped( TQDropEvent* e, TQListViewItem* tqparent, TQListViewItem* after )
+void K3bMixedDirTreeView::slotDropped( TQDropEvent* e, TQListViewItem* parent, TQListViewItem* after )
 {
   if( !e->isAccepted() )
     return;
@@ -81,7 +81,7 @@ void K3bMixedDirTreeView::slotDropped( TQDropEvent* e, TQListViewItem* tqparent,
     }
   }
   else
-    K3bDataDirTreeView::slotDropped( e, tqparent, after );
+    K3bDataDirTreeView::slotDropped( e, parent, after );
 }
 
 

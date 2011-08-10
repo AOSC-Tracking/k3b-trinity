@@ -55,8 +55,8 @@
 #include <kmessagebox.h>
 
 
-K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, TQWidget *tqparent, const char *name, bool modal )
-  : K3bProjectBurnDialog( _doc, tqparent, name, modal ),
+K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, TQWidget *parent, const char *name, bool modal )
+  : K3bProjectBurnDialog( _doc, parent, name, modal ),
     m_doc(_doc)
 {
   prepareGui();

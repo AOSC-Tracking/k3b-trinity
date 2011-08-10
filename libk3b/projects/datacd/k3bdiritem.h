@@ -38,7 +38,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
 
   /**
    * Default copy constructor. Copies the dir including all tqchildren. However, none of the
-   * tqchildren will have set a doc and the copy dir will not have set a tqparent dir.
+   * tqchildren will have set a doc and the copy dir will not have set a parent dir.
    */
   K3bDirItem( const K3bDirItem& );
 
@@ -111,7 +111,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
  private:
   /**
    * this recursivly updates the size of the directories.
-   * The size of this dir and the tqparent dir is updated.
+   * The size of this dir and the parent dir is updated.
    * These values are just used for user information.
    */
   void updateSize( K3bDataItem*, bool removed = false );

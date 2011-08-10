@@ -34,7 +34,7 @@ class K3bVideoDVDRippingView : public K3bMediaContentsView
   TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingView( TQWidget* tqparent = 0, const char * name = 0 );
+  K3bVideoDVDRippingView( TQWidget* parent = 0, const char * name = 0 );
   ~K3bVideoDVDRippingView();
 
   KActionCollection* actionCollection() const { return m_actionCollection; }

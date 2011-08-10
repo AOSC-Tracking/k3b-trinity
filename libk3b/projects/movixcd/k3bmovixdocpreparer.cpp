@@ -68,8 +68,8 @@ public:
 };
 
 
-K3bMovixDocPreparer::K3bMovixDocPreparer( K3bMovixDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bJob( jh, tqparent, name )
+K3bMovixDocPreparer::K3bMovixDocPreparer( K3bMovixDoc* doc, K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bJob( jh, parent, name )
 {
   d = new Private();
   d->doc = doc;
@@ -406,7 +406,7 @@ bool K3bMovixDocPreparer::addMovixFilesNew()
 
       // set the proper sort weight
       bootItem->setSortWeight( 200 );
-      bootItem->tqparent()->setSortWeight( 100 );
+      bootItem->parent()->setSortWeight( 100 );
     }
     else if( fileName != "movixrc" ) { // we create our own movixrc
       K3bFileItem* item = createItem( filePath, docPath );
@@ -478,8 +478,8 @@ K3bDirItem* K3bMovixDocPreparer::createDir( const TQString& docPath )
   // remember the dir to remove it
   if( dir != d->doc->root() ) {
     K3bDirItem* delDir = dir;
-    while( delDir->tqparent() != d->doc->root() )
-      delDir = delDir->tqparent();
+    while( delDir->parent() != d->doc->root() )
+      delDir = delDir->parent();
     if( d->newMovixItems.findRef( delDir ) == -1 )
       d->newMovixItems.append( delDir );
   }

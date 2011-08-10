@@ -45,7 +45,7 @@ class K3bDataSessionImportDialog : public KDialogBase
    *
    * \return the project
    */
-  static K3bDataDoc* importSession( K3bDataDoc* doc, TQWidget* tqparent );
+  static K3bDataDoc* importSession( K3bDataDoc* doc, TQWidget* parent );
 
  private slots:
   void slotOk();
@@ -55,7 +55,7 @@ class K3bDataSessionImportDialog : public KDialogBase
   void slotSelectionChanged( K3bDevice::Device* );
 
  private:
-  K3bDataSessionImportDialog( TQWidget* tqparent = 0 );
+  K3bDataSessionImportDialog( TQWidget* parent = 0 );
   ~K3bDataSessionImportDialog();
 
   K3bDataDoc* m_doc;

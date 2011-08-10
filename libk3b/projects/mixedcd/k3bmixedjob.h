@@ -43,7 +43,7 @@ class K3bMixedJob : public K3bBurnJob
   TQ_OBJECT
 	
  public:
-  K3bMixedJob( K3bMixedDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bMixedJob( K3bMixedDoc*, K3bJobHandler*, TQObject* parent = 0 );
   ~K3bMixedJob();
 	
   K3bDoc* doc() const;

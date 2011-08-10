@@ -24,7 +24,7 @@
 class K3bArtsOutputPlugin : public K3bAudioOutputPlugin
 {
  public:
-  K3bArtsOutputPlugin( TQObject* tqparent = 0, const char* name = 0 );
+  K3bArtsOutputPlugin( TQObject* parent = 0, const char* name = 0 );
   ~K3bArtsOutputPlugin();
 
   int pluginSystemVersion() const { return 3; }

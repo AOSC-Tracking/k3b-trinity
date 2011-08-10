@@ -33,7 +33,7 @@ class TQEvent;
 class LIBK3B_EXPORT K3bToolButton : public TQToolButton
 {
  public:
-  K3bToolButton( TQWidget* tqparent = 0 );
+  K3bToolButton( TQWidget* parent = 0 );
   ~K3bToolButton();
 
   void setInstantMenu( bool );

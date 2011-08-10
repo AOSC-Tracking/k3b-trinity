@@ -48,7 +48,7 @@ class K3bCdCopyDialog : public K3bInteractionDialog
   TQ_OBJECT
 
  public: 
-  K3bCdCopyDialog(TQWidget *tqparent = 0, const char *name = 0, bool modal = true );
+  K3bCdCopyDialog(TQWidget *parent = 0, const char *name = 0, bool modal = true );
   ~K3bCdCopyDialog();
 
   void setReadingDevice( K3bDevice::Device* );

@@ -38,14 +38,14 @@ class K3bLsofWrapperDialog : public KDialogBase
    *
    * If the device is not in use this method simply returns.
    */
-  static void checkDevice( K3bDevice::Device* dev, TQWidget* tqparent = 0 );
+  static void checkDevice( K3bDevice::Device* dev, TQWidget* parent = 0 );
 
  private slots:
   bool slotCheckDevice();
   void slotQuitOtherApps();
 
  private:
-  K3bLsofWrapperDialog( TQWidget* tqparent );
+  K3bLsofWrapperDialog( TQWidget* parent );
 
   K3bDevice::Device* m_device;
   K3bRichTextLabel* m_label;

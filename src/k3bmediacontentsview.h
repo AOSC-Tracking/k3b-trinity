@@ -91,7 +91,7 @@ class K3bMediaContentsView : public K3bContentsView
 			int mediumContent,
 			int mediumTypes,
 			int mediumState,
-			TQWidget* tqparent = 0, 
+			TQWidget* parent = 0, 
 			const char* name = 0 );
 
   /**

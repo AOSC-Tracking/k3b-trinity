@@ -109,7 +109,7 @@ class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
         KIO::filesize_t size() const;
         K3b::Msf length() const;
 
-        K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent );
+        K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* parent );
         K3bVcdOptions* vcdOptions() const
         {
             return m_vcdOptions;

@@ -51,8 +51,8 @@
 #include <kiconloader.h>
 
 
-K3bProjectBurnDialog::K3bProjectBurnDialog( K3bDoc* doc, TQWidget *tqparent, const char *name, bool modal, bool dvd )
-  : K3bInteractionDialog( tqparent, name, i18n("Project"), TQString(), 
+K3bProjectBurnDialog::K3bProjectBurnDialog( K3bDoc* doc, TQWidget *parent, const char *name, bool modal, bool dvd )
+  : K3bInteractionDialog( parent, name, i18n("Project"), TQString(), 
 			  START_BUTTON|SAVE_BUTTON|CANCEL_BUTTON, START_BUTTON, 
 			  "default " + doc->typeString() + " settings", modal ),
     m_writerSelectionWidget(0),

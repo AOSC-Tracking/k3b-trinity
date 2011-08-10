@@ -34,7 +34,7 @@ class K3bFileTreeComboBox : public KComboBox
   TQ_OBJECT
 
  public:
-  K3bFileTreeComboBox( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bFileTreeComboBox( TQWidget* parent = 0, const char* name = 0 );
   ~K3bFileTreeComboBox();
 
   void popup();

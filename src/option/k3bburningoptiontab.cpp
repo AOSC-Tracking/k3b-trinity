@@ -39,8 +39,8 @@
 #include <klineedit.h>
 
 
-K3bBurningOptionTab::K3bBurningOptionTab( TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name )
+K3bBurningOptionTab::K3bBurningOptionTab( TQWidget* parent, const char* name )
+  : TQWidget( parent, name )
 {
   setupGui();
 }

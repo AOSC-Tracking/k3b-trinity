@@ -30,12 +30,12 @@
 
 
 
-K3bExternalEncoderEditDialog::K3bExternalEncoderEditDialog( TQWidget* tqparent )
+K3bExternalEncoderEditDialog::K3bExternalEncoderEditDialog( TQWidget* parent )
   : KDialogBase( Swallow,
 		 i18n("Editing external audio encoder"),
 		 Ok|Cancel,
 		 Ok,
-		 tqparent )
+		 parent )
 {
   m_editW = new base_K3bExternalEncoderEditWidget( this );
   setMainWidget( m_editW );
@@ -109,8 +109,8 @@ public:
 };
 
 
-K3bExternalEncoderSettingsWidget::K3bExternalEncoderSettingsWidget( TQWidget* tqparent, const char* name )
-  : K3bPluginConfigWidget( tqparent, name )
+K3bExternalEncoderSettingsWidget::K3bExternalEncoderSettingsWidget( TQWidget* parent, const char* name )
+  : K3bPluginConfigWidget( parent, name )
 {
   d = new Private();
 

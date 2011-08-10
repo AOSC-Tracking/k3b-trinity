@@ -29,7 +29,7 @@ class K3bProjectFilePlugin: public KFilePlugin
   TQ_OBJECT
     
  public:
-  K3bProjectFilePlugin( TQObject *tqparent, const char *name, const TQStringList& args );
+  K3bProjectFilePlugin( TQObject *parent, const char *name, const TQStringList& args );
   
   virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

@@ -161,7 +161,7 @@ namespace K3b
   LIBK3B_EXPORT TQString prepareDir( const TQString& dir );
 
   /**
-   * returns the tqparent dir of a path.
+   * returns the parent dir of a path.
    * CAUTION: this does only work well with absolut paths.
    *
    * Example: /usr/share/doc -> /usr/share/

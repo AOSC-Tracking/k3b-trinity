@@ -120,12 +120,12 @@ private:
 class K3bDataAdvancedImageSettingsWidget::PrivateCheckViewItem : public TQCheckListItem
 {
 public:
-  PrivateCheckViewItem( TQListView* tqparent, const TQString& text, Type tt = Controller )
-    : TQCheckListItem( tqparent, text, tt ) {
+  PrivateCheckViewItem( TQListView* parent, const TQString& text, Type tt = Controller )
+    : TQCheckListItem( parent, text, tt ) {
   }
 
-  PrivateCheckViewItem( TQListViewItem* tqparent, const TQString& text, Type tt = Controller )
-    : TQCheckListItem( tqparent, text, tt ) {
+  PrivateCheckViewItem( TQListViewItem* parent, const TQString& text, Type tt = Controller )
+    : TQCheckListItem( parent, text, tt ) {
   }
 
 protected:
@@ -141,8 +141,8 @@ protected:
 };
 
 
-K3bDataAdvancedImageSettingsWidget::K3bDataAdvancedImageSettingsWidget( TQWidget* tqparent, const char* name )
-  : base_K3bAdvancedDataImageSettings( tqparent, name )
+K3bDataAdvancedImageSettingsWidget::K3bDataAdvancedImageSettingsWidget( TQWidget* parent, const char* name )
+  : base_K3bAdvancedDataImageSettings( parent, name )
 {
   m_viewIsoSettings->header()->hide();
   m_viewIsoSettings->setSorting( -1 );

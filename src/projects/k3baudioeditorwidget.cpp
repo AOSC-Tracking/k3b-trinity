@@ -168,8 +168,8 @@ public:
 };
 
 
-K3bAudioEditorWidget::K3bAudioEditorWidget( TQWidget* tqparent, const char* name )
-  : TQFrame( tqparent, name, TQt::WNoAutoErase ),
+K3bAudioEditorWidget::K3bAudioEditorWidget( TQWidget* parent, const char* name )
+  : TQFrame( parent, name, TQt::WNoAutoErase ),
     m_maxMarkers(1),
     m_idCnt(1),
     m_mouseAt(true),

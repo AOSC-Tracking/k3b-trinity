@@ -28,10 +28,10 @@
 
 
 K3bProgressDialog::K3bProgressDialog( const TQString& text,
-				      TQWidget* tqparent, 
+				      TQWidget* parent, 
 				      const TQString& caption,
 				      const char* name ) 
-  : KDialogBase( tqparent, name, true, caption, Cancel|Ok, Ok, true )
+  : KDialogBase( parent, name, true, caption, Cancel|Ok, Ok, true )
 {
   TQFrame* main = makeMainWidget();
   TQGridLayout* mainLayout = new TQGridLayout( main );

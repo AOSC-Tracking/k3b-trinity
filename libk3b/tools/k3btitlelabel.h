@@ -29,7 +29,7 @@ class LIBK3B_EXPORT K3bTitleLabel : public TQFrame
   TQ_OBJECT
 
  public:
-  K3bTitleLabel( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bTitleLabel( TQWidget* parent = 0, const char* name = 0 );
   ~K3bTitleLabel();
 
   TQSize tqsizeHint() const;

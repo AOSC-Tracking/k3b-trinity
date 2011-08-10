@@ -36,8 +36,8 @@
 #include <k3bglobals.h>
 #include <k3bprocess.h>
 
-K3bVideoCdRip::K3bVideoCdRip( K3bJobHandler* hdl, K3bVideoCdRippingOptions* options, TQObject* tqparent, const char* name )
-  : K3bJob( hdl, tqparent, name ),
+K3bVideoCdRip::K3bVideoCdRip( K3bJobHandler* hdl, K3bVideoCdRippingOptions* options, TQObject* parent, const char* name )
+  : K3bJob( hdl, parent, name ),
     m_ripsourceType( 0 ),
     m_subPosition ( 0 ),
     m_videooptions( options ),

@@ -32,7 +32,7 @@ class K3bMixedDirTreeView : public K3bDataDirTreeView
   TQ_OBJECT
 
  public:
-  K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, TQWidget* parent = 0, const char* name = 0 );
   ~K3bMixedDirTreeView();
 
  signals:
@@ -40,7 +40,7 @@ class K3bMixedDirTreeView : public K3bDataDirTreeView
   void dataTreeSelected();
 
  protected slots:
-  void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* tqparent );
+  void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* parent );
   
  private slots:
   void slotSelectionChanged( TQListViewItem* i );

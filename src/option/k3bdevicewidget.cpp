@@ -144,8 +144,8 @@ private:
 
 
 
-K3bDeviceWidget::K3bDeviceWidget( K3bDevice::DeviceManager* manager, TQWidget *tqparent, const char *name )
-  : TQWidget( tqparent, name ), m_deviceManager( manager )
+K3bDeviceWidget::K3bDeviceWidget( K3bDevice::DeviceManager* manager, TQWidget *parent, const char *name )
+  : TQWidget( parent, name ), m_deviceManager( manager )
 {
   TQGridLayout* frameLayout = new TQGridLayout( this );
   frameLayout->setSpacing( KDialog::spacingHint() );
@@ -229,7 +229,7 @@ void K3bDeviceWidget::updateDeviceListViews()
 {
   m_viewDevices->clear();
 
-  // create the tqparent view items
+  // create the parent view items
   // -----------------------------------------
   m_writerParentViewItem = new TQListViewItem( m_viewDevices, i18n("Writer Drives") );
   m_writerParentViewItem->setPixmap( 0, SmallIcon( "cdwriter_unmount" ) );

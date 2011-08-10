@@ -27,7 +27,7 @@ class K3bDebuggingOutputDialog : public KDialogBase
   TQ_OBJECT
 
  public:
-  K3bDebuggingOutputDialog( TQWidget* tqparent );
+  K3bDebuggingOutputDialog( TQWidget* parent );
   
  public slots:
   void setOutput( const TQMap<TQString, TQStringList>& );

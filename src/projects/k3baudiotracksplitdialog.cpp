@@ -30,10 +30,10 @@
 #include <tqlayout.h>
 
 
-K3bAudioTrackSplitDialog::K3bAudioTrackSplitDialog( K3bAudioTrack* track, TQWidget* tqparent, const char* name )
+K3bAudioTrackSplitDialog::K3bAudioTrackSplitDialog( K3bAudioTrack* track, TQWidget* parent, const char* name )
   : KDialogBase( KDialogBase::Plain, i18n("Split Audio Track"), 
 		 KDialogBase::Ok|KDialogBase::Cancel,
-		 KDialogBase::Ok, tqparent, name ),
+		 KDialogBase::Ok, parent, name ),
     m_track(track)
 {
   TQFrame* frame = plainPage();
@@ -193,10 +193,10 @@ void K3bAudioTrackSplitDialog::slotRemoveRange()
 
 
 void K3bAudioTrackSplitDialog::splitTrack( K3bAudioTrack* track,
-					   TQWidget* tqparent, 
+					   TQWidget* parent, 
 					   const char* name )
 {
-  K3bAudioTrackSplitDialog d( track, tqparent, name );
+  K3bAudioTrackSplitDialog d( track, parent, name );
   if( d.exec() == TQDialog::Accepted ) {
     TQValueList<int> ranges = d.m_editorWidget->allRanges();
     // we split the track at all range ends and just delete those that relate to the gaps in between

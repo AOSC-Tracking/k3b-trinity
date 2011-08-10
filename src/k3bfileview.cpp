@@ -43,8 +43,8 @@
 #include <kprogress.h>
 
 
-K3bFileView::K3bFileView(TQWidget *tqparent, const char *name ) 
-  : K3bContentsView( false, tqparent, name)
+K3bFileView::K3bFileView(TQWidget *parent, const char *name ) 
+  : K3bContentsView( false, parent, name)
 {
   setupGUI();
 }

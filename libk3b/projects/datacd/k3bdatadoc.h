@@ -64,7 +64,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
   TQ_OBJECT
 
  public:
-  K3bDataDoc( TQObject* tqparent = 0 );
+  K3bDataDoc( TQObject* parent = 0 );
   virtual ~K3bDataDoc();
 
   virtual int type() const { return DATA; }
@@ -111,11 +111,11 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
   void moveItem( K3bDataItem* item, K3bDirItem* newParent );
   void moveItems( TQPtrList<K3bDataItem> itemList, K3bDirItem* newParent );
 
-  K3bDirItem* addEmptyDir( const TQString& name, K3bDirItem* tqparent );
+  K3bDirItem* addEmptyDir( const TQString& name, K3bDirItem* parent );
 	
   TQString treatWhitespace( const TQString& );
 	
-  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent = 0 );
+  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* parent = 0 );
 	
   MultiSessionMode multiSessionMode() const { return m_multisessionMode; }
   void setMultiSessionMode( MultiSessionMode mode );
@@ -246,22 +246,22 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
 
  private:
   void prepareFilenamesInDir( K3bDirItem* dir );
-  void createSessionImportItems( const K3bIso9660Directory*, K3bDirItem* tqparent );
+  void createSessionImportItems( const K3bIso9660Directory*, K3bDirItem* parent );
 
   /**
    * used by K3bDirItem to inform about removed items.
    */
-  void itemRemovedFromDir( K3bDirItem* tqparent, K3bDataItem* removedItem );
-  void itemAddedToDir( K3bDirItem* tqparent, K3bDataItem* addedItem );
+  void itemRemovedFromDir( K3bDirItem* parent, K3bDataItem* removedItem );
+  void itemAddedToDir( K3bDirItem* parent, K3bDataItem* addedItem );
 
   /**
    * load recursivly
    */
-  bool loadDataItem( TQDomElement& e, K3bDirItem* tqparent );
+  bool loadDataItem( TQDomElement& e, K3bDirItem* parent );
   /**
    * save recursivly
    */
-  void saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomElement* tqparent );
+  void saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomElement* parent );
 
   void informAboutNotFoundFiles();
 

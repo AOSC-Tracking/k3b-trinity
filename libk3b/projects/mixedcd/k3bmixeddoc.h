@@ -36,7 +36,7 @@ class LIBK3B_EXPORT K3bMixedDoc : public K3bDoc
   TQ_OBJECT
 
  public: 
-  K3bMixedDoc( TQObject* tqparent = 0 );
+  K3bMixedDoc( TQObject* parent = 0 );
   ~K3bMixedDoc();
 
   TQString name() const;
@@ -51,7 +51,7 @@ class LIBK3B_EXPORT K3bMixedDoc : public K3bDoc
 
   int numOfTracks() const;
 
-  K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* parent = 0 );
 
   K3bAudioDoc* audioDoc() const { return m_audioDoc; }
   K3bDataDoc* dataDoc() const { return m_dataDoc; }

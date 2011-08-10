@@ -31,7 +31,7 @@
 class LIBK3B_EXPORT K3bVcdTrack
 {
     public:
-        K3bVcdTrack( TQPtrList<K3bVcdTrack>* tqparent, const TQString& filename );
+        K3bVcdTrack( TQPtrList<K3bVcdTrack>* parent, const TQString& filename );
         ~K3bVcdTrack();
 
         TQString fileName() const

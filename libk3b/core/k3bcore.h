@@ -62,7 +62,7 @@ class LIBK3B_EXPORT K3bCore : public TQObject
    * Although K3bCore is a singlelton it's constructor is not private to make inheritance
    * possible. Just make sure to only create one instance.
    */
-  K3bCore( TQObject* tqparent = 0, const char* name = 0 );
+  K3bCore( TQObject* parent = 0, const char* name = 0 );
   virtual ~K3bCore();
 
   const TQValueList<K3bJob*>& runningJobs() const;

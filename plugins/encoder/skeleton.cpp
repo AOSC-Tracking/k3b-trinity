@@ -25,8 +25,8 @@
 K_EXPORT_COMPONENT_FACTORY( libk3b<name>encoder, K3bPluginFactory<K3b<name>Encoder>( "libk3b<name>encoder" ) )
 
 
-K3b<name>Encoder::K3b<name>Encoder( TQObject* tqparent, const char* name )
-  : K3bAudioEncoder( tqparent, name )
+K3b<name>Encoder::K3b<name>Encoder( TQObject* parent, const char* name )
+  : K3bAudioEncoder( parent, name )
 {
 }
 
@@ -83,16 +83,16 @@ long long K3b<name>Encoder::fileSize( const TQString&, const K3b::Msf& msf ) con
 }
 
 
-K3bPluginConfigWidget* K3b<name>Encoder::createConfigWidget( TQWidget* tqparent, 
+K3bPluginConfigWidget* K3b<name>Encoder::createConfigWidget( TQWidget* parent, 
 							     const char* name ) const
 {
-  return new K3b<name>EncoderSettingsWidget( tqparent, name );
+  return new K3b<name>EncoderSettingsWidget( parent, name );
 }
 
 
 
-K3b<name>EncoderSettingsWidget::K3b<name>EncoderSettingsWidget( TQWidget* tqparent, const char* name )
-  : K3bPluginConfigWidget( tqparent, name )
+K3b<name>EncoderSettingsWidget::K3b<name>EncoderSettingsWidget( TQWidget* parent, const char* name )
+  : K3bPluginConfigWidget( parent, name )
 {
 }
 

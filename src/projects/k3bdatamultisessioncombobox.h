@@ -28,7 +28,7 @@ class K3bDataMultiSessionCombobox : public TQComboBox
   TQ_OBJECT
 
  public:
-  K3bDataMultiSessionCombobox( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bDataMultiSessionCombobox( TQWidget* parent = 0, const char* name = 0 );
   ~K3bDataMultiSessionCombobox();
 
   /**

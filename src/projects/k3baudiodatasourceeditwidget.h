@@ -33,7 +33,7 @@ class K3bAudioDataSourceEditWidget : public TQWidget
   TQ_OBJECT
 
  public:
-  K3bAudioDataSourceEditWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bAudioDataSourceEditWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bAudioDataSourceEditWidget();
 
   K3b::Msf startOffset() const;

@@ -37,8 +37,8 @@
 class K3bPluginOptionTab::PluginViewItem : public K3bListViewItem
 {
 public:
-  PluginViewItem( K3bPlugin* p, KListViewItem* tqparent )
-    : K3bListViewItem( tqparent ),
+  PluginViewItem( K3bPlugin* p, KListViewItem* parent )
+    : K3bListViewItem( parent ),
       plugin(p) {
     const K3bPluginInfo& info = p->pluginInfo();
     setText( 0, info.name() );
@@ -58,8 +58,8 @@ public:
 
 
 
-K3bPluginOptionTab::K3bPluginOptionTab( TQWidget* tqparent, const char* name )
-  : base_K3bPluginOptionTab( tqparent, name )
+K3bPluginOptionTab::K3bPluginOptionTab( TQWidget* parent, const char* name )
+  : base_K3bPluginOptionTab( parent, name )
 {
 #if KDE_IS_VERSION(3,4,0)
   m_viewPlugins->setShadeSortColumn( false );

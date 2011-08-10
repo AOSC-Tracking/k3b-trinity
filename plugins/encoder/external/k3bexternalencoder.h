@@ -30,7 +30,7 @@ class K3bExternalEncoder : public K3bAudioEncoder
   TQ_OBJECT
 
  public:
-  K3bExternalEncoder( TQObject* tqparent = 0, const char* name = 0 );
+  K3bExternalEncoder( TQObject* parent = 0, const char* name = 0 );
   ~K3bExternalEncoder();
 
   TQStringList extensions() const;
@@ -39,7 +39,7 @@ class K3bExternalEncoder : public K3bAudioEncoder
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent, 
+  K3bPluginConfigWidget* createConfigWidget( TQWidget* parent, 
 					     const char* name ) const;
 
   /**

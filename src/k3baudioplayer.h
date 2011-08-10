@@ -45,8 +45,8 @@ class KActionMenu;
 class K3bPlayListViewItem : public KListViewItem
 {
  public:
-  K3bPlayListViewItem( const TQString&, TQListView* tqparent );
-  K3bPlayListViewItem( const TQString&, TQListView* tqparent, TQListViewItem* after );
+  K3bPlayListViewItem( const TQString&, TQListView* parent );
+  K3bPlayListViewItem( const TQString&, TQListView* parent, TQListViewItem* after );
   ~K3bPlayListViewItem();
 
   /** @returns the filename for the first column and the 
@@ -88,7 +88,7 @@ Q_OBJECT
   TQ_OBJECT
 
  public:
-  K3bPlayListView( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bPlayListView( TQWidget* parent = 0, const char* name = 0 );
   ~K3bPlayListView();
 
  protected:
@@ -108,7 +108,7 @@ Q_OBJECT
   TQ_OBJECT
 
  public: 
-  K3bAudioPlayer( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bAudioPlayer( TQWidget* parent = 0, const char* name = 0 );
   ~K3bAudioPlayer();
 
   bool supportsMimetype( const TQString& mimetype );

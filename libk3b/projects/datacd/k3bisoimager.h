@@ -39,7 +39,7 @@ class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
   TQ_OBJECT
 
  public:
-  K3bIsoImager( K3bDataDoc*, K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bIsoImager( K3bDataDoc*, K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   virtual ~K3bIsoImager();
 
   virtual bool active() const;

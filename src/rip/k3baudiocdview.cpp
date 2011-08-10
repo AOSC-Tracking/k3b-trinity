@@ -60,11 +60,11 @@
 class K3bAudioCdView::AudioTrackViewItem : public K3bCheckListViewItem
 {
 public:
-  AudioTrackViewItem( TQListView* tqparent, 
+  AudioTrackViewItem( TQListView* parent, 
 		      TQListViewItem* after,
 		      int _trackNumber,
 		      const K3b::Msf& length) 
-    : K3bCheckListViewItem( tqparent, after ) {
+    : K3bCheckListViewItem( parent, after ) {
 
     setText( 1, TQString::number(_trackNumber).rightJustify( 2, ' ' ) );
     setText( 3, i18n("Track %1").tqarg(_trackNumber) );
@@ -94,12 +94,12 @@ public:
 };
 
 
-K3bAudioCdView::K3bAudioCdView( TQWidget* tqparent, const char *name )
+K3bAudioCdView::K3bAudioCdView( TQWidget* parent, const char *name )
   : K3bMediaContentsView( true, 
 			  K3bMedium::CONTENT_AUDIO,
 			  K3bDevice::MEDIA_CD_ALL,
 			  K3bDevice::STATE_INCOMPLETE|K3bDevice::STATE_COMPLETE,
-			  tqparent, name )
+			  parent, name )
 {
   TQGridLayout* mainGrid = new TQGridLayout( mainWidget() );
 

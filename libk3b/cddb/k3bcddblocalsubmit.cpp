@@ -25,8 +25,8 @@
 #include <klocale.h>
 
 
-K3bCddbLocalSubmit::K3bCddbLocalSubmit( TQObject* tqparent, const char* name )
-  : K3bCddbSubmit( tqparent, name )
+K3bCddbLocalSubmit::K3bCddbLocalSubmit( TQObject* parent, const char* name )
+  : K3bCddbSubmit( parent, name )
 {
 }
 

@@ -31,8 +31,8 @@ extern "C" {
 K_EXPORT_COMPONENT_FACTORY( libk3bffmpegdecoder, K3bPluginFactory<K3bFFMpegDecoderFactory>( "k3bffmpegdecoder" ) )
 
 
-K3bFFMpegDecoderFactory::K3bFFMpegDecoderFactory( TQObject* tqparent, const char* name )
-  : K3bAudioDecoderFactory( tqparent, name )
+K3bFFMpegDecoderFactory::K3bFFMpegDecoderFactory( TQObject* parent, const char* name )
+  : K3bAudioDecoderFactory( parent, name )
 {
 }
 
@@ -42,10 +42,10 @@ K3bFFMpegDecoderFactory::~K3bFFMpegDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bFFMpegDecoderFactory::createDecoder( TQObject* tqparent, 
+K3bAudioDecoder* K3bFFMpegDecoderFactory::createDecoder( TQObject* parent, 
 							 const char* name ) const
 {
-  return new K3bFFMpegDecoder( tqparent, name );
+  return new K3bFFMpegDecoder( parent, name );
 }
 
 
@@ -66,8 +66,8 @@ bool K3bFFMpegDecoderFactory::canDecode( const KURL& url )
 
 
 
-K3bFFMpegDecoder::K3bFFMpegDecoder( TQObject* tqparent, const char* name )
-  : K3bAudioDecoder( tqparent, name ),
+K3bFFMpegDecoder::K3bFFMpegDecoder( TQObject* parent, const char* name )
+  : K3bAudioDecoder( parent, name ),
     m_file(0)
 {
 }

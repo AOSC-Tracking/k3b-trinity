@@ -43,7 +43,7 @@ class K3bDataJob : public K3bBurnJob
   TQ_OBJECT
 	
  public:
-  K3bDataJob( K3bDataDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bDataJob( K3bDataDoc*, K3bJobHandler*, TQObject* parent = 0 );
   virtual ~K3bDataJob();
 	
   K3bDoc* doc() const;

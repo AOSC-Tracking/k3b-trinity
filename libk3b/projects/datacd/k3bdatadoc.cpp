@@ -67,8 +67,8 @@
  * \li or create your own K3bDirItems and K3bFileItems. The doc will be properly updated
  *     by the constructors of the items.
  */
-K3bDataDoc::K3bDataDoc( TQObject* tqparent )
-  : K3bDoc( tqparent )
+K3bDataDoc::K3bDataDoc( TQObject* parent )
+  : K3bDoc( parent )
 {
   m_root = 0;
 
@@ -219,9 +219,9 @@ bool K3bDataDoc::nameAlreadyInDir( const TQString& name, K3bDirItem* dir )
 }
 
 
-K3bDirItem* K3bDataDoc::addEmptyDir( const TQString& name, K3bDirItem* tqparent )
+K3bDirItem* K3bDataDoc::addEmptyDir( const TQString& name, K3bDirItem* parent )
 {
-  K3bDirItem* item = new K3bDirItem( name, this, tqparent );
+  K3bDirItem* item = new K3bDirItem( name, this, parent );
 
   setModified( true );
 
@@ -332,7 +332,7 @@ bool K3bDataDoc::loadDocumentData( TQDomElement* rootElem )
   // file we create a default one here.
   //
   if( !m_bootImages.isEmpty() && !m_bootCataloge )
-    createBootCatalogeItem( m_bootImages.first()->tqparent() );
+    createBootCatalogeItem( m_bootImages.first()->parent() );
 
 
   informAboutNotFoundFiles();
@@ -511,7 +511,7 @@ bool K3bDataDoc::loadDocumentDataHeader( TQDomElement headerElem )
 }
 
 
-bool K3bDataDoc::loadDataItem( TQDomElement& elem, K3bDirItem* tqparent )
+bool K3bDataDoc::loadDataItem( TQDomElement& elem, K3bDirItem* parent )
 {
   K3bDataItem* newItem = 0;
 
@@ -535,7 +535,7 @@ bool K3bDataDoc::loadDataItem( TQDomElement& elem, K3bDirItem* tqparent )
     else if( !elem.attribute( "bootimage" ).isEmpty() ) {
       K3bBootItem* bootItem = new K3bBootItem( urlElem.text(),
 					       this,
-					       tqparent,
+					       parent,
 					       elem.attributeNode( "name" ).value() );
       if( elem.attribute( "bootimage" ) == "floppy" )
 	bootItem->setImageType( K3bBootItem::FLOPPY );
@@ -554,18 +554,18 @@ bool K3bDataDoc::loadDataItem( TQDomElement& elem, K3bDirItem* tqparent )
     else {
       newItem = new K3bFileItem( urlElem.text(),
 				 this,
-				 tqparent,
+				 parent,
 				 elem.attributeNode( "name" ).value() );
     }
   }
   else if( elem.nodeName() == "special" ) {
     if( elem.attributeNode( "type" ).value() == "boot cataloge" )
-      createBootCatalogeItem( tqparent )->setK3bName( elem.attributeNode( "name" ).value() );
+      createBootCatalogeItem( parent )->setK3bName( elem.attributeNode( "name" ).value() );
   }
   else if( elem.nodeName() == "directory" ) {
     // This is for the VideoDVD project which already contains the *_TS folders
     K3bDirItem* newDirItem = 0;
-    if( K3bDataItem* item = tqparent->find( elem.attributeNode( "name" ).value() ) ) {
+    if( K3bDataItem* item = parent->find( elem.attributeNode( "name" ).value() ) ) {
       if( item->isDir() ) {
 	newDirItem = static_cast<K3bDirItem*>(item);
       }
@@ -576,7 +576,7 @@ bool K3bDataDoc::loadDataItem( TQDomElement& elem, K3bDirItem* tqparent )
     }
 
     if( !newDirItem )
-      newDirItem = new K3bDirItem( elem.attributeNode( "name" ).value(), this, tqparent );
+      newDirItem = new K3bDirItem( elem.attributeNode( "name" ).value(), this, parent );
     TQDomNodeList childNodes = elem.childNodes();
     for( uint i = 0; i < childNodes.count(); i++ ) {
 
@@ -835,7 +835,7 @@ void K3bDataDoc::saveDocumentDataHeader( TQDomElement& headerElem )
 }
 
 
-void K3bDataDoc::saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomElement* tqparent )
+void K3bDataDoc::saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomElement* parent )
 {
   if( K3bFileItem* fileItem = dynamic_cast<K3bFileItem*>( item ) ) {
     if( m_oldSession.contains( fileItem ) ) {
@@ -851,7 +851,7 @@ void K3bDataDoc::saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomEleme
       if( item->sortWeight() != 0 )
 	topElem.setAttribute( "sort_weight", TQString::number(item->sortWeight()) );
 
-      tqparent->appendChild( topElem );
+      parent->appendChild( topElem );
 
       // add boot options as attributes to preserve compatibility to older K3b versions
       if( K3bBootItem* bootItem = dynamic_cast<K3bBootItem*>( fileItem ) ) {
@@ -874,7 +874,7 @@ void K3bDataDoc::saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomEleme
     topElem.setAttribute( "name", m_bootCataloge->k3bName() );
     topElem.setAttribute( "type", "boot cataloge" );
 
-    tqparent->appendChild( topElem );
+    parent->appendChild( topElem );
   }
   else if( K3bDirItem* dirItem = dynamic_cast<K3bDirItem*>( item ) ) {
     TQDomElement topElem = doc->createElement( "directory" );
@@ -888,7 +888,7 @@ void K3bDataDoc::saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomEleme
       saveDataItem( it.current(), doc, &topElem );
     }
 
-    tqparent->appendChild( topElem );
+    parent->appendChild( topElem );
   }
 }
 
@@ -979,9 +979,9 @@ void K3bDataDoc::moveItems( TQPtrList<K3bDataItem> itemList, K3bDirItem* newPare
 }
 
 
-K3bBurnJob* K3bDataDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
+K3bBurnJob* K3bDataDoc::newBurnJob( K3bJobHandler* hdl, TQObject* parent )
 {
-  return new K3bDataJob( this, hdl, tqparent );
+  return new K3bDataJob( this, hdl, parent );
 }
 
 
@@ -1211,7 +1211,7 @@ bool K3bDataDoc::importSession( K3bDevice::Device* device )
 }
 
 
-void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir, K3bDirItem* tqparent )
+void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir, K3bDirItem* parent )
 {
   Q_ASSERT(importDir);
   TQStringList entries = importDir->entries();
@@ -1220,7 +1220,7 @@ void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir,
   for( TQStringList::const_iterator it = entries.begin();
        it != entries.end(); ++it ) {
     const K3bIso9660Entry* entry = importDir->entry( *it );
-    K3bDataItem* oldItem = tqparent->find( entry->name() );
+    K3bDataItem* oldItem = parent->find( entry->name() );
     if( entry->isDirectory() ) {
       K3bDirItem* dir = 0;
       if( oldItem && oldItem->isDir() ) {
@@ -1230,7 +1230,7 @@ void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir,
 	// we overwrite without warning!
 	if( oldItem )
 	  removeItem( oldItem );
-	dir = new K3bDirItem( entry->name(), this, tqparent );
+	dir = new K3bDirItem( entry->name(), this, parent );
       }
 
       dir->setRemoveable(false);
@@ -1250,7 +1250,7 @@ void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir,
       if( oldItem )
 	removeItem( oldItem );
 
-      K3bSessionImportItem* item = new K3bSessionImportItem( file, this, tqparent );
+      K3bSessionImportItem* item = new K3bSessionImportItem( file, this, parent );
       item->setExtraInfo( i18n("From previous session") );
       m_oldSession.append( item );
     }

@@ -32,8 +32,8 @@
 #include <kstandarddirs.h>
 
 
-K3bDeviceOptionTab::K3bDeviceOptionTab( TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name )
+K3bDeviceOptionTab::K3bDeviceOptionTab( TQWidget* parent, const char* name )
+  : TQWidget( parent, name )
 {
   TQGridLayout* frameLayout = new TQGridLayout( this );
   frameLayout->setSpacing( KDialog::spacingHint() );

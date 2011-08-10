@@ -74,9 +74,9 @@ public:
 
 
 K3bAudioMetainfoRenamerPluginWidget::K3bAudioMetainfoRenamerPluginWidget( K3bDoc* doc, 
-									  TQWidget* tqparent, 
+									  TQWidget* parent, 
 									  const char* name )
-  : TQWidget( tqparent, name )
+  : TQWidget( parent, name )
 {
   d = new Private();
   d->doc = dynamic_cast<K3bDataDoc*>(doc);
@@ -352,14 +352,14 @@ TQString K3bAudioMetainfoRenamerPluginWidget::createNewName( K3bFileItem* item )
 
 bool K3bAudioMetainfoRenamerPluginWidget::existsOtherItemWithSameName( K3bFileItem* item, const TQString& name )
 {
-  K3bDirItem* dir = item->tqparent();
+  K3bDirItem* dir = item->parent();
   K3bDataItem* otherItem = dir->find( name );
   if( otherItem && otherItem != item )
     return true;
 
   TQListViewItem* dirViewItem = d->dirItemDict[dir];
   TQListViewItem* current = dirViewItem->firstChild();
-  while( current && current->tqparent() == dirViewItem ) {
+  while( current && current->parent() == dirViewItem ) {
     if( current->text(0) == name )
       return true;
     current = current->nextSibling();
@@ -370,9 +370,9 @@ bool K3bAudioMetainfoRenamerPluginWidget::existsOtherItemWithSameName( K3bFileIt
 
 
 
-K3bAudioMetainfoRenamerPlugin::K3bAudioMetainfoRenamerPlugin( TQObject* tqparent, 
+K3bAudioMetainfoRenamerPlugin::K3bAudioMetainfoRenamerPlugin( TQObject* parent, 
 							      const char* name )
-  : K3bProjectPlugin( DATA_PROJECTS, true, tqparent, name )
+  : K3bProjectPlugin( DATA_PROJECTS, true, parent, name )
 {
   setText( i18n("Rename Audio Files") );
   setToolTip( i18n("Rename audio files based on their meta info.") );
@@ -384,9 +384,9 @@ K3bAudioMetainfoRenamerPlugin::~K3bAudioMetainfoRenamerPlugin()
 }
 
 
-K3bProjectPluginGUIBase* K3bAudioMetainfoRenamerPlugin::createGUI( K3bDoc* doc, TQWidget* tqparent, const char* name )
+K3bProjectPluginGUIBase* K3bAudioMetainfoRenamerPlugin::createGUI( K3bDoc* doc, TQWidget* parent, const char* name )
 {
-  return new K3bAudioMetainfoRenamerPluginWidget( doc, tqparent, name );
+  return new K3bAudioMetainfoRenamerPluginWidget( doc, parent, name );
 }
 
 #include "k3baudiometainforenamerplugin.moc"

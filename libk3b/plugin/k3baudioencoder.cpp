@@ -34,8 +34,8 @@ public:
 };
 
 
-K3bAudioEncoder::K3bAudioEncoder( TQObject* tqparent, const char* name )
-  : K3bPlugin( tqparent, name )
+K3bAudioEncoder::K3bAudioEncoder( TQObject* parent, const char* name )
+  : K3bPlugin( parent, name )
 {
   d = new Private();
 }

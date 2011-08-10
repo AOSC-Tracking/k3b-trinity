@@ -33,7 +33,7 @@ class K3bAudioMetainfoRenamerPluginWidget : public TQWidget, public K3bProjectPl
   TQ_OBJECT
 
  public:
-  K3bAudioMetainfoRenamerPluginWidget( K3bDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bAudioMetainfoRenamerPluginWidget( K3bDoc* doc, TQWidget* parent = 0, const char* name = 0 );
   ~K3bAudioMetainfoRenamerPluginWidget();
 
   TQWidget* qWidget() { return this; }
@@ -51,7 +51,7 @@ class K3bAudioMetainfoRenamerPluginWidget : public TQWidget, public K3bProjectPl
   void slotScanClicked();
 
  private:
-  void scanDir( K3bDirItem*, TQListViewItem* tqparent );
+  void scanDir( K3bDirItem*, TQListViewItem* parent );
   TQString createNewName( K3bFileItem* );
   bool existsOtherItemWithSameName( K3bFileItem*, const TQString& );
 
@@ -66,7 +66,7 @@ class K3bAudioMetainfoRenamerPlugin : public K3bProjectPlugin
   TQ_OBJECT
 
  public:
-  K3bAudioMetainfoRenamerPlugin( TQObject* tqparent, const char* name );
+  K3bAudioMetainfoRenamerPlugin( TQObject* parent, const char* name );
   ~K3bAudioMetainfoRenamerPlugin();
 
   int pluginSystemVersion() const { return 3; }

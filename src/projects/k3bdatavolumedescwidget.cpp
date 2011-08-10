@@ -24,8 +24,8 @@
 #include <tqtoolbutton.h>
 
 
-K3bDataVolumeDescWidget::K3bDataVolumeDescWidget( TQWidget* tqparent, const char* name )
-  : base_K3bDataVolumeDescWidget( tqparent, name )
+K3bDataVolumeDescWidget::K3bDataVolumeDescWidget( TQWidget* parent, const char* name )
+  : base_K3bDataVolumeDescWidget( parent, name )
 {
   // the maximal number of characters that can be inserted are set in the ui file!
 

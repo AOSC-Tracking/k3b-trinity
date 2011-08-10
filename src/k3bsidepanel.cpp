@@ -27,8 +27,8 @@
 
 
 
-K3bSidePanel::K3bSidePanel( K3bMainWindow* m, TQWidget* tqparent, const char* name )
-  : TQToolBox( tqparent, name ),
+K3bSidePanel::K3bSidePanel( K3bMainWindow* m, TQWidget* parent, const char* name )
+  : TQToolBox( parent, name ),
     m_mainWindow(m)
 {
   // our first widget is the tree view

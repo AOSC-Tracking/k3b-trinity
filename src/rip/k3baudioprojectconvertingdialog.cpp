@@ -64,8 +64,8 @@ public:
 };
 
 
-K3bAudioProjectConvertingDialog::K3bAudioProjectConvertingDialog( K3bAudioDoc* doc, TQWidget *tqparent, const char *name )
-  : K3bInteractionDialog( tqparent, name,
+K3bAudioProjectConvertingDialog::K3bAudioProjectConvertingDialog( K3bAudioDoc* doc, TQWidget *parent, const char *name )
+  : K3bInteractionDialog( parent, name,
 			  TQString(),
 			  TQString(),
 			  START_BUTTON|CANCEL_BUTTON,

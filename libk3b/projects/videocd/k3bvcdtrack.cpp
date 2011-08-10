@@ -30,12 +30,12 @@
 #include "k3bvcdtrack.h"
 #include <k3bglobals.h>
 
-K3bVcdTrack::K3bVcdTrack( TQPtrList<K3bVcdTrack>* tqparent, const TQString& filename )
+K3bVcdTrack::K3bVcdTrack( TQPtrList<K3bVcdTrack>* parent, const TQString& filename )
         : m_pbcnumkeys( true ),
         m_pbcnumkeysuserdefined( false ),
         m_file( filename )
 {
-    m_parent = tqparent;
+    m_parent = parent;
     m_title = TQFileInfo( m_file ).baseName( true );
 
     m_revreflist = new TQPtrList<K3bVcdTrack>;
@@ -67,7 +67,7 @@ int K3bVcdTrack::index() const
 {
     int i = m_parent->find( this );
     if ( i < 0 )
-        kdDebug() << "(K3bVcdTrack) I'm not part of my tqparent!" << endl;
+        kdDebug() << "(K3bVcdTrack) I'm not part of my parent!" << endl;
     return i;
 }
 

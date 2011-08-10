@@ -53,7 +53,7 @@ public:
   /**
    * Default copy constructor
    * Creates a copy of the fileitem. The copy, however, is not an exact duplicate of this item.
-   * The copy does not have a tqparent dir set and any old session items are set to 0.
+   * The copy does not have a parent dir set and any old session items are set to 0.
    */
   K3bFileItem( const K3bFileItem& );
 

@@ -30,8 +30,8 @@
 #include <kmessagebox.h>
 
 
-K3bDataSessionImportDialog::K3bDataSessionImportDialog( TQWidget* tqparent )
-  : KDialogBase( tqparent,
+K3bDataSessionImportDialog::K3bDataSessionImportDialog( TQWidget* parent )
+  : KDialogBase( parent,
 		 "session_import_dialog",
 		 true, 
 		 i18n("Session Import"), 
@@ -125,9 +125,9 @@ void K3bDataSessionImportDialog::slotSelectionChanged( K3bDevice::Device* dev )
 }
 
 
-K3bDataDoc* K3bDataSessionImportDialog::importSession( K3bDataDoc* doc, TQWidget* tqparent )
+K3bDataDoc* K3bDataSessionImportDialog::importSession( K3bDataDoc* doc, TQWidget* parent )
 {
-  K3bDataSessionImportDialog dlg( tqparent );
+  K3bDataSessionImportDialog dlg( parent );
   dlg.importSession( doc );
   dlg.exec();
   return dlg.m_doc;

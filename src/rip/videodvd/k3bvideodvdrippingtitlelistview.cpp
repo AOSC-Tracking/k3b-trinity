@@ -90,8 +90,8 @@ static TQString subpictureStreamString( const K3bVideoDVD::Title& title, unsigne
 class K3bVideoDVDRippingTitleListView::TitleViewItem : public K3bCheckListViewItem
 {
 public:
-  TitleViewItem( K3bVideoDVDRippingTitleListView* tqparent, TQListViewItem* after, const K3bVideoDVD::Title& title ) 
-    : K3bCheckListViewItem( tqparent, after ),
+  TitleViewItem( K3bVideoDVDRippingTitleListView* parent, TQListViewItem* after, const K3bVideoDVD::Title& title ) 
+    : K3bCheckListViewItem( parent, after ),
       m_title( title ) {
 
     setMarginVertical( 4 );
@@ -330,8 +330,8 @@ private:
 
 
 
-K3bVideoDVDRippingTitleListView::K3bVideoDVDRippingTitleListView( TQWidget* tqparent )
-  : K3bListView( tqparent )
+K3bVideoDVDRippingTitleListView::K3bVideoDVDRippingTitleListView( TQWidget* parent )
+  : K3bListView( parent )
 {
   setFullWidth(true);
   setSorting(-1);

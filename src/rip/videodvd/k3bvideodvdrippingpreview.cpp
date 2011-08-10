@@ -27,8 +27,8 @@
 
 
 
-K3bVideoDVDRippingPreview::K3bVideoDVDRippingPreview( TQObject* tqparent )
-  : TQObject( tqparent ),
+K3bVideoDVDRippingPreview::K3bVideoDVDRippingPreview( TQObject* parent )
+  : TQObject( parent ),
     m_tempDir( 0 ),
     m_process( 0 )
 {

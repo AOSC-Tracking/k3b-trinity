@@ -37,7 +37,7 @@ class K3bMediaSelectionComboBox : public KComboBox
   TQ_OBJECT
 
  public:
-  K3bMediaSelectionComboBox( TQWidget* tqparent );
+  K3bMediaSelectionComboBox( TQWidget* parent );
   virtual ~K3bMediaSelectionComboBox();
 
   /**

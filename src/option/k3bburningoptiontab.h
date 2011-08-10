@@ -36,7 +36,7 @@ Q_OBJECT
   TQ_OBJECT
 
  public:
-  K3bBurningOptionTab( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bBurningOptionTab( TQWidget* parent = 0, const char* name = 0 );
   ~K3bBurningOptionTab();
 
   void saveSettings();

@@ -83,8 +83,8 @@ public:
 };
 
 
-K3bDataJob::K3bDataJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bBurnJob( hdl, tqparent )
+K3bDataJob::K3bDataJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* parent )
+  : K3bBurnJob( hdl, parent )
 {
   d = new Private;
 

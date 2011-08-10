@@ -28,7 +28,7 @@
 class K3bMsfValidator : public TQRegExpValidator
 {
  public:
-  K3bMsfValidator( TQObject* tqparent = 0, const char* name = 0 );
+  K3bMsfValidator( TQObject* parent = 0, const char* name = 0 );
 };
 
 
@@ -38,7 +38,7 @@ class LIBK3B_EXPORT K3bMsfEdit : public TQSpinBox
   TQ_OBJECT
 
  public:
-  K3bMsfEdit( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bMsfEdit( TQWidget* parent = 0, const char* name = 0 );
   ~K3bMsfEdit();
 
   TQSize tqsizeHint() const;

@@ -33,8 +33,8 @@ class LIBK3B_EXPORT KCutLabel : public TQLabel
   /**
    * Default constructor.
    */
-  KCutLabel( TQWidget *tqparent = 0, const char *name = 0);
-  KCutLabel( const TQString &text, TQWidget *tqparent = 0, const char *name = 0 );
+  KCutLabel( TQWidget *parent = 0, const char *name = 0);
+  KCutLabel( const TQString &text, TQWidget *parent = 0, const char *name = 0 );
 
   virtual TQSize tqminimumSizeHint() const;
 

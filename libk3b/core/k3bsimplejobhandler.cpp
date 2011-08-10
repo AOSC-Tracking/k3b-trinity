@@ -16,8 +16,8 @@
 #include "k3bsimplejobhandler.h"
 
 
-K3bSimpleJobHandler::K3bSimpleJobHandler( TQObject* tqparent )
-  : TQObject( tqparent ),
+K3bSimpleJobHandler::K3bSimpleJobHandler( TQObject* parent )
+  : TQObject( parent ),
     K3bJobHandler()
 {
 }

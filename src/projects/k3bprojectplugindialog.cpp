@@ -20,8 +20,8 @@
 #include <tqwidget.h>
 
 
-K3bProjectPluginDialog::K3bProjectPluginDialog( K3bProjectPlugin* plugin, K3bDoc* doc, TQWidget* tqparent, const char* name )
-  : K3bInteractionDialog( tqparent, name,
+K3bProjectPluginDialog::K3bProjectPluginDialog( K3bProjectPlugin* plugin, K3bDoc* doc, TQWidget* parent, const char* name )
+  : K3bInteractionDialog( parent, name,
 			  TQString(),
 			  TQString(),
 			  START_BUTTON|CANCEL_BUTTON,

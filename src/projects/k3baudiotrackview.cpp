@@ -61,8 +61,8 @@
 #include <kdialogbase.h>
 
 
-K3bAudioTrackView::K3bAudioTrackView( K3bAudioDoc* doc, TQWidget* tqparent, const char* name )
-  : K3bListView( tqparent, name ),
+K3bAudioTrackView::K3bAudioTrackView( K3bAudioDoc* doc, TQWidget* parent, const char* name )
+  : K3bListView( parent, name ),
     m_doc(doc),
     m_updatingColumnWidths(false),
     m_currentMouseOverItem(0),
@@ -230,7 +230,7 @@ TQDragObject* K3bAudioTrackView::dragObject()
 }
 
 
-void K3bAudioTrackView::slotDropped( TQDropEvent* e, TQListViewItem* tqparent, TQListViewItem* after )
+void K3bAudioTrackView::slotDropped( TQDropEvent* e, TQListViewItem* parent, TQListViewItem* after )
 {
   m_autoOpenTrackTimer->stop();
 
@@ -249,7 +249,7 @@ void K3bAudioTrackView::slotDropped( TQDropEvent* e, TQListViewItem* tqparent, T
     }
   }
 
-  if( K3bAudioTrackViewItem* tv = dynamic_cast<K3bAudioTrackViewItem*>( tqparent ) ) {
+  if( K3bAudioTrackViewItem* tv = dynamic_cast<K3bAudioTrackViewItem*>( parent ) ) {
     m_dropTrackParent = tv->track();
   }
 
@@ -594,12 +594,12 @@ void K3bAudioTrackView::contentsDragLeaveEvent( TQDragLeaveEvent* e )
 
 K3bAudioTrackViewItem* K3bAudioTrackView::findTrackItem( const TQPoint& pos ) const
 {
-  TQListViewItem* tqparent = 0;
+  TQListViewItem* parent = 0;
   TQListViewItem* after = 0;
   K3bAudioTrackView* that = const_cast<K3bAudioTrackView*>(this);
-  that->findDrop( pos, tqparent, after );
-  if( tqparent )
-    return static_cast<K3bAudioTrackViewItem*>( tqparent );
+  that->findDrop( pos, parent, after );
+  if( parent )
+    return static_cast<K3bAudioTrackViewItem*>( parent );
   else if( K3bAudioTrackViewItem* tv = dynamic_cast<K3bAudioTrackViewItem*>(after) )
     return tv;
   else if( K3bAudioDataSourceViewItem* sv = dynamic_cast<K3bAudioDataSourceViewItem*>(after) )

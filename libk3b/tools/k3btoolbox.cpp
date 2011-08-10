@@ -42,7 +42,7 @@ class K3bToolBoxSeparator : public TQWidget
   TQ_OBJECT
 
  public:
-  K3bToolBoxSeparator( K3bToolBox* tqparent );
+  K3bToolBoxSeparator( K3bToolBox* parent );
   
   TQSize tqsizeHint() const;
   
@@ -51,8 +51,8 @@ class K3bToolBoxSeparator : public TQWidget
 };
 
 
-K3bToolBoxSeparator::K3bToolBoxSeparator( K3bToolBox* tqparent )
-  : TQWidget( tqparent )
+K3bToolBoxSeparator::K3bToolBoxSeparator( K3bToolBox* parent )
+  : TQWidget( parent )
 {
   tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum ) );
 }
@@ -77,8 +77,8 @@ void K3bToolBoxSeparator::paintEvent( TQPaintEvent* )
 
 
 
-K3bToolBoxButton::K3bToolBoxButton( KAction* action, TQWidget* tqparent )
-  : TQToolButton( tqparent ),
+K3bToolBoxButton::K3bToolBoxButton( KAction* action, TQWidget* parent )
+  : TQToolButton( parent ),
     m_popupMenu(0)
 {
   tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, tqsizePolicy().verData()) );
@@ -123,8 +123,8 @@ K3bToolBoxButton::K3bToolBoxButton( KAction* action, TQWidget* tqparent )
 K3bToolBoxButton::K3bToolBoxButton( const TQString& text, const TQString& icon, 
 				    const TQString& tooltip, const TQString& whatsthis,
 				    TQObject* receiver, const char* slot,
-				    TQWidget* tqparent )
-  : TQToolButton( tqparent ),
+				    TQWidget* parent )
+  : TQToolButton( parent ),
     m_popupMenu(0)
 {
   tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, tqsizePolicy().verData()) );
@@ -168,8 +168,8 @@ void K3bToolBoxButton::resizeEvent( TQResizeEvent* e )
 
 
 
-K3bToolBox::K3bToolBox( TQWidget* tqparent, const char* name )
-  : TQFrame( tqparent, name )
+K3bToolBox::K3bToolBox( TQWidget* parent, const char* name )
+  : TQFrame( parent, name )
 {
   tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed) );
 

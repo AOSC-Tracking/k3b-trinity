@@ -71,8 +71,8 @@ public:
 };
 
 
-K3bDvdFormattingJob::K3bDvdFormattingJob( K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bBurnJob( jh, tqparent, name )
+K3bDvdFormattingJob::K3bDvdFormattingJob( K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bBurnJob( jh, parent, name )
 {
   d = new Private;
 }

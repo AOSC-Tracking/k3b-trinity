@@ -35,15 +35,15 @@
 #include <tqfileinfo.h>
 
 
-K3bDataViewItem::K3bDataViewItem( K3bDataItem* item, TQListView* tqparent )
-  : K3bListViewItem( tqparent ),
+K3bDataViewItem::K3bDataViewItem( K3bDataItem* item, TQListView* parent )
+  : K3bListViewItem( parent ),
     m_dataItem(item)
 {
   init();
 }
 
-K3bDataViewItem::K3bDataViewItem( K3bDataItem* item, TQListViewItem* tqparent )
-  : K3bListViewItem( tqparent ),
+K3bDataViewItem::K3bDataViewItem( K3bDataItem* item, TQListViewItem* parent )
+  : K3bListViewItem( parent ),
     m_dataItem(item)
 {
   init();
@@ -134,16 +134,16 @@ TQString K3bDataViewItem::key( int col, bool a ) const
 }
 
 
-K3bDataDirViewItem::K3bDataDirViewItem( K3bDirItem* dir, TQListView* tqparent )
-  : K3bDataViewItem( dir, tqparent )
+K3bDataDirViewItem::K3bDataDirViewItem( K3bDirItem* dir, TQListView* parent )
+  : K3bDataViewItem( dir, parent )
 {
   m_dirItem = dir;
   setPixmap( 0, dir->depth() > 7 ? SmallIcon( "folder_red" ) : SmallIcon( "folder" ) );
 }
 
 
-K3bDataDirViewItem::K3bDataDirViewItem( K3bDirItem* dir, TQListViewItem* tqparent )
-  : K3bDataViewItem( dir, tqparent )
+K3bDataDirViewItem::K3bDataDirViewItem( K3bDirItem* dir, TQListViewItem* parent )
+  : K3bDataViewItem( dir, parent )
 {
   m_dirItem = dir;
   setPixmap( 0, dir->depth() > 7 ? SmallIcon( "folder_red" ) : SmallIcon( "folder" ) );
@@ -189,15 +189,15 @@ void K3bDataDirViewItem::highlightIcon( bool b )
 
 
 
-K3bDataFileViewItem::K3bDataFileViewItem( K3bFileItem* file, TQListView* tqparent )
-  : K3bDataViewItem( file, tqparent )
+K3bDataFileViewItem::K3bDataFileViewItem( K3bFileItem* file, TQListView* parent )
+  : K3bDataViewItem( file, parent )
 {
   init( file );
 }
 
 
-K3bDataFileViewItem::K3bDataFileViewItem( K3bFileItem* file, TQListViewItem* tqparent )
-  : K3bDataViewItem( file, tqparent )
+K3bDataFileViewItem::K3bDataFileViewItem( K3bFileItem* file, TQListViewItem* parent )
+  : K3bDataViewItem( file, parent )
 {
   init( file );
 }
@@ -262,8 +262,8 @@ TQString K3bDataFileViewItem::text( int index ) const
 
 
 
-K3bDataRootViewItem::K3bDataRootViewItem( K3bDataDoc* doc, TQListView* tqparent )
-  : K3bDataDirViewItem( doc->root(), tqparent )
+K3bDataRootViewItem::K3bDataRootViewItem( K3bDataDoc* doc, TQListView* parent )
+  : K3bDataDirViewItem( doc->root(), parent )
 {
   m_doc = doc;
   setPixmap( 0, SmallIcon( "cdrom_unmount" ) );
@@ -297,8 +297,8 @@ void K3bDataRootViewItem::setText( int col, const TQString& text )
 }
 
 
-K3bSpecialDataViewItem::K3bSpecialDataViewItem( K3bSpecialDataItem* item, TQListView* tqparent )
-  : K3bDataViewItem( item, tqparent )
+K3bSpecialDataViewItem::K3bSpecialDataViewItem( K3bSpecialDataItem* item, TQListView* parent )
+  : K3bDataViewItem( item, parent )
 {
   setPixmap( 0, SmallIcon("unknown") );
 }
@@ -319,8 +319,8 @@ TQString K3bSpecialDataViewItem::text( int col ) const
 
 
 
-K3bSessionImportViewItem::K3bSessionImportViewItem( K3bSessionImportItem* item, TQListView* tqparent )
-  : K3bDataViewItem( item, tqparent )
+K3bSessionImportViewItem::K3bSessionImportViewItem( K3bSessionImportItem* item, TQListView* parent )
+  : K3bDataViewItem( item, parent )
 {
   setPixmap( 0, SmallIcon("unknown") );
 }

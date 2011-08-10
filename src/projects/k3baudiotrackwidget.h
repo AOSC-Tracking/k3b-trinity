@@ -36,7 +36,7 @@ class K3bAudioTrackWidget : public base_K3bAudioTrackWidget
 
  public:
   K3bAudioTrackWidget( const TQPtrList<K3bAudioTrack>& tracks, 
-		       TQWidget* tqparent = 0, const char* name = 0 );
+		       TQWidget* parent = 0, const char* name = 0 );
   ~K3bAudioTrackWidget();
 
  public slots:

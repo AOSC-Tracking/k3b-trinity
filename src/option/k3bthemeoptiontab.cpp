@@ -46,8 +46,8 @@ public:
 class ThemeViewItem : public KListViewItem 
 {
 public:
-  ThemeViewItem( K3bTheme* theme_, TQListView* tqparent, TQListViewItem* after )
-    : KListViewItem( tqparent, after ),
+  ThemeViewItem( K3bTheme* theme_, TQListView* parent, TQListViewItem* after )
+    : KListViewItem( parent, after ),
       theme(theme_) {
     setText( 0, theme->name() );
     setText( 1, theme->author() );
@@ -58,8 +58,8 @@ public:
   K3bTheme* theme;
 };
 
-K3bThemeOptionTab::K3bThemeOptionTab(TQWidget *tqparent, const char *name )
-  : base_K3bThemeOptionTab(tqparent,name)
+K3bThemeOptionTab::K3bThemeOptionTab(TQWidget *parent, const char *name )
+  : base_K3bThemeOptionTab(parent,name)
 {
   d = new Private();
 

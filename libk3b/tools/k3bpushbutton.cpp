@@ -37,16 +37,16 @@ public:
 
 
 
-K3bPushButton::K3bPushButton( TQWidget* tqparent, const char* name )
-  : KPushButton( tqparent, name )
+K3bPushButton::K3bPushButton( TQWidget* parent, const char* name )
+  : KPushButton( parent, name )
 {
   d = new Private();
   installEventFilter(this);
 }
 
 
-K3bPushButton::K3bPushButton( const TQString& text, TQWidget* tqparent, const char* name )
-  : KPushButton( text, tqparent, name )
+K3bPushButton::K3bPushButton( const TQString& text, TQWidget* parent, const char* name )
+  : KPushButton( text, parent, name )
 {
   d = new Private();
   installEventFilter(this);
@@ -54,16 +54,16 @@ K3bPushButton::K3bPushButton( const TQString& text, TQWidget* tqparent, const ch
 
 
 K3bPushButton::K3bPushButton( const TQIconSet& icon, const TQString& text,
-			      TQWidget* tqparent, const char* name )
-  : KPushButton( icon, text, tqparent, name )
+			      TQWidget* parent, const char* name )
+  : KPushButton( icon, text, parent, name )
 {
   d = new Private();
   installEventFilter(this);
 }
 
 
-K3bPushButton::K3bPushButton( const KGuiItem& item, TQWidget* tqparent, const char* name )
-  : KPushButton( item, tqparent, name )
+K3bPushButton::K3bPushButton( const KGuiItem& item, TQWidget* parent, const char* name )
+  : KPushButton( item, parent, name )
 {
   d = new Private();
   installEventFilter(this);

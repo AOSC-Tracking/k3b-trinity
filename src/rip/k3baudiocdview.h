@@ -47,7 +47,7 @@ class K3bAudioCdView : public K3bMediaContentsView
   TQ_OBJECT
 
  public:
-  K3bAudioCdView( TQWidget* tqparent = 0, const char * name = 0 );
+  K3bAudioCdView( TQWidget* parent = 0, const char * name = 0 );
   ~K3bAudioCdView();
 
   KActionCollection* actionCollection() const { return m_actionCollection; }

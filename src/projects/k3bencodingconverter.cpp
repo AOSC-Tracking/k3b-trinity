@@ -77,7 +77,7 @@ bool K3bEncodingConverter::encodedLocally( const TQCString& s )
 }
 
 
-bool K3bEncodingConverter::fixEncoding( const TQCString& s, TQCString& result, TQWidget* tqparent, bool cache )
+bool K3bEncodingConverter::fixEncoding( const TQCString& s, TQCString& result, TQWidget* parent, bool cache )
 {
 #ifdef IMPLEMENT_THIS_METHOD // HAVE_ICONV_H
   if( !d->lastEncoding.isEmpty() ) {

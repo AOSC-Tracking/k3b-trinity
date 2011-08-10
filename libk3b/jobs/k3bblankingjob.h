@@ -30,7 +30,7 @@ class LIBK3B_EXPORT K3bBlankingJob : public K3bBurnJob
   TQ_OBJECT
 
  public:
-  K3bBlankingJob( K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bBlankingJob( K3bJobHandler*, TQObject* parent = 0 );
   ~K3bBlankingJob();
 
   K3bDevice::Device* writer() const;

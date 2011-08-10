@@ -31,7 +31,7 @@ class K3bProjectManager : public TQObject
   TQ_OBJECT
 
  public:
-  K3bProjectManager( TQObject* tqparent = 0, const char* name = 0 );
+  K3bProjectManager( TQObject* parent = 0, const char* name = 0 );
   virtual ~K3bProjectManager();
 
   const TQPtrList<K3bDoc>& projects() const;

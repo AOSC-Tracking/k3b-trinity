@@ -72,8 +72,8 @@ static const char* s_pictureSizeNames[] = {
 };
 
 
-K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( TQWidget* tqparent )
-  : base_K3bVideoDVDRippingWidget( tqparent )
+K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( TQWidget* parent )
+  : base_K3bVideoDVDRippingWidget( parent )
 {
   m_editBaseDir->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
 

@@ -86,8 +86,8 @@ public:
 
 
 
-K3bMadDecoder::K3bMadDecoder( TQObject* tqparent, const char* name )
-  : K3bAudioDecoder( tqparent, name )
+K3bMadDecoder::K3bMadDecoder( TQObject* parent, const char* name )
+  : K3bAudioDecoder( parent, name )
 {
   d = new MadDecoderPrivate();
   d->handle = new K3bMad();
@@ -457,8 +457,8 @@ TQString K3bMadDecoder::technicalInfo( const TQString& name ) const
 }
 
 
-K3bMadDecoderFactory::K3bMadDecoderFactory( TQObject* tqparent, const char* name )
-  : K3bAudioDecoderFactory( tqparent, name )
+K3bMadDecoderFactory::K3bMadDecoderFactory( TQObject* parent, const char* name )
+  : K3bAudioDecoderFactory( parent, name )
 {
 }
 
@@ -468,10 +468,10 @@ K3bMadDecoderFactory::~K3bMadDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bMadDecoderFactory::createDecoder( TQObject* tqparent,
+K3bAudioDecoder* K3bMadDecoderFactory::createDecoder( TQObject* parent,
 						      const char* name ) const
 {
-  return new K3bMadDecoder( tqparent, name );
+  return new K3bMadDecoder( parent, name );
 }
 
 

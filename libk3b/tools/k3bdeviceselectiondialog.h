@@ -34,7 +34,7 @@ class LIBK3B_EXPORT K3bDeviceSelectionDialog : public KDialogBase
   TQ_OBJECT
 
  public:
-  K3bDeviceSelectionDialog( TQWidget* tqparent = 0, 
+  K3bDeviceSelectionDialog( TQWidget* parent = 0, 
 			    const char* name = 0, 
 			    const TQString& text = TQString(), 
 			    bool modal = false );
@@ -47,11 +47,11 @@ class LIBK3B_EXPORT K3bDeviceSelectionDialog : public KDialogBase
 
   K3bDevice::Device* selectedDevice() const;
 
-  static K3bDevice::Device* selectWriter( TQWidget* tqparent, 
+  static K3bDevice::Device* selectWriter( TQWidget* parent, 
 					  const TQString& text = TQString() );
-  static K3bDevice::Device* selectDevice( TQWidget* tqparent, 
+  static K3bDevice::Device* selectDevice( TQWidget* parent, 
 					  const TQString& text = TQString() );
-  static K3bDevice::Device* selectDevice( TQWidget* tqparent, 
+  static K3bDevice::Device* selectDevice( TQWidget* parent, 
 					  const TQPtrList<K3bDevice::Device>& devices,
 					  const TQString& text = TQString() );
 

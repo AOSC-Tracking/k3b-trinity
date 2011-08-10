@@ -50,7 +50,7 @@ class K3bVerificationJob : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bVerificationJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bVerificationJob( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   ~K3bVerificationJob();
 
  public slots:

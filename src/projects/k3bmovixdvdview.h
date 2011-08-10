@@ -28,11 +28,11 @@ class K3bMovixDvdView : public K3bMovixView
   TQ_OBJECT
 
  public:
-  K3bMovixDvdView( K3bMovixDvdDoc* doc, TQWidget *tqparent = 0, const char *name = 0 );
+  K3bMovixDvdView( K3bMovixDvdDoc* doc, TQWidget *parent = 0, const char *name = 0 );
   ~K3bMovixDvdView();
 
  protected:
-  K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bProjectBurnDialog* newBurnDialog( TQWidget* parent = 0, const char* name = 0 );
 
  private:
   K3bMovixDvdDoc* m_doc;

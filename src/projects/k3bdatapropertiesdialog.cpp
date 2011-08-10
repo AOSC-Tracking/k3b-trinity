@@ -41,8 +41,8 @@
 
 
 
-K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidget* tqparent, const char* name )
-  : KDialogBase( Plain, i18n("File Properties"), Ok|Cancel, Ok, tqparent, name, true, false )
+K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidget* parent, const char* name )
+  : KDialogBase( Plain, i18n("File Properties"), Ok|Cancel, Ok, parent, name, true, false )
 {
   m_dataItem = dataItem;
 
@@ -182,10 +182,10 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
   m_checkHideOnRockRidge->setChecked( dataItem->hideOnRockRidge() );
   m_editSortWeight->setText( TQString::number(dataItem->sortWeight()) );
 
-  // if the tqparent is hidden the value cannot be changed (see K3bDataItem::setHide...)
-  if( dataItem->tqparent() ) {
-    m_checkHideOnRockRidge->setDisabled( dataItem->tqparent()->hideOnRockRidge() );
-    m_checkHideOnJoliet->setDisabled( dataItem->tqparent()->hideOnJoliet() );
+  // if the parent is hidden the value cannot be changed (see K3bDataItem::setHide...)
+  if( dataItem->parent() ) {
+    m_checkHideOnRockRidge->setDisabled( dataItem->parent()->hideOnRockRidge() );
+    m_checkHideOnJoliet->setDisabled( dataItem->parent()->hideOnJoliet() );
   }
 
   if( !dataItem->isHideable() ) {

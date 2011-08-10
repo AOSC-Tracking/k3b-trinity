@@ -120,7 +120,7 @@ class K3bFileTreeView : public KFileTreeView
   TQ_OBJECT
 
  public: 
-  K3bFileTreeView( TQWidget *tqparent = 0, const char *name = 0 );
+  K3bFileTreeView( TQWidget *parent = 0, const char *name = 0 );
   ~K3bFileTreeView();
 
 

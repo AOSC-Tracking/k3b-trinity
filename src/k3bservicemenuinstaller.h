@@ -38,14 +38,14 @@ class K3bServiceInstaller
   bool allInstalled() const;
 
   /**
-   * If tqparent != 0 a messagebox will be shown in case of an error.
+   * If parent != 0 a messagebox will be shown in case of an error.
    */
-  bool install( TQWidget* tqparent = 0 );
+  bool install( TQWidget* parent = 0 );
 
   /**
-   * If tqparent != 0 a messagebox will be shown in case of an error.
+   * If parent != 0 a messagebox will be shown in case of an error.
    */
-  bool remove( TQWidget* tqparent = 0 );
+  bool remove( TQWidget* parent = 0 );
 
  private:
   class Private;

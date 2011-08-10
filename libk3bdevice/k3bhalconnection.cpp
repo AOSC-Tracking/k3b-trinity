@@ -101,8 +101,8 @@ K3bDevice::HalConnection* K3bDevice::HalConnection::instance()
 }
 
 
-K3bDevice::HalConnection::HalConnection( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bDevice::HalConnection::HalConnection( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private();
 }

@@ -33,7 +33,7 @@ class LIBK3B_EXPORT K3bIntMapComboBox : public KComboBox
   TQ_OBJECT
 
  public:
-  K3bIntMapComboBox( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bIntMapComboBox( TQWidget* parent = 0, const char* name = 0 );
   ~K3bIntMapComboBox();
 
   int selectedValue() const;

@@ -63,8 +63,8 @@
 #include <tqfileinfo.h>
 
 
-K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *tqparent, const char *name, bool modal )
-  : K3bInteractionDialog( tqparent, name, i18n("CD Copy"), i18n("and CD Cloning"),
+K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *parent, const char *name, bool modal )
+  : K3bInteractionDialog( parent, name, i18n("CD Copy"), i18n("and CD Cloning"),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  "CD Copy",

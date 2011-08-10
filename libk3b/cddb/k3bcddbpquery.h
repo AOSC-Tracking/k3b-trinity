@@ -31,7 +31,7 @@ class K3bCddbpQuery : public K3bCddbQuery
   TQ_OBJECT
 
  public:
-  K3bCddbpQuery( TQObject* tqparent = 0, const char* name = 0 );
+  K3bCddbpQuery( TQObject* parent = 0, const char* name = 0 );
   ~K3bCddbpQuery();
 
  public slots:

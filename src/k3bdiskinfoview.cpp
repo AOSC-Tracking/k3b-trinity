@@ -51,22 +51,22 @@
 class K3bDiskInfoView::HeaderViewItem : public KListViewItem
 {
 public:
-  HeaderViewItem( TQListView* tqparent )
-      : KListViewItem( tqparent ) {}
-  HeaderViewItem( TQListViewItem* tqparent )
-      : KListViewItem( tqparent ) {}
-  HeaderViewItem( TQListView* tqparent, TQListViewItem* after )
-      : KListViewItem( tqparent, after ) {}
-  HeaderViewItem( TQListViewItem* tqparent, TQListViewItem* after )
-      : KListViewItem( tqparent, after ) {}
-  HeaderViewItem( TQListView* tqparent, const TQString& t1 )
-      : KListViewItem( tqparent, t1 ) {}
-  HeaderViewItem( TQListViewItem* tqparent, const TQString& t1 )
-      : KListViewItem( tqparent, t1 ) {}
-  HeaderViewItem( TQListView* tqparent, TQListViewItem* after, const TQString& t1 )
-      : KListViewItem( tqparent, after, t1 ) {}
-  HeaderViewItem( TQListViewItem* tqparent, TQListViewItem* after, const TQString& t1 )
-      : KListViewItem( tqparent, after, t1 ) {}
+  HeaderViewItem( TQListView* parent )
+      : KListViewItem( parent ) {}
+  HeaderViewItem( TQListViewItem* parent )
+      : KListViewItem( parent ) {}
+  HeaderViewItem( TQListView* parent, TQListViewItem* after )
+      : KListViewItem( parent, after ) {}
+  HeaderViewItem( TQListViewItem* parent, TQListViewItem* after )
+      : KListViewItem( parent, after ) {}
+  HeaderViewItem( TQListView* parent, const TQString& t1 )
+      : KListViewItem( parent, t1 ) {}
+  HeaderViewItem( TQListViewItem* parent, const TQString& t1 )
+      : KListViewItem( parent, t1 ) {}
+  HeaderViewItem( TQListView* parent, TQListViewItem* after, const TQString& t1 )
+      : KListViewItem( parent, after, t1 ) {}
+  HeaderViewItem( TQListViewItem* parent, TQListViewItem* after, const TQString& t1 )
+      : KListViewItem( parent, after, t1 ) {}
 
   void paintCell( TQPainter* p, const TQColorGroup & cg, int column, int width, int align )
   {
@@ -81,22 +81,22 @@ public:
 class K3bDiskInfoView::TwoColumnViewItem : public KListViewItem
 {
 public:
-  TwoColumnViewItem( TQListView* tqparent )
-      : KListViewItem( tqparent ) {}
-  TwoColumnViewItem( TQListViewItem* tqparent )
-      : KListViewItem( tqparent ) {}
-  TwoColumnViewItem( TQListView* tqparent, TQListViewItem* after )
-      : KListViewItem( tqparent, after ) {}
-  TwoColumnViewItem( TQListViewItem* tqparent, TQListViewItem* after )
-      : KListViewItem( tqparent, after ) {}
-  TwoColumnViewItem( TQListView* tqparent, const TQString& t1 )
-      : KListViewItem( tqparent, t1 ) {}
-  TwoColumnViewItem( TQListViewItem* tqparent, const TQString& t1 )
-      : KListViewItem( tqparent, t1 ) {}
-  TwoColumnViewItem( TQListView* tqparent, TQListViewItem* after, const TQString& t1 )
-      : KListViewItem( tqparent, after, t1 ) {}
-  TwoColumnViewItem( TQListViewItem* tqparent, TQListViewItem* after, const TQString& t1 )
-      : KListViewItem( tqparent, after, t1 ) {}
+  TwoColumnViewItem( TQListView* parent )
+      : KListViewItem( parent ) {}
+  TwoColumnViewItem( TQListViewItem* parent )
+      : KListViewItem( parent ) {}
+  TwoColumnViewItem( TQListView* parent, TQListViewItem* after )
+      : KListViewItem( parent, after ) {}
+  TwoColumnViewItem( TQListViewItem* parent, TQListViewItem* after )
+      : KListViewItem( parent, after ) {}
+  TwoColumnViewItem( TQListView* parent, const TQString& t1 )
+      : KListViewItem( parent, t1 ) {}
+  TwoColumnViewItem( TQListViewItem* parent, const TQString& t1 )
+      : KListViewItem( parent, t1 ) {}
+  TwoColumnViewItem( TQListView* parent, TQListViewItem* after, const TQString& t1 )
+      : KListViewItem( parent, after, t1 ) {}
+  TwoColumnViewItem( TQListViewItem* parent, TQListViewItem* after, const TQString& t1 )
+      : KListViewItem( parent, after, t1 ) {}
 
   void paintCell( TQPainter* p, const TQColorGroup & cg, int column, int width, int align )
   {
@@ -124,12 +124,12 @@ public:
 
 
 
-K3bDiskInfoView::K3bDiskInfoView( TQWidget* tqparent, const char* name )
+K3bDiskInfoView::K3bDiskInfoView( TQWidget* parent, const char* name )
   : K3bMediaContentsView( true,
 			  K3bMedium::CONTENT_ALL,
 			  K3bDevice::MEDIA_ALL|K3bDevice::MEDIA_UNKNOWN,
 			  K3bDevice::STATE_EMPTY|K3bDevice::STATE_INCOMPLETE|K3bDevice::STATE_COMPLETE|K3bDevice::STATE_UNKNOWN,
-			  tqparent, name )
+			  parent, name )
 {
   m_infoView = new KListView( this );
   setMainWidget( m_infoView );
@@ -247,7 +247,7 @@ void K3bDiskInfoView::reloadMedium()
 	  lastSession = track.session();
 	  trackItem->setOpen(true);
 	  trackItem = new HeaderViewItem( trackHeaderItem,
-					  m_infoView->lastItem()->tqparent(),
+					  m_infoView->lastItem()->parent(),
 					  i18n("Session %1").tqarg(lastSession) );
 	}
 

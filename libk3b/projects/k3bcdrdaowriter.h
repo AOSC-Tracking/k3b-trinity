@@ -41,7 +41,7 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
   enum SubMode { None, RW, RW_RAW };
 
   K3bCdrdaoWriter( K3bDevice::Device* dev, K3bJobHandler*, 
-		   TQObject* tqparent = 0, const char* name = 0 );
+		   TQObject* parent = 0, const char* name = 0 );
   ~K3bCdrdaoWriter();
 
   /**

@@ -33,7 +33,7 @@ class K3bAudioSessionReadingJob : public K3bThreadJob
   TQ_OBJECT
 
  public:
-  K3bAudioSessionReadingJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bAudioSessionReadingJob( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   ~K3bAudioSessionReadingJob();
 
   /**

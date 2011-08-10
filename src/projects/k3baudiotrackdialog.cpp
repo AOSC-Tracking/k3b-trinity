@@ -54,10 +54,10 @@
 //         do only show cd-text and options (eventuelle index0)
 
 
-K3bAudioTrackDialog::K3bAudioTrackDialog( TQPtrList<K3bAudioTrack>& tracks, TQWidget *tqparent, const char *name )
+K3bAudioTrackDialog::K3bAudioTrackDialog( TQPtrList<K3bAudioTrack>& tracks, TQWidget *parent, const char *name )
   : KDialogBase( KDialogBase::Plain, i18n("Audio Track Properties"), 
 		 KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Apply,
-		 KDialogBase::Ok, tqparent, name )
+		 KDialogBase::Ok, parent, name )
 {
   m_tracks = tracks;
 

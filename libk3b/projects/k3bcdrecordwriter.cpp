@@ -66,8 +66,8 @@ public:
 
 
 K3bCdrecordWriter::K3bCdrecordWriter( K3bDevice::Device* dev, K3bJobHandler* hdl,
-				      TQObject* tqparent, const char* name )
-  : K3bAbstractWriter( dev, hdl, tqparent, name ),
+				      TQObject* parent, const char* name )
+  : K3bAbstractWriter( dev, hdl, parent, name ),
     m_clone(false),
     m_cue(false),
     m_forceNoEject(false)

@@ -46,7 +46,7 @@ class K3bDataView : public K3bView
   TQ_OBJECT
 
  public:
-   K3bDataView(K3bDataDoc* doc, TQWidget *tqparent=0, const char *name=0);
+   K3bDataView(K3bDataDoc* doc, TQWidget *parent=0, const char *name=0);
    virtual ~K3bDataView();
 	
    K3bDirItem* currentDir() const;
@@ -66,7 +66,7 @@ class K3bDataView : public K3bView
    K3bDataFileView* m_dataFileView;
    TQLineEdit* m_volumeIDEdit;
 
-   virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
+   virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* parent = 0, const char* name = 0 );
 		
  private:
    K3bDataDoc* m_doc;

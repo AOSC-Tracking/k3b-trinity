@@ -37,12 +37,12 @@
 #include <kconfig.h>
 
 
-K3bVideoDVDRippingView::K3bVideoDVDRippingView( TQWidget* tqparent, const char * name )
+K3bVideoDVDRippingView::K3bVideoDVDRippingView( TQWidget* parent, const char * name )
   : K3bMediaContentsView( true,
 			  K3bMedium::CONTENT_VIDEO_DVD,
 			  K3bDevice::MEDIA_DVD_ALL,
 			  K3bDevice::STATE_INCOMPLETE|K3bDevice::STATE_COMPLETE,
-			  tqparent, name )
+			  parent, name )
 {
   TQGridLayout* mainGrid = new TQGridLayout( mainWidget() );
 

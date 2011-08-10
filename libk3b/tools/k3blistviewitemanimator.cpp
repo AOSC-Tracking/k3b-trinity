@@ -22,15 +22,15 @@
 #include <kpixmapeffect.h>
 
 
-K3bListViewItemAnimator::K3bListViewItemAnimator( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bListViewItemAnimator::K3bListViewItemAnimator( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   init();
 }
 
 
-K3bListViewItemAnimator::K3bListViewItemAnimator( TQListViewItem* item, int col, TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bListViewItemAnimator::K3bListViewItemAnimator( TQListViewItem* item, int col, TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   init();
   setItem( item, col );

@@ -99,8 +99,8 @@ public:
 };
 
 
-K3bExternalEncoder::K3bExternalEncoder( TQObject* tqparent, const char* name )
-  : K3bAudioEncoder( tqparent, name )
+K3bExternalEncoder::K3bExternalEncoder( TQObject* parent, const char* name )
+  : K3bAudioEncoder( parent, name )
 {
   d = new Private();
 }
@@ -370,10 +370,10 @@ TQString K3bExternalEncoder::fileTypeComment( const TQString& ext ) const
 }
 
 
-K3bPluginConfigWidget* K3bExternalEncoder::createConfigWidget( TQWidget* tqparent, 
+K3bPluginConfigWidget* K3bExternalEncoder::createConfigWidget( TQWidget* parent, 
 							       const char* name ) const
 {
-  return new K3bExternalEncoderSettingsWidget( tqparent, name );
+  return new K3bExternalEncoderSettingsWidget( parent, name );
 }
 
 

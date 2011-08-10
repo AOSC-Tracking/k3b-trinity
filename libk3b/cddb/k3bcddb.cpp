@@ -36,8 +36,8 @@
 #include "k3bcddbmultientriesdialog.h"
 
 
-K3bCddb::K3bCddb( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bCddb::K3bCddb( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   m_httpQuery = 0;
   m_cddbpQuery = 0;

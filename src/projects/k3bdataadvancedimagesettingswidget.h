@@ -29,7 +29,7 @@ class K3bDataAdvancedImageSettingsWidget : public base_K3bAdvancedDataImageSetti
   TQ_OBJECT
 
  public:
-  K3bDataAdvancedImageSettingsWidget( TQWidget* tqparent = 0, const char* name =  0 );
+  K3bDataAdvancedImageSettingsWidget( TQWidget* parent = 0, const char* name =  0 );
   ~K3bDataAdvancedImageSettingsWidget();
 
   void load( const K3bIsoOptions& );

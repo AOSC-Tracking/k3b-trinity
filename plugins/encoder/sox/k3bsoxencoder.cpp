@@ -122,8 +122,8 @@ public:
 };
 
 
-K3bSoxEncoder::K3bSoxEncoder( TQObject* tqparent, const char* name )
-  : K3bAudioEncoder( tqparent, name )
+K3bSoxEncoder::K3bSoxEncoder( TQObject* parent, const char* name )
+  : K3bAudioEncoder( parent, name )
 {
   if( k3bcore->externalBinManager()->program( "sox" ) == 0 )
     k3bcore->externalBinManager()->addProgram( new K3bSoxProgram() );
@@ -364,16 +364,16 @@ long long K3bSoxEncoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 }
 
 
-K3bPluginConfigWidget* K3bSoxEncoder::createConfigWidget( TQWidget* tqparent,
+K3bPluginConfigWidget* K3bSoxEncoder::createConfigWidget( TQWidget* parent,
 							  const char* name ) const
 {
-  return new K3bSoxEncoderSettingsWidget( tqparent, name );
+  return new K3bSoxEncoderSettingsWidget( parent, name );
 }
 
 
 
-K3bSoxEncoderSettingsWidget::K3bSoxEncoderSettingsWidget( TQWidget* tqparent, const char* name )
-  : K3bPluginConfigWidget( tqparent, name )
+K3bSoxEncoderSettingsWidget::K3bSoxEncoderSettingsWidget( TQWidget* parent, const char* name )
+  : K3bPluginConfigWidget( parent, name )
 {
   w = new base_K3bSoxEncoderConfigWidget( this );
   w->m_editSamplerate->setValidator( new TQIntValidator( TQT_TQOBJECT(w->m_editSamplerate) ) );

@@ -106,8 +106,8 @@ public:
 
 
 
-K3bSetup2::K3bSetup2( TQWidget *tqparent, const char *, const TQStringList& )
-  : KCModule( tqparent, "k3bsetup" )
+K3bSetup2::K3bSetup2( TQWidget *parent, const char *, const TQStringList& )
+  : KCModule( parent, "k3bsetup" )
 {
   d = new Private();
   d->config = new KConfig( "k3bsetup2rc" );

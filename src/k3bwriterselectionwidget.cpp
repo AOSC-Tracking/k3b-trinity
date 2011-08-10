@@ -47,8 +47,8 @@
 class K3bWriterSelectionWidget::MediaSelectionComboBox : public K3bMediaSelectionComboBox
 {
 public:
-  MediaSelectionComboBox( TQWidget* tqparent )
-    : K3bMediaSelectionComboBox( tqparent ),
+  MediaSelectionComboBox( TQWidget* parent )
+    : K3bMediaSelectionComboBox( parent ),
       m_overrideDevice( 0 ) {
   }
 
@@ -110,8 +110,8 @@ public:
 };
 
 
-K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *tqparent, const char *name )
-  : TQWidget( tqparent, name )
+K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *parent, const char *name )
+  : TQWidget( parent, name )
 {
   d = new Private;
   d->forceAutoSpeed = false;

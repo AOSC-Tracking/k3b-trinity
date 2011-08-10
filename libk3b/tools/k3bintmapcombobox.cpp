@@ -31,8 +31,8 @@ public:
 };
 
 
-K3bIntMapComboBox::K3bIntMapComboBox( TQWidget* tqparent, const char* name )
-  : KComboBox( tqparent, name )
+K3bIntMapComboBox::K3bIntMapComboBox( TQWidget* parent, const char* name )
+  : KComboBox( parent, name )
 {
   d = new Private;
   connect( this, TQT_SIGNAL(highlighted(int)),

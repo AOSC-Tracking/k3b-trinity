@@ -29,7 +29,7 @@ class K3bBootImageView : public base_K3bBootImageView
   TQ_OBJECT
 
 public:
-  K3bBootImageView( K3bDataDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bBootImageView( K3bDataDoc* doc, TQWidget* parent = 0, const char* name = 0 );
   ~K3bBootImageView();
 
  private slots:

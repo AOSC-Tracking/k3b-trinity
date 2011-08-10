@@ -19,8 +19,8 @@
 #include <tqtimer.h>
 
 
-K3bCddbSubmit::K3bCddbSubmit( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bCddbSubmit::K3bCddbSubmit( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
 }
 

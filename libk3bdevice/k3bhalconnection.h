@@ -204,7 +204,7 @@ namespace K3bDevice {
       /**
        * HalConnection is a signelton class. Use the instance() method to create it.
        */
-      HalConnection( TQObject* tqparent = 0, const char* name = 0 );
+      HalConnection( TQObject* parent = 0, const char* name = 0 );
 
       /**
        * Tries to open a connection to HAL.

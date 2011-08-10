@@ -29,7 +29,7 @@ class K3bDataModeWidget : public TQComboBox
   TQ_OBJECT
 
  public:
-  K3bDataModeWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bDataModeWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bDataModeWidget();
 
   /**

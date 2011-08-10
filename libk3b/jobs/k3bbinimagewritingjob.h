@@ -33,7 +33,7 @@ class LIBK3B_EXPORT K3bBinImageWritingJob : public K3bBurnJob
   TQ_OBJECT
 
  public: 
-  K3bBinImageWritingJob( K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bBinImageWritingJob( K3bJobHandler*, TQObject* parent = 0 );
   ~K3bBinImageWritingJob();
 
   K3bDevice::Device* writer() const { return m_device; };

@@ -31,7 +31,7 @@ Q_OBJECT
   TQ_OBJECT
 
  public:
-  K3bSplash( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bSplash( TQWidget* parent = 0, const char* name = 0 );
   ~K3bSplash();
 
  public slots:

@@ -43,8 +43,8 @@ class LIBK3B_EXPORT K3bThreadJob : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bThreadJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
-  K3bThreadJob( K3bThread*, K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bThreadJob( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
+  K3bThreadJob( K3bThread*, K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   virtual ~K3bThreadJob();
 
   void setThread( K3bThread* t );

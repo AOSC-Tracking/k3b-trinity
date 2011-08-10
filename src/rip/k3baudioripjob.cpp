@@ -23,8 +23,8 @@
 #include <klocale.h>
 
 
-K3bAudioRipJob::K3bAudioRipJob( K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bJob( hdl, tqparent )
+K3bAudioRipJob::K3bAudioRipJob( K3bJobHandler* hdl, TQObject* parent )
+  : K3bJob( hdl, parent )
 {
   m_thread = new K3bAudioRipThread();
   m_threadJob = new K3bThreadJob( m_thread, this, this );

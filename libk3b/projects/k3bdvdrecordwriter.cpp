@@ -26,8 +26,8 @@
 #include <klocale.h>
 
 
-K3bDvdrecordWriter::K3bDvdrecordWriter( K3bDevice::Device* dev, TQObject* tqparent, const char* name )
-  : K3bCdrecordWriter( dev, tqparent, name )
+K3bDvdrecordWriter::K3bDvdrecordWriter( K3bDevice::Device* dev, TQObject* parent, const char* name )
+  : K3bCdrecordWriter( dev, parent, name )
 {
 }
 

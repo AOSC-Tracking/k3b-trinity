@@ -40,7 +40,7 @@ class K3bFileView : public K3bContentsView
   TQ_OBJECT
 
  public:
-  K3bFileView(TQWidget *tqparent=0, const char *name=0);
+  K3bFileView(TQWidget *parent=0, const char *name=0);
   ~K3bFileView();
 
   void setUrl( const KURL &url, bool forward = true );

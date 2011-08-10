@@ -31,7 +31,7 @@ class K3bVideoDVDRippingPreview : public TQObject
   TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingPreview( TQObject* tqparent = 0 );
+  K3bVideoDVDRippingPreview( TQObject* parent = 0 );
   ~K3bVideoDVDRippingPreview();
 
   const TQImage& preview() const { return m_preview; }

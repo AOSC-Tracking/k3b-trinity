@@ -197,8 +197,8 @@ public:
 };
 
 
-K3bWaveDecoder::K3bWaveDecoder( TQObject* tqparent, const char* name )
-  : K3bAudioDecoder( tqparent, name )
+K3bWaveDecoder::K3bWaveDecoder( TQObject* parent, const char* name )
+  : K3bAudioDecoder( parent, name )
 {
   d = new Private();
   d->file = new TQFile();
@@ -358,8 +358,8 @@ TQString K3bWaveDecoder::technicalInfo( const TQString& name ) const
 }
 
 
-K3bWaveDecoderFactory::K3bWaveDecoderFactory( TQObject* tqparent, const char* name )
-  : K3bAudioDecoderFactory( tqparent, name )
+K3bWaveDecoderFactory::K3bWaveDecoderFactory( TQObject* parent, const char* name )
+  : K3bAudioDecoderFactory( parent, name )
 {
 }
 
@@ -369,10 +369,10 @@ K3bWaveDecoderFactory::~K3bWaveDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bWaveDecoderFactory::createDecoder( TQObject* tqparent, 
+K3bAudioDecoder* K3bWaveDecoderFactory::createDecoder( TQObject* parent, 
 						       const char* name ) const
 {
-  return new K3bWaveDecoder( tqparent, name );
+  return new K3bWaveDecoder( parent, name );
 }
 
 

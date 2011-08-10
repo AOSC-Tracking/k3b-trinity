@@ -30,14 +30,14 @@ class K3bMadDecoderFactory : public K3bAudioDecoderFactory
   TQ_OBJECT
 
  public:
-  K3bMadDecoderFactory( TQObject* tqparent = 0, const char* name = 0 );
+  K3bMadDecoderFactory( TQObject* parent = 0, const char* name = 0 );
   ~K3bMadDecoderFactory();
 
   bool canDecode( const KURL& filename );
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, 
+  K3bAudioDecoder* createDecoder( TQObject* parent = 0, 
 				  const char* name = 0 ) const;
 };
 
@@ -48,7 +48,7 @@ class K3bMadDecoder : public K3bAudioDecoder
   TQ_OBJECT
 
  public:
-  K3bMadDecoder( TQObject* tqparent = 0, const char* name = 0 );
+  K3bMadDecoder( TQObject* parent = 0, const char* name = 0 );
   ~K3bMadDecoder();
 
   TQString metaInfo( MetaDataField );

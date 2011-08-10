@@ -150,7 +150,7 @@ class LIBK3B_EXPORT K3bAudioDataSource
 
  protected:
   /**
-   * Informs the tqparent track about changes.
+   * Informs the parent track about changes.
    */
   void emitChange();
 

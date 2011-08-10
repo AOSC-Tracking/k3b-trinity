@@ -41,7 +41,7 @@ class K3bVcdListView : public K3bListView
   TQ_OBJECT
 
     public:
-        K3bVcdListView( K3bView*, K3bVcdDoc*, TQWidget *tqparent = 0, const char *name = 0 );
+        K3bVcdListView( K3bView*, K3bVcdDoc*, TQWidget *parent = 0, const char *name = 0 );
         ~K3bVcdListView();
 
         /**

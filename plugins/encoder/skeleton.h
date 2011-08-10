@@ -27,7 +27,7 @@ class K3b<name>Encoder : public K3bAudioEncoder
   TQ_OBJECT
 
  public:
-  K3b<name>Encoder( TQObject* tqparent = 0, const char* name = 0 );
+  K3b<name>Encoder( TQObject* parent = 0, const char* name = 0 );
   ~K3b<name>Encoder();
 
   TQStringList extensions() const;
@@ -38,7 +38,7 @@ class K3b<name>Encoder : public K3bAudioEncoder
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent = 0, 
+  K3bPluginConfigWidget* createConfigWidget( TQWidget* parent = 0, 
 					     const char* name = 0 ) const;
 
  private:
@@ -55,7 +55,7 @@ class K3b<name>EncoderSettingsWidget : public K3bPluginConfigWidget
   TQ_OBJECT
 
  public:
-  K3b<name>EncoderSettingsWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3b<name>EncoderSettingsWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3b<name>EncoderSettingsWidget();
 
  public slots:

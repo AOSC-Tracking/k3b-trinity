@@ -95,8 +95,8 @@ public:
 };
 
 
-K3bMixedJob::K3bMixedJob( K3bMixedDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bBurnJob( hdl, tqparent ),
+K3bMixedJob::K3bMixedJob( K3bMixedDoc* doc, K3bJobHandler* hdl, TQObject* parent )
+  : K3bBurnJob( hdl, parent ),
     m_doc( doc ),
     m_normalizeJob(0)
 {

@@ -41,7 +41,7 @@ class K3bAudioJob : public K3bBurnJob
   TQ_OBJECT
 	
  public:
-  K3bAudioJob( K3bAudioDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bAudioJob( K3bAudioDoc*, K3bJobHandler*, TQObject* parent = 0 );
   ~K3bAudioJob();
 	
   K3bDoc* doc() const;

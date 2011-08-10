@@ -50,8 +50,8 @@ private:
 };
 
 
-K3bAudioCueFileWritingJob::K3bAudioCueFileWritingJob( K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bBurnJob( jh, tqparent, name ),
+K3bAudioCueFileWritingJob::K3bAudioCueFileWritingJob( K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bBurnJob( jh, parent, name ),
     m_decoder(0)
 {
   m_analyserThread = new AnalyserThread();

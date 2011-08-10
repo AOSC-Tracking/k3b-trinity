@@ -31,7 +31,7 @@ class K3bMiscOptionTab : public base_K3bMiscOptionTab
   TQ_OBJECT
 
  public: 
-  K3bMiscOptionTab(TQWidget *tqparent=0, const char *name=0);
+  K3bMiscOptionTab(TQWidget *parent=0, const char *name=0);
   ~K3bMiscOptionTab();
 
   void readSettings();

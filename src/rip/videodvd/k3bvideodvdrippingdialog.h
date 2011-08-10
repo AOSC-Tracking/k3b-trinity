@@ -35,7 +35,7 @@ class K3bVideoDVDRippingDialog : public K3bInteractionDialog
  public: 
   K3bVideoDVDRippingDialog( const K3bVideoDVD::VideoDVD& dvd, 
 			    const TQValueList<int>& titles,
-			    TQWidget *tqparent = 0, const char *name = 0 );
+			    TQWidget *parent = 0, const char *name = 0 );
   ~K3bVideoDVDRippingDialog();
 
   void setBaseDir( const TQString& path );

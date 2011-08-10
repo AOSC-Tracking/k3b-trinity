@@ -37,8 +37,8 @@ K3bDirItem::K3bDirItem(const TQString& name, K3bDataDoc* doc, K3bDirItem* parent
   m_k3bName = name;
 
   // add automagically like a qlistviewitem
-  if( tqparent() )
-    tqparent()->addDataItem( this );
+  if( parent() )
+    parent()->addDataItem( this );
 }
 
 
@@ -106,7 +106,7 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
       int cnt = 1;
       while( K3bDataItem* oldItem = find( name ) ) {
 	if( !oldItem->isDir() && oldItem->isFromOldSession() ) {
-	  // in this case we remove this item from it's tqparent and save it in the new one
+	  // in this case we remove this item from it's parent and save it in the new one
 	  // to be able to recover it
 	  oldItem->take();
 	  static_cast<K3bSessionImportItem*>(oldItem)->setReplaceItem( static_cast<K3bFileItem*>(item) );
@@ -238,8 +238,8 @@ bool K3bDirItem::mkdir( const TQString& dirPath )
   // An absolut path always starts at the root item
   //
   if( dirPath[0] == '/' ) {
-    if( tqparent() )
-      return tqparent()->mkdir( dirPath );
+    if( parent() )
+      return parent()->mkdir( dirPath );
     else
       return mkdir( dirPath.mid( 1 ) );
   }
@@ -294,12 +294,12 @@ bool K3bDirItem::isSubItem( K3bDataItem* item ) const
   if( dynamic_cast<K3bDirItem*>(item) == this )
     return true;
 
-  K3bDirItem* d = item->tqparent();
+  K3bDirItem* d = item->parent();
   while( d ) {
     if( d == this ) {
       return true;
     }
-    d = d->tqparent();
+    d = d->parent();
   }
 
   return false;
@@ -349,16 +349,16 @@ void K3bDirItem::updateSize( K3bDataItem* item, bool removed )
         }
     }
 
-    if( tqparent() )
-        tqparent()->updateSize( item, removed );
+    if( parent() )
+        parent()->updateSize( item, removed );
 }
 
 void K3bDirItem::updateFiles( long files, long dirs )
 {
   m_files += files;
   m_dirs += dirs;
-  if( tqparent() )
-    tqparent()->updateFiles( files, dirs );
+  if( parent() )
+    parent()->updateFiles( files, dirs );
 }
 
 

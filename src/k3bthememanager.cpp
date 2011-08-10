@@ -166,8 +166,8 @@ public:
 
 
 
-K3bThemeManager::K3bThemeManager( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bThemeManager::K3bThemeManager( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private();
   d->emptyTheme.m_name = "Empty Theme";

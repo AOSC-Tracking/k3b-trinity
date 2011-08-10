@@ -35,7 +35,7 @@ class K3bCdda2wavReader : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bCdda2wavReader( TQObject* tqparent = 0, const char* name = 0 );
+  K3bCdda2wavReader( TQObject* parent = 0, const char* name = 0 );
   ~K3bCdda2wavReader();
 
   bool active() const;

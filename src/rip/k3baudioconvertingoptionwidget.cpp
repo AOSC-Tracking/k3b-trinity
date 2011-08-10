@@ -77,8 +77,8 @@ public:
 };
 
 
-K3bAudioConvertingOptionWidget::K3bAudioConvertingOptionWidget( TQWidget* tqparent, const char* name )
-  : base_K3bAudioRippingOptionWidget( tqparent, name )
+K3bAudioConvertingOptionWidget::K3bAudioConvertingOptionWidget( TQWidget* parent, const char* name )
+  : base_K3bAudioRippingOptionWidget( parent, name )
 {
   d = new Private();
 

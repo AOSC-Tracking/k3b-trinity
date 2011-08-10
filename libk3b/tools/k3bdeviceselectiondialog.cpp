@@ -37,7 +37,7 @@ public:
 };
 
 
-K3bDeviceSelectionDialog::K3bDeviceSelectionDialog( TQWidget* tqparent, 
+K3bDeviceSelectionDialog::K3bDeviceSelectionDialog( TQWidget* parent, 
 						    const char* name, 
 						    const TQString& text,
 						    bool modal )
@@ -45,7 +45,7 @@ K3bDeviceSelectionDialog::K3bDeviceSelectionDialog( TQWidget* tqparent,
 		 i18n("Device Selection"), 
 		 Ok|Cancel, 
 		 Ok,
-		 tqparent,
+		 parent,
 		 name,
 		 modal )
 {
@@ -94,7 +94,7 @@ void K3bDeviceSelectionDialog::setSelectedDevice( K3bDevice::Device* dev )
 }
 
 
-K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( TQWidget* tqparent, 
+K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( TQWidget* parent, 
 							       const TQPtrList<K3bDevice::Device>& devices,
 							       const TQString& text )
 {
@@ -103,7 +103,7 @@ K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( TQWidget* tqparent,
   if( devices.count() == 1 )
     return devices.getFirst();
 
-  K3bDeviceSelectionDialog dlg( tqparent, 0, text );
+  K3bDeviceSelectionDialog dlg( parent, 0, text );
   dlg.addDevices( devices );
 
   if( dlg.exec() == Accepted )
@@ -112,18 +112,18 @@ K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( TQWidget* tqparent,
     return 0;
 }
 
-K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( TQWidget* tqparent, 
+K3bDevice::Device* K3bDeviceSelectionDialog::selectDevice( TQWidget* parent, 
 							       const TQString& text )
 {
-  return selectDevice( tqparent, k3bcore->deviceManager()->allDevices(), text );
+  return selectDevice( parent, k3bcore->deviceManager()->allDevices(), text );
 
 
 }
 
 
-K3bDevice::Device* K3bDeviceSelectionDialog::selectWriter( TQWidget* tqparent, const TQString& text )
+K3bDevice::Device* K3bDeviceSelectionDialog::selectWriter( TQWidget* parent, const TQString& text )
 {
-  return selectDevice( tqparent, k3bcore->deviceManager()->burningDevices(), text );
+  return selectDevice( parent, k3bcore->deviceManager()->burningDevices(), text );
 }
 
 

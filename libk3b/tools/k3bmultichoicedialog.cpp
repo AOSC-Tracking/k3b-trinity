@@ -78,8 +78,8 @@ static TQPixmap themedMessageBoxIcon(TQMessageBox::Icon icon)
 K3bMultiChoiceDialog::K3bMultiChoiceDialog( const TQString& caption,
 					    const TQString& text,
 					    TQMessageBox::Icon icon,
-					    TQWidget* tqparent, const char* name )
-  : KDialog( tqparent, name )
+					    TQWidget* parent, const char* name )
+  : KDialog( parent, name )
 {
   d = new Private();
   d->mapper = new TQSignalMapper( TQT_TQOBJECT(this) );
@@ -161,7 +161,7 @@ void K3bMultiChoiceDialog::closeEvent( TQCloseEvent* e )
 int K3bMultiChoiceDialog::choose( const TQString& caption,
 				  const TQString& text,
 				  TQMessageBox::Icon icon,
-				  TQWidget* tqparent, 
+				  TQWidget* parent, 
 				  const char* name,
 				  int buttonCount,
 				  const KGuiItem& b1,
@@ -171,7 +171,7 @@ int K3bMultiChoiceDialog::choose( const TQString& caption,
 				  const KGuiItem& b5,
 				  const KGuiItem& b6 )
 {
-  K3bMultiChoiceDialog dlg( caption, text, icon, tqparent, name );
+  K3bMultiChoiceDialog dlg( caption, text, icon, parent, name );
   dlg.addButton( b1 );
   if( buttonCount > 1 )
     dlg.addButton( b2 );

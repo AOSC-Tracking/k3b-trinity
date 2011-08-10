@@ -25,7 +25,7 @@ class KComboBox;
 class K3bAlsaOutputPlugin : public K3bAudioOutputPlugin
 {
  public:
-  K3bAlsaOutputPlugin( TQObject* tqparent = 0, const char* name = 0 );
+  K3bAlsaOutputPlugin( TQObject* parent = 0, const char* name = 0 );
   ~K3bAlsaOutputPlugin();
 
   int pluginSystemVersion() const { return 3; }
@@ -38,7 +38,7 @@ class K3bAlsaOutputPlugin : public K3bAudioOutputPlugin
 
   int write( char* data, int len );
 
-  K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent = 0, 
+  K3bPluginConfigWidget* createConfigWidget( TQWidget* parent = 0, 
 					     const char* name = 0 ) const;
 
  private:
@@ -56,7 +56,7 @@ class K3bAlsaOutputPluginConfigWidget : public K3bPluginConfigWidget
   TQ_OBJECT
 
  public:
-  K3bAlsaOutputPluginConfigWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bAlsaOutputPluginConfigWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bAlsaOutputPluginConfigWidget();
 
  public slots:

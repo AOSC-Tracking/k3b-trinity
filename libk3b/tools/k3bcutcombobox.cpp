@@ -41,16 +41,16 @@ public:
 };
 
 
-K3bCutComboBox::K3bCutComboBox( TQWidget* tqparent, const char* name )
-  : KComboBox( tqparent, name )
+K3bCutComboBox::K3bCutComboBox( TQWidget* parent, const char* name )
+  : KComboBox( parent, name )
 {
   d = new Private();
   //  tqsetSizePolicy( TQSizePolicy::Maximum, sizePolicy().horData(), sizePolicy().hasHeightForWidth() );
 }
 
 
-K3bCutComboBox::K3bCutComboBox( int method, TQWidget* tqparent, const char* name )
-  : KComboBox( tqparent, name )
+K3bCutComboBox::K3bCutComboBox( int method, TQWidget* parent, const char* name )
+  : KComboBox( parent, name )
 {
   d = new Private();
   d->method = method;

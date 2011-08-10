@@ -37,7 +37,7 @@ class K3bReadcdReader : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bReadcdReader( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bReadcdReader( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   ~K3bReadcdReader();
 
   bool active() const;

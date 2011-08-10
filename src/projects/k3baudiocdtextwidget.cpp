@@ -36,8 +36,8 @@
 class K3bAudioCdTextWidget::AllFieldsDialog : public KDialogBase
 {
 public:
-  AllFieldsDialog( TQWidget* tqparent )
-    : KDialogBase( tqparent,
+  AllFieldsDialog( TQWidget* parent )
+    : KDialogBase( parent,
 		   "cdtext_allfields_dialog",
 		   true,
 		   i18n("CD-Text"),
@@ -52,8 +52,8 @@ public:
 };
 
 
-K3bAudioCdTextWidget::K3bAudioCdTextWidget( TQWidget* tqparent, const char* name )
-  : base_K3bAudioCdTextWidget( tqparent, name ),
+K3bAudioCdTextWidget::K3bAudioCdTextWidget( TQWidget* parent, const char* name )
+  : base_K3bAudioCdTextWidget( parent, name ),
     m_doc(0)
 {
   m_allFieldsDlg = new AllFieldsDialog( this );

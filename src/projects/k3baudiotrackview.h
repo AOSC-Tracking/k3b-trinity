@@ -46,7 +46,7 @@ class K3bAudioTrackView : public K3bListView
   TQ_OBJECT
 
  public:
-  K3bAudioTrackView( K3bAudioDoc*, TQWidget* tqparent, const char* name = 0 );
+  K3bAudioTrackView( K3bAudioDoc*, TQWidget* parent, const char* name = 0 );
   ~K3bAudioTrackView();
 
   KActionCollection* actionCollection() const { return m_actionCollection; }
@@ -106,7 +106,7 @@ class K3bAudioTrackView : public K3bListView
 
  private slots:
   void slotAnimation();
-  void slotDropped( TQDropEvent* e, TQListViewItem* tqparent, TQListViewItem* after );
+  void slotDropped( TQDropEvent* e, TQListViewItem* parent, TQListViewItem* after );
   void slotChanged();
   void slotTrackChanged( K3bAudioTrack* );
   void slotTrackRemoved( K3bAudioTrack* );

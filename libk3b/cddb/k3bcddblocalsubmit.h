@@ -28,7 +28,7 @@ class K3bCddbLocalSubmit : public K3bCddbSubmit
   TQ_OBJECT
 
  public:
-  K3bCddbLocalSubmit( TQObject* tqparent = 0, const char* name = 0 );
+  K3bCddbLocalSubmit( TQObject* parent = 0, const char* name = 0 );
   ~K3bCddbLocalSubmit();
 
  public slots:

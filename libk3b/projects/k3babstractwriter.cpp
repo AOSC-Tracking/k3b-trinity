@@ -26,8 +26,8 @@
 
 
 
-K3bAbstractWriter::K3bAbstractWriter( K3bDevice::Device* dev, K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bJob( jh, tqparent, name ),
+K3bAbstractWriter::K3bAbstractWriter( K3bDevice::Device* dev, K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bJob( jh, parent, name ),
     m_burnDevice(dev),
     m_burnSpeed(1),
     m_simulate(false),

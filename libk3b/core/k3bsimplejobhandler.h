@@ -34,7 +34,7 @@ class LIBK3B_EXPORT K3bSimpleJobHandler : public TQObject, public K3bJobHandler
   TQ_OBJECT
 
  public:
-  K3bSimpleJobHandler( TQObject* tqparent = 0 );
+  K3bSimpleJobHandler( TQObject* parent = 0 );
   ~K3bSimpleJobHandler();
 
   /*

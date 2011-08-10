@@ -23,8 +23,8 @@
 #include <tqpainter.h>
 
 
-K3bMiniButton::K3bMiniButton( TQWidget *tqparent, const char * name )
-  :TQPushButton( tqparent, name ),
+K3bMiniButton::K3bMiniButton( TQWidget *parent, const char * name )
+  :TQPushButton( parent, name ),
    m_mouseOver( false )
 {
   setFocusPolicy( TQ_NoFocus );

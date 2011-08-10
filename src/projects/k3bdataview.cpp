@@ -53,8 +53,8 @@
 #include <kdebug.h>
 
 
-K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *tqparent, const char *name )
-  : K3bView(doc, tqparent,name)
+K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *parent, const char *name )
+  : K3bView(doc, parent,name)
 {
   m_doc = doc;
 
@@ -156,9 +156,9 @@ void K3bDataView::editBootImages()
 }
 
 
-K3bProjectBurnDialog* K3bDataView::newBurnDialog( TQWidget* tqparent, const char* name )
+K3bProjectBurnDialog* K3bDataView::newBurnDialog( TQWidget* parent, const char* name )
 {
-  return new K3bDataBurnDialog( m_doc, tqparent, name, true );
+  return new K3bDataBurnDialog( m_doc, parent, name, true );
 }
 
 

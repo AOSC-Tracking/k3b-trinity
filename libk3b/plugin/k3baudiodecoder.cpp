@@ -106,8 +106,8 @@ public:
 
 
 
-K3bAudioDecoder::K3bAudioDecoder( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bAudioDecoder::K3bAudioDecoder( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private();
 }

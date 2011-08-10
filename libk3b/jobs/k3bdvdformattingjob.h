@@ -33,7 +33,7 @@ class LIBK3B_EXPORT K3bDvdFormattingJob : public K3bBurnJob
   TQ_OBJECT
 
  public:
-  K3bDvdFormattingJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bDvdFormattingJob( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   ~K3bDvdFormattingJob();
 
   TQString jobDescription() const;

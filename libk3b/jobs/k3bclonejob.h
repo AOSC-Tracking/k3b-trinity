@@ -34,7 +34,7 @@ class LIBK3B_EXPORT K3bCloneJob : public K3bBurnJob
   TQ_OBJECT
 
  public:
-  K3bCloneJob( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bCloneJob( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   ~K3bCloneJob();
 
   K3bDevice::Device* writer() const { return m_writerDevice; }

@@ -59,8 +59,8 @@ K3bAudioTrack::K3bAudioTrack()
 }
 
 
-K3bAudioTrack::K3bAudioTrack( K3bAudioDoc* tqparent )
-  : m_parent(tqparent),
+K3bAudioTrack::K3bAudioTrack( K3bAudioDoc* parent )
+  : m_parent(parent),
     m_copy(false),
     m_preEmp(false),
     m_index0Offset(150),
@@ -282,7 +282,7 @@ void K3bAudioTrack::moveAfter( K3bAudioTrack* track )
   kdDebug() << "(K3bAudioTrack::moveAfter( " << track << " )" << endl;
   if( !track ) {
     if( !doc() ) {
-      kdDebug() << "(K3bAudioTrack::moveAfter) no tqparent set" << endl;
+      kdDebug() << "(K3bAudioTrack::moveAfter) no parent set" << endl;
       return;
     }
       
@@ -302,7 +302,7 @@ void K3bAudioTrack::moveAfter( K3bAudioTrack* track )
     // remove this from the list
     take();
     
-    // set the new tqparent doc
+    // set the new parent doc
     m_parent = track->doc();
     
     K3bAudioTrack* oldNext = track->m_next;
@@ -330,7 +330,7 @@ void K3bAudioTrack::moveAhead( K3bAudioTrack* track )
 {
   if( !track ) {
     if( !doc() ) {
-      kdDebug() << "(K3bAudioTrack::moveAfter) no tqparent set" << endl;
+      kdDebug() << "(K3bAudioTrack::moveAfter) no parent set" << endl;
       return;
     }
 
@@ -350,7 +350,7 @@ void K3bAudioTrack::moveAhead( K3bAudioTrack* track )
     // remove this from the list
     take();
     
-    // set the new tqparent doc
+    // set the new parent doc
     m_parent = track->doc();
     
     K3bAudioTrack* oldPrev = track->m_prev;
@@ -568,7 +568,7 @@ K3bAudioTrack* K3bAudioTrack::split( const K3b::Msf& pos )
       splitTrack->addSource( addSource );
     }
 
-    kdDebug() << "(K3bAudioTrack) moving track " << splitTrack << " after this (" << this << ") with tqparent " << doc() << endl;
+    kdDebug() << "(K3bAudioTrack) moving track " << splitTrack << " after this (" << this << ") with parent " << doc() << endl;
     splitTrack->moveAfter( this );
 
     return splitTrack;

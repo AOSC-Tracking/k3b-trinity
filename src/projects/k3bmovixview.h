@@ -35,7 +35,7 @@ class K3bMovixView : public K3bView
   TQ_OBJECT
 
  public:
-  K3bMovixView( K3bMovixDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bMovixView( K3bMovixDoc* doc, TQWidget* parent = 0, const char* name = 0 );
   virtual ~K3bMovixView();
 
  private slots:
@@ -47,7 +47,7 @@ class K3bMovixView : public K3bView
   void slotDocChanged();
 
  protected:
-  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
+  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* parent = 0, const char* name = 0 );
 
   K3bMovixListView* m_listView;
 

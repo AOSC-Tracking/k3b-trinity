@@ -55,12 +55,12 @@
 #include <unistd.h>
 
 
-K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* tqparent, const char* name )
+K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* parent, const char* name )
   : KDialogBase( Plain,
 		 i18n("Adding files to project '%1'").tqarg(doc->URL().fileName()),
 		 Cancel,
 		 Cancel,
-		 tqparent,
+		 parent,
 		 name,
 		 true,
 		 true ),
@@ -108,7 +108,7 @@ K3bDataUrlAddingDialog::~K3bDataUrlAddingDialog()
 
 int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
 				     K3bDirItem* dir,
-				     TQWidget* tqparent )
+				     TQWidget* parent )
 {
   if( urls.isEmpty() )
     return 0;
@@ -120,7 +120,7 @@ int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
   if( urls.count() == 1 ) {
     K3bIso9660 isoF( urls.first().path() );
     if( isoF.open() ) {
-     if( KMessageBox::warningYesNo( tqparent,
+     if( KMessageBox::warningYesNo( parent,
 				    i18n("<p>The file you are about to add to the project is an ISO9660 image. As such "
 					 "it can be burned to a medium directly since it already contains a file "
 					 "system.<br>"
@@ -138,7 +138,7 @@ int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
     }
   }
 
-  K3bDataUrlAddingDialog dlg( dir->doc(), tqparent );
+  K3bDataUrlAddingDialog dlg( dir->doc(), parent );
   dlg.m_urls = urls;
   for( KURL::List::ConstIterator it = urls.begin(); it != urls.end(); ++it )
     dlg.m_urlQueue.append( tqMakePair( K3b::convertToLocalUrl(*it), dir ) );
@@ -158,7 +158,7 @@ int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
 
   TQString message = dlg.resultMessage();
   if( !message.isEmpty() )
-    KMessageBox::detailedSorry( tqparent, i18n("Problems while adding files to the project."), message );
+    KMessageBox::detailedSorry( parent, i18n("Problems while adding files to the project."), message );
 
   return ret;
 }
@@ -199,29 +199,29 @@ TQString K3bDataUrlAddingDialog::resultMessage() const
 
 int K3bDataUrlAddingDialog::moveItems( const TQValueList<K3bDataItem*>& items,
 				       K3bDirItem* dir,
-				       TQWidget* tqparent )
+				       TQWidget* parent )
 {
-  return copyMoveItems( items, dir, tqparent, false );
+  return copyMoveItems( items, dir, parent, false );
 }
 
 
 int K3bDataUrlAddingDialog::copyItems( const TQValueList<K3bDataItem*>& items,
 				       K3bDirItem* dir,
-				       TQWidget* tqparent )
+				       TQWidget* parent )
 {
-  return copyMoveItems( items, dir, tqparent, true );
+  return copyMoveItems( items, dir, parent, true );
 }
 
 
 int K3bDataUrlAddingDialog::copyMoveItems( const TQValueList<K3bDataItem*>& items,
 					   K3bDirItem* dir,
-					   TQWidget* tqparent,
+					   TQWidget* parent,
 					   bool copy )
 {
   if( items.isEmpty() )
     return 0;
 
-  K3bDataUrlAddingDialog dlg( dir->doc(), tqparent );
+  K3bDataUrlAddingDialog dlg( dir->doc(), parent );
   dlg.m_infoLabel->setText( i18n("Moving files to project \"%1\"...").tqarg(dir->doc()->URL().fileName()) );
   dlg.m_copyItems = copy;
 
@@ -608,8 +608,8 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
     m_counterLabel->setText( TQString("(%1/%2)").tqarg(m_filesHandled).tqarg(m_totalFiles) );
 
 
-  if( dir == item->tqparent() ) {
-    kdDebug() << "(K3bDataUrlAddingDialog) trying to move an item into its own tqparent dir." << endl;
+  if( dir == item->parent() ) {
+    kdDebug() << "(K3bDataUrlAddingDialog) trying to move an item into its own parent dir." << endl;
   }
   else if( dir == item ) {
     kdDebug() << "(K3bDataUrlAddingDialog) trying to move an item into itselft." << endl;

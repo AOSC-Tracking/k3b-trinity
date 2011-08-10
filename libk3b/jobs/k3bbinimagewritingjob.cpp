@@ -30,8 +30,8 @@
 
 
 
-K3bBinImageWritingJob::K3bBinImageWritingJob( K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bBurnJob( hdl, tqparent ),
+K3bBinImageWritingJob::K3bBinImageWritingJob( K3bJobHandler* hdl, TQObject* parent )
+  : K3bBurnJob( hdl, parent ),
     m_device(0),
     m_simulate(false),
     m_force(false),

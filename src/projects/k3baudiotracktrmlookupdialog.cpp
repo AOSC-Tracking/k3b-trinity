@@ -41,12 +41,12 @@
 #include <tqapplication.h>
 
 
-K3bAudioTrackTRMLookupDialog::K3bAudioTrackTRMLookupDialog( TQWidget* tqparent, const char* name )
+K3bAudioTrackTRMLookupDialog::K3bAudioTrackTRMLookupDialog( TQWidget* parent, const char* name )
   : KDialogBase( KDialogBase::Plain, 
 		 i18n("MusicBrainz Query"), 
 		 KDialogBase::Cancel,
 		 KDialogBase::Cancel,
-		 tqparent, 
+		 parent, 
 		 name,
 		 true,
 		 true )

@@ -36,7 +36,7 @@ class LIBK3B_EXPORT K3bVideoDVDTitleTranscodingJob : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bVideoDVDTitleTranscodingJob( K3bJobHandler* hdl, TQObject* tqparent );
+  K3bVideoDVDTitleTranscodingJob( K3bJobHandler* hdl, TQObject* parent );
   ~K3bVideoDVDTitleTranscodingJob();
 
   /**

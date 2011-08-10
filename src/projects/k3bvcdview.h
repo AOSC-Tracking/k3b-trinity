@@ -39,11 +39,11 @@ class K3bVcdView : public K3bView
   TQ_OBJECT
   
  public:
-  K3bVcdView( K3bVcdDoc* pDoc, TQWidget* tqparent, const char *name = 0 );
+  K3bVcdView( K3bVcdDoc* pDoc, TQWidget* parent, const char *name = 0 );
   ~K3bVcdView();
   
  protected:
-  K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bProjectBurnDialog* newBurnDialog( TQWidget* parent = 0, const char* name = 0 );
 
   void init();
   

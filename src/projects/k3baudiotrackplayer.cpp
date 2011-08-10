@@ -52,8 +52,8 @@ public:
 };
 
 
-K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name ),
+K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* parent, const char* name )
+  : TQObject( parent, name ),
     K3bAudioClient(),
     m_doc( doc ),
     m_currentTrack( 0 )

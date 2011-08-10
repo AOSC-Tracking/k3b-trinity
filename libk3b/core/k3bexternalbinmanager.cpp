@@ -161,8 +161,8 @@ void K3bExternalProgram::addUserParameter( const TQString& p )
 // ///////////////////////////////////////////////////////////
 
 
-K3bExternalBinManager::K3bExternalBinManager( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bExternalBinManager::K3bExternalBinManager( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
 }
 

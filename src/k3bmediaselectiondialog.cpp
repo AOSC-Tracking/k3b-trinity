@@ -24,7 +24,7 @@
 #include <tqlabel.h>
 
 
-K3bMediaSelectionDialog::K3bMediaSelectionDialog( TQWidget* tqparent, 
+K3bMediaSelectionDialog::K3bMediaSelectionDialog( TQWidget* parent, 
 						  const TQString& title, 
 						  const TQString& text, 
 						  bool modal )
@@ -32,7 +32,7 @@ K3bMediaSelectionDialog::K3bMediaSelectionDialog( TQWidget* tqparent,
 		 title.isEmpty() ? i18n("Medium Selection") : title, 
 		 Ok|Cancel, 
 		 Ok,
-		 tqparent,
+		 parent,
 		 0,
 		 modal )
 {
@@ -90,11 +90,11 @@ void K3bMediaSelectionDialog::slotSelectionChanged( K3bDevice::Device* dev )
 
 
 K3bDevice::Device* K3bMediaSelectionDialog::selectMedium( int type, int state, int content,
-							  TQWidget* tqparent, 
+							  TQWidget* parent, 
 							  const TQString& title, const TQString& text,
 							  bool* canceled )
 {
-  K3bMediaSelectionDialog dlg( tqparent, title, text );
+  K3bMediaSelectionDialog dlg( parent, title, text );
   dlg.setWantedMediumType( type );
   dlg.setWantedMediumState( state );
   dlg.setWantedMediumContent( content );
@@ -117,11 +117,11 @@ K3bDevice::Device* K3bMediaSelectionDialog::selectMedium( int type, int state, i
 
 
 K3bDevice::Device* K3bMediaSelectionDialog::selectMedium( int type, int state, 
-							  TQWidget* tqparent, 
+							  TQWidget* parent, 
 							  const TQString& title, const TQString& text,
 							  bool* canceled )
 {
-  return selectMedium( type, state, K3bMedium::CONTENT_ALL, tqparent, title, text, canceled );
+  return selectMedium( type, state, K3bMedium::CONTENT_ALL, parent, title, text, canceled );
 }
 
 #include "k3bmediaselectiondialog.moc"

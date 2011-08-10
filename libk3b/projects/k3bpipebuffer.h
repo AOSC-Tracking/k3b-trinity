@@ -25,7 +25,7 @@
 class K3bPipeBuffer : public K3bThreadJob
 {
  public:
-  K3bPipeBuffer( K3bJobHandler*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bPipeBuffer( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );
   ~K3bPipeBuffer();
 
   /**

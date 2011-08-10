@@ -17,8 +17,8 @@
 #include "k3bplugin.h"
 
 
-K3bPlugin::K3bPlugin( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bPlugin::K3bPlugin( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
 }
 

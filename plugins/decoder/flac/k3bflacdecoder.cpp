@@ -240,8 +240,8 @@ FLAC__StreamDecoderWriteStatus K3bFLACDecoder::Private::write_callback(const FLA
   return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
 }
 
-K3bFLACDecoder::K3bFLACDecoder( TQObject* tqparent, const char* name )
-  : K3bAudioDecoder( tqparent, name )
+K3bFLACDecoder::K3bFLACDecoder( TQObject* parent, const char* name )
+  : K3bAudioDecoder( parent, name )
 {
   d = 0;
 }
@@ -404,8 +404,8 @@ TQString K3bFLACDecoder::technicalInfo( const TQString& info ) const
 
 
 
-K3bFLACDecoderFactory::K3bFLACDecoderFactory( TQObject* tqparent, const char* name )
-  : K3bAudioDecoderFactory( tqparent, name )
+K3bFLACDecoderFactory::K3bFLACDecoderFactory( TQObject* parent, const char* name )
+  : K3bAudioDecoderFactory( parent, name )
 {
 }
 
@@ -415,10 +415,10 @@ K3bFLACDecoderFactory::~K3bFLACDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bFLACDecoderFactory::createDecoder( TQObject* tqparent, 
+K3bAudioDecoder* K3bFLACDecoderFactory::createDecoder( TQObject* parent, 
 						 const char* name ) const
 {
-  return new K3bFLACDecoder( tqparent, name );
+  return new K3bFLACDecoder( parent, name );
 }
 
 

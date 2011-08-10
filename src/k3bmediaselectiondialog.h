@@ -33,7 +33,7 @@ class K3bMediaSelectionDialog : public KDialogBase
   /**
    * Do not use the constructor. Use the static method instead.
    */
-  K3bMediaSelectionDialog( TQWidget* tqparent = 0, 
+  K3bMediaSelectionDialog( TQWidget* parent = 0, 
 			   const TQString& title = TQString(), 
 			   const TQString& text = TQString(), 
 			   bool modal = false );
@@ -67,13 +67,13 @@ class K3bMediaSelectionDialog : public KDialogBase
    * If only one medium of the wanted type is found the method returns immideately
    * without showing the dialog.
    */
-  static K3bDevice::Device* selectMedium( int type, int state, TQWidget* tqparent = 0,
+  static K3bDevice::Device* selectMedium( int type, int state, TQWidget* parent = 0,
 					  const TQString& title = TQString(), 
 					  const TQString& text = TQString(),
 					  bool* canceled = 0 );
 
   static K3bDevice::Device* selectMedium( int type, int state, int content = K3bMedium::CONTENT_ALL,
-					  TQWidget* tqparent = 0,
+					  TQWidget* parent = 0,
 					  const TQString& title = TQString(), 
 					  const TQString& text = TQString(),
 					  bool* canceled = 0 );

@@ -45,7 +45,7 @@ class K3bDataBurnDialog : public K3bProjectBurnDialog
   TQ_OBJECT
 
  public:
-   K3bDataBurnDialog(K3bDataDoc*, TQWidget *tqparent=0, const char *name=0, bool modal = true );
+   K3bDataBurnDialog(K3bDataDoc*, TQWidget *parent=0, const char *name=0, bool modal = true );
    ~K3bDataBurnDialog();
 
  protected:

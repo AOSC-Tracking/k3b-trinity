@@ -31,8 +31,8 @@
 #include <kaboutdata.h>
 
 
-K3bSplash::K3bSplash( TQWidget* tqparent, const char* name )
-  : TQVBox( tqparent, name, 
+K3bSplash::K3bSplash( TQWidget* parent, const char* name )
+  : TQVBox( parent, name, 
 	   WStyle_Customize|
 	   WDestructiveClose|
 	   /*	   WStyle_Splash|*/

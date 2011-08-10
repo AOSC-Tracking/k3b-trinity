@@ -38,7 +38,7 @@ class LIBK3B_EXPORT K3bPluginManager : public TQObject
   TQ_OBJECT
 
  public:
-  K3bPluginManager( TQObject* tqparent = 0, const char* name = 0 );
+  K3bPluginManager( TQObject* parent = 0, const char* name = 0 );
   ~K3bPluginManager();
 
   /**
@@ -61,7 +61,7 @@ class LIBK3B_EXPORT K3bPluginManager : public TQObject
 
   void loadPlugin( const TQString& fileName );
 
-  int execPluginDialog( K3bPlugin*, TQWidget* tqparent = 0, const char* name = 0 );
+  int execPluginDialog( K3bPlugin*, TQWidget* parent = 0, const char* name = 0 );
 
  private:
   class Private;

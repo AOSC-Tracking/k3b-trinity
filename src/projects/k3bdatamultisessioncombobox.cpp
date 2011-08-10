@@ -29,8 +29,8 @@ static const int s_continueIndex = 3;
 static const int s_finishIndex = 4;
 
 
-K3bDataMultiSessionCombobox::K3bDataMultiSessionCombobox( TQWidget* tqparent, const char* name )
-  : TQComboBox( tqparent, name ),
+K3bDataMultiSessionCombobox::K3bDataMultiSessionCombobox( TQWidget* parent, const char* name )
+  : TQComboBox( parent, name ),
     m_forceNoMultiSession(false)
 {
   init( false );

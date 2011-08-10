@@ -121,8 +121,8 @@ K3bCore* K3bCore::s_k3bCore = 0;
 
 
 
-K3bCore::K3bCore( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bCore::K3bCore( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private();
 

@@ -43,8 +43,8 @@ public:
 };
 
 
-K3bCloneJob::K3bCloneJob( K3bJobHandler* hdl, TQObject* tqparent, const char* name )
-  : K3bBurnJob( hdl, tqparent, name ),
+K3bCloneJob::K3bCloneJob( K3bJobHandler* hdl, TQObject* parent, const char* name )
+  : K3bBurnJob( hdl, parent, name ),
     m_writerDevice(0),
     m_readerDevice(0),
     m_writerJob(0),

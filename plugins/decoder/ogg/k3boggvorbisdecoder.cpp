@@ -51,8 +51,8 @@ public:
 };
 
 
-K3bOggVorbisDecoder::K3bOggVorbisDecoder( TQObject* tqparent, const char* name )
-  : K3bAudioDecoder( tqparent, name )
+K3bOggVorbisDecoder::K3bOggVorbisDecoder( TQObject* parent, const char* name )
+  : K3bAudioDecoder( parent, name )
 {
   d = new Private();
 }
@@ -209,8 +209,8 @@ TQString K3bOggVorbisDecoder::fileType() const
 }
 
 
-K3bOggVorbisDecoderFactory::K3bOggVorbisDecoderFactory( TQObject* tqparent, const char* name )
-  : K3bAudioDecoderFactory( tqparent, name )
+K3bOggVorbisDecoderFactory::K3bOggVorbisDecoderFactory( TQObject* parent, const char* name )
+  : K3bAudioDecoderFactory( parent, name )
 {
 }
 
@@ -220,10 +220,10 @@ K3bOggVorbisDecoderFactory::~K3bOggVorbisDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bOggVorbisDecoderFactory::createDecoder( TQObject* tqparent, 
+K3bAudioDecoder* K3bOggVorbisDecoderFactory::createDecoder( TQObject* parent, 
 							    const char* name ) const
 {
-  return new K3bOggVorbisDecoder( tqparent, name );
+  return new K3bOggVorbisDecoder( parent, name );
 }
 
 

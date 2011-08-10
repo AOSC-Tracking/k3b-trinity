@@ -32,24 +32,24 @@ class LIBK3B_EXPORT K3bPushButton : public KPushButton
   /**
    * Default constructor.
    */
-  K3bPushButton( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bPushButton( TQWidget* parent = 0, const char* name = 0 );
 
   /**
    * Constructor, that sets the button-text to @p text
    */
-  K3bPushButton( const TQString& text, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bPushButton( const TQString& text, TQWidget* parent = 0, const char* name = 0 );
 
   /**
    * Constructor, that sets an icon and the button-text to @p text
    */
   K3bPushButton( const TQIconSet& icon, const TQString& text,
-		 TQWidget* tqparent = 0, const char* name = 0 );
+		 TQWidget* parent = 0, const char* name = 0 );
 
   /**
    * Constructor that takes a KGuiItem for the text, the icon, the tooltip
    * and the what's this help
    */
-  K3bPushButton( const KGuiItem& item, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bPushButton( const KGuiItem& item, TQWidget* parent = 0, const char* name = 0 );
 
   /**
    * Destructs the button.

@@ -44,8 +44,8 @@
 #include <tqspinbox.h>
 
 
-K3bDvdBurnDialog::K3bDvdBurnDialog( K3bDvdDoc* doc, TQWidget *tqparent, const char *name, bool modal )
-  : K3bProjectBurnDialog( doc, tqparent, name, modal, true ),
+K3bDvdBurnDialog::K3bDvdBurnDialog( K3bDvdDoc* doc, TQWidget *parent, const char *name, bool modal )
+  : K3bProjectBurnDialog( doc, parent, name, modal, true ),
     m_doc( doc )
 {
   prepareGui();

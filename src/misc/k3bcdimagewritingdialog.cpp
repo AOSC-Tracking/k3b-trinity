@@ -111,8 +111,8 @@ public:
 };
 
 
-K3bCdImageWritingDialog::K3bCdImageWritingDialog( TQWidget* tqparent, const char* name, bool modal )
-  : K3bInteractionDialog( tqparent, name, 
+K3bCdImageWritingDialog::K3bCdImageWritingDialog( TQWidget* parent, const char* name, bool modal )
+  : K3bInteractionDialog( parent, name, 
 			  i18n("Burn CD Image"), 
 			  "iso cue toc",
 			  START_BUTTON|CANCEL_BUTTON,

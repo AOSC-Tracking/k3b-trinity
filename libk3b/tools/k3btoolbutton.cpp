@@ -31,8 +31,8 @@ public:
 };
 
 
-K3bToolButton::K3bToolButton( TQWidget* tqparent )
-  : TQToolButton( tqparent )
+K3bToolButton::K3bToolButton( TQWidget* parent )
+  : TQToolButton( parent )
 {
   d = new Private;
   d->instantMenu = false;

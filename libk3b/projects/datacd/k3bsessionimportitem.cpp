@@ -29,8 +29,8 @@ K3bSessionImportItem::K3bSessionImportItem( const K3bIso9660File* isoF, K3bDataD
   setK3bName( isoF->name() );
 
   // add automagically like a qlistviewitem
-  if( tqparent() )
-    tqparent()->addDataItem( this );
+  if( parent() )
+    parent()->addDataItem( this );
 }
 
 
@@ -48,8 +48,8 @@ K3bSessionImportItem::~K3bSessionImportItem()
     m_replaceItem->setReplacedItemFromOldSession(0);
 
   // remove this from parentdir
-  if( tqparent() )
-    tqparent()->takeDataItem( this );
+  if( parent() )
+    parent()->takeDataItem( this );
 }
 
 

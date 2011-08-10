@@ -59,8 +59,8 @@
 #include <kmessagebox.h>
 
 
-K3bMixedBurnDialog::K3bMixedBurnDialog( K3bMixedDoc* doc, TQWidget *tqparent, const char *name, bool modal )
-  : K3bProjectBurnDialog( doc, tqparent, name, modal ), m_doc(doc)
+K3bMixedBurnDialog::K3bMixedBurnDialog( K3bMixedDoc* doc, TQWidget *parent, const char *name, bool modal )
+  : K3bProjectBurnDialog( doc, parent, name, modal ), m_doc(doc)
 {
   prepareGui();
 

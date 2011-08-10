@@ -97,8 +97,8 @@ public:
 
 
 K3bGrowisofsWriter::K3bGrowisofsWriter( K3bDevice::Device* dev, K3bJobHandler* hdl,
-					TQObject* tqparent, const char* name )
-  : K3bAbstractWriter( dev, hdl, tqparent, name )
+					TQObject* parent, const char* name )
+  : K3bAbstractWriter( dev, hdl, parent, name )
 {
   d = new Private;
   d->speedEst = new K3bThroughputEstimator( this );

@@ -47,7 +47,7 @@ class K3bDataDirTreeView : public K3bListView
   TQ_OBJECT
 
  public:
-  K3bDataDirTreeView( K3bView*, K3bDataDoc*, TQWidget* tqparent );
+  K3bDataDirTreeView( K3bView*, K3bDataDoc*, TQWidget* parent );
   virtual ~K3bDataDirTreeView();
 
   K3bDataDirViewItem* root() { return m_root; }
@@ -61,7 +61,7 @@ class K3bDataDirTreeView : public K3bListView
   void setCurrentDir( K3bDirItem* );
 
  signals:
-  //  void urlsDropped( const KURL::List&, TQListViewItem* tqparent );
+  //  void urlsDropped( const KURL::List&, TQListViewItem* parent );
   void dirSelected( K3bDirItem* );
 
  protected:
@@ -77,7 +77,7 @@ class K3bDataDirTreeView : public K3bListView
   KAction* m_actionProperties;
 
  protected slots:
-  virtual void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* tqparent );
+  virtual void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* parent );
 
  private:
   void setupActions();

@@ -85,7 +85,7 @@ class LIBK3B_EXPORT K3bPlugin : public TQObject
     friend class K3bPluginManager;
 
  public:
-  K3bPlugin( TQObject* tqparent = 0, const char* name = 0 );
+  K3bPlugin( TQObject* parent = 0, const char* name = 0 );
   virtual ~K3bPlugin();
 
   const K3bPluginInfo& pluginInfo() const { return m_pluginInfo; }
@@ -105,7 +105,7 @@ class LIBK3B_EXPORT K3bPlugin : public TQObject
    *
    * The caller has to destroy the widget
    */
-  virtual K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent = 0, const char* name = 0 ) const;
+  virtual K3bPluginConfigWidget* createConfigWidget( TQWidget* parent = 0, const char* name = 0 ) const;
 
  private:
   K3bPluginInfo m_pluginInfo;

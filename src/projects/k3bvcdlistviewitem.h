@@ -24,8 +24,8 @@ class K3bVcdListViewItem : public K3bListViewItem
 {
 
     public:
-        K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* tqparent );
-        K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* tqparent, TQListViewItem* after );
+        K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent );
+        K3bVcdListViewItem( K3bVcdTrack* track, K3bListView* parent, TQListViewItem* after );
         ~K3bVcdListViewItem();
 
         /** reimplemented from TQListViewItem */

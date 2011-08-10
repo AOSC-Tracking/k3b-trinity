@@ -112,7 +112,7 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
    */
   K3bDevice::Toc toToc() const;
 
-  K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* parent = 0 );
 
   /**
    * Shows dialogs.
@@ -159,7 +159,7 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
    */
   void addTrack( K3bAudioTrack* track, uint position = 0 );
 
-  void addSources( K3bAudioTrack* tqparent, const KURL::List& urls, K3bAudioDataSource* sourceAfter = 0 );
+  void addSources( K3bAudioTrack* parent, const KURL::List& urls, K3bAudioDataSource* sourceAfter = 0 );
 
   void removeTrack( K3bAudioTrack* );
   void moveTrack( K3bAudioTrack* track, K3bAudioTrack* after );

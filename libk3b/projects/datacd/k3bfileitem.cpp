@@ -113,8 +113,8 @@ K3bFileItem::K3bFileItem( const TQString& filePath, K3bDataDoc* doc, K3bDirItem*
   }
 
   // add automagically like a qlistviewitem
-  if( tqparent() )
-    tqparent()->addDataItem( this );
+  if( parent() )
+    parent()->addDataItem( this );
 }
 
 
@@ -151,8 +151,8 @@ K3bFileItem::K3bFileItem( const k3b_struct_stat* stat,
     m_sizeFollowed = m_size;
   }
 
-  if( tqparent() )
-    tqparent()->addDataItem( this );
+  if( parent() )
+    parent()->addDataItem( this );
 }
 
 
@@ -267,7 +267,7 @@ bool K3bFileItem::isValid() const
       }
       else if( tokens[i] == ".." ) {
 	// change the directory
-	dir = dir->tqparent();
+	dir = dir->parent();
 	if( dir == 0 )
 	  return false;
       }

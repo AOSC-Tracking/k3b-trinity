@@ -60,8 +60,8 @@ public:
 
 
 
-K3bReadcdReader::K3bReadcdReader( K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bJob( jh, tqparent, name ),
+K3bReadcdReader::K3bReadcdReader( K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bJob( jh, parent, name ),
     m_noCorr(false),
     m_clone(false),
     m_noError(false),

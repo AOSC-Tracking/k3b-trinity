@@ -31,7 +31,7 @@ class K3bVideoDvdBurnDialog : public K3bProjectBurnDialog
   TQ_OBJECT
 
  public:
-   K3bVideoDvdBurnDialog( K3bVideoDvdDoc*, TQWidget *tqparent = 0, const char *name = 0, bool modal = true );
+   K3bVideoDvdBurnDialog( K3bVideoDvdDoc*, TQWidget *parent = 0, const char *name = 0, bool modal = true );
    ~K3bVideoDvdBurnDialog();
 
  protected slots:

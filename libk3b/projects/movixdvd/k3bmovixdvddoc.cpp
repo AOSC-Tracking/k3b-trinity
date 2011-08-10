@@ -19,8 +19,8 @@
 #include <kconfig.h>
 
 
-K3bMovixDvdDoc::K3bMovixDvdDoc( TQObject* tqparent )
-  : K3bMovixDoc( tqparent )
+K3bMovixDvdDoc::K3bMovixDvdDoc( TQObject* parent )
+  : K3bMovixDoc( parent )
 {
 }
 
@@ -28,9 +28,9 @@ K3bMovixDvdDoc::~K3bMovixDvdDoc()
 {
 }
 
-K3bBurnJob* K3bMovixDvdDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
+K3bBurnJob* K3bMovixDvdDoc::newBurnJob( K3bJobHandler* hdl, TQObject* parent )
 {
-  return new K3bMovixDvdJob( this, hdl, tqparent );
+  return new K3bMovixDvdJob( this, hdl, parent );
 }
 
 #include "k3bmovixdvddoc.moc"

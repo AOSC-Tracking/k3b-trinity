@@ -56,7 +56,7 @@ namespace K3bDevice {
       /**
        * Creates a new DeviceManager
        */
-      DeviceManager( TQObject* tqparent = 0, const char* name = 0 );
+      DeviceManager( TQObject* parent = 0, const char* name = 0 );
       virtual ~DeviceManager();
 
       /**

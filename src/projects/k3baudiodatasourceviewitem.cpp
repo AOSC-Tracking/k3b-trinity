@@ -23,11 +23,11 @@
 #include <kiconloader.h>
 
 
-K3bAudioDataSourceViewItem::K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* tqparent, 
+K3bAudioDataSourceViewItem::K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* parent, 
 							K3bAudioDataSourceViewItem* after, 
 							K3bAudioDataSource* source )
-  : K3bListViewItem( tqparent, after ),
-    m_trackViewItem( tqparent ),
+  : K3bListViewItem( parent, after ),
+    m_trackViewItem( parent ),
     m_source( source ),
     m_animationCounter(1)
 {

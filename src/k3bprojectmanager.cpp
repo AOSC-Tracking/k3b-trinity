@@ -74,8 +74,8 @@ public:
 
 
 
-K3bProjectManager::K3bProjectManager( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bProjectManager::K3bProjectManager( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private();
   d->activeProject = 0;

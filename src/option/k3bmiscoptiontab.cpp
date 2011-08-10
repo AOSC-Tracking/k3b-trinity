@@ -38,8 +38,8 @@
 #include <kcombobox.h>
 
 
-K3bMiscOptionTab::K3bMiscOptionTab(TQWidget *tqparent, const char *name )
-  : base_K3bMiscOptionTab(tqparent,name)
+K3bMiscOptionTab::K3bMiscOptionTab(TQWidget *parent, const char *name )
+  : base_K3bMiscOptionTab(parent,name)
 {
   m_editTempDir->setMode( KFile::Directory );
   connect( m_buttonConfigureAudioOutput, TQT_SIGNAL(clicked()),

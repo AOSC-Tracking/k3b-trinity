@@ -32,9 +32,9 @@
 
 K3bMovixListViewItem::K3bMovixListViewItem( K3bMovixDoc* doc, 
 					    K3bMovixFileItem* item, 
-					    TQListView* tqparent, 
+					    TQListView* parent, 
 					    TQListViewItem* after )
-  : K3bListViewItem( tqparent, after ),
+  : K3bListViewItem( parent, after ),
     m_doc(doc),
     m_fileItem(item)
 {
@@ -43,8 +43,8 @@ K3bMovixListViewItem::K3bMovixListViewItem( K3bMovixDoc* doc,
 
 K3bMovixListViewItem::K3bMovixListViewItem( K3bMovixDoc* doc, 
 					    K3bMovixFileItem* item, 
-					    TQListViewItem* tqparent )
-  : K3bListViewItem( tqparent ),
+					    TQListViewItem* parent )
+  : K3bListViewItem( parent ),
     m_doc(doc),
     m_fileItem(item)
 {
@@ -58,9 +58,9 @@ K3bMovixListViewItem::~K3bMovixListViewItem()
 
 K3bMovixFileViewItem::K3bMovixFileViewItem( K3bMovixDoc* doc, 
 					    K3bMovixFileItem* item, 
-					    TQListView* tqparent, 
+					    TQListView* parent, 
 					    TQListViewItem* after )
-  : K3bMovixListViewItem( doc, item, tqparent, after ),
+  : K3bMovixListViewItem( doc, item, parent, after ),
     KFileItem( 0, 0, KURL::fromPathOrURL(item->localPath()) )
 {
   setPixmap( 1, KFileItem::pixmap( 16, KIcon::DefaultState ) );
@@ -119,8 +119,8 @@ TQString K3bMovixFileViewItem::key( int, bool ) const
 
 K3bMovixSubTitleViewItem::K3bMovixSubTitleViewItem( K3bMovixDoc* doc, 
 						    K3bMovixFileItem* item, 
-						    K3bMovixListViewItem* tqparent )
-  : K3bMovixListViewItem( doc, item, tqparent ),
+						    K3bMovixListViewItem* parent )
+  : K3bMovixListViewItem( doc, item, parent ),
     KFileItem( 0, 0, KURL::fromPathOrURL(item->subTitleItem()->localPath()) )
 {
 }
@@ -166,8 +166,8 @@ TQString K3bMovixSubTitleViewItem::text( int c ) const
 
 
 
-K3bMovixListView::K3bMovixListView( K3bMovixDoc* doc, TQWidget* tqparent, const char* name )
-  : K3bListView( tqparent, name ),
+K3bMovixListView::K3bMovixListView( K3bMovixDoc* doc, TQWidget* parent, const char* name )
+  : K3bListView( parent, name ),
     m_doc(doc)
 {
   addColumn( i18n("No.") );

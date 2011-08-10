@@ -30,7 +30,7 @@ class K3bExternalEncoderEditDialog : public KDialogBase
   TQ_OBJECT
   
  public:
-  K3bExternalEncoderEditDialog( TQWidget* tqparent );
+  K3bExternalEncoderEditDialog( TQWidget* parent );
   ~K3bExternalEncoderEditDialog();
 
   K3bExternalEncoderCommand currentCommand() const;
@@ -50,7 +50,7 @@ class K3bExternalEncoderSettingsWidget : public K3bPluginConfigWidget
   TQ_OBJECT
 
  public:
-  K3bExternalEncoderSettingsWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bExternalEncoderSettingsWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bExternalEncoderSettingsWidget();
 
  public slots:

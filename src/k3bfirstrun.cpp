@@ -26,7 +26,7 @@
 #include <tqlabel.h>
 
 
-void K3bFirstRun::run( TQWidget* tqparent )
+void K3bFirstRun::run( TQWidget* parent )
 {
   if( !k3bcore->config()->readBoolEntry( "First run", true ) )
     return;
@@ -41,18 +41,18 @@ void K3bFirstRun::run( TQWidget* tqparent )
   if( si.allInstalled() )
     return;
 
-  K3bFirstRun dlg( tqparent );
+  K3bFirstRun dlg( parent );
   if( dlg.exec() == TQDialog::Accepted )
-    si.install( tqparent );
+    si.install( parent );
 }
 
 
-K3bFirstRun::K3bFirstRun( TQWidget* tqparent )
+K3bFirstRun::K3bFirstRun( TQWidget* parent )
   : KDialogBase( Plain,
 		 i18n("First Run"),
 		 Ok|Cancel,
 		 Ok,
-		 tqparent,
+		 parent,
 		 0,
 		 true,
 		 true )

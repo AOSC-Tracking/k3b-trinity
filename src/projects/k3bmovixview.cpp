@@ -38,8 +38,8 @@
 #include <tqlineedit.h>
 
 
-K3bMovixView::K3bMovixView( K3bMovixDoc* doc, TQWidget* tqparent, const char* name )
-  : K3bView( doc, tqparent, name ),
+K3bMovixView::K3bMovixView( K3bMovixDoc* doc, TQWidget* parent, const char* name )
+  : K3bView( doc, parent, name ),
     m_doc(doc)
 {
   m_listView = new K3bMovixListView( m_doc, this );
@@ -176,9 +176,9 @@ void K3bMovixView::slotAddSubTitleFile()
 }
 
 
-K3bProjectBurnDialog* K3bMovixView::newBurnDialog( TQWidget* tqparent, const char* name )
+K3bProjectBurnDialog* K3bMovixView::newBurnDialog( TQWidget* parent, const char* name )
 {
-  return new K3bMovixBurnDialog( m_doc, tqparent, name, true );
+  return new K3bMovixBurnDialog( m_doc, parent, name, true );
 }
 
 

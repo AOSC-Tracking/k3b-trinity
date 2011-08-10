@@ -30,12 +30,12 @@ class K3bAudioProjectCddbPlugin : public K3bProjectPlugin
   TQ_OBJECT
 
  public:
-  K3bAudioProjectCddbPlugin( TQObject* tqparent, const char* name );
+  K3bAudioProjectCddbPlugin( TQObject* parent, const char* name );
   ~K3bAudioProjectCddbPlugin();
 
   int pluginSystemVersion() const { return 3; }
 
-  void activate( K3bDoc* doc, TQWidget* tqparent );
+  void activate( K3bDoc* doc, TQWidget* parent );
 
  private slots:
   void slotCddbQueryFinished( int result );

@@ -28,7 +28,7 @@ class K3bTimeoutWidget : public TQWidget
   TQ_OBJECT
 
  public:
-  K3bTimeoutWidget( TQWidget* tqparent );
+  K3bTimeoutWidget( TQWidget* parent );
   ~K3bTimeoutWidget();
 
   TQSize tqsizeHint() const;

@@ -34,7 +34,7 @@ class K3bJobProgressOSD : public TQWidget
   TQ_OBJECT
 
  public:
-  K3bJobProgressOSD( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bJobProgressOSD( TQWidget* parent = 0, const char* name = 0 );
   ~K3bJobProgressOSD();
 
   int screen() const { return m_screen; }

@@ -25,7 +25,7 @@ class K3bAudioTrackViewItem;
 class K3bAudioDataSourceViewItem : public K3bListViewItem
 {
  public:
-  K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* tqparent, 
+  K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* parent, 
 			      K3bAudioDataSourceViewItem* after, 
 			      K3bAudioDataSource* );
 

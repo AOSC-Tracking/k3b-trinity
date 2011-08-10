@@ -29,8 +29,8 @@ class K3bThemedHeader : public TQFrame
   TQ_OBJECT
 
  public:
-  K3bThemedHeader( TQWidget* tqparent = 0 );
-  K3bThemedHeader( const TQString& title, const TQString& subtitle, TQWidget* tqparent = 0 );
+  K3bThemedHeader( TQWidget* parent = 0 );
+  K3bThemedHeader( const TQString& title, const TQString& subtitle, TQWidget* parent = 0 );
   ~K3bThemedHeader(); 
 
  public slots:

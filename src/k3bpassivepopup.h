@@ -34,7 +34,7 @@ class K3bPassivePopup : public TQFrame
   TQ_OBJECT
 
  public:
-  K3bPassivePopup( TQWidget* tqparent );
+  K3bPassivePopup( TQWidget* parent );
   ~K3bPassivePopup();
 
   enum MessageType {

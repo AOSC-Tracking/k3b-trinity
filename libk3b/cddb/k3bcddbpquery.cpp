@@ -25,8 +25,8 @@
 
 
 
-K3bCddbpQuery::K3bCddbpQuery( TQObject* tqparent, const char* name )
-  :K3bCddbQuery( tqparent, name )
+K3bCddbpQuery::K3bCddbpQuery( TQObject* parent, const char* name )
+  :K3bCddbQuery( parent, name )
 {
   m_socket = new TQSocket( this );
   m_stream.setDevice( m_socket );

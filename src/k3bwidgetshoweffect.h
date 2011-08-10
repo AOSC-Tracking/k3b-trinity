@@ -98,7 +98,7 @@ class K3bWidgetShowEffect : public TQObject
   Effect m_effect;
   TQWidget* m_widget;
 
-  TQBitmap m_tqmask;
+  TQBitmap m_mask;
 
   int m_dissolveSize;
   int m_dissolveDelta;

@@ -51,7 +51,7 @@ class K3bInteractionDialog : public KDialog
    * @param defaultButton may also be null to deactivate the feature
    * @param configgroup The config group used for the loadUserDefaults and saveUserDefaults methods
    */
-  K3bInteractionDialog( TQWidget* tqparent = 0, 
+  K3bInteractionDialog( TQWidget* parent = 0, 
 			const char* name = 0, 
 			const TQString& title = TQString(),
 			const TQString& subTitle = TQString(),

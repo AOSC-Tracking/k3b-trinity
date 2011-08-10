@@ -47,8 +47,8 @@
 #include <k3bexternalbinmanager.h>
 #include <k3bvalidators.h>
 
-K3bVcdBurnDialog::K3bVcdBurnDialog( K3bVcdDoc* _doc, TQWidget *tqparent, const char *name, bool modal )
-        : K3bProjectBurnDialog( _doc, tqparent, name, modal )
+K3bVcdBurnDialog::K3bVcdBurnDialog( K3bVcdDoc* _doc, TQWidget *parent, const char *name, bool modal )
+        : K3bProjectBurnDialog( _doc, parent, name, modal )
 {
     m_vcdDoc = _doc;
 

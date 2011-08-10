@@ -31,7 +31,7 @@ class K3bDvdrecordWriter : public K3bCdrecordWriter
   TQ_OBJECT
 
  public:
-  K3bDvdrecordWriter( K3bDevice::Device*, TQObject* tqparent = 0, const char* name = 0 );
+  K3bDvdrecordWriter( K3bDevice::Device*, TQObject* parent = 0, const char* name = 0 );
   ~K3bDvdrecordWriter();
 
  protected:

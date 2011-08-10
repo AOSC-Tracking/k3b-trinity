@@ -25,9 +25,9 @@
 #include <klocale.h>
 
 
-TQCheckBox* K3bStdGuiItems::simulateCheckbox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::simulateCheckbox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Simulate"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Simulate"), parent, name );
   TQWhatsThis::add( c, i18n("<p>If this option is checked K3b will perform all writing steps with the "
 			   "laser turned off."
 			   "<p>This is useful, for example, to test a higher writing speed "
@@ -37,9 +37,9 @@ TQCheckBox* K3bStdGuiItems::simulateCheckbox( TQWidget* tqparent, const char* na
   return c;
 }
 
-TQCheckBox* K3bStdGuiItems::daoCheckbox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::daoCheckbox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Disk at once"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Disk at once"), parent, name );
   TQWhatsThis::add( c, i18n("<p>If this option is checked, K3b will write the CD in 'disk at once' mode as "
 			   "compared to 'track at once' (TAO)."
 			   "<p>It is always recommended to use DAO where possible."
@@ -49,9 +49,9 @@ TQCheckBox* K3bStdGuiItems::daoCheckbox( TQWidget* tqparent, const char* name )
   return c;
 }
 
-TQCheckBox* K3bStdGuiItems::burnproofCheckbox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::burnproofCheckbox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Use Burnfree"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Use Burnfree"), parent, name );
   TQToolTip::add( c, i18n("Enable Burnfree (or Just Link) to avoid buffer underruns") );
   TQWhatsThis::add( c, i18n("<p>If this option is checked, K3b enables <em>Burnfree</em> "
 			   "(or <em>Just Link</em>). This is "
@@ -70,9 +70,9 @@ TQCheckBox* K3bStdGuiItems::burnproofCheckbox( TQWidget* tqparent, const char* n
   return c;
 }
 
-TQCheckBox* K3bStdGuiItems::onlyCreateImagesCheckbox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::onlyCreateImagesCheckbox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Only create image"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Only create image"), parent, name );
   TQWhatsThis::add( c, i18n("<p>If this option is checked, K3b will only create an "
 			   "image and not do any actual writing."
 			   "<p>The image can later be written to a CD/DVD with most current writing "
@@ -81,9 +81,9 @@ TQCheckBox* K3bStdGuiItems::onlyCreateImagesCheckbox( TQWidget* tqparent, const 
   return c;
 }
 
-TQCheckBox* K3bStdGuiItems::createCacheImageCheckbox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::createCacheImageCheckbox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Create image"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Create image"), parent, name );
   TQWhatsThis::add( c, i18n("<p>If this option is checked, K3b will create an image before writing "
 			   "the files to the CD/DVD. Otherwise the data will be written <em>on-the-fly</em>, "
 			   "i.e. no intermediate image will be created."
@@ -94,9 +94,9 @@ TQCheckBox* K3bStdGuiItems::createCacheImageCheckbox( TQWidget* tqparent, const 
   return c;
 }
 
-TQCheckBox* K3bStdGuiItems::removeImagesCheckbox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::removeImagesCheckbox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Remove image"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Remove image"), parent, name );
   TQWhatsThis::add( c, i18n("<p>If this option is checked, K3b will remove any created images after the "
 			   "writing has finished."
 			   "<p>Uncheck this if you want to keep the images.") );
@@ -104,9 +104,9 @@ TQCheckBox* K3bStdGuiItems::removeImagesCheckbox( TQWidget* tqparent, const char
   return c;
 }
 
-TQCheckBox* K3bStdGuiItems::onTheFlyCheckbox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::onTheFlyCheckbox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("On the fly"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("On the fly"), parent, name );
   TQWhatsThis::add( c, i18n("<p>If this option is checked, K3b will not create an image first but write "
 			   "the files directly to the CD/DVD."
 			   "<p><b>Caution:</b> Although this should work on most systems, make sure "
@@ -116,9 +116,9 @@ TQCheckBox* K3bStdGuiItems::onTheFlyCheckbox( TQWidget* tqparent, const char* na
   return c;
 }
 
-TQCheckBox* K3bStdGuiItems::cdTextCheckbox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::cdTextCheckbox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Write CD-TEXT"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Write CD-TEXT"), parent, name );
   TQToolTip::add( c, i18n("Create CD-TEXT entries") );
   TQWhatsThis::add( c, i18n("<p>If this option is checked K3b uses some otherwise-unused space on the audio "
 			   "CD to store additional information, like the artist or the CD title."
@@ -131,9 +131,9 @@ TQCheckBox* K3bStdGuiItems::cdTextCheckbox( TQWidget* tqparent, const char* name
 }
 
 
-TQComboBox* K3bStdGuiItems::paranoiaModeComboBox( TQWidget* tqparent, const char* name )
+TQComboBox* K3bStdGuiItems::paranoiaModeComboBox( TQWidget* parent, const char* name )
 {
-  TQComboBox* c = new TQComboBox( tqparent, name );
+  TQComboBox* c = new TQComboBox( parent, name );
   c->insertItem( "0" );
   c->insertItem( "1" );
   c->insertItem( "2" );
@@ -150,9 +150,9 @@ TQComboBox* K3bStdGuiItems::paranoiaModeComboBox( TQWidget* tqparent, const char
 }
 
 
-TQCheckBox* K3bStdGuiItems::startMultisessionCheckBox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::startMultisessionCheckBox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Start multisession CD"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Start multisession CD"), parent, name );
   TQToolTip::add( c, i18n("Do not close the disk to allow additional sessions to be added later") );
   TQWhatsThis::add( c, i18n("<p>If this option is checked K3b will not close the CD, and will write "
 			   "a temporary table of contents.</p>"
@@ -161,9 +161,9 @@ TQCheckBox* K3bStdGuiItems::startMultisessionCheckBox( TQWidget* tqparent, const
 }
 
 
-TQCheckBox* K3bStdGuiItems::normalizeCheckBox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::normalizeCheckBox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Normalize volume levels"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Normalize volume levels"), parent, name );
   TQToolTip::add( c, i18n("Adjust the volume levels of all tracks") );
   TQWhatsThis::add( c, i18n("<p>If this option is checked K3b will adjust the volume of all tracks "
 			   "to a standard level. This is useful for things like creating mixes, "
@@ -175,9 +175,9 @@ TQCheckBox* K3bStdGuiItems::normalizeCheckBox( TQWidget* tqparent, const char* n
 }
 
 
-TQCheckBox* K3bStdGuiItems::verifyCheckBox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::verifyCheckBox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Verify written data"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Verify written data"), parent, name );
   TQToolTip::add( c, i18n("Compare original with written data") );
   TQWhatsThis::add( c, i18n("<p>If this option is checked, then after successfully "
 			   "writing the disk K3b will compare the original source data "
@@ -187,9 +187,9 @@ TQCheckBox* K3bStdGuiItems::verifyCheckBox( TQWidget* tqparent, const char* name
 }
 
 
-TQCheckBox* K3bStdGuiItems::ignoreAudioReadErrorsCheckBox( TQWidget* tqparent, const char* name )
+TQCheckBox* K3bStdGuiItems::ignoreAudioReadErrorsCheckBox( TQWidget* parent, const char* name )
 {
-  TQCheckBox* c = new TQCheckBox( i18n("Ignore read errors"), tqparent, name );
+  TQCheckBox* c = new TQCheckBox( i18n("Ignore read errors"), parent, name );
   TQToolTip::add( c, i18n("Skip unreadable audio sectors") );
   TQWhatsThis::add( c, i18n("<p>If this option is checked and K3b is not able to read an "
 			   "audio sector from the source CD it will be replaced with zeros "
@@ -200,16 +200,16 @@ TQCheckBox* K3bStdGuiItems::ignoreAudioReadErrorsCheckBox( TQWidget* tqparent, c
 }
 
 
-TQFrame* K3bStdGuiItems::horizontalLine( TQWidget* tqparent, const char* name )
+TQFrame* K3bStdGuiItems::horizontalLine( TQWidget* parent, const char* name )
 {
-  TQFrame* line = new TQFrame( tqparent, name );
+  TQFrame* line = new TQFrame( parent, name );
   line->setFrameStyle( TQFrame::HLine | TQFrame::Sunken );
   return line;
 }
 
-TQFrame* K3bStdGuiItems::verticalLine( TQWidget* tqparent, const char* name )
+TQFrame* K3bStdGuiItems::verticalLine( TQWidget* parent, const char* name )
 {
-  TQFrame* line = new TQFrame( tqparent, name );
+  TQFrame* line = new TQFrame( parent, name );
   line->setFrameStyle( TQFrame::VLine | TQFrame::Sunken );
   return line;
 }

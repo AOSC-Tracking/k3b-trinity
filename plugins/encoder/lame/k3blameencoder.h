@@ -33,7 +33,7 @@ class K3bLameEncoder : public K3bAudioEncoder
   TQ_OBJECT
 
  public:
-  K3bLameEncoder( TQObject* tqparent = 0, const char* name = 0 );
+  K3bLameEncoder( TQObject* parent = 0, const char* name = 0 );
   ~K3bLameEncoder();
 
   bool openFile( const TQString& extension, const TQString& filename, const K3b::Msf& length );
@@ -49,7 +49,7 @@ class K3bLameEncoder : public K3bAudioEncoder
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bPluginConfigWidget* createConfigWidget( TQWidget* tqparent = 0, 
+  K3bPluginConfigWidget* createConfigWidget( TQWidget* parent = 0, 
 					     const char* name = 0 ) const;
 
  private:
@@ -69,7 +69,7 @@ class K3bLameEncoderSettingsWidget : public K3bPluginConfigWidget
   TQ_OBJECT
 
  public:
-  K3bLameEncoderSettingsWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bLameEncoderSettingsWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bLameEncoderSettingsWidget();
 
  public slots:

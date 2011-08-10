@@ -40,8 +40,8 @@
 #include <k3bcore.h>
 
 
-K3bView::K3bView( K3bDoc* pDoc, TQWidget *tqparent, const char* name )
-  : TQWidget( tqparent, name ),
+K3bView::K3bView( K3bDoc* pDoc, TQWidget *parent, const char* name )
+  : TQWidget( parent, name ),
     m_doc( pDoc )
 {
   TQGridLayout* grid = new TQGridLayout( this );

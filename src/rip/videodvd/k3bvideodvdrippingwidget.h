@@ -33,7 +33,7 @@ class K3bVideoDVDRippingWidget : public base_K3bVideoDVDRippingWidget
   TQ_OBJECT
 
  public:
-  K3bVideoDVDRippingWidget( TQWidget* tqparent );
+  K3bVideoDVDRippingWidget( TQWidget* parent );
   ~K3bVideoDVDRippingWidget();
 
   K3bVideoDVDTitleTranscodingJob::VideoCodec selectedVideoCodec() const;

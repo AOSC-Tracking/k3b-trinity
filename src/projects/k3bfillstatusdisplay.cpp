@@ -67,8 +67,8 @@ public:
 };
 
 
-K3bFillStatusDisplayWidget::K3bFillStatusDisplayWidget( K3bDoc* doc, TQWidget* tqparent )
-  : TQWidget( tqparent, 0, WRepaintNoErase )
+K3bFillStatusDisplayWidget::K3bFillStatusDisplayWidget( K3bDoc* doc, TQWidget* parent )
+  : TQWidget( parent, 0, WRepaintNoErase )
 {
   d = new Private();
   d->doc = doc;
@@ -279,8 +279,8 @@ void K3bFillStatusDisplayWidget::paintEvent( TQPaintEvent* )
 class K3bFillStatusDisplay::ToolTip : public TQToolTip
 {
 public:
-  ToolTip( K3bDoc* doc, TQWidget* tqparent )
-    : TQToolTip( tqparent, 0 ),
+  ToolTip( K3bDoc* doc, TQWidget* parent )
+    : TQToolTip( parent, 0 ),
       m_doc(doc) {
   }
 
@@ -329,8 +329,8 @@ public:
 };
 
 
-K3bFillStatusDisplay::K3bFillStatusDisplay( K3bDoc* doc, TQWidget *tqparent, const char *name )
-  : TQFrame(tqparent,name)
+K3bFillStatusDisplay::K3bFillStatusDisplay( K3bDoc* doc, TQWidget *parent, const char *name )
+  : TQFrame(parent,name)
 {
   d = new Private;
   d->doc = doc;

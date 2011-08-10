@@ -43,8 +43,8 @@
 
 
 
-K3bExternalBinWidget::K3bExternalProgramViewItem::K3bExternalProgramViewItem( K3bExternalProgram* p, TQListView* tqparent )
-  : K3bListViewItem( tqparent ), m_program(p)
+K3bExternalBinWidget::K3bExternalProgramViewItem::K3bExternalProgramViewItem( K3bExternalProgram* p, TQListView* parent )
+  : K3bListViewItem( parent ), m_program(p)
 {
   TQFont f( listView()->font() );
   f.setBold(true);
@@ -57,8 +57,8 @@ K3bExternalBinWidget::K3bExternalProgramViewItem::K3bExternalProgramViewItem( K3
 }
 
 
-K3bExternalBinWidget::K3bExternalBinViewItem::K3bExternalBinViewItem( K3bExternalBin* bin, K3bExternalProgramViewItem* tqparent )
-  : K3bListViewItem( tqparent ), m_bin( bin ), m_parent( tqparent )
+K3bExternalBinWidget::K3bExternalBinViewItem::K3bExternalBinViewItem( K3bExternalBin* bin, K3bExternalProgramViewItem* parent )
+  : K3bListViewItem( parent ), m_bin( bin ), m_parent( parent )
 {
   setText( 0, bin->path );
   setText( 1, bin->version );
@@ -95,8 +95,8 @@ void K3bExternalBinWidget::K3bExternalBinViewItem::setDefault( bool b )
 // //////////////////////////////////////////////////////////
 
 
-K3bExternalBinWidget::K3bExternalBinWidget( K3bExternalBinManager* manager, TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name ), m_manager( manager )
+K3bExternalBinWidget::K3bExternalBinWidget( K3bExternalBinManager* manager, TQWidget* parent, const char* name )
+  : TQWidget( parent, name ), m_manager( manager )
 {
   TQGridLayout* mainGrid = new TQGridLayout( this );
   mainGrid->setMargin( 0 );
@@ -292,7 +292,7 @@ void K3bExternalBinWidget::slotSetDefaultButtonClicked()
     // remove all default flags
     K3bExternalBinViewItem* bi = (K3bExternalBinViewItem*)item->parentProgramItem()->firstChild();
     TQListViewItemIterator it( bi );
-    while( it.current() && it.current()->tqparent() == item->parentProgramItem() ) {
+    while( it.current() && it.current()->parent() == item->parentProgramItem() ) {
       ((K3bExternalBinViewItem*)it.current())->setDefault(false);
       ++it;
     }

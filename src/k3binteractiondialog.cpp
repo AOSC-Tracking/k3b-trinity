@@ -49,7 +49,7 @@
 #include <kdeversion.h>
 
 
-K3bInteractionDialog::K3bInteractionDialog( TQWidget* tqparent,
+K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
 					    const char* name,
 					    const TQString& title,
 					    const TQString& subTitle,
@@ -58,7 +58,7 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* tqparent,
 					    const TQString& configGroup,
 					    bool modal,
 					    WFlags fl )
-  : KDialog( tqparent, name, modal, fl ),
+  : KDialog( parent, name, modal, fl ),
     m_mainWidget(0),
     m_defaultButton(defaultButton),
     m_configGroup(configGroup),

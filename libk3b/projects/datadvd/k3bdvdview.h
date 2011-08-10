@@ -28,11 +28,11 @@ class K3bDvdView : public K3bDataView
   TQ_OBJECT
 
  public:
-  K3bDvdView( K3bDvdDoc* doc, TQWidget *tqparent = 0, const char *name = 0 );
+  K3bDvdView( K3bDvdDoc* doc, TQWidget *parent = 0, const char *name = 0 );
   ~K3bDvdView();
 
  protected:
-  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
+  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* parent = 0, const char* name = 0 );
 
  private:
   K3bDvdDoc* m_doc;

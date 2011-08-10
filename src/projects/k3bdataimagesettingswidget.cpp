@@ -126,8 +126,8 @@ static void initializePresets()
 class K3bDataImageSettingsWidget::CustomFilesystemsDialog : public KDialogBase
 {
 public:
-  CustomFilesystemsDialog( TQWidget* tqparent )
-    : KDialogBase( tqparent,
+  CustomFilesystemsDialog( TQWidget* parent )
+    : KDialogBase( parent,
 		   "custom_filesystems_dialog",
 		   true,
 		   i18n("Custom Data Project Filesystems"),
@@ -145,8 +145,8 @@ public:
 class K3bDataImageSettingsWidget::VolumeDescDialog : public KDialogBase
 {
 public:
-  VolumeDescDialog( TQWidget* tqparent )
-    : KDialogBase( tqparent,
+  VolumeDescDialog( TQWidget* parent )
+    : KDialogBase( parent,
 		   "voldesc_dialog",
 		   true,
 		   i18n("Volume Descriptor"),
@@ -167,8 +167,8 @@ public:
 
 
 
-K3bDataImageSettingsWidget::K3bDataImageSettingsWidget( TQWidget* tqparent, const char* name )
-  : base_K3bDataImageSettings( tqparent, name ),
+K3bDataImageSettingsWidget::K3bDataImageSettingsWidget( TQWidget* parent, const char* name )
+  : base_K3bDataImageSettings( parent, name ),
     m_fileSystemOptionsShown(true)
 {
   tqlayout()->setMargin( KDialog::marginHint() );

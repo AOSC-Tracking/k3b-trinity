@@ -119,8 +119,8 @@ public:
 
 
 
-K3bDevice::DeviceManager::DeviceManager( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bDevice::DeviceManager::DeviceManager( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private;
 }
@@ -324,7 +324,7 @@ void K3bDevice::DeviceManager::NetBSDDeviceScan()
 
   int   i;
 
-  // Whole disk tqmask (According to cd(4), the AMD64, i386 and BeBox ports use
+  // Whole disk mask (According to cd(4), the AMD64, i386 and BeBox ports use
   // 'd' as whole-disk partition, the rest uses 'c'.)
 
 #if defined(__i386__) || defined (__amd64__) || defined (__bebox__)

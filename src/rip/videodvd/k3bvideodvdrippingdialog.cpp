@@ -117,9 +117,9 @@ class K3bVideoDVDRippingDialog::AudioStreamViewItem : public TQCheckListItem
 {
 public:
   AudioStreamViewItem( K3bVideoDVDRippingDialog* dlg,
-		       TQCheckListItem* tqparent, TQListViewItem* after, const TQString& text,
+		       TQCheckListItem* parent, TQListViewItem* after, const TQString& text,
 		       int audioStream )
-    : TQCheckListItem( tqparent, after, text, RadioButton ),
+    : TQCheckListItem( parent, after, text, RadioButton ),
       m_audioStream( audioStream ),
       m_dlg( dlg ) {
   }
@@ -127,7 +127,7 @@ public:
 private:
   void stateChange( bool ) {
     if( state() == On ) {
-      m_dlg->m_titleRipInfos[static_cast<TQCheckListItem*>(tqparent())].audioStream = m_audioStream;
+      m_dlg->m_titleRipInfos[static_cast<TQCheckListItem*>(parent())].audioStream = m_audioStream;
       m_dlg->slotUpdateFilenames();
     }
   }
@@ -146,8 +146,8 @@ public:
 
 K3bVideoDVDRippingDialog::K3bVideoDVDRippingDialog( const K3bVideoDVD::VideoDVD& dvd,
 						    const TQValueList<int>& titles,
-						    TQWidget* tqparent, const char* name )
-  : K3bInteractionDialog( tqparent, name,
+						    TQWidget* parent, const char* name )
+  : K3bInteractionDialog( parent, name,
 			  i18n("Video DVD Ripping"),
 			  TQString(),
 			  START_BUTTON|CANCEL_BUTTON,

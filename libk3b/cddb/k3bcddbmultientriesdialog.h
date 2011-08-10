@@ -37,10 +37,10 @@ class K3bCddbMultiEntriesDialog : public KDialogBase
  public:
   ~K3bCddbMultiEntriesDialog();
   
-  static K3bCddbResultHeader selectCddbEntry( K3bCddbQuery* query, TQWidget* tqparent = 0 );
+  static K3bCddbResultHeader selectCddbEntry( K3bCddbQuery* query, TQWidget* parent = 0 );
 
  protected:
-  K3bCddbMultiEntriesDialog( TQWidget* tqparent = 0, const char* name = 0);
+  K3bCddbMultiEntriesDialog( TQWidget* parent = 0, const char* name = 0);
 
  private:
   KListBox *m_listBox;

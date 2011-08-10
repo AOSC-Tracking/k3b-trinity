@@ -89,8 +89,8 @@ private:
 };
 
 
-K3bAudioServer::K3bAudioServer( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name ),
+K3bAudioServer::K3bAudioServer( TQObject* parent, const char* name )
+  : TQObject( parent, name ),
     m_usedOutputPlugin(0),
     m_pluginInitialized(false),
     m_client(0)

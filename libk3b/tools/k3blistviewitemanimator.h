@@ -33,11 +33,11 @@ class LIBK3B_EXPORT K3bListViewItemAnimator : public TQObject
   TQ_OBJECT
 
  public:
-  K3bListViewItemAnimator( TQObject* tqparent = 0, const char* name = 0 );
+  K3bListViewItemAnimator( TQObject* parent = 0, const char* name = 0 );
   /**
    * Will use the items pixmap.
    */
-  K3bListViewItemAnimator( TQListViewItem* item, int col, TQObject* tqparent = 0, const char* name = 0 );
+  K3bListViewItemAnimator( TQListViewItem* item, int col, TQObject* parent = 0, const char* name = 0 );
   ~K3bListViewItemAnimator();
 
   TQListViewItem* item() const;

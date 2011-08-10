@@ -25,10 +25,10 @@
 #include <tqpainter.h>
 
 
-K3bAudioTrackViewItem::K3bAudioTrackViewItem( K3bAudioTrackView* tqparent, 
+K3bAudioTrackViewItem::K3bAudioTrackViewItem( K3bAudioTrackView* parent, 
 					      K3bAudioTrackViewItem* after, 
 					      K3bAudioTrack* track )
-  : K3bListViewItem( tqparent, after ),
+  : K3bListViewItem( parent, after ),
     m_track( track ),
     m_alreadyRemoved(false),
     m_showingSources(false),

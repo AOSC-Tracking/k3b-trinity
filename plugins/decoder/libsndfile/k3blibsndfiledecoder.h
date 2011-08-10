@@ -28,7 +28,7 @@ class K3bLibsndfileDecoderFactory : public K3bAudioDecoderFactory
   TQ_OBJECT
 
  public:
-  K3bLibsndfileDecoderFactory( TQObject* tqparent = 0, const char* name = 0 );
+  K3bLibsndfileDecoderFactory( TQObject* parent = 0, const char* name = 0 );
   ~K3bLibsndfileDecoderFactory();
 
   bool canDecode( const KURL& filename );
@@ -37,7 +37,7 @@ class K3bLibsndfileDecoderFactory : public K3bAudioDecoderFactory
 
   bool multiFormatDecoder() const { return true; }
 
-  K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, 
+  K3bAudioDecoder* createDecoder( TQObject* parent = 0, 
 				  const char* name = 0 ) const;
 };
 
@@ -48,7 +48,7 @@ class K3bLibsndfileDecoder : public K3bAudioDecoder
   TQ_OBJECT
 
  public:
-  K3bLibsndfileDecoder( TQObject* tqparent = 0, const char* name = 0 );
+  K3bLibsndfileDecoder( TQObject* parent = 0, const char* name = 0 );
   ~K3bLibsndfileDecoder();
   void cleanup();
   TQString fileType() const;

@@ -221,8 +221,8 @@ public:
 };
 
 
-K3bPipeBuffer::K3bPipeBuffer( K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bThreadJob( jh, tqparent, name )
+K3bPipeBuffer::K3bPipeBuffer( K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bThreadJob( jh, parent, name )
 {
   m_thread = new WorkThread();
   setThread( m_thread );

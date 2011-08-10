@@ -96,8 +96,8 @@ public:
 };
 
 
-K3bMediaSelectionComboBox::K3bMediaSelectionComboBox( TQWidget* tqparent )
-  : KComboBox( false, tqparent )
+K3bMediaSelectionComboBox::K3bMediaSelectionComboBox( TQWidget* parent )
+  : KComboBox( false, parent )
 {
   d = new Private();
 

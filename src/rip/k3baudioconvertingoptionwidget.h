@@ -34,7 +34,7 @@ class K3bAudioConvertingOptionWidget : public base_K3bAudioRippingOptionWidget
   TQ_OBJECT
 
  public:
-  K3bAudioConvertingOptionWidget( TQWidget* tqparent, const char* name = 0 );
+  K3bAudioConvertingOptionWidget( TQWidget* parent, const char* name = 0 );
   ~K3bAudioConvertingOptionWidget();
 
   void setBaseDir( const TQString& path );

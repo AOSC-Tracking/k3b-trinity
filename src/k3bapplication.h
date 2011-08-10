@@ -79,7 +79,7 @@ class K3bApplication::Core : public K3bCore
   TQ_OBJECT
 
  public:
-  Core( TQObject* tqparent );
+  Core( TQObject* parent );
   ~Core();
 
   void init();

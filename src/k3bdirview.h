@@ -55,7 +55,7 @@ class K3bDirView : public TQVBox
   TQ_OBJECT
 
  public:
-  K3bDirView(K3bFileTreeView* tree, TQWidget *tqparent=0, const char *name=0);
+  K3bDirView(K3bFileTreeView* tree, TQWidget *parent=0, const char *name=0);
   ~K3bDirView();
 
  public slots:

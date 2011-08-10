@@ -27,8 +27,8 @@
 #include <kdebug.h>
 
 
-K3bMovixJob::K3bMovixJob( K3bMovixDoc* doc, K3bJobHandler* jh, TQObject* tqparent )
-  : K3bBurnJob( jh, tqparent ),
+K3bMovixJob::K3bMovixJob( K3bMovixDoc* doc, K3bJobHandler* jh, TQObject* parent )
+  : K3bBurnJob( jh, parent ),
     m_doc(doc)
 {
   m_dataJob = new K3bDataJob( doc, this, this );

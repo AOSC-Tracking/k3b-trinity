@@ -25,8 +25,8 @@
 
 
 
-K3bNotifyOptionTab::K3bNotifyOptionTab( TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name )
+K3bNotifyOptionTab::K3bNotifyOptionTab( TQWidget* parent, const char* name )
+  : TQWidget( parent, name )
 {
   m_notifyWidget = new KNotify::KNotifyWidget( this );
 

@@ -35,8 +35,8 @@
 #include <kmessagebox.h>
 
 
-K3bDebuggingOutputDialog::K3bDebuggingOutputDialog( TQWidget* tqparent )
-  : KDialogBase( tqparent, "debugViewDialog", true, i18n("Debugging Output"), Close|User1|User2, Close, 
+K3bDebuggingOutputDialog::K3bDebuggingOutputDialog( TQWidget* parent )
+  : KDialogBase( parent, "debugViewDialog", true, i18n("Debugging Output"), Close|User1|User2, Close, 
 		 false, 
 		 KStdGuiItem::saveAs(), 
 		 KGuiItem( i18n("Copy"), "editcopy" ) )

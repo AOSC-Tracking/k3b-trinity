@@ -28,7 +28,7 @@ class K3bCddbPatternWidget : public base_K3bCddbPatternWidget
   TQ_OBJECT
 
  public:
-  K3bCddbPatternWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bCddbPatternWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bCddbPatternWidget();
 
   TQString filenamePattern() const;

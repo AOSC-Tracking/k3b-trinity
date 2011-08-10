@@ -26,9 +26,9 @@ class K3bThemedLabel : public KCutLabel
   TQ_OBJECT
 
  public:
-  K3bThemedLabel( TQWidget* tqparent = 0 );
-  K3bThemedLabel( const TQString& text, TQWidget* tqparent = 0 );
-  K3bThemedLabel( K3bTheme::PixmapType, TQWidget* tqparent = 0 );
+  K3bThemedLabel( TQWidget* parent = 0 );
+  K3bThemedLabel( const TQString& text, TQWidget* parent = 0 );
+  K3bThemedLabel( K3bTheme::PixmapType, TQWidget* parent = 0 );
 
  public slots:
   void setThemePixmap( K3bTheme::PixmapType );

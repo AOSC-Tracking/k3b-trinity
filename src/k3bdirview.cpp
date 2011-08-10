@@ -90,8 +90,8 @@ public:
 
 
 
-K3bDirView::K3bDirView(K3bFileTreeView* treeView, TQWidget *tqparent, const char *name )
-  : TQVBox(tqparent, name),
+K3bDirView::K3bDirView(K3bFileTreeView* treeView, TQWidget *parent, const char *name )
+  : TQVBox(parent, name),
     m_fileTreeView(treeView),
     m_bViewDiskInfo(false)
 {

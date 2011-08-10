@@ -31,7 +31,7 @@ class LIBK3B_EXPORT K3bVideoDVDTitleDetectClippingJob : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, TQObject* tqparent );
+  K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, TQObject* parent );
   ~K3bVideoDVDTitleDetectClippingJob();
 
   const K3bVideoDVD::VideoDVD& videoDVD() const { return m_dvd; }

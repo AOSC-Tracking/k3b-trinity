@@ -38,7 +38,7 @@ class K3bOptionDialog : public KDialogBase
   TQ_OBJECT
 
  public:
-  K3bOptionDialog(TQWidget *tqparent=0, const char *name=0, bool modal = true);
+  K3bOptionDialog(TQWidget *parent=0, const char *name=0, bool modal = true);
   ~K3bOptionDialog();
 
   enum m_configPageIndex { Burning = 0, Devices = 1, Programs = 2, Cddb = 3 };

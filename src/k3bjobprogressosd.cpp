@@ -33,8 +33,8 @@
 #include <X11/Xlib.h>
 
 
-K3bJobProgressOSD::K3bJobProgressOSD( TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name, WType_TopLevel | WNoAutoErase | WStyle_Customize | WX11BypassWM | WStyle_StaysOnTop ),
+K3bJobProgressOSD::K3bJobProgressOSD( TQWidget* parent, const char* name )
+  : TQWidget( parent, name, WType_TopLevel | WNoAutoErase | WStyle_Customize | WX11BypassWM | WStyle_StaysOnTop ),
     m_dirty(true),
     m_progress(0),
     m_dragging(false),

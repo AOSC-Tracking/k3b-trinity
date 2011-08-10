@@ -39,8 +39,8 @@ public:
 };
 
 
-K3bDvdJob::K3bDvdJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bDataJob( doc, hdl, tqparent ),
+K3bDvdJob::K3bDvdJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* parent )
+  : K3bDataJob( doc, hdl, parent ),
     m_doc( doc )
 {
   d = new Private();

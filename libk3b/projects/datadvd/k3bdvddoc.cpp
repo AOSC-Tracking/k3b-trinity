@@ -22,8 +22,8 @@
 #include <kconfig.h>
 
 
-K3bDvdDoc::K3bDvdDoc( TQObject* tqparent )
-  : K3bDataDoc( tqparent )
+K3bDvdDoc::K3bDvdDoc( TQObject* parent )
+  : K3bDataDoc( parent )
 {
 }
 
@@ -31,9 +31,9 @@ K3bDvdDoc::~K3bDvdDoc()
 {
 }
 
-K3bBurnJob* K3bDvdDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
+K3bBurnJob* K3bDvdDoc::newBurnJob( K3bJobHandler* hdl, TQObject* parent )
 {
-  return new K3bDvdJob( this, hdl, tqparent );
+  return new K3bDvdJob( this, hdl, parent );
 }
 
 //#include "k3bdvddoc.moc"

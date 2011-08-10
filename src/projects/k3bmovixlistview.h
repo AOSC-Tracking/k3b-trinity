@@ -32,8 +32,8 @@ class K3bFileItem;
 class K3bMovixListViewItem : public K3bListViewItem
 {
  public:
-  K3bMovixListViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListView* tqparent, TQListViewItem* after );
-  K3bMovixListViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListViewItem* tqparent );
+  K3bMovixListViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListView* parent, TQListViewItem* after );
+  K3bMovixListViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListViewItem* parent );
   ~K3bMovixListViewItem();
 
   K3bMovixFileItem* fileItem() const { return m_fileItem; }
@@ -50,7 +50,7 @@ class K3bMovixListViewItem : public K3bListViewItem
 class K3bMovixFileViewItem : public K3bMovixListViewItem, public KFileItem
 {
  public:
-  K3bMovixFileViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListView* tqparent, TQListViewItem* );
+  K3bMovixFileViewItem( K3bMovixDoc* doc, K3bMovixFileItem*, TQListView* parent, TQListViewItem* );
 
   TQString text( int ) const;
   void setText(int col, const TQString& text );
@@ -62,7 +62,7 @@ class K3bMovixFileViewItem : public K3bMovixListViewItem, public KFileItem
 class K3bMovixSubTitleViewItem : public K3bMovixListViewItem, public KFileItem
 {
  public:
-  K3bMovixSubTitleViewItem( K3bMovixDoc*, K3bMovixFileItem* item, K3bMovixListViewItem* tqparent );
+  K3bMovixSubTitleViewItem( K3bMovixDoc*, K3bMovixFileItem* item, K3bMovixListViewItem* parent );
   ~K3bMovixSubTitleViewItem();
 
   TQString text( int ) const;
@@ -77,7 +77,7 @@ class K3bMovixListView : public K3bListView
   TQ_OBJECT
 
  public:
-  K3bMovixListView( K3bMovixDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bMovixListView( K3bMovixDoc* doc, TQWidget* parent = 0, const char* name = 0 );
   ~K3bMovixListView();
 
   TQDragObject* dragObject();

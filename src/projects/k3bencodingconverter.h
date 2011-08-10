@@ -41,13 +41,13 @@ class K3bEncodingConverter
    * the proper encoding based on example conversions.
    *
    * \param s The string to be fixed.
-   * \param tqparent The tqparent widget to be used when showing the encoding selection dialog.
+   * \param parent The parent widget to be used when showing the encoding selection dialog.
    * \param cacheEncoding If true the codeset used for successful conversion is cached and
    *                      reused for the next call to fixEncoding.
    *
    * \return True if the conversion was successful.
    */
-  bool fixEncoding( const TQCString& s, TQCString& result, TQWidget* tqparent = 0, bool cacheEncoding = true );
+  bool fixEncoding( const TQCString& s, TQCString& result, TQWidget* parent = 0, bool cacheEncoding = true );
 
  private:
   bool convert( const TQCString& s, TQCString& result, const TQString& from, const TQString& to );

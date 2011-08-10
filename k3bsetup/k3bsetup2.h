@@ -31,7 +31,7 @@ class K3bSetup2: public KCModule
   TQ_OBJECT
 
  public:
-  K3bSetup2( TQWidget* tqparent = 0, const char* name = 0, const TQStringList& args = TQStringList() );
+  K3bSetup2( TQWidget* parent = 0, const char* name = 0, const TQStringList& args = TQStringList() );
   ~K3bSetup2();
 
   TQString quickHelp() const;

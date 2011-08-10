@@ -40,7 +40,7 @@ class K3bVcdTrackDialog : public KDialogBase
   TQ_OBJECT
 
     public:
-        K3bVcdTrackDialog( K3bVcdDoc*, TQPtrList<K3bVcdTrack>& tracks, TQPtrList<K3bVcdTrack>& selectedTracks, TQWidget* tqparent = 0, const char* name = 0 );
+        K3bVcdTrackDialog( K3bVcdDoc*, TQPtrList<K3bVcdTrack>& tracks, TQPtrList<K3bVcdTrack>& selectedTracks, TQWidget* parent = 0, const char* name = 0 );
         ~K3bVcdTrackDialog();
 
     protected slots:

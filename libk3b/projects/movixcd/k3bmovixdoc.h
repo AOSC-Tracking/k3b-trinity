@@ -37,12 +37,12 @@ class LIBK3B_EXPORT K3bMovixDoc : public K3bDataDoc
   TQ_OBJECT
 
  public:
-  K3bMovixDoc( TQObject* tqparent = 0 );
+  K3bMovixDoc( TQObject* parent = 0 );
   virtual ~K3bMovixDoc();
 
   virtual int type() const { return MOVIX; }
 
-  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* tqparent );
+  virtual K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* parent );
 
   bool newDocument();
 

@@ -115,8 +115,8 @@ public:
 };
 
 
-K3bCdCopyJob::K3bCdCopyJob( K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bBurnJob( hdl, tqparent ),
+K3bCdCopyJob::K3bCdCopyJob( K3bJobHandler* hdl, TQObject* parent )
+  : K3bBurnJob( hdl, parent ),
     m_simulate(false),
     m_copies(1),
     m_onlyCreateImages(false),

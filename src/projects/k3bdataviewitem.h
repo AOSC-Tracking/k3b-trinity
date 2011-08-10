@@ -34,8 +34,8 @@ class TQColorGroup;
 class K3bDataViewItem : public K3bListViewItem
 {
  public:
-  K3bDataViewItem( K3bDataItem*, TQListView* tqparent );
-  K3bDataViewItem( K3bDataItem*, TQListViewItem* tqparent );
+  K3bDataViewItem( K3bDataItem*, TQListView* parent );
+  K3bDataViewItem( K3bDataItem*, TQListViewItem* parent );
   virtual ~K3bDataViewItem();
 	
   virtual K3bDataItem* dataItem() const { return m_dataItem; }
@@ -59,8 +59,8 @@ class K3bDataViewItem : public K3bListViewItem
 class K3bDataDirViewItem : public K3bDataViewItem
 {
  public:
-  K3bDataDirViewItem( K3bDirItem* dir, TQListView* tqparent );
-  K3bDataDirViewItem( K3bDirItem* dir, TQListViewItem* tqparent );
+  K3bDataDirViewItem( K3bDirItem* dir, TQListView* parent );
+  K3bDataDirViewItem( K3bDirItem* dir, TQListViewItem* parent );
   ~K3bDataDirViewItem();
 	
   virtual TQString text( int ) const;
@@ -81,8 +81,8 @@ class K3bDataDirViewItem : public K3bDataViewItem
 class K3bDataFileViewItem : public K3bDataViewItem
 {
  public:
-  K3bDataFileViewItem( K3bFileItem*, TQListView* tqparent );
-  K3bDataFileViewItem( K3bFileItem*, TQListViewItem* tqparent );
+  K3bDataFileViewItem( K3bFileItem*, TQListView* parent );
+  K3bDataFileViewItem( K3bFileItem*, TQListViewItem* parent );
   ~K3bDataFileViewItem() {}
 	
   TQString text( int ) const;
@@ -102,7 +102,7 @@ class K3bDataFileViewItem : public K3bDataViewItem
 class K3bDataRootViewItem : public K3bDataDirViewItem
 {
  public:
-  K3bDataRootViewItem( K3bDataDoc*, TQListView* tqparent );
+  K3bDataRootViewItem( K3bDataDoc*, TQListView* parent );
   ~K3bDataRootViewItem();
 	
   TQString text( int ) const;

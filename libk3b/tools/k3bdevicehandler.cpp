@@ -139,8 +139,8 @@ private:
 };
 
 
-K3bDevice::DeviceHandler::DeviceHandler( Device* dev, TQObject* tqparent, const char* name )
-  : K3bThreadJob( 0, tqparent, name ),
+K3bDevice::DeviceHandler::DeviceHandler( Device* dev, TQObject* parent, const char* name )
+  : K3bThreadJob( 0, parent, name ),
     m_selfDelete(false)
 {
   m_thread = new DeviceHandlerThread();
@@ -149,8 +149,8 @@ K3bDevice::DeviceHandler::DeviceHandler( Device* dev, TQObject* tqparent, const 
 }
 
 
-K3bDevice::DeviceHandler::DeviceHandler( TQObject* tqparent, const char* name )
-  : K3bThreadJob( 0, tqparent, name ),
+K3bDevice::DeviceHandler::DeviceHandler( TQObject* parent, const char* name )
+  : K3bThreadJob( 0, parent, name ),
     m_selfDelete(false)
 {
   m_thread = new DeviceHandlerThread();

@@ -39,8 +39,8 @@ public:
 };
 
 
-K3bGrowisofsHandler::K3bGrowisofsHandler( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bGrowisofsHandler::K3bGrowisofsHandler( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private;
   reset();

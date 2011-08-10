@@ -25,8 +25,8 @@
 #include <kdebug.h>
 
 
-K3bCddbLocalQuery::K3bCddbLocalQuery( TQObject* tqparent , const char* name )
-  : K3bCddbQuery( tqparent, name )
+K3bCddbLocalQuery::K3bCddbLocalQuery( TQObject* parent , const char* name )
+  : K3bCddbQuery( parent, name )
 {
 }
 

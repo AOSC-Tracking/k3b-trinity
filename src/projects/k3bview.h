@@ -48,7 +48,7 @@ class K3bView : public TQWidget, public KXMLGUIClient
   /** 
    *
    */
-  K3bView( K3bDoc* pDoc, TQWidget* tqparent, const char *name = 0 );
+  K3bView( K3bDoc* pDoc, TQWidget* parent, const char *name = 0 );
   virtual ~K3bView();
 	
   /** 

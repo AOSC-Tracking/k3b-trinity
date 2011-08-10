@@ -50,8 +50,8 @@ namespace K3bDevice
   TQ_OBJECT
 
      public:
-      DeviceHandler( Device*, TQObject* tqparent = 0, const char* name = 0 );
-      DeviceHandler( TQObject* tqparent = 0, const char* name = 0 );
+      DeviceHandler( Device*, TQObject* parent = 0, const char* name = 0 );
+      DeviceHandler( TQObject* parent = 0, const char* name = 0 );
 
       /**
        * This constructor is used by the global "quick" methods and should not be used

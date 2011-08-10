@@ -23,15 +23,15 @@
 #include <tqlayout.h>
 
 
-K3bThemedHeader::K3bThemedHeader( TQWidget* tqparent )
-  : TQFrame( tqparent )
+K3bThemedHeader::K3bThemedHeader( TQWidget* parent )
+  : TQFrame( parent )
 {
   init();
 }
 
 
-K3bThemedHeader::K3bThemedHeader( const TQString& title, const TQString& subtitle, TQWidget* tqparent )
-  : TQFrame( tqparent )
+K3bThemedHeader::K3bThemedHeader( const TQString& title, const TQString& subtitle, TQWidget* parent )
+  : TQFrame( parent )
 {
   setTitle( title );
   setSubTitle( subtitle );

@@ -31,7 +31,7 @@ class K3bThroughputEstimator : public TQObject
   TQ_OBJECT
 
  public:
-  K3bThroughputEstimator( TQObject* tqparent = 0, const char* name = 0 );
+  K3bThroughputEstimator( TQObject* parent = 0, const char* name = 0 );
   ~K3bThroughputEstimator();
 
   int average() const;

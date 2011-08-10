@@ -25,8 +25,8 @@
 
 
 
-K3bCddbMultiEntriesDialog::K3bCddbMultiEntriesDialog( TQWidget* tqparent, const char* name )
-  : KDialogBase( Plain, i18n("CDDB Database Entry"), Ok|Cancel, Ok, tqparent, name ) 
+K3bCddbMultiEntriesDialog::K3bCddbMultiEntriesDialog( TQWidget* parent, const char* name )
+  : KDialogBase( Plain, i18n("CDDB Database Entry"), Ok|Cancel, Ok, parent, name ) 
 {
   TQFrame* frame = plainPage();
   TQVBoxLayout* tqlayout = new TQVBoxLayout( frame );
@@ -42,9 +42,9 @@ K3bCddbMultiEntriesDialog::K3bCddbMultiEntriesDialog( TQWidget* tqparent, const 
   setMinimumSize( 280, 200 );
 }
 
-K3bCddbResultHeader K3bCddbMultiEntriesDialog::selectCddbEntry( K3bCddbQuery* query, TQWidget* tqparent )
+K3bCddbResultHeader K3bCddbMultiEntriesDialog::selectCddbEntry( K3bCddbQuery* query, TQWidget* parent )
 {
-  K3bCddbMultiEntriesDialog d( tqparent );
+  K3bCddbMultiEntriesDialog d( parent );
 
   const TQValueList<K3bCddbResultHeader> headers = query->getInexactMatches();
 

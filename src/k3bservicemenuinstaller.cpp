@@ -77,7 +77,7 @@ bool K3bServiceInstaller::allInstalled() const
 }
 
 
-bool K3bServiceInstaller::install( TQWidget* tqparent )
+bool K3bServiceInstaller::install( TQWidget* parent )
 {
   d->update();
 
@@ -87,11 +87,11 @@ bool K3bServiceInstaller::install( TQWidget* tqparent )
   for( unsigned int i = 0; i < d->allServiceMenus.count(); ++i )
     if( !KIO::NetAccess::file_copy( KURL::fromPathOrURL( d->allServiceMenus[i] ), 
 				    KURL::fromPathOrURL( d->konqiServicemenusFolder + d->allServiceMenuFiles[i] ), -1, 
-				    true, false, tqparent ) )
+				    true, false, parent ) )
       success = false;
 
-  if( !success && tqparent )
-    KMessageBox::error( tqparent,
+  if( !success && parent )
+    KMessageBox::error( parent,
 			KIO::NetAccess::lastErrorString(),
 			i18n("Failed to copy service menu files") );
 
@@ -99,19 +99,19 @@ bool K3bServiceInstaller::install( TQWidget* tqparent )
 }
 
 
-bool K3bServiceInstaller::remove( TQWidget* tqparent )
+bool K3bServiceInstaller::remove( TQWidget* parent )
 {
   d->update();
 
   bool success = true;
 
   for( unsigned int i = 0; i < d->allServiceMenuFiles.count(); ++i )
-    if( KIO::NetAccess::exists( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], true, tqparent ) )
-      if( !KIO::NetAccess::del( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], tqparent ) )
+    if( KIO::NetAccess::exists( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], true, parent ) )
+      if( !KIO::NetAccess::del( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], parent ) )
 	success = false;
 
-  if( !success && tqparent )
-    KMessageBox::error( tqparent,
+  if( !success && parent )
+    KMessageBox::error( parent,
 			KIO::NetAccess::lastErrorString(),
 			i18n("Failed to remove service menu files") );
 

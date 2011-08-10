@@ -35,7 +35,7 @@ class LIBK3B_EXPORT K3bCdCopyJob : public K3bBurnJob
   TQ_OBJECT
 
  public:
-  K3bCdCopyJob( K3bJobHandler* hdl, TQObject* tqparent = 0 );
+  K3bCdCopyJob( K3bJobHandler* hdl, TQObject* parent = 0 );
   ~K3bCdCopyJob();
 
   K3bDevice::Device* writer() const { return m_onlyCreateImages ? 0 : m_writerDevice; }

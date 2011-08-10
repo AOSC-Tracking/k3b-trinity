@@ -96,8 +96,8 @@ public:
 };
 
 
-K3bPassivePopup::K3bPassivePopup( TQWidget* tqparent )
-  : TQFrame( tqparent )
+K3bPassivePopup::K3bPassivePopup( TQWidget* parent )
+  : TQFrame( parent )
 {
   d = new Private;
   d->timeout = 6000;

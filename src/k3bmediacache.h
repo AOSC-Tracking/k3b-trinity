@@ -54,7 +54,7 @@ class K3bMediaCache : public TQObject
   TQ_OBJECT
 
  public:
-  K3bMediaCache( TQObject* tqparent = 0 );
+  K3bMediaCache( TQObject* parent = 0 );
   ~K3bMediaCache();
 
   /**

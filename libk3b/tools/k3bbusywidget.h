@@ -30,7 +30,7 @@ class LIBK3B_EXPORT K3bBusyWidget : public TQFrame
   TQ_OBJECT
 
  public:
-  K3bBusyWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bBusyWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bBusyWidget();
 
   void showBusy( bool b );

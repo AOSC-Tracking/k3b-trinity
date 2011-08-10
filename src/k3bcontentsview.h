@@ -33,7 +33,7 @@ class K3bContentsView : public TQWidget
 
  protected:
   K3bContentsView( bool withHeader,
-		   TQWidget* tqparent = 0, 
+		   TQWidget* parent = 0, 
 		   const char* name = 0 );
 
   TQWidget* mainWidget();

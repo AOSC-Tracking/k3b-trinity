@@ -30,13 +30,13 @@ class K3bVideoDvdView : public K3bView
   TQ_OBJECT
 
  public:
-  K3bVideoDvdView( K3bVideoDvdDoc* doc, TQWidget *tqparent = 0, const char *name = 0 );
+  K3bVideoDvdView( K3bVideoDvdDoc* doc, TQWidget *parent = 0, const char *name = 0 );
   ~K3bVideoDvdView();
 
    void addUrls( const KURL::List& );
 
  protected:
-  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
+  virtual K3bProjectBurnDialog* newBurnDialog( TQWidget* parent = 0, const char* name = 0 );
 
   void init();
 

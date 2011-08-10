@@ -28,7 +28,7 @@ class K3bDataVolumeDescWidget : public base_K3bDataVolumeDescWidget
   TQ_OBJECT
 
  public:
-  K3bDataVolumeDescWidget( TQWidget* tqparent = 0, const char* name =  0 );
+  K3bDataVolumeDescWidget( TQWidget* parent = 0, const char* name =  0 );
   ~K3bDataVolumeDescWidget();
 
   void load( const K3bIsoOptions& );

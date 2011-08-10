@@ -69,8 +69,8 @@ public:
 };
 
 
-K3bAudioDoc::K3bAudioDoc( TQObject* tqparent )
-  : K3bDoc( tqparent ),
+K3bAudioDoc::K3bAudioDoc( TQObject* parent )
+  : K3bDoc( parent ),
     m_firstTrack(0),
     m_lastTrack(0)
 {
@@ -288,11 +288,11 @@ bool K3bAudioDoc::readPlaylistFile( const KURL& url, KURL::List& playlist )
 }
 
 
-void K3bAudioDoc::addSources( K3bAudioTrack* tqparent, 
+void K3bAudioDoc::addSources( K3bAudioTrack* parent, 
 			      const KURL::List& urls, 
 			      K3bAudioDataSource* sourceAfter )
 {
-  kdDebug() << "(K3bAudioDoc::addSources( " << tqparent << ", "
+  kdDebug() << "(K3bAudioDoc::addSources( " << parent << ", "
 	    << urls.first().path() << ", " 
 	    << sourceAfter << " )" << endl;
   KURL::List allUrls = extractUrlList( urls );
@@ -302,7 +302,7 @@ void K3bAudioDoc::addSources( K3bAudioTrack* tqparent,
       if( sourceAfter )
 	file->moveAfter( sourceAfter );
       else
-	file->moveAhead( tqparent->firstSource() );
+	file->moveAhead( parent->firstSource() );
       sourceAfter = file;
     }
   }
@@ -916,9 +916,9 @@ int K3bAudioDoc::numOfTracks() const
 }
 
 
-K3bBurnJob* K3bAudioDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
+K3bBurnJob* K3bAudioDoc::newBurnJob( K3bJobHandler* hdl, TQObject* parent )
 {
-  return new K3bAudioJob( this, hdl, tqparent );
+  return new K3bAudioJob( this, hdl, parent );
 }
 
 

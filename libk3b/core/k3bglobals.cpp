@@ -191,17 +191,17 @@ TQString K3b::prepareDir( const TQString& dir )
 
 TQString K3b::parentDir( const TQString& path )
 {
-  TQString tqparent = path;
+  TQString parent = path;
   if( path[path.length()-1] == '/' )
-    tqparent.truncate( tqparent.length()-1 );
+    parent.truncate( parent.length()-1 );
 
-  int pos = tqparent.findRev( '/' );
+  int pos = parent.findRev( '/' );
   if( pos >= 0 )
-    tqparent.truncate( pos+1 );
+    parent.truncate( pos+1 );
   else // relative path, do anything...
-    tqparent = "/";
+    parent = "/";
 
-  return tqparent;
+  return parent;
 }
 
 

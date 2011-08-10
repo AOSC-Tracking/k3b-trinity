@@ -151,10 +151,10 @@ K3bFileTreeBranch::K3bFileTreeBranch( KFileTreeView* view,
 
 
 
-K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeViewItem* tqparent,
+K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeViewItem* parent,
 						  K3bDevice::Device* dev,
 						  K3bDeviceBranch* branch )
-  : KFileTreeViewItem( tqparent,
+  : KFileTreeViewItem( parent,
 		       new KFileItem( KURL( "media:/" + dev->blockDeviceName() ),
 				      "inode/directory",
 				      S_IFDIR  ),
@@ -165,10 +165,10 @@ K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeViewItem* tqparent,
 }
 
 
-K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeView* tqparent,
+K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeView* parent,
 						  K3bDevice::Device* dev,
 						  K3bDeviceBranch* branch )
-  : KFileTreeViewItem( tqparent,
+  : KFileTreeViewItem( parent,
 		       new KFileItem( KURL( "media:/" + dev->blockDeviceName() ),
 				      "inode/directory",
 				      S_IFDIR  ),
@@ -279,14 +279,14 @@ TQString K3bDeviceBranchViewItem::key( int column, bool ascending ) const
 
 
 
-K3bFileTreeViewItem::K3bFileTreeViewItem( KFileTreeViewItem* tqparent, KFileItem* item, KFileTreeBranch* branch )
-  : KFileTreeViewItem( tqparent, item, branch )
+K3bFileTreeViewItem::K3bFileTreeViewItem( KFileTreeViewItem* parent, KFileItem* item, KFileTreeBranch* branch )
+  : KFileTreeViewItem( parent, item, branch )
 {
 }
 
 
-K3bFileTreeViewItem::K3bFileTreeViewItem( KFileTreeView* tqparent, KFileItem* item, KFileTreeBranch* branch )
-  : KFileTreeViewItem( tqparent, item, branch )
+K3bFileTreeViewItem::K3bFileTreeViewItem( KFileTreeView* parent, KFileItem* item, KFileTreeBranch* branch )
+  : KFileTreeViewItem( parent, item, branch )
 {
 }
 
@@ -300,7 +300,7 @@ TQString K3bFileTreeViewItem::key( int column, bool ascending ) const
 class K3bDeviceTreeToolTip : public K3bToolTip
 {
 public:
-  K3bDeviceTreeToolTip( TQWidget* tqparent, K3bFileTreeView* lv );
+  K3bDeviceTreeToolTip( TQWidget* parent, K3bFileTreeView* lv );
 
   void maybeTip( const TQPoint &pos );
 
@@ -309,8 +309,8 @@ private:
 };
 
 
-K3bDeviceTreeToolTip::K3bDeviceTreeToolTip( TQWidget* tqparent, K3bFileTreeView* lv )
-  : K3bToolTip( tqparent ),
+K3bDeviceTreeToolTip::K3bDeviceTreeToolTip( TQWidget* parent, K3bFileTreeView* lv )
+  : K3bToolTip( parent ),
     m_view( lv )
 {
   setTipTimeout( 500 );
@@ -396,8 +396,8 @@ public:
   K3bDeviceTreeToolTip* toolTip;
 };
 
-K3bFileTreeView::K3bFileTreeView( TQWidget *tqparent, const char *name )
-  : KFileTreeView( tqparent,  name )
+K3bFileTreeView::K3bFileTreeView( TQWidget *parent, const char *name )
+  : KFileTreeView( parent,  name )
 {
   d = new Private();
 

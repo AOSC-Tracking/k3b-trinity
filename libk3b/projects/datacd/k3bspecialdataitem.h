@@ -29,15 +29,15 @@
 class K3bSpecialDataItem : public K3bDataItem
 {
  public:
-  K3bSpecialDataItem( K3bDataDoc* doc, KIO::filesize_t size, K3bDirItem* tqparent = 0, const TQString& k3bName = TQString() )
-    : K3bDataItem( doc, tqparent ),
+  K3bSpecialDataItem( K3bDataDoc* doc, KIO::filesize_t size, K3bDirItem* parent = 0, const TQString& k3bName = TQString() )
+    : K3bDataItem( doc, parent ),
     m_size( size )
     {
       setK3bName( k3bName );
 
       // add automagically like a qlistviewitem
-      if( tqparent )
-	tqparent->addDataItem( this );
+      if( parent )
+	parent->addDataItem( this );
     }
 
     K3bSpecialDataItem( const K3bSpecialDataItem& item )
@@ -48,8 +48,8 @@ class K3bSpecialDataItem : public K3bDataItem
 
   ~K3bSpecialDataItem() {
     // remove this from parentdir
-    if( tqparent() )
-      tqparent()->takeDataItem( this );
+    if( parent() )
+      parent()->takeDataItem( this );
   }
 
   K3bDataItem* copy() const {

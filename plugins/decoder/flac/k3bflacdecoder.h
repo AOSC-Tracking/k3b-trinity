@@ -27,14 +27,14 @@ class K3bFLACDecoderFactory : public K3bAudioDecoderFactory
   TQ_OBJECT
 
  public:
-  K3bFLACDecoderFactory( TQObject* tqparent = 0, const char* name = 0 );
+  K3bFLACDecoderFactory( TQObject* parent = 0, const char* name = 0 );
   ~K3bFLACDecoderFactory();
 
   bool canDecode( const KURL& filename );
 
   int pluginSystemVersion() const { return 3; }
 
-  K3bAudioDecoder* createDecoder( TQObject* tqparent = 0, 
+  K3bAudioDecoder* createDecoder( TQObject* parent = 0, 
 				  const char* name = 0 ) const;
 };
 
@@ -45,7 +45,7 @@ class K3bFLACDecoder : public K3bAudioDecoder
   TQ_OBJECT
 
  public: 
-  K3bFLACDecoder( TQObject* tqparent = 0, const char* name = 0 );
+  K3bFLACDecoder( TQObject* parent = 0, const char* name = 0 );
   ~K3bFLACDecoder();
 
   void cleanup();

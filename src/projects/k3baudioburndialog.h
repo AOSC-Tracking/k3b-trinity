@@ -45,7 +45,7 @@ class K3bAudioBurnDialog : public K3bProjectBurnDialog
   TQ_OBJECT
 
  public:
-  K3bAudioBurnDialog(K3bAudioDoc* doc, TQWidget *tqparent=0, const char *name=0, bool modal = true );
+  K3bAudioBurnDialog(K3bAudioDoc* doc, TQWidget *parent=0, const char *name=0, bool modal = true );
   ~K3bAudioBurnDialog();
    
  protected:

@@ -39,7 +39,7 @@ class K3bVcdBurnDialog : public K3bProjectBurnDialog
   TQ_OBJECT
 
     public:
-        K3bVcdBurnDialog( K3bVcdDoc* doc, TQWidget *tqparent = 0, const char *name = 0, bool modal = true );
+        K3bVcdBurnDialog( K3bVcdDoc* doc, TQWidget *parent = 0, const char *name = 0, bool modal = true );
         ~K3bVcdBurnDialog();
 
         K3bVcdDoc* vcdDoc() const

@@ -124,8 +124,8 @@ public:
 };
 
 
-K3bOggVorbisEncoder::K3bOggVorbisEncoder( TQObject* tqparent, const char* name )
-  : K3bAudioEncoder( tqparent, name )
+K3bOggVorbisEncoder::K3bOggVorbisEncoder( TQObject* parent, const char* name )
+  : K3bAudioEncoder( parent, name )
 {
   d = new Private();
 }
@@ -426,8 +426,8 @@ void K3bOggVorbisEncoder::loadConfig()
 
 
 
-K3bOggVorbisEncoderSettingsWidget::K3bOggVorbisEncoderSettingsWidget( TQWidget* tqparent, const char* name )
-  : K3bPluginConfigWidget( tqparent, name )
+K3bOggVorbisEncoderSettingsWidget::K3bOggVorbisEncoderSettingsWidget( TQWidget* parent, const char* name )
+  : K3bPluginConfigWidget( parent, name )
 {
   w = new base_K3bOggVorbisEncoderSettingsWidget( this );
 
@@ -545,10 +545,10 @@ long long K3bOggVorbisEncoder::fileSize( const TQString&, const K3b::Msf& msf ) 
 }
 
 
-K3bPluginConfigWidget* K3bOggVorbisEncoder::createConfigWidget( TQWidget* tqparent, 
+K3bPluginConfigWidget* K3bOggVorbisEncoder::createConfigWidget( TQWidget* parent, 
 								const char* name ) const
 {
-  return new K3bOggVorbisEncoderSettingsWidget( tqparent, name );
+  return new K3bOggVorbisEncoderSettingsWidget( parent, name );
 }
 
 

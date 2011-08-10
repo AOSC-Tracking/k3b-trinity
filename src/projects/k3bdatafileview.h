@@ -50,7 +50,7 @@ class K3bDataFileView : public K3bListView
   TQ_OBJECT
 
  public:
-  K3bDataFileView( K3bView*, K3bDataDirTreeView*, K3bDataDoc*, TQWidget* tqparent );
+  K3bDataFileView( K3bView*, K3bDataDirTreeView*, K3bDataDoc*, TQWidget* parent );
   ~K3bDataFileView();
 	
   K3bDirItem* currentDir() const;
@@ -67,7 +67,7 @@ class K3bDataFileView : public K3bListView
  private slots:
   void slotDataItemRemoved( K3bDataItem* );
   void slotExecuted( TQListViewItem* );
-  void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* tqparent );
+  void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* parent );
   void showPopupMenu( KListView*, TQListViewItem* _item, const TQPoint& );
   void slotRenameItem();
   void slotRemoveItem();

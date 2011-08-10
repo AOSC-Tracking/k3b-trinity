@@ -49,16 +49,16 @@
 
 using namespace std;
 
-K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* tqparent )
-  : KListViewItem( tqparent ), m_filename( filename )
+K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* parent )
+  : KListViewItem( parent ), m_filename( filename )
 {
   m_length = 0;
   m_bActive = false;
 }
 
 
-K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* tqparent, TQListViewItem* after )
-  : KListViewItem( tqparent, after ), m_filename( filename )
+K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* parent, TQListViewItem* after )
+  : KListViewItem( parent, after ), m_filename( filename )
 {
   m_length = 0;
   m_bActive = false;
@@ -110,8 +110,8 @@ void K3bPlayListViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int c
 }
 
 
-K3bPlayListView::K3bPlayListView( TQWidget* tqparent, const char* name )
-  : KListView( tqparent, name )
+K3bPlayListView::K3bPlayListView( TQWidget* parent, const char* name )
+  : KListView( parent, name )
 {
   addColumn( i18n("Filename") );
   addColumn( i18n("Length") );
@@ -154,8 +154,8 @@ TQDragObject* K3bPlayListView::dragObject()
 }
 
 
-K3bAudioPlayer::K3bAudioPlayer( TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name )
+K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
+  : TQWidget( parent, name )
 #ifdef WITH_ARTS
 , m_playObject( Arts::PlayObject::null() )
 #endif

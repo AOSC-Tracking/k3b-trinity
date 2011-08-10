@@ -38,8 +38,8 @@ class LIBK3B_EXPORT K3bCutComboBox : public KComboBox
   TQ_OBJECT
 
  public:
-  K3bCutComboBox( TQWidget* tqparent = 0, const char* name = 0 );
-  K3bCutComboBox( int method, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bCutComboBox( TQWidget* parent = 0, const char* name = 0 );
+  K3bCutComboBox( int method, TQWidget* parent = 0, const char* name = 0 );
   virtual ~K3bCutComboBox();
 
   enum Method {

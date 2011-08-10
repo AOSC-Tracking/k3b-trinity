@@ -25,7 +25,7 @@ class K3bCddbOptionTab : public base_K3bCddbOptionTab
   TQ_OBJECT
 
  public:
-  K3bCddbOptionTab( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bCddbOptionTab( TQWidget* parent = 0, const char* name = 0 );
   ~K3bCddbOptionTab();
 
  public slots:

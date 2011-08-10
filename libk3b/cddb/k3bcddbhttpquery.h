@@ -32,7 +32,7 @@ class K3bCddbHttpQuery : public K3bCddbQuery
   TQ_OBJECT
 
  public:
-  K3bCddbHttpQuery( TQObject* tqparent = 0, const char* name = 0 );
+  K3bCddbHttpQuery( TQObject* parent = 0, const char* name = 0 );
   ~K3bCddbHttpQuery();
 
  public slots:

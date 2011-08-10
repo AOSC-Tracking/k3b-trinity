@@ -45,7 +45,7 @@ class K3bDeviceWidget : public TQWidget
   TQ_OBJECT
 
  public:
-  K3bDeviceWidget( K3bDevice::DeviceManager*, TQWidget *tqparent = 0, const char *name = 0 );
+  K3bDeviceWidget( K3bDevice::DeviceManager*, TQWidget *parent = 0, const char *name = 0 );
   ~K3bDeviceWidget();
 
  public slots:

@@ -84,7 +84,7 @@ class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
   static int wait( K3bDevice::Device* device, 
 		   bool appendable = false, 
 		   int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
-		   TQWidget* tqparent = 0 );
+		   TQWidget* parent = 0 );
 
   /**
    * Starts the emptydiskwaiter.
@@ -97,7 +97,7 @@ class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
 		   int mediaState,
 		   int mediaType = K3bDevice::MEDIA_WRITABLE_CD,
 		   const TQString& message = TQString(),
-		   TQWidget* tqparent = 0 );
+		   TQWidget* parent = 0 );
 
  protected slots:
   void slotCancel();
@@ -114,7 +114,7 @@ class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
   /**
    * Use the static wait methods.
    */
-  explicit K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* tqparent = 0, const char* name = 0 );
+  explicit K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* parent = 0, const char* name = 0 );
 
   int waitForDisc( int mediaState = K3bDevice::STATE_EMPTY,
 		   int mediaType = K3bDevice::MEDIA_WRITABLE_CD,

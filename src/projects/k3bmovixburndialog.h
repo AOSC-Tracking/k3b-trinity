@@ -33,7 +33,7 @@ class K3bMovixBurnDialog : public K3bProjectBurnDialog
   TQ_OBJECT
 
  public:
-  K3bMovixBurnDialog( K3bMovixDoc* doc, TQWidget* tqparent = 0, const char* name = 0, bool modal = true );
+  K3bMovixBurnDialog( K3bMovixDoc* doc, TQWidget* parent = 0, const char* name = 0, bool modal = true );
   ~K3bMovixBurnDialog();
 
  protected slots:

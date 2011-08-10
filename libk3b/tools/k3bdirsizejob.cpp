@@ -131,8 +131,8 @@ private:
 };
 
 
-K3bDirSizeJob::K3bDirSizeJob( TQObject* tqparent )
-  : K3bThreadJob( new K3bSimpleJobHandler(), tqparent )
+K3bDirSizeJob::K3bDirSizeJob( TQObject* parent )
+  : K3bThreadJob( new K3bSimpleJobHandler(), parent )
 {
   d = new WorkThread;
   setThread( d );

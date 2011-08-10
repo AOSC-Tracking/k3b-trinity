@@ -38,7 +38,7 @@ class K3bVideoCdRippingDialog : public K3bInteractionDialog
   TQ_OBJECT
 
  public: 
-  K3bVideoCdRippingDialog( K3bVideoCdRippingOptions* options, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bVideoCdRippingDialog( K3bVideoCdRippingOptions* options, TQWidget* parent = 0, const char* name = 0 );
   ~K3bVideoCdRippingDialog();
 
  private:

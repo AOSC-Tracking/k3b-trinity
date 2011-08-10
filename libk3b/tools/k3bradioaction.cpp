@@ -18,32 +18,32 @@
 #include <ktoolbarbutton.h>
 
 K3bRadioAction::K3bRadioAction( const TQString& text, const KShortcut& cut,
-				TQObject* tqparent, const char* name )
-  : KToggleAction( text, cut, tqparent, name ),
+				TQObject* parent, const char* name )
+  : KToggleAction( text, cut, parent, name ),
     m_alwaysEmit(false)
 {
 }
 
 K3bRadioAction::K3bRadioAction( const TQString& text, const KShortcut& cut,
 				const TQObject* receiver, const char* slot,
-				TQObject* tqparent, const char* name )
-  : KToggleAction( text, cut, receiver, slot, tqparent, name ),
+				TQObject* parent, const char* name )
+  : KToggleAction( text, cut, receiver, slot, parent, name ),
     m_alwaysEmit(false)
 {
 }
 
 K3bRadioAction::K3bRadioAction( const TQString& text, const TQIconSet& pix,
 				const KShortcut& cut,
-				TQObject* tqparent, const char* name )
-  : KToggleAction( text, pix, cut, tqparent, name ),
+				TQObject* parent, const char* name )
+  : KToggleAction( text, pix, cut, parent, name ),
     m_alwaysEmit(false)
 {
 }
 
 K3bRadioAction::K3bRadioAction( const TQString& text, const TQString& pix,
 				const KShortcut& cut,
-				TQObject* tqparent, const char* name )
-  : KToggleAction( text, pix, cut, tqparent, name ),
+				TQObject* parent, const char* name )
+  : KToggleAction( text, pix, cut, parent, name ),
     m_alwaysEmit(false)
 {
 }
@@ -51,8 +51,8 @@ K3bRadioAction::K3bRadioAction( const TQString& text, const TQString& pix,
 K3bRadioAction::K3bRadioAction( const TQString& text, const TQIconSet& pix,
 				const KShortcut& cut,
 				const TQObject* receiver, const char* slot,
-				TQObject* tqparent, const char* name )
-  : KToggleAction( text, pix, cut, receiver, slot, tqparent, name ),
+				TQObject* parent, const char* name )
+  : KToggleAction( text, pix, cut, receiver, slot, parent, name ),
     m_alwaysEmit(false)
 {
 }
@@ -60,14 +60,14 @@ K3bRadioAction::K3bRadioAction( const TQString& text, const TQIconSet& pix,
 K3bRadioAction::K3bRadioAction( const TQString& text, const TQString& pix,
 				const KShortcut& cut,
 				const TQObject* receiver, const char* slot,
-				TQObject* tqparent, const char* name )
-  : KToggleAction( text, pix, cut, receiver, slot, tqparent, name ),
+				TQObject* parent, const char* name )
+  : KToggleAction( text, pix, cut, receiver, slot, parent, name ),
     m_alwaysEmit(false)
 {
 }
 
-K3bRadioAction::K3bRadioAction( TQObject* tqparent, const char* name )
-  : KToggleAction( tqparent, name ),
+K3bRadioAction::K3bRadioAction( TQObject* parent, const char* name )
+  : KToggleAction( parent, name ),
     m_alwaysEmit(false)
 {
 }

@@ -30,7 +30,7 @@ class K3bCddbSubmit : public TQObject
   TQ_OBJECT
 
  public:
-  K3bCddbSubmit( TQObject* tqparent = 0, const char* name = 0 );
+  K3bCddbSubmit( TQObject* parent = 0, const char* name = 0 );
   virtual ~K3bCddbSubmit();
 
   int error() const { return m_error; }

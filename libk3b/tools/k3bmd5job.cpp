@@ -68,8 +68,8 @@ public:
 };
 
 
-K3bMd5Job::K3bMd5Job( K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bJob( jh, tqparent, name )
+K3bMd5Job::K3bMd5Job( K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bJob( jh, parent, name )
 {
   d = new K3bMd5JobPrivate;
   d->data = new char[K3bMd5JobPrivate::BUFFERSIZE];

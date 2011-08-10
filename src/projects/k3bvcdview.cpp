@@ -34,8 +34,8 @@
 #include <k3bcore.h>
 
 
-K3bVcdView::K3bVcdView( K3bVcdDoc* pDoc, TQWidget* tqparent, const char *name )
-        : K3bView( pDoc, tqparent, name )
+K3bVcdView::K3bVcdView( K3bVcdDoc* pDoc, TQWidget* parent, const char *name )
+        : K3bView( pDoc, parent, name )
 {
     m_doc = pDoc;
 
@@ -53,9 +53,9 @@ K3bVcdView::~K3bVcdView()
 {}
 
 
-K3bProjectBurnDialog* K3bVcdView::newBurnDialog( TQWidget * tqparent, const char * name )
+K3bProjectBurnDialog* K3bVcdView::newBurnDialog( TQWidget * parent, const char * name )
 {
-  return new K3bVcdBurnDialog( m_doc, tqparent, name, true );
+  return new K3bVcdBurnDialog( m_doc, parent, name, true );
 }
 
 

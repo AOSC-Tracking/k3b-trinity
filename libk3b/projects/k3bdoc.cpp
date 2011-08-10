@@ -40,8 +40,8 @@
 #include <k3bdevicemanager.h>
 
 
-K3bDoc::K3bDoc( TQObject* tqparent )
-  : TQObject( tqparent ),
+K3bDoc::K3bDoc( TQObject* parent )
+  : TQObject( parent ),
     m_modified(false),
     m_view(0)
 {

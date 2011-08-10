@@ -37,7 +37,7 @@ class LIBK3B_EXPORT K3bDeviceComboBox : public KComboBox
   TQ_OBJECT
 
  public:
-  K3bDeviceComboBox( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bDeviceComboBox( TQWidget* parent = 0, const char* name = 0 );
   ~K3bDeviceComboBox();
 
   K3bDevice::Device* selectedDevice() const;

@@ -94,8 +94,8 @@ public:
 
 
 
-K3bTitleLabel::K3bTitleLabel( TQWidget* tqparent, const char* name )
-  : TQFrame( tqparent, name )
+K3bTitleLabel::K3bTitleLabel( TQWidget* parent, const char* name )
+  : TQFrame( parent, name )
 {
   d = new Private();
   m_toolTip = new ToolTip( this );

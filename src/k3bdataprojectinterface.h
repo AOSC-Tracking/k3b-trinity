@@ -41,16 +41,16 @@ class K3bDataProjectInterface : public K3bProjectInterface
 
   /**
    * Create a new folder with name @p name in the folder with the
-   * absolute path @p tqparent. 
+   * absolute path @p parent. 
    *
    * \return true if the folder was created successfully, false if 
-   *         an item with the same name already exists or the tqparent
+   *         an item with the same name already exists or the parent
    *         directory could not be found.
    *
    * Example: createFolder( "test", "/foo/bar" ) will create the
    *          folder /foo/bar/test.
    */
-  bool createFolder( const TQString& name, const TQString& tqparent );
+  bool createFolder( const TQString& name, const TQString& parent );
 
   /**
    * Add urls to a specific folder in the project.
@@ -58,9 +58,9 @@ class K3bDataProjectInterface : public K3bProjectInterface
    * Example: addUrl( "test.txt", "/foo/bar" ) will add the file test.txt
    *          to folder /foo/bar.
    */
-  void addUrl( const TQString& url, const TQString& tqparent );
+  void addUrl( const TQString& url, const TQString& parent );
 
-  void addUrls( const TQStringList& urls, const TQString& tqparent );
+  void addUrls( const TQStringList& urls, const TQString& parent );
 
   /**
    * Remove an item

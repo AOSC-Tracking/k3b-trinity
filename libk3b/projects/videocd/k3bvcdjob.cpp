@@ -43,8 +43,8 @@
 #include <k3bcdrecordwriter.h>
 #include <k3bcdrdaowriter.h>
 
-K3bVcdJob::K3bVcdJob( K3bVcdDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
-        : K3bBurnJob( jh, tqparent, name )
+K3bVcdJob::K3bVcdJob( K3bVcdDoc* doc, K3bJobHandler* jh, TQObject* parent, const char* name )
+        : K3bBurnJob( jh, parent, name )
 {
     m_doc = doc;
     m_doc->setCopies( m_doc->dummy() || m_doc->onlyCreateImages() ? 1 : m_doc->copies() );

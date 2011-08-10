@@ -142,8 +142,8 @@ public:
 
 
 
-K3bLameEncoder::K3bLameEncoder( TQObject* tqparent, const char* name )
-  : K3bAudioEncoder( tqparent, name )
+K3bLameEncoder::K3bLameEncoder( TQObject* parent, const char* name )
+  : K3bAudioEncoder( parent, name )
 {
   d = new Private();
 }
@@ -398,8 +398,8 @@ void K3bLameEncoder::setMetaDataInternal( K3bAudioEncoder::MetaDataField f, cons
 
 
 
-K3bLameEncoderSettingsWidget::K3bLameEncoderSettingsWidget( TQWidget* tqparent, const char* name )
-  : K3bPluginConfigWidget( tqparent, name )
+K3bLameEncoderSettingsWidget::K3bLameEncoderSettingsWidget( TQWidget* parent, const char* name )
+  : K3bPluginConfigWidget( parent, name )
 {
   m_w = new base_K3bLameEncoderSettingsWidget( this );
   m_w->m_sliderQuality->setRange( 0, 9 );
@@ -617,10 +617,10 @@ long long K3bLameEncoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 }
 
 
-K3bPluginConfigWidget* K3bLameEncoder::createConfigWidget( TQWidget* tqparent,
+K3bPluginConfigWidget* K3bLameEncoder::createConfigWidget( TQWidget* parent,
 							   const char* name ) const
 {
-  return new K3bLameEncoderSettingsWidget( tqparent, name );
+  return new K3bLameEncoderSettingsWidget( parent, name );
 }
 
 

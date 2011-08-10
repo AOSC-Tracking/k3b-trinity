@@ -61,16 +61,16 @@ public:
 };
 
 
-K3bWritingModeWidget::K3bWritingModeWidget( int modes, TQWidget* tqparent, const char* name )
-  : K3bIntMapComboBox( tqparent, name )
+K3bWritingModeWidget::K3bWritingModeWidget( int modes, TQWidget* parent, const char* name )
+  : K3bIntMapComboBox( parent, name )
 {
   init();
   setSupportedModes( modes );
 }
 
 
-K3bWritingModeWidget::K3bWritingModeWidget( TQWidget* tqparent, const char* name )
-  : K3bIntMapComboBox( tqparent, name )
+K3bWritingModeWidget::K3bWritingModeWidget( TQWidget* parent, const char* name )
+  : K3bIntMapComboBox( parent, name )
 {
   init();
   setSupportedModes( K3b::DAO | K3b::TAO | K3b::RAW );   // default: support all CD-R(W) modes

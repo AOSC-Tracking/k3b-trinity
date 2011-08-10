@@ -31,7 +31,7 @@ class K3bAudioEditorWidget : public TQFrame
   TQ_OBJECT
 
  public:
-  K3bAudioEditorWidget( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bAudioEditorWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bAudioEditorWidget();
 
   TQSize tqsizeHint() const;

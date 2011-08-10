@@ -38,8 +38,8 @@ public:
 };
 
 
-K3bThroughputEstimator::K3bThroughputEstimator( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bThroughputEstimator::K3bThroughputEstimator( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private();
 }

@@ -30,8 +30,8 @@
 
 
 
-K3bVideoDvdJob::K3bVideoDvdJob( K3bVideoDvdDoc* doc, K3bJobHandler* jh, TQObject* tqparent )
-  : K3bDvdJob( doc, jh, tqparent ),
+K3bVideoDvdJob::K3bVideoDvdJob( K3bVideoDvdDoc* doc, K3bJobHandler* jh, TQObject* parent )
+  : K3bDvdJob( doc, jh, parent ),
     m_doc(doc)
 {
 }

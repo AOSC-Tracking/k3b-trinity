@@ -38,8 +38,8 @@
 #include <tqwhatsthis.h>
 
 
-K3bDvdFormattingDialog::K3bDvdFormattingDialog( TQWidget* tqparent, const char* name, bool modal )
-  : K3bInteractionDialog( tqparent, name,
+K3bDvdFormattingDialog::K3bDvdFormattingDialog( TQWidget* parent, const char* name, bool modal )
+  : K3bInteractionDialog( parent, name,
 			  i18n("DVD Formatting"),
 			  i18n("DVD%1RW").tqarg("�"),
 			  START_BUTTON|CANCEL_BUTTON,

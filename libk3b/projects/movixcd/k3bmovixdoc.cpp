@@ -34,8 +34,8 @@
 #include <tqfileinfo.h>
 
 
-K3bMovixDoc::K3bMovixDoc( TQObject* tqparent )
-  : K3bDataDoc( tqparent )
+K3bMovixDoc::K3bMovixDoc( TQObject* parent )
+  : K3bDataDoc( parent )
 {
   connect( this, TQT_SIGNAL(itemRemoved(K3bDataItem*)),
 	   this, TQT_SLOT(slotDataItemRemoved(K3bDataItem*)) );
@@ -47,9 +47,9 @@ K3bMovixDoc::~K3bMovixDoc()
 }
 
 
-K3bBurnJob* K3bMovixDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
+K3bBurnJob* K3bMovixDoc::newBurnJob( K3bJobHandler* hdl, TQObject* parent )
 {
-  return new K3bMovixJob( this, hdl, tqparent );
+  return new K3bMovixJob( this, hdl, parent );
 }
 
 

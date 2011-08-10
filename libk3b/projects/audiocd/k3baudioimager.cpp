@@ -167,8 +167,8 @@ void K3bAudioImager::WorkThread::cancel()
 
 
 
-K3bAudioImager::K3bAudioImager( K3bAudioDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bThreadJob( jh, tqparent, name ),
+K3bAudioImager::K3bAudioImager( K3bAudioDoc* doc, K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bThreadJob( jh, parent, name ),
     m_doc(doc)
 {
   m_thread = new WorkThread(doc);

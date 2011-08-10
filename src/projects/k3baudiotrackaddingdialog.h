@@ -68,7 +68,7 @@ class K3bAudioTrackAddingDialog : public KDialogBase, public K3bJobHandler
 		      K3bAudioTrack* afterTrack = 0,
 		      K3bAudioTrack* parentTrack = 0,
 		      K3bAudioDataSource* afterSource = 0,
-		      TQWidget* tqparent = 0 );
+		      TQWidget* parent = 0 );
 
  private slots:
   void slotAddUrls();
@@ -76,7 +76,7 @@ class K3bAudioTrackAddingDialog : public KDialogBase, public K3bJobHandler
   void slotCancel();
 
  private:
-  K3bAudioTrackAddingDialog( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bAudioTrackAddingDialog( TQWidget* parent = 0, const char* name = 0 );
 
   static KURL::List extractUrlList( const KURL::List& urls );
 

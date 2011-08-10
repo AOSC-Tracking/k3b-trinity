@@ -92,8 +92,8 @@ class K3bAudioJob::Private
 };
 
 
-K3bAudioJob::K3bAudioJob( K3bAudioDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bBurnJob( hdl, tqparent ),
+K3bAudioJob::K3bAudioJob( K3bAudioDoc* doc, K3bJobHandler* hdl, TQObject* parent )
+  : K3bBurnJob( hdl, parent ),
     m_doc( doc ),
     m_normalizeJob(0),
     m_maxSpeedJob(0)

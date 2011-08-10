@@ -43,8 +43,8 @@
 #include <tqfileinfo.h>
 
 
-K3bMovixBurnDialog::K3bMovixBurnDialog( K3bMovixDoc* doc, TQWidget* tqparent, const char* name, bool modal )
-  : K3bProjectBurnDialog( doc, tqparent, name, modal ),
+K3bMovixBurnDialog::K3bMovixBurnDialog( K3bMovixDoc* doc, TQWidget* parent, const char* name, bool modal )
+  : K3bProjectBurnDialog( doc, parent, name, modal ),
     m_doc(doc)
 {
   prepareGui();

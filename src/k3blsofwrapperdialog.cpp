@@ -39,12 +39,12 @@ static TQString joinProcessNames( const TQValueList<K3bLsofWrapper::Process>& ap
 }
 
 
-K3bLsofWrapperDialog::K3bLsofWrapperDialog( TQWidget* tqparent )
+K3bLsofWrapperDialog::K3bLsofWrapperDialog( TQWidget* parent )
   : KDialogBase( KDialogBase::Swallow,
 		 i18n("Device in use"),
 		 Close|User1|User2,
 		 Close,
-		 tqparent,
+		 parent,
 		 0,
 		 true,
 		 true,
@@ -116,9 +116,9 @@ void K3bLsofWrapperDialog::slotQuitOtherApps()
 }
 
 
-void K3bLsofWrapperDialog::checkDevice( K3bDevice::Device* dev, TQWidget* tqparent )
+void K3bLsofWrapperDialog::checkDevice( K3bDevice::Device* dev, TQWidget* parent )
 {
-  K3bLsofWrapperDialog dlg( tqparent );
+  K3bLsofWrapperDialog dlg( parent );
   dlg.m_device = dev;
   if( dlg.slotCheckDevice() )
     dlg.exec();

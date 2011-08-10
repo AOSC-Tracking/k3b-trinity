@@ -32,7 +32,7 @@ class K3bStatusBarManager : public TQObject
   TQ_OBJECT
 
  public:
-  K3bStatusBarManager( K3bMainWindow* tqparent );
+  K3bStatusBarManager( K3bMainWindow* parent );
   ~K3bStatusBarManager();
 
  public slots:

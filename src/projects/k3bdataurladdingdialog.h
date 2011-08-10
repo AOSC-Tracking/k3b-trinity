@@ -43,16 +43,16 @@ class K3bDataUrlAddingDialog : public KDialogBase
    * \return \see TQDialog::exec()
    */
   static int addUrls( const KURL::List& urls, K3bDirItem* dir = 0,
-		      TQWidget* tqparent = 0 );
+		      TQWidget* parent = 0 );
 
   static int moveItems( const TQValueList<K3bDataItem*>& items, K3bDirItem* dir,
-			TQWidget* tqparent = 0 );
+			TQWidget* parent = 0 );
 
   static int copyItems( const TQValueList<K3bDataItem*>& items, K3bDirItem* dir,
-			TQWidget* tqparent = 0 );
+			TQWidget* parent = 0 );
 
   static int copyMoveItems( const TQValueList<K3bDataItem*>& items, K3bDirItem* dir,
-			    TQWidget* tqparent, bool copy );
+			    TQWidget* parent, bool copy );
 
  private slots:
   void slotAddUrls();
@@ -62,7 +62,7 @@ class K3bDataUrlAddingDialog : public KDialogBase
   void updateProgress();
 
  private:
-  K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* parent = 0, const char* name = 0 );
 
   bool getNewName( const TQString& oldName, K3bDirItem* dir, TQString& newName );
 

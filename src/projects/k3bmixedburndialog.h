@@ -40,7 +40,7 @@ class K3bMixedBurnDialog : public K3bProjectBurnDialog
   TQ_OBJECT
 
  public:
-   K3bMixedBurnDialog( K3bMixedDoc*, TQWidget *tqparent=0, const char *name=0, bool modal = true );
+   K3bMixedBurnDialog( K3bMixedDoc*, TQWidget *parent=0, const char *name=0, bool modal = true );
 
  protected:
    void loadK3bDefaults();

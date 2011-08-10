@@ -47,8 +47,8 @@
 #include <kdeversion.h>
 
 
-K3bDataFileView::K3bDataFileView( K3bView* view, K3bDataDirTreeView* dirTreeView, K3bDataDoc* doc, TQWidget* tqparent )
-  : K3bListView( tqparent ), 
+K3bDataFileView::K3bDataFileView( K3bView* view, K3bDataDirTreeView* dirTreeView, K3bDataDoc* doc, TQWidget* parent )
+  : K3bListView( parent ), 
     m_view(view),
     m_dropDirItem(0)
 {
@@ -126,7 +126,7 @@ void K3bDataFileView::clearItems()
 
 void K3bDataFileView::slotItemAdded( K3bDataItem* item )
 {
-  if( item->tqparent() == currentDir() ) {
+  if( item->parent() == currentDir() ) {
     K3bDataViewItem* vi = 0;
     if( item->isDir() )
       vi = new K3bDataDirViewItem( static_cast<K3bDirItem*>(item), this );
@@ -174,7 +174,7 @@ void K3bDataFileView::checkForNewItems()
   // now check if some of the items have been moved out of the currently showing dir.
   for( TQListViewItemIterator it( this ); it.current(); ++it ) {
     K3bDataViewItem* dataViewItem = dynamic_cast<K3bDataViewItem*>( it.current() );
-    if( dataViewItem && dataViewItem->dataItem()->tqparent() != currentDir() )
+    if( dataViewItem && dataViewItem->dataItem()->parent() != currentDir() )
       delete dataViewItem;
   }  
 }
@@ -373,7 +373,7 @@ void K3bDataFileView::showPopupMenu( KListView*, TQListViewItem* item, const TQP
 
 void K3bDataFileView::slotNewDir()
 {
-  K3bDirItem* tqparent = currentDir();
+  K3bDirItem* parent = currentDir();
 
   TQString name;
   bool ok;
@@ -382,7 +382,7 @@ void K3bDataFileView::slotNewDir()
 				i18n("Please insert the name for the new directory:"),
 				i18n("New Directory"), &ok, this );
 
-  while( ok && K3bDataDoc::nameAlreadyInDir( name, tqparent ) ) {
+  while( ok && K3bDataDoc::nameAlreadyInDir( name, parent ) ) {
     name = KInputDialog::getText( i18n("New Directory"),
 				  i18n("A file with that name already exists. "
 				       "Please insert the name for the new directory:"),
@@ -393,7 +393,7 @@ void K3bDataFileView::slotNewDir()
     return;
 
 
-  m_doc->addEmptyDir( name, tqparent );
+  m_doc->addEmptyDir( name, parent );
 }
 
 
@@ -418,7 +418,7 @@ void K3bDataFileView::slotRemoveItem()
 void K3bDataFileView::slotParentDir()
 {
   if( currentDir() != m_doc->root() ) {
-    slotSetCurrentDir( currentDir()->tqparent() );
+    slotSetCurrentDir( currentDir()->parent() );
 
     emit dirSelected( currentDir() );
   }

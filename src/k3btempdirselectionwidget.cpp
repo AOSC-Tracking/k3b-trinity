@@ -39,8 +39,8 @@
 #include <klineedit.h>
 
 
-K3bTempDirSelectionWidget::K3bTempDirSelectionWidget( TQWidget *tqparent, const char *name )
-  : TQGroupBox( 4, Qt::Vertical, tqparent, name ),
+K3bTempDirSelectionWidget::K3bTempDirSelectionWidget( TQWidget *parent, const char *name )
+  : TQGroupBox( 4, Qt::Vertical, parent, name ),
     m_labelCdSize(0),
     m_defaultImageFileName( "k3b_image.iso" )
 {

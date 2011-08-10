@@ -31,7 +31,7 @@ class K3bNotifyOptionTab : public TQWidget
   TQ_OBJECT
 
  public:
-  K3bNotifyOptionTab( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bNotifyOptionTab( TQWidget* parent = 0, const char* name = 0 );
   ~K3bNotifyOptionTab();
 
   void readSettings();

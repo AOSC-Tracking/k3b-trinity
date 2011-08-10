@@ -31,8 +31,8 @@
 #include <kpopupmenu.h>
 
 
-K3bAppDeviceManager::K3bAppDeviceManager( TQObject* tqparent, const char* name )
-  : K3bDevice::DeviceManager( tqparent, name ),
+K3bAppDeviceManager::K3bAppDeviceManager( TQObject* parent, const char* name )
+  : K3bDevice::DeviceManager( parent, name ),
     m_currentDevice(0),
     m_ejectRequested(false)
 {

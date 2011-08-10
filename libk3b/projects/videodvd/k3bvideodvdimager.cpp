@@ -42,8 +42,8 @@ public:
 };
 
 
-K3bVideoDvdImager::K3bVideoDvdImager( K3bVideoDvdDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bIsoImager( doc, jh, tqparent, name )
+K3bVideoDvdImager::K3bVideoDvdImager( K3bVideoDvdDoc* doc, K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bIsoImager( doc, jh, parent, name )
 {
   d = new Private;
   d->doc = doc;

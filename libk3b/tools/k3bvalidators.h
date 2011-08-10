@@ -26,7 +26,7 @@
 class LIBK3B_EXPORT K3bCharValidator : public TQValidator
 {
  public:
-  K3bCharValidator( TQObject* tqparent = 0, const char* name = 0 );
+  K3bCharValidator( TQObject* parent = 0, const char* name = 0 );
 
   virtual State validateChar( const TQChar& ) const = 0;
 
@@ -50,7 +50,7 @@ class LIBK3B_EXPORT K3bCharValidator : public TQValidator
 class LIBK3B_EXPORT K3bLatin1Validator : public K3bCharValidator
 {
  public:
-  K3bLatin1Validator( TQObject* tqparent = 0, const char* name = 0 );
+  K3bLatin1Validator( TQObject* parent = 0, const char* name = 0 );
 
   virtual State validateChar( const TQChar& ) const;
 };
@@ -59,7 +59,7 @@ class LIBK3B_EXPORT K3bLatin1Validator : public K3bCharValidator
 class LIBK3B_EXPORT K3bAsciiValidator : public K3bLatin1Validator
 {
  public:
-  K3bAsciiValidator( TQObject* tqparent = 0, const char* name = 0 );
+  K3bAsciiValidator( TQObject* parent = 0, const char* name = 0 );
 
   virtual State validateChar( const TQChar& ) const;
 };
@@ -74,8 +74,8 @@ class LIBK3B_EXPORT K3bAsciiValidator : public K3bLatin1Validator
 class LIBK3B_EXPORT K3bValidator : public TQRegExpValidator
 {
  public:
-  K3bValidator( TQObject* tqparent, const char * name = 0 );
-  K3bValidator( const TQRegExp& rx, TQObject* tqparent, const char* name = 0 );
+  K3bValidator( TQObject* parent, const char * name = 0 );
+  K3bValidator( const TQRegExp& rx, TQObject* parent, const char* name = 0 );
 
   void setReplaceChar( const TQChar& s ) { m_replaceChar = s; }
   const TQChar& replaceChar() const { return m_replaceChar; }
@@ -105,13 +105,13 @@ namespace K3bValidators
    * <li>S: serial number (digits)</li>
    * </ul>
    */
-  LIBK3B_EXPORT K3bValidator* isrcValidator( TQObject* tqparent = 0, const char* name = 0 );
+  LIBK3B_EXPORT K3bValidator* isrcValidator( TQObject* parent = 0, const char* name = 0 );
   
   /**
    * This needs to be replaced by something better in the future...
    * Even the name sucks!
    */
-  LIBK3B_EXPORT K3bValidator* iso9660Validator( bool allowEmpty = true, TQObject* tqparent = 0, const char* name = 0 );
+  LIBK3B_EXPORT K3bValidator* iso9660Validator( bool allowEmpty = true, TQObject* parent = 0, const char* name = 0 );
 
   /**
    * (1) d-characters are: A-Z, 0-9, _ (see ISO-9660:1988, Annex A, Table 15)
@@ -125,7 +125,7 @@ namespace K3bValidators
 
   LIBK3B_EXPORT K3bValidator* iso646Validator( int type = Iso646_a, 
 				 bool AllowLowerCase = false, 
-				 TQObject* tqparent = 0, const char* name = 0 );
+				 TQObject* parent = 0, const char* name = 0 );
 }
 
 #endif

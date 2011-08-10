@@ -46,8 +46,8 @@ public:
 
 
 
-K3bVideoDVDTitleDetectClippingJob::K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bJob( hdl, tqparent ),
+K3bVideoDVDTitleDetectClippingJob::K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, TQObject* parent )
+  : K3bJob( hdl, parent ),
     m_clippingTop( 0 ),
     m_clippingBottom( 0 ),
     m_clippingLeft( 0 ),

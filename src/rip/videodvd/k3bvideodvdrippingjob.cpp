@@ -82,8 +82,8 @@ public:
 
 
 
-K3bVideoDVDRippingJob::K3bVideoDVDRippingJob( K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bJob( hdl, tqparent )
+K3bVideoDVDRippingJob::K3bVideoDVDRippingJob( K3bJobHandler* hdl, TQObject* parent )
+  : K3bJob( hdl, parent )
 {
   d = new Private();
 

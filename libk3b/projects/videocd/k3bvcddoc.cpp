@@ -49,8 +49,8 @@ bool print_progress = true;
 bool aspect_correction = false;
 byte forced_sequence_header = 0;
 
-K3bVcdDoc::K3bVcdDoc( TQObject* tqparent )
-        : K3bDoc( tqparent )
+K3bVcdDoc::K3bVcdDoc( TQObject* parent )
+        : K3bDoc( parent )
 {
     m_tracks = 0L;
     m_vcdOptions = new K3bVcdOptions();
@@ -395,9 +395,9 @@ TQString K3bVcdDoc::typeString() const
 }
 
 
-K3bBurnJob* K3bVcdDoc::newBurnJob( K3bJobHandler* hdl, TQObject* tqparent )
+K3bBurnJob* K3bVcdDoc::newBurnJob( K3bJobHandler* hdl, TQObject* parent )
 {
-    return new K3bVcdJob( this, hdl, tqparent );
+    return new K3bVcdJob( this, hdl, parent );
 }
 
 void K3bVcdDoc::informAboutNotFoundFiles()

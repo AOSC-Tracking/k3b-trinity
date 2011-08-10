@@ -33,9 +33,9 @@
 K_EXPORT_COMPONENT_FACTORY(kfile_k3b, KGenericFactory<K3bProjectFilePlugin>("kfile_k3b"))
 
 
-K3bProjectFilePlugin::K3bProjectFilePlugin( TQObject *tqparent, const char *name,
+K3bProjectFilePlugin::K3bProjectFilePlugin( TQObject *parent, const char *name,
 					    const TQStringList &args)
-  : KFilePlugin(tqparent, name, args)
+  : KFilePlugin(parent, name, args)
 {
   KFileMimeTypeInfo* info = addMimeTypeInfo( "application/x-k3b" );
 

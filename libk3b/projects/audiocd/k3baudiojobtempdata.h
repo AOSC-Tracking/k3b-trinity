@@ -31,7 +31,7 @@ class K3bAudioJobTempData : public TQObject
   TQ_OBJECT
 
  public:
-  K3bAudioJobTempData( K3bAudioDoc* doc, TQObject* tqparent = 0, const char* name = 0 );
+  K3bAudioJobTempData( K3bAudioDoc* doc, TQObject* parent = 0, const char* name = 0 );
   ~K3bAudioJobTempData();
 
   const TQString& bufferFileName( int track );

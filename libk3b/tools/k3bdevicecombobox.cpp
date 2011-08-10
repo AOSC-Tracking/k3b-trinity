@@ -32,8 +32,8 @@ public:
 };
 
 
-K3bDeviceComboBox::K3bDeviceComboBox( TQWidget* tqparent, const char* name )
-  : KComboBox( tqparent, name )
+K3bDeviceComboBox::K3bDeviceComboBox( TQWidget* parent, const char* name )
+  : KComboBox( parent, name )
 {
   d = new Private();
   connect( this, TQT_SIGNAL(activated(int)),

@@ -54,12 +54,12 @@ public:
 };
 
 
-K3bAudioTrackAddingDialog::K3bAudioTrackAddingDialog( TQWidget* tqparent, const char* name )
+K3bAudioTrackAddingDialog::K3bAudioTrackAddingDialog( TQWidget* parent, const char* name )
   : KDialogBase( Plain,
 		 i18n("Please be patient..."),
 		 Cancel,
 		 Cancel,
-		 tqparent,
+		 parent,
 		 name,
 		 true,
 		 true ),
@@ -93,12 +93,12 @@ int K3bAudioTrackAddingDialog::addUrls( const KURL::List& urls,
 					K3bAudioTrack* afterTrack,
 					K3bAudioTrack* parentTrack,
 					K3bAudioDataSource* afterSource,
-					TQWidget* tqparent )
+					TQWidget* parent )
 {
   if( urls.isEmpty() )
     return 0;
 
-  K3bAudioTrackAddingDialog dlg( tqparent );
+  K3bAudioTrackAddingDialog dlg( parent );
   dlg.m_urls = extractUrlList( urls );
   dlg.m_doc = doc;
   dlg.m_trackAfter = afterTrack;
@@ -132,7 +132,7 @@ int K3bAudioTrackAddingDialog::addUrls( const KURL::List& urls,
       .tqarg( dlg.m_unsupportedFiles.join( "<br>" ) );
 
   if( !message.isEmpty() )
-    KMessageBox::detailedSorry( tqparent, i18n("Problems while adding files to the project."), message );
+    KMessageBox::detailedSorry( parent, i18n("Problems while adding files to the project."), message );
 
   return ret;
 }

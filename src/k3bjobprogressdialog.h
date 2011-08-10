@@ -52,7 +52,7 @@ class K3bJobProgressDialog : public KDialog, public K3bJobHandler
   TQ_OBJECT
 
  public:
-  K3bJobProgressDialog( TQWidget* tqparent = 0, 
+  K3bJobProgressDialog( TQWidget* parent = 0, 
 			const char* name = 0, 
 			bool showSubProgress = true, 
 			bool modal = FALSE, 

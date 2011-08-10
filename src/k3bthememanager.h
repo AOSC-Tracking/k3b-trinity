@@ -114,7 +114,7 @@ class K3bThemeManager : public TQObject
   TQ_OBJECT
 
  public:
-  K3bThemeManager( TQObject* tqparent = 0, const char* name = 0 );
+  K3bThemeManager( TQObject* parent = 0, const char* name = 0 );
   ~K3bThemeManager();
 
   const TQValueList<K3bTheme*>& themes() const;

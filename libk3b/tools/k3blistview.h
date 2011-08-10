@@ -42,30 +42,30 @@ class K3bListView;
 class LIBK3B_EXPORT K3bListViewItem : public KListViewItem
 {
  public:
-  K3bListViewItem(TQListView *tqparent);
-  K3bListViewItem(TQListViewItem *tqparent);
-  K3bListViewItem(TQListView *tqparent, TQListViewItem *after);
-  K3bListViewItem(TQListViewItem *tqparent, TQListViewItem *after);
+  K3bListViewItem(TQListView *parent);
+  K3bListViewItem(TQListViewItem *parent);
+  K3bListViewItem(TQListView *parent, TQListViewItem *after);
+  K3bListViewItem(TQListViewItem *parent, TQListViewItem *after);
 
-  K3bListViewItem(TQListView *tqparent,
+  K3bListViewItem(TQListView *parent,
 		  const TQString&, const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString());
 
-  K3bListViewItem(TQListViewItem *tqparent,
+  K3bListViewItem(TQListViewItem *parent,
 		  const TQString&, const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString());
 
-  K3bListViewItem(TQListView *tqparent, TQListViewItem *after,
+  K3bListViewItem(TQListView *parent, TQListViewItem *after,
 		  const TQString&, const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString());
 
-  K3bListViewItem(TQListViewItem *tqparent, TQListViewItem *after,
+  K3bListViewItem(TQListViewItem *parent, TQListViewItem *after,
 		  const TQString&, const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString(),
 		  const TQString& = TQString(), const TQString& = TQString(),
@@ -136,10 +136,10 @@ class LIBK3B_EXPORT K3bListViewItem : public KListViewItem
 class LIBK3B_EXPORT K3bCheckListViewItem : public K3bListViewItem
 {
  public:
-  K3bCheckListViewItem(TQListView *tqparent);
-  K3bCheckListViewItem(TQListViewItem *tqparent);
-  K3bCheckListViewItem(TQListView *tqparent, TQListViewItem *after);
-  K3bCheckListViewItem(TQListViewItem *tqparent, TQListViewItem *after);
+  K3bCheckListViewItem(TQListView *parent);
+  K3bCheckListViewItem(TQListViewItem *parent);
+  K3bCheckListViewItem(TQListView *parent, TQListViewItem *after);
+  K3bCheckListViewItem(TQListViewItem *parent, TQListViewItem *after);
 
   virtual bool isChecked() const;
   virtual void setChecked( bool checked );
@@ -161,7 +161,7 @@ class LIBK3B_EXPORT K3bListView : public KListView
   TQ_OBJECT
 
  public:
-  K3bListView (TQWidget *tqparent = 0, const char *name = 0);
+  K3bListView (TQWidget *parent = 0, const char *name = 0);
   virtual ~K3bListView();
 
   virtual void setCurrentItem( TQListViewItem* );

@@ -35,12 +35,12 @@ class K3bDataDoc;
 class LIBK3B_EXPORT K3bDataItem
 {
  public: 
-  K3bDataItem( K3bDataDoc* doc, K3bDataItem* tqparent = 0, int flags = 0 );
+  K3bDataItem( K3bDataDoc* doc, K3bDataItem* parent = 0, int flags = 0 );
 
   /**
    * Default copy constructor.
    *
-   * The result is an exact copy except that no tqparent dir it set and, thus, also no doc.
+   * The result is an exact copy except that no parent dir it set and, thus, also no doc.
    */
   K3bDataItem( const K3bDataItem& );
 
@@ -49,17 +49,17 @@ class LIBK3B_EXPORT K3bDataItem
   /**
    * Return an exact copy of this data item.
    *
-   * The result is an exact copy except that no tqparent dir it set and, thus, also no doc.
+   * The result is an exact copy except that no parent dir it set and, thus, also no doc.
    *
    * Implementations should use the default constructor.
    */
   virtual K3bDataItem* copy() const = 0;
 	
-  K3bDirItem* tqparent() { return m_parentDir; }
+  K3bDirItem* parent() { return m_parentDir; }
   K3bDirItem* getParent() const { return m_parentDir; }
 
   /**
-   * Remove this item from it's tqparent and return a pointer to it.
+   * Remove this item from it's parent and return a pointer to it.
    */
   K3bDataItem* take();
 	
@@ -133,7 +133,7 @@ class LIBK3B_EXPORT K3bDataItem
   virtual void reparent( K3bDirItem* );
 
   // FIXME: use all these flags and make the isXXX methods
-  // non-virtual. Then move the tqparent()->addDataItem call
+  // non-virtual. Then move the parent()->addDataItem call
   // to the K3bDataItem constructor
   enum ItemFlags {
     DIR = 0x1,

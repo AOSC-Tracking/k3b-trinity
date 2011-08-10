@@ -40,8 +40,8 @@
 
 // TODO: handle the default-settings
 
-K3bOptionDialog::K3bOptionDialog(TQWidget *tqparent, const char *name, bool modal )
-  : KDialogBase( IconList, i18n("Settings"), Apply|Ok|Cancel, Ok, tqparent,name, modal, true)
+K3bOptionDialog::K3bOptionDialog(TQWidget *parent, const char *name, bool modal )
+  : KDialogBase( IconList, i18n("Settings"), Apply|Ok|Cancel, Ok, parent,name, modal, true)
 {
   setupMiscPage();
   setupDevicePage();	

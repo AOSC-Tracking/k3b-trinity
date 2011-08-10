@@ -149,8 +149,8 @@ static TQString createItemsString( const TQValueList<K3bDataItem*>& items, unsig
 }
 
 
-K3bDataPreparationJob::K3bDataPreparationJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bJob( hdl, tqparent )
+K3bDataPreparationJob::K3bDataPreparationJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* parent )
+  : K3bJob( hdl, parent )
 {
   d = new Private( doc );
   d->threadJob = new K3bThreadJob( d, this, this );

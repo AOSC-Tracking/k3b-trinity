@@ -62,8 +62,8 @@ class LIBK3B_EXPORT K3bAudioOutputPlugin : public K3bPlugin
   virtual int write( char* data, int len ) = 0;
 
  protected:
-  K3bAudioOutputPlugin( TQObject* tqparent = 0, const char* name = 0 )
-    : K3bPlugin( tqparent, name ) {
+  K3bAudioOutputPlugin( TQObject* parent = 0, const char* name = 0 )
+    : K3bPlugin( parent, name ) {
   }
 };
 

@@ -24,8 +24,8 @@
 K_EXPORT_COMPONENT_FACTORY( libk3bartsoutputplugin, K3bPluginFactory<K3bArtsOutputPlugin>( "k3bartsoutputplugin" ) )
 
 
-K3bArtsOutputPlugin::K3bArtsOutputPlugin( TQObject* tqparent, const char* name )
-  : K3bAudioOutputPlugin( tqparent, name ),
+K3bArtsOutputPlugin::K3bArtsOutputPlugin( TQObject* parent, const char* name )
+  : K3bAudioOutputPlugin( parent, name ),
     m_initialized(false),
     m_lastErrorCode(0)
 {

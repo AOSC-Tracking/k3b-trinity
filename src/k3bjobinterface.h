@@ -35,7 +35,7 @@ class K3bJobInterface : public TQObject, public DCOPObject
   K_DCOP
 
  public:
-  K3bJobInterface( TQObject* tqparent );
+  K3bJobInterface( TQObject* parent );
 
   void setJob( K3bJob* );
 

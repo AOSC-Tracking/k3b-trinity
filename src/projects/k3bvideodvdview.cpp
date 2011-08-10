@@ -31,8 +31,8 @@
 #include <tqsplitter.h>
 
 
-K3bVideoDvdView::K3bVideoDvdView( K3bVideoDvdDoc* doc, TQWidget *tqparent, const char *name )
-  : K3bView( doc, tqparent, name ),
+K3bVideoDvdView::K3bVideoDvdView( K3bVideoDvdDoc* doc, TQWidget *parent, const char *name )
+  : K3bView( doc, parent, name ),
     m_doc(doc)
 {
   fillStatusDisplay()->showDvdSizes(true);
@@ -58,9 +58,9 @@ K3bVideoDvdView::~K3bVideoDvdView()
 }
 
 
-K3bProjectBurnDialog* K3bVideoDvdView::newBurnDialog( TQWidget* tqparent, const char* name )
+K3bProjectBurnDialog* K3bVideoDvdView::newBurnDialog( TQWidget* parent, const char* name )
 {
-  return new K3bVideoDvdBurnDialog( m_doc, tqparent, name, true );
+  return new K3bVideoDvdBurnDialog( m_doc, parent, name, true );
 }
 
 

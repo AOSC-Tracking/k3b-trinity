@@ -47,9 +47,9 @@
 #include <k3bcutcombobox.h>
 
 
-K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, TQPtrList<K3bVcdTrack>& tracks, TQPtrList<K3bVcdTrack>& selectedTracks, TQWidget* tqparent, const char* name )
+K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, TQPtrList<K3bVcdTrack>& tracks, TQPtrList<K3bVcdTrack>& selectedTracks, TQWidget* parent, const char* name )
         : KDialogBase( KDialogBase::Plain, i18n( "Video Track Properties" ), KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Apply,
-                       KDialogBase::Ok, tqparent, name )
+                       KDialogBase::Ok, parent, name )
 {
     prepareGui();
 

@@ -21,8 +21,8 @@
 #include <kglobalsettings.h>
 
 
-K3bBusyWidget::K3bBusyWidget( TQWidget* tqparent, const char* name )
-  : TQFrame( tqparent, name )
+K3bBusyWidget::K3bBusyWidget( TQWidget* parent, const char* name )
+  : TQFrame( parent, name )
 {
   m_busyTimer = new TQTimer( this );
   m_iBusyPosition = 0;

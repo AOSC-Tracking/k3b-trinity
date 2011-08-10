@@ -152,9 +152,9 @@ void K3bMusicBrainzJob::MusicBrainzThread::run()
 
 
 
-// cannot use this as tqparent for the K3bSimpleJobHandler since this has not been constructed yet
-K3bMusicBrainzJob::K3bMusicBrainzJob( TQWidget* tqparent, const char* name )
-  : K3bJob( new K3bSimpleJobHandler( 0 ), TQT_TQOBJECT(tqparent), name ),
+// cannot use this as parent for the K3bSimpleJobHandler since this has not been constructed yet
+K3bMusicBrainzJob::K3bMusicBrainzJob( TQWidget* parent, const char* name )
+  : K3bJob( new K3bSimpleJobHandler( 0 ), TQT_TQOBJECT(parent), name ),
     m_canceled( false )
 {
   m_trmThread = new TRMThread();
@@ -259,7 +259,7 @@ void K3bMusicBrainzJob::slotMbJobFinished( bool success )
 				   0,
 				   false,
 				   &ok,
-				   dynamic_cast<TQWidget*>(tqparent()) );
+				   dynamic_cast<TQWidget*>(parent()) );
       else
 	s = resultStringsUnique.first();
 

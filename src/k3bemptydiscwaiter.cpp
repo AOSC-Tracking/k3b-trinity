@@ -84,10 +84,10 @@ public:
 
 
 
-K3bEmptyDiscWaiter::K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* tqparent, const char* name )
+K3bEmptyDiscWaiter::K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* parent, const char* name )
   : KDialogBase( KDialogBase::Plain, i18n("Waiting for Disk"),
 		 KDialogBase::Cancel|KDialogBase::User1|KDialogBase::User2|KDialogBase::User3,
-		 KDialogBase::User3, tqparent, name, true, true, i18n("Force"), i18n("Eject"), i18n("Load") )
+		 KDialogBase::User3, parent, name, true, true, i18n("Force"), i18n("Eject"), i18n("Load") )
 {
   d = new Private();
   d->device = device;
@@ -683,9 +683,9 @@ void K3bEmptyDiscWaiter::slotReloadingAfterErasingFinished( K3bDevice::DeviceHan
 }
 
 
-int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device, bool appendable, int mediaType, TQWidget* tqparent )
+int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device, bool appendable, int mediaType, TQWidget* parent )
 {
-  K3bEmptyDiscWaiter d( device, tqparent ? tqparent : TQT_TQWIDGET(tqApp->activeWindow()) );
+  K3bEmptyDiscWaiter d( device, parent ? parent : TQT_TQWIDGET(tqApp->activeWindow()) );
   int mediaState = K3bDevice::STATE_EMPTY;
   if( appendable ) mediaState |= K3bDevice::STATE_INCOMPLETE;
   return d.waitForDisc( mediaState, mediaType );
@@ -696,16 +696,16 @@ int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device,
 			      int mediaState,
 			      int mediaType,
 			      const TQString& message,
-			      TQWidget* tqparent )
+			      TQWidget* parent )
 {
-  K3bEmptyDiscWaiter d( device, tqparent ? tqparent : TQT_TQWIDGET(tqApp->activeWindow()) );
+  K3bEmptyDiscWaiter d( device, parent ? parent : TQT_TQWIDGET(tqApp->activeWindow()) );
   return d.waitForDisc( mediaState, mediaType, message );
 }
 
 
 void K3bEmptyDiscWaiter::prepareErasingDialog()
 {
-  // we hide the emptydiskwaiter so the info dialog needs to have the same tqparent
+  // we hide the emptydiskwaiter so the info dialog needs to have the same parent
   if( !d->erasingInfoDialog )
     d->erasingInfoDialog = new K3bProgressDialog( TQString(), parentWidget() );
 

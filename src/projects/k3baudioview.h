@@ -37,7 +37,7 @@ class K3bAudioView : public K3bView
   TQ_OBJECT
 	
  public: 
-  K3bAudioView( K3bAudioDoc* pDoc, TQWidget* tqparent, const char *name = 0 );
+  K3bAudioView( K3bAudioDoc* pDoc, TQWidget* parent, const char *name = 0 );
   ~K3bAudioView();
 
   K3bAudioTrackPlayer* player() const { return m_songlist->player(); }
@@ -46,7 +46,7 @@ class K3bAudioView : public K3bView
   void addUrls( const KURL::List& );
 
  protected:
-  K3bProjectBurnDialog* newBurnDialog( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bProjectBurnDialog* newBurnDialog( TQWidget* parent = 0, const char* name = 0 );
 
   void init();
 

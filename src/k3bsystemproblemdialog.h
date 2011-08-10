@@ -78,7 +78,7 @@ class K3bSystemProblemDialog : public KDialog
    * or K3b is started for the first time.
    */
   static bool readCheckSystemConfig();
-  static void checkSystem( TQWidget* tqparent = 0, 
+  static void checkSystem( TQWidget* parent = 0, 
 			   const char* name = 0 );
 
  protected:
@@ -89,7 +89,7 @@ class K3bSystemProblemDialog : public KDialog
 
  private:
   K3bSystemProblemDialog( const TQValueList<K3bSystemProblem>&,
-			  TQWidget* tqparent = 0, 
+			  TQWidget* parent = 0, 
 			  const char* name = 0 );
   static int dmaActivated( K3bDevice::Device* );
   static TQPtrList<K3bDevice::Device> checkForAutomounting();

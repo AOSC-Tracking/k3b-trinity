@@ -27,8 +27,8 @@
 #include <kdialog.h>
 
 
-K3bAudioDataSourceEditWidget::K3bAudioDataSourceEditWidget( TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name ),
+K3bAudioDataSourceEditWidget::K3bAudioDataSourceEditWidget( TQWidget* parent, const char* name )
+  : TQWidget( parent, name ),
     m_source(0)
 {
   m_editor = new K3bAudioEditorWidget( this );

@@ -31,8 +31,8 @@
 
 
 
-K3bBlankingJob::K3bBlankingJob( K3bJobHandler* hdl, TQObject* tqparent )
-  : K3bBurnJob( hdl, tqparent ),
+K3bBlankingJob::K3bBlankingJob( K3bJobHandler* hdl, TQObject* parent )
+  : K3bBurnJob( hdl, parent ),
     m_writerJob(0),
     m_force(true),
     m_device(0),

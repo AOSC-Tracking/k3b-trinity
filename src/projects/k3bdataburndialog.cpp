@@ -64,8 +64,8 @@
 #include "k3bfilecompilationsizehandler.h"
 
 
-K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, TQWidget *tqparent, const char *name, bool modal )
-  : K3bProjectBurnDialog( _doc, tqparent, name, modal )
+K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, TQWidget *parent, const char *name, bool modal )
+  : K3bProjectBurnDialog( _doc, parent, name, modal )
 {
   prepareGui();
 

@@ -16,8 +16,8 @@
 #include "k3bthemedlabel.h"
 #include "k3bapplication.h"
 
-K3bThemedLabel::K3bThemedLabel( TQWidget* tqparent )
-  : KCutLabel( tqparent ),
+K3bThemedLabel::K3bThemedLabel( TQWidget* parent )
+  : KCutLabel( parent ),
     m_themePixmapCode( -1 )
 {
   slotThemeChanged();
@@ -29,8 +29,8 @@ K3bThemedLabel::K3bThemedLabel( TQWidget* tqparent )
 }
 
 
-K3bThemedLabel::K3bThemedLabel( const TQString& text, TQWidget* tqparent )
-  : KCutLabel( text, tqparent ),
+K3bThemedLabel::K3bThemedLabel( const TQString& text, TQWidget* parent )
+  : KCutLabel( text, parent ),
     m_themePixmapCode( -1 )
 {
   slotThemeChanged();
@@ -42,8 +42,8 @@ K3bThemedLabel::K3bThemedLabel( const TQString& text, TQWidget* tqparent )
 }
 
 
-K3bThemedLabel::K3bThemedLabel( K3bTheme::PixmapType pix, TQWidget* tqparent )
-  : KCutLabel( tqparent )
+K3bThemedLabel::K3bThemedLabel( K3bTheme::PixmapType pix, TQWidget* parent )
+  : KCutLabel( parent )
 {
   setThemePixmap( pix );
 

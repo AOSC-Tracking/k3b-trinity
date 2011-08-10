@@ -80,9 +80,9 @@ K3bSystemProblem::K3bSystemProblem( int t,
 
 
 K3bSystemProblemDialog::K3bSystemProblemDialog( const TQValueList<K3bSystemProblem>& problems,
-						TQWidget* tqparent, 
+						TQWidget* parent, 
 						const char* name )
-  : KDialog( tqparent, name )
+  : KDialog( parent, name )
 {
   setCaption( i18n("System Configuration Problems") );
 
@@ -168,7 +168,7 @@ void K3bSystemProblemDialog::closeEvent( TQCloseEvent* e )
 }
 
 
-void K3bSystemProblemDialog::checkSystem( TQWidget* tqparent, 
+void K3bSystemProblemDialog::checkSystem( TQWidget* parent, 
 					  const char* name )
 {
   TQValueList<K3bSystemProblem> problems;
@@ -594,7 +594,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* tqparent,
     static K3bSystemProblemDialog* s_openDlg = 0;
     if( s_openDlg )
       s_openDlg->close();
-    K3bSystemProblemDialog dlg( problems, tqparent, name );
+    K3bSystemProblemDialog dlg( problems, parent, name );
     s_openDlg = &dlg;
     dlg.exec();
     s_openDlg = 0;

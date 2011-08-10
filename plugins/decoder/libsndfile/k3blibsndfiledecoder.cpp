@@ -57,8 +57,8 @@ public:
 
 
 
-K3bLibsndfileDecoder::K3bLibsndfileDecoder( TQObject* tqparent, const char* name )
-  : K3bAudioDecoder( tqparent, name )
+K3bLibsndfileDecoder::K3bLibsndfileDecoder( TQObject* parent, const char* name )
+  : K3bAudioDecoder( parent, name )
 {
   d = new Private();
 }
@@ -202,8 +202,8 @@ void K3bLibsndfileDecoder::cleanup()
 /********************************************************/
 
 
-K3bLibsndfileDecoderFactory::K3bLibsndfileDecoderFactory( TQObject* tqparent, const char* name )
-  : K3bAudioDecoderFactory( tqparent, name )
+K3bLibsndfileDecoderFactory::K3bLibsndfileDecoderFactory( TQObject* parent, const char* name )
+  : K3bAudioDecoderFactory( parent, name )
 {
 }
 
@@ -213,10 +213,10 @@ K3bLibsndfileDecoderFactory::~K3bLibsndfileDecoderFactory()
 }
 
 
-K3bAudioDecoder* K3bLibsndfileDecoderFactory::createDecoder( TQObject* tqparent, 
+K3bAudioDecoder* K3bLibsndfileDecoderFactory::createDecoder( TQObject* parent, 
 							     const char* name ) const
 {
-  return new K3bLibsndfileDecoder( tqparent, name );
+  return new K3bLibsndfileDecoder( parent, name );
 }
 
 

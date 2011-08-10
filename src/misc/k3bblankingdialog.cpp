@@ -67,8 +67,8 @@ public:
 };
 
 
-K3bBlankingDialog::K3bBlankingDialog( TQWidget* tqparent, const char* name )
-  : K3bInteractionDialog( tqparent, name, 
+K3bBlankingDialog::K3bBlankingDialog( TQWidget* parent, const char* name )
+  : K3bInteractionDialog( parent, name, 
 			  i18n("Erase CD-RW"),
 			  TQString(),
 			  START_BUTTON|CANCEL_BUTTON,

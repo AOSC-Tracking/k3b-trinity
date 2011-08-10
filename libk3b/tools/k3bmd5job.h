@@ -34,7 +34,7 @@ class LIBK3B_EXPORT K3bMd5Job : public K3bJob
   TQ_OBJECT
 
  public:
-  K3bMd5Job( K3bJobHandler* jh , TQObject* tqparent = 0, const char* name = 0 );
+  K3bMd5Job( K3bJobHandler* jh , TQObject* parent = 0, const char* name = 0 );
   ~K3bMd5Job();
 
   TQCString hexDigest();

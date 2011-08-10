@@ -39,14 +39,14 @@
 class K3bBootImageView::PrivateBootImageViewItem : public KListViewItem
 {
 public:
-  PrivateBootImageViewItem( K3bBootItem* image, TQListView* tqparent ) 
-    : KListViewItem( tqparent ), 
+  PrivateBootImageViewItem( K3bBootItem* image, TQListView* parent ) 
+    : KListViewItem( parent ), 
       m_image( image ) {
 
   }
 
-  PrivateBootImageViewItem( K3bBootItem* image, TQListView* tqparent, TQListViewItem* after )
-    : KListViewItem( tqparent, after ),
+  PrivateBootImageViewItem( K3bBootItem* image, TQListView* parent, TQListViewItem* after )
+    : KListViewItem( parent, after ),
       m_image( image ) {
 
   }
@@ -75,8 +75,8 @@ private:
 };
 
 
-K3bBootImageView::K3bBootImageView( K3bDataDoc* doc, TQWidget* tqparent, const char* name )
-  : base_K3bBootImageView( tqparent, name ),
+K3bBootImageView::K3bBootImageView( K3bDataDoc* doc, TQWidget* parent, const char* name )
+  : base_K3bBootImageView( parent, name ),
     m_doc(doc)
 {
   connect( m_buttonNew, TQT_SIGNAL(clicked()), 

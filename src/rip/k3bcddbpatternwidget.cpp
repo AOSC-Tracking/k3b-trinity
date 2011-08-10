@@ -29,8 +29,8 @@
 #include <tqlayout.h>
 
 
-K3bCddbPatternWidget::K3bCddbPatternWidget( TQWidget* tqparent, const char* name )
-  : base_K3bCddbPatternWidget( tqparent, name )
+K3bCddbPatternWidget::K3bCddbPatternWidget( TQWidget* parent, const char* name )
+  : base_K3bCddbPatternWidget( parent, name )
 {
   // fix the tqlayout
   ((TQGridLayout*)tqlayout())->setRowStretch( 4, 1 );

@@ -76,8 +76,8 @@ static const char* s_allActions[] = {
   0
 };
 
-K3bWelcomeWidget::Display::Display( K3bWelcomeWidget* tqparent )
-  : TQWidget( tqparent->viewport() )
+K3bWelcomeWidget::Display::Display( K3bWelcomeWidget* parent )
+  : TQWidget( parent->viewport() )
 {
   setWFlags( TQt::WNoAutoErase );
 
@@ -96,7 +96,7 @@ K3bWelcomeWidget::Display::Display( K3bWelcomeWidget* tqparent )
   m_rows = m_cols = 1;
 
   m_buttonMore = new K3bFlatButton( i18n("Further actions..."), this );
-  connect( m_buttonMore, TQT_SIGNAL(pressed()), tqparent, TQT_SLOT(slotMoreActions()) );
+  connect( m_buttonMore, TQT_SIGNAL(pressed()), parent, TQT_SLOT(slotMoreActions()) );
 
   connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()), this, TQT_SLOT(slotThemeChanged()) );
 
@@ -344,8 +344,8 @@ void K3bWelcomeWidget::Display::dropEvent( TQDropEvent* e )
 
 
 
-K3bWelcomeWidget::K3bWelcomeWidget( K3bMainWindow* mw, TQWidget* tqparent, const char* name )
-  : TQScrollView( tqparent, name ),
+K3bWelcomeWidget::K3bWelcomeWidget( K3bMainWindow* mw, TQWidget* parent, const char* name )
+  : TQScrollView( parent, name ),
     m_mainWindow( mw )
 {
   main = new Display( this );

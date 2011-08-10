@@ -41,8 +41,8 @@
 #include <kdeversion.h>
 
 
-K3bCddbOptionTab::K3bCddbOptionTab( TQWidget* tqparent,  const char* name )
-    : base_K3bCddbOptionTab( tqparent, name )
+K3bCddbOptionTab::K3bCddbOptionTab( TQWidget* parent,  const char* name )
+    : base_K3bCddbOptionTab( parent, name )
 {
   // fix all the margins and spacings that have been corrupted by TQDesigner ;-)
   // -----------------------------------------------------------------------------

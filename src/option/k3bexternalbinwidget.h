@@ -38,7 +38,7 @@ class K3bExternalBinWidget : public TQWidget
   TQ_OBJECT
 
  public:
-  K3bExternalBinWidget( K3bExternalBinManager*, TQWidget* tqparent = 0, const char* name = 0 );
+  K3bExternalBinWidget( K3bExternalBinManager*, TQWidget* parent = 0, const char* name = 0 );
   ~K3bExternalBinWidget();
 
   class K3bExternalBinViewItem;
@@ -72,7 +72,7 @@ class K3bExternalBinWidget : public TQWidget
 class K3bExternalBinWidget::K3bExternalProgramViewItem : public K3bListViewItem
 {
  public:
-  K3bExternalProgramViewItem( K3bExternalProgram* p, TQListView* tqparent );
+  K3bExternalProgramViewItem( K3bExternalProgram* p, TQListView* parent );
   
   K3bExternalProgram* program() const { return m_program; }
   
@@ -85,7 +85,7 @@ class K3bExternalBinWidget::K3bExternalProgramViewItem : public K3bListViewItem
 class K3bExternalBinWidget::K3bExternalBinViewItem : public K3bListViewItem
 {
  public:
-  K3bExternalBinViewItem( K3bExternalBin* bin, K3bExternalProgramViewItem* tqparent );
+  K3bExternalBinViewItem( K3bExternalBin* bin, K3bExternalProgramViewItem* parent );
 
   K3bExternalBin* bin() const { return m_bin; }
   K3bExternalProgramViewItem* parentProgramItem() const { return m_parent; }

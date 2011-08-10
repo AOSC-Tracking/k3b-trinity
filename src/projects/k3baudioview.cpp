@@ -49,8 +49,8 @@
 
 
 
-K3bAudioView::K3bAudioView( K3bAudioDoc* pDoc, TQWidget* tqparent, const char *name )
-  : K3bView( pDoc, tqparent, name )
+K3bAudioView::K3bAudioView( K3bAudioDoc* pDoc, TQWidget* parent, const char *name )
+  : K3bView( pDoc, parent, name )
 {
   m_doc = pDoc;
 
@@ -115,9 +115,9 @@ void K3bAudioView::init()
 }
 
 
-K3bProjectBurnDialog* K3bAudioView::newBurnDialog( TQWidget* tqparent, const char* name )
+K3bProjectBurnDialog* K3bAudioView::newBurnDialog( TQWidget* parent, const char* name )
 {
-  return new K3bAudioBurnDialog( m_doc, tqparent, name, true );
+  return new K3bAudioBurnDialog( m_doc, parent, name, true );
 }
 
 

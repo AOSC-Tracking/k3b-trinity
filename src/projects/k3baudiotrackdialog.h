@@ -37,7 +37,7 @@ class K3bAudioTrackDialog : public KDialogBase
   TQ_OBJECT
 
  public:
-  K3bAudioTrackDialog( TQPtrList<K3bAudioTrack>&, TQWidget *tqparent=0, const char *name=0);
+  K3bAudioTrackDialog( TQPtrList<K3bAudioTrack>&, TQWidget *parent=0, const char *name=0);
   ~K3bAudioTrackDialog();
 	
  protected slots:

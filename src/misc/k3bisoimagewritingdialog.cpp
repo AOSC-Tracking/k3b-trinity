@@ -83,8 +83,8 @@ public:
 };
 
 
-K3bIsoImageWritingDialog::K3bIsoImageWritingDialog( TQWidget* tqparent, const char* name, bool modal )
-  : K3bInteractionDialog( tqparent, name,
+K3bIsoImageWritingDialog::K3bIsoImageWritingDialog( TQWidget* parent, const char* name, bool modal )
+  : K3bInteractionDialog( parent, name,
 			  i18n("Burn Iso9660 Image"),
 			  i18n("to DVD"),
 			  START_BUTTON|CANCEL_BUTTON,

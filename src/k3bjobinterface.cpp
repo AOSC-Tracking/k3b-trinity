@@ -21,8 +21,8 @@
 #include <tqdatastream.h>
 
 
-K3bJobInterface::K3bJobInterface( TQObject* tqparent )
-  : TQObject( tqparent ),
+K3bJobInterface::K3bJobInterface( TQObject* parent )
+  : TQObject( parent ),
     DCOPObject( "K3bJobInterface" ),
     m_job( 0 )
 {

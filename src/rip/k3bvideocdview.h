@@ -49,7 +49,7 @@ class K3bVideoCdView : public K3bMediaContentsView
   TQ_OBJECT
 
     public:
-        K3bVideoCdView( TQWidget* tqparent = 0, const char * name = 0 );
+        K3bVideoCdView( TQWidget* parent = 0, const char * name = 0 );
         ~K3bVideoCdView();
 
         KActionCollection* actionCollection() const

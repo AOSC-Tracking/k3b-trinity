@@ -27,16 +27,16 @@
 #include <tqpixmap.h>
 
 
-K3bFlatButton::K3bFlatButton( TQWidget *tqparent, const char *name )
-  : TQFrame( tqparent, name/*, WNoAutoErase*/ ),
+K3bFlatButton::K3bFlatButton( TQWidget *parent, const char *name )
+  : TQFrame( parent, name/*, WNoAutoErase*/ ),
     m_pressed(false)
 {
   init();
 }
 
 
-K3bFlatButton::K3bFlatButton( const TQString& text, TQWidget *tqparent, const char *name )
-  : TQFrame( tqparent, name/*, WNoAutoErase*/ ),
+K3bFlatButton::K3bFlatButton( const TQString& text, TQWidget *parent, const char *name )
+  : TQFrame( parent, name/*, WNoAutoErase*/ ),
     m_pressed(false)
 {
   init();
@@ -44,8 +44,8 @@ K3bFlatButton::K3bFlatButton( const TQString& text, TQWidget *tqparent, const ch
 }
 
 
-K3bFlatButton::K3bFlatButton( KAction* a, TQWidget *tqparent, const char *name )
-  : TQFrame( tqparent, name/*, WNoAutoErase*/ ),
+K3bFlatButton::K3bFlatButton( KAction* a, TQWidget *parent, const char *name )
+  : TQFrame( parent, name/*, WNoAutoErase*/ ),
     m_pressed(false)
 {
   init();

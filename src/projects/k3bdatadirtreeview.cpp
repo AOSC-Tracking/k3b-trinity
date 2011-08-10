@@ -64,8 +64,8 @@ public:
 };
 
 
-K3bDataDirTreeView::K3bDataDirTreeView( K3bView* view, K3bDataDoc* doc, TQWidget* tqparent )
-  : K3bListView( tqparent ), m_view(view)
+K3bDataDirTreeView::K3bDataDirTreeView( K3bView* view, K3bDataDoc* doc, TQWidget* parent )
+  : K3bListView( parent ), m_view(view)
 {
   d = new Private();
 
@@ -171,7 +171,7 @@ void K3bDataDirTreeView::slotDropped( TQDropEvent* e, TQListViewItem*, TQListVie
 
   if( d->addParentDir ) {
 
-    //    startDropAnimation( tqparent );
+    //    startDropAnimation( parent );
 
     // check if items have been moved
     if( m_fileView &&
@@ -231,7 +231,7 @@ void K3bDataDirTreeView::slotItemAdded( K3bDataItem* item )
     // should only be emitted once for every item
     //
     K3bDirItem* dirItem = static_cast<K3bDirItem*>( item );
-    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->tqparent()];
+    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->parent()];
     K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, parentViewItem );
     m_itemMap.insert( dirItem, newDirItem );
   }
@@ -268,7 +268,7 @@ void K3bDataDirTreeView::setCurrentDir( K3bDirItem* dirItem )
     setCurrentItem( it.data() );
     it.data()->setOpen(true);
     if( it.data() != root() )
-      it.data()->tqparent()->setOpen(true);
+      it.data()->parent()->setOpen(true);
   }
   else {
     kdDebug() << "Tried to set unknown dirItem to current" << endl;
@@ -328,7 +328,7 @@ void K3bDataDirTreeView::showPopupMenu( KListView*, TQListViewItem* item, const 
 void K3bDataDirTreeView::slotNewDir()
 {
   if( K3bDataDirViewItem* vI = dynamic_cast<K3bDataDirViewItem*>(currentItem()) ) {
-    K3bDirItem* tqparent = vI->dirItem();
+    K3bDirItem* parent = vI->dirItem();
 
     TQString name;
     bool ok;
@@ -337,7 +337,7 @@ void K3bDataDirTreeView::slotNewDir()
 				  i18n("Please insert the name for the new directory:"),
 				  i18n("New Directory"), &ok, this );
 
-    while( ok && K3bDataDoc::nameAlreadyInDir( name, tqparent ) ) {
+    while( ok && K3bDataDoc::nameAlreadyInDir( name, parent ) ) {
       name = KInputDialog::getText( i18n("New Directory"),
                                     i18n("A file with that name already exists. "
 					 "Please insert the name for the new directory:"),
@@ -348,7 +348,7 @@ void K3bDataDirTreeView::slotNewDir()
       return;
 
 
-    m_doc->addEmptyDir( name, tqparent );
+    m_doc->addEmptyDir( name, parent );
   }
 }
 
@@ -448,7 +448,7 @@ void K3bDataDirTreeView::checkForNewItems()
   while( item != 0 )
     {
       // check if we have an entry and if not, create one
-      // we can assume that a listViewItem for the tqparent exists
+      // we can assume that a listViewItem for the parent exists
       // since we go top to bottom
       if( item->isDir() )
 	{
@@ -456,15 +456,15 @@ void K3bDataDirTreeView::checkForNewItems()
 
 	  TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> itDirItem = m_itemMap.find( dirItem );
 	  if( itDirItem == m_itemMap.end() ) {
-	    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->tqparent()];
+	    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->parent()];
 	    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, parentViewItem );
 	    m_itemMap.insert( dirItem, newDirItem );
 	  }
 	  else {
-	    // check if tqparent still correct (to get moved items)
+	    // check if parent still correct (to get moved items)
 	    K3bDataDirViewItem* dirViewItem = itDirItem.data();
-	    K3bDataDirViewItem* parentViewItem = (K3bDataDirViewItem*)dirViewItem->tqparent();
-	    K3bDataDirViewItem* dirParentViewItem = m_itemMap[dirItem->tqparent()];
+	    K3bDataDirViewItem* parentViewItem = (K3bDataDirViewItem*)dirViewItem->parent();
+	    K3bDataDirViewItem* dirParentViewItem = m_itemMap[dirItem->parent()];
 	    if( dirParentViewItem != parentViewItem ) {
 	      // reparent it
 	      parentViewItem->takeItem( dirViewItem );

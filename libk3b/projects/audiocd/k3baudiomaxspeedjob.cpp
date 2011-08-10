@@ -203,8 +203,8 @@ int K3bAudioMaxSpeedJob::WorkThread::maxSpeedByMedia() const
 
 
 
-K3bAudioMaxSpeedJob::K3bAudioMaxSpeedJob( K3bAudioDoc* doc, K3bJobHandler* jh, TQObject* tqparent, const char* name )
-  : K3bThreadJob( jh, tqparent, name )
+K3bAudioMaxSpeedJob::K3bAudioMaxSpeedJob( K3bAudioDoc* doc, K3bJobHandler* jh, TQObject* parent, const char* name )
+  : K3bThreadJob( jh, parent, name )
 {
   m_thread = new WorkThread( doc );
   setThread( m_thread );

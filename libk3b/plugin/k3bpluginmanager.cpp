@@ -42,8 +42,8 @@ public:
 
 
 
-K3bPluginManager::K3bPluginManager( TQObject* tqparent, const char* name )
-  : TQObject( tqparent, name )
+K3bPluginManager::K3bPluginManager( TQObject* parent, const char* name )
+  : TQObject( parent, name )
 {
   d = new Private();
 }
@@ -163,9 +163,9 @@ int K3bPluginManager::pluginSystemVersion() const
 }
 
 
-int K3bPluginManager::execPluginDialog( K3bPlugin* plugin, TQWidget* tqparent, const char* name )
+int K3bPluginManager::execPluginDialog( K3bPlugin* plugin, TQWidget* parent, const char* name )
 {
-  KDialogBase dlg( tqparent, 
+  KDialogBase dlg( parent, 
 		   name, 
 		   true,
 		   i18n("Configure plugin %1").tqarg( plugin->pluginInfo().name() ) );
@@ -181,7 +181,7 @@ int K3bPluginManager::execPluginDialog( K3bPlugin* plugin, TQWidget* tqparent, c
     return r;
   }
   else {
-    KMessageBox::sorry( tqparent, i18n("No settings available for plugin %1.").tqarg( plugin->pluginInfo().name() ) );
+    KMessageBox::sorry( parent, i18n("No settings available for plugin %1.").tqarg( plugin->pluginInfo().name() ) );
     return 0;
   }
 }

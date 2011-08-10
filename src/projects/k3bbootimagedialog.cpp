@@ -21,10 +21,10 @@
 
 
 K3bBootImageDialog::K3bBootImageDialog( K3bDataDoc* doc, 
-					TQWidget* tqparent, 
+					TQWidget* parent, 
 					const char* name, 
 					bool modal )
-  : KDialogBase( tqparent, name, modal, i18n("Boot Images"), Ok )
+  : KDialogBase( parent, name, modal, i18n("Boot Images"), Ok )
 {
   m_bootImageView = new K3bBootImageView( doc, this );
   setMainWidget( m_bootImageView );

@@ -40,8 +40,8 @@ K3bMovixFileItem::~K3bMovixFileItem()
   // it is important to do it here and not
   // rely on the K3bFileItem destructor becasue
   // otherwise the doc is not informed early enough
-  if( tqparent() )
-    tqparent()->takeDataItem( this );
+  if( parent() )
+    parent()->takeDataItem( this );
 }
 
 

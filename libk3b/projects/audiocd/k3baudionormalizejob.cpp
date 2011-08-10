@@ -23,8 +23,8 @@
 #include <klocale.h>
 
 
-K3bAudioNormalizeJob::K3bAudioNormalizeJob( K3bJobHandler* hdl, TQObject* tqparent, const char* name )
-  : K3bJob( hdl, tqparent, name ),
+K3bAudioNormalizeJob::K3bAudioNormalizeJob( K3bJobHandler* hdl, TQObject* parent, const char* name )
+  : K3bJob( hdl, parent, name ),
     m_process(0)
 {
 }

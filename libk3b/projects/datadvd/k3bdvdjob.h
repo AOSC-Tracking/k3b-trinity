@@ -34,7 +34,7 @@ class K3bDvdJob : public K3bDataJob
   /**
    * To be more flexible we allow writing of any data doc
    */
-  K3bDvdJob( K3bDataDoc*, K3bJobHandler*, TQObject* tqparent = 0 );
+  K3bDvdJob( K3bDataDoc*, K3bJobHandler*, TQObject* parent = 0 );
   virtual ~K3bDvdJob();
 
   virtual TQString jobDescription() const;

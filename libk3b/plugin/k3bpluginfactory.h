@@ -64,10 +64,10 @@ class K3bPluginFactory : public KLibFactory
     }
   }
 
-  virtual TQObject* createObject( TQObject *tqparent, const char *name,
+  virtual TQObject* createObject( TQObject *parent, const char *name,
 				 const char*, const TQStringList& ) {
     initializeMessageCatalogue();
-    return new T( tqparent, name );
+    return new T( parent, name );
   }
 
  private:

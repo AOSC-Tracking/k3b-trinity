@@ -36,8 +36,8 @@
 
 
 
-K3bExternalBinOptionTab::K3bExternalBinOptionTab( K3bExternalBinManager* manager, TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name )
+K3bExternalBinOptionTab::K3bExternalBinOptionTab( K3bExternalBinManager* manager, TQWidget* parent, const char* name )
+  : TQWidget( parent, name )
 {
   m_manager = manager;
 

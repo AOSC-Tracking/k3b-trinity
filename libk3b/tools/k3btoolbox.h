@@ -39,11 +39,11 @@ class LIBK3B_EXPORT K3bToolBoxButton : public TQToolButton
   TQ_OBJECT
 
  public:
-  K3bToolBoxButton( KAction*, TQWidget* tqparent );
+  K3bToolBoxButton( KAction*, TQWidget* parent );
   K3bToolBoxButton( const TQString& text, const TQString& icon, 
 		    const TQString& tooltip, const TQString& whatsthis,
 		    TQObject* receiver, const char* slot,
-		    TQWidget* tqparent );
+		    TQWidget* parent );
 
  private slots:
   void slotPopupActivated();
@@ -62,7 +62,7 @@ class LIBK3B_EXPORT K3bToolBox : public TQFrame
   TQ_OBJECT
 
  public:
-  K3bToolBox( TQWidget* tqparent = 0, const char* name = 0 );
+  K3bToolBox( TQWidget* parent = 0, const char* name = 0 );
   ~K3bToolBox();
 
   K3bToolBoxButton* addButton( const TQString& text, const TQString& icon, 

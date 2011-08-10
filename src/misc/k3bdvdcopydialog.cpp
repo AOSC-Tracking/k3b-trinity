@@ -55,8 +55,8 @@
 
 
 
-K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* tqparent, const char* name, bool modal )
-  : K3bInteractionDialog( tqparent, name,
+K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* parent, const char* name, bool modal )
+  : K3bInteractionDialog( parent, name,
 			  i18n("DVD Copy"),
 			  i18n("No video transcoding!"),
 			  START_BUTTON|CANCEL_BUTTON,

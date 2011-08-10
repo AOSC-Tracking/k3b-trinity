@@ -776,10 +776,10 @@ bool K3bMainWindow::queryClose()
 // 	  //
 // 	  // now here we have the problem that due to the whole TQt event thing the exec call (or
 // 	  // in this case most likely the startJob call) does not return until we leave this method.
-// 	  // That means that the progress dialog might be deleted by it's tqparent below (when we 
+// 	  // That means that the progress dialog might be deleted by it's parent below (when we 
 // 	  // close docs) before it is deleted by the creator (most likely a projectburndialog).
 // 	  // That would result in a double deletion and thus a crash.
-// 	  // So we just reparent the dialog to 0 here so it's (former) tqparent won't delete it.
+// 	  // So we just reparent the dialog to 0 here so it's (former) parent won't delete it.
 // 	  //
 // 	  progressDialog->reparent( 0, TQPoint(0,0) );
 // 	}

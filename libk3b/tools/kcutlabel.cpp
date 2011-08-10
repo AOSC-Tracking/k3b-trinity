@@ -23,8 +23,8 @@
 #include <kdebug.h>
 
 
-KCutLabel::KCutLabel( const TQString &text , TQWidget *tqparent, const char *name )
- : TQLabel ( tqparent, name ),
+KCutLabel::KCutLabel( const TQString &text , TQWidget *parent, const char *name )
+ : TQLabel ( parent, name ),
    m_minChars(1) {
   TQSizePolicy myLabelSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
   tqsetSizePolicy(myLabelSizePolicy);
@@ -32,8 +32,8 @@ KCutLabel::KCutLabel( const TQString &text , TQWidget *tqparent, const char *nam
   cutTextToLabel();
 }
 
-KCutLabel::KCutLabel( TQWidget *tqparent, const char *name )
- : TQLabel ( tqparent, name ),
+KCutLabel::KCutLabel( TQWidget *parent, const char *name )
+ : TQLabel ( parent, name ),
    m_minChars(1) {
   TQSizePolicy myLabelSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
   tqsetSizePolicy(myLabelSizePolicy);

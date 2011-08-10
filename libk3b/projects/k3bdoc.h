@@ -155,7 +155,7 @@ class LIBK3B_EXPORT K3bDoc : public TQObject
    * easier this way since you don't need to distinguish between the different
    * project types.
    */
-  virtual K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* tqparent = 0 ) = 0;
+  virtual K3bBurnJob* newBurnJob( K3bJobHandler*, TQObject* parent = 0 ) = 0;
 
   int writingApp() const { return m_writingApp; }
   void setWritingApp( int a ) { m_writingApp = a; }

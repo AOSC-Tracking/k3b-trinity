@@ -30,7 +30,7 @@ namespace K3bDevice {
 
 /**
  * This is the baseclass for all the jobs in K3b which actually do the work like burning a cd!
- * The K3bJob object takes care of registering with the k3bcore or with a tqparent K3bJob.
+ * The K3bJob object takes care of registering with the k3bcore or with a parent K3bJob.
  *
  * Every job has a jobhandler which can be another job (in which case the job is handled as
  * a subjob) or an arbitrary class implementing the K3bJobHandler interface.
@@ -212,7 +212,7 @@ class LIBK3B_EXPORT K3bJob : public TQObject, public K3bJobHandler
    * \see runningSubJobs()
    * \see numRunningSubJobs()
    */
-  K3bJob( K3bJobHandler* hdl, TQObject* tqparent = 0, const char* name = 0 );
+  K3bJob( K3bJobHandler* hdl, TQObject* parent = 0, const char* name = 0 );
 
   /**
    * Call this in start() to properly register the job and emit the started() signal.
@@ -260,7 +260,7 @@ class LIBK3B_EXPORT K3bBurnJob : public K3bJob
   TQ_OBJECT
 	
  public:
-  K3bBurnJob( K3bJobHandler* hdl, TQObject* tqparent = 0, const char* name = 0 );
+  K3bBurnJob( K3bJobHandler* hdl, TQObject* parent = 0, const char* name = 0 );
   virtual ~K3bBurnJob();
 
   /**

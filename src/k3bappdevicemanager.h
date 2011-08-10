@@ -43,7 +43,7 @@ class K3bAppDeviceManager : public K3bDevice::DeviceManager
   TQ_OBJECT
 
  public:
-  K3bAppDeviceManager( TQObject* tqparent = 0, const char* name = 0 );
+  K3bAppDeviceManager( TQObject* parent = 0, const char* name = 0 );
   ~K3bAppDeviceManager();
 
   K3bDevice::Device* currentDevice() const;

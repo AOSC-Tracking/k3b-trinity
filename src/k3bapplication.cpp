@@ -315,8 +315,8 @@ void K3bApplication::slotShutDown()
 
 
 
-K3bApplication::Core::Core( TQObject* tqparent )
-  : K3bCore( tqparent ),
+K3bApplication::Core::Core( TQObject* parent )
+  : K3bCore( parent ),
     m_appDeviceManager(0),
     m_mediaCache(0)
 {
@@ -424,7 +424,7 @@ bool K3bApplication::Core::internalBlockDevice( K3bDevice::Device* dev )
     //
     // Check if the device is in use
     //
-    // FIXME: Use the top level widget as tqparent
+    // FIXME: Use the top level widget as parent
     K3bLsofWrapperDialog::checkDevice( dev );
 
     return true;

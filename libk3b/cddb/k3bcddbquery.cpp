@@ -35,8 +35,8 @@
 
 
 
-K3bCddbQuery::K3bCddbQuery( TQObject* tqparent, const char* name )
-  : TQObject(tqparent, name)
+K3bCddbQuery::K3bCddbQuery( TQObject* parent, const char* name )
+  : TQObject(parent, name)
 {
   m_bQueryFinishedEmited = false;
 }

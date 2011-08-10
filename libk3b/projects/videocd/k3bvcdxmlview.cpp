@@ -245,16 +245,16 @@ bool K3bVcdXmlView::write( const TQString& fname )
     return false;
 }
 
-void K3bVcdXmlView::addComment( TQDomDocument& doc, TQDomElement& tqparent, const TQString& text )
+void K3bVcdXmlView::addComment( TQDomDocument& doc, TQDomElement& parent, const TQString& text )
 {
     TQDomComment comment = doc.createComment( text );
-    tqparent.appendChild( comment );
+    parent.appendChild( comment );
 }
 
-TQDomElement K3bVcdXmlView::addSubElement( TQDomDocument& doc, TQDomElement& tqparent, const TQString& name, const TQString& value )
+TQDomElement K3bVcdXmlView::addSubElement( TQDomDocument& doc, TQDomElement& parent, const TQString& name, const TQString& value )
 {
     TQDomElement element = doc.createElement( name );
-    tqparent.appendChild( element );
+    parent.appendChild( element );
     if ( !value.isNull() ) {
         TQDomText t = doc.createTextNode( value );
         element.appendChild( t );
@@ -262,10 +262,10 @@ TQDomElement K3bVcdXmlView::addSubElement( TQDomDocument& doc, TQDomElement& tqp
     return element;
 }
 
-TQDomElement K3bVcdXmlView::addSubElement( TQDomDocument& doc, TQDomElement& tqparent, const TQString& name, const int& value )
+TQDomElement K3bVcdXmlView::addSubElement( TQDomDocument& doc, TQDomElement& parent, const TQString& name, const int& value )
 {
     TQDomElement element = doc.createElement( name );
-    tqparent.appendChild( element );
+    parent.appendChild( element );
     if ( value >= -1 ) {
         TQDomText t = doc.createTextNode( TQString( "%1" ).tqarg( value ) );
         element.appendChild( t );
@@ -273,17 +273,17 @@ TQDomElement K3bVcdXmlView::addSubElement( TQDomDocument& doc, TQDomElement& tqp
     return element;
 }
 
-TQDomElement K3bVcdXmlView::addFolderElement( TQDomDocument& doc, TQDomElement& tqparent, const TQString& name )
+TQDomElement K3bVcdXmlView::addFolderElement( TQDomDocument& doc, TQDomElement& parent, const TQString& name )
 {
-    TQDomElement elemFolder = addSubElement( doc, tqparent, "folder" );
+    TQDomElement elemFolder = addSubElement( doc, parent, "folder" );
     addSubElement( doc, elemFolder, "name", name );
 
     return elemFolder;
 }
 
-void K3bVcdXmlView::addFileElement( TQDomDocument& doc, TQDomElement& tqparent, const TQString& src, const TQString& name, bool mixed )
+void K3bVcdXmlView::addFileElement( TQDomDocument& doc, TQDomElement& parent, const TQString& src, const TQString& name, bool mixed )
 {
-    TQDomElement elemFile = addSubElement( doc, tqparent, "file" );
+    TQDomElement elemFile = addSubElement( doc, parent, "file" );
     elemFile.setAttribute( "src", TQString( "%1" ).tqarg( src ) );
     if ( mixed )
         elemFile.setAttribute( "format", "mixed" );
@@ -291,11 +291,11 @@ void K3bVcdXmlView::addFileElement( TQDomDocument& doc, TQDomElement& tqparent, 
     addSubElement( doc, elemFile, "name", name );
 }
 
-void K3bVcdXmlView::doPbc( TQDomDocument& doc, TQDomElement& tqparent, K3bVcdTrack* track )
+void K3bVcdXmlView::doPbc( TQDomDocument& doc, TQDomElement& parent, K3bVcdTrack* track )
 {
     TQString ref = ( track->isSegment() ) ? "segment" : "sequence";
 
-    TQDomElement elemSelection = addSubElement( doc, tqparent, "selection" );
+    TQDomElement elemSelection = addSubElement( doc, parent, "selection" );
     elemSelection.setAttribute( "id", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
 
     setNumkeyBSN( doc, elemSelection, track );
@@ -374,7 +374,7 @@ void K3bVcdXmlView::doPbc( TQDomDocument& doc, TQDomElement& tqparent, K3bVcdTra
     setNumkeySEL( doc, elemSelection, track );
 }
 
-void K3bVcdXmlView::setNumkeyBSN( TQDomDocument& doc, TQDomElement& tqparent, K3bVcdTrack* track )
+void K3bVcdXmlView::setNumkeyBSN( TQDomDocument& doc, TQDomElement& parent, K3bVcdTrack* track )
 {
     if ( track->PbcNumKeys() ) {
         if ( track->PbcNumKeysUserdefined() ) {
@@ -387,18 +387,18 @@ void K3bVcdXmlView::setNumkeyBSN( TQDomDocument& doc, TQDomElement& tqparent, K3
                 m_startkey = trackIt.key();
 
             if ( m_startkey > 0 )
-                addSubElement( doc, tqparent, "bsn", m_startkey );
+                addSubElement( doc, parent, "bsn", m_startkey );
             else // user has no numKeys defined for this track
                 track->setPbcNumKeys( false );
 
         } else {
             // default start with key #1
-            addSubElement( doc, tqparent, "bsn", 1 );
+            addSubElement( doc, parent, "bsn", 1 );
         }
     }
 }
 
-void K3bVcdXmlView::setNumkeySEL( TQDomDocument& doc, TQDomElement& tqparent, K3bVcdTrack* track )
+void K3bVcdXmlView::setNumkeySEL( TQDomDocument& doc, TQDomElement& parent, K3bVcdTrack* track )
 {
     if ( track->PbcNumKeys() ) {
         TQDomElement elemPbcSelectionNumKeySEL;
@@ -412,27 +412,27 @@ void K3bVcdXmlView::setNumkeySEL( TQDomDocument& doc, TQDomElement& tqparent, K3
 
                 kdDebug() << TQString( "trackIt key: %1 none: %2" ).tqarg( trackIt.key() ).tqarg( none ) << endl;
                 while ( none < trackIt.key() ) {
-                    elemPbcSelectionNumKeySEL = addSubElement( doc, tqparent, "select" );
+                    elemPbcSelectionNumKeySEL = addSubElement( doc, parent, "select" );
                     elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
-                    addComment( doc, tqparent, TQString( "key %1 -> %2 (normal none)" ).tqarg( none ).tqarg( TQFile::encodeName( track->absPath() ).data() ) );
+                    addComment( doc, parent, TQString( "key %1 -> %2 (normal none)" ).tqarg( none ).tqarg( TQFile::encodeName( track->absPath() ).data() ) );
                     none++;
                 }
 
                 if ( trackIt.data() ) {
                     TQString ref = ( trackIt.data() ->isSegment() ) ? "segment" : "sequence";
-                    elemPbcSelectionNumKeySEL = addSubElement( doc, tqparent, "select" );
+                    elemPbcSelectionNumKeySEL = addSubElement( doc, parent, "select" );
                     elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( trackIt.data() ->index() ).rightJustify( 3, '0' ) ) );
-                    addComment( doc, tqparent, TQString( "key %1 -> %2" ).tqarg( trackIt.key() ).tqarg( TQFile::encodeName( trackIt.data() ->absPath() ).data() ) );
+                    addComment( doc, parent, TQString( "key %1 -> %2" ).tqarg( trackIt.key() ).tqarg( TQFile::encodeName( trackIt.data() ->absPath() ).data() ) );
                 } else {
-                    elemPbcSelectionNumKeySEL = addSubElement( doc, tqparent, "select" );
+                    elemPbcSelectionNumKeySEL = addSubElement( doc, parent, "select" );
                     elemPbcSelectionNumKeySEL.setAttribute( "ref", "end" );
-                    addComment( doc, tqparent, TQString( "key %1 -> end" ).tqarg( trackIt.key() ) );
+                    addComment( doc, parent, TQString( "key %1 -> end" ).tqarg( trackIt.key() ) );
                 }
                 none++;
             }
         } else {
             // default reference to itSelf
-            elemPbcSelectionNumKeySEL = addSubElement( doc, tqparent, "select" );
+            elemPbcSelectionNumKeySEL = addSubElement( doc, parent, "select" );
             elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
         }
     }
