@@ -206,8 +206,8 @@ void K3bVideoDVDTitleDetectClippingJob::slotTranscodeStderr( const TQString& lin
   // parse progress
   // encoding frame [185],  24.02 fps, 93.0%, ETA: 0:00:00, ( 0| 0| 0)
   if( line.startsWith( "encoding frame" ) ) {
-    int pos1 = line.tqfind( '[', 15 );
-    int pos2 = line.tqfind( ']', pos1+1 );
+    int pos1 = line.find( '[', 15 );
+    int pos2 = line.find( ']', pos1+1 );
     if( pos1 > 0 && pos2 > 0 ) {
       bool ok;
       int encodedFrames = line.mid( pos1+1, pos2-pos1-1 ).toInt( &ok );
@@ -235,7 +235,7 @@ void K3bVideoDVDTitleDetectClippingJob::slotTranscodeStderr( const TQString& lin
 
   // [detectclipping#0] valid area: X: 5..719 Y: 72..507  -> -j 72,6,68,0
   else if( line.startsWith( "[detectclipping" ) ) {
-    int pos = line.tqfind( "-j" );
+    int pos = line.find( "-j" );
     if( pos > 0 ) {
       TQStringList values = TQStringList::split( ',', line.mid( pos+3 ) );
       m_clippingTop = TQMIN( m_clippingTop, values[0].toInt() );

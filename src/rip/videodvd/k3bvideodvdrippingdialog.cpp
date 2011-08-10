@@ -262,7 +262,7 @@ void K3bVideoDVDRippingDialog::slotUpdateFilenames()
        it != m_titleRipInfos.end(); ++it ) {
     TQString f = d->fsInfo.fixupPath( createFilename( it.data(), m_w->m_comboFilenamePattern->currentText() ) );
     if( m_w->m_checkBlankReplace->isChecked() )
-      f.tqreplace( TQRegExp( "\\s" ), m_w->m_editBlankReplace->text() );
+      f.replace( TQRegExp( "\\s" ), m_w->m_editBlankReplace->text() );
     it.data().filename = baseDir + f;
     it.key()->setText( 3, f );
   }
@@ -331,7 +331,7 @@ TQString K3bVideoDVDRippingDialog::createFilename( const K3bVideoDVDRippingJob::
       // first check if we have a long keyword instead of a one-char
       //
       if( pattern[i] == '{' ) {
-	int j = pattern.tqfind( '}', i );
+	int j = pattern.find( '}', i );
 	if( j < 0 ) // no closing bracket -> no valid pattern
 	  c = '*';
 	else {

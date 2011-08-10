@@ -121,13 +121,13 @@ void K3bAudioNormalizeJob::slotStdLine( const TQString& line )
     }
   }
   
-  else if( line.tqcontains( "already normalized" ) ) {
+  else if( line.contains( "already normalized" ) ) {
     // no normalization necessary for the current track
     emit infoMessage( i18n("Track %1 is already normalized.").tqarg(m_currentTrack), INFO );
     m_currentTrack++;
   }
 
-  else if( line.tqcontains( "--% done") ) {
+  else if( line.contains( "--% done") ) {
     if( m_currentAction == ADJUSTING_LEVELS ) {
       emit newTask( i18n("Adjusting volume level for track %1 of %2").tqarg(m_currentTrack).tqarg(m_files.count()) );
       kdDebug() << "(K3bAudioNormalizeJob) adjusting level for track " 
@@ -148,7 +148,7 @@ void K3bAudioNormalizeJob::slotStdLine( const TQString& line )
     m_currentTrack++;
   }
   
-  else if( int pos = line.tqfind( "% done" ) > 0 ) {
+  else if( int pos = line.find( "% done" ) > 0 ) {
     // parse progress: "XXX% done" and "batch XXX% done"
     pos -= 3;
     bool ok;

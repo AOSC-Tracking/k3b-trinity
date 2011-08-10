@@ -510,7 +510,7 @@ bool K3bMadDecoderFactory::canDecode( const KURL& url )
     unsigned int s = handle.madFrame->header.samplerate;
 
     //
-    // tqfind 4 more mp3 headers (random value since 2 was not enough)
+    // find 4 more mp3 headers (random value since 2 was not enough)
     // This way we get most of the mp3 files while sorting out
     // for example wave files.
     //

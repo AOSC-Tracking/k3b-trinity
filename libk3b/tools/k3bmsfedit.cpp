@@ -134,7 +134,7 @@ int K3bMsfEdit::currentStepValue() const
   TQString text = editor()->text();
   if( text.length() == 8 ) {
     text = text.mid( editor()->cursorPosition() );
-    int num = text.tqcontains( ':' );
+    int num = text.contains( ':' );
     if( num == 1 )
       val = 75;
     else if( num == 2 )

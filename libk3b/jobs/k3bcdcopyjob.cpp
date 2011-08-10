@@ -311,7 +311,7 @@ void K3bCdCopyJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
       }
 
       unsigned long avail, size;
-      TQString pathToTest = m_tempPath.left( m_tempPath.tqfindRev( '/' ) );
+      TQString pathToTest = m_tempPath.left( m_tempPath.findRev( '/' ) );
       if( !K3b::kbFreeOnFs( pathToTest, size, avail ) ) {
 	emit infoMessage( i18n("Unable to determine free space in temporary directory '%1'.").tqarg(pathToTest), ERROR );
 	d->error = true;

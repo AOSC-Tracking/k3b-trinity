@@ -108,7 +108,7 @@ class LIBK3B_EXPORT K3bIsoOptions
   void setPreserveFilePermissions( bool b ) { m_preserveFilePermissions = b; }
   // ----------------------------------------------------------------- mkisofs-options -----------
 
-  enum whiteSpaceTreatments { noChange = 0, tqreplace = 1, strip = 2, extended = 3 };
+  enum whiteSpaceTreatments { noChange = 0, replace = 1, strip = 2, extended = 3 };
 
   void setWhiteSpaceTreatment( int i ) { m_whiteSpaceTreatment = i; }
   int whiteSpaceTreatment() const { return m_whiteSpaceTreatment; }

@@ -264,7 +264,7 @@ TQString K3bAudioMetainfoRenamerPluginWidget::createNewName( K3bFileItem* item )
   KMimeType::Ptr mimetype = KMimeType::findByPath( item->localPath() );
   // sometimes ogg-vorbis files go as "application/x-ogg"
   if( mimetype != 0 && 
-      ( mimetype->name().tqcontains( "audio" ) || mimetype->name().tqcontains("ogg") ) ) {
+      ( mimetype->name().contains( "audio" ) || mimetype->name().contains("ogg") ) ) {
 
     TQString artist, title, track;
 
@@ -324,7 +324,7 @@ TQString K3bAudioMetainfoRenamerPluginWidget::createNewName( K3bFileItem* item )
     // remove white spaces from end and beginning
     newName = newName.stripWhiteSpace();
 
-    TQString extension = item->k3bName().mid( item->k3bName().tqfindRev(".") );
+    TQString extension = item->k3bName().mid( item->k3bName().findRev(".") );
 
     if( !newName.isEmpty() ) {
       //
@@ -353,7 +353,7 @@ TQString K3bAudioMetainfoRenamerPluginWidget::createNewName( K3bFileItem* item )
 bool K3bAudioMetainfoRenamerPluginWidget::existsOtherItemWithSameName( K3bFileItem* item, const TQString& name )
 {
   K3bDirItem* dir = item->tqparent();
-  K3bDataItem* otherItem = dir->tqfind( name );
+  K3bDataItem* otherItem = dir->find( name );
   if( otherItem && otherItem != item )
     return true;
 

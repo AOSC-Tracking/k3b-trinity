@@ -322,7 +322,7 @@ void K3bWriterSelectionWidget::clearSpeedCombo()
 
 void K3bWriterSelectionWidget::insertSpeedItem( int speed )
 {
-  if( !d->speedIndexMap.tqcontains( speed ) ) {
+  if( !d->speedIndexMap.contains( speed ) ) {
     d->indexSpeedMap[m_comboSpeed->count()] = speed;
     d->speedIndexMap[speed] = m_comboSpeed->count();
 
@@ -367,7 +367,7 @@ void K3bWriterSelectionWidget::setSpeed( int s )
 
   if( d->haveIgnoreSpeed && s < 0 )
     m_comboSpeed->setCurrentItem( 1 ); // Ignore
-  else if( d->speedIndexMap.tqcontains( s ) )
+  else if( d->speedIndexMap.contains( s ) )
     m_comboSpeed->setCurrentItem( d->speedIndexMap[s] );
   else {
     m_comboSpeed->setCurrentItem( 0 ); // Auto

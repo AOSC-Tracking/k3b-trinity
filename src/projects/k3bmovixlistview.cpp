@@ -219,7 +219,7 @@ void K3bMovixListView::slotNewFileItems()
   K3bMovixFileItem* lastItem = 0;
   for( TQPtrListIterator<K3bMovixFileItem> it( m_doc->movixFileItems() ); it.current(); ++it ) {
     K3bMovixFileItem* item = it.current();
-    if( !m_itemMap.tqcontains( item ) )
+    if( !m_itemMap.contains( item ) )
       m_itemMap.insert( item, new K3bMovixFileViewItem( m_doc, item, this, lastItem ? m_itemMap[lastItem] : 0L ) );
 
     if( item->subTitleItem() ) {
@@ -240,7 +240,7 @@ void K3bMovixListView::slotNewFileItems()
 
 void K3bMovixListView::slotFileItemRemoved( K3bMovixFileItem* item )
 {
-  if( m_itemMap.tqcontains( item ) ) {
+  if( m_itemMap.contains( item ) ) {
     K3bMovixFileViewItem* vi = m_itemMap[item];
     m_itemMap.erase(item);
     delete vi;
@@ -250,7 +250,7 @@ void K3bMovixListView::slotFileItemRemoved( K3bMovixFileItem* item )
 
 void K3bMovixListView::slotSubTitleItemRemoved( K3bMovixFileItem* item )
 {
-  if( m_itemMap.tqcontains( item ) ) {
+  if( m_itemMap.contains( item ) ) {
     K3bMovixFileViewItem* vi = m_itemMap[item];
     if( vi->childCount() >= 1 )
       delete vi->firstChild();

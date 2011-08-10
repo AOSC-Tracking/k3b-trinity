@@ -53,7 +53,7 @@ void K3bMsInfoFetcher::start()
 
   if( !k3bcore->externalBinManager()->foundBin( "cdrecord" ) ) {
     kdDebug() << "(K3bMsInfoFetcher) could not find cdrecord executable" << endl;
-    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("cdrecord"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdrecord"), K3bJob::ERROR );
     jobFinished(false);
     return;
   }
@@ -89,7 +89,7 @@ void K3bMsInfoFetcher::getMsInfo()
     bin = k3bcore->externalBinManager()->binObject( "cdrecord" );
  
     if( !bin ) {
-      emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg( m_dvd ? "dvdrecord" : "cdrecord" ), ERROR );
+      emit infoMessage( i18n("Could not find %1 executable.").tqarg( m_dvd ? "dvdrecord" : "cdrecord" ), ERROR );
       jobFinished(false);
       return;
     }
@@ -190,7 +190,7 @@ void K3bMsInfoFetcher::slotProcessExited()
   kdDebug() << "(K3bMsInfoFetcher) msinfo fetched" << endl;
 
   // now parse the output
-  TQString firstLine = m_collectedOutput.left( m_collectedOutput.tqfind("\n") );
+  TQString firstLine = m_collectedOutput.left( m_collectedOutput.find("\n") );
   TQStringList list = TQStringList::split( ",",  firstLine );
   if( list.count() == 2 ) {
     bool ok1, ok2;

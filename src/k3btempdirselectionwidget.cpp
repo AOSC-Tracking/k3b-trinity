@@ -93,7 +93,7 @@ unsigned long K3bTempDirSelectionWidget::freeTempSpace() const
   TQString path = m_editDirectory->url();
 
   if( !TQFile::exists( path ) )
-    path.truncate( path.tqfindRev('/') );
+    path.truncate( path.findRev('/') );
 
   unsigned long size;
   K3b::kbFreeOnFs( path, size, m_freeTempSpace );
@@ -184,7 +184,7 @@ TQString K3bTempDirSelectionWidget::tempDirectory() const
 
   // now we treat the last section as a filename and return the path
   // in front of it
-  td.truncate( td.tqfindRev( '/' ) + 1 );
+  td.truncate( td.findRev( '/' ) + 1 );
   return td;
 }
 
@@ -248,7 +248,7 @@ void K3bTempDirSelectionWidget::setDefaultImageFileName( const TQString& name )
         }
 
         m_defaultImageFileName = name;
-        if ( !m_defaultImageFileName.tqcontains( '.' ) ) {
+        if ( !m_defaultImageFileName.contains( '.' ) ) {
             m_defaultImageFileName += ".iso";
         }
         fixTempPath( changeImageName );

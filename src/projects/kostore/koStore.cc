@@ -208,7 +208,7 @@ bool KoStore::open( const TQString & _name )
   if ( m_mode == Write )
   {
     kdDebug(s_area) << "KoStore: opening for writing '" << m_sName << "'" << endl;
-    if ( m_strFiles.tqfindIndex( m_sName ) != -1 ) // just check if it's there
+    if ( m_strFiles.findIndex( m_sName ) != -1 ) // just check if it's there
     {
       kdWarning(s_area) << "KoStore: Duplicate filename " << m_sName << endl;
       //return KIO::ERR_FILE_ALREADY_EXIST;
@@ -379,7 +379,7 @@ bool KoStore::enterDirectory( const TQString& directory )
   bool success = true;
   TQString tmp( directory );
 
-  while ( ( pos = tmp.tqfind( '/' ) ) != -1 &&
+  while ( ( pos = tmp.find( '/' ) ) != -1 &&
           ( success = enterDirectoryInternal( tmp.left( pos ) ) ) )
           tmp = tmp.mid( pos + 1 );
 
@@ -562,7 +562,7 @@ TQString KoStore::expandEncodedPath( TQString intern ) const
   TQString result;
   int pos;
 
-  if ( ( pos = intern.tqfindRev( '/', -1 ) ) != -1 ) {
+  if ( ( pos = intern.findRev( '/', -1 ) ) != -1 ) {
     result = expandEncodedDirectory( intern.left( pos ) ) + '/';
     intern = intern.mid( pos + 1 );
   }
@@ -595,7 +595,7 @@ TQString KoStore::expandEncodedDirectory( TQString intern ) const
 
   TQString result;
   int pos;
-  while ( ( pos = intern.tqfind( '/' ) ) != -1 ) {
+  while ( ( pos = intern.find( '/' ) ) != -1 ) {
     if ( TQChar(intern.at(0)).isDigit() )
       result += "part";
     result += intern.left( pos + 1 ); // copy numbers (or "pictures") + "/"

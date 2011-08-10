@@ -504,7 +504,7 @@ void K3bAudioDecoder::cleanup()
 
 TQString K3bAudioDecoder::metaInfo( MetaDataField f )
 {
-  if( d->metaInfoMap.tqcontains( f ) )
+  if( d->metaInfoMap.contains( f ) )
     return d->metaInfoMap[f];
 
   // fall back to KFileMetaInfo

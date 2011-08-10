@@ -65,7 +65,7 @@ public:
   }
 
   void setLanguage( const TQString& l ) {
-    TQMap<TQString,int>::const_iterator it = m_indexMap.tqfind(l);
+    TQMap<TQString,int>::const_iterator it = m_indexMap.find(l);
     if( it == m_indexMap.end() )
       m_box->setCurrentItem( 0 );
     else

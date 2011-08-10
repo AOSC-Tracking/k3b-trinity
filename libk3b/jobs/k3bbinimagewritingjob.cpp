@@ -96,7 +96,7 @@ bool K3bBinImageWritingJob::prepareWriter()
       TQFile f( m_tocFile );
       if( f.open( IO_ReadOnly ) ) {
 	TQTextStream fStr( &f );
-	if( fStr.read().tqcontains( "MODE1/2352" ) ) {
+	if( fStr.read().contains( "MODE1/2352" ) ) {
 	  kdDebug() << "(K3bBinImageWritingJob) cuefile contains MODE1/2352 track. using cdrdao." << endl;
 	  usedWritingApp = K3b::CDRDAO;
 	}

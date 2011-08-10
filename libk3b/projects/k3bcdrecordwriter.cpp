@@ -293,7 +293,7 @@ void K3bCdrecordWriter::start()
   prepareProcess();
 
   if( !m_cdrecordBinObject ) {
-    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("cdrecord"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdrecord"), ERROR );
     jobFinished(false);
     return;
   }
@@ -406,8 +406,8 @@ void K3bCdrecordWriter::slotStdLine( const TQString& line )
 
 	m_totalTracks = tt;
 
-	int sizeStart = line.tqfind( TQRegExp("\\d"), 10 );
-	int sizeEnd = line.tqfind( "MB", sizeStart );
+	int sizeStart = line.find( TQRegExp("\\d"), 10 );
+	int sizeEnd = line.find( "MB", sizeStart );
 	track.size = line.mid( sizeStart, sizeEnd-sizeStart ).toInt(&ok);
 
 	if( ok ) {
@@ -474,7 +474,7 @@ void K3bCdrecordWriter::slotStdLine( const TQString& line )
 	   line.startsWith( m_cdrecordBinObject->path ) ||
 	   line.startsWith( m_cdrecordBinObject->path.left(m_cdrecordBinObject->path.length()-5) ) ) {
     // get rid of the path and the following colon and space
-    TQString errStr = line.mid( line.tqfind(':') + 2 );
+    TQString errStr = line.mid( line.find(':') + 2 );
 
     if( errStr.startsWith( "Drive does not support SAO" ) ) {
       emit infoMessage( i18n("DAO (Disk At Once) recording not supported with this writer"), K3bJob::ERROR );
@@ -508,7 +508,7 @@ void K3bCdrecordWriter::slotStdLine( const TQString& line )
     else if( errStr.startsWith("Bad Option") ) {
       m_cdrecordError = BAD_OPTION;
       // parse option
-      int pos = line.tqfind( "Bad Option" ) + 13;
+      int pos = line.find( "Bad Option" ) + 13;
       int len = line.length() - pos - 1;
       emit infoMessage( i18n("No valid %1 option: %2").tqarg(m_cdrecordBinObject->name()).tqarg(line.mid(pos, len)),
 			ERROR );
@@ -556,10 +556,10 @@ void K3bCdrecordWriter::slotStdLine( const TQString& line )
   // All other messages
   //
 
-  else if( line.tqcontains( "at speed" ) ) {
+  else if( line.contains( "at speed" ) ) {
     // parse the speed and inform the user if cdrdao switched it down
-    int pos = line.tqfind( "at speed" );
-    int pos2 = line.tqfind( "in", pos+9 );
+    int pos = line.find( "at speed" );
+    int pos2 = line.find( "in", pos+9 );
     int speed = static_cast<int>( line.mid( pos+9, pos2-pos-10 ).toDouble() );  // cdrecord-dvd >= 2.01a25 uses 8.0 and stuff
     if( speed != d->usedSpeed ) {
       emit infoMessage( i18n("Medium or burner do not support writing at %1x speed").tqarg(d->usedSpeed), K3bJob::WARNING );
@@ -640,10 +640,10 @@ void K3bCdrecordWriter::slotStdLine( const TQString& line )
     if( ok )
       emit infoMessage( i18n("Buffer was low 1 time.", "Buffer was low %n times.", num), INFO );
   }
-  else if( line.tqcontains("Medium Error") ) {
+  else if( line.contains("Medium Error") ) {
     m_cdrecordError = MEDIUM_ERROR;
   }
-  else if( line.startsWith( "Error trying to open" ) && line.tqcontains( "(Device or resource busy)" ) ) {
+  else if( line.startsWith( "Error trying to open" ) && line.contains( "(Device or resource busy)" ) ) {
     m_cdrecordError = DEVICE_BUSY;
   }
   else {

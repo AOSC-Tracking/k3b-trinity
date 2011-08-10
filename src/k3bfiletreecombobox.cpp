@@ -213,9 +213,9 @@ void K3bFileTreeComboBox::slotGoUrl()
   }
 
   // check for our own internal format
-  else if( p.tqcontains("/dev/") ) {
-    int pos1 = p.tqfindRev('(');
-    int pos2 = p.tqfindRev(')');
+  else if( p.contains("/dev/") ) {
+    int pos1 = p.findRev('(');
+    int pos2 = p.findRev(')');
     TQString devStr = p.mid( pos1+1, pos2-pos1-1  );
     if( K3bDevice::Device* dev = k3bcore->deviceManager()->findDevice( devStr ) ) {
       emit deviceExecuted( dev );
@@ -239,13 +239,13 @@ void K3bFileTreeComboBox::slotGoUrl()
   while( ( pos = someUsersHomeDir.search( p, pos ) ) != -1 ) {
     KUser user( someUsersHomeDir.cap(1) );
     if( user.isValid() )
-      p.tqreplace( pos, someUsersHomeDir.cap(1).length() + 1, user.homeDir() );
+      p.replace( pos, someUsersHomeDir.cap(1).length() + 1, user.homeDir() );
     else
       ++pos; // skip this ~
   }
 
   // now replace the unmatched tildes with our home dir
-  p.tqreplace( "~", K3b::prepareDir( TQDir::homeDirPath() ) );
+  p.replace( "~", K3b::prepareDir( TQDir::homeDirPath() ) );
 
 
   lineEdit()->setText( p );
@@ -273,7 +273,7 @@ bool K3bFileTreeComboBox::eventFilter( TQObject* o, TQEvent* e )
     }
     else if( e->type() == TQEvent::MouseButtonPress ) {
       TQMouseEvent* me = (TQMouseEvent*)e;
-      if ( !TQT_TQRECT_OBJECT(m_fileTreeView->rect()).tqcontains( me->pos() ) ) {
+      if ( !TQT_TQRECT_OBJECT(m_fileTreeView->rect()).contains( me->pos() ) ) {
 	TQRect arrowRect = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 							  TQStyle::SC_ComboBoxArrow);
 	arrowRect = TQStyle::tqvisualRect(arrowRect, this);
@@ -282,7 +282,7 @@ bool K3bFileTreeComboBox::eventFilter( TQObject* o, TQEvent* e )
 	// and thus has a rect that doesn't fit the button.
 	arrowRect.setHeight( TQMAX(  height() - (2 * arrowRect.y()), arrowRect.height() ) );
 
-	if ( arrowRect.tqcontains( mapFromGlobal(me->globalPos()) ) ) {
+	if ( arrowRect.contains( mapFromGlobal(me->globalPos()) ) ) {
 	  d->ignoreNextMouseClick = true;  // in the case we hit the arrow button
 	}
 	popdown();
@@ -316,7 +316,7 @@ void K3bFileTreeComboBox::mousePressEvent( TQMouseEvent* e )
   // and thus has a rect that doesn't fit the button.
   arrowRect.setHeight( TQMAX(  height() - (2 * arrowRect.y()), arrowRect.height() ) );
 
-  if ( arrowRect.tqcontains( e->pos() ) ) {
+  if ( arrowRect.contains( e->pos() ) ) {
     popup();
     tqrepaint( FALSE );
   }

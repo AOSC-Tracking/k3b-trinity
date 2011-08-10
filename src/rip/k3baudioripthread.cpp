@@ -194,7 +194,7 @@ void K3bAudioRipThread::run()
   if( m_singleFile ) {
     TQString& filename = m_tracks[0].second;
 
-    TQString dir = filename.left( filename.tqfindRev("/") );
+    TQString dir = filename.left( filename.findRev("/") );
     if( !KStandardDirs::makeDir( dir, 0777 ) ) {
       d->paranoiaLib->close();
       emitInfoMessage( i18n("Unable to create directory %1").tqarg(dir), K3bJob::ERROR );
@@ -298,7 +298,7 @@ bool K3bAudioRipThread::ripTrack( int track, const TQString& filename )
 
     long trackSectorsRead = 0;
 
-    TQString dir = filename.left( filename.tqfindRev("/") );
+    TQString dir = filename.left( filename.findRev("/") );
     if( !KStandardDirs::makeDir( dir, 0777 ) ) {
       emitInfoMessage( i18n("Unable to create directory %1").tqarg(dir), K3bJob::ERROR );
       return false;
@@ -444,7 +444,7 @@ void K3bAudioRipThread::cleanupAfterCancellation()
 bool K3bAudioRipThread::writePlaylist()
 {
   // this is an absolut path so there is always a "/"
-  TQString playlistDir = m_playlistFilename.left( m_playlistFilename.tqfindRev( "/" ) );
+  TQString playlistDir = m_playlistFilename.left( m_playlistFilename.findRev( "/" ) );
 
   if( !KStandardDirs::makeDir( playlistDir ) ) {
     emitInfoMessage( i18n("Unable to create directory %1").tqarg(playlistDir), K3bJob::ERROR );
@@ -467,8 +467,8 @@ bool K3bAudioRipThread::writePlaylist()
       if( !m_cddbEntry.cdArtist.isEmpty() && !m_cddbEntry.cdTitle.isEmpty() )
 	t << m_cddbEntry.cdArtist << " - " << m_cddbEntry.cdTitle << endl;
       else
-	t << m_tracks[0].second.mid(m_tracks[0].second.tqfindRev("/") + 1, 
-				    m_tracks[0].second.length() - m_tracks[0].second.tqfindRev("/") - 5)
+	t << m_tracks[0].second.mid(m_tracks[0].second.findRev("/") + 1, 
+				    m_tracks[0].second.length() - m_tracks[0].second.findRev("/") - 5)
 	  << endl; // filename without extension
 
       // filename
@@ -488,9 +488,9 @@ bool K3bAudioRipThread::writePlaylist()
 	if( !m_cddbEntry.artists[trackIndex].isEmpty() && !m_cddbEntry.titles[trackIndex].isEmpty() )
 	  t << m_cddbEntry.artists[trackIndex] << " - " << m_cddbEntry.titles[trackIndex] << endl;
 	else
-	  t << m_tracks[i].second.mid(m_tracks[i].second.tqfindRev("/") + 1, 
+	  t << m_tracks[i].second.mid(m_tracks[i].second.findRev("/") + 1, 
 				      m_tracks[i].second.length() 
-				      - m_tracks[i].second.tqfindRev("/") - 5)
+				      - m_tracks[i].second.findRev("/") - 5)
 	    << endl; // filename without extension
 
 	// filename
@@ -548,7 +548,7 @@ bool K3bAudioRipThread::writeCueFile()
 
   // use the same base name as the image file
   TQString cueFile = m_tracks[0].second;
-  cueFile.truncate( cueFile.tqfindRev(".") );
+  cueFile.truncate( cueFile.findRev(".") );
   cueFile += ".cue";
 
   emitInfoMessage( i18n("Writing cue file to %1.").tqarg(cueFile), K3bJob::INFO );
@@ -563,17 +563,17 @@ TQString K3bAudioRipThread::findRelativePath( const TQString& absPath, const TQS
   TQString path = K3b::fixupPath( absPath );
 
   // both paths have an equal beginning. That's just how it's configured by K3b
-  int pos = baseDir_.tqfind( "/" );
+  int pos = baseDir_.find( "/" );
   int oldPos = pos;
   while( pos != -1 && path.left( pos+1 ) == baseDir_.left( pos+1 ) ) {
     oldPos = pos;
-    pos = baseDir_.tqfind( "/", pos+1 );
+    pos = baseDir_.find( "/", pos+1 );
   }
 
   // now the paths are equal up to oldPos, so that's how "deep" we go
   path = path.mid( oldPos+1 );
   baseDir_ = baseDir_.mid( oldPos+1 );
-  int numberOfDirs = baseDir_.tqcontains( '/' );
+  int numberOfDirs = baseDir_.contains( '/' );
   for( int i = 0; i < numberOfDirs; ++i )
     path.prepend( "../" );
 

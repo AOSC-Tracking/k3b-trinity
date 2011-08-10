@@ -84,7 +84,7 @@ namespace K3bDevice
 
     private:
       // TODO: remove this (see above)
-      void fixup( TQString& s ) { s.tqreplace( '/', "_" ); s.tqreplace( '\"', "_" ); }
+      void fixup( TQString& s ) { s.replace( '/', "_" ); s.replace( '\"', "_" ); }
 
       TQString m_title;
       TQString m_performer;
@@ -177,7 +177,7 @@ namespace K3bDevice
 	
     private:
       // TODO: remove this (see above)
-      void fixup( TQString& s ) { s.tqreplace( '/', "_" ); s.tqreplace( '\"', "_" ); }
+      void fixup( TQString& s ) { s.replace( '/', "_" ); s.replace( '\"', "_" ); }
 
       const TQString& textForPackType( int packType, unsigned int track ) const;
       unsigned int textLengthForPackType( int packType ) const;

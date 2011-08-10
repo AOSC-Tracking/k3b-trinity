@@ -63,7 +63,7 @@ TQStringList K3bPluginManager::groups() const
   TQPtrList<K3bPlugin> fl;
   for( TQPtrListIterator<K3bPlugin> it( d->plugins );
        it.current(); ++it ) {
-    if( !grps.tqcontains( it.current()->group() ) )
+    if( !grps.contains( it.current()->group() ) )
 	grps.append( it.current()->group() );
   }
 

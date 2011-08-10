@@ -108,7 +108,7 @@ bool K3bCddbQuery::parseEntry( TQTextStream& stream, K3bCddbResultEntry& entry )
     }
     
     else if( line.startsWith( "TTITLE" ) ) {
-      int eqSgnPos = line.tqfind( "=" );
+      int eqSgnPos = line.find( "=" );
       bool ok;
       uint trackNum = (uint)line.mid( 6, eqSgnPos - 6 ).toInt( &ok );
       if( !ok )
@@ -129,7 +129,7 @@ bool K3bCddbQuery::parseEntry( TQTextStream& stream, K3bCddbResultEntry& entry )
     }
     
     else if( line.startsWith( "EXTT" ) ) {
-      int eqSgnPos = line.tqfind( "=" );
+      int eqSgnPos = line.find( "=" );
       bool ok;
       uint trackNum = (uint)line.mid( 4, eqSgnPos - 4 ).toInt( &ok );
       if( !ok )
@@ -158,7 +158,7 @@ bool K3bCddbQuery::parseEntry( TQTextStream& stream, K3bCddbResultEntry& entry )
   // if no " / " delimiter is present title and artist are the same
   // -------------------------------------------------------------------
   TQString fullTitle = entry.cdTitle;
-  int splitPos = fullTitle.tqfind( " / " );
+  int splitPos = fullTitle.find( " / " );
   if( splitPos < 0 )
     entry.cdArtist = fullTitle;
   else {
@@ -171,7 +171,7 @@ bool K3bCddbQuery::parseEntry( TQTextStream& stream, K3bCddbResultEntry& entry )
   for( TQStringList::iterator it = entry.titles.begin();
        it != entry.titles.end(); ++it ) {
     TQString fullTitle = *it;
-    int splitPos = fullTitle.tqfind( " / " );
+    int splitPos = fullTitle.find( " / " );
     if( splitPos < 0 )
       entry.artists.append( entry.cdArtist );
     else {
@@ -185,23 +185,23 @@ bool K3bCddbQuery::parseEntry( TQTextStream& stream, K3bCddbResultEntry& entry )
   // replace all "\\n" with "\n"
   for( TQStringList::iterator it = entry.titles.begin();
        it != entry.titles.end(); ++it ) {
-    (*it).tqreplace( "\\\\\\\\n", "\\n" );
+    (*it).replace( "\\\\\\\\n", "\\n" );
   }
 
   for( TQStringList::iterator it = entry.artists.begin();
        it != entry.artists.end(); ++it ) {
-    (*it).tqreplace( "\\\\\\\\n", "\\n" );
+    (*it).replace( "\\\\\\\\n", "\\n" );
   }
 
   for( TQStringList::iterator it = entry.extInfos.begin();
        it != entry.extInfos.end(); ++it ) {
-    (*it).tqreplace( "\\\\\\\\n", "\\n" );
+    (*it).replace( "\\\\\\\\n", "\\n" );
   }
 
-  entry.cdTitle.tqreplace( "\\\\\\\\n", "\\n" );
-  entry.cdArtist.tqreplace( "\\\\\\\\n", "\\n" );
-  entry.cdExtInfo.tqreplace( "\\\\\\\\n", "\\n" );
-  entry.genre.tqreplace( "\\\\\\\\n", "\\n" );
+  entry.cdTitle.replace( "\\\\\\\\n", "\\n" );
+  entry.cdArtist.replace( "\\\\\\\\n", "\\n" );
+  entry.cdExtInfo.replace( "\\\\\\\\n", "\\n" );
+  entry.genre.replace( "\\\\\\\\n", "\\n" );
 
   return true;
 }
@@ -254,7 +254,7 @@ bool K3bCddbQuery::parseMatchHeader( const TQString& line, K3bCddbResultHeader& 
   header.category = line.section( ' ', 0, 0 );
   header.discid = line.section( ' ', 1, 1 );
   header.title = line.mid( header.category.length() + header.discid.length() + 2 );
-  int slashPos = header.title.tqfind( "/" );
+  int slashPos = header.title.find( "/" );
   if( slashPos > 0 ) {
     header.artist = header.title.left(slashPos).stripWhiteSpace();
     header.title = header.title.mid( slashPos+1 ).stripWhiteSpace();

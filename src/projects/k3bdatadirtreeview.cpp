@@ -242,7 +242,7 @@ void K3bDataDirTreeView::slotDataItemRemoved( K3bDataItem* item )
 {
   if( item->isDir() ) {
     K3bDirItem* dirItem = static_cast<K3bDirItem*>( item );
-    TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> it = m_itemMap.tqfind( dirItem );
+    TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> it = m_itemMap.find( dirItem );
     if( it != m_itemMap.end() ) {
       K3bDataDirViewItem* viewItem = it.data();
       m_itemMap.remove( it );
@@ -263,7 +263,7 @@ void K3bDataDirTreeView::slotDataItemRemoved( K3bDataItem* item )
 
 void K3bDataDirTreeView::setCurrentDir( K3bDirItem* dirItem )
 {
-  TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> it = m_itemMap.tqfind( dirItem );
+  TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> it = m_itemMap.find( dirItem );
   if( it != m_itemMap.end() ) {
     setCurrentItem( it.data() );
     it.data()->setOpen(true);
@@ -454,7 +454,7 @@ void K3bDataDirTreeView::checkForNewItems()
 	{
 	  K3bDirItem* dirItem = dynamic_cast<K3bDirItem*>( item );
 
-	  TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> itDirItem = m_itemMap.tqfind( dirItem );
+	  TQMapIterator<K3bDirItem*, K3bDataDirViewItem*> itDirItem = m_itemMap.find( dirItem );
 	  if( itDirItem == m_itemMap.end() ) {
 	    K3bDataDirViewItem* parentViewItem = m_itemMap[dirItem->tqparent()];
 	    K3bDataDirViewItem* newDirItem = new K3bDataDirViewItem( dirItem, parentViewItem );

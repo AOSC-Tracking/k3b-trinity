@@ -475,7 +475,7 @@ void K3bCdrdaoWriter::start()
   m_cdrdaoBinObject = k3bcore->externalBinManager()->binObject("cdrdao");
 
   if( !m_cdrdaoBinObject ) {
-    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("cdrdao"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdrdao"), ERROR );
     jobFinished(false);
     return;
   }
@@ -664,12 +664,12 @@ bool K3bCdrdaoWriter::cueSheet()
             if ( !ts.eof() ) {
                 TQString line = ts.readLine();
                 f.close();
-                int pos = line.tqfind( "FILE \"" );
+                int pos = line.find( "FILE \"" );
                 if( pos < 0 )
                     return false;
 
                 pos += 6;
-                int endPos = line.tqfind( "\" BINARY", pos+1 );
+                int endPos = line.find( "\" BINARY", pos+1 );
                 if( endPos < 0 )
                     return false;
 
@@ -802,11 +802,11 @@ void K3bCdrdaoWriter::slotProcessExited( KProcess* p )
 
 void K3bCdrdaoWriter::unknownCdrdaoLine( const TQString& line )
 {
-  if( line.tqcontains( "at speed" ) )
+  if( line.contains( "at speed" ) )
   {
     // parse the speed and inform the user if cdrdao switched it down
-    int pos = line.tqfind( "at speed" );
-    int po2 = line.tqfind( TQRegExp("\\D"), pos + 9 );
+    int pos = line.find( "at speed" );
+    int po2 = line.find( TQRegExp("\\D"), pos + 9 );
     int speed = line.mid( pos+9, po2-pos-9 ).toInt();
     if( speed < d->usedSpeed )
     {
@@ -835,7 +835,7 @@ void K3bCdrdaoWriter::parseCdrdaoLine( const TQString& str )
   {
     parseCdrdaoError( str );
   }
-  else if( (str).startsWith( "Wrote" ) && !str.tqcontains("blocks") )
+  else if( (str).startsWith( "Wrote" ) && !str.contains("blocks") )
   {
     parseCdrdaoWrote( str );
   }
@@ -870,7 +870,7 @@ void K3bCdrdaoWriter::parseCdrdaoLine( const TQString& str )
   }
   else if( str.startsWith( "Found pre-gap" ) )
   {
-    emit infoMessage( i18n("Found pregap: %1").tqarg( str.mid(str.tqfind(":")+1) ), K3bJob::INFO );
+    emit infoMessage( i18n("Found pregap: %1").tqarg( str.mid(str.find(":")+1) ), K3bJob::INFO );
   }
   else
     unknownCdrdaoLine(str);
@@ -880,52 +880,52 @@ void K3bCdrdaoWriter::parseCdrdaoError( const TQString& line )
 {
   int pos = -1;
 
-  if( line.tqcontains( "No driver found" ) ||
-      line.tqcontains( "use option --driver" ) )
+  if( line.contains( "No driver found" ) ||
+      line.contains( "use option --driver" ) )
   {
     emit infoMessage( i18n("No cdrdao driver found."), K3bJob::ERROR );
     emit infoMessage( i18n("Please select one manually in the device settings."), K3bJob::ERROR );
     emit infoMessage( i18n("For most current drives this would be 'generic-mmc'."), K3bJob::ERROR );
     m_knownError = true;
   }
-  else if( line.tqcontains( "Cannot setup device" ) )
+  else if( line.contains( "Cannot setup device" ) )
   {
     // no nothing...
   }
-  else if( line.tqcontains( "not ready") )
+  else if( line.contains( "not ready") )
   {
     emit infoMessage( i18n("Device not ready, waiting."),K3bJob::WARNING );
   }
-  else if( line.tqcontains("Drive does not accept any cue sheet") )
+  else if( line.contains("Drive does not accept any cue sheet") )
   {
     emit infoMessage( i18n("Cue sheet not accepted."), K3bJob::ERROR );
     m_knownError = true;
   }
-  else if( (pos = line.tqfind( "Illegal option" )) > 0 ) {
+  else if( (pos = line.find( "Illegal option" )) > 0 ) {
     // ERROR: Illegal option: -wurst
     emit infoMessage( i18n("No valid %1 option: %2").tqarg(m_cdrdaoBinObject->name()).tqarg(line.mid(pos+16)), 
 		      ERROR );
     m_knownError = true;
   }
-  else if( line.tqcontains( "exceeds capacity" ) ) {
+  else if( line.contains( "exceeds capacity" ) ) {
     emit infoMessage( i18n("Data does not fit on disk."), ERROR );
     if( m_cdrdaoBinObject->hasFeature("overburn") )
       emit infoMessage( i18n("Enable overburning in the advanced K3b settings to burn anyway."), INFO );
     m_knownError = true;
   }
- //  else if( !line.tqcontains( "remote progress message" ) )
+ //  else if( !line.contains( "remote progress message" ) )
 //     emit infoMessage( line, K3bJob::ERROR );
 }
 
 void K3bCdrdaoWriter::parseCdrdaoWrote( const TQString& line )
 {
   int pos, po2;
-  pos = line.tqfind( "Wrote" );
-  po2 = line.tqfind( " ", pos + 6 );
+  pos = line.find( "Wrote" );
+  po2 = line.find( " ", pos + 6 );
   int processed = line.mid( pos+6, po2-pos-6 ).toInt();
 
-  pos = line.tqfind( "of" );
-  po2 = line.tqfind( " ", pos + 3 );
+  pos = line.find( "of" );
+  po2 = line.find( " ", pos + 3 );
   m_size = line.mid( pos+3, po2-pos-3 ).toInt();
 
   d->speedEst->dataWritten( processed*1024 );
@@ -1042,8 +1042,8 @@ TQString K3bCdrdaoWriter::findDriverFile( const K3bExternalBin* bin )
 
   // cdrdao normally in (prefix)/bin and driver table in (prefix)/share/cdrdao
   TQString path = bin->path;
-  path.truncate( path.tqfindRev("/") );
-  path.truncate( path.tqfindRev("/") );
+  path.truncate( path.findRev("/") );
+  path.truncate( path.findRev("/") );
   path += "/share/cdrdao/drivers";
   if( TQFile::exists(path) )
     return path;

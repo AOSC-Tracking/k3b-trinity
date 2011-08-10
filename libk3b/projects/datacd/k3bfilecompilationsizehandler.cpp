@@ -114,7 +114,7 @@ public:
   void removeFile( K3bFileItem* item, bool followSymlinks ) {
     InodeInfo& inodeInfo = inodeMap[item->localId(followSymlinks)];
     
-    if( inodeInfo.items.tqfindRef( item ) == -1 ) {
+    if( inodeInfo.items.findRef( item ) == -1 ) {
       kdError() << "(K3bFileCompilationSizeHandler) " 
 		<< item->localPath()
 		<< " has been removed without being added!" << endl;
@@ -136,7 +136,7 @@ public:
   void removeSpecialItem( K3bDataItem* item ) {
     // special files do not have a corresponding local file
     // so we just substract their k3bSize
-    if( specialItems.tqfindRef( item ) == -1 ) {
+    if( specialItems.findRef( item ) == -1 ) {
       kdError() << "(K3bFileCompilationSizeHandler) Special item "
 		<< item->k3bName()
 		<< " has been removed without being added!" << endl;

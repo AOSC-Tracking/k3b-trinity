@@ -223,7 +223,7 @@ void K3bDevice::HalConnection::addDevice( const char* udi )
 	TQCString du( deviceUdi );
 	libhal_free_string( deviceUdi );
 
-	if( d->udiDeviceMap.tqcontains( du ) ) {
+	if( d->udiDeviceMap.contains( du ) ) {
 	  //
 	  // A new medium has been inserted. Save this medium's udi so we can reuse it later
 	  // on for the mount/unmount/eject methods
@@ -239,7 +239,7 @@ void K3bDevice::HalConnection::addDevice( const char* udi )
 
 void K3bDevice::HalConnection::removeDevice( const char* udi )
 {
-  TQMapIterator<TQCString, TQString> it = d->udiDeviceMap.tqfind( udi );
+  TQMapIterator<TQCString, TQString> it = d->udiDeviceMap.find( udi );
   if( it != d->udiDeviceMap.end() ) {
     k3bDebug() << "Unmapping udi " << udi << " from device " << it.data() << endl;
     emit deviceRemoved( it.data() );
@@ -253,7 +253,7 @@ void K3bDevice::HalConnection::removeDevice( const char* udi )
 	TQCString du( deviceUdi );
 	libhal_free_string( deviceUdi );
 
-	if( d->udiDeviceMap.tqcontains( du ) ) {
+	if( d->udiDeviceMap.contains( du ) ) {
 	  //
 	  // A medium has been removed/ejected.
 	  //
@@ -276,7 +276,7 @@ int K3bDevice::HalConnection::lock( Device* dev )
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) ) {
+  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) ) {
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
   }
 
@@ -335,7 +335,7 @@ int K3bDevice::HalConnection::unlock( Device* dev )
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) ) {
+  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) ) {
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
   }
 
@@ -394,10 +394,10 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) )
+  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) )
     return org_freedesktop_Hal_NoSuchDevice;
 
-  if( !d->deviceMediumUdiMap.tqcontains( d->deviceUdiMap[dev->blockDeviceName()] ) )
+  if( !d->deviceMediumUdiMap.contains( d->deviceUdiMap[dev->blockDeviceName()] ) )
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 
   TQCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];
@@ -474,10 +474,10 @@ int K3bDevice::HalConnection::unmount( K3bDevice::Device* dev,
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) )
+  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) )
     return org_freedesktop_Hal_NoSuchDevice;
 
-  if( !d->deviceMediumUdiMap.tqcontains( d->deviceUdiMap[dev->blockDeviceName()] ) )
+  if( !d->deviceMediumUdiMap.contains( d->deviceUdiMap[dev->blockDeviceName()] ) )
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 
   TQCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];
@@ -545,10 +545,10 @@ int K3bDevice::HalConnection::eject( K3bDevice::Device* dev,
   DBusMessage* reply = 0;
   DBusError error;
 
-  if( !d->deviceUdiMap.tqcontains( dev->blockDeviceName() ) )
+  if( !d->deviceUdiMap.contains( dev->blockDeviceName() ) )
     return org_freedesktop_Hal_NoSuchDevice;
 
-  if( !d->deviceMediumUdiMap.tqcontains( d->deviceUdiMap[dev->blockDeviceName()] ) )
+  if( !d->deviceMediumUdiMap.contains( d->deviceUdiMap[dev->blockDeviceName()] ) )
     return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 
   TQCString mediumUdi = d->deviceMediumUdiMap[d->deviceUdiMap[dev->blockDeviceName()]];

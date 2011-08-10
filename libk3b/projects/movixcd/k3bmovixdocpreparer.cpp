@@ -204,7 +204,7 @@ bool K3bMovixDocPreparer::writeIsolinuxConfigFile( const TQString& originalPath 
 
   if( TQTextStream* s = d->isolinuxConfigFile->textStream() ) {
 
-    // now open the default isolinux.cfg and copy everything except the first line which tqcontains
+    // now open the default isolinux.cfg and copy everything except the first line which contains
     // the default boot label
     TQFile f( originalPath );
     if( f.open( IO_ReadOnly ) ) {
@@ -464,7 +464,7 @@ K3bDirItem* K3bMovixDocPreparer::createDir( const TQString& docPath )
   TQStringList docPathSections = TQStringList::split( '/', docPath );
   K3bDirItem* dir = d->doc->root();
   for( TQStringList::iterator it = docPathSections.begin(); it != docPathSections.end(); ++it ) {
-    K3bDataItem* next = dir->tqfind( *it );
+    K3bDataItem* next = dir->find( *it );
     if( !next )
       dir = new K3bDirItem( *it, d->doc, dir );
     else if( next->isDir() )
@@ -480,7 +480,7 @@ K3bDirItem* K3bMovixDocPreparer::createDir( const TQString& docPath )
     K3bDirItem* delDir = dir;
     while( delDir->tqparent() != d->doc->root() )
       delDir = delDir->tqparent();
-    if( d->newMovixItems.tqfindRef( delDir ) == -1 )
+    if( d->newMovixItems.findRef( delDir ) == -1 )
       d->newMovixItems.append( delDir );
   }
 

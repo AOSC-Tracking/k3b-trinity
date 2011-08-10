@@ -170,7 +170,7 @@ K3bDevice::Device* K3bDevice::DeviceManager::findDevice( const TQString& devicen
   }
   TQPtrListIterator<K3bDevice::Device> it( d->allDevices );
   while( it.current() ) {
-    if( it.current()->deviceNodes().tqcontains(devicename) )
+    if( it.current()->deviceNodes().contains(devicename) )
       return it.current();
 
     ++it;
@@ -271,7 +271,7 @@ void K3bDevice::DeviceManager::LinuxDeviceScan()
 
     TQRegExp re("[\t\n:]+");
     while( info.readLine( line, 80 ) > 0 ) {
-      if( line.tqcontains("drive name") > 0 ) {
+      if( line.contains("drive name") > 0 ) {
 	int i = 1;
 	TQString dev;
 	while( !(dev = line.section(re, i, i)).isEmpty() ) {
@@ -285,7 +285,7 @@ void K3bDevice::DeviceManager::LinuxDeviceScan()
 	  // each physical device the next line should be better
 	  //      else if ( dev.startsWith("sr") )
 	  if ( dev.startsWith("sr") ) {
-	    if( addDevice(TQString("/dev/%1").tqarg(dev.tqreplace(TQRegExp("r"),"cd"))) )
+	    if( addDevice(TQString("/dev/%1").tqarg(dev.replace(TQRegExp("r"),"cd"))) )
 	      devstring += dev + "|";
 	  }
 	  ++i;
@@ -591,14 +591,14 @@ bool K3bDevice::DeviceManager::saveConfig( KConfig* c )
   // remove duplicate entries (caused by buggy old implementations)
   TQStringList saveDeviceSearchPath;
   for( TQStringList::const_iterator it = deviceSearchPath.constBegin(); it != deviceSearchPath.constEnd(); ++it )
-    if( !saveDeviceSearchPath.tqcontains( *it ) )
+    if( !saveDeviceSearchPath.contains( *it ) )
       saveDeviceSearchPath.append( *it );
 
   for( TQPtrListIterator<K3bDevice::Device> it( d->allDevices ); *it; ++it ) {
     K3bDevice::Device* dev = *it;
 
     // update device search path
-    if( !saveDeviceSearchPath.tqcontains( dev->blockDeviceName() ) )
+    if( !saveDeviceSearchPath.contains( dev->blockDeviceName() ) )
       saveDeviceSearchPath.append( dev->blockDeviceName() );
 
     // save the device type settings

@@ -75,7 +75,7 @@ TQString K3bPlayListViewItem::text( int c ) const
   switch( c ) {
   case 0:
     {
-      int pos = m_filename.tqfindRev("/");
+      int pos = m_filename.findRev("/");
       if( pos >= 0 )
 	return m_filename.mid(pos+1);
       return m_filename;
@@ -513,7 +513,7 @@ long K3bAudioPlayer::position()
 // FIXME: let my do some useful stuff!
 bool K3bAudioPlayer::supportsMimetype( const TQString& mimetype )
 {
-  if( mimetype.tqcontains("audio") || mimetype.tqcontains("ogg") )
+  if( mimetype.contains("audio") || mimetype.contains("ogg") )
     return true;
   else
     return false;
@@ -580,7 +580,7 @@ void K3bAudioPlayer::slotUpdateFilename()
 {
   if( m_currentItem ) {
     TQString display = m_currentItem->filename();
-    int pos = display.tqfindRev("/");
+    int pos = display.findRev("/");
     if( pos >= 0 )
       display = display.mid(pos+1);
 

@@ -59,7 +59,7 @@ int K3bIntMapComboBox::selectedValue() const
 
 void K3bIntMapComboBox::setSelectedValue( int value )
 {
-  if( d->valueIndexMap.tqcontains( value ) )
+  if( d->valueIndexMap.contains( value ) )
     KComboBox::setCurrentItem( d->valueIndexMap[value] );
 }
 
@@ -75,7 +75,7 @@ void K3bIntMapComboBox::clear()
 
 bool K3bIntMapComboBox::insertItem( int value, const TQString& text, const TQString& description, int index )
 {
-  if( d->valueIndexMap.tqcontains( value ) )
+  if( d->valueIndexMap.contains( value ) )
     return false;
 
   // FIXME: allow inserition at any index

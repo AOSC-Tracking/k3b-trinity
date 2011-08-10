@@ -353,7 +353,7 @@ void K3bDataImageSettingsWidget::load( const K3bIsoOptions& o )
   case K3bIsoOptions::extended:
     m_comboSpaceHandling->setCurrentItem( WS_EXTENDED_STRIP );
     break;
-  case K3bIsoOptions::tqreplace:
+  case K3bIsoOptions::replace:
     m_comboSpaceHandling->setCurrentItem( WS_REPLACE );
     break;
   default:
@@ -387,7 +387,7 @@ void K3bDataImageSettingsWidget::save( K3bIsoOptions& o )
     o.setWhiteSpaceTreatment( K3bIsoOptions::extended );
     break;
   case WS_REPLACE:
-    o.setWhiteSpaceTreatment( K3bIsoOptions::tqreplace );
+    o.setWhiteSpaceTreatment( K3bIsoOptions::replace );
     break;
   default:
     o.setWhiteSpaceTreatment( K3bIsoOptions::noChange );

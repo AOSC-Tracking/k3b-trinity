@@ -432,7 +432,7 @@ void K3bWelcomeWidget::contentsMousePressEvent( TQMouseEvent* e )
     for ( int i = 0; s_allActions[i]; ++i ) {
         if ( s_allActions[i][0] != '_' ) {
             KAction* a = m_mainWindow->actionCollection()->action( s_allActions[i] );
-            if ( a && !main->m_actions.tqcontainsRef(a) ) {
+            if ( a && !main->m_actions.containsRef(a) ) {
                 map.insert( addPop.insertItem( a->iconSet(), a->text() ), a );
             }
         }

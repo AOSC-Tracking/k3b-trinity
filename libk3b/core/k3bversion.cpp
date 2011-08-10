@@ -101,7 +101,7 @@ void K3bVersion::setVersion( const TQString& v )
 // suffix = s and num = -1 is returned
 void K3bVersion::splitVersionString( const TQString& s, int& num, TQString& suffix )
 {
-  int pos = s.tqfind( TQRegExp("\\D") );
+  int pos = s.find( TQRegExp("\\D") );
   if( pos < 0 ) {
     num = s.toInt();
     suffix = "";

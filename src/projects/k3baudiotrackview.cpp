@@ -280,7 +280,7 @@ void K3bAudioTrackView::slotDropped( TQDropEvent* e, TQListViewItem* tqparent, T
     //
     TQPtrListIterator<K3bAudioDataSource> srcIt( sources );
     while( srcIt.current() ) {
-      if( tracks.tqcontainsRef( srcIt.current()->track() ) )
+      if( tracks.containsRef( srcIt.current()->track() ) )
 	sources.removeRef( *srcIt );
       else
 	++srcIt;
@@ -439,11 +439,11 @@ void K3bAudioTrackView::slotChanged()
 
 K3bAudioTrackViewItem* K3bAudioTrackView::getTrackViewItem( K3bAudioTrack* track, bool* isNewItem )
 {
-  TQMap<K3bAudioTrack*, K3bAudioTrackViewItem*>::iterator itemIt = m_trackItemMap.tqfind(track);
+  TQMap<K3bAudioTrack*, K3bAudioTrackViewItem*>::iterator itemIt = m_trackItemMap.find(track);
   if( itemIt == m_trackItemMap.end() ) {
     kdDebug() << "(K3bAudioTrackView) new track " << track << endl;
     K3bAudioTrackViewItem* prevItem = 0;
-    if( track->prev() && m_trackItemMap.tqcontains( track->prev() ) )
+    if( track->prev() && m_trackItemMap.contains( track->prev() ) )
       prevItem = m_trackItemMap[track->prev()];
     K3bAudioTrackViewItem* newItem = new K3bAudioTrackViewItem( this, prevItem, track );
     //
@@ -491,7 +491,7 @@ void K3bAudioTrackView::slotTrackChanged( K3bAudioTrack* track )
 
     // FIXME: only do this if the position really changed
     // move the item if the position has changed
-    if( track->prev() && m_trackItemMap.tqcontains(track->prev()) )
+    if( track->prev() && m_trackItemMap.contains(track->prev()) )
       item->moveItem( m_trackItemMap[track->prev()] );
     else if( !track->prev() ) {
       takeItem( item );
@@ -735,7 +735,7 @@ void K3bAudioTrackView::slotRemove()
   //
   TQPtrListIterator<K3bAudioDataSource> srcIt( sources );
   while( srcIt.current() ) {
-    if( tracks.tqcontainsRef( srcIt.current()->track() ) )
+    if( tracks.containsRef( srcIt.current()->track() ) )
       sources.removeRef( *srcIt );
     else
       ++srcIt;
@@ -993,7 +993,7 @@ void K3bAudioTrackView::slotQueryMusicBrainz()
 
   // only one may use the tracks at the same time
   if( m_currentlyPlayingTrack &&
-      tracks.tqcontainsRef( m_currentlyPlayingTrack ) )
+      tracks.containsRef( m_currentlyPlayingTrack ) )
     m_player->stop();
 
   // now do the lookup on the files.

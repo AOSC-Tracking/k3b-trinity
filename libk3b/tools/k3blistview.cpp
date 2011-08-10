@@ -734,7 +734,7 @@ TQWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
     }
     else {
       m_editorComboBox->insertStringList( item->comboStrings(col) );
-      int current = item->comboStrings(col).tqfindIndex( item->text(col) );
+      int current = item->comboStrings(col).findIndex( item->text(col) );
       if( current != -1 )
 	m_editorComboBox->setCurrentItem( current );
     }
@@ -752,7 +752,7 @@ TQWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
     m_editorLineEdit->setText( txt );
 
     // select the edit text (handle extensions while doing so)
-    int pos = txt.tqfindRev( '.' );
+    int pos = txt.findRev( '.' );
     if( pos > 0 )
       m_editorLineEdit->setSelection( 0, pos );
     else
@@ -1258,7 +1258,7 @@ KPixmap K3bListView::createDragPixmap( const TQPtrList<TQListViewItem>& items )
     bool alreadyDrawing = false;
     TQRect r = tqitemRect( item );
     if( r.isValid() ) {
-      if( items.tqcontainsRef( item ) ) {
+      if( items.containsRef( item ) ) {
 	// paint all columns
 	int x = 0;
 	for( int i = 0; i < columns(); ++i ) {

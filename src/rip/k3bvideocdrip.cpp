@@ -97,7 +97,7 @@ void K3bVideoCdRip::vcdxRip()
 
     if ( !bin ) {
         kdDebug() << "(K3bVideoCdRip) could not find vcdxrip executable" << endl;
-        emit infoMessage( i18n( "Could not tqfind %1 executable." ).tqarg( "vcdxrip" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "Could not find %1 executable." ).tqarg( "vcdxrip" ), K3bJob::ERROR );
         emit infoMessage( i18n( "To rip VideoCD's you must install VcdImager Version %1." ).tqarg( ">= 0.7.12" ), K3bJob::INFO );
         emit infoMessage( i18n( "You can find this on your distribution disks or download it from http://www.vcdimager.org" ), K3bJob::INFO );
         cancelAll();
@@ -288,7 +288,7 @@ void K3bVideoCdRip::slotVcdXRipFinished()
 void K3bVideoCdRip::parseInformation( TQString text )
 {
     // parse warning
-    if ( text.tqcontains( "encountered non-form2 sector" ) ) {
+    if ( text.contains( "encountered non-form2 sector" ) ) {
         // I think this is an error not a warning. Finish ripping with invalid mpegs.
         emit infoMessage( i18n( "%1 encountered non-form2 sector" ).tqarg("Vcdxrip"), K3bJob::ERROR );
         emit infoMessage( i18n( "leaving loop" ), K3bJob::ERROR );
@@ -298,22 +298,22 @@ void K3bVideoCdRip::parseInformation( TQString text )
     }
     
     // parse extra info
-    else if ( text.tqcontains( "detected extended VCD2.0 PBC files" ) )
+    else if ( text.contains( "detected extended VCD2.0 PBC files" ) )
         emit infoMessage( i18n( "detected extended VCD2.0 PBC files" ), K3bJob::INFO );
 
     // parse startposition and extracting sequence info
     // extracting avseq05.mpg... (start lsn 32603 (+28514))
     else if ( text.startsWith( "extracting" ) ) {
-        if ( text.tqcontains( "(start lsn" ) ) {
-            int index = text.tqfind( "(start lsn" );
-            int end = text.tqfind( " (+" );
+        if ( text.contains( "(start lsn" ) ) {
+            int index = text.find( "(start lsn" );
+            int end = text.find( " (+" );
             if ( end > 0) {
                 m_subPosition = text.mid( index + 11, end - index - 11 ).stripWhiteSpace().toLong();
             }
             else {
                 // found segment here we can get only the start lsn :)
                 // extracting item0001.mpg... (start lsn 225, 1 segments)
-                int end = text.tqfind(  ",", index );
+                int end = text.find(  ",", index );
                 int overallPos = text.mid( index + 11, end - index - 11 ).stripWhiteSpace().toLong();
                 double relOverallWritten = ( ( double ) overallPos  * 2352 ) / ( double ) m_videooptions ->getVideoCdSize()  ;
                 int newpercent =  ( int ) ( 100 * relOverallWritten );
@@ -325,17 +325,17 @@ void K3bVideoCdRip::parseInformation( TQString text )
 
 
             index = 11;
-            end = text.tqfind( "(start lsn" );
+            end = text.find( "(start lsn" );
             emit newSubTask( i18n( "Extracting %1" ).tqarg( text.mid( index, end - index ).stripWhiteSpace() ) );
         }
         // parse extracting files info
         // extracting CDI/CDI_IMAG.RTF to _cdi_cdi_imag.rtf (lsn 258, size 1315168, raw 1)
-        else if ( text.tqcontains( "(lsn" ) && text.tqcontains( "size" ) ) {
+        else if ( text.contains( "(lsn" ) && text.contains( "size" ) ) {
             int index = 11;
-            int end = text.tqfind( "to" );
+            int end = text.find( "to" );
             TQString extractFileName = text.mid( index, end - index ).stripWhiteSpace();
-            index = text.tqfind( " to " );
-            end = text.tqfind( " (lsn" );
+            index = text.find( " to " );
+            end = text.find( " (lsn" );
             TQString toFileName = text.mid( index + 4, end - index - 4 ).stripWhiteSpace();
             emit newSubTask( i18n( "Extracting %1 to %2" ).tqarg( extractFileName ).tqarg( toFileName ) );
         }

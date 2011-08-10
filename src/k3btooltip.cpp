@@ -153,7 +153,7 @@ bool K3bToolTip::eventFilter( TQObject* o, TQEvent* e )
       m_tipTimer->stop();
       if( m_currentTip ) {
 	// see if we have to hide it
-	if( !m_currentTipRect.tqcontains( m_lastMousePos ) ) {
+	if( !m_currentTipRect.contains( m_lastMousePos ) ) {
 	  hideTip();
 
 	  // in case we moved the mouse from one tip area to the next without leaving

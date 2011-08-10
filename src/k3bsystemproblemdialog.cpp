@@ -59,8 +59,8 @@
 static TQString markupString( const TQString& s_ )
 {
   TQString s(s_);
-  s.tqreplace( '<', "&lt;" );
-  s.tqreplace( '>', "&gt;" );
+  s.replace( '<', "&lt;" );
+  s.replace( '>', "&gt;" );
   return s;
 }
 
@@ -186,9 +186,9 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* tqparent,
     // 1. cdrecord, cdrdao
     if( !k3bcore->externalBinManager()->foundBin( "cdrecord" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("Unable to tqfind %1 executable").tqarg("cdrecord"),
+					 i18n("Unable to find %1 executable").tqarg("cdrecord"),
 					 i18n("K3b uses cdrecord to actually write CDs."),
-					 i18n("Install the cdrtools package which tqcontains "
+					 i18n("Install the cdrtools package which contains "
 					      "cdrecord."),
 					 false ) );
     }
@@ -242,7 +242,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* tqparent,
     }
     if( !k3bcore->externalBinManager()->foundBin( "cdrdao" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("Unable to tqfind %1 executable").tqarg("cdrdao"),
+					 i18n("Unable to find %1 executable").tqarg("cdrdao"),
 					 i18n("K3b uses cdrdao to actually write CDs."),
 					 i18n("Install the cdrdao package."),
 					 false ) );
@@ -268,7 +268,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* tqparent,
   if( !k3bcore->deviceManager()->dvdWriter().isEmpty() ) {
     if( !k3bcore->externalBinManager()->foundBin( "growisofs" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("Unable to tqfind %1 executable").tqarg("growisofs"),
+					 i18n("Unable to find %1 executable").tqarg("growisofs"),
 					 i18n("K3b uses growisofs to actually write dvds. "
 					      "Without growisofs you will not be able to write dvds. "
 					      "Make sure to install at least version 5.10."),
@@ -317,7 +317,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* tqparent,
 
     if( !k3bcore->externalBinManager()->foundBin( "dvd+rw-format" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("Unable to tqfind %1 executable").tqarg("dvd+rw-format"),
+					 i18n("Unable to find %1 executable").tqarg("dvd+rw-format"),
 					 i18n("K3b uses dvd+rw-format to format DVD-RWs and DVD+RWs."),
 					 i18n("Install the dvd+rw-tools package."),
 					 false ) );
@@ -412,7 +412,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* tqparent,
 
 	if( !k3bcore->externalBinManager()->binObject( "cdrdao" )->hasFeature( "hacked-atapi" ) &&
 	    !k3bcore->externalBinManager()->binObject( "cdrdao" )->hasFeature( "plain-atapi") ) {
-	  // FIXME: tqreplace ">" with "&gt;"
+	  // FIXME: replace ">" with "&gt;"
 	  problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
 					     i18n("%1 %2 does not support ATAPI")
 					     .tqarg("cdrdao").tqarg(k3bcore->externalBinManager()->binObject("cdrdao")->version),
@@ -633,9 +633,9 @@ int K3bSystemProblemDialog::dmaActivated( K3bDevice::Device* dev )
   //
   // But we ignore the on/off since it might be translated
   //
-  if( out.output().tqcontains( "1 (" ) )
+  if( out.output().contains( "1 (" ) )
     return 1;
-  else if( out.output().tqcontains( "0 (" ) )
+  else if( out.output().contains( "0 (" ) )
     return 0;
   else
     return -1;

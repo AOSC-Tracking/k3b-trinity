@@ -384,7 +384,7 @@ void K3bDataUrlAddingDialog::slotAddUrls()
   // and if so handle it properly
   //
   if( valid ) {
-    if( K3bDataItem* oldItem = dir->tqfind( newName ) ) {
+    if( K3bDataItem* oldItem = dir->find( newName ) ) {
       //
       // reuse an existing dir
       //
@@ -450,7 +450,7 @@ void K3bDataUrlAddingDialog::slotAddUrls()
 	case 2: // replace all
 	  m_bExistingItemsReplaceAll = true;
 	  // fallthrough
-	case 1: // tqreplace
+	case 1: // replace
 	  // if we replace an item from an old session the K3bFileItem constructor takes care
 	  // of replacing the item
 	  if( !oldItem->isFromOldSession() )
@@ -618,7 +618,7 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
     //
     // Let's see if an item with that name alredy exists
     //
-    if( K3bDataItem* oldItem = dir->tqfind( item->k3bName() ) ) {
+    if( K3bDataItem* oldItem = dir->find( item->k3bName() ) ) {
       //
       // reuse an existing dir: move all child items into the old dir
       //
@@ -686,7 +686,7 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
 	case 2: // replace all
 	  m_bExistingItemsReplaceAll = true;
 	  // fallthrough
-	case 1: // tqreplace
+	case 1: // replace
 	  //
 	  // if we replace an item from an old session K3bDirItem::addDataItem takes care
 	  // of replacing the item
@@ -751,7 +751,7 @@ bool K3bDataUrlAddingDialog::getNewName( const TQString& oldName, K3bDirItem* di
 				     i18n("A file with that name already exists. Please enter a new name:"),
 				     newName, &ok, this, "renamedialog", validator );
 
-  } while( ok && dir->tqfind( newName ) );
+  } while( ok && dir->find( newName ) );
 
   delete validator;
 

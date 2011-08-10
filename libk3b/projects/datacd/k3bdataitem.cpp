@@ -116,13 +116,13 @@ K3b::Msf K3bDataItem::itemBlocks( bool followSymbolicLinks ) const
 void K3bDataItem::setK3bName( const TQString& name ) {
     if ( name != m_k3bName ) {
   // test for not-allowed characters
-  if( name.tqcontains('/') ) {
+  if( name.contains('/') ) {
     kdDebug() << "(K3bDataItem) name contained invalid characters!" << endl;
     return;
   }
    
   if( tqparent() ) {
-    K3bDataItem* item = tqparent()->tqfind( name );
+    K3bDataItem* item = tqparent()->find( name );
     if( item && item != this ) {
       kdDebug() << "(K3bDataItem) item with that name already exists." << endl;
       return;

@@ -165,7 +165,7 @@ void K3bDataDoc::addUrls( const KURL::List& l, K3bDirItem* dir )
       TQString name( k3bname );
       if( cnt > 0 )
 	name += TQString("_%1").tqarg(cnt);
-      if( K3bDataItem* oldItem = dir->tqfind( name ) ) {
+      if( K3bDataItem* oldItem = dir->find( name ) ) {
 	if( f.isDir() && oldItem->isDir() ) {
 	  // ok, just reuse the dir
 	  newDirItem = static_cast<K3bDirItem*>(oldItem);
@@ -215,7 +215,7 @@ bool K3bDataDoc::nameAlreadyInDir( const TQString& name, K3bDirItem* dir )
   if( !dir )
     return false;
   else
-    return ( dir->tqfind( name ) != 0 );
+    return ( dir->find( name ) != 0 );
 }
 
 
@@ -275,7 +275,7 @@ bool K3bDataDoc::loadDocumentData( TQDomElement* rootElem )
   TQDomNodeList nodes = rootElem->childNodes();
 
   if( nodes.item(0).nodeName() != "general" ) {
-    kdDebug() << "(K3bDataDoc) could not tqfind 'general' section." << endl;
+    kdDebug() << "(K3bDataDoc) could not find 'general' section." << endl;
     return false;
   }
   if( !readGeneralDocumentData( nodes.item(0).toElement() ) )
@@ -285,7 +285,7 @@ bool K3bDataDoc::loadDocumentData( TQDomElement* rootElem )
   // parse options
   // -----------------------------------------------------------------
   if( nodes.item(1).nodeName() != "options" ) {
-    kdDebug() << "(K3bDataDoc) could not tqfind 'options' section." << endl;
+    kdDebug() << "(K3bDataDoc) could not find 'options' section." << endl;
     return false;
   }
   if( !loadDocumentDataOptions( nodes.item(1).toElement() ) )
@@ -297,7 +297,7 @@ bool K3bDataDoc::loadDocumentData( TQDomElement* rootElem )
   // parse header
   // -----------------------------------------------------------------
   if( nodes.item(2).nodeName() != "header" ) {
-    kdDebug() << "(K3bDataDoc) could not tqfind 'header' section." << endl;
+    kdDebug() << "(K3bDataDoc) could not find 'header' section." << endl;
     return false;
   }
   if( !loadDocumentDataHeader( nodes.item(2).toElement() ) )
@@ -309,7 +309,7 @@ bool K3bDataDoc::loadDocumentData( TQDomElement* rootElem )
   // parse files
   // -----------------------------------------------------------------
   if( nodes.item(3).nodeName() != "files" ) {
-    kdDebug() << "(K3bDataDoc) could not tqfind 'files' section." << endl;
+    kdDebug() << "(K3bDataDoc) could not find 'files' section." << endl;
     return false;
   }
 
@@ -428,7 +428,7 @@ bool K3bDataDoc::loadDocumentDataOptions( TQDomElement elem )
       else if( e.text() == "extended" )
 	m_isoOptions.setWhiteSpaceTreatment( K3bIsoOptions::extended );
       else if( e.text() == "extended" )
-	m_isoOptions.setWhiteSpaceTreatment( K3bIsoOptions::tqreplace );
+	m_isoOptions.setWhiteSpaceTreatment( K3bIsoOptions::replace );
       else
 	m_isoOptions.setWhiteSpaceTreatment( K3bIsoOptions::noChange );
     }
@@ -565,7 +565,7 @@ bool K3bDataDoc::loadDataItem( TQDomElement& elem, K3bDirItem* tqparent )
   else if( elem.nodeName() == "directory" ) {
     // This is for the VideoDVD project which already contains the *_TS folders
     K3bDirItem* newDirItem = 0;
-    if( K3bDataItem* item = tqparent->tqfind( elem.attributeNode( "name" ).value() ) ) {
+    if( K3bDataItem* item = tqparent->find( elem.attributeNode( "name" ).value() ) ) {
       if( item->isDir() ) {
 	newDirItem = static_cast<K3bDirItem*>(item);
       }
@@ -745,8 +745,8 @@ void K3bDataDoc::saveDocumentDataOptions( TQDomElement& optionsElem )
   case K3bIsoOptions::extended:
     topElem.appendChild( doc.createTextNode( "extended" ) );
     break;
-  case K3bIsoOptions::tqreplace:
-    topElem.appendChild( doc.createTextNode( "tqreplace" ) );
+  case K3bIsoOptions::replace:
+    topElem.appendChild( doc.createTextNode( "replace" ) );
     break;
   default:
     topElem.appendChild( doc.createTextNode( "noChange" ) );
@@ -838,7 +838,7 @@ void K3bDataDoc::saveDocumentDataHeader( TQDomElement& headerElem )
 void K3bDataDoc::saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomElement* tqparent )
 {
   if( K3bFileItem* fileItem = dynamic_cast<K3bFileItem*>( item ) ) {
-    if( m_oldSession.tqcontains( fileItem ) ) {
+    if( m_oldSession.contains( fileItem ) ) {
       kdDebug() << "(K3bDataDoc) ignoring fileitem " << fileItem->k3bName() << " from old session while saving..." << endl;
     }
     else {
@@ -998,8 +998,8 @@ TQString K3bDataDoc::treatWhitespace( const TQString& path )
   if( isoOptions().whiteSpaceTreatment() != K3bIsoOptions::noChange ) {
     TQString result = path;
 
-    if( isoOptions().whiteSpaceTreatment() == K3bIsoOptions::tqreplace ) {
-      result.tqreplace( ' ', isoOptions().whiteSpaceTreatmentReplaceString() );
+    if( isoOptions().whiteSpaceTreatment() == K3bIsoOptions::replace ) {
+      result.replace( ' ', isoOptions().whiteSpaceTreatmentReplaceString() );
     }
     else if( isoOptions().whiteSpaceTreatment() == K3bIsoOptions::strip ) {
       result.remove( ' ' );
@@ -1220,7 +1220,7 @@ void K3bDataDoc::createSessionImportItems( const K3bIso9660Directory* importDir,
   for( TQStringList::const_iterator it = entries.begin();
        it != entries.end(); ++it ) {
     const K3bIso9660Entry* entry = importDir->entry( *it );
-    K3bDataItem* oldItem = tqparent->tqfind( entry->name() );
+    K3bDataItem* oldItem = tqparent->find( entry->name() );
     if( entry->isDirectory() ) {
       K3bDirItem* dir = 0;
       if( oldItem && oldItem->isDir() ) {
@@ -1278,7 +1278,7 @@ void K3bDataDoc::clearImportedSession()
       }
       else {
 	for( TQPtrListIterator<K3bDataItem> it( dir->tqchildren() ); it.current(); ++it ) {
-	  if( !m_oldSession.tqcontains(it.current()) ) {
+	  if( !m_oldSession.contains(it.current()) ) {
 	    m_oldSession.remove();
 	    // now the dir becomes a totally normal dir
 	    dir->setRemoveable(true);
@@ -1308,7 +1308,7 @@ void K3bDataDoc::clearImportedSession()
 
 K3bDirItem* K3bDataDoc::bootImageDir()
 {
-  K3bDataItem* b = m_root->tqfind( "boot" );
+  K3bDataItem* b = m_root->find( "boot" );
   if( !b ) {
     b = new K3bDirItem( "boot", this, m_root );
     setModified( true );

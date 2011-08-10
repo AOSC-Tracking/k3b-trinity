@@ -1651,7 +1651,7 @@ bool K3bDevice::Device::setAutoEjectEnabled( bool enabled ) const
 
 void K3bDevice::Device::addDeviceNode( const TQString& n )
 {
-  if( !d->allNodes.tqcontains( n ) )
+  if( !d->allNodes.contains( n ) )
     d->allNodes.append( n );
 }
 

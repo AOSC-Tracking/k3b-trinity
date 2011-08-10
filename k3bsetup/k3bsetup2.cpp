@@ -234,7 +234,7 @@ void K3bSetup2::updatePrograms()
 	d->binListMap.insert( b, bi );
 
 	// check the item on first insertion or if it was checked before
-	bi->setOn( checkMap.tqcontains(b) ? checkMap[b] : true );
+	bi->setOn( checkMap.contains(b) ? checkMap[b] : true );
 
 	int perm = s.st_mode & 0007777;
 
@@ -289,12 +289,12 @@ void K3bSetup2::updateDevices()
     K3bDevice::Device* device = *it;
     // check the item on first insertion or if it was checked before
     TQCheckListItem* item = createDeviceItem( device->blockDeviceName() );
-    item->setOn( checkMap.tqcontains(device->blockDeviceName()) ? checkMap[device->blockDeviceName()] : true );
+    item->setOn( checkMap.contains(device->blockDeviceName()) ? checkMap[device->blockDeviceName()] : true );
     item->setText( 0, device->vendor() + " " + device->description() );
   
     if( !device->genericDevice().isEmpty() ) {
       TQCheckListItem* item = createDeviceItem( device->genericDevice() );
-      item->setOn( checkMap.tqcontains(device->genericDevice()) ? checkMap[device->genericDevice()] : true );
+      item->setOn( checkMap.contains(device->genericDevice()) ? checkMap[device->genericDevice()] : true );
       item->setText( 0, device->vendor() + " " + device->description() + " (" + i18n("Generic SCSI Device") + ")" );
     }
   }

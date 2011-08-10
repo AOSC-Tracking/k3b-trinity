@@ -171,7 +171,7 @@ void K3bCddb::slotQueryFinished( K3bCddbQuery* query )
 
 K3bCddbQuery* K3bCddb::getQuery( const TQString& s )
 {
-  TQStringList buf = TQStringList::split( ":", s.mid( s.tqfind(" ")+1 ) );
+  TQStringList buf = TQStringList::split( ":", s.mid( s.find(" ")+1 ) );
   TQString server = buf[0];
   int port = buf[1].toInt();
 

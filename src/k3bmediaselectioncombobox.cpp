@@ -157,7 +157,7 @@ TQValueList<K3bDevice::Device*> K3bMediaSelectionComboBox::allDevices() const
 
 void K3bMediaSelectionComboBox::setSelectedDevice( K3bDevice::Device* dev )
 {
-  if( dev && d->deviceIndexMap.tqcontains( dev ) ) {
+  if( dev && d->deviceIndexMap.contains( dev ) ) {
     setCurrentItem( d->deviceIndexMap[dev] );
     emit selectionChanged( dev );
   }
@@ -298,7 +298,7 @@ void K3bMediaSelectionComboBox::updateMedia()
       emit selectionChanged( 0 );
     }
   }
-  else if( selected && d->deviceIndexMap.tqcontains( selected ) ) {
+  else if( selected && d->deviceIndexMap.contains( selected ) ) {
     setCurrentItem( d->deviceIndexMap[selected] );
   }
   else {
@@ -346,7 +346,7 @@ void K3bMediaSelectionComboBox::addMedium( K3bDevice::Device* dev )
   // Now let's see if this string is already contained in the list
   // and if so add the device name to both
   //
-  if( d->mediaStringMap.tqcontains( s ) ) {
+  if( d->mediaStringMap.contains( s ) ) {
     //
     // insert the modified string
     //

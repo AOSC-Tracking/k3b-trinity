@@ -245,7 +245,7 @@ void K3bMusicBrainzJob::slotMbJobFinished( bool success )
       // so to not let the user have to choose between two equal entries we trim the list down
       for( TQStringList::const_iterator it = resultStrings.begin();
 	   it != resultStrings.end(); ++it )
-	if( resultStringsUnique.tqfind( *it ) == resultStringsUnique.end() )
+	if( resultStringsUnique.find( *it ) == resultStringsUnique.end() )
 	  resultStringsUnique.append( *it );
 
       TQString s;
@@ -264,7 +264,7 @@ void K3bMusicBrainzJob::slotMbJobFinished( bool success )
 	s = resultStringsUnique.first();
 
       if( ok ) {
-	int i = resultStrings.tqfindIndex( s );
+	int i = resultStrings.findIndex( s );
 	m_tracks.current()->setTitle( m_mbThread->title(i) );
 	m_tracks.current()->setArtist( m_mbThread->artist(i) );
       }

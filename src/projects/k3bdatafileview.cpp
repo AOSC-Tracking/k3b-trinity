@@ -153,7 +153,7 @@ void K3bDataFileView::slotDataItemRemoved( K3bDataItem* item )
     }
   }
   
-  if( m_itemMap.tqcontains( item ) ) {
+  if( m_itemMap.contains( item ) ) {
     delete m_itemMap[item];
     m_itemMap.remove(item);
   }
@@ -166,7 +166,7 @@ void K3bDataFileView::checkForNewItems()
 
   // add items that are not there yet
   for( TQPtrListIterator<K3bDataItem> it( m_currentDir->tqchildren() ); it.current(); ++it ) {
-    if( !m_itemMap.tqcontains( it.current() ) ) {
+    if( !m_itemMap.contains( it.current() ) ) {
       slotItemAdded( it.current() );
     }
   }

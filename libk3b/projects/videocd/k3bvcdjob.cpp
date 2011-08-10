@@ -133,7 +133,7 @@ void K3bVcdJob::start()
     emit burning( false );
     m_canceled = false;
 
-    int pos = TQString( m_doc->vcdImage() ).tqfind( ".bin", TQString( m_doc->vcdImage() ).length() - 4 );
+    int pos = TQString( m_doc->vcdImage() ).find( ".bin", TQString( m_doc->vcdImage() ).length() - 4 );
     if ( pos > 0 ) {
         m_cueFile = m_doc->vcdImage().left( pos ) + ".cue";
     } else {
@@ -184,7 +184,7 @@ void K3bVcdJob::vcdxBuild()
     const K3bExternalBin* bin = k3bcore ->externalBinManager() ->binObject( "vcdxbuild" );
     if ( !bin ) {
         kdDebug() << "(K3bVcdJob) could not find vcdxbuild executable" << endl;
-        emit infoMessage( i18n( "Could not tqfind %1 executable." ).tqarg( "vcdxbuild" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "Could not find %1 executable." ).tqarg( "vcdxbuild" ), K3bJob::ERROR );
         emit infoMessage( i18n( "To create VideoCDs you must install VcdImager Version %1." ).tqarg( ">= 0.7.12" ), K3bJob::INFO );
         emit infoMessage( i18n( "You can find this on your distribution disks or download it from http://www.vcdimager.org" ), K3bJob::INFO );
         cancelAll();
@@ -287,7 +287,7 @@ void K3bVcdJob::slotParseVcdxBuildOutput( KProcess*, char* output, int len )
                 if ( oper == "scan" ) {
                     // Scan Video Files
                     if ( m_stage == stageUnknown || pos < m_bytesFinished ) {
-                        const uint index = el.attribute( "id" ).tqreplace( TQRegExp( "sequence-" ), "" ).toUInt();
+                        const uint index = el.attribute( "id" ).replace( TQRegExp( "sequence-" ), "" ).toUInt();
 
                         m_currentWrittenTrack = m_doc->at( m_currentWrittenTrackNumber );
                         emit newSubTask( i18n( "Scanning video file %1 of %2 (%3)" ).tqarg( index + 1 ).tqarg( doc() ->numOfTracks() ).tqarg( m_currentWrittenTrack->fileName() ) );
@@ -509,28 +509,28 @@ void K3bVcdJob::slotWriterJobFinished( bool success )
 void K3bVcdJob::parseInformation( const TQString &text )
 {
     // parse warning
-    if ( text.tqcontains( "mpeg user scan data: one or more BCD fields out of range for" ) ) {
-        int index = text.tqfind( " for" );
+    if ( text.contains( "mpeg user scan data: one or more BCD fields out of range for" ) ) {
+        int index = text.find( " for" );
 
         emit infoMessage( i18n( "One or more BCD fields out of range for %1" ).tqarg( text.mid( index + 4 ).stripWhiteSpace() ), K3bJob::WARNING );
 
-    } else if ( text.tqcontains( "mpeg user scan data: from now on, scan information data errors will not be reported anymore" ) ) {
+    } else if ( text.contains( "mpeg user scan data: from now on, scan information data errors will not be reported anymore" ) ) {
         emit infoMessage( i18n( "From now on, scan information data errors will not be reported anymore" ), K3bJob::INFO );
         emit infoMessage( i18n( "Consider enabling the 'update scan offsets' option, if it is not enabled already." ), K3bJob::INFO );
 
-    } else if ( text.tqcontains( "APS' pts seems out of order (actual pts" ) ) {
-        int index = text.tqfind( "(actual pts" );
-        int index2 = text.tqfind( ", last seen pts" );
-        int index3 = text.tqfind( ") -- ignoring this aps" );
+    } else if ( text.contains( "APS' pts seems out of order (actual pts" ) ) {
+        int index = text.find( "(actual pts" );
+        int index2 = text.find( ", last seen pts" );
+        int index3 = text.find( ") -- ignoring this aps" );
 
         emit infoMessage( i18n( "APS' pts seems out of order (actual pts %1, last seen pts %2)" ).tqarg( text.mid( index + 12, index2 - index - 12 ).stripWhiteSpace() ).tqarg( text.mid( index2 + 14, index3 - index2 - 14 ).stripWhiteSpace() ), K3bJob::WARNING );
         emit infoMessage( i18n( "Ignoring this aps" ), K3bJob::INFO );
 
-    } else if ( text.tqcontains( "bad packet at packet" ) ) {
-        int index = text.tqfind( "at packet #" );
-        int index2 = text.tqfind( "(stream byte offset" );
-        int index3 = text.tqfind( ") -- remaining " );
-        int index4 = text.tqfind( "bytes of stream will be ignored" );
+    } else if ( text.contains( "bad packet at packet" ) ) {
+        int index = text.find( "at packet #" );
+        int index2 = text.find( "(stream byte offset" );
+        int index3 = text.find( ") -- remaining " );
+        int index4 = text.find( "bytes of stream will be ignored" );
 
         emit infoMessage( i18n( "Bad packet at packet #%1 (stream byte offset %2)" ).tqarg( text.mid( index + 11, index2 - index - 11 ).stripWhiteSpace() ).tqarg( text.mid( index2 + 19, index3 - index2 - 19 ).stripWhiteSpace() ), K3bJob::WARNING );
         emit infoMessage( i18n( "Remaining %1 bytes of stream will be ignored." ).tqarg( text.mid( index3 + 15, index4 - index3 - 15 ).stripWhiteSpace() ), K3bJob::WARNING );

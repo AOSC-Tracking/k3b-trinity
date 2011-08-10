@@ -150,7 +150,7 @@ void K3bFileView::slotFilterChanged()
   TQString filter = m_filterWidget->currentFilter();
   m_dirOp->clearFilter();
 
-  if( filter.tqfind( '/' ) > -1 ) {
+  if( filter.find( '/' ) > -1 ) {
     TQStringList types = TQStringList::split( " ", filter );
     types.prepend( "inode/directory" );
     m_dirOp->setMimeFilter( types );

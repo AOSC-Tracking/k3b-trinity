@@ -336,7 +336,7 @@ void K3bVcdDoc::removeTrack( K3bVcdTrack* track )
     }
 
     // set the current item to track
-    if ( m_tracks->tqfindRef( track ) >= 0 ) {
+    if ( m_tracks->findRef( track ) >= 0 ) {
         // take the current item
         track = m_tracks->take();
 
@@ -374,12 +374,12 @@ void K3bVcdDoc::moveTrack( const K3bVcdTrack* track, const K3bVcdTrack* after )
         return ;
 
     // set the current item to track
-    m_tracks->tqfindRef( track );
+    m_tracks->findRef( track );
     // take the current item
     track = m_tracks->take();
 
-    // if after == 0 tqfindRef returnes -1
-    int pos = m_tracks->tqfindRef( after );
+    // if after == 0 findRef returnes -1
+    int pos = m_tracks->findRef( after );
     m_tracks->insert( pos + 1, track );
 
     // reorder pbc tracks
@@ -645,8 +645,8 @@ bool K3bVcdDoc::loadDocumentData( TQDomElement* root )
                 track ->setPlayTime( trackElem.attribute( "playtime", "1" ).toInt() );
                 track ->setWaitTime( trackElem.attribute( "waittime", "2" ).toInt() );
                 track ->setReactivity( trackElem.attribute( "reactivity", "0" ).toInt() );
-                track -> setPbcNumKeys( ( trackElem.attribute( "numkeys", "yes" ).tqcontains( "yes" ) ) ? true : false );
-                track -> setPbcNumKeysUserdefined( ( trackElem.attribute( "userdefinednumkeys", "no" ).tqcontains( "yes" ) ) ? true : false );
+                track -> setPbcNumKeys( ( trackElem.attribute( "numkeys", "yes" ).contains( "yes" ) ) ? true : false );
+                track -> setPbcNumKeysUserdefined( ( trackElem.attribute( "userdefinednumkeys", "no" ).contains( "yes" ) ) ? true : false );
 
                 addTrack( track, m_tracks->count() );
             }
@@ -667,7 +667,7 @@ bool K3bVcdDoc::loadDocumentData( TQDomElement* root )
             for ( uint i = 0; i < trackNodes.length(); i++ ) {
                 TQDomElement trackElem = trackNodes.item( i ).toElement();
                 TQString name = trackElem.tagName();
-                if ( name.tqcontains( "pbc" ) ) {
+                if ( name.contains( "pbc" ) ) {
                     if ( trackElem.hasAttribute ( "type" ) ) {
                         type = trackElem.attribute ( "type" ).toInt();
                         if ( trackElem.hasAttribute ( "pbctrack" ) ) {
@@ -688,7 +688,7 @@ bool K3bVcdDoc::loadDocumentData( TQDomElement* root )
                             }
                         }
                     }
-                } else if ( name.tqcontains( "numkeys" ) ) {
+                } else if ( name.contains( "numkeys" ) ) {
                     if ( trackElem.hasAttribute ( "key" ) ) {
                         int key = trackElem.attribute ( "key" ).toInt();
                         if ( trackElem.hasAttribute ( "val" ) ) {

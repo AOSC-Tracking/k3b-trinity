@@ -85,7 +85,7 @@ void K3bCloneJob::start()
   //
   const K3bExternalBin* cdrecordBin = k3bcore->externalBinManager()->binObject( "cdrecord" );
   if( !cdrecordBin ) {
-    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("cdrecord"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdrecord"), ERROR );
     jobFinished(false);
     m_running = false;
     return;

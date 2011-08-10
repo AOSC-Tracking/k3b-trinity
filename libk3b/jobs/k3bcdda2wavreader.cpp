@@ -95,7 +95,7 @@ void K3bCdda2wavReader::start( bool onlyInfo )
 
   d->cdda2wavBin = k3bcore->externalBinManager()->binObject( "cdda2wav" );
   if( !d->cdda2wavBin ) {
-    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("cdda2wav"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdda2wav"), ERROR );
     jobFinished(false);
     d->running = false;
     return;
@@ -181,9 +181,9 @@ void K3bCdda2wavReader::slotProcessLine( const TQString& line )
 
   static TQRegExp rx( "T\\d\\d:" );
   if( rx.exactMatch( line.left(4) ) || line.startsWith( "Leadout" ) ) {
-    int pos = line.tqfind( " " );
-    int endpos = line.tqfind( TQRegExp( "\\d" ), pos );
-    endpos = line.tqfind( " ", endpos );
+    int pos = line.find( " " );
+    int endpos = line.find( TQRegExp( "\\d" ), pos );
+    endpos = line.find( " ", endpos );
     bool ok;
     int offset = line.mid( pos, endpos-pos ).toInt(&ok);
     if( ok )
@@ -198,12 +198,12 @@ void K3bCdda2wavReader::slotProcessLine( const TQString& line )
     emit nextTrack( d->currentTrack, d->trackOffsets.count() );
   }
 
-  else if( line.tqcontains("successfully recorded") ) {
+  else if( line.contains("successfully recorded") ) {
     d->currentTrack++;
     emit nextTrack( d->currentTrack, d->trackOffsets.count() );
   }
 
-  else if( line.tqcontains("%") ) {
+  else if( line.contains("%") ) {
     // parse progress
     bool ok;
     int p = line.left(3).toInt(&ok);

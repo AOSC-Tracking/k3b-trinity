@@ -85,7 +85,7 @@ void K3bDebuggingOutputDialog::setOutput( const TQMap<TQString, TQStringList>& m
 
 void K3bDebuggingOutputDialog::addOutput( const TQString& app, const TQString& msg )
 {
-  TQMap<TQString, int>::Iterator it = m_paragraphMap.tqfind( app );
+  TQMap<TQString, int>::Iterator it = m_paragraphMap.find( app );
 
   if( it == m_paragraphMap.end() ) {
     // create new section

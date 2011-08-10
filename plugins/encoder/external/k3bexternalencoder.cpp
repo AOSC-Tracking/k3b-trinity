@@ -218,16 +218,16 @@ bool K3bExternalEncoder::initEncoderInternal( const TQString& extension )
   // create the commandline
   TQStringList params = TQStringList::split( ' ', d->cmd.command, false );
   for( TQStringList::iterator it = params.begin(); it != params.end(); ++it ) {
-    (*it).tqreplace( "%f", d->fileName );
-    (*it).tqreplace( "%a", d->artist );
-    (*it).tqreplace( "%t", d->title );
-    (*it).tqreplace( "%c", d->comment );
-    (*it).tqreplace( "%y", d->year );
-    (*it).tqreplace( "%m", d->cdTitle );
-    (*it).tqreplace( "%r", d->cdArtist );
-    (*it).tqreplace( "%x", d->cdComment );
-    (*it).tqreplace( "%n", d->trackNumber );
-    (*it).tqreplace( "%g", d->genre );
+    (*it).replace( "%f", d->fileName );
+    (*it).replace( "%a", d->artist );
+    (*it).replace( "%t", d->title );
+    (*it).replace( "%c", d->comment );
+    (*it).replace( "%y", d->year );
+    (*it).replace( "%m", d->cdTitle );
+    (*it).replace( "%r", d->cdArtist );
+    (*it).replace( "%x", d->cdComment );
+    (*it).replace( "%n", d->trackNumber );
+    (*it).replace( "%g", d->genre );
 
     *d->process << *it;
   }

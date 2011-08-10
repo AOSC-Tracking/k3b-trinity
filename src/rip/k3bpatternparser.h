@@ -31,7 +31,7 @@ class K3bPatternParser
   static TQString parsePattern( const K3bCddbResultEntry& entry,
                                unsigned int trackNumber,
                                const TQString& pattern,
-                               bool tqreplace = false,
+                               bool replace = false,
                                const TQString& replaceString = "_" );
 
  private:

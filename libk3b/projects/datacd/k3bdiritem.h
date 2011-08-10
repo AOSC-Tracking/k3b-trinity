@@ -56,7 +56,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
   K3bDataItem* nextChild( K3bDataItem* ) const;
 
   bool alreadyInDirectory( const TQString& fileName ) const;
-  K3bDataItem* tqfind( const TQString& filename ) const;
+  K3bDataItem* find( const TQString& filename ) const;
   K3bDataItem* findByPath( const TQString& );
 
   long numFiles() const;

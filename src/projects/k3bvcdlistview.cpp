@@ -250,7 +250,7 @@ void K3bVcdListView::slotUpdateItems()
     K3bVcdTrack * track = m_doc->first();
     K3bVcdTrack* lastTrack = 0;
     while ( track != 0 ) {
-        if ( !m_itemMap.tqcontains( track ) )
+        if ( !m_itemMap.contains( track ) )
             m_itemMap.insert( track, new K3bVcdListViewItem( track, this, m_itemMap[ lastTrack ] ) );
 
         lastTrack = track;

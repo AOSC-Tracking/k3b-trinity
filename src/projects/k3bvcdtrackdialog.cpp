@@ -159,7 +159,7 @@ void K3bVcdTrackDialog::slotApply()
                 }
 
                 TQMap<TQString, K3bVcdTrack*>::Iterator mit;
-                mit = m_numkeysmap.tqfind( it.current() ->text( 1 ) );
+                mit = m_numkeysmap.find( it.current() ->text( 1 ) );
                 if ( mit != m_numkeysmap.end() )
                     if ( mit.data() ) {
                         selectedTrack->setDefinedNumKey( it.current() ->text( 0 ).toInt(), mit.data() );
@@ -718,11 +718,11 @@ void K3bVcdTrackDialog::setDefinedNumKeys( )
     while ( it.current() ) {
         int itemId = it.current() ->text( 0 ).toInt();
 
-        TQMap<int, K3bVcdTrack*>::const_iterator keyit = definedkeysmap.tqfind( itemId );
+        TQMap<int, K3bVcdTrack*>::const_iterator keyit = definedkeysmap.find( itemId );
 
         if ( keyit != definedkeysmap.end() ) {
             if ( keyit.data() ) {
-                if ( m_tracks.tqfindRef( keyit.data() ) >= 0 ) {
+                if ( m_tracks.findRef( keyit.data() ) >= 0 ) {
                     it.current() ->setText( 1 , displayName( keyit.data() ) ) ;
                 } else {
                     it.current() ->setText( 1 , "" ) ;

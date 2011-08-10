@@ -115,7 +115,7 @@ int K3bIso9660::isofs_callback( struct iso_directory_record *idr, void *udata )
 	path = isoPath;
 
 	// remove the version field
-	int pos = path.tqfind( ';' );
+	int pos = path.find( ';' );
 	if( pos > 0 )
 	  path.truncate( pos );
       }
@@ -367,11 +367,11 @@ K3bIso9660Entry* K3bIso9660Directory::entry( const TQString& n )
     name.truncate( name.length()-1 );
   }
 
-  int pos = name.tqfind( '/' );
+  int pos = name.find( '/' );
   while( pos == 0 ) {
     if( name.length() > 1 ) {
       name = name.mid( 1 ); // remove leading slash
-      pos = name.tqfind( '/' ); // look again
+      pos = name.find( '/' ); // look again
     }
     else // "/"
       return this;
@@ -405,11 +405,11 @@ K3bIso9660Entry* K3bIso9660Directory::iso9660Entry( const TQString& n )
     name.truncate( name.length()-1 );
   }
 
-  int pos = name.tqfind( '/' );
+  int pos = name.find( '/' );
   while( pos == 0 ) {
     if( name.length() > 1 ) {
       name = name.mid( 1 ); // remove leading slash
-      pos = name.tqfind( '/' ); // look again
+      pos = name.find( '/' ); // look again
     }
     else // "/"
       return this;

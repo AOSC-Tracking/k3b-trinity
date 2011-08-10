@@ -104,7 +104,7 @@ const TQPtrList<K3bDoc>& K3bProjectManager::projects() const
 
 void K3bProjectManager::addProject( K3bDoc* doc )
 {
-  if( !d->projects.tqcontainsRef( doc ) ) {
+  if( !d->projects.containsRef( doc ) ) {
     kdDebug() << "(K3bProjectManager) adding doc " << doc->URL().path() << endl;
     
     d->projects.append(doc);
@@ -120,7 +120,7 @@ void K3bProjectManager::addProject( K3bDoc* doc )
 void K3bProjectManager::removeProject( K3bDoc* doc )
 {
   //
-  // TQPtrList.tqfindRef seems to be buggy. Everytime we search for the
+  // TQPtrList.findRef seems to be buggy. Everytime we search for the
   // first added item it is not found!
   //
   for( TQPtrListIterator<K3bDoc> it( d->projects );
@@ -128,7 +128,7 @@ void K3bProjectManager::removeProject( K3bDoc* doc )
     if( it.current() == doc ) {
 
       // remove the DCOP interface
-      TQMap<K3bDoc*, K3bProjectInterface*>::iterator it = d->projectInterfaceMap.tqfind( doc );
+      TQMap<K3bDoc*, K3bProjectInterface*>::iterator it = d->projectInterfaceMap.find( doc );
       if( it != d->projectInterfaceMap.end() ) {
 	// delete the interface
 	delete it.data();
@@ -172,7 +172,7 @@ void K3bProjectManager::setActive( K3bDoc* doc )
   }
 
   //
-  // TQPtrList.tqfindRef seems to be buggy. Everytime we search for the
+  // TQPtrList.findRef seems to be buggy. Everytime we search for the
   // first added item it is not found!
   //
   for( TQPtrListIterator<K3bDoc> it( d->projects );
@@ -449,7 +449,7 @@ void K3bProjectManager::loadDefaults( K3bDoc* doc )
 
 K3bProjectInterface* K3bProjectManager::dcopInterface( K3bDoc* doc )
 {
-  TQMap<K3bDoc*, K3bProjectInterface*>::iterator it = d->projectInterfaceMap.tqfind( doc );
+  TQMap<K3bDoc*, K3bProjectInterface*>::iterator it = d->projectInterfaceMap.find( doc );
   if( it == d->projectInterfaceMap.end() ) {
     K3bProjectInterface* dcopInterface = 0;
     if( doc->type() == K3bDoc::DATA || doc->type() == K3bDoc::DVD )

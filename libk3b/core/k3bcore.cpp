@@ -346,7 +346,7 @@ void K3bCore::unblockDevice( K3bDevice::Device* dev )
 
 bool K3bCore::internalBlockDevice( K3bDevice::Device* dev )
 {
-  if( !d->blockedDevices.tqcontains( dev ) ) {
+  if( !d->blockedDevices.contains( dev ) ) {
     d->blockedDevices.append( dev );
     return true;
   }

@@ -117,7 +117,7 @@ TQString K3bCddbLocalQuery::preparePath( const TQString& p )
 {
   TQString path = p;
   if( path.startsWith( "~" ) )
-    path.tqreplace( 0, 1, TQDir::homeDirPath() );
+    path.replace( 0, 1, TQDir::homeDirPath() );
   else if( !path.startsWith( "/" ) )
     path.prepend( TQDir::homeDirPath() );
   if( path[path.length()-1] != '/' )

@@ -96,7 +96,7 @@ void K3bDeviceComboBox::addDevice( K3bDevice::Device* dev )
 void K3bDeviceComboBox::removeDevice( K3bDevice::Device* dev )
 {
   if( dev ) {
-    if( d->deviceIndexMap.tqcontains(dev->devicename()) ) {
+    if( d->deviceIndexMap.contains(dev->devicename()) ) {
       // let's make it easy and recreate the whole list
       K3bDevice::Device* selDev = selectedDevice();
       TQPtrList<K3bDevice::Device> devices;
@@ -126,7 +126,7 @@ void K3bDeviceComboBox::refreshDevices( const TQPtrList<K3bDevice::Device>& list
 {
   K3bDevice::Device* selDev = selectedDevice();
   clear();
-  if( !list.tqcontainsRef( selDev ) )
+  if( !list.containsRef( selDev ) )
     selDev = 0;
   addDevices( list );
   setSelectedDevice( selDev );
@@ -136,7 +136,7 @@ void K3bDeviceComboBox::refreshDevices( const TQPtrList<K3bDevice::Device>& list
 void K3bDeviceComboBox::setSelectedDevice( K3bDevice::Device* dev )
 {
   if( dev ) {
-    if( d->deviceIndexMap.tqcontains(dev->devicename()) ) {
+    if( d->deviceIndexMap.contains(dev->devicename()) ) {
       setCurrentItem( d->deviceIndexMap[dev->devicename()] );
       emit selectionChanged( dev );
     }
@@ -162,7 +162,7 @@ void K3bDeviceComboBox::slotDeviceManagerChanged( K3bDevice::DeviceManager* dm )
 {
   unsigned int i = 0;
   while( i < d->devices.size() ) {
-    if( !dm->allDevices().tqcontainsRef( d->devices[i] ) ) {
+    if( !dm->allDevices().containsRef( d->devices[i] ) ) {
       removeDevice( d->devices[i] );
       i = 0;
     }

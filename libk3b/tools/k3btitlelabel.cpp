@@ -81,10 +81,10 @@ public:
     TQRect titleTipRect( startPos, 0, m_label->d->displayTitleLength, m_label->height() );
     TQRect subTitleTipRect( startPos + m_label->d->displayTitleLength, 0, m_label->d->displaySubTitleLength, m_label->height() );
 
-    if( titleTipRect.tqcontains( pos ) &&
+    if( titleTipRect.contains( pos ) &&
 	m_label->d->displayTitle != m_label->d->title )
       tip( titleTipRect, m_label->d->title );
-    else if( subTitleTipRect.tqcontains( pos ) &&
+    else if( subTitleTipRect.contains( pos ) &&
 	m_label->d->displaySubTitle != m_label->d->subTitle )
       tip( subTitleTipRect, m_label->d->subTitle );
   }

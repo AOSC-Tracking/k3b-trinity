@@ -41,7 +41,7 @@ bool K3bDataProjectInterface::createFolder( const TQString& name )
 bool K3bDataProjectInterface::createFolder( const TQString& name, const TQString& tqparent )
 {
   K3bDataItem* p = m_dataDoc->root()->findByPath( tqparent );
-  if( p && p->isDir() && !static_cast<K3bDirItem*>(p)->tqfind( name ) ) {
+  if( p && p->isDir() && !static_cast<K3bDirItem*>(p)->find( name ) ) {
     m_dataDoc->addEmptyDir( name, static_cast<K3bDirItem*>(p) );
     return true;
   }

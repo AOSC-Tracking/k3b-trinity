@@ -285,7 +285,7 @@ void K3bDvdBooktypeJob::startBooktypeChange()
 
   d->dvdBooktypeBin = k3bcore->externalBinManager()->binObject( "dvd+rw-booktype" );
   if( !d->dvdBooktypeBin ) {
-    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("dvd+rw-booktype"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("dvd+rw-booktype"), ERROR );
     d->running = false;
     jobFinished(false);
     return;

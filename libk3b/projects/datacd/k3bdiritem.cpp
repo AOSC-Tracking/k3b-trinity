@@ -99,12 +99,12 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
     }
   }
 
-  if( m_tqchildren.tqfindRef( item ) == -1 ) {
+  if( m_tqchildren.findRef( item ) == -1 ) {
     if( item->isFile() ) {
       // do we replace an old item?
       TQString name = item->k3bName();
       int cnt = 1;
-      while( K3bDataItem* oldItem = tqfind( name ) ) {
+      while( K3bDataItem* oldItem = find( name ) ) {
 	if( !oldItem->isDir() && oldItem->isFromOldSession() ) {
 	  // in this case we remove this item from it's tqparent and save it in the new one
 	  // to be able to recover it
@@ -146,7 +146,7 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
 
 K3bDataItem* K3bDirItem::takeDataItem( K3bDataItem* item )
 {
-  int x = m_tqchildren.tqfindRef( item );
+  int x = m_tqchildren.findRef( item );
   if( x > -1 ) {
     K3bDataItem* item = m_tqchildren.take();
     updateSize( item, true );
@@ -186,7 +186,7 @@ K3bDataItem* K3bDirItem::nextSibling() const
 K3bDataItem* K3bDirItem::nextChild( K3bDataItem* prev ) const
 {
   // search for prev in tqchildren
-  if( m_tqchildren.tqfindRef( prev ) < 0 ) {
+  if( m_tqchildren.findRef( prev ) < 0 ) {
     return 0;
   }
   else
@@ -196,11 +196,11 @@ K3bDataItem* K3bDirItem::nextChild( K3bDataItem* prev ) const
 
 bool K3bDirItem::alreadyInDirectory( const TQString& filename ) const
 {
-  return (tqfind( filename ) != 0);
+  return (find( filename ) != 0);
 }
 
 
-K3bDataItem* K3bDirItem::tqfind( const TQString& filename ) const
+K3bDataItem* K3bDirItem::find( const TQString& filename ) const
 {
   for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( it.current()->k3bName() == filename )
@@ -218,12 +218,12 @@ K3bDataItem* K3bDirItem::findByPath( const TQString& p )
   TQString path = p;
   if( path.startsWith("/") )
     path = path.mid(1);
-  int pos = path.tqfind( "/" );
+  int pos = path.find( "/" );
   if( pos < 0 )
-    return tqfind( path );
+    return find( path );
   else {
     // do it recursivly
-    K3bDataItem* item = tqfind( path.left(pos) );
+    K3bDataItem* item = find( path.left(pos) );
     if( item && item->isDir() )
       return ((K3bDirItem*)item)->findByPath( path.mid( pos+1 ) );
     else
@@ -249,7 +249,7 @@ bool K3bDirItem::mkdir( const TQString& dirPath )
 
   TQString restPath;
   TQString dirName;
-  int pos = dirPath.tqfind( '/' );
+  int pos = dirPath.find( '/' );
   if( pos == -1 ) {
     dirName = dirPath;
   }
@@ -258,7 +258,7 @@ bool K3bDirItem::mkdir( const TQString& dirPath )
     restPath = dirPath.mid( pos+1 );
   }
 
-  K3bDataItem* dir = tqfind( dirName );
+  K3bDataItem* dir = find( dirName );
   if( !dir )
     dir = new K3bDirItem( dirName, doc(), this );
   else if( !dir->isDir() )

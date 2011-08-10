@@ -340,7 +340,7 @@ void K3bMediaCache::buildDeviceList( K3bDevice::DeviceManager* dm )
   const TQPtrList<K3bDevice::Device>& devices = dm->allDevices();
   for( TQPtrListIterator<K3bDevice::Device> it( devices ); *it; ++it ) {
     m_deviceMap.insert( *it, new DeviceEntry( this, *it ) );
-    TQMap<K3bDevice::Device*, int>::const_iterator bi_it = blockedIds.tqfind( *it );
+    TQMap<K3bDevice::Device*, int>::const_iterator bi_it = blockedIds.find( *it );
     if( bi_it != blockedIds.end() )
       m_deviceMap[*it]->blockedId = bi_it.data();
   }
@@ -356,7 +356,7 @@ void K3bMediaCache::buildDeviceList( K3bDevice::DeviceManager* dm )
 
 K3bMediaCache::DeviceEntry* K3bMediaCache::findDeviceEntry( K3bDevice::Device* dev )
 {
-  TQMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.tqfind( dev );
+  TQMap<K3bDevice::Device*, DeviceEntry*>::iterator it = m_deviceMap.find( dev );
   if( it != m_deviceMap.end() )
     return it.data();
   else

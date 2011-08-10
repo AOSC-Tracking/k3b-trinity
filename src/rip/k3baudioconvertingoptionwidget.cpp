@@ -171,7 +171,7 @@ void K3bAudioConvertingOptionWidget::slotUpdateFreeTempSpace()
   TQString path = m_editBaseDir->url();
 
   if( !TQFile::exists( path ) )
-    path.truncate( path.tqfindRev('/') );
+    path.truncate( path.findRev('/') );
 
   unsigned long size, avail;
   if( K3b::kbFreeOnFs( path, size, avail ) ) {
@@ -257,7 +257,7 @@ void K3bAudioConvertingOptionWidget::saveConfig( KConfigBase* c )
   c->writeEntry( "create_playlist", m_checkCreatePlaylist->isChecked() );
   c->writeEntry( "relative_path_in_playlist", m_checkPlaylistRelative->isChecked() );
 
-  if( d->extensionMap.tqcontains(m_comboFileType->currentItem()) )
+  if( d->extensionMap.contains(m_comboFileType->currentItem()) )
     c->writeEntry( "filetype", d->extensionMap[m_comboFileType->currentItem()] );
   else
     c->writeEntry( "filetype", "wav" );

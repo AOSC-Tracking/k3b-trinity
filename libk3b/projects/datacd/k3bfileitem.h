@@ -77,7 +77,7 @@ public:
   };
 
   /**
-   * This is not the normal inode number but it also tqcontains
+   * This is not the normal inode number but it also contains
    * the device number.
    */
   Id localId() const;

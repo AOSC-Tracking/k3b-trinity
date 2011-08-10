@@ -28,7 +28,7 @@
 TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
                                         unsigned int trackNumber,
                                         const TQString& pattern,
-                                        bool tqreplace,
+                                        bool replace,
                                         const TQString& replaceString )
 {
   if( entry.titles.count() < trackNumber )
@@ -115,18 +115,18 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
         switch( c ) {
           case ARTIST:
             s = entry.artists[trackNumber-1];
-            s.tqreplace( '/', '_' );
-            s.tqreplace( '*', '_' );
-            s.tqreplace( '}', '*' );  // for conditional inclusion
+            s.replace( '/', '_' );
+            s.replace( '*', '_' );
+            s.replace( '}', '*' );  // for conditional inclusion
             dir.append( s.isEmpty()
                 ? i18n("unknown") + TQString(" %1").tqarg(trackNumber)
                 : s );
             break;
           case TITLE:
             s = entry.titles[trackNumber-1];
-            s.tqreplace( '/', '_' );
-            s.tqreplace( '*', '_' );
-            s.tqreplace( '}', '*' );
+            s.replace( '/', '_' );
+            s.replace( '*', '_' );
+            s.replace( '}', '*' );
             dir.append( s.isEmpty()
                 ? i18n("Track %1").tqarg(trackNumber)
                 : s );
@@ -139,16 +139,16 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             break;
           case COMMENT:
             s = entry.extInfos[trackNumber-1];
-            s.tqreplace( '/', '_' );
-            s.tqreplace( '*', '_' );
-            s.tqreplace( '}', '*' );
+            s.replace( '/', '_' );
+            s.replace( '*', '_' );
+            s.replace( '}', '*' );
             dir.append( s );
             break;
           case GENRE:
             s = ( entry.genre.isEmpty() ? entry.category : entry.genre );
-            s.tqreplace( '/', '_' );
-            s.tqreplace( '*', '_' );
-            s.tqreplace( '}', '*' );
+            s.replace( '/', '_' );
+            s.replace( '*', '_' );
+            s.replace( '}', '*' );
             dir.append( s );
             break;
           case ALBUMARTIST:
@@ -157,17 +157,17 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             break;
           case ALBUMTITLE:
             s = entry.cdTitle;
-            s.tqreplace( '/', '_' );
-            s.tqreplace( '*', '_' );
-            s.tqreplace( '}', '*' );
+            s.replace( '/', '_' );
+            s.replace( '*', '_' );
+            s.replace( '}', '*' );
             dir.append( s.isEmpty()
                 ? i18n("unknown") : s );
             break;
           case ALBUMCOMMENT:
             s = entry.cdExtInfo;
-            s.tqreplace( '/', '_' );
-            s.tqreplace( '*', '_' );
-            s.tqreplace( '}', '*' );
+            s.replace( '/', '_' );
+            s.replace( '*', '_' );
+            s.replace( '}', '*' );
             dir.append( s ); // I think it makes more sense to allow empty comments
             break;
           case DATE:
@@ -267,7 +267,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
       else { // with string matching, e.g. ?y='2004'{text}
 
 	// Be aware that there might be ' in the condition text
-        int endOfCondition = dir.tqfind( '{', offset+4 )-1;
+        int endOfCondition = dir.find( '{', offset+4 )-1;
         TQString condition = dir.mid( offset+4,
 				     endOfCondition - (offset+4) );
 
@@ -280,7 +280,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
           isIncluded = !isIncluded;
       // Leave it when it's '@'.
 
-      dir.tqreplace( offset, length, ( isIncluded ? inclusion : TQString("") ) );
+      dir.replace( offset, length, ( isIncluded ? inclusion : TQString("") ) );
 
       if( isIncluded == TRUE )
         i -= length - inclusion.length();
@@ -289,17 +289,17 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
 
       continue;
 
-    } // end of tqreplace (at closing bracket '}')
+    } // end of replace (at closing bracket '}')
 
   } // end of conditional inclusion for(...)
 
   // end of Conditional Inclusion */
 
 
-  dir.tqreplace( '*', '}' );  // bring the brackets back, if there were any
+  dir.replace( '*', '}' );  // bring the brackets back, if there were any
 
-  if( tqreplace )
-    dir.tqreplace( TQRegExp( "\\s" ), replaceString );
+  if( replace )
+    dir.replace( TQRegExp( "\\s" ), replaceString );
 
   return dir;
 }

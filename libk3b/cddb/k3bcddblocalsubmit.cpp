@@ -40,7 +40,7 @@ void K3bCddbLocalSubmit::doSubmit()
 {
   TQString path = m_cddbDir;
   if( path.startsWith( "~" ) )
-    path.tqreplace( 0, 1, TQDir::homeDirPath() + "/" );
+    path.replace( 0, 1, TQDir::homeDirPath() + "/" );
   else if( !path.startsWith( "/" ) )
     path.prepend( TQDir::homeDirPath() + "/" );
   if( path[path.length()-1] != '/' )

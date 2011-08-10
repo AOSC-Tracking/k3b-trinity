@@ -252,7 +252,7 @@ void K3bBlankingDialog::slotWritingAppChanged(int app)
   TQWhatsThis::add( m_comboEraseMode, whatsThisInfo );
 
   // try to reset last mode
-  if( d->typeComboMap.tqcontains( lastMode ) )
+  if( d->typeComboMap.contains( lastMode ) )
     m_comboEraseMode->setCurrentItem( d->typeComboMap[lastMode] );
   else
     m_comboEraseMode->setCurrentItem( d->typeComboMap[K3bBlankingJob::Fast] );

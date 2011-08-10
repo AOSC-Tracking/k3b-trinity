@@ -99,7 +99,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
       m_labelType->setText( kFileItem.mimeComment() );
     m_labelLocalName->setText( kFileItem.name() );
     TQString localLocation = kFileItem.url().path(-1);
-    localLocation.truncate( localLocation.tqfindRev('/') );
+    localLocation.truncate( localLocation.findRev('/') );
     m_labelLocalLocation->setText( localLocation );
     m_labelSize->setText( KIO::convertSize(dataItem->size()) );
   }
@@ -132,7 +132,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
   TQString location = "/" + dataItem->k3bPath();
   if( location[location.length()-1] == '/' )
     location.truncate( location.length()-1 );
-  location.truncate( location.tqfindRev('/') );
+  location.truncate( location.findRev('/') );
   if( location.isEmpty() )
     location = "/";
   m_labelLocation->setText( location );

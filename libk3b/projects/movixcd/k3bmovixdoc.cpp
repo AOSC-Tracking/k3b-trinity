@@ -121,7 +121,7 @@ bool K3bMovixDoc::loadDocumentData( TQDomElement* rootElem )
   TQDomNodeList nodes = rootElem->childNodes();
 
   if( nodes.item(0).nodeName() != "general" ) {
-    kdDebug() << "(K3bMovixDoc) could not tqfind 'general' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not find 'general' section." << endl;
     return false;
   }
   if( !readGeneralDocumentData( nodes.item(0).toElement() ) )
@@ -131,7 +131,7 @@ bool K3bMovixDoc::loadDocumentData( TQDomElement* rootElem )
   // parse options
   // -----------------------------------------------------------------
   if( nodes.item(1).nodeName() != "data_options" ) {
-    kdDebug() << "(K3bMovixDoc) could not tqfind 'data_options' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not find 'data_options' section." << endl;
     return false;
   }
   if( !loadDocumentDataOptions( nodes.item(1).toElement() ) )
@@ -143,7 +143,7 @@ bool K3bMovixDoc::loadDocumentData( TQDomElement* rootElem )
   // parse header
   // -----------------------------------------------------------------
   if( nodes.item(2).nodeName() != "data_header" ) {
-    kdDebug() << "(K3bMovixDoc) could not tqfind 'data_header' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not find 'data_header' section." << endl;
     return false;
   }
   if( !loadDocumentDataHeader( nodes.item(2).toElement() ) )
@@ -155,7 +155,7 @@ bool K3bMovixDoc::loadDocumentData( TQDomElement* rootElem )
   // parse movix options
   // -----------------------------------------------------------------
   if( nodes.item(3).nodeName() != "movix_options" ) {
-    kdDebug() << "(K3bMovixDoc) could not tqfind 'movix_options' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not find 'movix_options' section." << endl;
     return false;
   }
 
@@ -203,7 +203,7 @@ bool K3bMovixDoc::loadDocumentData( TQDomElement* rootElem )
   // parse files
   // -----------------------------------------------------------------
   if( nodes.item(4).nodeName() != "movix_files" ) {
-    kdDebug() << "(K3bMovixDoc) could not tqfind 'movix_files' section." << endl;
+    kdDebug() << "(K3bMovixDoc) could not find 'movix_files' section." << endl;
     return false;
   }
 
@@ -370,7 +370,7 @@ void K3bMovixDoc::slotDataItemRemoved( K3bDataItem* item )
 {
   // check if it's a movix item
   if( K3bMovixFileItem* fi = dynamic_cast<K3bMovixFileItem*>(item) )
-    if( m_movixFiles.tqcontainsRef( fi ) ) {
+    if( m_movixFiles.containsRef( fi ) ) {
       emit movixItemRemoved( fi );
       m_movixFiles.removeRef( fi );
       setModified(true);
@@ -380,7 +380,7 @@ void K3bMovixDoc::slotDataItemRemoved( K3bDataItem* item )
 
 int K3bMovixDoc::indexOf( K3bMovixFileItem* item )
 {
-  return m_movixFiles.tqfindRef(item)+1;
+  return m_movixFiles.findRef(item)+1;
 }
 
 
@@ -390,12 +390,12 @@ void K3bMovixDoc::moveMovixItem( K3bMovixFileItem* item, K3bMovixFileItem* itemA
     return;
 
   // set the current item to track
-  m_movixFiles.tqfindRef( item );
+  m_movixFiles.findRef( item );
   // take the current item
   item = m_movixFiles.take();
 
-  // if after == 0 tqfindRef returnes -1
-  int pos = m_movixFiles.tqfindRef( itemAfter );
+  // if after == 0 findRef returnes -1
+  int pos = m_movixFiles.findRef( itemAfter );
   m_movixFiles.insert( pos+1, item );
 
   emit newMovixFileItems();

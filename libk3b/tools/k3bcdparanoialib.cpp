@@ -189,7 +189,7 @@ class K3bCdparanoiaLibData
   long sector() const { return m_currentSector; }
 
   static K3bCdparanoiaLibData* data( K3bDevice::Device* dev ) {
-    TQMap<K3bDevice::Device*, K3bCdparanoiaLibData*>::const_iterator it = s_dataMap.tqfind( dev );
+    TQMap<K3bDevice::Device*, K3bCdparanoiaLibData*>::const_iterator it = s_dataMap.find( dev );
     if( it == s_dataMap.constEnd() )
       return new K3bCdparanoiaLibData( dev );
     else

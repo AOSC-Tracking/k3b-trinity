@@ -382,7 +382,7 @@ K3bAudioDecoder* K3bAudioDoc::getDecoderForUrl( const KURL& url, bool* reused )
   K3bAudioDecoder* decoder = 0;
 
   // check if we already have a proper decoder
-  if( m_decoderPresenceMap.tqcontains( url.path() ) ) {
+  if( m_decoderPresenceMap.contains( url.path() ) ) {
     decoder = m_decoderPresenceMap[url.path()];
     *reused = true;
   }
@@ -997,7 +997,7 @@ void K3bAudioDoc::slotTrackRemoved( K3bAudioTrack* track )
 void K3bAudioDoc::increaseDecoderUsage( K3bAudioDecoder* decoder )
 {
   kdDebug() << "(K3bAudioDoc::increaseDecoderUsage)" << endl;
-  if( !m_decoderUsageCounterMap.tqcontains( decoder ) ) {
+  if( !m_decoderUsageCounterMap.contains( decoder ) ) {
     m_decoderUsageCounterMap[decoder] = 1;
     m_decoderPresenceMap[decoder->filename()] = decoder;
   }

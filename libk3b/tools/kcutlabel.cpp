@@ -82,7 +82,7 @@ void KCutLabel::cutTextToLabel()
   TQToolTip::remove( this );
   TQToolTip::hide();
 
-  if( m_fullText.tqcontains( "\n" ) ) {
+  if( m_fullText.contains( "\n" ) ) {
     TQString newText;
     TQStringList lines = TQStringList::split( "\n", m_fullText );
     for( TQStringList::Iterator it = lines.begin(); it != lines.end(); ++it ) {

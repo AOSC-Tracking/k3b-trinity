@@ -65,7 +65,7 @@ KIO::filesize_t K3bVcdTrack::size() const
 
 int K3bVcdTrack::index() const
 {
-    int i = m_parent->tqfind( this );
+    int i = m_parent->find( this );
     if ( i < 0 )
         kdDebug() << "(K3bVcdTrack) I'm not part of my tqparent!" << endl;
     return i;
@@ -119,23 +119,23 @@ void K3bVcdTrack::delRefFromUs()
 void K3bVcdTrack::setPbcTrack( int which, K3bVcdTrack* pbctrack )
 {
     kdDebug() << "K3bVcdTrack::setPbcTrack " << which << ", " << pbctrack << endl;
-    m_pbctrackmap.tqreplace( which, pbctrack );
+    m_pbctrackmap.replace( which, pbctrack );
 }
 
 void K3bVcdTrack::setPbcNonTrack( int which, int type )
 {
     kdDebug() << "K3bVcdTrack::setNonPbcTrack " << which << ", " << type << endl;
-    m_pbcnontrackmap.tqreplace( which, type );
+    m_pbcnontrackmap.replace( which, type );
 }
 
 void K3bVcdTrack::setUserDefined( int which, bool ud )
 {
-    m_pbcusrdefmap.tqreplace( which, ud );
+    m_pbcusrdefmap.replace( which, ud );
 }
 
 K3bVcdTrack* K3bVcdTrack::getPbcTrack( const int& which )
 {
-    if ( m_pbctrackmap.tqfind( which ) == m_pbctrackmap.end() )
+    if ( m_pbctrackmap.find( which ) == m_pbctrackmap.end() )
         return 0;
     else
         return m_pbctrackmap[ which ];
@@ -143,7 +143,7 @@ K3bVcdTrack* K3bVcdTrack::getPbcTrack( const int& which )
 
 int K3bVcdTrack::getNonPbcTrack( const int& which )
 {
-    if ( m_pbcnontrackmap.tqfind( which ) == m_pbcnontrackmap.end() )
+    if ( m_pbcnontrackmap.find( which ) == m_pbcnontrackmap.end() )
         return 0;
     else
         return m_pbcnontrackmap[ which ];

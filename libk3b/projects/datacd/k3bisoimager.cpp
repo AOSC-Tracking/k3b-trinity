@@ -400,7 +400,7 @@ void K3bIsoImager::slotMkisofsPrintSizeFinished()
   else {
     // parse the stderr output
     // I hope parsing the last line is enough!
-    int pos = m_collectedMkisofsPrintSizeStderr.tqfindRev( "extents scheduled to be written" );
+    int pos = m_collectedMkisofsPrintSizeStderr.findRev( "extents scheduled to be written" );
 
     if( pos == -1 )
       success = false;
@@ -857,7 +857,7 @@ int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& stream
 
       // some versions of mkisofs seem to have a bug that prevents to use filenames
       // that contain one or more backslashes
-      if( item->writtenPath().tqcontains("\\") )
+      if( item->writtenPath().contains("\\") )
 	m_containsFilesWithMultibleBackslashes = true;
 
 
@@ -887,7 +887,7 @@ void K3bIsoImager::writePathSpecForFile( K3bFileItem* item, TQTextStream& stream
   stream << escapeGraftPoint( item->writtenPath() )
 	 << "=";
 
-  if( m_doc->bootImages().tqcontainsRef( dynamic_cast<K3bBootItem*>(item) ) ) { // boot-image-backup-hack
+  if( m_doc->bootImages().containsRef( dynamic_cast<K3bBootItem*>(item) ) ) { // boot-image-backup-hack
 
     // create temp file
     KTempFile temp;
@@ -976,7 +976,7 @@ bool K3bIsoImager::writeSortWeightFile()
     K3bDataItem* item = m_doc->root();
     while( (item = item->nextSibling()) ) {  // we skip the root here
       if( item->sortWeight() != 0 ) {
-	if( m_doc->bootImages().tqcontainsRef( dynamic_cast<K3bBootItem*>(item) ) ) { // boot-image-backup-hack
+	if( m_doc->bootImages().containsRef( dynamic_cast<K3bBootItem*>(item) ) ) { // boot-image-backup-hack
 	  *t << escapeGraftPoint( static_cast<K3bBootItem*>(item)->tempPath() ) << " " << item->sortWeight() << endl;
 	}
 	else if( item->isDir() ) {
@@ -1049,8 +1049,8 @@ TQString K3bIsoImager::escapeGraftPoint( const TQString& str )
       ++pos;
   }
 
-//   enc.tqreplace( "\\\\", "\\\\\\\\" );
-//   enc.tqreplace( "=", "\\=" );
+//   enc.replace( "\\\\", "\\\\\\\\" );
+//   enc.replace( "=", "\\=" );
 
   return enc;
 }

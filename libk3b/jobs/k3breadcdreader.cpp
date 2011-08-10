@@ -104,7 +104,7 @@ void K3bReadcdReader::start()
   // the first thing to do is to check for readcd
   d->readcdBinObject = k3bcore->externalBinManager()->binObject( "readcd" );
   if( !d->readcdBinObject ) {
-    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("readcd"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("readcd"), ERROR );
     jobFinished(false);
     return;
   }
@@ -243,7 +243,7 @@ void K3bReadcdReader::slotStdLine( const TQString& line )
 
   else if( line.startsWith( "addr:" ) ) {
     bool ok;
-    long currentReadBlock = line.mid( 6, line.tqfind("cnt")-7 ).toInt(&ok);
+    long currentReadBlock = line.mid( 6, line.find("cnt")-7 ).toInt(&ok);
     if( d->firstSector < d->lastSector )
       currentReadBlock -= d->firstSector.lba();
     if( ok ) {
@@ -260,37 +260,37 @@ void K3bReadcdReader::slotStdLine( const TQString& line )
     }
     else
       kdError() << "(K3bReadcdReader) currentReadBlock parsing error in line: " 
-		<< line.mid( 6, line.tqfind("cnt")-7 ) << endl;
+		<< line.mid( 6, line.find("cnt")-7 ) << endl;
   }
 
-  else if( line.tqcontains("Cannot read source disk") ) {
+  else if( line.contains("Cannot read source disk") ) {
     emit infoMessage( i18n("Cannot read source disk."), ERROR );
   }
 
-  else if( (pos = line.tqfind("Retrying from sector")) >= 0 ) {
+  else if( (pos = line.find("Retrying from sector")) >= 0 ) {
     // parse the sector
     pos += 21;
     bool ok;
-    int problemSector = line.mid( pos, line.tqfind( TQRegExp("\\D"), pos )-pos ).toInt(&ok);
+    int problemSector = line.mid( pos, line.find( TQRegExp("\\D"), pos )-pos ).toInt(&ok);
     if( !ok ) {
       kdError() << "(K3bReadcdReader) problemSector parsing error in line: " 
-		<< line.mid( pos, line.tqfind( TQRegExp("\\D"), pos )-pos ) << endl;
+		<< line.mid( pos, line.find( TQRegExp("\\D"), pos )-pos ) << endl;
     }
     emit infoMessage( i18n("Retrying from sector %1.").tqarg(problemSector), INFO );
   }
 
-  else if( (pos = line.tqfind("Error on sector")) >= 0 ) {
+  else if( (pos = line.find("Error on sector")) >= 0 ) {
     d->unreadableBlocks++;
 
     pos += 16;
     bool ok;
-    int problemSector = line.mid( pos, line.tqfind( TQRegExp("\\D"), pos )-pos ).toInt(&ok);
+    int problemSector = line.mid( pos, line.find( TQRegExp("\\D"), pos )-pos ).toInt(&ok);
     if( !ok ) {
       kdError() << "(K3bReadcdReader) problemSector parsing error in line: " 
-		<< line.mid( pos, line.tqfind( TQRegExp("\\D"), pos )-pos ) << endl;
+		<< line.mid( pos, line.find( TQRegExp("\\D"), pos )-pos ) << endl;
     }
 
-    if( line.tqcontains( "not corrected") ) {
+    if( line.contains( "not corrected") ) {
       emit infoMessage( i18n("Uncorrected error in sector %1").tqarg(problemSector), ERROR );
     }
     else {

@@ -90,7 +90,7 @@ void K3bVideoCdInfo::slotParseOutput( KProcess*, char* output, int len )
     TQStringList::Iterator end( lines.end());
     for ( TQStringList::Iterator str = lines.begin(); str != end; ++str ) {
 
-        if ( ( *str ).tqcontains( "<?xml" ) )
+        if ( ( *str ).contains( "<?xml" ) )
             m_isXml = true;
 
         if ( m_isXml )
@@ -98,7 +98,7 @@ void K3bVideoCdInfo::slotParseOutput( KProcess*, char* output, int len )
         else
             kdDebug() << "(K3bVideoCdInfo::slotParseOutput) " << *str << endl;
 
-        if ( ( *str ).tqcontains( "</videocd>" ) )
+        if ( ( *str ).contains( "</videocd>" ) )
             m_isXml = false;
     }
 }

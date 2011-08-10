@@ -79,7 +79,7 @@ bool K3bMovixProgram::scanNewEMovix( K3bMovixBin* bin, const TQString& path )
   TQStringList files = bin->files();
   for( TQStringList::iterator it = files.begin();
        it != files.end(); ++it ) {
-    if( (*it).tqcontains( "isolinux.cfg" ) ) {
+    if( (*it).contains( "isolinux.cfg" ) ) {
       bin->m_supportedBootLabels = determineSupportedBootLabels( TQStringList::split( " ", *it )[1] );
       break;
     }
@@ -105,22 +105,22 @@ bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const TQString& path )
   //
   TQDir dir( bin->movixDataDir() );
   TQStringList subdirs = dir.entryList( TQDir::Dirs );
-  if( !subdirs.tqcontains( "boot-messages" ) ) {
+  if( !subdirs.contains( "boot-messages" ) ) {
     kdDebug() << "(K3bMovixProgram) could not find subdir 'boot-messages'" << endl;
     delete bin;
     return false;
   }
-  if( !subdirs.tqcontains( "isolinux" ) ) {
+  if( !subdirs.contains( "isolinux" ) ) {
     kdDebug() << "(K3bMovixProgram) could not find subdir 'isolinux'" << endl;
     delete bin;
     return false;
   }
-  if( !subdirs.tqcontains( "movix" ) ) {
+  if( !subdirs.contains( "movix" ) ) {
     kdDebug() << "(K3bMovixProgram) could not find subdir 'movix'" << endl;
     delete bin;
     return false;
   }
-  if( !subdirs.tqcontains( "mplayer-fonts" ) ) {
+  if( !subdirs.contains( "mplayer-fonts" ) ) {
     kdDebug() << "(K3bMovixProgram) could not find subdir 'mplayer-fonts'" << endl;
     delete bin;
     return false;
@@ -241,7 +241,7 @@ TQString K3bMovixBin::subtitleFontDir( const TQString& font ) const
 {
   if( font == i18n("none" ) )
     return "";
-  else if( m_supportedSubtitleFonts.tqcontains( font ) )
+  else if( m_supportedSubtitleFonts.contains( font ) )
     return path + "/mplayer-fonts/" + font;
   else
     return "";
@@ -252,7 +252,7 @@ TQString K3bMovixBin::languageDir( const TQString& lang ) const
 {
   if( lang == i18n("default") )
     return languageDir( "en" );
-  else if( m_supportedLanguages.tqcontains( lang ) )
+  else if( m_supportedLanguages.contains( lang ) )
     return path + "/boot-messages/" + lang;
   else
     return "";

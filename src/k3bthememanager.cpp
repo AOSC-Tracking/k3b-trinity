@@ -57,7 +57,7 @@ TQColor K3bTheme::foregroundColor() const
 
 const TQPixmap& K3bTheme::pixmap( const TQString& name ) const
 {
-  TQMap<TQString, TQPixmap>::const_iterator it = m_pixmapMap.tqfind( name );
+  TQMap<TQString, TQPixmap>::const_iterator it = m_pixmapMap.find( name );
   if( it != m_pixmapMap.end() )
     return *it;
 
@@ -270,7 +270,7 @@ void K3bThemeManager::loadThemes()
     // every theme dir needs to contain a k3b.theme file
     for( TQStringList::const_iterator entryIt = entries.begin(); entryIt != entries.end(); ++entryIt ) {
       TQString themeDir = *dirIt + *entryIt + "/";
-      if( !themeNames.tqcontains( *entryIt ) && TQFile::exists( themeDir + "k3b.theme" ) ) {
+      if( !themeNames.contains( *entryIt ) && TQFile::exists( themeDir + "k3b.theme" ) ) {
 	bool themeValid = true;
 
 	// check for all nessessary pixmaps (this is a little evil hacking)

@@ -60,7 +60,7 @@ TQString K3bMovixFileItem::subTitleFileName( const TQString& name )
 {
   // remove ending from k3bName
   TQString subName = name;
-  int pos = subName.tqfindRev(".");
+  int pos = subName.findRev(".");
   if( pos > 0 )
     subName.truncate( pos );
   subName += ".sub";

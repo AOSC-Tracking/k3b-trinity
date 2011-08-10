@@ -118,8 +118,8 @@ void K3bIsoOptions::save( KConfigBase* c, bool saveVolumeDesc )
   case extended:
     c->writeEntry( "white_space_treatment", "extended" );
     break;
-  case tqreplace:
-    c->writeEntry( "white_space_treatment", "tqreplace" );
+  case replace:
+    c->writeEntry( "white_space_treatment", "replace" );
     break;
   default:
     c->writeEntry( "white_space_treatment", "noChange" );
@@ -189,8 +189,8 @@ K3bIsoOptions K3bIsoOptions::load( KConfigBase* c, bool loadVolumeDesc )
   options.setDoNotCacheInodes( c->readBoolEntry( "do not cache inodes", options.doNotCacheInodes() ) );
 
   TQString w = c->readEntry( "white_space_treatment", "noChange" );
-  if( w == "tqreplace" )
-    options.setWhiteSpaceTreatment( tqreplace );
+  if( w == "replace" )
+    options.setWhiteSpaceTreatment( replace );
   else if( w == "strip" )
     options.setWhiteSpaceTreatment( strip );
   else if( w == "extended" )

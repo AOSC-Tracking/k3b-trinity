@@ -93,12 +93,12 @@ void K3bMkisofsHandler::parseMkisofsOutput( const TQString& line )
 	d->readError = true;
       }
     }
-    else if( line.tqcontains( "done, estimate" ) ) {
+    else if( line.contains( "done, estimate" ) ) {
       int p = parseMkisofsProgress( line );
       if( p != -1 )
 	handleMkisofsProgress( p );
     }
-    else if( line.tqcontains( "extents written" ) ) {
+    else if( line.contains( "extents written" ) ) {
       handleMkisofsProgress( 100 );
     }
     else if( line.startsWith( "Incorrectly encoded string" ) ) {
@@ -134,7 +134,7 @@ int K3bMkisofsHandler::parseMkisofsProgress( const TQString& line )
   //
 
   TQString perStr = line;
-  perStr.truncate( perStr.tqfind('%') );
+  perStr.truncate( perStr.find('%') );
   bool ok;
   double p = perStr.toDouble( &ok );
   if( !ok ) {

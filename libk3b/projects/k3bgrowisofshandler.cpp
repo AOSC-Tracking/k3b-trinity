@@ -76,7 +76,7 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
   if( line.startsWith( ":-[" ) ) {
     // Error
 
-    if( line.tqcontains( "ASC=30h" ) )
+    if( line.contains( "ASC=30h" ) )
       m_error = ERROR_MEDIA;
 
     // :-[ PERFORM OPC failed with SK=3h/ASC=73h/ASCQ=03h
@@ -85,7 +85,7 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
 
     // :-[ attempt -blank=full or re-run with -dvd-compat -dvd-compat to engage DAO ]
     else if( !m_dao && 
-	     ( line.tqcontains( "engage DAO" ) || line.tqcontains( "media is not formatted or unsupported" ) ) )
+	     ( line.contains( "engage DAO" ) || line.contains( "media is not formatted or unsupported" ) ) )
       emit infoMessage( i18n("Please try again with writing mode DAO."), K3bJob::ERROR );
 
     else if( line.startsWith( ":-[ Failed to change write speed" ) ) {
@@ -93,10 +93,10 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
     }
   }
   else if( line.startsWith( ":-(" ) ) {
-    if( line.tqcontains( "No space left on device" ) )
+    if( line.contains( "No space left on device" ) )
       m_error = ERROR_OVERSIZE;
 
-    else if( line.tqcontains( "blocks are free" ) && line.tqcontains( "to be written" ) ) {
+    else if( line.contains( "blocks are free" ) && line.contains( "to be written" ) ) {
       m_error = ERROR_OVERSIZE;
       if( k3bcore->globalSettings()->overburn() )
 	emit infoMessage( i18n("Trying to write more than the official disk capacity"), K3bJob::WARNING );
@@ -116,7 +116,7 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
   else if( line.startsWith( "PERFORM OPC" ) ) {
     m_error = ERROR_OPC;
   }
-  else if( line.tqcontains( "flushing cache" ) ) {
+  else if( line.contains( "flushing cache" ) ) {
     // here is where we already should stop queriying the buffer fill
     // since the device is only used there so far...
     m_device = 0;
@@ -131,34 +131,34 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
   //              line = line.mid( dev->blockDeviceName().length() );
   //              if( line.startsWith( "closing.....
 
-  else if( line.tqcontains( "closing track" ) ) {
+  else if( line.contains( "closing track" ) ) {
     emit newSubTask( i18n("Closing Track")  );
   }
-  else if( line.tqcontains( "closing disc" ) ) {
+  else if( line.contains( "closing disc" ) ) {
     emit newSubTask( i18n("Closing Disk")  );
   }
-  else if( line.tqcontains( "closing session" ) ) {
+  else if( line.contains( "closing session" ) ) {
     emit newSubTask( i18n("Closing Session")  );
   }
-  else if( line.tqcontains( "updating RMA" ) ) {
+  else if( line.contains( "updating RMA" ) ) {
     emit newSubTask( i18n("Updating RMA") );
     emit infoMessage( i18n("Updating RMA") + "...", K3bJob::INFO );
   }
-  else if( line.tqcontains( "closing session" ) ) {
+  else if( line.contains( "closing session" ) ) {
     emit newSubTask( i18n("Closing Session") );
     emit infoMessage( i18n("Closing Session") + "...", K3bJob::INFO );
   }
-  else if( line.tqcontains( "writing lead-out" ) ) {
+  else if( line.contains( "writing lead-out" ) ) {
     emit newSubTask( i18n("Writing Lead-out") );
     emit infoMessage( i18n("Writing the lead-out may take some time."), K3bJob::INFO );
   }
-  else if( line.tqcontains( "Quick Grow" ) ) {
+  else if( line.contains( "Quick Grow" ) ) {
     emit infoMessage( i18n("Removing reference to lead-out."), K3bJob::INFO );
   }
-  else if( line.tqcontains( "copying volume descriptor" ) ) {
+  else if( line.contains( "copying volume descriptor" ) ) {
     emit infoMessage( i18n("Modifying ISO9660 volume descriptor"), K3bJob::INFO );
   }
-  else if( line.tqcontains( "FEATURE 21h is not on" ) ) {
+  else if( line.contains( "FEATURE 21h is not on" ) ) {
     if( !m_dao ) {
       // FIXME: it's not only the writer. It may be the media: something like does not support it with this media
       //        da war was mit: wenn einmal formattiert, dann geht nur noch dao oder wenn einmal als overwrite
@@ -167,12 +167,12 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
       emit infoMessage( i18n("Engaging DAO"), K3bJob::WARNING );
     }
   }
-  else if( ( pos = line.tqfind( "Current Write Speed" ) ) > 0 ) {
+  else if( ( pos = line.find( "Current Write Speed" ) ) > 0 ) {
     // parse write speed
     // /dev/sr0: "Current Write Speed" is 2.4x1385KBps
 
     pos += 24;
-    int endPos = line.tqfind( 'x', pos+1 );
+    int endPos = line.find( 'x', pos+1 );
     bool ok = true;
     double speed = line.mid( pos, endPos-pos ).toDouble(&ok);
     if( ok )
@@ -182,13 +182,13 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
     else
       kdDebug() << "(K3bGrowisofsHandler) parsing error: '" << line.mid( pos, endPos-pos ) << "'" << endl;
   }
-  else if( (pos = line.tqfind( "RBU" )) > 0 ) {
+  else if( (pos = line.find( "RBU" )) > 0 ) {
 
     // FIXME: use TQRegExp
 
     // parse ring buffer fill for growisofs >= 6.0
     pos += 4;
-    int endPos = line.tqfind( '%', pos+1 );
+    int endPos = line.find( '%', pos+1 );
     bool ok = true;
     double val = line.mid( pos, endPos-pos ).toDouble( &ok );
     if( ok ) {
@@ -199,8 +199,8 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
       }
 
       // device buffer for growisofs >= 7.0
-      pos = line.tqfind( "UBU", pos );
-      endPos = line.tqfind( '%', pos+5 );
+      pos = line.find( "UBU", pos );
+      endPos = line.find( '%', pos+5 );
       if( pos > 0 ) {
 	pos += 4;
 	val = line.mid( pos, endPos-pos ).toDouble( &ok );

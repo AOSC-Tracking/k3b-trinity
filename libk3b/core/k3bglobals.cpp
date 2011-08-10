@@ -195,7 +195,7 @@ TQString K3b::parentDir( const TQString& path )
   if( path[path.length()-1] == '/' )
     tqparent.truncate( tqparent.length()-1 );
 
-  int pos = tqparent.tqfindRev( '/' );
+  int pos = tqparent.findRev( '/' );
   if( pos >= 0 )
     tqparent.truncate( pos+1 );
   else // relative path, do anything...
@@ -313,7 +313,7 @@ TQString K3b::cutFilename( const TQString& name, unsigned int len )
     TQString ret = name;
 
     // determine extension (we think of an extension to be at most 5 chars in length)
-    int pos = name.tqfind( '.', -6 );
+    int pos = name.find( '.', -6 );
     if( pos > 0 )
       len -= (name.length() - pos);
 
@@ -332,7 +332,7 @@ TQString K3b::cutFilename( const TQString& name, unsigned int len )
 TQString K3b::removeFilenameExtension( const TQString& name )
 {
   TQString v = name;
-  int dotpos = v.tqfindRev( '.' );
+  int dotpos = v.findRev( '.' );
   if( dotpos > 0 )
     v.truncate( dotpos );
   return v;
@@ -344,7 +344,7 @@ TQString K3b::appendNumberToFilename( const TQString& name, int num, unsigned in
   // determine extension (we think of an extension to be at most 5 chars in length)
   TQString result = name;
   TQString ext;
-  int pos = name.tqfind( '.', -6 );
+  int pos = name.find( '.', -6 );
   if( pos > 0 ) {
     ext = name.mid(pos);
     result.truncate( pos );
@@ -426,7 +426,7 @@ TQString K3b::resolveLink( const TQString& file )
     if( !p.startsWith( "/" ) )
       p.prepend( f.dirPath(true) + "/" );
     f.setFile( p );
-    if( steps.tqcontains( f.absFilePath() ) ) {
+    if( steps.contains( f.absFilePath() ) ) {
       kdDebug() << "(K3b) symlink loop detected." << endl;
       break;
     }

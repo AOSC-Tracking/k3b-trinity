@@ -155,7 +155,7 @@ bool K3bGrowisofsWriter::prepareProcess()
 {
   d->growisofsBin = k3bcore->externalBinManager()->binObject( "growisofs" );
   if( !d->growisofsBin ) {
-    emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("growisofs"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("growisofs"), ERROR );
     return false;
   }
 
@@ -465,7 +465,7 @@ void K3bGrowisofsWriter::slotReceivedStderr( const TQString& line )
 {
   emit debuggingOutput( d->growisofsBin->name(), line );
 
-  if( line.tqcontains( "remaining" ) ) {
+  if( line.contains( "remaining" ) ) {
 
     if( !d->writingStarted ) {
       d->writingStarted = true;
@@ -473,10 +473,10 @@ void K3bGrowisofsWriter::slotReceivedStderr( const TQString& line )
     }
 
     // parse progress
-    int pos = line.tqfind( "/" );
+    int pos = line.find( "/" );
     unsigned long long done = line.left( pos ).toULongLong();
     bool ok = true;
-    d->overallSizeFromOutput = line.mid( pos+1, line.tqfind( "(", pos ) - pos - 1 ).toULongLong( &ok );
+    d->overallSizeFromOutput = line.mid( pos+1, line.find( "(", pos ) - pos - 1 ).toULongLong( &ok );
     if( d->firstSizeFromOutput == -1 )
       d->firstSizeFromOutput = done;
     done -= d->firstSizeFromOutput;
@@ -495,10 +495,10 @@ void K3bGrowisofsWriter::slotReceivedStderr( const TQString& line )
       }
 
       // try parsing write speed (since growisofs 5.11)
-      pos = line.tqfind( '@' );
+      pos = line.find( '@' );
       if( pos != -1 ) {
 	pos += 1;
-	double speed = line.mid( pos, line.tqfind( 'x', pos ) - pos ).toDouble(&ok);
+	double speed = line.mid( pos, line.find( 'x', pos ) - pos ).toDouble(&ok);
 	if( ok ) {
 	  if( d->lastWritingSpeed != speed )
 	    emit writeSpeed( (int)(speed*1385.0), 1385 );
@@ -506,7 +506,7 @@ void K3bGrowisofsWriter::slotReceivedStderr( const TQString& line )
 	}
 	else
 	  kdDebug() << "(K3bGrowisofsWriter) speed parsing failed: '"
-		    << line.mid( pos, line.tqfind( 'x', pos ) - pos ) << "'" << endl;
+		    << line.mid( pos, line.find( 'x', pos ) - pos ) << "'" << endl;
       }
       else {
 	d->speedEst->dataWritten( done/1024 );
@@ -514,7 +514,7 @@ void K3bGrowisofsWriter::slotReceivedStderr( const TQString& line )
     }
     else
       kdDebug() << "(K3bGrowisofsWriter) progress parsing failed: '"
-		<< line.mid( pos+1, line.tqfind( "(", pos ) - pos - 1 ).stripWhiteSpace() << "'" << endl;
+		<< line.mid( pos+1, line.find( "(", pos ) - pos - 1 ).stripWhiteSpace() << "'" << endl;
   }
 
   //  else

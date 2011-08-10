@@ -173,7 +173,7 @@ void K3bCddbOptionTab::readSettings()
 
   for( TQStringList::const_iterator it = cddbServer.begin(); it != cddbServer.end(); ++it ) {
     const TQString& s = *it;
-    TQStringList buf = TQStringList::split( ":", s.mid( s.tqfind(" ")+1 ) );
+    TQStringList buf = TQStringList::split( ":", s.mid( s.find(" ")+1 ) );
     TQString server = buf[0];
     int port = buf[1].toInt();
     if( s.startsWith("Http") )

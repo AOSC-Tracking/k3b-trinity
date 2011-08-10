@@ -135,7 +135,7 @@ TQString K3bFileSystemInfo::fixupPath( const TQString& path )
 {
   TQString s = K3b::fixupPath( path );
   if( type() == K3bFileSystemInfo::FS_FAT )
-    return s.tqreplace( TQRegExp("[\"\\?\\*/\\\\[\\]\\|\\=\\:;]"), "_" );
+    return s.replace( TQRegExp("[\"\\?\\*/\\\\[\\]\\|\\=\\:;]"), "_" );
   else
     return s;
 }

@@ -216,7 +216,7 @@ void K3bDeviceBranchViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, i
   }
 
   ypos += fm.ascent();
-  TQString line1 = text(0).left( text(0).tqfind('\n') );
+  TQString line1 = text(0).left( text(0).find('\n') );
   p->drawText( xpos, ypos, line1 );
 
   TQFont f( listView()->font() );
@@ -226,7 +226,7 @@ void K3bDeviceBranchViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, i
   p->setFont( f );
 
   ypos += p->fontMetrics().height() + 1;
-  TQString line2 = text(0).mid( text(0).tqfind('\n')+1 );
+  TQString line2 = text(0).mid( text(0).find('\n')+1 );
   p->drawText( xpos - p->fontMetrics().leftBearing( line2[0] ), ypos, line2 );
 
 
@@ -256,12 +256,12 @@ int K3bDeviceBranchViewItem::widthHint() const
   if ( m_bCurrent ) {
       f.setBold( true );
   }
-  int w = TQFontMetrics(f).width( text(0).left( text(0).tqfind('\n') ) );
+  int w = TQFontMetrics(f).width( text(0).left( text(0).find('\n') ) );
 
   f.setItalic( true );
   f.setBold( false );
   f.setPointSize( f.pointSize() - 2 );
-  w = TQMAX( w, TQFontMetrics(f).width( text(0).mid( text(0).tqfind('\n')+1 ) ) );
+  w = TQMAX( w, TQFontMetrics(f).width( text(0).mid( text(0).find('\n')+1 ) ) );
 
   w++; // see paintCell
 
@@ -334,7 +334,7 @@ void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
   TQGridLayout* lay = new TQGridLayout( tooltip, 2, 2, tooltip->frameWidth()*2 /*margin*/, 6 /*spacing*/ );
 
   TQString text = k3bappcore->mediaCache()->medium( dev ).longString();
-  int detailsStart = text.tqfind( "<p>", 3 );
+  int detailsStart = text.find( "<p>", 3 );
   TQString details = text.mid( detailsStart );
   text.truncate( detailsStart );
 
@@ -579,7 +579,7 @@ KFileTreeBranch* K3bFileTreeView::addBranch( const KURL& url, const TQString& na
 void K3bFileTreeView::slotItemExecuted( TQListViewItem* item )
 {
   KFileTreeViewItem* treeItem = static_cast<KFileTreeViewItem*>(item);
-  if( d->branchDeviceMap.tqcontains( treeItem->branch() ) &&
+  if( d->branchDeviceMap.contains( treeItem->branch() ) &&
       treeItem == treeItem->branch()->root() ) {
     K3bDevice::Device* dev = d->branchDeviceMap[treeItem->branch()];
       k3bappcore->appDeviceManager()->setCurrentDevice( dev );
@@ -601,7 +601,7 @@ void K3bFileTreeView::followUrl( const KURL& url )
   // TODO: first try the current branch
   KFileTreeBranchIterator it( branches() );
   for( ; *it; ++it ) {
-    if( !d->branchDeviceMap.tqcontains( *it ) )
+    if( !d->branchDeviceMap.contains( *it ) )
       if( KFileTreeViewItem* item = (*it)->findTVIByURL( url ) ) {
 	setCurrentItem( item );
 	setSelected(item, true);
@@ -618,7 +618,7 @@ void K3bFileTreeView::slotContextMenu( KListView*, TQListViewItem* item, const T
   if( treeItem ) {
     K3bDevice::Device* device = 0;
     TQMap<KFileTreeBranch*, K3bDevice::Device*>::iterator devIt =
-      d->branchDeviceMap.tqfind( treeItem->branch() );
+      d->branchDeviceMap.find( treeItem->branch() );
     if( devIt != d->branchDeviceMap.end() )
       device = devIt.data();
 
@@ -641,7 +641,7 @@ K3bDevice::Device* K3bFileTreeView::selectedDevice() const
 {
   KFileTreeViewItem* treeItem = dynamic_cast<KFileTreeViewItem*>(selectedItem());
   if( treeItem ) {
-    if( d->branchDeviceMap.tqcontains( treeItem->branch() ) )
+    if( d->branchDeviceMap.contains( treeItem->branch() ) )
       return d->branchDeviceMap[treeItem->branch()];
   }
   return 0;
@@ -652,7 +652,7 @@ KURL K3bFileTreeView::selectedUrl() const
 {
   KFileTreeViewItem* treeItem = dynamic_cast<KFileTreeViewItem*>(selectedItem());
   if( treeItem ) {
-    if( !d->branchDeviceMap.tqcontains( treeItem->branch() ) )
+    if( !d->branchDeviceMap.contains( treeItem->branch() ) )
       return treeItem->url();
   }
   return KURL();
@@ -684,7 +684,7 @@ void K3bFileTreeView::setSelectedDevice( K3bDevice::Device* dev )
 
 K3bDeviceBranch* K3bFileTreeView::branch( K3bDevice::Device* dev )
 {
-  return d->deviceBranchDict.tqfind( (void*)dev );
+  return d->deviceBranchDict.find( (void*)dev );
 }
 
 

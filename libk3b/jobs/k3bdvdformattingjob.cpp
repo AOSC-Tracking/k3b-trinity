@@ -218,15 +218,15 @@ void K3bDvdFormattingJob::slotStderrLine( const TQString& line )
   emit debuggingOutput( "dvd+rw-format", line );
 
   // parsing for the -gui mode (since dvd+rw-format 4.6)
-  int pos = line.tqfind( "blanking" );
+  int pos = line.find( "blanking" );
   if( pos < 0 )
-    pos = line.tqfind( "formatting" );
+    pos = line.find( "formatting" );
   if( pos >= 0 ) {
-    pos = line.tqfind( TQRegExp( "\\d" ), pos );
+    pos = line.find( TQRegExp( "\\d" ), pos );
   }
   // parsing for \b\b... stuff
   else if( !line.startsWith("*") ) {
-    pos = line.tqfind( TQRegExp( "\\d" ) );
+    pos = line.find( TQRegExp( "\\d" ) );
   }
   else if( line.startsWith( ":-(" ) ) {
     if( line.startsWith( ":-( unable to proceed with format" ) ) {
@@ -235,7 +235,7 @@ void K3bDvdFormattingJob::slotStderrLine( const TQString& line )
   }
 
   if( pos >= 0 ) {
-    int endPos = line.tqfind( TQRegExp("[^\\d\\.]"), pos ) - 1;
+    int endPos = line.find( TQRegExp("[^\\d\\.]"), pos ) - 1;
     bool ok;
     int progress = (int)(line.mid( pos, endPos - pos ).toDouble(&ok));
     if( ok ) {
@@ -472,7 +472,7 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
 
     d->dvdFormatBin = k3bcore->externalBinManager()->binObject( "dvd+rw-format" );
     if( !d->dvdFormatBin ) {
-      emit infoMessage( i18n("Could not tqfind %1 executable.").tqarg("dvd+rw-format"), ERROR );
+      emit infoMessage( i18n("Could not find %1 executable.").tqarg("dvd+rw-format"), ERROR );
       d->running = false;
       jobFinished(false);
       return;

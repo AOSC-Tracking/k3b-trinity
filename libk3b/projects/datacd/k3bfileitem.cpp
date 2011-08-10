@@ -273,7 +273,7 @@ bool K3bFileItem::isValid() const
       }
       else {
 	// search for the item in dir
-	K3bDataItem* d = dir->tqfind( tokens[i] );
+	K3bDataItem* d = dir->find( tokens[i] );
 	if( d == 0 )
 	  return false;
 

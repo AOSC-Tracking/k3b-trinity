@@ -61,7 +61,7 @@ const TQString& K3bExternalBin::name() const
 
 bool K3bExternalBin::hasFeature( const TQString& f ) const
 {
-  return m_features.tqcontains( f );
+  return m_features.contains( f );
 }
 
 
@@ -113,7 +113,7 @@ const K3bExternalBin* K3bExternalProgram::mostRecentBin() const
 
 void K3bExternalProgram::addBin( K3bExternalBin* bin )
 {
-  if( !m_bins.tqcontains( bin ) ) {
+  if( !m_bins.contains( bin ) ) {
     // insertion sort
     // the first bin in the list is always the one used 
     // so we default to using the newest one
@@ -127,8 +127,8 @@ void K3bExternalProgram::addBin( K3bExternalBin* bin )
 
 void K3bExternalProgram::setDefault( const K3bExternalBin* bin )
 {
-  if( m_bins.tqcontains( bin ) )
-    m_bins.take( m_bins.tqfind( bin ) );
+  if( m_bins.contains( bin ) )
+    m_bins.take( m_bins.find( bin ) );
 
   // the first bin in the list is always the one used 
   m_bins.insert( 0, bin );
@@ -148,7 +148,7 @@ void K3bExternalProgram::setDefault( const TQString& path )
 
 void K3bExternalProgram::addUserParameter( const TQString& p )
 {
-  if( !m_userParameters.tqcontains( p ) )
+  if( !m_userParameters.contains( p ) )
     m_userParameters.append(p);
 }
 
@@ -230,7 +230,7 @@ bool K3bExternalBinManager::saveConfig( KConfig* c )
 
 bool K3bExternalBinManager::foundBin( const TQString& name )
 {
-  if( m_programs.tqfind( name ) == m_programs.end() )
+  if( m_programs.find( name ) == m_programs.end() )
     return false;
   else
     return (m_programs[name]->defaultBin() != 0);
@@ -239,7 +239,7 @@ bool K3bExternalBinManager::foundBin( const TQString& name )
 
 const TQString& K3bExternalBinManager::binPath( const TQString& name )
 {
-  if( m_programs.tqfind( name ) == m_programs.end() )
+  if( m_programs.find( name ) == m_programs.end() )
     return m_noPath;
 
   if( m_programs[name]->defaultBin() != 0 )
@@ -251,7 +251,7 @@ const TQString& K3bExternalBinManager::binPath( const TQString& name )
 
 const K3bExternalBin* K3bExternalBinManager::binObject( const TQString& name )
 {
-  if( m_programs.tqfind( name ) == m_programs.end() )
+  if( m_programs.find( name ) == m_programs.end() )
     return 0;
 
   return m_programs[name]->defaultBin();
@@ -287,7 +287,7 @@ void K3bExternalBinManager::search()
     TQString p = *it;
     if( p[p.length()-1] == '/' )
       p.truncate( p.length()-1 );
-    if( !paths.tqcontains( p ) && !paths.tqcontains( p + "/" ) )
+    if( !paths.contains( p ) && !paths.contains( p + "/" ) )
       paths.append(p);
   }
 
@@ -299,7 +299,7 @@ void K3bExternalBinManager::search()
       TQString p = *it;
       if( p[p.length()-1] == '/' )
 	p.truncate( p.length()-1 );
-      if( !paths.tqcontains( p ) && !paths.tqcontains( p + "/" ) )
+      if( !paths.contains( p ) && !paths.contains( p + "/" ) )
 	paths.append(p);
     }
   }
@@ -334,7 +334,7 @@ void K3bExternalBinManager::search()
 
 K3bExternalProgram* K3bExternalBinManager::program( const TQString& name ) const
 {
-  if( m_programs.tqfind( name ) == m_programs.end() )
+  if( m_programs.find( name ) == m_programs.end() )
     return 0;
   else
     return m_programs[name];
@@ -363,7 +363,7 @@ void K3bExternalBinManager::setSearchPath( const TQStringList& list )
   loadDefaultSearchPath();
 
   for( TQStringList::const_iterator it = list.begin(); it != list.end(); ++it ) {
-    if( !m_searchPath.tqcontains( *it ) )
+    if( !m_searchPath.contains( *it ) )
       m_searchPath.append( *it );
   }
 }
@@ -371,7 +371,7 @@ void K3bExternalBinManager::setSearchPath( const TQStringList& list )
 
 void K3bExternalBinManager::addSearchPath( const TQString& path )
 {
-  if( !m_searchPath.tqcontains( path ) )
+  if( !m_searchPath.contains( path ) )
     m_searchPath.append( path );
 }
 

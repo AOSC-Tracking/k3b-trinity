@@ -249,7 +249,7 @@ void K3bVideoDVDRippingWidget::slotUpdateFreeTempSpace()
   TQString path = m_editBaseDir->url();
 
   if( !TQFile::exists( path ) )
-    path.truncate( path.tqfindRev('/') );
+    path.truncate( path.findRev('/') );
 
   unsigned long size, avail;
   if( K3b::kbFreeOnFs( path, size, avail ) ) {
