@@ -4,7 +4,7 @@ Q: Compiling K3b fails with errors like this:
    base_k3badvanceddataimagesettings.h:17: forward declaration of `struct 
    KComboBox'
 A: The QTDesigner tool 'uic' is not able to find the kde widget plugins. 
-   To solve this run 'qtconfig' and add '$KDEDIR/lib/kde3/plugins' to the plugin search path 
+   To solve this run 'qtconfig' and add '$KDEDIR/lib/trinity/plugins' to the plugin search path 
    (replace $KDEDIR with your kde base dir).
 
 
@@ -17,7 +17,7 @@ A: If you are using the rpm from SuSE your version of K3bSetup is not able to se
 
 Q: Where has all the fancy graphic gone?
 A: Most likely you installed K3b in the wrong directory. All KDE programs are installed in the 
-   KDE dirtree (SuSE: /opt/kde3, RedHat: /usr). If you compile K3b from source it defaults 
+   KDE dirtree (SuSE: /opt/trinity, RedHat: /usr). If you compile K3b from source it defaults 
    to either $KDEDIR or /usr/local. To install in the correct directory you need to specify the prefix 
    to configure like this:
      ./configure --prefix=`kde-config --prefix`

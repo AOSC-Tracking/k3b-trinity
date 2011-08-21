@@ -129,7 +129,7 @@ application work. -->
       <para>
         The QTDesigner tool <application>uic</application> is not able to find the kde widget plugins.
         To solve this run <application>qtconfig</application> and add
-        <filename class="directory">$<envar>KDEDIR</envar>/lib/kde3/plugins</filename> to the
+        <filename class="directory">$<envar>KDEDIR</envar>/lib/trinity/plugins</filename> to the
         plugin search path (replace $<envar>KDEDIR</envar> with your kde base dir).
       </para>
     </answer>
