@@ -74,7 +74,7 @@ AM_CPPFLAGS = 	-I$(srcdir)/../libk3b/tools \
 METASOURCES = AUTO
 
 # the library search path.
-k3b_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+k3b_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
 
 rcdir = $(kde_datadir)/k3b
 rc_DATA = k3bui.rc eventsrc tips
