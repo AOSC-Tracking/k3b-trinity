@@ -31,6 +31,11 @@ extern "C" {
 #define FFMPEG_BUILD_PRE_4629
 #endif
 
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(52, 64, 0)
+#define AVMEDIA_TYPE_AUDIO CODEC_TYPE_AUDIO
+#define AVMEDIA_TYPE_VIDEO CODEC_TYPE_VIDEO
+#define AVMEDIA_TYPE_SUBTITLE CODEC_TYPE_SUBTITLE
+#endif
 
 K3bFFMpegWrapper* K3bFFMpegWrapper::s_instance = 0;
 
@@ -95,7 +100,7 @@ bool K3bFFMpegFile::open()
 #else
   AVCodecContext* codecContext =  d->formatContext->streams[0]->codec;
 #endif
-  if( codecContext->codec_type != CODEC_TYPE_AUDIO ) {
+  if( codecContext->codec_type != AVMEDIA_TYPE_AUDIO ) {
     kdDebug() << "(K3bFFMpegFile) not a simple audio stream: " << m_filename << endl;
     return false;
   }
@@ -207,8 +212,14 @@ TQString K3bFFMpegFile::typeComment() const
 TQString K3bFFMpegFile::title() const
 {
   // FIXME: is this UTF8 or something??
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 31, 0)
   if( d->formatContext->title[0] != '\0' )
     return TQString::fromLocal8Bit( d->formatContext->title );
+#else
+  AVDictionaryEntry *entry = av_dict_get(d->formatContext->metadata, "title", NULL, 0);
+  if( entry->value[0] != '\0' )
+    return TQString::fromLocal8Bit( entry->value );
+#endif
   else
     return TQString();
 }
@@ -217,8 +228,14 @@ TQString K3bFFMpegFile::title() const
 TQString K3bFFMpegFile::author() const
 {
   // FIXME: is this UTF8 or something??
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 31, 0)
   if( d->formatContext->author[0] != '\0' )
     return TQString::fromLocal8Bit( d->formatContext->author );
+#else
+  AVDictionaryEntry *entry = av_dict_get(d->formatContext->metadata, "author", NULL, 0);
+  if( entry->value[0] != '\0' )
+    return TQString::fromLocal8Bit( entry->value );
+#endif
   else
     return TQString();
 }
@@ -227,8 +244,14 @@ TQString K3bFFMpegFile::author() const
 TQString K3bFFMpegFile::comment() const
 {
   // FIXME: is this UTF8 or something??
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 31, 0)
   if( d->formatContext->comment[0] != '\0' )
     return TQString::fromLocal8Bit( d->formatContext->comment );
+#else
+  AVDictionaryEntry *entry = av_dict_get(d->formatContext->metadata, "comment", NULL, 0);
+  if( entry->value[0] != '\0' )
+    return TQString::fromLocal8Bit( entry->value );
+#endif
   else
     return TQString();
 }
@@ -287,6 +310,15 @@ int K3bFFMpegFile::fillOutputBuffer()
 
     d->outputBufferPos = d->outputBuffer;
 
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(52, 64, 0)
+    AVPacket avp;
+    av_init_packet( &avp );
+    avp.data = d->packetData;
+    avp.size = d->packetSize;
+int len = avcodec_decode_audio3( d->formatContext->streams[0]->codec,
+				    (short*)d->outputBuffer, &d->outputBufferSize,
+				    &avp );
+#else
 #ifdef FFMPEG_BUILD_PRE_4629
     int len = avcodec_decode_audio2( &d->formatContext->streams[0]->codec,
 #else
@@ -294,6 +326,7 @@ int K3bFFMpegFile::fillOutputBuffer()
 #endif
 				    (short*)d->outputBuffer, &d->outputBufferSize,
 				    d->packetData, d->packetSize );
+#endif
 
     d->packetSize -= len;
     d->packetData += len;

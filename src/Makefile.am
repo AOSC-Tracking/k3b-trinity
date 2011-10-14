@@ -28,7 +28,7 @@ k3b_SOURCES = k3bwelcomewidget.cpp k3bapplication.cpp k3bdiroperator.cpp \
 k3b_LDADD = ./option/liboption.la ./rip/librip.la \
 	./projects/libprojects.la ../libk3bdevice/libk3bdevice.la \
 	../libk3b/libk3b.la ./misc/libmisc.la ./fastscale/libfastscale.la \
-	-lkio -lkparts $(CAM_LIB) $(MUSICBRAINZ_LIBS)
+	-lkdefx -lkio -lkparts $(CAM_LIB) $(MUSICBRAINZ_LIBS)
 
 SUBDIRS = option misc rip projects fastscale pics icons konqi mimetypes sounds
 
