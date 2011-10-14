@@ -212,7 +212,7 @@ TQString K3bFFMpegFile::typeComment() const
 TQString K3bFFMpegFile::title() const
 {
   // FIXME: is this UTF8 or something??
-#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 31, 0)
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(53, 2, 0)
   if( d->formatContext->title[0] != '\0' )
     return TQString::fromLocal8Bit( d->formatContext->title );
 #else
@@ -228,7 +228,7 @@ TQString K3bFFMpegFile::title() const
 TQString K3bFFMpegFile::author() const
 {
   // FIXME: is this UTF8 or something??
-#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 31, 0)
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(53, 2, 0)
   if( d->formatContext->author[0] != '\0' )
     return TQString::fromLocal8Bit( d->formatContext->author );
 #else
@@ -244,7 +244,7 @@ TQString K3bFFMpegFile::author() const
 TQString K3bFFMpegFile::comment() const
 {
   // FIXME: is this UTF8 or something??
-#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 31, 0)
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(53, 2, 0)
   if( d->formatContext->comment[0] != '\0' )
     return TQString::fromLocal8Bit( d->formatContext->comment );
 #else
