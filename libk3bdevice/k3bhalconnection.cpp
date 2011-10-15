@@ -78,7 +78,7 @@ public:
 
   LibHalContext* halContext;
   DBusConnection* connection;
-  DBusTQt::Connection* dBusTQtConnection;
+  DBusQt::Connection* dBusTQtConnection;
 
   bool bOpen;
 
@@ -603,7 +603,7 @@ int K3bDevice::HalConnection::eject( K3bDevice::Device* dev,
 
 void K3bDevice::HalConnection::setupDBusTQtConnection( DBusConnection* dbusConnection )
 {
-  d->dBusTQtConnection = new DBusTQt::Connection( this );
+  d->dBusTQtConnection = new DBusQt::Connection( this );
   d->dBusTQtConnection->dbus_connection_setup_with_qt_main( dbusConnection );
 }
 
