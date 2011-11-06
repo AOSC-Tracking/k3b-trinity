@@ -1291,9 +1291,9 @@ void K3bMainWindow::slotProjectAddFiles()
 void K3bMainWindow::slotK3bSetup()
 {
   KProcess p;
-  p << "kdesu" << "kcmshell k3bsetup2 --lang " + KGlobal::locale()->language();
+  p << "tdesu" << "kcmshell k3bsetup2 --lang " + KGlobal::locale()->language();
   if( !p.start( KProcess::DontCare ) )
-    KMessageBox::error( 0, i18n("Could not find kdesu to run K3bSetup with root privileges. "
+    KMessageBox::error( 0, i18n("Could not find tdesu to run K3bSetup with root privileges. "
 				"Please run it manually as root.") );
 }
 

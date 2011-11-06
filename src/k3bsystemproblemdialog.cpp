@@ -608,7 +608,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 void K3bSystemProblemDialog::slotK3bSetup()
 {
   KProcess p;
-  p << "kdesu" << "kcmshell k3bsetup2 --lang " + KGlobal::locale()->language();
+  p << "tdesu" << "kcmshell k3bsetup2 --lang " + KGlobal::locale()->language();
   if( !p.start( KProcess::DontCare ) )
     KMessageBox::error( 0, i18n("Unable to start K3bSetup2.") );
 }
