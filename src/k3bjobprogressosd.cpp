@@ -18,7 +18,7 @@
 #include <k3bthememanager.h>
 #include <k3bapplication.h>
 
-#include <kwin.h>
+#include <twin.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <kcursor.h>
