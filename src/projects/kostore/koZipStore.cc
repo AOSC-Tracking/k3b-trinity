@@ -23,7 +23,7 @@
 
 #include <kzip.h>
 #include <kdebug.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kurl.h>
 #include <kio/netaccess.h>
 #if ! KDE_IS_VERSION( 3, 4, 1 )
@@ -40,7 +40,7 @@ KoZipStore::KoZipStore( const TQString & _filename, Mode _mode, const TQCString 
     m_pZip = new KZip( _filename );
 
 #if ! KDE_IS_VERSION( 3, 4, 1 )
-    // Workaround for KZip KSaveFile double deletion in kdelibs-3.4,
+    // Workaround for KZip KSaveFile double deletion in tdelibs-3.4,
     // when trying to write to a non-writable directory.
     TQDir dir( TQFileInfo( _filename ).dir() );
     if (_mode == Write && !TQFileInfo( dir.path() ).isWritable()  )

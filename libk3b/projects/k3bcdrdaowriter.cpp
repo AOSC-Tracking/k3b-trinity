@@ -459,7 +459,7 @@ void K3bCdrdaoWriter::start()
 
   d->speedEst->reset();
 
-  delete m_process;  // kdelibs want this!
+  delete m_process;  // tdelibs want this!
   m_process = new K3bProcess();
   m_process->setRunPrivileged(true);
   m_process->setSplitStdout(false);

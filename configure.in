@@ -371,7 +371,7 @@ dnl === check for resmgr - end ============
 
 
 
-# HAL check from kdebase/kioslave/media
+# HAL check from tdebase/kioslave/media
 
 AC_ARG_WITH(
 	hal, 
@@ -675,7 +675,7 @@ dnl
 dnl Don't use PKG_CHECK, since if there is no pkg-config installed,
 dnl then there is no auto* magic for it either.
 dnl
-dnl Tests copied from kdebase/kioslave/thumbnail/
+dnl Tests copied from tdebase/kioslave/thumbnail/
 dnl
 if test -z "$PKG_CONFIG"; then
     AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
@@ -889,7 +889,7 @@ dnl =======================================================
 #
 AM_PROG_AS
 
-# MMX test duped from kdelibs/tdefx - it should be probably moved to admin/
+# MMX test duped from tdelibs/tdefx - it should be probably moved to admin/
 dnl -----------------------------------------------------
 dnl IA32 checks
 dnl -----------------------------------------------------

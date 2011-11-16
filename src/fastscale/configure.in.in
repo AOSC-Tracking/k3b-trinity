@@ -3,7 +3,7 @@
 #
 AM_PROG_AS
 
-# MMX test duped from kdelibs/tdefx - it should be probably moved to admin/
+# MMX test duped from tdelibs/tdefx - it should be probably moved to admin/
 dnl -----------------------------------------------------
 dnl IA32 checks
 dnl -----------------------------------------------------

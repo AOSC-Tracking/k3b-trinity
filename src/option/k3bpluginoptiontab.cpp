@@ -28,7 +28,7 @@
 #include <kdialogbase.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 #include <tqstringlist.h>
 #include <tqpushbutton.h>

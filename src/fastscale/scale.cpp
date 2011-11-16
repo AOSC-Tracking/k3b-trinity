@@ -73,7 +73,7 @@
 #include <tqimage.h>
 #include <tqcolor.h>
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kcpuinfo.h>
 
 #include <string.h>

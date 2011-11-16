@@ -138,7 +138,7 @@ void K3bCdrecordWriter::setWritingMode( int mode )
 
 void K3bCdrecordWriter::prepareProcess()
 {
-  if( m_process ) delete m_process;  // kdelibs want this!
+  if( m_process ) delete m_process;  // tdelibs want this!
   m_process = new K3bProcess();
   m_process->setRunPrivileged(true);
   //  m_process->setPriority( KProcess::PrioHighest );

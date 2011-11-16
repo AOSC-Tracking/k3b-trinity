@@ -62,7 +62,7 @@ dnl === check for resmgr - end ============
 
 
 
-# HAL check from kdebase/kioslave/media
+# HAL check from tdebase/kioslave/media
 
 AC_ARG_WITH(
 	hal, 

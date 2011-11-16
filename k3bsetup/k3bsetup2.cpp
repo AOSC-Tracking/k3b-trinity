@@ -35,7 +35,7 @@
 #include <kinputdialog.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <ktextedit.h>
 
 #include "k3bsetup2.h"

@@ -548,7 +548,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 
   //
   // Never run K3b as root and especially not suid root! The latter is not possible anyway since
-  // the kdelibs refuse it.
+  // the tdelibs refuse it.
   //
   if( ::getuid() == 0 ) {
     problems.append( K3bSystemProblem( K3bSystemProblem::WARNING,

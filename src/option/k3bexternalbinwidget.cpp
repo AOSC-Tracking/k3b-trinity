@@ -39,7 +39,7 @@
 #include <keditlistbox.h>
 #include <klistview.h>
 #include <kglobalsettings.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 
 

@@ -46,7 +46,7 @@
 #include <kconfig.h>
 #include <kiconloader.h>
 #include <kglobalsettings.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 
 K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,

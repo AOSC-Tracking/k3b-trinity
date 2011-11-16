@@ -34,7 +34,7 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kconfig.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include "k3bnotifyoptiontab.h"
 
 

@@ -44,7 +44,7 @@
 #include <kdebug.h>
 #include <kshortcut.h>
 #include <krun.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 
 K3bDataFileView::K3bDataFileView( K3bView* view, K3bDataDirTreeView* dirTreeView, K3bDataDoc* doc, TQWidget* parent )

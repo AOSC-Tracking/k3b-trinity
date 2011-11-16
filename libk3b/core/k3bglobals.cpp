@@ -25,7 +25,7 @@
 #include <k3bcore.h>
 #include <k3bhalconnection.h>
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kstandarddirs.h>

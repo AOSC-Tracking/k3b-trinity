@@ -23,7 +23,7 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kdebug.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 #include "k3bcddb.h"
 #include "k3bcddbhttpquery.h"

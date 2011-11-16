@@ -24,7 +24,7 @@
  * flag which says if it should always emit the signals 
  * even if it was checked twice.
  *
- * Docu copied from kdelibs
+ * Docu copied from tdelibs
  */
 class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
 {

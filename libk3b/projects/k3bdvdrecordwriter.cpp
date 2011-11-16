@@ -38,7 +38,7 @@ K3bDvdrecordWriter::~K3bDvdrecordWriter()
 
 void K3bDvdrecordWriter::prepareProcess()
 {
-  if( m_process ) delete m_process;  // kdelibs want this!
+  if( m_process ) delete m_process;  // tdelibs want this!
   m_process = new K3bProcess();
   m_process->setRunPrivileged(true);
   m_process->setSplitStdout(true);

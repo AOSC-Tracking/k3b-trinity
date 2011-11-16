@@ -57,7 +57,7 @@ void K3bToolButton::drawButton( TQPainter* p )
   TQToolButton::drawButton( p );
 
   //
-  // code below comes from ktoolbarbutton.cpp from the kdelibs sources
+  // code below comes from ktoolbarbutton.cpp from the tdelibs sources
   // see the file for copyright information
   //
   if( TQToolButton::popup() ) {

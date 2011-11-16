@@ -269,7 +269,7 @@ void K3bDevice::HalConnection::removeDevice( const char* udi )
 int K3bDevice::HalConnection::lock( Device* dev )
 {
   //
-  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the kdebase package
+  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the tdebase package
   // Copyright (c) 2004-2005 Jérôme Lodewyck <jerome dot lodewyck at normalesup dot org>
   //
   DBusMessage* dmesg = 0;
@@ -328,7 +328,7 @@ int K3bDevice::HalConnection::lock( Device* dev )
 int K3bDevice::HalConnection::unlock( Device* dev )
 {
   //
-  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the kdebase package
+  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the tdebase package
   // Copyright (c) 2004-2005 Jérôme Lodewyck <jerome dot lodewyck at normalesup dot org>
   //
   DBusMessage* dmesg = 0;
@@ -387,7 +387,7 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
 				     const TQStringList& options )
 {
   //
-  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the kdebase package
+  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the tdebase package
   // Copyright (c) 2004-2005 Jérôme Lodewyck <jerome dot lodewyck at normalesup dot org>
   //
   DBusMessage* dmesg = 0;
@@ -467,7 +467,7 @@ int K3bDevice::HalConnection::unmount( K3bDevice::Device* dev,
 				       const TQStringList& options )
 {
   //
-  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the kdebase package
+  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the tdebase package
   // Copyright (c) 2004-2005 Jérôme Lodewyck <jerome dot lodewyck at normalesup dot org>
   //
   DBusMessage* dmesg = 0;
@@ -538,7 +538,7 @@ int K3bDevice::HalConnection::eject( K3bDevice::Device* dev,
 				     const TQStringList& options )
 {
   //
-  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the kdebase package
+  // The code below is based on the code from kioslave/media/mediamanager/halbackend.cpp in the tdebase package
   // Copyright (c) 2004-2005 Jérôme Lodewyck <jerome dot lodewyck at normalesup dot org>
   //
   DBusMessage* dmesg = 0;

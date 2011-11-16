@@ -14,7 +14,7 @@
  */
 
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 #include "k3bnotifyoptiontab.h"
 
