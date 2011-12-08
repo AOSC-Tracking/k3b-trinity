@@ -17,7 +17,7 @@
 #define __KFILE_K3BPROJECTFILEPLUGIN_H__
 
 /**
- * Note: For further information look into <$KDEDIR/include/kfilemetainfo.h>
+ * Note: For further information look into <$TDEDIR/include/kfilemetainfo.h>
  */
 #include <kfilemetainfo.h>
 
