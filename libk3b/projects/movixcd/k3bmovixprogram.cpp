@@ -23,7 +23,7 @@
 
 #include <tqdir.h>
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 
 K3bMovixProgram::K3bMovixProgram()

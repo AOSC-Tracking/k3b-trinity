@@ -47,7 +47,7 @@
 #include <tqcheckbox.h>
 #include <tqspinbox.h>
 #include <tqcombobox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqgroupbox.h>
 #include <tqptrlist.h>
 #include <tqlabel.h>
@@ -295,7 +295,7 @@ void K3bCdCopyDialog::slotStartClicked()
     //
     if( TQFileInfo( m_tempDirSelectionWidget->tempPath() ).isFile() ) {
       if( KMessageBox::warningContinueCancel( this,
-				     i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath()),
+				     i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath()),
 				     i18n("File Exists"), i18n("Overwrite") )
 	  != KMessageBox::Continue )
 	return;
@@ -303,7 +303,7 @@ void K3bCdCopyDialog::slotStartClicked()
 
     if( TQFileInfo( m_tempDirSelectionWidget->tempPath() + ".toc" ).isFile() ) {
       if( KMessageBox::warningContinueCancel( this,
-				     i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath() + ".toc"),
+				     i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath() + ".toc"),
 				     i18n("File Exists"), i18n("Overwrite") )
 	  != KMessageBox::Continue )
 	return;

@@ -240,9 +240,9 @@ bool K3bDevice::Device::init( bool bCheckWritingModes )
     return false;
   }
   else {
-    m_vendor = TQString::tqfromLatin1( (char*)(inq->vendor), 8 ).stripWhiteSpace();
-    m_description = TQString::tqfromLatin1( (char*)(inq->product), 16 ).stripWhiteSpace();
-    m_version = TQString::tqfromLatin1( (char*)(inq->revision), 4 ).stripWhiteSpace();
+    m_vendor = TQString::fromLatin1( (char*)(inq->vendor), 8 ).stripWhiteSpace();
+    m_description = TQString::fromLatin1( (char*)(inq->product), 16 ).stripWhiteSpace();
+    m_version = TQString::fromLatin1( (char*)(inq->revision), 4 ).stripWhiteSpace();
   }
 
   if( m_vendor.isEmpty() )
@@ -563,7 +563,7 @@ const TQString& K3bDevice::Device::devicename() const
 
 TQString K3bDevice::Device::busTargetLun() const
 {
-  return TQString("%1,%2,%3").tqarg(m_bus).tqarg(m_target).tqarg(m_lun);
+  return TQString("%1,%2,%3").arg(m_bus).arg(m_target).arg(m_lun);
 }
 
 
@@ -1056,18 +1056,18 @@ bool K3bDevice::Device::readRawToc( K3bDevice::Toc& toc ) const
 	k3bDebug() << "Session |  ADR   | CONTROL|  TNO   | POINT  |  Min   |  Sec   | Frame  |  Zero  |  PMIN  |  PSEC  | PFRAME |" << endl;
 	for( unsigned int i = 0; i < (dataLen-4)/(int)sizeof(toc_raw_track_descriptor); ++i ) {
 	  TQString s;
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].session_number, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].adr, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].control, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].tno, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].point, 6, 16 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].min, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].sec, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].frame, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].zero, 6, 16 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].p_min, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].p_sec, 6 );
-	  s += TQString( " %1 |" ).tqarg( (int)tr[i].p_frame, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].session_number, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].adr, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].control, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].tno, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].point, 6, 16 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].min, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].sec, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].frame, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].zero, 6, 16 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].p_min, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].p_sec, 6 );
+	  s += TQString( " %1 |" ).arg( (int)tr[i].p_frame, 6 );
 	  k3bDebug() << s << endl;
 	}
 

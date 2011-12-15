@@ -33,7 +33,7 @@
 #include <tqevent.h>
 #include <tqvalidator.h>
 #include <tqfont.h>
-#include <tqpalette.h>
+#include <palette.h>
 #include <tqstyle.h>
 #include <tqapplication.h>
 #include <tqprogressbar.h>
@@ -272,7 +272,7 @@ void K3bListViewItem::setBackgroundColor( int col, const TQColor& c )
   ColumnInfo* info = getColumnInfo( col );
   info->backgroundColorSet = true;
   info->backgroundColor = c;
-  tqrepaint();
+  repaint();
 }
 
 
@@ -281,7 +281,7 @@ void K3bListViewItem::setForegroundColor( int col, const TQColor& c )
  ColumnInfo* info = getColumnInfo( col );
  info->foregroundColorSet = true;
  info->foregroundColor = c;
- tqrepaint();
+ repaint();
 }
 
 
@@ -299,7 +299,7 @@ void K3bListViewItem::setProgress( int col, int p )
     setDisplayProgressBar( col, true );
   if( info->progressValue != p ) {
     info->progressValue = p;
-    tqrepaint();
+    repaint();
   }
 }
 
@@ -309,7 +309,7 @@ void K3bListViewItem::setTotalSteps( int col, int steps )
   ColumnInfo* info = getColumnInfo( col );
   info->totalProgressSteps = steps;
 
-  tqrepaint();
+  repaint();
 }
 
 
@@ -318,14 +318,14 @@ void K3bListViewItem::setMarginHorizontal( int col, int margin )
   ColumnInfo* info = getColumnInfo( col );
   info->margin = margin;
 
-  tqrepaint();
+  repaint();
 }
 
 
 void K3bListViewItem::setMarginVertical( int margin )
 {
   m_vMargin = margin;
-  tqrepaint();
+  repaint();
 }
 
 
@@ -364,7 +364,7 @@ void K3bListViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int col, 
   if( info->backgroundColorSet )
     cgh.setColor( TQColorGroup::Base, info->backgroundColor );
 
-  // in case this is the selected row has a margin we need to tqrepaint the selection bar
+  // in case this is the selected row has a margin we need to repaint the selection bar
   if( isSelected() &&
       (col == 0 || listView()->allColumnsShowFocus()) &&
       info->margin > 0 ) {
@@ -445,11 +445,11 @@ void K3bListViewItem::paintProgressBar( TQPainter* p, const TQColorGroup& cgh, i
   s_dummyProgressBar->setTotalSteps( info->totalProgressSteps );
   s_dummyProgressBar->setProgress( info->progressValue );
 
-  // some styles use the widget's tqgeometry
+  // some styles use the widget's geometry
   s_dummyProgressBar->setGeometry( r );
 
-  listView()->tqstyle().tqdrawControl(TQStyle::CE_ProgressBarContents, &dbPainter, s_dummyProgressBar, r, cgh, flags );
-  listView()->tqstyle().tqdrawControl(TQStyle::CE_ProgressBarLabel, &dbPainter, s_dummyProgressBar, r, cgh, flags );
+  listView()->tqstyle().drawControl(TQStyle::CE_ProgressBarContents, &dbPainter, s_dummyProgressBar, r, cgh, flags );
+  listView()->tqstyle().drawControl(TQStyle::CE_ProgressBarLabel, &dbPainter, s_dummyProgressBar, r, cgh, flags );
 
   // now we really paint the progress in the listview
   p->drawPixmap( 0, 0, *doubleBuffer );
@@ -498,7 +498,7 @@ bool K3bCheckListViewItem::isChecked() const
 void K3bCheckListViewItem::setChecked( bool checked )
 {
   m_checked = checked;
-  tqrepaint();
+  repaint();
 }
 
 
@@ -508,7 +508,7 @@ void K3bCheckListViewItem::paintK3bCell( TQPainter* p, const TQColorGroup& cg, i
 
   if( col == 0 ) {
     if( m_checked ) {
-      TQRect r( 0, marginVertical(), width, /*listView()->tqstyle().tqpixelMetric( TQStyle::PM_CheckListButtonSize )*/height()-2*marginVertical() );
+      TQRect r( 0, marginVertical(), width, /*listView()->tqstyle().pixelMetric( TQStyle::PM_CheckListButtonSize )*/height()-2*marginVertical() );
 
       TQStyle::SFlags flags = TQStyle::Style_Default;
       if( listView()->isEnabled() )
@@ -666,7 +666,7 @@ void K3bListView::showEditor( K3bListViewItem* item, int col )
 void K3bListView::placeEditor( K3bListViewItem* item, int col )
 {
   ensureItemVisible( item );
-  TQRect r = tqitemRect( item );
+  TQRect r = itemRect( item );
 
   r.setX( contentsToViewport( TQPoint(header()->sectionPos( col ), 0) ).x() );
   r.setWidth( header()->sectionSize( col ) - 1 );
@@ -699,7 +699,7 @@ void K3bListView::placeEditor( K3bListViewItem* item, int col )
 
   if( TQWidget* editor = prepareEditor( item, col ) ) {
     editor->resize( r.size() );
-    //    editor->resize( TQSize( r.width(), editor->tqminimumSizeHint().height() ) );
+    //    editor->resize( TQSize( r.width(), editor->minimumSizeHint().height() ) );
     moveChild( editor, r.x(), r.y() );
   }
 }
@@ -1142,8 +1142,8 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
 	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
 	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ||
 	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorComboBox) ) {
-      // make sure we did not lose the focus to one of the edit widgets' tqchildren
-      if( !tqApp->tqfocusWidget() || TQT_BASE_OBJECT(tqApp->tqfocusWidget()->parentWidget()) != TQT_BASE_OBJECT(o) ) {
+      // make sure we did not lose the focus to one of the edit widgets' children
+      if( !tqApp->focusWidget() || TQT_BASE_OBJECT(tqApp->focusWidget()->parentWidget()) != TQT_BASE_OBJECT(o) ) {
 	doRename();
 	hideEditor();
       }
@@ -1170,7 +1170,7 @@ void K3bListView::viewportResizeEvent( TQResizeEvent* e )
     TQPixmap bgPix( size );
 
     // FIXME: let the user specify the color
-    bgPix.fill( tqcolorGroup().base() );
+    bgPix.fill( colorGroup().base() );
 
     if( bgPix.width() < m_backgroundPixmap.width() ||
 	bgPix.height() < m_backgroundPixmap.height() ) {
@@ -1227,7 +1227,7 @@ KPixmap K3bListView::createDragPixmap( const TQPtrList<TQListViewItem>& items )
   int width = header()->width();
   int height = 0;
   for( TQPtrListIterator<TQListViewItem> it( items ); *it; ++it ) {
-    TQRect r = tqitemRect( *it );
+    TQRect r = itemRect( *it );
 
     if( r.isValid() ) {
       height += ( *it )->height();
@@ -1256,13 +1256,13 @@ KPixmap K3bListView::createDragPixmap( const TQPtrList<TQListViewItem>& items )
     // FIXME: items on other than the top level have a smaller first column
     //        the same goes for all items if root is decorated
     bool alreadyDrawing = false;
-    TQRect r = tqitemRect( item );
+    TQRect r = itemRect( item );
     if( r.isValid() ) {
       if( items.containsRef( item ) ) {
 	// paint all columns
 	int x = 0;
 	for( int i = 0; i < columns(); ++i ) {
-	  item->paintCell( &p, tqcolorGroup(), i, columnWidth( i ), columnAlignment( i ) );
+	  item->paintCell( &p, colorGroup(), i, columnWidth( i ), columnAlignment( i ) );
 	  p.translate( columnWidth( i ), 0 );
 	  x += columnWidth( i );
 	}
@@ -1274,7 +1274,7 @@ KPixmap K3bListView::createDragPixmap( const TQPtrList<TQListViewItem>& items )
       else if( alreadyDrawing )
 	p.translate( 0, item->height() );
 
-      if( p.tqworldMatrix().dy() >= pix.height() )
+      if( p.worldMatrix().dy() >= pix.height() )
 	break;
     }
   }

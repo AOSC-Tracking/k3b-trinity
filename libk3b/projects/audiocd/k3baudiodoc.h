@@ -27,7 +27,7 @@
 #include <tqstring.h>
 #include <tqstringlist.h>
 #include <tqdatetime.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include "k3b_export.h"
 #include <kurl.h>
 

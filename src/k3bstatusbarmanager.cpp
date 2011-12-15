@@ -66,7 +66,7 @@ K3bStatusBarManager::K3bStatusBarManager( K3bMainWindow* parent )
   m_labelInfoMessage = new TQLabel( " ", m_mainWindow->statusBar() );
 
   // setup version info
-  m_versionBox = new TQLabel( TQString("K3b %1").tqarg(kapp->aboutData()->version()), m_mainWindow->statusBar() );
+  m_versionBox = new TQLabel( TQString("K3b %1").arg(kapp->aboutData()->version()), m_mainWindow->statusBar() );
   m_versionBox->installEventFilter( this );
 
   // setup the statusbar
@@ -167,7 +167,7 @@ bool K3bStatusBarManager::eventFilter( TQObject* o, TQEvent* e )
 static TQString dataDocStats( K3bDataDoc* dataDoc )
 {
   return i18n("1 file in %1", "%n files in %1", dataDoc->root()->numFiles() )
-    .tqarg( i18n("1 folder", "%n folders", dataDoc->root()->numDirs()+1 ) );
+    .arg( i18n("1 folder", "%n folders", dataDoc->root()->numDirs()+1 ) );
 }
 
 
@@ -199,7 +199,7 @@ void K3bStatusBarManager::slotUpdateProjectStats()
 
     case K3bDoc::DATA: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("Data CD (%1)").tqarg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("Data CD (%1)").arg(dataDocStats(dataDoc)) );
       break;
     }
 
@@ -207,7 +207,7 @@ void K3bStatusBarManager::slotUpdateProjectStats()
       K3bAudioDoc* audioDoc = static_cast<K3bMixedDoc*>( doc )->audioDoc();
       K3bDataDoc* dataDoc = static_cast<K3bMixedDoc*>( doc )->dataDoc();
       m_labelProjectInfo->setText( i18n("Mixed CD (1 track and %1)", "Mixed CD (%n tracks and %1)", audioDoc->numOfTracks() )
-				   .tqarg( dataDocStats(dataDoc)) );
+				   .arg( dataDocStats(dataDoc)) );
       break;
     }
 
@@ -219,25 +219,25 @@ void K3bStatusBarManager::slotUpdateProjectStats()
 
     case K3bDoc::MOVIX: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("eMovix CD (%1)").tqarg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("eMovix CD (%1)").arg(dataDocStats(dataDoc)) );
       break;
     }
 
     case K3bDoc::MOVIX_DVD: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("eMovix DVD (%1)").tqarg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("eMovix DVD (%1)").arg(dataDocStats(dataDoc)) );
       break;
     }
 
     case K3bDoc::DVD: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("Data DVD (%1)").tqarg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("Data DVD (%1)").arg(dataDocStats(dataDoc)) );
       break;
     }
       
     case K3bDoc::VIDEODVD: {
       K3bDataDoc* dataDoc = static_cast<K3bDataDoc*>( doc );
-      m_labelProjectInfo->setText( i18n("Video DVD (%1)").tqarg(dataDocStats(dataDoc)) );
+      m_labelProjectInfo->setText( i18n("Video DVD (%1)").arg(dataDocStats(dataDoc)) );
       break;
     }
     }

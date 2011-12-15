@@ -18,7 +18,7 @@
 #include <k3bcore.h>
 
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlistview.h>
 #include <tqpushbutton.h>
 

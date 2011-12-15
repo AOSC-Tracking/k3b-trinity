@@ -77,7 +77,7 @@ bool K3bVideoDVD::VideoDVD::open( K3bDevice::Device* dev )
     DVDClose( dvdReaderT );
     return false;
   }
-  m_volumeIdentifier = TQString::tqfromLatin1( v, 32 );
+  m_volumeIdentifier = TQString::fromLatin1( v, 32 );
 
   //
   // Open the VMG info
@@ -305,13 +305,13 @@ TQString K3bVideoDVD::subPictureCodeExtensionString( int ext )
   case SUBPIC_CODE_EXT_CAPTION_BIGGER_SIZE:
     return i18n("Caption with bigger size character");
   case SUBPIC_CODE_EXT_CAPTION_FOR_CHILDREN:
-    return i18n("Caption for tqchildren");
+    return i18n("Caption for children");
   case SUBPIC_CODE_EXT_CLOSED_CAPTION_NORMAL_SIZE:
     return i18n("Closed caption with normal size character");
   case SUBPIC_CODE_EXT_CLOSED_CAPTION_BIGGER_SIZE:
     return i18n("Closed caption with bigger size character");
   case SUBPIC_CODE_EXT_CLOSED_CAPTION_FOR_CHILDREN:
-    return i18n("Closed caption for tqchildren");
+    return i18n("Closed caption for children");
   case SUBPIC_CODE_EXT_FORCED_CAPTION:
     return i18n("Forced caption");
   case SUBPIC_CODE_EXT_DIR_COMMENTS_NORMAL_SIZE:
@@ -319,7 +319,7 @@ TQString K3bVideoDVD::subPictureCodeExtensionString( int ext )
   case SUBPIC_CODE_EXT_DIR_COMMENTS_BIGGER_SIZE:
     return i18n("Director's comments with bigger size characters");
   case SUBPIC_CODE_EXT_DIR_COMMENTS_FOR_CHILDREN:
-    return i18n("Director's comments for tqchildren");
+    return i18n("Director's comments for children");
   default:
     return i18n("unknown code extension");
   }

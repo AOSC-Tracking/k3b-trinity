@@ -97,14 +97,14 @@ void K3bMd5Job::start()
   }
   else if( !d->filename.isEmpty() ) {
     if( !TQFile::exists( d->filename ) ) {
-      emit infoMessage( i18n("Could not find file %1").tqarg(d->filename), ERROR );
+      emit infoMessage( i18n("Could not find file %1").arg(d->filename), ERROR );
       jobFinished(false);
       return;
     }
 
     d->file.setName( d->filename );
     if( !d->file.open( IO_ReadOnly ) ) {
-      emit infoMessage( i18n("Could not open file %1").tqarg(d->filename), ERROR );
+      emit infoMessage( i18n("Could not open file %1").arg(d->filename), ERROR );
       jobFinished(false);
       return;
     }
@@ -204,7 +204,7 @@ void K3bMd5Job::slotUpdate()
 
     if( readSize <= 0 ) {
       //      kdDebug() << "(K3bMd5Job) reached max size of " << d->maxSize << ". Stopping." << endl;
-      emit debuggingOutput( "K3bMd5Job", TQString("Reached max read of %1. Stopping after %2 bytes.").tqarg(d->maxSize).tqarg(d->readData) );
+      emit debuggingOutput( "K3bMd5Job", TQString("Reached max read of %1. Stopping after %2 bytes.").arg(d->maxSize).arg(d->readData) );
       stopAll();
       emit percent( 100 );
       jobFinished(true);
@@ -252,13 +252,13 @@ void K3bMd5Job::slotUpdate()
       }
 
       if( read < 0 ) {
-	emit infoMessage( i18n("Error while reading from file %1").tqarg(d->filename), ERROR );
+	emit infoMessage( i18n("Error while reading from file %1").arg(d->filename), ERROR );
 	stopAll();
 	jobFinished(false);
       }
       else if( read == 0 ) {
 	//	kdDebug() << "(K3bMd5Job) read all data. Total size: " << d->readData << ". Stopping." << endl;
-	emit debuggingOutput( "K3bMd5Job", TQString("All data read. Stopping after %1 bytes.").tqarg(d->readData) );
+	emit debuggingOutput( "K3bMd5Job", TQString("All data read. Stopping after %1 bytes.").arg(d->readData) );
 	stopAll();
 	emit percent( 100 );
 	jobFinished(true);
@@ -303,7 +303,7 @@ TQCString K3bMd5Job::base64Digest()
 
 void K3bMd5Job::stop()
 {
-  emit debuggingOutput( "K3bMd5Job", TQString("Stopped manually after %1 bytes.").tqarg(d->readData) );
+  emit debuggingOutput( "K3bMd5Job", TQString("Stopped manually after %1 bytes.").arg(d->readData) );
   stopAll();
   jobFinished( true );
 }

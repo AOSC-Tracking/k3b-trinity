@@ -30,7 +30,7 @@
 
 #include <tqtimer.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtooltip.h>
 #include <tqpushbutton.h>
 #include <tqapplication.h>
@@ -95,10 +95,10 @@ K3bEmptyDiscWaiter::K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* par
   // setup the gui
   // -----------------------------
   d->labelRequest = new TQLabel( plainPage() );
-  d->labelRequest->tqsetAlignment( TQt::AlignLeft | TQt::AlignVCenter );
+  d->labelRequest->setAlignment( TQt::AlignLeft | TQt::AlignVCenter );
   d->labelFoundMedia = new TQLabel( plainPage() );
   d->pixLabel = new TQLabel( plainPage() );
-  d->pixLabel->tqsetAlignment( TQt::AlignHCenter | TQt::AlignTop );
+  d->pixLabel->setAlignment( TQt::AlignHCenter | TQt::AlignTop );
 
   TQFont f( d->labelFoundMedia->font() );
   f.setBold(true);
@@ -152,11 +152,11 @@ int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const TQStri
   //
   if( (d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD) &&
 	   (d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_CD) )
-    d->wantedMediaTypeString = i18n("CD-R(W) or DVD%1R(W)").tqarg("�");
+    d->wantedMediaTypeString = i18n("CD-R(W) or DVD%1R(W)").arg("�");
   else if( d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD_SL )
-    d->wantedMediaTypeString = i18n("DVD%1R(W)").tqarg("�");
+    d->wantedMediaTypeString = i18n("DVD%1R(W)").arg("�");
   else if( d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD_DL )
-    d->wantedMediaTypeString = i18n("Double Layer DVD%1R").tqarg("�");
+    d->wantedMediaTypeString = i18n("Double Layer DVD%1R").arg("�");
   else
     d->wantedMediaTypeString = i18n("CD-R(W)");
 
@@ -164,44 +164,44 @@ int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const TQStri
     if( (d->wantedMediaState & K3bDevice::STATE_COMPLETE) && (d->wantedMediaState & K3bDevice::STATE_INCOMPLETE) )
       d->labelRequest->setText( i18n("Please insert a complete or appendable %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.tqarg(d->device->vendor())
-				.tqarg(d->device->description())
-				.tqarg(d->device->devicename())
-				.tqarg( d->wantedMediaTypeString ) );
+				.arg(d->device->vendor())
+				.arg(d->device->description())
+				.arg(d->device->devicename())
+				.arg( d->wantedMediaTypeString ) );
     else if( d->wantedMediaState & K3bDevice::STATE_COMPLETE )
       d->labelRequest->setText( i18n("Please insert a complete %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.tqarg(d->device->vendor())
-				.tqarg(d->device->description())
-				.tqarg(d->device->devicename())
-				.tqarg( d->wantedMediaTypeString ) );
+				.arg(d->device->vendor())
+				.arg(d->device->description())
+				.arg(d->device->devicename())
+				.arg( d->wantedMediaTypeString ) );
     else if( (d->wantedMediaState & K3bDevice::STATE_INCOMPLETE) && (d->wantedMediaState & K3bDevice::STATE_EMPTY) )
       d->labelRequest->setText( i18n("Please insert an empty or appendable %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.tqarg(d->device->vendor())
-				.tqarg(d->device->description())
-				.tqarg(d->device->devicename())
-				.tqarg( d->wantedMediaTypeString ) );
+				.arg(d->device->vendor())
+				.arg(d->device->description())
+				.arg(d->device->devicename())
+				.arg( d->wantedMediaTypeString ) );
     else if( d->wantedMediaState & K3bDevice::STATE_INCOMPLETE )
       d->labelRequest->setText( i18n("Please insert an appendable %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.tqarg(d->device->vendor())
-				.tqarg(d->device->description())
-				.tqarg(d->device->devicename())
-				.tqarg( d->wantedMediaTypeString ) );
+				.arg(d->device->vendor())
+				.arg(d->device->description())
+				.arg(d->device->devicename())
+				.arg( d->wantedMediaTypeString ) );
     else if( d->wantedMediaState & K3bDevice::STATE_EMPTY )
       d->labelRequest->setText( i18n("Please insert an empty %4 medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.tqarg(d->device->vendor())
-				.tqarg(d->device->description())
-				.tqarg(d->device->devicename())
-				.tqarg( d->wantedMediaTypeString ) );
+				.arg(d->device->vendor())
+				.arg(d->device->description())
+				.arg(d->device->devicename())
+				.arg( d->wantedMediaTypeString ) );
     else // fallback case (this should not happen in K3b)
       d->labelRequest->setText( i18n("Please insert a suitable medium "
 				     "into drive<p><b>%1 %2 (%3)</b>.")
-				.tqarg(d->device->vendor())
-				.tqarg(d->device->description())
-				.tqarg(d->device->devicename()) );
+				.arg(d->device->vendor())
+				.arg(d->device->description())
+				.arg(d->device->devicename()) );
 
   }
   else
@@ -340,10 +340,10 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	    KMessageBox::warningContinueCancel( parentWidgetToUse(),
 						i18n("Found %1 media in %2 - %3. "
 						     "Should it be overwritten?")
-						.tqarg("DVD+RW")
-						.tqarg(d->device->vendor())
-						.tqarg(d->device->description()),
-						i18n("Found %1").tqarg("DVD+RW"),i18n("Overwrite") ) == KMessageBox::Continue ) {
+						.arg("DVD+RW")
+						.arg(d->device->vendor())
+						.arg(d->device->description()),
+						i18n("Found %1").arg("DVD+RW"),i18n("Overwrite") ) == KMessageBox::Continue ) {
 	  finishWaiting( K3bDevice::MEDIA_DVD_PLUS_RW );
 	}
 	else {
@@ -410,10 +410,10 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	    KMessageBox::warningContinueCancel( parentWidgetToUse(),
 						i18n("Found %1 media in %2 - %3. "
 						     "Should it be overwritten?")
-						.tqarg(K3bDevice::mediaTypeString(medium.diskInfo().mediaType()))
-						.tqarg(d->device->vendor())
-						.tqarg(d->device->description()),
-						i18n("Found %1").tqarg("DVD-RW"),i18n("Overwrite") ) == KMessageBox::Continue ) {
+						.arg(K3bDevice::mediaTypeString(medium.diskInfo().mediaType()))
+						.arg(d->device->vendor())
+						.arg(d->device->description()),
+						i18n("Found %1").arg("DVD-RW"),i18n("Overwrite") ) == KMessageBox::Continue ) {
 	  finishWaiting( K3bDevice::MEDIA_DVD_RW_OVWR );
 	}
 	else {
@@ -467,10 +467,10 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	  KMessageBox::warningContinueCancel( parentWidgetToUse(),
 					      i18n("Found %1 media in %2 - %3. "
 						   "Should it be formatted?")
-					      .tqarg( K3bDevice::mediaTypeString(medium.diskInfo().mediaType()) )
-					      .tqarg(d->device->vendor())
-					      .tqarg(d->device->description()),
-					      i18n("Found %1").tqarg("DVD-RW"), i18n("Format") ) == KMessageBox::Continue ) {
+					      .arg( K3bDevice::mediaTypeString(medium.diskInfo().mediaType()) )
+					      .arg(d->device->vendor())
+					      .arg(d->device->description()),
+					      i18n("Found %1").arg("DVD-RW"), i18n("Format") ) == KMessageBox::Continue ) {
 
 	kdDebug() << "(K3bEmptyDiscWaiter) ------ formatting DVD-RW." << endl;
 
@@ -542,7 +542,7 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
     if( formatWithoutAsking ||
 	KMessageBox::questionYesNo( parentWidgetToUse(),
 				    i18n("Found rewritable media in %1 - %2. "
-					 "Should it be erased?").tqarg(d->device->vendor()).tqarg(d->device->description()),
+					 "Should it be erased?").arg(d->device->vendor()).arg(d->device->description()),
 				    i18n("Found Rewritable Disk"),
 				    KGuiItem(i18n("&Erase"), "cdrwblank"),
 				    KGuiItem(i18n("E&ject")) ) == KMessageBox::Yes ) {

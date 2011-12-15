@@ -119,7 +119,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             s.replace( '*', '_' );
             s.replace( '}', '*' );  // for conditional inclusion
             dir.append( s.isEmpty()
-                ? i18n("unknown") + TQString(" %1").tqarg(trackNumber)
+                ? i18n("unknown") + TQString(" %1").arg(trackNumber)
                 : s );
             break;
           case TITLE:
@@ -128,7 +128,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             s.replace( '*', '_' );
             s.replace( '}', '*' );
             dir.append( s.isEmpty()
-                ? i18n("Track %1").tqarg(trackNumber)
+                ? i18n("Track %1").arg(trackNumber)
                 : s );
             break;
           case NUMBER:
@@ -171,7 +171,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             dir.append( s ); // I think it makes more sense to allow empty comments
             break;
           case DATE:
-            dir.append( KGlobal::locale()->formatDate( TQDate::tqcurrentDate() ) );
+            dir.append( KGlobal::locale()->formatDate( TQDate::currentDate() ) );
             break;
           default:
             dir.append( pattern.mid(i, len) );
@@ -247,7 +247,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
         s = entry.cdExtInfo;
         break;
       case DATE:
-        s = KGlobal::locale()->formatDate( TQDate::tqcurrentDate() );
+        s = KGlobal::locale()->formatDate( TQDate::currentDate() );
         break;
       default: // we must never get here,
         break; // all choices should be covered

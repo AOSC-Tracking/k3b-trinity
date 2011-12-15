@@ -25,7 +25,7 @@
 #include <klocale.h>
 
 
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqstringlist.h>
 #include <tqregexp.h>
 #include <tqtimer.h>
@@ -226,7 +226,7 @@ TQString K3bCddbQuery::handshakeString() const
   if( host.isEmpty() )
     host = "kde-host";
   
-  return TQString("%1 %2 K3b %3").tqarg(user).tqarg(host).tqarg(kapp->aboutData()->version());
+  return TQString("%1 %2 K3b %3").arg(user).arg(host).arg(kapp->aboutData()->version());
 }
 
 
@@ -238,10 +238,10 @@ TQString K3bCddbQuery::queryString() const
     + TQString::number( (unsigned int)m_toc.count() );
   
   for( K3bDevice::Toc::const_iterator it = m_toc.begin(); it != m_toc.end(); ++it ) {
-    query.append( TQString( " %1" ).tqarg( (*it).firstSector().lba() ) );
+    query.append( TQString( " %1" ).arg( (*it).firstSector().lba() ) );
   }
   
-  query.append( TQString( " %1" ).tqarg( m_toc.length().lba() / 75 ) );
+  query.append( TQString( " %1" ).arg( m_toc.length().lba() / 75 ) );
   
   return query;
 }

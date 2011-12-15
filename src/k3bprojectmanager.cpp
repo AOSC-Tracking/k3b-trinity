@@ -40,7 +40,7 @@
 
 #include <tqptrlist.h>
 #include <tqmap.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqdom.h>
 #include <tqfile.h>
 #include <tqapplication.h>
@@ -199,49 +199,49 @@ K3bDoc* K3bProjectManager::createEmptyProject( K3bDoc::DocType type )
   switch( type ) {
   case K3bDoc::AUDIO: {
     doc = new K3bAudioDoc( this );
-    fileName = i18n("AudioCD%1").tqarg(d->audioUntitledCount++);
+    fileName = i18n("AudioCD%1").arg(d->audioUntitledCount++);
     break;
   }
 
   case K3bDoc::DATA: {
     doc = new K3bDataDoc( this );
-    fileName = i18n("DataCD%1").tqarg(d->dataUntitledCount++);
+    fileName = i18n("DataCD%1").arg(d->dataUntitledCount++);
     break;
   }
 
   case K3bDoc::MIXED: {
     doc = new K3bMixedDoc( this );
-    fileName=i18n("MixedCD%1").tqarg(d->mixedUntitledCount++);
+    fileName=i18n("MixedCD%1").arg(d->mixedUntitledCount++);
     break;
   }
 
   case K3bDoc::VCD: {
     doc = new K3bVcdDoc( this );
-    fileName=i18n("VideoCD%1").tqarg(d->vcdUntitledCount++);
+    fileName=i18n("VideoCD%1").arg(d->vcdUntitledCount++);
     break;
   }
 
   case K3bDoc::MOVIX: {
     doc = new K3bMovixDoc( this );
-    fileName=i18n("eMovixCD%1").tqarg(d->movixUntitledCount++);
+    fileName=i18n("eMovixCD%1").arg(d->movixUntitledCount++);
     break;
   }
 
   case K3bDoc::MOVIX_DVD: {
     doc = new K3bMovixDvdDoc( this );
-    fileName=i18n("eMovixDVD%1").tqarg(d->movixDvdUntitledCount++);
+    fileName=i18n("eMovixDVD%1").arg(d->movixDvdUntitledCount++);
     break;
   }
 
   case K3bDoc::DVD: {
     doc = new K3bDvdDoc( this );
-    fileName = i18n("DataDVD%1").tqarg(d->dvdUntitledCount++);
+    fileName = i18n("DataDVD%1").arg(d->dvdUntitledCount++);
     break;
   }
       
   case K3bDoc::VIDEODVD: {
     doc = new K3bVideoDvdDoc( this );
-    fileName = i18n("VideoDVD%1").tqarg(d->videoDvdUntitledCount++);
+    fileName = i18n("VideoDVD%1").arg(d->videoDvdUntitledCount++);
     break;
   }
   }

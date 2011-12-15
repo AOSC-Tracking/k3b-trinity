@@ -19,7 +19,7 @@
 
 #include <tqobject.h>
 #include <tqstring.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 #include "k3bcddbresult.h"
 

@@ -76,7 +76,7 @@ K3bAudioCueFileWritingJob::K3bAudioCueFileWritingJob( K3bJobHandler* jh, TQObjec
   connect( m_audioJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
   connect( m_audioJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
   connect( m_audioJob, TQT_SIGNAL(burning(bool)), this, TQT_SIGNAL(burning(bool)) );
-  connect( m_audioJob, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_audioJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SIGNAL(bufferStatus(int)) );
   connect( m_audioJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
   connect( m_audioJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
 
@@ -252,19 +252,19 @@ void K3bAudioCueFileWritingJob::importCueInProject()
 
       // now analyze the source
       emit newTask( i18n("Analysing the audio file") );
-      emit newSubTask( i18n("Analysing %1").tqarg( parser.imageFilename() ) );
+      emit newSubTask( i18n("Analysing %1").arg( parser.imageFilename() ) );
 
       // start the analyser thread
       m_analyserThread->setDecoder( m_decoder );
       m_analyserJob->start();
     }
     else {
-      emit infoMessage( i18n("Unable to handle '%1' due to an unsupported format.").tqarg( m_cueFile ), ERROR );
+      emit infoMessage( i18n("Unable to handle '%1' due to an unsupported format.").arg( m_cueFile ), ERROR );
       jobFinished(false);
     }
   }
   else {
-    emit infoMessage( i18n("No valid audio cue file: '%1'").tqarg( m_cueFile ), ERROR );
+    emit infoMessage( i18n("No valid audio cue file: '%1'").arg( m_cueFile ), ERROR );
     jobFinished(false);
   }
 }

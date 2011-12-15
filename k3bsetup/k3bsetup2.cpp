@@ -15,7 +15,7 @@
 
 #include <config.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqmap.h>
 #include <tqfile.h>
 #include <tqfileinfo.h>
@@ -260,7 +260,7 @@ void K3bSetup2::updatePrograms()
 	if( perm != wantedPerm ||
 	    fi.owner() != "root" ||
 	    fi.group() != wantedGroup ) {
-	  bi->setText( 4, TQString("%1 root.%2").tqarg(wantedPerm,0,8).tqarg(wantedGroup) );
+	  bi->setText( 4, TQString("%1 root.%2").arg(wantedPerm,0,8).arg(wantedGroup) );
 	  if( bi->isOn() )
 	    d->changesNeeded = true;
 	}
@@ -405,7 +405,7 @@ void K3bSetup2::save()
     // TODO: create the group if it's not there
     g = getgrnam( burningGroup().local8Bit() );
     if( !g ) {
-      KMessageBox::error( this, i18n("There is no group %1.").tqarg(burningGroup()) );
+      KMessageBox::error( this, i18n("There is no group %1.").arg(burningGroup()) );
       return;
     }
   }
@@ -536,7 +536,7 @@ void K3bSetup2::slotAddDevice()
       emit changed( d->changesNeeded );
     }
     else
-      KMessageBox::error( this, i18n("Could not find an additional device at\n%1").tqarg(newDevicename),
+      KMessageBox::error( this, i18n("Could not find an additional device at\n%1").arg(newDevicename),
 			  i18n("Error"), false );
   }
 }

@@ -20,7 +20,7 @@
 
 #include <k3bdebug.h>
 
-#include <tqtextcodec.h>
+#include <textcodec.h>
 
 #include <string.h>
 
@@ -65,12 +65,12 @@ namespace K3bDevice {
   
     for( int i = 0; i < dataLen/18; ++i ) {
       TQString s;
-      s += TQString( " %1 |" ).tqarg( pack[i].id1, 6, 16 );
-      s += TQString( " %1 |" ).tqarg( pack[i].id2, 6 );
-      s += TQString( " %1 |" ).tqarg( pack[i].id3, 6 );
-      s += TQString( " %1 |" ).tqarg( pack[i].charpos, 6 );
-      s += TQString( " %1 |" ).tqarg( pack[i].blocknum, 6 );
-      s += TQString( " %1 |" ).tqarg( pack[i].dbcc, 4 );
+      s += TQString( " %1 |" ).arg( pack[i].id1, 6, 16 );
+      s += TQString( " %1 |" ).arg( pack[i].id2, 6 );
+      s += TQString( " %1 |" ).arg( pack[i].id3, 6 );
+      s += TQString( " %1 |" ).arg( pack[i].charpos, 6 );
+      s += TQString( " %1 |" ).arg( pack[i].blocknum, 6 );
+      s += TQString( " %1 |" ).arg( pack[i].dbcc, 4 );
 //       char str[12];
 //       sprintf( str, "%c%c%c%c%c%c%c%c%c%c%c%c",
 // 	       pack[i].data[0] == '\0' ? '�' : pack[i].data[0],
@@ -85,9 +85,9 @@ namespace K3bDevice {
 // 	       pack[i].data[9] == '\0' ? '�' : pack[i].data[9],
 // 	       pack[i].data[10] == '\0' ? '�' : pack[i].data[10],
 // 	       pack[i].data[11] == '\0' ? '�' : pack[i].data[11] );
-//       s += TQString( " %1 |" ).tqarg( "'" + TQCString(str,13) + "'", 14 );
+//       s += TQString( " %1 |" ).arg( "'" + TQCString(str,13) + "'", 14 );
 //       TQ_UINT16 crc = pack[i].crc[0]<<8|pack[i].crc[1];
-//       s += TQString( " %1 |" ).tqarg( crc );
+//       s += TQString( " %1 |" ).arg( crc );
       k3bDebug() << s << endl;
     }
   }
@@ -202,9 +202,9 @@ void K3bDevice::CdText::setRawPackData( const unsigned char* data, int len )
 	char* nextNullPos = (char*)::memchr( nullPos+1, '\0', 11 - (nullPos - (char*)pack[i].data) );
 	TQString txtstr;	    
 	if( nextNullPos ) // take all chars up to the next null
-	  txtstr = TQString::tqfromLatin1( (char*)nullPos+1, nextNullPos - nullPos - 1 );
+	  txtstr = TQString::fromLatin1( (char*)nullPos+1, nextNullPos - nullPos - 1 );
 	else // take all chars to the end of the pack data (12 bytes)
-	  txtstr = TQString::tqfromLatin1( (char*)nullPos+1, 11 - (nullPos - (char*)pack[i].data) );
+	  txtstr = TQString::fromLatin1( (char*)nullPos+1, 11 - (nullPos - (char*)pack[i].data) );
 	  
 	//
 	// a tab character means to use the same as for the previous track
@@ -471,7 +471,7 @@ void K3bDevice::CdText::savePack( cdtext_pack* pack, TQByteArray& data, unsigned
 
   // append the pack to data  
   if( data.size() < dataFill + sizeof(cdtext_pack) )
-    data.tqresize( dataFill + sizeof(cdtext_pack), TQGArray::SpeedOptim );
+    data.resize( dataFill + sizeof(cdtext_pack), TQGArray::SpeedOptim );
 
   ::memcpy( &data.data()[dataFill], reinterpret_cast<char*>( pack ), sizeof(cdtext_pack) );
 

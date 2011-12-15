@@ -17,7 +17,7 @@
 #define _K3B_INF_FILE_WRITER_H_
 
 #include <tqvaluevector.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 #include <k3bmsf.h>
 

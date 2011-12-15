@@ -39,7 +39,7 @@ K3bMovixDvdJob::K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler* jh, TQObject
   connect( m_dvdJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
   connect( m_dvdJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
   connect( m_dvdJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( m_dvdJob, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_dvdJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SIGNAL(bufferStatus(int)) );
   connect( m_dvdJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
   connect( m_dvdJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
   connect( m_dvdJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
@@ -114,7 +114,7 @@ TQString K3bMovixDvdJob::jobDescription() const
   if( m_doc->isoOptions().volumeID().isEmpty() )
     return i18n("Writing eMovix DVD");
   else
-    return i18n("Writing eMovix DVD (%1)").tqarg(m_doc->isoOptions().volumeID());
+    return i18n("Writing eMovix DVD (%1)").arg(m_doc->isoOptions().volumeID());
 }
 
 
@@ -122,7 +122,7 @@ TQString K3bMovixDvdJob::jobDetails() const
 {
   return ( i18n("1 file (%1) and about 8 MB eMovix data", 
 		"%n files (%1) and about 8 MB eMovix data", 
-		m_doc->movixFileItems().count()).tqarg(KIO::convertSize(m_doc->size()))
+		m_doc->movixFileItems().count()).arg(KIO::convertSize(m_doc->size()))
 	   + ( m_doc->copies() > 1 
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
 	       : TQString() ) );

@@ -18,7 +18,7 @@
 #include <k3bthemedheader.h>
 
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqpixmap.h>
 
 
@@ -51,7 +51,7 @@ K3bContentsView::~K3bContentsView()
 void K3bContentsView::setMainWidget( TQWidget* w )
 {
   m_centerWidget = w;
-  ((TQVBoxLayout*)tqlayout())->addWidget( w );
+  ((TQVBoxLayout*)layout())->addWidget( w );
 }
 
 

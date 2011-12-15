@@ -131,7 +131,7 @@ bool K3bVcdXmlView::write( const TQString& fname )
     addSubElement( xmlDoc, elemPvd, "volume-id", m_doc->vcdOptions() ->volumeId().upper() );
     addSubElement( xmlDoc, elemPvd, "system-id", m_doc->vcdOptions() ->systemId() );
     addSubElement( xmlDoc, elemPvd, "application-id", m_doc->vcdOptions() ->applicationId() );
-    addSubElement( xmlDoc, elemPvd, "preparer-id", TQString( "K3b - Version %1" ).tqarg( k3bcore->version() ).upper() );
+    addSubElement( xmlDoc, elemPvd, "preparer-id", TQString( "K3b - Version %1" ).arg( k3bcore->version() ).upper() );
     addSubElement( xmlDoc, elemPvd, "publisher-id", m_doc->vcdOptions() ->publisher().upper() );
 
 
@@ -180,7 +180,7 @@ bool K3bVcdXmlView::write( const TQString& fname )
                 filename = locate( "data", "k3b/extra/k3bphotosvcd.mpg" );
 
             elemsequenceItem = addSubElement( xmlDoc, elemsequenceItems, "sequence-item" );
-            elemsequenceItem.setAttribute( "src", TQString( "%1" ).tqarg( TQFile::encodeName(  filename ).data() ) );
+            elemsequenceItem.setAttribute( "src", TQString( "%1" ).arg( TQFile::encodeName(  filename ).data() ) );
             elemsequenceItem.setAttribute( "id", "sequence-000"  );
             // default entry
             TQDomElement elemdefaultEntry;
@@ -199,19 +199,19 @@ bool K3bVcdXmlView::write( const TQString& fname )
             TQString seqId = TQString::number( it.current() ->index() ).rightJustify( 3, '0' );
 
             elemsequenceItem = addSubElement( xmlDoc, elemsequenceItems, "sequence-item" );
-            elemsequenceItem.setAttribute( "src", TQString( "%1" ).tqarg( TQFile::encodeName( it.current() ->absPath() ).data() ) );
-            elemsequenceItem.setAttribute( "id", TQString( "sequence-%1" ).tqarg( seqId ) );
+            elemsequenceItem.setAttribute( "src", TQString( "%1" ).arg( TQFile::encodeName( it.current() ->absPath() ).data() ) );
+            elemsequenceItem.setAttribute( "id", TQString( "sequence-%1" ).arg( seqId ) );
 
             // default entry
             TQDomElement elemdefaultEntry;
             elemdefaultEntry = addSubElement( xmlDoc, elemsequenceItem, "default-entry" );
-            elemdefaultEntry.setAttribute( "id", TQString( "entry-%1" ).tqarg( seqId ) );
+            elemdefaultEntry.setAttribute( "id", TQString( "entry-%1" ).arg( seqId ) );
 
         } else {
             // sequence-items element needs at least one segment to fit the XML
             elemsegmentItem = addSubElement( xmlDoc, elemsegmentItems, "segment-item" );
-            elemsegmentItem.setAttribute( "src", TQString( "%1" ).tqarg( TQFile::encodeName( it.current() ->absPath() ).data() ) );
-            elemsegmentItem.setAttribute( "id", TQString( "segment-%1" ).tqarg( TQString::number( it.current() ->index() ).rightJustify( 3, '0' ) ) );
+            elemsegmentItem.setAttribute( "src", TQString( "%1" ).arg( TQFile::encodeName( it.current() ->absPath() ).data() ) );
+            elemsegmentItem.setAttribute( "id", TQString( "segment-%1" ).arg( TQString::number( it.current() ->index() ).rightJustify( 3, '0' ) ) );
 
         }
     }
@@ -232,7 +232,7 @@ bool K3bVcdXmlView::write( const TQString& fname )
     }
 
     m_xmlstring = xmlDoc.toString();
-    kdDebug() << TQString( "(K3bVcdXmlView) Write Data to %1:" ).tqarg( fname ) << endl;
+    kdDebug() << TQString( "(K3bVcdXmlView) Write Data to %1:" ).arg( fname ) << endl;
 
     TQFile xmlFile( fname );
     if ( xmlFile.open( IO_WriteOnly ) ) {
@@ -267,7 +267,7 @@ TQDomElement K3bVcdXmlView::addSubElement( TQDomDocument& doc, TQDomElement& par
     TQDomElement element = doc.createElement( name );
     parent.appendChild( element );
     if ( value >= -1 ) {
-        TQDomText t = doc.createTextNode( TQString( "%1" ).tqarg( value ) );
+        TQDomText t = doc.createTextNode( TQString( "%1" ).arg( value ) );
         element.appendChild( t );
     }
     return element;
@@ -284,7 +284,7 @@ TQDomElement K3bVcdXmlView::addFolderElement( TQDomDocument& doc, TQDomElement& 
 void K3bVcdXmlView::addFileElement( TQDomDocument& doc, TQDomElement& parent, const TQString& src, const TQString& name, bool mixed )
 {
     TQDomElement elemFile = addSubElement( doc, parent, "file" );
-    elemFile.setAttribute( "src", TQString( "%1" ).tqarg( src ) );
+    elemFile.setAttribute( "src", TQString( "%1" ).arg( src ) );
     if ( mixed )
         elemFile.setAttribute( "format", "mixed" );
 
@@ -296,7 +296,7 @@ void K3bVcdXmlView::doPbc( TQDomDocument& doc, TQDomElement& parent, K3bVcdTrack
     TQString ref = ( track->isSegment() ) ? "segment" : "sequence";
 
     TQDomElement elemSelection = addSubElement( doc, parent, "selection" );
-    elemSelection.setAttribute( "id", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
+    elemSelection.setAttribute( "id", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
 
     setNumkeyBSN( doc, elemSelection, track );
 
@@ -310,24 +310,24 @@ void K3bVcdXmlView::doPbc( TQDomDocument& doc, TQDomElement& parent, K3bVcdTrack
             switch ( i ) {
                 case K3bVcdTrack::PREVIOUS:
                     elemPbcSelectionPNRDT = addSubElement( doc, elemSelection, "prev" );
-                    elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( index ).rightJustify( 3, '0' ) ) );
+                    elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( index ).rightJustify( 3, '0' ) ) );
                     break;
                 case K3bVcdTrack::NEXT:
                     elemPbcSelectionPNRDT = addSubElement( doc, elemSelection, "next" );
-                    elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( index ).rightJustify( 3, '0' ) ) );
+                    elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( index ).rightJustify( 3, '0' ) ) );
                     break;
                 case K3bVcdTrack::RETURN:
                     elemPbcSelectionPNRDT = addSubElement( doc, elemSelection, "return" );
-                    elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( index ).rightJustify( 3, '0' ) ) );
+                    elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( index ).rightJustify( 3, '0' ) ) );
                     break;
                 case K3bVcdTrack::DEFAULT:
                     elemPbcSelectionPNRDT = addSubElement( doc, elemSelection, "default" );
-                    elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( index ).rightJustify( 3, '0' ) ) );
+                    elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( index ).rightJustify( 3, '0' ) ) );
                     break;
                 case K3bVcdTrack::AFTERTIMEOUT:
                     if ( track->getWaitTime() >= 0 ) {
                         elemPbcSelectionPNRDT = addSubElement( doc, elemSelection, "timeout" );
-                        elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( index ).rightJustify( 3, '0' ) ) );
+                        elemPbcSelectionPNRDT.setAttribute( "ref", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( index ).rightJustify( 3, '0' ) ) );
                     }
                     break;
             }
@@ -369,7 +369,7 @@ void K3bVcdXmlView::doPbc( TQDomDocument& doc, TQDomElement& parent, K3bVcdTrack
     else
         loop.setAttribute( "jump-timing", "immediate" );
 
-    addSubElement( doc, elemSelection, "play-item" ).setAttribute( "ref", TQString( "%1-%2" ).tqarg( ref ).tqarg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
+    addSubElement( doc, elemSelection, "play-item" ).setAttribute( "ref", TQString( "%1-%2" ).arg( ref ).arg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
 
     setNumkeySEL( doc, elemSelection, track );
 }
@@ -410,30 +410,30 @@ void K3bVcdXmlView::setNumkeySEL( TQDomDocument& doc, TQDomElement& parent, K3bV
 
             for ( trackIt = numKeyMap.begin(); trackIt != numKeyMap.end(); ++trackIt ) {
 
-                kdDebug() << TQString( "trackIt key: %1 none: %2" ).tqarg( trackIt.key() ).tqarg( none ) << endl;
+                kdDebug() << TQString( "trackIt key: %1 none: %2" ).arg( trackIt.key() ).arg( none ) << endl;
                 while ( none < trackIt.key() ) {
                     elemPbcSelectionNumKeySEL = addSubElement( doc, parent, "select" );
-                    elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
-                    addComment( doc, parent, TQString( "key %1 -> %2 (normal none)" ).tqarg( none ).tqarg( TQFile::encodeName( track->absPath() ).data() ) );
+                    elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
+                    addComment( doc, parent, TQString( "key %1 -> %2 (normal none)" ).arg( none ).arg( TQFile::encodeName( track->absPath() ).data() ) );
                     none++;
                 }
 
                 if ( trackIt.data() ) {
                     TQString ref = ( trackIt.data() ->isSegment() ) ? "segment" : "sequence";
                     elemPbcSelectionNumKeySEL = addSubElement( doc, parent, "select" );
-                    elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( trackIt.data() ->index() ).rightJustify( 3, '0' ) ) );
-                    addComment( doc, parent, TQString( "key %1 -> %2" ).tqarg( trackIt.key() ).tqarg( TQFile::encodeName( trackIt.data() ->absPath() ).data() ) );
+                    elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( trackIt.data() ->index() ).rightJustify( 3, '0' ) ) );
+                    addComment( doc, parent, TQString( "key %1 -> %2" ).arg( trackIt.key() ).arg( TQFile::encodeName( trackIt.data() ->absPath() ).data() ) );
                 } else {
                     elemPbcSelectionNumKeySEL = addSubElement( doc, parent, "select" );
                     elemPbcSelectionNumKeySEL.setAttribute( "ref", "end" );
-                    addComment( doc, parent, TQString( "key %1 -> end" ).tqarg( trackIt.key() ) );
+                    addComment( doc, parent, TQString( "key %1 -> end" ).arg( trackIt.key() ) );
                 }
                 none++;
             }
         } else {
             // default reference to itSelf
             elemPbcSelectionNumKeySEL = addSubElement( doc, parent, "select" );
-            elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).tqarg( ref ).tqarg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
+            elemPbcSelectionNumKeySEL.setAttribute( "ref", TQString( "select-%1-%2" ).arg( ref ).arg( TQString::number( track->index() ).rightJustify( 3, '0' ) ) );
         }
     }
 }

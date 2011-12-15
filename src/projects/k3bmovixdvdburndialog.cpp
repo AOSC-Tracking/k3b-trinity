@@ -40,7 +40,7 @@
 #include <kdebug.h>
 
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqgroupbox.h>
 #include <tqfileinfo.h>
 
@@ -54,7 +54,7 @@ K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, TQWidget* par
   m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::FILE );
 
   setTitle( i18n("eMovix DVD Project"),
-	    i18n("1 file (%1)", "%n files (%1)", m_doc->movixFileItems().count()).tqarg(KIO::convertSize(m_doc->size())) );
+	    i18n("1 file (%1)", "%n files (%1)", m_doc->movixFileItems().count()).arg(KIO::convertSize(m_doc->size())) );
 
   m_movixOptionsWidget = new K3bMovixOptionsWidget( this );
   addPage( m_movixOptionsWidget, i18n("eMovix") );
@@ -193,7 +193,7 @@ void K3bMovixDvdBurnDialog::slotStartClicked()
 
     if( TQFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
       if( KMessageBox::warningContinueCancel( this,
-				     i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath()),
+				     i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath()),
 				     i18n("File Exists"), i18n("Overwrite") )
 	  != KMessageBox::Continue )
 	return;

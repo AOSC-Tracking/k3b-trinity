@@ -20,7 +20,7 @@
 
 #include <tqtimer.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqdir.h>
 #include <tqfileinfo.h>
 
@@ -57,7 +57,7 @@
 
 K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* parent, const char* name )
   : KDialogBase( Plain,
-		 i18n("Adding files to project '%1'").tqarg(doc->URL().fileName()),
+		 i18n("Adding files to project '%1'").arg(doc->URL().fileName()),
 		 Cancel,
 		 Cancel,
 		 parent,
@@ -84,7 +84,7 @@ K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* paren
 
   m_counterLabel = new TQLabel( page );
   m_infoLabel = new KSqueezedTextLabel( i18n("Adding files to project '%1'")
-					.tqarg(doc->URL().fileName()) + "...", page );
+					.arg(doc->URL().fileName()) + "...", page );
   m_progressWidget = new KProgress( 0, page );
 
   grid->addWidget( m_counterLabel, 0, 1 );
@@ -96,7 +96,7 @@ K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* paren
 	   this, TQT_SLOT(slotDirSizeDone(bool)) );
 
   // try to start with a reasonable size
-  resize( (int)( fontMetrics().width( caption() ) * 1.5 ), tqsizeHint().height() );
+  resize( (int)( fontMetrics().width( caption() ) * 1.5 ), sizeHint().height() );
 }
 
 
@@ -169,29 +169,29 @@ TQString K3bDataUrlAddingDialog::resultMessage() const
   TQString message;
   if( !m_unreadableFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("Insufficient permissions to read the following files") )
-      .tqarg( m_unreadableFiles.join( "<br>" ) );
+      .arg( i18n("Insufficient permissions to read the following files") )
+      .arg( m_unreadableFiles.join( "<br>" ) );
   if( !m_notFoundFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("Unable to find the following files") )
-      .tqarg( m_notFoundFiles.join( "<br>" ) );
+      .arg( i18n("Unable to find the following files") )
+      .arg( m_notFoundFiles.join( "<br>" ) );
   if( !m_nonLocalFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("No non-local files supported") )
-      .tqarg( m_unreadableFiles.join( "<br>" ) );
+      .arg( i18n("No non-local files supported") )
+      .arg( m_unreadableFiles.join( "<br>" ) );
   if( !m_tooBigFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("It is not possible to add files bigger than %1").tqarg(KIO::convertSize(0xFFFFFFFF)) )
-      .tqarg( m_tooBigFiles.join( "<br>" ) );
+      .arg( i18n("It is not possible to add files bigger than %1").arg(KIO::convertSize(0xFFFFFFFF)) )
+      .arg( m_tooBigFiles.join( "<br>" ) );
   if( !m_mkisofsLimitationRenamedFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("Some filenames had to be modified due to limitations in mkisofs") )
-      .tqarg( m_mkisofsLimitationRenamedFiles.join( "<br>" ) );
+      .arg( i18n("Some filenames had to be modified due to limitations in mkisofs") )
+      .arg( m_mkisofsLimitationRenamedFiles.join( "<br>" ) );
   if( !m_invalidFilenameEncodingFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("The following filenames have an invalid encoding. You may fix this "
+      .arg( i18n("The following filenames have an invalid encoding. You may fix this "
 		 "with the convmv tool") )
-      .tqarg( m_invalidFilenameEncodingFiles.join( "<br>" ) );
+      .arg( m_invalidFilenameEncodingFiles.join( "<br>" ) );
 
   return message;
 }
@@ -222,7 +222,7 @@ int K3bDataUrlAddingDialog::copyMoveItems( const TQValueList<K3bDataItem*>& item
     return 0;
 
   K3bDataUrlAddingDialog dlg( dir->doc(), parent );
-  dlg.m_infoLabel->setText( i18n("Moving files to project \"%1\"...").tqarg(dir->doc()->URL().fileName()) );
+  dlg.m_infoLabel->setText( i18n("Moving files to project \"%1\"...").arg(dir->doc()->URL().fileName()) );
   dlg.m_copyItems = copy;
 
   for( TQValueList<K3bDataItem*>::const_iterator it = items.begin(); it != items.end(); ++it ) {
@@ -283,9 +283,9 @@ void K3bDataUrlAddingDialog::slotAddUrls()
 #if 0
   m_infoLabel->setText( url.path() );
   if( m_totalFiles == 0 )
-    m_counterLabel->setText( TQString("(%1)").tqarg(m_filesHandled) );
+    m_counterLabel->setText( TQString("(%1)").arg(m_filesHandled) );
   else
-    m_counterLabel->setText( TQString("(%1/%2)").tqarg(m_filesHandled).tqarg(m_totalFiles) );
+    m_counterLabel->setText( TQString("(%1/%2)").arg(m_filesHandled).arg(m_totalFiles) );
 #endif
 
   //
@@ -425,8 +425,8 @@ void K3bDataUrlAddingDialog::slotAddUrls()
 	switch( K3bMultiChoiceDialog::choose( i18n("File already exists"),
 					      i18n("<p>File <em>%1</em> already exists in "
 						   "project folder <em>%2</em>.")
-					      .tqarg(newName)
-					      .tqarg('/' + dir->k3bPath()),
+					      .arg(newName)
+					      .arg('/' + dir->k3bPath()),
 					      TQMessageBox::Warning,
 					      this,
 					      0,
@@ -493,8 +493,8 @@ void K3bDataUrlAddingDialog::slotAddUrls()
 						   "K3b project cannot be resolved."
 						   "<p><b>If you do not intend to enable the option <em>follow symbolic links</em> you may safely "
 						   "ignore this warning and choose to add the link to the project.</b>")
-					      .tqarg(absFilePath)
-					      .tqarg(resolved ),
+					      .arg(absFilePath)
+					      .arg(resolved ),
 					      TQMessageBox::Warning,
 					      this,
 					      0,
@@ -603,9 +603,9 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
   ++m_filesHandled;
   m_infoLabel->setText( item->k3bPath() );
   if( m_totalFiles == 0 )
-    m_counterLabel->setText( TQString("(%1)").tqarg(m_filesHandled) );
+    m_counterLabel->setText( TQString("(%1)").arg(m_filesHandled) );
   else
-    m_counterLabel->setText( TQString("(%1/%2)").tqarg(m_filesHandled).tqarg(m_totalFiles) );
+    m_counterLabel->setText( TQString("(%1/%2)").arg(m_filesHandled).arg(m_totalFiles) );
 
 
   if( dir == item->parent() ) {
@@ -623,7 +623,7 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
       // reuse an existing dir: move all child items into the old dir
       //
       if( oldItem->isDir() && item->isDir() ) {
-	const TQPtrList<K3bDataItem>& cl = dynamic_cast<K3bDirItem*>( item )->tqchildren();
+	const TQPtrList<K3bDataItem>& cl = dynamic_cast<K3bDirItem*>( item )->children();
 	for( TQPtrListIterator<K3bDataItem> it( cl ); *it; ++it )
 	  m_items.append( tqMakePair( *it, dynamic_cast<K3bDirItem*>( oldItem ) ) );
 
@@ -661,8 +661,8 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
 	switch( K3bMultiChoiceDialog::choose( i18n("File already exists"),
 					      i18n("<p>File <em>%1</em> already exists in "
 						   "project folder <em>%2</em>.")
-					      .tqarg( item->k3bName() )
-					      .tqarg("/" + dir->k3bPath()),
+					      .arg( item->k3bName() )
+					      .arg("/" + dir->k3bPath()),
 					      TQMessageBox::Warning,
 					      this,
 					      0,

@@ -21,7 +21,7 @@
 #include <k3bversion.h>
 
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqdatetime.h>
 
 
@@ -87,5 +87,5 @@ bool K3bCueFileWriter::save( TQTextStream& t )
     i++;
   }
 
-  return ( t.tqdevice()->status() == IO_Ok );
+  return ( t.device()->status() == IO_Ok );
 }

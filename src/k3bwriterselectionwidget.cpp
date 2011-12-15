@@ -33,7 +33,7 @@
 #include <kinputdialog.h>
 
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqgroupbox.h>
 #include <tqtooltip.h>
 #include <tqtoolbutton.h>
@@ -121,11 +121,11 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *parent, const char
   TQGroupBox* groupWriter = new TQGroupBox( this );
   groupWriter->setTitle( i18n( "Burn Medium" ) );
   groupWriter->setColumnLayout(0, Qt::Vertical );
-  groupWriter->tqlayout()->setSpacing( 0 );
-  groupWriter->tqlayout()->setMargin( 0 );
+  groupWriter->layout()->setSpacing( 0 );
+  groupWriter->layout()->setMargin( 0 );
 
-  TQGridLayout* groupWriterLayout = new TQGridLayout( groupWriter->tqlayout() );
-  groupWriterLayout->tqsetAlignment( TQt::AlignTop );
+  TQGridLayout* groupWriterLayout = new TQGridLayout( groupWriter->layout() );
+  groupWriterLayout->setAlignment( TQt::AlignTop );
   groupWriterLayout->setSpacing( KDialog::spacingHint() );
   groupWriterLayout->setMargin( KDialog::marginHint() );
 
@@ -150,7 +150,7 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *parent, const char
 
 
   TQGridLayout* mainLayout = new TQGridLayout( this );
-  mainLayout->tqsetAlignment( TQt::AlignTop );
+  mainLayout->setAlignment( TQt::AlignTop );
   mainLayout->setSpacing( KDialog::spacingHint() );
   mainLayout->setMargin( 0 );
 
@@ -332,7 +332,7 @@ void K3bWriterSelectionWidget::insertSpeedItem( int speed )
 				: TQString::number( speed/1385 ) )
 			      + "x" );
     else
-      m_comboSpeed->insertItem( TQString("%1x").tqarg(speed/175) );
+      m_comboSpeed->insertItem( TQString("%1x").arg(speed/175) );
   }
 }
 

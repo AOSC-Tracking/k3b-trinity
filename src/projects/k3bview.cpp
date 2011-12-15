@@ -15,7 +15,7 @@
 
 
 // include files for TQt
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtoolbutton.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
@@ -87,7 +87,7 @@ K3bView::~K3bView()
 
 void K3bView::setMainWidget( TQWidget* w )
 {
-  static_cast<TQGridLayout*>(tqlayout())->addMultiCellWidget( w, 1, 1, 0, 1 );
+  static_cast<TQGridLayout*>(layout())->addMultiCellWidget( w, 1, 1, 0, 1 );
 }
 
 

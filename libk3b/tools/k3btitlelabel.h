@@ -32,8 +32,8 @@ class LIBK3B_EXPORT K3bTitleLabel : public TQFrame
   K3bTitleLabel( TQWidget* parent = 0, const char* name = 0 );
   ~K3bTitleLabel();
 
-  TQSize tqsizeHint() const;
-  TQSize tqminimumSizeHint() const;
+  TQSize sizeHint() const;
+  TQSize minimumSizeHint() const;
 
  public slots:
    /**
@@ -47,10 +47,10 @@ class LIBK3B_EXPORT K3bTitleLabel : public TQFrame
   /**
    * The title label only supports alignments left, hcenter, and right
    *
-   * Default tqalignment is left.
+   * Default alignment is left.
    */
   // FIXME: honor right-to-left languages
-  void tqsetAlignment( int align );
+  void setAlignment( int align );
 
  protected:
   void resizeEvent( TQResizeEvent* );

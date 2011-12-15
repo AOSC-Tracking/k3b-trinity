@@ -102,12 +102,12 @@ bool K3bDataProjectInterface::isFolder( const TQString& path ) const
 }
 
 
-TQStringList K3bDataProjectInterface::tqchildren( const TQString& path ) const
+TQStringList K3bDataProjectInterface::children( const TQString& path ) const
 {
   TQStringList l;
   K3bDataItem* item =  m_dataDoc->root()->findByPath( path );
   if( item && item->isDir() ) {
-    const TQPtrList<K3bDataItem>& cl = static_cast<K3bDirItem*>(item)->tqchildren();
+    const TQPtrList<K3bDataItem>& cl = static_cast<K3bDirItem*>(item)->children();
     for( TQPtrListIterator<K3bDataItem> it( cl ); *it; ++it )
       l.append( it.current()->k3bName() );
   }

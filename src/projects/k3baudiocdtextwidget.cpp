@@ -24,7 +24,7 @@
 #include <tqtoolbutton.h>
 #include <tqpushbutton.h>
 #include <tqptrlist.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqgroupbox.h>
 
 #include <klineedit.h>

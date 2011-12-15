@@ -22,7 +22,7 @@
 
 #include <tqfile.h>
 #include <tqfileinfo.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqregexp.h>
 #include <tqdir.h>
 

@@ -20,7 +20,7 @@
 #include <tqdir.h>
 #include <tqfile.h>
 #include <tqfileinfo.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqwhatsthis.h>
 #include <tqtooltip.h>
 #include <tqtoolbutton.h>
@@ -29,7 +29,7 @@
 #include <tqevent.h>
 #include <tqvaluelist.h>
 #include <tqfont.h>
-#include <tqpalette.h>
+#include <palette.h>
 #include <tqwidgetstack.h>
 #include <tqtimer.h>
 
@@ -181,8 +181,8 @@ K3bMainWindow::K3bMainWindow()
 
   // FIXME: now make sure the welcome screen is displayed completely
   resize( 780, 550 );
-//   getMainDockWidget()->resize( getMainDockWidget()->size().expandedTo( d->welcomeWidget->tqsizeHint() ) );
-//   m_dirTreeDock->resize( TQSize( m_dirTreeDock->tqsizeHint().width(), m_dirTreeDock->height() ) );
+//   getMainDockWidget()->resize( getMainDockWidget()->size().expandedTo( d->welcomeWidget->sizeHint() ) );
+//   m_dirTreeDock->resize( TQSize( m_dirTreeDock->sizeHint().width(), m_dirTreeDock->height() ) );
 
   readOptions();
 }
@@ -198,7 +198,7 @@ K3bMainWindow::~K3bMainWindow()
 
 void K3bMainWindow::showEvent( TQShowEvent* e )
 {
-  slotCheckDockWidgettqStatus();
+  slotCheckDockWidgetStatus();
   KDockMainWindow::showEvent( e );
 }
 
@@ -288,7 +288,7 @@ void K3bMainWindow::initActions()
 
   actionToolsBlankCdrw = new KAction( i18n("&Erase CD-RW..."), "erasecd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotBlankCdrw()),
 				      actionCollection(), "tools_blank_cdrw" );
-  KAction* actionToolsFormatDVD = new KAction( i18n("&Format DVD%1RW...").tqarg("�"), "formatdvd", 0, TQT_TQOBJECT(this), 
+  KAction* actionToolsFormatDVD = new KAction( i18n("&Format DVD%1RW...").arg("�"), "formatdvd", 0, TQT_TQOBJECT(this), 
 					       TQT_SLOT(slotFormatDvd()), actionCollection(), "tools_format_dvd" );
   actionToolsWriteCdImage = new KAction(i18n("&Burn CD Image..."), "burn_cdimage", 0, TQT_TQOBJECT(this), TQT_SLOT(slotWriteCdImage()),
 					 actionCollection(), "tools_write_cd_image" );
@@ -330,7 +330,7 @@ void K3bMainWindow::initActions()
   actionFileNewMovix->setToolTip( i18n("Creates a new eMovix CD project") );
   actionFileNewVcd->setToolTip( i18n("Creates a new Video CD project") );
   actionToolsBlankCdrw->setToolTip( i18n("Open the CD-RW erasing dialog") );
-  actionToolsFormatDVD->setToolTip( i18n("Open the DVD%1RW formatting dialog").tqarg("�") );
+  actionToolsFormatDVD->setToolTip( i18n("Open the DVD%1RW formatting dialog").arg("�") );
   actionCdCopy->setToolTip( i18n("Open the CD copy dialog") );
   actionToolsWriteCdImage->setToolTip( i18n("Write an Iso9660, cue/bin, or cdrecord clone image to CD") );
   actionToolsWriteDvdImage->setToolTip( i18n("Write an Iso9660 image to DVD") );
@@ -398,7 +398,7 @@ void K3bMainWindow::initView()
 
   m_documentHeader = new K3bThemedHeader( d->documentHull );
   m_documentHeader->setTitle( i18n("Current Projects") );
-  m_documentHeader->tqsetAlignment( TQt::AlignHCenter | TQt::AlignVCenter );
+  m_documentHeader->setAlignment( TQt::AlignHCenter | TQt::AlignVCenter );
   m_documentHeader->setLeftPixmap( K3bTheme::PROJECT_LEFT );
   m_documentHeader->setRightPixmap( K3bTheme::PROJECT_RIGHT );
 
@@ -609,7 +609,7 @@ void K3bMainWindow::readOptions()
   m_dirView->readConfig( config() );
 
   slotViewDocumentHeader();
-  slotCheckDockWidgettqStatus();
+  slotCheckDockWidgetStatus();
 }
 
 
@@ -635,20 +635,20 @@ void K3bMainWindow::saveProperties( KConfig* c )
   int cnt = 1;
   for( TQPtrListIterator<K3bDoc> it( docs ); *it; ++it ) {
     // the "name" of the project (or the original url if isSaved())
-    c->writePathEntry( TQString("%1 url").tqarg(cnt), (*it)->URL().url() );
+    c->writePathEntry( TQString("%1 url").arg(cnt), (*it)->URL().url() );
 
     // is the doc modified
-    c->writeEntry( TQString("%1 modified").tqarg(cnt), (*it)->isModified() );
+    c->writeEntry( TQString("%1 modified").arg(cnt), (*it)->isModified() );
 
     // has the doc already been saved?
-    c->writeEntry( TQString("%1 saved").tqarg(cnt), (*it)->isSaved() );
+    c->writeEntry( TQString("%1 saved").arg(cnt), (*it)->isSaved() );
 
     // where does the session management save it? If it's not modified and saved this is
     // the same as the url
     KURL saveUrl = (*it)->URL();
     if( !(*it)->isSaved() || (*it)->isModified() )
       saveUrl = KURL::fromPathOrURL( saveDir + TQString::number(cnt) );
-    c->writePathEntry( TQString("%1 saveurl").tqarg(cnt), saveUrl.url() );
+    c->writePathEntry( TQString("%1 saveurl").arg(cnt), saveUrl.url() );
 
     // finally save it
     k3bappcore->projectManager()->saveProject( *it, saveUrl );
@@ -690,13 +690,13 @@ void K3bMainWindow::readProperties( KConfig* c )
 
   for( int i = 1; i <= cnt; ++i ) {
     // in this case the constructor works since we saved as url()
-    KURL url = c->readPathEntry( TQString("%1 url").tqarg(i) );
+    KURL url = c->readPathEntry( TQString("%1 url").arg(i) );
 
-    bool modified = c->readBoolEntry( TQString("%1 modified").tqarg(i) );
+    bool modified = c->readBoolEntry( TQString("%1 modified").arg(i) );
 
-    bool saved = c->readBoolEntry( TQString("%1 saved").tqarg(i) );
+    bool saved = c->readBoolEntry( TQString("%1 saved").arg(i) );
 
-    KURL saveUrl = c->readPathEntry( TQString("%1 saveurl").tqarg(i) );
+    KURL saveUrl = c->readPathEntry( TQString("%1 saveurl").arg(i) );
 
     // now load the project
     if( K3bDoc* doc = k3bappcore->projectManager()->openProject( saveUrl ) ) {
@@ -826,7 +826,7 @@ bool K3bMainWindow::canCloseDocument( K3bDoc* doc )
     return true;
 
   switch ( KMessageBox::warningYesNoCancel( this, 
-					    i18n("%1 has unsaved data.").tqarg( doc->URL().fileName() ),
+					    i18n("%1 has unsaved data.").arg( doc->URL().fileName() ),
 					    i18n("Closing Project"), 
 					    KStdGuiItem::save(),
 					    KGuiItem( i18n("&Discard"), "editshred" ) ) )
@@ -940,7 +940,7 @@ void K3bMainWindow::fileSaveAs( K3bDoc* doc )
       bool exists = KIO::NetAccess::exists( url, false, 0 );
       if( !exists ||
 	  ( exists &&
-	    KMessageBox::warningContinueCancel( this, i18n("Do you want to overwrite %1?").tqarg( url.prettyURL() ), 
+	    KMessageBox::warningContinueCancel( this, i18n("Do you want to overwrite %1?").arg( url.prettyURL() ), 
 						i18n("File Exists"), i18n("Overwrite") )
 	    == KMessageBox::Continue ) ) {
 
@@ -1364,14 +1364,14 @@ void K3bMainWindow::slotDvdCopy()
 void K3bMainWindow::slotShowDirTreeView()
 {
   m_dirTreeDock->changeHideShowState();
-  slotCheckDockWidgettqStatus();
+  slotCheckDockWidgetStatus();
 }
 
 
 void K3bMainWindow::slotShowContentsView()
 {
   m_contentsDock->changeHideShowState();
-  slotCheckDockWidgettqStatus();
+  slotCheckDockWidgetStatus();
 }
 
 
@@ -1402,7 +1402,7 @@ void K3bMainWindow::slotContentsDockHidden()
 }
 
 
-void K3bMainWindow::slotCheckDockWidgettqStatus()
+void K3bMainWindow::slotCheckDockWidgetStatus()
 {
   actionViewContentsView->setChecked( m_contentsDock->isVisible() );
   actionViewDirTreeView->setChecked( m_dirTreeDock->isVisible() );

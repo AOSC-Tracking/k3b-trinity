@@ -22,7 +22,7 @@
 #include <k3bglobals.h>
 
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 #include <kdebug.h>
 

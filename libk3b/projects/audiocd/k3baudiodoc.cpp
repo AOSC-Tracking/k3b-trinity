@@ -37,7 +37,7 @@
 #include <tqdir.h>
 #include <tqdom.h>
 #include <tqdatetime.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqsemaphore.h>
 
 // KDE-includes
@@ -263,7 +263,7 @@ bool K3bAudioDoc::readPlaylistFile( const KURL& url, KURL::List& playlist )
   TQTextStream t( &f );
   char buf[7];
   t.readRawBytes( buf, 7 );
-  if( TQString::tqfromLatin1( buf, 7 ) != "#EXTM3U" )
+  if( TQString::fromLatin1( buf, 7 ) != "#EXTM3U" )
     return false;
 
   // skip the first line

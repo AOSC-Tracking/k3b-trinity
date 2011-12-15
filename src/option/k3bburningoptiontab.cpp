@@ -22,7 +22,7 @@
 #include <tqlabel.h>
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqgroupbox.h>
 #include <tqtabwidget.h>
 #include <tqradiobutton.h>
@@ -54,14 +54,14 @@ K3bBurningOptionTab::~K3bBurningOptionTab()
 void K3bBurningOptionTab::setupGui()
 {
   TQGridLayout* groupAdvancedLayout = new TQGridLayout( this );
-  groupAdvancedLayout->tqsetAlignment( TQt::AlignTop );
+  groupAdvancedLayout->setAlignment( TQt::AlignTop );
   groupAdvancedLayout->setSpacing( KDialog::spacingHint() );
   groupAdvancedLayout->setMargin( 0 );
 
 
   TQGroupBox* groupWritingApp = new TQGroupBox( 0, Qt::Vertical, i18n("Burning"), this );
-  groupWritingApp->tqlayout()->setMargin( 0 );
-  TQGridLayout* bufferLayout = new TQGridLayout( groupWritingApp->tqlayout() );
+  groupWritingApp->layout()->setMargin( 0 );
+  TQGridLayout* bufferLayout = new TQGridLayout( groupWritingApp->layout() );
   bufferLayout->setMargin( KDialog::marginHint() );
   bufferLayout->setSpacing( KDialog::spacingHint() );
 
@@ -132,7 +132,7 @@ void K3bBurningOptionTab::setupGui()
 							"avoid gaps in the data stream due to high system load. The default "
 							"sizes used are %1 MB for CD and %2 MB for DVD burning."
 							"<p>If this option is checked the value specified will be used for both "
-							"CD and DVD burning.").tqarg(4).tqarg(32) );
+							"CD and DVD burning.").arg(4).arg(32) );
 
   TQWhatsThis::add( m_checkEject, i18n("<p>If this option is checked K3b will not eject the medium once the burn process "
 				      "finishes. This can be helpful in case one leaves the computer after starting the "

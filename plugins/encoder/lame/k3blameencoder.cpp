@@ -28,14 +28,14 @@
 #include <kcombobox.h>
 #include <kdialogbase.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcstring.h>
 #include <tqradiobutton.h>
 #include <tqcheckbox.h>
 #include <tqspinbox.h>
 #include <tqgroupbox.h>
 #include <tqbuttongroup.h>
-#include <tqtextcodec.h>
+#include <textcodec.h>
 #include <tqfile.h>
 #include <tqslider.h>
 #include <tqlabel.h>
@@ -411,13 +411,13 @@ K3bLameEncoderSettingsWidget::K3bLameEncoderSettingsWidget( TQWidget* parent, co
   m_manualSettingsDlg->setMainWidget( m_brW );
 
   for( int i = 0; s_lame_bitrates[i]; ++i )
-    m_brW->m_comboMaximumBitrate->insertItem( i18n("%1 kbps" ).tqarg(s_lame_bitrates[i]) );
+    m_brW->m_comboMaximumBitrate->insertItem( i18n("%1 kbps" ).arg(s_lame_bitrates[i]) );
 
   for( int i = 0; s_lame_bitrates[i]; ++i )
-    m_brW->m_comboMinimumBitrate->insertItem( i18n("%1 kbps" ).tqarg(s_lame_bitrates[i]) );
+    m_brW->m_comboMinimumBitrate->insertItem( i18n("%1 kbps" ).arg(s_lame_bitrates[i]) );
 
   for( int i = 0; s_lame_bitrates[i]; ++i )
-    m_brW->m_comboConstantBitrate->insertItem( i18n("%1 kbps" ).tqarg(s_lame_bitrates[i]) );
+    m_brW->m_comboConstantBitrate->insertItem( i18n("%1 kbps" ).arg(s_lame_bitrates[i]) );
 
 
   TQHBoxLayout* lay = new TQHBoxLayout( this );
@@ -469,11 +469,11 @@ void K3bLameEncoderSettingsWidget::updateManualSettingsLabel()
 {
   if( m_brW->m_radioConstantBitrate->isChecked() )
     m_w->m_labelManualSettings->setText( i18n("Constant Bitrate: %1 kbps (%2)")
-					 .tqarg(s_lame_bitrates[m_brW->m_comboConstantBitrate->currentItem()])
-					 .tqarg(i18n(s_lame_mode_strings[m_brW->m_comboMode->currentItem()])) );
+					 .arg(s_lame_bitrates[m_brW->m_comboConstantBitrate->currentItem()])
+					 .arg(i18n(s_lame_mode_strings[m_brW->m_comboMode->currentItem()])) );
   else
     m_w->m_labelManualSettings->setText( i18n("Variable Bitrate (%1)")
-					 .tqarg(i18n(s_lame_mode_strings[m_brW->m_comboMode->currentItem()])) );
+					 .arg(i18n(s_lame_mode_strings[m_brW->m_comboMode->currentItem()])) );
 }
 
 
@@ -507,9 +507,9 @@ void K3bLameEncoderSettingsWidget::loadConfig()
   else
     m_brW->m_radioConstantBitrate->setChecked( true );
 
-  m_brW->m_comboConstantBitrate->setCurrentItem( i18n("%1 kbps").tqarg(c->readNumEntry( "Constant Bitrate", 128 )) );
-  m_brW->m_comboMaximumBitrate->setCurrentItem( i18n("%1 kbps").tqarg(c->readNumEntry( "Maximum Bitrate", 224 )) );
-  m_brW->m_comboMinimumBitrate->setCurrentItem( i18n("%1 kbps").tqarg(c->readNumEntry( "Minimum Bitrate", 32 )) );
+  m_brW->m_comboConstantBitrate->setCurrentItem( i18n("%1 kbps").arg(c->readNumEntry( "Constant Bitrate", 128 )) );
+  m_brW->m_comboMaximumBitrate->setCurrentItem( i18n("%1 kbps").arg(c->readNumEntry( "Maximum Bitrate", 224 )) );
+  m_brW->m_comboMinimumBitrate->setCurrentItem( i18n("%1 kbps").arg(c->readNumEntry( "Minimum Bitrate", 32 )) );
   m_brW->m_spinAverageBitrate->setValue( c->readNumEntry( "Average Bitrate", 128) );
 
   m_brW->m_checkBitrateMaximum->setChecked( c->readBoolEntry( "Use Maximum Bitrate", false ) );

@@ -17,7 +17,7 @@
 
 #include <tqstringlist.h>
 #include <tqsocket.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -54,7 +54,7 @@ void K3bCddbpQuery::doQuery()
   // connect to the server
 
   m_socket->connectToHost( m_server, m_port );
-  emit infoMessage( i18n("Searching %1 on port %2").tqarg(m_server).tqarg(m_port) );
+  emit infoMessage( i18n("Searching %1 on port %2").arg(m_server).arg(m_port) );
 }
 
 
@@ -63,7 +63,7 @@ void K3bCddbpQuery::doMatchQuery()
   // we should still be connected
   // TODO: check this
 
-  TQString read = TQString( "cddb read %1 %2").tqarg( header().category ).tqarg( header().discid );
+  TQString read = TQString( "cddb read %1 %2").arg( header().category ).arg( header().discid );
   
   m_state = READ;
   m_parsingBuffer = "";
@@ -258,16 +258,16 @@ void K3bCddbpQuery::slotError( int e )
 {
   switch(e) {
   case TQSocket::ErrConnectionRefused:
-    kdDebug() <<  i18n("Connection to %1 refused").tqarg( m_server ) << endl;
-    emit infoMessage( i18n("Connection to %1 refused").tqarg( m_server ) );
+    kdDebug() <<  i18n("Connection to %1 refused").arg( m_server ) << endl;
+    emit infoMessage( i18n("Connection to %1 refused").arg( m_server ) );
     break;
   case TQSocket::ErrHostNotFound:
-    kdDebug() <<  i18n("Could not find host %1").tqarg( m_server ) << endl;
-    emit infoMessage( i18n("Could not find host %1").tqarg( m_server ) );
+    kdDebug() <<  i18n("Could not find host %1").arg( m_server ) << endl;
+    emit infoMessage( i18n("Could not find host %1").arg( m_server ) );
     break;
   case TQSocket::ErrSocketRead:
-    kdDebug() <<  i18n("Error while reading from %1").tqarg( m_server ) << endl;
-    emit infoMessage( i18n("Error while reading from %1").tqarg( m_server ) );
+    kdDebug() <<  i18n("Error while reading from %1").arg( m_server ) << endl;
+    emit infoMessage( i18n("Error while reading from %1").arg( m_server ) );
     break;
   }
 

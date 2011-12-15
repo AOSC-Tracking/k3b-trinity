@@ -29,7 +29,7 @@
 #include <kactivelabel.h>
 
 #include <tqtimer.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqmainwindow.h>
 #include <tqmessagebox.h>
@@ -116,7 +116,7 @@ K3bPassivePopup::K3bPassivePopup( TQWidget* parent )
 
   d->titleLabel = new TQLabel( this );
   d->titleLabel->setMargin( 5 );
-  d->titleLabel->tqsetAlignment( TQt::AlignCenter );
+  d->titleLabel->setAlignment( TQt::AlignCenter );
   TQFont fnt( d->titleLabel->font() );
   fnt.setBold( true );
   d->titleLabel->setFont( fnt );
@@ -124,7 +124,7 @@ K3bPassivePopup::K3bPassivePopup( TQWidget* parent )
   d->messageLabel = new KActiveLabel( this );
 
   d->pixmapLabel = new TQLabel( this );
-  d->pixmapLabel->tqsetAlignment( TQt::AlignTop );
+  d->pixmapLabel->setAlignment( TQt::AlignTop );
 
   d->timeoutWidget = new K3bTimeoutWidget( this );
   connect( d->timeoutWidget, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotClose()) );

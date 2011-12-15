@@ -31,7 +31,7 @@
 #include <ktempfile.h>
 #include <kio/global.h>
 
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqdir.h>
 
 
@@ -190,7 +190,7 @@ bool K3bMovixDocPreparer::writePlaylistFile()
     return true;
   }
   else {
-    emit infoMessage( i18n("Could not write to temporary file %1").tqarg(d->playlistFile->name()), ERROR );
+    emit infoMessage( i18n("Could not write to temporary file %1").arg(d->playlistFile->name()), ERROR );
     return false;
   }
 }
@@ -229,7 +229,7 @@ bool K3bMovixDocPreparer::writeIsolinuxConfigFile( const TQString& originalPath 
       return false;
   }
   else {
-    emit infoMessage( i18n("Could not write to temporary file %1").tqarg(d->isolinuxConfigFile->name()), ERROR );
+    emit infoMessage( i18n("Could not write to temporary file %1").arg(d->isolinuxConfigFile->name()), ERROR );
     return false;
   }
 }
@@ -263,7 +263,7 @@ bool K3bMovixDocPreparer::writeMovixRcFile()
     return true;
   }
   else {
-    emit infoMessage( i18n("Could not write to temporary file %1").tqarg(d->movixRcFile->name()), ERROR );
+    emit infoMessage( i18n("Could not write to temporary file %1").arg(d->movixRcFile->name()), ERROR );
     return false;
   }
 }

@@ -21,7 +21,7 @@
 
 #include <tqlabel.h>
 #include <tqstring.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcursor.h>
 #include <tqapplication.h>
 
@@ -43,7 +43,7 @@ K3bDeviceOptionTab::K3bDeviceOptionTab( TQWidget* parent, const char* name )
   // Info Label
   // ------------------------------------------------
   m_labelDevicesInfo = new TQLabel( this, "m_labelDevicesInfo" );
-  m_labelDevicesInfo->tqsetAlignment( int( TQLabel::WordBreak | TQLabel::AlignVCenter | TQLabel::AlignLeft ) );
+  m_labelDevicesInfo->setAlignment( int( TQLabel::WordBreak | TQLabel::AlignVCenter | TQLabel::AlignLeft ) );
   m_labelDevicesInfo->setText( i18n( "K3b tries to detect all your devices properly. "
 				     "You can add devices that have not been detected and change "
 				     "the black values by clicking in the list. If K3b is unable "

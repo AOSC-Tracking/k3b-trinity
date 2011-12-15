@@ -86,7 +86,7 @@ K3bWelcomeWidget::Display::Display( K3bWelcomeWidget* parent )
   fnt.setPointSize( 16 );
   m_header = new TQSimpleRichText( i18n("Welcome to K3b - The CD and DVD Kreator"), fnt );
   m_infoText = new TQSimpleRichText( TQString::fromUtf8("<qt align=\"center\">K3b %1 (c) 1999 - 2007 Sebastian Trüg")
-				    .tqarg(kapp->aboutData()->version()), font() );
+				    .arg(kapp->aboutData()->version()), font() );
 
   // set a large width just to be sure no linebreak occurs
   m_header->setWidth( 800 );
@@ -182,9 +182,9 @@ void K3bWelcomeWidget::Display::rebuildGui()
 
     // determine the needed button size (since all buttons should be equal in size
     // we use the max of all sizes)
-    m_buttonSize = m_buttons.first()->tqsizeHint();
+    m_buttonSize = m_buttons.first()->sizeHint();
     for( TQPtrListIterator<K3bFlatButton> it( m_buttons ); it.current(); ++it ) {
-      m_buttonSize = m_buttonSize.expandedTo( it.current()->tqsizeHint() );
+      m_buttonSize = m_buttonSize.expandedTo( it.current()->sizeHint() );
     }
 
     repositionButtons();
@@ -249,7 +249,7 @@ int K3bWelcomeWidget::Display::heightForWidth( int w ) const
 }
 
 
-TQSize K3bWelcomeWidget::Display::tqminimumSizeHint() const
+TQSize K3bWelcomeWidget::Display::minimumSizeHint() const
 {
   TQSize size( TQMAX(40+m_header->widthUsed(), 40+m_buttonSize.width()),
 	      20 + m_header->height() + 20 + 10 + m_buttonSize.height() + 10 + m_infoText->height() + 20 );
@@ -309,7 +309,7 @@ void K3bWelcomeWidget::Display::paintEvent( TQPaintEvent* )
     p.drawRect( 10, 10, width()-20, height()-20 );
 
     // draw the header text
-    TQColorGroup grp( tqcolorGroup() );
+    TQColorGroup grp( colorGroup() );
     grp.setColor( TQColorGroup::Text, theme->foregroundColor() );
     int pos = 20;
     pos += TQMAX( (width()-40-m_header->widthUsed())/2, 0 );
@@ -415,7 +415,7 @@ void K3bWelcomeWidget::showEvent( TQShowEvent* e )
 void K3bWelcomeWidget::fixSize()
 {
   TQSize s = contentsRect().size();
-  s.setWidth( TQMAX( main->tqminimumSizeHint().width(), s.width() ) );
+  s.setWidth( TQMAX( main->minimumSizeHint().width(), s.width() ) );
   s.setHeight( TQMAX( main->heightForWidth(s.width()), s.height() ) );
 
   main->resize( s );
@@ -443,7 +443,7 @@ void K3bWelcomeWidget::contentsMousePressEvent( TQMouseEvent* e )
     int r = 0;
     int removeAction = 0;
 
-    TQWidget* widgetAtPos = viewport()->tqchildAt(e->pos());
+    TQWidget* widgetAtPos = viewport()->childAt(e->pos());
     if( widgetAtPos && widgetAtPos->inherits( "K3bFlatButton" ) ) {
       KPopupMenu pop;
       removeAction = pop.insertItem( SmallIcon("remove"), i18n("Remove Button") );

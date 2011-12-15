@@ -64,7 +64,7 @@ void K3bMediaSelectionComboBox::ToolTip::maybeTip( const TQPoint& pos )
   int index = m_box->listBox()->index( item );
 
   if( K3bDevice::Device* dev = m_box->deviceAt( index ) ) {
-    tip( m_box->listBox()->tqitemRect( item ),
+    tip( m_box->listBox()->itemRect( item ),
 	 m_box->mediumToolTip( k3bappcore->mediaCache()->medium( dev ) ) );
   }
 }
@@ -350,7 +350,7 @@ void K3bMediaSelectionComboBox::addMedium( K3bDevice::Device* dev )
     //
     // insert the modified string
     //
-    insertItem( s + TQString(" (%1 - %2)").tqarg(dev->vendor()).tqarg(dev->description()) );
+    insertItem( s + TQString(" (%1 - %2)").arg(dev->vendor()).arg(dev->description()) );
 
     //
     // change the already existing string if we did not already do so
@@ -358,7 +358,7 @@ void K3bMediaSelectionComboBox::addMedium( K3bDevice::Device* dev )
     //
     int prevIndex = d->mediaStringMap[s];
     if( prevIndex >= 0 )
-      changeItem( text(prevIndex) + TQString(" (%1 - %2)").tqarg(d->devices[prevIndex]->vendor()).tqarg(d->devices[prevIndex]->description()),
+      changeItem( text(prevIndex) + TQString(" (%1 - %2)").arg(d->devices[prevIndex]->vendor()).arg(d->devices[prevIndex]->description()),
 		  prevIndex );
 
     //
@@ -478,11 +478,11 @@ TQString K3bMediaSelectionComboBox::noMediumMessage() const
     mediumString = i18n("DVD");
   else if( (d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_DVD) &&
       (d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_CD) )
-    mediumString = i18n("CD-R(W) or DVD%1R(W)").tqarg("±");
+    mediumString = i18n("CD-R(W) or DVD%1R(W)").arg("±");
   else if( d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_DVD_SL )
-    mediumString = i18n("DVD%1R(W)").tqarg("±");
+    mediumString = i18n("DVD%1R(W)").arg("±");
   else if( d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_DVD_DL )
-    mediumString = i18n("Double Layer DVD%1R").tqarg("±");
+    mediumString = i18n("Double Layer DVD%1R").arg("±");
   else if( d->wantedMediumType & K3bDevice::MEDIA_WRITABLE_CD )
     mediumString = i18n("CD-R(W)");
   else if( d->wantedMediumType & K3bDevice::MEDIA_DVD_ROM )
@@ -490,7 +490,7 @@ TQString K3bMediaSelectionComboBox::noMediumMessage() const
   else
     mediumString = i18n("CD-ROM");
 
-  return i18n("Please insert %1...").tqarg( stateString.tqarg( mediumString ) );
+  return i18n("Please insert %1...").arg( stateString.arg( mediumString ) );
 }
 
 

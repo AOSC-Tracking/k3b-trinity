@@ -38,7 +38,7 @@
 #include <k3bprojectplugin.h>
 
 // QT-includes
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqstring.h>
 
 // KDE-includes

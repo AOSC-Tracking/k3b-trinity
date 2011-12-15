@@ -22,7 +22,7 @@
 #include <k3bvalidators.h>
 
 #include <tqpushbutton.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqframe.h>
 #include <tqcheckbox.h>
@@ -94,7 +94,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
     KFileItem kFileItem( KFileItem::Unknown, KFileItem::Unknown, KURL::fromPathOrURL(fileItem->localPath()) );
     labelMimeType->setPixmap( kFileItem.pixmap(KIcon::SizeLarge) );
     if( fileItem->isSymLink() )
-      m_labelType->setText( i18n("Link to %1").tqarg(kFileItem.mimeComment()) );
+      m_labelType->setText( i18n("Link to %1").arg(kFileItem.mimeComment()) );
     else
       m_labelType->setText( kFileItem.mimeComment() );
     m_labelLocalName->setText( kFileItem.name() );
@@ -136,7 +136,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
   if( location.isEmpty() )
     location = "/";
   m_labelLocation->setText( location );
-  extraInfoLabel->setText( TQString( "(%1)" ).tqarg(dataItem->extraInfo()) );
+  extraInfoLabel->setText( TQString( "(%1)" ).arg(dataItem->extraInfo()) );
   if( dataItem->extraInfo().isEmpty() )
     extraInfoLabel->hide();
 
@@ -168,7 +168,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
   sortingBoxGrid->setMargin( marginHint() );
   m_editSortWeight = new KLineEdit( sortingBox );
   m_editSortWeight->setValidator( new TQIntValidator( -2147483647, 2147483647, TQT_TQOBJECT(m_editSortWeight) ) );
-  m_editSortWeight->tqsetAlignment( TQt::AlignRight );
+  m_editSortWeight->setAlignment( TQt::AlignRight );
   sortingBoxGrid->addWidget( new TQLabel( i18n("Sort weight:"), sortingBox ), 0, 0 );
   sortingBoxGrid->addWidget( m_editSortWeight, 0, 1 );
   sortingBoxGrid->setColStretch( 1, 1 );
@@ -215,7 +215,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
 					  "in the ISO9660 filesystem. A higher weighting means that the "
 					  "file will be located closer to the beginning of the image "
 					  "(and the disk)."
-					  "<p>This option is useful in order to optimize the data tqlayout "
+					  "<p>This option is useful in order to optimize the data layout "
 					  "on a CD/DVD."
 					  "<p><b>Caution:</b> This does not sort the order of the file "
 					  "names that appear in the ISO9660 directory."

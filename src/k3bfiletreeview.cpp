@@ -46,13 +46,13 @@
 #include <tqfont.h>
 #include <tqstyle.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 
 
 K3bDeviceBranch::K3bDeviceBranch( KFileTreeView* view, K3bDevice::Device* dev, KFileTreeViewItem* item )
   : KFileTreeBranch( view,
 		     KURL( "media:/" + dev->blockDeviceName() ),
-		     TQString("%1 - %2").tqarg(dev->vendor()).tqarg(dev->description()),
+		     TQString("%1 - %2").arg(dev->vendor()).arg(dev->description()),
 		     ( dev->burner()
 		       ? SmallIcon("cdwriter_unmount")
 		       : SmallIcon("cdrom_unmount") ),
@@ -99,13 +99,13 @@ void K3bDeviceBranch::updateLabel()
 {
   if( m_showBlockDeviceName )
     setName( TQString("%1 %2 (%3)")
-	     .tqarg(m_device->vendor())
-	     .tqarg(m_device->description())
-	     .tqarg(m_device->blockDeviceName()) );
+	     .arg(m_device->vendor())
+	     .arg(m_device->description())
+	     .arg(m_device->blockDeviceName()) );
   else
     setName( TQString("%1 %2")
-	     .tqarg(m_device->vendor())
-	     .tqarg(m_device->description()) );
+	     .arg(m_device->vendor())
+	     .arg(m_device->description()) );
 
   if( k3bappcore->mediaCache() ) {
     root()->setMultiLinesEnabled( true );
@@ -182,7 +182,7 @@ K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeView* parent,
 void K3bDeviceBranchViewItem::setCurrent( bool c )
 {
   m_bCurrent = c;
-  tqrepaint();
+  repaint();
 }
 
 
@@ -238,7 +238,7 @@ void K3bDeviceBranchViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, i
       textheight++;
     if ( textheight < height() ) {
       int w = listView()->treeStepSize() / 2;
-      listView()->tqstyle().tqdrawComplexControl( TQStyle::CC_ListView, p, listView(),
+      listView()->tqstyle().drawComplexControl( TQStyle::CC_ListView, p, listView(),
 					      TQRect( 0, textheight, w + 1, height() - textheight + 1 ), cg,
 					      TQStyle::Style_Enabled,
 					      TQStyle::SC_ListViewExpand,
@@ -343,7 +343,7 @@ void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
   lay->addMultiCellWidget( label, 0, 0, 0, 1 );
   label = new TQLabel( details, tooltip );
   label->setMargin( 9 );
-  label->tqsetAlignment( Qt::Vertical );
+  label->setAlignment( Qt::Vertical );
   lay->addMultiCellWidget( label, 1, 2, 0, 0 );
   label = new TQLabel( tooltip );
   lay->addWidget( label, 2, 1 );
@@ -374,7 +374,7 @@ void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
   }
 
   // the tooltip will take care of deleting the widget
-  tip( m_view->tqitemRect( item ), tooltip );
+  tip( m_view->itemRect( item ), tooltip );
 }
 
 
@@ -722,7 +722,7 @@ void K3bFileTreeView::updateMinimumWidth()
   }
 
   // width of the items + scrollbar width + the frame + a little eyecandy spacing
-  setMinimumWidth( w + verticalScrollBar()->tqsizeHint().width() + 2*frameWidth() + 2 );
+  setMinimumWidth( w + verticalScrollBar()->sizeHint().width() + 2*frameWidth() + 2 );
 }
 
 #include "k3bfiletreeview.moc"

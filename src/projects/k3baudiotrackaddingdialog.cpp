@@ -30,7 +30,7 @@
 #include <kmessagebox.h>
 
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqfileinfo.h>
 #include <tqtimer.h>
 #include <tqdir.h>
@@ -104,7 +104,7 @@ int K3bAudioTrackAddingDialog::addUrls( const KURL::List& urls,
   dlg.m_trackAfter = afterTrack;
   dlg.m_parentTrack = parentTrack;
   dlg.m_sourceAfter = afterSource;
-  dlg.m_infoLabel->setText( i18n("Adding files to project \"%1\"...").tqarg(doc->URL().fileName()) );
+  dlg.m_infoLabel->setText( i18n("Adding files to project \"%1\"...").arg(doc->URL().fileName()) );
 
   dlg.m_busyWidget->showBusy(true);
   TQTimer::singleShot( 0, &dlg, TQT_SLOT(slotAddUrls()) );
@@ -113,23 +113,23 @@ int K3bAudioTrackAddingDialog::addUrls( const KURL::List& urls,
   TQString message;
   if( !dlg.m_unreadableFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("Insufficient permissions to read the following files") )
-      .tqarg( dlg.m_unreadableFiles.join( "<br>" ) );
+      .arg( i18n("Insufficient permissions to read the following files") )
+      .arg( dlg.m_unreadableFiles.join( "<br>" ) );
   if( !dlg.m_notFoundFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("Unable to find the following files") )
-      .tqarg( dlg.m_notFoundFiles.join( "<br>" ) );
+      .arg( i18n("Unable to find the following files") )
+      .arg( dlg.m_notFoundFiles.join( "<br>" ) );
   if( !dlg.m_nonLocalFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .tqarg( i18n("No non-local files supported") )
-      .tqarg( dlg.m_unreadableFiles.join( "<br>" ) );
+      .arg( i18n("No non-local files supported") )
+      .arg( dlg.m_unreadableFiles.join( "<br>" ) );
   if( !dlg.m_unsupportedFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br><i>%2</i><br>%3")
-      .tqarg( i18n("Unable to handle the following files due to an unsupported format" ) )
-      .tqarg( i18n("You may manually convert these audio files to wave using another "
+      .arg( i18n("Unable to handle the following files due to an unsupported format" ) )
+      .arg( i18n("You may manually convert these audio files to wave using another "
 		 "application supporting the audio format and then add the wave files "
 		 "to the K3b project.") )
-      .tqarg( dlg.m_unsupportedFiles.join( "<br>" ) );
+      .arg( dlg.m_unsupportedFiles.join( "<br>" ) );
 
   if( !message.isEmpty() )
     KMessageBox::detailedSorry( parent, i18n("Problems while adding files to the project."), message );
@@ -162,7 +162,7 @@ void K3bAudioTrackAddingDialog::slotAddUrls()
     }
   }
 
-  m_infoLabel->setText( i18n("Analysing file '%1'...").tqarg( url.fileName() ) );
+  m_infoLabel->setText( i18n("Analysing file '%1'...").arg( url.fileName() ) );
 
   if( !url.isLocalFile() ) {
     valid = false;

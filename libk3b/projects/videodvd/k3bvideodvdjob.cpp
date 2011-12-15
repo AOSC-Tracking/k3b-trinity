@@ -85,14 +85,14 @@ TQString K3bVideoDvdJob::jobDescription() const
     return i18n("Writing Video DVD")
       + ( m_doc->isoOptions().volumeID().isEmpty()
 	  ? TQString()
-	  : TQString( " (%1)" ).tqarg(m_doc->isoOptions().volumeID()) );
+	  : TQString( " (%1)" ).arg(m_doc->isoOptions().volumeID()) );
   }
 }
 
 
 TQString K3bVideoDvdJob::jobDetails() const
 {
-  return ( i18n("ISO9660/Udf Filesystem (Size: %1)").tqarg(KIO::convertSize( doc()->size() ))
+  return ( i18n("ISO9660/Udf Filesystem (Size: %1)").arg(KIO::convertSize( doc()->size() ))
 	   + ( m_doc->copies() > 1 
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
 	       : TQString() ) );

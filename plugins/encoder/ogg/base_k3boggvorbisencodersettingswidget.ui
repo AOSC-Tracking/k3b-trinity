@@ -33,7 +33,7 @@
                 </property>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>tqlayout7</cstring>
+                        <cstring>layout7</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -68,7 +68,7 @@
                             <property name="text">
                                 <string>textLabel1</string>
                             </property>
-                            <property name="tqalignment">
+                            <property name="alignment">
                                 <set>AlignVCenter|AlignRight</set>
                             </property>
                         </widget>
@@ -101,7 +101,7 @@
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="tqsizeHint">
+                            <property name="sizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>20</height>
@@ -110,7 +110,7 @@
                         </spacer>
                         <widget class="TQLayoutWidget">
                             <property name="name">
-                                <cstring>tqlayout8</cstring>
+                                <cstring>layout8</cstring>
                             </property>
                             <grid>
                                 <property name="name">
@@ -148,7 +148,7 @@
                                     <property name="text">
                                         <string>high quality</string>
                                     </property>
-                                    <property name="tqalignment">
+                                    <property name="alignment">
                                         <set>AlignVCenter|AlignRight</set>
                                     </property>
                                 </widget>
@@ -179,7 +179,7 @@
                     <property name="sizeType">
                         <enum>Fixed</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>20</width>
                             <height>20</height>
@@ -196,7 +196,7 @@
                 </widget>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>tqlayout6</cstring>
+                        <cstring>layout6</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -212,7 +212,7 @@
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="tqsizeHint">
+                            <property name="sizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>21</height>

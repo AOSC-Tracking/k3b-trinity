@@ -26,7 +26,7 @@
 #include <k3bsystemproblemdialog.h>
 
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
 #include <tqtabwidget.h>

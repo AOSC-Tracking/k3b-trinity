@@ -48,7 +48,7 @@
 #include <tqheader.h>
 #include <tqsplitter.h>
 #include <tqpushbutton.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqiconset.h>
 #include <tqvaluelist.h>
 #include <tqlabel.h>
@@ -247,7 +247,7 @@ void K3bDirView::showMediumInfo( const K3bMedium& medium )
       else {
 	if( KMessageBox::questionYesNo( this,
 					i18n("Found %1. Do you want K3b to mount the data part "
-					     "or show all the tracks?").tqarg( i18n("Video CD") ),
+					     "or show all the tracks?").arg( i18n("Video CD") ),
 					i18n("Video CD"),
 					i18n("Mount CD"),
 					i18n("Show Video Tracks") ) == KMessageBox::No ) {
@@ -260,7 +260,7 @@ void K3bDirView::showMediumInfo( const K3bMedium& medium )
     else if( medium.content() & K3bMedium::CONTENT_AUDIO ) {
       if( KMessageBox::questionYesNo( this,
 				      i18n("Found %1. Do you want K3b to mount the data part "
-					   "or show all the tracks?").tqarg( i18n("Audio CD") ),
+					   "or show all the tracks?").arg( i18n("Audio CD") ),
 				      i18n("Audio CD"),
 				      i18n("Mount CD"),
 				      i18n("Show Audio Tracks") ) == KMessageBox::No ) {
@@ -298,9 +298,9 @@ void K3bDirView::slotMountFinished( const TQString& mp )
   else {
     m_viewStack->raiseWidget( m_fileView );
     K3bPassivePopup::showPopup( i18n("<p>K3b was unable to mount medium <b>%1</b> in device <em>%2 - %3</em>")
-				.tqarg( k3bappcore->mediaCache()->medium( k3bappcore->appDeviceManager()->currentDevice() ).shortString() )
-				.tqarg( k3bappcore->appDeviceManager()->currentDevice()->vendor() )
-				.tqarg( k3bappcore->appDeviceManager()->currentDevice()->description() ),
+				.arg( k3bappcore->mediaCache()->medium( k3bappcore->appDeviceManager()->currentDevice() ).shortString() )
+				.arg( k3bappcore->appDeviceManager()->currentDevice()->vendor() )
+				.arg( k3bappcore->appDeviceManager()->currentDevice()->description() ),
 				i18n("Mount Failed"),
 				K3bPassivePopup::Warning );
   }
@@ -314,9 +314,9 @@ void K3bDirView::slotUnmountFinished( bool success )
   }
   else {
     K3bPassivePopup::showPopup( i18n("<p>K3b was unable to unmount medium <b>%1</b> in device <em>%2 - %3</em>")
-				.tqarg( k3bappcore->mediaCache()->medium( k3bappcore->appDeviceManager()->currentDevice() ).shortString() )
-				.tqarg( k3bappcore->appDeviceManager()->currentDevice()->vendor() )
-				.tqarg( k3bappcore->appDeviceManager()->currentDevice()->description() ),
+				.arg( k3bappcore->mediaCache()->medium( k3bappcore->appDeviceManager()->currentDevice() ).shortString() )
+				.arg( k3bappcore->appDeviceManager()->currentDevice()->vendor() )
+				.arg( k3bappcore->appDeviceManager()->currentDevice()->description() ),
 				i18n("Unmount Failed"),
 				K3bPassivePopup::Warning );
   }

@@ -22,7 +22,7 @@
 #include <k3bdevicemanager.h>
 
 #include <tqcombobox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqstring.h>
 #include <tqframe.h>

@@ -22,10 +22,10 @@
 #include <k3bversion.h>
 #include <k3bglobals.h>
 
-#include <tqtextedit.h>
+#include <textedit.h>
 #include <tqcursor.h>
 #include <tqfile.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 
 #include <klocale.h>
 #include <kstdguiitem.h>
@@ -122,12 +122,12 @@ void K3bDebuggingOutputDialog::clear()
     K3bDevice::Device* dev = *it;
     addOutput( "Devices", 
 	       TQString( "%1 (%2, %3) [%5] [%6] [%7]" )
-	       .tqarg( dev->vendor() + " " + dev->description() + " " + dev->version() )
-	       .tqarg( dev->blockDeviceName() )
-	       .tqarg( dev->genericDevice() )
-	       .tqarg( K3bDevice::deviceTypeString( dev->type() ) )
-	       .tqarg( K3bDevice::mediaTypeString( dev->supportedProfiles() ) )
-	       .tqarg( K3bDevice::writingModeString( dev->writingModes() ) ) );
+	       .arg( dev->vendor() + " " + dev->description() + " " + dev->version() )
+	       .arg( dev->blockDeviceName() )
+	       .arg( dev->genericDevice() )
+	       .arg( K3bDevice::deviceTypeString( dev->type() ) )
+	       .arg( K3bDevice::mediaTypeString( dev->supportedProfiles() ) )
+	       .arg( K3bDevice::writingModeString( dev->writingModes() ) ) );
   }
 }
 
@@ -138,7 +138,7 @@ void K3bDebuggingOutputDialog::slotUser1()
   if( !filename.isEmpty() ) {
     TQFile f( filename );
     if( !f.exists() || KMessageBox::warningContinueCancel( this,
-						  i18n("Do you want to overwrite %1?").tqarg(filename),
+						  i18n("Do you want to overwrite %1?").arg(filename),
 						  i18n("File Exists"), i18n("Overwrite") )
 	== KMessageBox::Continue ) {
 
@@ -147,7 +147,7 @@ void K3bDebuggingOutputDialog::slotUser1()
 	t << debugView->text();
       }
       else {
-	KMessageBox::error( this, i18n("Could not open file %1").tqarg(filename) );
+	KMessageBox::error( this, i18n("Could not open file %1").arg(filename) );
       }
     }
   }
@@ -156,7 +156,7 @@ void K3bDebuggingOutputDialog::slotUser1()
 
 void K3bDebuggingOutputDialog::slotUser2()
 {
-  TQApplication::tqclipboard()->setText( debugView->text(), TQClipboard::Clipboard );
+  TQApplication::clipboard()->setText( debugView->text(), TQClipboard::Clipboard );
 }
 
 #include "k3bdebuggingoutputdialog.moc"

@@ -33,7 +33,7 @@
 #include <kdebug.h>
 
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtimer.h>
 #include <tqframe.h>
 #include <tqeventloop.h>
@@ -122,7 +122,7 @@ void K3bAudioTrackTRMLookupDialog::slotTrackFinished( K3bAudioTrack* track, bool
 {
   if( !success )
     K3bPassivePopup::showPopup( i18n("Track %1 was not found in the MusicBrainz database.")
-				.tqarg( track->trackNumber()),
+				.arg( track->trackNumber()),
 				i18n("Audio Project") );
 }
 

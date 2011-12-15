@@ -21,7 +21,7 @@
 #include <k3bversion.h>
 
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqdatetime.h>
 
 
@@ -149,7 +149,7 @@ bool K3bTocFileWriter::save( TQTextStream& t )
     trackIndex++;
   }
 
-  return ( t.tqdevice()->status() == IO_Ok );
+  return ( t.device()->status() == IO_Ok );
 }
 
 
@@ -157,7 +157,7 @@ void K3bTocFileWriter::writeHeader( TQTextStream& t )
 {
   // little comment
   t << "// TOC-file to use with cdrdao created by K3b " << k3bcore->version()
-    << ", " << TQDateTime::tqcurrentDateTime().toString() << endl << endl;
+    << ", " << TQDateTime::currentDateTime().toString() << endl << endl;
 
   t << "// " << m_toc.count() << " tracks" << endl;
   if( m_toc.back().session() > 0 ) {

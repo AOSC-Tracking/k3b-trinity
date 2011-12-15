@@ -36,7 +36,7 @@ class LIBK3B_EXPORT KCutLabel : public TQLabel
   KCutLabel( TQWidget *parent = 0, const char *name = 0);
   KCutLabel( const TQString &text, TQWidget *parent = 0, const char *name = 0 );
 
-  virtual TQSize tqminimumSizeHint() const;
+  virtual TQSize minimumSizeHint() const;
 
   /**
    * \return the full text while text() returns the cut text

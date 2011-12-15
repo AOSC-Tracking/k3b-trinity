@@ -22,7 +22,7 @@
 #include <k3bversion.h>
 
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqdatetime.h>
 
 
@@ -60,7 +60,7 @@ bool K3bInfFileWriter::save( TQTextStream& s )
   // ----------------------
   // header
   s << "# Cdrecord-Inf-File written by K3b " << k3bcore->version() 
-    << ", " << TQDateTime::tqcurrentDateTime().toString() << endl
+    << ", " << TQDateTime::currentDateTime().toString() << endl
     << "#" << endl;
 
   s << "ISRC=\t\t" << m_isrc << endl;
@@ -130,7 +130,7 @@ bool K3bInfFileWriter::save( TQTextStream& s )
 
   s << "Index0=\t\t" << m_index0 << endl;
 
-  return ( s.tqdevice()->status() == IO_Ok );
+  return ( s.device()->status() == IO_Ok );
 }
 
 

@@ -46,7 +46,7 @@
 #include <kstandarddirs.h>
 #include <kdialogbase.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqheader.h>
 #include <tqlabel.h>
 #include <tqframe.h>
@@ -67,7 +67,7 @@ public:
     : K3bCheckListViewItem( parent, after ) {
 
     setText( 1, TQString::number(_trackNumber).rightJustify( 2, ' ' ) );
-    setText( 3, i18n("Track %1").tqarg(_trackNumber) );
+    setText( 3, i18n("Track %1").arg(_trackNumber) );
     setText( 4, " " + length.toString() + " " );
     setText( 5, " " + KIO::convertSize( length.audioBytes() ) + " " );
 
@@ -111,7 +111,7 @@ K3bAudioCdView::K3bAudioCdView( TQWidget* parent, const char *name )
   TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
   toolBoxLayout->addItem( spacer );
   m_labelLength = new TQLabel( mainWidget() );
-  m_labelLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelLength->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   toolBoxLayout->addWidget( m_labelLength );
 
 
@@ -335,7 +335,7 @@ void K3bAudioCdView::slotEditTrackCddb()
   if( !items.isEmpty() ) {
     AudioTrackViewItem* a = static_cast<AudioTrackViewItem*>(items.first());
 
-    KDialogBase d( this, "trackCddbDialog", true, i18n("Cddb Track %1").tqarg(a->trackNumber),
+    KDialogBase d( this, "trackCddbDialog", true, i18n("Cddb Track %1").arg(a->trackNumber),
 		   KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true);
     TQWidget* w = new TQWidget( &d );
 
@@ -359,7 +359,7 @@ void K3bAudioCdView::slotEditTrackCddb()
     grid->setRowStretch( 4, 1 );
 
     d.setMainWidget(w);
-    d.resize( TQMAX( TQMAX(d.tqsizeHint().height(), d.tqsizeHint().width()), 300), d.tqsizeHint().height() );
+    d.resize( TQMAX( TQMAX(d.sizeHint().height(), d.sizeHint().width()), 300), d.sizeHint().height() );
 
     if( d.exec() == TQDialog::Accepted ) {
       m_cddbInfo.titles[a->trackNumber-1] = editTitle->text();
@@ -415,7 +415,7 @@ void K3bAudioCdView::slotEditAlbumCddb()
   grid->setRowStretch( 7, 1 );
 
   d.setMainWidget(w);
-  d.resize( TQMAX( TQMAX(d.tqsizeHint().height(), d.tqsizeHint().width()), 300), d.tqsizeHint().height() );
+  d.resize( TQMAX( TQMAX(d.sizeHint().height(), d.sizeHint().width()), 300), d.sizeHint().height() );
 
   if( d.exec() == TQDialog::Accepted ) {
     m_cddbInfo.cdTitle = editTitle->text();
@@ -516,8 +516,8 @@ void K3bAudioCdView::slotSaveCddbLocally()
 
   m_cddb->saveEntry( m_cddbInfo );
   K3bPassivePopup::showPopup( i18n("Saved entry (%1) in category %2.")
-			      .tqarg(m_cddbInfo.discid)
-			      .tqarg(m_cddbInfo.category),
+			      .arg(m_cddbInfo.discid)
+			      .arg(m_cddbInfo.category),
 			      i18n("CDDB") );
 }
 
@@ -569,7 +569,7 @@ void K3bAudioCdView::updateDisplay()
 
   m_labelLength->setText( i18n("1 track (%1)", 
 			       "%n tracks (%1)", 
-			       m_toc.count()).tqarg(K3b::Msf(m_toc.length()).toString()) );
+			       m_toc.count()).arg(K3b::Msf(m_toc.length()).toString()) );
 }
 
 
@@ -584,7 +584,7 @@ void K3bAudioCdView::showBusyLabel( bool b )
     // the themed label is a cut label, thus its size hint is
     // based on the cut text, we force it to be full
     m_busyInfoLabel->resize( width(), height() );
-    m_busyInfoLabel->resize( m_busyInfoLabel->tqsizeHint() );
+    m_busyInfoLabel->resize( m_busyInfoLabel->sizeHint() );
     int x = (width() - m_busyInfoLabel->width())/2;
     int y = (height() - m_busyInfoLabel->height())/2;
     TQRect r( TQPoint( x, y ), m_busyInfoLabel->size() );

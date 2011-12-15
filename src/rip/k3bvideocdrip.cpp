@@ -97,8 +97,8 @@ void K3bVideoCdRip::vcdxRip()
 
     if ( !bin ) {
         kdDebug() << "(K3bVideoCdRip) could not find vcdxrip executable" << endl;
-        emit infoMessage( i18n( "Could not find %1 executable." ).tqarg( "vcdxrip" ), K3bJob::ERROR );
-        emit infoMessage( i18n( "To rip VideoCD's you must install VcdImager Version %1." ).tqarg( ">= 0.7.12" ), K3bJob::INFO );
+        emit infoMessage( i18n( "Could not find %1 executable." ).arg( "vcdxrip" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "To rip VideoCD's you must install VcdImager Version %1." ).arg( ">= 0.7.12" ), K3bJob::INFO );
         emit infoMessage( i18n( "You can find this on your distribution disks or download it from http://www.vcdimager.org" ), K3bJob::INFO );
         cancelAll();
         jobFinished( false );
@@ -107,7 +107,7 @@ void K3bVideoCdRip::vcdxRip()
 
     if( bin->version < K3bVersion("0.7.12") ) {
         kdDebug() << "(K3bVideoCdRip) vcdxrip executable too old!" << endl;
-        emit infoMessage( i18n( "%1 executable too old! Need version %2 or greater" ).tqarg( "Vcdxrip" ).tqarg( "0.7.12" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "%1 executable too old! Need version %2 or greater" ).arg( "Vcdxrip" ).arg( "0.7.12" ), K3bJob::ERROR );
         emit infoMessage( i18n( "You can find this on your distribution disks or download it from http://www.vcdimager.org" ), K3bJob::INFO );
         cancelAll();
         jobFinished( false );
@@ -115,7 +115,7 @@ void K3bVideoCdRip::vcdxRip()
     }
         
     if ( !bin->copyright.isEmpty() )
-        emit infoMessage( i18n( "Using %1 %2 - Copyright (C) %3" ).tqarg( bin->name() ).tqarg( bin->version ).tqarg( bin->copyright ), INFO );
+        emit infoMessage( i18n( "Using %1 %2 - Copyright (C) %3" ).arg( bin->name() ).arg( bin->version ).arg( bin->copyright ), INFO );
 
 
     *m_process << k3bcore ->externalBinManager() ->binPath( "vcdxrip" );
@@ -142,10 +142,10 @@ void K3bVideoCdRip::vcdxRip()
      if ( m_videooptions ->getVideoCdSector2336() )
         *m_process << "--sector-2336";
         
-     *m_process << "-i" << TQString( "%1" ).tqarg( TQFile::encodeName( m_videooptions ->getVideoCdSource() ).data() );
+     *m_process << "-i" << TQString( "%1" ).arg( TQFile::encodeName( m_videooptions ->getVideoCdSource() ).data() );
 
      if ( m_videooptions ->getVideoCdExtractXml() )
-        *m_process << "-o" << TQString( "%1" ).tqarg( TQFile::encodeName( m_videooptions ->getVideoCdDescription() + ".xml" ).data() );
+        *m_process << "-o" << TQString( "%1" ).arg( TQFile::encodeName( m_videooptions ->getVideoCdDescription() + ".xml" ).data() );
      else
         *m_process << "-o" << "/dev/null";
       
@@ -172,11 +172,11 @@ void K3bVideoCdRip::vcdxRip()
 
     emit newTask( i18n( "Extracting" ) );
     emit infoMessage( i18n( "Start extracting." ), K3bJob::INFO );
-    emit infoMessage( i18n( "Extract files from %1 to %2." ).tqarg( m_videooptions ->getVideoCdSource() ).tqarg( m_videooptions ->getVideoCdDestination() ), K3bJob::INFO );
+    emit infoMessage( i18n( "Extract files from %1 to %2." ).arg( m_videooptions ->getVideoCdSource() ).arg( m_videooptions ->getVideoCdDestination() ), K3bJob::INFO );
             
     if ( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
         kdDebug() << "(K3bVideoCdRip) could not start vcdxrip" << endl;
-        emit infoMessage( i18n( "Could not start %1." ).tqarg( "vcdxrip" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "Could not start %1." ).arg( "vcdxrip" ), K3bJob::ERROR );
         cancelAll();
         jobFinished( false );
     }
@@ -241,15 +241,15 @@ void K3bVideoCdRip::slotParseVcdXRipOutput( KProcess*, char* output, int len )
                 if ( tel.isText() ) {
                     const TQString text = tel.data();
                     if ( level == "information" ) {
-                        kdDebug() << TQString( "(K3bVideoCdRip) vcdxrip information, %1" ).tqarg( text ) << endl;
+                        kdDebug() << TQString( "(K3bVideoCdRip) vcdxrip information, %1" ).arg( text ) << endl;
                         parseInformation( text );
                     } else {
                         if ( level != "error" ) {
-                            kdDebug() << TQString( "(K3bVideoCdRip) vcdxrip warning, %1" ).tqarg( text ) << endl;
+                            kdDebug() << TQString( "(K3bVideoCdRip) vcdxrip warning, %1" ).arg( text ) << endl;
                             emit debuggingOutput( "vcdxrip", text );
                             parseInformation( text );
                         } else {
-                            kdDebug() << TQString( "(K3bVideoCdRip) vcdxrip error, %1" ).tqarg( text ) << endl;
+                            kdDebug() << TQString( "(K3bVideoCdRip) vcdxrip error, %1" ).arg( text ) << endl;
                             emit infoMessage( text, K3bJob::ERROR );
                         }
                     }
@@ -269,14 +269,14 @@ void K3bVideoCdRip::slotVcdXRipFinished()
                 emit infoMessage( i18n( "Files successfully extracted." ), K3bJob::SUCCESS );
                 break;
             default:
-                emit infoMessage( i18n( "%1 returned an unknown error (code %2)." ).tqarg( "vcdxrip" ).tqarg( m_process->exitStatus() ), K3bJob::ERROR );
+                emit infoMessage( i18n( "%1 returned an unknown error (code %2)." ).arg( "vcdxrip" ).arg( m_process->exitStatus() ), K3bJob::ERROR );
                 emit infoMessage( i18n( "Please send me an email with the last output..." ), K3bJob::ERROR );
                 cancelAll();
                 jobFinished( false );
                 return ;
         }
     } else {
-        emit infoMessage( i18n( "%1 did not exit cleanly." ).tqarg( "Vcdxrip" ), K3bJob::ERROR );
+        emit infoMessage( i18n( "%1 did not exit cleanly." ).arg( "Vcdxrip" ), K3bJob::ERROR );
         cancelAll();
         jobFinished( false );
         return ;
@@ -290,7 +290,7 @@ void K3bVideoCdRip::parseInformation( TQString text )
     // parse warning
     if ( text.contains( "encountered non-form2 sector" ) ) {
         // I think this is an error not a warning. Finish ripping with invalid mpegs.
-        emit infoMessage( i18n( "%1 encountered non-form2 sector" ).tqarg("Vcdxrip"), K3bJob::ERROR );
+        emit infoMessage( i18n( "%1 encountered non-form2 sector" ).arg("Vcdxrip"), K3bJob::ERROR );
         emit infoMessage( i18n( "leaving loop" ), K3bJob::ERROR );
         cancelAll();
         jobFinished( false );
@@ -326,7 +326,7 @@ void K3bVideoCdRip::parseInformation( TQString text )
 
             index = 11;
             end = text.find( "(start lsn" );
-            emit newSubTask( i18n( "Extracting %1" ).tqarg( text.mid( index, end - index ).stripWhiteSpace() ) );
+            emit newSubTask( i18n( "Extracting %1" ).arg( text.mid( index, end - index ).stripWhiteSpace() ) );
         }
         // parse extracting files info
         // extracting CDI/CDI_IMAG.RTF to _cdi_cdi_imag.rtf (lsn 258, size 1315168, raw 1)
@@ -337,14 +337,14 @@ void K3bVideoCdRip::parseInformation( TQString text )
             index = text.find( " to " );
             end = text.find( " (lsn" );
             TQString toFileName = text.mid( index + 4, end - index - 4 ).stripWhiteSpace();
-            emit newSubTask( i18n( "Extracting %1 to %2" ).tqarg( extractFileName ).tqarg( toFileName ) );
+            emit newSubTask( i18n( "Extracting %1 to %2" ).arg( extractFileName ).arg( toFileName ) );
         }
     }
 }
 
 TQString K3bVideoCdRip::jobDescription() const
 {
-    return i18n( "Extracting %1" ).tqarg( m_videooptions ->getVideoCdDescription() );
+    return i18n( "Extracting %1" ).arg( m_videooptions ->getVideoCdDescription() );
 }
 
 TQString K3bVideoCdRip::jobDetails() const

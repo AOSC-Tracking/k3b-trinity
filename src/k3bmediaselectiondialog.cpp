@@ -20,7 +20,7 @@
 
 #include <klocale.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 
 

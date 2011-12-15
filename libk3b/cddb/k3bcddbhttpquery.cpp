@@ -21,7 +21,7 @@
 
 #include <tqstringlist.h>
 #include <tqregexp.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -58,7 +58,7 @@ void K3bCddbHttpQuery::doMatchQuery()
   m_state = READ;
   m_parsingBuffer.truncate(0);
 
-  performCommand( TQString( "cddb read %1 %2").tqarg( header().category ).tqarg( header().discid ) );
+  performCommand( TQString( "cddb read %1 %2").arg( header().category ).arg( header().discid ) );
 }
 
 
@@ -82,7 +82,7 @@ void K3bCddbHttpQuery::performCommand( const TQString& cmd )
 
   if( !job ) {
     setError( CONNECTION_ERROR );
-    emit infoMessage( i18n("Could not connect to host %1").tqarg(m_server) );
+    emit infoMessage( i18n("Could not connect to host %1").arg(m_server) );
     emitQueryFinished();
     return;
   }

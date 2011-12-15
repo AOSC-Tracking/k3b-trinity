@@ -39,7 +39,7 @@
 #include <tqlineedit.h>
 #include <tqpushbutton.h>
 #include <tqtoolbutton.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvariant.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
@@ -69,7 +69,7 @@ K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, TQWidget *parent, const c
 {
   prepareGui();
 
-  setTitle( i18n("Data Project"), i18n("Size: %1").tqarg( KIO::convertSize(_doc->size()) ) );
+  setTitle( i18n("Data Project"), i18n("Size: %1").arg( KIO::convertSize(_doc->size()) ) );
 
   // for now we just put the verify checkbox on the main page...
   m_checkVerify = K3bStdGuiItems::verifyCheckBox( m_optionGroup );
@@ -181,7 +181,7 @@ void K3bDataBurnDialog::slotStartClicked()
 
     if( TQFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
       if( KMessageBox::warningContinueCancel( this,
-					      i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath()),
+					      i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath()),
 					      i18n("File Exists"), i18n("Overwrite") )
 	  == KMessageBox::Continue ) {
 	// delete the file here to avoid problems with free space in K3bProjectBurnDialog::slotStartClicked

@@ -77,11 +77,11 @@ void K3bVideoDVDRippingPreview::generatePreview( const K3bVideoDVD::VideoDVD& dv
   m_process = new KProcess();
   *m_process << bin->path;
   *m_process << "-i" << dvd.device()->blockDeviceName();
-  *m_process << "-T" << TQString("%1,%2").tqarg(title).tqarg(chapter);
+  *m_process << "-T" << TQString("%1,%2").arg(title).arg(chapter);
   *m_process << "-x" << "dvd,null";
   *m_process << "--dvd_access_delay" << "0";
   *m_process << "-y" << "ppm,null";
-  *m_process << "-c" << TQString("%1-%2").tqarg( frame ).tqarg( frame+1 );
+  *m_process << "-c" << TQString("%1-%2").arg( frame ).arg( frame+1 );
   *m_process << "-Z" << "x200";
   *m_process << "-o" << m_tempDir->name();
 

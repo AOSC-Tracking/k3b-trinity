@@ -27,7 +27,7 @@
 #include <k3bexternalbinmanager.h>
 
 #include <tqcursor.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 
 #include <kapplication.h>
@@ -54,7 +54,7 @@ K3bVideoDVDRippingView::K3bVideoDVDRippingView( TQWidget* parent, const char * n
   TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
   toolBoxLayout->addItem( spacer );
   m_labelLength = new TQLabel( mainWidget() );
-  m_labelLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelLength->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   toolBoxLayout->addWidget( m_labelLength );
 
 
@@ -65,7 +65,7 @@ K3bVideoDVDRippingView::K3bVideoDVDRippingView( TQWidget* parent, const char * n
   connect( m_titleView, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
 	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem*, const TQPoint&)) );
 
-  // general tqlayout
+  // general layout
   // ----------------------------------------------------------------------------------
   mainGrid->addLayout( toolBoxLayout, 0, 0 );
   mainGrid->addWidget( m_titleView, 1, 0 );

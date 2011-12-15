@@ -35,7 +35,7 @@
 #include <tqgroupbox.h>
 #include <tqlabel.h>
 #include <tqpushbutton.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvariant.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
@@ -131,7 +131,7 @@ void K3bJobProgressDialog::setupGUI()
   headerLayout->addWidget( m_pixLabel );
 
   TQFrame* frame4 = new TQFrame( headerFrame, "frame4" );
-  frame4->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 1, 0, frame4->sizePolicy().hasHeightForWidth() ) );
+  frame4->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 1, 0, frame4->sizePolicy().hasHeightForWidth() ) );
   frame4->setFrameShape( TQFrame::NoFrame );
   frame4->setFrameShadow( TQFrame::Raised );
   TQVBoxLayout* frame4Layout = new TQVBoxLayout( frame4, 6, 3, "frame4Layout"); 
@@ -142,12 +142,12 @@ void K3bJobProgressDialog::setupGUI()
   m_labelJob_font.setPointSize( m_labelJob_font.pointSize() + 2 );
   m_labelJob_font.setBold( true );
   m_labelJob->setFont( m_labelJob_font ); 
-  m_labelJob->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelJob->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   frame4Layout->addWidget( m_labelJob );
 
   m_labelJobDetails = new K3bThemedLabel( frame4 );
-  m_labelJobDetails->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 0, 1, m_labelJobDetails->sizePolicy().hasHeightForWidth() ) );
-  m_labelJobDetails->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelJobDetails->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 0, 1, m_labelJobDetails->sizePolicy().hasHeightForWidth() ) );
+  m_labelJobDetails->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   frame4Layout->addWidget( m_labelJobDetails );
   headerLayout->addWidget( frame4 );
 
@@ -177,7 +177,7 @@ void K3bJobProgressDialog::setupGUI()
   progressHeaderLayout->setSpacing( 0 );
 
   TQFrame* frame5 = new TQFrame( progressHeaderFrame, "frame5" );
-  frame5->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 1, 0, frame5->sizePolicy().hasHeightForWidth() ) );
+  frame5->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 1, 0, frame5->sizePolicy().hasHeightForWidth() ) );
   frame5->setFrameShape( TQFrame::NoFrame );
   frame5->setFrameShadow( TQFrame::Raised );
   TQVBoxLayout* frame5Layout = new TQVBoxLayout( frame5, 6, 3, "frame5Layout"); 
@@ -190,7 +190,7 @@ void K3bJobProgressDialog::setupGUI()
   frame5Layout->addWidget( m_labelTask );
 
   m_labelElapsedTime = new K3bThemedLabel( frame5 );
-  m_labelElapsedTime->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 0, 1, m_labelElapsedTime->sizePolicy().hasHeightForWidth() ) );
+  m_labelElapsedTime->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 0, 1, m_labelElapsedTime->sizePolicy().hasHeightForWidth() ) );
   frame5Layout->addWidget( m_labelElapsedTime );
   progressHeaderLayout->addWidget( frame5 );
 
@@ -198,28 +198,28 @@ void K3bJobProgressDialog::setupGUI()
   mainLayout->addWidget( progressHeaderFrame );
   // ------------------------------------------------------------------------------------------
 
-  TQHBoxLayout* tqlayout3 = new TQHBoxLayout( 0, 0, 6, "tqlayout3"); 
+  TQHBoxLayout* layout3 = new TQHBoxLayout( 0, 0, 6, "layout3"); 
 
   m_labelSubTask = new KCutLabel( this, "m_labelSubTask" );
-  tqlayout3->addWidget( m_labelSubTask );
+  layout3->addWidget( m_labelSubTask );
 
   m_labelSubProcessedSize = new TQLabel( this, "m_labelSubProcessedSize" );
-  m_labelSubProcessedSize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
-  tqlayout3->addWidget( m_labelSubProcessedSize );
-  mainLayout->addLayout( tqlayout3 );
+  m_labelSubProcessedSize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  layout3->addWidget( m_labelSubProcessedSize );
+  mainLayout->addLayout( layout3 );
 
   m_progressSubPercent = new KProgress( this, "m_progressSubPercent" );
   mainLayout->addWidget( m_progressSubPercent );
 
-  TQHBoxLayout* tqlayout4 = new TQHBoxLayout( 0, 0, 6, "tqlayout4"); 
+  TQHBoxLayout* layout4 = new TQHBoxLayout( 0, 0, 6, "layout4"); 
 
   TQLabel* textLabel5 = new TQLabel( i18n("Overall progress:"), this, "textLabel5" );
-  tqlayout4->addWidget( textLabel5 );
+  layout4->addWidget( textLabel5 );
 
   m_labelProcessedSize = new TQLabel( this, "m_labelProcessedSize" );
-  m_labelProcessedSize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
-  tqlayout4->addWidget( m_labelProcessedSize );
-  mainLayout->addLayout( tqlayout4 );
+  m_labelProcessedSize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  layout4->addWidget( m_labelProcessedSize );
+  mainLayout->addLayout( layout4 );
 
   m_progressPercent = new KProgress( this, "m_progressPercent" );
   mainLayout->addWidget( m_progressPercent );
@@ -237,18 +237,18 @@ void K3bJobProgressDialog::setupGUI()
  line2->setFrameShadow( TQFrame::Sunken );
   mainLayout->addWidget( line2 );
 
-  TQHBoxLayout* tqlayout5 = new TQHBoxLayout( 0, 0, 6, "tqlayout5"); 
+  TQHBoxLayout* layout5 = new TQHBoxLayout( 0, 0, 6, "layout5"); 
   TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
-  tqlayout5->addItem( spacer );
+  layout5->addItem( spacer );
 
   m_buttonCancel = new KPushButton( KStdGuiItem::cancel(), this, "m_buttonCancel" );
-  tqlayout5->addWidget( m_buttonCancel );
+  layout5->addWidget( m_buttonCancel );
   m_buttonClose = new KPushButton( KStdGuiItem::close(), this );
-  tqlayout5->addWidget( m_buttonClose );
+  layout5->addWidget( m_buttonClose );
   m_buttonShowDebug = new TQPushButton( i18n("Show Debugging Output"), this );
-  tqlayout5->addWidget( m_buttonShowDebug );
+  layout5->addWidget( m_buttonShowDebug );
 
-  mainLayout->addLayout( tqlayout5 );
+  mainLayout->addLayout( layout5 );
 
   m_pixLabel->setThemePixmap( K3bTheme::PROGRESS_WORKING );
 
@@ -314,13 +314,13 @@ void K3bJobProgressDialog::setupConnections()
 
 void K3bJobProgressDialog::slotProcessedSize( int processed, int size )
 {
-  m_labelProcessedSize->setText( i18n("%1 of %2 MB").tqarg( processed ).tqarg( size ) );
+  m_labelProcessedSize->setText( i18n("%1 of %2 MB").arg( processed ).arg( size ) );
 }
 
 
 void K3bJobProgressDialog::slotProcessedSubSize( int processedTrackSize, int trackSize )
 {
-  m_labelSubProcessedSize->setText( i18n("%1 of %2 MB").tqarg(processedTrackSize).tqarg(trackSize) );
+  m_labelSubProcessedSize->setText( i18n("%1 of %2 MB").arg(processedTrackSize).arg(trackSize) );
 }
 
 
@@ -515,10 +515,10 @@ void K3bJobProgressDialog::slotUpdateTime()
 {
   int elapsed = m_startTime.secsTo( TQTime::currentTime() );
 
-  TQString s = i18n("Elapsed time: %1 h").tqarg( TQTime().addSecs(elapsed).toString() );
+  TQString s = i18n("Elapsed time: %1 h").arg( TQTime().addSecs(elapsed).toString() );
   if( d->lastProgress > 0 && d->lastProgress < 100 ) {
     int rem = m_startTime.secsTo( m_lastProgressUpdateTime ) * (100-d->lastProgress) / d->lastProgress;
-    s += " / " + i18n("Remaining: %1 h").tqarg( TQTime().addSecs(rem).toString() );
+    s += " / " + i18n("Remaining: %1 h").arg( TQTime().addSecs(rem).toString() );
   }
 
   m_labelElapsedTime->setText( s );
@@ -546,10 +546,10 @@ void K3bJobProgressDialog::slotProgress( int percent )
     d->lastProgress = percent;
     m_lastProgressUpdateTime = TQTime::currentTime();
     if( KMainWindow* w = dynamic_cast<KMainWindow*>(kapp->mainWidget()) ) {
-      w->setPlainCaption( TQString( "(%1%) %2" ).tqarg(percent).tqarg(m_plainCaption) );
+      w->setPlainCaption( TQString( "(%1%) %2" ).arg(percent).arg(m_plainCaption) );
     }
 
-    setCaption( TQString( "(%1%) %2" ).tqarg(percent).tqarg(m_job->jobDescription()) );
+    setCaption( TQString( "(%1%) %2" ).arg(percent).arg(m_job->jobDescription()) );
   }
 }
 
@@ -579,9 +579,9 @@ void K3bJobProgressDialog::keyPressEvent( TQKeyEvent *e )
 }
 
 
-TQSize K3bJobProgressDialog::tqsizeHint() const
+TQSize K3bJobProgressDialog::sizeHint() const
 {
-  TQSize s = tqlayout()->totalSizeHint();
+  TQSize s = layout()->totalSizeHint();
   if( s.width() < s.height() )
     s.setWidth( s.height() );
   return s;

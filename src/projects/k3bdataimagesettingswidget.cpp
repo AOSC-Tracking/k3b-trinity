@@ -26,7 +26,7 @@
 #include <tqcombobox.h>
 #include <tqpushbutton.h>
 #include <tqwhatsthis.h>
-#include <tqlayout.h>
+#include <layout.h>
 
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -157,7 +157,7 @@ public:
     setMainWidget( w );
 
     // give ourselves a reasonable size
-    TQSize s = tqsizeHint();
+    TQSize s = sizeHint();
     s.setWidth( TQMAX(s.width(), 300) );
     resize( s );
   }
@@ -171,7 +171,7 @@ K3bDataImageSettingsWidget::K3bDataImageSettingsWidget( TQWidget* parent, const 
   : base_K3bDataImageSettings( parent, name ),
     m_fileSystemOptionsShown(true)
 {
-  tqlayout()->setMargin( KDialog::marginHint() );
+  layout()->setMargin( KDialog::marginHint() );
 
   m_customFsDlg = new CustomFilesystemsDialog( this );
   m_volDescDlg = new VolumeDescDialog( this );
@@ -268,7 +268,7 @@ void K3bDataImageSettingsWidget::slotFilesystemsChanged()
   if( s.isEmpty() )
     m_comboFilesystems->changeItem( i18n("Custom (ISO9660 only)"), FS_CUSTOM );
   else
-    m_comboFilesystems->changeItem( i18n("Custom (%1)").tqarg( s.join(", ") ), FS_CUSTOM );
+    m_comboFilesystems->changeItem( i18n("Custom (%1)").arg( s.join(", ") ), FS_CUSTOM );
 
   // see if any of the presets is loaded
   m_comboFilesystems->setCurrentItem( FS_CUSTOM );

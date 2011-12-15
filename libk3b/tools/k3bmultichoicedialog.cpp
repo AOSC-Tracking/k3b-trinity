@@ -21,7 +21,7 @@
 #include <kapplication.h>
 #include <kiconloader.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqsignalmapper.h>
 #include <tqptrlist.h>
 #include <tqlabel.h>

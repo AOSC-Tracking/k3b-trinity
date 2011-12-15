@@ -57,7 +57,7 @@ K3bAudioTrackViewItem::K3bAudioTrackViewItem( K3bAudioTrackView* parent,
   setFont( 3, f );
 
   // gray out filename
-  setForegroundColor( 5, listView()->tqpalette().disabled().foreground() );
+  setForegroundColor( 5, listView()->palette().disabled().foreground() );
 
   // smaller filename
   f = listView()->font();
@@ -194,7 +194,7 @@ bool K3bAudioTrackViewItem::animate()
     item = item->nextSibling();
   }
   if( animate ) {
-    TQString icon = TQString( "kde%1" ).tqarg( m_animationCounter );
+    TQString icon = TQString( "kde%1" ).arg( m_animationCounter );
     setPixmap( 4, SmallIcon( icon ) );
     m_animationCounter++;
     if ( m_animationCounter > 6 )

@@ -48,7 +48,7 @@
 #include <tqcheckbox.h>
 #include <tqlabel.h>
 #include <tqpushbutton.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvariant.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
@@ -106,7 +106,7 @@ K3bAudioRippingDialog::K3bAudioRippingDialog(const K3bDevice::Toc& toc,
   }
   setTitle( i18n("CD Ripping"), 
 	    i18n("1 track (%1)", "%n tracks (%1)", 
-		 m_trackNumbers.count()).tqarg(length.toString()) );
+		 m_trackNumbers.count()).arg(length.toString()) );
 }
 
 
@@ -383,7 +383,7 @@ void K3bAudioRippingDialog::refresh()
 						   m_patternWidget->blankReplaceString() ) + "." + extension;
       }
       else {
-	filename = i18n("Track%1").tqarg( TQString::number( *it ).rightJustify( 2, '0' ) ) + "." + extension;
+	filename = i18n("Track%1").arg( TQString::number( *it ).rightJustify( 2, '0' ) ) + "." + extension;
       }
 
       filename = d->fsInfo.fixupPath( filename );

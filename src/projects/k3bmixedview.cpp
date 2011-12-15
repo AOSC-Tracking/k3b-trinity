@@ -33,7 +33,7 @@
 
 #include <tqwidgetstack.h>
 #include <tqsplitter.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvaluelist.h>
 
 #include <kdialog.h>

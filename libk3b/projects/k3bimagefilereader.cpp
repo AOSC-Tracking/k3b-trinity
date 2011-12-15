@@ -16,7 +16,7 @@
 #include "k3bimagefilereader.h"
 
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 #include <kdebug.h>
 

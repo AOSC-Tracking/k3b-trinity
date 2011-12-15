@@ -30,7 +30,7 @@
 #include <kapplication.h>
 
 #include <tqgroupbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcheckbox.h>
 #include <tqframe.h>
 #include <tqpushbutton.h>
@@ -41,7 +41,7 @@
 K3bDvdFormattingDialog::K3bDvdFormattingDialog( TQWidget* parent, const char* name, bool modal )
   : K3bInteractionDialog( parent, name,
 			  i18n("DVD Formatting"),
-			  i18n("DVD%1RW").tqarg("�"),
+			  i18n("DVD%1RW").arg("�"),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  "DVD Formatting", // config group
@@ -59,15 +59,15 @@ K3bDvdFormattingDialog::K3bDvdFormattingDialog( TQWidget* parent, const char* na
   m_writerSelectionWidget->setForceAutoSpeed(true);
 
   TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), frame );
-  groupWritingMode->tqlayout()->setMargin( marginHint() );
-  groupWritingMode->tqlayout()->setSpacing( spacingHint() );
+  groupWritingMode->layout()->setMargin( marginHint() );
+  groupWritingMode->layout()->setSpacing( spacingHint() );
   m_writingModeWidget = new K3bWritingModeWidget( K3b::WRITING_MODE_INCR_SEQ|K3b::WRITING_MODE_RES_OVWR,
 						  groupWritingMode );
 
 
   TQGroupBox* groupOptions = new TQGroupBox( 2, Qt::Vertical, i18n("Settings"), frame );
-  groupOptions->tqlayout()->setMargin( marginHint() );
-  groupOptions->tqlayout()->setSpacing( spacingHint() );
+  groupOptions->layout()->setMargin( marginHint() );
+  groupOptions->layout()->setSpacing( spacingHint() );
   m_checkForce = new TQCheckBox( i18n("Force"), groupOptions );
   m_checkQuickFormat = new TQCheckBox( i18n("Quick format"), groupOptions );
 

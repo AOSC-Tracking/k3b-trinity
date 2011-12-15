@@ -27,7 +27,7 @@
         </property>
         <widget class="TQLayoutWidget" row="3" column="0" rowspan="1" colspan="2">
             <property name="name">
-                <cstring>tqlayout8</cstring>
+                <cstring>layout8</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -107,7 +107,7 @@
         </widget>
         <widget class="TQLayoutWidget" row="2" column="0" rowspan="1" colspan="2">
             <property name="name">
-                <cstring>tqlayout2</cstring>
+                <cstring>layout2</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -123,7 +123,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>31</width>
                             <height>2</height>
@@ -137,7 +137,7 @@
                     <property name="text">
                         <string>See special strings</string>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
@@ -148,7 +148,7 @@
                     <property name="text">
                         <string>About conditional inclusion</string>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>

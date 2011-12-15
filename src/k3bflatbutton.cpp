@@ -139,7 +139,7 @@ void K3bFlatButton::setHover( bool b )
 }
 
 
-TQSize K3bFlatButton::tqsizeHint() const
+TQSize K3bFlatButton::sizeHint() const
 {
   // height: pixmap + 5 spacing + font height + frame width
   // width: max( pixmap, text) + frame width
@@ -158,7 +158,7 @@ void K3bFlatButton::drawContents( TQPainter* p )
 //     TQRect r( mapToParent( TQPoint(lineWidth(), lineWidth()) ), 
 // 	     mapToParent( TQPoint(width()-2*lineWidth(), height()-2*lineWidth() )) );
     
-//     parentWidget()->tqrepaint( r );
+//     parentWidget()->repaint( r );
 //   }
 
   p->save();
