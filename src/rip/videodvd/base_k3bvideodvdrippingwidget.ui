@@ -67,7 +67,7 @@
                             </property>
                             <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout9</cstring>
+                                    <cstring>tqlayout9</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
@@ -106,7 +106,7 @@
                             </widget>
                             <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout9</cstring>
+                                    <cstring>tqlayout9</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
@@ -188,7 +188,7 @@
                                 <property name="text">
                                     <string>-</string>
                                 </property>
-                                <property name="alignment">
+                                <property name="tqalignment">
                                     <set>AlignVCenter|AlignRight</set>
                                 </property>
                             </widget>
@@ -207,7 +207,7 @@
                                 <property name="text">
                                     <string>-</string>
                                 </property>
-                                <property name="alignment">
+                                <property name="tqalignment">
                                     <set>AlignVCenter|AlignRight</set>
                                 </property>
                             </widget>
@@ -252,7 +252,7 @@
                                         </widget>
                                         <widget class="TQLayoutWidget">
                                             <property name="name">
-                                                <cstring>layout4</cstring>
+                                                <cstring>tqlayout4</cstring>
                                             </property>
                                             <hbox>
                                                 <property name="name">
@@ -326,7 +326,7 @@
                                         </property>
                                         <widget class="TQLayoutWidget">
                                             <property name="name">
-                                                <cstring>layout8</cstring>
+                                                <cstring>tqlayout8</cstring>
                                             </property>
                                             <hbox>
                                                 <property name="name">
@@ -372,7 +372,7 @@
                                             <property name="sizeType">
                                                 <enum>Expanding</enum>
                                             </property>
-                                            <property name="sizeHint">
+                                            <property name="tqsizeHint">
                                                 <size>
                                                     <width>20</width>
                                                     <height>0</height>
@@ -397,7 +397,7 @@
                             </property>
                             <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout10</cstring>
+                                    <cstring>tqlayout10</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
@@ -423,7 +423,7 @@
                             </widget>
                             <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout9</cstring>
+                                    <cstring>tqlayout9</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
@@ -464,7 +464,7 @@
                     </property>
                     <widget class="TQLayoutWidget">
                         <property name="name">
-                            <cstring>layout14</cstring>
+                            <cstring>tqlayout14</cstring>
                         </property>
                         <hbox>
                             <property name="name">
@@ -509,13 +509,13 @@
                         <property name="text">
                             <string>See special strings</string>
                         </property>
-                        <property name="alignment">
+                        <property name="tqalignment">
                             <set>AlignVCenter|AlignRight</set>
                         </property>
                     </widget>
                     <widget class="TQLayoutWidget">
                         <property name="name">
-                            <cstring>layout8</cstring>
+                            <cstring>tqlayout8</cstring>
                         </property>
                         <hbox>
                             <property name="name">
@@ -560,7 +560,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>5</width>
                                 <height>1</height>
@@ -663,7 +663,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>20</width>
                                 <height>1</height>

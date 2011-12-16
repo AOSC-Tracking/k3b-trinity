@@ -65,7 +65,7 @@ void K3bGrowisofsHandler::reset( K3bDevice::Device* dev, bool dao )
 
 void K3bGrowisofsHandler::handleStart()
 {
-//  TQTimer::singleShot( 2000, this, TQT_SLOT(slotCheckBufferStatus()) );
+//  TQTimer::singleShot( 2000, this, TQT_SLOT(slotCheckBuffertqStatus()) );
 }
 
 
@@ -177,8 +177,8 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
     double speed = line.mid( pos, endPos-pos ).toDouble(&ok);
     if( ok )
       emit infoMessage( i18n("Writing speed: %1 KB/s (%2x)")
-			.arg((int)(speed*1385.0))
-			.arg(KGlobal::locale()->formatNumber(speed)), K3bJob::INFO );
+			.tqarg((int)(speed*1385.0))
+			.tqarg(KGlobal::locale()->formatNumber(speed)), K3bJob::INFO );
     else
       kdDebug() << "(K3bGrowisofsHandler) parsing error: '" << line.mid( pos, endPos-pos ) << "'" << endl;
   }
@@ -274,7 +274,7 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
       // for now we just emit a message with the error
       // in the future when I know more about what kinds of errors may occur
       // we will enhance this
-      emit infoMessage( i18n("Fatal error at startup: %1").arg(strerror(exitCode-128)), 
+      emit infoMessage( i18n("Fatal error at startup: %1").tqarg(strerror(exitCode-128)), 
 			K3bJob::ERROR );
     }
     else if( exitCode == 1 ) {
@@ -286,7 +286,7 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
       emit infoMessage( i18n("Most likely mkisofs failed in some way."), K3bJob::ERROR );
     }
     else {
-      emit infoMessage( i18n("Fatal error during recording: %1").arg(strerror(exitCode)), 
+      emit infoMessage( i18n("Fatal error during recording: %1").tqarg(strerror(exitCode)), 
 			K3bJob::ERROR );
     }
   }
@@ -295,7 +295,7 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
 }
 
 
-void K3bGrowisofsHandler::slotCheckBufferStatus()
+void K3bGrowisofsHandler::slotCheckBuffertqStatus()
 {
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::BUFFER_CAPACITY, m_device ),
 	   TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
@@ -308,7 +308,7 @@ void K3bGrowisofsHandler::slotCheckBufferStatusDone( K3bDevice::DeviceHandler* d
 {
   if( dh->success() && dh->bufferCapacity() > 0 ) {
     emit deviceBuffer( 100 * (dh->bufferCapacity() - dh->availableBufferCapacity() ) / dh->bufferCapacity() );
-    TQTimer::singleShot( 500, this, TQT_SLOT(slotCheckBufferStatus()) );
+    TQTimer::singleShot( 500, this, TQT_SLOT(slotCheckBuffertqStatus()) );
   }
   else {
     kdDebug() << "(K3bGrowisofsHandler) stopping buffer check." << endl;

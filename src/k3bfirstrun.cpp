@@ -22,7 +22,7 @@
 #include <kiconloader.h>
 #include <kconfig.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 
 

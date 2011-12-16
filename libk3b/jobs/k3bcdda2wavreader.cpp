@@ -95,7 +95,7 @@ void K3bCdda2wavReader::start( bool onlyInfo )
 
   d->cdda2wavBin = k3bcore->externalBinManager()->binObject( "cdda2wav" );
   if( !d->cdda2wavBin ) {
-    emit infoMessage( i18n("Could not find %1 executable.").arg("cdda2wav"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdda2wav"), ERROR );
     jobFinished(false);
     d->running = false;
     return;
@@ -115,7 +115,7 @@ void K3bCdda2wavReader::start( bool onlyInfo )
   *d->process << d->cdda2wavBin->path;
   *d->process << "-vall" << ( d->cdda2wavBin->hasFeature( "gui" ) ? "-gui" : "-g" );
   if( d->cdda2wavBin->hasFeature( "dev" ) )
-    *d->process << TQString("dev=%1").arg(K3bDevice::externalBinDeviceParameter(m_device, d->cdda2wavBin));
+    *d->process << TQString("dev=%1").tqarg(K3bDevice::externalBinDeviceParameter(m_device, d->cdda2wavBin));
   else
     *d->process << "-D" << K3bDevice::externalBinDeviceParameter(m_device, d->cdda2wavBin);
   *d->process << ( d->cdda2wavBin->hasFeature( "bulk" ) ? "-bulk" : "-B" );
@@ -134,7 +134,7 @@ void K3bCdda2wavReader::start( bool onlyInfo )
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bCdda2wavReader) could not start cdda2wav" << endl;
-    emit infoMessage( i18n("Could not start %1.").arg("cdda2wav"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").tqarg("cdda2wav"), K3bJob::ERROR );
     d->running = false;
     jobFinished(false);
   }
@@ -240,12 +240,12 @@ void K3bCdda2wavReader::slotProcessExited( KProcess* p )
     }
     else {
       emit infoMessage( i18n("%1 returned an unknown error (code %2).")
-			.arg("Cdda2wav").arg(p->exitStatus()), ERROR );
+			.tqarg("Cdda2wav").tqarg(p->exitStatus()), ERROR );
       jobFinished( false );
     }
   }
   else {
-    emit infoMessage( i18n("%1 did not exit cleanly.").arg("Cdda2wav"), 
+    emit infoMessage( i18n("%1 did not exit cleanly.").tqarg("Cdda2wav"), 
 		      ERROR );
     jobFinished( false );
   }

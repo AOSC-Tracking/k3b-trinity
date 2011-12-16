@@ -27,7 +27,7 @@
 
 #include <tqlabel.h>
 #include <tqframe.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 
 K3bAudioTrackSplitDialog::K3bAudioTrackSplitDialog( K3bAudioTrack* track, TQWidget* parent, const char* name )
@@ -42,19 +42,19 @@ K3bAudioTrackSplitDialog::K3bAudioTrackSplitDialog( K3bAudioTrack* track, TQWidg
   m_msfEditStart = new K3bMsfEdit( frame );
   m_msfEditEnd = new K3bMsfEdit( frame );
 
-  TQGridLayout* layout = new TQGridLayout( frame );
-  layout->setMargin( 0 );
-  layout->setSpacing( spacingHint() );
+  TQGridLayout* tqlayout = new TQGridLayout( frame );
+  tqlayout->setMargin( 0 );
+  tqlayout->setSpacing( spacingHint() );
 
   // FIXME: After the string freeze replace the text with a better one explaning how to use this dialog
-  layout->addMultiCellWidget( new TQLabel( i18n("Please select the position where the track should be split."),
+  tqlayout->addMultiCellWidget( new TQLabel( i18n("Please select the position where the track should be split."),
 			      frame ), 0, 0, 0, 3 );
-  layout->addMultiCellWidget( m_editorWidget, 1, 1, 0, 3 );
-  layout->addWidget( m_msfEditStart, 2, 1 );
-  layout->addWidget( new TQLabel( " - ", frame ), 2, 2 );
-  layout->addWidget( m_msfEditEnd, 2, 3 );
-  layout->addWidget( new TQLabel( i18n("Split track at:"), frame ), 2, 0 );
-  layout->setColStretch( 0, 1 );
+  tqlayout->addMultiCellWidget( m_editorWidget, 1, 1, 0, 3 );
+  tqlayout->addWidget( m_msfEditStart, 2, 1 );
+  tqlayout->addWidget( new TQLabel( " - ", frame ), 2, 2 );
+  tqlayout->addWidget( m_msfEditEnd, 2, 3 );
+  tqlayout->addWidget( new TQLabel( i18n("Split track at:"), frame ), 2, 0 );
+  tqlayout->setColStretch( 0, 1 );
 
   m_editorWidget->setAllowOverlappingRanges( false );
   m_editorWidget->enableRangeSelection( true );

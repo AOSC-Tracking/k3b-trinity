@@ -32,7 +32,7 @@
 #include <kio/global.h>
 #include <kmessagebox.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqgroupbox.h>
 #include <tqlabel.h>
@@ -46,7 +46,7 @@ K3bVideoDvdBurnDialog::K3bVideoDvdBurnDialog( K3bVideoDvdDoc* doc, TQWidget *par
 {
   prepareGui();
 
-  setTitle( i18n("Video DVD Project"), i18n("Size: %1").arg( KIO::convertSize(doc->size()) ) );
+  setTitle( i18n("Video DVD Project"), i18n("Size: %1").tqarg( KIO::convertSize(doc->size()) ) );
 
   // for now we just put the verify checkbox on the main page...
   m_checkVerify = K3bStdGuiItems::verifyCheckBox( m_optionGroup );
@@ -181,7 +181,7 @@ void K3bVideoDvdBurnDialog::slotStartClicked()
 
     if( TQFile::exists( m_tempDirSelectionWidget->tempPath() ) ) {
       if( KMessageBox::warningContinueCancel( this,
-					      i18n("Do you want to overwrite %1?").arg(m_tempDirSelectionWidget->tempPath()),
+					      i18n("Do you want to overwrite %1?").tqarg(m_tempDirSelectionWidget->tempPath()),
 					      i18n("File Exists"), i18n("Overwrite") )
 	  == KMessageBox::Continue ) {
 	// delete the file here to avoid problems with free space in K3bProjectBurnDialog::slotStartClicked

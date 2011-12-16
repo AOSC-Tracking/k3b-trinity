@@ -19,7 +19,7 @@
 
 #include <tqdir.h>
 #include <tqfile.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -94,7 +94,7 @@ void K3bCddbLocalSubmit::doSubmit()
   else {
     kdDebug() << "(K3bCddbLocalSubmit) could not find directory: " << path << endl;
     setError( IO_ERROR );
-    emit infoMessage( i18n("Could not find directory: %1").arg(path) );
+    emit infoMessage( i18n("Could not find directory: %1").tqarg(path) );
     emit submitFinished( this );
   }
 }

@@ -83,7 +83,7 @@ which can be used with programs like xmms or noatun.
                 </widget>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout6</cstring>
+                        <cstring>tqlayout6</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -99,7 +99,7 @@ which can be used with programs like xmms or noatun.
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>16</height>
@@ -148,7 +148,7 @@ file will contain all tracks one after the other.
                 </widget>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout6_2</cstring>
+                        <cstring>tqlayout6_2</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -164,7 +164,7 @@ file will contain all tracks one after the other.
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>16</height>
@@ -231,7 +231,7 @@ file will contain all tracks one after the other.
                     <property name="text">
                         <string>-</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
@@ -250,7 +250,7 @@ file will contain all tracks one after the other.
                     <property name="text">
                         <string>-</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>

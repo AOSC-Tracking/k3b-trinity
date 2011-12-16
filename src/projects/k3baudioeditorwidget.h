@@ -34,8 +34,8 @@ class K3bAudioEditorWidget : public TQFrame
   K3bAudioEditorWidget( TQWidget* parent = 0, const char* name = 0 );
   ~K3bAudioEditorWidget();
 
-  TQSize sizeHint() const;
-  TQSize minimumSizeHint() const;
+  TQSize tqsizeHint() const;
+  TQSize tqminimumSizeHint() const;
 
   /**
    * For now the Editor has only one parameter: the length data.

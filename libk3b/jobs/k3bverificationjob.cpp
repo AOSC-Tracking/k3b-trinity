@@ -203,7 +203,7 @@ void K3bVerificationJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
     if( (int)d->toc.count() < (*it).trackNumber ) {
         if ( d->mediumHasBeenReloaded ) {
             emit infoMessage( i18n("Internal Error: Verification job improperly initialized (%1)")
-                              .arg( "Specified track number not found on medium" ), ERROR );
+                              .tqarg( "Specified track number not found on medium" ), ERROR );
             jobFinished( false );
             return;
         }
@@ -236,7 +236,7 @@ void K3bVerificationJob::readTrack( int trackIndex )
     return;
   }
 
-  emit newTask( i18n("Verifying track %1").arg( d->tracks[trackIndex].trackNumber ) );
+  emit newTask( i18n("Verifying track %1").tqarg( d->tracks[trackIndex].trackNumber ) );
 
   d->pipe.open();
 
@@ -304,7 +304,7 @@ void K3bVerificationJob::slotMd5JobFinished( bool success )
   if( success && !d->canceled && d->readSuccessful ) {
     // compare the two sums
     if( d->tracks[d->currentTrackIndex].checksum != d->md5Job->hexDigest() ) {
-      emit infoMessage( i18n("Written data in track %1 differs from original.").arg(d->tracks[d->currentTrackIndex].trackNumber), ERROR );
+      emit infoMessage( i18n("Written data in track %1 differs from original.").tqarg(d->tracks[d->currentTrackIndex].trackNumber), ERROR );
       jobFinished(false);
     }
     else {

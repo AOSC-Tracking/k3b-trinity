@@ -33,7 +33,7 @@
 #include <tqlineedit.h>
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 #include <sys/types.h>
 #include <sys/wait.h>

@@ -157,9 +157,9 @@ TQString K3bVersion::createVersionString( int majorVersion,
     TQString s = TQString::number(majorVersion);
     
     if( minorVersion > -1 ) {
-      s.append( TQString(".%1").arg(minorVersion) );
+      s.append( TQString(".%1").tqarg(minorVersion) );
       if( patchlevel > -1 )
-	s.append( TQString(".%1").arg(patchlevel) );
+	s.append( TQString(".%1").tqarg(patchlevel) );
     }
     
     if( !suffix.isNull() )

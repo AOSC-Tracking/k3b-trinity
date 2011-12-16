@@ -79,9 +79,9 @@ bool K3bLsofWrapperDialog::slotCheckDevice()
 			     "<p><em>Hint: Sometimes shutting down an application does not "
 			     "happen instantly. In that case you might have to use the '%3' "
 			     "button.")
-			.arg( m_device->vendor() + " - " + m_device->description() )
-			.arg( joinProcessNames(apps) )
-			.arg( actionButton( User2 )->text() ) );
+			.tqarg( m_device->vendor() + " - " + m_device->description() )
+			.tqarg( joinProcessNames(apps) )
+			.tqarg( actionButton( User2 )->text() ) );
       return true;
     }
   }

@@ -31,7 +31,7 @@
 #include <k3bmediacache.h>
 #include <k3biso9660.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqgroupbox.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>
@@ -169,7 +169,7 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* parent, const char* name, bool mod
 
 
   //
-  // setup layout
+  // setup tqlayout
   // //////////////////////////////////////////////////////////////////////////
   TQGridLayout* grid = new TQGridLayout( w );
   grid->setMargin( 0 );

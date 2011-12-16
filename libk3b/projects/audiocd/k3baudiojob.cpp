@@ -297,7 +297,7 @@ void K3bAudioJob::start()
 	d->useCdText ) {
       if( !cdrecordCdText ) {
 	emit infoMessage( i18n("Cdrecord %1 does not support CD-Text writing.")
-			  .arg(k3bcore->externalBinManager()->binObject("cdrecord")->version), ERROR );
+			  .tqarg(k3bcore->externalBinManager()->binObject("cdrecord")->version), ERROR );
 	d->useCdText = false;
       }
       else if( m_usedWritingMode == K3b::TAO ) {
@@ -346,7 +346,7 @@ void K3bAudioJob::start()
   }
   else {
     emit burning(false);
-    emit infoMessage( i18n("Creating image files in %1").arg(m_doc->tempDir()), INFO );
+    emit infoMessage( i18n("Creating image files in %1").tqarg(m_doc->tempDir()), INFO );
     emit newTask( i18n("Creating image files") );
     m_tempData->prepareTempFileNames( doc()->tempDir() );
     TQStringList filenames;
@@ -480,9 +480,9 @@ void K3bAudioJob::slotAudioDecoderNextTrack( int t, int tt )
   if( m_doc->onlyCreateImages() || !m_doc->onTheFly() ) {
     K3bAudioTrack* track = m_doc->getTrack(t);
     emit newSubTask( i18n("Decoding audio track %1 of %2%3")
-		     .arg(t)
-		     .arg(tt)
-		     .arg( track->title().isEmpty() || track->artist().isEmpty() 
+		     .tqarg(t)
+		     .tqarg(tt)
+		     .tqarg( track->title().isEmpty() || track->artist().isEmpty() 
 			   ? TQString()
 			   : " (" + track->artist() + " - " + track->title() + ")" ) );
   }
@@ -568,7 +568,7 @@ bool K3bAudioJob::prepareWriter()
   connect( m_writer, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
   connect( m_writer, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
   connect( m_writer, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
-  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
+  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
   connect( m_writer, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
   connect( m_writer, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
   connect( m_writer, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
@@ -588,9 +588,9 @@ void K3bAudioJob::slotWriterNextTrack( int t, int tt )
   if( m_doc->hideFirstTrack() )
     track = m_doc->getTrack(t+1);
   emit newSubTask( i18n("Writing track %1 of %2%3")
-		   .arg(t)
-		   .arg(tt)
-		   .arg( track->title().isEmpty() || track->artist().isEmpty() 
+		   .tqarg(t)
+		   .tqarg(tt)
+		   .tqarg( track->title().isEmpty() || track->artist().isEmpty() 
 			 ? TQString()
 			 : " (" + track->artist() + " - " + track->title() + ")" ) );
 }
@@ -650,7 +650,7 @@ bool K3bAudioJob::startWriting()
   if( m_doc->dummy() )
     emit newTask( i18n("Simulating") );
   else if( d->copies > 1 )
-    emit newTask( i18n("Writing Copy %1").arg(d->copiesDone+1) );
+    emit newTask( i18n("Writing Copy %1").tqarg(d->copiesDone+1) );
   else
     emit newTask( i18n("Writing") );
 
@@ -847,7 +847,7 @@ TQString K3bAudioJob::jobDescription() const
   return i18n("Writing Audio CD")
     + ( m_doc->title().isEmpty() 
 	? TQString()
-	: TQString( " (%1)" ).arg(m_doc->title()) );
+	: TQString( " (%1)" ).tqarg(m_doc->title()) );
 }
 
 
@@ -855,7 +855,7 @@ TQString K3bAudioJob::jobDetails() const
 {
   return ( i18n( "1 track (%1 minutes)", 
 		 "%n tracks (%1 minutes)", 
-		 m_doc->numOfTracks() ).arg(m_doc->length().toString())
+		 m_doc->numOfTracks() ).tqarg(m_doc->length().toString())
 	   + ( m_doc->copies() > 1 && !m_doc->dummy()
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
 	       : TQString() ) );

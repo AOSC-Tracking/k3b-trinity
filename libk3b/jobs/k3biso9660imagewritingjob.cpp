@@ -37,7 +37,7 @@
 #include <kio/global.h>
 
 #include <tqstring.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqfile.h>
 #include <tqapplication.h>
 
@@ -86,7 +86,7 @@ void K3bIso9660ImageWritingJob::start()
   emit newTask( i18n("Preparing data") );
 
   if( !TQFile::exists( m_imagePath ) ) {
-    emit infoMessage( i18n("Could not find image %1").arg(m_imagePath), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not find image %1").tqarg(m_imagePath), K3bJob::ERROR );
     jobFinished( false );
     return;
   }
@@ -133,7 +133,7 @@ void K3bIso9660ImageWritingJob::slotWriterJobFinished( bool success )
       if( m_copies == 1 )
 	emit newTask( i18n("Verifying written data") );
       else
-	emit newTask( i18n("Verifying written copy %1 of %2").arg(m_currentCopy).arg(m_copies) );
+	emit newTask( i18n("Verifying written copy %1 of %2").tqarg(m_currentCopy).tqarg(m_copies) );
 
       m_verifyJob->start();
     }
@@ -200,7 +200,7 @@ void K3bIso9660ImageWritingJob::slotNextTrack( int, int )
   if( m_copies == 1 )
     emit newSubTask( i18n("Writing image") );
   else
-    emit newSubTask( i18n("Writing copy %1 of %2").arg(m_currentCopy).arg(m_copies) );
+    emit newSubTask( i18n("Writing copy %1 of %2").tqarg(m_currentCopy).tqarg(m_copies) );
 }
 
 
@@ -350,7 +350,7 @@ bool K3bIso9660ImageWritingJob::prepareWriter( int mediaType )
 	writer->addArgument("-data");
 
       // read from stdin
-      writer->addArgument( TQString("-tsize=%1s").arg( K3b::imageFilesize( m_imagePath )/2048 ) )->addArgument( "-" );
+      writer->addArgument( TQString("-tsize=%1s").tqarg( K3b::imageFilesize( m_imagePath )/2048 ) )->addArgument( "-" );
 
       m_writer = writer;
     }
@@ -424,7 +424,7 @@ bool K3bIso9660ImageWritingJob::prepareWriter( int mediaType )
   connect( m_writer, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotNextTrack(int, int)) );
   connect( m_writer, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterPercent(int)) );
   connect( m_writer, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
+  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
   connect( m_writer, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
   connect( m_writer, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
   connect( m_writer, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterJobFinished(bool)) );
@@ -451,7 +451,7 @@ TQString K3bIso9660ImageWritingJob::jobDescription() const
 
 TQString K3bIso9660ImageWritingJob::jobDetails() const
 {
-  return m_imagePath.section("/", -1) + TQString( " (%1)" ).arg(KIO::convertSize(K3b::filesize(KURL::fromPathOrURL(m_imagePath))));
+  return m_imagePath.section("/", -1) + TQString( " (%1)" ).tqarg(KIO::convertSize(K3b::filesize(KURL::fromPathOrURL(m_imagePath))));
 }
 
 

@@ -22,7 +22,7 @@
 #include <tqhbox.h>
 #include <tqlineedit.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqmultilineedit.h>
 #include <tqpixmap.h>
 #include <tqradiobutton.h>
@@ -70,7 +70,7 @@ K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, TQPtrList<K3bVcdTrack>& t
         m_displayFileName->setText( selectedTrack->fileName() );
         m_displayLength->setText( selectedTrack->duration() );
         m_displaySize->setText( KIO::convertSize( selectedTrack->size() ) );
-        m_muxrate->setText( i18n( "%1 bit/s" ).arg( selectedTrack->muxrate() ) );
+        m_muxrate->setText( i18n( "%1 bit/s" ).tqarg( selectedTrack->muxrate() ) );
 
         if ( selectedTrack->isSegment() )
             m_labelMimeType->setPixmap( SmallIcon( "image", KIcon::SizeMedium ) );
@@ -93,7 +93,7 @@ void K3bVcdTrackDialog::slotOk()
 void K3bVcdTrackDialog::setPbcTrack( K3bVcdTrack* selected, K3bCutComboBox* box, int which )
 {
     // TODO: Unset Userdefined on default settings
-    kdDebug() << TQString( "K3bVcdTrackDialog::setPbcTrack: currentItem = %1, count = %2" ).arg( box->currentItem() ).arg( m_tracks.count() ) << endl;
+    kdDebug() << TQString( "K3bVcdTrackDialog::setPbcTrack: currentItem = %1, count = %2" ).tqarg( box->currentItem() ).tqarg( m_tracks.count() ) << endl;
 
     int count = m_tracks.count();
 
@@ -375,11 +375,11 @@ void K3bVcdTrackDialog::prepareGui()
     // FILE-INFO BOX
     ///////////////////////////////////////////////////
     TQGroupBox* groupFileInfo = new TQGroupBox( 0, Qt::Vertical, i18n( "File Info" ), frame, "groupFileInfo" );
-    groupFileInfo->layout() ->setSpacing( 0 );
-    groupFileInfo->layout() ->setMargin( 0 );
+    groupFileInfo->tqlayout() ->setSpacing( 0 );
+    groupFileInfo->tqlayout() ->setMargin( 0 );
 
-    TQGridLayout* groupFileInfoLayout = new TQGridLayout( groupFileInfo->layout() );
-    groupFileInfoLayout->setAlignment( TQt::AlignTop );
+    TQGridLayout* groupFileInfoLayout = new TQGridLayout( groupFileInfo->tqlayout() );
+    groupFileInfoLayout->tqsetAlignment( TQt::AlignTop );
     groupFileInfoLayout->setSpacing( spacingHint() );
     groupFileInfoLayout->setMargin( marginHint() );
 
@@ -387,7 +387,7 @@ void K3bVcdTrackDialog::prepareGui()
 
     m_displayFileName = new KCutLabel( groupFileInfo );
     m_displayFileName->setText( i18n( "Filename" ) );
-    m_displayFileName->setAlignment( int( TQLabel::AlignTop | TQLabel::AlignLeft ) );
+    m_displayFileName->tqsetAlignment( int( TQLabel::AlignTop | TQLabel::AlignLeft ) );
 
     TQLabel* labelSize = new TQLabel( i18n( "Size:" ), groupFileInfo, "labelSize" );
     TQLabel* labelLength = new TQLabel( i18n( "Length:" ), groupFileInfo, "labelLength" );
@@ -395,15 +395,15 @@ void K3bVcdTrackDialog::prepareGui()
 
     m_displaySize = new TQLabel( groupFileInfo, "m_displaySize" );
     m_displaySize->setText( "0.0 MB" );
-    m_displaySize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_displaySize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     m_displayLength = new TQLabel( groupFileInfo, "m_displayLength" );
     m_displayLength->setText( "0:0:0" );
-    m_displayLength->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_displayLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     m_muxrate = new TQLabel( groupFileInfo, "m_muxrate" );
-    m_muxrate->setText( i18n( "%1 bit/s" ).arg( 0 ) );
-    m_muxrate->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_muxrate->setText( i18n( "%1 bit/s" ).tqarg( 0 ) );
+    m_muxrate->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     TQFrame* fileInfoLine = new TQFrame( groupFileInfo );
     fileInfoLine->setFrameStyle( TQFrame::HLine | TQFrame::Sunken );
@@ -443,15 +443,15 @@ void K3bVcdTrackDialog::setupPbcTab()
     TQWidget * w = new TQWidget( m_mainTabbed );
 
     TQGridLayout* grid = new TQGridLayout( w );
-    grid->setAlignment( TQt::AlignTop );
+    grid->tqsetAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
 
     //////////////////////////////////////////////////////////////////////////////////////////
     TQGroupBox* groupOptions = new TQGroupBox( 3, Qt::Vertical, i18n( "Settings" ), w );
-    groupOptions->layout() ->setSpacing( spacingHint() );
-    groupOptions->layout() ->setMargin( marginHint() );
+    groupOptions->tqlayout() ->setSpacing( spacingHint() );
+    groupOptions->tqlayout() ->setMargin( marginHint() );
 
     m_check_pbc = new TQCheckBox( i18n( "Enable playback control (for the whole CD)" ), groupOptions, "m_check_pbc" );
 
@@ -463,11 +463,11 @@ void K3bVcdTrackDialog::setupPbcTab()
 
     //////////////////////////////////////////////////////////////////////////////////////////
     m_groupPlay = new TQGroupBox( 0, Qt::Vertical, i18n( "Playing" ), w );
-    m_groupPlay->layout() ->setSpacing( spacingHint() );
-    m_groupPlay->layout() ->setMargin( marginHint() );
+    m_groupPlay->tqlayout() ->setSpacing( spacingHint() );
+    m_groupPlay->tqlayout() ->setMargin( marginHint() );
 
-    TQGridLayout* groupPlayLayout = new TQGridLayout( m_groupPlay->layout() );
-    groupPlayLayout->setAlignment( TQt::AlignTop );
+    TQGridLayout* groupPlayLayout = new TQGridLayout( m_groupPlay->tqlayout() );
+    groupPlayLayout->tqsetAlignment( TQt::AlignTop );
 
     TQLabel* labelPlaying = new TQLabel( i18n( "Playing track" ) , m_groupPlay, "labelPlaying" );
 
@@ -499,11 +499,11 @@ void K3bVcdTrackDialog::setupPbcTab()
 
     //////////////////////////////////////////////////////////////////////////////////////////
     m_groupPbc = new TQGroupBox( 0, Qt::Vertical, i18n( "Key Pressed Interaction" ), w );
-    m_groupPbc->layout() ->setSpacing( spacingHint() );
-    m_groupPbc->layout() ->setMargin( marginHint() );
+    m_groupPbc->tqlayout() ->setSpacing( spacingHint() );
+    m_groupPbc->tqlayout() ->setMargin( marginHint() );
 
-    TQGridLayout* groupPbcLayout = new TQGridLayout( m_groupPbc->layout() );
-    groupPbcLayout->setAlignment( TQt::AlignTop );
+    TQGridLayout* groupPbcLayout = new TQGridLayout( m_groupPbc->tqlayout() );
+    groupPbcLayout->tqsetAlignment( TQt::AlignTop );
 
     TQLabel* labelPbc_previous = new TQLabel( i18n( "Previous:" ), m_groupPbc, "labelPbc_previous" );
     TQLabel* labelPbc_next = new TQLabel( i18n( "Next:" ), m_groupPbc, "labelPbc_next" );
@@ -553,14 +553,14 @@ void K3bVcdTrackDialog::setupPbcKeyTab()
     m_widgetnumkeys = new TQWidget( m_mainTabbed );
 
     TQGridLayout* grid = new TQGridLayout( m_widgetnumkeys );
-    grid->setAlignment( TQt::AlignTop );
+    grid->tqsetAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
     m_groupKey = new TQGroupBox( 3, Qt::Vertical, i18n( "Numeric Keys" ), m_widgetnumkeys );
     m_groupKey->setEnabled( false );
-    m_groupKey->layout() ->setSpacing( spacingHint() );
-    m_groupKey->layout() ->setMargin( marginHint() );
+    m_groupKey->tqlayout() ->setSpacing( spacingHint() );
+    m_groupKey->tqlayout() ->setMargin( marginHint() );
 
     m_list_keys = new K3bListView( m_groupKey, "m_list_keys" );
     m_list_keys->setAllColumnsShowFocus( true );
@@ -590,7 +590,7 @@ void K3bVcdTrackDialog::setupAudioTab()
     TQWidget * w = new TQWidget( m_mainTabbed );
 
     TQGridLayout* grid = new TQGridLayout( w );
-    grid->setAlignment( TQt::AlignTop );
+    grid->tqsetAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
@@ -647,7 +647,7 @@ void K3bVcdTrackDialog::setupVideoTab()
     TQWidget * w = new TQWidget( m_mainTabbed );
 
     TQGridLayout* grid = new TQGridLayout( w );
-    grid->setAlignment( TQt::AlignTop );
+    grid->tqsetAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
@@ -744,9 +744,9 @@ TQString K3bVcdTrackDialog::displayName( K3bVcdTrack * track )
         return i18n( "ItSelf" );
 
     if ( track->isSegment() )
-        return i18n( "Segment-%1 - %2" ).arg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).arg( track->title() );
+        return i18n( "Segment-%1 - %2" ).tqarg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).tqarg( track->title() );
 
-    return i18n( "Sequence-%1 - %2" ).arg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).arg( track->title() );
+    return i18n( "Sequence-%1 - %2" ).tqarg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).tqarg( track->title() );
 }
 
 void K3bVcdTrackDialog::slotPlayTimeChanged( int value )

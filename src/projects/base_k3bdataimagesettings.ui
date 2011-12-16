@@ -89,7 +89,7 @@
         </widget>
         <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>layout4</cstring>
+                <cstring>tqlayout4</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -258,7 +258,7 @@ Example: 'my good file.ext' becomes 'my_good_file.ext'</string>
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>21</width>
                     <height>0</height>

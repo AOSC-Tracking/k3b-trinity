@@ -19,7 +19,7 @@
 
 #include <tqlabel.h>
 #include <tqpushbutton.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqframe.h>
 #include <tqwidgetstack.h>
 

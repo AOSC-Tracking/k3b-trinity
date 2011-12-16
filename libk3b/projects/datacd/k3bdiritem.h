@@ -37,8 +37,8 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
   K3bDirItem( const TQString& name, K3bDataDoc*, K3bDirItem* parentDir = 0 );
 
   /**
-   * Default copy constructor. Copies the dir including all children. However, none of the
-   * children will have set a doc and the copy dir will not have set a parent dir.
+   * Default copy constructor. Copies the dir including all tqchildren. However, none of the
+   * tqchildren will have set a doc and the copy dir will not have set a parent dir.
    */
   K3bDirItem( const K3bDirItem& );
 
@@ -48,7 +48,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
 	
   K3bDirItem* getDirItem() const;
 
-  const TQPtrList<K3bDataItem>& children() const { return m_children; }
+  const TQPtrList<K3bDataItem>& tqchildren() const { return m_tqchildren; }
   K3bDirItem* addDataItem( K3bDataItem* item );
   K3bDataItem* takeDataItem( K3bDataItem* item );
 	
@@ -121,7 +121,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
    */
   void updateFiles( long files, long dirs );
 
-  mutable TQPtrList<K3bDataItem> m_children;
+  mutable TQPtrList<K3bDataItem> m_tqchildren;
 
   // size of the items simply added
   KIO::filesize_t m_size;

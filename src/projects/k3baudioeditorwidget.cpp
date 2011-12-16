@@ -125,7 +125,7 @@ protected:
     if( m ) {
       r.setLeft( p.x() - 1 );
       r.setRight( p.x() + 1 );
-      tip( r, m->toolTip.isEmpty() ? m->pos.toString() : TQString("%1 (%2)").arg(m->toolTip).arg(m->pos.toString()) );
+      tip( r, m->toolTip.isEmpty() ? m->pos.toString() : TQString("%1 (%2)").tqarg(m->toolTip).tqarg(m->pos.toString()) );
     }
     else {
       Range* range = m_editorWidget->findRange( p );
@@ -134,8 +134,8 @@ protected:
 	r.setRight( m_editorWidget->msfToPos( range->end ) );
 	tip( r, 
 	     range->toolTip.isEmpty()
-	     ? TQString("%1 - %2").arg(range->start.toString()).arg(range->end.toString())
-	     : TQString("%1 (%2 - %3)").arg(range->toolTip).arg(range->start.toString()).arg(range->end.toString()) );
+	     ? TQString("%1 - %2").tqarg(range->start.toString()).tqarg(range->end.toString())
+	     : TQString("%1 (%2 - %3)").tqarg(range->toolTip).tqarg(range->start.toString()).tqarg(range->end.toString()) );
       }
     }
   }
@@ -177,9 +177,9 @@ K3bAudioEditorWidget::K3bAudioEditorWidget( TQWidget* parent, const char* name )
     m_draggedMarker(0)
 {
   d = new Private;
-  d->selectedRangeBrush = TQBrush(colorGroup().highlight());
+  d->selectedRangeBrush = TQBrush(tqcolorGroup().highlight());
 
-  setSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Minimum );
+  tqsetSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Minimum );
   setFrameStyle( StyledPanel|Sunken );
   setMouseTracking(true);
   setCursor( TQt::PointingHandCursor );
@@ -201,7 +201,7 @@ K3bAudioEditorWidget::~K3bAudioEditorWidget()
 }
 
 
-TQSize K3bAudioEditorWidget::minimumSizeHint() const
+TQSize K3bAudioEditorWidget::tqminimumSizeHint() const
 {
   constPolish();
   // some fixed height minimum and enough space for a tickmark every minute
@@ -215,9 +215,9 @@ TQSize K3bAudioEditorWidget::minimumSizeHint() const
 }
 
 
-TQSize K3bAudioEditorWidget::sizeHint() const
+TQSize K3bAudioEditorWidget::tqsizeHint() const
 {
-  return minimumSizeHint();
+  return tqminimumSizeHint();
 }
 
 
@@ -263,7 +263,7 @@ bool K3bAudioEditorWidget::allowOverlappingRanges() const
 void K3bAudioEditorWidget::enableRangeSelection( bool b )
 {
   d->rangeSelectionEnabled = b;
-  repaint( false );
+  tqrepaint( false );
 }
 
 
@@ -283,7 +283,7 @@ void K3bAudioEditorWidget::setSelectedRange( K3bAudioEditorWidget::Range* r )
 {
   d->selectedRange = r;
   if( rangeSelectedEnabled() ) {
-    repaint( false );
+    tqrepaint( false );
     emit selectedRangeChanged( d->selectedRange ? d->selectedRange->id : 0 );
   }
 }
@@ -307,7 +307,7 @@ int K3bAudioEditorWidget::addRange( const K3b::Msf& start, const K3b::Msf& end,
     return -1;
 
   Range* r = new Range( m_idCnt++, start, end, startFixed, endFixed, toolTip,
-			brush.style() != TQBrush::NoBrush ? brush : TQBrush(colorGroup().background()) );
+			brush.style() != TQBrush::NoBrush ? brush : TQBrush(tqcolorGroup().background()) );
   d->ranges.inSort( r );
 
   // only update the changed range
@@ -356,7 +356,7 @@ bool K3bAudioEditorWidget::modifyRange( int identifier, const K3b::Msf& start, c
     if( !d->allowOverlappingRanges )
       fixupOverlappingRanges( range );
     
-    repaint( false );
+    tqrepaint( false );
 
     return true;
   }
@@ -372,7 +372,7 @@ bool K3bAudioEditorWidget::removeRange( int identifier )
 
     emit rangeRemoved( identifier );
 
-    // repaint only the part of the range
+    // tqrepaint only the part of the range
     TQRect rect = contentsRect();
     rect.setLeft( msfToPos( range->start ) );
     rect.setRight( msfToPos( range->end ) );
@@ -433,7 +433,7 @@ void K3bAudioEditorWidget::setMaxNumberOfMarkers( int i )
 int K3bAudioEditorWidget::addMarker( const K3b::Msf& pos, bool fixed, const TQString& toolTip, const TQColor& color )
 {
   if( pos < m_length ) {
-    Marker* m = new Marker( m_idCnt++, pos, fixed, color.isValid() ? color : colorGroup().foreground(), toolTip );
+    Marker* m = new Marker( m_idCnt++, pos, fixed, color.isValid() ? color : tqcolorGroup().foreground(), toolTip );
     m_markers.inSort( m );
     return m->id;
   }
@@ -488,16 +488,16 @@ void K3bAudioEditorWidget::drawContents( TQPainter* p )
 {
   // double buffering
   TQPixmap pix( contentsRect().size() );
-  pix.fill( colorGroup().base() );
+  pix.fill( tqcolorGroup().base() );
 
   TQPainter pixP;
-  pixP.begin( &pix, TQT_TQOBJECT(this) );
+  pixP.tqbegin( &pix, TQT_TQOBJECT(this) );
 
   TQRect drawRect( contentsRect() );
   drawRect.setLeft( drawRect.left() + m_margin );
   drawRect.setRight( drawRect.right() - m_margin );
 
-  // from minimumSizeHint()
+  // from tqminimumSizeHint()
 //   int neededHeight = fontMetrics().height() + 12 + 6;
 
 //   drawRect.setTop( drawRect.top() + (drawRect.height() - neededHeight)/2 );
@@ -690,11 +690,11 @@ void K3bAudioEditorWidget::mouseReleaseEvent( TQMouseEvent* e )
     //
     if( m_draggedRange ) {
       fixupOverlappingRanges( m_draggedRange );
-      repaint( false );
+      tqrepaint( false );
     }
     else if( d->movedRange ) {
       fixupOverlappingRanges( d->movedRange );
-      repaint( false );
+      tqrepaint( false );
     }
   }
 
@@ -739,13 +739,13 @@ void K3bAudioEditorWidget::mouseMoveEvent( TQMouseEvent* e )
 
       emit rangeChanged( m_draggedRange->id, m_draggedRange->start, m_draggedRange->end );
 
-      repaint( false );
+      tqrepaint( false );
     }
     else if( m_draggedMarker ) {
       m_draggedMarker->pos = posToMsf( e->pos().x() );
       emit markerMoved( m_draggedMarker->id, m_draggedMarker->pos );
 
-      repaint( false );
+      tqrepaint( false );
     }
     else if( d->movedRange ) {
       int diff = posToMsf( e->pos().x() ).lba() - d->lastMovePosition.lba();
@@ -763,7 +763,7 @@ void K3bAudioEditorWidget::mouseMoveEvent( TQMouseEvent* e )
 
       emit rangeChanged( d->movedRange->id, d->movedRange->start, d->movedRange->end );
 
-      repaint( false );
+      tqrepaint( false );
     }
   }
   else if( findRangeEdge( e->pos() ) || findMarker( e->pos() ) )

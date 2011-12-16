@@ -155,13 +155,13 @@ bool K3bGrowisofsWriter::prepareProcess()
 {
   d->growisofsBin = k3bcore->externalBinManager()->binObject( "growisofs" );
   if( !d->growisofsBin ) {
-    emit infoMessage( i18n("Could not find %1 executable.").arg("growisofs"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("growisofs"), ERROR );
     return false;
   }
 
   if( d->growisofsBin->version < K3bVersion( 5, 10 ) ) {
     emit infoMessage( i18n("Growisofs version %1 is too old. "
-			   "K3b needs at least version 5.10.").arg(d->growisofsBin->version),
+			   "K3b needs at least version 5.10.").tqarg(d->growisofsBin->version),
 		      ERROR );
     return false;
   }
@@ -169,8 +169,8 @@ bool K3bGrowisofsWriter::prepareProcess()
   emit debuggingOutput( "Used versions", "growisofs: " + d->growisofsBin->version );
 
   if( !d->growisofsBin->copyright.isEmpty() )
-    emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3").arg("growisofs")
-		      .arg(d->growisofsBin->version).arg(d->growisofsBin->copyright), INFO );
+    emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3").tqarg("growisofs")
+		      .tqarg(d->growisofsBin->version).tqarg(d->growisofsBin->copyright), INFO );
 
 
   //
@@ -234,7 +234,7 @@ bool K3bGrowisofsWriter::prepareProcess()
     d->inputFile.setName( d->image );
     d->trackSize = (K3b::filesize( d->image ) + 1024) / 2048;
     if( !d->inputFile.open( IO_ReadOnly ) ) {
-      emit infoMessage( i18n("Could not open file %1.").arg(d->image), ERROR );
+      emit infoMessage( i18n("Could not open file %1.").tqarg(d->image), ERROR );
       return false;
     }
   }
@@ -299,7 +299,7 @@ bool K3bGrowisofsWriter::prepareProcess()
 
     // speed may be a float number. example: DVD+R(W): 2.4x
     if( speed != 0 )
-      *d->process << TQString("-speed=%1").arg( speed%1385 > 0
+      *d->process << TQString("-speed=%1").tqarg( speed%1385 > 0
 					      ? TQString::number( (float)speed/1385.0, 'f', 1 )
 					      : TQString::number( speed/1385 ) );
   }
@@ -310,7 +310,7 @@ bool K3bGrowisofsWriter::prepareProcess()
   if( !d->usingRingBuffer && d->growisofsBin->version >= K3bVersion( 6, 0 ) ) {
     bool manualBufferSize = k3bcore->globalSettings()->useManualBufferSize();
     int bufSize = ( manualBufferSize ? k3bcore->globalSettings()->bufferSize() : 32 );
-    *d->process << TQString("-use-the-force-luke=bufsize:%1m").arg(bufSize);
+    *d->process << TQString("-use-the-force-luke=bufsize:%1m").tqarg(bufSize);
   }
 
   // additional user parameters from config
@@ -374,7 +374,7 @@ void K3bGrowisofsWriter::start()
       // something went wrong when starting the program
       // it "should" be the executable
       kdDebug() << "(K3bGrowisofsWriter) could not start " << d->growisofsBin->path << endl;
-      emit infoMessage( i18n("Could not start %1.").arg(d->growisofsBin->name()), K3bJob::ERROR );
+      emit infoMessage( i18n("Could not start %1.").tqarg(d->growisofsBin->name()), K3bJob::ERROR );
       jobFinished(false);
     }
     else {
@@ -551,7 +551,7 @@ void K3bGrowisofsWriter::slotProcessExited( KProcess* p )
     int s = d->speedEst->average();
     if( s > 0 )
       emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)")
-                        .arg(s).arg(KGlobal::locale()->formatNumber((double)s/1385.0), 2), INFO );
+                        .tqarg(s).tqarg(KGlobal::locale()->formatNumber((double)s/1385.0), 2), INFO );
 
     if( simulate() )
       emit infoMessage( i18n("Simulation successfully completed"), K3bJob::SUCCESS );

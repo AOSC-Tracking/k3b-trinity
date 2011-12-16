@@ -1925,7 +1925,7 @@ TQImage scale(const TQImage& image, int width, int height,
 	if( image.isNull()) return image.copy();
 	
 	TQSize newSize( image.size() );
-	newSize.scale( TQSize( width, height ), (TQSize::ScaleMode)mode ); // ### remove cast in TQt 4.0
+	newSize.tqscale( TQSize( width, height ), (TQSize::ScaleMode)mode ); // ### remove cast in TQt 4.0
 	newSize = newSize.expandedTo( TQSize( 1, 1 )); // make sure it doesn't become null
 
 	if ( newSize == image.size() ) return image.copy();

@@ -14,9 +14,9 @@
  */
 
 
-#include <textedit.h>
+#include <tqtextedit.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqgroupbox.h>
 #include <tqframe.h>
 #include <tqcheckbox.h>

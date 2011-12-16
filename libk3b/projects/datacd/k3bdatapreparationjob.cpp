@@ -77,8 +77,8 @@ void K3bDataPreparationJob::Private::run()
 	 ++it, --maxlines ) {
       K3bDataItem* item = *it;
       listOfRenamedItems += i18n("<em>%1</em> renamed to <em>%2</em>")
-	.arg( KStringHandler::csqueeze( item->k3bName(), 30 ) )
-	.arg( KStringHandler::csqueeze( item->writtenName(), 30 ) );
+	.tqarg( KStringHandler::csqueeze( item->k3bName(), 30 ) )
+	.tqarg( KStringHandler::csqueeze( item->writtenName(), 30 ) );
       listOfRenamedItems += "<br>";
     }
     if( it != doc->needToCutFilenameItems().end() )
@@ -182,7 +182,7 @@ void K3bDataPreparationJob::slotWorkDone( bool success )
 				       "of the Joliet extensions. If the Joliet extensions are disabled filenames "
 				       "do not have to be shortened but long filenames will not be available on "
 				       "Windows systems.")
-			  .arg( d->doc->isoOptions().jolietLong() ? 103 : 64 )
+			  .tqarg( d->doc->isoOptions().jolietLong() ? 103 : 64 )
 			  + "<p>" + d->listOfRenamedItems,
 			  i18n("Warning"),
 			  i18n("Shorten Filenames"),
@@ -207,7 +207,7 @@ void K3bDataPreparationJob::slotWorkDone( bool success )
 				       "restrict the length of the volume descriptior (the name of the filesystem) "
 				       "to %1 characters. The selected descriptor '%2' is longer than that. Do you "
 				       "want it to be cut or do you want to go back and change it manually?")
-			  .arg( 16 ).arg( d->doc->isoOptions().volumeID() ),
+			  .tqarg( 16 ).tqarg( d->doc->isoOptions().volumeID() ),
 			  i18n("Warning"),
 			  i18n("Cut volume descriptor in the Joliet tree"),
 			  i18n("Cancel and go back") ) ) {

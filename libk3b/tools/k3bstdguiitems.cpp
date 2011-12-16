@@ -20,7 +20,7 @@
 #include <tqwhatsthis.h>
 #include <tqcombobox.h>
 #include <tqframe.h>
-#include <palette.h>
+#include <tqpalette.h>
 
 #include <klocale.h>
 

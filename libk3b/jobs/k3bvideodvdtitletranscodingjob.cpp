@@ -87,15 +87,15 @@ void K3bVideoDVDTitleTranscodingJob::start()
 
   d->usedTranscodeBin = k3bcore->externalBinManager()->binObject("transcode");
   if( !d->usedTranscodeBin ) {
-    emit infoMessage( i18n("%1 executable could not be found.").arg("transcode"), ERROR );
+    emit infoMessage( i18n("%1 executable could not be found.").tqarg("transcode"), ERROR );
     jobFinished( false );
     return;
   }
 
   if( d->usedTranscodeBin->version < K3bVersion( 1, 0, 0 ) ){
     emit infoMessage( i18n("%1 version %2 is too old.")
-		      .arg("transcode")
-		      .arg(d->usedTranscodeBin->version), ERROR );
+		      .tqarg("transcode")
+		      .tqarg(d->usedTranscodeBin->version), ERROR );
     jobFinished( false );
     return;
   }
@@ -104,9 +104,9 @@ void K3bVideoDVDTitleTranscodingJob::start()
 
   if( !d->usedTranscodeBin->copyright.isEmpty() )
     emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3")
-		      .arg(d->usedTranscodeBin->name())
-		      .arg(d->usedTranscodeBin->version)
-		      .arg(d->usedTranscodeBin->copyright), INFO );
+		      .tqarg(d->usedTranscodeBin->name())
+		      .tqarg(d->usedTranscodeBin->version)
+		      .tqarg(d->usedTranscodeBin->copyright), INFO );
 
   //
   // Let's take a look at the filename
@@ -119,11 +119,11 @@ void K3bVideoDVDTitleTranscodingJob::start()
     TQFileInfo fileInfo( m_filename );
     TQFileInfo dirInfo( fileInfo.dirPath() );
     if( !dirInfo.exists() && !KStandardDirs::makeDir( dirInfo.absFilePath() ) ) {
-      emit infoMessage( i18n("Unable to create folder '%1'").arg(dirInfo.filePath()), ERROR );
+      emit infoMessage( i18n("Unable to create folder '%1'").tqarg(dirInfo.filePath()), ERROR );
       return;
     }
     else if( !dirInfo.isDir() || !dirInfo.isWritable() ) {
-      emit infoMessage( i18n("Invalid filename: '%1'").arg(m_filename), ERROR );
+      emit infoMessage( i18n("Invalid filename: '%1'").tqarg(m_filename), ERROR );
       jobFinished( false );
       return;
     }
@@ -134,7 +134,7 @@ void K3bVideoDVDTitleTranscodingJob::start()
   //
   d->twoPassEncodingLogFile = K3b::findTempFile( "log" );
 
-  emit newTask( i18n("Transcoding title %1 from Video DVD %2").arg(m_titleNumber).arg(m_dvd.volumeIdentifier()) );
+  emit newTask( i18n("Transcoding title %1 from Video DVD %2").tqarg(m_titleNumber).tqarg(m_dvd.volumeIdentifier()) );
 
   //
   // Ok then, let's begin
@@ -159,7 +159,7 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
     break;
 
   default:
-    emit infoMessage( i18n("Invalid Video codec set: %1").arg(m_videoCodec), ERROR );
+    emit infoMessage( i18n("Invalid Video codec set: %1").tqarg(m_videoCodec), ERROR );
     jobFinished( false );
     return;
   }
@@ -182,7 +182,7 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
     break;
 
   default:
-    emit infoMessage( i18n("Invalid Audio codec set: %1").arg(m_audioCodec), ERROR );
+    emit infoMessage( i18n("Invalid Audio codec set: %1").tqarg(m_audioCodec), ERROR );
     jobFinished( false );
     return;
   }
@@ -218,7 +218,7 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
   *d->process << "-x" << "dvd";
 
   // select the title number
-  *d->process << "-T" << TQString("%1,-1,1").arg( m_titleNumber );
+  *d->process << "-T" << TQString("%1,-1,1").tqarg( m_titleNumber );
 
   // select the audio stream to extract
   if ( m_dvd[m_titleNumber-1].numAudioStreams() > 0 )
@@ -226,14 +226,14 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
 
   // clipping
   *d->process << "-j" << TQString("%1,%2,%3,%4")
-                         .arg(m_clippingTop)
-                         .arg(m_clippingLeft)
-                         .arg(m_clippingBottom)
-                         .arg(m_clippingRight);
+                         .tqarg(m_clippingTop)
+                         .tqarg(m_clippingLeft)
+                         .tqarg(m_clippingBottom)
+                         .tqarg(m_clippingRight);
 
   // select the encoding type (single pass or two-pass) and the log file for two-pass encoding
   // the latter is unused for pass = 0
-  *d->process << "-R" << TQString("%1,%2").arg( pass ).arg( d->twoPassEncodingLogFile );
+  *d->process << "-R" << TQString("%1,%2").tqarg( pass ).tqarg( d->twoPassEncodingLogFile );
 
   // depending on the pass we use different options
   if( pass != 1 ) {
@@ -249,7 +249,7 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
     }
     else {
       // audio quality settings
-      *d->process << "-b" << TQString("%1,%2").arg(m_audioBitrate).arg(m_audioVBR ? 1 : 0);
+      *d->process << "-b" << TQString("%1,%2").tqarg(m_audioBitrate).tqarg(m_audioVBR ? 1 : 0);
 
       // resample audio stream to 44.1 khz
       if( m_resampleAudio )
@@ -261,7 +261,7 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
   }
   else {
     // gather information about the video stream, ignore audio
-    *d->process << "-y" << TQString("%1,null").arg( videoCodecString );
+    *d->process << "-y" << TQString("%1,null").tqarg( videoCodecString );
 
     // we ignore the output from the first pass
     *d->process << "-o" << "/dev/null";
@@ -317,8 +317,8 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
 
   // we only give information about the resizing of the video once
   if( pass < 2 )
-    emit infoMessage( i18n("Resizing picture of title %1 to %2x%3").arg(m_titleNumber).arg(usedWidth).arg(usedHeight), INFO );
-  *d->process << "-Z" << TQString("%1x%2").arg(usedWidth).arg(usedHeight);
+    emit infoMessage( i18n("Resizing picture of title %1 to %2x%3").tqarg(m_titleNumber).tqarg(usedWidth).tqarg(usedHeight), INFO );
+  *d->process << "-Z" << TQString("%1x%2").tqarg(usedWidth).tqarg(usedHeight);
 
   // additional user parameters from config
   const TQStringList& params = d->usedTranscodeBin->userParameters();
@@ -339,7 +339,7 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
   if( !d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
     // something went wrong when starting the program
     // it "should" be the executable
-    emit infoMessage( i18n("Could not start %1.").arg(d->usedTranscodeBin->name()), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").tqarg(d->usedTranscodeBin->name()), K3bJob::ERROR );
     jobFinished(false);
   }
   else {
@@ -372,7 +372,7 @@ void K3bVideoDVDTitleTranscodingJob::cleanup( bool success )
   }
 
   if( !success && TQFile::exists( m_filename ) ) {
-    emit infoMessage( i18n("Removing incomplete video file '%1'").arg(m_filename), INFO );
+    emit infoMessage( i18n("Removing incomplete video file '%1'").tqarg(m_filename), INFO );
     TQFile::remove( m_filename );
   }
 }
@@ -440,7 +440,7 @@ void K3bVideoDVDTitleTranscodingJob::slotTranscodeExited( KProcess* p )
       // FIXME: error handling
 
       emit infoMessage( i18n("%1 returned an unknown error (code %2).")
-			.arg(d->usedTranscodeBin->name()).arg(p->exitStatus()),
+			.tqarg(d->usedTranscodeBin->name()).tqarg(p->exitStatus()),
 			K3bJob::ERROR );
       emit infoMessage( i18n("Please send me an email with the last output."), K3bJob::ERROR );
 
@@ -450,7 +450,7 @@ void K3bVideoDVDTitleTranscodingJob::slotTranscodeExited( KProcess* p )
   }
   else {
     cleanup( false );
-    emit infoMessage( i18n("Execution of %1 failed.").arg("transcode"), ERROR );
+    emit infoMessage( i18n("Execution of %1 failed.").tqarg("transcode"), ERROR );
     emit infoMessage( i18n("Please consult the debugging output for details."), ERROR );
     jobFinished( false );
   }
@@ -566,7 +566,7 @@ bool K3bVideoDVDTitleTranscodingJob::transcodeBinaryHasSupportFor( K3bVideoDVDTi
     bin = k3bcore->externalBinManager()->binObject("transcode");
   if( !bin )
     return false;
-  return bin->hasFeature( TQString::fromLatin1( s_codecFeatures[(int)codec] ) );
+  return bin->hasFeature( TQString::tqfromLatin1( s_codecFeatures[(int)codec] ) );
 }
 
 
@@ -577,7 +577,7 @@ bool K3bVideoDVDTitleTranscodingJob::transcodeBinaryHasSupportFor( K3bVideoDVDTi
     bin = k3bcore->externalBinManager()->binObject("transcode");
   if( !bin )
     return false;
-  return bin->hasFeature( TQString::fromLatin1( s_codecFeatures[(int)codec] ) );
+  return bin->hasFeature( TQString::tqfromLatin1( s_codecFeatures[(int)codec] ) );
 }
 
 #include "k3bvideodvdtitletranscodingjob.moc"

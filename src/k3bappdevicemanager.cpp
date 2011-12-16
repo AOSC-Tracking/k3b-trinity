@@ -230,7 +230,7 @@ void K3bAppDeviceManager::setReadSpeed()
 					   "and the spinning noise is intrusive."
 					   "<p>Be aware that this has no influence on K3b since it will "
 					   "change the reading speed again when copying CDs or DVDs.")
-				      .arg(currentDevice()->vendor() + " " + currentDevice()->description()),
+				      .tqarg(currentDevice()->vendor() + " " + currentDevice()->description()),
 				      12,
 				      1,
 				      currentDevice()->maxReadSpeed(),

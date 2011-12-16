@@ -22,7 +22,7 @@
 
 #include <tqwidget.h>
 #include <tqdragobject.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqdir.h>
 #include <tqvbox.h>
 #include <tqlabel.h>
@@ -63,15 +63,15 @@ KActionCollection* K3bFileView::actionCollection() const
 
 void K3bFileView::setupGUI()
 {
-  TQVBoxLayout* layout = new TQVBoxLayout( this );
-  //  layout->setAutoAdd( true );
+  TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
+  //  tqlayout->setAutoAdd( true );
 
   m_dirOp = new K3bDirOperator( KURL::fromPathOrURL(TQDir::home().absPath()), this );
   m_toolBox = new K3bToolBox( this );
 
-  layout->addWidget( m_toolBox );
-  layout->addWidget( m_dirOp );
-  layout->setStretchFactor( m_dirOp, 1 );
+  tqlayout->addWidget( m_toolBox );
+  tqlayout->addWidget( m_dirOp );
+  tqlayout->setStretchFactor( m_dirOp, 1 );
 
   // setup actions
   KAction* actionHome = m_dirOp->actionCollection()->action("home");

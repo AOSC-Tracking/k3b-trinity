@@ -558,7 +558,7 @@ namespace K3bDevice
        * if true is returned dataLen specifies the actual length of *data which needs to be
        * deleted after using.
        */
-      bool mechanismStatus( unsigned char** data, unsigned int& dataLen ) const;
+      bool mechanismtqStatus( unsigned char** data, unsigned int& dataLen ) const;
 
       /**
        * Read a single feature.

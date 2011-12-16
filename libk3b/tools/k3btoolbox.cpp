@@ -22,7 +22,7 @@
 
 #include <tqtoolbutton.h>
 #include <tqsizepolicy.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqwhatsthis.h>
 #include <tqtooltip.h>
 #include <tqlabel.h>
@@ -44,7 +44,7 @@ class K3bToolBoxSeparator : public TQWidget
  public:
   K3bToolBoxSeparator( K3bToolBox* parent );
   
-  TQSize sizeHint() const;
+  TQSize tqsizeHint() const;
   
  protected:
   void paintEvent( TQPaintEvent * );
@@ -54,13 +54,13 @@ class K3bToolBoxSeparator : public TQWidget
 K3bToolBoxSeparator::K3bToolBoxSeparator( K3bToolBox* parent )
   : TQWidget( parent )
 {
-  setSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum ) );
+  tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum ) );
 }
 
 
-TQSize K3bToolBoxSeparator::sizeHint() const
+TQSize K3bToolBoxSeparator::tqsizeHint() const
 {
-  int extent = tqstyle().pixelMetric( TQStyle::PM_DockWindowSeparatorExtent,
+  int extent = tqstyle().tqpixelMetric( TQStyle::PM_DockWindowSeparatorExtent,
 				    this );
   return TQSize( extent, 0 );
 }
@@ -72,7 +72,7 @@ void K3bToolBoxSeparator::paintEvent( TQPaintEvent* )
   TQStyle::SFlags flags = TQStyle::Style_Default|TQStyle::Style_Horizontal;
 
   tqstyle().tqdrawPrimitive( TQStyle::PE_DockWindowSeparator, &p, rect(),
-			 colorGroup(), flags );
+			 tqcolorGroup(), flags );
 }
 
 
@@ -81,7 +81,7 @@ K3bToolBoxButton::K3bToolBoxButton( KAction* action, TQWidget* parent )
   : TQToolButton( parent ),
     m_popupMenu(0)
 {
-  setSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, sizePolicy().verData()) );
+  tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, tqsizePolicy().verData()) );
   setAutoRaise( true );
 
   setIconSet( action->iconSet() );
@@ -127,7 +127,7 @@ K3bToolBoxButton::K3bToolBoxButton( const TQString& text, const TQString& icon,
   : TQToolButton( parent ),
     m_popupMenu(0)
 {
-  setSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, sizePolicy().verData()) );
+  tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, tqsizePolicy().verData()) );
   setAutoRaise( true );
 
   setTextLabel( text );
@@ -171,7 +171,7 @@ void K3bToolBoxButton::resizeEvent( TQResizeEvent* e )
 K3bToolBox::K3bToolBox( TQWidget* parent, const char* name )
   : TQFrame( parent, name )
 {
-  setSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed) );
+  tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed) );
 
   m_mainLayout = new TQGridLayout( this );
   m_mainLayout->setMargin( 1 );
@@ -243,7 +243,7 @@ void K3bToolBox::addStretch()
 void K3bToolBox::addLabel( const TQString& text )
 {
   TQLabel* label = new TQLabel( text, this );
-  label->setSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
+  label->tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
 
   addWidget( label );
 }
@@ -257,7 +257,7 @@ void K3bToolBox::addWidget( TQWidget* w )
 
   m_mainLayout->addWidget( w, 0, m_mainLayout->numCols()-1 );
 
-  if( w->sizePolicy().horData() == TQSizePolicy::Fixed || w->sizePolicy().horData() == TQSizePolicy::Maximum )
+  if( w->tqsizePolicy().horData() == TQSizePolicy::Fixed || w->tqsizePolicy().horData() == TQSizePolicy::Maximum )
     m_mainLayout->setColStretch( m_mainLayout->numCols(), 1 );
   else {
     m_mainLayout->setColStretch( m_mainLayout->numCols()-1, 1 );

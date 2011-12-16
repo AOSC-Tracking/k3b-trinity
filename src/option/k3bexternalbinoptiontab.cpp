@@ -27,7 +27,7 @@
 #include <tqgroupbox.h>
 #include <tqlabel.h>
 #include <tqpushbutton.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqvariant.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
@@ -52,7 +52,7 @@ K3bExternalBinOptionTab::K3bExternalBinOptionTab( K3bExternalBinManager* manager
   m_labelInfo->setText( i18n( "Specify the paths to the external programs that K3b needs to work properly, "
 			      "or press \"Search\" to let K3b search for the programs." ) );
   m_labelInfo->setScaledContents( false );
-  m_labelInfo->setAlignment( int( TQLabel::WordBreak | TQLabel::AlignVCenter | TQLabel::AlignLeft ) );
+  m_labelInfo->tqsetAlignment( int( TQLabel::WordBreak | TQLabel::AlignVCenter | TQLabel::AlignLeft ) );
 
   frameLayout->addWidget( m_labelInfo, 0, 0 );
 }

@@ -417,7 +417,7 @@ void K3bMovixDoc::addSubTitleItem( K3bMovixFileItem* item, const KURL& url )
   TQString name = K3bMovixFileItem::subTitleFileName( item->k3bName() );
 
   if( nameAlreadyInDir( name, root() ) ) {
-    KMessageBox::error( 0, i18n("Could not rename subtitle file. File with requested name %1 already exists.").arg(name) );
+    KMessageBox::error( 0, i18n("Could not rename subtitle file. File with requested name %1 already exists.").tqarg(name) );
     return;
   }
 

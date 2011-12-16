@@ -73,7 +73,7 @@ class K3bGrowisofsHandler : public TQObject
   void flushingCache();
 
  private slots:
-  void slotCheckBufferStatus();
+  void slotCheckBuffertqStatus();
   void slotCheckBufferStatusDone( K3bDevice::DeviceHandler* );
 
  private:

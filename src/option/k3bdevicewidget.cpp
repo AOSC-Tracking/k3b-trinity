@@ -33,7 +33,7 @@
 
 #include <tqgroupbox.h>
 #include <tqpushbutton.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqvariant.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
@@ -170,8 +170,8 @@ K3bDeviceWidget::K3bDeviceWidget( K3bDevice::DeviceManager* manager, TQWidget *p
   // Devices Box
   // ------------------------------------------------
   TQGroupBox* groupDevices = new TQGroupBox( 1, Qt::Vertical, i18n( "CD/DVD Drives" ), this );
-  groupDevices->layout()->setSpacing( KDialog::spacingHint() );
-  groupDevices->layout()->setMargin( KDialog::marginHint() );
+  groupDevices->tqlayout()->setSpacing( KDialog::spacingHint() );
+  groupDevices->tqlayout()->setMargin( KDialog::marginHint() );
 
   m_viewDevices = new K3bListView( groupDevices, "m_viewDevicesReader" );
   m_viewDevices->addColumn( "V" );
@@ -254,30 +254,30 @@ void K3bDeviceWidget::updateDeviceListViews()
     // create the read-only info items
     K3bListViewItem* systemDeviceItem = new K3bListViewItem( devRoot, i18n("System device name:") );
     if( dev->device->interfaceType() == K3bDevice::SCSI )
-      systemDeviceItem->setText( 1, TQString("%1 (%2)").arg(dev->device->devicename()).arg(dev->device->busTargetLun()) );
+      systemDeviceItem->setText( 1, TQString("%1 (%2)").tqarg(dev->device->devicename()).tqarg(dev->device->busTargetLun()) );
     else
       systemDeviceItem->setText( 1, dev->device->devicename() );
-    systemDeviceItem->setForegroundColor( 1, palette().disabled().foreground() );
+    systemDeviceItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
 
     K3bListViewItem* interfaceItem = new K3bListViewItem( devRoot, systemDeviceItem,
 							  i18n("Interface type:"),
 							  ( dev->device->interfaceType() == K3bDevice::SCSI ?
 							    i18n("Generic SCSI") :
 							    i18n("ATAPI") ) );
-    interfaceItem->setForegroundColor( 1, palette().disabled().foreground() );
+    interfaceItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
 
     K3bListViewItem* vendorItem = new K3bListViewItem( devRoot, interfaceItem,
 						   i18n("Vendor:"),
 						   dev->device->vendor() );
-    vendorItem->setForegroundColor( 1, palette().disabled().foreground() );
+    vendorItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     K3bListViewItem* modelItem = new K3bListViewItem( devRoot, vendorItem,
 						   i18n("Description:"),
 						   dev->device->description() );
-    modelItem->setForegroundColor( 1, palette().disabled().foreground() );
+    modelItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     K3bListViewItem* versionItem = new K3bListViewItem( devRoot, modelItem,
 						   i18n("Firmware:"),
 						   dev->device->version() );
-    versionItem->setForegroundColor( 1, palette().disabled().foreground() );
+    versionItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
 
 
     // drive type
@@ -285,33 +285,33 @@ void K3bDeviceWidget::updateDeviceListViews()
     K3bListViewItem* typeItem = new K3bListViewItem( devRoot, versionItem,
 						     i18n("Writes CD-R:"),
 						     dev->device->writesCd() ? i18n("yes") : i18n("no") );
-    typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+    typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     typeItem = new K3bListViewItem( devRoot, typeItem,
 				    i18n("Writes CD-RW:"),
 				    dev->device->writesCdrw() ? i18n("yes") : i18n("no") );
-    typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+    typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     typeItem = new K3bListViewItem( devRoot, typeItem, 
 				    i18n("Reads DVD:"),
 				    dev->device->readsDvd() ? i18n("yes") : i18n("no") );
-    typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+    typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     typeItem = new K3bListViewItem( devRoot, typeItem,
 				    i18n("Writes DVD-R(W):"),
 				    dev->device->writesDvdMinus() ? i18n("yes") : i18n("no") );
-    typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+    typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     typeItem = new K3bListViewItem( devRoot, typeItem,
 				    i18n("Writes DVD-R Dual Layer:"),
 				    (dev->device->type() & K3bDevice::DEVICE_DVD_R_DL)
 				    ? i18n("yes") : i18n("no") );
-    typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+    typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     typeItem = new K3bListViewItem( devRoot, typeItem,
 				    i18n("Writes DVD+R(W):"),
 				    dev->device->writesDvdPlus() ? i18n("yes") : i18n("no") );
-    typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+    typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     typeItem = new K3bListViewItem( devRoot, typeItem,
 				    i18n("Writes DVD+R Double Layer:"),
 				    (dev->device->type() & K3bDevice::DEVICE_DVD_PLUS_R_DL)
 				    ? i18n("yes") : i18n("no") );
-    typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+    typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     // --------------------------------
 
 
@@ -320,7 +320,7 @@ void K3bDeviceWidget::updateDeviceListViews()
       typeItem = new K3bListViewItem( devRoot, typeItem,
 				      i18n("Buffer Size:"),
 				      KIO::convertSizeFromKB(dev->device->bufferSize()) );
-      typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+      typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
     }
 
     PrivateDeviceViewItem1* cdrdaoDriverItem = new PrivateDeviceViewItem1( PrivateDeviceViewItem1::t_cdrdaoDriver,
@@ -339,14 +339,14 @@ void K3bDeviceWidget::updateDeviceListViews()
       typeItem = new K3bListViewItem( devRoot, cdTextItem,
 				      i18n("Supports Burnfree:"),
 				      dev->device->burnfree() ? i18n("yes") : i18n("no") );
-      typeItem->setForegroundColor( 1, palette().disabled().foreground() );
+      typeItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
 
       
       // and at last the write modes
       (new K3bListViewItem( devRoot, 
 			    typeItem, 
 			    i18n("Write modes:"), 
-			    K3bDevice::writingModeString(dev->device->writingModes()) ))->setForegroundColor( 1, palette().disabled().foreground() );
+			    K3bDevice::writingModeString(dev->device->writingModes()) ))->setForegroundColor( 1, tqpalette().disabled().foreground() );
     }
 
     devRoot->setOpen(true);
@@ -383,7 +383,7 @@ void K3bDeviceWidget::slotNewDevice()
       updateDeviceListViews();
     }
     else
-      KMessageBox::error( this, i18n("Could not find an additional device at\n%1").arg(newDevicename), i18n("Error"), false );
+      KMessageBox::error( this, i18n("Could not find an additional device at\n%1").tqarg(newDevicename), i18n("Error"), false );
   }
 }
 

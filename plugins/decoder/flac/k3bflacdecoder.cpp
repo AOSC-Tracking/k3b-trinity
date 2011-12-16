@@ -394,9 +394,9 @@ TQString K3bFLACDecoder::technicalInfo( const TQString& info ) const
     else if( info == i18n("Channels") )
       return TQString::number(d->channels);
     else if( info == i18n("Sampling Rate") )
-      return i18n("%1 Hz").arg(d->rate);
+      return i18n("%1 Hz").tqarg(d->rate);
     else if( info == i18n("Sample Size") )
-      return i18n("%1 bits").arg(d->bitsPerSample);
+      return i18n("%1 bits").tqarg(d->bitsPerSample);
   }
 
   return TQString();

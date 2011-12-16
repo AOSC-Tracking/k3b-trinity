@@ -43,7 +43,7 @@
 
 #include <tqpixmap.h>
 #include <tqsplitter.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqdragobject.h>
 #include <tqheader.h>
 #include <tqptrlist.h>

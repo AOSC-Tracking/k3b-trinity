@@ -24,7 +24,7 @@
 
 #include <kgenericfactory.h>
 
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqdom.h>
 #include <tqfile.h>
 

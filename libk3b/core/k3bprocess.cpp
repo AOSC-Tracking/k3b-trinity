@@ -192,7 +192,7 @@ TQStringList K3bProcess::splitOutput( char* data, int len,
   // check if line ends with a newline
   // if not save the last line because it is not finished
   TQChar c = buffer.right(1).at(0);
-  bool hasUnfinishedLine = ( c != '\n' && c != '\r' && c != TQChar(46) );  // What is unicode 46?? It is printed as a point
+  bool hasUnfinishedLine = ( c != '\n' && c != '\r' && c != TQChar(46) );  // What is tqunicode 46?? It is printed as a point
   if( hasUnfinishedLine ) {
     kdDebug() << "(K3bProcess) found unfinished line: '" << lines.last() << "'" << endl;
     kdDebug() << "(K3bProcess)             last char: '" << buffer.right(1) << "'" << endl;

@@ -215,7 +215,7 @@ class K3bMainWindow : public KParts::DockMainWindow
 
   void slotViewDocumentHeader();
 
-  void slotCheckDockWidgetStatus();
+  void slotCheckDockWidgettqStatus();
 
   /** changes the statusbar contents for the standard label permanently, used to indicate current actions.
    * @param text the text that is displayed in the statusbar
@@ -249,7 +249,7 @@ class K3bMainWindow : public KParts::DockMainWindow
   void fileSaveAs( K3bDoc* doc = 0 );
   void closeProject( K3bDoc* );
 
-  /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
+  /** save general Options like all bar positions and status as well as the tqgeometry and the recent file list to the configuration
    * file
    */
   void saveOptions();

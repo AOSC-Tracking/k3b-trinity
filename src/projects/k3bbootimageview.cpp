@@ -61,7 +61,7 @@ public:
 	return i18n("None");
     }
     else if( col == 1 )
-      return TQString( "%1 KB" ).arg( m_image->size()/1024 );
+      return TQString( "%1 KB" ).tqarg( m_image->size()/1024 );
     else if( col == 2 )
       return m_image->localPath();
     else

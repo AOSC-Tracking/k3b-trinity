@@ -20,7 +20,7 @@
 #include <k3btitlelabel.h>
 
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 
 K3bThemedHeader::K3bThemedHeader( TQWidget* parent )
@@ -71,9 +71,9 @@ void K3bThemedHeader::setRightPixmap( K3bTheme::PixmapType p )
 }
 
 
-void K3bThemedHeader::setAlignment( int align )
+void K3bThemedHeader::tqsetAlignment( int align )
 {
-  m_titleLabel->setAlignment( align );
+  m_titleLabel->tqsetAlignment( align );
 }
 
 
@@ -84,9 +84,9 @@ void K3bThemedHeader::init()
   setLineWidth( 1 );
   setMargin( 1 );
 
-  TQHBoxLayout* layout = new TQHBoxLayout( this );
-  layout->setMargin( 2 ); // to make sure the frame gets displayed
-  layout->setSpacing( 0 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( this );
+  tqlayout->setMargin( 2 ); // to make sure the frame gets displayed
+  tqlayout->setSpacing( 0 );
 
   m_leftLabel = new TQLabel( this );
   m_leftLabel->setScaledContents( false );
@@ -94,10 +94,10 @@ void K3bThemedHeader::init()
   m_rightLabel = new TQLabel( this );
   m_rightLabel->setScaledContents( false );
 
-  layout->addWidget( m_leftLabel );
-  layout->addWidget( m_titleLabel );
-  layout->setStretchFactor( m_titleLabel, 1 );
-  layout->addWidget( m_rightLabel );
+  tqlayout->addWidget( m_leftLabel );
+  tqlayout->addWidget( m_titleLabel );
+  tqlayout->setStretchFactor( m_titleLabel, 1 );
+  tqlayout->addWidget( m_rightLabel );
 
   m_leftPix = K3bTheme::DIALOG_LEFT;
   m_rightPix = K3bTheme::DIALOG_RIGHT;

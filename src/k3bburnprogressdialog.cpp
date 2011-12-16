@@ -29,7 +29,7 @@
 
 #include <tqgroupbox.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqframe.h>
 
 
@@ -38,7 +38,7 @@ K3bBurnProgressDialog::K3bBurnProgressDialog( TQWidget *parent, const char *name
   : K3bJobProgressDialog(parent,name, showSubProgress, modal, wf)
 {
   m_labelWritingSpeed = new TQLabel( m_frameExtraInfo, "m_labelWritingSpeed" );
-  //  m_labelWritingSpeed->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  //  m_labelWritingSpeed->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
   m_frameExtraInfoLayout->addWidget( m_labelWritingSpeed, 2, 0 );
   m_frameExtraInfoLayout->addWidget( new TQLabel( i18n("Estimated writing speed:"), m_frameExtraInfo ), 1, 0 );
@@ -83,7 +83,7 @@ void K3bBurnProgressDialog::setBurnJob( K3bBurnJob* burnJob )
   K3bJobProgressDialog::setJob(burnJob);
 
   if( burnJob ) {
-    connect( burnJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SLOT(slotBufferStatus(int)) );
+    connect( burnJob, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SLOT(slotBuffertqStatus(int)) );
     connect( burnJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SLOT(slotDeviceBuffer(int)) );
     connect( burnJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SLOT(slotWriteSpeed(int, int)) );
     connect( burnJob, TQT_SIGNAL(burning(bool)), m_progressWritingBuffer, TQT_SLOT(setEnabled(bool)) );
@@ -91,7 +91,7 @@ void K3bBurnProgressDialog::setBurnJob( K3bBurnJob* burnJob )
     connect( burnJob, TQT_SIGNAL(burning(bool)), m_labelWritingSpeed, TQT_SLOT(setEnabled(bool)) );
 
     if( burnJob->writer() )
-      m_labelWriter->setText( i18n("Writer: %1 %2").arg(burnJob->writer()->vendor()).
+      m_labelWriter->setText( i18n("Writer: %1 %2").tqarg(burnJob->writer()->vendor()).
 			      arg(burnJob->writer()->description()) );
 
     m_labelWritingSpeed->setText( i18n("no info") );
@@ -112,7 +112,7 @@ void K3bBurnProgressDialog::slotFinished( bool success )
 }
 
 
-void K3bBurnProgressDialog::slotBufferStatus( int b )
+void K3bBurnProgressDialog::slotBuffertqStatus( int b )
 {
   m_progressWritingBuffer->setFormat( "%p%" );
   m_progressWritingBuffer->setValue( b );
@@ -128,7 +128,7 @@ void K3bBurnProgressDialog::slotDeviceBuffer( int b )
 
 void K3bBurnProgressDialog::slotWriteSpeed( int s, int multiplicator )
 {
-  m_labelWritingSpeed->setText( TQString("%1 KB/s (%2x)").arg(s).arg(KGlobal::locale()->formatNumber((double)s/(double)multiplicator,2)) );
+  m_labelWritingSpeed->setText( TQString("%1 KB/s (%2x)").tqarg(s).tqarg(KGlobal::locale()->formatNumber((double)s/(double)multiplicator,2)) );
 }
 
 #include "k3bburnprogressdialog.moc"

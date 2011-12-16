@@ -41,7 +41,7 @@ class LIBK3B_EXPORT K3bMsfEdit : public TQSpinBox
   K3bMsfEdit( TQWidget* parent = 0, const char* name = 0 );
   ~K3bMsfEdit();
 
-  TQSize sizeHint() const;
+  TQSize tqsizeHint() const;
 
   void setFrameStyle( int style );
   void setLineWidth(int);

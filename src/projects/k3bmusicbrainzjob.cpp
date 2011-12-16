@@ -188,7 +188,7 @@ void K3bMusicBrainzJob::start()
   m_trmThread->track = m_tracks.first();
 
   emit infoMessage( i18n("Generating fingerprint for track %1.")
-		    .arg(m_tracks.current()->trackNumber()), INFO );
+		    .tqarg(m_tracks.current()->trackNumber()), INFO );
 
   m_trmJob->start();  
 }
@@ -215,7 +215,7 @@ void K3bMusicBrainzJob::slotTrmJobFinished( bool success )
     // now query musicbrainz
     m_mbThread->setSignature( m_trmThread->signature() );
     emit infoMessage( i18n("Querying MusicBrainz for track %1.")
-		      .arg(m_tracks.current()->trackNumber()), INFO );
+		      .tqarg(m_tracks.current()->trackNumber()), INFO );
     m_mbJob->start();    
   }
   else {
@@ -253,8 +253,8 @@ void K3bMusicBrainzJob::slotMbJobFinished( bool success )
       if( resultStringsUnique.count() > 1 )
 	s = KInputDialog::getItem( i18n("MusicBrainz Query"),
 				   i18n("Found multiple matches for track %1 (%2). Please select one.")
-				   .arg(m_tracks.current()->trackNumber())
-				   .arg(m_tracks.current()->firstSource()->sourceComment()),
+				   .tqarg(m_tracks.current()->trackNumber())
+				   .tqarg(m_tracks.current()->firstSource()->sourceComment()),
 				   resultStringsUnique,
 				   0,
 				   false,
@@ -273,7 +273,7 @@ void K3bMusicBrainzJob::slotMbJobFinished( bool success )
     // query next track
     if( m_tracks.next() ) {
       emit infoMessage( i18n("Generating fingerprint for track %1.")
-			.arg(m_tracks.current()->trackNumber()), INFO );
+			.tqarg(m_tracks.current()->trackNumber()), INFO );
       m_trmThread->track = m_tracks.current();
       m_trmJob->start();  
     }

@@ -31,7 +31,7 @@
 #include <kpixmap.h>
 
 #include <tqpainter.h>
-#include <palette.h>
+#include <tqpalette.h>
 #include <tqfileinfo.h>
 
 
@@ -65,7 +65,7 @@ void K3bDataViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int colum
   TQColorGroup _cg = cg;
 
   if( !dataItem()->isRemoveable() && dataItem()->doc()->root() != dataItem() ) {
-    _cg.setColor( TQColorGroup::Text, listView()->palette().disabled().foreground() );
+    _cg.setColor( TQColorGroup::Text, listView()->tqpalette().disabled().foreground() );
   }
 
   if( column == 0 ) {
@@ -182,7 +182,7 @@ void K3bDataDirViewItem::highlightIcon( bool b )
     m_pixmap = *pixmap(0);
 
   if( b )
-    setPixmap( 0, KPixmapEffect::selectedPixmap( m_pixmap, listView()->colorGroup().highlight() ) );
+    setPixmap( 0, KPixmapEffect::selectedPixmap( m_pixmap, listView()->tqcolorGroup().highlight() ) );
   else
     setPixmap( 0, m_pixmap );
 }
@@ -228,7 +228,7 @@ TQString K3bDataFileViewItem::text( int index ) const
 	comment = m_pMimeType->name();
 
       if( m_fileItem->isSymLink() )
-	return i18n("Link to %1").arg(comment);
+	return i18n("Link to %1").tqarg(comment);
       else
 	return comment;
     }

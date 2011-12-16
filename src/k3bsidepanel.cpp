@@ -23,7 +23,7 @@
 
 #include <tqtoolbutton.h>
 #include <tqframe.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 
 
@@ -43,7 +43,7 @@ K3bSidePanel::K3bSidePanel( K3bMainWindow* m, TQWidget* parent, const char* name
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_mixed" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_vcd" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_movix" ) );
-  TQGridLayout* grid = (TQGridLayout*)cdProjectsFrame->layout();
+  TQGridLayout* grid = (TQGridLayout*)cdProjectsFrame->tqlayout();
   grid->setRowSpacing( grid->numRows(), 15 );
   addButton( cdProjectsFrame, m_mainWindow->action( "tools_copy_cd" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "tools_write_cd_image" ) );
@@ -56,7 +56,7 @@ K3bSidePanel::K3bSidePanel( K3bMainWindow* m, TQWidget* parent, const char* name
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_dvd" ) );
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_video_dvd" ) );
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_movix_dvd" ) );
-  grid = (TQGridLayout*)dvdProjectsFrame->layout();
+  grid = (TQGridLayout*)dvdProjectsFrame->tqlayout();
   grid->setRowSpacing( grid->numRows(), 15 );
   addButton( dvdProjectsFrame, m_mainWindow->action( "tools_copy_dvd" ) );
   addButton( dvdProjectsFrame, m_mainWindow->action( "tools_write_dvd_iso" ) );
@@ -98,7 +98,7 @@ void K3bSidePanel::addButton( TQFrame* frame, KAction* a )
 
     connect( b, TQT_SIGNAL(clicked()), a, TQT_SLOT(activate()) );
 
-    TQGridLayout* grid = (TQGridLayout*)(frame->layout());
+    TQGridLayout* grid = (TQGridLayout*)(frame->tqlayout());
     grid->addWidget( b, grid->numRows(), 0 );
   }
   else

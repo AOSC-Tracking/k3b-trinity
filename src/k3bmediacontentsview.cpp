@@ -19,7 +19,7 @@
 #include <k3bapplication.h>
 
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpixmap.h>
 #include <tqwidgetstack.h>
 

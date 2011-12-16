@@ -198,7 +198,7 @@ void K3bVcdListView::showPropertiesDialog()
         TQPtrList<K3bVcdTrack> tracks = *m_doc->tracks();
         K3bVcdTrackDialog d( m_doc, tracks, selected, this );
         if ( d.exec() ) {
-            repaint();
+            tqrepaint();
         }
     } else {
       m_view->slotProperties();

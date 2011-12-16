@@ -52,7 +52,7 @@
 #include <tqcheckbox.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqfile.h>
 #include <tqfileinfo.h>
 #include <tqpushbutton.h>
@@ -62,7 +62,7 @@
 #include <tqspinbox.h>
 #include <tqevent.h>
 #include <tqpopupmenu.h>
-#include <clipboard.h>
+#include <tqclipboard.h>
 
 
 class K3bIsoImageWritingDialog::Private
@@ -181,7 +181,7 @@ void K3bIsoImageWritingDialog::setupGui()
 
   TQWidget* optionTab = new TQWidget( optionTabbed );
   TQGridLayout* optionTabLayout = new TQGridLayout( optionTab );
-  optionTabLayout->setAlignment( TQt::AlignTop );
+  optionTabLayout->tqsetAlignment( TQt::AlignTop );
   optionTabLayout->setSpacing( spacingHint() );
   optionTabLayout->setMargin( marginHint() );
 
@@ -319,12 +319,12 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
 
       K3bListViewItem* isoRootItem = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 							  i18n("Iso9660 image") );
-      isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
+      isoRootItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
       isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
       K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 						   i18n("Filesize:"), KIO::convertSize( imageSize ) );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
@@ -332,7 +332,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
 				  isoF.primaryDescriptor().systemId.isEmpty()
 				  ? TQString("-")
 				  : isoF.primaryDescriptor().systemId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
@@ -340,7 +340,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
 				  isoF.primaryDescriptor().volumeId.isEmpty()
 				  ? TQString("-")
 				  : isoF.primaryDescriptor().volumeId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
@@ -348,7 +348,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
 				  isoF.primaryDescriptor().volumeSetId.isEmpty()
 				  ? TQString("-")
 				  : isoF.primaryDescriptor().volumeSetId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
@@ -356,14 +356,14 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
 				  isoF.primaryDescriptor().publisherId.isEmpty()
 				  ? TQString("-")
 				  : isoF.primaryDescriptor().publisherId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
 				  i18n("Preparer Id:"),
 				  isoF.primaryDescriptor().preparerId.isEmpty()
 				  ? TQString("-") : isoF.primaryDescriptor().preparerId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
 				  m_infoView->lastItem(),
@@ -371,7 +371,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
 				  isoF.primaryDescriptor().applicationId.isEmpty()
 				  ? TQString("-")
 				  : isoF.primaryDescriptor().applicationId );
-      item->setForegroundColor( 0, palette().disabled().foreground() );
+      item->setForegroundColor( 0, tqpalette().disabled().foreground() );
 
       isoRootItem->setOpen( true );
 
@@ -441,7 +441,7 @@ void K3bIsoImageWritingDialog::calculateMd5Sum( const TQString& file )
     d->md5SumItem = new K3bListViewItem( m_infoView, m_infoView->firstChild() );
 
   d->md5SumItem->setText( 0, i18n("Md5 Sum:") );
-  d->md5SumItem->setForegroundColor( 0, palette().disabled().foreground() );
+  d->md5SumItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
   d->md5SumItem->setProgress( 1, 0 );
   d->md5SumItem->setPixmap( 0, SmallIcon( "exec") );
 
@@ -501,15 +501,15 @@ void K3bIsoImageWritingDialog::slotContextMenu( KListView*, TQListViewItem*, con
 						     this );
     if( ok ) {
       if( md5sumToCompare.lower().utf8() == m_md5Job->hexDigest().lower() )
-	KMessageBox::information( this, i18n("The MD5 Sum of %1 equals the specified.").arg(imagePath()),
+	KMessageBox::information( this, i18n("The MD5 Sum of %1 equals the specified.").tqarg(imagePath()),
 				  i18n("MD5 Sums Equal") );
       else
-	KMessageBox::sorry( this, i18n("The MD5 Sum of %1 differs from the specified.").arg(imagePath()),
+	KMessageBox::sorry( this, i18n("The MD5 Sum of %1 differs from the specified.").tqarg(imagePath()),
 			    i18n("MD5 Sums Differ") );
     }
   }
   else if( r == copyItem ) {
-    TQApplication::clipboard()->setText( m_md5Job->hexDigest().lower(), TQClipboard::Clipboard );
+    TQApplication::tqclipboard()->setText( m_md5Job->hexDigest().lower(), TQClipboard::Clipboard );
   }
 }
 

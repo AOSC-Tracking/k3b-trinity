@@ -55,7 +55,7 @@
                 </widget>
                 <widget class="TQLayoutWidget" row="3" column="0" rowspan="1" colspan="2">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>tqlayout1</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -239,10 +239,10 @@
                         <cstring>m_comboKeyboardLayout</cstring>
                     </property>
                     <property name="toolTip" stdset="0">
-                        <string>Select the layout of the keyboard</string>
+                        <string>Select the tqlayout of the keyboard</string>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>&lt;p&gt;The keyboard layout selected here will be used for the eMovix commands like controlling the media player.</string>
+                        <string>&lt;p&gt;The keyboard tqlayout selected here will be used for the eMovix commands like controlling the media player.</string>
                     </property>
                 </widget>
             </grid>

@@ -85,13 +85,13 @@ void K3bCloneJob::start()
   //
   const K3bExternalBin* cdrecordBin = k3bcore->externalBinManager()->binObject( "cdrecord" );
   if( !cdrecordBin ) {
-    emit infoMessage( i18n("Could not find %1 executable.").arg("cdrecord"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdrecord"), ERROR );
     jobFinished(false);
     m_running = false;
     return;
   }
   else if( !cdrecordBin->hasFeature( "clone" ) ) {
-    emit infoMessage( i18n("Cdrecord version %1 does not have cloning support.").arg(cdrecordBin->version), ERROR );
+    emit infoMessage( i18n("Cdrecord version %1 does not have cloning support.").tqarg(cdrecordBin->version), ERROR );
     jobFinished(false);
     m_running = false;
     return;
@@ -109,8 +109,8 @@ void K3bCloneJob::start()
     if( !writer()->supportsWritingMode( K3bDevice::RAW_R96R ) &&
 	!writer()->supportsWritingMode( K3bDevice::RAW_R16 ) ) {
       emit infoMessage( i18n("CD writer %1 does not support cloning.")
-			.arg(writer()->vendor())
-			.arg(writer()->description()), ERROR );
+			.tqarg(writer()->vendor())
+			.tqarg(writer()->description()), ERROR );
       m_running = false;
       jobFinished(false);
       return;
@@ -180,7 +180,7 @@ void K3bCloneJob::prepareWriter()
     connect( m_writerJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
     connect( m_writerJob, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
     connect( m_writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-    connect( m_writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
+    connect( m_writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
     connect( m_writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
     connect( m_writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
     connect( m_writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
@@ -222,7 +222,7 @@ void K3bCloneJob::slotWriterPercent( int p )
 
 void K3bCloneJob::slotWriterNextTrack( int t, int tt )
 {
-  emit newSubTask( i18n("Writing Track %1 of %2").arg(t).arg(tt) );
+  emit newSubTask( i18n("Writing Track %1 of %2").tqarg(t).tqarg(tt) );
 }
 
 
@@ -239,7 +239,7 @@ void K3bCloneJob::slotWriterFinished( bool success )
   if( success ) {
     d->doneCopies++;
 
-    emit infoMessage( i18n("Successfully written clone copy %1.").arg(d->doneCopies), INFO );
+    emit infoMessage( i18n("Successfully written clone copy %1.").tqarg(d->doneCopies), INFO );
 
     if( d->doneCopies < m_copies ) {
       K3bDevice::eject( writer() );
@@ -330,7 +330,7 @@ void K3bCloneJob::startWriting()
   if( m_simulate )
     emit newTask( i18n("Simulating clone copy") );
   else
-    emit newTask( i18n("Writing clone copy %1").arg(d->doneCopies+1) );
+    emit newTask( i18n("Writing clone copy %1").tqarg(d->doneCopies+1) );
 
   m_writerJob->start();
 }

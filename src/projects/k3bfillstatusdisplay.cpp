@@ -35,7 +35,7 @@
 #include <tqvalidator.h>
 #include <tqtoolbutton.h>
 #include <tqtooltip.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqwhatsthis.h>
 #include <tqtimer.h>
 
@@ -72,7 +72,7 @@ K3bFillStatusDisplayWidget::K3bFillStatusDisplayWidget( K3bDoc* doc, TQWidget* p
 {
   d = new Private();
   d->doc = doc;
-  setSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Preferred ) );
+  tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Preferred ) );
 }
 
 
@@ -102,13 +102,13 @@ void K3bFillStatusDisplayWidget::setCdSize( const K3b::Msf& size )
 }
 
 
-TQSize K3bFillStatusDisplayWidget::sizeHint() const
+TQSize K3bFillStatusDisplayWidget::tqsizeHint() const
 {
-  return minimumSizeHint();
+  return tqminimumSizeHint();
 }
 
 
-TQSize K3bFillStatusDisplayWidget::minimumSizeHint() const
+TQSize K3bFillStatusDisplayWidget::tqminimumSizeHint() const
 {
   int margin = 2;
   TQFontMetrics fm( font() );
@@ -127,9 +127,9 @@ void K3bFillStatusDisplayWidget::paintEvent( TQPaintEvent* )
 {
   // double buffer
   TQPixmap buffer( size() );
-  buffer.fill( colorGroup().base() );
+  buffer.fill( tqcolorGroup().base() );
   TQPainter p;
-  p.begin( &buffer, TQT_TQOBJECT(this) );
+  p.tqbegin( &buffer, TQT_TQOBJECT(this) );
   p.setPen( TQt::black ); // we use a fixed bar color (which is not very nice btw, so we also fix the text color)
 
   long long docSize;
@@ -199,16 +199,16 @@ void K3bFillStatusDisplayWidget::paintEvent( TQPaintEvent* )
   TQString overSizeText;
   if( d->cdSize.mode1Bytes() >= d->doc->size() )
     overSizeText = i18n("Available: %1 of %2")
-      .arg( d->showTime
-	    ? i18n("%1 min").arg((K3b::Msf( cdSize*60*75 ) - d->doc->length()).toString(false))
+      .tqarg( d->showTime
+	    ? i18n("%1 min").tqarg((K3b::Msf( cdSize*60*75 ) - d->doc->length()).toString(false))
 	    : KIO::convertSize( TQMAX( (cdSize * 1024LL * 1024LL) - (long long)d->doc->size(), 0LL ) ) )
-      .arg( d->showTime
-	    ? i18n("%1 min").arg(K3b::Msf( cdSize*60*75 ).toString(false))
+      .tqarg( d->showTime
+	    ? i18n("%1 min").tqarg(K3b::Msf( cdSize*60*75 ).toString(false))
 	    : KIO::convertSizeFromKB( cdSize * 1024 ) );
   else
     overSizeText = i18n("Capacity exceeded by %1")
-      .arg( d->showTime
-	    ? i18n("%1 min").arg( (d->doc->length() - K3b::Msf( cdSize*60*75 ) ).toString(false))
+      .tqarg( d->showTime
+	    ? i18n("%1 min").tqarg( (d->doc->length() - K3b::Msf( cdSize*60*75 ) ).toString(false))
 	    : KIO::convertSize( (long long)d->doc->size() - (cdSize * 1024LL * 1024LL) ) );
   // ====================================================================================
 
@@ -346,12 +346,12 @@ K3bFillStatusDisplay::K3bFillStatusDisplay( K3bDoc* doc, TQWidget *parent, const
 //   TQToolTip::add( d->buttonMenu, i18n("Fill display properties") );
 //   connect( d->buttonMenu, TQT_SIGNAL(clicked()), TQT_TQOBJECT(this), TQT_SLOT(slotMenuButtonClicked()) );
 
-  TQGridLayout* layout = new TQGridLayout( this );
-  layout->setSpacing(5);
-  layout->setMargin(frameWidth());
-  layout->addWidget( d->displayWidget, 0, 0 );
-  //  layout->addWidget( d->buttonMenu, 0, 1 );
-  layout->setColStretch( 0, 1 );
+  TQGridLayout* tqlayout = new TQGridLayout( this );
+  tqlayout->setSpacing(5);
+  tqlayout->setMargin(frameWidth());
+  tqlayout->addWidget( d->displayWidget, 0, 0 );
+  //  tqlayout->addWidget( d->buttonMenu, 0, 1 );
+  tqlayout->setColStretch( 0, 1 );
 
   setupPopupMenu();
 
@@ -388,11 +388,11 @@ void K3bFillStatusDisplay::setupPopupMenu()
 
   d->actionAuto = new KRadioAction( i18n("Auto"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotAutoSize()),
 				    d->actionCollection, "fillstatus_auto" );
-  d->action74Min = new KRadioAction( i18n("%1 MB").arg(650), 0, TQT_TQOBJECT(this), TQT_SLOT(slot74Minutes()),
+  d->action74Min = new KRadioAction( i18n("%1 MB").tqarg(650), 0, TQT_TQOBJECT(this), TQT_SLOT(slot74Minutes()),
 				     d->actionCollection, "fillstatus_74minutes" );
-  d->action80Min = new KRadioAction( i18n("%1 MB").arg(700), 0, TQT_TQOBJECT(this), TQT_SLOT(slot80Minutes()),
+  d->action80Min = new KRadioAction( i18n("%1 MB").tqarg(700), 0, TQT_TQOBJECT(this), TQT_SLOT(slot80Minutes()),
 				     d->actionCollection, "fillstatus_80minutes" );
-  d->action100Min = new KRadioAction( i18n("%1 MB").arg(880), 0, TQT_TQOBJECT(this), TQT_SLOT(slot100Minutes()),
+  d->action100Min = new KRadioAction( i18n("%1 MB").tqarg(880), 0, TQT_TQOBJECT(this), TQT_SLOT(slot100Minutes()),
 				      d->actionCollection, "fillstatus_100minutes" );
   d->actionDvd4_7GB = new KRadioAction( KIO::convertSizeFromKB((int)(4.4*1024.0*1024.0)), 0, TQT_TQOBJECT(this), TQT_SLOT(slotDvd4_7GB()),
 					d->actionCollection, "fillstatus_dvd_4_7gb" );
@@ -460,9 +460,9 @@ void K3bFillStatusDisplay::showSize()
 {
   d->actionShowMegs->setChecked( true );
 
-  d->action74Min->setText( i18n("%1 MB").arg(650) );
-  d->action80Min->setText( i18n("%1 MB").arg(700) );
-  d->action100Min->setText( i18n("%1 MB").arg(880) );
+  d->action74Min->setText( i18n("%1 MB").tqarg(650) );
+  d->action80Min->setText( i18n("%1 MB").tqarg(700) );
+  d->action100Min->setText( i18n("%1 MB").tqarg(880) );
 
   d->showTime = false;
   d->displayWidget->setShowTime(false);
@@ -548,7 +548,7 @@ void K3bFillStatusDisplay::slotCustomSize()
 					i18n("<p>Please specify the size of the media. Use suffixes <b>gb</b>,<b>mb</b>, "
 					     "and <b>min</b> for <em>gigabytes</em>, <em>megabytes</em>, and <em>minutes</em>"
 					     " respectively."),
-					d->showDvdSizes ? TQString("4%14%2").arg(KGlobal::locale()->decimalSymbol()).arg(gbS) :
+					d->showDvdSizes ? TQString("4%14%2").tqarg(KGlobal::locale()->decimalSymbol()).tqarg(gbS) :
 					(d->showTime ? TQString("74")+minS : TQString("650")+mbS),
 					&ok, this, (const char*)0,
 					new TQRegExpValidator( rx, TQT_TQOBJECT(this) ) );
@@ -577,7 +577,7 @@ void K3bFillStatusDisplay::slotCustomSize()
 
 void K3bFillStatusDisplay::slotMenuButtonClicked()
 {
-  TQSize size = d->showDvdSizes ? d->dvdPopup->sizeHint() : d->popup->sizeHint();
+  TQSize size = d->showDvdSizes ? d->dvdPopup->tqsizeHint() : d->popup->tqsizeHint();
   slotPopupMenu( d->buttonMenu->mapToGlobal(TQPoint(d->buttonMenu->width(), 0)) +
 		 TQPoint(-1*size.width(), -1*size.height()) );
 }

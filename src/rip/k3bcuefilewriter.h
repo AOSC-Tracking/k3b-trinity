@@ -16,7 +16,7 @@
 #ifndef _K3B_CUE_FILE_WRITER_H_
 #define _K3B_CUE_FILE_WRITER_H_
 
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqstringlist.h>
 
 #include <k3btoc.h>

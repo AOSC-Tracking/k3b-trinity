@@ -68,13 +68,13 @@ void K3bBusyWidget::animateBusy()
 }
 
 
-TQSize K3bBusyWidget::sizeHint() const
+TQSize K3bBusyWidget::tqsizeHint() const
 {
-  return minimumSizeHint();
+  return tqminimumSizeHint();
 }
 
 
-TQSize K3bBusyWidget::minimumSizeHint() const
+TQSize K3bBusyWidget::tqminimumSizeHint() const
 {
   return TQSize( 2*frameWidth() + 62, 10 );
 }

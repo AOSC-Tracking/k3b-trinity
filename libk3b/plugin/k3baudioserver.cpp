@@ -153,8 +153,8 @@ void K3bAudioServer::attachClient( K3bAudioClient* c )
   if( m_usedOutputPlugin && !m_pluginInitialized ) {
     if( !m_usedOutputPlugin->init() ) {
       emit error( i18n("Could not initialize Audio Output plugin %1 (%2)")
-		  .arg(m_usedOutputPlugin->pluginInfo().name())
-		  .arg(m_usedOutputPlugin->lastErrorMessage()) );
+		  .tqarg(m_usedOutputPlugin->pluginInfo().name())
+		  .tqarg(m_usedOutputPlugin->lastErrorMessage()) );
     }
     else
       m_pluginInitialized = true;

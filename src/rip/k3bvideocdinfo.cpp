@@ -177,7 +177,7 @@ void K3bVideoCdInfo::parseXmlData()
                                  );
             }
         } else {
-            kdDebug() << TQString( "(K3bVideoCdInfo::parseXmlData) tagName '%1' not used" ).arg( tagName ) << endl;
+            kdDebug() << TQString( "(K3bVideoCdInfo::parseXmlData) tagName '%1' not used" ).tqarg( tagName ) << endl;
         }
     }
 }

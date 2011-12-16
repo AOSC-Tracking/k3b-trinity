@@ -23,7 +23,7 @@
 #include <tqfileinfo.h>
 #include <tqobject.h>
 #include <tqregexp.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 
 #include <k3bprocess.h>
 #include <kdebug.h>
@@ -186,7 +186,7 @@ bool K3bCdrecordProgram::scan( const TQString& p )
     endPos = out.output().find( "\n", pos );
 
     // cdrecord does not use local encoding for the copyright statement but plain latin1
-    bin->copyright = TQString::fromLatin1( out.output().mid( pos, endPos-pos ).local8Bit() ).stripWhiteSpace();
+    bin->copyright = TQString::tqfromLatin1( out.output().mid( pos, endPos-pos ).local8Bit() ).stripWhiteSpace();
   }
   else {
     kdDebug() << "(K3bCdrecordProgram) could not start " << path << endl;

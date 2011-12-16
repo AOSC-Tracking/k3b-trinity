@@ -242,7 +242,7 @@ bool K3bExternalEncoder::initEncoderInternal( const TQString& extension )
   kdDebug() << s << flush << endl;
 
   // set one general error message
-  setLastError( i18n("Command failed: %1").arg( s ) );
+  setLastError( i18n("Command failed: %1").tqarg( s ) );
   
   if( d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
     if( d->cmd.writeWaveHeader )
@@ -253,7 +253,7 @@ bool K3bExternalEncoder::initEncoderInternal( const TQString& extension )
   else {
     TQString commandName = d->cmd.command.section( TQRegExp("\\s+"), 0 );
     if( !KStandardDirs::findExe( commandName ).isEmpty() )
-      setLastError( i18n("Could not find program '%1'").arg(commandName) );
+      setLastError( i18n("Could not find program '%1'").tqarg(commandName) );
 
     return false;
   }

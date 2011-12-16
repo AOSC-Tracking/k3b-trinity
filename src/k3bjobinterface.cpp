@@ -49,7 +49,7 @@ void K3bJobInterface::setJob( K3bJob* job )
     connect( m_job, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotNextTrack(int, int)) );
 
     if( m_job->inherits( "K3bBurnJob" ) ) {
-      connect( m_job, TQT_SIGNAL(bufferStatus(int)), this, TQT_SLOT(slotBuffer(int)) );
+      connect( m_job, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SLOT(slotBuffer(int)) );
       connect( m_job, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SLOT(slotDeviceBuffer(int)) );
     }
 

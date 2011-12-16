@@ -20,7 +20,7 @@
 #include <tqradiobutton.h>
 #include <tqlabel.h>
 #include <tqlineedit.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
 #include <tqgrid.h>
@@ -69,7 +69,7 @@ K3bVcdBurnDialog::K3bVcdBurnDialog( K3bVcdDoc* _doc, TQWidget *parent, const cha
     }
 
     setTitle( vcdType, i18n( "1 MPEG (%1)", "%n MPEGs (%1)",
-                             m_vcdDoc->tracks() ->count() ).arg( KIO::convertSize( m_vcdDoc->size() ) ) );
+                             m_vcdDoc->tracks() ->count() ).tqarg( KIO::convertSize( m_vcdDoc->size() ) ) );
 
     const K3bExternalBin* cdrecordBin = k3bcore->externalBinManager() ->binObject( "cdrecord" );
     if ( cdrecordBin && cdrecordBin->hasFeature( "cuefile" ) )
@@ -95,13 +95,13 @@ K3bVcdBurnDialog::K3bVcdBurnDialog( K3bVcdDoc* _doc, TQWidget *parent, const cha
     // ToolTips
     // -------------------------------------------------------------------------
     TQToolTip::add
-        ( m_radioVcd11, i18n( "Select Video CD type %1" ).arg( "(VCD 1.1)" ) );
+        ( m_radioVcd11, i18n( "Select Video CD type %1" ).tqarg( "(VCD 1.1)" ) );
     TQToolTip::add
-        ( m_radioVcd20, i18n( "Select Video CD type %1" ).arg( "(VCD 2.0)" ) );
+        ( m_radioVcd20, i18n( "Select Video CD type %1" ).tqarg( "(VCD 2.0)" ) );
     TQToolTip::add
-        ( m_radioSvcd10, i18n( "Select Video CD type %1" ).arg( "(SVCD 1.0)" ) );
+        ( m_radioSvcd10, i18n( "Select Video CD type %1" ).tqarg( "(SVCD 1.0)" ) );
     TQToolTip::add
-        ( m_radioHqVcd10, i18n( "Select Video CD type %1" ).arg( "(HQ-VCD 1.0)" ) );
+        ( m_radioHqVcd10, i18n( "Select Video CD type %1" ).tqarg( "(HQ-VCD 1.0)" ) );
     TQToolTip::add
         ( m_checkAutoDetect, i18n( "Automatic video type recognition." ) );
     TQToolTip::add
@@ -231,7 +231,7 @@ K3bVcdBurnDialog::K3bVcdBurnDialog( K3bVcdDoc* _doc, TQWidget *parent, const cha
         ( m_editCdiCfg, i18n( "<p>Configuration parameters only available for VideoCD 2.0"
                               "<p>The engine works perfectly well when used as-is."
                               "<p>You have the option to configure the VCD application."
-                              "<p>You can adapt the color and/or the shape of the cursor and lots more." ) );
+                              "<p>You can adapt the color and/or the tqshape of the cursor and lots more." ) );
 
 
     TQWhatsThis::add
@@ -307,11 +307,11 @@ void K3bVcdBurnDialog::setupAdvancedTab()
 
     // -------------------------------------------- gaps & margins group ----
     m_groupGaps = new TQGroupBox( 0, Qt::Vertical, i18n( "Gaps" ), w );
-    m_groupGaps->layout() ->setSpacing( spacingHint() );
-    m_groupGaps->layout() ->setMargin( marginHint() );
+    m_groupGaps->tqlayout() ->setSpacing( spacingHint() );
+    m_groupGaps->tqlayout() ->setMargin( marginHint() );
 
-    TQGridLayout* groupGapsLayout = new TQGridLayout( m_groupGaps->layout() );
-    groupGapsLayout->setAlignment( TQt::AlignTop );
+    TQGridLayout* groupGapsLayout = new TQGridLayout( m_groupGaps->tqlayout() );
+    groupGapsLayout->tqsetAlignment( TQt::AlignTop );
 
     m_checkGaps = new TQCheckBox( i18n( "Customize gaps and margins" ), m_groupGaps );
 
@@ -403,11 +403,11 @@ void K3bVcdBurnDialog::setupAdvancedTab()
 
     // ------------------------------------------------------- misc group ----
     m_groupMisc = new TQGroupBox( 0, Qt::Vertical, i18n( "Misc" ), w );
-    m_groupMisc->layout() ->setSpacing( spacingHint() );
-    m_groupMisc->layout() ->setMargin( marginHint() );
+    m_groupMisc->tqlayout() ->setSpacing( spacingHint() );
+    m_groupMisc->tqlayout() ->setMargin( marginHint() );
 
-    TQGridLayout* groupMiscLayout = new TQGridLayout( m_groupMisc->layout() );
-    groupMiscLayout->setAlignment( TQt::AlignTop );
+    TQGridLayout* groupMiscLayout = new TQGridLayout( m_groupMisc->tqlayout() );
+    groupMiscLayout->tqsetAlignment( TQt::AlignTop );
 
     m_labelRestriction = new TQLabel( i18n( "Restriction category (0..3):" ), m_groupMisc, "m_labelRestriction" );
     m_spinRestriction = new TQSpinBox( m_groupMisc, "m_spinRestriction" );
@@ -451,7 +451,7 @@ void K3bVcdBurnDialog::setupVideoCdTab()
     m_checkNonCompliant->setEnabled( false );
     m_checkNonCompliant->setChecked( false );
 
-    m_checkVCD30interpretation = new TQCheckBox( i18n( "Enable %1 track interpretation" ).arg( "VCD 3.0" ), m_groupOptions );
+    m_checkVCD30interpretation = new TQCheckBox( i18n( "Enable %1 track interpretation" ).tqarg( "VCD 3.0" ), m_groupOptions );
     // Only available on SVCD Type
     m_checkVCD30interpretation->setEnabled( false );
     m_checkVCD30interpretation->setChecked( false );
@@ -580,7 +580,7 @@ void K3bVcdBurnDialog::slotStartClicked()
 {
 
     if ( TQFile::exists( vcdDoc() ->vcdImage() ) ) {
-        if ( KMessageBox::warningContinueCancel( this, i18n( "Do you want to overwrite %1" ).arg( vcdDoc() ->vcdImage() ), i18n( "File Exists" ), i18n("Overwrite") )
+        if ( KMessageBox::warningContinueCancel( this, i18n( "Do you want to overwrite %1" ).tqarg( vcdDoc() ->vcdImage() ), i18n( "File Exists" ), i18n("Overwrite") )
                 != KMessageBox::Continue )
             return ;
     }
@@ -895,7 +895,7 @@ void K3bVcdBurnDialog::saveCdiConfig()
     int i = m_editCdiCfg->numLines();
 
     for ( int j = 0; j < i; j++ )
-        s << TQString( "%1" ).arg( m_editCdiCfg->textLine( j ) ) << "\n";
+        s << TQString( "%1" ).tqarg( m_editCdiCfg->textLine( j ) ) << "\n";
 
     cdi.close();
 

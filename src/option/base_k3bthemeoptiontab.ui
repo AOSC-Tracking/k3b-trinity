@@ -98,7 +98,7 @@
                 </property>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>tqlayout1</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -135,7 +135,7 @@
                             <property name="text">
                                 <string>no Theme selected</string>
                             </property>
-                            <property name="alignment">
+                            <property name="tqalignment">
                                 <set>AlignCenter</set>
                             </property>
                         </widget>
@@ -153,7 +153,7 @@
         </widget>
         <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>layout5</cstring>
+                <cstring>tqlayout5</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -172,7 +172,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>161</width>
                             <height>2</height>

@@ -66,8 +66,8 @@ void K3bDvdrecordWriter::prepareProcess()
     *m_process << "gracetime=2";  // 2 is the lowest allowed value (Joerg, why do you do this to us?)
    
   // Again we assume the device to be set!
-  *m_process << TQString("dev=%1").arg(K3b::externalBinDeviceParameter(burnDevice(), m_cdrecordBinObject));
-  *m_process << TQString("speed=%1").arg(burnSpeed());
+  *m_process << TQString("dev=%1").tqarg(K3b::externalBinDeviceParameter(burnDevice(), m_cdrecordBinObject));
+  *m_process << TQString("speed=%1").tqarg(burnSpeed());
   
   // DVDs are only written in DAO mode (and Packet, but we do not support that since it does not
   //                                    make much sense here)  
@@ -95,7 +95,7 @@ void K3bDvdrecordWriter::prepareProcess()
 
   bool manualBufferSize = k3bcore->globalSettings()->manualBufferSize();
   if( manualBufferSize ) {
-    *m_process << TQString("fs=%1m").arg( k3bcore->globalSettings()->writingBuffer() );
+    *m_process << TQString("fs=%1m").tqarg( k3bcore->globalSettings()->writingBuffer() );
   }
     
   bool overburn = k3bcore->globalSettings()->overburn();
@@ -103,7 +103,7 @@ void K3bDvdrecordWriter::prepareProcess()
     if( m_cdrecordBinObject->hasFeature("overburn") )
       *m_process << "-overburn";
     else
-      emit infoMessage( i18n("Cdrecord %1 does not support overburning.").arg(m_cdrecordBinObject->version), INFO );
+      emit infoMessage( i18n("Cdrecord %1 does not support overburning.").tqarg(m_cdrecordBinObject->version), INFO );
     
   // additional user parameters from config
   const TQStringList& params = m_cdrecordBinObject->userParameters();

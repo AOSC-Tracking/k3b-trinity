@@ -36,7 +36,7 @@
 #include <tqwidgetstack.h>
 #include <tqpushbutton.h>
 #include <tqcheckbox.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 
 static const int s_mp3Bitrates[] = {
@@ -86,7 +86,7 @@ K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( TQWidget* parent )
   //
   // Example filename pattern
   //
-  m_comboFilenamePattern->insertItem( TQString( "%b - %1 %t (%n %a %c)" ).arg(i18n("Title") ) );
+  m_comboFilenamePattern->insertItem( TQString( "%b - %1 %t (%n %a %c)" ).tqarg(i18n("Title") ) );
   m_comboFilenamePattern->insertItem( TQString( "%{volumeid} (%{title})" ) );
 
 
@@ -94,7 +94,7 @@ K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( TQWidget* parent )
   // Add the Audio bitrates
   //
   for( int i = 0; s_mp3Bitrates[i]; ++i )
-    m_comboAudioBitrate->insertItem( i18n("%1 kbps" ).arg(s_mp3Bitrates[i]) );
+    m_comboAudioBitrate->insertItem( i18n("%1 kbps" ).tqarg(s_mp3Bitrates[i]) );
 
 
   for( int i = 0; i < K3bVideoDVDTitleTranscodingJob::VIDEO_CODEC_NUM_ENTRIES; ++i ) {
@@ -187,8 +187,8 @@ void K3bVideoDVDRippingWidget::setSelectedPictureSize( const TQSize& size )
   else {
     m_comboVideoSize->changeItem( i18n(s_pictureSizeNames[PICTURE_SIZE_CUSTOM])
 				  + TQString(" (%1x%2)")
-				  .arg(size.width() == 0 ? i18n("auto") : TQString::number(size.width()))
-				  .arg(size.height() == 0 ? i18n("auto") : TQString::number(size.height())),
+				  .tqarg(size.width() == 0 ? i18n("auto") : TQString::number(size.width()))
+				  .tqarg(size.height() == 0 ? i18n("auto") : TQString::number(size.height())),
 				  PICTURE_SIZE_CUSTOM );
     m_comboVideoSize->setCurrentItem( PICTURE_SIZE_CUSTOM );
   }
@@ -351,8 +351,8 @@ void K3bVideoDVDRippingWidget::slotCustomPictureSize()
   spinHeight->setSpecialValueText( i18n("Auto") );
   TQLabel* labelW = new TQLabel( spinWidth, i18n("Width") + ':', dlg.plainPage() );
   TQLabel* labelH = new TQLabel( spinHeight, i18n("Height") + ':', dlg.plainPage() );
-  labelW->setAlignment( TQt::AlignRight|TQt::AlignVCenter );
-  labelH->setAlignment( TQt::AlignRight|TQt::AlignVCenter );
+  labelW->tqsetAlignment( TQt::AlignRight|TQt::AlignVCenter );
+  labelH->tqsetAlignment( TQt::AlignRight|TQt::AlignVCenter );
 
   TQGridLayout* grid = new TQGridLayout( dlg.plainPage() );
   grid->setMargin( 0 );

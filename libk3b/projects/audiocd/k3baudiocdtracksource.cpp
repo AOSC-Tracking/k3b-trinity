@@ -99,8 +99,8 @@ bool K3bAudioCdTrackSource::initParanoia()
       if( !m_lastUsedDevice ) {
 	// could not find the CD, so ask for it
 	TQString s = i18n("Please insert Audio CD %1%2")
-	  .arg(m_discId, 0, 16)
-	  .arg(m_cddbEntry.cdTitle.isEmpty() || m_cddbEntry.cdArtist.isEmpty()
+	  .tqarg(m_discId, 0, 16)
+	  .tqarg(m_cddbEntry.cdTitle.isEmpty() || m_cddbEntry.cdArtist.isEmpty()
 	       ? TQString()
 	       : " (" + m_cddbEntry.cdArtist + " - " + m_cddbEntry.cdTitle + ")");
 
@@ -252,7 +252,7 @@ TQString K3bAudioCdTrackSource::type() const
 
 TQString K3bAudioCdTrackSource::sourceComment() const
 {
-  return i18n("Track %1 from Audio CD %2").arg(m_cdTrackNumber).arg(m_discId,0,16);
+  return i18n("Track %1 from Audio CD %2").tqarg(m_cdTrackNumber).tqarg(m_discId,0,16);
 }
 
 

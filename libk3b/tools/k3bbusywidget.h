@@ -35,8 +35,8 @@ class LIBK3B_EXPORT K3bBusyWidget : public TQFrame
 
   void showBusy( bool b );
 
-  TQSize sizeHint() const;
-  TQSize minimumSizeHint() const;
+  TQSize tqsizeHint() const;
+  TQSize tqminimumSizeHint() const;
 
  protected:
   void drawContents( TQPainter* p );

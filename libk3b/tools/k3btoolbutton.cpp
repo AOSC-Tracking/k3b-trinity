@@ -69,7 +69,7 @@ void K3bToolButton::drawButton( TQPainter* p )
       arrowFlags |= TQStyle::Style_Enabled;
     
     tqstyle().tqdrawPrimitive(TQStyle::PE_ArrowDown, p,
-			  TQRect(width()-7, height()-7, 7, 7), colorGroup(),
+			  TQRect(width()-7, height()-7, 7, 7), tqcolorGroup(),
 			  arrowFlags, TQStyleOption() );
   }
 }

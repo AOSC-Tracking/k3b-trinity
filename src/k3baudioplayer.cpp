@@ -20,14 +20,14 @@
 
 #include <tqlabel.h>
 #include <tqtoolbutton.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtimer.h>
 #include <tqdatetime.h>
 #include <tqfont.h>
 #include <tqslider.h>
 #include <tqlistview.h>
 #include <tqfile.h>
-#include <palette.h>
+#include <tqpalette.h>
 #include <tqheader.h>
 #include <tqevent.h>
 #include <tqdragobject.h>
@@ -169,8 +169,8 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
 
   m_viewPlayList = new K3bPlayListView( this );
 
-  m_labelOverallTime->setAlignment( AlignHCenter | AlignVCenter );
-  m_labelCurrentTime->setAlignment( AlignHCenter | AlignVCenter );
+  m_labelOverallTime->tqsetAlignment( AlignHCenter | AlignVCenter );
+  m_labelCurrentTime->tqsetAlignment( AlignHCenter | AlignVCenter );
   m_labelOverallTime->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );
   m_labelCurrentTime->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );
   m_labelFilename->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );
@@ -194,7 +194,7 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
   m_updateTimer = new TQTimer( this );
   // ------------------------------------------------------------------------
 
-  // layout
+  // tqlayout
   // ------------------------------------------------------------------------
   TQGridLayout* grid = new TQGridLayout( this );
   grid->setSpacing( 2 );
@@ -586,13 +586,13 @@ void K3bAudioPlayer::slotUpdateFilename()
 
     switch( state() ) {
     case PLAYING:
-      display.prepend( TQString("(%1) ").arg(i18n("playing")) );
+      display.prepend( TQString("(%1) ").tqarg(i18n("playing")) );
       break;
     case PAUSED:
-      display.prepend( TQString("(%1) ").arg(i18n("paused")) );
+      display.prepend( TQString("(%1) ").tqarg(i18n("paused")) );
       break;
     case STOPPED:
-      display.prepend( TQString("(%1) ").arg(i18n("stopped")) );
+      display.prepend( TQString("(%1) ").tqarg(i18n("stopped")) );
       break;
     default:
       break;

@@ -39,7 +39,7 @@ K3bAudioDataSourceViewItem::K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* p
   //  setMarginVertical( 2 );
 
   // gray out filename
-  setForegroundColor( 5, listView()->palette().disabled().foreground() );
+  setForegroundColor( 5, listView()->tqpalette().disabled().foreground() );
 
   // smaller filename
   f = listView()->font();
@@ -89,7 +89,7 @@ void K3bAudioDataSourceViewItem::setText( int col, const TQString& text )
 bool K3bAudioDataSourceViewItem::animate()
 {
   if( source()->length() == 0 && source()->isValid() ) {
-    TQString icon = TQString( "kde%1" ).arg( m_animationCounter );
+    TQString icon = TQString( "kde%1" ).tqarg( m_animationCounter );
     setPixmap( 4, SmallIcon( icon ) );
     m_animationCounter++;
     if ( m_animationCounter > 6 )

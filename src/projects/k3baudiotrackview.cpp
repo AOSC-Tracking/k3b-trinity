@@ -46,7 +46,7 @@
 #include <tqevent.h>
 #include <tqpixmap.h>
 #include <tqpainter.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqvaluelist.h>
 
@@ -487,7 +487,7 @@ void K3bAudioTrackView::slotTrackChanged( K3bAudioTrack* track )
       item->showSources(true);
 
     // the length might have changed
-    item->repaint();
+    item->tqrepaint();
 
     // FIXME: only do this if the position really changed
     // move the item if the position has changed

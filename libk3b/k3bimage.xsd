@@ -1,9 +1,9 @@
 <!--
- This document describes the layout of the toc.xml file in a K3b image archive.
- A K3b image archive is a TAR archive with a simple layout as follows.
+ This document describes the tqlayout of the toc.xml file in a K3b image archive.
+ A K3b image archive is a TAR archive with a simple tqlayout as follows.
 
  Every K3b image archive contains the toc.xml file as described in this document
- which describes the layout of the CD or DVD saved in the K3b image archive.
+ which describes the tqlayout of the CD or DVD saved in the K3b image archive.
  Additionally the K3b image archive contains an arbitrary number of files which
  contain the CD/DVD sector data. These files are referenced in the elements of
  type "file".

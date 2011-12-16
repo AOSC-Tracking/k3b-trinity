@@ -34,7 +34,7 @@
 #include <kconfig.h>
 #include <kmessagebox.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqspinbox.h>
 #include <tqstyle.h>
@@ -172,7 +172,7 @@ K3bVideoDVDRippingDialog::K3bVideoDVDRippingDialog( const K3bVideoDVD::VideoDVD&
 
   setTitle( i18n("Video DVD Ripping"),
 	    i18n("1 title from %1", "%n titles from %1", titles.count())
-	    .arg( k3bappcore->mediaCache()->medium(m_dvd.device()).beautifiedVolumeId() ) );
+	    .tqarg( k3bappcore->mediaCache()->medium(m_dvd.device()).beautifiedVolumeId() ) );
 
   // populate list map
   populateTitleView( titles );
@@ -195,13 +195,13 @@ void K3bVideoDVDRippingDialog::populateTitleView( const TQValueList<int>& titles
     titleItem = new TQCheckListItem( m_w->m_titleView,
 				    titleItem,
 				    i18n("Title %1 (%2)")
-				    .arg(*it)
-				    .arg(m_dvd[*it-1].playbackTime().toString()),
+				    .tqarg(*it)
+				    .tqarg(m_dvd[*it-1].playbackTime().toString()),
 				    TQCheckListItem::RadioButtonController );
     titleItem->setText( 1, TQString("%1x%2")
-		       .arg(m_dvd[*it-1].videoStream().realPictureWidth())
-		       .arg(m_dvd[*it-1].videoStream().realPictureHeight()) );
-    titleItem->setText( 3, TQString("%1 Title %2.avi").arg(m_dvd.volumeIdentifier()).arg(*it) );
+		       .tqarg(m_dvd[*it-1].videoStream().realPictureWidth())
+		       .tqarg(m_dvd[*it-1].videoStream().realPictureHeight()) );
+    titleItem->setText( 3, TQString("%1 Title %2.avi").tqarg(m_dvd.volumeIdentifier()).tqarg(*it) );
 
     // now for the rip info
     K3bVideoDVDRippingJob::TitleRipInfo ri( *it );
@@ -222,18 +222,18 @@ void K3bVideoDVDRippingDialog::populateTitleView( const TQValueList<int>& titles
     TQListViewItem* asI = 0;
     for( unsigned int i = 0; i < m_dvd[*it-1].numAudioStreams(); ++i ) {
       TQString text = i18n("%1 %2Ch (%3%4)")
-	.arg( K3bVideoDVD::audioFormatString( m_dvd[*it-1].audioStream(i).format() ) )
-	.arg( m_dvd[*it-1].audioStream(i).channels() )
-	.arg( m_dvd[*it-1].audioStream(i).langCode().isEmpty()
+	.tqarg( K3bVideoDVD::audioFormatString( m_dvd[*it-1].audioStream(i).format() ) )
+	.tqarg( m_dvd[*it-1].audioStream(i).channels() )
+	.tqarg( m_dvd[*it-1].audioStream(i).langCode().isEmpty()
 	      ? i18n("unknown language")
 	      : KGlobal::locale()->twoAlphaToLanguageName( m_dvd[*it-1].audioStream(i).langCode() ) )
-	.arg( m_dvd[*it-1].audioStream(i).codeExtension() != K3bVideoDVD::AUDIO_CODE_EXT_UNSPECIFIED
+	.tqarg( m_dvd[*it-1].audioStream(i).codeExtension() != K3bVideoDVD::AUDIO_CODE_EXT_UNSPECIFIED
 	      ? TQString(" ") + K3bVideoDVD::audioCodeExtensionString( m_dvd[*it-1].audioStream(i).codeExtension() )
 	      : TQString() );
 
       if( m_dvd[*it-1].audioStream(i).format() == K3bVideoDVD::AUDIO_FORMAT_DTS ) {
 	// width of the radio button from TQCheckListItem::paintCell
-	int buttonSize = tqstyle().pixelMetric( TQStyle::PM_CheckListButtonSize, m_w->m_titleView ) + 4;
+	int buttonSize = tqstyle().tqpixelMetric( TQStyle::PM_CheckListButtonSize, m_w->m_titleView ) + 4;
 	int spaceWidth = fontMetrics().width( ' ' );
 	int numSpaces = buttonSize/spaceWidth;
 	asI = new TQListViewItem( titleItem, asI, TQString().fill( ' ', numSpaces ) + text + " (" + i18n("not supported") + ")" );
@@ -302,7 +302,7 @@ void K3bVideoDVDRippingDialog::slotUpdateVideoSizes()
   for( TQMap<TQCheckListItem*, K3bVideoDVDRippingJob::TitleRipInfo>::iterator it = m_titleRipInfos.begin();
        it != m_titleRipInfos.end(); ++it ) {
     TQSize s( resizeTitle( m_dvd[it.data().title-1].videoStream(), size ) );
-    it.key()->setText( 1, TQString("%1x%2").arg(s.width()).arg(s.height()) );
+    it.key()->setText( 1, TQString("%1x%2").tqarg(s.width()).tqarg(s.height()) );
   }
 }
 
@@ -456,12 +456,12 @@ TQString K3bVideoDVDRippingDialog::createFilename( const K3bVideoDVDRippingJob::
 	break;
       case PATTERN_ORIG_VIDEO_SIZE:
 	f.append( TQString("%1x%2")
-		  .arg(title.videoStream().pictureWidth())
-		  .arg(title.videoStream().pictureHeight()) );
+		  .tqarg(title.videoStream().pictureWidth())
+		  .tqarg(title.videoStream().pictureHeight()) );
 	break;
       case PATTERN_VIDEO_SIZE: {
 	TQSize s( resizeTitle( m_dvd[info.title-1].videoStream(), m_w->selectedPictureSize() ) );
-	f.append( TQString("%1x%2").arg(s.width()).arg(s.height()) );
+	f.append( TQString("%1x%2").tqarg(s.width()).tqarg(s.height()) );
 	break;
       }
       case PATTERN_ASPECT_RATIO:
@@ -471,7 +471,7 @@ TQString K3bVideoDVDRippingDialog::createFilename( const K3bVideoDVDRippingJob::
 	  f.append( "16:9" );
 	break;
       case PATTERN_CURRENT_DATE:
-	f.append( KGlobal::locale()->formatDate( TQDate::currentDate() ) );
+	f.append( KGlobal::locale()->formatDate( TQDate::tqcurrentDate() ) );
 	break;
       default:
 	f.append( pattern[i-1] );

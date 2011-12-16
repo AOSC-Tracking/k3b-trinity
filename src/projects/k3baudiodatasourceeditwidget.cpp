@@ -19,7 +19,7 @@
 
 #include <k3baudiodatasource.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqtooltip.h>
 
@@ -37,7 +37,7 @@ K3bAudioDataSourceEditWidget::K3bAudioDataSourceEditWidget( TQWidget* parent, co
 
   TQLabel* startLabel = new TQLabel( i18n("Start Offset") + ":", this );
   TQLabel* endLabel = new TQLabel( i18n("End Offset") + ":", this );
-  endLabel->setAlignment( TQt::AlignRight );
+  endLabel->tqsetAlignment( TQt::AlignRight );
 
   TQGridLayout* grid = new TQGridLayout( this );
   grid->setMargin( 0 );
@@ -101,7 +101,7 @@ void K3bAudioDataSourceEditWidget::loadSource( K3bAudioDataSource* source )
 				  false, 
 				  false,
 				  i18n("Used part of the audio source"),
-				  colorGroup().highlight() );
+				  tqcolorGroup().highlight() );
 
   m_editStartOffset->setMaxValue( source->originalLength().lba() );
   m_editEndOffset->setMaxValue( source->originalLength().lba() );

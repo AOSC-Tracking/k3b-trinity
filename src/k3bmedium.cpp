@@ -292,7 +292,7 @@ TQString K3bMedium::shortString( bool useContent ) const
   }
 
   else if( diskInfo().diskState() == K3bDevice::STATE_EMPTY ) {
-    return i18n("Empty %1 medium").arg( mediaTypeString );
+    return i18n("Empty %1 medium").tqarg( mediaTypeString );
   }
 
   else {
@@ -302,39 +302,39 @@ TQString K3bMedium::shortString( bool useContent ) const
 	  toc().contentType() == K3bDevice::MIXED ) {
 	if( !cdText().performer().isEmpty() || !cdText().title().isEmpty() ) {
 	  return TQString("%1 - %2 (%3)")
-	    .arg( cdText().performer() )
-	    .arg( cdText().title() )
-	    .arg( toc().contentType() == K3bDevice::AUDIO ? i18n("Audio CD") : i18n("Mixed CD") );
+	    .tqarg( cdText().performer() )
+	    .tqarg( cdText().title() )
+	    .tqarg( toc().contentType() == K3bDevice::AUDIO ? i18n("Audio CD") : i18n("Mixed CD") );
 	}
 	else if( toc().contentType() == K3bDevice::AUDIO ) {
 	  return i18n("Audio CD");
 	}
 	else {
-	  return i18n("%1 (Mixed CD)").arg( beautifiedVolumeId() );
+	  return i18n("%1 (Mixed CD)").tqarg( beautifiedVolumeId() );
 	}
       }
 
       // DATA CD and DVD
       else if( !volumeId().isEmpty() ) {
 	if( content() & CONTENT_VIDEO_DVD ) {
-	  return TQString("%1 (%2)").arg( beautifiedVolumeId() ).arg( i18n("Video DVD") );
+	  return TQString("%1 (%2)").tqarg( beautifiedVolumeId() ).tqarg( i18n("Video DVD") );
 	}
 	else if( content() & CONTENT_VIDEO_CD ) {
-	  return TQString("%1 (%2)").arg( beautifiedVolumeId() ).arg( i18n("Video CD") );
+	  return TQString("%1 (%2)").tqarg( beautifiedVolumeId() ).tqarg( i18n("Video CD") );
 	}
 	else if( diskInfo().diskState() == K3bDevice::STATE_INCOMPLETE ) {
-	  return i18n("%1 (Appendable Data %2)").arg( beautifiedVolumeId(), mediaTypeString );
+	  return i18n("%1 (Appendable Data %2)").tqarg( beautifiedVolumeId(), mediaTypeString );
 	}
 	else {
-	  return i18n("%1 (Complete Data %2)").arg( beautifiedVolumeId(), mediaTypeString );
+	  return i18n("%1 (Complete Data %2)").tqarg( beautifiedVolumeId(), mediaTypeString );
 	}
       }
       else {
 	if( diskInfo().diskState() == K3bDevice::STATE_INCOMPLETE ) {
-	  return i18n("Appendable Data %1").arg( mediaTypeString );
+	  return i18n("Appendable Data %1").tqarg( mediaTypeString );
 	}
 	else {
-	  return i18n("Complete Data %1").arg( mediaTypeString );
+	  return i18n("Complete Data %1").tqarg( mediaTypeString );
 	}
       }
     }
@@ -342,10 +342,10 @@ TQString K3bMedium::shortString( bool useContent ) const
     // without content
     else {
       if( diskInfo().diskState() == K3bDevice::STATE_INCOMPLETE ) {
-	return i18n("Appendable %1 medium").arg( mediaTypeString );
+	return i18n("Appendable %1 medium").tqarg( mediaTypeString );
       }
       else {
-	return i18n("Complete %1 medium").arg( mediaTypeString );
+	return i18n("Complete %1 medium").tqarg( mediaTypeString );
       }
     }
   }
@@ -356,15 +356,15 @@ TQString K3bMedium::longString() const
 {
   TQString s = TQString("<p><nobr><b>%1 %2</b> (%3)</nobr>"
 		      "<p>")
-    .arg( d->device->vendor() )
-    .arg( d->device->description() )
-    .arg( d->device->blockDeviceName() )
+    .tqarg( d->device->vendor() )
+    .tqarg( d->device->description() )
+    .tqarg( d->device->blockDeviceName() )
     + shortString( true );
 
   if( diskInfo().diskState() == K3bDevice::STATE_COMPLETE ||
       diskInfo().diskState() == K3bDevice::STATE_INCOMPLETE  ) {
     s += "<br>" + i18n("%1 in %n track", "%1 in %n tracks", toc().count() )
-      .arg( KIO::convertSize(diskInfo().size().mode1Bytes() ) );
+      .tqarg( KIO::convertSize(diskInfo().size().mode1Bytes() ) );
     if( diskInfo().numSessions() > 1 )
       s += i18n(" and %n session", " and %n sessions", diskInfo().numSessions() );
   }
@@ -372,11 +372,11 @@ TQString K3bMedium::longString() const
   if( diskInfo().diskState() == K3bDevice::STATE_EMPTY ||
       diskInfo().diskState() == K3bDevice::STATE_INCOMPLETE  )
     s += "<br>" + i18n("Free space: %1")
-      .arg( KIO::convertSize( diskInfo().remainingSize().mode1Bytes() ) );
+      .tqarg( KIO::convertSize( diskInfo().remainingSize().mode1Bytes() ) );
 
   if( !diskInfo().empty() && diskInfo().rewritable() )
     s += "<br>" + i18n("Capacity: %1")
-      .arg( KIO::convertSize( diskInfo().capacity().mode1Bytes() ) );
+      .tqarg( KIO::convertSize( diskInfo().capacity().mode1Bytes() ) );
 
   return s;
 }
@@ -411,7 +411,7 @@ TQString K3bMedium::beautifiedVolumeId() const
       return oldId;
 
     // replace underscore with space
-    else if( c.unicode() == 95 ) {
+    else if( c.tqunicode() == 95 ) {
       newId.append( ' ' );
       newWord = true;
     }

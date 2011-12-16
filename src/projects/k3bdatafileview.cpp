@@ -165,7 +165,7 @@ void K3bDataFileView::checkForNewItems()
   hideEditor();
 
   // add items that are not there yet
-  for( TQPtrListIterator<K3bDataItem> it( m_currentDir->children() ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_currentDir->tqchildren() ); it.current(); ++it ) {
     if( !m_itemMap.contains( it.current() ) ) {
       slotItemAdded( it.current() );
     }

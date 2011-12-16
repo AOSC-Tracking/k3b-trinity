@@ -14,7 +14,7 @@
 */
 
 // QT-includes
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqstring.h>
 
 

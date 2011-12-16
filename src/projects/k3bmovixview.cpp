@@ -33,7 +33,7 @@
 #include <kmessagebox.h>
 #include <kurl.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqlineedit.h>
 

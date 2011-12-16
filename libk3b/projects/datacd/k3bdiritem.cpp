@@ -52,26 +52,26 @@ K3bDirItem::K3bDirItem( const K3bDirItem& item )
     m_dirs(0),
     m_localPath( item.m_localPath )
 {
-  for( TQPtrListIterator<K3bDataItem> it( item.children() ); *it; ++it )
+  for( TQPtrListIterator<K3bDataItem> it( item.tqchildren() ); *it; ++it )
     addDataItem( (*it)->copy() );
 }
 
 K3bDirItem::~K3bDirItem()
 {
-  // delete all children
+  // delete all tqchildren
   // doing this by hand is much saver than using the
   // auto-delete feature since some of the items' destructors
   // may change the list
-  K3bDataItem* i = m_children.first();
+  K3bDataItem* i = m_tqchildren.first();
   while( i ) {
     // it is important to use takeDataItem here to be sure
     // the size gets updated properly
     takeDataItem(i);
     delete i;
-    i = m_children.first();
+    i = m_tqchildren.first();
   }
 
-  // this has to be done after deleting the children
+  // this has to be done after deleting the tqchildren
   // because the directory itself has a size of 0 in K3b
   // and all it's files' sizes have already been substracted
   take();
@@ -99,7 +99,7 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
     }
   }
 
-  if( m_children.findRef( item ) == -1 ) {
+  if( m_tqchildren.findRef( item ) == -1 ) {
     if( item->isFile() ) {
       // do we replace an old item?
       TQString name = item->k3bName();
@@ -126,7 +126,7 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
       item->setK3bName( name );
     }
 
-    m_children.append( item->take() );
+    m_tqchildren.append( item->take() );
     updateSize( item, false );
     if( item->isDir() )
       updateFiles( ((K3bDirItem*)item)->numFiles(), ((K3bDirItem*)item)->numDirs()+1 );
@@ -146,9 +146,9 @@ K3bDirItem* K3bDirItem::addDataItem( K3bDataItem* item )
 
 K3bDataItem* K3bDirItem::takeDataItem( K3bDataItem* item )
 {
-  int x = m_children.findRef( item );
+  int x = m_tqchildren.findRef( item );
   if( x > -1 ) {
-    K3bDataItem* item = m_children.take();
+    K3bDataItem* item = m_tqchildren.take();
     updateSize( item, true );
     if( item->isDir() )
       updateFiles( -1*((K3bDirItem*)item)->numFiles(), -1*((K3bDirItem*)item)->numDirs()-1 );
@@ -176,8 +176,8 @@ K3bDataItem* K3bDirItem::takeDataItem( K3bDataItem* item )
 
 K3bDataItem* K3bDirItem::nextSibling() const
 {
-  if( !m_children.isEmpty() )
-    return m_children.getFirst();
+  if( !m_tqchildren.isEmpty() )
+    return m_tqchildren.getFirst();
   else
     return K3bDataItem::nextSibling();
 }
@@ -185,12 +185,12 @@ K3bDataItem* K3bDirItem::nextSibling() const
 
 K3bDataItem* K3bDirItem::nextChild( K3bDataItem* prev ) const
 {
-  // search for prev in children
-  if( m_children.findRef( prev ) < 0 ) {
+  // search for prev in tqchildren
+  if( m_tqchildren.findRef( prev ) < 0 ) {
     return 0;
   }
   else
-    return m_children.next();
+    return m_tqchildren.next();
 }
 
 
@@ -202,7 +202,7 @@ bool K3bDirItem::alreadyInDirectory( const TQString& filename ) const
 
 K3bDataItem* K3bDirItem::find( const TQString& filename ) const
 {
-  for( TQPtrListIterator<K3bDataItem> it( m_children ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( it.current()->k3bName() == filename )
       return it.current();
   }
@@ -323,7 +323,7 @@ bool K3bDirItem::isRemoveable() const
   if( !K3bDataItem::isRemoveable() )
     return false;
 
-  for( TQPtrListIterator<K3bDataItem> it( m_children ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( !it.current()->isRemoveable() )
       return false;
   }
@@ -364,7 +364,7 @@ void K3bDirItem::updateFiles( long files, long dirs )
 
 bool K3bDirItem::isFromOldSession() const
 {
-  for( TQPtrListIterator<K3bDataItem> it( m_children ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( (*it)->isFromOldSession() )
       return true;
   }
@@ -375,7 +375,7 @@ bool K3bDirItem::isFromOldSession() const
 bool K3bDirItem::writeToCd() const
 {
   // check if this dir contains items to write
-  for( TQPtrListIterator<K3bDataItem> it( m_children ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( m_tqchildren ); it.current(); ++it ) {
     if( (*it)->writeToCd() )
       return true;
   }

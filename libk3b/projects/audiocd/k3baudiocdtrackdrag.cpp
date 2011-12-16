@@ -70,7 +70,7 @@ bool K3bAudioCdTrackDrag::decode( const TQMimeSource* e,
 				  K3bDevice::Toc& toc, TQValueList<int>& trackNumbers, 
 				  K3bCddbResultEntry& cddb, K3bDevice::Device** dev )
 {
-  TQByteArray data = e->encodedData( "k3b/audio_track_drag" );
+  TQByteArray data = e->tqencodedData( "k3b/audio_track_drag" );
 
   TQDataStream s( data, IO_ReadOnly );
 

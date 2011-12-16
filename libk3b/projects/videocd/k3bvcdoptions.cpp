@@ -37,7 +37,7 @@ K3bVcdOptions::K3bVcdOptions()
         m_volumeID( "VIDEOCD" ),
         m_albumID( "" ),
         m_volumeSetId( "" ),
-        m_publisher( TQString( "K3b - Version %1" ).arg( k3bcore->version() ) ),
+        m_publisher( TQString( "K3b - Version %1" ).tqarg( k3bcore->version() ) ),
         m_applicationId( "CDI/CDI_VCD.APP;1" ),
         m_systemId( "CD-RTOS CD-BRIDGE" ),
         m_vcdclass( "vcd" ),

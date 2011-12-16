@@ -37,8 +37,8 @@
 #include <tqgroupbox.h>
 #include <tqpushbutton.h>
 #include <tqcheckbox.h>
-#include <layout.h>
-#include <textview.h>
+#include <tqlayout.h>
+#include <tqtextview.h>
 #include <tqcombobox.h>
 #include <tqlabel.h>
 #include <tqheader.h>
@@ -109,8 +109,8 @@ void K3bBlankingDialog::setupGui()
 
   // --- setup the blanking type button group -----------------------------
   TQGroupBox* groupBlankType = new TQGroupBox( 1, Qt::Vertical, i18n("&Erase Type"), frame );
-  groupBlankType->layout()->setSpacing( spacingHint() );
-  groupBlankType->layout()->setMargin( marginHint() );
+  groupBlankType->tqlayout()->setSpacing( spacingHint() );
+  groupBlankType->tqlayout()->setMargin( marginHint() );
 
   m_comboEraseMode = new TQComboBox( groupBlankType );
   // ----------------------------------------------------------------------
@@ -200,7 +200,7 @@ void K3bBlankingDialog::slotWriterChanged()
     setButtonEnabled( START_BUTTON, true );
   else {
     setButtonEnabled( START_BUTTON, false );
-    KMessageBox::sorry( this, i18n("%1 does not support CD-RW writing.").arg(dev->devicename()) );
+    KMessageBox::sorry( this, i18n("%1 does not support CD-RW writing.").tqarg(dev->devicename()) );
   }
 }
 

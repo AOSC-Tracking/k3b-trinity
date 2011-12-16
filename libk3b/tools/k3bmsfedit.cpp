@@ -50,16 +50,16 @@ K3bMsfEdit::~K3bMsfEdit()
 {}
 
 
-TQSize K3bMsfEdit::sizeHint() const
+TQSize K3bMsfEdit::tqsizeHint() const
 {
   // more or less copied from TQSpinBox
   constPolish();
-  TQSize sz = editor()->sizeHint();
+  TQSize sz = editor()->tqsizeHint();
   int h = sz.height();
   TQFontMetrics fm( font() );
   int w = fm.width( "00:00:00" );
   int wx = fm.width( ' ' )*2;
-  int frame = tqstyle().pixelMetric( TQStyle::PM_SpinBoxFrameWidth );
+  int frame = tqstyle().tqpixelMetric( TQStyle::PM_SpinBoxFrameWidth );
   return tqstyle().tqsizeFromContents(TQStyle::CT_SpinBox, this,
 				  TQSize( w + wx + downRect().width() + frame*2,
 					 h + frame*2).

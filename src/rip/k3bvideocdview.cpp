@@ -29,7 +29,7 @@
 #include <tqframe.h>
 #include <tqheader.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcursor.h>
 #include <tqapplication.h>
 
@@ -68,7 +68,7 @@ class K3bVideoCdView::VideoTrackViewItem : public TQListViewItem
                             const K3b::Msf& length )
                 : TQListViewItem( parent )
         {
-            setText( 0, TQString( "%1. %2" ).arg( _trackNumber ).arg( id ) );
+            setText( 0, TQString( "%1. %2" ).tqarg( _trackNumber ).tqarg( id ) );
             setText( 1, name );
             if ( length > 0 ) {
                 setText( 2, length.toString() );
@@ -83,7 +83,7 @@ class K3bVideoCdView::VideoTrackViewItem : public TQListViewItem
 
         void updateData( const K3bVideoCdInfoResultEntry& resultEntry )
         {
-            setText( 0, TQString( "%1. %2" ).arg( trackNumber ).arg( resultEntry.id ) );
+            setText( 0, TQString( "%1. %2" ).tqarg( trackNumber ).tqarg( resultEntry.id ) );
             setText( 1, resultEntry.name );
         }
 
@@ -153,7 +153,7 @@ K3bVideoCdView::K3bVideoCdView( TQWidget* parent, const char *name )
     TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
     toolBoxLayout->addItem( spacer );
     m_labelLength = new TQLabel( mainWidget() );
-    m_labelLength->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_labelLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
     toolBoxLayout->addWidget( m_labelLength );
 
     // the track view
@@ -232,7 +232,7 @@ void K3bVideoCdView::reloadMedium()
             K3b::Msf length( ( *it ).length() );
             sequenceSize += length;
             m_videocdmpegsize += length.mode2Form2Bytes();
-            ( void ) new VideoTrackViewItem( ( VideoTrackViewCheckItem* ) m_contentList[ 0 ], i18n( "Sequence-%1" ).arg( index ), "", index, length );
+            ( void ) new VideoTrackViewItem( ( VideoTrackViewCheckItem* ) m_contentList[ 0 ], i18n( "Sequence-%1" ).tqarg( index ), "", index, length );
         } else {
             K3b::Msf length( ( *it ).length() );
             m_videocddatasize += length.mode2Form1Bytes();
@@ -314,7 +314,7 @@ void K3bVideoCdView::updateDisplay()
     else
         setTitle( i18n( "Video CD" ) );
 
-    m_labelLength->setText( i18n( "1 track (%1)", "%n tracks (%1)", m_toc.count() ).arg( K3b::Msf( m_toc.length() ).toString() ) );
+    m_labelLength->setText( i18n( "1 track (%1)", "%n tracks (%1)", m_toc.count() ).tqarg( K3b::Msf( m_toc.length() ).toString() ) );
 }
 
 
@@ -416,7 +416,7 @@ void K3bVideoCdView::startRip()
         if ( m_videooptions ->getVideoCdRipSequences() )
             videocdsize += m_videocdmpegsize;
 
-        kdDebug() << TQString("(K3bVideoCdView::startRip())  m_videooptions ->setVideoCdSize( %1)").arg( videocdsize ) << endl;
+        kdDebug() << TQString("(K3bVideoCdView::startRip())  m_videooptions ->setVideoCdSize( %1)").tqarg( videocdsize ) << endl;
         m_videooptions ->setVideoCdSize( videocdsize );
         K3bVideoCdRippingDialog rip( m_videooptions, this );
         rip.exec();

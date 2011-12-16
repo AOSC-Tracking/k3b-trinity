@@ -88,13 +88,13 @@ void K3bTimeoutWidget::timeStep()
 }
 
 
-TQSize K3bTimeoutWidget::sizeHint() const
+TQSize K3bTimeoutWidget::tqsizeHint() const
 {
-  return minimumSizeHint();
+  return tqminimumSizeHint();
 }
 
 
-TQSize K3bTimeoutWidget::minimumSizeHint() const
+TQSize K3bTimeoutWidget::tqminimumSizeHint() const
 {
   int fw = fontMetrics().width( TQString::number( d->timeout/1000 ) );
   int fh = fontMetrics().height();
@@ -128,7 +128,7 @@ void K3bTimeoutWidget::paintEvent( TQPaintEvent* )
     }
 
     TQRect r;
-    r.setSize( minimumSizeHint() );
+    r.setSize( tqminimumSizeHint() );
     r.moveCenter( rect().center() );
 
     p.drawArc( r, 0, 360*16 );    

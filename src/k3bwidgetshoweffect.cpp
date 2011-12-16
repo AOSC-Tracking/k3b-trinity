@@ -96,7 +96,7 @@ void K3bWidgetShowEffect::timerEvent( TQTimerEvent* )
 void K3bWidgetShowEffect::dissolveMask()
 {
   if( m_bShow ) {
-    m_widget->repaint( false );
+    m_widget->tqrepaint( false );
     TQPainter maskPainter(&m_mask);
 
     m_mask.fill(TQt::black);

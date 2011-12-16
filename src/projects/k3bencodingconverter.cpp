@@ -18,7 +18,7 @@
 #include "k3bencodingconverter.h"
 
 #include <tqwidget.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 #include <kdebug.h>
 

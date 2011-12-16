@@ -28,7 +28,7 @@
 #include <tqcheckbox.h>
 #include <tqlabel.h>
 #include <tqtimer.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
 #include <tqdir.h>
@@ -73,11 +73,11 @@ void K3bVideoCdRippingDialog::setupGui()
 
     // ---------------------------------------------------- Directory group ---
     TQGroupBox* groupDirectory = new TQGroupBox( 0, Qt::Vertical, i18n( "Destination Directory" ), frame );
-    groupDirectory->layout() ->setSpacing( KDialog::spacingHint() );
-    groupDirectory->layout() ->setMargin( KDialog::marginHint() );
+    groupDirectory->tqlayout() ->setSpacing( KDialog::spacingHint() );
+    groupDirectory->tqlayout() ->setMargin( KDialog::marginHint() );
 
-    TQGridLayout* groupDirectoryLayout = new TQGridLayout( groupDirectory->layout() );
-    groupDirectoryLayout->setAlignment( TQt::AlignTop );
+    TQGridLayout* groupDirectoryLayout = new TQGridLayout( groupDirectory->tqlayout() );
+    groupDirectoryLayout->tqsetAlignment( TQt::AlignTop );
 
     TQLabel* rippathLabel = new TQLabel( i18n( "Rip files to:" ), groupDirectory );
     m_editDirectory = new KURLRequester( groupDirectory, "m_editDirectory" );
@@ -90,13 +90,13 @@ void K3bVideoCdRippingDialog::setupGui()
     freeSpaceBox->setSpacing( KDialog::spacingHint() );
     ( void ) new TQLabel( i18n( "Free space in directory:" ), freeSpaceBox, "FreeSpaceLabel" );
     m_labelFreeSpace = new TQLabel( "                       ", freeSpaceBox, "m_labelFreeSpace" );
-    m_labelFreeSpace->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_labelFreeSpace->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     TQHBox* necessarySizeBox = new TQHBox( groupDirectory );
     necessarySizeBox->setSpacing( KDialog::spacingHint() );
     ( void ) new TQLabel( i18n( "Necessary storage size:" ), necessarySizeBox, "StorSize" );
     m_labelNecessarySize = new TQLabel( "                        ", necessarySizeBox, "m_labelNecessarySize" );
-    m_labelNecessarySize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_labelNecessarySize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
 
     groupDirectoryLayout->addWidget( rippathLabel, 0, 0 );
@@ -132,7 +132,7 @@ void K3bVideoCdRippingDialog::setupGui()
 
 void K3bVideoCdRippingDialog::setupContextHelp()
 {
-    TQToolTip::add( m_labelFreeSpace, i18n("Free space on destination directory: %1").arg( m_editDirectory ->url() ) );
+    TQToolTip::add( m_labelFreeSpace, i18n("Free space on destination directory: %1").tqarg( m_editDirectory ->url() ) );
 
     TQToolTip::add( m_labelNecessarySize, i18n("Necessary space for extracted files") );
 
@@ -157,10 +157,10 @@ void K3bVideoCdRippingDialog::slotStartClicked()
     TQDir d;
     d.setPath( m_editDirectory ->url() );
     if( !d.exists() ) {
-      if( KMessageBox::warningYesNo( this, i18n("Image folder '%1' does not exist. Do you want K3b to create it?").arg( m_editDirectory->url() ) )
+      if( KMessageBox::warningYesNo( this, i18n("Image folder '%1' does not exist. Do you want K3b to create it?").tqarg( m_editDirectory->url() ) )
 	  == KMessageBox::Yes ) {
 	if( !KStandardDirs::makeDir( m_editDirectory->url() ) ) {
-	  KMessageBox::error( this, i18n("Failed to create folder '%1'.").arg( m_editDirectory->url() ) );
+	  KMessageBox::error( this, i18n("Failed to create folder '%1'.").tqarg( m_editDirectory->url() ) );
 	  return;
 	}
       }
@@ -170,7 +170,7 @@ void K3bVideoCdRippingDialog::slotStartClicked()
     TQFileInfo* fi;
     while ( ( fi = it.current() ) != 0 ) {
         if ( fi ->fileName() != "." && fi ->fileName() != ".." )
-            filesExists.append( TQString( "%1 (%2)" ).arg( TQFile::encodeName( fi ->fileName() ).data() ).arg( KIO::convertSize( fi ->size() ) ) );
+            filesExists.append( TQString( "%1 (%2)" ).tqarg( TQFile::encodeName( fi ->fileName() ).data() ).tqarg( KIO::convertSize( fi ->size() ) ) );
         ++it;
     }
 

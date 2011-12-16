@@ -21,7 +21,7 @@
 #include <knotifydialog.h>
 #include <kdebug.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 
 
 

@@ -159,7 +159,7 @@ const TQString K3bVcdTrack::resolution()
     if ( mpeg_info->has_video ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->video[ i ].seen ) {
-                return TQString( "%1 x %2" ).arg( mpeg_info->video[ i ].hsize ).arg( mpeg_info->video[ i ].vsize );
+                return TQString( "%1 x %2" ).tqarg( mpeg_info->video[ i ].hsize ).tqarg( mpeg_info->video[ i ].vsize );
             }
         }
     }
@@ -171,7 +171,7 @@ const TQString K3bVcdTrack::highresolution()
 {
     if ( mpeg_info->has_video ) {
         if ( mpeg_info->video[ 2 ].seen ) {
-            return TQString( "%1 x %2" ).arg( mpeg_info->video[ 2 ].hsize ).arg( mpeg_info->video[ 2 ].vsize );
+            return TQString( "%1 x %2" ).tqarg( mpeg_info->video[ 2 ].hsize ).tqarg( mpeg_info->video[ 2 ].vsize );
         }
     }
     return i18n( "n/a" );
@@ -195,7 +195,7 @@ const TQString K3bVcdTrack::video_bitrate()
     if ( mpeg_info->has_video ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->video[ i ].seen ) {
-                return i18n( "%1 bit/s" ).arg( mpeg_info->video[ i ].bitrate ) ;
+                return i18n( "%1 bit/s" ).tqarg( mpeg_info->video[ i ].bitrate ) ;
             }
         }
     }
@@ -284,7 +284,7 @@ const TQString K3bVcdTrack::audio_bitrate()
     if ( mpeg_info->has_audio ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->audio[ i ].seen ) {
-                return i18n( "%1 bit/s" ).arg( mpeg_info->audio[ i ].bitrate ) ;
+                return i18n( "%1 bit/s" ).tqarg( mpeg_info->audio[ i ].bitrate ) ;
             }
         }
     }
@@ -297,7 +297,7 @@ const TQString K3bVcdTrack::audio_sampfreq()
     if ( mpeg_info->has_audio ) {
         for ( int i = 0; i < 2; i++ ) {
             if ( mpeg_info->audio[ i ].seen ) {
-                return i18n( "%1 Hz" ).arg( mpeg_info->audio[ i ].sampfreq ) ;
+                return i18n( "%1 Hz" ).tqarg( mpeg_info->audio[ i ].sampfreq ) ;
             }
         }
     }
@@ -337,16 +337,16 @@ const TQString K3bVcdTrack::mpegTypeS( bool audio )
         for ( int i = 0; i < 3; i++ )
             if ( mpeg_info->video[ i ].seen ) {
                 if ( i == 0 ) {
-                    return TQString( "MPEG%1 " ).arg( mpeg_info->version ) + i18n( "Motion Picture" );
+                    return TQString( "MPEG%1 " ).tqarg( mpeg_info->version ) + i18n( "Motion Picture" );
                 } else {
-                    return TQString( "MPEG%1 " ).arg( mpeg_info->version ) + i18n( "Still Picture" );
+                    return TQString( "MPEG%1 " ).tqarg( mpeg_info->version ) + i18n( "Still Picture" );
                 }
             }
     }
     if ( mpeg_info->has_audio && audio ) {
         for ( int i = 0; i < 3; i++ )
             if ( mpeg_info->audio[ i ].seen ) {
-                return TQString( "MPEG%1 " ).arg( mpeg_info->audio[ i ].version ) + i18n( "Layer %1" ).arg( mpeg_info->audio[ i ].layer );
+                return TQString( "MPEG%1 " ).tqarg( mpeg_info->audio[ i ].version ) + i18n( "Layer %1" ).tqarg( mpeg_info->audio[ i ].layer );
             }
     }
 
@@ -423,10 +423,10 @@ TQString K3bVcdTrack::SecsToHMS( double duration )
     byte mins = ( byte ) ( ( duration / 60 ) - ( hours * 60 ) );
     float secs = duration - 60 * mins - 3600 * hours;
     if ( hours != 0 ) {
-        return TQString( "%1:" ).arg( hours ).rightJustify( 3, ' ' ) + TQString( "%1:" ).arg( mins ).rightJustify( 3, '0' ) + TQString::number( secs, 'f', 2 );
+        return TQString( "%1:" ).tqarg( hours ).rightJustify( 3, ' ' ) + TQString( "%1:" ).tqarg( mins ).rightJustify( 3, '0' ) + TQString::number( secs, 'f', 2 );
     }
     if ( mins != 0 ) {
-        return TQString( "%1:" ).arg( mins ).rightJustify( 3, '0' ) + TQString::number( secs, 'f', 2 );
+        return TQString( "%1:" ).tqarg( mins ).rightJustify( 3, '0' ) + TQString::number( secs, 'f', 2 );
     }
     return TQString::number( secs, 'f', 2 );
 }

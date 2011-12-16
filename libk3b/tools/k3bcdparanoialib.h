@@ -122,7 +122,7 @@ class LIBK3B_EXPORT K3bCdparanoiaLib
    */
   int status() const;
 
-  enum Status {
+  enum tqStatus {
     S_OK,
     S_ERROR
     // to be extended with Jitter and stuff...

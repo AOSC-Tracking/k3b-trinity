@@ -42,7 +42,7 @@ public:
 
   TQString text( int col ) const {
     if( col == 0 )
-      return i18n("Audio Tracks") + TQString(" (%1)").arg(m_doc->audioDoc()->numOfTracks());
+      return i18n("Audio Tracks") + TQString(" (%1)").tqarg(m_doc->audioDoc()->numOfTracks());
     else
       return TQString();
   }
@@ -97,7 +97,7 @@ void K3bMixedDirTreeView::slotSelectionChanged( TQListViewItem* i )
 void K3bMixedDirTreeView::slotNewAudioTracks()
 {
   // update the tracknumber
-  m_audioRootItem->repaint();
+  m_audioRootItem->tqrepaint();
 }
 
 #include "k3bmixeddirtreeview.moc"

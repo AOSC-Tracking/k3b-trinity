@@ -25,7 +25,7 @@
 #include <kconfig.h>
 #include <kdialog.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 
 #include <alsa/asoundlib.h>
@@ -109,7 +109,7 @@ bool K3bAlsaOutputPlugin::recoverFromError( int err )
   if( err == -EPIPE ) {
     err = snd_pcm_prepare( d->pcm_playback );
     if( err < 0 ) {
-      d->lastErrorMessage = i18n("Internal Alsa problem: %1").arg(snd_strerror(err));
+      d->lastErrorMessage = i18n("Internal Alsa problem: %1").tqarg(snd_strerror(err));
       return false;
     }
   }
@@ -121,7 +121,7 @@ bool K3bAlsaOutputPlugin::recoverFromError( int err )
       // unable to wake up pcm device, restart it
       err = snd_pcm_prepare( d->pcm_playback );
       if( err < 0 ) {
-	d->lastErrorMessage = i18n("Internal Alsa problem: %1").arg(snd_strerror(err));
+	d->lastErrorMessage = i18n("Internal Alsa problem: %1").tqarg(snd_strerror(err));
 	return false;
       }
     }
@@ -153,7 +153,7 @@ bool K3bAlsaOutputPlugin::init()
 
   int err = snd_pcm_open( &d->pcm_playback, alsaDevice.local8Bit(), SND_PCM_STREAM_PLAYBACK, 0 );
   if( err < 0 ) {
-    d->lastErrorMessage = i18n("Could not open alsa audio device '%1' (%2).").arg(alsaDevice).arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not open alsa audio device '%1' (%2).").tqarg(alsaDevice).tqarg(snd_strerror(err));
     d->error = true;
     return false;
   }
@@ -174,20 +174,20 @@ bool K3bAlsaOutputPlugin::setupHwParams()
   int err = 0;
 
   if( ( err = snd_pcm_hw_params_malloc( &hw_params ) ) < 0 ) {
-    d->lastErrorMessage = i18n("Could not allocate hardware parameter structure (%1)").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not allocate hardware parameter structure (%1)").tqarg(snd_strerror(err));
     d->error = true;
     return false;
   }
                                  
   if( (err = snd_pcm_hw_params_any( d->pcm_playback, hw_params )) < 0) {
-    d->lastErrorMessage = i18n("Could not initialize hardware parameter structure (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not initialize hardware parameter structure (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
   }
         
   if( (err = snd_pcm_hw_params_set_access( d->pcm_playback, hw_params, SND_PCM_ACCESS_RW_INTERLEAVED)) < 0) {
-    d->lastErrorMessage = i18n("Could not set access type (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not set access type (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
@@ -195,7 +195,7 @@ bool K3bAlsaOutputPlugin::setupHwParams()
 
   if( (err = snd_pcm_hw_params_set_format( d->pcm_playback, hw_params, SND_PCM_FORMAT_S16_BE)) < 0) {
     if( (err = snd_pcm_hw_params_set_format( d->pcm_playback, hw_params, SND_PCM_FORMAT_S16_LE)) < 0) {
-      d->lastErrorMessage = i18n("Could not set sample format (%1).").arg(snd_strerror(err));
+      d->lastErrorMessage = i18n("Could not set sample format (%1).").tqarg(snd_strerror(err));
       snd_pcm_hw_params_free( hw_params );
       d->error = true;
       return false;
@@ -208,7 +208,7 @@ bool K3bAlsaOutputPlugin::setupHwParams()
 
   d->sampleRate = 44100;
   if( (err = snd_pcm_hw_params_set_rate_near( d->pcm_playback, hw_params, &d->sampleRate, 0)) < 0) {
-    d->lastErrorMessage = i18n("Could not set sample rate (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not set sample rate (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
@@ -217,14 +217,14 @@ bool K3bAlsaOutputPlugin::setupHwParams()
   kdDebug() << "(K3bAlsaOutputPlugin) samplerate set to " << d->sampleRate << endl;
 
   if( (err = snd_pcm_hw_params_set_channels( d->pcm_playback, hw_params, 2)) < 0) {
-    d->lastErrorMessage = i18n("Could not set channel count (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not set channel count (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;
   }
 
   if( (err = snd_pcm_hw_params( d->pcm_playback, hw_params )) < 0) {
-    d->lastErrorMessage = i18n("Could not set parameters (%1).").arg(snd_strerror(err));
+    d->lastErrorMessage = i18n("Could not set parameters (%1).").tqarg(snd_strerror(err));
     snd_pcm_hw_params_free( hw_params );
     d->error = true;
     return false;

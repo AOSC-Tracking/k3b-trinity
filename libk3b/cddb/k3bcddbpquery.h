@@ -21,7 +21,7 @@
 
 #include <tqstring.h>
 #include <tqvaluelist.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 
 class TQSocket;
 

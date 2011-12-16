@@ -125,10 +125,10 @@ void K3bPushButton::slotDelayedPopup()
   if( isDown() ) {
     // popup the menu.
     // this has been taken from the TQPushButton code
-    if( mapToGlobal( TQPoint( 0, rect().bottom() ) ).y() + popup()->sizeHint().height() <= tqApp->desktop()->height() )
+    if( mapToGlobal( TQPoint( 0, rect().bottom() ) ).y() + popup()->tqsizeHint().height() <= tqApp->desktop()->height() )
       popup()->exec( mapToGlobal( rect().bottomLeft() ) );
     else
-      popup()->exec( mapToGlobal( rect().topLeft() - TQPoint( 0, popup()->sizeHint().height() ) ) );
+      popup()->exec( mapToGlobal( rect().topLeft() - TQPoint( 0, popup()->tqsizeHint().height() ) ) );
     setDown( false );
   }
 }
