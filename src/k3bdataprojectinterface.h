@@ -90,7 +90,7 @@ class K3bDataProjectInterface : public K3bProjectInterface
   /**
    * \return the names of the child elements of the item determined by path.
    */
-  TQStringList tqchildren( const TQString& path ) const;
+  TQStringList children( const TQString& path ) const;
 
   /**
    * Set the sort weight of an item

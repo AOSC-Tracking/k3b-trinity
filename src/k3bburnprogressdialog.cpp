@@ -91,7 +91,7 @@ void K3bBurnProgressDialog::setBurnJob( K3bBurnJob* burnJob )
     connect( burnJob, TQT_SIGNAL(burning(bool)), m_labelWritingSpeed, TQT_SLOT(setEnabled(bool)) );
 
     if( burnJob->writer() )
-      m_labelWriter->setText( i18n("Writer: %1 %2").tqarg(burnJob->writer()->vendor()).
+      m_labelWriter->setText( i18n("Writer: %1 %2").arg(burnJob->writer()->vendor()).
 			      arg(burnJob->writer()->description()) );
 
     m_labelWritingSpeed->setText( i18n("no info") );
@@ -128,7 +128,7 @@ void K3bBurnProgressDialog::slotDeviceBuffer( int b )
 
 void K3bBurnProgressDialog::slotWriteSpeed( int s, int multiplicator )
 {
-  m_labelWritingSpeed->setText( TQString("%1 KB/s (%2x)").tqarg(s).tqarg(KGlobal::locale()->formatNumber((double)s/(double)multiplicator,2)) );
+  m_labelWritingSpeed->setText( TQString("%1 KB/s (%2x)").arg(s).arg(KGlobal::locale()->formatNumber((double)s/(double)multiplicator,2)) );
 }
 
 #include "k3bburnprogressdialog.moc"

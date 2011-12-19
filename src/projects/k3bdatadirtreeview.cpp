@@ -249,7 +249,7 @@ void K3bDataDirTreeView::slotDataItemRemoved( K3bDataItem* item )
 
       // we don't get removedInfo for the child items
       // so we need to remove them here
-      TQPtrListIterator<K3bDataItem> it( dirItem->tqchildren() );
+      TQPtrListIterator<K3bDataItem> it( dirItem->children() );
       for( ; it.current(); ++it ) {
 	if( it.current()->isDir() )
 	  slotDataItemRemoved( it.current() );
@@ -374,9 +374,9 @@ void K3bDataDirTreeView::slotProperties()
   if(  viewItem && currentItem() != root() ) {
     K3bDataPropertiesDialog d( viewItem->dataItem(), this );
     if( d.exec() ) {
-      tqrepaint();
+      repaint();
       if( m_fileView )
-	m_fileView->tqrepaint();
+	m_fileView->repaint();
     }
   }
   else
@@ -499,7 +499,7 @@ void K3bDataDirTreeView::slotDocChanged()
   // avoid flicker
   if( d->lastUpdateVolumeId != m_doc->isoOptions().volumeID() ) {
     d->lastUpdateVolumeId = m_doc->isoOptions().volumeID();
-    root()->tqrepaint();
+    root()->repaint();
   }
 }
 

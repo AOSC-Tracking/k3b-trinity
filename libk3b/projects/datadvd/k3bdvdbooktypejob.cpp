@@ -118,7 +118,7 @@ void K3bDvdBooktypeJob::start()
 		      K3bDevice::STATE_COMPLETE|K3bDevice::STATE_INCOMPLETE|K3bDevice::STATE_EMPTY,
 		      K3bDevice::MEDIA_DVD_PLUS_RW|K3bDevice::MEDIA_DVD_PLUS_R,
 		      i18n("Please insert an empty DVD+R or a DVD+RW medium into drive<p><b>%1 %2 (%3)</b>.")
-		      .tqarg(d->device->vendor()).tqarg(d->device->description()).tqarg(d->device->devicename()) ) == -1 ) {
+		      .arg(d->device->vendor()).arg(d->device->description()).arg(d->device->devicename()) ) == -1 ) {
       emit canceled();
       jobFinished(false);
       d->running = false;
@@ -189,7 +189,7 @@ void K3bDvdBooktypeJob::slotProcessFinished( KProcess* p )
       d->success = true;
     }
     else {
-      emit infoMessage( i18n("%1 returned an unknown error (code %2).").tqarg(d->dvdBooktypeBin->name()).tqarg(p->exitStatus()), 
+      emit infoMessage( i18n("%1 returned an unknown error (code %2).").arg(d->dvdBooktypeBin->name()).arg(p->exitStatus()), 
 			K3bJob::ERROR );
       emit infoMessage( i18n("Please send me an email with the last output."), K3bJob::ERROR );
       
@@ -197,7 +197,7 @@ void K3bDvdBooktypeJob::slotProcessFinished( KProcess* p )
     }
   }
   else {
-    emit infoMessage( i18n("%1 did not exit cleanly.").tqarg(d->dvdBooktypeBin->name()), 
+    emit infoMessage( i18n("%1 did not exit cleanly.").arg(d->dvdBooktypeBin->name()), 
 		      ERROR );
     d->success = false;
   }
@@ -285,7 +285,7 @@ void K3bDvdBooktypeJob::startBooktypeChange()
 
   d->dvdBooktypeBin = k3bcore->externalBinManager()->binObject( "dvd+rw-booktype" );
   if( !d->dvdBooktypeBin ) {
-    emit infoMessage( i18n("Could not find %1 executable.").tqarg("dvd+rw-booktype"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").arg("dvd+rw-booktype"), ERROR );
     d->running = false;
     jobFinished(false);
     return;
@@ -338,7 +338,7 @@ void K3bDvdBooktypeJob::startBooktypeChange()
   if( !d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
     // something went wrong when starting the program
     // it "should" be the executable
-    emit infoMessage( i18n("Could not start %1.").tqarg(d->dvdBooktypeBin->name()), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").arg(d->dvdBooktypeBin->name()), K3bJob::ERROR );
     d->running = false;
     jobFinished(false);
   }

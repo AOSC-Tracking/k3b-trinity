@@ -45,12 +45,12 @@ static TQString audioStreamString( const K3bVideoDVD::Title& title, unsigned int
       s += "<br>";
     s += TQString::number(i+1) + ": " 
       + i18n("%1 %2Ch (%3<em>%4</em>)")
-      .tqarg( K3bVideoDVD::audioFormatString( title.audioStream(i).format() ) )
-      .tqarg( title.audioStream(i).channels() )
-      .tqarg( title.audioStream(i).langCode().isEmpty()
+      .arg( K3bVideoDVD::audioFormatString( title.audioStream(i).format() ) )
+      .arg( title.audioStream(i).channels() )
+      .arg( title.audioStream(i).langCode().isEmpty()
 	    ? i18n("unknown language")
 	    : KGlobal::locale()->twoAlphaToLanguageName( title.audioStream(i).langCode() ) )
-      .tqarg( includeExtInfo && title.audioStream(i).codeExtension() != K3bVideoDVD::AUDIO_CODE_EXT_UNSPECIFIED 
+      .arg( includeExtInfo && title.audioStream(i).codeExtension() != K3bVideoDVD::AUDIO_CODE_EXT_UNSPECIFIED 
 	    ? TQString(" ") + K3bVideoDVD::audioCodeExtensionString( title.audioStream(i).codeExtension() )
 	    : TQString() );
   }
@@ -69,13 +69,13 @@ static TQString subpictureStreamString( const K3bVideoDVD::Title& title, unsigne
       s += "<br>";
     s += TQString::number(i+1) + ": " 
       + TQString("%1 (%2<em>%3</em>)")
-      .tqarg( title.subPictureStream(i).codeMode() == K3bVideoDVD::SUBPIC_CODE_MODE_RLE 
+      .arg( title.subPictureStream(i).codeMode() == K3bVideoDVD::SUBPIC_CODE_MODE_RLE 
 	    ? i18n("RLE")
 	    : i18n("Extended") )
-      .tqarg( title.subPictureStream(i).langCode().isEmpty()
+      .arg( title.subPictureStream(i).langCode().isEmpty()
 	    ? i18n("unknown language")
 	    : KGlobal::locale()->twoAlphaToLanguageName( title.subPictureStream(i).langCode() ) )
-      .tqarg( includeExtInfo && title.subPictureStream(i).codeExtension() != K3bVideoDVD::SUBPIC_CODE_EXT_UNSPECIFIED 
+      .arg( includeExtInfo && title.subPictureStream(i).codeExtension() != K3bVideoDVD::SUBPIC_CODE_EXT_UNSPECIFIED 
 	    ? TQString(" ") + K3bVideoDVD::subPictureCodeExtensionString( title.subPictureStream(i).codeExtension() )
 	    : TQString() );
   }
@@ -137,7 +137,7 @@ public:
 
     m_previewSet = true;
 
-    tqrepaint();
+    repaint();
   }
 
   const TQImage& preview() const {
@@ -243,18 +243,18 @@ private:
       // Title X + length
       return i18n("<p><b>Title %1 (%2)</b><br>"
 		  "%3")
-	.tqarg( m_title.titleNumber(), 2 )
-	.tqarg( m_title.playbackTime().toString( false ) )
-	.tqarg( i18n("%n chapter", "%n chapters", m_title.numPTTs() ) );
+	.arg( m_title.titleNumber(), 2 )
+	.arg( m_title.playbackTime().toString( false ) )
+	.arg( i18n("%n chapter", "%n chapters", m_title.numPTTs() ) );
 
     case 3:
       // video stream info
       return TQString("<p>%1 %2x%3<br>%4%5")
-	.tqarg( m_title.videoStream().mpegVersion() == 0 ? i18n("MPEG1") : i18n("MPEG2") )
-	.tqarg( m_title.videoStream().pictureWidth() )
-	.tqarg( m_title.videoStream().pictureHeight() )
-	.tqarg( m_title.videoStream().displayAspectRatio() == K3bVideoDVD::VIDEO_ASPECT_RATIO_4_3 ? "4:3" : "16:9" )
-	.tqarg( m_title.videoStream().letterboxed() ? TQString(" - <em>") + i18n("letterboxed") + TQString("</em>"): 
+	.arg( m_title.videoStream().mpegVersion() == 0 ? i18n("MPEG1") : i18n("MPEG2") )
+	.arg( m_title.videoStream().pictureWidth() )
+	.arg( m_title.videoStream().pictureHeight() )
+	.arg( m_title.videoStream().displayAspectRatio() == K3bVideoDVD::VIDEO_ASPECT_RATIO_4_3 ? "4:3" : "16:9" )
+	.arg( m_title.videoStream().letterboxed() ? TQString(" - <em>") + i18n("letterboxed") + TQString("</em>"): 
 	      m_title.videoStream().permittedDf() == K3bVideoDVD::VIDEO_PERMITTED_DF_LETTERBOXED 
 	      ? TQString(" - <em>") + i18n("anamorph") + TQString("</em>") : TQString() );
 

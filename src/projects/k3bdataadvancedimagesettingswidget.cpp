@@ -130,7 +130,7 @@ public:
 
 protected:
   void stateChange( bool on ) {
-    // enable or disable all tqchildren
+    // enable or disable all children
     TQListViewItem* item = firstChild();
     while( item ) {
       if( PrivateCheckViewItem* pi = dynamic_cast<PrivateCheckViewItem*>(item) )
@@ -205,13 +205,13 @@ K3bDataAdvancedImageSettingsWidget::K3bDataAdvancedImageSettingsWidget( TQWidget
 					     i18n("ISO Level") );
 
   m_radioIsoLevel3 = new TQCheckListItem( m_isoLevelController, 
-					 i18n("Level %1").tqarg(3),
+					 i18n("Level %1").arg(3),
 					 TQCheckListItem::RadioButton );
   m_radioIsoLevel2 = new TQCheckListItem( m_isoLevelController, 
-					 i18n("Level %1").tqarg(2),
+					 i18n("Level %1").arg(2),
 					 TQCheckListItem::RadioButton );
   m_radioIsoLevel1 = new TQCheckListItem( m_isoLevelController, 
-					 i18n("Level %1").tqarg(1),
+					 i18n("Level %1").arg(1),
 					 TQCheckListItem::RadioButton );
 
   m_isoLevelController->setOpen(true);

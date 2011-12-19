@@ -186,7 +186,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
     // 1. cdrecord, cdrdao
     if( !k3bcore->externalBinManager()->foundBin( "cdrecord" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("Unable to find %1 executable").tqarg("cdrecord"),
+					 i18n("Unable to find %1 executable").arg("cdrecord"),
 					 i18n("K3b uses cdrecord to actually write CDs."),
 					 i18n("Install the cdrtools package which contains "
 					      "cdrecord."),
@@ -195,7 +195,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
     else {
       if( k3bcore->externalBinManager()->binObject( "cdrecord" )->hasFeature( "outdated" ) ) {
 	problems.append( K3bSystemProblem( K3bSystemProblem::NON_CRITICAL,
-					   i18n("Used %1 version %2 is outdated").tqarg("cdrecord").tqarg(k3bcore->externalBinManager()->binObject( "cdrecord" )->version),
+					   i18n("Used %1 version %2 is outdated").arg("cdrecord").arg(k3bcore->externalBinManager()->binObject( "cdrecord" )->version),
 					   i18n("Although K3b supports all cdrtools versions since "
 						"1.10 it is highly recommended to at least use "
 						"version 2.0."),
@@ -217,16 +217,16 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 	  !k3bcore->externalBinManager()->binObject( "cdrecord" )->hasFeature( "wodim" ) ) {
 	if( k3bcore->externalBinManager()->binObject( "cdrecord" )->hasFeature( "suidroot" ) )
 	  problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					     i18n("%1 will be run with root privileges on kernel >= 2.6.8").tqarg("cdrecord <= 2.01.01a05"),
+					     i18n("%1 will be run with root privileges on kernel >= 2.6.8").arg("cdrecord <= 2.01.01a05"),
 					     i18n("Since Linux kernel 2.6.8 %1 will not work when run suid "
-						  "root for security reasons anymore.").tqarg("cdrecord <= 2.01.01a05"),
+						  "root for security reasons anymore.").arg("cdrecord <= 2.01.01a05"),
 					     TQString(),
 					     true ) );
       }
 #ifdef CDRECORD_SUID_ROOT_CHECK
       else if( !k3bcore->externalBinManager()->binObject( "cdrecord" )->hasFeature( "suidroot" ) && getuid() != 0 ) // not root
 	problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					   i18n("%1 will be run without root privileges").tqarg("cdrecord"),
+					   i18n("%1 will be run without root privileges").arg("cdrecord"),
 					   i18n("It is highly recommended to configure cdrecord "
 						"to run with root privileges. Only then cdrecord "
 						"runs with high priority which increases the overall "
@@ -242,7 +242,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
     }
     if( !k3bcore->externalBinManager()->foundBin( "cdrdao" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("Unable to find %1 executable").tqarg("cdrdao"),
+					 i18n("Unable to find %1 executable").arg("cdrdao"),
 					 i18n("K3b uses cdrdao to actually write CDs."),
 					 i18n("Install the cdrdao package."),
 					 false ) );
@@ -253,7 +253,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 #ifdef CDRECORD_SUID_ROOT_CHECK
       if( !k3bcore->externalBinManager()->binObject( "cdrdao" )->hasFeature( "suidroot" ) && getuid() != 0 )
 	problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					   i18n("%1 will be run without root privileges").tqarg("cdrdao"),
+					   i18n("%1 will be run without root privileges").arg("cdrdao"),
 					   i18n("It is highly recommended to configure cdrdao "
 						"to run with root privileges to increase the "
 						"overall stability of the burning process."),
@@ -268,7 +268,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
   if( !k3bcore->deviceManager()->dvdWriter().isEmpty() ) {
     if( !k3bcore->externalBinManager()->foundBin( "growisofs" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("Unable to find %1 executable").tqarg("growisofs"),
+					 i18n("Unable to find %1 executable").arg("growisofs"),
 					 i18n("K3b uses growisofs to actually write dvds. "
 					      "Without growisofs you will not be able to write dvds. "
 					      "Make sure to install at least version 5.10."),
@@ -278,34 +278,34 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
     else {
       if( k3bcore->externalBinManager()->binObject( "growisofs" )->version < K3bVersion( 5, 10 ) ) {
 	problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					   i18n("Used %1 version %2 is outdated").tqarg("growisofs").tqarg(k3bcore->externalBinManager()->binObject( "growisofs" )->version),
+					   i18n("Used %1 version %2 is outdated").arg("growisofs").arg(k3bcore->externalBinManager()->binObject( "growisofs" )->version),
 					   i18n("K3b needs at least growisofs version 5.10 to write dvds. "
 						"All older versions will not work and K3b will refuse to use them."),
-					   i18n("Install a more recent version of %1.").tqarg("growisofs"),
+					   i18n("Install a more recent version of %1.").arg("growisofs"),
 					   false ) );
       }
       else if( k3bcore->externalBinManager()->binObject( "growisofs" )->version < K3bVersion( 5, 12 ) ) {
 	problems.append( K3bSystemProblem( K3bSystemProblem::NON_CRITICAL,
-					   i18n("Used %1 version %2 is outdated").tqarg("growisofs").tqarg(k3bcore->externalBinManager()->binObject( "growisofs" )->version),
+					   i18n("Used %1 version %2 is outdated").arg("growisofs").arg(k3bcore->externalBinManager()->binObject( "growisofs" )->version),
 					   i18n("K3b will not be able to copy DVDs on-the-fly or write a DVD+RW in multiple "
 						"sessions using a growisofs "
 						"version older than 5.12."),
-					   i18n("Install a more recent version of %1.").tqarg("growisofs"),
+					   i18n("Install a more recent version of %1.").arg("growisofs"),
 					   false ) );
       }
       else if( k3bcore->externalBinManager()->binObject( "growisofs" )->version < K3bVersion( 7, 0 ) ) {
 	problems.append( K3bSystemProblem( K3bSystemProblem::NON_CRITICAL,
-					   i18n("Used %1 version %2 is outdated").tqarg("growisofs").tqarg(k3bcore->externalBinManager()->binObject( "growisofs" )->version),
+					   i18n("Used %1 version %2 is outdated").arg("growisofs").arg(k3bcore->externalBinManager()->binObject( "growisofs" )->version),
 					   i18n("It is highly recommended to use growisofs 7.0 or higher. "
 						"K3b won't be able to write a DVD+RW in multiple "
 						"sessions using a growisofs version older than 7.0." ),
-					   i18n("Install a more recent version of %1.").tqarg("growisofs"),
+					   i18n("Install a more recent version of %1.").arg("growisofs"),
 					   false ) );
       }
       // for now we ignore the suid root bit becasue of the memorylocked issue
 //       else if( !k3bcore->externalBinManager()->binObject( "growisofs" )->hasFeature( "suidroot" ) ) {
 // 	problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-// 					   i18n("%1 will be run without root privileges").tqarg("growisofs"),
+// 					   i18n("%1 will be run without root privileges").arg("growisofs"),
 // 					   i18n("It is highly recommended to configure growisofs "
 // 						"to run with root privileges. Only then growisofs "
 // 						"runs with high priority which increases the overall "
@@ -317,7 +317,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 
     if( !k3bcore->externalBinManager()->foundBin( "dvd+rw-format" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("Unable to find %1 executable").tqarg("dvd+rw-format"),
+					 i18n("Unable to find %1 executable").arg("dvd+rw-format"),
 					 i18n("K3b uses dvd+rw-format to format DVD-RWs and DVD+RWs."),
 					 i18n("Install the dvd+rw-tools package."),
 					 false ) );
@@ -330,11 +330,11 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
   else if( k3bcore->externalBinManager()->binObject( "mkisofs" )->hasFeature( "outdated" ) ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
 					 i18n("Used %1 version %2 is outdated")
-					 .tqarg("mkisofs")
-					 .tqarg(k3bcore->externalBinManager()->binObject( "mkisofs" )->version),
+					 .arg("mkisofs")
+					 .arg(k3bcore->externalBinManager()->binObject( "mkisofs" )->version),
 					 i18n("K3b needs at least mkisofs version 1.14. Older versions may introduce problems "
 					      "when creating data projects."),
-					 i18n("Install a more recent version of %1.").tqarg("mkisofs"),
+					 i18n("Install a more recent version of %1.").arg("mkisofs"),
 					 false ) );
   }
 
@@ -357,7 +357,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
        it.current(); ++it ) {
     problems.append( K3bSystemProblem( K3bSystemProblem::NON_CRITICAL,
 				       i18n("Device %1 - %2 is automounted.")
-				       .tqarg(it.current()->vendor()).tqarg(it.current()->description()),
+				       .arg(it.current()->vendor()).arg(it.current()->description()),
 				       i18n("K3b is not able to unmount automounted devices. Thus, especially "
 					    "DVD+RW rewriting might fail. There is no need to report this as "
 					    "a bug or feature wish; it is not possible to solve this problem "
@@ -394,16 +394,16 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 	    !( k3bcore->externalBinManager()->binObject( "cdrecord" )->hasFeature( "plain-atapi" ) &&
 	       K3b::plainAtapiSupport() ) ) {
 	  problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					     i18n("%1 %2 does not support ATAPI").tqarg("cdrecord").tqarg(k3bcore->externalBinManager()->binObject("cdrecord")->version),
+					     i18n("%1 %2 does not support ATAPI").arg("cdrecord").arg(k3bcore->externalBinManager()->binObject("cdrecord")->version),
 					     i18n("The configured version of %1 does not "
 						  "support writing to ATAPI devices without "
 						  "SCSI emulation and there is at least one writer "
 						  "in your system not configured to use "
-						  "SCSI emulation.").tqarg("cdrecord"),
+						  "SCSI emulation.").arg("cdrecord"),
 					     i18n("The best and recommended solution is to enable "
 						  "ide-scsi (SCSI emulation) for all devices. "
 						  "This way you won't have any problems. Or you install "
-						  "(or select as the default) a more recent version of %1.").tqarg("cdrtools"),
+						  "(or select as the default) a more recent version of %1.").arg("cdrtools"),
 					     false ) );
 	}
       }
@@ -415,19 +415,19 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 	  // FIXME: replace ">" with "&gt;"
 	  problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
 					     i18n("%1 %2 does not support ATAPI")
-					     .tqarg("cdrdao").tqarg(k3bcore->externalBinManager()->binObject("cdrdao")->version),
+					     .arg("cdrdao").arg(k3bcore->externalBinManager()->binObject("cdrdao")->version),
 					     i18n("The configured version of %1 does not "
 						  "support writing to ATAPI devices without "
 						  "SCSI emulation and there is at least one writer "
 						  "in your system not configured to use "
-						  "SCSI emulation.").tqarg("cdrdao"),
+						  "SCSI emulation.").arg("cdrdao"),
 					     K3b::simpleKernelVersion() > K3bVersion( 2, 5, 0 )
 					     ? i18n("Install cdrdao >= 1.1.8 which supports writing to "
 						    "ATAPI devices directly.")
 					     : i18n("The best, and recommended, solution is to use "
 						    "ide-scsi (SCSI emulation) for all writer devices: "
 						    "this way you will not have any problems; or, you can install "
-						    "(or select as the default) a more recent version of %1.").tqarg("cdrdao"),
+						    "(or select as the default) a more recent version of %1.").arg("cdrdao"),
 					     false ) );
 	}
       }
@@ -437,7 +437,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
   if( dvd_r_dl && k3bcore->externalBinManager()->foundBin( "growisofs" ) ) {
     if( k3bcore->externalBinManager()->binObject( "growisofs" )->version < K3bVersion( 6, 0 ) )
       problems.append( K3bSystemProblem( K3bSystemProblem::NON_CRITICAL,
-					 i18n("Used %1 version %2 is outdated").tqarg("growisofs").tqarg(k3bcore->externalBinManager()->binObject( "growisofs" )->version),
+					 i18n("Used %1 version %2 is outdated").arg("growisofs").arg(k3bcore->externalBinManager()->binObject( "growisofs" )->version),
 					 i18n("K3b won't be able to write DVD-R Dual Layer media using a growisofs "
 					      "version older than 6.0."),
 					 i18n("Install a more recent version of growisofs."),
@@ -450,31 +450,31 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 
     if( !TQFileInfo( dev->blockDeviceName() ).isWritable() )
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("No write access to device %1").tqarg(dev->blockDeviceName()),
+					 i18n("No write access to device %1").arg(dev->blockDeviceName()),
 					 i18n("K3b needs write access to all the devices to perform certain tasks. "
-					      "Without it you might encounter problems with %1 - %2").tqarg(dev->vendor()).tqarg(dev->description()),
+					      "Without it you might encounter problems with %1 - %2").arg(dev->vendor()).arg(dev->description()),
 					 i18n("Make sure you have write access to %1. In case you are not using "
-					      "devfs or udev K3bSetup is able to do this for you.").tqarg(dev->blockDeviceName()),
+					      "devfs or udev K3bSetup is able to do this for you.").arg(dev->blockDeviceName()),
 					 false ) );
 
 
     if( !dev->genericDevice().isEmpty() &&
 	!TQFileInfo( dev->genericDevice() ).isWritable() )
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("No write access to generic SCSI device %1").tqarg(dev->genericDevice()),
+					 i18n("No write access to generic SCSI device %1").arg(dev->genericDevice()),
 					 i18n("Without write access to the generic device you might "
-					      "encounter problems with Audio CD ripping from %1 - %2").tqarg(dev->vendor()).tqarg(dev->description()),
+					      "encounter problems with Audio CD ripping from %1 - %2").arg(dev->vendor()).arg(dev->description()),
 					 i18n("Make sure you have write access to %1. In case you are not using "
-					      "devfs or udev K3bSetup is able to do this for you.").tqarg(dev->genericDevice()),
+					      "devfs or udev K3bSetup is able to do this for you.").arg(dev->genericDevice()),
 					 false ) );
 
     if( dev->interfaceType() == K3bDevice::IDE && !dmaActivated( dev ) )
       problems.append( K3bSystemProblem( K3bSystemProblem::CRITICAL,
-					 i18n("DMA disabled on device %1 - %2").tqarg(dev->vendor()).tqarg(dev->description()),
+					 i18n("DMA disabled on device %1 - %2").arg(dev->vendor()).arg(dev->description()),
 					 i18n("With most modern CD/DVD devices enabling DMA highly increases "
 					      "read/write performance. If you experience very low writing speeds "
 					      "this is probably the cause."),
-					 i18n("Enable DMA temporarily as root with 'hdparm -d 1 %1'.").tqarg(dev->blockDeviceName()) ) );
+					 i18n("Enable DMA temporarily as root with 'hdparm -d 1 %1'.").arg(dev->blockDeviceName()) ) );
   }
 
 
@@ -487,13 +487,13 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
     const K3bExternalProgram* p = it.data();
     if( !p->userParameters().isEmpty() ) {
       problems.append( K3bSystemProblem( K3bSystemProblem::WARNING,
-					 i18n("User parameters specified for external program %1").tqarg(p->name()),
+					 i18n("User parameters specified for external program %1").arg(p->name()),
 					 i18n("Sometimes it may be nessessary to specify user parameters in addition to "
 					      "the parameters generated by K3b. This is simply a warning to make sure that "
 					      "these parameters are really wanted and won't be part of some bug report."),
 					 i18n("To remove the user parameters for the external program %1 open the "
 					      "K3b settings page 'Programs' and choose the tab 'User Parameters'.")
-					 .tqarg(p->name()),
+					 .arg(p->name()),
 					 false ) );
     }
   }

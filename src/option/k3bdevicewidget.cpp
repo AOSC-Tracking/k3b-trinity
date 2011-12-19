@@ -254,7 +254,7 @@ void K3bDeviceWidget::updateDeviceListViews()
     // create the read-only info items
     K3bListViewItem* systemDeviceItem = new K3bListViewItem( devRoot, i18n("System device name:") );
     if( dev->device->interfaceType() == K3bDevice::SCSI )
-      systemDeviceItem->setText( 1, TQString("%1 (%2)").tqarg(dev->device->devicename()).tqarg(dev->device->busTargetLun()) );
+      systemDeviceItem->setText( 1, TQString("%1 (%2)").arg(dev->device->devicename()).arg(dev->device->busTargetLun()) );
     else
       systemDeviceItem->setText( 1, dev->device->devicename() );
     systemDeviceItem->setForegroundColor( 1, tqpalette().disabled().foreground() );
@@ -383,7 +383,7 @@ void K3bDeviceWidget::slotNewDevice()
       updateDeviceListViews();
     }
     else
-      KMessageBox::error( this, i18n("Could not find an additional device at\n%1").tqarg(newDevicename), i18n("Error"), false );
+      KMessageBox::error( this, i18n("Could not find an additional device at\n%1").arg(newDevicename), i18n("Error"), false );
   }
 }
 

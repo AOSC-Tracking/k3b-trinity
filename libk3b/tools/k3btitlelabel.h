@@ -47,7 +47,7 @@ class LIBK3B_EXPORT K3bTitleLabel : public TQFrame
   /**
    * The title label only supports alignments left, hcenter, and right
    *
-   * Default tqalignment is left.
+   * Default alignment is left.
    */
   // FIXME: honor right-to-left languages
   void setAlignment( int align );

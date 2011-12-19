@@ -487,7 +487,7 @@ void K3bAudioTrackView::slotTrackChanged( K3bAudioTrack* track )
       item->showSources(true);
 
     // the length might have changed
-    item->tqrepaint();
+    item->repaint();
 
     // FIXME: only do this if the position really changed
     // move the item if the position has changed

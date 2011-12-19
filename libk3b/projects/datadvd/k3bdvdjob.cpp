@@ -243,8 +243,8 @@ bool K3bDvdJob::waitForMedium()
 	if( !questionYesNo( i18n("Your writer (%1 %2) does not support simulation with DVD-R(W) media. "
 				 "Do you really want to continue? The media will be written "
 				 "for real.")
-			    .tqarg(m_doc->burner()->vendor())
-			    .tqarg(m_doc->burner()->description()),
+			    .arg(m_doc->burner()->vendor())
+			    .arg(m_doc->burner()->description()),
 			    i18n("No Simulation with DVD-R(W)") ) ) {
 	  return false;
 	}
@@ -271,7 +271,7 @@ bool K3bDvdJob::waitForMedium()
 	if( m_doc->writingMode() == K3b::DAO )
 	    // || ( m_doc->writingMode() == K3b::WRITING_MODE_AUTO &&
 // 	      usedMultiSessionMode() == K3bDataDoc::NONE ) )
-	  emit infoMessage( i18n("Writing %1 in DAO mode.").tqarg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
+	  emit infoMessage( i18n("Writing %1 in DAO mode.").arg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
 
 	else {
 	  // check if the writer supports writing sequential and thus multisession (on -1 the burner cannot handle
@@ -279,14 +279,14 @@ bool K3bDvdJob::waitForMedium()
 	  if( m_doc->burner()->featureCurrent( K3bDevice::FEATURE_INCREMENTAL_STREAMING_WRITABLE ) == 0 ) {
 	    if( !questionYesNo( i18n("Your writer (%1 %2) does not support Incremental Streaming with %3 "
 				     "media. Multisession will not be possible. Continue anyway?")
-				.tqarg(m_doc->burner()->vendor())
-				.tqarg(m_doc->burner()->description())
-				.tqarg( K3bDevice::mediaTypeString(foundMedium, true) ),
+				.arg(m_doc->burner()->vendor())
+				.arg(m_doc->burner()->description())
+				.arg( K3bDevice::mediaTypeString(foundMedium, true) ),
 				i18n("No Incremental Streaming") ) ) {
 	      return false;
 	    }
 	    else {
-	      emit infoMessage( i18n("Writing %1 in DAO mode.").tqarg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
+	      emit infoMessage( i18n("Writing %1 in DAO mode.").arg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
 	    }
 	  }
 	  else {
@@ -294,7 +294,7 @@ bool K3bDvdJob::waitForMedium()
 		m_doc->writingMode() == K3b::WRITING_MODE_RES_OVWR )
 	      emit infoMessage( i18n("Restricted Overwrite is not possible with DVD-R media."), INFO );
 
-	    emit infoMessage( i18n("Writing %1 in incremental mode.").tqarg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
+	    emit infoMessage( i18n("Writing %1 in incremental mode.").arg( K3bDevice::mediaTypeString(foundMedium, true) ), INFO );
 	  }
 	}
       }
@@ -315,13 +315,13 @@ TQString K3bDvdJob::jobDescription() const
     return i18n("Writing Data DVD")
       + ( m_doc->isoOptions().volumeID().isEmpty()
 	  ? TQString()
-	  : TQString( " (%1)" ).tqarg(m_doc->isoOptions().volumeID()) );
+	  : TQString( " (%1)" ).arg(m_doc->isoOptions().volumeID()) );
   }
   else {
     return i18n("Writing Multisession DVD")
       + ( m_doc->isoOptions().volumeID().isEmpty()
 	  ? TQString()
-	  : TQString( " (%1)" ).tqarg(m_doc->isoOptions().volumeID()) );
+	  : TQString( " (%1)" ).arg(m_doc->isoOptions().volumeID()) );
   }
 }
 
@@ -335,10 +335,10 @@ TQString K3bDvdJob::jobDetails() const
     return i18n("ISO9660 Filesystem (Size: %1) - %n copy",
 		"ISO9660 Filesystem (Size: %1) - %n copies",
 		m_doc->copies())
-      .tqarg(KIO::convertSize( m_doc->size() ));
+      .arg(KIO::convertSize( m_doc->size() ));
   else
     return i18n("ISO9660 Filesystem (Size: %1)")
-      .tqarg(KIO::convertSize( m_doc->size() ));
+      .arg(KIO::convertSize( m_doc->size() ));
 }
 
 #include "k3bdvdjob.moc"

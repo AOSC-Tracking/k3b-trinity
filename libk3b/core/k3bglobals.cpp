@@ -387,7 +387,7 @@ TQString K3b::externalBinDeviceParameter( K3bDevice::Device* dev, const K3bExter
   else if( (plainAtapiSupport() && bin->hasFeature("plain-atapi") ) )
     return dev->blockDeviceName();
   else
-    return TQString("ATAPI:%1").tqarg(dev->blockDeviceName());
+    return TQString("ATAPI:%1").arg(dev->blockDeviceName());
 }
 
 

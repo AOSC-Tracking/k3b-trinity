@@ -92,8 +92,8 @@ bool K3bDataDoc::newDocument()
   m_bExistingItemsReplaceAll = m_bExistingItemsIgnoreAll = false;
 
   if( m_root ) {
-    while( m_root->tqchildren().getFirst() )
-      removeItem( m_root->tqchildren().getFirst() );
+    while( m_root->children().getFirst() )
+      removeItem( m_root->children().getFirst() );
   }
   else
     m_root = new K3bRootItem( this );
@@ -164,7 +164,7 @@ void K3bDataDoc::addUrls( const KURL::List& l, K3bDirItem* dir )
       ok = true;
       TQString name( k3bname );
       if( cnt > 0 )
-	name += TQString("_%1").tqarg(cnt);
+	name += TQString("_%1").arg(cnt);
       if( K3bDataItem* oldItem = dir->find( name ) ) {
 	if( f.isDir() && oldItem->isDir() ) {
 	  // ok, just reuse the dir
@@ -182,7 +182,7 @@ void K3bDataDoc::addUrls( const KURL::List& l, K3bDirItem* dir )
       }
     }
     if( cnt > 0 )
-      k3bname += TQString("_%1").tqarg(cnt);
+      k3bname += TQString("_%1").arg(cnt);
 
     // TQFileInfo::exists and TQFileInfo::isReadable return false for broken symlinks :(
     if( f.isDir() && !f.isSymLink() ) {
@@ -624,7 +624,7 @@ bool K3bDataDoc::saveDocumentData( TQDomElement* docElem )
   // ----------------------------------------------------------------------
   TQDomElement topElem = doc.createElement( "files" );
 
-  TQPtrListIterator<K3bDataItem> it( root()->tqchildren() );
+  TQPtrListIterator<K3bDataItem> it( root()->children() );
   for( ; it.current(); ++it ) {
     saveDataItem( it.current(), &doc, &topElem );
   }
@@ -883,7 +883,7 @@ void K3bDataDoc::saveDataItem( K3bDataItem* item, TQDomDocument* doc, TQDomEleme
     if( item->sortWeight() != 0 )
       topElem.setAttribute( "sort_weight", TQString::number(item->sortWeight()) );
 
-    TQPtrListIterator<K3bDataItem> it( dirItem->tqchildren() );
+    TQPtrListIterator<K3bDataItem> it( dirItem->children() );
     for( ; it.current(); ++it ) {
       saveDataItem( it.current(), doc, &topElem );
     }
@@ -1065,7 +1065,7 @@ void K3bDataDoc::prepareFilenamesInDir( K3bDirItem* dir )
     return;
 
   TQPtrList<K3bDataItem> sortedChildren;
-  TQPtrListIterator<K3bDataItem> it( dir->tqchildren() );
+  TQPtrListIterator<K3bDataItem> it( dir->children() );
 
   for( it.toLast(); it.current(); --it ) {
     K3bDataItem* item = it.current();
@@ -1277,7 +1277,7 @@ void K3bDataDoc::clearImportedSession()
 	delete dir;
       }
       else {
-	for( TQPtrListIterator<K3bDataItem> it( dir->tqchildren() ); it.current(); ++it ) {
+	for( TQPtrListIterator<K3bDataItem> it( dir->children() ); it.current(); ++it ) {
 	  if( !m_oldSession.contains(it.current()) ) {
 	    m_oldSession.remove();
 	    // now the dir becomes a totally normal dir
@@ -1343,7 +1343,7 @@ K3bDataItem* K3bDataDoc::createBootCatalogeItem( K3bDirItem* dir )
     int i = 0;
     while( dir->alreadyInDirectory( "boot.catalog" ) ) {
       ++i;
-      newName = TQString( "boot%1.catalog" ).tqarg(i);
+      newName = TQString( "boot%1.catalog" ).arg(i);
     }
 
     K3bSpecialDataItem* b = new K3bSpecialDataItem( this, 0, dir, newName );

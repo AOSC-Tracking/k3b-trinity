@@ -64,14 +64,14 @@ void K3bMiniButton::drawButton( TQPainter* p )
 void K3bMiniButton::enterEvent( TQEvent * )
 {
   m_mouseOver = true;
-  tqrepaint();
+  repaint();
 }
 
 
 void K3bMiniButton::leaveEvent( TQEvent * )
 {
   m_mouseOver = false;
-  tqrepaint();
+  repaint();
 }
 
 #include "k3bminibutton.moc"

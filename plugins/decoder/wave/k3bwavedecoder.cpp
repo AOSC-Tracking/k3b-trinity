@@ -350,9 +350,9 @@ TQString K3bWaveDecoder::technicalInfo( const TQString& name ) const
   if( name == i18n("Channels") )
     return TQString::number(d->channels);
   else if( name == i18n("Sampling Rate") )
-    return i18n("%1 Hz").tqarg(d->sampleRate);
+    return i18n("%1 Hz").arg(d->sampleRate);
   else if( name == i18n("Sample Size") )
-    return i18n("%1 bits").tqarg(d->sampleSize);
+    return i18n("%1 bits").arg(d->sampleSize);
   else
     return TQString();
 }

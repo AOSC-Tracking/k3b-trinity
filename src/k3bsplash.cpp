@@ -60,7 +60,7 @@ K3bSplash::K3bSplash( TQWidget* parent, const char* name )
   m_infoBox->setPaletteBackgroundColor( black );
   m_infoBox->setPaletteForegroundColor( white );
 
-  // Set tqgeometry, with support for Xinerama systems
+  // Set geometry, with support for Xinerama systems
   TQRect r;
   r.setSize(sizeHint());
   int ps = TQApplication::desktop()->primaryScreen();
@@ -108,7 +108,7 @@ void K3bSplash::addInfo( const TQString& s )
 
 //   TQFontMetrics fm = p.fontMetrics();
 
-//   TQString line1 = TQString( "K3b version %1" ).tqarg(VERSION);
+//   TQString line1 = TQString( "K3b version %1" ).arg(VERSION);
 //   TQString line2( "(c) 2001 by Sebastian Trueg" );
 //   TQString line3( "licenced under the GPL" );
 
@@ -122,7 +122,7 @@ void K3bSplash::addInfo( const TQString& s )
 //   int startX = 10;
 //   int startY = height() - 10 - textH;
 
-//   p.drawText( startX, startY, textW, textH, 0, TQString("%1\n%2\n%3").tqarg(line1).tqarg(line2).tqarg(line3) );
+//   p.drawText( startX, startY, textW, textH, 0, TQString("%1\n%2\n%3").arg(line1).arg(line2).arg(line3) );
 // }
 
 

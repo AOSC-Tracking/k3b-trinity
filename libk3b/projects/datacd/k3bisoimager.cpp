@@ -165,14 +165,14 @@ void K3bIsoImager::slotProcessExited( KProcess* p )
 
   emit debuggingOutput( "K3bIsoImager",
 			TQString("Pipe throughput: %1 bytes read, %2 bytes written.")
-			.tqarg(d->pipe->bytesRead()).tqarg(d->pipe->bytesWritten()) );
+			.arg(d->pipe->bytesRead()).arg(d->pipe->bytesWritten()) );
 
   if( d->imageFile.isOpen() ) {
     d->imageFile.close();
 
     if( m_canceled || p->exitStatus() != 0 ) {
       d->imageFile.remove();
-      emit infoMessage( i18n("Removed incomplete image file %1.").tqarg(d->imageFile.name()), WARNING );
+      emit infoMessage( i18n("Removed incomplete image file %1.").arg(d->imageFile.name()), WARNING );
     }
   }
 
@@ -210,7 +210,7 @@ void K3bIsoImager::slotProcessExited( KProcess* p )
 
 	default:
 	  if( !d->knownError && !mkisofsReadError() ) {
-	    emit infoMessage( i18n("%1 returned an unknown error (code %2).").tqarg("mkisofs").tqarg(p->exitStatus()),
+	    emit infoMessage( i18n("%1 returned an unknown error (code %2).").arg("mkisofs").arg(p->exitStatus()),
 			      K3bJob::ERROR );
 	    emit infoMessage( i18n("Please send me an email with the last output."), K3bJob::ERROR );
 	  }
@@ -220,7 +220,7 @@ void K3bIsoImager::slotProcessExited( KProcess* p )
       }
     }
     else {
-      emit infoMessage( i18n("%1 did not exit cleanly.").tqarg("mkisofs"), ERROR );
+      emit infoMessage( i18n("%1 did not exit cleanly.").arg("mkisofs"), ERROR );
       jobFinished( false );
     }
   }
@@ -356,7 +356,7 @@ void K3bIsoImager::startSizeCalculation()
   m_mkisofsPrintSizeResult = 0;
 
   if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
-    emit infoMessage( i18n("Could not start %1.").tqarg("mkisofs"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").arg("mkisofs"), K3bJob::ERROR );
     cleanup();
 
     jobFinished( false );
@@ -410,8 +410,8 @@ void K3bIsoImager::slotMkisofsPrintSizeFinished()
 
   emit debuggingOutput( "K3bIsoImager",
 			TQString("mkisofs print size result: %1 (%2 bytes)")
-			.tqarg(m_mkisofsPrintSizeResult)
-			.tqarg(TQ_UINT64(m_mkisofsPrintSizeResult)*2048ULL) );
+			.arg(m_mkisofsPrintSizeResult)
+			.arg(TQ_UINT64(m_mkisofsPrintSizeResult)*2048ULL) );
 
   cleanup();
 
@@ -496,7 +496,7 @@ void K3bIsoImager::start()
   if( m_fdToWriteTo == -1 ) {
     d->imageFile.setName( d->imagePath );
     if( !d->imageFile.open( IO_WriteOnly ) ) {
-      emit infoMessage( i18n("Could not open %1 for writing").tqarg(d->imagePath), ERROR );
+      emit infoMessage( i18n("Could not open %1 for writing").arg(d->imagePath), ERROR );
       cleanup();
       jobFinished(false);
       return;
@@ -532,7 +532,7 @@ void K3bIsoImager::start()
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bIsoImager) could not start mkisofs" << endl;
-    emit infoMessage( i18n("Could not start %1.").tqarg("mkisofs"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").arg("mkisofs"), K3bJob::ERROR );
     jobFinished( false );
     cleanup();
   }
@@ -814,7 +814,7 @@ int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& stream
 
   // now create the graft points
   int num = 0;
-  for( TQPtrListIterator<K3bDataItem> it( dirItem->tqchildren() ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( dirItem->children() ); it.current(); ++it ) {
     K3bDataItem* item = it.current();
     bool writeItem = item->writeToCd();
 
@@ -828,14 +828,14 @@ int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& stream
 	TQFileInfo f( K3b::resolveLink( item->localPath() ) );
 	if( !f.exists() ) {
 	  emit infoMessage( i18n("Could not follow link %1 to non-existing file %2. Skipping...")
-			    .tqarg(item->k3bName())
-			    .tqarg(f.filePath()), WARNING );
+			    .arg(item->k3bName())
+			    .arg(f.filePath()), WARNING );
 	  writeItem = false;
 	}
 	else if( f.isDir() ) {
 	  emit infoMessage( i18n("Ignoring link %1 to folder %2. K3b is unable to follow links to folders.")
-			    .tqarg(item->k3bName())
-			    .tqarg(f.filePath()), WARNING );
+			    .arg(item->k3bName())
+			    .arg(f.filePath()), WARNING );
 	  writeItem = false;
 	}
       }
@@ -843,11 +843,11 @@ int K3bIsoImager::writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& stream
     else if( item->isFile() ) {
       TQFileInfo f( item->localPath() );
       if( !f.exists() ) {
-	emit infoMessage( i18n("Could not find file %1. Skipping...").tqarg(item->localPath()), WARNING );
+	emit infoMessage( i18n("Could not find file %1. Skipping...").arg(item->localPath()), WARNING );
 	writeItem = false;
       }
       else if( !f.isReadable() ) {
-	emit infoMessage( i18n("Could not read file %1. Skipping...").tqarg(item->localPath()), WARNING );
+	emit infoMessage( i18n("Could not read file %1. Skipping...").arg(item->localPath()), WARNING );
 	writeItem = false;
       }
     }
@@ -895,7 +895,7 @@ void K3bIsoImager::writePathSpecForFile( K3bFileItem* item, TQTextStream& stream
     temp.unlink();
 
     if( !KIO::NetAccess::copy( KURL(item->localPath()), KURL::fromPathOrURL(tempPath) ) ) {
-      emit infoMessage( i18n("Failed to backup boot image file %1").tqarg(item->localPath()), ERROR );
+      emit infoMessage( i18n("Failed to backup boot image file %1").arg(item->localPath()), ERROR );
       return;
     }
 

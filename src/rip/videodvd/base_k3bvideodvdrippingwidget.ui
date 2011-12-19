@@ -188,7 +188,7 @@
                                 <property name="text">
                                     <string>-</string>
                                 </property>
-                                <property name="tqalignment">
+                                <property name="alignment">
                                     <set>AlignVCenter|AlignRight</set>
                                 </property>
                             </widget>
@@ -207,7 +207,7 @@
                                 <property name="text">
                                     <string>-</string>
                                 </property>
-                                <property name="tqalignment">
+                                <property name="alignment">
                                     <set>AlignVCenter|AlignRight</set>
                                 </property>
                             </widget>
@@ -509,7 +509,7 @@
                         <property name="text">
                             <string>See special strings</string>
                         </property>
-                        <property name="tqalignment">
+                        <property name="alignment">
                             <set>AlignVCenter|AlignRight</set>
                         </property>
                     </widget>

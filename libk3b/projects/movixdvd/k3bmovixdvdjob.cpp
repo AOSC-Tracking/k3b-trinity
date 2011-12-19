@@ -114,7 +114,7 @@ TQString K3bMovixDvdJob::jobDescription() const
   if( m_doc->isoOptions().volumeID().isEmpty() )
     return i18n("Writing eMovix DVD");
   else
-    return i18n("Writing eMovix DVD (%1)").tqarg(m_doc->isoOptions().volumeID());
+    return i18n("Writing eMovix DVD (%1)").arg(m_doc->isoOptions().volumeID());
 }
 
 
@@ -122,7 +122,7 @@ TQString K3bMovixDvdJob::jobDetails() const
 {
   return ( i18n("1 file (%1) and about 8 MB eMovix data", 
 		"%n files (%1) and about 8 MB eMovix data", 
-		m_doc->movixFileItems().count()).tqarg(KIO::convertSize(m_doc->size()))
+		m_doc->movixFileItems().count()).arg(KIO::convertSize(m_doc->size()))
 	   + ( m_doc->copies() > 1 
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
 	       : TQString() ) );

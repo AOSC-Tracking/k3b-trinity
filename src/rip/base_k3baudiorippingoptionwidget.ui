@@ -231,7 +231,7 @@ file will contain all tracks one after the other.
                     <property name="text">
                         <string>-</string>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
@@ -250,7 +250,7 @@ file will contain all tracks one after the other.
                     <property name="text">
                         <string>-</string>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>

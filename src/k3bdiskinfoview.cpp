@@ -231,7 +231,7 @@ void K3bDiskInfoView::reloadMedium()
       // if we have multiple sessions we create a header item for every session
       KListViewItem* trackItem = 0;
       if( medium().diskInfo().numSessions() > 1 && medium().toc()[0].session() > 0 ) {
-	trackItem = new HeaderViewItem( trackHeaderItem, item, i18n("Session %1").tqarg(1) );
+	trackItem = new HeaderViewItem( trackHeaderItem, item, i18n("Session %1").arg(1) );
 	lastSession = 1;
       }
       else
@@ -248,7 +248,7 @@ void K3bDiskInfoView::reloadMedium()
 	  trackItem->setOpen(true);
 	  trackItem = new HeaderViewItem( trackHeaderItem,
 					  m_infoView->lastItem()->parent(),
-					  i18n("Session %1").tqarg(lastSession) );
+					  i18n("Session %1").arg(lastSession) );
 	}
 
         item = new KListViewItem( trackItem, item );
@@ -269,21 +269,21 @@ void K3bDiskInfoView::reloadMedium()
 	  else
 	    text = i18n("Data");
         }
-        item->setText( 0, i18n("%1 (%2)").tqarg( TQString::number(index).rightJustify( 2, ' ' )).tqarg(text) );
+        item->setText( 0, i18n("%1 (%2)").arg( TQString::number(index).rightJustify( 2, ' ' )).arg(text) );
 	item->setText( 1, TQString( "%1/%2" )
-		       .tqarg( track.copyPermitted() ? i18n("copy") : i18n("no copy") )
-		       .tqarg( track.type() == K3bTrack::AUDIO
+		       .arg( track.copyPermitted() ? i18n("copy") : i18n("no copy") )
+		       .arg( track.type() == K3bTrack::AUDIO
 			    ? ( track.preEmphasis() ?  i18n("preemp") : i18n("no preemp") )
 			    : ( track.recordedIncremental() ?  i18n("incremental") : i18n("uninterrupted") ) ) );
         item->setText( 2,
 		       TQString("%1 - %2")
-		       .tqarg(track.firstSector().lba())
-		       .tqarg(track.lastSector().lba()) );
+		       .arg(track.firstSector().lba())
+		       .arg(track.lastSector().lba()) );
         item->setText( 3, TQString::number( track.length().lba() ) + " (" + track.length().toString() + ")" );
 
 #ifdef K3B_DEBUG
         if( track.type() == K3bTrack::AUDIO )
-	  item->setText( 4, TQString( "%1 (%2)" ).tqarg(track.index0().toString()).tqarg(track.index0().lba()) );
+	  item->setText( 4, TQString( "%1 (%2)" ).arg(track.index0().toString()).arg(track.index0().lba()) );
 #endif
         ++index;
       }
@@ -355,19 +355,19 @@ void K3bDiskInfoView::createMediaInfoItems( const K3bMedium& medium )
 
   atipChild = new KListViewItem( atipItem, atipChild,
 				 i18n("Capacity:"),
-				 i18n("%1 min").tqarg(info.capacity().toString()),
+				 i18n("%1 min").arg(info.capacity().toString()),
 				 KIO::convertSize(info.capacity().mode1Bytes()) );
 
   if( !info.empty() )
     atipChild = new KListViewItem( atipItem, atipChild,
 				   i18n("Used Capacity:"),
-				   i18n("%1 min").tqarg(info.size().toString()),
+				   i18n("%1 min").arg(info.size().toString()),
 				   KIO::convertSize(info.size().mode1Bytes()) );
 
   if( info.appendable() )
     atipChild = new KListViewItem( atipItem, atipChild,
 				   i18n("Remaining:"),
-				   i18n("%1 min").tqarg( info.remainingSize().toString() ),
+				   i18n("%1 min").arg( info.remainingSize().toString() ),
 				   KIO::convertSize(info.remainingSize().mode1Bytes()) );
 
   atipChild = new KListViewItem( atipItem, atipChild,
@@ -427,7 +427,7 @@ void K3bDiskInfoView::createMediaInfoItems( const K3bMedium& medium )
 	if( info.isDvdMedia() )
 	  s.append( TQString().sprintf( "%.1fx (%d KB/s)", (double)*it / 1385.0, *it ) );
 	else
-	  s.append( TQString( "%1x (%2 KB/s)" ).tqarg( *it/175 ).tqarg( *it ) );
+	  s.append( TQString( "%1x (%2 KB/s)" ).arg( *it/175 ).arg( *it ) );
       }
 
     atipChild->setText( 1, s );
@@ -476,10 +476,10 @@ void K3bDiskInfoView::createIso9660InfoItems( const K3bIso9660SimplePrimaryDescr
 //   iso9660Child = new KListViewItem( iso9660Item, iso9660Child,
 // 				    i18n("Volume Size:"),
 // 				    TQString( "%1 (%2*%3)" )
-// 				    .tqarg(iso.logicalBlockSize
+// 				    .arg(iso.logicalBlockSize
 // 					 *iso.volumeSpaceSize)
-// 				    .tqarg(iso.logicalBlockSize)
-// 				    .tqarg(iso.volumeSpaceSize),
+// 				    .arg(iso.logicalBlockSize)
+// 				    .arg(iso.volumeSpaceSize),
 // 				    KIO::convertSize(iso.logicalBlockSize
 // 						     *iso.volumeSpaceSize)  );
 

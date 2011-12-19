@@ -115,8 +115,8 @@ TQString K3bVideoDVDRippingJob::jobDescription() const
 TQString K3bVideoDVDRippingJob::jobDetails() const
 {
   return i18n("Transcoding %n title to %1/%2", "Transcoding %n titles to %1/%2", m_titleRipInfos.count() )
-    .tqarg( K3bVideoDVDTitleTranscodingJob::videoCodecString( m_transcodingJob->videoCodec() ) )
-    .tqarg( K3bVideoDVDTitleTranscodingJob::audioCodecString( m_transcodingJob->audioCodec() ) );
+    .arg( K3bVideoDVDTitleTranscodingJob::videoCodecString( m_transcodingJob->videoCodec() ) )
+    .arg( K3bVideoDVDTitleTranscodingJob::audioCodecString( m_transcodingJob->audioCodec() ) );
 }
 
 
@@ -143,10 +143,10 @@ void K3bVideoDVDRippingJob::slotTranscodingJobFinished( bool success )
   }
   else {
     if( success )
-      emit infoMessage( i18n("Successfully ripped title %1").tqarg(m_titleRipInfos[d->currentTitleInfoIndex].title), SUCCESS );
+      emit infoMessage( i18n("Successfully ripped title %1").arg(m_titleRipInfos[d->currentTitleInfoIndex].title), SUCCESS );
     else {
       d->failedTitles++;
-      emit infoMessage( i18n("Failed to rip title %1").tqarg(m_titleRipInfos[d->currentTitleInfoIndex].title), ERROR );
+      emit infoMessage( i18n("Failed to rip title %1").arg(m_titleRipInfos[d->currentTitleInfoIndex].title), ERROR );
     }
 
     ++d->currentTitleInfoIndex ;
@@ -176,11 +176,11 @@ void K3bVideoDVDRippingJob::slotDetectClippingJobFinished( bool success )
     m_titleRipInfos[d->currentTitleInfoIndex].clipRight = 0;
 
     if( success ) {
-      emit infoMessage( i18n("Determined clipping values for title %1").tqarg(m_titleRipInfos[d->currentTitleInfoIndex].title), SUCCESS );
+      emit infoMessage( i18n("Determined clipping values for title %1").arg(m_titleRipInfos[d->currentTitleInfoIndex].title), SUCCESS );
       emit infoMessage( i18n("Top: %1, Bottom: %2")
-			.tqarg(m_detectClippingJob->clippingTop()).tqarg(m_detectClippingJob->clippingBottom()), INFO );
+			.arg(m_detectClippingJob->clippingTop()).arg(m_detectClippingJob->clippingBottom()), INFO );
       emit infoMessage( i18n("Left: %1, Right: %2")
-			.tqarg(m_detectClippingJob->clippingLeft()).tqarg(m_detectClippingJob->clippingRight()), INFO );
+			.arg(m_detectClippingJob->clippingLeft()).arg(m_detectClippingJob->clippingRight()), INFO );
 
       // let's see if the clipping values make sense
       if( m_detectClippingJob->clippingTop() + m_detectClippingJob->clippingBottom() 
@@ -197,7 +197,7 @@ void K3bVideoDVDRippingJob::slotDetectClippingJobFinished( bool success )
       }
     }
     else
-      emit infoMessage( i18n("Failed to determine clipping values for title %1").tqarg(m_titleRipInfos[d->currentTitleInfoIndex].title), ERROR );
+      emit infoMessage( i18n("Failed to determine clipping values for title %1").arg(m_titleRipInfos[d->currentTitleInfoIndex].title), ERROR );
 
     startTranscoding( d->currentTitleInfoIndex );
   }

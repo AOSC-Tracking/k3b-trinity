@@ -38,7 +38,7 @@ K3bCddbLocalQuery::~K3bCddbLocalQuery()
 
 void K3bCddbLocalQuery::doQuery()
 {
-  emit infoMessage( i18n("Searching entry in %1").tqarg( m_cddbDir ) );
+  emit infoMessage( i18n("Searching entry in %1").arg( m_cddbDir ) );
   kapp->processEvents(); //BAD!
 
   TQString path = preparePath( m_cddbDir );

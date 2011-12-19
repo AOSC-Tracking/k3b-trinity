@@ -207,7 +207,7 @@ void K3bBinImageWritingJob::writerFinished(bool ok)
 
 void K3bBinImageWritingJob::slotNextTrack( int t, int tt )
 {
-  emit newSubTask( i18n("Writing track %1 of %2").tqarg(t).tqarg(tt) );
+  emit newSubTask( i18n("Writing track %1 of %2").arg(t).arg(tt) );
 }
 
 

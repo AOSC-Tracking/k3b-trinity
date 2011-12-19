@@ -66,7 +66,7 @@ K3bMixedBurnDialog::K3bMixedBurnDialog( K3bMixedDoc* doc, TQWidget *parent, cons
 
   setTitle( i18n("Mixed Project"), i18n("1 track (%1 minutes)",
 					"%n tracks (%1 minutes)",
-					m_doc->numOfTracks()).tqarg(m_doc->length().toString()) );
+					m_doc->numOfTracks()).arg(m_doc->length().toString()) );
 
   m_checkOnlyCreateImage->hide();
 

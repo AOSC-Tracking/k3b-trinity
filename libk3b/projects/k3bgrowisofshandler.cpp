@@ -177,8 +177,8 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
     double speed = line.mid( pos, endPos-pos ).toDouble(&ok);
     if( ok )
       emit infoMessage( i18n("Writing speed: %1 KB/s (%2x)")
-			.tqarg((int)(speed*1385.0))
-			.tqarg(KGlobal::locale()->formatNumber(speed)), K3bJob::INFO );
+			.arg((int)(speed*1385.0))
+			.arg(KGlobal::locale()->formatNumber(speed)), K3bJob::INFO );
     else
       kdDebug() << "(K3bGrowisofsHandler) parsing error: '" << line.mid( pos, endPos-pos ) << "'" << endl;
   }
@@ -274,7 +274,7 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
       // for now we just emit a message with the error
       // in the future when I know more about what kinds of errors may occur
       // we will enhance this
-      emit infoMessage( i18n("Fatal error at startup: %1").tqarg(strerror(exitCode-128)), 
+      emit infoMessage( i18n("Fatal error at startup: %1").arg(strerror(exitCode-128)), 
 			K3bJob::ERROR );
     }
     else if( exitCode == 1 ) {
@@ -286,7 +286,7 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
       emit infoMessage( i18n("Most likely mkisofs failed in some way."), K3bJob::ERROR );
     }
     else {
-      emit infoMessage( i18n("Fatal error during recording: %1").tqarg(strerror(exitCode)), 
+      emit infoMessage( i18n("Fatal error during recording: %1").arg(strerror(exitCode)), 
 			K3bJob::ERROR );
     }
   }

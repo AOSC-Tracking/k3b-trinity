@@ -332,7 +332,7 @@ void K3bWriterSelectionWidget::insertSpeedItem( int speed )
 				: TQString::number( speed/1385 ) )
 			      + "x" );
     else
-      m_comboSpeed->insertItem( TQString("%1x").tqarg(speed/175) );
+      m_comboSpeed->insertItem( TQString("%1x").arg(speed/175) );
   }
 }
 

@@ -275,7 +275,7 @@ void K3bDevice::DeviceManager::LinuxDeviceScan()
 	int i = 1;
 	TQString dev;
 	while( !(dev = line.section(re, i, i)).isEmpty() ) {
-	  if( addDevice( TQString("/dev/%1").tqarg(dev) ) ) {
+	  if( addDevice( TQString("/dev/%1").arg(dev) ) ) {
 	    devstring += dev + "|";
 	  }
 	  // according to the LINUX ALLOCATED DEVICES document (http://www.lanana.org/docs/device-list/),
@@ -285,7 +285,7 @@ void K3bDevice::DeviceManager::LinuxDeviceScan()
 	  // each physical device the next line should be better
 	  //      else if ( dev.startsWith("sr") )
 	  if ( dev.startsWith("sr") ) {
-	    if( addDevice(TQString("/dev/%1").tqarg(dev.replace(TQRegExp("r"),"cd"))) )
+	    if( addDevice(TQString("/dev/%1").arg(dev.replace(TQRegExp("r"),"cd"))) )
 	      devstring += dev + "|";
 	  }
 	  ++i;
@@ -304,7 +304,7 @@ void K3bDevice::DeviceManager::LinuxDeviceScan()
   //
   k3bDebug() << "(K3bDevice::DeviceManager) SCANNING FOR GENERIC DEVICES." << endl;
   for( int i = 0; i < 16; i++ ) {
-    TQString sgDev = resolveSymLink( TQString("/dev/sg%1").tqarg(i) );
+    TQString sgDev = resolveSymLink( TQString("/dev/sg%1").arg(i) );
     int bus = -1, id = -1, lun = -1;
     if( determineBusIdLun( sgDev, bus, id, lun ) ) {
       if( Device* dev = findDevice( bus, id, lun ) ) {
