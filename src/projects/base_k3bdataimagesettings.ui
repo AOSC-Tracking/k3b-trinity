@@ -258,7 +258,7 @@ Example: 'my good file.ext' becomes 'my_good_file.ext'</string>
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="tqsizeHint">
+            <property name="sizeHint">
                 <size>
                     <width>21</width>
                     <height>0</height>

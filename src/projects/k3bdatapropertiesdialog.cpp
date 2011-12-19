@@ -168,7 +168,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
   sortingBoxGrid->setMargin( marginHint() );
   m_editSortWeight = new KLineEdit( sortingBox );
   m_editSortWeight->setValidator( new TQIntValidator( -2147483647, 2147483647, TQT_TQOBJECT(m_editSortWeight) ) );
-  m_editSortWeight->tqsetAlignment( TQt::AlignRight );
+  m_editSortWeight->setAlignment( TQt::AlignRight );
   sortingBoxGrid->addWidget( new TQLabel( i18n("Sort weight:"), sortingBox ), 0, 0 );
   sortingBoxGrid->addWidget( m_editSortWeight, 0, 1 );
   sortingBoxGrid->setColStretch( 1, 1 );

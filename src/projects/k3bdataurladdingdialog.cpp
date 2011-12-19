@@ -96,7 +96,7 @@ K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* paren
 	   this, TQT_SLOT(slotDirSizeDone(bool)) );
 
   // try to start with a reasonable size
-  resize( (int)( fontMetrics().width( caption() ) * 1.5 ), tqsizeHint().height() );
+  resize( (int)( fontMetrics().width( caption() ) * 1.5 ), sizeHint().height() );
 }
 
 

@@ -379,7 +379,7 @@ void K3bVcdTrackDialog::prepareGui()
     groupFileInfo->tqlayout() ->setMargin( 0 );
 
     TQGridLayout* groupFileInfoLayout = new TQGridLayout( groupFileInfo->tqlayout() );
-    groupFileInfoLayout->tqsetAlignment( TQt::AlignTop );
+    groupFileInfoLayout->setAlignment( TQt::AlignTop );
     groupFileInfoLayout->setSpacing( spacingHint() );
     groupFileInfoLayout->setMargin( marginHint() );
 
@@ -387,7 +387,7 @@ void K3bVcdTrackDialog::prepareGui()
 
     m_displayFileName = new KCutLabel( groupFileInfo );
     m_displayFileName->setText( i18n( "Filename" ) );
-    m_displayFileName->tqsetAlignment( int( TQLabel::AlignTop | TQLabel::AlignLeft ) );
+    m_displayFileName->setAlignment( int( TQLabel::AlignTop | TQLabel::AlignLeft ) );
 
     TQLabel* labelSize = new TQLabel( i18n( "Size:" ), groupFileInfo, "labelSize" );
     TQLabel* labelLength = new TQLabel( i18n( "Length:" ), groupFileInfo, "labelLength" );
@@ -395,15 +395,15 @@ void K3bVcdTrackDialog::prepareGui()
 
     m_displaySize = new TQLabel( groupFileInfo, "m_displaySize" );
     m_displaySize->setText( "0.0 MB" );
-    m_displaySize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_displaySize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     m_displayLength = new TQLabel( groupFileInfo, "m_displayLength" );
     m_displayLength->setText( "0:0:0" );
-    m_displayLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_displayLength->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     m_muxrate = new TQLabel( groupFileInfo, "m_muxrate" );
     m_muxrate->setText( i18n( "%1 bit/s" ).tqarg( 0 ) );
-    m_muxrate->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_muxrate->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     TQFrame* fileInfoLine = new TQFrame( groupFileInfo );
     fileInfoLine->setFrameStyle( TQFrame::HLine | TQFrame::Sunken );
@@ -443,7 +443,7 @@ void K3bVcdTrackDialog::setupPbcTab()
     TQWidget * w = new TQWidget( m_mainTabbed );
 
     TQGridLayout* grid = new TQGridLayout( w );
-    grid->tqsetAlignment( TQt::AlignTop );
+    grid->setAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
@@ -467,7 +467,7 @@ void K3bVcdTrackDialog::setupPbcTab()
     m_groupPlay->tqlayout() ->setMargin( marginHint() );
 
     TQGridLayout* groupPlayLayout = new TQGridLayout( m_groupPlay->tqlayout() );
-    groupPlayLayout->tqsetAlignment( TQt::AlignTop );
+    groupPlayLayout->setAlignment( TQt::AlignTop );
 
     TQLabel* labelPlaying = new TQLabel( i18n( "Playing track" ) , m_groupPlay, "labelPlaying" );
 
@@ -503,7 +503,7 @@ void K3bVcdTrackDialog::setupPbcTab()
     m_groupPbc->tqlayout() ->setMargin( marginHint() );
 
     TQGridLayout* groupPbcLayout = new TQGridLayout( m_groupPbc->tqlayout() );
-    groupPbcLayout->tqsetAlignment( TQt::AlignTop );
+    groupPbcLayout->setAlignment( TQt::AlignTop );
 
     TQLabel* labelPbc_previous = new TQLabel( i18n( "Previous:" ), m_groupPbc, "labelPbc_previous" );
     TQLabel* labelPbc_next = new TQLabel( i18n( "Next:" ), m_groupPbc, "labelPbc_next" );
@@ -553,7 +553,7 @@ void K3bVcdTrackDialog::setupPbcKeyTab()
     m_widgetnumkeys = new TQWidget( m_mainTabbed );
 
     TQGridLayout* grid = new TQGridLayout( m_widgetnumkeys );
-    grid->tqsetAlignment( TQt::AlignTop );
+    grid->setAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
@@ -590,7 +590,7 @@ void K3bVcdTrackDialog::setupAudioTab()
     TQWidget * w = new TQWidget( m_mainTabbed );
 
     TQGridLayout* grid = new TQGridLayout( w );
-    grid->tqsetAlignment( TQt::AlignTop );
+    grid->setAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
@@ -647,7 +647,7 @@ void K3bVcdTrackDialog::setupVideoTab()
     TQWidget * w = new TQWidget( m_mainTabbed );
 
     TQGridLayout* grid = new TQGridLayout( w );
-    grid->tqsetAlignment( TQt::AlignTop );
+    grid->setAlignment( TQt::AlignTop );
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 

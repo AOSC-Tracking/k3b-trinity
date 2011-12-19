@@ -27,7 +27,7 @@ KCutLabel::KCutLabel( const TQString &text , TQWidget *parent, const char *name 
  : TQLabel ( parent, name ),
    m_minChars(1) {
   TQSizePolicy myLabelSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
-  tqsetSizePolicy(myLabelSizePolicy);
+  setSizePolicy(myLabelSizePolicy);
   m_fullText = text;
   cutTextToLabel();
 }
@@ -36,12 +36,12 @@ KCutLabel::KCutLabel( TQWidget *parent, const char *name )
  : TQLabel ( parent, name ),
    m_minChars(1) {
   TQSizePolicy myLabelSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
-  tqsetSizePolicy(myLabelSizePolicy);
+  setSizePolicy(myLabelSizePolicy);
 }
 
-TQSize KCutLabel::tqminimumSizeHint() const
+TQSize KCutLabel::minimumSizeHint() const
 {
-  TQSize sh = TQLabel::tqminimumSizeHint();
+  TQSize sh = TQLabel::minimumSizeHint();
   if( m_minChars == 0 )
     sh.setWidth(-1);
   else if( m_minChars < (int)m_fullText.length() )

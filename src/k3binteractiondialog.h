@@ -105,7 +105,7 @@ class K3bInteractionDialog : public KDialog
     CANCEL_BUTTON = 4
   };
 
-  TQSize tqsizeHint() const;
+  TQSize sizeHint() const;
 
   const TQString& configGroup() const { return m_configGroup; }
 

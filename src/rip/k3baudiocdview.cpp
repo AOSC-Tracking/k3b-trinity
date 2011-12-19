@@ -111,7 +111,7 @@ K3bAudioCdView::K3bAudioCdView( TQWidget* parent, const char *name )
   TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
   toolBoxLayout->addItem( spacer );
   m_labelLength = new TQLabel( mainWidget() );
-  m_labelLength->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelLength->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   toolBoxLayout->addWidget( m_labelLength );
 
 
@@ -359,7 +359,7 @@ void K3bAudioCdView::slotEditTrackCddb()
     grid->setRowStretch( 4, 1 );
 
     d.setMainWidget(w);
-    d.resize( TQMAX( TQMAX(d.tqsizeHint().height(), d.tqsizeHint().width()), 300), d.tqsizeHint().height() );
+    d.resize( TQMAX( TQMAX(d.sizeHint().height(), d.sizeHint().width()), 300), d.sizeHint().height() );
 
     if( d.exec() == TQDialog::Accepted ) {
       m_cddbInfo.titles[a->trackNumber-1] = editTitle->text();
@@ -415,7 +415,7 @@ void K3bAudioCdView::slotEditAlbumCddb()
   grid->setRowStretch( 7, 1 );
 
   d.setMainWidget(w);
-  d.resize( TQMAX( TQMAX(d.tqsizeHint().height(), d.tqsizeHint().width()), 300), d.tqsizeHint().height() );
+  d.resize( TQMAX( TQMAX(d.sizeHint().height(), d.sizeHint().width()), 300), d.sizeHint().height() );
 
   if( d.exec() == TQDialog::Accepted ) {
     m_cddbInfo.cdTitle = editTitle->text();
@@ -584,7 +584,7 @@ void K3bAudioCdView::showBusyLabel( bool b )
     // the themed label is a cut label, thus its size hint is
     // based on the cut text, we force it to be full
     m_busyInfoLabel->resize( width(), height() );
-    m_busyInfoLabel->resize( m_busyInfoLabel->tqsizeHint() );
+    m_busyInfoLabel->resize( m_busyInfoLabel->sizeHint() );
     int x = (width() - m_busyInfoLabel->width())/2;
     int y = (height() - m_busyInfoLabel->height())/2;
     TQRect r( TQPoint( x, y ), m_busyInfoLabel->size() );

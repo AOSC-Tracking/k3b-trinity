@@ -37,7 +37,7 @@ K3bMiniButton::~K3bMiniButton()
 
 void K3bMiniButton::drawButton( TQPainter* p )
 {
-  p->fillRect( 0,0, width(), height(), TQBrush(tqcolorGroup().brush(TQColorGroup::Background)) );
+  p->fillRect( 0,0, width(), height(), TQBrush(colorGroup().brush(TQColorGroup::Background)) );
   p->drawPixmap( (width() - pixmap()->width()) / 2, (height() - pixmap()->height()) / 2, *pixmap() );
   if( m_mouseOver && !isDown() ){
     p->setPen( white );
@@ -45,12 +45,12 @@ void K3bMiniButton::drawButton( TQPainter* p )
     p->lineTo( 0, 0 );
     p->lineTo( width() - 1, 0 );
 
-    p->setPen( tqcolorGroup().dark() );
+    p->setPen( colorGroup().dark() );
     p->lineTo( width() - 1, height() - 1 );
     p->lineTo( 0, height() - 1 );
   }
   if( isOn() || isDown() ){
-    p->setPen( tqcolorGroup().dark() );
+    p->setPen( colorGroup().dark() );
     p->moveTo( 0, height() - 1 );
     p->lineTo( 0, 0 );
     p->lineTo( width() - 1, 0 );

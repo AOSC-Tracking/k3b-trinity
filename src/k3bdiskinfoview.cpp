@@ -350,7 +350,7 @@ void K3bDiskInfoView::createMediaInfoItems( const K3bMedium& medium )
   if( info.isDvdMedia() )
     atipChild = new KListViewItem( atipItem, atipChild,
 				   i18n("Media ID:"),
-				   !info.mediaId().isEmpty() ? TQString::tqfromLatin1( info.mediaId() ) : i18n("unknown") );
+				   !info.mediaId().isEmpty() ? TQString::fromLatin1( info.mediaId() ) : i18n("unknown") );
 
 
   atipChild = new KListViewItem( atipItem, atipChild,

@@ -171,7 +171,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             dir.append( s ); // I think it makes more sense to allow empty comments
             break;
           case DATE:
-            dir.append( KGlobal::locale()->formatDate( TQDate::tqcurrentDate() ) );
+            dir.append( KGlobal::locale()->formatDate( TQDate::currentDate() ) );
             break;
           default:
             dir.append( pattern.mid(i, len) );
@@ -247,7 +247,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
         s = entry.cdExtInfo;
         break;
       case DATE:
-        s = KGlobal::locale()->formatDate( TQDate::tqcurrentDate() );
+        s = KGlobal::locale()->formatDate( TQDate::currentDate() );
         break;
       default: // we must never get here,
         break; // all choices should be covered

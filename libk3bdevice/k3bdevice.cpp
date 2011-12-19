@@ -240,9 +240,9 @@ bool K3bDevice::Device::init( bool bCheckWritingModes )
     return false;
   }
   else {
-    m_vendor = TQString::tqfromLatin1( (char*)(inq->vendor), 8 ).stripWhiteSpace();
-    m_description = TQString::tqfromLatin1( (char*)(inq->product), 16 ).stripWhiteSpace();
-    m_version = TQString::tqfromLatin1( (char*)(inq->revision), 4 ).stripWhiteSpace();
+    m_vendor = TQString::fromLatin1( (char*)(inq->vendor), 8 ).stripWhiteSpace();
+    m_description = TQString::fromLatin1( (char*)(inq->product), 16 ).stripWhiteSpace();
+    m_version = TQString::fromLatin1( (char*)(inq->revision), 4 ).stripWhiteSpace();
   }
 
   if( m_vendor.isEmpty() )

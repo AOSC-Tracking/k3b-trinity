@@ -238,7 +238,7 @@ void K3bDeviceBranchViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, i
       textheight++;
     if ( textheight < height() ) {
       int w = listView()->treeStepSize() / 2;
-      listView()->tqstyle().tqdrawComplexControl( TQStyle::CC_ListView, p, listView(),
+      listView()->tqstyle().drawComplexControl( TQStyle::CC_ListView, p, listView(),
 					      TQRect( 0, textheight, w + 1, height() - textheight + 1 ), cg,
 					      TQStyle::Style_Enabled,
 					      TQStyle::SC_ListViewExpand,
@@ -343,7 +343,7 @@ void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
   lay->addMultiCellWidget( label, 0, 0, 0, 1 );
   label = new TQLabel( details, tooltip );
   label->setMargin( 9 );
-  label->tqsetAlignment( Qt::Vertical );
+  label->setAlignment( Qt::Vertical );
   lay->addMultiCellWidget( label, 1, 2, 0, 0 );
   label = new TQLabel( tooltip );
   lay->addWidget( label, 2, 1 );
@@ -374,7 +374,7 @@ void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
   }
 
   // the tooltip will take care of deleting the widget
-  tip( m_view->tqitemRect( item ), tooltip );
+  tip( m_view->itemRect( item ), tooltip );
 }
 
 
@@ -722,7 +722,7 @@ void K3bFileTreeView::updateMinimumWidth()
   }
 
   // width of the items + scrollbar width + the frame + a little eyecandy spacing
-  setMinimumWidth( w + verticalScrollBar()->tqsizeHint().width() + 2*frameWidth() + 2 );
+  setMinimumWidth( w + verticalScrollBar()->sizeHint().width() + 2*frameWidth() + 2 );
 }
 
 #include "k3bfiletreeview.moc"

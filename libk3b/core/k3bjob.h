@@ -285,7 +285,7 @@ class LIBK3B_EXPORT K3bBurnJob : public K3bJob
   void setWritingApp( int w ) { m_writeMethod = w; }
 
  signals:
-  void buffertqStatus( int );
+  void bufferStatus( int );
 
   void deviceBuffer( int );
 

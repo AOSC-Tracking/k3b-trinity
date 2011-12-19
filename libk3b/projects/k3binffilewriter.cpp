@@ -60,7 +60,7 @@ bool K3bInfFileWriter::save( TQTextStream& s )
   // ----------------------
   // header
   s << "# Cdrecord-Inf-File written by K3b " << k3bcore->version() 
-    << ", " << TQDateTime::tqcurrentDateTime().toString() << endl
+    << ", " << TQDateTime::currentDateTime().toString() << endl
     << "#" << endl;
 
   s << "ISRC=\t\t" << m_isrc << endl;

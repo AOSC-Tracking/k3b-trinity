@@ -566,7 +566,7 @@ bool K3bVideoDVDTitleTranscodingJob::transcodeBinaryHasSupportFor( K3bVideoDVDTi
     bin = k3bcore->externalBinManager()->binObject("transcode");
   if( !bin )
     return false;
-  return bin->hasFeature( TQString::tqfromLatin1( s_codecFeatures[(int)codec] ) );
+  return bin->hasFeature( TQString::fromLatin1( s_codecFeatures[(int)codec] ) );
 }
 
 
@@ -577,7 +577,7 @@ bool K3bVideoDVDTitleTranscodingJob::transcodeBinaryHasSupportFor( K3bVideoDVDTi
     bin = k3bcore->externalBinManager()->binObject("transcode");
   if( !bin )
     return false;
-  return bin->hasFeature( TQString::tqfromLatin1( s_codecFeatures[(int)codec] ) );
+  return bin->hasFeature( TQString::fromLatin1( s_codecFeatures[(int)codec] ) );
 }
 
 #include "k3bvideodvdtitletranscodingjob.moc"

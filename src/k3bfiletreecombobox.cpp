@@ -154,8 +154,8 @@ void K3bFileTreeComboBox::popup()
   // code mainly from qcombobox.cpp
 
   m_fileTreeView->triggerUpdate();
-  int w = TQMAX( m_fileTreeView->tqsizeHint().width(), width() );
-  int h = m_fileTreeView->tqsizeHint().height();
+  int w = TQMAX( m_fileTreeView->sizeHint().width(), width() );
+  int h = m_fileTreeView->sizeHint().height();
   TQRect screen = TQApplication::desktop()->availableGeometry( this );
   int sx = screen.x();				// screen pos
   int sy = screen.y();
@@ -276,7 +276,7 @@ bool K3bFileTreeComboBox::eventFilter( TQObject* o, TQEvent* e )
       if ( !TQT_TQRECT_OBJECT(m_fileTreeView->rect()).contains( me->pos() ) ) {
 	TQRect arrowRect = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 							  TQStyle::SC_ComboBoxArrow);
-	arrowRect = TQStyle::tqvisualRect(arrowRect, this);
+	arrowRect = TQStyle::visualRect(arrowRect, this);
 	
 	// Correction for motif style, where arrow is smaller
 	// and thus has a rect that doesn't fit the button.
@@ -310,7 +310,7 @@ void K3bFileTreeComboBox::mousePressEvent( TQMouseEvent* e )
 
   TQRect arrowRect = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 						    TQStyle::SC_ComboBoxArrow);
-  arrowRect = TQStyle::tqvisualRect(arrowRect, this);
+  arrowRect = TQStyle::visualRect(arrowRect, this);
 
   // Correction for motif style, where arrow is smaller
   // and thus has a rect that doesn't fit the button.
@@ -339,7 +339,7 @@ void K3bFileTreeComboBox::paintEvent( TQPaintEvent* )
   // we only need this since there is no way to change the status of the arrow-button
 
   TQPainter p( this );
-  const TQColorGroup & g = tqcolorGroup();
+  const TQColorGroup & g = colorGroup();
   p.setPen(g.text());
 
   TQStyle::SFlags flags = TQStyle::Style_Default;
@@ -356,7 +356,7 @@ void K3bFileTreeComboBox::paintEvent( TQPaintEvent* )
 
   //  bool reverse = TQApplication::reverseLayout();
 
-  tqstyle().tqdrawComplexControl( TQStyle::CC_ComboBox, &p, this, rect(), g,
+  tqstyle().drawComplexControl( TQStyle::CC_ComboBox, &p, this, rect(), g,
 			      flags, TQStyle::SC_All,
 			      (d->poppedUp ?
 			       TQStyle::SC_ComboBoxArrow :
@@ -364,7 +364,7 @@ void K3bFileTreeComboBox::paintEvent( TQPaintEvent* )
 
   TQRect re = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 					     TQStyle::SC_ComboBoxEditField );
-  re = TQStyle::tqvisualRect(re, this);
+  re = TQStyle::visualRect(re, this);
   p.setClipRect( re );
 
 //     TQListBoxItem * item = listBox()->item( 0 );
@@ -380,7 +380,7 @@ void K3bFileTreeComboBox::paintEvent( TQPaintEvent* )
     const TQPixmap *pix = item->pixmap();
     if ( pix ) {
       p.fillRect( re.x(), re.y(), pix->width() + 4, re.height(),
-		  tqcolorGroup().brush( TQColorGroup::Base ) );
+		  colorGroup().brush( TQColorGroup::Base ) );
       p.drawPixmap( re.x() + 2, re.y() +
 		    ( re.height() - pix->height() ) / 2, *pix );
     }

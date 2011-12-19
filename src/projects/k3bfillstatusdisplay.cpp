@@ -72,7 +72,7 @@ K3bFillStatusDisplayWidget::K3bFillStatusDisplayWidget( K3bDoc* doc, TQWidget* p
 {
   d = new Private();
   d->doc = doc;
-  tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Preferred ) );
+  setSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Preferred ) );
 }
 
 
@@ -102,13 +102,13 @@ void K3bFillStatusDisplayWidget::setCdSize( const K3b::Msf& size )
 }
 
 
-TQSize K3bFillStatusDisplayWidget::tqsizeHint() const
+TQSize K3bFillStatusDisplayWidget::sizeHint() const
 {
-  return tqminimumSizeHint();
+  return minimumSizeHint();
 }
 
 
-TQSize K3bFillStatusDisplayWidget::tqminimumSizeHint() const
+TQSize K3bFillStatusDisplayWidget::minimumSizeHint() const
 {
   int margin = 2;
   TQFontMetrics fm( font() );
@@ -127,7 +127,7 @@ void K3bFillStatusDisplayWidget::paintEvent( TQPaintEvent* )
 {
   // double buffer
   TQPixmap buffer( size() );
-  buffer.fill( tqcolorGroup().base() );
+  buffer.fill( colorGroup().base() );
   TQPainter p;
   p.tqbegin( &buffer, TQT_TQOBJECT(this) );
   p.setPen( TQt::black ); // we use a fixed bar color (which is not very nice btw, so we also fix the text color)
@@ -577,7 +577,7 @@ void K3bFillStatusDisplay::slotCustomSize()
 
 void K3bFillStatusDisplay::slotMenuButtonClicked()
 {
-  TQSize size = d->showDvdSizes ? d->dvdPopup->tqsizeHint() : d->popup->tqsizeHint();
+  TQSize size = d->showDvdSizes ? d->dvdPopup->sizeHint() : d->popup->sizeHint();
   slotPopupMenu( d->buttonMenu->mapToGlobal(TQPoint(d->buttonMenu->width(), 0)) +
 		 TQPoint(-1*size.width(), -1*size.height()) );
 }

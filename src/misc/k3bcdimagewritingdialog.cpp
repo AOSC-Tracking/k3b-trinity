@@ -238,7 +238,7 @@ void K3bCdImageWritingDialog::setupGui()
 
   TQWidget* optionTab = new TQWidget( d->optionTabbed );
   TQGridLayout* optionTabLayout = new TQGridLayout( optionTab );
-  optionTabLayout->tqsetAlignment( TQt::AlignTop );
+  optionTabLayout->setAlignment( TQt::AlignTop );
   optionTabLayout->setSpacing( spacingHint() );
   optionTabLayout->setMargin( marginHint() );
 
@@ -293,7 +293,7 @@ void K3bCdImageWritingDialog::setupGui()
   // advanced ---------------------------------
   d->advancedTab = new TQWidget( d->optionTabbed );
   TQGridLayout* advancedTabLayout = new TQGridLayout( d->advancedTab );
-  advancedTabLayout->tqsetAlignment( TQt::AlignTop );
+  advancedTabLayout->setAlignment( TQt::AlignTop );
   advancedTabLayout->setSpacing( spacingHint() );
   advancedTabLayout->setMargin( marginHint() );
     
@@ -816,7 +816,7 @@ void K3bCdImageWritingDialog::toggleAll()
     item->setForegroundColor( 1, 
 			      currentImageType() != d->foundImageType 
 			      ? TQt::red
-			      : m_infoView->tqcolorGroup().foreground() );
+			      : m_infoView->colorGroup().foreground() );
 }
 
 

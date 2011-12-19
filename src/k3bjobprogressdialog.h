@@ -79,7 +79,7 @@ class K3bJobProgressDialog : public KDialog, public K3bJobHandler
    */
   int startJob( K3bJob* job = 0 );
 
-  TQSize tqsizeHint() const;
+  TQSize sizeHint() const;
 
   /**
    * @reimplemented from K3bJobHandler

@@ -181,7 +181,7 @@ void K3bIsoImageWritingDialog::setupGui()
 
   TQWidget* optionTab = new TQWidget( optionTabbed );
   TQGridLayout* optionTabLayout = new TQGridLayout( optionTab );
-  optionTabLayout->tqsetAlignment( TQt::AlignTop );
+  optionTabLayout->setAlignment( TQt::AlignTop );
   optionTabLayout->setSpacing( spacingHint() );
   optionTabLayout->setMargin( marginHint() );
 

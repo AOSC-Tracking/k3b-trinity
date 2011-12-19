@@ -181,8 +181,8 @@ K3bMainWindow::K3bMainWindow()
 
   // FIXME: now make sure the welcome screen is displayed completely
   resize( 780, 550 );
-//   getMainDockWidget()->resize( getMainDockWidget()->size().expandedTo( d->welcomeWidget->tqsizeHint() ) );
-//   m_dirTreeDock->resize( TQSize( m_dirTreeDock->tqsizeHint().width(), m_dirTreeDock->height() ) );
+//   getMainDockWidget()->resize( getMainDockWidget()->size().expandedTo( d->welcomeWidget->sizeHint() ) );
+//   m_dirTreeDock->resize( TQSize( m_dirTreeDock->sizeHint().width(), m_dirTreeDock->height() ) );
 
   readOptions();
 }
@@ -198,7 +198,7 @@ K3bMainWindow::~K3bMainWindow()
 
 void K3bMainWindow::showEvent( TQShowEvent* e )
 {
-  slotCheckDockWidgettqStatus();
+  slotCheckDockWidgetStatus();
   KDockMainWindow::showEvent( e );
 }
 
@@ -398,7 +398,7 @@ void K3bMainWindow::initView()
 
   m_documentHeader = new K3bThemedHeader( d->documentHull );
   m_documentHeader->setTitle( i18n("Current Projects") );
-  m_documentHeader->tqsetAlignment( TQt::AlignHCenter | TQt::AlignVCenter );
+  m_documentHeader->setAlignment( TQt::AlignHCenter | TQt::AlignVCenter );
   m_documentHeader->setLeftPixmap( K3bTheme::PROJECT_LEFT );
   m_documentHeader->setRightPixmap( K3bTheme::PROJECT_RIGHT );
 
@@ -609,7 +609,7 @@ void K3bMainWindow::readOptions()
   m_dirView->readConfig( config() );
 
   slotViewDocumentHeader();
-  slotCheckDockWidgettqStatus();
+  slotCheckDockWidgetStatus();
 }
 
 
@@ -1364,14 +1364,14 @@ void K3bMainWindow::slotDvdCopy()
 void K3bMainWindow::slotShowDirTreeView()
 {
   m_dirTreeDock->changeHideShowState();
-  slotCheckDockWidgettqStatus();
+  slotCheckDockWidgetStatus();
 }
 
 
 void K3bMainWindow::slotShowContentsView()
 {
   m_contentsDock->changeHideShowState();
-  slotCheckDockWidgettqStatus();
+  slotCheckDockWidgetStatus();
 }
 
 
@@ -1402,7 +1402,7 @@ void K3bMainWindow::slotContentsDockHidden()
 }
 
 
-void K3bMainWindow::slotCheckDockWidgettqStatus()
+void K3bMainWindow::slotCheckDockWidgetStatus()
 {
   actionViewContentsView->setChecked( m_contentsDock->isVisible() );
   actionViewDirTreeView->setChecked( m_dirTreeDock->isVisible() );

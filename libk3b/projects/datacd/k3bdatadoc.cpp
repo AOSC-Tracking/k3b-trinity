@@ -263,7 +263,7 @@ K3b::Msf K3bDataDoc::burningLength() const
 
 TQString K3bDataDoc::typeString() const
 {
-  return TQString::tqfromLatin1("data");
+  return TQString::fromLatin1("data");
 }
 
 

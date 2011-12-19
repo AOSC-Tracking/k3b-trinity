@@ -157,7 +157,7 @@ public:
     setMainWidget( w );
 
     // give ourselves a reasonable size
-    TQSize s = tqsizeHint();
+    TQSize s = sizeHint();
     s.setWidth( TQMAX(s.width(), 300) );
     resize( s );
   }

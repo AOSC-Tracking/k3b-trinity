@@ -126,19 +126,19 @@ void K3bTitleLabel::setSubTitle( const TQString& subTitle )
 }
 
 
-void K3bTitleLabel::tqsetAlignment( int align )
+void K3bTitleLabel::setAlignment( int align )
 {
   d->tqalignment = align;
   update();
 }
 
 
-TQSize K3bTitleLabel::tqsizeHint() const
+TQSize K3bTitleLabel::sizeHint() const
 {
   return TQSize( d->titleLength + d->subTitleLength + 2*d->margin, d->titleBaseLine );
 }
 
-TQSize K3bTitleLabel::tqminimumSizeHint() const
+TQSize K3bTitleLabel::minimumSizeHint() const
 {
   return TQSize( d->cachedMinimumWidth, d->titleBaseLine );
 }

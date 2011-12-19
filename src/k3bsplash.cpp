@@ -47,7 +47,7 @@ K3bSplash::K3bSplash( TQWidget* parent, const char* name )
   copyrightLabel->setMargin( 5 );
   copyrightLabel->setPaletteBackgroundColor( black );
   copyrightLabel->setPaletteForegroundColor( white );
-  copyrightLabel->tqsetAlignment( AlignRight );
+  copyrightLabel->setAlignment( AlignRight );
 
   TQLabel* picLabel = new TQLabel( this );
   if( K3bTheme* theme = k3bappcore->themeManager()->currentTheme() ) {
@@ -62,7 +62,7 @@ K3bSplash::K3bSplash( TQWidget* parent, const char* name )
 
   // Set tqgeometry, with support for Xinerama systems
   TQRect r;
-  r.setSize(tqsizeHint());
+  r.setSize(sizeHint());
   int ps = TQApplication::desktop()->primaryScreen();
   r.moveCenter( TQApplication::desktop()->screenGeometry(ps).center() );
   setGeometry(r);

@@ -64,7 +64,7 @@ void K3bMediaSelectionComboBox::ToolTip::maybeTip( const TQPoint& pos )
   int index = m_box->listBox()->index( item );
 
   if( K3bDevice::Device* dev = m_box->deviceAt( index ) ) {
-    tip( m_box->listBox()->tqitemRect( item ),
+    tip( m_box->listBox()->itemRect( item ),
 	 m_box->mediumToolTip( k3bappcore->mediaCache()->medium( dev ) ) );
   }
 }

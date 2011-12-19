@@ -65,7 +65,7 @@ void K3bGrowisofsHandler::reset( K3bDevice::Device* dev, bool dao )
 
 void K3bGrowisofsHandler::handleStart()
 {
-//  TQTimer::singleShot( 2000, this, TQT_SLOT(slotCheckBuffertqStatus()) );
+//  TQTimer::singleShot( 2000, this, TQT_SLOT(slotCheckBufferStatus()) );
 }
 
 
@@ -295,7 +295,7 @@ void K3bGrowisofsHandler::handleExit( int exitCode )
 }
 
 
-void K3bGrowisofsHandler::slotCheckBuffertqStatus()
+void K3bGrowisofsHandler::slotCheckBufferStatus()
 {
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::BUFFER_CAPACITY, m_device ),
 	   TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
@@ -308,7 +308,7 @@ void K3bGrowisofsHandler::slotCheckBufferStatusDone( K3bDevice::DeviceHandler* d
 {
   if( dh->success() && dh->bufferCapacity() > 0 ) {
     emit deviceBuffer( 100 * (dh->bufferCapacity() - dh->availableBufferCapacity() ) / dh->bufferCapacity() );
-    TQTimer::singleShot( 500, this, TQT_SLOT(slotCheckBuffertqStatus()) );
+    TQTimer::singleShot( 500, this, TQT_SLOT(slotCheckBufferStatus()) );
   }
   else {
     kdDebug() << "(K3bGrowisofsHandler) stopping buffer check." << endl;

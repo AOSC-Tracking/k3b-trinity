@@ -215,7 +215,7 @@ class K3bMainWindow : public KParts::DockMainWindow
 
   void slotViewDocumentHeader();
 
-  void slotCheckDockWidgettqStatus();
+  void slotCheckDockWidgetStatus();
 
   /** changes the statusbar contents for the standard label permanently, used to indicate current actions.
    * @param text the text that is displayed in the statusbar

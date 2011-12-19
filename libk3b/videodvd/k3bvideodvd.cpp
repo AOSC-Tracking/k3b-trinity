@@ -77,7 +77,7 @@ bool K3bVideoDVD::VideoDVD::open( K3bDevice::Device* dev )
     DVDClose( dvdReaderT );
     return false;
   }
-  m_volumeIdentifier = TQString::tqfromLatin1( v, 32 );
+  m_volumeIdentifier = TQString::fromLatin1( v, 32 );
 
   //
   // Open the VMG info

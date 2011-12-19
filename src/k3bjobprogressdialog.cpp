@@ -131,7 +131,7 @@ void K3bJobProgressDialog::setupGUI()
   headerLayout->addWidget( m_pixLabel );
 
   TQFrame* frame4 = new TQFrame( headerFrame, "frame4" );
-  frame4->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 1, 0, frame4->sizePolicy().hasHeightForWidth() ) );
+  frame4->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 1, 0, frame4->sizePolicy().hasHeightForWidth() ) );
   frame4->setFrameShape( TQFrame::NoFrame );
   frame4->setFrameShadow( TQFrame::Raised );
   TQVBoxLayout* frame4Layout = new TQVBoxLayout( frame4, 6, 3, "frame4Layout"); 
@@ -142,12 +142,12 @@ void K3bJobProgressDialog::setupGUI()
   m_labelJob_font.setPointSize( m_labelJob_font.pointSize() + 2 );
   m_labelJob_font.setBold( true );
   m_labelJob->setFont( m_labelJob_font ); 
-  m_labelJob->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelJob->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   frame4Layout->addWidget( m_labelJob );
 
   m_labelJobDetails = new K3bThemedLabel( frame4 );
-  m_labelJobDetails->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 0, 1, m_labelJobDetails->sizePolicy().hasHeightForWidth() ) );
-  m_labelJobDetails->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelJobDetails->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 0, 1, m_labelJobDetails->sizePolicy().hasHeightForWidth() ) );
+  m_labelJobDetails->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   frame4Layout->addWidget( m_labelJobDetails );
   headerLayout->addWidget( frame4 );
 
@@ -177,7 +177,7 @@ void K3bJobProgressDialog::setupGUI()
   progressHeaderLayout->setSpacing( 0 );
 
   TQFrame* frame5 = new TQFrame( progressHeaderFrame, "frame5" );
-  frame5->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 1, 0, frame5->sizePolicy().hasHeightForWidth() ) );
+  frame5->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 1, 0, frame5->sizePolicy().hasHeightForWidth() ) );
   frame5->setFrameShape( TQFrame::NoFrame );
   frame5->setFrameShadow( TQFrame::Raised );
   TQVBoxLayout* frame5Layout = new TQVBoxLayout( frame5, 6, 3, "frame5Layout"); 
@@ -190,7 +190,7 @@ void K3bJobProgressDialog::setupGUI()
   frame5Layout->addWidget( m_labelTask );
 
   m_labelElapsedTime = new K3bThemedLabel( frame5 );
-  m_labelElapsedTime->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 0, 1, m_labelElapsedTime->sizePolicy().hasHeightForWidth() ) );
+  m_labelElapsedTime->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)5, (TQSizePolicy::SizeType)5, 0, 1, m_labelElapsedTime->sizePolicy().hasHeightForWidth() ) );
   frame5Layout->addWidget( m_labelElapsedTime );
   progressHeaderLayout->addWidget( frame5 );
 
@@ -204,7 +204,7 @@ void K3bJobProgressDialog::setupGUI()
   tqlayout3->addWidget( m_labelSubTask );
 
   m_labelSubProcessedSize = new TQLabel( this, "m_labelSubProcessedSize" );
-  m_labelSubProcessedSize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelSubProcessedSize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   tqlayout3->addWidget( m_labelSubProcessedSize );
   mainLayout->addLayout( tqlayout3 );
 
@@ -217,7 +217,7 @@ void K3bJobProgressDialog::setupGUI()
   tqlayout4->addWidget( textLabel5 );
 
   m_labelProcessedSize = new TQLabel( this, "m_labelProcessedSize" );
-  m_labelProcessedSize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+  m_labelProcessedSize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   tqlayout4->addWidget( m_labelProcessedSize );
   mainLayout->addLayout( tqlayout4 );
 
@@ -579,7 +579,7 @@ void K3bJobProgressDialog::keyPressEvent( TQKeyEvent *e )
 }
 
 
-TQSize K3bJobProgressDialog::tqsizeHint() const
+TQSize K3bJobProgressDialog::sizeHint() const
 {
   TQSize s = tqlayout()->totalSizeHint();
   if( s.width() < s.height() )

@@ -300,7 +300,7 @@ public:
       return;
     int col = m_view->header()->sectionAt( contentsPos.x() );
 
-    TQRect r = m_view->tqitemRect( item );
+    TQRect r = m_view->itemRect( item );
     int headerPos = m_view->header()->sectionPos( col );
     r.setLeft( headerPos );
     r.setRight( headerPos + m_view->header()->sectionSize( col ) );

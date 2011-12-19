@@ -95,10 +95,10 @@ K3bEmptyDiscWaiter::K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* par
   // setup the gui
   // -----------------------------
   d->labelRequest = new TQLabel( plainPage() );
-  d->labelRequest->tqsetAlignment( TQt::AlignLeft | TQt::AlignVCenter );
+  d->labelRequest->setAlignment( TQt::AlignLeft | TQt::AlignVCenter );
   d->labelFoundMedia = new TQLabel( plainPage() );
   d->pixLabel = new TQLabel( plainPage() );
-  d->pixLabel->tqsetAlignment( TQt::AlignHCenter | TQt::AlignTop );
+  d->pixLabel->setAlignment( TQt::AlignHCenter | TQt::AlignTop );
 
   TQFont f( d->labelFoundMedia->font() );
   f.setBold(true);

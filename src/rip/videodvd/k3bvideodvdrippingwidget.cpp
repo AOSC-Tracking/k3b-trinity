@@ -351,8 +351,8 @@ void K3bVideoDVDRippingWidget::slotCustomPictureSize()
   spinHeight->setSpecialValueText( i18n("Auto") );
   TQLabel* labelW = new TQLabel( spinWidth, i18n("Width") + ':', dlg.plainPage() );
   TQLabel* labelH = new TQLabel( spinHeight, i18n("Height") + ':', dlg.plainPage() );
-  labelW->tqsetAlignment( TQt::AlignRight|TQt::AlignVCenter );
-  labelH->tqsetAlignment( TQt::AlignRight|TQt::AlignVCenter );
+  labelW->setAlignment( TQt::AlignRight|TQt::AlignVCenter );
+  labelH->setAlignment( TQt::AlignRight|TQt::AlignVCenter );
 
   TQGridLayout* grid = new TQGridLayout( dlg.plainPage() );
   grid->setMargin( 0 );
