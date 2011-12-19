@@ -200,7 +200,7 @@ void K3bBlankingDialog::slotWriterChanged()
     setButtonEnabled( START_BUTTON, true );
   else {
     setButtonEnabled( START_BUTTON, false );
-    KMessageBox::sorry( this, i18n("%1 does not support CD-RW writing.").tqarg(dev->devicename()) );
+    KMessageBox::sorry( this, i18n("%1 does not support CD-RW writing.").arg(dev->devicename()) );
   }
 }
 

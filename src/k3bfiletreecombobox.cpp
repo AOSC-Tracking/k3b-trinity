@@ -198,7 +198,7 @@ void K3bFileTreeComboBox::popdown()
 {
   m_fileTreeView->hide();
   d->poppedUp = false;
-  tqrepaint(); // tqrepaint the arrow
+  repaint(); // repaint the arrow
 }
 
 
@@ -318,7 +318,7 @@ void K3bFileTreeComboBox::mousePressEvent( TQMouseEvent* e )
 
   if ( arrowRect.contains( e->pos() ) ) {
     popup();
-    tqrepaint( FALSE );
+    repaint( FALSE );
   }
 }
 

@@ -314,13 +314,13 @@ void K3bJobProgressDialog::setupConnections()
 
 void K3bJobProgressDialog::slotProcessedSize( int processed, int size )
 {
-  m_labelProcessedSize->setText( i18n("%1 of %2 MB").tqarg( processed ).tqarg( size ) );
+  m_labelProcessedSize->setText( i18n("%1 of %2 MB").arg( processed ).arg( size ) );
 }
 
 
 void K3bJobProgressDialog::slotProcessedSubSize( int processedTrackSize, int trackSize )
 {
-  m_labelSubProcessedSize->setText( i18n("%1 of %2 MB").tqarg(processedTrackSize).tqarg(trackSize) );
+  m_labelSubProcessedSize->setText( i18n("%1 of %2 MB").arg(processedTrackSize).arg(trackSize) );
 }
 
 
@@ -515,10 +515,10 @@ void K3bJobProgressDialog::slotUpdateTime()
 {
   int elapsed = m_startTime.secsTo( TQTime::currentTime() );
 
-  TQString s = i18n("Elapsed time: %1 h").tqarg( TQTime().addSecs(elapsed).toString() );
+  TQString s = i18n("Elapsed time: %1 h").arg( TQTime().addSecs(elapsed).toString() );
   if( d->lastProgress > 0 && d->lastProgress < 100 ) {
     int rem = m_startTime.secsTo( m_lastProgressUpdateTime ) * (100-d->lastProgress) / d->lastProgress;
-    s += " / " + i18n("Remaining: %1 h").tqarg( TQTime().addSecs(rem).toString() );
+    s += " / " + i18n("Remaining: %1 h").arg( TQTime().addSecs(rem).toString() );
   }
 
   m_labelElapsedTime->setText( s );
@@ -546,10 +546,10 @@ void K3bJobProgressDialog::slotProgress( int percent )
     d->lastProgress = percent;
     m_lastProgressUpdateTime = TQTime::currentTime();
     if( KMainWindow* w = dynamic_cast<KMainWindow*>(kapp->mainWidget()) ) {
-      w->setPlainCaption( TQString( "(%1%) %2" ).tqarg(percent).tqarg(m_plainCaption) );
+      w->setPlainCaption( TQString( "(%1%) %2" ).arg(percent).arg(m_plainCaption) );
     }
 
-    setCaption( TQString( "(%1%) %2" ).tqarg(percent).tqarg(m_job->jobDescription()) );
+    setCaption( TQString( "(%1%) %2" ).arg(percent).arg(m_job->jobDescription()) );
   }
 }
 

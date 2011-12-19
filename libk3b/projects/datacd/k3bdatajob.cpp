@@ -196,7 +196,7 @@ void K3bDataJob::slotMsInfoFetched(bool success)
     prepareData();
 
     if( d->usedWritingApp == K3b::CDRDAO )  // cdrdao seems to write a 150 blocks pregap that is not used by cdrecord
-      m_isoImager->setMultiSessionInfo( TQString("%1,%2").tqarg(m_msInfoFetcher->lastSessionStart()).tqarg(m_msInfoFetcher->nextSessionStart()+150), d->doc->burner() );
+      m_isoImager->setMultiSessionInfo( TQString("%1,%2").arg(m_msInfoFetcher->lastSessionStart()).arg(m_msInfoFetcher->nextSessionStart()+150), d->doc->burner() );
     else
       m_isoImager->setMultiSessionInfo( m_msInfoFetcher->msInfo(), d->doc->burner() );
 
@@ -226,7 +226,7 @@ void K3bDataJob::writeImage()
 
   emit newTask( i18n("Creating image file") );
   emit newSubTask( i18n("Track 1 of 1") );
-  emit infoMessage( i18n("Creating image file in %1").tqarg(d->doc->tempDir()), INFO );
+  emit infoMessage( i18n("Creating image file in %1").arg(d->doc->tempDir()), INFO );
 
   m_isoImager->writeToImageFile( d->doc->tempDir() );
   m_isoImager->start();
@@ -324,7 +324,7 @@ void K3bDataJob::slotIsoImagerFinished( bool success )
 	d->doc->onlyCreateImages() ) {
 
       if( success ) {
-	emit infoMessage( i18n("Image successfully created in %1").tqarg(d->doc->tempDir()), K3bJob::SUCCESS );
+	emit infoMessage( i18n("Image successfully created in %1").arg(d->doc->tempDir()), K3bJob::SUCCESS );
 	d->imageFinished = true;
 
 	if( d->doc->onlyCreateImages() ) {
@@ -370,7 +370,7 @@ bool K3bDataJob::startWriterJob()
   if( d->doc->dummy() )
     emit newTask( i18n("Simulating") );
   else if( d->copies > 1 )
-    emit newTask( i18n("Writing Copy %1").tqarg(d->copiesDone+1) );
+    emit newTask( i18n("Writing Copy %1").arg(d->copiesDone+1) );
   else
     emit newTask( i18n("Writing") );
 
@@ -408,7 +408,7 @@ void K3bDataJob::slotWriterJobPercent( int p )
 
 void K3bDataJob::slotWriterNextTrack( int t, int tt )
 {
-  emit newSubTask( i18n("Writing Track %1 of %2").tqarg(t).tqarg(tt) );
+  emit newSubTask( i18n("Writing Track %1 of %2").arg(t).arg(tt) );
 }
 
 
@@ -632,7 +632,7 @@ bool K3bDataJob::prepareWriterJob()
 	writer->addArgument( "-xa1" );
     }
 
-    writer->addArgument( TQString("-tsize=%1s").tqarg(m_isoImager->size()) )->addArgument("-");
+    writer->addArgument( TQString("-tsize=%1s").arg(m_isoImager->size()) )->addArgument("-");
 
     setWriterJob( writer );
   }
@@ -915,13 +915,13 @@ TQString K3bDataJob::jobDescription() const
     return i18n("Writing Data CD")
       + ( d->doc->isoOptions().volumeID().isEmpty()
 	  ? TQString()
-	  : TQString( " (%1)" ).tqarg(d->doc->isoOptions().volumeID()) );
+	  : TQString( " (%1)" ).arg(d->doc->isoOptions().volumeID()) );
   }
   else {
     return i18n("Writing Multisession CD")
       + ( d->doc->isoOptions().volumeID().isEmpty()
 	  ? TQString()
-	  : TQString( " (%1)" ).tqarg(d->doc->isoOptions().volumeID()) );
+	  : TQString( " (%1)" ).arg(d->doc->isoOptions().volumeID()) );
   }
 }
 
@@ -935,10 +935,10 @@ TQString K3bDataJob::jobDetails() const
     return i18n("ISO9660 Filesystem (Size: %1) - %n copy",
 		"ISO9660 Filesystem (Size: %1) - %n copies",
 		d->doc->copies() )
-      .tqarg(KIO::convertSize( d->doc->size() ));
+      .arg(KIO::convertSize( d->doc->size() ));
   else
     return i18n("ISO9660 Filesystem (Size: %1)")
-      .tqarg(KIO::convertSize( d->doc->size() ));
+      .arg(KIO::convertSize( d->doc->size() ));
 }
 
 
@@ -953,7 +953,7 @@ void K3bDataJob::cleanup()
   if( !d->doc->onTheFly() && d->doc->removeImages() ) {
     if( TQFile::exists( d->doc->tempDir() ) ) {
       d->imageFile.remove();
-      emit infoMessage( i18n("Removed image file %1").tqarg(d->doc->tempDir()), K3bJob::SUCCESS );
+      emit infoMessage( i18n("Removed image file %1").arg(d->doc->tempDir()), K3bJob::SUCCESS );
     }
   }
 

@@ -67,7 +67,7 @@ public:
     : K3bCheckListViewItem( parent, after ) {
 
     setText( 1, TQString::number(_trackNumber).rightJustify( 2, ' ' ) );
-    setText( 3, i18n("Track %1").tqarg(_trackNumber) );
+    setText( 3, i18n("Track %1").arg(_trackNumber) );
     setText( 4, " " + length.toString() + " " );
     setText( 5, " " + KIO::convertSize( length.audioBytes() ) + " " );
 
@@ -335,7 +335,7 @@ void K3bAudioCdView::slotEditTrackCddb()
   if( !items.isEmpty() ) {
     AudioTrackViewItem* a = static_cast<AudioTrackViewItem*>(items.first());
 
-    KDialogBase d( this, "trackCddbDialog", true, i18n("Cddb Track %1").tqarg(a->trackNumber),
+    KDialogBase d( this, "trackCddbDialog", true, i18n("Cddb Track %1").arg(a->trackNumber),
 		   KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true);
     TQWidget* w = new TQWidget( &d );
 
@@ -516,8 +516,8 @@ void K3bAudioCdView::slotSaveCddbLocally()
 
   m_cddb->saveEntry( m_cddbInfo );
   K3bPassivePopup::showPopup( i18n("Saved entry (%1) in category %2.")
-			      .tqarg(m_cddbInfo.discid)
-			      .tqarg(m_cddbInfo.category),
+			      .arg(m_cddbInfo.discid)
+			      .arg(m_cddbInfo.category),
 			      i18n("CDDB") );
 }
 
@@ -569,7 +569,7 @@ void K3bAudioCdView::updateDisplay()
 
   m_labelLength->setText( i18n("1 track (%1)", 
 			       "%n tracks (%1)", 
-			       m_toc.count()).tqarg(K3b::Msf(m_toc.length()).toString()) );
+			       m_toc.count()).arg(K3b::Msf(m_toc.length()).toString()) );
 }
 
 

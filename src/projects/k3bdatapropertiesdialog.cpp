@@ -94,7 +94,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
     KFileItem kFileItem( KFileItem::Unknown, KFileItem::Unknown, KURL::fromPathOrURL(fileItem->localPath()) );
     labelMimeType->setPixmap( kFileItem.pixmap(KIcon::SizeLarge) );
     if( fileItem->isSymLink() )
-      m_labelType->setText( i18n("Link to %1").tqarg(kFileItem.mimeComment()) );
+      m_labelType->setText( i18n("Link to %1").arg(kFileItem.mimeComment()) );
     else
       m_labelType->setText( kFileItem.mimeComment() );
     m_labelLocalName->setText( kFileItem.name() );
@@ -136,7 +136,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
   if( location.isEmpty() )
     location = "/";
   m_labelLocation->setText( location );
-  extraInfoLabel->setText( TQString( "(%1)" ).tqarg(dataItem->extraInfo()) );
+  extraInfoLabel->setText( TQString( "(%1)" ).arg(dataItem->extraInfo()) );
   if( dataItem->extraInfo().isEmpty() )
     extraInfoLabel->hide();
 

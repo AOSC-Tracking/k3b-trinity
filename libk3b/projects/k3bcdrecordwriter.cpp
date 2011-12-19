@@ -163,7 +163,7 @@ void K3bCdrecordWriter::prepareProcess()
     *m_process << "gracetime=2";  // 2 is the lowest allowed value (Joerg, why do you do this to us?)
 
   // Again we assume the device to be set!
-  *m_process << TQString("dev=%1").tqarg(K3b::externalBinDeviceParameter(burnDevice(), m_cdrecordBinObject));
+  *m_process << TQString("dev=%1").arg(K3b::externalBinDeviceParameter(burnDevice(), m_cdrecordBinObject));
 
   d->usedSpeed = burnSpeed();
   if( d->usedSpeed == 0 ) {
@@ -174,7 +174,7 @@ void K3bCdrecordWriter::prepareProcess()
   }
   d->usedSpeed /= 175;
   if( d->usedSpeed != 0 )
-    *m_process << TQString("speed=%1").tqarg(d->usedSpeed);
+    *m_process << TQString("speed=%1").arg(d->usedSpeed);
 
   if( m_writingMode == K3b::DAO || m_cue ) {
     if( burnDevice()->dao() )
@@ -227,7 +227,7 @@ void K3bCdrecordWriter::prepareProcess()
 
   if( m_cue ) {
     m_process->setWorkingDirectory(TQUrl(m_cueFile).dirPath());
-    *m_process << TQString("cuefile=%1").tqarg( m_cueFile );
+    *m_process << TQString("cuefile=%1").arg( m_cueFile );
   }
 
   if( m_clone )
@@ -249,7 +249,7 @@ void K3bCdrecordWriter::prepareProcess()
 
   bool manualBufferSize = k3bcore->globalSettings()->useManualBufferSize();
   if( manualBufferSize ) {
-    *m_process << TQString("fs=%1m").tqarg( k3bcore->globalSettings()->bufferSize() );
+    *m_process << TQString("fs=%1m").arg( k3bcore->globalSettings()->bufferSize() );
   }
 
   bool overburn = k3bcore->globalSettings()->overburn();
@@ -257,7 +257,7 @@ void K3bCdrecordWriter::prepareProcess()
     if( m_cdrecordBinObject->hasFeature("overburn") )
       *m_process << "-overburn";
     else
-      emit infoMessage( i18n("Cdrecord %1 does not support overburning.").tqarg(m_cdrecordBinObject->version), WARNING );
+      emit infoMessage( i18n("Cdrecord %1 does not support overburning.").arg(m_cdrecordBinObject->version), WARNING );
 
   // additional user parameters from config
   const TQStringList& params = m_cdrecordBinObject->userParameters();
@@ -293,7 +293,7 @@ void K3bCdrecordWriter::start()
   prepareProcess();
 
   if( !m_cdrecordBinObject ) {
-    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdrecord"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").arg("cdrecord"), ERROR );
     jobFinished(false);
     return;
   }
@@ -302,9 +302,9 @@ void K3bCdrecordWriter::start()
 
   if( !m_cdrecordBinObject->copyright.isEmpty() )
     emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3")
-		      .tqarg(m_cdrecordBinObject->hasFeature( "wodim" ) ? "Wodim" : "Cdrecord" )
-		      .tqarg(m_cdrecordBinObject->version)
-		      .tqarg(m_cdrecordBinObject->copyright), INFO );
+		      .arg(m_cdrecordBinObject->hasFeature( "wodim" ) ? "Wodim" : "Cdrecord" )
+		      .arg(m_cdrecordBinObject->version)
+		      .arg(m_cdrecordBinObject->copyright), INFO );
 
 
   kdDebug() << "***** " << m_cdrecordBinObject->name() << " parameters:\n";
@@ -343,22 +343,22 @@ void K3bCdrecordWriter::start()
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bCdrecordWriter) could not start " << m_cdrecordBinObject->name() << endl;
-    emit infoMessage( i18n("Could not start %1.").tqarg(m_cdrecordBinObject->name()), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not start %1.").arg(m_cdrecordBinObject->name()), K3bJob::ERROR );
     jobFinished(false);
   }
   else {
     if( simulate() ) {
       emit newTask( i18n("Simulating") );
       emit infoMessage( i18n("Starting %1 simulation at %2x speed...")
-			.tqarg(K3b::writingModeString(m_writingMode))
-			.tqarg(d->usedSpeed),
+			.arg(K3b::writingModeString(m_writingMode))
+			.arg(d->usedSpeed),
 			K3bJob::INFO );
     }
     else {
       emit newTask( i18n("Writing") );
       emit infoMessage( i18n("Starting %1 writing at %2x speed...")
-			.tqarg(K3b::writingModeString(m_writingMode))
-			.tqarg(d->usedSpeed),
+			.arg(K3b::writingModeString(m_writingMode))
+			.arg(d->usedSpeed),
 			K3bJob::INFO );
     }
   }
@@ -510,7 +510,7 @@ void K3bCdrecordWriter::slotStdLine( const TQString& line )
       // parse option
       int pos = line.find( "Bad Option" ) + 13;
       int len = line.length() - pos - 1;
-      emit infoMessage( i18n("No valid %1 option: %2").tqarg(m_cdrecordBinObject->name()).tqarg(line.mid(pos, len)),
+      emit infoMessage( i18n("No valid %1 option: %2").arg(m_cdrecordBinObject->name()).arg(line.mid(pos, len)),
 			ERROR );
     }
     else if( errStr.startsWith("Cannot set speed/dummy") ) {
@@ -562,11 +562,11 @@ void K3bCdrecordWriter::slotStdLine( const TQString& line )
     int pos2 = line.find( "in", pos+9 );
     int speed = static_cast<int>( line.mid( pos+9, pos2-pos-10 ).toDouble() );  // cdrecord-dvd >= 2.01a25 uses 8.0 and stuff
     if( speed != d->usedSpeed ) {
-      emit infoMessage( i18n("Medium or burner do not support writing at %1x speed").tqarg(d->usedSpeed), K3bJob::WARNING );
+      emit infoMessage( i18n("Medium or burner do not support writing at %1x speed").arg(d->usedSpeed), K3bJob::WARNING );
       if( speed > d->usedSpeed )
-	emit infoMessage( i18n("Switching burn speed up to %1x").tqarg(speed), K3bJob::WARNING );
+	emit infoMessage( i18n("Switching burn speed up to %1x").arg(speed), K3bJob::WARNING );
       else
-	emit infoMessage( i18n("Switching burn speed down to %1x").tqarg(speed), K3bJob::WARNING );
+	emit infoMessage( i18n("Switching burn speed down to %1x").arg(speed), K3bJob::WARNING );
     }
   }
   else if( line.startsWith( "Starting new" ) ) {
@@ -682,7 +682,7 @@ void K3bCdrecordWriter::slotProcessExited( KProcess* p )
 	  emit infoMessage( i18n("Writing successfully completed"), K3bJob::SUCCESS );
 
 	int s = d->speedEst->average();
-	emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)").tqarg(s).tqarg(KGlobal::locale()->formatNumber((double)s/150.0), 2), INFO );
+	emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)").arg(s).arg(KGlobal::locale()->formatNumber((double)s/150.0), 2), INFO );
 
 	jobFinished( true );
       }
@@ -709,14 +709,14 @@ void K3bCdrecordWriter::slotProcessExited( KProcess* p )
 	// error message has already been emited earlier since we needed the actual line
 	break;
       case SHMGET_FAILED:
-	emit infoMessage( i18n("%1 could not reserve shared memory segment of requested size.").tqarg(m_cdrecordBinObject->name()), ERROR );
+	emit infoMessage( i18n("%1 could not reserve shared memory segment of requested size.").arg(m_cdrecordBinObject->name()), ERROR );
 	emit infoMessage( i18n("Probably you chose a too large buffer size."), ERROR );
 	break;
       case OPC_FAILED:
 	emit infoMessage( i18n("OPC failed. Probably the writer does not like the medium."), ERROR );
 	break;
       case CANNOT_SET_SPEED:
-	emit infoMessage( i18n("Unable to set write speed to %1.").tqarg(d->usedSpeed), ERROR );
+	emit infoMessage( i18n("Unable to set write speed to %1.").arg(d->usedSpeed), ERROR );
 	emit infoMessage( i18n("Probably this is lower than your writer's lowest writing speed."), ERROR );
 	break;
       case CANNOT_SEND_CUE_SHEET:
@@ -734,7 +734,7 @@ void K3bCdrecordWriter::slotProcessExited( KProcess* p )
 	  emit infoMessage( i18n("Try DAO writing mode."), ERROR );
 	break;
       case PERMISSION_DENIED:
-	emit infoMessage( i18n("%1 has no permission to open the device.").tqarg("Cdrecord"), ERROR );
+	emit infoMessage( i18n("%1 has no permission to open the device.").arg("Cdrecord"), ERROR );
 #ifdef HAVE_K3BSETUP
 	emit infoMessage( i18n("You may use K3bsetup2 to solve this problem."), ERROR );
 #endif
@@ -776,7 +776,7 @@ void K3bCdrecordWriter::slotProcessExited( KProcess* p )
 	}
 	else if( !wasSourceUnreadable() ) {
 	  emit infoMessage( i18n("%1 returned an unknown error (code %2).")
-			    .tqarg(m_cdrecordBinObject->name()).tqarg(p->exitStatus()),
+			    .arg(m_cdrecordBinObject->name()).arg(p->exitStatus()),
 			    K3bJob::ERROR );
 
 	  if( p->exitStatus() >= 254 && m_writingMode == K3b::DAO ) {
@@ -795,7 +795,7 @@ void K3bCdrecordWriter::slotProcessExited( KProcess* p )
     }
   }
   else {
-    emit infoMessage( i18n("%1 did not exit cleanly.").tqarg(m_cdrecordBinObject->name()),
+    emit infoMessage( i18n("%1 did not exit cleanly.").arg(m_cdrecordBinObject->name()),
 		      ERROR );
     jobFinished( false );
   }

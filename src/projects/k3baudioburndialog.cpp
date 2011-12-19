@@ -63,7 +63,7 @@ K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, TQWidget *parent, cons
 
   setTitle( i18n("Audio Project"),
 	    i18n("1 track (%1 minutes)", "%n tracks (%1 minutes)",
-		 m_doc->numOfTracks() ).tqarg(m_doc->length().toString()) );
+		 m_doc->numOfTracks() ).arg(m_doc->length().toString()) );
 
   TQSpacerItem* spacer = new TQSpacerItem( 20, 20, TQSizePolicy::Minimum, TQSizePolicy::Expanding );
   m_optionGroupLayout->addItem( spacer );

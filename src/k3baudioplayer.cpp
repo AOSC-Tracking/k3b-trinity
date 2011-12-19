@@ -586,13 +586,13 @@ void K3bAudioPlayer::slotUpdateFilename()
 
     switch( state() ) {
     case PLAYING:
-      display.prepend( TQString("(%1) ").tqarg(i18n("playing")) );
+      display.prepend( TQString("(%1) ").arg(i18n("playing")) );
       break;
     case PAUSED:
-      display.prepend( TQString("(%1) ").tqarg(i18n("paused")) );
+      display.prepend( TQString("(%1) ").arg(i18n("paused")) );
       break;
     case STOPPED:
-      display.prepend( TQString("(%1) ").tqarg(i18n("stopped")) );
+      display.prepend( TQString("(%1) ").arg(i18n("stopped")) );
       break;
     default:
       break;

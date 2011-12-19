@@ -203,7 +203,7 @@ void K3bAudioMetainfoRenamerPluginWidget::scanDir( K3bDirItem* dir, TQListViewIt
 
   d->dirItemDict.insert( dir, viewRoot );
 
-  for( TQPtrListIterator<K3bDataItem> it( dir->tqchildren() ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( dir->children() ); it.current(); ++it ) {
     K3bDataItem* item = it.current();
 
     if( item->isFile() ) {
@@ -334,9 +334,9 @@ TQString K3bAudioMetainfoRenamerPluginWidget::createNewName( K3bFileItem* item )
 	kdDebug() << "(K3bAudioMetainfoRenamerPluginWidget) file with name " 
 		  << newName << extension << " already exists" << endl;
 	int i = 1;
-	while( existsOtherItemWithSameName( item, newName + TQString( " (%1)").tqarg(i) + extension ) )
+	while( existsOtherItemWithSameName( item, newName + TQString( " (%1)").arg(i) + extension ) )
 	  i++;
-	newName.append( TQString( " (%1)").tqarg(i) );
+	newName.append( TQString( " (%1)").arg(i) );
       }
 
       // append extension

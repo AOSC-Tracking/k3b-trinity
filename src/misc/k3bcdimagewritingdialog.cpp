@@ -718,9 +718,9 @@ void K3bCdImageWritingDialog::createAudioCueItems( const K3bCueFileParser& cp )
   if( !cp.cdText().isEmpty() )
     trackParent->setText( 1,
 			  TQString("%1 (%2 - %3)")
-			  .tqarg(trackParent->text(1))
-			  .tqarg(cp.cdText().performer())
-			  .tqarg(cp.cdText().title()) );
+			  .arg(trackParent->text(1))
+			  .arg(cp.cdText().performer())
+			  .arg(cp.cdText().title()) );
 
   unsigned int i = 1;
   for( K3bDevice::Toc::const_iterator it = cp.toc().begin();
@@ -736,9 +736,9 @@ void K3bCdImageWritingDialog::createAudioCueItems( const K3bCueFileParser& cp )
     if( !cp.cdText().isEmpty() && !cp.cdText()[i-1].isEmpty() )
       trackItem->setText( 1,
 			  TQString("%1 (%2 - %3)")
-			  .tqarg(trackItem->text(1))
-			  .tqarg(cp.cdText()[i-1].performer())
-			  .tqarg(cp.cdText()[i-1].title()) );
+			  .arg(trackItem->text(1))
+			  .arg(cp.cdText()[i-1].performer())
+			  .arg(cp.cdText()[i-1].title()) );
 
     ++i;
   }
@@ -899,10 +899,10 @@ void K3bCdImageWritingDialog::slotContextMenu( KListView*, TQListViewItem*, cons
 						     this );
     if( ok ) {
       if( md5sumToCompare.lower().utf8() == d->md5Job->hexDigest().lower() )
-	KMessageBox::information( this, i18n("The MD5 Sum of %1 equals the specified.").tqarg(imagePath()),
+	KMessageBox::information( this, i18n("The MD5 Sum of %1 equals the specified.").arg(imagePath()),
 				  i18n("MD5 Sums Equal") );
       else
-	KMessageBox::sorry( this, i18n("The MD5 Sum of %1 differs from the specified.").tqarg(imagePath()),
+	KMessageBox::sorry( this, i18n("The MD5 Sum of %1 differs from the specified.").arg(imagePath()),
 			    i18n("MD5 Sums Differ") );
     }
   }

@@ -132,7 +132,7 @@ void K3bBurningOptionTab::setupGui()
 							"avoid gaps in the data stream due to high system load. The default "
 							"sizes used are %1 MB for CD and %2 MB for DVD burning."
 							"<p>If this option is checked the value specified will be used for both "
-							"CD and DVD burning.").tqarg(4).tqarg(32) );
+							"CD and DVD burning.").arg(4).arg(32) );
 
   TQWhatsThis::add( m_checkEject, i18n("<p>If this option is checked K3b will not eject the medium once the burn process "
 				      "finishes. This can be helpful in case one leaves the computer after starting the "

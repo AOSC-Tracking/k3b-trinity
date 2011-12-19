@@ -158,7 +158,7 @@ void K3bFlatButton::drawContents( TQPainter* p )
 //     TQRect r( mapToParent( TQPoint(lineWidth(), lineWidth()) ), 
 // 	     mapToParent( TQPoint(width()-2*lineWidth(), height()-2*lineWidth() )) );
     
-//     parentWidget()->tqrepaint( r );
+//     parentWidget()->repaint( r );
 //   }
 
   p->save();

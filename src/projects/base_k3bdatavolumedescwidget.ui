@@ -134,7 +134,7 @@
                     <property name="text">
                         <string>Volume set &amp;number:</string>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                     <property name="buddy" stdset="0">

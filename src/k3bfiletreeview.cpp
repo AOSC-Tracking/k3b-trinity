@@ -52,7 +52,7 @@
 K3bDeviceBranch::K3bDeviceBranch( KFileTreeView* view, K3bDevice::Device* dev, KFileTreeViewItem* item )
   : KFileTreeBranch( view,
 		     KURL( "media:/" + dev->blockDeviceName() ),
-		     TQString("%1 - %2").tqarg(dev->vendor()).tqarg(dev->description()),
+		     TQString("%1 - %2").arg(dev->vendor()).arg(dev->description()),
 		     ( dev->burner()
 		       ? SmallIcon("cdwriter_unmount")
 		       : SmallIcon("cdrom_unmount") ),
@@ -99,13 +99,13 @@ void K3bDeviceBranch::updateLabel()
 {
   if( m_showBlockDeviceName )
     setName( TQString("%1 %2 (%3)")
-	     .tqarg(m_device->vendor())
-	     .tqarg(m_device->description())
-	     .tqarg(m_device->blockDeviceName()) );
+	     .arg(m_device->vendor())
+	     .arg(m_device->description())
+	     .arg(m_device->blockDeviceName()) );
   else
     setName( TQString("%1 %2")
-	     .tqarg(m_device->vendor())
-	     .tqarg(m_device->description()) );
+	     .arg(m_device->vendor())
+	     .arg(m_device->description()) );
 
   if( k3bappcore->mediaCache() ) {
     root()->setMultiLinesEnabled( true );
@@ -182,7 +182,7 @@ K3bDeviceBranchViewItem::K3bDeviceBranchViewItem( KFileTreeView* parent,
 void K3bDeviceBranchViewItem::setCurrent( bool c )
 {
   m_bCurrent = c;
-  tqrepaint();
+  repaint();
 }
 
 

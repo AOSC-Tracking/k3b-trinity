@@ -272,7 +272,7 @@ void K3bListViewItem::setBackgroundColor( int col, const TQColor& c )
   ColumnInfo* info = getColumnInfo( col );
   info->backgroundColorSet = true;
   info->backgroundColor = c;
-  tqrepaint();
+  repaint();
 }
 
 
@@ -281,7 +281,7 @@ void K3bListViewItem::setForegroundColor( int col, const TQColor& c )
  ColumnInfo* info = getColumnInfo( col );
  info->foregroundColorSet = true;
  info->foregroundColor = c;
- tqrepaint();
+ repaint();
 }
 
 
@@ -299,7 +299,7 @@ void K3bListViewItem::setProgress( int col, int p )
     setDisplayProgressBar( col, true );
   if( info->progressValue != p ) {
     info->progressValue = p;
-    tqrepaint();
+    repaint();
   }
 }
 
@@ -309,7 +309,7 @@ void K3bListViewItem::setTotalSteps( int col, int steps )
   ColumnInfo* info = getColumnInfo( col );
   info->totalProgressSteps = steps;
 
-  tqrepaint();
+  repaint();
 }
 
 
@@ -318,14 +318,14 @@ void K3bListViewItem::setMarginHorizontal( int col, int margin )
   ColumnInfo* info = getColumnInfo( col );
   info->margin = margin;
 
-  tqrepaint();
+  repaint();
 }
 
 
 void K3bListViewItem::setMarginVertical( int margin )
 {
   m_vMargin = margin;
-  tqrepaint();
+  repaint();
 }
 
 
@@ -364,7 +364,7 @@ void K3bListViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int col, 
   if( info->backgroundColorSet )
     cgh.setColor( TQColorGroup::Base, info->backgroundColor );
 
-  // in case this is the selected row has a margin we need to tqrepaint the selection bar
+  // in case this is the selected row has a margin we need to repaint the selection bar
   if( isSelected() &&
       (col == 0 || listView()->allColumnsShowFocus()) &&
       info->margin > 0 ) {
@@ -445,7 +445,7 @@ void K3bListViewItem::paintProgressBar( TQPainter* p, const TQColorGroup& cgh, i
   s_dummyProgressBar->setTotalSteps( info->totalProgressSteps );
   s_dummyProgressBar->setProgress( info->progressValue );
 
-  // some styles use the widget's tqgeometry
+  // some styles use the widget's geometry
   s_dummyProgressBar->setGeometry( r );
 
   listView()->tqstyle().drawControl(TQStyle::CE_ProgressBarContents, &dbPainter, s_dummyProgressBar, r, cgh, flags );
@@ -498,7 +498,7 @@ bool K3bCheckListViewItem::isChecked() const
 void K3bCheckListViewItem::setChecked( bool checked )
 {
   m_checked = checked;
-  tqrepaint();
+  repaint();
 }
 
 
@@ -1142,7 +1142,7 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
 	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
 	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ||
 	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorComboBox) ) {
-      // make sure we did not lose the focus to one of the edit widgets' tqchildren
+      // make sure we did not lose the focus to one of the edit widgets' children
       if( !tqApp->focusWidget() || TQT_BASE_OBJECT(tqApp->focusWidget()->parentWidget()) != TQT_BASE_OBJECT(o) ) {
 	doRename();
 	hideEditor();

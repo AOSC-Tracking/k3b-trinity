@@ -30,7 +30,7 @@ public:
   Private() {
     titleLength = subTitleLength = 0;
     margin = 2;
-    tqalignment = TQt::AlignLeft;
+    alignment = TQt::AlignLeft;
     cachedMinimumWidth = 0;
     titleBaseLine = 0;
   }
@@ -41,7 +41,7 @@ public:
   TQString displayTitle;
   TQString displaySubTitle;
 
-  int tqalignment;
+  int alignment;
 
   int titleLength;
   int subTitleLength;
@@ -71,9 +71,9 @@ public:
       neededWidth += m_label->d->displaySubTitleLength + 5;
 
     int startPos = 0;
-    if( m_label->d->tqalignment & TQt::AlignHCenter )
+    if( m_label->d->alignment & TQt::AlignHCenter )
       startPos = r.left() + ( r.width() - 2*m_label->d->margin - neededWidth ) / 2;
-    else if( m_label->d->tqalignment & TQt::AlignRight )
+    else if( m_label->d->alignment & TQt::AlignRight )
       startPos = r.right() - m_label->d->margin - neededWidth;
     else
       startPos = r.left() + m_label->d->margin;
@@ -128,7 +128,7 @@ void K3bTitleLabel::setSubTitle( const TQString& subTitle )
 
 void K3bTitleLabel::setAlignment( int align )
 {
-  d->tqalignment = align;
+  d->alignment = align;
   update();
 }
 
@@ -168,9 +168,9 @@ void K3bTitleLabel::drawContents( TQPainter* p )
     neededWidth += d->displaySubTitleLength + 5;
 
   int startPos = 0;
-  if( d->tqalignment & TQt::AlignHCenter )
+  if( d->alignment & TQt::AlignHCenter )
     startPos = r.left() + ( r.width() - 2*d->margin - neededWidth ) / 2;
-  else if( d->tqalignment & TQt::AlignRight )
+  else if( d->alignment & TQt::AlignRight )
     startPos = r.right() - d->margin - neededWidth;
   else
     startPos = r.left() + d->margin;

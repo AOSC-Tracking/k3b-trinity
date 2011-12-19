@@ -253,7 +253,7 @@ void K3bCdrdaoWriter::setWriteArguments()
   {
     *m_process << "--driver";
     if( burnDevice()->cdTextCapable() == 1 )
-      *m_process << TQString("%1:0x00000010").tqarg( burnDevice()->cdrdaoDriver() );
+      *m_process << TQString("%1:0x00000010").arg( burnDevice()->cdrdaoDriver() );
     else
       *m_process << burnDevice()->cdrdaoDriver();
   }
@@ -264,7 +264,7 @@ void K3bCdrdaoWriter::setWriteArguments()
 
   // burn speed
   if( d->usedSpeed != 0 )
-    *m_process << "--speed" << TQString("%1").tqarg(d->usedSpeed);
+    *m_process << "--speed" << TQString("%1").arg(d->usedSpeed);
 
   //simulate
   if( simulate() )
@@ -283,7 +283,7 @@ void K3bCdrdaoWriter::setWriteArguments()
     if( m_cdrdaoBinObject->hasFeature( "disable-burnproof" ) )
       *m_process << "--buffer-under-run-protection" << "0";
     else
-      emit infoMessage( i18n("Cdrdao %1 does not support disabling burnfree.").tqarg(m_cdrdaoBinObject->version), WARNING );
+      emit infoMessage( i18n("Cdrdao %1 does not support disabling burnfree.").arg(m_cdrdaoBinObject->version), WARNING );
   }
   
   if( k3bcore->globalSettings()->force() ) {
@@ -307,7 +307,7 @@ void K3bCdrdaoWriter::setWriteArguments()
     if( m_cdrdaoBinObject->hasFeature("overburn") )
       *m_process << "--overburn";
     else
-      emit infoMessage( i18n("Cdrdao %1 does not support overburning.").tqarg(m_cdrdaoBinObject->version), WARNING );
+      emit infoMessage( i18n("Cdrdao %1 does not support overburning.").arg(m_cdrdaoBinObject->version), WARNING );
   }
 
 }
@@ -342,17 +342,17 @@ void K3bCdrdaoWriter::setReadArguments()
   // TAO Source Adjust
   if ( m_taoSourceAdjust != -1 )
     *m_process << "--tao-source-adjust"
-    << TQString("%1").tqarg(m_taoSourceAdjust);
+    << TQString("%1").arg(m_taoSourceAdjust);
 
   // paranoia Mode
   if ( m_paranoiaMode != -1 )
     *m_process << "--paranoia-mode"
-    << TQString("%1").tqarg(m_paranoiaMode);
+    << TQString("%1").arg(m_paranoiaMode);
 
   // session
   if ( m_session != -1 )
     *m_process << "--session"
-    << TQString("%1").tqarg(m_session);
+    << TQString("%1").arg(m_session);
 
   // fast TOC
   if ( m_fastToc )
@@ -386,7 +386,7 @@ void K3bCdrdaoWriter::setBlankArguments()
   {
     *m_process << "--driver";
     if( burnDevice()->cdTextCapable() == 1 )
-      *m_process << TQString("%1:0x00000010").tqarg( burnDevice()->cdrdaoDriver() );
+      *m_process << TQString("%1:0x00000010").arg( burnDevice()->cdrdaoDriver() );
     else
       *m_process << burnDevice()->cdrdaoDriver();
   }
@@ -397,7 +397,7 @@ void K3bCdrdaoWriter::setBlankArguments()
 
   // burn speed
   if( d->usedSpeed != 0 )
-    *m_process << "--speed" << TQString("%1").tqarg(d->usedSpeed);
+    *m_process << "--speed" << TQString("%1").arg(d->usedSpeed);
 
   // blank-mode
   *m_process << "--blank-mode";
@@ -432,7 +432,7 @@ void K3bCdrdaoWriter::setCommonArguments()
     *m_process << "--eject";
 
   // remote
-  *m_process << "--remote" <<  TQString("%1").tqarg(m_cdrdaoComm[0]);
+  *m_process << "--remote" <<  TQString("%1").arg(m_cdrdaoComm[0]);
 
   // data File
   if ( ! m_dataFile.isEmpty() )
@@ -475,7 +475,7 @@ void K3bCdrdaoWriter::start()
   m_cdrdaoBinObject = k3bcore->externalBinManager()->binObject("cdrdao");
 
   if( !m_cdrdaoBinObject ) {
-    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdrdao"), ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").arg("cdrdao"), ERROR );
     jobFinished(false);
     return;
   }
@@ -483,7 +483,7 @@ void K3bCdrdaoWriter::start()
   emit debuggingOutput( "Used versions", "cdrdao: " + m_cdrdaoBinObject->version );
 
   if( !m_cdrdaoBinObject->copyright.isEmpty() )
-    emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3").tqarg(m_cdrdaoBinObject->name()).tqarg(m_cdrdaoBinObject->version).tqarg(m_cdrdaoBinObject->copyright), INFO );
+    emit infoMessage( i18n("Using %1 %2 - Copyright (C) %3").arg(m_cdrdaoBinObject->name()).arg(m_cdrdaoBinObject->version).arg(m_cdrdaoBinObject->copyright), INFO );
 
 
   // the message size changed in cdrdao 1.1.8)
@@ -582,7 +582,7 @@ void K3bCdrdaoWriter::start()
       // something went wrong when starting the program
       // it "should" be the executable
       kdDebug() << "(K3bCdrdaoWriter) could not start cdrdao" << endl;
-      emit infoMessage( i18n("Could not start %1.").tqarg("cdrdao"), K3bJob::ERROR );
+      emit infoMessage( i18n("Could not start %1.").arg("cdrdao"), K3bJob::ERROR );
       jobFinished(false);
     }
   else
@@ -592,13 +592,13 @@ void K3bCdrdaoWriter::start()
 	case WRITE:
 	  if( simulate() )
 	    {
-	      emit infoMessage(i18n("Starting DAO simulation at %1x speed...").tqarg(d->usedSpeed), 
+	      emit infoMessage(i18n("Starting DAO simulation at %1x speed...").arg(d->usedSpeed), 
 			       K3bJob::INFO );
 	      emit newTask( i18n("Simulating") );
 	    }
 	  else
 	    {
-	      emit infoMessage( i18n("Starting DAO writing at %1x speed...").tqarg(d->usedSpeed), K3bJob::INFO );
+	      emit infoMessage( i18n("Starting DAO writing at %1x speed...").arg(d->usedSpeed), K3bJob::INFO );
 	      emit newTask( i18n("Writing") );
 	    }
 	  break;
@@ -609,12 +609,12 @@ void K3bCdrdaoWriter::start()
 	case COPY:
 	  if( simulate() )
 	    {
-	      emit infoMessage(i18n("Starting simulation copy at %1x speed...").tqarg(d->usedSpeed), K3bJob::INFO );
+	      emit infoMessage(i18n("Starting simulation copy at %1x speed...").arg(d->usedSpeed), K3bJob::INFO );
 	      emit newTask( i18n("Simulating") );
 	    }
 	  else
 	    {
-	      emit infoMessage( i18n("Starting copy at %1x speed...").tqarg(d->usedSpeed), K3bJob::INFO );
+	      emit infoMessage( i18n("Starting copy at %1x speed...").arg(d->usedSpeed), K3bJob::INFO );
 	      emit newTask( i18n("Copying") );
 	    }
 	  break;
@@ -676,8 +676,8 @@ bool K3bCdrdaoWriter::cueSheet()
                 line = line.mid( pos, endPos-pos );
                 TQFileInfo fi( TQFileInfo( m_tocFile ).dirPath() + "/" + TQFileInfo( line ).fileName() );
                 TQString binpath = fi.filePath();
-                kdDebug() << TQString("K3bCdrdaoWriter::cueSheet() BinFilePath from CueFile: %1").tqarg( line ) << endl;
-                kdDebug() << TQString("K3bCdrdaoWriter::cueSheet() absolute BinFilePath: %1").tqarg( binpath ) << endl;
+                kdDebug() << TQString("K3bCdrdaoWriter::cueSheet() BinFilePath from CueFile: %1").arg( line ) << endl;
+                kdDebug() << TQString("K3bCdrdaoWriter::cueSheet() absolute BinFilePath: %1").arg( binpath ) << endl;
 
                 if ( !fi.exists() )
                     return false;
@@ -691,8 +691,8 @@ bool K3bCdrdaoWriter::cueSheet()
                 if ( symlink(TQFile::encodeName( m_tocFile ), TQFile::encodeName( tempFile + ".cue") ) == -1 )
                     return false;
 
-                kdDebug() << TQString("K3bCdrdaoWriter::cueSheet() symlink BinFileName: %1.bin").tqarg( tempFile ) << endl;
-                kdDebug() << TQString("K3bCdrdaoWriter::cueSheet() symlink CueFileName: %1.cue").tqarg( tempFile ) << endl;
+                kdDebug() << TQString("K3bCdrdaoWriter::cueSheet() symlink BinFileName: %1.bin").arg( tempFile ) << endl;
+                kdDebug() << TQString("K3bCdrdaoWriter::cueSheet() symlink CueFileName: %1.cue").arg( tempFile ) << endl;
                 m_binFileLnk = tempFile + ".bin";
                 m_cueFileLnk = tempFile + ".cue";
                 return true;
@@ -733,7 +733,7 @@ void K3bCdrdaoWriter::slotProcessExited( KProcess* p )
       {
         kdDebug() << "(K3bCdrdaoWriter) restoring tocfile " << m_tocFile << " failed." << endl;
         emit infoMessage( i18n("Due to a bug in cdrdao the toc/cue file %1 has been deleted. "
-                               "K3b was unable to restore it from the backup %2.").tqarg(m_tocFile).tqarg(m_backupTocFile), ERROR );
+                               "K3b was unable to restore it from the backup %2.").arg(m_tocFile).arg(m_backupTocFile), ERROR );
       }
       else if ( !KIO::NetAccess::del(KURL::fromPathOrURL(m_backupTocFile), (TQWidget*) 0) )
       {
@@ -775,7 +775,7 @@ void K3bCdrdaoWriter::slotProcessExited( KProcess* p )
 
       if( m_command == WRITE || m_command == COPY ) {
 	int s = d->speedEst->average();
-	emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)").tqarg(s).tqarg(KGlobal::locale()->formatNumber((double)s/150.0), 2), INFO );
+	emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)").arg(s).arg(KGlobal::locale()->formatNumber((double)s/150.0), 2), INFO );
       }
 
       jobFinished( true );
@@ -783,7 +783,7 @@ void K3bCdrdaoWriter::slotProcessExited( KProcess* p )
 
     default:
       if( !m_knownError && !wasSourceUnreadable() ) {
-        emit infoMessage( i18n("%1 returned an unknown error (code %2).").tqarg(m_cdrdaoBinObject->name()).tqarg(p->exitStatus()), 
+        emit infoMessage( i18n("%1 returned an unknown error (code %2).").arg(m_cdrdaoBinObject->name()).arg(p->exitStatus()), 
 			  K3bJob::ERROR );
 	emit infoMessage( i18n("Please include the debugging output in your problem report."), K3bJob::ERROR );
       }
@@ -794,7 +794,7 @@ void K3bCdrdaoWriter::slotProcessExited( KProcess* p )
   }
   else
   {
-    emit infoMessage( i18n("%1 did not exit cleanly.").tqarg("cdrdao"), K3bJob::ERROR );
+    emit infoMessage( i18n("%1 did not exit cleanly.").arg("cdrdao"), K3bJob::ERROR );
     jobFinished( false );
   }
 }
@@ -810,8 +810,8 @@ void K3bCdrdaoWriter::unknownCdrdaoLine( const TQString& line )
     int speed = line.mid( pos+9, po2-pos-9 ).toInt();
     if( speed < d->usedSpeed )
     {
-      emit infoMessage( i18n("Medium or burner do not support writing at %1x speed").tqarg(d->usedSpeed), K3bJob::WARNING );
-      emit infoMessage( i18n("Switching down burn speed to %1x").tqarg(speed), K3bJob::WARNING );
+      emit infoMessage( i18n("Medium or burner do not support writing at %1x speed").arg(d->usedSpeed), K3bJob::WARNING );
+      emit infoMessage( i18n("Switching down burn speed to %1x").arg(speed), K3bJob::WARNING );
     }
   }
 }
@@ -870,7 +870,7 @@ void K3bCdrdaoWriter::parseCdrdaoLine( const TQString& str )
   }
   else if( str.startsWith( "Found pre-gap" ) )
   {
-    emit infoMessage( i18n("Found pregap: %1").tqarg( str.mid(str.find(":")+1) ), K3bJob::INFO );
+    emit infoMessage( i18n("Found pregap: %1").arg( str.mid(str.find(":")+1) ), K3bJob::INFO );
   }
   else
     unknownCdrdaoLine(str);
@@ -903,7 +903,7 @@ void K3bCdrdaoWriter::parseCdrdaoError( const TQString& line )
   }
   else if( (pos = line.find( "Illegal option" )) > 0 ) {
     // ERROR: Illegal option: -wurst
-    emit infoMessage( i18n("No valid %1 option: %2").tqarg(m_cdrdaoBinObject->name()).tqarg(line.mid(pos+16)), 
+    emit infoMessage( i18n("No valid %1 option: %2").arg(m_cdrdaoBinObject->name()).arg(line.mid(pos+16)), 
 		      ERROR );
     m_knownError = true;
   }

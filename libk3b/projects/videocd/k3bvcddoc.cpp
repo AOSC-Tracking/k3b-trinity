@@ -211,8 +211,8 @@ K3bVcdTrack* K3bVcdDoc::createTrack( const KURL& url )
                                           i18n( "K3b will create a %1 image from the given MPEG "
                                                 "files, but these files must already be in %2 "
                                                 "format. K3b does not yet resample MPEG files." )
-                                          .tqarg( i18n( "VCD" ) )
-                                          .tqarg( i18n( "VCD" ) ),
+                                          .arg( i18n( "VCD" ) )
+                                          .arg( i18n( "VCD" ) ),
                                           i18n( "Information" ) );
                 m_urlAddingTimer->start( 0 );
             } else if ( vcdType() == NONE ) {
@@ -223,8 +223,8 @@ K3bVcdTrack* K3bVcdDoc::createTrack( const KURL& url )
                                                       i18n( "K3b will create a %1 image from the given MPEG "
                                                             "files, but these files must already be in %2 "
                                                             "format. K3b does not yet resample MPEG files." )
-                                                      .tqarg( i18n( "SVCD" ) )
-                                                      .tqarg( i18n( "SVCD" ) )
+                                                      .arg( i18n( "SVCD" ) )
+                                                      .arg( i18n( "SVCD" ) )
                                                       + "\n\n"
                                                       + i18n( "Note: Forcing MPEG2 as VCD is not supported by "
                                                               "some standalone DVD players." ),
@@ -448,7 +448,7 @@ void K3bVcdDoc::setPbcTracks()
 
     if ( m_tracks ) {
         int count = m_tracks->count();
-        kdDebug() << TQString( "K3bVcdDoc::setPbcTracks() - we have %1 tracks in list." ).tqarg( count ) << endl;
+        kdDebug() << TQString( "K3bVcdDoc::setPbcTracks() - we have %1 tracks in list." ).arg( count ) << endl;
 
         TQPtrListIterator<K3bVcdTrack> iterTrack( *m_tracks );
         K3bVcdTrack* track;
@@ -574,7 +574,7 @@ bool K3bVcdDoc::loadDocumentData( TQDomElement* root )
         TQDomNode item = vcdNodes.item( i );
         TQString name = item.nodeName();
 
-        kdDebug() << TQString( "(K3bVcdDoc::loadDocumentData) nodeName = '%1'" ).tqarg( name ) << endl;
+        kdDebug() << TQString( "(K3bVcdDoc::loadDocumentData) nodeName = '%1'" ).arg( name ) << endl;
 
         if ( name == "volumeId" )
             vcdOptions() ->setVolumeId( item.toElement().text() );

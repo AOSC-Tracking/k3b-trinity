@@ -132,7 +132,7 @@ void K3bVideoCdRippingDialog::setupGui()
 
 void K3bVideoCdRippingDialog::setupContextHelp()
 {
-    TQToolTip::add( m_labelFreeSpace, i18n("Free space on destination directory: %1").tqarg( m_editDirectory ->url() ) );
+    TQToolTip::add( m_labelFreeSpace, i18n("Free space on destination directory: %1").arg( m_editDirectory ->url() ) );
 
     TQToolTip::add( m_labelNecessarySize, i18n("Necessary space for extracted files") );
 
@@ -157,10 +157,10 @@ void K3bVideoCdRippingDialog::slotStartClicked()
     TQDir d;
     d.setPath( m_editDirectory ->url() );
     if( !d.exists() ) {
-      if( KMessageBox::warningYesNo( this, i18n("Image folder '%1' does not exist. Do you want K3b to create it?").tqarg( m_editDirectory->url() ) )
+      if( KMessageBox::warningYesNo( this, i18n("Image folder '%1' does not exist. Do you want K3b to create it?").arg( m_editDirectory->url() ) )
 	  == KMessageBox::Yes ) {
 	if( !KStandardDirs::makeDir( m_editDirectory->url() ) ) {
-	  KMessageBox::error( this, i18n("Failed to create folder '%1'.").tqarg( m_editDirectory->url() ) );
+	  KMessageBox::error( this, i18n("Failed to create folder '%1'.").arg( m_editDirectory->url() ) );
 	  return;
 	}
       }
@@ -170,7 +170,7 @@ void K3bVideoCdRippingDialog::slotStartClicked()
     TQFileInfo* fi;
     while ( ( fi = it.current() ) != 0 ) {
         if ( fi ->fileName() != "." && fi ->fileName() != ".." )
-            filesExists.append( TQString( "%1 (%2)" ).tqarg( TQFile::encodeName( fi ->fileName() ).data() ).tqarg( KIO::convertSize( fi ->size() ) ) );
+            filesExists.append( TQString( "%1 (%2)" ).arg( TQFile::encodeName( fi ->fileName() ).data() ).arg( KIO::convertSize( fi ->size() ) ) );
         ++it;
     }
 

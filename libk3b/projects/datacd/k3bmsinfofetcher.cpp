@@ -53,7 +53,7 @@ void K3bMsInfoFetcher::start()
 
   if( !k3bcore->externalBinManager()->foundBin( "cdrecord" ) ) {
     kdDebug() << "(K3bMsInfoFetcher) could not find cdrecord executable" << endl;
-    emit infoMessage( i18n("Could not find %1 executable.").tqarg("cdrecord"), K3bJob::ERROR );
+    emit infoMessage( i18n("Could not find %1 executable.").arg("cdrecord"), K3bJob::ERROR );
     jobFinished(false);
     return;
   }
@@ -89,7 +89,7 @@ void K3bMsInfoFetcher::getMsInfo()
     bin = k3bcore->externalBinManager()->binObject( "cdrecord" );
  
     if( !bin ) {
-      emit infoMessage( i18n("Could not find %1 executable.").tqarg( m_dvd ? "dvdrecord" : "cdrecord" ), ERROR );
+      emit infoMessage( i18n("Could not find %1 executable.").arg( m_dvd ? "dvdrecord" : "cdrecord" ), ERROR );
       jobFinished(false);
       return;
     }
@@ -97,7 +97,7 @@ void K3bMsInfoFetcher::getMsInfo()
     *m_process << bin->path;
 
     // add the device (e.g. /dev/sg1)
-    *m_process << TQString("dev=%1").tqarg( K3b::externalBinDeviceParameter(m_device, bin) );
+    *m_process << TQString("dev=%1").arg( K3b::externalBinDeviceParameter(m_device, bin) );
 
     *m_process << "-msinfo";
 
@@ -128,7 +128,7 @@ void K3bMsInfoFetcher::getMsInfo()
     m_canceled = false;
 
     if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
-      emit infoMessage( i18n("Could not start %1.").tqarg(bin->name()), K3bJob::ERROR );
+      emit infoMessage( i18n("Could not start %1.").arg(bin->name()), K3bJob::ERROR );
       jobFinished(false);
     }
   }
@@ -161,7 +161,7 @@ void K3bMsInfoFetcher::slotMediaDetectionFinished( K3bDevice::DeviceHandler* h )
       }
       else {
 	emit infoMessage( i18n("Could not open Iso9660 filesystem in %1.")
-			  .tqarg( m_device->vendor() + " " + m_device->description() ), ERROR );
+			  .arg( m_device->vendor() + " " + m_device->description() ), ERROR );
 	jobFinished( false );
       }
     }

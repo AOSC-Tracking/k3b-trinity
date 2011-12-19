@@ -501,10 +501,10 @@ void K3bIsoImageWritingDialog::slotContextMenu( KListView*, TQListViewItem*, con
 						     this );
     if( ok ) {
       if( md5sumToCompare.lower().utf8() == m_md5Job->hexDigest().lower() )
-	KMessageBox::information( this, i18n("The MD5 Sum of %1 equals the specified.").tqarg(imagePath()),
+	KMessageBox::information( this, i18n("The MD5 Sum of %1 equals the specified.").arg(imagePath()),
 				  i18n("MD5 Sums Equal") );
       else
-	KMessageBox::sorry( this, i18n("The MD5 Sum of %1 differs from the specified.").tqarg(imagePath()),
+	KMessageBox::sorry( this, i18n("The MD5 Sum of %1 differs from the specified.").arg(imagePath()),
 			    i18n("MD5 Sums Differ") );
     }
   }

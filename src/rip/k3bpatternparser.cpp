@@ -119,7 +119,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             s.replace( '*', '_' );
             s.replace( '}', '*' );  // for conditional inclusion
             dir.append( s.isEmpty()
-                ? i18n("unknown") + TQString(" %1").tqarg(trackNumber)
+                ? i18n("unknown") + TQString(" %1").arg(trackNumber)
                 : s );
             break;
           case TITLE:
@@ -128,7 +128,7 @@ TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,
             s.replace( '*', '_' );
             s.replace( '}', '*' );
             dir.append( s.isEmpty()
-                ? i18n("Track %1").tqarg(trackNumber)
+                ? i18n("Track %1").arg(trackNumber)
                 : s );
             break;
           case NUMBER:

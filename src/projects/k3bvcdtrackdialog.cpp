@@ -70,7 +70,7 @@ K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, TQPtrList<K3bVcdTrack>& t
         m_displayFileName->setText( selectedTrack->fileName() );
         m_displayLength->setText( selectedTrack->duration() );
         m_displaySize->setText( KIO::convertSize( selectedTrack->size() ) );
-        m_muxrate->setText( i18n( "%1 bit/s" ).tqarg( selectedTrack->muxrate() ) );
+        m_muxrate->setText( i18n( "%1 bit/s" ).arg( selectedTrack->muxrate() ) );
 
         if ( selectedTrack->isSegment() )
             m_labelMimeType->setPixmap( SmallIcon( "image", KIcon::SizeMedium ) );
@@ -93,7 +93,7 @@ void K3bVcdTrackDialog::slotOk()
 void K3bVcdTrackDialog::setPbcTrack( K3bVcdTrack* selected, K3bCutComboBox* box, int which )
 {
     // TODO: Unset Userdefined on default settings
-    kdDebug() << TQString( "K3bVcdTrackDialog::setPbcTrack: currentItem = %1, count = %2" ).tqarg( box->currentItem() ).tqarg( m_tracks.count() ) << endl;
+    kdDebug() << TQString( "K3bVcdTrackDialog::setPbcTrack: currentItem = %1, count = %2" ).arg( box->currentItem() ).arg( m_tracks.count() ) << endl;
 
     int count = m_tracks.count();
 
@@ -402,7 +402,7 @@ void K3bVcdTrackDialog::prepareGui()
     m_displayLength->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     m_muxrate = new TQLabel( groupFileInfo, "m_muxrate" );
-    m_muxrate->setText( i18n( "%1 bit/s" ).tqarg( 0 ) );
+    m_muxrate->setText( i18n( "%1 bit/s" ).arg( 0 ) );
     m_muxrate->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     TQFrame* fileInfoLine = new TQFrame( groupFileInfo );
@@ -744,9 +744,9 @@ TQString K3bVcdTrackDialog::displayName( K3bVcdTrack * track )
         return i18n( "ItSelf" );
 
     if ( track->isSegment() )
-        return i18n( "Segment-%1 - %2" ).tqarg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).tqarg( track->title() );
+        return i18n( "Segment-%1 - %2" ).arg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).arg( track->title() );
 
-    return i18n( "Sequence-%1 - %2" ).tqarg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).tqarg( track->title() );
+    return i18n( "Sequence-%1 - %2" ).arg( TQString::number( track->index() + 1 ).rightJustify( 3, '0' ) ).arg( track->title() );
 }
 
 void K3bVcdTrackDialog::slotPlayTimeChanged( int value )

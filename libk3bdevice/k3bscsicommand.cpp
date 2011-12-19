@@ -169,8 +169,8 @@ void K3bDevice::ScsiCommand::debugError( int command, int errorCode, int senseKe
   if( m_printErrors ) {
     k3bDebug() << "(K3bDevice::ScsiCommand) failed: " << endl
 	      << "                           command:    " << TQString("%1 (%2)")
-      .tqarg( K3bDevice::commandString( command ) )
-      .tqarg( TQString::number(command, 16) ) << endl
+      .arg( K3bDevice::commandString( command ) )
+      .arg( TQString::number(command, 16) ) << endl
 	      << "                           errorcode:  " << TQString::number(errorCode, 16) << endl
 	      << "                           sense key:  " << senseKeyToString(senseKey) << endl
 	      << "                           asc:        " << TQString::number(asc, 16) << endl

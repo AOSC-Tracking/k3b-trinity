@@ -108,26 +108,26 @@ int K3bVideoDvdImager::writePathSpec()
   d->tempPath = K3b::findUniqueFilePrefix( "k3bVideoDvd", dir.path() );
   kdDebug() << "(K3bVideoDvdImager) creating temp dir: " << d->tempPath << endl;
   if( !dir.mkdir( d->tempPath, true ) ) {
-    emit infoMessage( i18n("Unable to create temporary directory '%1'.").tqarg(d->tempPath), ERROR );
+    emit infoMessage( i18n("Unable to create temporary directory '%1'.").arg(d->tempPath), ERROR );
     return -1;
   }
 
   dir.cd( d->tempPath );
   if( !dir.mkdir( "VIDEO_TS" ) ) {
-    emit infoMessage( i18n("Unable to create temporary directory '%1'.").tqarg(d->tempPath + "/VIDEO_TS"), ERROR );
+    emit infoMessage( i18n("Unable to create temporary directory '%1'.").arg(d->tempPath + "/VIDEO_TS"), ERROR );
     return -1;
   }
   
-  for( TQPtrListIterator<K3bDataItem> it( d->doc->videoTsDir()->tqchildren() ); *it; ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( d->doc->videoTsDir()->children() ); *it; ++it ) {
     if( (*it)->isDir() ) {
-      emit infoMessage( i18n("Found invalid entry in the VIDEO_TS folder (%1).").tqarg((*it)->k3bName()), ERROR );
+      emit infoMessage( i18n("Found invalid entry in the VIDEO_TS folder (%1).").arg((*it)->k3bName()), ERROR );
       return -1;
     }
 
     // convert to upper case names
     if( ::symlink( TQFile::encodeName( (*it)->localPath() ), 
 		   TQFile::encodeName( d->tempPath + "/VIDEO_TS/" + (*it)->k3bName().upper() ) ) == -1 ) {
-      emit infoMessage( i18n("Unable to link temporary file in folder %1.").tqarg( d->tempPath ), ERROR );
+      emit infoMessage( i18n("Unable to link temporary file in folder %1.").arg( d->tempPath ), ERROR );
       return -1;
     }
   }
@@ -148,7 +148,7 @@ int K3bVideoDvdImager::writePathSpecForDir( K3bDirItem* dirItem, TQTextStream& s
   }
 
   int num = 0;
-  for( TQPtrListIterator<K3bDataItem> it( dirItem->tqchildren() ); it.current(); ++it ) {
+  for( TQPtrListIterator<K3bDataItem> it( dirItem->children() ); it.current(); ++it ) {
     K3bDataItem* item = it.current();
     num++;
       
@@ -195,7 +195,7 @@ void K3bVideoDvdImager::cleanup()
   if( TQFile::exists( d->tempPath ) ) {
     TQDir dir( d->tempPath );
     dir.cd( "VIDEO_TS" );
-    for( TQPtrListIterator<K3bDataItem> it( d->doc->videoTsDir()->tqchildren() ); *it; ++it )
+    for( TQPtrListIterator<K3bDataItem> it( d->doc->videoTsDir()->children() ); *it; ++it )
       dir.remove( (*it)->k3bName().upper() );
     dir.cdUp();
     dir.rmdir( "VIDEO_TS" );

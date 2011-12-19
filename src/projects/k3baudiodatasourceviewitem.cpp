@@ -89,7 +89,7 @@ void K3bAudioDataSourceViewItem::setText( int col, const TQString& text )
 bool K3bAudioDataSourceViewItem::animate()
 {
   if( source()->length() == 0 && source()->isValid() ) {
-    TQString icon = TQString( "kde%1" ).tqarg( m_animationCounter );
+    TQString icon = TQString( "kde%1" ).arg( m_animationCounter );
     setPixmap( 4, SmallIcon( icon ) );
     m_animationCounter++;
     if ( m_animationCounter > 6 )
