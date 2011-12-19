@@ -434,7 +434,7 @@ void K3bDvdCopyJob::prepareWriter()
   connect( d->writerJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterProgress(int)) );
   connect( d->writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
   connect( d->writerJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-  connect( d->writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( d->writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
   connect( d->writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
   connect( d->writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
   connect( d->writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );

@@ -41,7 +41,7 @@ class K3bFlatButton : public TQFrame
   
   ~K3bFlatButton();
 
-  TQSize tqsizeHint() const;
+  TQSize sizeHint() const;
 
  public slots:
   void setColors( const TQColor& fore, const TQColor& back );

@@ -896,7 +896,7 @@ TQString K3bDevice::DeviceManager::resolveSymLink( const TQString& path )
     return path;
   }
 
-  return TQString::tqfromLatin1( resolved );
+  return TQString::fromLatin1( resolved );
 }
 
 

@@ -125,7 +125,7 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *parent, const char
   groupWriter->tqlayout()->setMargin( 0 );
 
   TQGridLayout* groupWriterLayout = new TQGridLayout( groupWriter->tqlayout() );
-  groupWriterLayout->tqsetAlignment( TQt::AlignTop );
+  groupWriterLayout->setAlignment( TQt::AlignTop );
   groupWriterLayout->setSpacing( KDialog::spacingHint() );
   groupWriterLayout->setMargin( KDialog::marginHint() );
 
@@ -150,7 +150,7 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *parent, const char
 
 
   TQGridLayout* mainLayout = new TQGridLayout( this );
-  mainLayout->tqsetAlignment( TQt::AlignTop );
+  mainLayout->setAlignment( TQt::AlignTop );
   mainLayout->setSpacing( KDialog::spacingHint() );
   mainLayout->setMargin( 0 );
 

@@ -157,7 +157,7 @@ void K3bTocFileWriter::writeHeader( TQTextStream& t )
 {
   // little comment
   t << "// TOC-file to use with cdrdao created by K3b " << k3bcore->version()
-    << ", " << TQDateTime::tqcurrentDateTime().toString() << endl << endl;
+    << ", " << TQDateTime::currentDateTime().toString() << endl << endl;
 
   t << "// " << m_toc.count() << " tracks" << endl;
   if( m_toc.back().session() > 0 ) {

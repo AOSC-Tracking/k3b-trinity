@@ -77,7 +77,7 @@ void K3bVideoCdRippingDialog::setupGui()
     groupDirectory->tqlayout() ->setMargin( KDialog::marginHint() );
 
     TQGridLayout* groupDirectoryLayout = new TQGridLayout( groupDirectory->tqlayout() );
-    groupDirectoryLayout->tqsetAlignment( TQt::AlignTop );
+    groupDirectoryLayout->setAlignment( TQt::AlignTop );
 
     TQLabel* rippathLabel = new TQLabel( i18n( "Rip files to:" ), groupDirectory );
     m_editDirectory = new KURLRequester( groupDirectory, "m_editDirectory" );
@@ -90,13 +90,13 @@ void K3bVideoCdRippingDialog::setupGui()
     freeSpaceBox->setSpacing( KDialog::spacingHint() );
     ( void ) new TQLabel( i18n( "Free space in directory:" ), freeSpaceBox, "FreeSpaceLabel" );
     m_labelFreeSpace = new TQLabel( "                       ", freeSpaceBox, "m_labelFreeSpace" );
-    m_labelFreeSpace->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_labelFreeSpace->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
     TQHBox* necessarySizeBox = new TQHBox( groupDirectory );
     necessarySizeBox->setSpacing( KDialog::spacingHint() );
     ( void ) new TQLabel( i18n( "Necessary storage size:" ), necessarySizeBox, "StorSize" );
     m_labelNecessarySize = new TQLabel( "                        ", necessarySizeBox, "m_labelNecessarySize" );
-    m_labelNecessarySize->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_labelNecessarySize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
 
     groupDirectoryLayout->addWidget( rippathLabel, 0, 0 );

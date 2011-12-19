@@ -80,7 +80,7 @@ void K3bListViewItemAnimator::setItem( TQListViewItem* item, int col )
   m_item = item;
   m_column = col;
   m_pixmap = *item->pixmap(col);
-  m_fadeColor = item->listView()->tqcolorGroup().base();
+  m_fadeColor = item->listView()->colorGroup().base();
   start();
 }
 

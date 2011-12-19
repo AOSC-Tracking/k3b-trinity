@@ -54,10 +54,10 @@ class LIBK3B_EXPORT K3bCutComboBox : public KComboBox
   void setMethod( int );
 
   /** reimplemeted */
-  TQSize tqsizeHint() const;
+  TQSize sizeHint() const;
 
   /** reimplemeted */
-  TQSize tqminimumSizeHint() const;
+  TQSize minimumSizeHint() const;
 
   /** reimplemeted */
   virtual void setCurrentText( const TQString& );

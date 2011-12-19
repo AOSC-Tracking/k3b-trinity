@@ -76,7 +76,7 @@ class K3bWelcomeWidget::Display : public TQWidget
   Display( K3bWelcomeWidget* parent );
   ~Display();
 
-  TQSize tqminimumSizeHint() const;
+  TQSize minimumSizeHint() const;
   TQSizePolicy sizePolicy () const;
   int heightForWidth ( int w ) const;
 

@@ -187,7 +187,7 @@ K3bCddbQuery* K3bCddb::getQuery( const TQString& s )
     }
 
     m_httpQuery->setServer( server, port );
-    m_httpQuery->setCgiPath( m_bUseManualCgiPath ? m_cgiPath : TQString::tqfromLatin1("/~cddb/cddb.cgi") );
+    m_httpQuery->setCgiPath( m_bUseManualCgiPath ? m_cgiPath : TQString::fromLatin1("/~cddb/cddb.cgi") );
 
     return m_httpQuery;
   }

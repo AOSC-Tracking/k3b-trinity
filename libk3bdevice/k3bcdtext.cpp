@@ -202,9 +202,9 @@ void K3bDevice::CdText::setRawPackData( const unsigned char* data, int len )
 	char* nextNullPos = (char*)::memchr( nullPos+1, '\0', 11 - (nullPos - (char*)pack[i].data) );
 	TQString txtstr;	    
 	if( nextNullPos ) // take all chars up to the next null
-	  txtstr = TQString::tqfromLatin1( (char*)nullPos+1, nextNullPos - nullPos - 1 );
+	  txtstr = TQString::fromLatin1( (char*)nullPos+1, nextNullPos - nullPos - 1 );
 	else // take all chars to the end of the pack data (12 bytes)
-	  txtstr = TQString::tqfromLatin1( (char*)nullPos+1, 11 - (nullPos - (char*)pack[i].data) );
+	  txtstr = TQString::fromLatin1( (char*)nullPos+1, 11 - (nullPos - (char*)pack[i].data) );
 	  
 	//
 	// a tab character means to use the same as for the previous track

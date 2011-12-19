@@ -200,9 +200,9 @@ void K3bInteractionDialog::show()
 }
 
 
-TQSize K3bInteractionDialog::tqsizeHint() const
+TQSize K3bInteractionDialog::sizeHint() const
 {
-  TQSize s = KDialog::tqsizeHint();
+  TQSize s = KDialog::sizeHint();
   // I want the dialogs to look good.
   // That means their height should never outgrow their width
   if( s.height() > s.width() )

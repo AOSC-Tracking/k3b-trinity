@@ -169,7 +169,7 @@ TQString K3b::findUniqueFilePrefix( const TQString& _prefix, const TQString& pat
 
 TQString K3b::findTempFile( const TQString& ending, const TQString& d )
 {
-  return findUniqueFilePrefix( "k3b_", d ) + ( ending.isEmpty() ? TQString() : (TQString::tqfromLatin1(".") + ending) );
+  return findUniqueFilePrefix( "k3b_", d ) + ( ending.isEmpty() ? TQString() : (TQString::fromLatin1(".") + ending) );
 }
 
 

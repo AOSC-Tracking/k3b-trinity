@@ -31,8 +31,8 @@ class K3bTimeoutWidget : public TQWidget
   K3bTimeoutWidget( TQWidget* parent );
   ~K3bTimeoutWidget();
 
-  TQSize tqsizeHint() const;
-  TQSize tqminimumSizeHint() const;
+  TQSize sizeHint() const;
+  TQSize minimumSizeHint() const;
 
  public slots:
   void setTimeout( int msecs );

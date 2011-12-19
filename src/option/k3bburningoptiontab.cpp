@@ -54,7 +54,7 @@ K3bBurningOptionTab::~K3bBurningOptionTab()
 void K3bBurningOptionTab::setupGui()
 {
   TQGridLayout* groupAdvancedLayout = new TQGridLayout( this );
-  groupAdvancedLayout->tqsetAlignment( TQt::AlignTop );
+  groupAdvancedLayout->setAlignment( TQt::AlignTop );
   groupAdvancedLayout->setSpacing( KDialog::spacingHint() );
   groupAdvancedLayout->setMargin( 0 );
 

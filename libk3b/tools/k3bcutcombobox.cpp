@@ -45,7 +45,7 @@ K3bCutComboBox::K3bCutComboBox( TQWidget* parent, const char* name )
   : KComboBox( parent, name )
 {
   d = new Private();
-  //  tqsetSizePolicy( TQSizePolicy::Maximum, sizePolicy().horData(), sizePolicy().hasHeightForWidth() );
+  //  setSizePolicy( TQSizePolicy::Maximum, sizePolicy().horData(), sizePolicy().hasHeightForWidth() );
 }
 
 
@@ -70,9 +70,9 @@ void K3bCutComboBox::setMethod( int m )
 }
 
 
-TQSize K3bCutComboBox::tqsizeHint() const
+TQSize K3bCutComboBox::sizeHint() const
 {
-//   TQSize s(KComboBox::tqsizeHint());
+//   TQSize s(KComboBox::sizeHint());
 
 //   for( int i = 0; i < count(); i++ ) {
 //     int w = fontMetrics().width(d->originalItems[i]) + 
@@ -81,12 +81,12 @@ TQSize K3bCutComboBox::tqsizeHint() const
 //       s.setWidth( w );
 //   }
 
-  return KComboBox::tqsizeHint();
+  return KComboBox::sizeHint();
 }
 
-TQSize K3bCutComboBox::tqminimumSizeHint() const
+TQSize K3bCutComboBox::minimumSizeHint() const
 {
-  return KComboBox::tqminimumSizeHint();
+  return KComboBox::minimumSizeHint();
 }
 
 
@@ -205,7 +205,7 @@ void K3bCutComboBox::resizeEvent( TQResizeEvent* e )
 
 void K3bCutComboBox::cutText()
 {
-  d->width = TQStyle::tqvisualRect( tqstyle().querySubControlMetrics(TQStyle::CC_ComboBox, this,
+  d->width = TQStyle::visualRect( tqstyle().querySubControlMetrics(TQStyle::CC_ComboBox, this,
 								TQStyle::SC_ComboBoxEditField), this ).width();
 
   for( int i = 0; i < (int)d->originalItems.count(); ++i ) {

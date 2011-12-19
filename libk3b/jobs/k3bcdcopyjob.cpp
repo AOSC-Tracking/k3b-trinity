@@ -713,7 +713,7 @@ bool K3bCdCopyJob::writeNextSession()
     connect( d->cdrecordWriter, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
     connect( d->cdrecordWriter, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
     connect( d->cdrecordWriter, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWritingNextTrack(int, int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+    connect( d->cdrecordWriter, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
     connect( d->cdrecordWriter, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
     connect( d->cdrecordWriter, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
     connect( d->cdrecordWriter, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );

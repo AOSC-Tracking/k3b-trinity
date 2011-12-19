@@ -626,7 +626,7 @@ bool K3bDevice::Device::readTocPmaAtip( unsigned char** data, unsigned int& data
 }
 
 
-bool K3bDevice::Device::mechanismtqStatus( unsigned char** data, unsigned int& dataLen ) const
+bool K3bDevice::Device::mechanismStatus( unsigned char** data, unsigned int& dataLen ) const
 {
   unsigned char header[2048];
   ::memset( header, 0, 2048 );

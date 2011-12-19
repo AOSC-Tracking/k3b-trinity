@@ -71,9 +71,9 @@ void K3bThemedHeader::setRightPixmap( K3bTheme::PixmapType p )
 }
 
 
-void K3bThemedHeader::tqsetAlignment( int align )
+void K3bThemedHeader::setAlignment( int align )
 {
-  m_titleLabel->tqsetAlignment( align );
+  m_titleLabel->setAlignment( align );
 }
 
 

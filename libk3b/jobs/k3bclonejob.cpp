@@ -180,7 +180,7 @@ void K3bCloneJob::prepareWriter()
     connect( m_writerJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
     connect( m_writerJob, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
     connect( m_writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-    connect( m_writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+    connect( m_writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
     connect( m_writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
     connect( m_writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
     connect( m_writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );

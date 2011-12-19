@@ -99,7 +99,7 @@ which can be used with programs like xmms or noatun.
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="tqsizeHint">
+                            <property name="sizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>16</height>
@@ -164,7 +164,7 @@ file will contain all tracks one after the other.
                             <property name="sizeType">
                                 <enum>Fixed</enum>
                             </property>
-                            <property name="tqsizeHint">
+                            <property name="sizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>16</height>

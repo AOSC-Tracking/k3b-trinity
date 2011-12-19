@@ -36,7 +36,7 @@ class K3bThemedHeader : public TQFrame
  public slots:
   void setTitle( const TQString& title, const TQString& subtitle = TQString() );
   void setSubTitle( const TQString& subtitle );
-  void tqsetAlignment( int );
+  void setAlignment( int );
   void setLeftPixmap( K3bTheme::PixmapType );
   void setRightPixmap( K3bTheme::PixmapType );
 

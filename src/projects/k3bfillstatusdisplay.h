@@ -51,8 +51,8 @@ class K3bFillStatusDisplayWidget : public TQWidget
   K3bFillStatusDisplayWidget( K3bDoc* doc, TQWidget* parent );
   ~K3bFillStatusDisplayWidget();
 
-  TQSize tqsizeHint() const;
-  TQSize tqminimumSizeHint() const;
+  TQSize sizeHint() const;
+  TQSize minimumSizeHint() const;
 
   const K3b::Msf& cdSize() const;
 

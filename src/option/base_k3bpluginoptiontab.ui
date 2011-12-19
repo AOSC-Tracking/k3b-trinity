@@ -38,7 +38,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="tqsizeHint">
+            <property name="sizeHint">
                 <size>
                     <width>411</width>
                     <height>21</height>

@@ -177,9 +177,9 @@ K3bAudioEditorWidget::K3bAudioEditorWidget( TQWidget* parent, const char* name )
     m_draggedMarker(0)
 {
   d = new Private;
-  d->selectedRangeBrush = TQBrush(tqcolorGroup().highlight());
+  d->selectedRangeBrush = TQBrush(colorGroup().highlight());
 
-  tqsetSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Minimum );
+  setSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Minimum );
   setFrameStyle( StyledPanel|Sunken );
   setMouseTracking(true);
   setCursor( TQt::PointingHandCursor );
@@ -201,7 +201,7 @@ K3bAudioEditorWidget::~K3bAudioEditorWidget()
 }
 
 
-TQSize K3bAudioEditorWidget::tqminimumSizeHint() const
+TQSize K3bAudioEditorWidget::minimumSizeHint() const
 {
   constPolish();
   // some fixed height minimum and enough space for a tickmark every minute
@@ -215,9 +215,9 @@ TQSize K3bAudioEditorWidget::tqminimumSizeHint() const
 }
 
 
-TQSize K3bAudioEditorWidget::tqsizeHint() const
+TQSize K3bAudioEditorWidget::sizeHint() const
 {
-  return tqminimumSizeHint();
+  return minimumSizeHint();
 }
 
 
@@ -307,7 +307,7 @@ int K3bAudioEditorWidget::addRange( const K3b::Msf& start, const K3b::Msf& end,
     return -1;
 
   Range* r = new Range( m_idCnt++, start, end, startFixed, endFixed, toolTip,
-			brush.style() != TQBrush::NoBrush ? brush : TQBrush(tqcolorGroup().background()) );
+			brush.style() != TQBrush::NoBrush ? brush : TQBrush(colorGroup().background()) );
   d->ranges.inSort( r );
 
   // only update the changed range
@@ -433,7 +433,7 @@ void K3bAudioEditorWidget::setMaxNumberOfMarkers( int i )
 int K3bAudioEditorWidget::addMarker( const K3b::Msf& pos, bool fixed, const TQString& toolTip, const TQColor& color )
 {
   if( pos < m_length ) {
-    Marker* m = new Marker( m_idCnt++, pos, fixed, color.isValid() ? color : tqcolorGroup().foreground(), toolTip );
+    Marker* m = new Marker( m_idCnt++, pos, fixed, color.isValid() ? color : colorGroup().foreground(), toolTip );
     m_markers.inSort( m );
     return m->id;
   }
@@ -488,7 +488,7 @@ void K3bAudioEditorWidget::drawContents( TQPainter* p )
 {
   // double buffering
   TQPixmap pix( contentsRect().size() );
-  pix.fill( tqcolorGroup().base() );
+  pix.fill( colorGroup().base() );
 
   TQPainter pixP;
   pixP.tqbegin( &pix, TQT_TQOBJECT(this) );
@@ -497,7 +497,7 @@ void K3bAudioEditorWidget::drawContents( TQPainter* p )
   drawRect.setLeft( drawRect.left() + m_margin );
   drawRect.setRight( drawRect.right() - m_margin );
 
-  // from tqminimumSizeHint()
+  // from minimumSizeHint()
 //   int neededHeight = fontMetrics().height() + 12 + 6;
 
 //   drawRect.setTop( drawRect.top() + (drawRect.height() - neededHeight)/2 );

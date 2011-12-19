@@ -148,7 +148,7 @@ bool K3bBinImageWritingJob::prepareWriter()
   connect( m_writer, TQT_SIGNAL(percent(int)), this, TQT_SLOT(copyPercent(int)) );
   connect( m_writer, TQT_SIGNAL(subPercent(int)), this, TQT_SLOT(copySubPercent(int)) );
   connect( m_writer, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
   connect( m_writer, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
   connect( m_writer, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
   connect( m_writer, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(writerFinished(bool)) );

@@ -39,7 +39,7 @@ K3bMovixDvdJob::K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler* jh, TQObject
   connect( m_dvdJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
   connect( m_dvdJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
   connect( m_dvdJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( m_dvdJob, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_dvdJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SIGNAL(bufferStatus(int)) );
   connect( m_dvdJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
   connect( m_dvdJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
   connect( m_dvdJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );

@@ -76,7 +76,7 @@ K3bAudioCueFileWritingJob::K3bAudioCueFileWritingJob( K3bJobHandler* jh, TQObjec
   connect( m_audioJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
   connect( m_audioJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
   connect( m_audioJob, TQT_SIGNAL(burning(bool)), this, TQT_SIGNAL(burning(bool)) );
-  connect( m_audioJob, TQT_SIGNAL(buffertqStatus(int)), this, TQT_SIGNAL(buffertqStatus(int)) );
+  connect( m_audioJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SIGNAL(bufferStatus(int)) );
   connect( m_audioJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
   connect( m_audioJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
 

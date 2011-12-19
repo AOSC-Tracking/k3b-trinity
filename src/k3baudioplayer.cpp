@@ -169,8 +169,8 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
 
   m_viewPlayList = new K3bPlayListView( this );
 
-  m_labelOverallTime->tqsetAlignment( AlignHCenter | AlignVCenter );
-  m_labelCurrentTime->tqsetAlignment( AlignHCenter | AlignVCenter );
+  m_labelOverallTime->setAlignment( AlignHCenter | AlignVCenter );
+  m_labelCurrentTime->setAlignment( AlignHCenter | AlignVCenter );
   m_labelOverallTime->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );
   m_labelCurrentTime->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );
   m_labelFilename->setFrameStyle( TQFrame::StyledPanel | TQFrame::Plain );

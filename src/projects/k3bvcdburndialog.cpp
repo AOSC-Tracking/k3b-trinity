@@ -311,7 +311,7 @@ void K3bVcdBurnDialog::setupAdvancedTab()
     m_groupGaps->tqlayout() ->setMargin( marginHint() );
 
     TQGridLayout* groupGapsLayout = new TQGridLayout( m_groupGaps->tqlayout() );
-    groupGapsLayout->tqsetAlignment( TQt::AlignTop );
+    groupGapsLayout->setAlignment( TQt::AlignTop );
 
     m_checkGaps = new TQCheckBox( i18n( "Customize gaps and margins" ), m_groupGaps );
 
@@ -407,7 +407,7 @@ void K3bVcdBurnDialog::setupAdvancedTab()
     m_groupMisc->tqlayout() ->setMargin( marginHint() );
 
     TQGridLayout* groupMiscLayout = new TQGridLayout( m_groupMisc->tqlayout() );
-    groupMiscLayout->tqsetAlignment( TQt::AlignTop );
+    groupMiscLayout->setAlignment( TQt::AlignTop );
 
     m_labelRestriction = new TQLabel( i18n( "Restriction category (0..3):" ), m_groupMisc, "m_labelRestriction" );
     m_spinRestriction = new TQSpinBox( m_groupMisc, "m_spinRestriction" );

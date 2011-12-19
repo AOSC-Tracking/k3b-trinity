@@ -214,7 +214,7 @@ namespace K3bDevice
 
   /**
    * Based on the cdrecord struct cd_mode_page_2A
-   * MM Capabilities and Mechanical tqStatus Page
+   * MM Capabilities and Mechanical Status Page
    */
 #ifdef WORDS_BIGENDIAN // __BYTE_ORDER == __BIG_ENDIAN
 
