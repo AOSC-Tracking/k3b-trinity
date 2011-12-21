@@ -269,9 +269,9 @@ void K3bProjectBurnDialog::prepareGui()
   m_writingModeWidget = new K3bWritingModeWidget( groupWritingMode );
 
   m_optionGroup = new TQGroupBox( 0, Qt::Vertical, i18n("Settings"), w );
-  m_optionGroup->tqlayout()->setMargin(0);
-  m_optionGroup->tqlayout()->setSpacing(0);
-  m_optionGroupLayout = new TQVBoxLayout( m_optionGroup->tqlayout() );
+  m_optionGroup->layout()->setMargin(0);
+  m_optionGroup->layout()->setSpacing(0);
+  m_optionGroupLayout = new TQVBoxLayout( m_optionGroup->layout() );
   m_optionGroupLayout->setMargin( KDialog::marginHint() );
   m_optionGroupLayout->setSpacing( KDialog::spacingHint() );
 

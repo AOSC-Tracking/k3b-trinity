@@ -411,7 +411,7 @@ TQString K3bMedium::beautifiedVolumeId() const
       return oldId;
 
     // replace underscore with space
-    else if( c.tqunicode() == 95 ) {
+    else if( c.unicode() == 95 ) {
       newId.append( ' ' );
       newWord = true;
     }

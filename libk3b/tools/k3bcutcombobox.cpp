@@ -205,7 +205,7 @@ void K3bCutComboBox::resizeEvent( TQResizeEvent* e )
 
 void K3bCutComboBox::cutText()
 {
-  d->width = TQStyle::visualRect( tqstyle().querySubControlMetrics(TQStyle::CC_ComboBox, this,
+  d->width = TQStyle::visualRect( style().querySubControlMetrics(TQStyle::CC_ComboBox, this,
 								TQStyle::SC_ComboBoxEditField), this ).width();
 
   for( int i = 0; i < (int)d->originalItems.count(); ++i ) {

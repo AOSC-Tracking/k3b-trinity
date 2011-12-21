@@ -130,7 +130,7 @@ K3bPassivePopup::K3bPassivePopup( TQWidget* parent )
   connect( d->timeoutWidget, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotClose()) );
 
   d->closeButton = new K3bMiniButton( d->titleLabel );
-  d->closeButton->setPixmap( tqstyle().stylePixmap( TQStyle::SP_TitleBarCloseButton, this ) );
+  d->closeButton->setPixmap( style().stylePixmap( TQStyle::SP_TitleBarCloseButton, this ) );
   d->closeButton->setFixedSize( d->closeButton->pixmap()->width(), d->closeButton->pixmap()->height() );
   TQToolTip::add( d->closeButton, i18n("Close") );
   connect( d->closeButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotClose()) );

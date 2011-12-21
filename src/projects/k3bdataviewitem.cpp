@@ -65,7 +65,7 @@ void K3bDataViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int colum
   TQColorGroup _cg = cg;
 
   if( !dataItem()->isRemoveable() && dataItem()->doc()->root() != dataItem() ) {
-    _cg.setColor( TQColorGroup::Text, listView()->tqpalette().disabled().foreground() );
+    _cg.setColor( TQColorGroup::Text, listView()->palette().disabled().foreground() );
   }
 
   if( column == 0 ) {

@@ -307,10 +307,10 @@ void K3bVcdBurnDialog::setupAdvancedTab()
 
     // -------------------------------------------- gaps & margins group ----
     m_groupGaps = new TQGroupBox( 0, Qt::Vertical, i18n( "Gaps" ), w );
-    m_groupGaps->tqlayout() ->setSpacing( spacingHint() );
-    m_groupGaps->tqlayout() ->setMargin( marginHint() );
+    m_groupGaps->layout() ->setSpacing( spacingHint() );
+    m_groupGaps->layout() ->setMargin( marginHint() );
 
-    TQGridLayout* groupGapsLayout = new TQGridLayout( m_groupGaps->tqlayout() );
+    TQGridLayout* groupGapsLayout = new TQGridLayout( m_groupGaps->layout() );
     groupGapsLayout->setAlignment( TQt::AlignTop );
 
     m_checkGaps = new TQCheckBox( i18n( "Customize gaps and margins" ), m_groupGaps );
@@ -403,10 +403,10 @@ void K3bVcdBurnDialog::setupAdvancedTab()
 
     // ------------------------------------------------------- misc group ----
     m_groupMisc = new TQGroupBox( 0, Qt::Vertical, i18n( "Misc" ), w );
-    m_groupMisc->tqlayout() ->setSpacing( spacingHint() );
-    m_groupMisc->tqlayout() ->setMargin( marginHint() );
+    m_groupMisc->layout() ->setSpacing( spacingHint() );
+    m_groupMisc->layout() ->setMargin( marginHint() );
 
-    TQGridLayout* groupMiscLayout = new TQGridLayout( m_groupMisc->tqlayout() );
+    TQGridLayout* groupMiscLayout = new TQGridLayout( m_groupMisc->layout() );
     groupMiscLayout->setAlignment( TQt::AlignTop );
 
     m_labelRestriction = new TQLabel( i18n( "Restriction category (0..3):" ), m_groupMisc, "m_labelRestriction" );

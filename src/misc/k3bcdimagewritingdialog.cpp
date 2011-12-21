@@ -588,14 +588,14 @@ void K3bCdImageWritingDialog::createIso9660InfoItems( K3bIso9660* isoF )
   K3bListViewItem* isoRootItem = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 						      i18n("Detected:"),
 						      i18n("Iso9660 image") );
-  isoRootItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
   isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
   KIO::filesize_t size = K3b::filesize( KURL::fromPathOrURL(isoF->fileName()) );
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 					       i18n("Filesize:"), 
 					       KIO::convertSize( size ) );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
@@ -603,7 +603,7 @@ void K3bCdImageWritingDialog::createIso9660InfoItems( K3bIso9660* isoF )
 			      isoF->primaryDescriptor().systemId.isEmpty()
 			      ? TQString("-") 
 			      : isoF->primaryDescriptor().systemId );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
@@ -611,7 +611,7 @@ void K3bCdImageWritingDialog::createIso9660InfoItems( K3bIso9660* isoF )
 			      isoF->primaryDescriptor().volumeId.isEmpty() 
 			      ? TQString("-") 
 			      : isoF->primaryDescriptor().volumeId );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
@@ -619,7 +619,7 @@ void K3bCdImageWritingDialog::createIso9660InfoItems( K3bIso9660* isoF )
 			      isoF->primaryDescriptor().volumeSetId.isEmpty()
 			      ? TQString("-")
 			      : isoF->primaryDescriptor().volumeSetId );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
@@ -627,14 +627,14 @@ void K3bCdImageWritingDialog::createIso9660InfoItems( K3bIso9660* isoF )
 			      isoF->primaryDescriptor().publisherId.isEmpty() 
 			      ? TQString("-") 
 			      : isoF->primaryDescriptor().publisherId );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
 			      i18n("Preparer Id:"), 
 			      isoF->primaryDescriptor().preparerId.isEmpty() 
 			      ? TQString("-") : isoF->primaryDescriptor().preparerId );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
@@ -642,7 +642,7 @@ void K3bCdImageWritingDialog::createIso9660InfoItems( K3bIso9660* isoF )
 			      isoF->primaryDescriptor().applicationId.isEmpty()
 			      ? TQString("-") 
 			      : isoF->primaryDescriptor().applicationId );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   isoRootItem->setOpen( true );
 }
@@ -653,24 +653,24 @@ void K3bCdImageWritingDialog::createCdrecordCloneItems( const TQString& tocFile,
   K3bListViewItem* isoRootItem = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 						      i18n("Detected:"),
 						      i18n("Cdrecord clone image") );
-  isoRootItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
   isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 					       i18n("Filesize:"), KIO::convertSize( K3b::filesize(KURL::fromPathOrURL(imageFile)) ) );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
 			      i18n("Image file:"), 
 			      imageFile );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
 			      i18n("TOC file:"), 
 			      tocFile );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   isoRootItem->setOpen( true );
 }
@@ -681,24 +681,24 @@ void K3bCdImageWritingDialog::createCueBinItems( const TQString& cueFile, const 
   K3bListViewItem* isoRootItem = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 						      i18n("Detected:"),
 						      i18n("Cue/bin image") );
-  isoRootItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
   isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 					       i18n("Filesize:"), KIO::convertSize( K3b::filesize(KURL::fromPathOrURL(imageFile)) ) );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
 			      i18n("Image file:"), 
 			      imageFile );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
 			      m_infoView->lastItem(),
 			      i18n("Cue file:"), 
 			      cueFile );
-  item->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  item->setForegroundColor( 0, palette().disabled().foreground() );
 
   isoRootItem->setOpen( true );
 }
@@ -709,7 +709,7 @@ void K3bCdImageWritingDialog::createAudioCueItems( const K3bCueFileParser& cp )
   K3bListViewItem* rootItem = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 						   i18n("Detected:"),
 						   i18n("Audio Cue Image") );
-  rootItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  rootItem->setForegroundColor( 0, palette().disabled().foreground() );
   rootItem->setPixmap( 0, SmallIcon( "sound") );
 
   K3bListViewItem* trackParent = new K3bListViewItem( rootItem,
@@ -839,7 +839,7 @@ void K3bCdImageWritingDialog::calculateMd5Sum( const TQString& file )
     d->md5SumItem = new K3bListViewItem( m_infoView, m_infoView->firstChild() );
 
   d->md5SumItem->setText( 0, i18n("Md5 Sum:") );
-  d->md5SumItem->setForegroundColor( 0, tqpalette().disabled().foreground() );
+  d->md5SumItem->setForegroundColor( 0, palette().disabled().foreground() );
   d->md5SumItem->setProgress( 1, 0 );
   d->md5SumItem->setPixmap( 0, SmallIcon( "exec") );
 
@@ -907,7 +907,7 @@ void K3bCdImageWritingDialog::slotContextMenu( KListView*, TQListViewItem*, cons
     }
   }
   else if( r == copyItem ) {
-    TQApplication::tqclipboard()->setText( d->md5Job->hexDigest().lower(), TQClipboard::Clipboard );
+    TQApplication::clipboard()->setText( d->md5Job->hexDigest().lower(), TQClipboard::Clipboard );
   }
 }
 

@@ -109,8 +109,8 @@ void K3bBlankingDialog::setupGui()
 
   // --- setup the blanking type button group -----------------------------
   TQGroupBox* groupBlankType = new TQGroupBox( 1, Qt::Vertical, i18n("&Erase Type"), frame );
-  groupBlankType->tqlayout()->setSpacing( spacingHint() );
-  groupBlankType->tqlayout()->setMargin( marginHint() );
+  groupBlankType->layout()->setSpacing( spacingHint() );
+  groupBlankType->layout()->setMargin( marginHint() );
 
   m_comboEraseMode = new TQComboBox( groupBlankType );
   // ----------------------------------------------------------------------

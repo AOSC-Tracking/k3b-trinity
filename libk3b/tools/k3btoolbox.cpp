@@ -60,7 +60,7 @@ K3bToolBoxSeparator::K3bToolBoxSeparator( K3bToolBox* parent )
 
 TQSize K3bToolBoxSeparator::sizeHint() const
 {
-  int extent = tqstyle().pixelMetric( TQStyle::PM_DockWindowSeparatorExtent,
+  int extent = style().pixelMetric( TQStyle::PM_DockWindowSeparatorExtent,
 				    this );
   return TQSize( extent, 0 );
 }
@@ -71,7 +71,7 @@ void K3bToolBoxSeparator::paintEvent( TQPaintEvent* )
   TQPainter p( this );
   TQStyle::SFlags flags = TQStyle::Style_Default|TQStyle::Style_Horizontal;
 
-  tqstyle().tqdrawPrimitive( TQStyle::PE_DockWindowSeparator, &p, rect(),
+  style().tqdrawPrimitive( TQStyle::PE_DockWindowSeparator, &p, rect(),
 			 colorGroup(), flags );
 }
 

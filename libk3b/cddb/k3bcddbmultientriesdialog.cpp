@@ -29,10 +29,10 @@ K3bCddbMultiEntriesDialog::K3bCddbMultiEntriesDialog( TQWidget* parent, const ch
   : KDialogBase( Plain, i18n("CDDB Database Entry"), Ok|Cancel, Ok, parent, name ) 
 {
   TQFrame* frame = plainPage();
-  TQVBoxLayout* tqlayout = new TQVBoxLayout( frame );
-  tqlayout->setAutoAdd( true );
-  tqlayout->setSpacing( spacingHint() );
-  tqlayout->setMargin( 0 );
+  TQVBoxLayout* layout = new TQVBoxLayout( frame );
+  layout->setAutoAdd( true );
+  layout->setSpacing( spacingHint() );
+  layout->setMargin( 0 );
 
   TQLabel* infoLabel = new TQLabel( i18n("K3b found multiple inexact CDDB entries. Please select one."), frame );
   infoLabel->setAlignment( WordBreak );

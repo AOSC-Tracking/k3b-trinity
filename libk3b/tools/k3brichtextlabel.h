@@ -21,7 +21,7 @@
 #include <k3b_export.h>
 
 /**
- * @short A replacement for TQLabel that supports richtext and proper tqlayout management
+ * @short A replacement for TQLabel that supports richtext and proper layout management
  *
  * @author Waldo Bastian <bastian@kde.org>
  */

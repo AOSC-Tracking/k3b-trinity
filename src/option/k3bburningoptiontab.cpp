@@ -60,8 +60,8 @@ void K3bBurningOptionTab::setupGui()
 
 
   TQGroupBox* groupWritingApp = new TQGroupBox( 0, Qt::Vertical, i18n("Burning"), this );
-  groupWritingApp->tqlayout()->setMargin( 0 );
-  TQGridLayout* bufferLayout = new TQGridLayout( groupWritingApp->tqlayout() );
+  groupWritingApp->layout()->setMargin( 0 );
+  TQGridLayout* bufferLayout = new TQGridLayout( groupWritingApp->layout() );
   bufferLayout->setMargin( KDialog::marginHint() );
   bufferLayout->setSpacing( KDialog::spacingHint() );
 

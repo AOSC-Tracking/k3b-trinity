@@ -108,7 +108,7 @@ K3bSystemProblemDialog::K3bSystemProblemDialog( const TQValueList<K3bSystemProbl
   view->setTextFormat(RichText);
 
 
-  // tqlayout everything
+  // layout everything
   TQGridLayout* grid = new TQGridLayout( this );
   grid->setMargin( marginHint() );
   grid->setSpacing( spacingHint() );

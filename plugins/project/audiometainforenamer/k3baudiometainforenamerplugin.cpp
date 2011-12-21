@@ -104,7 +104,7 @@ K3bAudioMetainfoRenamerPluginWidget::K3bAudioMetainfoRenamerPluginWidget( K3bDoc
   d->viewFiles->addColumn( i18n("Old Name") );
   d->viewFiles->setNoItemText( i18n("Please click the Scan button to search for renameable files.") );
 
-  // tqlayout
+  // layout
   TQVBoxLayout* box = new TQVBoxLayout( this );
   box->setMargin( 0 );
   box->setSpacing( KDialog::spacingHint() );

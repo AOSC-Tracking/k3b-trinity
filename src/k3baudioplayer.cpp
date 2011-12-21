@@ -194,7 +194,7 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
   m_updateTimer = new TQTimer( this );
   // ------------------------------------------------------------------------
 
-  // tqlayout
+  // layout
   // ------------------------------------------------------------------------
   TQGridLayout* grid = new TQGridLayout( this );
   grid->setSpacing( 2 );
