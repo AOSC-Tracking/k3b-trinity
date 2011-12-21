@@ -156,7 +156,7 @@ void K3bDebuggingOutputDialog::slotUser1()
 
 void K3bDebuggingOutputDialog::slotUser2()
 {
-  TQApplication::tqclipboard()->setText( debugView->text(), TQClipboard::Clipboard );
+  TQApplication::clipboard()->setText( debugView->text(), TQClipboard::Clipboard );
 }
 
 #include "k3bdebuggingoutputdialog.moc"

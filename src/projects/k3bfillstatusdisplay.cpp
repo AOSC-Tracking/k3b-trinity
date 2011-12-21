@@ -346,12 +346,12 @@ K3bFillStatusDisplay::K3bFillStatusDisplay( K3bDoc* doc, TQWidget *parent, const
 //   TQToolTip::add( d->buttonMenu, i18n("Fill display properties") );
 //   connect( d->buttonMenu, TQT_SIGNAL(clicked()), TQT_TQOBJECT(this), TQT_SLOT(slotMenuButtonClicked()) );
 
-  TQGridLayout* tqlayout = new TQGridLayout( this );
-  tqlayout->setSpacing(5);
-  tqlayout->setMargin(frameWidth());
-  tqlayout->addWidget( d->displayWidget, 0, 0 );
-  //  tqlayout->addWidget( d->buttonMenu, 0, 1 );
-  tqlayout->setColStretch( 0, 1 );
+  TQGridLayout* layout = new TQGridLayout( this );
+  layout->setSpacing(5);
+  layout->setMargin(frameWidth());
+  layout->addWidget( d->displayWidget, 0, 0 );
+  //  layout->addWidget( d->buttonMenu, 0, 1 );
+  layout->setColStretch( 0, 1 );
 
   setupPopupMenu();
 

@@ -82,7 +82,7 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
   // settings buttons
   // ---------------------------------------------------------------------------------------------------
   if( !m_configGroup.isEmpty() ) {
-    TQHBoxLayout* tqlayout2 = new TQHBoxLayout( 0, 0, spacingHint(), "tqlayout2");
+    TQHBoxLayout* layout2 = new TQHBoxLayout( 0, 0, spacingHint(), "layout2");
     m_buttonLoadSettings = new K3bToolButton( /*i18n("User Defaults"), */this );
     ((K3bToolButton*)m_buttonLoadSettings)->setIconSet( SmallIconSet( "revert" ) );
     TQPopupMenu* userDefaultsPopup = new TQPopupMenu( m_buttonLoadSettings );
@@ -91,13 +91,13 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
     userDefaultsPopup->insertItem( i18n("Load last used settings"), this, TQT_SLOT(slotLoadLastSettings()) );
     ((TQToolButton*)m_buttonLoadSettings)->setPopup( userDefaultsPopup );
     ((K3bToolButton*)m_buttonLoadSettings)->setInstantMenu( true );
-    tqlayout2->addWidget( m_buttonLoadSettings );
+    layout2->addWidget( m_buttonLoadSettings );
 
     m_buttonSaveSettings = new TQToolButton( /*i18n("Save User Defaults"), */this, "m_buttonSaveSettings" );
     ((TQToolButton*)m_buttonSaveSettings)->setIconSet( SmallIconSet( "filesave" ) );
-    tqlayout2->addWidget( m_buttonSaveSettings );
+    layout2->addWidget( m_buttonSaveSettings );
 
-    mainGrid->addLayout( tqlayout2, 2, 0 );
+    mainGrid->addLayout( layout2, 2, 0 );
   }
 
   TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
@@ -106,7 +106,7 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
 
   // action buttons
   // ---------------------------------------------------------------------------------------------------
-  TQHBoxLayout* tqlayout5 = new TQHBoxLayout( 0, 0, spacingHint(), "tqlayout5");
+  TQHBoxLayout* layout5 = new TQHBoxLayout( 0, 0, spacingHint(), "layout5");
 
   if( buttonMask & START_BUTTON ) {
     KGuiItem startItem = KStdGuiItem::ok();
@@ -149,33 +149,33 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
   case 0: // KDE default
   default:
       if ( m_buttonStart )
-          tqlayout5->addWidget( m_buttonStart );
+          layout5->addWidget( m_buttonStart );
       if ( m_buttonSave )
-          tqlayout5->addWidget( m_buttonSave );
+          layout5->addWidget( m_buttonSave );
       if ( m_buttonCancel )
-          tqlayout5->addWidget( m_buttonCancel );
+          layout5->addWidget( m_buttonCancel );
       break;
 
   case 1: // something different
       if ( m_buttonCancel )
-          tqlayout5->addWidget( m_buttonCancel );
+          layout5->addWidget( m_buttonCancel );
       if ( m_buttonSave )
-          tqlayout5->addWidget( m_buttonSave );
+          layout5->addWidget( m_buttonSave );
       if ( m_buttonStart )
-          tqlayout5->addWidget( m_buttonStart );
+          layout5->addWidget( m_buttonStart );
       break;
 
   case 2: // GTK-Style
       if ( m_buttonSave )
-          tqlayout5->addWidget( m_buttonSave );
+          layout5->addWidget( m_buttonSave );
       if ( m_buttonCancel )
-          tqlayout5->addWidget( m_buttonCancel );
+          layout5->addWidget( m_buttonCancel );
       if ( m_buttonStart )
-          tqlayout5->addWidget( m_buttonStart );
+          layout5->addWidget( m_buttonStart );
       break;
   }
 
-  mainGrid->addLayout( tqlayout5, 2, 2 );
+  mainGrid->addLayout( layout5, 2, 2 );
 
   mainGrid->setRowStretch( 1, 1 );
 

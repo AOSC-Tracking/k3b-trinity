@@ -448,8 +448,8 @@ void K3bListViewItem::paintProgressBar( TQPainter* p, const TQColorGroup& cgh, i
   // some styles use the widget's geometry
   s_dummyProgressBar->setGeometry( r );
 
-  listView()->tqstyle().drawControl(TQStyle::CE_ProgressBarContents, &dbPainter, s_dummyProgressBar, r, cgh, flags );
-  listView()->tqstyle().drawControl(TQStyle::CE_ProgressBarLabel, &dbPainter, s_dummyProgressBar, r, cgh, flags );
+  listView()->style().drawControl(TQStyle::CE_ProgressBarContents, &dbPainter, s_dummyProgressBar, r, cgh, flags );
+  listView()->style().drawControl(TQStyle::CE_ProgressBarLabel, &dbPainter, s_dummyProgressBar, r, cgh, flags );
 
   // now we really paint the progress in the listview
   p->drawPixmap( 0, 0, *doubleBuffer );
@@ -508,7 +508,7 @@ void K3bCheckListViewItem::paintK3bCell( TQPainter* p, const TQColorGroup& cg, i
 
   if( col == 0 ) {
     if( m_checked ) {
-      TQRect r( 0, marginVertical(), width, /*listView()->tqstyle().pixelMetric( TQStyle::PM_CheckListButtonSize )*/height()-2*marginVertical() );
+      TQRect r( 0, marginVertical(), width, /*listView()->style().pixelMetric( TQStyle::PM_CheckListButtonSize )*/height()-2*marginVertical() );
 
       TQStyle::SFlags flags = TQStyle::Style_Default;
       if( listView()->isEnabled() )
@@ -520,7 +520,7 @@ void K3bCheckListViewItem::paintK3bCell( TQPainter* p, const TQColorGroup& cg, i
       else
 	flags |= TQStyle::Style_Off;
 
-      listView()->tqstyle().tqdrawPrimitive( TQStyle::PE_CheckMark, p, r, cg, flags );
+      listView()->style().tqdrawPrimitive( TQStyle::PE_CheckMark, p, r, cg, flags );
     }
   }
 }

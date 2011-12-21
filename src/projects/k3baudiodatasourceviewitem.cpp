@@ -39,7 +39,7 @@ K3bAudioDataSourceViewItem::K3bAudioDataSourceViewItem( K3bAudioTrackViewItem* p
   //  setMarginVertical( 2 );
 
   // gray out filename
-  setForegroundColor( 5, listView()->tqpalette().disabled().foreground() );
+  setForegroundColor( 5, listView()->palette().disabled().foreground() );
 
   // smaller filename
   f = listView()->font();

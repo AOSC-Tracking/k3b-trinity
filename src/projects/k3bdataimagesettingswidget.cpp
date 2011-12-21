@@ -171,7 +171,7 @@ K3bDataImageSettingsWidget::K3bDataImageSettingsWidget( TQWidget* parent, const 
   : base_K3bDataImageSettings( parent, name ),
     m_fileSystemOptionsShown(true)
 {
-  tqlayout()->setMargin( KDialog::marginHint() );
+  layout()->setMargin( KDialog::marginHint() );
 
   m_customFsDlg = new CustomFilesystemsDialog( this );
   m_volDescDlg = new VolumeDescDialog( this );

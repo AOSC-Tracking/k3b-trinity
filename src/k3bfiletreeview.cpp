@@ -238,7 +238,7 @@ void K3bDeviceBranchViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, i
       textheight++;
     if ( textheight < height() ) {
       int w = listView()->treeStepSize() / 2;
-      listView()->tqstyle().drawComplexControl( TQStyle::CC_ListView, p, listView(),
+      listView()->style().drawComplexControl( TQStyle::CC_ListView, p, listView(),
 					      TQRect( 0, textheight, w + 1, height() - textheight + 1 ), cg,
 					      TQStyle::Style_Enabled,
 					      TQStyle::SC_ListViewExpand,

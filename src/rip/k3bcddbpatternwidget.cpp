@@ -32,8 +32,8 @@
 K3bCddbPatternWidget::K3bCddbPatternWidget( TQWidget* parent, const char* name )
   : base_K3bCddbPatternWidget( parent, name )
 {
-  // fix the tqlayout
-  ((TQGridLayout*)tqlayout())->setRowStretch( 4, 1 );
+  // fix the layout
+  ((TQGridLayout*)layout())->setRowStretch( 4, 1 );
 
   // setup validators
   // there can never be one of the following characters in both dir and filename:

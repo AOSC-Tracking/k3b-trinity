@@ -88,7 +88,7 @@
                 </widget>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>tqlayout6</cstring>
+                        <cstring>layout6</cstring>
                     </property>
                     <hbox>
                         <property name="name">

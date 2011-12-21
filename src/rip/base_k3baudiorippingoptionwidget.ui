@@ -83,7 +83,7 @@ which can be used with programs like xmms or noatun.
                 </widget>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>tqlayout6</cstring>
+                        <cstring>layout6</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -148,7 +148,7 @@ file will contain all tracks one after the other.
                 </widget>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>tqlayout6_2</cstring>
+                        <cstring>layout6_2</cstring>
                     </property>
                     <hbox>
                         <property name="name">

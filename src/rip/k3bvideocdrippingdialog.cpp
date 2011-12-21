@@ -73,10 +73,10 @@ void K3bVideoCdRippingDialog::setupGui()
 
     // ---------------------------------------------------- Directory group ---
     TQGroupBox* groupDirectory = new TQGroupBox( 0, Qt::Vertical, i18n( "Destination Directory" ), frame );
-    groupDirectory->tqlayout() ->setSpacing( KDialog::spacingHint() );
-    groupDirectory->tqlayout() ->setMargin( KDialog::marginHint() );
+    groupDirectory->layout() ->setSpacing( KDialog::spacingHint() );
+    groupDirectory->layout() ->setMargin( KDialog::marginHint() );
 
-    TQGridLayout* groupDirectoryLayout = new TQGridLayout( groupDirectory->tqlayout() );
+    TQGridLayout* groupDirectoryLayout = new TQGridLayout( groupDirectory->layout() );
     groupDirectoryLayout->setAlignment( TQt::AlignTop );
 
     TQLabel* rippathLabel = new TQLabel( i18n( "Rip files to:" ), groupDirectory );

@@ -32,7 +32,7 @@
                     </property>
                     <widget class="TQLayoutWidget">
                         <property name="name">
-                            <cstring>tqlayout9</cstring>
+                            <cstring>layout9</cstring>
                         </property>
                         <grid>
                             <property name="name">
@@ -217,7 +217,7 @@
                     </widget>
                     <widget class="TQLayoutWidget">
                         <property name="name">
-                            <cstring>tqlayout6</cstring>
+                            <cstring>layout6</cstring>
                         </property>
                         <hbox>
                             <property name="name">

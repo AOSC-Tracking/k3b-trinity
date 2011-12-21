@@ -50,20 +50,20 @@ K3bCddbOptionTab::K3bCddbOptionTab( TQWidget* parent,  const char* name )
   base_K3bCddbOptionTabLayout->setMargin( 0 );
   base_K3bCddbOptionTabLayout->setSpacing( KDialog::spacingHint() );
 
-  m_mainTabbed->page(0)->tqlayout()->setMargin( KDialog::marginHint() );
-  m_mainTabbed->page(0)->tqlayout()->setSpacing( KDialog::spacingHint() );
-  m_mainTabbed->page(1)->tqlayout()->setMargin( KDialog::marginHint() );
-  m_mainTabbed->page(1)->tqlayout()->setSpacing( KDialog::spacingHint() );
+  m_mainTabbed->page(0)->layout()->setMargin( KDialog::marginHint() );
+  m_mainTabbed->page(0)->layout()->setSpacing( KDialog::spacingHint() );
+  m_mainTabbed->page(1)->layout()->setMargin( KDialog::marginHint() );
+  m_mainTabbed->page(1)->layout()->setSpacing( KDialog::spacingHint() );
 
-//   m_groupLocalDir->tqlayout()->setMargin( 0 );
+//   m_groupLocalDir->layout()->setMargin( 0 );
 //   m_groupLocalDirLayout->setMargin( KDialog::marginHint() );
 //   m_groupLocalDirLayout->setSpacing( KDialog::spacingHint() );
 
-//   m_groupCddbServer->tqlayout()->setMargin( 0 );
+//   m_groupCddbServer->layout()->setMargin( 0 );
 //   m_groupCddbServerLayout->setMargin( KDialog::marginHint() );
 //   m_groupCddbServerLayout->setSpacing( KDialog::spacingHint() );
 
-  m_groupCgi->tqlayout()->setMargin( 0 );
+  m_groupCgi->layout()->setMargin( 0 );
   m_groupCgiLayout->setMargin( KDialog::marginHint() );
   m_groupCgiLayout->setSpacing( KDialog::spacingHint() );
 

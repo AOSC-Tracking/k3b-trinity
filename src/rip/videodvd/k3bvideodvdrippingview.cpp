@@ -65,7 +65,7 @@ K3bVideoDVDRippingView::K3bVideoDVDRippingView( TQWidget* parent, const char * n
   connect( m_titleView, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
 	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem*, const TQPoint&)) );
 
-  // general tqlayout
+  // general layout
   // ----------------------------------------------------------------------------------
   mainGrid->addLayout( toolBoxLayout, 0, 0 );
   mainGrid->addWidget( m_titleView, 1, 0 );

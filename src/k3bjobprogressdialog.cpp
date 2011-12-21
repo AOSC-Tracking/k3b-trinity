@@ -198,28 +198,28 @@ void K3bJobProgressDialog::setupGUI()
   mainLayout->addWidget( progressHeaderFrame );
   // ------------------------------------------------------------------------------------------
 
-  TQHBoxLayout* tqlayout3 = new TQHBoxLayout( 0, 0, 6, "tqlayout3"); 
+  TQHBoxLayout* layout3 = new TQHBoxLayout( 0, 0, 6, "layout3"); 
 
   m_labelSubTask = new KCutLabel( this, "m_labelSubTask" );
-  tqlayout3->addWidget( m_labelSubTask );
+  layout3->addWidget( m_labelSubTask );
 
   m_labelSubProcessedSize = new TQLabel( this, "m_labelSubProcessedSize" );
   m_labelSubProcessedSize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
-  tqlayout3->addWidget( m_labelSubProcessedSize );
-  mainLayout->addLayout( tqlayout3 );
+  layout3->addWidget( m_labelSubProcessedSize );
+  mainLayout->addLayout( layout3 );
 
   m_progressSubPercent = new KProgress( this, "m_progressSubPercent" );
   mainLayout->addWidget( m_progressSubPercent );
 
-  TQHBoxLayout* tqlayout4 = new TQHBoxLayout( 0, 0, 6, "tqlayout4"); 
+  TQHBoxLayout* layout4 = new TQHBoxLayout( 0, 0, 6, "layout4"); 
 
   TQLabel* textLabel5 = new TQLabel( i18n("Overall progress:"), this, "textLabel5" );
-  tqlayout4->addWidget( textLabel5 );
+  layout4->addWidget( textLabel5 );
 
   m_labelProcessedSize = new TQLabel( this, "m_labelProcessedSize" );
   m_labelProcessedSize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
-  tqlayout4->addWidget( m_labelProcessedSize );
-  mainLayout->addLayout( tqlayout4 );
+  layout4->addWidget( m_labelProcessedSize );
+  mainLayout->addLayout( layout4 );
 
   m_progressPercent = new KProgress( this, "m_progressPercent" );
   mainLayout->addWidget( m_progressPercent );
@@ -237,18 +237,18 @@ void K3bJobProgressDialog::setupGUI()
  line2->setFrameShadow( TQFrame::Sunken );
   mainLayout->addWidget( line2 );
 
-  TQHBoxLayout* tqlayout5 = new TQHBoxLayout( 0, 0, 6, "tqlayout5"); 
+  TQHBoxLayout* layout5 = new TQHBoxLayout( 0, 0, 6, "layout5"); 
   TQSpacerItem* spacer = new TQSpacerItem( 10, 10, TQSizePolicy::Expanding, TQSizePolicy::Minimum );
-  tqlayout5->addItem( spacer );
+  layout5->addItem( spacer );
 
   m_buttonCancel = new KPushButton( KStdGuiItem::cancel(), this, "m_buttonCancel" );
-  tqlayout5->addWidget( m_buttonCancel );
+  layout5->addWidget( m_buttonCancel );
   m_buttonClose = new KPushButton( KStdGuiItem::close(), this );
-  tqlayout5->addWidget( m_buttonClose );
+  layout5->addWidget( m_buttonClose );
   m_buttonShowDebug = new TQPushButton( i18n("Show Debugging Output"), this );
-  tqlayout5->addWidget( m_buttonShowDebug );
+  layout5->addWidget( m_buttonShowDebug );
 
-  mainLayout->addLayout( tqlayout5 );
+  mainLayout->addLayout( layout5 );
 
   m_pixLabel->setThemePixmap( K3bTheme::PROGRESS_WORKING );
 
@@ -581,7 +581,7 @@ void K3bJobProgressDialog::keyPressEvent( TQKeyEvent *e )
 
 TQSize K3bJobProgressDialog::sizeHint() const
 {
-  TQSize s = tqlayout()->totalSizeHint();
+  TQSize s = layout()->totalSizeHint();
   if( s.width() < s.height() )
     s.setWidth( s.height() );
   return s;

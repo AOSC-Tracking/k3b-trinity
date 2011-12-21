@@ -375,10 +375,10 @@ void K3bVcdTrackDialog::prepareGui()
     // FILE-INFO BOX
     ///////////////////////////////////////////////////
     TQGroupBox* groupFileInfo = new TQGroupBox( 0, Qt::Vertical, i18n( "File Info" ), frame, "groupFileInfo" );
-    groupFileInfo->tqlayout() ->setSpacing( 0 );
-    groupFileInfo->tqlayout() ->setMargin( 0 );
+    groupFileInfo->layout() ->setSpacing( 0 );
+    groupFileInfo->layout() ->setMargin( 0 );
 
-    TQGridLayout* groupFileInfoLayout = new TQGridLayout( groupFileInfo->tqlayout() );
+    TQGridLayout* groupFileInfoLayout = new TQGridLayout( groupFileInfo->layout() );
     groupFileInfoLayout->setAlignment( TQt::AlignTop );
     groupFileInfoLayout->setSpacing( spacingHint() );
     groupFileInfoLayout->setMargin( marginHint() );
@@ -450,8 +450,8 @@ void K3bVcdTrackDialog::setupPbcTab()
 
     //////////////////////////////////////////////////////////////////////////////////////////
     TQGroupBox* groupOptions = new TQGroupBox( 3, Qt::Vertical, i18n( "Settings" ), w );
-    groupOptions->tqlayout() ->setSpacing( spacingHint() );
-    groupOptions->tqlayout() ->setMargin( marginHint() );
+    groupOptions->layout() ->setSpacing( spacingHint() );
+    groupOptions->layout() ->setMargin( marginHint() );
 
     m_check_pbc = new TQCheckBox( i18n( "Enable playback control (for the whole CD)" ), groupOptions, "m_check_pbc" );
 
@@ -463,10 +463,10 @@ void K3bVcdTrackDialog::setupPbcTab()
 
     //////////////////////////////////////////////////////////////////////////////////////////
     m_groupPlay = new TQGroupBox( 0, Qt::Vertical, i18n( "Playing" ), w );
-    m_groupPlay->tqlayout() ->setSpacing( spacingHint() );
-    m_groupPlay->tqlayout() ->setMargin( marginHint() );
+    m_groupPlay->layout() ->setSpacing( spacingHint() );
+    m_groupPlay->layout() ->setMargin( marginHint() );
 
-    TQGridLayout* groupPlayLayout = new TQGridLayout( m_groupPlay->tqlayout() );
+    TQGridLayout* groupPlayLayout = new TQGridLayout( m_groupPlay->layout() );
     groupPlayLayout->setAlignment( TQt::AlignTop );
 
     TQLabel* labelPlaying = new TQLabel( i18n( "Playing track" ) , m_groupPlay, "labelPlaying" );
@@ -499,10 +499,10 @@ void K3bVcdTrackDialog::setupPbcTab()
 
     //////////////////////////////////////////////////////////////////////////////////////////
     m_groupPbc = new TQGroupBox( 0, Qt::Vertical, i18n( "Key Pressed Interaction" ), w );
-    m_groupPbc->tqlayout() ->setSpacing( spacingHint() );
-    m_groupPbc->tqlayout() ->setMargin( marginHint() );
+    m_groupPbc->layout() ->setSpacing( spacingHint() );
+    m_groupPbc->layout() ->setMargin( marginHint() );
 
-    TQGridLayout* groupPbcLayout = new TQGridLayout( m_groupPbc->tqlayout() );
+    TQGridLayout* groupPbcLayout = new TQGridLayout( m_groupPbc->layout() );
     groupPbcLayout->setAlignment( TQt::AlignTop );
 
     TQLabel* labelPbc_previous = new TQLabel( i18n( "Previous:" ), m_groupPbc, "labelPbc_previous" );
@@ -559,8 +559,8 @@ void K3bVcdTrackDialog::setupPbcKeyTab()
 
     m_groupKey = new TQGroupBox( 3, Qt::Vertical, i18n( "Numeric Keys" ), m_widgetnumkeys );
     m_groupKey->setEnabled( false );
-    m_groupKey->tqlayout() ->setSpacing( spacingHint() );
-    m_groupKey->tqlayout() ->setMargin( marginHint() );
+    m_groupKey->layout() ->setSpacing( spacingHint() );
+    m_groupKey->layout() ->setMargin( marginHint() );
 
     m_list_keys = new K3bListView( m_groupKey, "m_list_keys" );
     m_list_keys->setAllColumnsShowFocus( true );

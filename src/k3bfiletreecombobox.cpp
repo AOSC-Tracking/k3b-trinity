@@ -175,7 +175,7 @@ void K3bFileTreeComboBox::popup()
     y = y - h - height();
 
   TQRect rect =
-    tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
+    style().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 				    TQStyle::SC_ComboBoxListBoxPopup,
 				    TQStyleOption( x, y, w, h ) );
   // work around older styles that don't implement the combobox
@@ -274,7 +274,7 @@ bool K3bFileTreeComboBox::eventFilter( TQObject* o, TQEvent* e )
     else if( e->type() == TQEvent::MouseButtonPress ) {
       TQMouseEvent* me = (TQMouseEvent*)e;
       if ( !TQT_TQRECT_OBJECT(m_fileTreeView->rect()).contains( me->pos() ) ) {
-	TQRect arrowRect = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
+	TQRect arrowRect = style().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 							  TQStyle::SC_ComboBoxArrow);
 	arrowRect = TQStyle::visualRect(arrowRect, this);
 	
@@ -308,7 +308,7 @@ void K3bFileTreeComboBox::mousePressEvent( TQMouseEvent* e )
     return;
   }
 
-  TQRect arrowRect = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
+  TQRect arrowRect = style().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 						    TQStyle::SC_ComboBoxArrow);
   arrowRect = TQStyle::visualRect(arrowRect, this);
 
@@ -356,13 +356,13 @@ void K3bFileTreeComboBox::paintEvent( TQPaintEvent* )
 
   //  bool reverse = TQApplication::reverseLayout();
 
-  tqstyle().drawComplexControl( TQStyle::CC_ComboBox, &p, this, rect(), g,
+  style().drawComplexControl( TQStyle::CC_ComboBox, &p, this, rect(), g,
 			      flags, TQStyle::SC_All,
 			      (d->poppedUp ?
 			       TQStyle::SC_ComboBoxArrow :
 			       TQStyle::SC_None ));
 
-  TQRect re = tqstyle().querySubControlMetrics( TQStyle::CC_ComboBox, this,
+  TQRect re = style().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 					     TQStyle::SC_ComboBoxEditField );
   re = TQStyle::visualRect(re, this);
   p.setClipRect( re );

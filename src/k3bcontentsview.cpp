@@ -51,7 +51,7 @@ K3bContentsView::~K3bContentsView()
 void K3bContentsView::setMainWidget( TQWidget* w )
 {
   m_centerWidget = w;
-  ((TQVBoxLayout*)tqlayout())->addWidget( w );
+  ((TQVBoxLayout*)layout())->addWidget( w );
 }
 
 

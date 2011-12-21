@@ -169,7 +169,7 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* parent, const char* name, bool mod
 
 
   //
-  // setup tqlayout
+  // setup layout
   // //////////////////////////////////////////////////////////////////////////
   TQGridLayout* grid = new TQGridLayout( w );
   grid->setMargin( 0 );

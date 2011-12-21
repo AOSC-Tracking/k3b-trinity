@@ -57,7 +57,7 @@ K3bAudioTrackViewItem::K3bAudioTrackViewItem( K3bAudioTrackView* parent,
   setFont( 3, f );
 
   // gray out filename
-  setForegroundColor( 5, listView()->tqpalette().disabled().foreground() );
+  setForegroundColor( 5, listView()->palette().disabled().foreground() );
 
   // smaller filename
   f = listView()->font();

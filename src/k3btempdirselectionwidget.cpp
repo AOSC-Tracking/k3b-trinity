@@ -44,8 +44,8 @@ K3bTempDirSelectionWidget::K3bTempDirSelectionWidget( TQWidget *parent, const ch
     m_labelCdSize(0),
     m_defaultImageFileName( "k3b_image.iso" )
 {
-  tqlayout()->setSpacing( KDialog::spacingHint() );
-  tqlayout()->setMargin( KDialog::marginHint() );
+  layout()->setSpacing( KDialog::spacingHint() );
+  layout()->setMargin( KDialog::marginHint() );
 
   m_imageFileLabel = new TQLabel( this );
   m_editDirectory = new KURLRequester( this, "m_editDirectory" );
