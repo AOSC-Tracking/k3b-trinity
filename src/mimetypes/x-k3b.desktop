@@ -61,5 +61,5 @@ Type=MimeType
 Patterns=*.k3b;
 X-KDE-AutoEmbed=false
 [Property::X-KDE-NativeExtension]
-Type=QString
+Type=TQString
 Value=.k3b
