@@ -631,7 +631,7 @@ static TQImage ResizeImage(const TQImage& image,const int columns,
   if (support < filtersupport)
     support=filtersupport;
   contribution=new ContributionInfo[ fasttolong( 2.0*Max(support,0.5)+3 ) ];
-  Q_CHECK_PTR( contribution );
+  TQ_CHECK_PTR( contribution );
   /*
     Resize image.
   */
