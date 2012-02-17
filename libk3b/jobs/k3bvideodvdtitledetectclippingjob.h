@@ -28,7 +28,7 @@ class KProcess;
 class LIBK3B_EXPORT K3bVideoDVDTitleDetectClippingJob : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bVideoDVDTitleDetectClippingJob( K3bJobHandler* hdl, TQObject* parent );

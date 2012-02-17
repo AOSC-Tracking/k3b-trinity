@@ -28,7 +28,7 @@ class TQTextStream;
 class K3bAudioJobTempData : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioJobTempData( K3bAudioDoc* doc, TQObject* parent = 0, const char* name = 0 );

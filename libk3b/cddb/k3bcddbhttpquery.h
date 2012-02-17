@@ -29,7 +29,7 @@ namespace KIO {
 class K3bCddbHttpQuery : public K3bCddbQuery
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCddbHttpQuery( TQObject* parent = 0, const char* name = 0 );

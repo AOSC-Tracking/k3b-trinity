@@ -28,7 +28,7 @@ class K3bVideoDvdDoc;
 class K3bVideoDvdJob : public K3bDvdJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bVideoDvdJob( K3bVideoDvdDoc*, K3bJobHandler*, TQObject* parent = 0 );

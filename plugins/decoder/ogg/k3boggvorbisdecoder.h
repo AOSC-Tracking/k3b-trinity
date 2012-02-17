@@ -26,7 +26,7 @@ class KURL;
 class K3bOggVorbisDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bOggVorbisDecoderFactory( TQObject* parent = 0, const char* name = 0 );
@@ -47,7 +47,7 @@ class K3bOggVorbisDecoderFactory : public K3bAudioDecoderFactory
 class K3bOggVorbisDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bOggVorbisDecoder( TQObject* parent = 0, const char* name = 0 );

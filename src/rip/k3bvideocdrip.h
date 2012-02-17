@@ -27,7 +27,7 @@ class TQDataStream;
 class K3bVideoCdRip : public K3bJob
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         K3bVideoCdRip( K3bJobHandler*, K3bVideoCdRippingOptions* options, TQObject* parent = 0, const char* name = 0 );

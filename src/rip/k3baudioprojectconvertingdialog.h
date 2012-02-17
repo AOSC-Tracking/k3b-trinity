@@ -42,7 +42,7 @@ class K3bAudioDoc;
 class K3bAudioProjectConvertingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bAudioProjectConvertingDialog( K3bAudioDoc*, TQWidget *parent = 0, const char *name = 0 );

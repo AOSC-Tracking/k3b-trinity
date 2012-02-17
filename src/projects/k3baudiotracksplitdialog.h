@@ -34,7 +34,7 @@ class KPopupMenu;
 class K3bAudioTrackSplitDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioTrackSplitDialog( K3bAudioTrack*, TQWidget* parent = 0, const char* name = 0 );

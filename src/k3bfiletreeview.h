@@ -40,7 +40,7 @@ namespace KIO {
 class K3bDeviceBranch : public KFileTreeBranch
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDeviceBranch( KFileTreeView*, K3bDevice::Device* dev, KFileTreeViewItem* item = 0 );
@@ -117,7 +117,7 @@ class K3bFileTreeViewItem : public KFileTreeViewItem
 class K3bFileTreeView : public KFileTreeView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bFileTreeView( TQWidget *parent = 0, const char *name = 0 );

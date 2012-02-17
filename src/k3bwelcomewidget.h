@@ -40,7 +40,7 @@ class TQShowEvent;
 class K3bWelcomeWidget : public TQScrollView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bWelcomeWidget( K3bMainWindow*, TQWidget* parent = 0, const char* name = 0 );
@@ -70,7 +70,7 @@ class K3bWelcomeWidget : public TQScrollView
 class K3bWelcomeWidget::Display : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   Display( K3bWelcomeWidget* parent );

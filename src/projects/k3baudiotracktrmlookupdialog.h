@@ -28,7 +28,7 @@ class K3bBusyWidget;
 class K3bAudioTrackTRMLookupDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioTrackTRMLookupDialog( TQWidget* parent = 0, const char* name = 0 );

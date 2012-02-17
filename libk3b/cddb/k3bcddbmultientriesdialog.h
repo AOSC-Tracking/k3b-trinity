@@ -32,7 +32,7 @@ class KListBox;
 class K3bCddbMultiEntriesDialog : public KDialogBase  
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   ~K3bCddbMultiEntriesDialog();

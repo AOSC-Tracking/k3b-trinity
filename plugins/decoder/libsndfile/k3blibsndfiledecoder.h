@@ -25,7 +25,7 @@ class KURL;
 class K3bLibsndfileDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bLibsndfileDecoderFactory( TQObject* parent = 0, const char* name = 0 );
@@ -45,7 +45,7 @@ class K3bLibsndfileDecoderFactory : public K3bAudioDecoderFactory
 class K3bLibsndfileDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bLibsndfileDecoder( TQObject* parent = 0, const char* name = 0 );

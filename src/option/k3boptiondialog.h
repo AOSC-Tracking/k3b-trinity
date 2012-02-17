@@ -35,7 +35,7 @@ class K3bThemeOptionTab;
 class K3bOptionDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bOptionDialog(TQWidget *parent=0, const char *name=0, bool modal = true);

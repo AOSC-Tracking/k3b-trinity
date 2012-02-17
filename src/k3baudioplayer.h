@@ -85,7 +85,7 @@ class K3bPlayListViewItem : public KListViewItem
 class K3bPlayListView : public KListView
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bPlayListView( TQWidget* parent = 0, const char* name = 0 );
@@ -105,7 +105,7 @@ Q_OBJECT
 class K3bAudioPlayer : public TQWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bAudioPlayer( TQWidget* parent = 0, const char* name = 0 );

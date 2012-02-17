@@ -32,7 +32,7 @@ class K3bVideoDVDTitleDetectClippingJob;
 class K3bVideoDVDRippingJob : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bVideoDVDRippingJob( K3bJobHandler* hdl, TQObject* parent );

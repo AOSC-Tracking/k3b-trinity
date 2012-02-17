@@ -158,7 +158,7 @@ class LIBK3B_EXPORT K3bListView : public KListView
   friend class K3bListViewItem;
 
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bListView (TQWidget *parent = 0, const char *name = 0);

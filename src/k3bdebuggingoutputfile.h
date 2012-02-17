@@ -34,7 +34,7 @@ class K3bDebuggingOutputFile : public TQObject, public TQFile
 // MOC_SKIP_END
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDebuggingOutputFile();

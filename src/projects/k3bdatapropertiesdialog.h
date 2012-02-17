@@ -33,7 +33,7 @@ class TQCheckBox;
 class K3bDataPropertiesDialog : public KDialogBase  
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bDataPropertiesDialog( K3bDataItem*, TQWidget* parent = 0, const char* name = 0 );

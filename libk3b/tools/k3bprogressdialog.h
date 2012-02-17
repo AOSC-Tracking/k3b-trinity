@@ -34,7 +34,7 @@ class TQWidgetStack;
 class LIBK3B_EXPORT  K3bProgressDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bProgressDialog( const TQString& text = TQString(),

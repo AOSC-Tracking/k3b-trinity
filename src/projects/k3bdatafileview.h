@@ -47,7 +47,7 @@ class TQDragLeaveEvent;
 class K3bDataFileView : public K3bListView  
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDataFileView( K3bView*, K3bDataDirTreeView*, K3bDataDoc*, TQWidget* parent );

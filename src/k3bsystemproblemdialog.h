@@ -68,7 +68,7 @@ class K3bSystemProblem
 class K3bSystemProblemDialog : public KDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   /**

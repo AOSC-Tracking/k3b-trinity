@@ -31,7 +31,7 @@ class KConfigBase;
 class K3bAudioConvertingOptionWidget : public base_K3bAudioRippingOptionWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioConvertingOptionWidget( TQWidget* parent, const char* name = 0 );

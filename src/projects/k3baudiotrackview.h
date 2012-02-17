@@ -43,7 +43,7 @@ class K3bAudioTrackPlayer;
 class K3bAudioTrackView : public K3bListView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioTrackView( K3bAudioDoc*, TQWidget* parent, const char* name = 0 );

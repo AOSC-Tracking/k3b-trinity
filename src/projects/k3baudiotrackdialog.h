@@ -34,7 +34,7 @@ class K3bAudioTrackWidget;
 class K3bAudioTrackDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioTrackDialog( TQPtrList<K3bAudioTrack>&, TQWidget *parent=0, const char *name=0);

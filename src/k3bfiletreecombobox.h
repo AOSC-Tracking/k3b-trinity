@@ -31,7 +31,7 @@ namespace K3bDevice {
 class K3bFileTreeComboBox : public KComboBox
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bFileTreeComboBox( TQWidget* parent = 0, const char* name = 0 );

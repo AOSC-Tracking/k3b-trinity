@@ -30,7 +30,7 @@ class TQListViewItem;
 class K3bAudioMetainfoRenamerPluginWidget : public TQWidget, public K3bProjectPluginGUIBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioMetainfoRenamerPluginWidget( K3bDoc* doc, TQWidget* parent = 0, const char* name = 0 );
@@ -63,7 +63,7 @@ class K3bAudioMetainfoRenamerPluginWidget : public TQWidget, public K3bProjectPl
 class K3bAudioMetainfoRenamerPlugin : public K3bProjectPlugin
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioMetainfoRenamerPlugin( TQObject* parent, const char* name );

@@ -38,7 +38,7 @@ class K3bCddbLocalSubmit;
 class LIBK3B_EXPORT K3bCddb : public TQObject 
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCddb( TQObject* parent = 0, const char* name = 0 );

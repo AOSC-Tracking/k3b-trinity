@@ -30,7 +30,7 @@ class K3bDataModeWidget;
 class K3bMovixBurnDialog : public K3bProjectBurnDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMovixBurnDialog( K3bMovixDoc* doc, TQWidget* parent = 0, const char* name = 0, bool modal = true );

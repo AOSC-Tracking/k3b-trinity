@@ -29,7 +29,7 @@ class K3bAudioClient;
 class LIBK3B_EXPORT K3bAudioServer : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioServer( TQObject* parent = 0, const char* name = 0 );

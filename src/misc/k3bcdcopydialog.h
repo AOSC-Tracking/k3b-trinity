@@ -45,7 +45,7 @@ class TQGroupBox;
 class K3bCdCopyDialog : public K3bInteractionDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bCdCopyDialog(TQWidget *parent = 0, const char *name = 0, bool modal = true );

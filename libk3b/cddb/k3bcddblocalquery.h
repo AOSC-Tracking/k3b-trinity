@@ -27,7 +27,7 @@
 class K3bCddbLocalQuery : public K3bCddbQuery
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCddbLocalQuery( TQObject* parent = 0, const char* name = 0 );

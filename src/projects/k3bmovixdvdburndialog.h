@@ -29,7 +29,7 @@ class TQCheckBox;
 class K3bMovixDvdBurnDialog : public K3bProjectBurnDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, TQWidget* parent = 0, const char* name = 0, bool modal = true );

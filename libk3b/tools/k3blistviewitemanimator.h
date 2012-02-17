@@ -30,7 +30,7 @@ class TQTimer;
 class LIBK3B_EXPORT K3bListViewItemAnimator : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bListViewItemAnimator( TQObject* parent = 0, const char* name = 0 );

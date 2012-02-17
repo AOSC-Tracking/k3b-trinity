@@ -26,7 +26,7 @@ class K3bDeviceWidget;
 class K3bDeviceOptionTab : public TQWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDeviceOptionTab( TQWidget*, const char* name = 0 );

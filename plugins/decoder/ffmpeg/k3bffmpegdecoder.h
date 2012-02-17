@@ -24,7 +24,7 @@ class K3bFFMpegFile;
 class K3bFFMpegDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bFFMpegDecoderFactory( TQObject* parent = 0, const char* name = 0 );
@@ -44,7 +44,7 @@ class K3bFFMpegDecoderFactory : public K3bAudioDecoderFactory
 class K3bFFMpegDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bFFMpegDecoder( TQObject* parent = 0, const char* name = 0 );

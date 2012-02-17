@@ -44,7 +44,7 @@ namespace K3bDevice {
 class K3bAudioCdView : public K3bMediaContentsView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioCdView( TQWidget* parent = 0, const char * name = 0 );

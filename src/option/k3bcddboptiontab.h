@@ -22,7 +22,7 @@
 class K3bCddbOptionTab : public base_K3bCddbOptionTab
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCddbOptionTab( TQWidget* parent = 0, const char* name = 0 );

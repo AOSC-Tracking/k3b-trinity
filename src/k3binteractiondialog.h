@@ -38,7 +38,7 @@ class KGuiItem;
 class K3bInteractionDialog : public KDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   /**

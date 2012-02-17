@@ -28,7 +28,7 @@ class KProcess;
 class K3bVideoDVDRippingPreview : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bVideoDVDRippingPreview( TQObject* parent = 0 );

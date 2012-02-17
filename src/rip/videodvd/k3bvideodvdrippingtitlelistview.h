@@ -29,7 +29,7 @@ class TQHideEvent;
 class K3bVideoDVDRippingTitleListView : public K3bListView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bVideoDVDRippingTitleListView( TQWidget* parent );

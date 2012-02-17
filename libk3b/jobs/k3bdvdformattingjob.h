@@ -30,7 +30,7 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bDvdFormattingJob : public K3bBurnJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDvdFormattingJob( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );

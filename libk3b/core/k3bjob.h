@@ -43,7 +43,7 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bJob : public TQObject, public K3bJobHandler
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   virtual ~K3bJob();
@@ -257,7 +257,7 @@ class LIBK3B_EXPORT K3bJob : public TQObject, public K3bJobHandler
 class LIBK3B_EXPORT K3bBurnJob : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 	
  public:
   K3bBurnJob( K3bJobHandler* hdl, TQObject* parent = 0, const char* name = 0 );

@@ -32,7 +32,7 @@ class TQSocket;
 class K3bCdrdaoWriter : public K3bAbstractWriter
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
 

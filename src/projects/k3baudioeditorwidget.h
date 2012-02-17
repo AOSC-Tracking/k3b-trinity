@@ -28,7 +28,7 @@ class TQPainter;
 class K3bAudioEditorWidget : public TQFrame
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioEditorWidget( TQWidget* parent = 0, const char* name = 0 );

@@ -29,7 +29,7 @@ namespace K3bDevice {
 class K3bDvdFormattingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDvdFormattingDialog( TQWidget* = 0, const char* = 0, bool modal = true );

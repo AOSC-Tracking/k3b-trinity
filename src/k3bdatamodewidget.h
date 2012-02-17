@@ -26,7 +26,7 @@ class KConfigBase;
 class K3bDataModeWidget : public TQComboBox
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDataModeWidget( TQWidget* parent = 0, const char* name = 0 );

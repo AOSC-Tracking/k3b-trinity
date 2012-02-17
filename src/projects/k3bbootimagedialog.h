@@ -26,7 +26,7 @@ class K3bDataDoc;
 class K3bBootImageDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bBootImageDialog( K3bDataDoc*, 

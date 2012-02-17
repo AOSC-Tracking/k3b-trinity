@@ -62,7 +62,7 @@ namespace K3bDevice {
 class K3bMainWindow : public KParts::DockMainWindow
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   /** construtor of K3bMainWindow, calls all init functions to create the application.

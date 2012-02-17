@@ -32,7 +32,7 @@ namespace K3bDevice {
 class K3bGrowisofsHandler : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bGrowisofsHandler( TQObject* parent = 0, const char* name = 0 );

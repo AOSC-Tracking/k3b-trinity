@@ -36,7 +36,7 @@ class K3bProjectBurnDialog;
 class K3bVcdView : public K3bView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
  public:
   K3bVcdView( K3bVcdDoc* pDoc, TQWidget* parent, const char *name = 0 );

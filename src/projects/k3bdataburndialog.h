@@ -42,7 +42,7 @@ class K3bDataMultiSessionCombobox;
 class K3bDataBurnDialog : public K3bProjectBurnDialog
 {
  Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
    K3bDataBurnDialog(K3bDataDoc*, TQWidget *parent=0, const char *name=0, bool modal = true );

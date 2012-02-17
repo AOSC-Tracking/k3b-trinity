@@ -29,7 +29,7 @@ class TQListViewItem;
 class K3bMixedDirTreeView : public K3bDataDirTreeView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, TQWidget* parent = 0, const char* name = 0 );

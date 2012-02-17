@@ -27,7 +27,7 @@ class K3bAudioCdView;
 class K3bAudioCdListView : public K3bListView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioCdListView( K3bAudioCdView*, TQWidget* parent = 0, const char* name = 0 );

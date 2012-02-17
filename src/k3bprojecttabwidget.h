@@ -34,7 +34,7 @@ class K3bDoc;
 class K3bProjectTabWidget : public TQTabWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bProjectTabWidget( TQWidget *parent = 0, const char *name = 0, WFlags = 0 );

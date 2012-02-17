@@ -37,7 +37,7 @@ class K3bCutComboBox;
 class K3bVcdTrackDialog : public KDialogBase
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         K3bVcdTrackDialog( K3bVcdDoc*, TQPtrList<K3bVcdTrack>& tracks, TQPtrList<K3bVcdTrack>& selectedTracks, TQWidget* parent = 0, const char* name = 0 );

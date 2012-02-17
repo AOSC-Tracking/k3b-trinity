@@ -25,7 +25,7 @@
 class LIBK3B_EXPORT K3bAudioOutputPlugin : public K3bPlugin
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   virtual ~K3bAudioOutputPlugin() {

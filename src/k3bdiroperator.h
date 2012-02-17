@@ -33,7 +33,7 @@ class KActionMenu;
 class K3bDirOperator : public KDirOperator, public KBookmarkOwner
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bDirOperator( const KURL& urlName = KURL(), TQWidget* parent = 0, const char* name = 0 );

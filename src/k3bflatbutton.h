@@ -32,7 +32,7 @@ class KAction;
 class K3bFlatButton : public TQFrame
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bFlatButton( TQWidget *parent = 0, const char *name = 0 );

@@ -25,7 +25,7 @@ class K3bMovixDvdDoc;
 class K3bMovixDvdView : public K3bMovixView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMovixDvdView( K3bMovixDvdDoc* doc, TQWidget *parent = 0, const char *name = 0 );

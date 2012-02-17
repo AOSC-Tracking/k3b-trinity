@@ -35,7 +35,7 @@ class K3bMsfValidator : public TQRegExpValidator
 class LIBK3B_EXPORT K3bMsfEdit : public TQSpinBox
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMsfEdit( TQWidget* parent = 0, const char* name = 0 );

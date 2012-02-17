@@ -74,7 +74,7 @@ class K3bMovixSubTitleViewItem : public K3bMovixListViewItem, public KFileItem
 class K3bMovixListView : public K3bListView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMovixListView( K3bMovixDoc* doc, TQWidget* parent = 0, const char* name = 0 );

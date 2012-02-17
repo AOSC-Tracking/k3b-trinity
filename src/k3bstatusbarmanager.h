@@ -29,7 +29,7 @@ class TQTimer;
 class K3bStatusBarManager : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bStatusBarManager( K3bMainWindow* parent );

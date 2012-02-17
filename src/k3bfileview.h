@@ -37,7 +37,7 @@ class K3bToolBox;
 class K3bFileView : public K3bContentsView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bFileView(TQWidget *parent=0, const char *name=0);

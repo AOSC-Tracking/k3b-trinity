@@ -31,7 +31,7 @@ class K3bDevice::Device;
 class K3bVcdJob : public K3bBurnJob
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         K3bVcdJob( K3bVcdDoc*, K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );

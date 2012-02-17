@@ -25,7 +25,7 @@
 class K3bCddbLocalSubmit : public K3bCddbSubmit
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCddbLocalSubmit( TQObject* parent = 0, const char* name = 0 );

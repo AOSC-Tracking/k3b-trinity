@@ -27,7 +27,7 @@ extern "C" {
 class K3bMadDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMadDecoderFactory( TQObject* parent = 0, const char* name = 0 );
@@ -45,7 +45,7 @@ class K3bMadDecoderFactory : public K3bAudioDecoderFactory
 class K3bMadDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMadDecoder( TQObject* parent = 0, const char* name = 0 );

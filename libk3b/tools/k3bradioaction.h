@@ -29,7 +29,7 @@
 class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   /**

@@ -61,7 +61,7 @@ namespace K3bDevice {
 class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDataDoc( TQObject* parent = 0 );

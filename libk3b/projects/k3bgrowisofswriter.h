@@ -30,7 +30,7 @@ class KProcess;
 class K3bGrowisofsWriter : public K3bAbstractWriter
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bGrowisofsWriter( K3bDevice::Device*, K3bJobHandler*,

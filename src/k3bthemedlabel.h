@@ -23,7 +23,7 @@
 class K3bThemedLabel : public KCutLabel
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bThemedLabel( TQWidget* parent = 0 );

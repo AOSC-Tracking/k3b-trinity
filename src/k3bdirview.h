@@ -52,7 +52,7 @@ namespace KIO {
 class K3bDirView : public TQVBox
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDirView(K3bFileTreeView* tree, TQWidget *parent=0, const char *name=0);

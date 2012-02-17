@@ -31,7 +31,7 @@ class TQLabel;
 class K3bPassivePopup : public TQFrame
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bPassivePopup( TQWidget* parent );

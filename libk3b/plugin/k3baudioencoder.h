@@ -33,7 +33,7 @@
 class LIBK3B_EXPORT K3bAudioEncoder : public K3bPlugin
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioEncoder( TQObject* parent = 0, const char* name = 0 );

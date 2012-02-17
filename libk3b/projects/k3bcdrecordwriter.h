@@ -31,7 +31,7 @@ class K3bDevice::Device;
 class K3bCdrecordWriter : public K3bAbstractWriter
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCdrecordWriter( K3bDevice::Device*, K3bJobHandler* hdl, 

@@ -32,7 +32,7 @@ class KConfigBase;
 class K3bTempDirSelectionWidget : public TQGroupBox
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bTempDirSelectionWidget( TQWidget *parent = 0, const char *name = 0 );

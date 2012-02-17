@@ -26,7 +26,7 @@
 class K3bThemeOptionTab : public base_K3bThemeOptionTab
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bThemeOptionTab( TQWidget* parent = 0, const char* name = 0 );

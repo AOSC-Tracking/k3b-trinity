@@ -26,7 +26,7 @@
 class LIBK3B_EXPORT K3bPushButton : public KPushButton
 {
  Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   /**

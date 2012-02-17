@@ -24,7 +24,7 @@ class TQTextEdit;
 class K3bDebuggingOutputDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDebuggingOutputDialog( TQWidget* parent );

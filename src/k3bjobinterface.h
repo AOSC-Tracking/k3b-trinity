@@ -31,7 +31,7 @@ class K3bJob;
 class K3bJobInterface : public TQObject, public DCOPObject
 {
   Q_OBJECT
-//  TQ_OBJECT
+//  
   K_DCOP
 
  public:

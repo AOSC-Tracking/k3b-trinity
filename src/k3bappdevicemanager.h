@@ -40,7 +40,7 @@ namespace KIO {
 class K3bAppDeviceManager : public K3bDevice::DeviceManager
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAppDeviceManager( TQObject* parent = 0, const char* name = 0 );

@@ -32,7 +32,7 @@ namespace K3bDevice {
 class K3bCdda2wavReader : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCdda2wavReader( TQObject* parent = 0, const char* name = 0 );

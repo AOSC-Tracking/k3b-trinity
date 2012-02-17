@@ -29,7 +29,7 @@ class TQFile;
 class LIBK3B_EXPORT K3bWaveDecoderFactory : public K3bAudioDecoderFactory
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bWaveDecoderFactory( TQObject* parent = 0, const char* name = 0 );
@@ -47,7 +47,7 @@ class LIBK3B_EXPORT K3bWaveDecoderFactory : public K3bAudioDecoderFactory
 class LIBK3B_EXPORT K3bWaveDecoder : public K3bAudioDecoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bWaveDecoder( TQObject* parent = 0, const char* name = 0 );

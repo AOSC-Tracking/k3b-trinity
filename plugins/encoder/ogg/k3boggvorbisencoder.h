@@ -27,7 +27,7 @@ class base_K3bOggVorbisEncoderSettingsWidget;
 class K3bOggVorbisEncoder : public K3bAudioEncoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bOggVorbisEncoder( TQObject* parent = 0, const char* name = 0 );
@@ -63,7 +63,7 @@ class K3bOggVorbisEncoder : public K3bAudioEncoder
 class K3bOggVorbisEncoderSettingsWidget : public K3bPluginConfigWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bOggVorbisEncoderSettingsWidget( TQWidget* parent = 0, const char* name = 0 );

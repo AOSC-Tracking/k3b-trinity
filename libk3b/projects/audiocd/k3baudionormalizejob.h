@@ -29,7 +29,7 @@ class KProcess;
 class K3bAudioNormalizeJob : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioNormalizeJob( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );

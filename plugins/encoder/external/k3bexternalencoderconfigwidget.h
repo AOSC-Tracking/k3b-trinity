@@ -27,7 +27,7 @@
 class K3bExternalEncoderEditDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
  public:
   K3bExternalEncoderEditDialog( TQWidget* parent );
@@ -47,7 +47,7 @@ class K3bExternalEncoderEditDialog : public KDialogBase
 class K3bExternalEncoderSettingsWidget : public K3bPluginConfigWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bExternalEncoderSettingsWidget( TQWidget* parent = 0, const char* name = 0 );

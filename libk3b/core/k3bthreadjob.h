@@ -40,7 +40,7 @@ class K3bThread;
 class LIBK3B_EXPORT K3bThreadJob : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bThreadJob( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );

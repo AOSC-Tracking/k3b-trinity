@@ -25,7 +25,7 @@ class K3bAudioDoc;
 class K3bAudioCdTextWidget : public base_K3bAudioCdTextWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioCdTextWidget( TQWidget* parent = 0, const char* name = 0 );

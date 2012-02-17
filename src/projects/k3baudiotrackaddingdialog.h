@@ -33,7 +33,7 @@ class K3bAudioDoc;
 class K3bAudioTrackAddingDialog : public KDialogBase, public K3bJobHandler
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   ~K3bAudioTrackAddingDialog();

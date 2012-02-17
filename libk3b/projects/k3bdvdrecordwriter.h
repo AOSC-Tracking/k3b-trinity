@@ -28,7 +28,7 @@ class K3bDevice::Device;
 class K3bDvdrecordWriter : public K3bCdrecordWriter
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDvdrecordWriter( K3bDevice::Device*, TQObject* parent = 0, const char* name = 0 );

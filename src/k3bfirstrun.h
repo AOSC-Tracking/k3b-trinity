@@ -22,7 +22,7 @@
 class K3bFirstRun : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   static void run( TQWidget* parent = 0 );

@@ -32,7 +32,7 @@ class K3bThreadJob;
 class K3bAudioRipJob : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioRipJob( K3bJobHandler* hdl, TQObject* parent );

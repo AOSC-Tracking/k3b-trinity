@@ -44,7 +44,7 @@ class K3bAudioConvertingOptionWidget;
 class K3bAudioRippingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bAudioRippingDialog( const K3bDevice::Toc&, 

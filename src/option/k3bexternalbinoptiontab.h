@@ -31,7 +31,7 @@ class K3bExternalBinWidget;
 class K3bExternalBinOptionTab : public TQWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bExternalBinOptionTab( K3bExternalBinManager*, TQWidget*, const char* name = 0 );

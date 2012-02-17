@@ -40,7 +40,7 @@ class K3bDevice::Device;
 class K3bMixedJob : public K3bBurnJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 	
  public:
   K3bMixedJob( K3bMixedDoc*, K3bJobHandler*, TQObject* parent = 0 );

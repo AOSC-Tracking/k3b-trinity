@@ -31,7 +31,7 @@
  */
 class LIBK3B_EXPORT K3bRichTextLabel : public TQLabel {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   /**

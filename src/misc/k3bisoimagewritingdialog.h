@@ -42,7 +42,7 @@ class TQPoint;
 class K3bIsoImageWritingDialog : public K3bInteractionDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public: 
   K3bIsoImageWritingDialog( TQWidget* = 0, const char* = 0, bool = true );

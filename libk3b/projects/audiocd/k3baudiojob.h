@@ -38,7 +38,7 @@ class K3bAudioMaxSpeedJob;
 class K3bAudioJob : public K3bBurnJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 	
  public:
   K3bAudioJob( K3bAudioDoc*, K3bJobHandler*, TQObject* parent = 0 );

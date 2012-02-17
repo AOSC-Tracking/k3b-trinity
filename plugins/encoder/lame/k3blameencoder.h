@@ -30,7 +30,7 @@ class KDialogBase;
 class K3bLameEncoder : public K3bAudioEncoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bLameEncoder( TQObject* parent = 0, const char* name = 0 );
@@ -66,7 +66,7 @@ class K3bLameEncoder : public K3bAudioEncoder
 class K3bLameEncoderSettingsWidget : public K3bPluginConfigWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bLameEncoderSettingsWidget( TQWidget* parent = 0, const char* name = 0 );

@@ -34,7 +34,7 @@ namespace K3b {
 class K3bReadcdReader : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bReadcdReader( K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );

@@ -33,7 +33,7 @@ class TQRadioButton;
 class K3bBurningOptionTab : public TQWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bBurningOptionTab( TQWidget* parent = 0, const char* name = 0 );

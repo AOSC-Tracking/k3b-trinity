@@ -28,7 +28,7 @@ namespace KNotify {
 class K3bNotifyOptionTab : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bNotifyOptionTab( TQWidget* parent = 0, const char* name = 0 );

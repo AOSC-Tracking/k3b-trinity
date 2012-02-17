@@ -28,7 +28,7 @@ class TQCloseEvent;
 class LIBK3B_EXPORT K3bMultiChoiceDialog : public KDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMultiChoiceDialog( const TQString& caption,

@@ -49,7 +49,7 @@ class K3bThemedLabel;
 class K3bJobProgressDialog : public KDialog, public K3bJobHandler
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bJobProgressDialog( TQWidget* parent = 0, 

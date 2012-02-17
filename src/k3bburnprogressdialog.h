@@ -30,7 +30,7 @@ class TQLabel;
 class K3bBurnProgressDialog : public K3bJobProgressDialog  {
 
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bBurnProgressDialog( TQWidget* parent = 0, const char* name = 0, bool showSubProgress = true, 

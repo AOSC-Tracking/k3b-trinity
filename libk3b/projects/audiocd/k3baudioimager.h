@@ -23,7 +23,7 @@ class K3bAudioDoc;
 class K3bAudioImager : public K3bThreadJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioImager( K3bAudioDoc*, K3bJobHandler*, TQObject* parent = 0, const char* name = 0 );

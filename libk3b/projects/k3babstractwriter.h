@@ -29,7 +29,7 @@ class K3bJobHandler;
 class K3bAbstractWriter : public K3bJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   virtual ~K3bAbstractWriter();

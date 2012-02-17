@@ -34,7 +34,7 @@ class KConfig;
 class LIBK3B_EXPORT K3bMovixDoc : public K3bDataDoc
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMovixDoc( TQObject* parent = 0 );

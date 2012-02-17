@@ -38,7 +38,7 @@ class TQPainter;
 class K3bVcdListView : public K3bListView
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         K3bVcdListView( K3bView*, K3bVcdDoc*, TQWidget *parent = 0, const char *name = 0 );

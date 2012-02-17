@@ -27,7 +27,7 @@ class K3bAbstractWriter;
 class LIBK3B_EXPORT K3bBlankingJob : public K3bBurnJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bBlankingJob( K3bJobHandler*, TQObject* parent = 0 );

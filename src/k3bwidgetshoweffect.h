@@ -32,7 +32,7 @@
 class K3bWidgetShowEffect : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   // FIXME: add an effect direction

@@ -33,7 +33,7 @@ namespace K3bDevice {
 class K3bDiskInfoView : public K3bMediaContentsView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDiskInfoView( TQWidget* parent = 0, const char* name = 0 );

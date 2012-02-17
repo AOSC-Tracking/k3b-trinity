@@ -34,7 +34,7 @@ class K3bAudioTrackView;
 class K3bAudioView : public K3bView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 	
  public: 
   K3bAudioView( K3bAudioDoc* pDoc, TQWidget* parent, const char *name = 0 );

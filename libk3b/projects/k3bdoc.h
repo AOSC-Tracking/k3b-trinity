@@ -57,7 +57,7 @@ namespace K3b {
 class LIBK3B_EXPORT K3bDoc : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDoc( TQObject* = 0 );

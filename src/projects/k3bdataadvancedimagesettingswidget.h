@@ -26,7 +26,7 @@ class TQCheckListItem;
 class K3bDataAdvancedImageSettingsWidget : public base_K3bAdvancedDataImageSettings
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bDataAdvancedImageSettingsWidget( TQWidget* parent = 0, const char* name =  0 );

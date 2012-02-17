@@ -27,7 +27,7 @@ class KProcess;
 class K3bExternalEncoder : public K3bAudioEncoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bExternalEncoder( TQObject* parent = 0, const char* name = 0 );

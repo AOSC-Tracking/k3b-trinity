@@ -27,7 +27,7 @@ class KConfigBase;
 class K3bProjectPluginDialog : public K3bInteractionDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bProjectPluginDialog( K3bProjectPlugin*, K3bDoc*, TQWidget*, const char* name = 0 );

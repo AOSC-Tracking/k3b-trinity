@@ -23,7 +23,7 @@
 class LIBK3B_EXPORT K3bPluginConfigWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bPluginConfigWidget( TQWidget* parent = 0, const char* name = 0 );

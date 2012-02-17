@@ -32,7 +32,7 @@ class K3bAudioTrack;
 class K3bAudioTrackWidget : public base_K3bAudioTrackWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioTrackWidget( const TQPtrList<K3bAudioTrack>& tracks, 

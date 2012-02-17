@@ -28,7 +28,7 @@ class TQSocket;
 class K3bCddbpQuery : public K3bCddbQuery
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCddbpQuery( TQObject* parent = 0, const char* name = 0 );

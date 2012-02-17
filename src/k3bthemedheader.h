@@ -26,7 +26,7 @@ class TQLabel;
 class K3bThemedHeader : public TQFrame
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bThemedHeader( TQWidget* parent = 0 );

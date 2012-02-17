@@ -38,7 +38,7 @@ class K3bExternalBin;
 class LIBK3B_EXPORT K3bProcess : public KProcess
 {
   Q_OBJECT
-  TQ_OBJECT
+  
     
  public:
   class OutputCollector;
@@ -181,7 +181,7 @@ class LIBK3B_EXPORT K3bProcess : public KProcess
 class LIBK3B_EXPORT K3bProcessOutputCollector: public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
     
  public:
   K3bProcessOutputCollector( KProcess* );

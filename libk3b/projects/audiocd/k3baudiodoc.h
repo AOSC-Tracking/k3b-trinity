@@ -50,7 +50,7 @@ class K3bAudioFile;
 class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc  
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   friend class K3bMixedDoc;
   friend class K3bAudioTrack;

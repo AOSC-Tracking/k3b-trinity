@@ -34,7 +34,7 @@
 class LIBK3B_EXPORT K3bAudioDecoder : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioDecoder( TQObject* parent = 0, const char* name = 0 );
@@ -210,7 +210,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public TQObject
 class LIBK3B_EXPORT K3bAudioDecoderFactory : public K3bPlugin
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bAudioDecoderFactory( TQObject* parent = 0, const char* name = 0 )

@@ -27,7 +27,7 @@ class KAction;
 class K3bSidePanel : public TQToolBox
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bSidePanel( K3bMainWindow*, TQWidget* parent = 0, const char* name = 0 );

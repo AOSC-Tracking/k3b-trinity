@@ -28,7 +28,7 @@ class K3bProjectInterface;
 class K3bProjectManager : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bProjectManager( TQObject* parent = 0, const char* name = 0 );

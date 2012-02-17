@@ -30,7 +30,7 @@
 class LIBK3B_EXPORT K3bCddbQuery : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bCddbQuery( TQObject* parent = 0, const char* name = 0 );

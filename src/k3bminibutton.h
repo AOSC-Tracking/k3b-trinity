@@ -34,7 +34,7 @@ class TQEvent;
 class K3bMiniButton : public TQPushButton
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bMiniButton( TQWidget *parent=0, const char *name=0 );

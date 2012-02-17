@@ -27,7 +27,7 @@ class KProcess;
 class K3bSoxEncoder : public K3bAudioEncoder
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bSoxEncoder( TQObject* parent = 0, const char* name = 0 );
@@ -67,7 +67,7 @@ class K3bSoxEncoder : public K3bAudioEncoder
 class K3bSoxEncoderSettingsWidget : public K3bPluginConfigWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bSoxEncoderSettingsWidget( TQWidget* parent = 0, const char* name = 0 );

@@ -28,7 +28,7 @@ class TQCheckListItem;
 class K3bSetup2: public KCModule
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bSetup2( TQWidget* parent = 0, const char* name = 0, const TQStringList& args = TQStringList() );

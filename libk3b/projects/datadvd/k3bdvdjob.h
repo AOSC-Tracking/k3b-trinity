@@ -28,7 +28,7 @@ class K3bGrowisofsWriter;
 class K3bDvdJob : public K3bDataJob
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   /**

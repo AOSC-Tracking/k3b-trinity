@@ -28,7 +28,7 @@
 class K3bThroughputEstimator : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bThroughputEstimator( TQObject* parent = 0, const char* name = 0 );

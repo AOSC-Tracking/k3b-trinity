@@ -33,7 +33,7 @@ namespace K3bDevice {
 class K3bBlankingDialog : public K3bInteractionDialog, public K3bJobHandler
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   K3bBlankingDialog( TQWidget*, const char* );
