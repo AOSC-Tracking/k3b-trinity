@@ -127,7 +127,7 @@ K3bCore::K3bCore( TQObject* parent, const char* name )
   d = new Private();
 
   if( s_k3bCore )
-    qFatal("ONLY ONE INSTANCE OF K3BCORE ALLOWED!");
+    tqFatal("ONLY ONE INSTANCE OF K3BCORE ALLOWED!");
   s_k3bCore = this;
 
   // create the thread widget instance in the GUI thread

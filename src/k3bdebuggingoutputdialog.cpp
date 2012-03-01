@@ -114,7 +114,7 @@ void K3bDebuggingOutputDialog::clear()
 
   addOutput( "System", "K3b Version: " + k3bcore->version() );
   addOutput( "System", "KDE Version: " + TQString(KDE::versionString()) );
-  addOutput( "System", "QT Version:  " + TQString(qVersion()) );
+  addOutput( "System", "QT Version:  " + TQString(tqVersion()) );
   addOutput( "System", "Kernel:      " + K3b::kernelVersion() );
   
   // devices in the logfile
