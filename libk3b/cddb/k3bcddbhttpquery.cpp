@@ -46,7 +46,7 @@ K3bCddbHttpQuery::~K3bCddbHttpQuery()
 void K3bCddbHttpQuery::doQuery()
 {
   setError( WORKING );
-  m_state = TQUERY;
+  m_state = QUERY;
 
   performCommand( queryString() );
 }
@@ -122,7 +122,7 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
 
     switch( m_state ) {
 
-    case TQUERY:
+    case QUERY:
       if( getCode( line ) == 200 ) {
 	// parse exact match and send a read command
 	K3bCddbResultHeader header;
@@ -137,7 +137,7 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
 
 	emit infoMessage( i18n("Found multiple exact matches") );
 
-	m_state = TQUERY_DATA;
+	m_state = QUERY_DATA;
       }
 
       else if( getCode( line ) == 211 ) {
@@ -145,7 +145,7 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
 
 	emit infoMessage( i18n("Found inexact matches") );
 
-	m_state = TQUERY_DATA;
+	m_state = QUERY_DATA;
       }
 
       else if( getCode( line ) == 202 ) {
@@ -160,14 +160,14 @@ void K3bCddbHttpQuery::slotResult( KIO::Job* job )
       else {
 	kdDebug() << "(K3bCddbHttpQuery) Error while querying: " << line << endl;
 	emit infoMessage( i18n("Error while querying") );
-	setError(TQUERY_ERROR);
+	setError(QUERY_ERROR);
 	m_state = FINISHED;
 	emitQueryFinished();
 	return;
       }
       break;
 
-    case TQUERY_DATA:
+    case QUERY_DATA:
       if( line.startsWith( "." ) ) {
 	// finished query
 	// go on reading

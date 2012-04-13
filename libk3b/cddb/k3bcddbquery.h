@@ -14,8 +14,8 @@
  */
 
 
-#ifndef K3BCDDB_TQUERY_H
-#define K3BCDDB_TQUERY_H
+#ifndef K3BCDDB_QUERY_H
+#define K3BCDDB_QUERY_H
 
 #include <tqobject.h>
 #include <tqstring.h>
@@ -57,7 +57,7 @@ class LIBK3B_EXPORT K3bCddbQuery : public TQObject
 	       CANCELED,
 	       NO_ENTRY_FOUND, 
 	       CONNECTION_ERROR,
-	       TQUERY_ERROR,
+	       QUERY_ERROR,
 	       READ_ERROR,
 	       FAILURE, 
 	       WORKING };

@@ -13,8 +13,8 @@
  */
 
 
-#ifndef K3BCDDBP_TQUERY_H
-#define K3BCDDBP_TQUERY_H
+#ifndef K3BCDDBP_QUERY_H
+#define K3BCDDBP_QUERY_H
 
 #include "k3bcddbquery.h"
 #include "k3bcddbresult.h"
@@ -48,7 +48,7 @@ class K3bCddbpQuery : public K3bCddbQuery
 
  private:
   void cddbpQuit();
-  enum State { GREETING, HANDSHAKE, PROTO, TQUERY, TQUERY_DATA, READ, READ_DATA, TQUIT };
+  enum State { GREETING, HANDSHAKE, PROTO, QUERY, QUERY_DATA, READ, READ_DATA, QUIT };
 
   int m_state;
   TQString m_server;

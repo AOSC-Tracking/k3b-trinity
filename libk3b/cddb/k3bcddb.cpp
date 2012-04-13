@@ -241,7 +241,7 @@ TQString K3bCddb::errorString() const
     return i18n("Error while connecting to host.");
   case K3bCddbQuery::WORKING:
     return i18n("Working...");
-  case K3bCddbQuery::TQUERY_ERROR:
+  case K3bCddbQuery::QUERY_ERROR:
   case K3bCddbQuery::READ_ERROR:
   case K3bCddbQuery::FAILURE:
   default:

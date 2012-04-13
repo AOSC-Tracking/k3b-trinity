@@ -37,9 +37,9 @@ namespace K3bVideoDVD
   };
 
   enum AudioQuantization {
-    AUDIO_TQUANTIZATION_16BIT = 0,
-    AUDIO_TQUANTIZATION_20BIT = 1,
-    AUDIO_TQUANTIZATION_24BIT = 2
+    AUDIO_QUANTIZATION_16BIT = 0,
+    AUDIO_QUANTIZATION_20BIT = 1,
+    AUDIO_QUANTIZATION_24BIT = 2
   };
 
   enum AudioSampleFrequency {

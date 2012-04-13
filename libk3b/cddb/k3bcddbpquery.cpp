@@ -95,7 +95,7 @@ void K3bCddbpQuery::slotConnectionClosed()
 
 void K3bCddbpQuery::cddbpQuit()
 {
-  m_state = TQUIT;
+  m_state = QUIT;
   m_stream << "quit" << endl << flush;
 }
 
@@ -146,13 +146,13 @@ void K3bCddbpQuery::slotReadyRead()
 	}
 	
 	// just ignore the reply since it's not important for the functionality
-	m_state = TQUERY;
+	m_state = QUERY;
 	
 	m_stream << queryString() << endl << flush;
 	break;
       }
 
-    case TQUERY:
+    case QUERY:
       if( getCode( line ) == 200 ) {
 	// parse exact match and send a read command
 	K3bCddbResultHeader header;
@@ -169,7 +169,7 @@ void K3bCddbpQuery::slotReadyRead()
 
 	emit infoMessage( i18n("Found multiple exact matches") );
 
-	m_state = TQUERY_DATA;
+	m_state = QUERY_DATA;
       }
 
       else if( getCode( line ) == 211 ) {
@@ -177,7 +177,7 @@ void K3bCddbpQuery::slotReadyRead()
 
 	emit infoMessage( i18n("Found inexact matches") );
 
-	m_state = TQUERY_DATA;
+	m_state = QUERY_DATA;
       }
 
       else if( getCode( line ) == 202 ) {
@@ -190,12 +190,12 @@ void K3bCddbpQuery::slotReadyRead()
       else {
 	kdDebug() << "(K3bCddbpQuery) Error while querying: " << line << endl;
 	emit infoMessage( i18n("Error while querying") );
-	setError( TQUERY_ERROR );
+	setError( QUERY_ERROR );
 	cddbpQuit();
       }
       break;
 
-    case TQUERY_DATA:
+    case QUERY_DATA:
       if( line.startsWith( "." ) ) {
 	// finished query
 	// go on reading
@@ -246,7 +246,7 @@ void K3bCddbpQuery::slotReadyRead()
       }
       break;
 
-    case TQUIT:
+    case QUIT:
       // no parsing needed
       break;
     }

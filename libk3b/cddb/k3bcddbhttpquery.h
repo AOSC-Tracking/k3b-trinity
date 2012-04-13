@@ -14,8 +14,8 @@
  */
 
 
-#ifndef K3BCDDB_HTTP_TQUERY_H
-#define K3BCDDB_HTTP_TQUERY_H
+#ifndef K3BCDDB_HTTP_QUERY_H
+#define K3BCDDB_HTTP_QUERY_H
 
 #include "k3bcddbquery.h"
 #include "k3bcddbresult.h"
@@ -48,7 +48,7 @@ class K3bCddbHttpQuery : public K3bCddbQuery
  private:
   void performCommand( const TQString& );
 
-  enum State { TQUERY, TQUERY_DATA, READ, READ_DATA, FINISHED };
+  enum State { QUERY, QUERY_DATA, READ, READ_DATA, FINISHED };
 
   int m_state;
   TQString m_server;

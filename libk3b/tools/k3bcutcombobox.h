@@ -44,7 +44,7 @@ class LIBK3B_EXPORT K3bCutComboBox : public KComboBox
 
   enum Method {
     CUT,
-    STQUEEZE
+    SQUEEZE
   };
 
   /**
