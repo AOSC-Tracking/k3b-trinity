@@ -231,7 +231,7 @@ bool K3bDevice::Device::init( bool bCheckWritingModes )
   cmd.clear();
   ::memset( buf, 0, sizeof(buf) );
   struct inquiry* inq = (struct inquiry*)buf;
-  cmd[0] = MMC_INTQUIRY;
+  cmd[0] = MMC_INQUIRY;
   cmd[4] = sizeof(buf);
   cmd[5] = 0;
   if( cmd.transport( TR_DIR_READ, buf, sizeof(buf) ) ) {

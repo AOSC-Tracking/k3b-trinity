@@ -487,7 +487,7 @@ void K3bVcdTrackDialog::setupPbcTab()
 
     m_labelAfterTimeout = new TQLabel( i18n( "after timeout playing" ), m_groupPlay, "m_labelTimeout" );
     // m_labelAfterTimeout->setEnabled( false );
-    m_comboAfterTimeout = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPlay, "m_comboAfterTimeout" );
+    m_comboAfterTimeout = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPlay, "m_comboAfterTimeout" );
     // m_comboAfterTimeout->setEnabled( false );
 
     groupPlayLayout->addWidget( labelPlaying, 1, 0 );
@@ -510,10 +510,10 @@ void K3bVcdTrackDialog::setupPbcTab()
     TQLabel* labelPbc_return = new TQLabel( i18n( "Return:" ), m_groupPbc, "labelPbc_return" );
     TQLabel* labelPbc_default = new TQLabel( i18n( "Default:" ), m_groupPbc, "labelPbc_default" );
 
-    m_pbc_previous = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPbc, "m_pbc_previous" );
-    m_pbc_next = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPbc, "m_pbc_next" );
-    m_pbc_return = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPbc, "m_pbc_return" );
-    m_pbc_default = new K3bCutComboBox( K3bCutComboBox::STQUEEZE, m_groupPbc, "m_pbc_default" );
+    m_pbc_previous = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPbc, "m_pbc_previous" );
+    m_pbc_next = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPbc, "m_pbc_next" );
+    m_pbc_return = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPbc, "m_pbc_return" );
+    m_pbc_default = new K3bCutComboBox( K3bCutComboBox::SQUEEZE, m_groupPbc, "m_pbc_default" );
 
     groupPbcLayout->addWidget( labelPbc_previous, 1, 0 );
     groupPbcLayout->addMultiCellWidget( m_pbc_previous, 1, 1, 1, 3 );

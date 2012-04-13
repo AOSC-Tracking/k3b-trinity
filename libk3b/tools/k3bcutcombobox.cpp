@@ -214,7 +214,7 @@ void K3bCutComboBox::cutText()
       w -= ( pixmap(i)->width() + 4 );
 
     TQString text;
-    if( d->method == STQUEEZE )
+    if( d->method == SQUEEZE )
       text = K3b::squeezeTextToWidth( fontMetrics(), d->originalItems[i], w );
     else
       text = K3b::cutToWidth( fontMetrics(), d->originalItems[i], w );

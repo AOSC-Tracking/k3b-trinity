@@ -15,8 +15,8 @@
 
 
 
-#ifndef K3BCDDB_LOCAL_TQUERY_H
-#define K3BCDDB_LOCAL_TQUERY_H
+#ifndef K3BCDDB_LOCAL_QUERY_H
+#define K3BCDDB_LOCAL_QUERY_H
 
 #include "k3bcddbquery.h"
 #include "k3bcddbresult.h"

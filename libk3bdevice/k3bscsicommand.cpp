@@ -35,8 +35,8 @@ TQString K3bDevice::commandString( const unsigned char& command )
     return "GET EVENT STATUS NOTIFICATION";
   if( command == MMC_GET_PERFORMANCE )
     return "GET PERFORMANCE";
-  if( command == MMC_INTQUIRY )
-    return "INTQUIRY";
+  if( command == MMC_INQUIRY )
+    return "INQUIRY";
   if( command == MMC_LOAD_UNLOAD_MEDIUM )
     return "LOAD/UNLOAD MEDIUM";
   if( command == MMC_MECHANISM_STATUS )

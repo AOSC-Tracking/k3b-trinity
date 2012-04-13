@@ -31,7 +31,7 @@ namespace K3bDevice
   const unsigned char MMC_GET_CONFIGURATION = 0x46;
   const unsigned char MMC_GET_EVENT_STATUS_NOTIFICATION = 0x4A;
   const unsigned char MMC_GET_PERFORMANCE = 0xAC;
-  const unsigned char MMC_INTQUIRY = 0x12;
+  const unsigned char MMC_INQUIRY = 0x12;
   const unsigned char MMC_LOAD_UNLOAD_MEDIUM = 0xA6;
   const unsigned char MMC_MECHANISM_STATUS = 0xBD;
   const unsigned char MMC_MODE_SELECT = 0x55;

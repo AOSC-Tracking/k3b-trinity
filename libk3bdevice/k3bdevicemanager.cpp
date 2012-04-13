@@ -659,7 +659,7 @@ bool K3bDevice::DeviceManager::testForCdrom( const TQString& devicename )
     ::memset( buf, 0, sizeof(buf) );
 
     ScsiCommand cmd( cdromfd );
-    cmd[0] = MMC_INTQUIRY;
+    cmd[0] = MMC_INQUIRY;
     cmd[4] = sizeof(buf);
     cmd[5] = 0;
 
