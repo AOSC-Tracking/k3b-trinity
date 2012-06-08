@@ -1,7 +1,7 @@
 [Desktop Entry]
 ServiceTypes=media/blankcd
 Actions=K3bDataProject;K3bAudioCDProject;
-X-KDE-Priority=TopLevel
+X-TDE-Priority=TopLevel
 
 [Desktop Action K3bDataProject]
 Exec=k3b --device %u --datacd

@@ -58,7 +58,7 @@ Comment[zh_TW]=K3b 專案
 Icon=k3b
 Type=MimeType
 Patterns=*.k3b;
-X-KDE-AutoEmbed=false
-[Property::X-KDE-NativeExtension]
+X-TDE-AutoEmbed=false
+[Property::X-TDE-NativeExtension]
 Type=TQString
 Value=.k3b
