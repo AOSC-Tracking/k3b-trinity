@@ -1,4 +1,4 @@
-/* 
+/*
  *
  * $Id: k3bffmpegwrapper.cpp 641819 2007-03-12 17:29:23Z trueg $
  * Copyright (C) 2004-2007 Sebastian Trueg <trueg@k3b.org>
@@ -79,14 +79,14 @@ bool K3bFFMpegFile::open()
   close();
 
   // open the file
-  int err = av_open_input_file( &d->formatContext, m_filename.local8Bit(), 0, 0, 0 );
+  int err = avformat_open_input( &d->formatContext, m_filename.local8Bit(), 0, 0);
   if( err < 0 ) {
     kdDebug() << "(K3bFFMpegFile) unable to open " << m_filename << " with error " << err << endl;
     return false;
   }
 
   // analyze the streams
-  av_find_stream_info( d->formatContext );
+  avformat_find_stream_info( d->formatContext, NULL );
 
   // we only handle files containing one audio stream
   if( d->formatContext->nb_streams != 1 ) {
@@ -114,7 +114,7 @@ bool K3bFFMpegFile::open()
 
   // open the codec on our context
   kdDebug() << "(K3bFFMpegFile) found codec for " << m_filename << endl;
-  if( avcodec_open( codecContext, d->codec ) < 0 ) {
+  if( avcodec_open2( codecContext, d->codec, NULL ) < 0 ) {
     kdDebug() << "(K3bFFMpegDecoderFactory) could not open codec." << endl;
     return false;
   }
@@ -128,7 +128,7 @@ bool K3bFFMpegFile::open()
   }
 
   // dump some debugging info
-  dump_format( d->formatContext, 0, m_filename.local8Bit(), 0 );
+  av_dump_format( d->formatContext, 0, m_filename.local8Bit(), 0 );
 
   return true;
 }
@@ -150,7 +150,7 @@ void K3bFFMpegFile::close()
   }
 
   if( d->formatContext ) {
-    av_close_input_file( d->formatContext );
+    avformat_close_input( &d->formatContext );
     d->formatContext = 0;
   }
 }
@@ -315,8 +315,8 @@ int K3bFFMpegFile::fillOutputBuffer()
     av_init_packet( &avp );
     avp.data = d->packetData;
     avp.size = d->packetSize;
-int len = avcodec_decode_audio3( d->formatContext->streams[0]->codec,
-				    (short*)d->outputBuffer, &d->outputBufferSize,
+int len = avcodec_decode_audio4( d->formatContext->streams[0]->codec,
+				    (AVFrame*)d->outputBuffer, &d->outputBufferSize,
 				    &avp );
 #else
 #ifdef FFMPEG_BUILD_PRE_4629
