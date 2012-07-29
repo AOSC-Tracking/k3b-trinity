@@ -79,14 +79,22 @@ bool K3bFFMpegFile::open()
   close();
 
   // open the file
+# if LIBAVFORMAT_VERSION_INT >= AV_VERSION_INT(53, 2, 0)
   int err = avformat_open_input( &d->formatContext, m_filename.local8Bit(), 0, 0);
+# else
+  int err = av_open_input_file( &d->formatContext, m_filename.local8Bit(), 0, 0, 0);
+# endif
   if( err < 0 ) {
     kdDebug() << "(K3bFFMpegFile) unable to open " << m_filename << " with error " << err << endl;
     return false;
   }
 
   // analyze the streams
+# if LIBAVFORMAT_VERSION_INT >= AV_VERSION_INT(53, 6, 0)
   avformat_find_stream_info( d->formatContext, NULL );
+# else
+  av_find_stream_info( d->formatContext );
+# endif
 
   // we only handle files containing one audio stream
   if( d->formatContext->nb_streams != 1 ) {
@@ -114,7 +122,13 @@ bool K3bFFMpegFile::open()
 
   // open the codec on our context
   kdDebug() << "(K3bFFMpegFile) found codec for " << m_filename << endl;
-  if( avcodec_open2( codecContext, d->codec, NULL ) < 0 ) {
+  if(
+#    if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(53, 8, 0)
+     avcodec_open2( codecContext, d->codec, NULL ) < 0
+#    else
+     avcodec_open( codecContext, d->codec ) < 0
+#    endif
+    ) {
     kdDebug() << "(K3bFFMpegDecoderFactory) could not open codec." << endl;
     return false;
   }
@@ -128,7 +142,11 @@ bool K3bFFMpegFile::open()
   }
 
   // dump some debugging info
+# if LIBAVFORMAT_VERSION_INT >= AV_VERSION_INT(52, 101, 0)
   av_dump_format( d->formatContext, 0, m_filename.local8Bit(), 0 );
+# else
+  dump_format( d->formatContext, 0, m_filename.local8Bit(), 0 );
+# endif
 
   return true;
 }
@@ -150,7 +168,11 @@ void K3bFFMpegFile::close()
   }
 
   if( d->formatContext ) {
+#   if LIBAVFORMAT_VERSION_INT >= AV_VERSION_INT(53, 17, 0)
     avformat_close_input( &d->formatContext );
+#   else
+    av_close_input_file( d->formatContext );
+#   endif
     d->formatContext = 0;
   }
 }
@@ -315,9 +337,15 @@ int K3bFFMpegFile::fillOutputBuffer()
     av_init_packet( &avp );
     avp.data = d->packetData;
     avp.size = d->packetSize;
+#   if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(53, 25, 0)
 int len = avcodec_decode_audio4( d->formatContext->streams[0]->codec,
 				    (AVFrame*)d->outputBuffer, &d->outputBufferSize,
 				    &avp );
+#   else
+int len = avcodec_decode_audio3( d->formatContext->streams[0]->codec,
+				    (short*)d->outputBuffer, &d->outputBufferSize,
+				    &avp );
+#   endif
 #else
 #ifdef FFMPEG_BUILD_PRE_4629
     int len = avcodec_decode_audio2( &d->formatContext->streams[0]->codec,
