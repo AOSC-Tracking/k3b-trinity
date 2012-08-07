@@ -16,7 +16,7 @@ libk3b_la_LIBADD = core/libk3bcore.la \
 	plugin/libk3bplugin.la \
 	tools/libk3btools.la \
 	jobs/libjobs.la \
-	$(VIDEODVDLIB) \
+	$(VIDEODVDLIB) $(LIB_TDEUI) $(LIB_QT) $(LIB_TDECORE) $(LIBDL) -ltdefx -lDCOP \
 	../libk3bdevice/libk3bdevice.la
 
 libk3b_la_LDFLAGS = $(all_libraries) -version-info 3:0:0 -no-undefined
