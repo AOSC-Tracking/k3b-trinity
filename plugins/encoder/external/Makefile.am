@@ -6,7 +6,7 @@ libk3bexternalencoder_la_SOURCES = base_k3bexternalencoderconfigwidget.ui \
 	base_k3bexternalencodereditwidget.ui k3bexternalencoder.cpp \
 	k3bexternalencoderconfigwidget.cpp k3bexternalencodercommand.cpp
 
-libk3bexternalencoder_la_LIBADD = ../../../libk3b/libk3b.la $(LIB_KDECORE)
+libk3bexternalencoder_la_LIBADD = ../../../libk3b/libk3b.la ../../../libk3bdevice/libk3bdevice.la $(LIB_KDECORE) $(LIB_QT) $(LIB_KDEUI)
 libk3bexternalencoder_la_LDFLAGS = -avoid-version -module -no-undefined $(all_libraries)
 
 pluginsdir = $(kde_datadir)/k3b/plugins

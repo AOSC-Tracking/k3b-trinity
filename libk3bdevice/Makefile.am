@@ -6,7 +6,7 @@ METASOURCES = AUTO
 
 lib_LTLIBRARIES = libk3bdevice.la
 
-libk3bdevice_la_LIBADD = $(LIB_KIO) $(RESMGR_LIB) $(CAM_LIB) $(HAL_DBUS_LIBS)
+libk3bdevice_la_LIBADD = $(LIB_KIO) $(RESMGR_LIB) $(CAM_LIB) $(HAL_DBUS_LIBS) $(LIB_QT) $(LIB_KDECORE)
 
 # lib version 5 for K3b 1.0
 libk3bdevice_la_LDFLAGS = $(all_libraries) -version-info 5:0:0 -no-undefined

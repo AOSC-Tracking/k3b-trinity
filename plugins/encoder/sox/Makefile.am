@@ -4,7 +4,7 @@ kde_module_LTLIBRARIES = libk3bsoxencoder.la
 
 libk3bsoxencoder_la_SOURCES = base_k3bsoxencoderconfigwidget.ui k3bsoxencoder.cpp
 
-libk3bsoxencoder_la_LIBADD = ../../../libk3b/libk3b.la $(LIB_KDECORE)
+libk3bsoxencoder_la_LIBADD = ../../../libk3b/libk3b.la ../../../libk3bdevice/libk3bdevice.la $(LIB_KDECORE) $(LIB_QT)
 libk3bsoxencoder_la_LDFLAGS = -avoid-version -module -no-undefined $(all_libraries)
 
 pluginsdir = $(kde_datadir)/k3b/plugins

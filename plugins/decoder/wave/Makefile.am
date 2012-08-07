@@ -4,7 +4,7 @@ kde_module_LTLIBRARIES = libk3bwavedecoder.la
 
 libk3bwavedecoder_la_SOURCES = k3bwavedecoder.cpp
 
-libk3bwavedecoder_la_LIBADD = $(LIB_KDECORE) ../../../libk3b/libk3b.la
+libk3bwavedecoder_la_LIBADD = $(LIB_KDECORE) $(LIB_QT) ../../../libk3b/libk3b.la ../../../libk3bdevice/libk3bdevice.la
 libk3bwavedecoder_la_LDFLAGS = -avoid-version -module -no-undefined $(all_libraries)
 
 pluginsdir = $(kde_datadir)/k3b/plugins
