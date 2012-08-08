@@ -70,7 +70,7 @@ static KCmdLineOptions options[] =
 	{ "nosplash", I18N_NOOP("Disable the splash screen"), 0 },
 	{ "ao <method>", I18N_NOOP("Set the audio output method (like arts or alsa depending on the installed plugins)"), 0 },
         { "device <device>", I18N_NOOP( "Set the device to be used for new projects (This option has no effect. "
-                                        "Its main purpose is to enable handling of empty media from the KDE Media Manager)." ), 0 },
+                                        "Its main purpose is to enable handling of empty media from the TDE Media Manager)." ), 0 },
         KCmdLineLastOption
     };
 

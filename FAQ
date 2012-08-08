@@ -16,8 +16,8 @@ A: If you are using the rpm from SuSE your version of K3bSetup is not able to se
 
 
 Q: Where has all the fancy graphic gone?
-A: Most likely you installed K3b in the wrong directory. All KDE programs are installed in the 
-   KDE dirtree (SuSE: /opt/trinity, RedHat: /usr). If you compile K3b from source it defaults 
+A: Most likely you installed K3b in the wrong directory. All TDE programs are installed in the 
+   TDE directory tree. If you compile K3b from source it defaults 
    to either $TDEDIR or /usr/local. To install in the correct directory you need to specify the prefix 
    to configure like this:
      ./configure --prefix=`tde-config --prefix`
