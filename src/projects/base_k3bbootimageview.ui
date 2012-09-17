@@ -337,13 +337,13 @@
     </connection>
     <connection>
         <sender>m_editLoadSegment</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>base_K3bBootImageView</receiver>
         <slot>slotOptionsChanged()</slot>
     </connection>
     <connection>
         <sender>m_editLoadSize</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>base_K3bBootImageView</receiver>
         <slot>slotOptionsChanged()</slot>
     </connection>
