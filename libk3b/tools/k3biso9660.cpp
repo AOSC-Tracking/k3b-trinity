@@ -32,7 +32,7 @@
 
 
 /* callback function for libisofs */
-int K3bIso9660::read_callback( char* buf, sector_t start, int len, void* udata )
+int K3bIso9660::read_callback( char* buf, sector_t start, long long len, void* udata )
 {
   K3bIso9660* isoF = static_cast<K3bIso9660*>(udata);
 

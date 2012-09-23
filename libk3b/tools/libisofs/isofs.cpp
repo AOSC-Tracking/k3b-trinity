@@ -121,7 +121,7 @@ void FreeBootTable(boot_head *boot) {
 	boot->defentry=NULL;
 }
 
-int BootImageSize(readfunc* read,int media,sector_t start,int len,void* udata) {
+int BootImageSize(readfunc* read,int media,sector_t start,long long len,void* udata) {
 	int ret;
 
 	switch(media & 0xf) {

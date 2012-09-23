@@ -23,7 +23,7 @@
 #include "iso_fs.h"
 #include "el_torito.h"
 
-typedef long sector_t;
+typedef long long sector_t;
 
 typedef struct _rr_entry {
 	int		len;	/* length of structure */
@@ -48,7 +48,7 @@ typedef struct _rr_entry {
 	int		re; /* relocated */
 	char	z_algo[2]; /* zizofs algorithm */
 	char	z_params[2]; /* zizofs parameters */
-	int		z_size; /* zizofs real_size */
+	long long		z_size; /* zizofs real_size */
 } rr_entry;
 
 typedef struct _iso_vol_desc {
@@ -74,7 +74,7 @@ typedef struct _boot_head {
 /**
  * this callback function needs to read 'len' sectors from 'start' into 'buf' 
  */
-typedef int readfunc(char *buf,sector_t start, int len,void *);
+typedef int readfunc(char *buf,sector_t start, long long len,void *);
 
 /**
  * ProcessDir uses this callback
@@ -135,7 +135,7 @@ int JolietLevel(struct iso_volume_descriptor *ivd);
 /**
  * Returns the size of the boot image (in 512 byte sectors)
  */
-int BootImageSize(readfunc *read,int media,sector_t start,int len,void *udata);
+int BootImageSize(readfunc *read,int media,sector_t start,long long len,void *udata);
 
 /**
  * Frees the boot catalog entries in 'boot'. If you ever called ReadBootTable,

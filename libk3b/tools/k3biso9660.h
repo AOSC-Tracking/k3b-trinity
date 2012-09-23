@@ -38,7 +38,7 @@ struct iso_directory_record;
 struct el_torito_boot_descriptor;
 struct iso_primary_descriptor;
 
-typedef long sector_t;
+typedef long long sector_t;
 
 
 
@@ -437,7 +437,7 @@ class LIBK3B_EXPORT K3bIso9660
   int m_joliet;
 
   // only used for creation
-  static int read_callback( char* buf, sector_t start, int len, void* udata );
+  static int read_callback( char* buf, sector_t start, long long len, void* udata );
   static int isofs_callback( struct iso_directory_record* idr, void *udata );
   K3bIso9660Directory *dirent;
   bool m_rr;
