@@ -616,7 +616,7 @@ void K3bMainWindow::readOptions()
 void K3bMainWindow::saveProperties( KConfig* c )
 {
   // 1. put saved projects in the config
-  // 2. save every modified project in  "~/.kde/share/apps/k3b/sessions/" + KApp->sessionId()
+  // 2. save every modified project in  "~/.trinity/share/apps/k3b/sessions/" + KApp->sessionId()
   // 3. save the url of the project (might be something like "AudioCD1") in the config
   // 4. save the status of every project (modified/saved)
 
@@ -673,7 +673,7 @@ void K3bMainWindow::readProperties( KConfig* c )
   // 1. read all projects from the config
   // 2. simply open all of themg
   // 3. reset the saved urls and the modified state
-  // 4. delete "~/.kde/share/apps/k3b/sessions/" + KApp->sessionId()
+  // 4. delete "~/.trinity/share/apps/k3b/sessions/" + KApp->sessionId()
 
   TQString saveDir = KGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
 
