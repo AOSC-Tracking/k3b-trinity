@@ -97,7 +97,7 @@ void K3bApplication::init()
 
   TQGuardedPtr<K3bSplash> splash;
   if( !isRestored() ) {
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
     if( generalOptions.readBoolEntry("Show splash", true) && args->isSet( "splash" ) ) {
       // we need the correct splash pic
@@ -175,7 +175,7 @@ int K3bApplication::newInstance()
 
 bool K3bApplication::processCmdLineArgs()
 {
-  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
   bool showTips = true;
   bool dialogOpen = false;
