@@ -419,7 +419,7 @@ K3bFileTreeView::K3bFileTreeView( TQWidget *parent, const char *name )
 	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem* , const TQPoint& )) );
 
   // we always simulate the single click
-  slotSettingsChangedK3b(KApplication::SETTINGS_MOUSE);
+  slotSettingsChangedK3b(TDEApplication::SETTINGS_MOUSE);
   if( kapp )
     connect( kapp, TQT_SIGNAL(settingsChanged(int)), TQT_SLOT(slotSettingsChangedK3b(int)) );
 
@@ -692,7 +692,7 @@ void K3bFileTreeView::slotSettingsChangedK3b(int category)
 {
   // we force single click like konqueror does. This really should be done in KFileTreeView
 
-  if( category == KApplication::SETTINGS_MOUSE ) {
+  if( category == TDEApplication::SETTINGS_MOUSE ) {
     disconnect(this, TQT_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
 	       this, TQT_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
 

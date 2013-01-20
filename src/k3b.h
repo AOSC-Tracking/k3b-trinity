@@ -165,7 +165,7 @@ class K3bMainWindow : public KParts::DockMainWindow
   virtual bool queryExit();
 
   /** saves the window properties for each open window during session end to the session config file, including saving the currently
-   * opened file by a temporary filename provided by KApplication.
+   * opened file by a temporary filename provided by TDEApplication.
    * @see KTMainWindow#saveProperties
    */
   virtual void saveProperties(KConfig *_cfg);
