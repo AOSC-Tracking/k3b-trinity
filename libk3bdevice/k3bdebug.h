@@ -27,7 +27,7 @@ class K3bDebug;
 typedef K3bDebug& (*K3BDBGFUNC)( K3bDebug& );
 
 /**
- * K3bDebug as compared to KDebug does not need anything. No KInstance or whatever
+ * K3bDebug as compared to KDebug does not need anything. No TDEInstance or whatever
  * and does not use anything except fprintf.
  * Thus, K3bDebug is fully thread-safe and safe in general
  */

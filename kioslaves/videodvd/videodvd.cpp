@@ -42,7 +42,7 @@ extern "C"
 {
   LIBK3B_EXPORT int kdemain( int argc, char **argv )
   {
-    KInstance instance( "kio_videodvd" );
+    TDEInstance instance( "kio_videodvd" );
 
     kdDebug(7101) << "*** Starting kio_videodvd " << endl;
 

@@ -17,7 +17,7 @@
 
 
 template <class T>
-KInstance* K3bPluginFactory<T>::s_instance = 0;
+TDEInstance* K3bPluginFactory<T>::s_instance = 0;
 
 
 template <class T>
@@ -25,9 +25,9 @@ K3bPluginFactory<T>* K3bPluginFactory<T>::s_self = 0;
 
 
 template <class T>
-KInstance* K3bPluginFactory<T>::instance()
+TDEInstance* K3bPluginFactory<T>::instance()
 {
   if( !s_instance && s_self )
-    s_instance = new KInstance( s_self->m_instanceName );
+    s_instance = new TDEInstance( s_self->m_instanceName );
   return s_instance;
 }

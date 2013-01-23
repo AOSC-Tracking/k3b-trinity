@@ -49,7 +49,7 @@ class K3bPluginFactory : public KLibFactory
     s_self = 0;
   }
 
-  static KInstance* instance();
+  static TDEInstance* instance();
 
  protected:
   virtual void setupTranslations( void ) {
@@ -74,13 +74,13 @@ class K3bPluginFactory : public KLibFactory
   TQCString m_instanceName;
   bool m_catalogueInitialized;
 
-  static KInstance* s_instance;
+  static TDEInstance* s_instance;
   static K3bPluginFactory<T> *s_self;
 };
 
 
 template <class T>
-KInstance* K3bPluginFactory<T>::s_instance = 0;
+TDEInstance* K3bPluginFactory<T>::s_instance = 0;
 
 
 template <class T>
@@ -88,10 +88,10 @@ K3bPluginFactory<T>* K3bPluginFactory<T>::s_self = 0;
 
 
 template <class T>
-KInstance* K3bPluginFactory<T>::instance()
+TDEInstance* K3bPluginFactory<T>::instance()
 {
   if( !s_instance && s_self )
-    s_instance = new KInstance( s_self->m_instanceName );
+    s_instance = new TDEInstance( s_self->m_instanceName );
   return s_instance;
 }
 

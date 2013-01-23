@@ -35,7 +35,7 @@ class K3bSetup2: public KCModule
   ~K3bSetup2();
 
   TQString quickHelp() const;
-  const KAboutData* aboutData() { return m_aboutData; };
+  const TDEAboutData* aboutData() { return m_aboutData; };
 
   void load();
   void save();
@@ -60,7 +60,7 @@ class K3bSetup2: public KCModule
 
   base_K3bSetup2* w;
 
-  KAboutData* m_aboutData;
+  TDEAboutData* m_aboutData;
 };
 
 #endif

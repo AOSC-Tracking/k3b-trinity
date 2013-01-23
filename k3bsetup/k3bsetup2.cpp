@@ -112,9 +112,9 @@ K3bSetup2::K3bSetup2( TQWidget *parent, const char *, const TQStringList& )
   d = new Private();
   d->config = new KConfig( "k3bsetup2rc" );
 
-  m_aboutData = new KAboutData("k3bsetup2",
+  m_aboutData = new TDEAboutData("k3bsetup2",
 			       "K3bSetup 2",
-			       0, 0, KAboutData::License_GPL,
+			       0, 0, TDEAboutData::License_GPL,
 			       "(C) 2003-2007 Sebastian Trueg");
   m_aboutData->addAuthor("Sebastian Trueg", 0, "trueg@k3b.org");
 

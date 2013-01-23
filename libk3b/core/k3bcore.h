@@ -31,7 +31,7 @@
 class K3bExternalBinManager;
 class K3bVersion;
 class KConfig;
-class KAboutData;
+class TDEAboutData;
 class K3bJob;
 class K3bBurnJob;
 class K3bGlobalSettings;
