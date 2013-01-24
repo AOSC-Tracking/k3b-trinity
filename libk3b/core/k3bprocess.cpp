@@ -54,7 +54,7 @@ public:
 
 
 K3bProcess::K3bProcess()
-  : KProcess(),
+  : TDEProcess(),
     m_bSplitStdout(false)
 {
   d = new Data();
@@ -78,25 +78,25 @@ K3bProcess& K3bProcess::operator<<( const K3bExternalBin* bin )
 
 K3bProcess& K3bProcess::operator<<( const TQString& arg )
 {
-  static_cast<KProcess*>(this)->operator<<( arg );
+  static_cast<TDEProcess*>(this)->operator<<( arg );
   return *this;
 }
 
 K3bProcess& K3bProcess::operator<<( const char* arg )
 {
-  static_cast<KProcess*>(this)->operator<<( arg );
+  static_cast<TDEProcess*>(this)->operator<<( arg );
   return *this;
 }
 
 K3bProcess& K3bProcess::operator<<( const TQCString& arg )
 {
-  static_cast<KProcess*>(this)->operator<<( arg );
+  static_cast<TDEProcess*>(this)->operator<<( arg );
   return *this;
 }
 
 K3bProcess& K3bProcess::operator<<( const TQStringList& args )
 {
-  static_cast<KProcess*>(this)->operator<<( args );
+  static_cast<TDEProcess*>(this)->operator<<( args );
   return *this;
 }
 
@@ -104,19 +104,19 @@ K3bProcess& K3bProcess::operator<<( const TQStringList& args )
 bool K3bProcess::start( RunMode run, Communication com )
 {
   if( com & Stderr ) {
-    connect( this, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-	     this, TQT_SLOT(slotSplitStderr(KProcess*, char*, int)) );
+    connect( this, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+	     this, TQT_SLOT(slotSplitStderr(TDEProcess*, char*, int)) );
   }
   if( com & Stdout ) {
-    connect( this, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-	     this, TQT_SLOT(slotSplitStdout(KProcess*, char*, int)) );
+    connect( this, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+	     this, TQT_SLOT(slotSplitStdout(TDEProcess*, char*, int)) );
   }
 
-  return KProcess::start( run, com );
+  return TDEProcess::start( run, com );
 }
 
 
-void K3bProcess::slotSplitStdout( KProcess*, char* data, int len )
+void K3bProcess::slotSplitStdout( TDEProcess*, char* data, int len )
 {
   if( m_bSplitStdout ) {
     TQStringList lines = splitOutput( data, len, d->unfinishedStdoutLine, d->suppressEmptyLines );
@@ -134,7 +134,7 @@ void K3bProcess::slotSplitStdout( KProcess*, char* data, int len )
 }
 
 
-void K3bProcess::slotSplitStderr( KProcess*, char* data, int len )
+void K3bProcess::slotSplitStderr( TDEProcess*, char* data, int len )
 {
   TQStringList lines = splitOutput( data, len, d->unfinishedStderrLine, d->suppressEmptyLines );
 
@@ -208,7 +208,7 @@ TQStringList K3bProcess::splitOutput( char* data, int len,
 
 int K3bProcess::setupCommunication( Communication comm )
 {
-  if( KProcess::setupCommunication( comm ) ) {
+  if( TDEProcess::setupCommunication( comm ) ) {
 
     //
     // Setup our own socketpair
@@ -255,13 +255,13 @@ void K3bProcess::commClose()
     d->out[0] = -1;
   }
 
-  KProcess::commClose();
+  TDEProcess::commClose();
 }
 
 
 int K3bProcess::commSetupDoneP()
 {
-  int ok = KProcess::commSetupDoneP();
+  int ok = TDEProcess::commSetupDoneP();
 
   if( d->rawStdin )
     close(d->in[0]);
@@ -276,7 +276,7 @@ int K3bProcess::commSetupDoneP()
 
 int K3bProcess::commSetupDoneC()
 {
-  int ok = KProcess::commSetupDoneC();
+  int ok = TDEProcess::commSetupDoneC();
 
   if( d->dupStdoutFd != -1 ) {
     //
@@ -396,7 +396,7 @@ bool K3bProcess::closeStdin()
     return true;
   }
   else
-    return KProcess::closeStdin();
+    return TDEProcess::closeStdin();
 }
 
 
@@ -408,27 +408,27 @@ bool K3bProcess::closeStdout()
     return true;
   }
   else
-    return KProcess::closeStdout();
+    return TDEProcess::closeStdout();
 }
 
 
-K3bProcessOutputCollector::K3bProcessOutputCollector( KProcess* p )
+K3bProcessOutputCollector::K3bProcessOutputCollector( TDEProcess* p )
   : m_process(0)
 {
   setProcess( p );
 }
 
-void K3bProcessOutputCollector::setProcess( KProcess* p )
+void K3bProcessOutputCollector::setProcess( TDEProcess* p )
 {
   if( m_process )
     m_process->disconnect( this );
 
   m_process = p;
   if( p ) {
-    connect( p, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)), 
-	     this, TQT_SLOT(slotGatherStdout(KProcess*, char*, int)) );
-    connect( p, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)), 
-	     this, TQT_SLOT(slotGatherStderr(KProcess*, char*, int)) );
+    connect( p, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)), 
+	     this, TQT_SLOT(slotGatherStdout(TDEProcess*, char*, int)) );
+    connect( p, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)), 
+	     this, TQT_SLOT(slotGatherStderr(TDEProcess*, char*, int)) );
   }
 
   m_gatheredOutput.truncate( 0 );
@@ -436,13 +436,13 @@ void K3bProcessOutputCollector::setProcess( KProcess* p )
   m_stdoutOutput.truncate( 0 );
 }
 
-void K3bProcessOutputCollector::slotGatherStderr( KProcess*, char* data, int len )
+void K3bProcessOutputCollector::slotGatherStderr( TDEProcess*, char* data, int len )
 {
   m_gatheredOutput.append( TQString::fromLocal8Bit( data, len ) );
   m_stderrOutput.append( TQString::fromLocal8Bit( data, len ) );
 }
 
-void K3bProcessOutputCollector::slotGatherStdout( KProcess*, char* data, int len )
+void K3bProcessOutputCollector::slotGatherStdout( TDEProcess*, char* data, int len )
 {
   m_gatheredOutput.append( TQString::fromLocal8Bit( data, len ) );
   m_stdoutOutput.append( TQString::fromLocal8Bit( data, len ) );

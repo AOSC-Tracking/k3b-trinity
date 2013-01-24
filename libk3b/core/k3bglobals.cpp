@@ -177,7 +177,7 @@ TQString K3b::defaultTempPath()
 {
   TQString oldGroup = kapp->config()->group();
   kapp->config()->setGroup( "General Options" );
-  TQString url = kapp->config()->readPathEntry( "Temp Dir", KGlobal::dirs()->resourceDirs( "tmp" ).first() );
+  TQString url = kapp->config()->readPathEntry( "Temp Dir", TDEGlobal::dirs()->resourceDirs( "tmp" ).first() );
   kapp->config()->setGroup( oldGroup );
   return prepareDir(url);
 }
@@ -560,11 +560,11 @@ bool K3b::unmount( K3bDevice::Device* dev )
 
   TQString umountBin = K3b::findExe( "umount" );
   if( !umountBin.isEmpty() ) {
-    KProcess p;
+    TDEProcess p;
     p << umountBin;
     p << "-l"; // lazy unmount
     p << dev->blockDeviceName();
-    p.start( KProcess::Block );
+    p.start( TDEProcess::Block );
     if( !p.exitStatus() )
       return true;
   }
@@ -572,11 +572,11 @@ bool K3b::unmount( K3bDevice::Device* dev )
   // now try pmount
   TQString pumountBin = K3b::findExe( "pumount" );
   if( !pumountBin.isEmpty() ) {
-    KProcess p;
+    TDEProcess p;
     p << pumountBin;
     p << "-l"; // lazy unmount
     p << dev->blockDeviceName();
-    p.start( KProcess::Block );
+    p.start( TDEProcess::Block );
     return !p.exitStatus();
   }
   else {
@@ -610,10 +610,10 @@ bool K3b::mount( K3bDevice::Device* dev )
   // now try pmount
   TQString pmountBin = K3b::findExe( "pmount" );
   if( !pmountBin.isEmpty() ) {
-    KProcess p;
+    TDEProcess p;
     p << pmountBin;
     p << mntDev;
-    p.start( KProcess::Block );
+    p.start( TDEProcess::Block );
     return !p.exitStatus();
   }
   return false;

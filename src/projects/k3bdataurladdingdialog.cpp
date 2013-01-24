@@ -562,8 +562,8 @@ void K3bDataUrlAddingDialog::slotAddUrls()
       int dirFilter = TQDir::All|TQDir::Hidden|TQDir::System;
 
       TQStringList dlist = newDir.entryList( dirFilter );
-      const TQString& dot = KGlobal::staticQString( "." );
-      const TQString& dotdot = KGlobal::staticQString( ".." );
+      const TQString& dot = TDEGlobal::staticQString( "." );
+      const TQString& dotdot = TDEGlobal::staticQString( ".." );
       dlist.remove( dot );
       dlist.remove( dotdot );
 

@@ -150,11 +150,11 @@ void K3bVideoCdRip::vcdxRip()
         *m_process << "-o" << "/dev/null";
       
 
-    connect( m_process, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseVcdXRipOutput( KProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseVcdXRipOutput( KProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( processExited( KProcess* ) ),
+    connect( m_process, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseVcdXRipOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseVcdXRipOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( processExited( TDEProcess* ) ),
              this, TQT_SLOT( slotVcdXRipFinished() ) );
 
     m_process->setWorkingDirectory( TQUrl( m_videooptions ->getVideoCdDestination() ).dirPath() );
@@ -174,7 +174,7 @@ void K3bVideoCdRip::vcdxRip()
     emit infoMessage( i18n( "Start extracting." ), K3bJob::INFO );
     emit infoMessage( i18n( "Extract files from %1 to %2." ).arg( m_videooptions ->getVideoCdSource() ).arg( m_videooptions ->getVideoCdDestination() ), K3bJob::INFO );
             
-    if ( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
+    if ( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) ) {
         kdDebug() << "(K3bVideoCdRip) could not start vcdxrip" << endl;
         emit infoMessage( i18n( "Could not start %1." ).arg( "vcdxrip" ), K3bJob::ERROR );
         cancelAll();
@@ -182,7 +182,7 @@ void K3bVideoCdRip::vcdxRip()
     }
 }
 
-void K3bVideoCdRip::slotParseVcdXRipOutput( KProcess*, char* output, int len )
+void K3bVideoCdRip::slotParseVcdXRipOutput( TDEProcess*, char* output, int len )
 {
     TQString buffer = TQString::fromLocal8Bit( output, len );
 

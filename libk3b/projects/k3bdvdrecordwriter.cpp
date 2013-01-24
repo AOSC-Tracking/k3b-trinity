@@ -44,8 +44,8 @@ void K3bDvdrecordWriter::prepareProcess()
   m_process->setSplitStdout(true);
   connect( m_process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
   connect( m_process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
-  connect( m_process, TQT_SIGNAL(wroteStdin(KProcess*)), this, TQT_SIGNAL(dataWritten()) );
+  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
+  connect( m_process, TQT_SIGNAL(wroteStdin(TDEProcess*)), this, TQT_SIGNAL(dataWritten()) );
 
 //   if( k3bcore->externalBinManager()->binObject("cdrecord")->hasFeature( "dvd-patch" ) )
 //     m_cdrecordBinObject = k3bcore->externalBinManager()->binObject("cdrecord");

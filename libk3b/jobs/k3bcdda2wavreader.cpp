@@ -109,7 +109,7 @@ void K3bCdda2wavReader::start( bool onlyInfo )
   d->process->setWorkingDirectory( m_imagePath );
   connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotProcessLine(const TQString&)) );
   connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotProcessLine(const TQString&)) );
-  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
 
   // create the command line
   *d->process << d->cdda2wavBin->path;
@@ -130,7 +130,7 @@ void K3bCdda2wavReader::start( bool onlyInfo )
     *d->process << *it;
 
   // start the thing
-  if( !d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
+  if( !d->process->start( TDEProcess::NotifyOnExit, TDEProcess::All ) ) {
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bCdda2wavReader) could not start cdda2wav" << endl;
@@ -222,7 +222,7 @@ void K3bCdda2wavReader::slotProcessLine( const TQString& line )
 }
 
 
-void K3bCdda2wavReader::slotProcessExited( KProcess* p )
+void K3bCdda2wavReader::slotProcessExited( TDEProcess* p )
 {
   d->running = false;
 

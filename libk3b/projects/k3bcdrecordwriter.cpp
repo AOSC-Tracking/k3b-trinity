@@ -141,13 +141,13 @@ void K3bCdrecordWriter::prepareProcess()
   if( m_process ) delete m_process;  // tdelibs want this!
   m_process = new K3bProcess();
   m_process->setRunPrivileged(true);
-  //  m_process->setPriority( KProcess::PrioHighest );
+  //  m_process->setPriority( TDEProcess::PrioHighest );
   m_process->setSplitStdout(true);
   m_process->setSuppressEmptyLines(true);
   m_process->setRawStdin(true);  // we only use stdin when writing on-the-fly
   connect( m_process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
   connect( m_process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
+  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
 
   m_cdrecordBinObject = k3bcore->externalBinManager()->binObject("cdrecord");
 
@@ -339,7 +339,7 @@ void K3bCdrecordWriter::start()
   burnDevice()->close();
   burnDevice()->usageLock();
 
-  if( !m_process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
+  if( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::All ) ) {
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bCdrecordWriter) could not start " << m_cdrecordBinObject->name() << endl;
@@ -653,7 +653,7 @@ void K3bCdrecordWriter::slotStdLine( const TQString& line )
 }
 
 
-void K3bCdrecordWriter::slotProcessExited( KProcess* p )
+void K3bCdrecordWriter::slotProcessExited( TDEProcess* p )
 {
   // remove temporary cdtext file
   delete d->cdTextFile;
@@ -682,7 +682,7 @@ void K3bCdrecordWriter::slotProcessExited( KProcess* p )
 	  emit infoMessage( i18n("Writing successfully completed"), K3bJob::SUCCESS );
 
 	int s = d->speedEst->average();
-	emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)").arg(s).arg(KGlobal::locale()->formatNumber((double)s/150.0), 2), INFO );
+	emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)").arg(s).arg(TDEGlobal::locale()->formatNumber((double)s/150.0), 2), INFO );
 
 	jobFinished( true );
       }

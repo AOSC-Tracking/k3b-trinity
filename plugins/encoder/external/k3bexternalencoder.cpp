@@ -161,7 +161,7 @@ void K3bExternalEncoder::finishEncoderInternal()
 }
 
 
-void K3bExternalEncoder::slotExternalProgramFinished( KProcess* p )
+void K3bExternalEncoder::slotExternalProgramFinished( TDEProcess* p )
 {
   if( !p->normalExit() || p->exitStatus() != 0 )
     kdDebug() << "(K3bExternalEncoder) program exited with error." << endl;
@@ -207,8 +207,8 @@ bool K3bExternalEncoder::initEncoderInternal( const TQString& extension )
   d->process->setSplitStdout(true);
   d->process->setRawStdin(true);
 
-  connect( d->process, TQT_SIGNAL(processExited(KProcess*)),
-	   this, TQT_SLOT(slotExternalProgramFinished(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)),
+	   this, TQT_SLOT(slotExternalProgramFinished(TDEProcess*)) );
   connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)),
 	   this, TQT_SLOT(slotExternalProgramOutputLine(const TQString&)) );
   connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)),
@@ -244,7 +244,7 @@ bool K3bExternalEncoder::initEncoderInternal( const TQString& extension )
   // set one general error message
   setLastError( i18n("Command failed: %1").arg( s ) );
   
-  if( d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
+  if( d->process->start( TDEProcess::NotifyOnExit, TDEProcess::All ) ) {
     if( d->cmd.writeWaveHeader )
       return writeWaveHeader();
     else

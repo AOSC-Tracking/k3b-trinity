@@ -20,7 +20,7 @@
 #include <k3bjob.h>
 
 
-class KProcess;
+class TDEProcess;
 namespace K3bDevice {
   class Device;
   class DeviceHandler;
@@ -83,7 +83,7 @@ class K3bDvdBooktypeJob : public K3bJob
 
  private slots:
   void slotStderrLine( const TQString& );
-  void slotProcessFinished( KProcess* );
+  void slotProcessFinished( TDEProcess* );
   void slotDeviceHandlerFinished( K3bDevice::DeviceHandler* );
   void slotEjectingFinished( K3bDevice::DeviceHandler* );
 

@@ -96,7 +96,7 @@ void K3bBusyWidget::drawContents( TQPainter* p )
 
   //  p->eraseRect( rect );
   if( m_bBusy )
-    p->fillRect( pos, (rect.height() - squareSize)/2, squareSize, squareSize, KGlobalSettings::highlightColor() );
+    p->fillRect( pos, (rect.height() - squareSize)/2, squareSize, squareSize, TDEGlobalSettings::highlightColor() );
 }
 
 

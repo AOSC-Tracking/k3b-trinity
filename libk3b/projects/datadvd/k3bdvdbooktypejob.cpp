@@ -177,7 +177,7 @@ void K3bDvdBooktypeJob::slotStderrLine( const TQString& line )
 }
 
 
-void K3bDvdBooktypeJob::slotProcessFinished( KProcess* p )
+void K3bDvdBooktypeJob::slotProcessFinished( TDEProcess* p )
 {
   if( d->canceled ) {
     emit canceled();
@@ -281,7 +281,7 @@ void K3bDvdBooktypeJob::startBooktypeChange()
   d->process->setRunPrivileged(true);
   d->process->setSuppressEmptyLines(true);
   connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStderrLine(const TQString&)) );
-  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessFinished(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessFinished(TDEProcess*)) );
 
   d->dvdBooktypeBin = k3bcore->externalBinManager()->binObject( "dvd+rw-booktype" );
   if( !d->dvdBooktypeBin ) {
@@ -335,7 +335,7 @@ void K3bDvdBooktypeJob::startBooktypeChange()
   emit debuggingOutput( "dvd+rw-booktype command:", s );
 
 
-  if( !d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
+  if( !d->process->start( TDEProcess::NotifyOnExit, TDEProcess::All ) ) {
     // something went wrong when starting the program
     // it "should" be the executable
     emit infoMessage( i18n("Could not start %1.").arg(d->dvdBooktypeBin->name()), K3bJob::ERROR );

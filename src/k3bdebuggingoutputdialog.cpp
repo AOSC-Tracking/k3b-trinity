@@ -47,7 +47,7 @@ K3bDebuggingOutputDialog::K3bDebuggingOutputDialog( TQWidget* parent )
   debugView = new TQTextEdit( this );
   debugView->setReadOnly(true);
   debugView->setTextFormat( TQTextEdit::PlainText );
-  debugView->setCurrentFont( KGlobalSettings::fixedFont() );
+  debugView->setCurrentFont( TDEGlobalSettings::fixedFont() );
   debugView->setWordWrap( TQTextEdit::NoWrap );
 
   setMainWidget( debugView );

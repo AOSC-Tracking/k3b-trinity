@@ -620,7 +620,7 @@ void K3bMainWindow::saveProperties( KConfig* c )
   // 3. save the url of the project (might be something like "AudioCD1") in the config
   // 4. save the status of every project (modified/saved)
 
-  TQString saveDir = KGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
+  TQString saveDir = TDEGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
 
   // FIXME: for some reason the config entries are not properly stored when using the default
   //        KMainWindow session config. Since I was not able to find the bug I use another config object
@@ -675,7 +675,7 @@ void K3bMainWindow::readProperties( KConfig* c )
   // 3. reset the saved urls and the modified state
   // 4. delete "~/.trinity/share/apps/k3b/sessions/" + KApp->sessionId()
 
-  TQString saveDir = KGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
+  TQString saveDir = TDEGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
 
   // FIXME: for some reason the config entries are not properly stored when using the default
   //        KMainWindow session config. Since I was not able to find the bug I use another config object
@@ -1290,9 +1290,9 @@ void K3bMainWindow::slotProjectAddFiles()
 
 void K3bMainWindow::slotK3bSetup()
 {
-  KProcess p;
-  p << "tdesu" << "kcmshell k3bsetup2 --lang " + KGlobal::locale()->language();
-  if( !p.start( KProcess::DontCare ) )
+  TDEProcess p;
+  p << "tdesu" << "kcmshell k3bsetup2 --lang " + TDEGlobal::locale()->language();
+  if( !p.start( TDEProcess::DontCare ) )
     KMessageBox::error( 0, i18n("Could not find tdesu to run K3bSetup with root privileges. "
 				"Please run it manually as root.") );
 }

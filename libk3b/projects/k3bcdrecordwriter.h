@@ -24,7 +24,7 @@
 
 class K3bExternalBin;
 class K3bProcess;
-class KProcess;
+class TDEProcess;
 class K3bDevice::Device;
 
 
@@ -67,7 +67,7 @@ class K3bCdrecordWriter : public K3bAbstractWriter
 
  protected slots:
   void slotStdLine( const TQString& line );
-  void slotProcessExited(KProcess*);
+  void slotProcessExited(TDEProcess*);
   void slotThroughput( int t );
 
  protected:

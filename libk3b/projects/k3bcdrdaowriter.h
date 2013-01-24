@@ -23,7 +23,7 @@
 
 class K3bExternalBin;
 class K3bProcess;
-class KProcess;
+class TDEProcess;
 class K3bDevice::Device;
 class TQSocket;
 
@@ -93,7 +93,7 @@ class K3bCdrdaoWriter : public K3bAbstractWriter
 
  private slots:
   void slotStdLine( const TQString& line );
-  void slotProcessExited(KProcess*);
+  void slotProcessExited(TDEProcess*);
   void parseCdrdaoMessage();
   void slotThroughput( int t );
 

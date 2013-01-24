@@ -67,21 +67,21 @@ void K3bVideoCdInfo::info( const TQString& device )
 
     *m_process << "-q" << "--norip" << "-i" << device << "-o" << "-";
 
-    connect( m_process, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseOutput( KProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseOutput( KProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( processExited( KProcess* ) ),
+    connect( m_process, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( processExited( TDEProcess* ) ),
              this, TQT_SLOT( slotInfoFinished() ) );
 
-    if ( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
+    if ( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) ) {
         kdDebug() << "(K3bVideoCdInfo::info) could not start vcdxrip" << endl;
         cancelAll();
         emit infoFinished( false );
     }
 }
 
-void K3bVideoCdInfo::slotParseOutput( KProcess*, char* output, int len )
+void K3bVideoCdInfo::slotParseOutput( TDEProcess*, char* output, int len )
 {
     TQString buffer = TQString::fromLocal8Bit( output, len );
 

@@ -97,11 +97,11 @@ void K3bPluginOptionTab::readSettings()
     TQFont f( font() );
     f.setBold(true);
     groupViewItem->setFont( 0, f );
-    groupViewItem->setBackgroundColor( 0, KGlobalSettings::alternateBackgroundColor() );
-    groupViewItem->setBackgroundColor( 1, KGlobalSettings::alternateBackgroundColor() );
-    groupViewItem->setBackgroundColor( 2, KGlobalSettings::alternateBackgroundColor() );
-    groupViewItem->setBackgroundColor( 3, KGlobalSettings::alternateBackgroundColor() );
-    groupViewItem->setBackgroundColor( 4, KGlobalSettings::alternateBackgroundColor() );
+    groupViewItem->setBackgroundColor( 0, TDEGlobalSettings::alternateBackgroundColor() );
+    groupViewItem->setBackgroundColor( 1, TDEGlobalSettings::alternateBackgroundColor() );
+    groupViewItem->setBackgroundColor( 2, TDEGlobalSettings::alternateBackgroundColor() );
+    groupViewItem->setBackgroundColor( 3, TDEGlobalSettings::alternateBackgroundColor() );
+    groupViewItem->setBackgroundColor( 4, TDEGlobalSettings::alternateBackgroundColor() );
     groupViewItem->setSelectable( false );
 
     TQPtrList<K3bPlugin> fl = k3bcore->pluginManager()->plugins( group );

@@ -24,7 +24,7 @@
 #include <k3btoc.h>
 #include <k3bcore.h>
 
-class KProcess;
+class TDEProcess;
 
 class K3bVideoCdInfoResultEntry
 {
@@ -90,7 +90,7 @@ class K3bVideoCdInfo : public TQObject
 
     private slots:
         void slotInfoFinished();
-        void slotParseOutput( KProcess*, char* output, int len );
+        void slotParseOutput( TDEProcess*, char* output, int len );
 
     private:
         void cancelAll();
@@ -98,7 +98,7 @@ class K3bVideoCdInfo : public TQObject
         K3bVideoCdInfoResult m_Result;
         void parseXmlData();
 
-        KProcess* m_process;
+        TDEProcess* m_process;
 
         TQString m_xmlData;
         bool m_isXml;

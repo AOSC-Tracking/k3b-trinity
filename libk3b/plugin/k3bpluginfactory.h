@@ -43,7 +43,7 @@ class K3bPluginFactory : public KLibFactory
 
   ~K3bPluginFactory() {
     if ( s_instance )
-      KGlobal::locale()->removeCatalogue( s_instance->instanceName() );
+      TDEGlobal::locale()->removeCatalogue( s_instance->instanceName() );
     delete s_instance;
     s_instance = 0;
     s_self = 0;
@@ -54,7 +54,7 @@ class K3bPluginFactory : public KLibFactory
  protected:
   virtual void setupTranslations( void ) {
     if( instance() )
-      KGlobal::locale()->insertCatalogue( instance()->instanceName() );
+      TDEGlobal::locale()->insertCatalogue( instance()->instanceName() );
   }
 
   void initializeMessageCatalogue() {

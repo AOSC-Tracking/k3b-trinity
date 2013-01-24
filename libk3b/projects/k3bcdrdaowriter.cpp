@@ -466,8 +466,8 @@ void K3bCdrdaoWriter::start()
   m_process->setRawStdin(true);
   connect( m_process, TQT_SIGNAL(stderrLine(const TQString&)),
            this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(KProcess*)),
-           this, TQT_SLOT(slotProcessExited(KProcess*)) );
+  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
+           this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
 
   m_canceled = false;
   m_knownError = false;
@@ -577,7 +577,7 @@ void K3bCdrdaoWriter::start()
   burnDevice()->close();
   burnDevice()->usageLock();
 
-  if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
     {
       // something went wrong when starting the program
       // it "should" be the executable
@@ -709,7 +709,7 @@ void K3bCdrdaoWriter::slotStdLine( const TQString& line )
 }
 
 
-void K3bCdrdaoWriter::slotProcessExited( KProcess* p )
+void K3bCdrdaoWriter::slotProcessExited( TDEProcess* p )
 {
   // release the device within this process
   burnDevice()->usageUnlock();
@@ -775,7 +775,7 @@ void K3bCdrdaoWriter::slotProcessExited( KProcess* p )
 
       if( m_command == WRITE || m_command == COPY ) {
 	int s = d->speedEst->average();
-	emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)").arg(s).arg(KGlobal::locale()->formatNumber((double)s/150.0), 2), INFO );
+	emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)").arg(s).arg(TDEGlobal::locale()->formatNumber((double)s/150.0), 2), INFO );
       }
 
       jobFinished( true );

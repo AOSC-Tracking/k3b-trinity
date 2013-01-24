@@ -49,9 +49,9 @@ K3bExternalBinWidget::K3bExternalProgramViewItem::K3bExternalProgramViewItem( K3
   TQFont f( listView()->font() );
   f.setBold(true);
   setFont( 0, f );
-  setBackgroundColor( 0, KGlobalSettings::alternateBackgroundColor() );
-  setBackgroundColor( 1, KGlobalSettings::alternateBackgroundColor() );
-  setBackgroundColor( 2, KGlobalSettings::alternateBackgroundColor() );
+  setBackgroundColor( 0, TDEGlobalSettings::alternateBackgroundColor() );
+  setBackgroundColor( 1, TDEGlobalSettings::alternateBackgroundColor() );
+  setBackgroundColor( 2, TDEGlobalSettings::alternateBackgroundColor() );
   setText( 0, p->name() );
   setSelectable( false );
 }

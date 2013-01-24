@@ -97,7 +97,7 @@ bool K3bToolButton::eventFilter( TQObject* o, TQEvent* ev )
       else if( ev->type() == TQEvent::MouseMove ) {
         TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
         if( !d->instantMenu &&
-	    ( mev->pos() - d->mousePressPos).manhattanLength() > KGlobalSettings::dndEventDelay() ) {
+	    ( mev->pos() - d->mousePressPos).manhattanLength() > TDEGlobalSettings::dndEventDelay() ) {
 	  openPopup();
           return true;
         }

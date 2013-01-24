@@ -46,7 +46,7 @@ public:
       if( *it == i18n("default") )
 	m_box->insertItem( *it );
       else {
-	TQString lang = KGlobal::locale()->twoAlphaToLanguageName( *it );
+	TQString lang = TDEGlobal::locale()->twoAlphaToLanguageName( *it );
 	if( lang.isEmpty() )
 	  lang = *it;
 

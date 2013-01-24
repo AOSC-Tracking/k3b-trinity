@@ -50,7 +50,7 @@ void K3bAudioNormalizeJob::start()
 
   m_process = new K3bProcess();
   connect( m_process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
+  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
 
   const K3bExternalBin* bin = k3bcore->externalBinManager()->binObject( "normalize-audio" );
 
@@ -79,7 +79,7 @@ void K3bAudioNormalizeJob::start()
     *m_process << m_files[i];
 
   // now start the process
-  if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
+  if( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) ) {
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bAudioNormalizeJob) could not start normalize-audio" << endl;
@@ -175,7 +175,7 @@ void K3bAudioNormalizeJob::slotStdLine( const TQString& line )
 }
 
 
-void K3bAudioNormalizeJob::slotProcessExited( KProcess* p )
+void K3bAudioNormalizeJob::slotProcessExited( TDEProcess* p )
 {
   if( p->normalExit() ) {
     switch( p->exitStatus() ) {

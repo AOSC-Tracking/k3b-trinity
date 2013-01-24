@@ -69,8 +69,8 @@ K3bApplication::K3bApplication()
     m_needToInit(true)
 {
   // insert library i18n data
-  KGlobal::locale()->insertCatalogue( "libk3bdevice" );
-  KGlobal::locale()->insertCatalogue( "libk3b" );
+  TDEGlobal::locale()->insertCatalogue( "libk3bdevice" );
+  TDEGlobal::locale()->insertCatalogue( "libk3b" );
 
   m_core = new Core( TQT_TQOBJECT(this) );
 

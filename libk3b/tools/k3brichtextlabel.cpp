@@ -37,14 +37,14 @@ static TQString qrichtextify( const TQString& text )
 
 K3bRichTextLabel::K3bRichTextLabel( const TQString &text , TQWidget *parent, const char *name )
  : TQLabel ( parent, name ) {
-  m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
+  m_defaultWidth = TQMIN(400, TDEGlobalSettings::desktopGeometry(this).width()*2/5);
   setAlignment( TQt::WordBreak );
   setText(text);
 }
 
 K3bRichTextLabel::K3bRichTextLabel( TQWidget *parent, const char *name )
  : TQLabel ( parent, name ) {
-  m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
+  m_defaultWidth = TQMIN(400, TDEGlobalSettings::desktopGeometry(this).width()*2/5);
   setAlignment( TQt::WordBreak );
 }
 

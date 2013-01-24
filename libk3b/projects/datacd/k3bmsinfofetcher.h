@@ -22,7 +22,7 @@ namespace K3bDevice {
   class Device;
   class DeviceHandler;
 }
-class KProcess;
+class TDEProcess;
 
 class K3bMsInfoFetcher : public K3bJob
 {
@@ -45,7 +45,7 @@ class K3bMsInfoFetcher : public K3bJob
 
  private slots:
   void slotProcessExited();
-  void slotCollectOutput( KProcess*, char* output, int len );
+  void slotCollectOutput( TDEProcess*, char* output, int len );
   void slotMediaDetectionFinished( K3bDevice::DeviceHandler* );
   void getMsInfo();
 
@@ -55,7 +55,7 @@ class K3bMsInfoFetcher : public K3bJob
   int m_nextSessionStart;
   TQString m_collectedOutput;
 
-  KProcess* m_process;
+  TDEProcess* m_process;
   K3bDevice::Device* m_device;
 
   bool m_canceled;

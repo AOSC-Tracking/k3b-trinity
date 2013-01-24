@@ -22,7 +22,7 @@ class K3bVcdDoc;
 class K3bVcdTrack;
 class TQString;
 class K3bProcess;
-class KProcess;
+class TDEProcess;
 class TQDataStream;
 class K3bAbstractWriter;
 class K3bDevice::Device;
@@ -56,7 +56,7 @@ class K3bVcdJob : public K3bBurnJob
 
     protected slots:
         void slotVcdxBuildFinished();
-        void slotParseVcdxBuildOutput( KProcess*, char* output, int len );
+        void slotParseVcdxBuildOutput( TDEProcess*, char* output, int len );
 
         void slotWriterJobPercent( int p );
         void slotProcessedSize( int cs, int ts );

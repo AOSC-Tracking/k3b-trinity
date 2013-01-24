@@ -212,7 +212,7 @@ void K3bVideoDVDRippingDialog::populateTitleView( const TQValueList<int>& titles
     //
     ri.audioStream = 0;
     for( unsigned int i = 0; i < m_dvd[*it-1].numAudioStreams(); ++i ) {
-      if( m_dvd[*it-1].audioStream(i).langCode() == KGlobal::locale()->language() &&
+      if( m_dvd[*it-1].audioStream(i).langCode() == TDEGlobal::locale()->language() &&
 	  m_dvd[*it-1].audioStream(i).format() != K3bVideoDVD::AUDIO_FORMAT_DTS ) {
 	ri.audioStream = i;
 	break;
@@ -226,7 +226,7 @@ void K3bVideoDVDRippingDialog::populateTitleView( const TQValueList<int>& titles
 	.arg( m_dvd[*it-1].audioStream(i).channels() )
 	.arg( m_dvd[*it-1].audioStream(i).langCode().isEmpty()
 	      ? i18n("unknown language")
-	      : KGlobal::locale()->twoAlphaToLanguageName( m_dvd[*it-1].audioStream(i).langCode() ) )
+	      : TDEGlobal::locale()->twoAlphaToLanguageName( m_dvd[*it-1].audioStream(i).langCode() ) )
 	.arg( m_dvd[*it-1].audioStream(i).codeExtension() != K3bVideoDVD::AUDIO_CODE_EXT_UNSPECIFIED
 	      ? TQString(" ") + K3bVideoDVD::audioCodeExtensionString( m_dvd[*it-1].audioStream(i).codeExtension() )
 	      : TQString() );
@@ -436,7 +436,7 @@ TQString K3bVideoDVDRippingDialog::createFilename( const K3bVideoDVDRippingJob::
 	break;
       case PATTERN_LANGUAGE_NAME:
 	if( title.numAudioStreams() > 0 )
-	  f.append( KGlobal::locale()->twoAlphaToLanguageName( title.audioStream( info.audioStream ).langCode() ) );
+	  f.append( TDEGlobal::locale()->twoAlphaToLanguageName( title.audioStream( info.audioStream ).langCode() ) );
 	break;
       case PATTERN_AUDIO_FORMAT:
 	// FIXME: what about MPEG audio streams?
@@ -471,7 +471,7 @@ TQString K3bVideoDVDRippingDialog::createFilename( const K3bVideoDVDRippingJob::
 	  f.append( "16:9" );
 	break;
       case PATTERN_CURRENT_DATE:
-	f.append( KGlobal::locale()->formatDate( TQDate::currentDate() ) );
+	f.append( TDEGlobal::locale()->formatDate( TQDate::currentDate() ) );
 	break;
       default:
 	f.append( pattern[i-1] );

@@ -24,7 +24,7 @@ static inline TQString defaultTempDir()
   // we need a world-readable temp dir
   
   // FIXME: check if the default is world-readable
-//   TQStringList dirs = KGlobal::dirs()->resourceDirs( "tmp" );
+//   TQStringList dirs = TDEGlobal::dirs()->resourceDirs( "tmp" );
 //   for( TQStringList::const_iterator it = dirs.begin();
 //        it != dirs.end(); ++it ) {
 //     const TQString& dir = *it;

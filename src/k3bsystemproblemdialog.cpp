@@ -607,9 +607,9 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 
 void K3bSystemProblemDialog::slotK3bSetup()
 {
-  KProcess p;
-  p << "tdesu" << "kcmshell k3bsetup2 --lang " + KGlobal::locale()->language();
-  if( !p.start( KProcess::DontCare ) )
+  TDEProcess p;
+  p << "tdesu" << "kcmshell k3bsetup2 --lang " + TDEGlobal::locale()->language();
+  if( !p.start( TDEProcess::DontCare ) )
     KMessageBox::error( 0, i18n("Unable to start K3bSetup2.") );
 }
 
@@ -623,7 +623,7 @@ int K3bSystemProblemDialog::dmaActivated( K3bDevice::Device* dev )
   K3bProcess p;
   K3bProcessOutputCollector out( &p );
   p << hdparm << "-d" << dev->blockDeviceName();
-  if( !p.start( KProcess::Block, KProcess::AllOutput ) )
+  if( !p.start( TDEProcess::Block, TDEProcess::AllOutput ) )
     return -1;
 
   // output is something like:

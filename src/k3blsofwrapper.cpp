@@ -62,7 +62,7 @@ bool K3bLsofWrapper::checkDevice( K3bDevice::Device* dev )
     return false;
 
   // run lsof
-  KProcess p;
+  TDEProcess p;
   K3bProcessOutputCollector out( &p );
 
   //
@@ -72,7 +72,7 @@ bool K3bLsofWrapper::checkDevice( K3bDevice::Device* dev )
   //
   p << d->lsofBin << "-Fpc" << dev->blockDeviceName();
 
-  if( !p.start( KProcess::Block, KProcess::Stdout ) )
+  if( !p.start( TDEProcess::Block, TDEProcess::Stdout ) )
     return false;
 
   //

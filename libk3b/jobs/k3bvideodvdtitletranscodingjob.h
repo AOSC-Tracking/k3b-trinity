@@ -20,7 +20,7 @@
 #include <k3bjob.h>
 #include <k3bvideodvd.h>
 
-class KProcess;
+class TDEProcess;
 class K3bExternalBin;
 
 
@@ -230,7 +230,7 @@ class LIBK3B_EXPORT K3bVideoDVDTitleTranscodingJob : public K3bJob
 
  private slots:
   void slotTranscodeStderr( const TQString& );
-  void slotTranscodeExited( KProcess* );
+  void slotTranscodeExited( TDEProcess* );
 
  private:
   /**

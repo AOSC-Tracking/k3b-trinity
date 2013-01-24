@@ -145,7 +145,7 @@ void K3bPluginManager::loadPlugin( const TQString& fileName )
 void K3bPluginManager::loadAll()
 {
   // we simply search the K3b plugin dir for now
-  TQStringList dirs = KGlobal::dirs()->findDirs( "data", "k3b/plugins/" );
+  TQStringList dirs = TDEGlobal::dirs()->findDirs( "data", "k3b/plugins/" );
 
   for( TQStringList::const_iterator it = dirs.begin();
        it != dirs.end(); ++it ) {

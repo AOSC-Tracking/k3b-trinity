@@ -139,7 +139,7 @@ void K3bReadcdReader::start()
   delete d->process;
   d->process = new K3bProcess();
   connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
 
 
   *d->process << d->readcdBinObject;
@@ -204,7 +204,7 @@ void K3bReadcdReader::start()
 
   d->canceled = false;
 
-  if( !d->process->start( KProcess::NotifyOnExit, KProcess::AllOutput) ) {
+  if( !d->process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput) ) {
     // something went wrong when starting the program
     // it "should" be the executable
     kdError() << "(K3bReadcdReader) could not start readcd" << endl;
@@ -303,7 +303,7 @@ void K3bReadcdReader::slotStdLine( const TQString& line )
   }
 }
 
-void K3bReadcdReader::slotProcessExited( KProcess* p )
+void K3bReadcdReader::slotProcessExited( TDEProcess* p )
 {
   if( d->canceled ) {
     emit canceled();

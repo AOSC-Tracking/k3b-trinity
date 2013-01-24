@@ -68,11 +68,11 @@ class K3bSoxProgram : public K3bExternalProgram
     K3bExternalBin* bin = 0;
 
     // probe version
-    KProcess vp;
+    TDEProcess vp;
     K3bProcessOutputCollector out( &vp );
 
     vp << path << "-h";
-    if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+    if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
       int pos = out.output().find( "sox: SoX Version" );
       if ( pos < 0 )
           pos = out.output().find( "sox: SoX v" ); // newer sox versions
@@ -153,7 +153,7 @@ void K3bSoxEncoder::finishEncoderInternal()
 }
 
 
-void K3bSoxEncoder::slotSoxFinished( KProcess* p )
+void K3bSoxEncoder::slotSoxFinished( TDEProcess* p )
 {
   if( !p->normalExit() || p->exitStatus() != 0 )
     kdDebug() << "(K3bSoxEncoder) sox exited with error." << endl;
@@ -182,8 +182,8 @@ bool K3bSoxEncoder::initEncoderInternal( const TQString& extension )
     d->process->setSplitStdout(true);
     d->process->setRawStdin(true);
 
-    connect( d->process, TQT_SIGNAL(processExited(KProcess*)),
-	     this, TQT_SLOT(slotSoxFinished(KProcess*)) );
+    connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)),
+	     this, TQT_SLOT(slotSoxFinished(TDEProcess*)) );
     connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)),
 	     this, TQT_SLOT(slotSoxOutputLine(const TQString&)) );
     connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)),
@@ -240,7 +240,7 @@ bool K3bSoxEncoder::initEncoderInternal( const TQString& extension )
     kdDebug() << s << flush << endl;
 
 
-    return d->process->start( KProcess::NotifyOnExit, KProcess::All );
+    return d->process->start( TDEProcess::NotifyOnExit, TDEProcess::All );
   }
   else {
     kdDebug() << "(K3bSoxEncoder) could not find sox bin." << endl;

@@ -287,7 +287,7 @@ public:
   void maybeTip( const TQPoint& ) {
     tip( parentWidget()->rect(),
 	 KIO::convertSize( m_doc->size() ) +
-	 " (" + KGlobal::locale()->formatNumber( m_doc->size(), 0 ) + "), " +
+	 " (" + TDEGlobal::locale()->formatNumber( m_doc->size(), 0 ) + "), " +
 	 m_doc->length().toString(false) + " " + i18n("min") +
 	 " (" + i18n("Right click for media sizes") + ")");
   }
@@ -542,13 +542,13 @@ void K3bFillStatusDisplay::slotCustomSize()
   TQString mbS = i18n("mb");
   TQString minS = i18n("min");
 
-  TQRegExp rx( "(\\d+\\" + KGlobal::locale()->decimalSymbol() + "?\\d*)(" + gbS + "|" + mbS + "|" + minS + ")?" );
+  TQRegExp rx( "(\\d+\\" + TDEGlobal::locale()->decimalSymbol() + "?\\d*)(" + gbS + "|" + mbS + "|" + minS + ")?" );
   bool ok;
   TQString size = KInputDialog::getText( i18n("Custom Size"),
 					i18n("<p>Please specify the size of the media. Use suffixes <b>gb</b>,<b>mb</b>, "
 					     "and <b>min</b> for <em>gigabytes</em>, <em>megabytes</em>, and <em>minutes</em>"
 					     " respectively."),
-					d->showDvdSizes ? TQString("4%14%2").arg(KGlobal::locale()->decimalSymbol()).arg(gbS) :
+					d->showDvdSizes ? TQString("4%14%2").arg(TDEGlobal::locale()->decimalSymbol()).arg(gbS) :
 					(d->showTime ? TQString("74")+minS : TQString("650")+mbS),
 					&ok, this, (const char*)0,
 					new TQRegExpValidator( rx, TQT_TQOBJECT(this) ) );
@@ -556,9 +556,9 @@ void K3bFillStatusDisplay::slotCustomSize()
     // determine size
     if( rx.exactMatch( size ) ) {
       TQString valStr = rx.cap(1);
-      if( valStr.endsWith( KGlobal::locale()->decimalSymbol() ) )
+      if( valStr.endsWith( TDEGlobal::locale()->decimalSymbol() ) )
 	valStr += "0";
-      double val = KGlobal::locale()->readNumber( valStr, &ok );
+      double val = TDEGlobal::locale()->readNumber( valStr, &ok );
       if( ok ) {
 	TQString s = rx.cap(2);
 	if( s == gbS || (s.isEmpty() && d->showDvdSizes) )

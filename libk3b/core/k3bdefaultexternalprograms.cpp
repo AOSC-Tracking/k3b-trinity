@@ -148,11 +148,11 @@ bool K3bCdrecordProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   K3bProcessOutputCollector out( &vp );
 
   vp << path << "-version";
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = -1;
     if( wodim ) {
       pos = out.output().find( "Wodim" );
@@ -199,10 +199,10 @@ bool K3bCdrecordProgram::scan( const TQString& p )
   }
 
   // probe features
-  KProcess fp;
+  TDEProcess fp;
   out.setProcess( &fp );
   fp << path << "-help";
-  if( fp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( fp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     if( out.output().contains( "gracetime" ) )
       bin->addFeature( "gracetime" );
     if( out.output().contains( "-overburn" ) )
@@ -297,10 +297,10 @@ bool K3bMkisofsProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   vp << path << "-version";
   K3bProcessOutputCollector out( &vp );
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = -1;
     if( genisoimage )
       pos = out.output().find( "genisoimage" );
@@ -333,10 +333,10 @@ bool K3bMkisofsProgram::scan( const TQString& p )
 
 
   // probe features
-  KProcess fp;
+  TDEProcess fp;
   fp << path << "-help";
   out.setProcess( &fp );
-  if( fp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( fp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     if( out.output().contains( "-udf" ) )
       bin->addFeature( "udf" );
     if( out.output().contains( "-dvd-video" ) )
@@ -412,10 +412,10 @@ bool K3bReadcdProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   vp << path << "-version";
   K3bProcessOutputCollector out( &vp );
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = -1;
     if( readom )
       pos = out.output().find( "readom" );
@@ -447,10 +447,10 @@ bool K3bReadcdProgram::scan( const TQString& p )
 
 
   // probe features
-  KProcess fp;
+  TDEProcess fp;
   fp << path << "-help";
   out.setProcess( &fp );
-  if( fp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( fp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     if( out.output().contains( "-clone" ) )
       bin->addFeature( "clone" );
 
@@ -503,10 +503,10 @@ bool K3bCdrdaoProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   vp << path ;
   K3bProcessOutputCollector out( &vp );
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = out.output().find( "Cdrdao version" );
     if( pos < 0 )
       return false;
@@ -535,10 +535,10 @@ bool K3bCdrdaoProgram::scan( const TQString& p )
 
 
   // probe features
-  KProcess fp;
+  TDEProcess fp;
   fp << path << "write" << "-h";
   out.setProcess( &fp );
-  if( fp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( fp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     if( out.output().contains( "--overburn" ) )
       bin->addFeature( "overburn" );
     if( out.output().contains( "--multi" ) )
@@ -601,10 +601,10 @@ bool K3bTranscodeProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   vp << appPath << "-v";
   K3bProcessOutputCollector out( &vp );
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = out.output().find( "transcode v" );
     if( pos < 0 )
       return false;
@@ -628,10 +628,10 @@ bool K3bTranscodeProgram::scan( const TQString& p )
   // Check features
   //
   TQString modInfoBin = path + "tcmodinfo";
-  KProcess modp;
+  TDEProcess modp;
   modp << modInfoBin << "-p";
   out.setProcess( &modp );
-  if( modp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( modp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     TQString modPath = out.output().stripWhiteSpace();
     TQDir modDir( modPath );
     if( !modDir.entryList( "*export_xvid*", TQDir::Files ).isEmpty() )
@@ -675,10 +675,10 @@ bool K3bVcdbuilderProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   vp << path << "-V";
   K3bProcessOutputCollector out( &vp );
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = out.output().find( "GNU VCDImager" );
     if( pos < 0 )
       return false;
@@ -732,11 +732,11 @@ bool K3bNormalizeProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   K3bProcessOutputCollector out( &vp );
 
   vp << path << "--version";
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = out.output().find( "normalize" );
     if( pos < 0 )
       return false;
@@ -791,11 +791,11 @@ bool K3bGrowisofsProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   K3bProcessOutputCollector out( &vp );
 
   vp << path << "-version";
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = out.output().find( "growisofs" );
     if( pos < 0 )
       return false;
@@ -856,11 +856,11 @@ bool K3bDvdformatProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   K3bProcessOutputCollector out( &vp );
 
   vp << path;
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     // different locales make searching for the +- char difficult
     // so we simply ignore it.
     int pos = out.output().find( TQRegExp("DVD.*RAM format utility") );
@@ -926,11 +926,11 @@ bool K3bDvdBooktypeProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   K3bProcessOutputCollector out( &vp );
 
   vp << path;
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = out.output().find( "dvd+rw-booktype" );
     if( pos < 0 )
       return false;
@@ -975,11 +975,11 @@ bool K3bCdda2wavProgram::scan( const TQString& p )
   K3bExternalBin* bin = 0;
 
   // probe version
-  KProcess vp;
+  TDEProcess vp;
   K3bProcessOutputCollector out( &vp );
 
   vp << path << "-h";
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     int pos = out.output().find( "cdda2wav" );
     if( pos < 0 )
       return false;

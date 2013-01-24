@@ -179,12 +179,12 @@ bool K3bGrowisofsWriter::prepareProcess()
   delete d->process;
   d->process = new K3bProcess();
   d->process->setRunPrivileged(true);
-  //  d->process->setPriority( KProcess::PrioHighest );
+  //  d->process->setPriority( TDEProcess::PrioHighest );
   d->process->setSplitStdout(true);
   d->process->setRawStdin(true);
   connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotReceivedStderr(const TQString&)) );
   connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotReceivedStderr(const TQString&)) );
-  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotProcessExited(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
 
 
   //
@@ -370,7 +370,7 @@ void K3bGrowisofsWriter::start()
     burnDevice()->close();
     burnDevice()->usageLock();
 
-    if( !d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
+    if( !d->process->start( TDEProcess::NotifyOnExit, TDEProcess::All ) ) {
       // something went wrong when starting the program
       // it "should" be the executable
       kdDebug() << "(K3bGrowisofsWriter) could not start " << d->growisofsBin->path << endl;
@@ -524,7 +524,7 @@ void K3bGrowisofsWriter::slotReceivedStderr( const TQString& line )
 }
 
 
-void K3bGrowisofsWriter::slotProcessExited( KProcess* p )
+void K3bGrowisofsWriter::slotProcessExited( TDEProcess* p )
 {
   d->inputFile.close();
 
@@ -551,7 +551,7 @@ void K3bGrowisofsWriter::slotProcessExited( KProcess* p )
     int s = d->speedEst->average();
     if( s > 0 )
       emit infoMessage( i18n("Average overall write speed: %1 KB/s (%2x)")
-                        .arg(s).arg(KGlobal::locale()->formatNumber((double)s/1385.0), 2), INFO );
+                        .arg(s).arg(TDEGlobal::locale()->formatNumber((double)s/1385.0), 2), INFO );
 
     if( simulate() )
       emit infoMessage( i18n("Simulation successfully completed"), K3bJob::SUCCESS );

@@ -23,7 +23,7 @@
 
 
 class KTempDir;
-class KProcess;
+class TDEProcess;
 
 class K3bVideoDVDRippingPreview : public TQObject
 {
@@ -51,12 +51,12 @@ class K3bVideoDVDRippingPreview : public TQObject
   void previewDone( bool );
 
  private slots:
-  void slotTranscodeFinished( KProcess* );
+  void slotTranscodeFinished( TDEProcess* );
 
  private:
   TQImage m_preview;
   KTempDir* m_tempDir;
-  KProcess* m_process;
+  TDEProcess* m_process;
   int m_title;
   int m_chapter;
   K3bVideoDVD::VideoDVD m_dvd;

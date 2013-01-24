@@ -105,7 +105,7 @@ bool K3bPushButton::eventFilter( TQObject* o, TQEvent* ev )
       }
       else if( ev->type() == TQEvent::MouseMove ) {
         TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
-        if( ( mev->pos() - d->mousePressPos).manhattanLength() > KGlobalSettings::dndEventDelay() ) {
+        if( ( mev->pos() - d->mousePressPos).manhattanLength() > TDEGlobalSettings::dndEventDelay() ) {
 	  d->popupTimer->stop();
 	  slotDelayedPopup();
           return true;

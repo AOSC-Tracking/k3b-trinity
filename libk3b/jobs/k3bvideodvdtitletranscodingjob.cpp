@@ -196,7 +196,7 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
   d->process->setSplitStdout(true);
   connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotTranscodeStderr(const TQString&)) );
   connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotTranscodeStderr(const TQString&)) );
-  connect( d->process, TQT_SIGNAL(processExited(KProcess*)), this, TQT_SLOT(slotTranscodeExited(KProcess*)) );
+  connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotTranscodeExited(TDEProcess*)) );
 
   // the executable
   *d->process << d->usedTranscodeBin;
@@ -336,7 +336,7 @@ void K3bVideoDVDTitleTranscodingJob::startTranscode( int pass )
   emit debuggingOutput( d->usedTranscodeBin->name() + " command:", s);
 
   // start the process
-  if( !d->process->start( KProcess::NotifyOnExit, KProcess::All ) ) {
+  if( !d->process->start( TDEProcess::NotifyOnExit, TDEProcess::All ) ) {
     // something went wrong when starting the program
     // it "should" be the executable
     emit infoMessage( i18n("Could not start %1.").arg(d->usedTranscodeBin->name()), K3bJob::ERROR );
@@ -414,7 +414,7 @@ void K3bVideoDVDTitleTranscodingJob::slotTranscodeStderr( const TQString& line )
 }
 
 
-void K3bVideoDVDTitleTranscodingJob::slotTranscodeExited( KProcess* p )
+void K3bVideoDVDTitleTranscodingJob::slotTranscodeExited( TDEProcess* p )
 {
   if( d->canceled ) {
     emit canceled();

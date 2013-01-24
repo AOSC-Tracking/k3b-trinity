@@ -49,11 +49,11 @@ bool K3bMovixProgram::scan( const TQString& p )
   //
   // probe version and data dir
   //
-  KProcess vp, dp;
+  TDEProcess vp, dp;
   vp << path + "movix-version";
   dp << path + "movix-conf";
   K3bProcessOutputCollector vout( &vp ), dout( &dp );
-  if( vp.start( KProcess::Block, KProcess::AllOutput ) && dp.start( KProcess::Block, KProcess::AllOutput ) ) {
+  if( vp.start( TDEProcess::Block, TDEProcess::AllOutput ) && dp.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
     // movix-version just gives us the version number on stdout
     if( !vout.output().isEmpty() && !dout.output().isEmpty() ) {
       bin = new K3bMovixBin( this );
@@ -133,10 +133,10 @@ bool K3bMovixProgram::scanOldEMovix( K3bMovixBin* bin, const TQString& path )
   if( TQFile::exists( path + "movix-files" ) ) {
     bin->addFeature( "files" );
 
-    KProcess p;
+    TDEProcess p;
     K3bProcessOutputCollector out( &p );
     p << bin->path + "movix-files";
-    if( p.start( KProcess::Block, KProcess::AllOutput ) ) {
+    if( p.start( TDEProcess::Block, TDEProcess::AllOutput ) ) {
       bin->m_movixFiles = TQStringList::split( "\n", out.output() );
     }
   }
@@ -300,10 +300,10 @@ TQStringList K3bMovixBin::supportedCodecs() const
 
 TQStringList K3bMovixBin::supported( const TQString& type ) const
 {
-  KProcess p;
+  TDEProcess p;
   K3bProcessOutputCollector out( &p );
   p << path + "movix-conf" << "--supported=" + type;
-  if( p.start( KProcess::Block, KProcess::AllOutput ) )
+  if( p.start( TDEProcess::Block, TDEProcess::AllOutput ) )
     return TQStringList::split( "\n", out.output() );
   else
     return TQStringList();
@@ -316,7 +316,7 @@ TQStringList K3bMovixBin::files( const TQString& kbd,
 				const TQString& lang,
 				const TQStringList& codecs ) const
 {
-  KProcess p;
+  TDEProcess p;
   K3bProcessOutputCollector out( &p );
   p << path + "movix-conf" << "--files";
 
@@ -332,7 +332,7 @@ TQStringList K3bMovixBin::files( const TQString& kbd,
   if( !codecs.isEmpty() )
     p << "--codecs" << codecs.join( "," );
 
-  if( p.start( KProcess::Block, KProcess::AllOutput ) )
+  if( p.start( TDEProcess::Block, TDEProcess::AllOutput ) )
     return TQStringList::split( "\n", out.output() );
   else
     return TQStringList();

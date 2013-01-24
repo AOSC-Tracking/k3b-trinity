@@ -104,7 +104,7 @@ int K3bVideoDvdImager::writePathSpec()
   //
   // We do this here since K3bIsoImager::start calls cleanup which deletes the temp files
   //
-  TQDir dir( KGlobal::dirs()->resourceDirs( "tmp" ).first() );
+  TQDir dir( TDEGlobal::dirs()->resourceDirs( "tmp" ).first() );
   d->tempPath = K3b::findUniqueFilePrefix( "k3bVideoDvd", dir.path() );
   kdDebug() << "(K3bVideoDvdImager) creating temp dir: " << d->tempPath << endl;
   if( !dir.mkdir( d->tempPath, true ) ) {

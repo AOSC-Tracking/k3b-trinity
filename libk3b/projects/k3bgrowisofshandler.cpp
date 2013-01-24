@@ -178,7 +178,7 @@ void K3bGrowisofsHandler::handleLine( const TQString& line )
     if( ok )
       emit infoMessage( i18n("Writing speed: %1 KB/s (%2x)")
 			.arg((int)(speed*1385.0))
-			.arg(KGlobal::locale()->formatNumber(speed)), K3bJob::INFO );
+			.arg(TDEGlobal::locale()->formatNumber(speed)), K3bJob::INFO );
     else
       kdDebug() << "(K3bGrowisofsHandler) parsing error: '" << line.mid( pos, endPos-pos ) << "'" << endl;
   }

@@ -22,7 +22,7 @@
 
 
 class base_K3bSoxEncoderConfigWidget;
-class KProcess;
+class TDEProcess;
 
 class K3bSoxEncoder : public K3bAudioEncoder
 {
@@ -51,7 +51,7 @@ class K3bSoxEncoder : public K3bAudioEncoder
   void closeFile();
 
  private slots:
-  void slotSoxFinished( KProcess* );
+  void slotSoxFinished( TDEProcess* );
   void slotSoxOutputLine( const TQString& );
 
  private:

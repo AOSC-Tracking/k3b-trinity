@@ -696,7 +696,7 @@ void K3bFileTreeView::slotSettingsChangedK3b(int category)
     disconnect(this, TQT_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
 	       this, TQT_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
 
-    if( !KGlobalSettings::singleClick() )
+    if( !TDEGlobalSettings::singleClick() )
       connect(this, TQT_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
 	      this, TQT_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
   }

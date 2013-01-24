@@ -49,7 +49,7 @@ static TQString audioStreamString( const K3bVideoDVD::Title& title, unsigned int
       .arg( title.audioStream(i).channels() )
       .arg( title.audioStream(i).langCode().isEmpty()
 	    ? i18n("unknown language")
-	    : KGlobal::locale()->twoAlphaToLanguageName( title.audioStream(i).langCode() ) )
+	    : TDEGlobal::locale()->twoAlphaToLanguageName( title.audioStream(i).langCode() ) )
       .arg( includeExtInfo && title.audioStream(i).codeExtension() != K3bVideoDVD::AUDIO_CODE_EXT_UNSPECIFIED 
 	    ? TQString(" ") + K3bVideoDVD::audioCodeExtensionString( title.audioStream(i).codeExtension() )
 	    : TQString() );
@@ -74,7 +74,7 @@ static TQString subpictureStreamString( const K3bVideoDVD::Title& title, unsigne
 	    : i18n("Extended") )
       .arg( title.subPictureStream(i).langCode().isEmpty()
 	    ? i18n("unknown language")
-	    : KGlobal::locale()->twoAlphaToLanguageName( title.subPictureStream(i).langCode() ) )
+	    : TDEGlobal::locale()->twoAlphaToLanguageName( title.subPictureStream(i).langCode() ) )
       .arg( includeExtInfo && title.subPictureStream(i).codeExtension() != K3bVideoDVD::SUBPIC_CODE_EXT_UNSPECIFIED 
 	    ? TQString(" ") + K3bVideoDVD::subPictureCodeExtensionString( title.subPictureStream(i).codeExtension() )
 	    : TQString() );

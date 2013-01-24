@@ -143,7 +143,7 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
   // our buttons are always to the right of the dialog
   int btl = 0;
 #if KDE_IS_VERSION(3,3,0)
-  btl = KGlobalSettings::buttonLayout();
+  btl = TDEGlobalSettings::buttonLayout();
 #endif
   switch( btl ) {
   case 0: // KDE default

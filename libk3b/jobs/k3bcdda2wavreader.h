@@ -18,7 +18,7 @@
 
 #include <k3bjob.h>
 
-class KProcess;
+class TDEProcess;
 namespace K3bDevice {
   class Device;
 };
@@ -57,7 +57,7 @@ class K3bCdda2wavReader : public K3bJob
 
  private slots:
   void slotProcessLine( const TQString& );
-  void slotProcessExited( KProcess* );
+  void slotProcessExited( TDEProcess* );
 
  private:
   K3bDevice::Device* m_device;

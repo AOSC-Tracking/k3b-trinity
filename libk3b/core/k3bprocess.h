@@ -26,7 +26,7 @@ class K3bExternalBin;
 
 
 /**
- * This is an enhanced KProcess.
+ * This is an enhanced TDEProcess.
  * It splits the stderr output to lines making sure the client gets every line as it 
  * was written by the process.
  * Aditionally one may set raw stdout and stdin handling using the stdin() and stdout() methods
@@ -35,7 +35,7 @@ class K3bExternalBin;
  * K3bProcesses like used in K3bDataJob to duplicate mkisofs' stdout to the stdin of the writer 
  * (cdrecord or cdrdao)
  */
-class LIBK3B_EXPORT K3bProcess : public KProcess
+class LIBK3B_EXPORT K3bProcess : public TDEProcess
 {
   Q_OBJECT
   
@@ -135,8 +135,8 @@ class LIBK3B_EXPORT K3bProcess : public KProcess
   bool closeStdout();
 
  private slots:
-  void slotSplitStderr( KProcess*, char*, int );
-  void slotSplitStdout( KProcess*, char*, int );
+  void slotSplitStderr( TDEProcess*, char*, int );
+  void slotSplitStdout( TDEProcess*, char*, int );
 
  signals:
   void stderrLine( const TQString& line );
@@ -150,22 +150,22 @@ class LIBK3B_EXPORT K3bProcess : public KProcess
 
  protected:
   /**
-   * reimplemeted from KProcess
+   * reimplemeted from TDEProcess
    */
   int commSetupDoneP();
 
   /**
-   * reimplemeted from KProcess
+   * reimplemeted from TDEProcess
    */
   int commSetupDoneC();
 
   /**
-   * reimplemeted from KProcess
+   * reimplemeted from TDEProcess
    */
   int setupCommunication( Communication comm );
 
   /**
-   * reimplemeted from KProcess
+   * reimplemeted from TDEProcess
    */
   void commClose();
 
@@ -184,22 +184,22 @@ class LIBK3B_EXPORT K3bProcessOutputCollector: public TQObject
   
     
  public:
-  K3bProcessOutputCollector( KProcess* );
-  void setProcess( KProcess* );
+  K3bProcessOutputCollector( TDEProcess* );
+  void setProcess( TDEProcess* );
   
   const TQString& output() const { return m_gatheredOutput; }
   const TQString& stderrOutput() const { return m_stderrOutput; }
   const TQString& stdoutOutput() const { return m_stdoutOutput; }
   
  private slots:
-  void slotGatherStderr( KProcess*, char*, int );
-  void slotGatherStdout( KProcess*, char*, int );
+  void slotGatherStderr( TDEProcess*, char*, int );
+  void slotGatherStdout( TDEProcess*, char*, int );
   
  private:
   TQString m_gatheredOutput;
   TQString m_stderrOutput;
   TQString m_stdoutOutput;
-  KProcess* m_process;
+  TDEProcess* m_process;
 };
 
 

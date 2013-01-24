@@ -42,7 +42,7 @@ TQColor K3bTheme::backgroundColor() const
   if( m_bgColor.isValid() )
     return m_bgColor;
   else
-    return KGlobalSettings::activeTitleColor();
+    return TDEGlobalSettings::activeTitleColor();
 }
 
 
@@ -51,7 +51,7 @@ TQColor K3bTheme::foregroundColor() const
   if( m_fgColor.isValid() )
     return m_fgColor;
   else
-    return KGlobalSettings::activeTextColor();
+    return TDEGlobalSettings::activeTextColor();
 }
 
 
@@ -256,7 +256,7 @@ void K3bThemeManager::loadThemes()
     delete *it;
   d->themes.clear();
 
-  TQStringList dirs = KGlobal::dirs()->findDirs( "data", "k3b/pics" );
+  TQStringList dirs = TDEGlobal::dirs()->findDirs( "data", "k3b/pics" );
   // now search for themes. As there may be multiple themes with the same name
   // we only use the names from this list and then use findResourceDir to make sure
   // the local is preferred over the global stuff (like testing a theme by copying it
@@ -299,7 +299,7 @@ void K3bThemeManager::loadThemes()
 
 void K3bThemeManager::loadTheme( const TQString& name )
 {
-  TQString path = KGlobal::dirs()->findResource( "data", "k3b/pics/" + name + "/k3b.theme" );
+  TQString path = TDEGlobal::dirs()->findResource( "data", "k3b/pics/" + name + "/k3b.theme" );
   if( !path.isEmpty() ) {
     K3bTheme* t = new K3bTheme();
     t->m_name = name;

@@ -79,7 +79,7 @@ void K3bMsInfoFetcher::start()
 void K3bMsInfoFetcher::getMsInfo()
 {
   delete m_process;
-  m_process = new KProcess();
+  m_process = new TDEProcess();
 
   const K3bExternalBin* bin = 0;
   if( m_dvd ) {
@@ -116,18 +116,18 @@ void K3bMsInfoFetcher::getMsInfo()
     emit debuggingOutput( "msinfo command:", s );
 
 
-    //   connect( m_process, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-    // 	   this, TQT_SLOT(slotCollectOutput(KProcess*, char*, int)) );
-    connect( m_process, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-	     this, TQT_SLOT(slotCollectOutput(KProcess*, char*, int)) );
-    connect( m_process, TQT_SIGNAL(processExited(KProcess*)),
+    //   connect( m_process, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+    // 	   this, TQT_SLOT(slotCollectOutput(TDEProcess*, char*, int)) );
+    connect( m_process, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+	     this, TQT_SLOT(slotCollectOutput(TDEProcess*, char*, int)) );
+    connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
 	     this, TQT_SLOT(slotProcessExited()) );
 
     m_msInfo = TQString();
     m_collectedOutput = TQString();
     m_canceled = false;
 
-    if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
+    if( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) ) {
       emit infoMessage( i18n("Could not start %1.").arg(bin->name()), K3bJob::ERROR );
       jobFinished(false);
     }
@@ -218,7 +218,7 @@ void K3bMsInfoFetcher::slotProcessExited()
 }
 
 
-void K3bMsInfoFetcher::slotCollectOutput( KProcess*, char* output, int len )
+void K3bMsInfoFetcher::slotCollectOutput( TDEProcess*, char* output, int len )
 {
   emit debuggingOutput( "msinfo", TQString::fromLocal8Bit( output, len ) );
 

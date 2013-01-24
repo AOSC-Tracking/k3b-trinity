@@ -21,7 +21,7 @@
 
 
 class base_K3bExternalEncoderConfigWidget;
-class KProcess;
+class TDEProcess;
 
 
 class K3bExternalEncoder : public K3bAudioEncoder
@@ -52,7 +52,7 @@ class K3bExternalEncoder : public K3bAudioEncoder
   class Command;
 
  private slots:
-  void slotExternalProgramFinished( KProcess* );
+  void slotExternalProgramFinished( TDEProcess* );
   void slotExternalProgramOutputLine( const TQString& );
 
  private:

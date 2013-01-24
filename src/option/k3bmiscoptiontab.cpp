@@ -80,7 +80,7 @@ void K3bMiscOptionTab::readSettings()
 								  K3bInteractionDialog::LOAD_SAVED_SETTINGS ) );
   m_checkSystemConfig->setChecked( c->readBoolEntry( "check system config", true ) );
 
-  TQString tempdir = c->readPathEntry( "Temp Dir", KGlobal::dirs()->resourceDirs( "tmp" ).first() );
+  TQString tempdir = c->readPathEntry( "Temp Dir", TDEGlobal::dirs()->resourceDirs( "tmp" ).first() );
   m_editTempDir->setURL( tempdir );
 
 //   if( c->readEntry( "Multiple Instances", "smart" ) == "smart" )

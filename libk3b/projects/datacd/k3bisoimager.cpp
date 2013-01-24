@@ -155,7 +155,7 @@ void K3bIsoImager::handleMkisofsInfoMessage( const TQString& line, int type )
 }
 
 
-void K3bIsoImager::slotProcessExited( KProcess* p )
+void K3bIsoImager::slotProcessExited( TDEProcess* p )
 {
   kdDebug() << k_funcinfo << endl;
 
@@ -340,11 +340,11 @@ void K3bIsoImager::startSizeCalculation()
 
   // TODO: use K3bProcess::OutputCollector instead iof our own two slots.
 
-  connect( m_process, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, TQT_SLOT(slotCollectMkisofsPrintSizeStderr(KProcess*, char*, int)) );
+  connect( m_process, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+	   this, TQT_SLOT(slotCollectMkisofsPrintSizeStderr(TDEProcess*, char*, int)) );
   connect( m_process, TQT_SIGNAL(stdoutLine(const TQString&)),
 	   this, TQT_SLOT(slotCollectMkisofsPrintSizeStdout(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(KProcess*)),
+  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
 	   this, TQT_SLOT(slotMkisofsPrintSizeFinished()) );
 
   // we also want error messages
@@ -355,7 +355,7 @@ void K3bIsoImager::startSizeCalculation()
   m_collectedMkisofsPrintSizeStderr = TQString();
   m_mkisofsPrintSizeResult = 0;
 
-  if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
+  if( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) ) {
     emit infoMessage( i18n("Could not start %1.").arg("mkisofs"), K3bJob::ERROR );
     cleanup();
 
@@ -365,7 +365,7 @@ void K3bIsoImager::startSizeCalculation()
 }
 
 
-void K3bIsoImager::slotCollectMkisofsPrintSizeStderr(KProcess*, char* data , int len)
+void K3bIsoImager::slotCollectMkisofsPrintSizeStderr(TDEProcess*, char* data , int len)
 {
   emit debuggingOutput( "mkisofs", TQString::fromLocal8Bit( data, len ) );
   m_collectedMkisofsPrintSizeStderr.append( TQString::fromLocal8Bit( data, len ) );
@@ -485,8 +485,8 @@ void K3bIsoImager::start()
     return;
   }
 
-  connect( m_process, TQT_SIGNAL(processExited(KProcess*)),
-	   this, TQT_SLOT(slotProcessExited(KProcess*)) );
+  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
+	   this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
 
   connect( m_process, TQT_SIGNAL(stderrLine( const TQString& )),
 	   this, TQT_SLOT(slotReceivedStderr( const TQString& )) );
@@ -528,7 +528,7 @@ void K3bIsoImager::start()
   kdDebug() << s << endl << flush;
   emit debuggingOutput("mkisofs command:", s);
 
-  if( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput) ) {
+  if( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput) ) {
     // something went wrong when starting the program
     // it "should" be the executable
     kdDebug() << "(K3bIsoImager) could not start mkisofs" << endl;

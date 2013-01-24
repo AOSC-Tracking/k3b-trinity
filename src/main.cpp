@@ -138,9 +138,9 @@ int main( int argc, char* argv[] )
   if( K3bApplication::start() ) {
     TDECmdLineArgs* args = TDECmdLineArgs::parsedArgs();
     if( args->isSet("lang") )
-      if( !KGlobal::locale()->setLanguage(args->getOption("lang")) )
+      if( !TDEGlobal::locale()->setLanguage(args->getOption("lang")) )
 	kdDebug() << "Unable to set to language " << args->getOption("lang")
-		  << " current is: " << KGlobal::locale()->language() << endl;
+		  << " current is: " << TDEGlobal::locale()->language() << endl;
 
     K3bApplication app;
 

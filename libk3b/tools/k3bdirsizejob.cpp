@@ -69,8 +69,8 @@ public:
   }
   
   bool countDir( const TQString& dir ) {
-    const TQString& dot = KGlobal::staticQString( "." );
-    const TQString& dotdot = KGlobal::staticQString( ".." );
+    const TQString& dot = TDEGlobal::staticQString( "." );
+    const TQString& dotdot = TDEGlobal::staticQString( ".." );
     TQStringList l = TQDir(dir).entryList( TQDir::All|TQDir::Hidden|TQDir::System );
     l.remove( dot );
     l.remove( dotdot );

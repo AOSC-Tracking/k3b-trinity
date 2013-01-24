@@ -23,7 +23,7 @@
 #include <tqvaluevector.h>
 
 class K3bProcess;
-class KProcess;
+class TDEProcess;
 
 
 class K3bAudioNormalizeJob : public K3bJob
@@ -43,7 +43,7 @@ class K3bAudioNormalizeJob : public K3bJob
 
  private slots:
   void slotStdLine( const TQString& line );
-  void slotProcessExited( KProcess* p );
+  void slotProcessExited( TDEProcess* p );
 
  private:
   K3bProcess* m_process;

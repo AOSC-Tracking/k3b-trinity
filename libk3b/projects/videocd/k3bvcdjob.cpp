@@ -225,11 +225,11 @@ void K3bVcdJob::vcdxBuild()
 
     *m_process << TQString( "%1" ).arg( TQFile::encodeName( m_xmlFile ).data() );
 
-    connect( m_process, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseVcdxBuildOutput( KProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseVcdxBuildOutput( KProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( processExited( KProcess* ) ),
+    connect( m_process, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseVcdxBuildOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+             this, TQT_SLOT( slotParseVcdxBuildOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQT_SIGNAL( processExited( TDEProcess* ) ),
              this, TQT_SLOT( slotVcdxBuildFinished() ) );
 
     // vcdxbuild commandline parameters
@@ -243,7 +243,7 @@ void K3bVcdJob::vcdxBuild()
     kdDebug() << s << flush << endl;
     emit debuggingOutput( "vcdxbuild command:", s );
 
-    if ( !m_process->start( KProcess::NotifyOnExit, KProcess::AllOutput ) ) {
+    if ( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) ) {
         kdDebug() << "(K3bVcdJob) could not start vcdxbuild" << endl;
         emit infoMessage( i18n( "Could not start %1." ).arg( "vcdxbuild" ), K3bJob::ERROR );
         cancelAll();
@@ -251,7 +251,7 @@ void K3bVcdJob::vcdxBuild()
     }
 }
 
-void K3bVcdJob::slotParseVcdxBuildOutput( KProcess*, char* output, int len )
+void K3bVcdJob::slotParseVcdxBuildOutput( TDEProcess*, char* output, int len )
 {
     TQString buffer = TQString::fromLocal8Bit( output, len );
 
