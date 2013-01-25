@@ -271,7 +271,7 @@ bool K3bDirItem::mkdir( const TQString& dirPath )
 }
 
 
-KIO::filesize_t K3bDirItem::itemSize( bool followsylinks ) const
+TDEIO::filesize_t K3bDirItem::itemSize( bool followsylinks ) const
 {
   if( followsylinks )
     return m_followSymlinksSize;

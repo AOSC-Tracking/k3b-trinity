@@ -41,8 +41,8 @@ class K3bVideoDvdBurnDialog : public K3bProjectBurnDialog
 
  protected:
    void loadK3bDefaults();
-   void loadUserDefaults( KConfigBase* );
-   void saveUserDefaults( KConfigBase* );
+   void loadUserDefaults( TDEConfigBase* );
+   void saveUserDefaults( TDEConfigBase* );
    void toggleAll();
 
  private:

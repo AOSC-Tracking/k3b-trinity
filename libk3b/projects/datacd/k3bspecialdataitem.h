@@ -29,7 +29,7 @@
 class K3bSpecialDataItem : public K3bDataItem
 {
  public:
-  K3bSpecialDataItem( K3bDataDoc* doc, KIO::filesize_t size, K3bDirItem* parent = 0, const TQString& k3bName = TQString() )
+  K3bSpecialDataItem( K3bDataDoc* doc, TDEIO::filesize_t size, K3bDirItem* parent = 0, const TQString& k3bName = TQString() )
     : K3bDataItem( doc, parent ),
     m_size( size )
     {
@@ -65,11 +65,11 @@ class K3bSpecialDataItem : public K3bDataItem
   /**
    * Normally one does not use this method but K3bDataItem::size()
    */
-  KIO::filesize_t itemSize( bool ) const { return m_size; }
+  TDEIO::filesize_t itemSize( bool ) const { return m_size; }
 
  private:
   TQString m_mimeType;
-  KIO::filesize_t m_size;
+  TDEIO::filesize_t m_size;
 };
 
 #endif

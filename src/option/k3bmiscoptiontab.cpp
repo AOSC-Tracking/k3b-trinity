@@ -69,7 +69,7 @@ K3bMiscOptionTab::~K3bMiscOptionTab()
 
 void K3bMiscOptionTab::readSettings()
 {
-  KConfig* c = kapp->config();
+  TDEConfig* c = kapp->config();
   c->setGroup( "General Options" );
   m_checkSaveOnExit->setChecked( c->readBoolEntry( "ask_for_saving_changes_on_exit", true ) );
   m_checkShowSplash->setChecked( c->readBoolEntry("Show splash", true) );
@@ -106,7 +106,7 @@ void K3bMiscOptionTab::readSettings()
 
 bool K3bMiscOptionTab::saveSettings()
 {
-  KConfig* c = kapp->config();
+  TDEConfig* c = kapp->config();
   c->setGroup( "General Options" );
   c->writeEntry( "ask_for_saving_changes_on_exit", m_checkSaveOnExit->isChecked() );
   c->writeEntry( "Show splash", m_checkShowSplash->isChecked() );

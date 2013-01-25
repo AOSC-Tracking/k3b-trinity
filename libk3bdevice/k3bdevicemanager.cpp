@@ -530,7 +530,7 @@ void K3bDevice::DeviceManager::clear()
 }
 
 
-bool K3bDevice::DeviceManager::readConfig( KConfig* c )
+bool K3bDevice::DeviceManager::readConfig( TDEConfig* c )
 {
   //
   // New configuration format since K3b 0.11.94
@@ -572,7 +572,7 @@ bool K3bDevice::DeviceManager::readConfig( KConfig* c )
 }
 
 
-bool K3bDevice::DeviceManager::saveConfig( KConfig* c )
+bool K3bDevice::DeviceManager::saveConfig( TDEConfig* c )
 {
   //
   // New configuration format since K3b 0.11.94

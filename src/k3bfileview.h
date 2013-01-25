@@ -27,7 +27,7 @@ class KURL;
 class KFileFilterCombo;
 class KFileItem;
 class KActionCollection;
-class KConfig;
+class TDEConfig;
 class K3bToolBox;
 
 
@@ -55,8 +55,8 @@ class K3bFileView : public K3bContentsView
 
  public slots:
   void setDir( const TQString& );
-  void saveConfig( KConfig* c );
-  void readConfig( KConfig* c );
+  void saveConfig( TDEConfig* c );
+  void readConfig( TDEConfig* c );
   void setAutoUpdate( bool );
 
  private:

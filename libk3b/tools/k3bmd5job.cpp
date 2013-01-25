@@ -62,7 +62,7 @@ public:
 
   int lastProgress;
 
-  KIO::filesize_t imageSize;
+  TDEIO::filesize_t imageSize;
 
   static const int BUFFERSIZE = 2048*10;
 };

@@ -32,7 +32,7 @@ class K3bFlatButton;
 class TQPaintEvent;
 class TQResizeEvent;
 class TQSimpleRichText;
-class KConfigBase;
+class TDEConfigBase;
 class TQMouseEvent;
 class TQShowEvent;
 
@@ -46,8 +46,8 @@ class K3bWelcomeWidget : public TQScrollView
   K3bWelcomeWidget( K3bMainWindow*, TQWidget* parent = 0, const char* name = 0 );
   ~K3bWelcomeWidget();
 
-  void loadConfig( KConfigBase* c );
-  void saveConfig( KConfigBase* c );
+  void loadConfig( TDEConfigBase* c );
+  void saveConfig( TDEConfigBase* c );
 
   class Display;
 

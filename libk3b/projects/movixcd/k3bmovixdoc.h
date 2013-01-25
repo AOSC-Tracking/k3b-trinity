@@ -28,7 +28,7 @@ class TQDomElement;
 class K3bFileItem;
 class K3bMovixFileItem;
 class K3bDataItem;
-class KConfig;
+class TDEConfig;
 
 
 class LIBK3B_EXPORT K3bMovixDoc : public K3bDataDoc

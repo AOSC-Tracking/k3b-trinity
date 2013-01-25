@@ -283,18 +283,18 @@ TQPoint K3bJobProgressOSD::fixupPosition( const TQPoint& pp )
 }
 
 
-void K3bJobProgressOSD::readSettings( KConfigBase* c )
+void K3bJobProgressOSD::readSettings( TDEConfigBase* c )
 {
-  KConfigGroup grp( c, "OSD Position" );
+  TDEConfigGroup grp( c, "OSD Position" );
 
   setPosition( grp.readPointEntry( "Position", 0 ) );
   setScreen( grp.readNumEntry( "Screen", 0 ) );
 }
 
 
-void K3bJobProgressOSD::saveSettings( KConfigBase* c )
+void K3bJobProgressOSD::saveSettings( TDEConfigBase* c )
 {
-  KConfigGroup grp( c, "OSD Position" );
+  TDEConfigGroup grp( c, "OSD Position" );
 
   grp.writeEntry( "Position", m_position );
   grp.writeEntry( "Screen", m_screen );

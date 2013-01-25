@@ -66,8 +66,8 @@ class K3bVideoDVDRippingDialog : public K3bInteractionDialog
   TQString createFilename( const K3bVideoDVDRippingJob::TitleRipInfo& info, const TQString& pattern ) const;
 
   void loadK3bDefaults();
-  void loadUserDefaults( KConfigBase* );
-  void saveUserDefaults( KConfigBase* );
+  void loadUserDefaults( TDEConfigBase* );
+  void saveUserDefaults( TDEConfigBase* );
 
   K3bVideoDVDRippingWidget* m_w;
 

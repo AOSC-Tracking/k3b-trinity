@@ -151,7 +151,7 @@ void K3bBurningOptionTab::setupGui()
 
 void K3bBurningOptionTab::readSettings()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
 
   c->setGroup( "General Options" );
   m_checkAutoErasingRewritable->setChecked( c->readBoolEntry( "auto rewritable erasing", false ) );
@@ -169,7 +169,7 @@ void K3bBurningOptionTab::readSettings()
 
 void K3bBurningOptionTab::saveSettings()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
 
   c->setGroup( "General Options" );
   c->writeEntry( "auto rewritable erasing", m_checkAutoErasingRewritable->isChecked() );
@@ -182,7 +182,7 @@ void K3bBurningOptionTab::saveSettings()
   k3bcore->globalSettings()->setBufferSize( m_editWritingBufferSize->value() );
   k3bcore->globalSettings()->setForce( m_checkForceUnsafeOperations->isChecked() );
 
-  // FIXME: remove this once libk3b does not use KConfig anymore for these values
+  // FIXME: remove this once libk3b does not use TDEConfig anymore for these values
   k3bcore->globalSettings()->saveSettings( c );
 }
 

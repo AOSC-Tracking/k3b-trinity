@@ -129,7 +129,7 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
     m_buttonSave = 0;
 
   if( buttonMask & CANCEL_BUTTON ) {
-    m_buttonCancel = new KPushButton( KConfigGroup( k3bcore->config(), "General Options" )
+    m_buttonCancel = new KPushButton( TDEConfigGroup( k3bcore->config(), "General Options" )
 				      .readBoolEntry( "keep action dialogs open", false )
 				      ? KStdGuiItem::close()
 				      : KStdGuiItem::cancel(),
@@ -285,27 +285,27 @@ void K3bInteractionDialog::slotLoadK3bDefaults()
 
 void K3bInteractionDialog::slotLoadUserDefaults()
 {
-  KConfigGroup c( k3bcore->config(), m_configGroup );
+  TDEConfigGroup c( k3bcore->config(), m_configGroup );
   loadUserDefaults( &c );
 }
 
 void K3bInteractionDialog::slotSaveUserDefaults()
 {
-  KConfigGroup c( k3bcore->config(), m_configGroup );
+  TDEConfigGroup c( k3bcore->config(), m_configGroup );
   saveUserDefaults( &c );
 }
 
 
 void K3bInteractionDialog::slotLoadLastSettings()
 {
-  KConfigGroup c( k3bcore->config(), "last used " + m_configGroup );
+  TDEConfigGroup c( k3bcore->config(), "last used " + m_configGroup );
   loadUserDefaults( &c );
 }
 
 
 void K3bInteractionDialog::saveLastSettings()
 {
-  KConfigGroup c( k3bcore->config(), "last used " + m_configGroup );
+  TDEConfigGroup c( k3bcore->config(), "last used " + m_configGroup );
   saveUserDefaults( &c );
 }
 
@@ -314,7 +314,7 @@ void K3bInteractionDialog::slotStartClickedInternal()
 {
   saveLastSettings();
 
-  KConfigGroup c( k3bcore->config(), "General Options" );
+  TDEConfigGroup c( k3bcore->config(), "General Options" );
   if( !c.readNumEntry( "action dialog startup settings", 0 ) ) {
     // first time saving last used settings
     switch( K3bMultiChoiceDialog::choose( i18n("Action Dialog Settings"),
@@ -521,12 +521,12 @@ void K3bInteractionDialog::setSaveButtonText( const TQString& text,
 }
 
 
-void K3bInteractionDialog::saveUserDefaults( KConfigBase* )
+void K3bInteractionDialog::saveUserDefaults( TDEConfigBase* )
 {
 }
 
 
-void K3bInteractionDialog::loadUserDefaults( KConfigBase* )
+void K3bInteractionDialog::loadUserDefaults( TDEConfigBase* )
 {
 }
 
@@ -538,7 +538,7 @@ void K3bInteractionDialog::loadK3bDefaults()
 
 void K3bInteractionDialog::loadStartupSettings()
 {
-  KConfigGroup c( k3bcore->config(), "General Options" );
+  TDEConfigGroup c( k3bcore->config(), "General Options" );
 
   // earlier K3b versions loaded the saved settings
   // so that is what we do as a default

@@ -79,7 +79,7 @@ void K3bDataModeWidget::setDataMode( int mode )
 }
 
 
-void K3bDataModeWidget::saveConfig( KConfigBase* c )
+void K3bDataModeWidget::saveConfig( TDEConfigBase* c )
 {
   TQString datamode;
   if( dataMode() == K3b::MODE1 )
@@ -92,7 +92,7 @@ void K3bDataModeWidget::saveConfig( KConfigBase* c )
 }
 
 
-void K3bDataModeWidget::loadConfig( KConfigBase* c )
+void K3bDataModeWidget::loadConfig( TDEConfigBase* c )
 {
   TQString datamode = c->readEntry( "data_track_mode" );
   if( datamode == "mode1" )

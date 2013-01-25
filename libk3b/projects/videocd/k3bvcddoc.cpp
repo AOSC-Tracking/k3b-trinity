@@ -95,7 +95,7 @@ TQString K3bVcdDoc::name() const
 }
 
 
-KIO::filesize_t K3bVcdDoc::calcTotalSize() const
+TDEIO::filesize_t K3bVcdDoc::calcTotalSize() const
 {
     unsigned long long sum = 0;
     if ( m_tracks ) {
@@ -106,7 +106,7 @@ KIO::filesize_t K3bVcdDoc::calcTotalSize() const
     return sum;
 }
 
-KIO::filesize_t K3bVcdDoc::size() const
+TDEIO::filesize_t K3bVcdDoc::size() const
 {
     // mode2 -> mode1 int(( n+2047 ) / 2048) * 2352
     // mode1 -> mode2 int(( n+2351 ) / 2352) * 2048
@@ -114,7 +114,7 @@ KIO::filesize_t K3bVcdDoc::size() const
     return tracksize + ISOsize();
 }
 
-KIO::filesize_t K3bVcdDoc::ISOsize() const
+TDEIO::filesize_t K3bVcdDoc::ISOsize() const
 {
     // 136000b for vcd iso reseved
     long long iso_size = 136000;
@@ -841,7 +841,7 @@ bool K3bVcdDoc::saveDocumentData( TQDomElement * docElem )
         ++iterTrack;
 
         TQDomElement trackElem = doc.createElement( "track" );
-        trackElem.setAttribute( "url", KIO::decodeFileName( track->absPath() ) );
+        trackElem.setAttribute( "url", TDEIO::decodeFileName( track->absPath() ) );
         trackElem.setAttribute( "playtime", track->getPlayTime() );
         trackElem.setAttribute( "waittime", track->getWaitTime() );
         trackElem.setAttribute( "reactivity", track->Reactivity() );

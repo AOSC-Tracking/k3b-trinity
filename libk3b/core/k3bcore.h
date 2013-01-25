@@ -30,7 +30,7 @@
 
 class K3bExternalBinManager;
 class K3bVersion;
-class KConfig;
+class TDEConfig;
 class TDEAboutData;
 class K3bJob;
 class K3bBurnJob;
@@ -81,12 +81,12 @@ class LIBK3B_EXPORT K3bCore : public TQObject
   /**
    * @param c if 0 K3bCore uses the K3b configuration
    */
-  virtual void readSettings( KConfig* c = 0 );
+  virtual void readSettings( TDEConfig* c = 0 );
 
   /**
    * @param c if 0 K3bCore uses the K3b configuration
    */
-  virtual void saveSettings( KConfig* c = 0 );
+  virtual void saveSettings( TDEConfig* c = 0 );
 
   /**
    * If this is reimplemented it is recommended to also reimplement
@@ -121,7 +121,7 @@ class LIBK3B_EXPORT K3bCore : public TQObject
    * Default implementation returns the K3b configuration from k3brc.
    * Normally this should not be used.
    */
-  virtual KConfig* config() const;
+  virtual TDEConfig* config() const;
 
   /**
    * Used by the writing jobs to block a device.

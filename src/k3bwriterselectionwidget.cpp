@@ -234,9 +234,9 @@ int K3bWriterSelectionWidget::wantedMediumState() const
 }
 
 
-void K3bWriterSelectionWidget::slotConfigChanged( KConfigBase* c )
+void K3bWriterSelectionWidget::slotConfigChanged( TDEConfigBase* c )
 {
-  KConfigGroup g( c, "General Options" );
+  TDEConfigGroup g( c, "General Options" );
   if( g.readBoolEntry( "Manual writing app selection", false ) ) {
     m_comboWritingApp->show();
     m_writingAppLabel->show();
@@ -414,7 +414,7 @@ int K3bWriterSelectionWidget::writerSpeed() const
 
 int K3bWriterSelectionWidget::writingApp() const
 {
-  KConfigGroup g( k3bcore->config(), "General Options" );
+  TDEConfigGroup g( k3bcore->config(), "General Options" );
   if( g.readBoolEntry( "Manual writing app selection", false ) ) {
     return selectedWritingApp();
   }
@@ -451,7 +451,7 @@ void K3bWriterSelectionWidget::slotWriterChanged()
 
   // save last selected writer
   if( K3bDevice::Device* dev = writerDevice() ) {
-    KConfigGroup g( k3bcore->config(), "General Options" );
+    TDEConfigGroup g( k3bcore->config(), "General Options" );
     g.writeEntry( "current_writer", dev->devicename() );
   }
 }
@@ -500,7 +500,7 @@ void K3bWriterSelectionWidget::slotRefreshWritingApps()
 }
 
 
-void K3bWriterSelectionWidget::loadConfig( KConfigBase* c )
+void K3bWriterSelectionWidget::loadConfig( TDEConfigBase* c )
 {
   setWriterDevice( k3bcore->deviceManager()->findDevice( c->readEntry( "writer_device" ) ) );
   setSpeed( c->readNumEntry( "writing_speed",  0 ) );
@@ -508,7 +508,7 @@ void K3bWriterSelectionWidget::loadConfig( KConfigBase* c )
 }
 
 
-void K3bWriterSelectionWidget::saveConfig( KConfigBase* c )
+void K3bWriterSelectionWidget::saveConfig( TDEConfigBase* c )
 {
   c->writeEntry( "writing_speed", writerSpeed() );
   c->writeEntry( "writer_device", writerDevice() ? writerDevice()->devicename() : TQString() );

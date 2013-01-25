@@ -195,7 +195,7 @@ const TQString& K3bLameEncoder::filename() const
 
 bool K3bLameEncoder::initEncoderInternal( const TQString&, const K3b::Msf& length )
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( "K3bLameEncoderPlugin" );
 
   d->flags = lame_init();
@@ -485,7 +485,7 @@ void K3bLameEncoderSettingsWidget::slotQualityLevelChanged( int val )
 
 void K3bLameEncoderSettingsWidget::loadConfig()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( "K3bLameEncoderPlugin" );
 
   TQString mode = c->readEntry( "Mode", "stereo" );
@@ -532,7 +532,7 @@ void K3bLameEncoderSettingsWidget::loadConfig()
 
 void K3bLameEncoderSettingsWidget::saveConfig()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( "K3bLameEncoderPlugin" );
 
   TQString mode;
@@ -588,7 +588,7 @@ TQString K3bLameEncoder::fileTypeComment( const TQString& ) const
 
 long long K3bLameEncoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( "K3bLameEncoderPlugin" );
   int bitrate = 0;
   if( c->readBoolEntry( "Manual Bitrate Settings", false ) ) {

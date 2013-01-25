@@ -76,7 +76,7 @@ class K3bMainWindow : public KParts::DockMainWindow
 
   K3bDevice::DeviceManager*      deviceManager() const;
   K3bExternalBinManager* externalBinManager() const;
-  KConfig*               config() const            { return m_config; }
+  TDEConfig*               config() const            { return m_config; }
   // return main window with browser/cd/dvd view, used for DND
   K3bDirView*            mainWindow() const        { return m_dirView; }
   /**
@@ -145,7 +145,7 @@ class K3bMainWindow : public KParts::DockMainWindow
 
  signals:
   void initializationInfo( const TQString& );
-  void configChanged( KConfig* c );
+  void configChanged( TDEConfig* c );
 
  protected:
   /** queryClose is called by KTMainWindow on each closeEvent of a window. Against the
@@ -168,13 +168,13 @@ class K3bMainWindow : public KParts::DockMainWindow
    * opened file by a temporary filename provided by TDEApplication.
    * @see KTMainWindow#saveProperties
    */
-  virtual void saveProperties(KConfig *_cfg);
+  virtual void saveProperties(TDEConfig *_cfg);
 
   /** reads the session config file and restores the application's state including the last opened files and documents by reading the
    * temporary files saved by saveProperties()
    * @see KTMainWindow#readProperties
    */
-  virtual void readProperties(KConfig *_cfg);
+  virtual void readProperties(TDEConfig *_cfg);
 
   /**
    * checks if doc is modified and asks the user for saving if so.
@@ -266,7 +266,7 @@ class K3bMainWindow : public KParts::DockMainWindow
   bool isCdDvdImageAndIfSoOpenDialog( const KURL& url );
 
   /** the configuration object of the application */
-  KConfig *m_config;
+  TDEConfig *m_config;
 
   /** The MDI-Interface is managed by this tabbed view */
   K3bProjectTabWidget* m_documentTab;

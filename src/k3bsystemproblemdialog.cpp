@@ -160,7 +160,7 @@ K3bSystemProblemDialog::K3bSystemProblemDialog( const TQValueList<K3bSystemProbl
 void K3bSystemProblemDialog::closeEvent( TQCloseEvent* e )
 {
   if( m_checkDontShowAgain->isChecked() ) {
-    KConfigGroup grp( kapp->config(), "General Options" );
+    TDEConfigGroup grp( kapp->config(), "General Options" );
     grp.writeEntry( "check system config", false );
   }
 
@@ -601,7 +601,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
   }
 
   // remember which version of K3b checked the system the last time
-  KConfigGroup cfg( k3bcore->config(), "General Options" );
+  TDEConfigGroup cfg( k3bcore->config(), "General Options" );
   cfg.writeEntry( "Last system check version", k3bcore->version() );
 }
 
@@ -678,7 +678,7 @@ TQPtrList<K3bDevice::Device> K3bSystemProblemDialog::checkForAutomounting()
 
 bool K3bSystemProblemDialog::readCheckSystemConfig()
 {
-  KConfigGroup cfgGrp( k3bcore->config(), "General Options" );
+  TDEConfigGroup cfgGrp( k3bcore->config(), "General Options" );
 
   K3bVersion configVersion( cfgGrp.readEntry( "Last system check version", "0.1" ) );
   if( configVersion < k3bcore->version() )

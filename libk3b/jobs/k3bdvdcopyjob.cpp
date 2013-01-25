@@ -312,7 +312,7 @@ void K3bDvdCopyJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
       //
       // check free temp space
       //
-      KIO::filesize_t imageSpaceNeeded = (KIO::filesize_t)(d->lastSector.lba()+1)*2048;
+      TDEIO::filesize_t imageSpaceNeeded = (TDEIO::filesize_t)(d->lastSector.lba()+1)*2048;
       unsigned long avail, size;
       TQString pathToTest = m_imagePath.left( m_imagePath.findRev( '/' ) );
       if( !K3b::kbFreeOnFs( pathToTest, size, avail ) ) {

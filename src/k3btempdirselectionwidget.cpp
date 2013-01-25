@@ -107,7 +107,7 @@ void K3bTempDirSelectionWidget::slotUpdateFreeTempSpace()
   // update the temp space
   freeTempSpace();
 
-  m_labelFreeSpace->setText( KIO::convertSizeFromKB(m_freeTempSpace) );
+  m_labelFreeSpace->setText( TDEIO::convertSizeFromKB(m_freeTempSpace) );
 
   if( m_labelCdSize ) {
     if( m_freeTempSpace < m_requestedSize/1024 )
@@ -204,34 +204,34 @@ void K3bTempDirSelectionWidget::setSelectionMode( int mode )
 }
 
 
-void K3bTempDirSelectionWidget::setNeededSize( KIO::filesize_t bytes )
+void K3bTempDirSelectionWidget::setNeededSize( TDEIO::filesize_t bytes )
 {
   m_requestedSize = bytes;
   if( !m_labelCdSize ) {
     TQHBox* cdSizeBox = new TQHBox( this );
     cdSizeBox->setSpacing( KDialog::spacingHint() );
     (void)new TQLabel( i18n( "Size of project:" ), cdSizeBox, "TextLabel4" );
-    m_labelCdSize = new TQLabel( KIO::convertSize(bytes), cdSizeBox, "m_labelCdSize" );
+    m_labelCdSize = new TQLabel( TDEIO::convertSize(bytes), cdSizeBox, "m_labelCdSize" );
     m_labelCdSize->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
   }
-  m_labelCdSize->setText( KIO::convertSize(bytes) );
+  m_labelCdSize->setText( TDEIO::convertSize(bytes) );
 }
 
 
 void K3bTempDirSelectionWidget::saveConfig()
 {
-  KConfigGroup grp( k3bcore->config(), "General Options" );
+  TDEConfigGroup grp( k3bcore->config(), "General Options" );
   grp.writePathEntry( "Temp Dir", tempDirectory() );
 }
 
 
-void K3bTempDirSelectionWidget::readConfig( KConfigBase* c )
+void K3bTempDirSelectionWidget::readConfig( TDEConfigBase* c )
 {
   setTempPath( c->readPathEntry( "image path", K3b::defaultTempPath() ) );
 }
 
 
-void K3bTempDirSelectionWidget::saveConfig( KConfigBase* c )
+void K3bTempDirSelectionWidget::saveConfig( TDEConfigBase* c )
 {
   c->writePathEntry( "image path", tempPath() );
 }

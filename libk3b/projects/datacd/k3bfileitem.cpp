@@ -87,7 +87,7 @@ K3bFileItem::K3bFileItem( const TQString& filePath, K3bDataDoc* doc, K3bDirItem*
     }
   }
   else {
-    m_size = (KIO::filesize_t)statBuf.st_size;
+    m_size = (TDEIO::filesize_t)statBuf.st_size;
 
     m_bSymLink = S_ISLNK(statBuf.st_mode);
 
@@ -108,7 +108,7 @@ K3bFileItem::K3bFileItem( const TQString& filePath, K3bDataDoc* doc, K3bDirItem*
       m_idFollowed.inode = statBuf.st_ino;
       m_idFollowed.device = statBuf.st_dev;
 
-      m_sizeFollowed = (KIO::filesize_t)statBuf.st_size;
+      m_sizeFollowed = (TDEIO::filesize_t)statBuf.st_size;
     }
   }
 
@@ -130,7 +130,7 @@ K3bFileItem::K3bFileItem( const k3b_struct_stat* stat,
   else
     m_k3bName = k3bName;
 
-  m_size = (KIO::filesize_t)stat->st_size;
+  m_size = (TDEIO::filesize_t)stat->st_size;
   m_bSymLink = S_ISLNK(stat->st_mode);
 
   //
@@ -144,7 +144,7 @@ K3bFileItem::K3bFileItem( const k3b_struct_stat* stat,
     m_idFollowed.inode = followedStat->st_ino;
     m_idFollowed.device = followedStat->st_dev;
     
-    m_sizeFollowed = (KIO::filesize_t)followedStat->st_size;
+    m_sizeFollowed = (TDEIO::filesize_t)followedStat->st_size;
   }
   else {
     m_idFollowed = m_id;
@@ -182,7 +182,7 @@ K3bDataItem* K3bFileItem::copy() const
 }
 
 
-KIO::filesize_t K3bFileItem::itemSize( bool followSymlinks ) const
+TDEIO::filesize_t K3bFileItem::itemSize( bool followSymlinks ) const
 {
   if( followSymlinks )
     return m_sizeFollowed;

@@ -163,7 +163,7 @@ void K3bMovixOptionsWidget::loadDefaults()
 }
 
 
-void K3bMovixOptionsWidget::loadConfig( KConfigBase* c )
+void K3bMovixOptionsWidget::loadConfig( TDEConfigBase* c )
 {
   TQString s = c->readEntry("subtitle_fontset");
   if( !s.isEmpty() && s != "none" && m_comboSubtitleFontset->contains(s) )
@@ -201,7 +201,7 @@ void K3bMovixOptionsWidget::loadConfig( KConfigBase* c )
 }
 
 
-void K3bMovixOptionsWidget::saveConfig( KConfigBase* c )
+void K3bMovixOptionsWidget::saveConfig( TDEConfigBase* c )
 {
   if( m_comboSubtitleFontset->currentItem() == 0 )
     c->writeEntry( "subtitle_fontset", "none" );

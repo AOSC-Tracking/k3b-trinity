@@ -163,7 +163,7 @@ void K3bCdImageWritingDialog::init()
   if( !d->imageForced ) {
     // when opening the dialog first the default settings are loaded and afterwards we set the 
     // last written image because that's what most users want
-    KConfig* c = k3bcore->config();
+    TDEConfig* c = k3bcore->config();
     c->setGroup( configGroup() );
     TQString image = c->readPathEntry( "last written image" );
     if( TQFile::exists( image ) )
@@ -337,7 +337,7 @@ void K3bCdImageWritingDialog::slotStartClicked()
   d->md5Job->cancel();
 
   // save the path
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( configGroup() );
   c->writePathEntry( "last written image", imagePath() );
 
@@ -404,7 +404,7 @@ void K3bCdImageWritingDialog::slotStartClicked()
     {
       K3bIso9660 isoFs( d->imageFile );
       if( isoFs.open() ) {
-	if( K3b::filesize( KURL::fromPathOrURL(d->imageFile) ) < (KIO::filesize_t)(isoFs.primaryDescriptor().volumeSpaceSize*2048) ) {
+	if( K3b::filesize( KURL::fromPathOrURL(d->imageFile) ) < (TDEIO::filesize_t)(isoFs.primaryDescriptor().volumeSpaceSize*2048) ) {
 	  if( KMessageBox::questionYesNo( this, 
 					  i18n("<p>This image has an invalid file size."
 					       "If it has been downloaded make sure the download is complete."
@@ -447,7 +447,7 @@ void K3bCdImageWritingDialog::slotStartClicked()
     
     delete job;
 
-    if( KConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
+    if( TDEConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
 	!exitLoopOnHide() )
       show();
     else
@@ -591,10 +591,10 @@ void K3bCdImageWritingDialog::createIso9660InfoItems( K3bIso9660* isoF )
   isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
   isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
-  KIO::filesize_t size = K3b::filesize( KURL::fromPathOrURL(isoF->fileName()) );
+  TDEIO::filesize_t size = K3b::filesize( KURL::fromPathOrURL(isoF->fileName()) );
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 					       i18n("Filesize:"), 
-					       KIO::convertSize( size ) );
+					       TDEIO::convertSize( size ) );
   item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
@@ -657,7 +657,7 @@ void K3bCdImageWritingDialog::createCdrecordCloneItems( const TQString& tocFile,
   isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
-					       i18n("Filesize:"), KIO::convertSize( K3b::filesize(KURL::fromPathOrURL(imageFile)) ) );
+					       i18n("Filesize:"), TDEIO::convertSize( K3b::filesize(KURL::fromPathOrURL(imageFile)) ) );
   item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
@@ -685,7 +685,7 @@ void K3bCdImageWritingDialog::createCueBinItems( const TQString& cueFile, const 
   isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
-					       i18n("Filesize:"), KIO::convertSize( K3b::filesize(KURL::fromPathOrURL(imageFile)) ) );
+					       i18n("Filesize:"), TDEIO::convertSize( K3b::filesize(KURL::fromPathOrURL(imageFile)) ) );
   item->setForegroundColor( 0, palette().disabled().foreground() );
 
   item = new K3bListViewItem( isoRootItem, 
@@ -912,7 +912,7 @@ void K3bCdImageWritingDialog::slotContextMenu( KListView*, TQListViewItem*, cons
 }
 
 
-void K3bCdImageWritingDialog::loadUserDefaults( KConfigBase* c )
+void K3bCdImageWritingDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_writingModeWidget->loadConfig( c );
   m_checkDummy->setChecked( c->readBoolEntry("simulate", false ) );
@@ -954,7 +954,7 @@ void K3bCdImageWritingDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bCdImageWritingDialog::saveUserDefaults( KConfigBase* c )
+void K3bCdImageWritingDialog::saveUserDefaults( TDEConfigBase* c )
 {
   m_writingModeWidget->saveConfig( c ),
   c->writeEntry( "simulate", m_checkDummy->isChecked() );

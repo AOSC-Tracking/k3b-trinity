@@ -132,7 +132,7 @@ KoStore* KoStore::createStore( TQWidget* window, const KURL& url, Mode mode, con
   else
   {
     const bool downloaded =
-        KIO::NetAccess::download( url, tmpFile, window );
+        TDEIO::NetAccess::download( url, tmpFile, window );
 
     if (!downloaded)
     {
@@ -194,14 +194,14 @@ bool KoStore::open( const TQString & _name )
   if ( m_bIsOpen )
   {
     kdWarning(s_area) << "KoStore: File is already opened" << endl;
-    //return KIO::ERR_INTERNAL;
+    //return TDEIO::ERR_INTERNAL;
     return false;
   }
 
   if ( m_sName.length() > 512 )
   {
       kdError(s_area) << "KoStore: Filename " << m_sName << " is too long" << endl;
-      //return KIO::ERR_MALFORMED_URL;
+      //return TDEIO::ERR_MALFORMED_URL;
       return false;
   }
 
@@ -211,7 +211,7 @@ bool KoStore::open( const TQString & _name )
     if ( m_strFiles.findIndex( m_sName ) != -1 ) // just check if it's there
     {
       kdWarning(s_area) << "KoStore: Duplicate filename " << m_sName << endl;
-      //return KIO::ERR_FILE_ALREADY_EXIST;
+      //return TDEIO::ERR_FILE_ALREADY_EXIST;
       return false;
     }
 
@@ -228,7 +228,7 @@ bool KoStore::open( const TQString & _name )
       return false;
   }
   else
-    //return KIO::ERR_UNSUPPORTED_ACTION;
+    //return TDEIO::ERR_UNSUPPORTED_ACTION;
     return false;
 
   m_bIsOpen = true;
@@ -247,7 +247,7 @@ bool KoStore::close()
   if ( !m_bIsOpen )
   {
     kdWarning(s_area) << "KoStore: You must open before closing" << endl;
-    //return KIO::ERR_INTERNAL;
+    //return TDEIO::ERR_INTERNAL;
     return false;
   }
 

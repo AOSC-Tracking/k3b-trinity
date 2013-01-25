@@ -32,7 +32,7 @@ namespace K3bDevice {
   class DeviceManager;
 }
 
-namespace KIO {
+namespace TDEIO {
   class Job;
 }
 

@@ -30,7 +30,7 @@ class TQTabWidget;
 class TQSpinBox;
 class TQVBoxLayout;
 class K3bWritingModeWidget;
-class KConfigBase;
+class TDEConfigBase;
 
 
 /**
@@ -95,7 +95,7 @@ class K3bProjectBurnDialog : public K3bInteractionDialog
    virtual void loadK3bDefaults();
 
    /**
-    * The default implementation loads the following settings from the KConfig.
+    * The default implementation loads the following settings from the TDEConfig.
     * May be used in subclasses.
     * <ul>
     *   <li>Writing mode</li>
@@ -107,10 +107,10 @@ class K3bProjectBurnDialog : public K3bInteractionDialog
     *   <li>writing speed</li>
     * </ul>
     */
-   virtual void loadUserDefaults( KConfigBase* );
+   virtual void loadUserDefaults( TDEConfigBase* );
 
    /**
-    * The default implementation saves the following settings to the KConfig.
+    * The default implementation saves the following settings to the TDEConfig.
     * May be used in subclasses.
     * <ul>
     *   <li>Writing mode</li>
@@ -122,7 +122,7 @@ class K3bProjectBurnDialog : public K3bInteractionDialog
     *   <li>writing speed</li>
     * </ul>
     */
-   virtual void saveUserDefaults( KConfigBase* );
+   virtual void saveUserDefaults( TDEConfigBase* );
 
    /**
     * The default implementation saves the following settings to the doc and may be called 

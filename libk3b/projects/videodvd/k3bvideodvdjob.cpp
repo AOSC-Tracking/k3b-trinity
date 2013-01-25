@@ -92,7 +92,7 @@ TQString K3bVideoDvdJob::jobDescription() const
 
 TQString K3bVideoDvdJob::jobDetails() const
 {
-  return ( i18n("ISO9660/Udf Filesystem (Size: %1)").arg(KIO::convertSize( doc()->size() ))
+  return ( i18n("ISO9660/Udf Filesystem (Size: %1)").arg(TDEIO::convertSize( doc()->size() ))
 	   + ( m_doc->copies() > 1 
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies()) 
 	       : TQString() ) );

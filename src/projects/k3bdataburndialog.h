@@ -51,8 +51,8 @@ class K3bDataBurnDialog : public K3bProjectBurnDialog
  protected:
    void setupSettingsTab();
    void loadK3bDefaults();
-   void loadUserDefaults( KConfigBase* );
-   void saveUserDefaults( KConfigBase* );
+   void loadUserDefaults( TDEConfigBase* );
+   void saveUserDefaults( TDEConfigBase* );
    void toggleAll();
 
    // --- settings tab ---------------------------

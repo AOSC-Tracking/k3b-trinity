@@ -33,10 +33,10 @@ public:
   int counter;
 
   // TQIODevice::Offset is too small on most compilations
-  KIO::filesize_t maxFileSize;
+  TDEIO::filesize_t maxFileSize;
 
-  KIO::filesize_t currentOverallPos;
-  KIO::filesize_t currentFilePos;
+  TDEIO::filesize_t currentOverallPos;
+  TDEIO::filesize_t currentFilePos;
 
   void determineMaxFileSize() {
     if( maxFileSize == 0 ) {
@@ -210,7 +210,7 @@ TQ_LONG K3bFileSplitter::readBlock( char *data, TQ_ULONG maxlen )
 TQ_LONG K3bFileSplitter::writeBlock( const char *data, TQ_ULONG len )
 {
   // We cannot rely on TQFile::at since it uses long on most copmpilations
-  TQ_ULONG max = (TQ_ULONG)TQMIN( (KIO::filesize_t)len, d->maxFileSize - d->currentFilePos );
+  TQ_ULONG max = (TQ_ULONG)TQMIN( (TDEIO::filesize_t)len, d->maxFileSize - d->currentFilePos );
 
   TQ_LONG r = d->file.writeBlock( data, max );
 
@@ -304,7 +304,7 @@ void K3bFileSplitter::remove()
 }
 
 
-void K3bFileSplitter::setMaxFileSize( KIO::filesize_t size )
+void K3bFileSplitter::setMaxFileSize( TDEIO::filesize_t size )
 {
   d->maxFileSize = size;
 }

@@ -89,7 +89,7 @@ TQString K3bMovixFileViewItem::text( int col ) const
 	return const_cast<K3bMovixFileViewItem*>(this)->mimeComment() + "  ";
     }
   case 3:
-    return KIO::convertSize( fileItem()->size() ) + "  ";
+    return TDEIO::convertSize( fileItem()->size() ) + "  ";
   case 4:
     return fileItem()->localPath() + "  ";
   case 5:
@@ -144,7 +144,7 @@ TQString K3bMovixSubTitleViewItem::text( int c ) const
 	return const_cast<K3bMovixSubTitleViewItem*>(this)->mimeComment();
     }
   case 3:
-    return KIO::convertSize( fileItem()->subTitleItem()->size() );
+    return TDEIO::convertSize( fileItem()->subTitleItem()->size() );
   case 4:
     return fileItem()->subTitleItem()->localPath();
   case 5:

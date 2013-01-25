@@ -43,8 +43,8 @@ class K3bProjectPluginGUIBase
   virtual TQString title() const = 0;
   virtual TQString subTitle() const { return TQString(); }
 
-  virtual void readSettings( KConfigBase* ) {}
-  virtual void saveSettings( KConfigBase* ) {}
+  virtual void readSettings( TDEConfigBase* ) {}
+  virtual void saveSettings( TDEConfigBase* ) {}
 
   /**
    * Load system defaults for the GUI

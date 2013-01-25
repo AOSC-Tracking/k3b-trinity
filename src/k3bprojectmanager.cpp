@@ -273,7 +273,7 @@ K3bDoc* K3bProjectManager::createProject( K3bDoc::DocType type )
 
 void K3bProjectManager::loadDefaults( K3bDoc* doc )
 {
-  KConfig* c = kapp->config();
+  TDEConfig* c = kapp->config();
 
   TQString oldGroup = c->group();
 
@@ -281,7 +281,7 @@ void K3bProjectManager::loadDefaults( K3bDoc* doc )
 
   // earlier K3b versions loaded the saved settings
   // so that is what we do as a default
-  int i = KConfigGroup( c, "General Options" ).readNumEntry( "action dialog startup settings", 
+  int i = TDEConfigGroup( c, "General Options" ).readNumEntry( "action dialog startup settings", 
 							     K3bInteractionDialog::LOAD_SAVED_SETTINGS );
   if( i == K3bInteractionDialog::LOAD_K3B_DEFAULTS )
     return; // the default k3b settings are the ones everyone starts with
@@ -473,7 +473,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
   TQApplication::setOverrideCursor( TQCursor(TQt::WaitCursor) );
 
   TQString tmpfile;
-  KIO::NetAccess::download( url, tmpfile, 0L );
+  TDEIO::NetAccess::download( url, tmpfile, 0L );
 
   // ///////////////////////////////////////////////
   // first check if it's a store or an old plain xml file
@@ -527,7 +527,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
   }
 
   // ///////////////////////////////////////////////
-  KIO::NetAccess::removeTempFile( tmpfile );
+  TDEIO::NetAccess::removeTempFile( tmpfile );
 
   if( !success ) {
     kdDebug() << "(K3bDoc) could not open file " << url.path() << endl;
@@ -594,7 +594,7 @@ K3bDoc* K3bProjectManager::openProject( const KURL& url )
 bool K3bProjectManager::saveProject( K3bDoc* doc, const KURL& url )
 {
   TQString tmpfile;
-  KIO::NetAccess::download( url, tmpfile, 0L );
+  TDEIO::NetAccess::download( url, tmpfile, 0L );
 
   bool success = false;
 
@@ -639,7 +639,7 @@ bool K3bProjectManager::saveProject( K3bDoc* doc, const KURL& url )
     }
   }
 
-  KIO::NetAccess::removeTempFile( tmpfile );
+  TDEIO::NetAccess::removeTempFile( tmpfile );
 
   return success;
 }

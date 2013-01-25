@@ -292,7 +292,7 @@ void K3bAudioRippingDialog::refresh()
   TQString baseDir = K3b::prepareDir( m_optionWidget->baseDir() );
   d->fsInfo.setPath( baseDir );
 
-  KIO::filesize_t overallSize = 0;
+  TDEIO::filesize_t overallSize = 0;
 
   if( m_optionWidget->createSingleFile() ) {
     long length = 0;
@@ -334,7 +334,7 @@ void K3bAudioRippingDialog::refresh()
 			     m_viewTracks->lastItem(),
 			     filename + "." + extension,
 			     K3b::Msf(length).toString(),
-			     fileSize < 0 ? i18n("unknown") : KIO::convertSize( fileSize ),
+			     fileSize < 0 ? i18n("unknown") : TDEIO::convertSize( fileSize ),
 			     i18n("Audio") );
     d->filenames.append( baseDir + "/" + filename + "." + extension );
 
@@ -392,7 +392,7 @@ void K3bAudioRippingDialog::refresh()
 			       m_viewTracks->lastItem(),
 			       filename,
 			       trackLength.toString(),
-			       fileSize < 0 ? i18n("unknown") : KIO::convertSize( fileSize ),
+			       fileSize < 0 ? i18n("unknown") : TDEIO::convertSize( fileSize ),
 			       (m_toc[index].type() == K3bTrack::AUDIO ? i18n("Audio") : i18n("Data") ) );
 
       d->filenames.append( baseDir + "/" + filename );
@@ -442,7 +442,7 @@ void K3bAudioRippingDialog::loadK3bDefaults()
   refresh();
 }
 
-void K3bAudioRippingDialog::loadUserDefaults( KConfigBase* c )
+void K3bAudioRippingDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_comboParanoiaMode->setCurrentItem( c->readNumEntry( "paranoia_mode", 0 ) );
   m_spinRetries->setValue( c->readNumEntry( "read_retries", 5 ) );
@@ -455,7 +455,7 @@ void K3bAudioRippingDialog::loadUserDefaults( KConfigBase* c )
   refresh();
 }
 
-void K3bAudioRippingDialog::saveUserDefaults( KConfigBase* c )
+void K3bAudioRippingDialog::saveUserDefaults( TDEConfigBase* c )
 {
   c->writeEntry( "paranoia_mode", m_comboParanoiaMode->currentText().toInt() );
   c->writeEntry( "read_retries", m_spinRetries->value() );

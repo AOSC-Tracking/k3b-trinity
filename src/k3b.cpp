@@ -582,14 +582,14 @@ void K3bMainWindow::saveOptions()
 
   d->welcomeWidget->saveConfig( config() );
 
-  KConfigGroup grp( m_config, "General Options" );
+  TDEConfigGroup grp( m_config, "General Options" );
   grp.writeEntry( "Show Document Header", actionViewDocumentHeader->isChecked() );
 }
 
 
 void K3bMainWindow::readOptions()
 {
-  KConfigGroup grp( m_config, "General Options" );
+  TDEConfigGroup grp( m_config, "General Options" );
 
   bool bViewDocumentHeader = grp.readBoolEntry("Show Document Header", true);
   actionViewDocumentHeader->setChecked(bViewDocumentHeader);
@@ -613,7 +613,7 @@ void K3bMainWindow::readOptions()
 }
 
 
-void K3bMainWindow::saveProperties( KConfig* c )
+void K3bMainWindow::saveProperties( TDEConfig* c )
 {
   // 1. put saved projects in the config
   // 2. save every modified project in  "~/.trinity/share/apps/k3b/sessions/" + KApp->sessionId()
@@ -665,7 +665,7 @@ void K3bMainWindow::saveProperties( KConfig* c )
 
 
 // FIXME:move this to K3bProjectManager
-void K3bMainWindow::readProperties( KConfig* c )
+void K3bMainWindow::readProperties( TDEConfig* c )
 {
   // FIXME: do not delete the files here. rather do it when the app is exited normally
   //        since that's when we can be sure we never need the session stuff again.
@@ -715,7 +715,7 @@ void K3bMainWindow::readProperties( KConfig* c )
   }
 
   // and now remove the temp dir
-  KIO::del( KURL::fromPathOrURL(saveDir), false, false );
+  TDEIO::del( KURL::fromPathOrURL(saveDir), false, false );
 
   // FIXME: for some reason the config entries are not properly stored when using the default
   //        KMainWindow session config. Since I was not able to find the bug I use another config object
@@ -822,7 +822,7 @@ bool K3bMainWindow::canCloseDocument( K3bDoc* doc )
   if( !doc->isModified() )
     return true;
 
-  if( !KConfigGroup( config(), "General Options" ).readBoolEntry( "ask_for_saving_changes_on_exit", true ) )
+  if( !TDEConfigGroup( config(), "General Options" ).readBoolEntry( "ask_for_saving_changes_on_exit", true ) )
     return true;
 
   switch ( KMessageBox::warningYesNoCancel( this, 
@@ -937,7 +937,7 @@ void K3bMainWindow::fileSaveAs( K3bDoc* doc )
     if( url.isValid() ) {
       KRecentDocument::add( url );
 
-      bool exists = KIO::NetAccess::exists( url, false, 0 );
+      bool exists = TDEIO::NetAccess::exists( url, false, 0 );
       if( !exists ||
 	  ( exists &&
 	    KMessageBox::warningContinueCancel( this, i18n("Do you want to overwrite %1?").arg( url.prettyURL() ), 
@@ -1215,7 +1215,7 @@ void K3bMainWindow::slotNewToolBarConfig()
 
 bool K3bMainWindow::eject()
 {
-  KConfigGroup c( config(), "General Options" );
+  TDEConfigGroup c( config(), "General Options" );
   return !c.readBoolEntry( "No cd eject", false );
 }
 

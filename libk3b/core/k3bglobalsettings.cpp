@@ -29,7 +29,7 @@ K3bGlobalSettings::K3bGlobalSettings()
 }
 
 
-void K3bGlobalSettings::readSettings( KConfig* c )
+void K3bGlobalSettings::readSettings( TDEConfig* c )
 {
   TQString lastG = c->group();
   c->setGroup( "General Options" );
@@ -45,7 +45,7 @@ void K3bGlobalSettings::readSettings( KConfig* c )
 }
 
 
-void K3bGlobalSettings::saveSettings( KConfig* c )
+void K3bGlobalSettings::saveSettings( TDEConfig* c )
 {
   TQString lastG = c->group();
   c->setGroup( "General Options" );

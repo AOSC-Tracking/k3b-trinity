@@ -66,7 +66,7 @@ K3bIsoOptions::K3bIsoOptions()
 }
 
 
-void K3bIsoOptions::save( KConfigBase* c, bool saveVolumeDesc )
+void K3bIsoOptions::save( TDEConfigBase* c, bool saveVolumeDesc )
 {
   if( saveVolumeDesc ) {
     c->writeEntry( "volume id", m_volumeID );
@@ -134,7 +134,7 @@ void K3bIsoOptions::save( KConfigBase* c, bool saveVolumeDesc )
 }
 
 
-K3bIsoOptions K3bIsoOptions::load( KConfigBase* c, bool loadVolumeDesc )
+K3bIsoOptions K3bIsoOptions::load( TDEConfigBase* c, bool loadVolumeDesc )
 {
   K3bIsoOptions options;
 

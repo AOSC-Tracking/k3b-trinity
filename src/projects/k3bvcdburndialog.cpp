@@ -69,7 +69,7 @@ K3bVcdBurnDialog::K3bVcdBurnDialog( K3bVcdDoc* _doc, TQWidget *parent, const cha
     }
 
     setTitle( vcdType, i18n( "1 MPEG (%1)", "%n MPEGs (%1)",
-                             m_vcdDoc->tracks() ->count() ).arg( KIO::convertSize( m_vcdDoc->size() ) ) );
+                             m_vcdDoc->tracks() ->count() ).arg( TDEIO::convertSize( m_vcdDoc->size() ) ) );
 
     const K3bExternalBin* cdrecordBin = k3bcore->externalBinManager() ->binObject( "cdrecord" );
     if ( cdrecordBin && cdrecordBin->hasFeature( "cuefile" ) )
@@ -793,7 +793,7 @@ void K3bVcdBurnDialog::readSettings()
     loadCdiConfig();
 }
 
-void K3bVcdBurnDialog::loadUserDefaults( KConfigBase* c )
+void K3bVcdBurnDialog::loadUserDefaults( TDEConfigBase* c )
 {
     K3bProjectBurnDialog::loadUserDefaults( c );
 
@@ -845,7 +845,7 @@ void K3bVcdBurnDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bVcdBurnDialog::saveUserDefaults( KConfigBase* c )
+void K3bVcdBurnDialog::saveUserDefaults( TDEConfigBase* c )
 {
     K3bProjectBurnDialog::saveUserDefaults( c );
 

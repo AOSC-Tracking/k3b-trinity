@@ -214,7 +214,7 @@ void K3bMixedBurnDialog::loadK3bDefaults()
 }
 
 
-void K3bMixedBurnDialog::loadUserDefaults( KConfigBase* c )
+void K3bMixedBurnDialog::loadUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::loadUserDefaults( c );
 
@@ -238,7 +238,7 @@ void K3bMixedBurnDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bMixedBurnDialog::saveUserDefaults( KConfigBase* c )
+void K3bMixedBurnDialog::saveUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::saveUserDefaults(c);
 

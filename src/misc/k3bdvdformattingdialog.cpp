@@ -141,7 +141,7 @@ void K3bDvdFormattingDialog::slotStartClicked()
 
   delete job;
 
-  if( KConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
+  if( TDEConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
       !exitLoopOnHide() )
     show();
   else
@@ -155,7 +155,7 @@ void K3bDvdFormattingDialog::slotWriterChanged()
 } 
 
 
-void K3bDvdFormattingDialog::loadUserDefaults( KConfigBase* c )
+void K3bDvdFormattingDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_checkForce->setChecked( c->readBoolEntry( "force", false ) );
   m_checkQuickFormat->setChecked( c->readBoolEntry( "quick format", true ) );
@@ -164,7 +164,7 @@ void K3bDvdFormattingDialog::loadUserDefaults( KConfigBase* c )
 } 
 
 
-void K3bDvdFormattingDialog::saveUserDefaults( KConfigBase* c )
+void K3bDvdFormattingDialog::saveUserDefaults( TDEConfigBase* c )
 {
   c->writeEntry( "force", m_checkForce->isChecked() );
   c->writeEntry( "quick format", m_checkQuickFormat->isChecked() );

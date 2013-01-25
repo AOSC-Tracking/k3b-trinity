@@ -319,7 +319,7 @@ void K3bDeviceWidget::updateDeviceListViews()
     if( dev->device->bufferSize() > 0 ) {
       typeItem = new K3bListViewItem( devRoot, typeItem,
 				      i18n("Buffer Size:"),
-				      KIO::convertSizeFromKB(dev->device->bufferSize()) );
+				      TDEIO::convertSizeFromKB(dev->device->bufferSize()) );
       typeItem->setForegroundColor( 1, palette().disabled().foreground() );
     }
 

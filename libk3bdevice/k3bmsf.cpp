@@ -169,29 +169,29 @@ TQString K3b::Msf::toString( bool showFrames ) const
 }
 
 
-KIO::filesize_t K3b::Msf::mode1Bytes() const
+TDEIO::filesize_t K3b::Msf::mode1Bytes() const
 {
-  return (KIO::filesize_t)2048 * ( (KIO::filesize_t)lba() );
+  return (TDEIO::filesize_t)2048 * ( (TDEIO::filesize_t)lba() );
 }
 
-KIO::filesize_t K3b::Msf::mode2Form1Bytes() const
+TDEIO::filesize_t K3b::Msf::mode2Form1Bytes() const
 {
-  return (KIO::filesize_t)2048 * ( (KIO::filesize_t)lba() );
+  return (TDEIO::filesize_t)2048 * ( (TDEIO::filesize_t)lba() );
 }
 
-KIO::filesize_t K3b::Msf::mode2Form2Bytes() const
+TDEIO::filesize_t K3b::Msf::mode2Form2Bytes() const
 {
-  return (KIO::filesize_t)2324 * ( (KIO::filesize_t)lba() );
+  return (TDEIO::filesize_t)2324 * ( (TDEIO::filesize_t)lba() );
 }
 
-KIO::filesize_t K3b::Msf::audioBytes() const
+TDEIO::filesize_t K3b::Msf::audioBytes() const
 {
-  return (KIO::filesize_t)2352 * ( (KIO::filesize_t)lba() );
+  return (TDEIO::filesize_t)2352 * ( (TDEIO::filesize_t)lba() );
 }
 
-KIO::filesize_t K3b::Msf::rawBytes() const
+TDEIO::filesize_t K3b::Msf::rawBytes() const
 {
-  return (KIO::filesize_t)2448 * ( (KIO::filesize_t)lba() );
+  return (TDEIO::filesize_t)2448 * ( (TDEIO::filesize_t)lba() );
 }
 
 void K3b::Msf::makeValid()

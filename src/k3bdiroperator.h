@@ -42,12 +42,12 @@ class K3bDirOperator : public KDirOperator, public KBookmarkOwner
   /**
    * reimplemented from KDirOperator
    */
-  void readConfig( KConfig* cfg, const TQString& group );
+  void readConfig( TDEConfig* cfg, const TQString& group );
 
   /**
    * reimplemented from KDirOperator
    */
-  void writeConfig( KConfig* cfg, const TQString& group );
+  void writeConfig( TDEConfig* cfg, const TQString& group );
 
   /**
    * reimplemented from KBookmarkOwner

@@ -353,13 +353,13 @@ void K3bDirView::home()
 }
 
 
-void K3bDirView::saveConfig( KConfig* c )
+void K3bDirView::saveConfig( TDEConfig* c )
 {
   m_fileView->saveConfig(c);
 }
 
 
-void K3bDirView::readConfig( KConfig* c )
+void K3bDirView::readConfig( TDEConfig* c )
 {
   m_fileView->readConfig(c);
 }

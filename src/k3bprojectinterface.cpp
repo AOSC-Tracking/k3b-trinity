@@ -101,7 +101,7 @@ int K3bProjectInterface::length() const
 }
 
 
-KIO::filesize_t K3bProjectInterface::size() const
+TDEIO::filesize_t K3bProjectInterface::size() const
 {
   return m_doc->size();
 }

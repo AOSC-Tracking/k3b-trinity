@@ -19,7 +19,7 @@
 
 #include "base_k3bcddbpatternwidget.h"
 
-class KConfigBase;
+class TDEConfigBase;
 
 
 class K3bCddbPatternWidget : public base_K3bCddbPatternWidget
@@ -40,8 +40,8 @@ class K3bCddbPatternWidget : public base_K3bCddbPatternWidget
   void changed();
 
  public slots:
-  void loadConfig( KConfigBase* );
-  void saveConfig( KConfigBase* );
+  void loadConfig( TDEConfigBase* );
+  void saveConfig( TDEConfigBase* );
   void loadDefaults();
 
  private slots:

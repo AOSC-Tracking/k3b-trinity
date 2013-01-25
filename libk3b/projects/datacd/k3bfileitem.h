@@ -103,13 +103,13 @@ public:
   /**
    * Normally one does not use this method but K3bDataItem::size()
    */
-  KIO::filesize_t itemSize( bool followSymlinks ) const;
+  TDEIO::filesize_t itemSize( bool followSymlinks ) const;
 
  private:
   K3bDataItem* m_replacedItemFromOldSession;
 
-  KIO::filesize_t m_size;
-  KIO::filesize_t m_sizeFollowed;
+  TDEIO::filesize_t m_size;
+  TDEIO::filesize_t m_sizeFollowed;
   Id m_id;
   Id m_idFollowed;
 

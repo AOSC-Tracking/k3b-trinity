@@ -220,7 +220,7 @@ void K3bAudioProjectConvertingDialog::refresh()
 
   TQString extension = m_optionWidget->extension();
 
-  KIO::filesize_t overallSize = 0;
+  TDEIO::filesize_t overallSize = 0;
 
   if( m_optionWidget->createSingleFile() ) {
     TQString filename;
@@ -245,7 +245,7 @@ void K3bAudioProjectConvertingDialog::refresh()
 			     m_viewTracks->lastItem(),
 			     filename + "." + extension,
 			     m_doc->length().toString(),
-			     filesize < 0 ? i18n("unknown") : KIO::convertSize( filesize ) );
+			     filesize < 0 ? i18n("unknown") : TDEIO::convertSize( filesize ) );
 
     d->filenames.append( K3b::fixupPath( baseDir + "/" + filename + "." + extension ) );
 
@@ -283,7 +283,7 @@ void K3bAudioProjectConvertingDialog::refresh()
 			       m_viewTracks->lastItem(),
 			       filename,
 			       track->length().toString(),
-			       filesize < 0 ? i18n("unknown") : KIO::convertSize( filesize ) );
+			       filesize < 0 ? i18n("unknown") : TDEIO::convertSize( filesize ) );
 
       d->filenames.append( K3b::fixupPath( baseDir + "/" + filename ) );
 
@@ -330,7 +330,7 @@ void K3bAudioProjectConvertingDialog::loadK3bDefaults()
   refresh();
 }
 
-void K3bAudioProjectConvertingDialog::loadUserDefaults( KConfigBase* c )
+void K3bAudioProjectConvertingDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_optionWidget->loadConfig( c );
   m_patternWidget->loadConfig( c );
@@ -339,7 +339,7 @@ void K3bAudioProjectConvertingDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bAudioProjectConvertingDialog::saveUserDefaults( KConfigBase* c )
+void K3bAudioProjectConvertingDialog::saveUserDefaults( TDEConfigBase* c )
 {
   m_optionWidget->saveConfig( c );
   m_patternWidget->saveConfig( c );

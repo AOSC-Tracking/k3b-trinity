@@ -24,7 +24,7 @@
 #include "k3b_export.h"
 #include "k3bversion.h"
 
-class KConfig;
+class TDEConfig;
 class TDEProcess;
 
 
@@ -126,12 +126,12 @@ class LIBK3B_EXPORT K3bExternalBinManager : public TQObject
    * read config and add changes to current map.
    * Takes care of setting the config group
    */
-  bool readConfig( KConfig* );
+  bool readConfig( TDEConfig* );
 
   /**
    * Takes care of setting the config group
    */
-  bool saveConfig( KConfig* );
+  bool saveConfig( TDEConfig* );
 
   bool foundBin( const TQString& name );
   const TQString& binPath( const TQString& name );

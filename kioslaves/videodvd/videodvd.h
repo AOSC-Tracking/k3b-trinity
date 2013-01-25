@@ -32,7 +32,7 @@ namespace K3bDevice
   class DeviceManager;
 }
 
-class kio_videodvdProtocol : public KIO::SlaveBase
+class kio_videodvdProtocol : public TDEIO::SlaveBase
 {
 public:
   kio_videodvdProtocol(const TQCString &pool_socket, const TQCString &app_socket);
@@ -45,7 +45,7 @@ public:
 
 private:
   K3bIso9660* openIso( const KURL&, TQString& plainIsoPath );
-  KIO::UDSEntry createUDSEntry( const K3bIso9660Entry* e ) const;
+  TDEIO::UDSEntry createUDSEntry( const K3bIso9660Entry* e ) const;
   void listVideoDVDs();
 
   static K3bDevice::DeviceManager* s_deviceManager;

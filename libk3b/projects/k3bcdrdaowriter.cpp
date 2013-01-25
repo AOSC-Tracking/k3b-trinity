@@ -516,7 +516,7 @@ void K3bCdrdaoWriter::start()
 	    m_backupTocFile = m_tocFile + ".k3bbak";
 
 	    // workaround, cdrdao deletes the tocfile when --remote parameter is set
-	    if ( !KIO::NetAccess::copy(KURL(m_tocFile),KURL(m_backupTocFile), (TQWidget*) 0) )
+	    if ( !TDEIO::NetAccess::copy(KURL(m_tocFile),KURL(m_backupTocFile), (TQWidget*) 0) )
 	      {
 		kdDebug() << "(K3bCdrdaoWriter) could not backup " << m_tocFile << " to " << m_backupTocFile << endl;
 		emit infoMessage( i18n("Could not backup tocfile."), ERROR );
@@ -722,20 +722,20 @@ void K3bCdrdaoWriter::slotProcessExited( TDEProcess* p )
   case WRITE:
   case COPY:
     if ( !m_binFileLnk.isEmpty() ) {
-        KIO::NetAccess::del(KURL::fromPathOrURL(m_cueFileLnk), (TQWidget*) 0);
-        KIO::NetAccess::del(KURL::fromPathOrURL(m_binFileLnk), (TQWidget*) 0);
+        TDEIO::NetAccess::del(KURL::fromPathOrURL(m_cueFileLnk), (TQWidget*) 0);
+        TDEIO::NetAccess::del(KURL::fromPathOrURL(m_binFileLnk), (TQWidget*) 0);
     }
     else if( (!TQFile::exists( m_tocFile ) || K3b::filesize( KURL::fromPathOrURL(m_tocFile) ) == 0 ) && !m_onTheFly )
     {
       // cdrdao removed the tocfile :(
       // we need to recover it
-      if ( !KIO::NetAccess::copy(KURL::fromPathOrURL(m_backupTocFile), KURL::fromPathOrURL(m_tocFile), (TQWidget*) 0) )
+      if ( !TDEIO::NetAccess::copy(KURL::fromPathOrURL(m_backupTocFile), KURL::fromPathOrURL(m_tocFile), (TQWidget*) 0) )
       {
         kdDebug() << "(K3bCdrdaoWriter) restoring tocfile " << m_tocFile << " failed." << endl;
         emit infoMessage( i18n("Due to a bug in cdrdao the toc/cue file %1 has been deleted. "
                                "K3b was unable to restore it from the backup %2.").arg(m_tocFile).arg(m_backupTocFile), ERROR );
       }
-      else if ( !KIO::NetAccess::del(KURL::fromPathOrURL(m_backupTocFile), (TQWidget*) 0) )
+      else if ( !TDEIO::NetAccess::del(KURL::fromPathOrURL(m_backupTocFile), (TQWidget*) 0) )
       {
         kdDebug() << "(K3bCdrdaoWriter) delete tocfile backkup " << m_backupTocFile << " failed." << endl;
       }

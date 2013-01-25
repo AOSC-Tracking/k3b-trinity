@@ -411,7 +411,7 @@ void K3bOggVorbisEncoder::cleanup()
 
 void K3bOggVorbisEncoder::loadConfig()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
 
   c->setGroup( "K3bOggVorbisEncoderPlugin" );
 
@@ -476,7 +476,7 @@ void K3bOggVorbisEncoderSettingsWidget::slotQualityLevelChanged( int val )
 
 void K3bOggVorbisEncoderSettingsWidget::loadConfig()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
 
   c->setGroup( "K3bOggVorbisEncoderPlugin" );
 
@@ -497,7 +497,7 @@ void K3bOggVorbisEncoderSettingsWidget::loadConfig()
 
 void K3bOggVorbisEncoderSettingsWidget::saveConfig()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
 
   c->setGroup( "K3bOggVorbisEncoderPlugin" );
 
@@ -518,7 +518,7 @@ TQString K3bOggVorbisEncoder::fileTypeComment( const TQString& ) const
 
 long long K3bOggVorbisEncoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( "K3bOggVorbisEncoderPlugin" );
 
   // the following code is based on the size estimation from the audiocd kioslave

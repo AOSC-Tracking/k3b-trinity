@@ -66,8 +66,8 @@ class K3bCdImageWritingDialog : public K3bInteractionDialog
   void slotUpdateImage( const TQString& );
 
  protected:
-  void loadUserDefaults( KConfigBase* );
-  void saveUserDefaults( KConfigBase* );
+  void loadUserDefaults( TDEConfigBase* );
+  void saveUserDefaults( TDEConfigBase* );
   void loadK3bDefaults();
 
   void calculateMd5Sum( const TQString& );

@@ -42,8 +42,8 @@ class K3bAudioMetainfoRenamerPluginWidget : public TQWidget, public K3bProjectPl
   TQString subTitle() const;
 
   void loadDefaults();
-  void readSettings( KConfigBase* );
-  void saveSettings( KConfigBase* );
+  void readSettings( TDEConfigBase* );
+  void saveSettings( TDEConfigBase* );
 
   void activate();
 

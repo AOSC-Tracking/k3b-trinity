@@ -349,7 +349,7 @@ TQString K3bVideoCdRip::jobDescription() const
 
 TQString K3bVideoCdRip::jobDetails() const
 {
-    return TQString( "(%1)" ).arg ( KIO::convertSize( m_videooptions ->getVideoCdSize() ) );
+    return TQString( "(%1)" ).arg ( TDEIO::convertSize( m_videooptions ->getVideoCdSize() ) );
 }
 
 #include "k3bvideocdrip.moc"

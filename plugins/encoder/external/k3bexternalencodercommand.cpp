@@ -25,7 +25,7 @@
 
 TQValueList<K3bExternalEncoderCommand> K3bExternalEncoderCommand::readCommands()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
 
   c->setGroup( "K3bExternalEncoderPlugin" );
 

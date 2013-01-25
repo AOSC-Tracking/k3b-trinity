@@ -73,8 +73,8 @@ Q_OBJECT
  private:
   void setupGui();
   void loadK3bDefaults();
-  void loadUserDefaults( KConfigBase* );
-  void saveUserDefaults( KConfigBase* );
+  void loadUserDefaults( TDEConfigBase* );
+  void saveUserDefaults( TDEConfigBase* );
 
   K3bWriterSelectionWidget* m_writerSelectionWidget;
 

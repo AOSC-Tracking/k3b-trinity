@@ -89,7 +89,7 @@ bool K3bDataItem::isBootItem() const
 }
 
 
-KIO::filesize_t K3bDataItem::size() const
+TDEIO::filesize_t K3bDataItem::size() const
 {
   return itemSize( m_doc 
 		   ? m_doc->isoOptions().followSymbolicLinks() || 

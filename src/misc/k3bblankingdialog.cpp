@@ -160,7 +160,7 @@ void K3bBlankingDialog::slotStartClicked()
   if( d->jobRunning ) // in case the job already finished in the start slot
     d->erasingDlg->exec(false);
 
-  if( KConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
+  if( TDEConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
       !exitLoopOnHide() )
     show();
   else
@@ -265,7 +265,7 @@ void K3bBlankingDialog::loadK3bDefaults()
   m_comboEraseMode->setCurrentItem( d->typeComboMap[K3bBlankingJob::Fast] );
 }
 
-void K3bBlankingDialog::loadUserDefaults( KConfigBase* c )
+void K3bBlankingDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_writerSelectionWidget->loadConfig( c );
   slotWritingAppChanged( m_writerSelectionWidget->writingApp() );
@@ -285,7 +285,7 @@ void K3bBlankingDialog::loadUserDefaults( KConfigBase* c )
   }
 }
 
-void K3bBlankingDialog::saveUserDefaults( KConfigBase* c )
+void K3bBlankingDialog::saveUserDefaults( TDEConfigBase* c )
 {
   TQString mode;
   switch( d->comboTypeMap[m_comboEraseMode->currentItem()] ) {

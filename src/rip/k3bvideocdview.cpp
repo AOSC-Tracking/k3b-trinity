@@ -72,7 +72,7 @@ class K3bVideoCdView::VideoTrackViewItem : public TQListViewItem
             setText( 1, name );
             if ( length > 0 ) {
                 setText( 2, length.toString() );
-                setText( 3, KIO::convertSize( length.mode2Form2Bytes() ) );
+                setText( 3, TDEIO::convertSize( length.mode2Form2Bytes() ) );
             }
 
             trackNumber = _trackNumber;
@@ -129,9 +129,9 @@ class K3bVideoCdView::VideoTrackViewCheckItem : public TQCheckListItem
         {
             setText( 2, length.toString() );
             if ( form2 )
-                setText( 3, KIO::convertSize( length.mode2Form2Bytes() ) );
+                setText( 3, TDEIO::convertSize( length.mode2Form2Bytes() ) );
             else
-                setText( 3, KIO::convertSize( length.mode2Form1Bytes() ) );
+                setText( 3, TDEIO::convertSize( length.mode2Form1Bytes() ) );
         }
 
 };

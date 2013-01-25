@@ -16,7 +16,7 @@
 #ifndef _K3B_GLOBAL_SETTINGS_H_
 #define _K3B_GLOBAL_SETTINGS_H_
 #include "k3b_export.h"
-class KConfig;
+class TDEConfig;
 
 /**
  * Some global settings used throughout K3b.
@@ -29,12 +29,12 @@ class LIBK3B_EXPORT K3bGlobalSettings
   /**
    * This method takes care of settings the config group
    */
-  void readSettings( KConfig* );
+  void readSettings( TDEConfig* );
 
   /**
    * This method takes care of settings the config group
    */
-  void saveSettings( KConfig* );
+  void saveSettings( TDEConfig* );
 
   bool ejectMedia() const { return m_eject; }
   bool burnfree() const { return m_burnfree; }

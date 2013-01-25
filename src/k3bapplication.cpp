@@ -93,7 +93,7 @@ K3bApplication::~K3bApplication()
 
 void K3bApplication::init()
 {
-  KConfigGroup generalOptions( config(), "General Options" );
+  TDEConfigGroup generalOptions( config(), "General Options" );
 
   TQGuardedPtr<K3bSplash> splash;
   if( !isRestored() ) {
@@ -360,7 +360,7 @@ K3bDevice::DeviceManager* K3bApplication::Core::deviceManager() const
 }
 
 
-KConfig* K3bApplication::Core::config() const
+TDEConfig* K3bApplication::Core::config() const
 {
   return kapp->config();
 }
@@ -387,11 +387,11 @@ void K3bApplication::Core::init()
 }
 
 
-void K3bApplication::Core::readSettings( KConfig* cnf )
+void K3bApplication::Core::readSettings( TDEConfig* cnf )
 {
   K3bCore::readSettings( cnf );
 
-  KConfig* c = cnf;
+  TDEConfig* c = cnf;
   if( !c )
     c = config();
 
@@ -399,7 +399,7 @@ void K3bApplication::Core::readSettings( KConfig* cnf )
 }
 
 
-void K3bApplication::Core::saveSettings( KConfig* cnf )
+void K3bApplication::Core::saveSettings( TDEConfig* cnf )
 {
   if( !cnf )
     cnf = config();

@@ -26,7 +26,7 @@ namespace K3bDevice {
   class DiskInfoDetector;
 }
 
-namespace KIO {
+namespace TDEIO {
   class Job;
 }
 

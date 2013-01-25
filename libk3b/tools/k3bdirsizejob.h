@@ -37,24 +37,24 @@ class LIBK3B_EXPORT K3bDirSizeJob : public K3bThreadJob
   K3bDirSizeJob( TQObject* parent = 0 );
   ~K3bDirSizeJob();
 
-  KIO::filesize_t totalSize() const;
+  TDEIO::filesize_t totalSize() const;
 
   /**
    * Does also include symlinks to files, devices, and fifos
    */
-  KIO::filesize_t totalFiles() const;
+  TDEIO::filesize_t totalFiles() const;
 
   /**
    * Total number of counted dirs. This does also
    * include the first dirs the job was started with.
    * Does also include symlinks to dirs.
    */
-  KIO::filesize_t totalDirs() const;
+  TDEIO::filesize_t totalDirs() const;
 
   /**
    * Includes symlinks to files and folders
    */
-  KIO::filesize_t totalSymlinks() const;
+  TDEIO::filesize_t totalSymlinks() const;
 
  public slots:
   void setUrls( const KURL::List& urls );

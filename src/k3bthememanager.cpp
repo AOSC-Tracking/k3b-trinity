@@ -192,9 +192,9 @@ K3bTheme* K3bThemeManager::currentTheme() const
 }
 
 
-void K3bThemeManager::readConfig( KConfigBase* c )
+void K3bThemeManager::readConfig( TDEConfigBase* c )
 {
-  KConfigGroup generalOptions( c, "General Options" );
+  TDEConfigGroup generalOptions( c, "General Options" );
 
   // allow to override the default theme by packaging a default config file
   TQString defaultTheme = generalOptions.readEntry( "default theme", "quant" );
@@ -207,10 +207,10 @@ void K3bThemeManager::readConfig( KConfigBase* c )
 }
 
 
-void K3bThemeManager::saveConfig( KConfigBase* c )
+void K3bThemeManager::saveConfig( TDEConfigBase* c )
 {
   if( !d->currentThemeName.isEmpty() )
-    KConfigGroup( c, "General Options" ).writeEntry( "current theme", d->currentThemeName );
+    TDEConfigGroup( c, "General Options" ).writeEntry( "current theme", d->currentThemeName );
 }
 
 

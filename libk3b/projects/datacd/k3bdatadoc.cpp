@@ -229,7 +229,7 @@ K3bDirItem* K3bDataDoc::addEmptyDir( const TQString& name, K3bDirItem* parent )
 }
 
 
-KIO::filesize_t K3bDataDoc::size() const
+TDEIO::filesize_t K3bDataDoc::size() const
 {
   if( m_isoOptions.doNotCacheInodes() )
     return root()->blocks().mode1Bytes() + m_oldSessionSize;
@@ -239,7 +239,7 @@ KIO::filesize_t K3bDataDoc::size() const
 }
 
 
-KIO::filesize_t K3bDataDoc::burningSize() const
+TDEIO::filesize_t K3bDataDoc::burningSize() const
 {
   return size() - m_oldSessionSize; //m_oldSessionSizeHandler->size();
 }
@@ -1171,7 +1171,7 @@ bool K3bDataDoc::importSession( K3bDevice::Device* device )
     // anyway since there might be files overwritten or removed
     m_oldSessionSize = toc.last().lastSector().mode1Bytes();
     
-    kdDebug() << "(K3bDataDoc) imported session size: " << KIO::convertSize(m_oldSessionSize) << endl;
+    kdDebug() << "(K3bDataDoc) imported session size: " << TDEIO::convertSize(m_oldSessionSize) << endl;
     
     // the track size for DVD+RW media and DVD-RW Overwrite media has nothing to do with the filesystem 
     // size. in that case we need to use the filesystem's size (which is ok since it's one track anyway,

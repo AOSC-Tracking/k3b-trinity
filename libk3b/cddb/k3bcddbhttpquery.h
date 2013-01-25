@@ -22,7 +22,7 @@
 
 #include <tqvaluelist.h>
 
-namespace KIO {
+namespace TDEIO {
   class Job;
 }
 
@@ -42,8 +42,8 @@ class K3bCddbHttpQuery : public K3bCddbQuery
  protected slots:
   void doQuery();
   void doMatchQuery();
-  void slotResult( KIO::Job* );
-  void slotData( KIO::Job*, const TQByteArray& data );
+  void slotResult( TDEIO::Job* );
+  void slotData( TDEIO::Job*, const TQByteArray& data );
 
  private:
   void performCommand( const TQString& );

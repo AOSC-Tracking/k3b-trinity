@@ -362,9 +362,9 @@ K3bWelcomeWidget::~K3bWelcomeWidget()
 }
 
 
-void K3bWelcomeWidget::loadConfig( KConfigBase* c )
+void K3bWelcomeWidget::loadConfig( TDEConfigBase* c )
 {
-  TQStringList sl = KConfigGroup( c, "Welcome Widget" ).readListEntry( "welcome_actions" );
+  TQStringList sl = TDEConfigGroup( c, "Welcome Widget" ).readListEntry( "welcome_actions" );
 
   if( sl.isEmpty() ) {
     sl.append( "file_new_audio" );
@@ -386,9 +386,9 @@ void K3bWelcomeWidget::loadConfig( KConfigBase* c )
 }
 
 
-void K3bWelcomeWidget::saveConfig( KConfigBase* c )
+void K3bWelcomeWidget::saveConfig( TDEConfigBase* c )
 {
-  KConfigGroup grp( c, "Welcome Widget" );
+  TDEConfigGroup grp( c, "Welcome Widget" );
 
   TQStringList sl;
   for( TQPtrListIterator<KAction> it( main->m_actions ); it.current(); ++it )

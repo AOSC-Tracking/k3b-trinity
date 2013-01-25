@@ -558,7 +558,7 @@ TQString K3bVcdJob::jobDetails() const
 {
     return ( i18n( "1 MPEG (%1)",
                    "%n MPEGs (%1)",
-                   m_doc->tracks() ->count() ).arg( KIO::convertSize( m_doc->size() ) )
+                   m_doc->tracks() ->count() ).arg( TDEIO::convertSize( m_doc->size() ) )
              + ( m_doc->copies() > 1
                  ? i18n( " - %n copy", " - %n copies", m_doc->copies() )
                  : TQString() ) );

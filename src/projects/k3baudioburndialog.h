@@ -52,8 +52,8 @@ class K3bAudioBurnDialog : public K3bProjectBurnDialog
   void saveSettings();
   void readSettings();
   void loadK3bDefaults();
-  void loadUserDefaults( KConfigBase* );
-  void saveUserDefaults( KConfigBase* );
+  void loadUserDefaults( TDEConfigBase* );
+  void saveUserDefaults( TDEConfigBase* );
   void showEvent( TQShowEvent* );
   void toggleAll();
 

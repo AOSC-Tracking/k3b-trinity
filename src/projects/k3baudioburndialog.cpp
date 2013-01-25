@@ -194,7 +194,7 @@ void K3bAudioBurnDialog::loadK3bDefaults()
 }
 
 
-void K3bAudioBurnDialog::loadUserDefaults( KConfigBase* c )
+void K3bAudioBurnDialog::loadUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::loadUserDefaults( c );
 
@@ -210,7 +210,7 @@ void K3bAudioBurnDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bAudioBurnDialog::saveUserDefaults( KConfigBase* c )
+void K3bAudioBurnDialog::saveUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::saveUserDefaults( c );
 

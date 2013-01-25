@@ -53,7 +53,7 @@ K3bCddb::~K3bCddb()
 }
 
 
-void K3bCddb::readConfig( KConfig* c )
+void K3bCddb::readConfig( TDEConfig* c )
 {
   c->setGroup( "Cddb" );
 

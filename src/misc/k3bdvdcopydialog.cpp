@@ -277,7 +277,7 @@ void K3bDvdCopyDialog::slotStartClicked()
   delete dlg;
   delete job;
 
-  if( KConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
+  if( TDEConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
       !exitLoopOnHide() )
     show();
   else
@@ -285,7 +285,7 @@ void K3bDvdCopyDialog::slotStartClicked()
 }
 
 
-void K3bDvdCopyDialog::loadUserDefaults( KConfigBase* c )
+void K3bDvdCopyDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_comboSourceDevice->setSelectedDevice( k3bcore->deviceManager()->findDevice( c->readEntry( "source_device" ) ) );
 
@@ -308,7 +308,7 @@ void K3bDvdCopyDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bDvdCopyDialog::saveUserDefaults( KConfigBase* c )
+void K3bDvdCopyDialog::saveUserDefaults( TDEConfigBase* c )
 {
   m_tempDirSelectionWidget->saveConfig();
 
@@ -440,14 +440,14 @@ void K3bDvdCopyDialog::updateOverrideDevice()
 }
 
 
-KIO::filesize_t K3bDvdCopyDialog::neededSize() const
+TDEIO::filesize_t K3bDvdCopyDialog::neededSize() const
 {
   K3bMedium medium = k3bappcore->mediaCache()->medium( m_comboSourceDevice->selectedDevice() );
 
   if( medium.diskInfo().diskState() == K3bDevice::STATE_NO_MEDIA )
     return 0;
   else if( medium.diskInfo().mediaType() & (K3bDevice::MEDIA_DVD_RW_OVWR|K3bDevice::MEDIA_DVD_PLUS_RW) )
-    return (KIO::filesize_t)medium.iso9660Descriptor().volumeSpaceSize * (KIO::filesize_t)2048;
+    return (TDEIO::filesize_t)medium.iso9660Descriptor().volumeSpaceSize * (TDEIO::filesize_t)2048;
   else
     return medium.diskInfo().size().mode1Bytes();
 }

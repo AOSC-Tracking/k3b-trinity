@@ -19,7 +19,7 @@
 #include <tqstring.h>
 #include "k3b_export.h"
 
-class KConfigBase;
+class TDEConfigBase;
 
 class LIBK3B_EXPORT K3bVcdOptions
 {
@@ -242,9 +242,9 @@ class LIBK3B_EXPORT K3bVcdOptions
         }
 
         bool checkCdiFiles();
-        void save( KConfigBase* c );
+        void save( TDEConfigBase* c );
 
-        static K3bVcdOptions load( KConfigBase* c );
+        static K3bVcdOptions load( TDEConfigBase* c );
         static K3bVcdOptions defaults();
 
         void setPbcEnabled( const bool& b )

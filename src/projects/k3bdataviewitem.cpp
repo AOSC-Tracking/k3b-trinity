@@ -169,7 +169,7 @@ TQString K3bDataDirViewItem::text( int index ) const
   case 1:
     return i18n("Directory");
   case 2:
-    return KIO::convertSize( m_dirItem->size() );
+    return TDEIO::convertSize( m_dirItem->size() );
   default:
     return "";
   }
@@ -233,7 +233,7 @@ TQString K3bDataFileViewItem::text( int index ) const
 	return comment;
     }
   case 2:
-    return KIO::convertSize( m_fileItem->size() );
+    return TDEIO::convertSize( m_fileItem->size() );
   case 3:
       return m_fileItem->localPath();
   case 4: {
@@ -311,7 +311,7 @@ TQString K3bSpecialDataViewItem::text( int col ) const
   case 1:
     return ((K3bSpecialDataItem*)dataItem())->mimeType();
   case 2:
-    return KIO::convertSize( dataItem()->size() );
+    return TDEIO::convertSize( dataItem()->size() );
   default:
     return "";
   }
@@ -333,7 +333,7 @@ TQString K3bSessionImportViewItem::text( int col ) const
   case 1:
     return i18n("From previous session");
   case 2:
-    return KIO::convertSize( dataItem()->size() );
+    return TDEIO::convertSize( dataItem()->size() );
   default:
     return "";
   }

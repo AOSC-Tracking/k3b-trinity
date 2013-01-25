@@ -101,7 +101,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
     TQString localLocation = kFileItem.url().path(-1);
     localLocation.truncate( localLocation.findRev('/') );
     m_labelLocalLocation->setText( localLocation );
-    m_labelSize->setText( KIO::convertSize(dataItem->size()) );
+    m_labelSize->setText( TDEIO::convertSize(dataItem->size()) );
   }
   else if( K3bDirItem* dirItem = dynamic_cast<K3bDirItem*>(dataItem) ) {
     labelMimeType->setPixmap( KMimeType::pixmapForURL( KURL( "/" )) );
@@ -111,7 +111,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
     m_labelLocalName->hide();
     m_labelLocalLocation->hide();
     line->hide();
-    m_labelSize->setText( KIO::convertSize(dataItem->size()) + "\n(" +
+    m_labelSize->setText( TDEIO::convertSize(dataItem->size()) + "\n(" +
 			  i18n("in 1 file", "in %n files", dirItem->numFiles()) + " " +
 			  i18n("and 1 directory", "and %n directories", dirItem->numDirs()) + ")" );
   }
@@ -123,7 +123,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
     label1->hide();
     label2->hide();
     line->hide();
-    m_labelSize->setText( KIO::convertSize(dataItem->size()) );
+    m_labelSize->setText( TDEIO::convertSize(dataItem->size()) );
   }
 
   m_editName->setText( dataItem->k3bName() );

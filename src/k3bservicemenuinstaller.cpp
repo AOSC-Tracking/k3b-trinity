@@ -67,7 +67,7 @@ bool K3bServiceInstaller::allInstalled() const
   d->update();
 
   for( unsigned int i = 0; i < d->allServiceMenuFiles.count(); ++i )
-    if( !KIO::NetAccess::exists( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], true, 0 ) ) {
+    if( !TDEIO::NetAccess::exists( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], true, 0 ) ) {
       kdDebug() << "(K3bServiceInstaller) service menu " << d->konqiServicemenusFolder << d->allServiceMenuFiles[i]
 		<< " does not exist." << endl;
       return false;
@@ -85,14 +85,14 @@ bool K3bServiceInstaller::install( TQWidget* parent )
 
   // simply link all the globally installed K3b service menus to the local konqi service menu folder
   for( unsigned int i = 0; i < d->allServiceMenus.count(); ++i )
-    if( !KIO::NetAccess::file_copy( KURL::fromPathOrURL( d->allServiceMenus[i] ), 
+    if( !TDEIO::NetAccess::file_copy( KURL::fromPathOrURL( d->allServiceMenus[i] ), 
 				    KURL::fromPathOrURL( d->konqiServicemenusFolder + d->allServiceMenuFiles[i] ), -1, 
 				    true, false, parent ) )
       success = false;
 
   if( !success && parent )
     KMessageBox::error( parent,
-			KIO::NetAccess::lastErrorString(),
+			TDEIO::NetAccess::lastErrorString(),
 			i18n("Failed to copy service menu files") );
 
   return success;
@@ -106,13 +106,13 @@ bool K3bServiceInstaller::remove( TQWidget* parent )
   bool success = true;
 
   for( unsigned int i = 0; i < d->allServiceMenuFiles.count(); ++i )
-    if( KIO::NetAccess::exists( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], true, parent ) )
-      if( !KIO::NetAccess::del( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], parent ) )
+    if( TDEIO::NetAccess::exists( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], true, parent ) )
+      if( !TDEIO::NetAccess::del( d->konqiServicemenusFolder + d->allServiceMenuFiles[i], parent ) )
 	success = false;
 
   if( !success && parent )
     KMessageBox::error( parent,
-			KIO::NetAccess::lastErrorString(),
+			TDEIO::NetAccess::lastErrorString(),
 			i18n("Failed to remove service menu files") );
 
   return success;

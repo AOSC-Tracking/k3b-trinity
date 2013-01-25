@@ -53,7 +53,7 @@ class LIBK3B_EXPORT K3bFileSplitter : public TQIODevice
    *
    * Be aware that setName will reset the max file size.
    */
-  void setMaxFileSize( KIO::filesize_t size );
+  void setMaxFileSize( TDEIO::filesize_t size );
 
   const TQString& name() const;
 

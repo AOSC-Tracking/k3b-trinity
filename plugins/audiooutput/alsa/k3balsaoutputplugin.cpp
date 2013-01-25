@@ -148,7 +148,7 @@ bool K3bAlsaOutputPlugin::init()
 {
   cleanup();
 
-  KConfigGroup c( k3bcore->config(), "Alsa Output Plugin" );
+  TDEConfigGroup c( k3bcore->config(), "Alsa Output Plugin" );
   TQString alsaDevice = c.readEntry( "output device", "default" );
 
   int err = snd_pcm_open( &d->pcm_playback, alsaDevice.local8Bit(), SND_PCM_STREAM_PLAYBACK, 0 );
@@ -276,7 +276,7 @@ K3bAlsaOutputPluginConfigWidget::~K3bAlsaOutputPluginConfigWidget()
 
 void K3bAlsaOutputPluginConfigWidget::loadConfig()
 {
-  KConfigGroup c( k3bcore->config(), "Alsa Output Plugin" );
+  TDEConfigGroup c( k3bcore->config(), "Alsa Output Plugin" );
 
   m_comboDevice->setCurrentText( c.readEntry( "output device", "default" ) );
 }
@@ -284,7 +284,7 @@ void K3bAlsaOutputPluginConfigWidget::loadConfig()
 
 void K3bAlsaOutputPluginConfigWidget::saveConfig()
 {
-  KConfigGroup c( k3bcore->config(), "Alsa Output Plugin" );
+  TDEConfigGroup c( k3bcore->config(), "Alsa Output Plugin" );
 
   c.writeEntry( "output device", m_comboDevice->currentText() );
 }

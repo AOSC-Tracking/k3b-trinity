@@ -69,7 +69,7 @@ K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, TQPtrList<K3bVcdTrack>& t
 
         m_displayFileName->setText( selectedTrack->fileName() );
         m_displayLength->setText( selectedTrack->duration() );
-        m_displaySize->setText( KIO::convertSize( selectedTrack->size() ) );
+        m_displaySize->setText( TDEIO::convertSize( selectedTrack->size() ) );
         m_muxrate->setText( i18n( "%1 bit/s" ).arg( selectedTrack->muxrate() ) );
 
         if ( selectedTrack->isSegment() )

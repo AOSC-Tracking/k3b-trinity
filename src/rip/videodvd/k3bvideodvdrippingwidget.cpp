@@ -253,7 +253,7 @@ void K3bVideoDVDRippingWidget::slotUpdateFreeTempSpace()
 
   unsigned long size, avail;
   if( K3b::kbFreeOnFs( path, size, avail ) ) {
-    m_labelFreeSpace->setText( KIO::convertSizeFromKB(avail) );
+    m_labelFreeSpace->setText( TDEIO::convertSizeFromKB(avail) );
     if( avail < m_neededSize/1024 )
       m_labelNeededSpace->setPaletteForegroundColor( TQt::red );
     else
@@ -266,11 +266,11 @@ void K3bVideoDVDRippingWidget::slotUpdateFreeTempSpace()
 }
 
 
-void K3bVideoDVDRippingWidget::setNeededSize( KIO::filesize_t size )
+void K3bVideoDVDRippingWidget::setNeededSize( TDEIO::filesize_t size )
 {
   m_neededSize = size;
   if( size > 0 )
-    m_labelNeededSpace->setText( KIO::convertSize( size ) );
+    m_labelNeededSpace->setText( TDEIO::convertSize( size ) );
   else
     m_labelNeededSpace->setText( i18n("unknown") );
 

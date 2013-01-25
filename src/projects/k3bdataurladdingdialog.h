@@ -101,8 +101,8 @@ class K3bDataUrlAddingDialog : public KDialogBase
 
   bool m_copyItems;
 
-  KIO::filesize_t m_totalFiles;
-  KIO::filesize_t m_filesHandled;
+  TDEIO::filesize_t m_totalFiles;
+  TDEIO::filesize_t m_filesHandled;
   K3bDirSizeJob* m_dirSizeJob;
 
   unsigned int m_lastProgress;

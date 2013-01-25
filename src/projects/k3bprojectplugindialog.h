@@ -21,7 +21,7 @@
 class K3bProjectPlugin;
 class K3bProjectPluginGUIBase;
 class K3bDoc;
-class KConfigBase;
+class TDEConfigBase;
 
 
 class K3bProjectPluginDialog : public K3bInteractionDialog
@@ -35,8 +35,8 @@ class K3bProjectPluginDialog : public K3bInteractionDialog
   
  protected slots:
   void slotStartClicked();
-  void saveUserDefaults( KConfigBase* config );
-  void loadUserDefaults( KConfigBase* config );
+  void saveUserDefaults( TDEConfigBase* config );
+  void loadUserDefaults( TDEConfigBase* config );
   void loadK3bDefaults();
 
  private:

@@ -126,7 +126,7 @@ void K3bVideoCdRippingDialog::setupGui()
 
     connect( m_editDirectory, TQT_SIGNAL(textChanged(const TQString&)), this, TQT_SLOT(slotUpdateFreeSpace()) );
 
-    m_labelNecessarySize ->setText( KIO::convertSize( m_videooptions ->getVideoCdSize() ) );    
+    m_labelNecessarySize ->setText( TDEIO::convertSize( m_videooptions ->getVideoCdSize() ) );    
 }
 
 
@@ -170,7 +170,7 @@ void K3bVideoCdRippingDialog::slotStartClicked()
     TQFileInfo* fi;
     while ( ( fi = it.current() ) != 0 ) {
         if ( fi ->fileName() != "." && fi ->fileName() != ".." )
-            filesExists.append( TQString( "%1 (%2)" ).arg( TQFile::encodeName( fi ->fileName() ).data() ).arg( KIO::convertSize( fi ->size() ) ) );
+            filesExists.append( TQString( "%1 (%2)" ).arg( TQFile::encodeName( fi ->fileName() ).data() ).arg( TDEIO::convertSize( fi ->size() ) ) );
         ++it;
     }
 
@@ -202,7 +202,7 @@ void K3bVideoCdRippingDialog::slotFreeSpace(const TQString&,
 						  unsigned long,
 						  unsigned long kbAvail)
 {
-    m_labelFreeSpace->setText( KIO::convertSizeFromKB(kbAvail) );
+    m_labelFreeSpace->setText( TDEIO::convertSizeFromKB(kbAvail) );
 
     m_freeSpace = kbAvail;
 
@@ -239,7 +239,7 @@ void K3bVideoCdRippingDialog::loadK3bDefaults()
     slotUpdateFreeSpace();
 }
 
-void K3bVideoCdRippingDialog::loadUserDefaults( KConfigBase* c )
+void K3bVideoCdRippingDialog::loadUserDefaults( TDEConfigBase* c )
 {
     m_editDirectory ->setURL( c->readPathEntry( "last ripping directory", TQDir::homeDirPath() ) );
     m_ignoreExt ->setChecked( c->readBoolEntry( "ignore ext", false ) );
@@ -249,7 +249,7 @@ void K3bVideoCdRippingDialog::loadUserDefaults( KConfigBase* c )
     slotUpdateFreeSpace();
 }
 
-void K3bVideoCdRippingDialog::saveUserDefaults( KConfigBase* c )
+void K3bVideoCdRippingDialog::saveUserDefaults( TDEConfigBase* c )
 {
     c->writePathEntry( "last ripping directory", m_editDirectory->url() );
     c->writeEntry( "ignore ext", m_ignoreExt ->isChecked( ) );

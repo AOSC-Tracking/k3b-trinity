@@ -22,7 +22,7 @@
 #include <kio/global.h>
 
 class K3bAudioEncoder;
-class KConfigBase;
+class TDEConfigBase;
 
 
 /**
@@ -39,7 +39,7 @@ class K3bAudioConvertingOptionWidget : public base_K3bAudioRippingOptionWidget
 
   void setBaseDir( const TQString& path );
 
-  void setNeededSize( KIO::filesize_t );
+  void setNeededSize( TDEIO::filesize_t );
 
   /**
    * @returns 0 if wave is selected
@@ -56,8 +56,8 @@ class K3bAudioConvertingOptionWidget : public base_K3bAudioRippingOptionWidget
 
  public slots:
   void loadDefaults();
-  void loadConfig( KConfigBase* );
-  void saveConfig( KConfigBase* );
+  void loadConfig( TDEConfigBase* );
+  void saveConfig( TDEConfigBase* );
 
  signals:
   void changed();

@@ -48,13 +48,13 @@ void K3bProjectPluginDialog::slotStartClicked()
 }
 
 
-void K3bProjectPluginDialog::saveUserDefaults( KConfigBase* config )
+void K3bProjectPluginDialog::saveUserDefaults( TDEConfigBase* config )
 {
   m_pluginGui->saveSettings( config );
 }
 
 
-void K3bProjectPluginDialog::loadUserDefaults( KConfigBase* config )
+void K3bProjectPluginDialog::loadUserDefaults( TDEConfigBase* config )
 {
   m_pluginGui->readSettings( config );
 }

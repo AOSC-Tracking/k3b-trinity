@@ -58,7 +58,7 @@ K3bVcdTrack::~K3bVcdTrack()
 {}
 
 
-KIO::filesize_t K3bVcdTrack::size() const
+TDEIO::filesize_t K3bVcdTrack::size() const
 {
     return m_file.size();
 }

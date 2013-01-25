@@ -21,7 +21,7 @@
 
 class TQPaintEvent;
 class TQMouseEvent;
-class KConfigBase;
+class TDEConfigBase;
 
 /**
  * An OSD displaying a text and a progress bar.
@@ -40,8 +40,8 @@ class K3bJobProgressOSD : public TQWidget
   int screen() const { return m_screen; }
   const TQPoint& position() const { return m_position; }
 
-  void readSettings( KConfigBase* );
-  void saveSettings( KConfigBase* );
+  void readSettings( TDEConfigBase* );
+  void saveSettings( TDEConfigBase* );
 
  public slots:
   void setScreen( int );

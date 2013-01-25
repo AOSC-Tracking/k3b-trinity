@@ -21,7 +21,7 @@
 
 #include <k3bmedium.h>
 
-class KConfigBase;
+class TDEConfigBase;
 
 
 /**
@@ -39,11 +39,11 @@ class K3bWritingModeWidget : public K3bIntMapComboBox
 
   int writingMode() const;
 
-  void saveConfig( KConfigBase* );
+  void saveConfig( TDEConfigBase* );
   /**
    * This will not emit the writingModeChanged signal
    */
-  void loadConfig( KConfigBase* );
+  void loadConfig( TDEConfigBase* );
 
  public slots:
   /**

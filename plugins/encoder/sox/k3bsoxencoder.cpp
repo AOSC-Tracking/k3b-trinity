@@ -201,7 +201,7 @@ bool K3bSoxEncoder::initEncoderInternal( const TQString& extension )
     // output settings
     *d->process << "-t" << extension;
 
-    KConfig* c = k3bcore->config();
+    TDEConfig* c = k3bcore->config();
     c->setGroup( "K3bSoxEncoderPlugin" );
     if( c->readBoolEntry( "manual settings", false ) ) {
       *d->process << "-r" << TQString::number( c->readNumEntry( "samplerate", 44100 ) )
@@ -348,7 +348,7 @@ TQString K3bSoxEncoder::fileTypeComment( const TQString& ext ) const
 long long K3bSoxEncoder::fileSize( const TQString&, const K3b::Msf& msf ) const
 {
   // for now we make a rough assumption based on the settings
-    KConfig* c = k3bcore->config();
+    TDEConfig* c = k3bcore->config();
     c->setGroup( "K3bSoxEncoderPlugin" );
     if( c->readBoolEntry( "manual settings", false ) ) {
       int sr =  c->readNumEntry( "samplerate", 44100 );
@@ -392,7 +392,7 @@ K3bSoxEncoderSettingsWidget::~K3bSoxEncoderSettingsWidget()
 
 void K3bSoxEncoderSettingsWidget::loadConfig()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
 
   c->setGroup( "K3bSoxEncoderPlugin" );
 
@@ -428,7 +428,7 @@ void K3bSoxEncoderSettingsWidget::loadConfig()
 
 void K3bSoxEncoderSettingsWidget::saveConfig()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
 
   c->setGroup( "K3bSoxEncoderPlugin" );
 

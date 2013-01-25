@@ -100,7 +100,7 @@ bool K3bCddbPatternWidget::replaceBlanks() const
 }
 
 
-void K3bCddbPatternWidget::loadConfig( KConfigBase* c )
+void K3bCddbPatternWidget::loadConfig( TDEConfigBase* c )
 {
   m_comboPlaylistPattern->setEditText( c->readEntry( "playlist pattern", m_comboPlaylistPattern->text(0) ) );
   m_comboFilenamePattern->setEditText( c->readEntry( "filename pattern", m_comboFilenamePattern->text(0) ) );
@@ -109,7 +109,7 @@ void K3bCddbPatternWidget::loadConfig( KConfigBase* c )
 }
 
 
-void K3bCddbPatternWidget::saveConfig( KConfigBase* c )
+void K3bCddbPatternWidget::saveConfig( TDEConfigBase* c )
 {
   c->writeEntry( "playlist pattern", m_comboPlaylistPattern->currentText() );
   c->writeEntry( "filename pattern", m_comboFilenamePattern->currentText() );

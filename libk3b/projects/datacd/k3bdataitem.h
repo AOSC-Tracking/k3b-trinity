@@ -117,7 +117,7 @@ class LIBK3B_EXPORT K3bDataItem
   /**
    * The size of the item
    */
-  KIO::filesize_t size() const;
+  TDEIO::filesize_t size() const;
 
   /**
    * \return The number of blocks (2048 bytes) occupied by this item.
@@ -183,7 +183,7 @@ class LIBK3B_EXPORT K3bDataItem
   void setExtraInfo( const TQString& i ) { m_extraInfo = i; }
 
  protected:
-  virtual KIO::filesize_t itemSize( bool followSymlinks ) const = 0;
+  virtual TDEIO::filesize_t itemSize( bool followSymlinks ) const = 0;
 
   /**
    * \param followSymlinks If true symlinks will be followed and their

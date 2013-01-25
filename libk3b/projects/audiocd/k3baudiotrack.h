@@ -56,7 +56,7 @@ class LIBK3B_EXPORT K3bAudioTrack
    * @return length of track in frames
    */
   K3b::Msf length() const;
-  KIO::filesize_t size() const;
+  TDEIO::filesize_t size() const;
 
   const TQString& artist() const { return m_cdText.performer(); }
   const TQString& performer() const { return m_cdText.performer(); }

@@ -24,7 +24,7 @@ class TQLabel;
 class KPushButton;
 class TQButton;
 class K3bThemedHeader;
-class KConfigBase;
+class TDEConfigBase;
 class KGuiItem;
 
 
@@ -207,7 +207,7 @@ class K3bInteractionDialog : public KDialog
    * The save/load buttons are only activated if the config group is
    * set in the constructor.
    */
-  virtual void saveUserDefaults( KConfigBase* config );
+  virtual void saveUserDefaults( TDEConfigBase* config );
 
   /**
    * Reimplement this to support the save/load user default buttons.
@@ -216,7 +216,7 @@ class K3bInteractionDialog : public KDialog
    * The save/load buttons are only activated if the config group is
    * set in the constructor.
    */
-  virtual void loadUserDefaults( KConfigBase* config );
+  virtual void loadUserDefaults( TDEConfigBase* config );
 
   /**
    * Reimplement this to support the "k3b defaults" button.

@@ -27,7 +27,7 @@
 #include <kdebug.h>
 
 class TDEProcess;
-class KConfig;
+class TDEConfig;
 class K3bExternalBin;
 
 
@@ -171,9 +171,9 @@ namespace K3bDevice {
       /**
        * Reads the device information from the config file.
        */
-      virtual bool readConfig( KConfig* );
+      virtual bool readConfig( TDEConfig* );
 
-      virtual bool saveConfig( KConfig* );
+      virtual bool saveConfig( TDEConfig* );
 
 
     public slots:

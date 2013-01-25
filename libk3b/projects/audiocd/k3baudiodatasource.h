@@ -67,7 +67,7 @@ class LIBK3B_EXPORT K3bAudioDataSource
   /** 
    * @return The raw size in pcm samples (16bit, 44800 kHz, stereo) 
    */
-  KIO::filesize_t size() const { return length().audioBytes(); }
+  TDEIO::filesize_t size() const { return length().audioBytes(); }
 
   virtual bool seek( const K3b::Msf& ) = 0;
 

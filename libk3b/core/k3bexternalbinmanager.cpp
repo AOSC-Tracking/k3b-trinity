@@ -173,7 +173,7 @@ K3bExternalBinManager::~K3bExternalBinManager()
 }
 
 
-bool K3bExternalBinManager::readConfig( KConfig* c )
+bool K3bExternalBinManager::readConfig( TDEConfig* c )
 {
   loadDefaultSearchPath();
 
@@ -207,7 +207,7 @@ bool K3bExternalBinManager::readConfig( KConfig* c )
   return true;
 }
 
-bool K3bExternalBinManager::saveConfig( KConfig* c )
+bool K3bExternalBinManager::saveConfig( TDEConfig* c )
 {
   c->setGroup( "External Programs" );
   c->writePathEntry( "search path", m_searchPath );

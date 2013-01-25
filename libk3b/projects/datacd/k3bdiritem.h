@@ -101,7 +101,7 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
    * between files with the same inode in an iso9660 filesystem.
    * For that one has to use K3bFileCompilationSizeHandler.
    */
-  KIO::filesize_t itemSize( bool followSymlinks ) const;
+  TDEIO::filesize_t itemSize( bool followSymlinks ) const;
 
   /*
    * Normally one does not use this method but K3bDataItem::blocks()
@@ -124,8 +124,8 @@ class LIBK3B_EXPORT K3bDirItem : public K3bDataItem
   mutable TQPtrList<K3bDataItem> m_children;
 
   // size of the items simply added
-  KIO::filesize_t m_size;
-  KIO::filesize_t m_followSymlinksSize;
+  TDEIO::filesize_t m_size;
+  TDEIO::filesize_t m_followSymlinksSize;
 
   // number of blocks (2048 bytes) used by all the items
   long m_blocks;

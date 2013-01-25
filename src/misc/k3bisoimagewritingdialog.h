@@ -59,8 +59,8 @@ class K3bIsoImageWritingDialog : public K3bInteractionDialog
   void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& pos );
 
  protected:
-  void loadUserDefaults( KConfigBase* );
-  void saveUserDefaults( KConfigBase* );
+  void loadUserDefaults( TDEConfigBase* );
+  void saveUserDefaults( TDEConfigBase* );
   void loadK3bDefaults();
 
   void calculateMd5Sum( const TQString& );

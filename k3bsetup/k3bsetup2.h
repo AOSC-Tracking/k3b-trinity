@@ -25,7 +25,7 @@ class base_K3bSetup2;
 class TQCheckListItem;
 
 
-class K3bSetup2: public KCModule
+class K3bSetup2: public TDECModule
 {
   Q_OBJECT
   

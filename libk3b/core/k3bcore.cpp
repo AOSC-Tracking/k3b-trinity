@@ -104,7 +104,7 @@ public:
   }
 
   K3bVersion version;
-  KConfig* config;
+  TDEConfig* config;
   bool deleteConfig;
   K3bDevice::DeviceManager* deviceManager;
   K3bExternalBinManager* externalBinManager;
@@ -178,13 +178,13 @@ const K3bVersion& K3bCore::version() const
 }
 
 
-KConfig* K3bCore::config() const
+TDEConfig* K3bCore::config() const
 {
   if( !d->config ) {
     kdDebug() << "(K3bCore) opening k3b config file." << endl;
     kdDebug() << "(K3bCore) while I am a " << className() << endl;
     d->deleteConfig = true;
-    d->config = new KConfig( "k3brc" );
+    d->config = new TDEConfig( "k3brc" );
   }
 
   return d->config;
@@ -251,9 +251,9 @@ void K3bCore::initPluginManager()
 }
 
 
-void K3bCore::readSettings( KConfig* cnf )
+void K3bCore::readSettings( TDEConfig* cnf )
 {
-  KConfig* c = cnf;
+  TDEConfig* c = cnf;
   if( !c )
     c = config();
 
@@ -267,9 +267,9 @@ void K3bCore::readSettings( KConfig* cnf )
 }
 
 
-void K3bCore::saveSettings( KConfig* cnf )
+void K3bCore::saveSettings( TDEConfig* cnf )
 {
-  KConfig* c = cnf;
+  TDEConfig* c = cnf;
   if( !c )
     c = config();
 

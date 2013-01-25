@@ -210,7 +210,7 @@ K3b::Msf K3bAudioTrack::length() const
 }
 
 
-KIO::filesize_t K3bAudioTrack::size() const
+TDEIO::filesize_t K3bAudioTrack::size() const
 {
   return length().audioBytes();
 }

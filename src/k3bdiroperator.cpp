@@ -64,7 +64,7 @@ K3bDirOperator::~K3bDirOperator()
 }
 
 
-void K3bDirOperator::readConfig( KConfig* cfg, const TQString& group )
+void K3bDirOperator::readConfig( TDEConfig* cfg, const TQString& group )
 {
   TQString oldGroup = cfg->group();
   cfg->setGroup( group );
@@ -93,7 +93,7 @@ void K3bDirOperator::readConfig( KConfig* cfg, const TQString& group )
 }
 
 
-void K3bDirOperator::writeConfig( KConfig* cfg, const TQString& group )
+void K3bDirOperator::writeConfig( TDEConfig* cfg, const TQString& group )
 {
   TQString oldGroup = cfg->group();
   cfg->setGroup( group );

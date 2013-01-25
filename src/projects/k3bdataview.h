@@ -28,7 +28,7 @@ class K3bDataFileView;
 class TQLineEdit;
 
 
-namespace KIO {
+namespace TDEIO {
   class Job;
 }
 namespace K3bDevice {

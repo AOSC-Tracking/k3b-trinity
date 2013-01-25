@@ -98,11 +98,11 @@ KoZipStore::~KoZipStore()
     // Now we have still some job to do for remote files.
     if ( m_fileMode == KoStoreBase::RemoteRead )
     {
-        KIO::NetAccess::removeTempFile( m_localFileName );
+        TDEIO::NetAccess::removeTempFile( m_localFileName );
     }
     else if ( m_fileMode == KoStoreBase::RemoteWrite )
     {
-        KIO::NetAccess::upload( m_localFileName, m_url, m_window );
+        TDEIO::NetAccess::upload( m_localFileName, m_url, m_window );
         // ### FIXME: delete temp file
     }
 }
@@ -148,13 +148,13 @@ bool KoZipStore::openRead( const TQString& name )
     if ( entry == 0L )
     {
         //kdWarning(s_area) << "Unknown filename " << name << endl;
-        //return KIO::ERR_DOES_NOT_EXIST;
+        //return TDEIO::ERR_DOES_NOT_EXIST;
         return false;
     }
     if ( entry->isDirectory() )
     {
         kdWarning(s_area) << name << " is a directory !" << endl;
-        //return KIO::ERR_IS_DIRECTORY;
+        //return TDEIO::ERR_IS_DIRECTORY;
         return false;
     }
     // Must cast to KZipFileEntry, not only KArchiveFile, because device() isn't virtual!

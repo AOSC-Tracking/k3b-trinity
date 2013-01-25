@@ -18,7 +18,7 @@
 
 #include <k3bdatadoc.h>
 #include "k3b_export.h"
-class KConfig;
+class TDEConfig;
 
 class LIBK3B_EXPORT K3bDvdDoc : public K3bDataDoc
 {

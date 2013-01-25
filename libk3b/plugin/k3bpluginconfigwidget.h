@@ -32,7 +32,7 @@ class LIBK3B_EXPORT K3bPluginConfigWidget : public TQWidget
  public slots:
   /**
    * Use k3bcore->config() to store the settings
-   * FIXME: add a KConfig parameter here
+   * FIXME: add a TDEConfig parameter here
    */
   virtual void loadConfig();
   virtual void saveConfig();

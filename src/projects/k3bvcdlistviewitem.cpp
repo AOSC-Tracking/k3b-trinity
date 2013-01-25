@@ -72,7 +72,7 @@ TQString K3bVcdListViewItem::text( int i ) const
             return m_track->duration() + "  ";
             case 8:
             // track size
-            return KIO::convertSize( m_track->size() ) + "  ";
+            return TDEIO::convertSize( m_track->size() ) + "  ";
             case 9:
             // filename
             return m_track->fileName();

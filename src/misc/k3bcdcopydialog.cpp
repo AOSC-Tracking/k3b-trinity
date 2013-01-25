@@ -357,7 +357,7 @@ void K3bCdCopyDialog::slotStartClicked()
   delete dlg;
   delete burnJob;
 
-  if( KConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
+  if( TDEConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
       !exitLoopOnHide() )
     show();
   else
@@ -456,7 +456,7 @@ void K3bCdCopyDialog::updateOverrideDevice()
 }
 
 
-void K3bCdCopyDialog::loadUserDefaults( KConfigBase* c )
+void K3bCdCopyDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_writerSelectionWidget->loadConfig( c );
   m_comboSourceDevice->setSelectedDevice( k3bcore->deviceManager()->findDevice( c->readEntry( "source_device" ) ) );
@@ -489,7 +489,7 @@ void K3bCdCopyDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bCdCopyDialog::saveUserDefaults( KConfigBase* c )
+void K3bCdCopyDialog::saveUserDefaults( TDEConfigBase* c )
 {
   m_writingModeWidget->saveConfig( c );
   c->writeEntry( "simulate", m_checkSimulate->isChecked() );
@@ -545,7 +545,7 @@ void K3bCdCopyDialog::loadK3bDefaults()
 }
 
 
-KIO::filesize_t K3bCdCopyDialog::neededSize() const
+TDEIO::filesize_t K3bCdCopyDialog::neededSize() const
 {
   if( m_comboCopyMode->currentItem() == 0 )
     return k3bappcore->mediaCache()->medium( m_comboSourceDevice->selectedDevice() ).diskInfo().size().mode1Bytes();

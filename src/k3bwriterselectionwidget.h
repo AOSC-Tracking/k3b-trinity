@@ -20,7 +20,7 @@
 #include <tqwidget.h>
 
 class KComboBox;
-class KConfigBase;
+class TDEConfigBase;
 class TQLabel;
 class K3bMediaSelectionComboBox;
 namespace K3bDevice {
@@ -58,8 +58,8 @@ class K3bWriterSelectionWidget : public TQWidget
   int wantedMediumState() const;
 
   void loadDefaults();
-  void loadConfig( KConfigBase* );
-  void saveConfig( KConfigBase* );
+  void loadConfig( TDEConfigBase* );
+  void saveConfig( TDEConfigBase* );
 
  public slots:
   void setWriterDevice( K3bDevice::Device* );
@@ -122,7 +122,7 @@ class K3bWriterSelectionWidget : public TQWidget
   void slotRefreshWriterSpeeds();
   void slotRefreshWritingApps();
   void slotWritingAppSelected( int id );
-  void slotConfigChanged( KConfigBase* c );
+  void slotConfigChanged( TDEConfigBase* c );
   void slotSpeedChanged( int index );
   void slotWriterChanged();
   void slotNewBurnMedium( K3bDevice::Device* dev );

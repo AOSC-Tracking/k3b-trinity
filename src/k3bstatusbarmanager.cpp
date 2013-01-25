@@ -79,7 +79,7 @@ K3bStatusBarManager::K3bStatusBarManager( K3bMainWindow* parent )
   m_mainWindow->statusBar()->addWidget( new TQLabel( "  ", m_mainWindow->statusBar() ), 0, true );
   m_mainWindow->statusBar()->addWidget( m_versionBox, 0, true );
 
-  connect( m_mainWindow, TQT_SIGNAL(configChanged(KConfig*)), this, TQT_SLOT(update()) );
+  connect( m_mainWindow, TQT_SIGNAL(configChanged(TDEConfig*)), this, TQT_SLOT(update()) );
   connect( m_mainWindow->actionCollection(), TQT_SIGNAL(actionStatusText(const TQString&)),
 	   this, TQT_SLOT(showActionStatusText(const TQString&)) );
   connect( m_mainWindow->actionCollection(), TQT_SIGNAL(clearStatusText()),
@@ -124,8 +124,8 @@ void K3bStatusBarManager::slotFreeTempSpace(const TQString&,
 					    unsigned long,
 					    unsigned long kbAvail)
 {
-  m_labelFreeTemp->setText(KIO::convertSizeFromKB(kbAvail)  + "/" +
-	                   KIO::convertSizeFromKB(kbSize)  );
+  m_labelFreeTemp->setText(TDEIO::convertSizeFromKB(kbAvail)  + "/" +
+	                   TDEIO::convertSizeFromKB(kbSize)  );
 
   // if we have less than 640 MB that is not good
   if( kbAvail < 655360 )

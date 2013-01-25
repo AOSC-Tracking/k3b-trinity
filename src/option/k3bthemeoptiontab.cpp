@@ -140,7 +140,7 @@ void K3bThemeOptionTab::slotInstallTheme()
   TQString themeTmpFile;
   // themeTmpFile contains the name of the downloaded file
 
-  if( !KIO::NetAccess::download( themeURL, themeTmpFile, this ) ) {
+  if( !TDEIO::NetAccess::download( themeURL, themeTmpFile, this ) ) {
     TQString sorryText;
     if (themeURL.isLocalFile())
        sorryText = i18n("Unable to find the icon theme archive %1.");
@@ -196,7 +196,7 @@ void K3bThemeOptionTab::slotInstallTheme()
   }
 
   archive.close();
-  KIO::NetAccess::removeTempFile(themeTmpFile);
+  TDEIO::NetAccess::removeTempFile(themeTmpFile);
 
   readSettings();
 }
@@ -227,7 +227,7 @@ void K3bThemeOptionTab::slotRemoveTheme()
     readSettings();
 
     // delete the theme data itself
-    KIO::del( path, false, false );
+    TDEIO::del( path, false, false );
   }
 }
 

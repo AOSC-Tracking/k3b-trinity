@@ -276,32 +276,32 @@ bool K3b::kbFreeOnFs( const TQString& path, unsigned long& size, unsigned long& 
 }
 
 
-KIO::filesize_t K3b::filesize( const KURL& url )
+TDEIO::filesize_t K3b::filesize( const KURL& url )
 {
     if( url.isLocalFile() ) {
         k3b_struct_stat buf;
         if ( !k3b_stat( TQFile::encodeName( url.path() ), &buf ) ) {
-            return (KIO::filesize_t)buf.st_size;
+            return (TDEIO::filesize_t)buf.st_size;
         }
     }
 
-    KIO::UDSEntry uds;
-    KIO::NetAccess::stat( url, uds, 0 );
-    for( KIO::UDSEntry::const_iterator it = uds.begin(); it != uds.end(); ++it ) {
-        if( (*it).m_uds == KIO::UDS_SIZE ) {
+    TDEIO::UDSEntry uds;
+    TDEIO::NetAccess::stat( url, uds, 0 );
+    for( TDEIO::UDSEntry::const_iterator it = uds.begin(); it != uds.end(); ++it ) {
+        if( (*it).m_uds == TDEIO::UDS_SIZE ) {
             return (*it).m_long;
         }
     }
 
-    return ( KIO::filesize_t )0;
+    return ( TDEIO::filesize_t )0;
 }
 
 
-KIO::filesize_t K3b::imageFilesize( const KURL& url )
+TDEIO::filesize_t K3b::imageFilesize( const KURL& url )
 {
-  KIO::filesize_t size = K3b::filesize( url );
+  TDEIO::filesize_t size = K3b::filesize( url );
   int cnt = 0;
-  while( KIO::NetAccess::exists( KURL::fromPathOrURL( url.url() + '.' + TQString::number(cnt).rightJustify( 3, '0' ) ), true ) )
+  while( TDEIO::NetAccess::exists( KURL::fromPathOrURL( url.url() + '.' + TQString::number(cnt).rightJustify( 3, '0' ) ), true ) )
     size += K3b::filesize( KURL::fromPathOrURL( url.url() + '.' + TQString::number(cnt++).rightJustify( 3, '0' ) ) );
   return size;
 }
@@ -462,17 +462,17 @@ KURL K3b::convertToLocalUrl( const KURL& url )
 {
   if( !url.isLocalFile() ) {
 #if KDE_IS_VERSION(3,4,91)
-    return KIO::NetAccess::mostLocalURL( url, 0 );
+    return TDEIO::NetAccess::mostLocalURL( url, 0 );
 #else
 #ifndef UDS_LOCAL_PATH
-#define UDS_LOCAL_PATH (72 | KIO::UDS_STRING)
+#define UDS_LOCAL_PATH (72 | TDEIO::UDS_STRING)
 #else
-    using namespace KIO;
+    using namespace TDEIO;
 #endif
-    KIO::UDSEntry e;
-    if( KIO::NetAccess::stat( url, e, 0 ) ) {
-      const KIO::UDSEntry::ConstIterator end = e.end();
-      for( KIO::UDSEntry::ConstIterator it = e.begin(); it != end; ++it ) {
+    TDEIO::UDSEntry e;
+    if( TDEIO::NetAccess::stat( url, e, 0 ) ) {
+      const TDEIO::UDSEntry::ConstIterator end = e.end();
+      for( TDEIO::UDSEntry::ConstIterator it = e.begin(); it != end; ++it ) {
 	if( (*it).m_uds == UDS_LOCAL_PATH && !(*it).m_str.isEmpty() )
 	  return KURL::fromPathOrURL( (*it).m_str );
       }
@@ -541,7 +541,7 @@ bool K3b::isMounted( K3bDevice::Device* dev )
   if( !dev )
     return false;
 
-  return !KIO::findDeviceMountPoint( dev->blockDeviceName() ).isEmpty();
+  return !TDEIO::findDeviceMountPoint( dev->blockDeviceName() ).isEmpty();
 }
 
 
@@ -554,7 +554,7 @@ bool K3b::unmount( K3bDevice::Device* dev )
 
 #if KDE_IS_VERSION(3,4,0)
   // first try to unmount it the standard way
-  if( KIO::NetAccess::synchronousRun( KIO::unmount( mntDev, false ), 0 ) )
+  if( TDEIO::NetAccess::synchronousRun( TDEIO::unmount( mntDev, false ), 0 ) )
     return true;
 #endif
 
@@ -598,7 +598,7 @@ bool K3b::mount( K3bDevice::Device* dev )
 
 #if KDE_IS_VERSION(3,4,0)
   // first try to mount it the standard way
-  if( KIO::NetAccess::synchronousRun( KIO::mount( true, 0, mntDev, false ), 0 ) )
+  if( TDEIO::NetAccess::synchronousRun( TDEIO::mount( true, 0, mntDev, false ), 0 ) )
     return true;
 #endif
 

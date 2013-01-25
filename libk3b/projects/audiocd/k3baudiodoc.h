@@ -38,7 +38,7 @@ class TQTimer;
 class TQDomDocument;
 class TQDomElement;
 class K3bThreadJob;
-class KConfig;
+class TDEConfig;
 class K3bAudioDataSource;
 class K3bAudioDecoder;
 class K3bAudioFile;
@@ -84,7 +84,7 @@ class LIBK3B_EXPORT K3bAudioDoc : public K3bDoc
   K3bAudioFile* createAudioFile( const KURL& url );
 
   /** get the current size of the project */
-  KIO::filesize_t size() const;
+  TDEIO::filesize_t size() const;
   K3b::Msf length() const;
 	
   // CD-Text

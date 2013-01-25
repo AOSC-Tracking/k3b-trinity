@@ -181,7 +181,7 @@ TQString K3bDataUrlAddingDialog::resultMessage() const
       .arg( m_unreadableFiles.join( "<br>" ) );
   if( !m_tooBigFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")
-      .arg( i18n("It is not possible to add files bigger than %1").arg(KIO::convertSize(0xFFFFFFFF)) )
+      .arg( i18n("It is not possible to add files bigger than %1").arg(TDEIO::convertSize(0xFFFFFFFF)) )
       .arg( m_tooBigFiles.join( "<br>" ) );
   if( !m_mkisofsLimitationRenamedFiles.isEmpty() )
     message += TQString("<p><b>%1:</b><br>%2")

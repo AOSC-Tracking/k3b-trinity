@@ -43,7 +43,7 @@ class K3bFileCompilationSizeHandler
    * This does NOT equal blocks() * 2048.
    * This is the sum of the actual file sizes.
    */
-  const KIO::filesize_t& size( bool followSymlinks = false ) const;
+  const TDEIO::filesize_t& size( bool followSymlinks = false ) const;
 
   /**
    * Number of blocks the files will occupy.

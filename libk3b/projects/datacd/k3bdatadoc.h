@@ -40,7 +40,7 @@ class K3bFileCompilationSizeHandler;
 
 class KProgressDialog;
 //class K3bView;
-class KConfig;
+class TDEConfig;
 class TQString;
 class TQStringList;
 class TQWidget;
@@ -89,12 +89,12 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
   K3bRootItem* root() const { return m_root; }
 
   virtual bool newDocument();
-  virtual KIO::filesize_t size() const;
+  virtual TDEIO::filesize_t size() const;
 
   /**
    * This is used for multisession where size() also returnes the imported session's size
    */
-  virtual KIO::filesize_t burningSize() const;
+  virtual TDEIO::filesize_t burningSize() const;
   virtual K3b::Msf length() const;
   virtual K3b::Msf burningLength() const;
 
@@ -131,7 +131,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
   /**
    * Most of the options that map to the mkisofs parameters are grouped
    * together in the K3bIsoOptions class to allow easy saving to and loading
-   * from a KConfig object.
+   * from a TDEConfig object.
    */
   const K3bIsoOptions& isoOptions() const { return m_isoOptions; }
   void setIsoOptions( const K3bIsoOptions& );
@@ -242,7 +242,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
   K3bFileCompilationSizeHandler* m_sizeHandler;
 
   //  K3bFileCompilationSizeHandler* m_oldSessionSizeHandler;
-  KIO::filesize_t m_oldSessionSize;
+  TDEIO::filesize_t m_oldSessionSize;
 
  private:
   void prepareFilenamesInDir( K3bDirItem* dir );
@@ -274,7 +274,7 @@ class LIBK3B_EXPORT K3bDataDoc : public K3bDoc
 
   bool m_verifyData;
 
-  KIO::filesize_t m_size;
+  TDEIO::filesize_t m_size;
 		
   K3bIsoOptions m_isoOptions;
 

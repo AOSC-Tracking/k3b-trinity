@@ -46,7 +46,7 @@ class K3bVideoDVDRippingWidget : public base_K3bVideoDVDRippingWidget
   void setSelectedAudioBitrate( int bitrate );
   void setSelectedPictureSize( const TQSize& );
 
-  void setNeededSize( KIO::filesize_t );
+  void setNeededSize( TDEIO::filesize_t );
 
  signals:
   void changed();
@@ -60,7 +60,7 @@ class K3bVideoDVDRippingWidget : public base_K3bVideoDVDRippingWidget
 
  private:
   TQTimer* m_freeSpaceUpdateTimer;
-  KIO::filesize_t m_neededSize;
+  TDEIO::filesize_t m_neededSize;
 
   TQSize m_customVideoSize;
 };

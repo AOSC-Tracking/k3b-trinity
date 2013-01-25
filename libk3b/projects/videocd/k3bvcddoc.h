@@ -41,7 +41,7 @@ class TQWidget;
 class TQTimer;
 class TQDomDocument;
 class TQDomElement;
-class KConfig;
+class TDEConfig;
 
 
 
@@ -106,7 +106,7 @@ class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
         }
 
         /** get the current size of the project */
-        KIO::filesize_t size() const;
+        TDEIO::filesize_t size() const;
         K3b::Msf length() const;
 
         K3bBurnJob* newBurnJob( K3bJobHandler* hdl, TQObject* parent );
@@ -178,8 +178,8 @@ class LIBK3B_EXPORT K3bVcdDoc : public K3bDoc
         TQTimer* m_urlAddingTimer;
 
         TQPtrList<K3bVcdTrack>* m_tracks;
-        KIO::filesize_t calcTotalSize() const;
-        KIO::filesize_t ISOsize() const;
+        TDEIO::filesize_t calcTotalSize() const;
+        TDEIO::filesize_t ISOsize() const;
 
         bool isImage( const KURL& url );
 

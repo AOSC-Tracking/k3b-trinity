@@ -272,7 +272,7 @@ void K3bVideoDVDRippingDialog::slotUpdateFilenames()
 void K3bVideoDVDRippingDialog::slotUpdateFilesizes()
 {
   double bitrate = (double)m_w->m_spinVideoBitrate->value();
-  KIO::filesize_t overallSize = 0ULL;
+  TDEIO::filesize_t overallSize = 0ULL;
 
   // update file sizes
   for( TQMap<TQCheckListItem*, K3bVideoDVDRippingJob::TitleRipInfo>::iterator it = m_titleRipInfos.begin();
@@ -281,13 +281,13 @@ void K3bVideoDVDRippingDialog::slotUpdateFilesizes()
     double sec = m_dvd[it.data().title-1].playbackTime().totalSeconds();
 
     // estimate the filesize
-    KIO::filesize_t size = (KIO::filesize_t)( sec * bitrate * 1000.0 / 8.0 );
+    TDEIO::filesize_t size = (TDEIO::filesize_t)( sec * bitrate * 1000.0 / 8.0 );
 
     // add audio stream size
     // FIXME: consider AC3 passthrough
-    size += (KIO::filesize_t)( sec * m_w->selectedAudioBitrate() / 8.0 * 1024.0 );
+    size += (TDEIO::filesize_t)( sec * m_w->selectedAudioBitrate() / 8.0 * 1024.0 );
 
-    it.key()->setText( 2, KIO::convertSize( size ) );
+    it.key()->setText( 2, TDEIO::convertSize( size ) );
 
     overallSize += size;
   }
@@ -514,7 +514,7 @@ void K3bVideoDVDRippingDialog::loadK3bDefaults()
 }
 
 
-void K3bVideoDVDRippingDialog::loadUserDefaults( KConfigBase* c )
+void K3bVideoDVDRippingDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_w->m_spinVideoBitrate->setValue( c->readNumEntry( "video bitrate", 1200 ) );
   m_w->m_checkTwoPassEncoding->setChecked( c->readBoolEntry( "two pass encoding", true ) );
@@ -532,7 +532,7 @@ void K3bVideoDVDRippingDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bVideoDVDRippingDialog::saveUserDefaults( KConfigBase* c )
+void K3bVideoDVDRippingDialog::saveUserDefaults( TDEConfigBase* c )
 {
   c->writeEntry( "video bitrate", m_w->m_spinVideoBitrate->value() );
   c->writeEntry( "two pass encoding", m_w->m_checkTwoPassEncoding->isChecked() );

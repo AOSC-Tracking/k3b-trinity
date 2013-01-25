@@ -67,11 +67,11 @@ namespace K3b
 
       TQString toString( bool showFrames = true ) const;
 
-      KIO::filesize_t mode1Bytes() const;
-      KIO::filesize_t mode2Form1Bytes() const;
-      KIO::filesize_t mode2Form2Bytes() const;
-      KIO::filesize_t audioBytes() const;
-      KIO::filesize_t rawBytes() const;
+      TDEIO::filesize_t mode1Bytes() const;
+      TDEIO::filesize_t mode2Form1Bytes() const;
+      TDEIO::filesize_t mode2Form2Bytes() const;
+      TDEIO::filesize_t audioBytes() const;
+      TDEIO::filesize_t rawBytes() const;
       unsigned long long pcmSamples() const { return lba()*588; }
 
       /**

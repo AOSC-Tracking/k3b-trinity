@@ -130,7 +130,7 @@ K3bCddbOptionTab::~K3bCddbOptionTab()
 
 void K3bCddbOptionTab::readSettings()
 {
-  KConfig* c = kapp->config();
+  TDEConfig* c = kapp->config();
 
   c->setGroup( "Cddb" );
 
@@ -188,7 +188,7 @@ void K3bCddbOptionTab::readSettings()
 
 void K3bCddbOptionTab::apply()
 {
-  KConfig* c = kapp->config();
+  TDEConfig* c = kapp->config();
 
   c->setGroup( "Cddb" );
 

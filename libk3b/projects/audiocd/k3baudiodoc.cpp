@@ -145,7 +145,7 @@ void K3bAudioDoc::setLastTrack( K3bAudioTrack* track )
 }
 
 
-KIO::filesize_t K3bAudioDoc::size() const 
+TDEIO::filesize_t K3bAudioDoc::size() const 
 {
   // This is not really correct but what the user expects ;)
   return length().mode1Bytes();

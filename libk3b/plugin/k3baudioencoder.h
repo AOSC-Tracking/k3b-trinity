@@ -51,7 +51,7 @@ class LIBK3B_EXPORT K3bAudioEncoder : public K3bPlugin
   /**
    * Force the plugin to read it's configuration
    */
-  // virtual void readConfig( KConfig* );
+  // virtual void readConfig( TDEConfig* );
 
   TQString group() const { return "AudioEncoder"; }
 

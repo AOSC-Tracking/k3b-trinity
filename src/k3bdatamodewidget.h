@@ -20,7 +20,7 @@
 #include <tqcombobox.h>
 
 
-class KConfigBase;
+class TDEConfigBase;
 
 
 class K3bDataModeWidget : public TQComboBox
@@ -37,8 +37,8 @@ class K3bDataModeWidget : public TQComboBox
    */
   int dataMode() const;
 
-  void saveConfig( KConfigBase* );
-  void loadConfig( KConfigBase* );
+  void saveConfig( TDEConfigBase* );
+  void loadConfig( TDEConfigBase* );
 
  public slots:
   void setDataMode( int );

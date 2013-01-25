@@ -25,7 +25,7 @@
 
 
 
-class KConfigBase;
+class TDEConfigBase;
 
 
 class K3bTheme
@@ -131,8 +131,8 @@ class K3bThemeManager : public TQObject
   void themeChanged( K3bTheme* );
 
  public slots:
-  void readConfig( KConfigBase* );
-  void saveConfig( KConfigBase* );
+  void readConfig( TDEConfigBase* );
+  void saveConfig( TDEConfigBase* );
   void setCurrentTheme( const TQString& );
   void setCurrentTheme( K3bTheme* );
   void loadThemes();

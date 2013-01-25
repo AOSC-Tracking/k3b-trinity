@@ -335,10 +335,10 @@ TQString K3bDvdJob::jobDetails() const
     return i18n("ISO9660 Filesystem (Size: %1) - %n copy",
 		"ISO9660 Filesystem (Size: %1) - %n copies",
 		m_doc->copies())
-      .arg(KIO::convertSize( m_doc->size() ));
+      .arg(TDEIO::convertSize( m_doc->size() ));
   else
     return i18n("ISO9660 Filesystem (Size: %1)")
-      .arg(KIO::convertSize( m_doc->size() ));
+      .arg(TDEIO::convertSize( m_doc->size() ));
 }
 
 #include "k3bdvdjob.moc"

@@ -27,7 +27,7 @@ class TQDomElement;
 class K3bBurnJob;
 //class K3bView;
 class TQWidget;
-class KConfig;
+class TDEConfig;
 
 
 class LIBK3B_EXPORT K3bMixedDoc : public K3bDoc
@@ -46,7 +46,7 @@ class LIBK3B_EXPORT K3bMixedDoc : public K3bDoc
   void setModified( bool m = true );
   bool isModified() const;
 
-  KIO::filesize_t size() const;
+  TDEIO::filesize_t size() const;
   K3b::Msf length() const;
 
   int numOfTracks() const;

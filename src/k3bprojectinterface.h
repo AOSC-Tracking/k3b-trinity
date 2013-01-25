@@ -65,7 +65,7 @@ class K3bProjectInterface : public DCOPObject
   /**
    * \return size of the project in bytes.
    */
-  virtual KIO::filesize_t size() const;
+  virtual TDEIO::filesize_t size() const;
 
   virtual const TQString& imagePath() const;
 

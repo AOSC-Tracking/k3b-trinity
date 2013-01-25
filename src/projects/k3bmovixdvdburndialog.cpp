@@ -54,7 +54,7 @@ K3bMovixDvdBurnDialog::K3bMovixDvdBurnDialog( K3bMovixDvdDoc* doc, TQWidget* par
   m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::FILE );
 
   setTitle( i18n("eMovix DVD Project"),
-	    i18n("1 file (%1)", "%n files (%1)", m_doc->movixFileItems().count()).arg(KIO::convertSize(m_doc->size())) );
+	    i18n("1 file (%1)", "%n files (%1)", m_doc->movixFileItems().count()).arg(TDEIO::convertSize(m_doc->size())) );
 
   m_movixOptionsWidget = new K3bMovixOptionsWidget( this );
   addPage( m_movixOptionsWidget, i18n("eMovix") );
@@ -103,7 +103,7 @@ void K3bMovixDvdBurnDialog::loadK3bDefaults()
 }
 
 
-void K3bMovixDvdBurnDialog::loadUserDefaults( KConfigBase* c )
+void K3bMovixDvdBurnDialog::loadUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::loadUserDefaults(c);
 
@@ -118,7 +118,7 @@ void K3bMovixDvdBurnDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bMovixDvdBurnDialog::saveUserDefaults( KConfigBase* c )
+void K3bMovixDvdBurnDialog::saveUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::saveUserDefaults(c);
 

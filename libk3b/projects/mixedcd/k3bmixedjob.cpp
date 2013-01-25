@@ -793,8 +793,8 @@ bool K3bMixedJob::writeTocFile()
     m_tocFile->close();
 
     // backup for debugging
-//    KIO::NetAccess::del("/tmp/trueg/tocfile_debug_backup.toc",0L);
-//    KIO::NetAccess::copy( m_tocFile->name(), "/tmp/trueg/tocfile_debug_backup.toc",0L );
+//    TDEIO::NetAccess::del("/tmp/trueg/tocfile_debug_backup.toc",0L);
+//    TDEIO::NetAccess::copy( m_tocFile->name(), "/tmp/trueg/tocfile_debug_backup.toc",0L );
 
     return success;
   }
@@ -1330,7 +1330,7 @@ TQString K3bMixedJob::jobDetails() const
   return ( i18n("%1 tracks (%2 minutes audio data, %3 ISO9660 data)")
 	   .arg(m_doc->numOfTracks())
 	   .arg(m_doc->audioDoc()->length().toString())
-	   .arg(KIO::convertSize(m_doc->dataDoc()->size()))
+	   .arg(TDEIO::convertSize(m_doc->dataDoc()->size()))
 	   + ( m_doc->copies() > 1 && !m_doc->dummy()
 	       ? i18n(" - %n copy", " - %n copies", m_doc->copies())
 	       : TQString() ) );

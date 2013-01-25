@@ -52,7 +52,7 @@ K3bMovixBurnDialog::K3bMovixBurnDialog( K3bMovixDoc* doc, TQWidget* parent, cons
   m_tempDirSelectionWidget->setSelectionMode( K3bTempDirSelectionWidget::FILE );
 
   setTitle( i18n("eMovix CD Project"),
-	    i18n("1 file (%1)", "%n files (%1)", m_doc->movixFileItems().count()).arg(KIO::convertSize(m_doc->size())) );
+	    i18n("1 file (%1)", "%n files (%1)", m_doc->movixFileItems().count()).arg(TDEIO::convertSize(m_doc->size())) );
 
   m_movixOptionsWidget = new K3bMovixOptionsWidget( this );
   addPage( m_movixOptionsWidget, i18n("eMovix") );
@@ -127,7 +127,7 @@ void K3bMovixBurnDialog::loadK3bDefaults()
 }
 
 
-void K3bMovixBurnDialog::loadUserDefaults( KConfigBase* c )
+void K3bMovixBurnDialog::loadUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::loadUserDefaults(c);
 
@@ -146,7 +146,7 @@ void K3bMovixBurnDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bMovixBurnDialog::saveUserDefaults( KConfigBase* c )
+void K3bMovixBurnDialog::saveUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::saveUserDefaults(c);
 

@@ -46,7 +46,7 @@ K3bVideoDvdBurnDialog::K3bVideoDvdBurnDialog( K3bVideoDvdDoc* doc, TQWidget *par
 {
   prepareGui();
 
-  setTitle( i18n("Video DVD Project"), i18n("Size: %1").arg( KIO::convertSize(doc->size()) ) );
+  setTitle( i18n("Video DVD Project"), i18n("Size: %1").arg( TDEIO::convertSize(doc->size()) ) );
 
   // for now we just put the verify checkbox on the main page...
   m_checkVerify = K3bStdGuiItems::verifyCheckBox( m_optionGroup );
@@ -146,7 +146,7 @@ void K3bVideoDvdBurnDialog::loadK3bDefaults()
 }
 
 
-void K3bVideoDvdBurnDialog::loadUserDefaults( KConfigBase* c )
+void K3bVideoDvdBurnDialog::loadUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::loadUserDefaults( c );
 
@@ -159,7 +159,7 @@ void K3bVideoDvdBurnDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bVideoDvdBurnDialog::saveUserDefaults( KConfigBase* c )
+void K3bVideoDvdBurnDialog::saveUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::saveUserDefaults(c);
 

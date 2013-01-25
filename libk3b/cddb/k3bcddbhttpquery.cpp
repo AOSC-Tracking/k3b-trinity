@@ -78,7 +78,7 @@ void K3bCddbHttpQuery::performCommand( const TQString& cmd )
 
   kdDebug() << "(K3bCddbHttpQuery) getting url: " << url.prettyURL() << endl;
 
-  KIO::TransferJob* job = KIO::get( url, false, false );
+  TDEIO::TransferJob* job = TDEIO::get( url, false, false );
 
   if( !job ) {
     setError( CONNECTION_ERROR );
@@ -87,15 +87,15 @@ void K3bCddbHttpQuery::performCommand( const TQString& cmd )
     return;
   }
 
-  connect( job, TQT_SIGNAL(data(KIO::Job*, const TQByteArray&)),
-	   TQT_SLOT(slotData(KIO::Job*, const TQByteArray&)) );
-  connect( job, TQT_SIGNAL(result(KIO::Job*)),
-	   TQT_SLOT(slotResult(KIO::Job*)) );
+  connect( job, TQT_SIGNAL(data(TDEIO::Job*, const TQByteArray&)),
+	   TQT_SLOT(slotData(TDEIO::Job*, const TQByteArray&)) );
+  connect( job, TQT_SIGNAL(result(TDEIO::Job*)),
+	   TQT_SLOT(slotResult(TDEIO::Job*)) );
 }
 
 
 
-void K3bCddbHttpQuery::slotData( KIO::Job*, const TQByteArray& data )
+void K3bCddbHttpQuery::slotData( TDEIO::Job*, const TQByteArray& data )
 {
   if( data.size() ) {
     TQDataStream stream( m_data, IO_WriteOnly | IO_Append );
@@ -104,7 +104,7 @@ void K3bCddbHttpQuery::slotData( KIO::Job*, const TQByteArray& data )
 }
 
 
-void K3bCddbHttpQuery::slotResult( KIO::Job* job )
+void K3bCddbHttpQuery::slotResult( TDEIO::Job* job )
 {
   if( job->error() ) {
     emit infoMessage( job->errorString() );

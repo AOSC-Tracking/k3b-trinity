@@ -28,7 +28,7 @@
 // or we just update the sizes!
 
 
-static long usedBlocks( const KIO::filesize_t& bytes )
+static long usedBlocks( const TDEIO::filesize_t& bytes )
 {
   if( bytes % 2048 )
     return bytes/2048 + 1;
@@ -62,9 +62,9 @@ public:
    * This way we always use the size of the first added file and may
    * warn the user if sizes differ.
    */
-  KIO::filesize_t savedSize;
+  TDEIO::filesize_t savedSize;
 
-  KIO::filesize_t completeSize() const { return savedSize*number; }
+  TDEIO::filesize_t completeSize() const { return savedSize*number; }
 
   /**
    * In an iso9660 filesystem a file occupies complete blocks of 2048 bytes.
@@ -154,7 +154,7 @@ public:
    */
   TQMap<K3bFileItem::Id, InodeInfo> inodeMap;
 
-  KIO::filesize_t size;
+  TDEIO::filesize_t size;
   K3b::Msf blocks;
 
   TQPtrList<K3bDataItem> specialItems;
@@ -175,7 +175,7 @@ K3bFileCompilationSizeHandler::~K3bFileCompilationSizeHandler()
 }
 
 
-const KIO::filesize_t& K3bFileCompilationSizeHandler::size( bool followSymlinks ) const
+const TDEIO::filesize_t& K3bFileCompilationSizeHandler::size( bool followSymlinks ) const
 {
   if( followSymlinks )
     return d_noSymlinks->size;

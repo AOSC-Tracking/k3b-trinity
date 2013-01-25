@@ -105,7 +105,7 @@ public:
       }
       else if( !S_ISLNK( s.st_mode ) ) {
 	++totalFiles;
-	totalSize += (KIO::filesize_t)s.st_size;
+	totalSize += (TDEIO::filesize_t)s.st_size;
       }
     }
 
@@ -121,10 +121,10 @@ public:
   KURL::List urls;
   bool followSymlinks;
 
-  KIO::filesize_t totalSize;
-  KIO::filesize_t totalFiles;
-  KIO::filesize_t totalDirs;
-  KIO::filesize_t totalSymlinks;
+  TDEIO::filesize_t totalSize;
+  TDEIO::filesize_t totalFiles;
+  TDEIO::filesize_t totalDirs;
+  TDEIO::filesize_t totalSymlinks;
 
 private:
   bool m_canceled;
@@ -146,25 +146,25 @@ K3bDirSizeJob::~K3bDirSizeJob()
 }
 
 
-KIO::filesize_t K3bDirSizeJob::totalSize() const
+TDEIO::filesize_t K3bDirSizeJob::totalSize() const
 {
   return d->totalSize;
 }
 
 
-KIO::filesize_t K3bDirSizeJob::totalFiles() const
+TDEIO::filesize_t K3bDirSizeJob::totalFiles() const
 {
   return d->totalFiles;
 }
 
 
-KIO::filesize_t K3bDirSizeJob::totalDirs() const
+TDEIO::filesize_t K3bDirSizeJob::totalDirs() const
 {
   return d->totalDirs;
 }
 
 
-KIO::filesize_t K3bDirSizeJob::totalSymlinks() const
+TDEIO::filesize_t K3bDirSizeJob::totalSymlinks() const
 {
   return d->totalSymlinks;
 }

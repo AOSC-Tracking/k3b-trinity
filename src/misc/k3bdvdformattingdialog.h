@@ -43,8 +43,8 @@ class K3bDvdFormattingDialog : public K3bInteractionDialog
   void slotWriterChanged();
 
  private:
-  void loadUserDefaults( KConfigBase* );
-  void saveUserDefaults( KConfigBase* );
+  void loadUserDefaults( TDEConfigBase* );
+  void saveUserDefaults( TDEConfigBase* );
   void loadK3bDefaults();
 
   K3bWriterSelectionWidget* m_writerSelectionWidget;

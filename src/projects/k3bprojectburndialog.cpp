@@ -366,7 +366,7 @@ void K3bProjectBurnDialog::readSettings()
 }
 
 
-void K3bProjectBurnDialog::saveUserDefaults( KConfigBase* c )
+void K3bProjectBurnDialog::saveUserDefaults( TDEConfigBase* c )
 {
   m_writingModeWidget->saveConfig( c );
   c->writeEntry( "simulate", m_checkSimulate->isChecked() );
@@ -380,7 +380,7 @@ void K3bProjectBurnDialog::saveUserDefaults( KConfigBase* c )
 }
 
 
-void K3bProjectBurnDialog::loadUserDefaults( KConfigBase* c )
+void K3bProjectBurnDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_writingModeWidget->loadConfig( c );
   m_checkSimulate->setChecked( c->readBoolEntry( "simulate", false ) );

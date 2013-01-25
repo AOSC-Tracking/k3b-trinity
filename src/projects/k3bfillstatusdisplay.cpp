@@ -194,22 +194,22 @@ void K3bFillStatusDisplayWidget::paintEvent( TQPaintEvent* )
   if( d->showTime )
     docSizeText = d->doc->length().toString(false) + " " + i18n("min");
   else
-    docSizeText = KIO::convertSize( d->doc->size() );
+    docSizeText = TDEIO::convertSize( d->doc->size() );
 
   TQString overSizeText;
   if( d->cdSize.mode1Bytes() >= d->doc->size() )
     overSizeText = i18n("Available: %1 of %2")
       .arg( d->showTime
 	    ? i18n("%1 min").arg((K3b::Msf( cdSize*60*75 ) - d->doc->length()).toString(false))
-	    : KIO::convertSize( TQMAX( (cdSize * 1024LL * 1024LL) - (long long)d->doc->size(), 0LL ) ) )
+	    : TDEIO::convertSize( TQMAX( (cdSize * 1024LL * 1024LL) - (long long)d->doc->size(), 0LL ) ) )
       .arg( d->showTime
 	    ? i18n("%1 min").arg(K3b::Msf( cdSize*60*75 ).toString(false))
-	    : KIO::convertSizeFromKB( cdSize * 1024 ) );
+	    : TDEIO::convertSizeFromKB( cdSize * 1024 ) );
   else
     overSizeText = i18n("Capacity exceeded by %1")
       .arg( d->showTime
 	    ? i18n("%1 min").arg( (d->doc->length() - K3b::Msf( cdSize*60*75 ) ).toString(false))
-	    : KIO::convertSize( (long long)d->doc->size() - (cdSize * 1024LL * 1024LL) ) );
+	    : TDEIO::convertSize( (long long)d->doc->size() - (cdSize * 1024LL * 1024LL) ) );
   // ====================================================================================
 
   // draw the medium size marker
@@ -286,7 +286,7 @@ public:
 
   void maybeTip( const TQPoint& ) {
     tip( parentWidget()->rect(),
-	 KIO::convertSize( m_doc->size() ) +
+	 TDEIO::convertSize( m_doc->size() ) +
 	 " (" + TDEGlobal::locale()->formatNumber( m_doc->size(), 0 ) + "), " +
 	 m_doc->length().toString(false) + " " + i18n("min") +
 	 " (" + i18n("Right click for media sizes") + ")");
@@ -394,9 +394,9 @@ void K3bFillStatusDisplay::setupPopupMenu()
 				     d->actionCollection, "fillstatus_80minutes" );
   d->action100Min = new KRadioAction( i18n("%1 MB").arg(880), 0, TQT_TQOBJECT(this), TQT_SLOT(slot100Minutes()),
 				      d->actionCollection, "fillstatus_100minutes" );
-  d->actionDvd4_7GB = new KRadioAction( KIO::convertSizeFromKB((int)(4.4*1024.0*1024.0)), 0, TQT_TQOBJECT(this), TQT_SLOT(slotDvd4_7GB()),
+  d->actionDvd4_7GB = new KRadioAction( TDEIO::convertSizeFromKB((int)(4.4*1024.0*1024.0)), 0, TQT_TQOBJECT(this), TQT_SLOT(slotDvd4_7GB()),
 					d->actionCollection, "fillstatus_dvd_4_7gb" );
-  d->actionDvdDoubleLayer = new KRadioAction( KIO::convertSizeFromKB((int)(8.0*1024.0*1024.0)),
+  d->actionDvdDoubleLayer = new KRadioAction( TDEIO::convertSizeFromKB((int)(8.0*1024.0*1024.0)),
 					      0, TQT_TQOBJECT(this), TQT_SLOT(slotDvdDoubleLayer()),
 					      d->actionCollection, "fillstatus_dvd_double_layer" );
   d->actionCustomSize = new K3bRadioAction( i18n("Custom..."), 0, TQT_TQOBJECT(this), TQT_SLOT(slotCustomSize()),
@@ -618,7 +618,7 @@ void K3bFillStatusDisplay::slotDetermineSize()
 void K3bFillStatusDisplay::slotLoadUserDefaults()
 {
   // load project specific values
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( "default " + d->doc->typeString() + " settings" );
 
   // defaults to megabytes
@@ -725,7 +725,7 @@ void K3bFillStatusDisplay::slotMediumChanged( K3bDevice::Device* )
 void K3bFillStatusDisplay::slotSaveUserDefaults()
 {
   // save project specific values
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( "default " + d->doc->typeString() + " settings" );
 
   c->writeEntry( "show minutes", d->showTime );

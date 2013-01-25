@@ -26,7 +26,7 @@
 #include "k3bcddbresult.h"
 #include "k3b_export.h"
 
-class KConfig;
+class TDEConfig;
 class K3bCddbQuery;
 class K3bCddbHttpQuery;
 class K3bCddbpQuery;
@@ -55,7 +55,7 @@ class LIBK3B_EXPORT K3bCddb : public TQObject
  public slots:  
   /** query a cd and connect to the queryFinished signal */
   void query( const K3bDevice::Toc& );
-  void readConfig( KConfig* c );
+  void readConfig( TDEConfig* c );
   void saveEntry( const K3bCddbResultEntry& );
 
  signals:

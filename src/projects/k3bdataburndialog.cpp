@@ -69,7 +69,7 @@ K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, TQWidget *parent, const c
 {
   prepareGui();
 
-  setTitle( i18n("Data Project"), i18n("Size: %1").arg( KIO::convertSize(_doc->size()) ) );
+  setTitle( i18n("Data Project"), i18n("Size: %1").arg( TDEIO::convertSize(_doc->size()) ) );
 
   // for now we just put the verify checkbox on the main page...
   m_checkVerify = K3bStdGuiItems::verifyCheckBox( m_optionGroup );
@@ -220,7 +220,7 @@ void K3bDataBurnDialog::loadK3bDefaults()
 }
 
 
-void K3bDataBurnDialog::loadUserDefaults( KConfigBase* c )
+void K3bDataBurnDialog::loadUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::loadUserDefaults(c);
 
@@ -236,7 +236,7 @@ void K3bDataBurnDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bDataBurnDialog::saveUserDefaults( KConfigBase* c )
+void K3bDataBurnDialog::saveUserDefaults( TDEConfigBase* c )
 {
   K3bProjectBurnDialog::saveUserDefaults(c);
 

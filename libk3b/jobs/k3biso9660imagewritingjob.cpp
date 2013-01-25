@@ -451,7 +451,7 @@ TQString K3bIso9660ImageWritingJob::jobDescription() const
 
 TQString K3bIso9660ImageWritingJob::jobDetails() const
 {
-  return m_imagePath.section("/", -1) + TQString( " (%1)" ).arg(KIO::convertSize(K3b::filesize(KURL::fromPathOrURL(m_imagePath))));
+  return m_imagePath.section("/", -1) + TQString( " (%1)" ).arg(TDEIO::convertSize(K3b::filesize(KURL::fromPathOrURL(m_imagePath))));
 }
 
 

@@ -23,7 +23,7 @@
 class TQTimer;
 class TQLabel;
 class KURLRequester;
-class KConfigBase;
+class TDEConfigBase;
 
 
 /**
@@ -45,7 +45,7 @@ class K3bTempDirSelectionWidget : public TQGroupBox
 
   /**
    * \return Free space in KB
-   * FIXME: use KIO::filesize_t and return the number of bytes
+   * FIXME: use TDEIO::filesize_t and return the number of bytes
    */
   unsigned long freeTempSpace() const;
   TQString tempPath() const;
@@ -60,7 +60,7 @@ class K3bTempDirSelectionWidget : public TQGroupBox
  public slots:
   void setTempPath( const TQString& );
   void setSelectionMode( int mode );
-  void setNeededSize( KIO::filesize_t bytes );
+  void setNeededSize( TDEIO::filesize_t bytes );
 
   /**
    * In file selection mode if the user enters a directory name it will
@@ -74,8 +74,8 @@ class K3bTempDirSelectionWidget : public TQGroupBox
    */
   void saveConfig();
 
-  void readConfig( KConfigBase* );
-  void saveConfig( KConfigBase* );
+  void readConfig( TDEConfigBase* );
+  void saveConfig( TDEConfigBase* );
 
  private slots:
   void slotUpdateFreeTempSpace();

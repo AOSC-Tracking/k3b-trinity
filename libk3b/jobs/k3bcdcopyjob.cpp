@@ -302,7 +302,7 @@ void K3bCdCopyJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
       //
       // check free temp space
       //
-      KIO::filesize_t imageSpaceNeeded = 0;
+      TDEIO::filesize_t imageSpaceNeeded = 0;
       for( K3bDevice::Toc::const_iterator it = d->toc.begin(); it != d->toc.end(); ++it ) {
 	if( (*it).type() == K3bDevice::Track::AUDIO )
 	  imageSpaceNeeded += (*it).length().audioBytes() + 44;
@@ -415,7 +415,7 @@ void K3bCdCopyJob::queryCddb()
 	     this, TQT_SLOT(slotCddbQueryFinished(int)) );
   }
 
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup("Cddb");
 
   d->cddb->readConfig( c );
@@ -432,7 +432,7 @@ void K3bCdCopyJob::slotCddbQueryFinished( int error )
     emit infoMessage( i18n("Found Cddb entry (%1 - %2).").arg(d->cddbInfo.cdArtist).arg(d->cddbInfo.cdTitle), SUCCESS );
 
     // save the entry locally
-    KConfig* c = k3bcore->config();
+    TDEConfig* c = k3bcore->config();
     c->setGroup( "Cddb" );
     if( c->readBoolEntry( "save cddb entries locally", true ) )
       d->cddb->saveEntry( d->cddbInfo );
@@ -1084,7 +1084,7 @@ void K3bCdCopyJob::cleanup()
 
     // remove the tempdir created in prepareImageFiles()
     if( d->deleteTempDir ) {
-      KIO::NetAccess::del( KURL::fromPathOrURL(m_tempPath), 0 );
+      TDEIO::NetAccess::del( KURL::fromPathOrURL(m_tempPath), 0 );
       d->deleteTempDir = false;
     }
   }

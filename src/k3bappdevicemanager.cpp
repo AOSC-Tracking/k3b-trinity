@@ -185,7 +185,7 @@ void K3bAppDeviceManager::mountDisk()
         if( !K3b::isMounted( currentDevice() ) )
             K3b::mount( currentDevice() );
 
-        emit mountFinished( KIO::findDeviceMountPoint( currentDevice()->blockDeviceName() ) );
+        emit mountFinished( TDEIO::findDeviceMountPoint( currentDevice()->blockDeviceName() ) );
     }
 }
 

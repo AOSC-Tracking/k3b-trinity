@@ -169,13 +169,13 @@ void K3bFileView::reload()
 }
 
 
-void K3bFileView::saveConfig( KConfig* c )
+void K3bFileView::saveConfig( TDEConfig* c )
 {
   m_dirOp->writeConfig( c, "file view" );
 }
 
 
-void K3bFileView::readConfig( KConfig* c )
+void K3bFileView::readConfig( TDEConfig* c )
 {
   m_dirOp->readConfig( c, "file view" );
 }

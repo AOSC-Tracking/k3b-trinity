@@ -38,7 +38,7 @@ class KTempFile;
 class K3bBurnJob;
 class TQDomDocument;
 class TQDomElement;
-class KConfig;
+class TDEConfig;
 class KActionCollection;
 class K3bJobHandler;
 
@@ -141,7 +141,7 @@ class LIBK3B_EXPORT K3bDoc : public TQObject
   int copies() const { return m_copies; }
   int speed() const { return m_speed; }
   K3bDevice::Device* burner() const { return m_burner; }
-  virtual KIO::filesize_t size() const = 0;
+  virtual TDEIO::filesize_t size() const = 0;
   virtual K3b::Msf length() const = 0;
 
   // FIXME: rename this to something like imagePath

@@ -69,7 +69,7 @@ public:
     setText( 1, TQString::number(_trackNumber).rightJustify( 2, ' ' ) );
     setText( 3, i18n("Track %1").arg(_trackNumber) );
     setText( 4, " " + length.toString() + " " );
-    setText( 5, " " + KIO::convertSize( length.audioBytes() ) + " " );
+    setText( 5, " " + TDEIO::convertSize( length.audioBytes() ) + " " );
 
     trackNumber = _trackNumber;
 
@@ -203,7 +203,7 @@ void K3bAudioCdView::reloadMedium()
 
   updateDisplay();
 
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup("Cddb");
   bool useCddb = ( c->readBoolEntry( "use local cddb query", true ) || 
 		   c->readBoolEntry( "use remote cddb", false ) );
@@ -432,7 +432,7 @@ void K3bAudioCdView::slotEditAlbumCddb()
 
 void K3bAudioCdView::queryCddb()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup("Cddb");
 
   m_cddb->readConfig( c );
@@ -453,7 +453,7 @@ void K3bAudioCdView::slotCddbQueryFinished( int error )
     m_cddbInfo = m_cddb->result();
 
     // save the entry locally
-    KConfig* c = k3bcore->config();
+    TDEConfig* c = k3bcore->config();
     c->setGroup( "Cddb" );
     if( c->readBoolEntry( "save cddb entries locally", true ) )
       m_cddb->saveEntry( m_cddbInfo );
@@ -461,7 +461,7 @@ void K3bAudioCdView::slotCddbQueryFinished( int error )
     updateDisplay();
   }
   else if( error == K3bCddbQuery::NO_ENTRY_FOUND ) {
-    if( !KConfigGroup( k3bcore->config(), "Cddb" ).readBoolEntry( "use remote cddb", false ) )
+    if( !TDEConfigGroup( k3bcore->config(), "Cddb" ).readBoolEntry( "use remote cddb", false ) )
       K3bPassivePopup::showPopup( i18n("<p>No CDDB entry found. Enable remote CDDB queries in the K3b settings to get access "
 				       "to more entries through the internet."), i18n("CDDB") );
     else
@@ -509,7 +509,7 @@ void K3bAudioCdView::slotSaveCddbLocally()
   // make sure the data gets updated (bad design like a lot in the cddb stuff! :(
   m_cddbInfo.rawData.truncate(0);
 
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup("Cddb");
 
   m_cddb->readConfig( c );

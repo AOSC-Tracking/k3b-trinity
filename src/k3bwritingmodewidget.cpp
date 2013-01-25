@@ -166,7 +166,7 @@ void K3bWritingModeWidget::updateModes()
 }
 
 
-void K3bWritingModeWidget::saveConfig( KConfigBase* c )
+void K3bWritingModeWidget::saveConfig( TDEConfigBase* c )
 {
   switch( writingMode() ) {
   case K3b::DAO:
@@ -190,7 +190,7 @@ void K3bWritingModeWidget::saveConfig( KConfigBase* c )
   }
 }
 
-void K3bWritingModeWidget::loadConfig( KConfigBase* c )
+void K3bWritingModeWidget::loadConfig( TDEConfigBase* c )
 {
   TQString mode = c->readEntry( "writing_mode" );
   if ( mode == "dao" )

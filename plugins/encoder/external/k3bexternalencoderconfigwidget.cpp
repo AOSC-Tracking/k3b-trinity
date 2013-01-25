@@ -203,7 +203,7 @@ void K3bExternalEncoderSettingsWidget::loadConfig()
 
 void K3bExternalEncoderSettingsWidget::saveConfig()
 {
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->deleteGroup( "K3bExternalEncoderPlugin", true );
   c->setGroup( "K3bExternalEncoderPlugin" );
 

@@ -55,8 +55,8 @@ class K3bVcdBurnDialog : public K3bProjectBurnDialog
         void readSettings();
 
         void loadK3bDefaults();
-        void loadUserDefaults( KConfigBase* );
-        void saveUserDefaults( KConfigBase* );
+        void loadUserDefaults( TDEConfigBase* );
+        void saveUserDefaults( TDEConfigBase* );
 
         // -----------------------------------------------------------
         // the video-cd-tab

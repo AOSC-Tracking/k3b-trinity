@@ -105,7 +105,7 @@ void K3bAudioTrackDialog::updateTrackLengthDisplay()
 {
 //   K3b::Msf len = m_editTrackEnd->msfValue() - m_editTrackStart->msfValue();
 //   m_displayLength->setText( len.toString() );
-//   m_displaySize->setText( KIO::convertSize(len.audioBytes()) );
+//   m_displaySize->setText( TDEIO::convertSize(len.audioBytes()) );
 }
 
 

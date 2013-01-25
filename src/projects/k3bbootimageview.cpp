@@ -128,7 +128,7 @@ void K3bBootImageView::slotNewBootImage()
 {
   TQString file = KFileDialog::getOpenFileName( TQString(), TQString(), this, i18n("Please Choose Boot Image") );
   if( !file.isEmpty() ) {
-    KIO::filesize_t fsize = K3b::filesize( file );
+    TDEIO::filesize_t fsize = K3b::filesize( file );
     int boottype = K3bBootItem::FLOPPY;
     if( fsize != 1200*1024 &&
 	fsize != 1440*1024 &&
@@ -218,7 +218,7 @@ void K3bBootImageView::loadBootItemSettings( K3bBootItem* item )
       m_radioNoEmulation->setChecked(true);
 
     // force floppy size
-    KIO::filesize_t fsize = K3b::filesize( item->localPath() );
+    TDEIO::filesize_t fsize = K3b::filesize( item->localPath() );
     m_radioFloppy->setDisabled( fsize != 1200*1024 &&
 				fsize != 1440*1024 &&
 				fsize != 2880*1024 );	

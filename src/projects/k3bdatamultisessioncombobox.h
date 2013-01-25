@@ -19,7 +19,7 @@
 #include <tqcombobox.h>
 #include <k3bdatadoc.h>
 
-class KConfigBase;
+class TDEConfigBase;
 
 
 class K3bDataMultiSessionCombobox : public TQComboBox
@@ -38,8 +38,8 @@ class K3bDataMultiSessionCombobox : public TQComboBox
 
   void setForceNoMultisession( bool );
 
-  void saveConfig( KConfigBase* );
-  void loadConfig( KConfigBase* );
+  void saveConfig( TDEConfigBase* );
+  void loadConfig( TDEConfigBase* );
 
  public slots:
   void setMultiSessionMode( K3bDataDoc::MultiSessionMode );

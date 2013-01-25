@@ -356,19 +356,19 @@ void K3bDiskInfoView::createMediaInfoItems( const K3bMedium& medium )
   atipChild = new KListViewItem( atipItem, atipChild,
 				 i18n("Capacity:"),
 				 i18n("%1 min").arg(info.capacity().toString()),
-				 KIO::convertSize(info.capacity().mode1Bytes()) );
+				 TDEIO::convertSize(info.capacity().mode1Bytes()) );
 
   if( !info.empty() )
     atipChild = new KListViewItem( atipItem, atipChild,
 				   i18n("Used Capacity:"),
 				   i18n("%1 min").arg(info.size().toString()),
-				   KIO::convertSize(info.size().mode1Bytes()) );
+				   TDEIO::convertSize(info.size().mode1Bytes()) );
 
   if( info.appendable() )
     atipChild = new KListViewItem( atipItem, atipChild,
 				   i18n("Remaining:"),
 				   i18n("%1 min").arg( info.remainingSize().toString() ),
-				   KIO::convertSize(info.remainingSize().mode1Bytes()) );
+				   TDEIO::convertSize(info.remainingSize().mode1Bytes()) );
 
   atipChild = new KListViewItem( atipItem, atipChild,
 				 i18n("Rewritable:"),
@@ -480,7 +480,7 @@ void K3bDiskInfoView::createIso9660InfoItems( const K3bIso9660SimplePrimaryDescr
 // 					 *iso.volumeSpaceSize)
 // 				    .arg(iso.logicalBlockSize)
 // 				    .arg(iso.volumeSpaceSize),
-// 				    KIO::convertSize(iso.logicalBlockSize
+// 				    TDEIO::convertSize(iso.logicalBlockSize
 // 						     *iso.volumeSpaceSize)  );
 
   iso9660Item->setOpen( true );

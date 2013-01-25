@@ -28,7 +28,7 @@
 #include <k3bdevicetypes.h>
 #include "k3b_export.h"
 
-class KConfig;
+class TDEConfig;
 class K3bVersion;
 class K3bExternalBin;
 
@@ -187,7 +187,7 @@ namespace K3b
 
   TQString systemName();
 
-  LIBK3B_EXPORT KIO::filesize_t filesize( const KURL& );
+  LIBK3B_EXPORT TDEIO::filesize_t filesize( const KURL& );
 
   /**
    * Calculate the total size of an image file. This also includes
@@ -195,7 +195,7 @@ namespace K3b
    *
    * \returns the total size of the image file at url
    */
-  LIBK3B_EXPORT KIO::filesize_t imageFilesize( const KURL& url );
+  LIBK3B_EXPORT TDEIO::filesize_t imageFilesize( const KURL& url );
 
   /**
    * true if the kernel supports ATAPI devices without SCSI emulation.
@@ -236,7 +236,7 @@ namespace K3b
 
   /**
    * Tries to unmount the device ignoring its actual mounting state.
-   * This method uses both KIO::unmount and pumount if available.
+   * This method uses both TDEIO::unmount and pumount if available.
    */
   LIBK3B_EXPORT bool unmount( K3bDevice::Device* );
 

@@ -19,7 +19,7 @@
 #include <tqstring.h>
 #include "k3b_export.h"
 
-class KConfigBase;
+class TDEConfigBase;
 
 
 class LIBK3B_EXPORT K3bIsoOptions
@@ -124,9 +124,9 @@ class LIBK3B_EXPORT K3bIsoOptions
   bool doNotCacheInodes() const { return m_doNotCacheInodes; }
   void setDoNotCacheInodes( bool b ) { m_doNotCacheInodes = b; }
 
-  void save( KConfigBase* c, bool saveVolumeDesc = true );
+  void save( TDEConfigBase* c, bool saveVolumeDesc = true );
 
-  static K3bIsoOptions load( KConfigBase* c, bool loadVolumeDesc = true );
+  static K3bIsoOptions load( TDEConfigBase* c, bool loadVolumeDesc = true );
   static K3bIsoOptions defaults();
 
  private:

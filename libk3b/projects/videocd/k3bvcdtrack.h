@@ -42,7 +42,7 @@ class LIBK3B_EXPORT K3bVcdTrack
         {
             return TQFileInfo( m_file ).absFilePath();
         }
-        KIO::filesize_t size() const;
+        TDEIO::filesize_t size() const;
         int index() const;
 
         const TQString& title() const

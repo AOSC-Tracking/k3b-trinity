@@ -18,7 +18,7 @@
 
 #include <k3bmovixdoc.h>
 #include "k3b_export.h"
-class KConfig;
+class TDEConfig;
 
 
 class LIBK3B_EXPORT K3bMovixDvdDoc : public K3bMovixDoc

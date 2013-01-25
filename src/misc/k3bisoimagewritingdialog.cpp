@@ -134,7 +134,7 @@ void K3bIsoImageWritingDialog::init()
   if( !d->imageForced ) {
     // when opening the dialog first the default settings are loaded and afterwards we set the
     // last written image because that's what most users want
-    KConfig* c = k3bcore->config();
+    TDEConfig* c = k3bcore->config();
     c->setGroup( configGroup() );
     TQString image = c->readPathEntry( "last written image" );
     if( TQFile::exists( image ) )
@@ -244,7 +244,7 @@ void K3bIsoImageWritingDialog::slotStartClicked()
 
   K3bIso9660 isoFs( imagePath() );
   if( isoFs.open() ) {
-    if( K3b::imageFilesize( KURL::fromPathOrURL( imagePath() ) ) < (KIO::filesize_t)(isoFs.primaryDescriptor().volumeSpaceSize*2048) ) {
+    if( K3b::imageFilesize( KURL::fromPathOrURL( imagePath() ) ) < (TDEIO::filesize_t)(isoFs.primaryDescriptor().volumeSpaceSize*2048) ) {
       if( KMessageBox::questionYesNo( this, 
 				      i18n("<p>This image has an invalid file size."
 					   "If it has been downloaded make sure the download is complete."
@@ -259,7 +259,7 @@ void K3bIsoImageWritingDialog::slotStartClicked()
   m_md5Job->cancel();
 
   // save the path
-  KConfig* c = k3bcore->config();
+  TDEConfig* c = k3bcore->config();
   c->setGroup( configGroup() );
   if( c->readPathEntry( "last written image" ).isEmpty() )
     c->writePathEntry( "last written image", imagePath() );
@@ -288,7 +288,7 @@ void K3bIsoImageWritingDialog::slotStartClicked()
 
   delete job;
 
-  if( KConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
+  if( TDEConfigGroup( k3bcore->config(), "General Options" ).readBoolEntry( "keep action dialogs open", false ) &&
       !exitLoopOnHide() )
     show();
   else
@@ -307,7 +307,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
   TQFileInfo info( path );
   if( info.isFile() ) {
 
-    KIO::filesize_t imageSize = K3b::filesize( KURL::fromPathOrURL(path) );
+    TDEIO::filesize_t imageSize = K3b::filesize( KURL::fromPathOrURL(path) );
 
     // ------------------------------------------------
     // Test for iso9660 image
@@ -323,7 +323,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
       isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
 
       K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
-						   i18n("Filesize:"), KIO::convertSize( imageSize ) );
+						   i18n("Filesize:"), TDEIO::convertSize( imageSize ) );
       item->setForegroundColor( 0, palette().disabled().foreground() );
 
       item = new K3bListViewItem( isoRootItem,
@@ -514,7 +514,7 @@ void K3bIsoImageWritingDialog::slotContextMenu( KListView*, TQListViewItem*, con
 }
 
 
-void K3bIsoImageWritingDialog::loadUserDefaults( KConfigBase* c )
+void K3bIsoImageWritingDialog::loadUserDefaults( TDEConfigBase* c )
 {
   m_writingModeWidget->loadConfig( c );
   m_checkDummy->setChecked( c->readBoolEntry("simulate", false ) );
@@ -531,7 +531,7 @@ void K3bIsoImageWritingDialog::loadUserDefaults( KConfigBase* c )
 }
 
 
-void K3bIsoImageWritingDialog::saveUserDefaults( KConfigBase* c )
+void K3bIsoImageWritingDialog::saveUserDefaults( TDEConfigBase* c )
 {
   m_writingModeWidget->saveConfig( c ),
   c->writeEntry( "simulate", m_checkDummy->isChecked() );

@@ -44,7 +44,7 @@ public:
 
   TQTimer freeSpaceUpdateTimer;
 
-  KIO::filesize_t neededSize;
+  TDEIO::filesize_t neededSize;
 
   int getDefaultFormat() {
     // we prefere formats in this order:
@@ -145,11 +145,11 @@ void K3bAudioConvertingOptionWidget::setBaseDir( const TQString& path )
 }
 
 
-void K3bAudioConvertingOptionWidget::setNeededSize( KIO::filesize_t size )
+void K3bAudioConvertingOptionWidget::setNeededSize( TDEIO::filesize_t size )
 {
   d->neededSize = size;
   if( size > 0 )
-    m_labelNeededSpace->setText( KIO::convertSize( size ) );
+    m_labelNeededSpace->setText( TDEIO::convertSize( size ) );
   else
     m_labelNeededSpace->setText( i18n("unknown") );
 
@@ -175,7 +175,7 @@ void K3bAudioConvertingOptionWidget::slotUpdateFreeTempSpace()
 
   unsigned long size, avail;
   if( K3b::kbFreeOnFs( path, size, avail ) ) {
-    m_labelFreeSpace->setText( KIO::convertSizeFromKB(avail) );
+    m_labelFreeSpace->setText( TDEIO::convertSizeFromKB(avail) );
     if( avail < d->neededSize/1024 )
       m_labelNeededSpace->setPaletteForegroundColor( TQt::red );
     else
@@ -220,7 +220,7 @@ void K3bAudioConvertingOptionWidget::loadDefaults()
 }
 
 
-void K3bAudioConvertingOptionWidget::loadConfig( KConfigBase* c )
+void K3bAudioConvertingOptionWidget::loadConfig( TDEConfigBase* c )
 {
   m_editBaseDir->setURL( c->readPathEntry( "last ripping directory", TQDir::homeDirPath() ) );
 
@@ -247,7 +247,7 @@ void K3bAudioConvertingOptionWidget::loadConfig( KConfigBase* c )
 }
 
 
-void K3bAudioConvertingOptionWidget::saveConfig( KConfigBase* c )
+void K3bAudioConvertingOptionWidget::saveConfig( TDEConfigBase* c )
 {
   c->writePathEntry( "last ripping directory", m_editBaseDir->url() );
 

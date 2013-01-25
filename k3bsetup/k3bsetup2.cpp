@@ -101,16 +101,16 @@ public:
   TQMap<TQCheckListItem*, K3bExternalBin*> listBinMap;
   TQMap<K3bExternalBin*, TQCheckListItem*> binListMap;
 
-  KConfig* config;
+  TDEConfig* config;
 };
 
 
 
 K3bSetup2::K3bSetup2( TQWidget *parent, const char *, const TQStringList& )
-  : KCModule( parent, "k3bsetup" )
+  : TDECModule( parent, "k3bsetup" )
 {
   d = new Private();
-  d->config = new KConfig( "k3bsetup2rc" );
+  d->config = new TDEConfig( "k3bsetup2rc" );
 
   m_aboutData = new TDEAboutData("k3bsetup2",
 			       "K3bSetup 2",
@@ -118,7 +118,7 @@ K3bSetup2::K3bSetup2( TQWidget *parent, const char *, const TQStringList& )
 			       "(C) 2003-2007 Sebastian Trueg");
   m_aboutData->addAuthor("Sebastian Trueg", 0, "trueg@k3b.org");
 
-  setButtons( KCModule::Apply|KCModule::Cancel|KCModule::Ok|KCModule::Default );
+  setButtons( TDECModule::Apply|TDECModule::Cancel|TDECModule::Ok|TDECModule::Default );
 
   TQHBoxLayout* box = new TQHBoxLayout( this );
   box->setAutoAdd(true);

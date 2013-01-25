@@ -85,7 +85,7 @@ bool K3bMixedDoc::isModified() const
 }
 
 
-KIO::filesize_t K3bMixedDoc::size() const
+TDEIO::filesize_t K3bMixedDoc::size() const
 {
   return m_dataDoc->size() + m_audioDoc->size();
 }

@@ -33,7 +33,7 @@ class TQWidgetStack;
 class K3bDiskInfoView;
 class TQScrollView;
 class TQLabel;
-class KConfig;
+class TDEConfig;
 class K3bDeviceBranch;
 
 namespace K3bDevice {
@@ -41,7 +41,7 @@ namespace K3bDevice {
   class DiskInfo;
 }
 
-namespace KIO {
+namespace TDEIO {
   class Job;
 }
 
@@ -59,8 +59,8 @@ class K3bDirView : public TQVBox
   ~K3bDirView();
 
  public slots:
-  void saveConfig( KConfig* c );
-  void readConfig( KConfig* c );
+  void saveConfig( TDEConfig* c );
+  void readConfig( TDEConfig* c );
   void showUrl( const KURL& );
   void showDevice( K3bDevice::Device* );
   
