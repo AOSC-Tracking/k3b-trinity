@@ -17,7 +17,7 @@
 #ifndef _K3BSETUP2_H_
 #define _K3BSETUP2_H_
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <kaboutdata.h>
 
 
