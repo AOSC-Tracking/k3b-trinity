@@ -30,7 +30,7 @@
 
 // include files for KDE
 #include <kapplication.h>
-#include <kparts/dockmainwindow.h>
+#include <tdeparts/dockmainwindow.h>
 #include <kdockwidget.h>
 #include <kaction.h>
 #include <kurl.h>
