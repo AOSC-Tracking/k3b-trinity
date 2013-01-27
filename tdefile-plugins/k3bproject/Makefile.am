@@ -9,19 +9,19 @@ AM_CPPFLAGS = -I$(srcdir)/../../libk3b/core \
 	$(all_includes)
 
 # these are the headers for your project
-noinst_HEADERS   = kfile_k3bprojectfileplugin.h
+noinst_HEADERS   = tdefile_k3bprojectfileplugin.h
 
-kde_module_LTLIBRARIES = kfile_k3b.la
+kde_module_LTLIBRARIES = tdefile_k3b.la
 
-kfile_k3b_la_SOURCES = kfile_k3bprojectfileplugin.cpp
-kfile_k3b_la_LDFLAGS = $(all_libraries) $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIB_KIO) -module $(KDE_PLUGIN)
-kfile_k3b_la_LIBADD = $(LIB_KIO) ../../libk3b/libk3b.la ../../src/projects/kostore/libkostore.la
+tdefile_k3b_la_SOURCES = tdefile_k3bprojectfileplugin.cpp
+tdefile_k3b_la_LDFLAGS = $(all_libraries) $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIB_KIO) -module $(KDE_PLUGIN)
+tdefile_k3b_la_LIBADD = $(LIB_KIO) ../../libk3b/libk3b.la ../../src/projects/kostore/libkostore.la
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-services_DATA = kfile_k3b.desktop
+services_DATA = tdefile_k3b.desktop
 servicesdir = $(kde_servicesdir)
 
 messages:
-	$(XGETTEXT) *.cpp -o $(podir)/kfile_k3b.pot
+	$(XGETTEXT) *.cpp -o $(podir)/tdefile_k3b.pot

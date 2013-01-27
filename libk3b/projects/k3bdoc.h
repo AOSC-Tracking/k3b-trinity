@@ -29,7 +29,7 @@
 
 // include files for KDE
 #include <kurl.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include "k3b_export.h"
 
 // forward declaration of the K3b classes

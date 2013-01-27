@@ -13,7 +13,7 @@
 * See the file "COPYING" for the exact licensing terms.
 */
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kiconloader.h>
 
 

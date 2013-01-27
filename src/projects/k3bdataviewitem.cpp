@@ -22,7 +22,7 @@
 #include "k3bdatadoc.h"
 #include <k3bvalidators.h>
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kmimetype.h>

@@ -13,9 +13,9 @@
 * See the file "COPYING" for the exact licensing terms.
 */
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>

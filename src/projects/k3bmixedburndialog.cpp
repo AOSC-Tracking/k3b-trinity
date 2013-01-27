@@ -53,7 +53,7 @@
 #include <tqradiobutton.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kmessagebox.h>

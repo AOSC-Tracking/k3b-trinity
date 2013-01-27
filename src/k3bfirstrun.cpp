@@ -20,7 +20,7 @@
 
 #include <klocale.h>
 #include <kiconloader.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqlayout.h>
 #include <tqlabel.h>

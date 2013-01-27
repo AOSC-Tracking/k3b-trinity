@@ -16,4 +16,4 @@ konq_sidebartree_init_services_data_DATA = videodvd.desktop
 konq_sidebartree_init_services_datadir = $(kde_datadir)/konqsidebartng/virtual_folders/services
 
 messages:
-	$(XGETTEXT) *.cpp -o $(podir)/kio_videodvd.pot
+	$(XGETTEXT) *.cpp -o $(podir)/tdeio_videodvd.pot

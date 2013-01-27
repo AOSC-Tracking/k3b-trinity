@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <kaction.h>
 #include <kpopupmenu.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmessagebox.h>
 #include <kurl.h>
 

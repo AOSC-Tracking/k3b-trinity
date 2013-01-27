@@ -21,7 +21,7 @@
 #include <k3bpluginfactory.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kinstance.h>
 #include <knuminput.h>

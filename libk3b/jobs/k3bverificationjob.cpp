@@ -25,9 +25,9 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <kio/global.h>
-#include <kio/job.h>
-#include <kio/netaccess.h>
+#include <tdeio/global.h>
+#include <tdeio/job.h>
+#include <tdeio/netaccess.h>
 
 #include <tqcstring.h>
 #include <tqapplication.h>

@@ -21,8 +21,8 @@
 #include <tqcstring.h>
 
 #include <kurl.h>
-#include <kio/global.h>
-#include <kio/slavebase.h>
+#include <tdeio/global.h>
+#include <tdeio/slavebase.h>
 
 class TQCString;
 class K3bIso9660Entry;

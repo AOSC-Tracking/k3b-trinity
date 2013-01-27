@@ -19,7 +19,7 @@
 
 #include <k3bisooptions.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 
 K3bDvdDoc::K3bDvdDoc( TQObject* parent )

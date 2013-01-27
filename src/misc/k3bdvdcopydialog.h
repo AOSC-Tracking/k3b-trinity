@@ -19,7 +19,7 @@
 
 #include <k3binteractiondialog.h>
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 
 namespace K3bDevice {

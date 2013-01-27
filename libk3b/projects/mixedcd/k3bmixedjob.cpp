@@ -50,8 +50,8 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <ktempfile.h>
-#include <kio/netaccess.h>
-#include <kio/global.h>
+#include <tdeio/netaccess.h>
+#include <tdeio/global.h>
 #include <kstringhandler.h>
 
 

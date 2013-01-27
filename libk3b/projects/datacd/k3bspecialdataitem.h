@@ -20,7 +20,7 @@
 #include "k3bdataitem.h"
 #include "k3bdiritem.h"
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 /**
  * This can be used to create fake items like the boot catalog

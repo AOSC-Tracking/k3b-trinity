@@ -18,7 +18,7 @@
 #include "k3b<name>encoder.h"
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 
 

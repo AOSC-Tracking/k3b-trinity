@@ -18,7 +18,7 @@
 #define _K3B_PROJECT_INTERFACE_H_
 
 #include <dcopobject.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <tqstringlist.h>
 
 class K3bDoc;

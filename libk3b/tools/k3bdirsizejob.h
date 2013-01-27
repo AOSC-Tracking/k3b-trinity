@@ -17,7 +17,7 @@
 #define _K3B_DIR_SIZE_JOB_H_
 
 #include <k3bthreadjob.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <k3b_export.h>
 

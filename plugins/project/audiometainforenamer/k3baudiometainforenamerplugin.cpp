@@ -29,9 +29,9 @@
 #include <kinstance.h>
 #include <kmessagebox.h>
 #include <klocale.h>
-#include <kfilemetainfo.h>
+#include <tdefilemetainfo.h>
 #include <kcombobox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmimetype.h>
 #include <kdialog.h>
 

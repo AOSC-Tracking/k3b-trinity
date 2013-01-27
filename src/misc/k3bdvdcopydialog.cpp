@@ -46,7 +46,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>

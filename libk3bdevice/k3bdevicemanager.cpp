@@ -31,7 +31,7 @@
 
 #include <kprocess.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <ktempfile.h>
 
 #include <iostream>

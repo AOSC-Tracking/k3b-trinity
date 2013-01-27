@@ -19,7 +19,7 @@
 #include "base_k3baudiorippingoptionwidget.h"
 
 #include <tqcheckbox.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 class K3bAudioEncoder;
 class TDEConfigBase;

@@ -17,4 +17,4 @@
 
 #TODO: if tdesu not found and not currently root use kdialog to display an error message
 
-tdesu kcmshell k3bsetup2
+tdesu tdecmshell k3bsetup2

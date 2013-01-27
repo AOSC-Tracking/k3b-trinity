@@ -14,11 +14,11 @@
 */
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <kurl.h>
 #include <ktempfile.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <tqstring.h>
 #include <tqdatetime.h>

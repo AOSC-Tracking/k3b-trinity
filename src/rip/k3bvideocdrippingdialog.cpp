@@ -17,7 +17,7 @@
 // kde include
 #include <klocale.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kurlrequester.h>
 #include <kdebug.h>
 #include <kmessagebox.h>

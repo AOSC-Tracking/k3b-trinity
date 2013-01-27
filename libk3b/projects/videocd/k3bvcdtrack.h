@@ -23,7 +23,7 @@
 #include <tqptrlist.h>
 
 // Kde Includes
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 // K3b Includes
 #include "mpeginfo/k3bmpeginfo.h"

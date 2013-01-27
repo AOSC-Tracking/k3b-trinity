@@ -25,7 +25,7 @@
 #include <tqdom.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
 

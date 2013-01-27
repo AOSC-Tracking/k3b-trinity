@@ -43,7 +43,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <ktextedit.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
@@ -608,7 +608,7 @@ void K3bSystemProblemDialog::checkSystem( TQWidget* parent,
 void K3bSystemProblemDialog::slotK3bSetup()
 {
   TDEProcess p;
-  p << "tdesu" << "kcmshell k3bsetup2 --lang " + TDEGlobal::locale()->language();
+  p << "tdesu" << "tdecmshell k3bsetup2 --lang " + TDEGlobal::locale()->language();
   if( !p.start( TDEProcess::DontCare ) )
     KMessageBox::error( 0, i18n("Unable to start K3bSetup2.") );
 }

@@ -21,7 +21,7 @@
 The purpose of this document is to define a common KOffice Storage Structure.
 Torben, Reggie, and all the others agreed on storing embedded KOffice Parts
 and binary data (e.g. pictures, movies, sounds) via a simple tar.gz-structure.
-The support class for the tar format is tdelibs/kio/ktar.*, written by Torben
+The support class for the tar format is tdelibs/tdeio/ktar.*, written by Torben
 and finished by David.
 
 The obvious benefits of this type of storage are:

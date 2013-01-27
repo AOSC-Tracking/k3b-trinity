@@ -15,7 +15,7 @@
 
 #include "k3bglobalsettings.h"
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 
 K3bGlobalSettings::K3bGlobalSettings()

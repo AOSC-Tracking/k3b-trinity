@@ -28,7 +28,7 @@
 #include <kapplication.h>
 #include <kdialog.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 
 

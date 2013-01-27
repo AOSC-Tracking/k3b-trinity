@@ -46,7 +46,7 @@
 
 #include <ktip.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <dcopclient.h>

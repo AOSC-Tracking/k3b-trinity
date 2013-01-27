@@ -27,7 +27,7 @@
 #include <tqstringlist.h>
 
 #include <kurl.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include "k3b_export.h"
 
 class K3bDataItem;

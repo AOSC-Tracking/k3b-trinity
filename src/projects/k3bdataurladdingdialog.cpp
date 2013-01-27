@@ -48,7 +48,7 @@
 #include <kiconloader.h>
 #include <kglobal.h>
 #include <kstdguiitem.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <ksqueezedtextlabel.h>
 #include <kprogress.h>
 

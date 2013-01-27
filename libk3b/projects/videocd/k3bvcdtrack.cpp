@@ -14,7 +14,7 @@
 */
 
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqstring.h>
 #include <tqfileinfo.h>

@@ -30,8 +30,8 @@
 #include <kurlrequester.h>
 #include <kcombobox.h>
 #include <klineedit.h>
-#include <kio/global.h>
-#include <kconfig.h>
+#include <tdeio/global.h>
+#include <tdeconfig.h>
 #include <kmessagebox.h>
 
 #include <tqlayout.h>

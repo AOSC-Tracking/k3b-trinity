@@ -54,11 +54,11 @@
 #include <kmessagebox.h>
 #include <klineedit.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kcombobox.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 
 #include "k3bfilecompilationsizehandler.h"

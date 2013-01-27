@@ -48,8 +48,8 @@
 
 #include <kurl.h>
 #include <kdebug.h>
-#include <kconfig.h>
-#include <kio/netaccess.h>
+#include <tdeconfig.h>
+#include <tdeio/netaccess.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 

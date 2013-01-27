@@ -37,8 +37,8 @@
 #include <kpopupmenu.h>
 #include <kaction.h>
 #include <kmessagebox.h>
-#include <kio/global.h>
-#include <kio/job.h>
+#include <tdeio/global.h>
+#include <tdeio/job.h>
 #include <kdialogbase.h>
 
 #include <tqpixmap.h>

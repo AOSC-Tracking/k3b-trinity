@@ -21,7 +21,7 @@
 
 #include <k3bisooptions.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 
 K3bVideoDvdDoc::K3bVideoDvdDoc( TQObject* parent )

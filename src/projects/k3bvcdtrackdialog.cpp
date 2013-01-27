@@ -32,7 +32,7 @@
 
 // Kde Includes
 #include <kiconloader.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <klocale.h>
 #include <kmimetype.h>
 #include <knuminput.h>

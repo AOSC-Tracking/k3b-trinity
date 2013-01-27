@@ -45,10 +45,10 @@
 #include <kurl.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kdebug.h>
 
 #include <iostream>

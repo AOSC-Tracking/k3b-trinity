@@ -21,7 +21,7 @@
 #include <tqregexp.h>
 
 #include <kdebug.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include "k3bdevice_export.h"
 
 namespace K3b

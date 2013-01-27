@@ -38,7 +38,7 @@
 #include <tqfont.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kactivelabel.h>

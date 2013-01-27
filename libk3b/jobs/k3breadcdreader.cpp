@@ -26,7 +26,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqregexp.h>
 #include <tqvaluelist.h>

@@ -52,7 +52,7 @@
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kprogress.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 
 

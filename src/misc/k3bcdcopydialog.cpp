@@ -40,7 +40,7 @@
 #include <kstdguiitem.h>
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 #include <kiconloader.h>
 

@@ -23,7 +23,7 @@
 #include <kmdcodec.h>
 #include <klocale.h>
 #include <kdebug.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 
 #include <tqtimer.h>
 #include <tqcstring.h>

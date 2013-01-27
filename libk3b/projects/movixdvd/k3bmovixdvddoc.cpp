@@ -16,7 +16,7 @@
 #include "k3bmovixdvddoc.h"
 #include "k3bmovixdvdjob.h"
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 
 K3bMovixDvdDoc::K3bMovixDvdDoc( TQObject* parent )

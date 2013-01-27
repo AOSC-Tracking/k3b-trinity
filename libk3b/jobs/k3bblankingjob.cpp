@@ -21,10 +21,10 @@
 #include <k3bdevice.h>
 #include <k3bdevicehandler.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
-#include <kio/global.h>
-#include <kio/job.h>
+#include <tdeio/global.h>
+#include <tdeio/job.h>
 #include <kdebug.h>
 
 #include <tqstring.h>

@@ -40,7 +40,7 @@
 #include <kaction.h>
 #include <kstdaction.h>
 #include <kmessagebox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kstandarddirs.h>

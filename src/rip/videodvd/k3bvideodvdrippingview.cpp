@@ -34,7 +34,7 @@
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kaction.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 
 K3bVideoDVDRippingView::K3bVideoDVDRippingView( TQWidget* parent, const char * name )

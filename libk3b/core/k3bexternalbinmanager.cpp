@@ -17,7 +17,7 @@
 
 #include <kdebug.h>
 #include <kprocess.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <tdeversion.h>
 
 #include <tqstring.h>

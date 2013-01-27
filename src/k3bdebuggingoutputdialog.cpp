@@ -31,7 +31,7 @@
 #include <kstdguiitem.h>
 #include <kglobalsettings.h>
 #include <kapplication.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmessagebox.h>
 
 

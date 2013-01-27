@@ -18,7 +18,7 @@
 #include <k3bglobals.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqwhatsthis.h>
 #include <tqtooltip.h>

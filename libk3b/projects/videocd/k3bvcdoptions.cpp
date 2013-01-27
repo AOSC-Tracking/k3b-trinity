@@ -15,7 +15,7 @@
 
 // Kde Includes
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <k3bcore.h>
 #include <klocale.h>
 #include <kstandarddirs.h>

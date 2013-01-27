@@ -40,7 +40,7 @@
 
 #include <klocale.h>
 #include <kdebug.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>
 

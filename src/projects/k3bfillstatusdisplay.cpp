@@ -43,10 +43,10 @@
 #include <kpopupmenu.h>
 #include <klocale.h>
 #include <kinputdialog.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kiconloader.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kmessagebox.h>
 #include <kglobal.h>
 #include <kpixmapeffect.h>

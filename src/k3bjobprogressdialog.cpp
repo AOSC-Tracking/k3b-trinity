@@ -57,7 +57,7 @@
 #include <kmessagebox.h>
 #include <klistview.h>
 #include <kiconloader.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <knotifyclient.h>

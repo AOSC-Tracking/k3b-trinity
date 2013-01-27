@@ -23,7 +23,7 @@ class K3bDataDoc;
 
 #include <tqstring.h>
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <k3bmsf.h>
 #include "k3b_export.h"

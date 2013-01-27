@@ -28,10 +28,10 @@
 #include <tqfileinfo.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kapplication.h>
 
 #include "k3bvcdburndialog.h"

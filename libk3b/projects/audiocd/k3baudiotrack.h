@@ -22,7 +22,7 @@
 #include <tqfile.h>
 #include <tqptrlist.h>
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <k3bmsf.h>
 

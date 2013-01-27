@@ -24,7 +24,7 @@
 
 #include <klineedit.h>
 #include <kmessagebox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 
 

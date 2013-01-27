@@ -32,7 +32,7 @@
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kstdguiitem.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqgroupbox.h>
 #include <tqpushbutton.h>

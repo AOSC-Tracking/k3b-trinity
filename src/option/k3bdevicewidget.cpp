@@ -25,11 +25,11 @@
 #include <knuminput.h>
 #include <kdialog.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <ksimpleconfig.h>
 #include <kiconloader.h>
 #include <kstandarddirs.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <tqgroupbox.h>
 #include <tqpushbutton.h>

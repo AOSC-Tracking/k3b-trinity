@@ -3,7 +3,7 @@ dnl
 dnl Don't use PKG_CHECK, since if there is no pkg-config installed,
 dnl then there is no auto* magic for it either.
 dnl
-dnl Tests copied from tdebase/kioslave/thumbnail/
+dnl Tests copied from tdebase/tdeioslave/thumbnail/
 dnl
 if test -z "$PKG_CONFIG"; then
     AC_PATH_PROG(PKG_CONFIG, pkg-config, no)

@@ -30,9 +30,9 @@
 
 #include <kiconloader.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kstatusbar.h>
 #include <kaboutdata.h>
 #include <kaction.h>

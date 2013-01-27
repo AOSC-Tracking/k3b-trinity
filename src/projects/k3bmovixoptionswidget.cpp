@@ -20,7 +20,7 @@
 
 #include <kcombobox.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobal.h>
 #include <kdebug.h>
 

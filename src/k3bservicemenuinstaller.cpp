@@ -19,7 +19,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kdebug.h>
 
 

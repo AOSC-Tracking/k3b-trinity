@@ -20,7 +20,7 @@
 
 #include <klocale.h>
 #include <k3bdebug.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <tqstringlist.h>
 

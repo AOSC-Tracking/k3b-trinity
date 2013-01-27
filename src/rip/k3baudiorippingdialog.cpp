@@ -32,11 +32,11 @@
 #include <kcombobox.h>
 #include <klocale.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klistview.h>
 #include <kurlrequester.h>
-#include <kfiledialog.h>
-#include <kio/global.h>
+#include <tdefiledialog.h>
+#include <tdeio/global.h>
 #include <kiconloader.h>
 #include <kstdguiitem.h>
 #include <kdebug.h>

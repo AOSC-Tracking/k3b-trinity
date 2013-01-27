@@ -44,7 +44,7 @@
 #include <kiconloader.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 
 // FIXME: use K3bListViewItem instead

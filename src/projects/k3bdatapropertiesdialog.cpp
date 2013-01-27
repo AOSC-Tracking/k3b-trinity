@@ -36,8 +36,8 @@
 #include <klocale.h>
 #include <kmimetype.h>
 #include <kurl.h>
-#include <kio/global.h>
-#include <kfileitem.h>
+#include <tdeio/global.h>
+#include <tdefileitem.h>
 
 
 

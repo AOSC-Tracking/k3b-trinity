@@ -24,7 +24,7 @@
 #include <k3bcore.h>
 
 #include <kdebug.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 

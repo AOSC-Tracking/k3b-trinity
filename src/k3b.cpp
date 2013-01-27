@@ -38,10 +38,10 @@
 // include files for KDE
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmenubar.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstdaction.h>
 #include <klineeditdlg.h>
 #include <kstandarddirs.h>
@@ -58,8 +58,8 @@
 #include <ktip.h>
 #include <kxmlguifactory.h>
 #include <kstdguiitem.h>
-#include <kio/global.h>
-#include <kio/netaccess.h>
+#include <tdeio/global.h>
+#include <tdeio/netaccess.h>
 #include <krecentdocument.h>
 
 #include <stdlib.h>
@@ -1291,7 +1291,7 @@ void K3bMainWindow::slotProjectAddFiles()
 void K3bMainWindow::slotK3bSetup()
 {
   TDEProcess p;
-  p << "tdesu" << "kcmshell k3bsetup2 --lang " + TDEGlobal::locale()->language();
+  p << "tdesu" << "tdecmshell k3bsetup2 --lang " + TDEGlobal::locale()->language();
   if( !p.start( TDEProcess::DontCare ) )
     KMessageBox::error( 0, i18n("Could not find tdesu to run K3bSetup with root privileges. "
 				"Please run it manually as root.") );

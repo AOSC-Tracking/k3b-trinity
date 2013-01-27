@@ -23,7 +23,7 @@
 
 #include <tqstring.h>
 #include <tqfile.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kurl.h>
 #include <k3bdevicetypes.h>
 #include "k3b_export.h"

@@ -29,7 +29,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <ktempfile.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <tqtextstream.h>
 #include <tqdir.h>

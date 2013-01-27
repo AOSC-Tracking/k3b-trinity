@@ -33,11 +33,11 @@
 
 #include <kcombobox.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klistview.h>
 #include <kurlrequester.h>
-#include <kfiledialog.h>
-#include <kio/global.h>
+#include <tdefiledialog.h>
+#include <tdeio/global.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 

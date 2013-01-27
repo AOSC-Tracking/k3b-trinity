@@ -64,7 +64,7 @@
  * K3b now warns if user parameters for external programs have been specified. This has been introduced
    because there were some bug report that were caused by faulty user parameters.
  * Cleaned up all the job classes: No job creates a widget anymore. This allows for non-GUI usage of libk3b.
-   For example in a kioslave.
+   For example in a tdeioslave.
  * New option in the data project to not cache the inodes. That means it is possible to have multiple
    actual copies of the same file on one CD/DVD.
  * K3b now tries to disable stuff that might influence the burning process. This includes the KDED module

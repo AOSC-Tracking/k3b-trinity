@@ -36,12 +36,12 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kurlrequester.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kstdguiitem.h>
 #include <kguiitem.h>
 #include <kiconloader.h>
-#include <kconfig.h>
-#include <kio/global.h>
+#include <tdeconfig.h>
+#include <tdeio/global.h>
 #include <kurl.h>
 #include <kinputdialog.h>
 #include <kurldrag.h>

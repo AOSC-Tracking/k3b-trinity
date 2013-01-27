@@ -30,8 +30,8 @@
 #include <kurl.h>
 #include <kstandarddirs.h>
 #include <kaction.h>
-#include <kio/global.h>
-#include <kfileitem.h>
+#include <tdeio/global.h>
+#include <tdefileitem.h>
 #include <kapplication.h>
 #include <kglobalsettings.h>
 

@@ -28,16 +28,16 @@
 #include <tqlabel.h>
 #include <tqtoolbutton.h>
 
-#include <kfiledetailview.h>
+#include <tdefiledetailview.h>
 #include <klistview.h>
 #include <kaction.h>
 #include <ktoolbar.h>
 #include <ktoolbarbutton.h>
 #include <kurl.h>
 #include <kurldrag.h>
-#include <kfilefiltercombo.h>
+#include <tdefilefiltercombo.h>
 #include <klocale.h>
-#include <kfileitem.h>
+#include <tdefileitem.h>
 #include <kmessagebox.h>
 #include <kdirlister.h>
 #include <kprogress.h>

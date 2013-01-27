@@ -21,7 +21,7 @@
 #include <tqstring.h>
 #include <tqptrlist.h>
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include "k3bdataitem.h"
 #include "k3b_export.h"

@@ -23,7 +23,7 @@
 #include <klistview.h>
 #include <klocale.h>
 #include <kurlrequester.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kurllabel.h>
 #include <kdialogbase.h>
 #include <klineedit.h>

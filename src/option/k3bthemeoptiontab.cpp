@@ -20,13 +20,13 @@
 
 #include <k3bapplication.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmessagebox.h>
 #include <kurlrequester.h>
 #include <klistview.h>
-#include <kio/global.h>
-#include <kio/netaccess.h>
-#include <kio/job.h>
+#include <tdeio/global.h>
+#include <tdeio/netaccess.h>
+#include <tdeio/job.h>
 #include <kstandarddirs.h>
 #include <ktar.h>
 #include <kurlrequesterdlg.h>

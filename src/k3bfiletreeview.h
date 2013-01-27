@@ -18,7 +18,7 @@
 #define K3BFILETREEVIEW_H
 
 
-#include <kfiletreeview.h>
+#include <tdefiletreeview.h>
 
 class KFileTreeBranch;
 class KActionCollection;

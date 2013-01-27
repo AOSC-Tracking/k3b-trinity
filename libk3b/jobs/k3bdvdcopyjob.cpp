@@ -34,7 +34,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <tqfile.h>
 #include <tqfileinfo.h>

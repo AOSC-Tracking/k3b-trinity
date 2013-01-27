@@ -371,7 +371,7 @@ dnl === check for resmgr - end ============
 
 
 
-# HAL check from tdebase/kioslave/media
+# HAL check from tdebase/tdeioslave/media
 
 AC_ARG_WITH(
 	hal, 
@@ -675,7 +675,7 @@ dnl
 dnl Don't use PKG_CHECK, since if there is no pkg-config installed,
 dnl then there is no auto* magic for it either.
 dnl
-dnl Tests copied from tdebase/kioslave/thumbnail/
+dnl Tests copied from tdebase/tdeioslave/thumbnail/
 dnl
 if test -z "$PKG_CONFIG"; then
     AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
@@ -951,10 +951,10 @@ KDE_CREATE_SUBDIRSLIST
 AC_CONFIG_FILES([ Makefile ])
 AC_CONFIG_FILES([ doc/Makefile ])
 AC_CONFIG_FILES([ k3bsetup/Makefile ])
-AC_CONFIG_FILES([ kfile-plugins/Makefile ])
-AC_CONFIG_FILES([ kfile-plugins/k3bproject/Makefile ])
-AC_CONFIG_FILES([ kioslaves/Makefile ])
-AC_CONFIG_FILES([ kioslaves/videodvd/Makefile ])
+AC_CONFIG_FILES([ tdefile-plugins/Makefile ])
+AC_CONFIG_FILES([ tdefile-plugins/k3bproject/Makefile ])
+AC_CONFIG_FILES([ tdeioslaves/Makefile ])
+AC_CONFIG_FILES([ tdeioslaves/videodvd/Makefile ])
 AC_CONFIG_FILES([ libk3b/Makefile ])
 AC_CONFIG_FILES([ libk3b/cddb/Makefile ])
 AC_CONFIG_FILES([ libk3b/core/Makefile ])

@@ -37,7 +37,7 @@
 #include <tdeversion.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 
 //#define DefaultFormat KoStore::Tar
 #define DefaultFormat KoStore::Zip

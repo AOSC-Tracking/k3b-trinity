@@ -23,7 +23,7 @@
 #include <tqvaluevector.h>
 #include <tqmap.h>
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 class TQTimer;
 

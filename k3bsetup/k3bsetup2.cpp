@@ -34,7 +34,7 @@
 #include <kmessagebox.h>
 #include <kinputdialog.h>
 #include <kstandarddirs.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <tdeversion.h>
 #include <ktextedit.h>
 

@@ -21,7 +21,7 @@
 
 #include <klocale.h>
 #include <kdebug.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kurldrag.h>
 
 #include <tqdragobject.h>

@@ -29,7 +29,7 @@
 #include <knuminput.h>
 #include <kmimetype.h>
 #include <kurl.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <klineedit.h>
 
 #include "k3baudiotrackdialog.h"

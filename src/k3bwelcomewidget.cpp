@@ -39,7 +39,7 @@
 #include <kapplication.h>
 #include <kiconloader.h>
 #include <kglobal.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kpopupmenu.h>
 #include <kaboutdata.h>

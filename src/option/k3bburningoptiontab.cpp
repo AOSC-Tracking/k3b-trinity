@@ -33,7 +33,7 @@
 #include <tqwhatsthis.h>
 
 #include <knuminput.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdialog.h>
 #include <klocale.h>
 #include <klineedit.h>

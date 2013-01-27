@@ -22,7 +22,7 @@
 #include <kdebug.h>
 #include <kcombobox.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdialog.h>
 
 #include <tqlayout.h>

@@ -21,7 +21,7 @@
 
 #include <klocale.h>
 #include <klistview.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 

@@ -25,7 +25,7 @@
 #include <kdebug.h>
 #include <tdeversion.h>
 #include <kurl.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #if ! KDE_IS_VERSION( 3, 4, 1 )
 #include <tqdir.h>
 #include <tqfileinfo.h>

@@ -25,8 +25,8 @@
 
 #include <klocale.h>
 #include <kdebug.h>
-#include <kio/global.h>
-#include <kio/job.h>
+#include <tdeio/global.h>
+#include <tdeio/job.h>
 
 
 K3bCddbHttpQuery::K3bCddbHttpQuery( TQObject* parent, const char* name )

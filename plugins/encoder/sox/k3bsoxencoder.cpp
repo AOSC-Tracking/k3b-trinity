@@ -24,7 +24,7 @@
 #include <k3bpluginfactory.h>
 
 #include <kdebug.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 
 #include <tqfileinfo.h>

@@ -16,7 +16,7 @@
 
 #include <config.h>
 
-#include "kfile_k3bprojectfileplugin.h"
+#include "tdefile_k3bprojectfileplugin.h"
 #include "kostore/koStore.h"
 #include "kostore/koStoreDevice.h"
 
@@ -30,7 +30,7 @@
 
 
 
-K_EXPORT_COMPONENT_FACTORY(kfile_k3b, KGenericFactory<K3bProjectFilePlugin>("kfile_k3b"))
+K_EXPORT_COMPONENT_FACTORY(tdefile_k3b, KGenericFactory<K3bProjectFilePlugin>("tdefile_k3b"))
 
 
 K3bProjectFilePlugin::K3bProjectFilePlugin( TQObject *parent, const char *name,
@@ -131,5 +131,5 @@ bool K3bProjectFilePlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
   return success;
 }
 
-#include "kfile_k3bprojectfileplugin.moc"
+#include "tdefile_k3bprojectfileplugin.moc"
 

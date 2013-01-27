@@ -27,15 +27,15 @@
 #include <tqwhatsthis.h>
 #include <tqfileinfo.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kdialog.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
 #include <kurlrequester.h>
-#include <kio/global.h>
-#include <kconfig.h>
+#include <tdeio/global.h>
+#include <tdeconfig.h>
 #include <klineedit.h>
 
 

@@ -18,7 +18,7 @@
 #include <k3bversion.h>
 #include <k3bglobals.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <tqstring.h>
 

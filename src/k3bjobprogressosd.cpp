@@ -22,7 +22,7 @@
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <kcursor.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kpopupmenu.h>
 

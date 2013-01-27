@@ -26,7 +26,7 @@
 
 #include <klocale.h>
 #include <kdialog.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kcombobox.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>

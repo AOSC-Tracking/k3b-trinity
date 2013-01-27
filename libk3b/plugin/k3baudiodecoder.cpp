@@ -21,7 +21,7 @@
 #include "k3bpluginmanager.h"
 
 #include <kdebug.h>
-#include <kfilemetainfo.h>
+#include <tdefilemetainfo.h>
 
 #include <tqmap.h>
 

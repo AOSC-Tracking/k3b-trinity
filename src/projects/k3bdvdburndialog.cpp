@@ -28,9 +28,9 @@
 #include <k3bstdguiitems.h>
 #include <k3bglobalsettings.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kmessagebox.h>
 
 #include <tqlayout.h>

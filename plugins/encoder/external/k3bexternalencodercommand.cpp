@@ -19,7 +19,7 @@
 
 #include <k3bcore.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 
 

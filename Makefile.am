@@ -8,4 +8,4 @@ AUTOMAKE_OPTIONS = foreign 1.5
 
 #include admin/deps.am
 
-SUBDIRS = doc  libk3bdevice libk3b src kioslaves plugins kfile-plugins $(K3BSETUPDIR)
+SUBDIRS = doc  libk3bdevice libk3b src tdeioslaves plugins tdefile-plugins $(K3BSETUPDIR)

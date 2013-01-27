@@ -33,14 +33,14 @@
 #include <k3bcore.h>
 #include <k3binffilewriter.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <ktempfile.h>
-#include <kio/netaccess.h>
-#include <kio/job.h>
-#include <kio/global.h>
+#include <tdeio/netaccess.h>
+#include <tdeio/job.h>
+#include <tdeio/global.h>
 
 #include <tqtimer.h>
 #include <tqstringlist.h>

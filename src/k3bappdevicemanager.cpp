@@ -25,9 +25,9 @@
 #include <kinputdialog.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <klocale.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kpopupmenu.h>
 
 

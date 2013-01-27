@@ -22,7 +22,7 @@
 #include <k3bpluginfactory.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <knuminput.h>
 
@@ -521,7 +521,7 @@ long long K3bOggVorbisEncoder::fileSize( const TQString&, const K3b::Msf& msf ) 
   TDEConfig* c = k3bcore->config();
   c->setGroup( "K3bOggVorbisEncoderPlugin" );
 
-  // the following code is based on the size estimation from the audiocd kioslave
+  // the following code is based on the size estimation from the audiocd tdeioslave
   // TODO: reimplement.
 
   if( !c->readBoolEntry( "manual bitrate", false ) ) {

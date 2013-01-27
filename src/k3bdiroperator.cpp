@@ -22,7 +22,7 @@
 #include <k3bcore.h>
 
 #include <kcombiview.h>
-#include <kfilepreview.h>
+#include <tdefilepreview.h>
 #include <kaction.h>
 #include <kbookmarkmenu.h>
 #include <kstandarddirs.h>

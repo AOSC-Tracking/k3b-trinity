@@ -34,9 +34,9 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <ktempfile.h>
-#include <kio/netaccess.h>
-#include <kio/global.h>
-#include <kio/job.h>
+#include <tdeio/netaccess.h>
+#include <tdeio/global.h>
+#include <tdeio/job.h>
 #include <kstringhandler.h>
 
 #include <tqfile.h>

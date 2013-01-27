@@ -31,10 +31,10 @@
 #include <k3bfilesplitter.h>
 
 #include <kdebug.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <ktempfile.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 #include <tqstring.h>
 #include <tqtextstream.h>

@@ -19,7 +19,7 @@
 #define _K3B_MOVIX_LISTVIEW_H_
 
 #include <k3blistview.h>
-#include <kfileitem.h>
+#include <tdefileitem.h>
 
 #include <tqmap.h>
 

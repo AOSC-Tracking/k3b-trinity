@@ -17,7 +17,7 @@
 #define _K3B_FILECOMPILATION_SIZE_HANDLER_H_
 
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <k3bmsf.h>
 
 class K3bDataItem;

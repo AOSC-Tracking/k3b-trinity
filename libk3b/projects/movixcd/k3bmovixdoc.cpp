@@ -27,7 +27,7 @@
 #include <kurl.h>
 #include <kinputdialog.h>
 #include <kmessagebox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 
 #include <tqdom.h>

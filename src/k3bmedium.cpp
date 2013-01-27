@@ -24,7 +24,7 @@
 #include <k3biso9660backend.h>
 
 #include <klocale.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 /**
  * Internal class used by K3bMedium

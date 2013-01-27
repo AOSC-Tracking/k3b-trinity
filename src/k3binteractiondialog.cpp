@@ -43,7 +43,7 @@
 #include <kstandarddirs.h>
 #include <kstdguiitem.h>
 #include <kpushbutton.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kiconloader.h>
 #include <kglobalsettings.h>
 #include <tdeversion.h>

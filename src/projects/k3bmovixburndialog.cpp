@@ -33,9 +33,9 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqcheckbox.h>
 #include <tqlayout.h>

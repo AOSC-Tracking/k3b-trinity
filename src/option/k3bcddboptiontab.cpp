@@ -36,7 +36,7 @@
 #include <klineedit.h>
 #include <klocale.h>
 #include <knuminput.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 #include <tdeversion.h>
 

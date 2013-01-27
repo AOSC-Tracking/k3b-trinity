@@ -18,7 +18,7 @@
 #define K3BTEMPDIRSELECTIONWIDGET_H
 
 #include <tqgroupbox.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 class TQTimer;
 class TQLabel;

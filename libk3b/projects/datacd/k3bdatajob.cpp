@@ -40,8 +40,8 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>
-#include <kio/global.h>
-#include <kio/job.h>
+#include <tdeio/global.h>
+#include <tdeio/job.h>
 
 #include <tqstring.h>
 #include <tqstringlist.h>
