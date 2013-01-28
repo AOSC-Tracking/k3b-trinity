@@ -6,8 +6,8 @@ INCLUDES    = 	-I$(srcdir)/../../libk3b/tools \
 kde_module_LTLIBRARIES = kio_videodvd.la
 
 kio_videodvd_la_SOURCES = videodvd.cpp
-kio_videodvd_la_LIBADD = -lkio ../../libk3b/libk3b.la
-kio_videodvd_la_LDFLAGS = -avoid-version -module $(all_libraries) $(KDE_PLUGIN) $(LIB_QT) -lkio -ltdecore -L../../libk3bdevice/.libs -lk3bdevice
+kio_videodvd_la_LIBADD = -ltdeio ../../libk3b/libk3b.la
+kio_videodvd_la_LDFLAGS = -avoid-version -module $(all_libraries) $(KDE_PLUGIN) $(LIB_QT) -ltdeio -ltdecore -L../../libk3bdevice/.libs -lk3bdevice
 
 protocol_DATA = videodvd.protocol
 protocoldir = $(kde_servicesdir)
