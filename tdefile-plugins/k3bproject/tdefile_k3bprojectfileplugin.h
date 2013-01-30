@@ -13,8 +13,8 @@
  * See the file "COPYING" for the exact licensing terms.
  */
 
-#ifndef __KFILE_K3BPROJECTFILEPLUGIN_H__
-#define __KFILE_K3BPROJECTFILEPLUGIN_H__
+#ifndef __TDEFILE_K3BPROJECTFILEPLUGIN_H__
+#define __TDEFILE_K3BPROJECTFILEPLUGIN_H__
 
 /**
  * Note: For further information look into <$TDEDIR/include/tdefilemetainfo.h>
