@@ -32,11 +32,11 @@ namespace K3bDevice
   class DeviceManager;
 }
 
-class kio_videodvdProtocol : public TDEIO::SlaveBase
+class tdeio_videodvdProtocol : public TDEIO::SlaveBase
 {
 public:
-  kio_videodvdProtocol(const TQCString &pool_socket, const TQCString &app_socket);
-  ~kio_videodvdProtocol();
+  tdeio_videodvdProtocol(const TQCString &pool_socket, const TQCString &app_socket);
+  ~tdeio_videodvdProtocol();
 
   void mimetype( const KURL& url );
   void stat( const KURL& url );

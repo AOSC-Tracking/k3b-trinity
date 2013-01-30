@@ -42,20 +42,20 @@ extern "C"
 {
   LIBK3B_EXPORT int kdemain( int argc, char **argv )
   {
-    TDEInstance instance( "kio_videodvd" );
+    TDEInstance instance( "tdeio_videodvd" );
 
-    kdDebug(7101) << "*** Starting kio_videodvd " << endl;
+    kdDebug(7101) << "*** Starting tdeio_videodvd " << endl;
 
     if (argc != 4)
     {
-      kdDebug(7101) << "Usage: kio_videodvd  protocol domain-socket1 domain-socket2" << endl;
+      kdDebug(7101) << "Usage: tdeio_videodvd  protocol domain-socket1 domain-socket2" << endl;
       exit(-1);
     }
 
-    kio_videodvdProtocol slave(argv[2], argv[3]);
+    tdeio_videodvdProtocol slave(argv[2], argv[3]);
     slave.dispatchLoop();
 
-    kdDebug(7101) << "*** kio_videodvd Done" << endl;
+    kdDebug(7101) << "*** tdeio_videodvd Done" << endl;
     return 0;
   }
 }
@@ -64,13 +64,13 @@ extern "C"
 
 // FIXME: Does it really make sense to use a static device manager? Are all instances
 // of videodvd started in another process?
-K3bDevice::DeviceManager* kio_videodvdProtocol::s_deviceManager = 0;
-int kio_videodvdProtocol::s_instanceCnt = 0;
+K3bDevice::DeviceManager* tdeio_videodvdProtocol::s_deviceManager = 0;
+int tdeio_videodvdProtocol::s_instanceCnt = 0;
 
-kio_videodvdProtocol::kio_videodvdProtocol(const TQCString &pool_socket, const TQCString &app_socket)
-    : SlaveBase("kio_videodvd", pool_socket, app_socket)
+tdeio_videodvdProtocol::tdeio_videodvdProtocol(const TQCString &pool_socket, const TQCString &app_socket)
+    : SlaveBase("tdeio_videodvd", pool_socket, app_socket)
 {
-  kdDebug() << "kio_videodvdProtocol::kio_videodvdProtocol()" << endl;
+  kdDebug() << "tdeio_videodvdProtocol::tdeio_videodvdProtocol()" << endl;
   if( !s_deviceManager )
   {
     s_deviceManager = new K3bDevice::DeviceManager();
@@ -81,9 +81,9 @@ kio_videodvdProtocol::kio_videodvdProtocol(const TQCString &pool_socket, const T
 }
 
 
-kio_videodvdProtocol::~kio_videodvdProtocol()
+tdeio_videodvdProtocol::~tdeio_videodvdProtocol()
 {
-  kdDebug() << "kio_videodvdProtocol::~kio_videodvdProtocol()" << endl;
+  kdDebug() << "tdeio_videodvdProtocol::~tdeio_videodvdProtocol()" << endl;
   s_instanceCnt--;
   if( s_instanceCnt == 0 )
   {
@@ -93,7 +93,7 @@ kio_videodvdProtocol::~kio_videodvdProtocol()
 }
 
 
-TDEIO::UDSEntry kio_videodvdProtocol::createUDSEntry( const K3bIso9660Entry* e ) const
+TDEIO::UDSEntry tdeio_videodvdProtocol::createUDSEntry( const K3bIso9660Entry* e ) const
 {
   TDEIO::UDSEntry uds;
   TDEIO::UDSAtom a;
@@ -150,12 +150,12 @@ TDEIO::UDSEntry kio_videodvdProtocol::createUDSEntry( const K3bIso9660Entry* e )
 
 // FIXME: remember the iso instance for quicker something and search for the videodvd
 //        in the available devices.
-K3bIso9660* kio_videodvdProtocol::openIso( const KURL& url, TQString& plainIsoPath )
+K3bIso9660* tdeio_videodvdProtocol::openIso( const KURL& url, TQString& plainIsoPath )
 {
   // get the volume id from the url
   TQString volumeId = url.path().section( '/', 1, 1 );
 
-  kdDebug() << "(kio_videodvdProtocol) searching for Video dvd: " << volumeId << endl;
+  kdDebug() << "(tdeio_videodvdProtocol) searching for Video dvd: " << volumeId << endl;
 
   // now search the devices for this volume id
   // FIXME: use the cache created in listVideoDVDs
@@ -171,7 +171,7 @@ K3bIso9660* kio_videodvdProtocol::openIso( const KURL& url, TQString& plainIsoPa
       iso->setPlainIso9660( true );
       if( iso->open() && iso->primaryDescriptor().volumeId == volumeId ) {
 	plainIsoPath = url.path().section( "/", 2, -1 ) + "/";
-	kdDebug() << "(kio_videodvdProtocol) using iso path: " << plainIsoPath << endl;
+	kdDebug() << "(tdeio_videodvdProtocol) using iso path: " << plainIsoPath << endl;
 	return iso;
       }
       delete iso;
@@ -183,9 +183,9 @@ K3bIso9660* kio_videodvdProtocol::openIso( const KURL& url, TQString& plainIsoPa
 }
 
 
-void kio_videodvdProtocol::get(const KURL& url )
+void tdeio_videodvdProtocol::get(const KURL& url )
 {
-  kdDebug() << "kio_videodvd::get(const KURL& url)" << endl ;
+  kdDebug() << "tdeio_videodvd::get(const KURL& url)" << endl ;
 
   TQString isoPath;
   if( K3bIso9660* iso = openIso( url, isoPath ) )
@@ -227,7 +227,7 @@ void kio_videodvdProtocol::get(const KURL& url )
 }
 
 
-void kio_videodvdProtocol::listDir( const KURL& url )
+void tdeio_videodvdProtocol::listDir( const KURL& url )
 {
   if( url.path() == "/" ) {
     listVideoDVDs();
@@ -265,7 +265,7 @@ void kio_videodvdProtocol::listDir( const KURL& url )
 }
 
 
-void kio_videodvdProtocol::listVideoDVDs()
+void tdeio_videodvdProtocol::listVideoDVDs()
 {
   int cnt = 0;
 
@@ -321,7 +321,7 @@ void kio_videodvdProtocol::listVideoDVDs()
 }
 
 
-void kio_videodvdProtocol::stat( const KURL& url )
+void tdeio_videodvdProtocol::stat( const KURL& url )
 {
   if( url.path() == "/" ) {
     //
@@ -364,7 +364,7 @@ void kio_videodvdProtocol::stat( const KURL& url )
 
 
 // FIXME: when does this get called? It seems not to be used for the files.
-void kio_videodvdProtocol::mimetype( const KURL& url )
+void tdeio_videodvdProtocol::mimetype( const KURL& url )
 {
   if( url.path() == "/" ) {
     error( ERR_UNSUPPORTED_ACTION, "mimetype(/)" );
