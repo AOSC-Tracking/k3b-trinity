@@ -118,7 +118,7 @@ void K3bVideoDVDTitleTranscodingJob::start()
     // let's see if the directory exists and we can write to it
     TQFileInfo fileInfo( m_filename );
     TQFileInfo dirInfo( fileInfo.dirPath() );
-    if( !dirInfo.exists() && !KStandardDirs::makeDir( dirInfo.absFilePath() ) ) {
+    if( !dirInfo.exists() && !TDEStandardDirs::makeDir( dirInfo.absFilePath() ) ) {
       emit infoMessage( i18n("Unable to create folder '%1'").arg(dirInfo.filePath()), ERROR );
       return;
     }

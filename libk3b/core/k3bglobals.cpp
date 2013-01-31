@@ -526,11 +526,11 @@ TQ_INT64 K3b::fromLe64( char* data )
 TQString K3b::findExe( const TQString& name )
 {
   // first we search the path
-  TQString bin = KStandardDirs::findExe( name );
+  TQString bin = TDEStandardDirs::findExe( name );
 
   // then go on with our own little list
   if( bin.isEmpty() )
-    bin = KStandardDirs::findExe( name, k3bcore->externalBinManager()->searchPath().join(":") );
+    bin = TDEStandardDirs::findExe( name, k3bcore->externalBinManager()->searchPath().join(":") );
 
   return bin;
 }

@@ -159,7 +159,7 @@ void K3bVideoCdRippingDialog::slotStartClicked()
     if( !d.exists() ) {
       if( KMessageBox::warningYesNo( this, i18n("Image folder '%1' does not exist. Do you want K3b to create it?").arg( m_editDirectory->url() ) )
 	  == KMessageBox::Yes ) {
-	if( !KStandardDirs::makeDir( m_editDirectory->url() ) ) {
+	if( !TDEStandardDirs::makeDir( m_editDirectory->url() ) ) {
 	  KMessageBox::error( this, i18n("Failed to create folder '%1'.").arg( m_editDirectory->url() ) );
 	  return;
 	}

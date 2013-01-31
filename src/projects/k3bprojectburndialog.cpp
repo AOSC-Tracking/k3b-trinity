@@ -201,7 +201,7 @@ void K3bProjectBurnDialog::slotStartClicked()
       if( !TQFile::exists( tempDir ) ) {
 	if( KMessageBox::warningYesNo( this, i18n("Image folder '%1' does not exist. Do you want K3b to create it?").arg( tempDir ) )
 	    == KMessageBox::Yes ) {
-	  if( !KStandardDirs::makeDir( tempDir ) ) {
+	  if( !TDEStandardDirs::makeDir( tempDir ) ) {
 	    KMessageBox::error( this, i18n("Failed to create folder '%1'.").arg( tempDir ) );
 	    return;
 	  }

@@ -109,7 +109,7 @@ void K3bAudioProjectConvertingThread::run()
     TQString& filename = m_tracks[0].second;
 
     TQString dir = filename.left( filename.findRev("/") );
-    if( !KStandardDirs::makeDir( dir ) ) {
+    if( !TDEStandardDirs::makeDir( dir ) ) {
       emitInfoMessage( i18n("Unable to create directory %1").arg(dir), K3bJob::ERROR );
       emitFinished(false);
       return;
@@ -195,7 +195,7 @@ void K3bAudioProjectConvertingThread::run()
 bool K3bAudioProjectConvertingThread::convertTrack( K3bAudioTrack* track, const TQString& filename )
 {
   TQString dir = filename.left( filename.findRev("/") );
-  if( !KStandardDirs::makeDir( dir ) ) {
+  if( !TDEStandardDirs::makeDir( dir ) ) {
     emitInfoMessage( i18n("Unable to create directory %1").arg(dir), K3bJob::ERROR );
     return false;
   }
@@ -303,7 +303,7 @@ bool K3bAudioProjectConvertingThread::writePlaylist()
   // this is an absolut path so there is always a "/"
   TQString playlistDir = m_playlistFilename.left( m_playlistFilename.findRev( "/" ) );
 
-  if( !KStandardDirs::makeDir( playlistDir ) ) {
+  if( !TDEStandardDirs::makeDir( playlistDir ) ) {
     emitInfoMessage( i18n("Unable to create directory %1").arg(playlistDir), K3bJob::ERROR );
     return false;
   }

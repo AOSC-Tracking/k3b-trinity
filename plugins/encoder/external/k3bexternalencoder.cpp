@@ -252,7 +252,7 @@ bool K3bExternalEncoder::initEncoderInternal( const TQString& extension )
   }
   else {
     TQString commandName = d->cmd.command.section( TQRegExp("\\s+"), 0 );
-    if( !KStandardDirs::findExe( commandName ).isEmpty() )
+    if( !TDEStandardDirs::findExe( commandName ).isEmpty() )
       setLastError( i18n("Could not find program '%1'").arg(commandName) );
 
     return false;

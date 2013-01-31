@@ -145,7 +145,7 @@ namespace K3b
   LIBK3B_EXPORT TQString findTempFile( const TQString& ending = TQString(), const TQString& d = TQString() );
 
   /**
-   * Wrapper around KStandardDirs::findExe which searches the PATH and some additional
+   * Wrapper around TDEStandardDirs::findExe which searches the PATH and some additional
    * directories to find system tools which are normally only in root's PATH.
    */
   LIBK3B_EXPORT TQString findExe( const TQString& name );

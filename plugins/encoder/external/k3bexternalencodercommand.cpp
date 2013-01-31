@@ -59,7 +59,7 @@ TQValueList<K3bExternalEncoderCommand> K3bExternalEncoderCommand::readCommands()
     cl.append( lameCmd );
 #endif
 
-    if( !KStandardDirs::findExe( "flac" ).isEmpty() ) {
+    if( !TDEStandardDirs::findExe( "flac" ).isEmpty() ) {
       K3bExternalEncoderCommand flacCmd;
       flacCmd.name = "Flac";
       flacCmd.extension = "flac";
@@ -82,7 +82,7 @@ TQValueList<K3bExternalEncoderCommand> K3bExternalEncoderCommand::readCommands()
       cl.append( flacCmd );
     }
 
-    if( !KStandardDirs::findExe( "mppenc" ).isEmpty() ) {
+    if( !TDEStandardDirs::findExe( "mppenc" ).isEmpty() ) {
       K3bExternalEncoderCommand mppCmd;
       mppCmd.name = "Musepack";
       mppCmd.extension = "mpc";

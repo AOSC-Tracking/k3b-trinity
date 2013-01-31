@@ -195,7 +195,7 @@ void K3bAudioRipThread::run()
     TQString& filename = m_tracks[0].second;
 
     TQString dir = filename.left( filename.findRev("/") );
-    if( !KStandardDirs::makeDir( dir, 0777 ) ) {
+    if( !TDEStandardDirs::makeDir( dir, 0777 ) ) {
       d->paranoiaLib->close();
       emitInfoMessage( i18n("Unable to create directory %1").arg(dir), K3bJob::ERROR );
       m_device->block(false);
@@ -299,7 +299,7 @@ bool K3bAudioRipThread::ripTrack( int track, const TQString& filename )
     long trackSectorsRead = 0;
 
     TQString dir = filename.left( filename.findRev("/") );
-    if( !KStandardDirs::makeDir( dir, 0777 ) ) {
+    if( !TDEStandardDirs::makeDir( dir, 0777 ) ) {
       emitInfoMessage( i18n("Unable to create directory %1").arg(dir), K3bJob::ERROR );
       return false;
     }
@@ -446,7 +446,7 @@ bool K3bAudioRipThread::writePlaylist()
   // this is an absolut path so there is always a "/"
   TQString playlistDir = m_playlistFilename.left( m_playlistFilename.findRev( "/" ) );
 
-  if( !KStandardDirs::makeDir( playlistDir ) ) {
+  if( !TDEStandardDirs::makeDir( playlistDir ) ) {
     emitInfoMessage( i18n("Unable to create directory %1").arg(playlistDir), K3bJob::ERROR );
     return false;
   }
