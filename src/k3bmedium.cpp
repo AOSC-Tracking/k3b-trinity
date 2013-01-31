@@ -29,7 +29,7 @@
 /**
  * Internal class used by K3bMedium
  */
-class K3bMedium::Data : public KShared
+class K3bMedium::Data : public TDEShared
 {
 public:
   Data();

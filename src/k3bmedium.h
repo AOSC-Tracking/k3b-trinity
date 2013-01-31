@@ -128,7 +128,7 @@ class K3bMedium
   void detach();
 
   class Data;
-  KSharedPtr<Data> d;
+  TDESharedPtr<Data> d;
 };
 
 #endif
