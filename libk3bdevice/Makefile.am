@@ -1,4 +1,4 @@
-AM_CPPFLAGS= -I$(srcdir)/libk3bdevice -I$(srcdir) $(all_includes) $(HAL_INCS) $(DBUS_INCS) $(DBUSQT_INCS)
+AM_CPPFLAGS= -I$(srcdir)/libk3bdevice -I$(srcdir) $(all_includes) $(HAL_INCS) $(DBUSQT_CFLAGS)
 
 KDE_CXXFLAGS = $(ENABLE_PERMISSIVE_FLAG)
 
