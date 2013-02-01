@@ -89,7 +89,7 @@ class K3bMovixListView : public K3bListView
   void slotNewFileItems();
   void slotFileItemRemoved( K3bMovixFileItem* );
   void slotSubTitleItemRemoved( K3bMovixFileItem* );
-  void slotDropped( KListView*, TQDropEvent* e, TQListViewItem* after );
+  void slotDropped( TDEListView*, TQDropEvent* e, TQListViewItem* after );
   void slotChanged();
 
  private:

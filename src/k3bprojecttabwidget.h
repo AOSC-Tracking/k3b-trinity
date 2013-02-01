@@ -20,8 +20,8 @@
 #include <tqtabwidget.h>
 #include <kurl.h>
 
-class KAction;
-class KActionMenu;
+class TDEAction;
+class TDEActionMenu;
 class K3bDoc;
 
 
@@ -58,7 +58,7 @@ class K3bProjectTabWidget : public TQTabWidget
   /**
    * inserts the given action into the popup menu for the tabs
    */
-  void insertAction( KAction* );
+  void insertAction( TDEAction* );
 
   bool eventFilter( TQObject* o, TQEvent* e );
 
@@ -70,7 +70,7 @@ class K3bProjectTabWidget : public TQTabWidget
   void slotDocSaved( K3bDoc* );
 
  private:
-  KActionMenu* m_projectActionMenu;
+  TDEActionMenu* m_projectActionMenu;
 
   class ProjectData;
   TQMap<K3bDoc*, ProjectData> m_projectDataMap;

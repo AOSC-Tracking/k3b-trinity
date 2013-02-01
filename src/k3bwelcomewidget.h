@@ -80,11 +80,11 @@ class K3bWelcomeWidget::Display : public TQWidget
   TQSizePolicy sizePolicy () const;
   int heightForWidth ( int w ) const;
 
-  void addAction( KAction* );
-  void removeAction( KAction* );
+  void addAction( TDEAction* );
+  void removeAction( TDEAction* );
   void removeButton( K3bFlatButton* );
   void rebuildGui();
-  void rebuildGui( const TQPtrList<KAction>& );
+  void rebuildGui( const TQPtrList<TDEAction>& );
 
  signals:
   void dropped( const KURL::List& );
@@ -109,9 +109,9 @@ class K3bWelcomeWidget::Display : public TQWidget
   int m_cols;
   int m_rows;
 
-  TQPtrList<KAction> m_actions;
+  TQPtrList<TDEAction> m_actions;
   TQPtrList<K3bFlatButton> m_buttons;
-  TQMap<K3bFlatButton*, KAction*> m_buttonMap;
+  TQMap<K3bFlatButton*, TDEAction*> m_buttonMap;
 
   K3bFlatButton* m_buttonMore;
 

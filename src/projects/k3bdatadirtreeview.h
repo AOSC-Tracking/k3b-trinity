@@ -29,9 +29,9 @@ class K3bDataDirViewItem;
 class K3bDirItem;
 class K3bDataItem;
 class K3bDataFileView;
-class KActionCollection;
-class KActionMenu;
-class KAction;
+class TDEActionCollection;
+class TDEActionMenu;
+class TDEAction;
 class K3bView;
 class TQDragMoveEvent;
 class TQDragLeaveEvent;
@@ -54,7 +54,7 @@ class K3bDataDirTreeView : public K3bListView
 		
   void setFileView( K3bDataFileView* view ) { m_fileView = view; }
 
-  KActionCollection* actionCollection() const { return m_actionCollection; }
+  TDEActionCollection* actionCollection() const { return m_actionCollection; }
 
  public slots:
   void checkForNewItems();
@@ -69,12 +69,12 @@ class K3bDataDirTreeView : public K3bListView
   void contentsDragMoveEvent( TQDragMoveEvent* e );
   void contentsDragLeaveEvent( TQDragLeaveEvent* e );
 
-  KActionCollection* m_actionCollection;
-  KActionMenu* m_popupMenu;
-  KAction* m_actionRemove;
-  KAction* m_actionRename;
-  KAction* m_actionNewDir;
-  KAction* m_actionProperties;
+  TDEActionCollection* m_actionCollection;
+  TDEActionMenu* m_popupMenu;
+  TDEAction* m_actionRemove;
+  TDEAction* m_actionRename;
+  TDEAction* m_actionNewDir;
+  TDEAction* m_actionProperties;
 
  protected slots:
   virtual void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* parent );
@@ -102,7 +102,7 @@ class K3bDataDirTreeView : public K3bListView
  private slots:
   void slotExecuted( TQListViewItem* );
   void slotDataItemRemoved( K3bDataItem* );
-  void showPopupMenu( KListView*, TQListViewItem* _item, const TQPoint& );
+  void showPopupMenu( TDEListView*, TQListViewItem* _item, const TQPoint& );
   void slotRenameItem();
   void slotRemoveItem();
   void slotNewDir();

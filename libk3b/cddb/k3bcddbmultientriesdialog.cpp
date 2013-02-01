@@ -37,7 +37,7 @@ K3bCddbMultiEntriesDialog::K3bCddbMultiEntriesDialog( TQWidget* parent, const ch
   TQLabel* infoLabel = new TQLabel( i18n("K3b found multiple inexact CDDB entries. Please select one."), frame );
   infoLabel->setAlignment( WordBreak );
 
-  m_listBox = new KListBox( frame, "list_box");
+  m_listBox = new TDEListBox( frame, "list_box");
 
   setMinimumSize( 280, 200 );
 }

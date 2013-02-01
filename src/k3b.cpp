@@ -215,10 +215,10 @@ void K3bMainWindow::initActions()
   actionFileOpenRecent = KStdAction::openRecent(TQT_TQOBJECT(this), TQT_SLOT(slotFileOpenRecent(const KURL&)), actionCollection());
   actionFileSave = KStdAction::save(TQT_TQOBJECT(this), TQT_SLOT(slotFileSave()), actionCollection());
   actionFileSaveAs = KStdAction::saveAs(TQT_TQOBJECT(this), TQT_SLOT(slotFileSaveAs()), actionCollection());
-  actionFileSaveAll = new KAction( i18n("Save All"), "save_all", 0, TQT_TQOBJECT(this), TQT_SLOT(slotFileSaveAll()), 
+  actionFileSaveAll = new TDEAction( i18n("Save All"), "save_all", 0, TQT_TQOBJECT(this), TQT_SLOT(slotFileSaveAll()), 
 				   actionCollection(), "file_save_all" );
   actionFileClose = KStdAction::close(TQT_TQOBJECT(this), TQT_SLOT(slotFileClose()), actionCollection());
-  actionFileCloseAll = new KAction( i18n("Close All"), 0, 0, TQT_TQOBJECT(this), TQT_SLOT(slotFileCloseAll()), 
+  actionFileCloseAll = new TDEAction( i18n("Close All"), 0, 0, TQT_TQOBJECT(this), TQT_SLOT(slotFileCloseAll()), 
 				    actionCollection(), "file_close_all" );
   actionFileQuit = KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(slotFileQuit()), actionCollection());
   actionViewStatusBar = KStdAction::showStatusbar(TQT_TQOBJECT(this), TQT_SLOT(slotViewStatusBar()), actionCollection());
@@ -232,38 +232,38 @@ void K3bMainWindow::initActions()
   setStandardToolBarMenuEnabled(true);
   KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT(slotShowMenuBar()), actionCollection() );
 
-  actionFileNewMenu = new KActionMenu( i18n("&New Project"), "filenew", actionCollection(), "file_new" );
-  actionFileNewAudio = new KAction(i18n("New &Audio CD Project"), "audiocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewAudioDoc()),
+  actionFileNewMenu = new TDEActionMenu( i18n("&New Project"), "filenew", actionCollection(), "file_new" );
+  actionFileNewAudio = new TDEAction(i18n("New &Audio CD Project"), "audiocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewAudioDoc()),
 			     actionCollection(), "file_new_audio");
-  actionFileNewData = new KAction(i18n("New Data &CD Project"), "datacd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewDataDoc()),
+  actionFileNewData = new TDEAction(i18n("New Data &CD Project"), "datacd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewDataDoc()),
 			    actionCollection(), "file_new_data");
-  actionFileNewMixed = new KAction(i18n("New &Mixed Mode CD Project"), "mixedcd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMixedDoc()),
+  actionFileNewMixed = new TDEAction(i18n("New &Mixed Mode CD Project"), "mixedcd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMixedDoc()),
 				   actionCollection(), "file_new_mixed");
-  actionFileNewVcd = new KAction(i18n("New &Video CD Project"), "videocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewVcdDoc()),
+  actionFileNewVcd = new TDEAction(i18n("New &Video CD Project"), "videocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewVcdDoc()),
 				   actionCollection(), "file_new_vcd");
-  actionFileNewMovix = new KAction(i18n("New &eMovix CD Project"), "emovix", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMovixDoc()),
+  actionFileNewMovix = new TDEAction(i18n("New &eMovix CD Project"), "emovix", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMovixDoc()),
 				   actionCollection(), "file_new_movix");
-  actionFileNewMovixDvd = new KAction(i18n("New &eMovix DVD Project"), "emovix", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMovixDvdDoc()),
+  actionFileNewMovixDvd = new TDEAction(i18n("New &eMovix DVD Project"), "emovix", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewMovixDvdDoc()),
 				      actionCollection(), "file_new_movix_dvd");
-  actionFileNewDvd = new KAction(i18n("New Data &DVD Project"), "datadvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewDvdDoc()),
+  actionFileNewDvd = new TDEAction(i18n("New Data &DVD Project"), "datadvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewDvdDoc()),
 				 actionCollection(), "file_new_dvd");
-  actionFileNewVideoDvd = new KAction(i18n("New V&ideo DVD Project"), "videodvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewVideoDvdDoc()),
+  actionFileNewVideoDvd = new TDEAction(i18n("New V&ideo DVD Project"), "videodvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewVideoDvdDoc()),
 				      actionCollection(), "file_new_video_dvd");
-  actionFileContinueMultisession = new KAction( i18n("Continue Multisession Project"), "datacd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotContinueMultisession()),
+  actionFileContinueMultisession = new TDEAction( i18n("Continue Multisession Project"), "datacd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotContinueMultisession()),
 						actionCollection(), "file_continue_multisession" );
 
   actionFileNewMenu->setDelayed( false );
   actionFileNewMenu->insert( actionFileNewData );
   actionFileNewMenu->insert( actionFileNewDvd );
   actionFileNewMenu->insert( actionFileContinueMultisession );
-  actionFileNewMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
+  actionFileNewMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
   actionFileNewMenu->insert( actionFileNewAudio );
-  actionFileNewMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
+  actionFileNewMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
   actionFileNewMenu->insert( actionFileNewMixed );
-  actionFileNewMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
+  actionFileNewMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
   actionFileNewMenu->insert( actionFileNewVcd );
   actionFileNewMenu->insert( actionFileNewVideoDvd );
-  actionFileNewMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
+  actionFileNewMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
   actionFileNewMenu->insert( actionFileNewMovix );
   actionFileNewMenu->insert( actionFileNewMovixDvd );
 
@@ -271,53 +271,53 @@ void K3bMainWindow::initActions()
 
 
 
-  actionProjectAddFiles = new KAction( i18n("&Add Files..."), "filenew", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProjectAddFiles()),
+  actionProjectAddFiles = new TDEAction( i18n("&Add Files..."), "filenew", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProjectAddFiles()),
 				       actionCollection(), "project_add_files");
 
-  KAction* actionClearProject = new KAction( i18n("&Clear Project"), TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, 
+  TDEAction* actionClearProject = new TDEAction( i18n("&Clear Project"), TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, 
 					     TQT_TQOBJECT(this), TQT_SLOT(slotClearProject()), actionCollection(), "project_clear_project" );
 
-  actionViewDirTreeView = new KToggleAction(i18n("Show Directories"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotShowDirTreeView()),
+  actionViewDirTreeView = new TDEToggleAction(i18n("Show Directories"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotShowDirTreeView()),
 					    actionCollection(), "view_dir_tree");
 
-  actionViewContentsView = new KToggleAction(i18n("Show Contents"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotShowContentsView()),
+  actionViewContentsView = new TDEToggleAction(i18n("Show Contents"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotShowContentsView()),
 					     actionCollection(), "view_contents");
 
-  actionViewDocumentHeader = new KToggleAction(i18n("Show Document Header"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotViewDocumentHeader()),
+  actionViewDocumentHeader = new TDEToggleAction(i18n("Show Document Header"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotViewDocumentHeader()),
 					       actionCollection(), "view_document_header");
 
-  actionToolsBlankCdrw = new KAction( i18n("&Erase CD-RW..."), "erasecd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotBlankCdrw()),
+  actionToolsBlankCdrw = new TDEAction( i18n("&Erase CD-RW..."), "erasecd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotBlankCdrw()),
 				      actionCollection(), "tools_blank_cdrw" );
-  KAction* actionToolsFormatDVD = new KAction( i18n("&Format DVD%1RW...").arg("�"), "formatdvd", 0, TQT_TQOBJECT(this), 
+  TDEAction* actionToolsFormatDVD = new TDEAction( i18n("&Format DVD%1RW...").arg("�"), "formatdvd", 0, TQT_TQOBJECT(this), 
 					       TQT_SLOT(slotFormatDvd()), actionCollection(), "tools_format_dvd" );
-  actionToolsWriteCdImage = new KAction(i18n("&Burn CD Image..."), "burn_cdimage", 0, TQT_TQOBJECT(this), TQT_SLOT(slotWriteCdImage()),
+  actionToolsWriteCdImage = new TDEAction(i18n("&Burn CD Image..."), "burn_cdimage", 0, TQT_TQOBJECT(this), TQT_SLOT(slotWriteCdImage()),
 					 actionCollection(), "tools_write_cd_image" );
-  KAction* actionToolsWriteDvdImage = new KAction(i18n("&Burn DVD ISO Image..."), "burn_dvdimage", 0, TQT_TQOBJECT(this), TQT_SLOT(slotWriteDvdIsoImage()),
+  TDEAction* actionToolsWriteDvdImage = new TDEAction(i18n("&Burn DVD ISO Image..."), "burn_dvdimage", 0, TQT_TQOBJECT(this), TQT_SLOT(slotWriteDvdIsoImage()),
 						 actionCollection(), "tools_write_dvd_iso" );
 
-  actionCdCopy = new KAction(i18n("&Copy CD..."), "cdcopy", 0, TQT_TQOBJECT(this), TQT_SLOT(slotCdCopy()),
+  actionCdCopy = new TDEAction(i18n("&Copy CD..."), "cdcopy", 0, TQT_TQOBJECT(this), TQT_SLOT(slotCdCopy()),
 			     actionCollection(), "tools_copy_cd" );
 
-  KAction* actionToolsDvdCopy = new KAction(i18n("Copy &DVD..."), "dvdcopy", 0, TQT_TQOBJECT(this), TQT_SLOT(slotDvdCopy()),
+  TDEAction* actionToolsDvdCopy = new TDEAction(i18n("Copy &DVD..."), "dvdcopy", 0, TQT_TQOBJECT(this), TQT_SLOT(slotDvdCopy()),
 					    actionCollection(), "tools_copy_dvd" );
 
-  actionToolsCddaRip = new KAction( i18n("Rip Audio CD..."), "cddarip", 0, TQT_TQOBJECT(this), TQT_SLOT(slotCddaRip()),
+  actionToolsCddaRip = new TDEAction( i18n("Rip Audio CD..."), "cddarip", 0, TQT_TQOBJECT(this), TQT_SLOT(slotCddaRip()),
 				    actionCollection(), "tools_cdda_rip" );
-  actionToolsVideoDvdRip = new KAction( i18n("Rip Video DVD..."), "videodvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotVideoDvdRip()),
+  actionToolsVideoDvdRip = new TDEAction( i18n("Rip Video DVD..."), "videodvd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotVideoDvdRip()),
 				    actionCollection(), "tools_videodvd_rip" );
-  actionToolsVideoCdRip = new KAction( i18n("Rip Video CD..."), "videocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotVideoCdRip()),
+  actionToolsVideoCdRip = new TDEAction( i18n("Rip Video CD..."), "videocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotVideoCdRip()),
 				       actionCollection(), "tools_videocd_rip" );
 
-  (void)new KAction( i18n("System Check"), 0, 0, TQT_TQOBJECT(this), TQT_SLOT(slotCheckSystem()),
+  (void)new TDEAction( i18n("System Check"), 0, 0, TQT_TQOBJECT(this), TQT_SLOT(slotCheckSystem()),
 		     actionCollection(), "help_check_system" );
 
 #ifdef HAVE_K3BSETUP
-  actionSettingsK3bSetup = new KAction(i18n("&Setup System Permissions..."), "configure", 0, TQT_TQOBJECT(this), TQT_SLOT(slotK3bSetup()),
+  actionSettingsK3bSetup = new TDEAction(i18n("&Setup System Permissions..."), "configure", 0, TQT_TQOBJECT(this), TQT_SLOT(slotK3bSetup()),
 				       actionCollection(), "settings_k3bsetup" );
 #endif
 
 #ifdef K3B_DEBUG
-  (void)new KAction( "Test Media Selection ComboBox", 0, 0, TQT_TQOBJECT(this), 
+  (void)new TDEAction( "Test Media Selection ComboBox", 0, 0, TQT_TQOBJECT(this), 
 		     TQT_SLOT(slotMediaSelectionTester()), actionCollection(),
 		     "test_media_selection" );
 #endif
@@ -456,7 +456,7 @@ void K3bMainWindow::initView()
 							  0, 0, 0,
 							  actionCollection(), "quick_dir_selector" );
   fileTreeComboAction->setAutoSized(true);
-  (void)new KAction( i18n("Go"), "key_enter", 0, TQT_TQOBJECT(m_fileTreeComboBox), TQT_SLOT(slotGoUrl()), actionCollection(), "go_url" );
+  (void)new TDEAction( i18n("Go"), "key_enter", 0, TQT_TQOBJECT(m_fileTreeComboBox), TQT_SLOT(slotGoUrl()), actionCollection(), "go_url" );
   // ---------------------------------------------------------------------------------------------
 }
 
@@ -623,7 +623,7 @@ void K3bMainWindow::saveProperties( TDEConfig* c )
   TQString saveDir = TDEGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
 
   // FIXME: for some reason the config entries are not properly stored when using the default
-  //        KMainWindow session config. Since I was not able to find the bug I use another config object
+  //        TDEMainWindow session config. Since I was not able to find the bug I use another config object
   // ----------------------------------------------------------
   c = new KSimpleConfig( saveDir + "list", false );
   c->setGroup( "Saved Session" );
@@ -657,7 +657,7 @@ void K3bMainWindow::saveProperties( TDEConfig* c )
   }
 
   // FIXME: for some reason the config entries are not properly stored when using the default
-  //        KMainWindow session config. Since I was not able to find the bug I use another config object
+  //        TDEMainWindow session config. Since I was not able to find the bug I use another config object
   // ----------------------------------------------------------
   delete c;
   // ----------------------------------------------------------
@@ -678,7 +678,7 @@ void K3bMainWindow::readProperties( TDEConfig* c )
   TQString saveDir = TDEGlobal::dirs()->saveLocation( "appdata", "sessions/" + tqApp->sessionId() + "/", true );
 
   // FIXME: for some reason the config entries are not properly stored when using the default
-  //        KMainWindow session config. Since I was not able to find the bug I use another config object
+  //        TDEMainWindow session config. Since I was not able to find the bug I use another config object
   // ----------------------------------------------------------
   c = new KSimpleConfig( saveDir + "list", true );
   c->setGroup( "Saved Session" );
@@ -718,7 +718,7 @@ void K3bMainWindow::readProperties( TDEConfig* c )
   TDEIO::del( KURL::fromPathOrURL(saveDir), false, false );
 
   // FIXME: for some reason the config entries are not properly stored when using the default
-  //        KMainWindow session config. Since I was not able to find the bug I use another config object
+  //        TDEMainWindow session config. Since I was not able to find the bug I use another config object
   // ----------------------------------------------------------
   delete c;
   // ----------------------------------------------------------
@@ -935,7 +935,7 @@ void K3bMainWindow::fileSaveAs( K3bDoc* doc )
     KURL url = dlg.selectedURL();
 
     if( url.isValid() ) {
-      KRecentDocument::add( url );
+      TDERecentDocument::add( url );
 
       bool exists = TDEIO::NetAccess::exists( url, false, 0 );
       if( !exists ||

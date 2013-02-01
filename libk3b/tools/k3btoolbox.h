@@ -22,8 +22,8 @@
 #include <tqptrlist.h>
 #include "k3b_export.h"
 
-class KAction;
-class KToggleAction;
+class TDEAction;
+class TDEToggleAction;
 class KWidgetAction;
 class TQGridLayout;
 class TQPopupMenu;
@@ -39,7 +39,7 @@ class LIBK3B_EXPORT K3bToolBoxButton : public TQToolButton
   
 
  public:
-  K3bToolBoxButton( KAction*, TQWidget* parent );
+  K3bToolBoxButton( TDEAction*, TQWidget* parent );
   K3bToolBoxButton( const TQString& text, const TQString& icon, 
 		    const TQString& tooltip, const TQString& whatsthis,
 		    TQObject* receiver, const char* slot,
@@ -69,8 +69,8 @@ class LIBK3B_EXPORT K3bToolBox : public TQFrame
 			       const TQString& tooltip = TQString(), const TQString& whatsthis = TQString(),
 			       TQObject* receiver = 0, const char* slot = 0,
 			       bool forceTextLabel = false );
-  K3bToolBoxButton* addButton( KAction*, bool forceTextLabel = false );
-  K3bToolBoxButton* addToggleButton( KToggleAction* );
+  K3bToolBoxButton* addButton( TDEAction*, bool forceTextLabel = false );
+  K3bToolBoxButton* addToggleButton( TDEToggleAction* );
   void addWidgetAction( KWidgetAction* );
 
   /**

@@ -155,7 +155,7 @@ void K3bJobProgressDialog::setupGUI()
   // ------------------------------------------------------------------------------------------
 
 
-  m_viewInfo = new KListView( this, "m_viewInfo" );
+  m_viewInfo = new TDEListView( this, "m_viewInfo" );
   m_viewInfo->addColumn( "" );
   m_viewInfo->addColumn( i18n( "Message" ) );
   m_viewInfo->setFullWidth( true );
@@ -291,7 +291,7 @@ void K3bJobProgressDialog::closeEvent( TQCloseEvent* e )
       w->show();
 
     if( !m_plainCaption.isEmpty() )
-      if( KMainWindow* w = dynamic_cast<KMainWindow*>(kapp->mainWidget()) )
+      if( TDEMainWindow* w = dynamic_cast<TDEMainWindow*>(kapp->mainWidget()) )
 	w->setPlainCaption( m_plainCaption );
 
     if( m_osd ) {
@@ -504,7 +504,7 @@ void K3bJobProgressDialog::slotStarted()
   d->lastProgress = 0;
   m_timer->start( 1000 );
   m_startTime = TQTime::currentTime();
-  if( KMainWindow* w = dynamic_cast<KMainWindow*>(kapp->mainWidget()) )
+  if( TDEMainWindow* w = dynamic_cast<TDEMainWindow*>(kapp->mainWidget()) )
     m_plainCaption = w->caption();
 
   m_logFile.open();
@@ -545,7 +545,7 @@ void K3bJobProgressDialog::slotProgress( int percent )
   if( percent > d->lastProgress ) {
     d->lastProgress = percent;
     m_lastProgressUpdateTime = TQTime::currentTime();
-    if( KMainWindow* w = dynamic_cast<KMainWindow*>(kapp->mainWidget()) ) {
+    if( TDEMainWindow* w = dynamic_cast<TDEMainWindow*>(kapp->mainWidget()) ) {
       w->setPlainCaption( TQString( "(%1%) %2" ).arg(percent).arg(m_plainCaption) );
     }
 

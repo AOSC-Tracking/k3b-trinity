@@ -36,17 +36,17 @@
 
 
 
-class K3bBootImageView::PrivateBootImageViewItem : public KListViewItem
+class K3bBootImageView::PrivateBootImageViewItem : public TDEListViewItem
 {
 public:
   PrivateBootImageViewItem( K3bBootItem* image, TQListView* parent ) 
-    : KListViewItem( parent ), 
+    : TDEListViewItem( parent ), 
       m_image( image ) {
 
   }
 
   PrivateBootImageViewItem( K3bBootItem* image, TQListView* parent, TQListViewItem* after )
-    : KListViewItem( parent, after ),
+    : TDEListViewItem( parent, after ),
       m_image( image ) {
 
   }

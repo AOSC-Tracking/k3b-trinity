@@ -16,8 +16,8 @@
 #ifndef _K3B_APP_DEVICE_MANAGER_H_
 #define _K3B_APP_DEVICE_MANAGER_H_
 
-class KActionCollection;
-class KAction;
+class TDEActionCollection;
+class TDEAction;
 class K3bMediaCache;
 
 namespace K3bDevice {
@@ -47,7 +47,7 @@ class K3bAppDeviceManager : public K3bDevice::DeviceManager
   ~K3bAppDeviceManager();
 
   K3bDevice::Device* currentDevice() const;
-  KActionCollection* actionCollection() const { return m_actionCollection; }
+  TDEActionCollection* actionCollection() const { return m_actionCollection; }
   void setMediaCache( K3bMediaCache* c );
 
  signals:
@@ -103,15 +103,15 @@ class K3bAppDeviceManager : public K3bDevice::DeviceManager
   void slotMediumChanged( K3bDevice::Device* dev );
 
  private:
-  KAction* m_actionDiskInfo;
-  KAction* m_actionUnmount;
-  KAction* m_actionMount;
-  KAction* m_actionEject;
-  KAction* m_actionLoad;
-  KAction* m_actionSetReadSpeed;
+  TDEAction* m_actionDiskInfo;
+  TDEAction* m_actionUnmount;
+  TDEAction* m_actionMount;
+  TDEAction* m_actionEject;
+  TDEAction* m_actionLoad;
+  TDEAction* m_actionSetReadSpeed;
 
   mutable K3bDevice::Device* m_currentDevice;
-  KActionCollection* m_actionCollection;
+  TDEActionCollection* m_actionCollection;
   K3bDevice::DiskInfoDetector* m_diskInfoDetector;
 
   bool m_ejectRequested;

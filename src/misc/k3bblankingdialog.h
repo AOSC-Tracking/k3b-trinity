@@ -23,7 +23,7 @@
 class TQGroupBox;
 class TQComboBox;
 class TQCloseEvent;
-class KListView;
+class TDEListView;
 class K3bWriterSelectionWidget;
 namespace K3bDevice {
   class Device;

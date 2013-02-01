@@ -39,7 +39,7 @@ class K3bBurnJob;
 class TQDomDocument;
 class TQDomElement;
 class TDEConfig;
-class KActionCollection;
+class TDEActionCollection;
 class K3bJobHandler;
 
 

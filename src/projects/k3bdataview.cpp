@@ -75,12 +75,12 @@ K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *parent, const char *name )
 
 
   // the data actions
-  KAction* actionImportSession = new KAction(i18n("&Import Session..."), "gear", 0, TQT_TQOBJECT(this), TQT_SLOT(importSession()),
+  TDEAction* actionImportSession = new TDEAction(i18n("&Import Session..."), "gear", 0, TQT_TQOBJECT(this), TQT_SLOT(importSession()),
 					     actionCollection(), "project_data_import_session" );
-  KAction* actionClearSession = new KAction(i18n("&Clear Imported Session"), "gear", 0, TQT_TQOBJECT(this),
+  TDEAction* actionClearSession = new TDEAction(i18n("&Clear Imported Session"), "gear", 0, TQT_TQOBJECT(this),
 					    TQT_SLOT(clearImportedSession()), actionCollection(),
 					    "project_data_clear_imported_session" );
-  KAction* actionEditBootImages = new KAction(i18n("&Edit Boot Images..."), "cdtrack", 0, TQT_TQOBJECT(this),
+  TDEAction* actionEditBootImages = new TDEAction(i18n("&Edit Boot Images..."), "cdtrack", 0, TQT_TQOBJECT(this),
 					      TQT_SLOT(editBootImages()), actionCollection(),
 					      "project_data_edit_boot_images" );
 

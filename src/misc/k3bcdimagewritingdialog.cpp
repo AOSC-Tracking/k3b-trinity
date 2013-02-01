@@ -224,8 +224,8 @@ void K3bCdImageWritingDialog::setupGui()
   m_infoView->setFullWidth(true);
   m_infoView->setSelectionMode( TQListView::NoSelection );
 
-  connect( m_infoView, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem*, const TQPoint&)) );
+  connect( m_infoView, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
 
 
   m_writerSelectionWidget = new K3bWriterSelectionWidget( frame );
@@ -879,7 +879,7 @@ void K3bCdImageWritingDialog::slotMd5JobFinished( bool success )
 }
 
 
-void K3bCdImageWritingDialog::slotContextMenu( KListView*, TQListViewItem*, const TQPoint& pos )
+void K3bCdImageWritingDialog::slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& pos )
 {
   if( !d->haveMd5Sum )
     return;

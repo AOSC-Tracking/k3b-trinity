@@ -183,7 +183,7 @@ void K3bAudioMetainfoRenamerPluginWidget::slotScanClicked()
 //     d->progressCounter = 0;
 
     // create root item
-    KListViewItem* rootItem = new KListViewItem( d->viewFiles, "/" );
+    TDEListViewItem* rootItem = new TDEListViewItem( d->viewFiles, "/" );
 
     //  d->progressDialog->show();
     scanDir( dir, rootItem );
@@ -229,7 +229,7 @@ void K3bAudioMetainfoRenamerPluginWidget::scanDir( K3bDirItem* dir, TQListViewIt
     }
     else if( item->isDir() ) {
       // create dir item
-      KListViewItem* dirViewItem = new KListViewItem( viewRoot, item->k3bName() );
+      TDEListViewItem* dirViewItem = new TDEListViewItem( viewRoot, item->k3bName() );
       scanDir( (K3bDirItem*)item, dirViewItem );
       dirViewItem->setOpen(true);
     }

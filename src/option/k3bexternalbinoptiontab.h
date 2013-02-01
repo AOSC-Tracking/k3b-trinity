@@ -23,7 +23,7 @@
 
 class TQPushButton;
 class TQListViewItem;
-class KListView;
+class TDEListView;
 class K3bExternalBinManager;
 class K3bExternalBinWidget;
 

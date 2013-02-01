@@ -77,7 +77,7 @@ void K3bToolBoxSeparator::paintEvent( TQPaintEvent* )
 
 
 
-K3bToolBoxButton::K3bToolBoxButton( KAction* action, TQWidget* parent )
+K3bToolBoxButton::K3bToolBoxButton( TDEAction* action, TQWidget* parent )
   : TQToolButton( parent ),
     m_popupMenu(0)
 {
@@ -94,7 +94,7 @@ K3bToolBoxButton::K3bToolBoxButton( KAction* action, TQWidget* parent )
   else
     TQToolTip::add( this, action->toolTip() );
 
-//   if( KToggleAction* ta = dynamic_cast<KToggleAction*>( action ) ) {
+//   if( TDEToggleAction* ta = dynamic_cast<TDEToggleAction*>( action ) ) {
 //     setToggleButton( true );
     
 //     // initial state
@@ -106,7 +106,7 @@ K3bToolBoxButton::K3bToolBoxButton( KAction* action, TQWidget* parent )
 //   }
 
 //  else
-  if( KActionMenu* am = dynamic_cast<KActionMenu*>( action ) ) {
+  if( TDEActionMenu* am = dynamic_cast<TDEActionMenu*>( action ) ) {
     m_popupMenu = am->popupMenu();
     connect( this, TQT_SIGNAL(pressed()), this, TQT_SLOT(slotPopupActivated()) );
     setPopup( m_popupMenu );
@@ -185,7 +185,7 @@ K3bToolBox::~K3bToolBox()
 }
 
 
-K3bToolBoxButton* K3bToolBox::addButton( KAction* action, bool forceText )
+K3bToolBoxButton* K3bToolBox::addButton( TDEAction* action, bool forceText )
 {
   if( action ) {
     K3bToolBoxButton* b = new K3bToolBoxButton( action, this );
@@ -266,7 +266,7 @@ void K3bToolBox::addWidget( TQWidget* w )
 }
 
 
-K3bToolBoxButton* K3bToolBox::addToggleButton( KToggleAction* action )
+K3bToolBoxButton* K3bToolBox::addToggleButton( TDEToggleAction* action )
 {
   return addButton( action );
 }

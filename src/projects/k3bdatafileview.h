@@ -30,9 +30,9 @@ class K3bDataView;
 class K3bDataViewItem;
 class K3bDataItem;
 class TQDropEvent;
-class KActionCollection;
-class KActionMenu;
-class KAction;
+class TDEActionCollection;
+class TDEActionMenu;
+class TDEAction;
 class K3bDataDirTreeView;
 class K3bDataDirViewItem;
 class K3bView;
@@ -55,7 +55,7 @@ class K3bDataFileView : public K3bListView
 	
   K3bDirItem* currentDir() const;
 
-  KActionCollection* actionCollection() const { return m_actionCollection; }
+  TDEActionCollection* actionCollection() const { return m_actionCollection; }
 
  signals:
   void dirSelected( K3bDirItem* );
@@ -68,7 +68,7 @@ class K3bDataFileView : public K3bListView
   void slotDataItemRemoved( K3bDataItem* );
   void slotExecuted( TQListViewItem* );
   void slotDropped( TQDropEvent* e, TQListViewItem* after, TQListViewItem* parent );
-  void showPopupMenu( KListView*, TQListViewItem* _item, const TQPoint& );
+  void showPopupMenu( TDEListView*, TQListViewItem* _item, const TQPoint& );
   void slotRenameItem();
   void slotRemoveItem();
   void slotNewDir();
@@ -89,14 +89,14 @@ class K3bDataFileView : public K3bListView
   void clearItems();
   void setupActions();
 
-  KActionCollection* m_actionCollection;
-  KActionMenu* m_popupMenu;
-  KAction* m_actionParentDir;
-  KAction* m_actionRemove;
-  KAction* m_actionRename;
-  KAction* m_actionNewDir;
-  KAction* m_actionProperties;
-  KAction* m_actionOpen;
+  TDEActionCollection* m_actionCollection;
+  TDEActionMenu* m_popupMenu;
+  TDEAction* m_actionParentDir;
+  TDEAction* m_actionRemove;
+  TDEAction* m_actionRename;
+  TDEAction* m_actionNewDir;
+  TDEAction* m_actionProperties;
+  TDEAction* m_actionOpen;
 
   K3bView* m_view;
 

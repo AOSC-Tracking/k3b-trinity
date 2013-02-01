@@ -90,15 +90,15 @@ K3bAudioTrackSplitDialog::~K3bAudioTrackSplitDialog()
 
 void K3bAudioTrackSplitDialog::setupActions()
 {
-  m_actionCollection = new KActionCollection( this );
-  m_popupMenu = new KPopupMenu( this );
+  m_actionCollection = new TDEActionCollection( this );
+  m_popupMenu = new TDEPopupMenu( this );
 
-  KAction* actionSplitHere = new KAction( i18n("Split Here"), 0,
-					  KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotSplitHere()),
+  TDEAction* actionSplitHere = new TDEAction( i18n("Split Here"), 0,
+					  TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotSplitHere()),
 					  actionCollection(), "range_split" );
   // FIXME: after the message freeze give this action a proper name like "Remove track part"
-  KAction* actionRemoveRange = new KAction( i18n("Remove this Range"), 0,
-					    KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotRemoveRange()),
+  TDEAction* actionRemoveRange = new TDEAction( i18n("Remove this Range"), 0,
+					    TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotRemoveRange()),
 					    actionCollection(), "range_remove" );
 
   actionSplitHere->plug( m_popupMenu );

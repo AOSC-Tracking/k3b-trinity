@@ -21,8 +21,8 @@
 #include <tdefiletreeview.h>
 
 class KFileTreeBranch;
-class KActionCollection;
-class KActionMenu;
+class TDEActionCollection;
+class TDEActionMenu;
 class TQPoint;
 class TQDropEvent;
 class TQDragEnterEvent;
@@ -181,7 +181,7 @@ class K3bFileTreeView : public KFileTreeView
   
  private slots:
   void slotItemExecuted( TQListViewItem* item );
-  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& );
+  void slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& );
   void slotSettingsChangedK3b(int category);
   void slotMouseButtonClickedK3b( int btn, TQListViewItem *item, const TQPoint &pos, int c );
 
@@ -192,9 +192,9 @@ class K3bFileTreeView : public KFileTreeView
   Private* d;
 
   bool m_dirOnlyMode;
-  KActionCollection* m_actionCollection;
-  KActionMenu* m_devicePopupMenu;
-  KActionMenu* m_urlPopupMenu;
+  TDEActionCollection* m_actionCollection;
+  TDEActionMenu* m_devicePopupMenu;
+  TDEActionMenu* m_urlPopupMenu;
   bool m_menuEnabled;
 };
 

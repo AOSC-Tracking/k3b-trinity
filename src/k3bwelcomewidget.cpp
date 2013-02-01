@@ -111,7 +111,7 @@ K3bWelcomeWidget::Display::~Display()
 }
 
 
-void K3bWelcomeWidget::Display::addAction( KAction* action )
+void K3bWelcomeWidget::Display::addAction( TDEAction* action )
 {
   if( action ) {
     m_actions.append(action);
@@ -120,7 +120,7 @@ void K3bWelcomeWidget::Display::addAction( KAction* action )
 }
 
 
-void K3bWelcomeWidget::Display::removeAction( KAction* action )
+void K3bWelcomeWidget::Display::removeAction( TDEAction* action )
 {
   if( action ) {
     m_actions.removeRef( action );
@@ -135,7 +135,7 @@ void K3bWelcomeWidget::Display::removeButton( K3bFlatButton* b )
 }
 
 
-void K3bWelcomeWidget::Display::rebuildGui( const TQPtrList<KAction>& actions )
+void K3bWelcomeWidget::Display::rebuildGui( const TQPtrList<TDEAction>& actions )
 {
   m_actions = actions;
   rebuildGui();
@@ -171,8 +171,8 @@ void K3bWelcomeWidget::Display::rebuildGui()
   if( numActions > 0 ) {
 
     // create buttons
-    for( TQPtrListIterator<KAction> it( m_actions ); it.current(); ++it ) {
-      KAction* a = it.current();
+    for( TQPtrListIterator<TDEAction> it( m_actions ); it.current(); ++it ) {
+      TDEAction* a = it.current();
 
       K3bFlatButton* b = new K3bFlatButton( a, this );
 
@@ -375,9 +375,9 @@ void K3bWelcomeWidget::loadConfig( TDEConfigBase* c )
     sl.append( "tools_write_dvd_iso" );
   }
 
-  TQPtrList<KAction> actions;
+  TQPtrList<TDEAction> actions;
   for( TQStringList::const_iterator it = sl.begin(); it != sl.end(); ++it )
-    if( KAction* a = m_mainWindow->actionCollection()->action( (*it).latin1() ) )
+    if( TDEAction* a = m_mainWindow->actionCollection()->action( (*it).latin1() ) )
       actions.append(a);
 
   main->rebuildGui( actions );
@@ -391,7 +391,7 @@ void K3bWelcomeWidget::saveConfig( TDEConfigBase* c )
   TDEConfigGroup grp( c, "Welcome Widget" );
 
   TQStringList sl;
-  for( TQPtrListIterator<KAction> it( main->m_actions ); it.current(); ++it )
+  for( TQPtrListIterator<TDEAction> it( main->m_actions ); it.current(); ++it )
     sl.append( it.current()->name() );
 
   grp.writeEntry( "welcome_actions", sl );
@@ -426,12 +426,12 @@ void K3bWelcomeWidget::fixSize()
 void K3bWelcomeWidget::contentsMousePressEvent( TQMouseEvent* e )
 {
   if( e->button() == Qt::RightButton ) {
-    TQMap<int, KAction*> map;
-    KPopupMenu addPop;
+    TQMap<int, TDEAction*> map;
+    TDEPopupMenu addPop;
 
     for ( int i = 0; s_allActions[i]; ++i ) {
         if ( s_allActions[i][0] != '_' ) {
-            KAction* a = m_mainWindow->actionCollection()->action( s_allActions[i] );
+            TDEAction* a = m_mainWindow->actionCollection()->action( s_allActions[i] );
             if ( a && !main->m_actions.containsRef(a) ) {
                 map.insert( addPop.insertItem( a->iconSet(), a->text() ), a );
             }
@@ -445,7 +445,7 @@ void K3bWelcomeWidget::contentsMousePressEvent( TQMouseEvent* e )
 
     TQWidget* widgetAtPos = viewport()->childAt(e->pos());
     if( widgetAtPos && widgetAtPos->inherits( "K3bFlatButton" ) ) {
-      KPopupMenu pop;
+      TDEPopupMenu pop;
       removeAction = pop.insertItem( SmallIcon("remove"), i18n("Remove Button") );
       if ( addPop.count() > 0 )
           pop.insertItem( i18n("Add Button"), &addPop );
@@ -472,11 +472,11 @@ void K3bWelcomeWidget::contentsMousePressEvent( TQMouseEvent* e )
 
 void K3bWelcomeWidget::slotMoreActions()
 {
-  KPopupMenu popup;
+  TDEPopupMenu popup;
 
   for ( int i = 0; s_allActions[i]; ++i ) {
       if ( s_allActions[i][0] == '_' ) {
-          (new KActionSeparator( TQT_TQOBJECT(&popup) ))->plug( &popup );
+          (new TDEActionSeparator( TQT_TQOBJECT(&popup) ))->plug( &popup );
       }
       else {
           m_mainWindow->actionCollection()->action( s_allActions[i] )->plug( &popup );

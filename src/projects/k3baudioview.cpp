@@ -59,7 +59,7 @@ K3bAudioView::K3bAudioView( K3bAudioDoc* pDoc, TQWidget* parent, const char *nam
   fillStatusDisplay()->showTime();
 
   // add button for the audio conversion
-  KAction* conversionAction = new KAction( i18n("Convert Tracks"), "redo", 0, TQT_TQOBJECT(this), TQT_SLOT(slotAudioConversion()), 
+  TDEAction* conversionAction = new TDEAction( i18n("Convert Tracks"), "redo", 0, TQT_TQOBJECT(this), TQT_SLOT(slotAudioConversion()), 
 					   actionCollection(), "project_audio_convert" );
   conversionAction->setToolTip( i18n("Convert audio tracks to other audio formats." ) );
 

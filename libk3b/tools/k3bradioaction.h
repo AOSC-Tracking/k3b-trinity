@@ -20,13 +20,13 @@
 #include "k3b_export.h"
 
 /**
- * This differs from KRadioAction only in the boolean 
+ * This differs from TDERadioAction only in the boolean 
  * flag which says if it should always emit the signals 
  * even if it was checked twice.
  *
  * Docu copied from tdelibs
  */
-class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
+class LIBK3B_EXPORT K3bRadioAction : public TDEToggleAction
 {
   Q_OBJECT
   
@@ -42,7 +42,7 @@ class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
    * @param parent This action's parent.
    * @param name An internal name for this action.
    */
-  K3bRadioAction( const TQString& text, const KShortcut& cut = KShortcut(), TQObject* parent = 0, const char* name = 0 );
+  K3bRadioAction( const TQString& text, const TDEShortcut& cut = TDEShortcut(), TQObject* parent = 0, const char* name = 0 );
 
   /**
    *  @param text The text that will be displayed.
@@ -52,7 +52,7 @@ class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
    *  @param parent This action's parent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( const TQString& text, const KShortcut& cut,
+  K3bRadioAction( const TQString& text, const TDEShortcut& cut,
                   const TQObject* receiver, const char* slot, TQObject* parent, const char* name = 0 );
 
   /**
@@ -62,7 +62,7 @@ class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
    *  @param parent This action's parent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( const TQString& text, const TQIconSet& pix, const KShortcut& cut = KShortcut(),
+  K3bRadioAction( const TQString& text, const TQIconSet& pix, const TDEShortcut& cut = TDEShortcut(),
                   TQObject* parent = 0, const char* name = 0 );
 
   /**
@@ -72,7 +72,7 @@ class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
    *  @param parent This action's parent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( const TQString& text, const TQString& pix, const KShortcut& cut = KShortcut(),
+  K3bRadioAction( const TQString& text, const TQString& pix, const TDEShortcut& cut = TDEShortcut(),
                   TQObject* parent = 0, const char* name = 0 );
 
   /**
@@ -84,7 +84,7 @@ class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
    *  @param parent This action's parent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( const TQString& text, const TQIconSet& pix, const KShortcut& cut,
+  K3bRadioAction( const TQString& text, const TQIconSet& pix, const TDEShortcut& cut,
                   const TQObject* receiver, const char* slot, TQObject* parent, const char* name = 0 );
 
   /**
@@ -96,7 +96,7 @@ class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
    *  @param parent This action's parent.
    *  @param name An internal name for this action.
    */
-  K3bRadioAction( const TQString& text, const TQString& pix, const KShortcut& cut,
+  K3bRadioAction( const TQString& text, const TQString& pix, const TDEShortcut& cut,
                   const TQObject* receiver, const char* slot,
                   TQObject* parent, const char* name = 0 );
 
@@ -109,7 +109,7 @@ class LIBK3B_EXPORT K3bRadioAction : public KToggleAction
   /**
    * @param b if true the action will always emit the activated signal
    *          even if the toggled state did not change. The default is false.
-   *          which is the same behaviour as KRadioAction
+   *          which is the same behaviour as TDERadioAction
    */
   void setAlwaysEmitActivated( bool b ) { m_alwaysEmit = b; }
 

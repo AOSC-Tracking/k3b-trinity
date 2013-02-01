@@ -25,7 +25,7 @@
 
 
 class TQLabel;
-class KListBox;
+class TDEListBox;
 class K3bDataDoc;
 class K3bMediaSelectionComboBox;
 

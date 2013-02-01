@@ -50,7 +50,7 @@
 using namespace std;
 
 K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* parent )
-  : KListViewItem( parent ), m_filename( filename )
+  : TDEListViewItem( parent ), m_filename( filename )
 {
   m_length = 0;
   m_bActive = false;
@@ -58,7 +58,7 @@ K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* 
 
 
 K3bPlayListViewItem::K3bPlayListViewItem( const TQString& filename, TQListView* parent, TQListViewItem* after )
-  : KListViewItem( parent, after ), m_filename( filename )
+  : TDEListViewItem( parent, after ), m_filename( filename )
 {
   m_length = 0;
   m_bActive = false;
@@ -103,15 +103,15 @@ void K3bPlayListViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int c
     newCg.setColor( TQColorGroup::Highlight, red );
     newCg.setColor( TQColorGroup::HighlightedText, white );
 
-    KListViewItem::paintCell( p, newCg, c, w, a );
+    TDEListViewItem::paintCell( p, newCg, c, w, a );
   }
   else
-    KListViewItem::paintCell( p, cg, c, w, a );
+    TDEListViewItem::paintCell( p, cg, c, w, a );
 }
 
 
 K3bPlayListView::K3bPlayListView( TQWidget* parent, const char* name )
-  : KListView( parent, name )
+  : TDEListView( parent, name )
 {
   addColumn( i18n("Filename") );
   addColumn( i18n("Length") );
@@ -132,8 +132,8 @@ K3bPlayListView::~K3bPlayListView()
 
 bool K3bPlayListView::acceptDrag( TQDropEvent* e ) const
 {
-  // we accept textdrag (urls) and moved items (supported by KListView)
-  return KURLDrag::canDecode(e) || KListView::acceptDrag(e);
+  // we accept textdrag (urls) and moved items (supported by TDEListView)
+  return KURLDrag::canDecode(e) || TDEListView::acceptDrag(e);
 }
 
 
@@ -222,14 +222,14 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
 
   // actions
   // ------------------------------------------------------------------------
-  m_actionRemove = new KAction( i18n( "Remove" ), "editdelete",
+  m_actionRemove = new TDEAction( i18n( "Remove" ), "editdelete",
 				Key_Delete, this, TQT_SLOT(slotRemoveSelected()),
 				this, "audioplayer_remove" );
-  m_actionClear = new KAction( i18n( "Clear List" ), "editclear",
+  m_actionClear = new TDEAction( i18n( "Clear List" ), "editclear",
 			       0, this, TQT_SLOT(clear()),
 			       this, "audioplayer_clear" );
 
-  m_contextMenu = new KActionMenu( this, "audio_player_menu" );
+  m_contextMenu = new TDEActionMenu( this, "audio_player_menu" );
   m_contextMenu->insert(m_actionRemove);
   m_contextMenu->insert(m_actionClear);
   // ------------------------------------------------------------------------
@@ -237,8 +237,8 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
 
   // connections
   // ------------------------------------------------------------------------
-  connect( m_viewPlayList, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(slotShowContextMenu(KListView*, TQListViewItem*, const TQPoint&)) );
+  connect( m_viewPlayList, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(slotShowContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
 
   connect( m_buttonPlay, TQT_SIGNAL(clicked()), this, TQT_SLOT(play()) );
   connect( m_buttonStop, TQT_SIGNAL(clicked()), this, TQT_SLOT(stop()) );
@@ -649,7 +649,7 @@ void K3bAudioPlayer::slotRemoveSelected()
 }
 
 
-void K3bAudioPlayer::slotShowContextMenu( KListView*, TQListViewItem* item, const TQPoint& p )
+void K3bAudioPlayer::slotShowContextMenu( TDEListView*, TQListViewItem* item, const TQPoint& p )
 {
   if( item )
     m_actionRemove->setEnabled( true );

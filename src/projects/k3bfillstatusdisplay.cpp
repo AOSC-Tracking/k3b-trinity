@@ -299,22 +299,22 @@ private:
 class K3bFillStatusDisplay::Private
 {
 public:
-  KActionCollection* actionCollection;
-  KRadioAction* actionShowMinutes;
-  KRadioAction* actionShowMegs;
-  KRadioAction* actionAuto;
-  KRadioAction* action74Min;
-  KRadioAction* action80Min;
-  KRadioAction* action100Min;
-  KRadioAction* actionDvd4_7GB;
-  KRadioAction* actionDvdDoubleLayer;
+  TDEActionCollection* actionCollection;
+  TDERadioAction* actionShowMinutes;
+  TDERadioAction* actionShowMegs;
+  TDERadioAction* actionAuto;
+  TDERadioAction* action74Min;
+  TDERadioAction* action80Min;
+  TDERadioAction* action100Min;
+  TDERadioAction* actionDvd4_7GB;
+  TDERadioAction* actionDvdDoubleLayer;
   K3bRadioAction* actionCustomSize;
   K3bRadioAction* actionDetermineSize;
-  KAction* actionSaveUserDefaults;
-  KAction* actionLoadUserDefaults;
+  TDEAction* actionSaveUserDefaults;
+  TDEAction* actionLoadUserDefaults;
 
-  KPopupMenu* popup;
-  KPopupMenu* dvdPopup;
+  TDEPopupMenu* popup;
+  TDEPopupMenu* dvdPopup;
 
   TQToolButton* buttonMenu;
 
@@ -372,31 +372,31 @@ K3bFillStatusDisplay::~K3bFillStatusDisplay()
 
 void K3bFillStatusDisplay::setupPopupMenu()
 {
-  d->actionCollection = new KActionCollection( this );
+  d->actionCollection = new TDEActionCollection( this );
 
   // we use a nother popup for the dvd sizes
-  d->popup = new KPopupMenu( this, "popup" );
-  d->dvdPopup = new KPopupMenu( this, "dvdpopup" );
+  d->popup = new TDEPopupMenu( this, "popup" );
+  d->dvdPopup = new TDEPopupMenu( this, "dvdpopup" );
 
-  d->actionShowMinutes = new KRadioAction( i18n("Minutes"), 0, TQT_TQOBJECT(this), TQT_SLOT(showTime()),
+  d->actionShowMinutes = new TDERadioAction( i18n("Minutes"), 0, TQT_TQOBJECT(this), TQT_SLOT(showTime()),
 					   d->actionCollection, "fillstatus_show_minutes" );
-  d->actionShowMegs = new KRadioAction( i18n("Megabytes"), 0, TQT_TQOBJECT(this), TQT_SLOT(showSize()),
+  d->actionShowMegs = new TDERadioAction( i18n("Megabytes"), 0, TQT_TQOBJECT(this), TQT_SLOT(showSize()),
 					d->actionCollection, "fillstatus_show_megabytes" );
 
   d->actionShowMegs->setExclusiveGroup( "show_size_in" );
   d->actionShowMinutes->setExclusiveGroup( "show_size_in" );
 
-  d->actionAuto = new KRadioAction( i18n("Auto"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotAutoSize()),
+  d->actionAuto = new TDERadioAction( i18n("Auto"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotAutoSize()),
 				    d->actionCollection, "fillstatus_auto" );
-  d->action74Min = new KRadioAction( i18n("%1 MB").arg(650), 0, TQT_TQOBJECT(this), TQT_SLOT(slot74Minutes()),
+  d->action74Min = new TDERadioAction( i18n("%1 MB").arg(650), 0, TQT_TQOBJECT(this), TQT_SLOT(slot74Minutes()),
 				     d->actionCollection, "fillstatus_74minutes" );
-  d->action80Min = new KRadioAction( i18n("%1 MB").arg(700), 0, TQT_TQOBJECT(this), TQT_SLOT(slot80Minutes()),
+  d->action80Min = new TDERadioAction( i18n("%1 MB").arg(700), 0, TQT_TQOBJECT(this), TQT_SLOT(slot80Minutes()),
 				     d->actionCollection, "fillstatus_80minutes" );
-  d->action100Min = new KRadioAction( i18n("%1 MB").arg(880), 0, TQT_TQOBJECT(this), TQT_SLOT(slot100Minutes()),
+  d->action100Min = new TDERadioAction( i18n("%1 MB").arg(880), 0, TQT_TQOBJECT(this), TQT_SLOT(slot100Minutes()),
 				      d->actionCollection, "fillstatus_100minutes" );
-  d->actionDvd4_7GB = new KRadioAction( TDEIO::convertSizeFromKB((int)(4.4*1024.0*1024.0)), 0, TQT_TQOBJECT(this), TQT_SLOT(slotDvd4_7GB()),
+  d->actionDvd4_7GB = new TDERadioAction( TDEIO::convertSizeFromKB((int)(4.4*1024.0*1024.0)), 0, TQT_TQOBJECT(this), TQT_SLOT(slotDvd4_7GB()),
 					d->actionCollection, "fillstatus_dvd_4_7gb" );
-  d->actionDvdDoubleLayer = new KRadioAction( TDEIO::convertSizeFromKB((int)(8.0*1024.0*1024.0)),
+  d->actionDvdDoubleLayer = new TDERadioAction( TDEIO::convertSizeFromKB((int)(8.0*1024.0*1024.0)),
 					      0, TQT_TQOBJECT(this), TQT_SLOT(slotDvdDoubleLayer()),
 					      d->actionCollection, "fillstatus_dvd_double_layer" );
   d->actionCustomSize = new K3bRadioAction( i18n("Custom..."), 0, TQT_TQOBJECT(this), TQT_SLOT(slotCustomSize()),
@@ -416,14 +416,14 @@ void K3bFillStatusDisplay::setupPopupMenu()
   d->actionCustomSize->setExclusiveGroup( "cd_size" );
   d->actionDetermineSize->setExclusiveGroup( "cd_size" );
 
-  d->actionLoadUserDefaults = new KAction( i18n("User Defaults"), "", 0,
+  d->actionLoadUserDefaults = new TDEAction( i18n("User Defaults"), "", 0,
 					   TQT_TQOBJECT(this), TQT_SLOT(slotLoadUserDefaults()),
 					   d->actionCollection, "load_user_defaults" );
-  d->actionSaveUserDefaults = new KAction( i18n("Save User Defaults"), "", 0,
+  d->actionSaveUserDefaults = new TDEAction( i18n("Save User Defaults"), "", 0,
 					   TQT_TQOBJECT(this), TQT_SLOT(slotSaveUserDefaults()),
 					   d->actionCollection, "save_user_defaults" );
 
-  KAction* dvdSizeInfoAction = new KAction( i18n("Why 4.4 instead of 4.7?"), "", 0,
+  TDEAction* dvdSizeInfoAction = new TDEAction( i18n("Why 4.4 instead of 4.7?"), "", 0,
 					    TQT_TQOBJECT(this), TQT_SLOT(slotWhy44()),
 					    d->actionCollection, "why_44_gb" );
 

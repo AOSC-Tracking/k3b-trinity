@@ -21,7 +21,7 @@
 class K3bMainWindow;
 class K3bFileTreeView;
 class TQFrame;
-class KAction;
+class TDEAction;
 
 
 class K3bSidePanel : public TQToolBox
@@ -44,7 +44,7 @@ class K3bSidePanel : public TQToolBox
   K3bFileTreeView* m_fileTreeView;
 
   TQFrame* createPanel();
-  void addButton( TQFrame* frame, KAction* action );
+  void addButton( TQFrame* frame, TDEAction* action );
 };
 
 #endif

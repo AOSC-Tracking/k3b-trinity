@@ -256,7 +256,7 @@ class K3bMainWindow : public KParts::DockMainWindow
   /** read general Options again and initialize all variables like the recent file list */
   void readOptions();
 
-  /** initializes the KActions of the application */
+  /** initializes the TDEActions of the application */
   void initActions();
 
   /** sets up the statusbar for the main window by initialzing a statuslabel.
@@ -271,41 +271,41 @@ class K3bMainWindow : public KParts::DockMainWindow
   /** The MDI-Interface is managed by this tabbed view */
   K3bProjectTabWidget* m_documentTab;
 
-  // KAction pointers to enable/disable actions
-  KActionMenu* actionFileNewMenu;
-  KAction* actionFileNewAudio;
-  KAction* actionFileNewData;
-  KAction* actionFileNewMixed;
-  KAction* actionFileNewVcd;
-  KAction* actionFileNewMovix;
-  KAction* actionFileNewMovixDvd;
-  KAction* actionFileNewDvd;
-  KAction* actionFileNewVideoDvd;
-  KAction* actionFileContinueMultisession;
-  KAction* actionFileOpen;
-  KRecentFilesAction* actionFileOpenRecent;
-  KAction* actionFileSave;
-  KAction* actionFileSaveAs;
-  KAction* actionFileSaveAll;
-  KAction* actionFileClose;
-  KAction* actionFileCloseAll;
-  KAction* actionFileQuit;
-  KAction* actionSettingsConfigure;
-  KAction* actionSettingsK3bSetup;
-  KAction* actionToolsBlankCdrw;
-  KAction* actionToolsWriteCdImage;
-  KAction* actionToolsCddaRip;
-  KAction* actionToolsVideoDvdRip;
-  KAction* actionToolsVideoCdRip;
-  KAction* actionCdCopy;
-  KAction* actionProjectAddFiles;
-  KToggleAction* actionViewStatusBar;
-  KToggleAction* actionViewDirTreeView;
-  KToggleAction* actionViewContentsView;
-  KToggleAction* actionViewDocumentHeader;
+  // TDEAction pointers to enable/disable actions
+  TDEActionMenu* actionFileNewMenu;
+  TDEAction* actionFileNewAudio;
+  TDEAction* actionFileNewData;
+  TDEAction* actionFileNewMixed;
+  TDEAction* actionFileNewVcd;
+  TDEAction* actionFileNewMovix;
+  TDEAction* actionFileNewMovixDvd;
+  TDEAction* actionFileNewDvd;
+  TDEAction* actionFileNewVideoDvd;
+  TDEAction* actionFileContinueMultisession;
+  TDEAction* actionFileOpen;
+  TDERecentFilesAction* actionFileOpenRecent;
+  TDEAction* actionFileSave;
+  TDEAction* actionFileSaveAs;
+  TDEAction* actionFileSaveAll;
+  TDEAction* actionFileClose;
+  TDEAction* actionFileCloseAll;
+  TDEAction* actionFileQuit;
+  TDEAction* actionSettingsConfigure;
+  TDEAction* actionSettingsK3bSetup;
+  TDEAction* actionToolsBlankCdrw;
+  TDEAction* actionToolsWriteCdImage;
+  TDEAction* actionToolsCddaRip;
+  TDEAction* actionToolsVideoDvdRip;
+  TDEAction* actionToolsVideoCdRip;
+  TDEAction* actionCdCopy;
+  TDEAction* actionProjectAddFiles;
+  TDEToggleAction* actionViewStatusBar;
+  TDEToggleAction* actionViewDirTreeView;
+  TDEToggleAction* actionViewContentsView;
+  TDEToggleAction* actionViewDocumentHeader;
 
   // project actions
-  TQPtrList<KAction> m_dataProjectActions;
+  TQPtrList<TDEAction> m_dataProjectActions;
 
   KDockWidget* mainDock;
   KDockWidget* m_contentsDock;

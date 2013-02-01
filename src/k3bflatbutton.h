@@ -23,7 +23,7 @@
 class TQEvent;
 class TQMouseEvent;
 class TQPainter;
-class KAction;
+class TDEAction;
 
 
 /**
@@ -37,7 +37,7 @@ class K3bFlatButton : public TQFrame
  public:
   K3bFlatButton( TQWidget *parent = 0, const char *name = 0 );
   K3bFlatButton( const TQString& text, TQWidget *parent = 0, const char *name = 0 );
-  K3bFlatButton( KAction*, TQWidget *parent = 0, const char *name = 0 );
+  K3bFlatButton( TDEAction*, TQWidget *parent = 0, const char *name = 0 );
   
   ~K3bFlatButton();
 

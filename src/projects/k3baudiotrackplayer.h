@@ -24,7 +24,7 @@
 
 class K3bAudioDoc;
 class K3bAudioTrack;
-class KAction;
+class TDEAction;
 
 
 class K3bAudioTrackPlayer : public TQObject, public K3bAudioClient
@@ -49,7 +49,7 @@ class K3bAudioTrackPlayer : public TQObject, public K3bAudioClient
     ACTION_SEEK
   };
 
-  KAction* action( int action ) const;
+  TDEAction* action( int action ) const;
 
   /**
    * Reimplemented from K3bAudioClient

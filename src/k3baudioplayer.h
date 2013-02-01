@@ -34,15 +34,15 @@ class TQPainter;
 class TQColorGroup;
 class TQDropEvent;
 class TQDragObject;
-class KAction;
-class KActionMenu;
+class TDEAction;
+class TDEActionMenu;
 
 
 /**
  * Special ListViewItem for the K3bAudioPlayer playlist
  * @author Sebastian Trueg
  */
-class K3bPlayListViewItem : public KListViewItem
+class K3bPlayListViewItem : public TDEListViewItem
 {
  public:
   K3bPlayListViewItem( const TQString&, TQListView* parent );
@@ -82,7 +82,7 @@ class K3bPlayListViewItem : public KListViewItem
  * Playlistview just needed to accept 
  * url drags
  */ 
-class K3bPlayListView : public KListView
+class K3bPlayListView : public TDEListView
 {
 Q_OBJECT
   
@@ -172,7 +172,7 @@ Q_OBJECT
    */
   void setCurrentItem( TQListViewItem* item );
   void slotRemoveSelected();
-  void slotShowContextMenu( KListView*, TQListViewItem* item, const TQPoint& p );
+  void slotShowContextMenu( TDEListView*, TQListViewItem* item, const TQPoint& p );
 
  private:
 #ifdef WITH_ARTS
@@ -201,9 +201,9 @@ Q_OBJECT
 
   bool m_bLengthReady;
 
-  KAction* m_actionRemove;
-  KAction* m_actionClear;
-  KActionMenu* m_contextMenu;
+  TDEAction* m_actionRemove;
+  TDEAction* m_actionClear;
+  TDEActionMenu* m_contextMenu;
 };
 
 

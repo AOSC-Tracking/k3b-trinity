@@ -37,7 +37,7 @@ class K3bIso9660;
 class K3bCueFileParser;
 class TQDragEnterEvent;
 class TQDropEvent;
-class KListView;
+class TDEListView;
 class TQListViewItem;
 class TQPoint;
 
@@ -61,7 +61,7 @@ class K3bCdImageWritingDialog : public K3bInteractionDialog
 
   void slotMd5JobPercent( int );
   void slotMd5JobFinished( bool );
-  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& pos );
+  void slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& pos );
 
   void slotUpdateImage( const TQString& );
 

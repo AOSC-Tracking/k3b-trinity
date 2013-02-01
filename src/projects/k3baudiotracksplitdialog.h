@@ -24,8 +24,8 @@ namespace K3b {
 class K3bAudioTrack;
 class K3bAudioEditorWidget;
 class K3bMsfEdit;
-class KActionCollection;
-class KPopupMenu;
+class TDEActionCollection;
+class TDEPopupMenu;
 
 
 /**
@@ -42,7 +42,7 @@ class K3bAudioTrackSplitDialog : public KDialogBase
 
   bool eventFilter( TQObject* o, TQEvent* e );
 
-  KActionCollection* actionCollection() const { return m_actionCollection; }
+  TDEActionCollection* actionCollection() const { return m_actionCollection; }
 
   /**
    * if this method returns true val is filled with the user selected value.
@@ -64,8 +64,8 @@ class K3bAudioTrackSplitDialog : public KDialogBase
   K3bMsfEdit* m_msfEditStart;
   K3bMsfEdit* m_msfEditEnd;
   K3bAudioTrack* m_track;
-  KActionCollection* m_actionCollection;
-  KPopupMenu* m_popupMenu;
+  TDEActionCollection* m_actionCollection;
+  TDEPopupMenu* m_popupMenu;
   TQPoint m_lastClickPosition;
 };
 

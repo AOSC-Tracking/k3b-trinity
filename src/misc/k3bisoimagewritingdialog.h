@@ -31,7 +31,7 @@ class K3bListView;
 class TQSpinBox;
 class TQDragEnterEvent;
 class TQDropEvent;
-class KListView;
+class TDEListView;
 class TQListViewItem;
 class TQPoint;
 
@@ -56,7 +56,7 @@ class K3bIsoImageWritingDialog : public K3bInteractionDialog
   void slotWriterChanged();
   void slotMd5JobPercent( int );
   void slotMd5JobFinished( bool );
-  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& pos );
+  void slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& pos );
 
  protected:
   void loadUserDefaults( TDEConfigBase* );

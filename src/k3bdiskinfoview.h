@@ -22,7 +22,7 @@
 #include "k3bmedium.h"
 
 class TQLabel;
-class KListView;
+class TDEListView;
 class K3bIso9660;
 
 namespace K3bDevice {
@@ -47,7 +47,7 @@ class K3bDiskInfoView : public K3bMediaContentsView
   void createMediaInfoItems( const K3bMedium& );
   void createIso9660InfoItems( const K3bIso9660SimplePrimaryDescriptor& );
 
-  KListView* m_infoView;
+  TDEListView* m_infoView;
 
   class HeaderViewItem;
   class TwoColumnViewItem;

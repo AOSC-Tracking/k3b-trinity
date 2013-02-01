@@ -60,7 +60,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="KListView">
+        <widget class="TDEListView">
             <column>
                 <property name="text">
                     <string>Emulation Type</string>

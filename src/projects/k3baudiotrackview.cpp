@@ -79,8 +79,8 @@ K3bAudioTrackView::K3bAudioTrackView( K3bAudioDoc* doc, TQWidget* parent, const 
   setDropVisualizer( true );
   setAllColumnsShowFocus( true );
   setDragEnabled( true );
-  //  setSelectionModeExt( KListView::Konqueror ); // FileManager in KDE3
-  setSelectionModeExt( KListView::Extended );
+  //  setSelectionModeExt( TDEListView::Konqueror ); // FileManager in KDE3
+  setSelectionModeExt( TDEListView::Extended );
   setItemsMovable( false );
   setAlternateBackground( TQColor() ); // disable alternate colors
 
@@ -100,8 +100,8 @@ K3bAudioTrackView::K3bAudioTrackView( K3bAudioDoc* doc, TQWidget* parent, const 
 
   connect( this, TQT_SIGNAL(dropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)),
 	   this, TQT_SLOT(slotDropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(showPopupMenu(KListView*, TQListViewItem*, const TQPoint&)) );
+  connect( this, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(showPopupMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
   connect( this, TQT_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)),
 	   this, TQT_SLOT(slotProperties()) );
 
@@ -151,36 +151,36 @@ void K3bAudioTrackView::setupColumns()
 
 void K3bAudioTrackView::setupActions()
 {
-  m_actionCollection = new KActionCollection( this );
-  m_popupMenu = new KPopupMenu( this );
+  m_actionCollection = new TDEActionCollection( this );
+  m_popupMenu = new TDEPopupMenu( this );
 
-  m_actionProperties = new KAction( i18n("Properties"), "misc",
-				    KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
+  m_actionProperties = new TDEAction( i18n("Properties"), "misc",
+				    TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
 				    actionCollection(), "track_properties" );
-  m_actionRemove = new KAction( i18n( "Remove" ), "editdelete",
+  m_actionRemove = new TDEAction( i18n( "Remove" ), "editdelete",
 				Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemove()),
 				actionCollection(), "track_remove" );
 
-  m_actionAddSilence = new KAction( i18n("Add Silence") + "...", "misc",
-				    KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotAddSilence()),
+  m_actionAddSilence = new TDEAction( i18n("Add Silence") + "...", "misc",
+				    TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotAddSilence()),
 				    actionCollection(), "track_add_silence" );
-  m_actionMergeTracks = new KAction( i18n("Merge Tracks"), "misc",
-				     KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotMergeTracks()),
+  m_actionMergeTracks = new TDEAction( i18n("Merge Tracks"), "misc",
+				     TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotMergeTracks()),
 				     actionCollection(), "track_merge" );
-  m_actionSplitSource = new KAction( i18n("Source to Track"), "misc",
-				     KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotSplitSource()),
+  m_actionSplitSource = new TDEAction( i18n("Source to Track"), "misc",
+				     TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotSplitSource()),
 				     actionCollection(), "source_split" );
-  m_actionSplitTrack = new KAction( i18n("Split Track..."), 0,
-				    KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotSplitTrack()),
+  m_actionSplitTrack = new TDEAction( i18n("Split Track..."), 0,
+				    TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotSplitTrack()),
 				    actionCollection(), "track_split" );
-  m_actionEditSource = new KAction( i18n("Edit Source..."), 0,
-				    KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotEditSource()),
+  m_actionEditSource = new TDEAction( i18n("Edit Source..."), 0,
+				    TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotEditSource()),
 				    actionCollection(), "source_edit" );
-  m_actionPlayTrack = new KAction( i18n("Play Track"), "player_play",
-				   KShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotPlayTrack()),
+  m_actionPlayTrack = new TDEAction( i18n("Play Track"), "player_play",
+				   TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotPlayTrack()),
 				   actionCollection(), "track_play" );
 #ifdef HAVE_MUSICBRAINZ
-  KAction* mbAction = new KAction( i18n("Musicbrainz Lookup"), "musicbrainz", 0, TQT_TQOBJECT(this),
+  TDEAction* mbAction = new TDEAction( i18n("Musicbrainz Lookup"), "musicbrainz", 0, TQT_TQOBJECT(this),
 				   TQT_SLOT(slotQueryMusicBrainz()),
 				   actionCollection(), "project_audio_musicbrainz" );
   mbAction->setToolTip( i18n("Try to determine meta information over the internet") );
@@ -191,7 +191,7 @@ void K3bAudioTrackView::setupActions()
 bool K3bAudioTrackView::acceptDrag(TQDropEvent* e) const
 {
   // the first is for built-in item moving, the second for dropping urls, the third for dropping audio tracks
-  return ( KListView::acceptDrag(e) || KURLDrag::canDecode(e) || K3bAudioCdTrackDrag::canDecode(e) );
+  return ( TDEListView::acceptDrag(e) || KURLDrag::canDecode(e) || K3bAudioCdTrackDrag::canDecode(e) );
 }
 
 
@@ -868,7 +868,7 @@ void K3bAudioTrackView::slotEditSource()
 }
 
 
-void K3bAudioTrackView::showPopupMenu( KListView*, TQListViewItem* item, const TQPoint& pos )
+void K3bAudioTrackView::showPopupMenu( TDEListView*, TQListViewItem* item, const TQPoint& pos )
 {
   TQPtrList<K3bAudioTrack> tracks;
   TQPtrList<K3bAudioDataSource> sources;

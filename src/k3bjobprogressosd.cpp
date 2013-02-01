@@ -216,7 +216,7 @@ void K3bJobProgressOSD::mousePressEvent( TQMouseEvent* e )
     m_dragging = true;
   }
   else if( e->button() == Qt::RightButton ) {
-    KPopupMenu m;
+    TDEPopupMenu m;
     if( m.insertItem( i18n("Hide OSD") ) == m.exec( e->globalPos() ) )
       hide();
   }

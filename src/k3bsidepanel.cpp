@@ -85,7 +85,7 @@ TQFrame* K3bSidePanel::createPanel()
 }
 
 
-void K3bSidePanel::addButton( TQFrame* frame, KAction* a )
+void K3bSidePanel::addButton( TQFrame* frame, TDEAction* a )
 {
   if( a ) {
     TQToolButton* b = new TQToolButton( frame );

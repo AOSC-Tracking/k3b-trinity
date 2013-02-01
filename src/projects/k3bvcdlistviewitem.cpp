@@ -78,7 +78,7 @@ TQString K3bVcdListViewItem::text( int i ) const
             return m_track->fileName();
 
             default:
-            return KListViewItem::text( i );
+            return TDEListViewItem::text( i );
     }
 }
 
@@ -89,7 +89,7 @@ void K3bVcdListViewItem::setText( int col, const TQString& text )
         m_track->setTitle( text );
     }
 
-    KListViewItem::setText( col, text );
+    TDEListViewItem::setText( col, text );
 }
 
 

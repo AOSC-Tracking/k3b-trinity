@@ -82,7 +82,7 @@ void K3bAudioDataSourceViewItem::setText( int col, const TQString& text )
     }
   }
   else
-    KListViewItem::setText( col, text );
+    TDEListViewItem::setText( col, text );
 }
 
 

@@ -128,7 +128,7 @@ TQString K3bAudioTrackViewItem::text(int i) const
       else
 	return m_track->firstSource()->sourceComment();
     default:
-      return KListViewItem::text(i);
+      return TDEListViewItem::text(i);
     }
 }
 
@@ -152,7 +152,7 @@ void K3bAudioTrackViewItem::setText( int col, const TQString& text )
       m_track->setTitle( text );
   }
 
-  KListViewItem::setText( col, text );
+  TDEListViewItem::setText( col, text );
 }
 
 

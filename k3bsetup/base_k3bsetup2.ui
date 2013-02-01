@@ -135,7 +135,7 @@
                                 <string>Check the devices whose permissions you want to be changed</string>
                             </property>
                         </widget>
-                        <widget class="KListView">
+                        <widget class="TDEListView">
                             <column>
                                 <property name="text">
                                     <string>Device</string>
@@ -255,7 +255,7 @@
                                             <string>Check the programs whose permissions you want to be changed</string>
                                         </property>
                                     </widget>
-                                    <widget class="KListView">
+                                    <widget class="TDEListView">
                                         <column>
                                             <property name="text">
                                                 <string>Program</string>

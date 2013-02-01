@@ -29,7 +29,7 @@
 class TQVBoxLayout;
 class TQHBoxLayout;
 class TQGridLayout;
-class KListView;
+class TDEListView;
 class TQFrame;
 class TQGroupBox;
 class TQLabel;
@@ -132,7 +132,7 @@ class K3bJobProgressDialog : public KDialog, public K3bJobHandler
 	
   K3bThemedLabel* m_labelJob;
   K3bThemedLabel* m_labelJobDetails;
-  KListView* m_viewInfo;
+  TDEListView* m_viewInfo;
   K3bThemedLabel* m_labelTask;
   K3bThemedLabel* m_labelElapsedTime;
   KCutLabel* m_labelSubTask;

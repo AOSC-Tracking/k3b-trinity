@@ -21,7 +21,7 @@
 #include "k3b_export.h"
 
 /**
- * A pushbutton with delayed popu pmenu support just like the KToolBarButton
+ * A pushbutton with delayed popu pmenu support just like the TDEToolBarButton
  */
 class LIBK3B_EXPORT K3bPushButton : public KPushButton
 {
@@ -58,7 +58,7 @@ class LIBK3B_EXPORT K3bPushButton : public KPushButton
 
   /**
    * The popup menu will show if the button is pressed down for about half a second
-   * or if the mouse is moved while pressed just like the KToolBarButton.
+   * or if the mouse is moved while pressed just like the TDEToolBarButton.
    */
   void setDelayedPopupMenu( TQPopupMenu* );
 

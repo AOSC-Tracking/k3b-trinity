@@ -182,7 +182,7 @@ K3bMovixListView::K3bMovixListView( K3bMovixDoc* doc, TQWidget* parent, const ch
   setAllColumnsShowFocus( true );
   setDragEnabled( true );
   setItemsMovable( false );
-  setSelectionModeExt( KListView::Extended );
+  setSelectionModeExt( TDEListView::Extended );
   setSorting(0);
 
   setNoItemText( i18n("Use drag'n'drop to add files to the project.") +"\n"
@@ -193,8 +193,8 @@ K3bMovixListView::K3bMovixListView( K3bMovixDoc* doc, TQWidget* parent, const ch
   connect( m_doc, TQT_SIGNAL(newMovixFileItems()), this, TQT_SLOT(slotNewFileItems()) );
   connect( m_doc, TQT_SIGNAL(movixItemRemoved(K3bMovixFileItem*)), this, TQT_SLOT(slotFileItemRemoved(K3bMovixFileItem*)) );
   connect( m_doc, TQT_SIGNAL(subTitleItemRemoved(K3bMovixFileItem*)), this, TQT_SLOT(slotSubTitleItemRemoved(K3bMovixFileItem*)) );
-  connect( this, TQT_SIGNAL(dropped(KListView*, TQDropEvent*, TQListViewItem*)),
-	   this, TQT_SLOT(slotDropped(KListView*, TQDropEvent*, TQListViewItem*)) );
+  connect( this, TQT_SIGNAL(dropped(TDEListView*, TQDropEvent*, TQListViewItem*)),
+	   this, TQT_SLOT(slotDropped(TDEListView*, TQDropEvent*, TQListViewItem*)) );
 
   // let's see what the doc already has
   slotNewFileItems();
@@ -258,7 +258,7 @@ void K3bMovixListView::slotSubTitleItemRemoved( K3bMovixFileItem* item )
 }
 
 
-void K3bMovixListView::slotDropped( KListView*, TQDropEvent* e, TQListViewItem* after )
+void K3bMovixListView::slotDropped( TDEListView*, TQDropEvent* e, TQListViewItem* after )
 {
   if( !e->isAccepted() )
     return;

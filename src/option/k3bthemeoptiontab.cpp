@@ -43,11 +43,11 @@ public:
 };
 
 
-class ThemeViewItem : public KListViewItem 
+class ThemeViewItem : public TDEListViewItem 
 {
 public:
   ThemeViewItem( K3bTheme* theme_, TQListView* parent, TQListViewItem* after )
-    : KListViewItem( parent, after ),
+    : TDEListViewItem( parent, after ),
       theme(theme_) {
     setText( 0, theme->name() );
     setText( 1, theme->author() );

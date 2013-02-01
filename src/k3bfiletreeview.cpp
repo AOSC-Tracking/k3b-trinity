@@ -415,8 +415,8 @@ K3bFileTreeView::K3bFileTreeView( TQWidget *parent, const char *name )
 
   connect( this, TQT_SIGNAL(executed(TQListViewItem*)), this, TQT_SLOT(slotItemExecuted(TQListViewItem*)) );
   connect( this, TQT_SIGNAL(returnPressed(TQListViewItem*)), this, TQT_SLOT(slotItemExecuted(TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem* , const TQPoint& )),
-	   this, TQT_SLOT(slotContextMenu(KListView*, TQListViewItem* , const TQPoint& )) );
+  connect( this, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem* , const TQPoint& )),
+	   this, TQT_SLOT(slotContextMenu(TDEListView*, TQListViewItem* , const TQPoint& )) );
 
   // we always simulate the single click
   slotSettingsChangedK3b(TDEApplication::SETTINGS_MOUSE);
@@ -444,20 +444,20 @@ void K3bFileTreeView::clear()
 
 void K3bFileTreeView::initActions()
 {
-//   m_actionCollection = new KActionCollection( this );
+//   m_actionCollection = new TDEActionCollection( this );
 
-//   m_devicePopupMenu = new KActionMenu( m_actionCollection, "device_popup_menu" );
-//   m_urlPopupMenu = new KActionMenu( m_actionCollection, "url_popup_menu" );
+//   m_devicePopupMenu = new TDEActionMenu( m_actionCollection, "device_popup_menu" );
+//   m_urlPopupMenu = new TDEActionMenu( m_actionCollection, "url_popup_menu" );
 
-//   KAction* actionDiskInfo = new KAction( i18n("&Disk Info"), "info", 0, this, TQT_SLOT(slotShowDiskInfo()),
+//   TDEAction* actionDiskInfo = new TDEAction( i18n("&Disk Info"), "info", 0, this, TQT_SLOT(slotShowDiskInfo()),
 // 					 m_actionCollection, "disk_info");
-//   KAction* actionUnmount = new KAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(slotUnmountDisk()),
+//   TDEAction* actionUnmount = new TDEAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(slotUnmountDisk()),
 // 					m_actionCollection, "disk_unmount");
-//   KAction* actionEject = new KAction( i18n("&Eject"), "", 0, this, TQT_SLOT(slotEjectDisk()),
+//   TDEAction* actionEject = new TDEAction( i18n("&Eject"), "", 0, this, TQT_SLOT(slotEjectDisk()),
 // 					m_actionCollection, "disk_eject");
 
 //   m_devicePopupMenu->insert( actionDiskInfo );
-//   m_devicePopupMenu->insert( new KActionSeparator( this ) );
+//   m_devicePopupMenu->insert( new TDEActionSeparator( this ) );
 //   m_devicePopupMenu->insert( actionUnmount );
 //   m_devicePopupMenu->insert( actionEject );
 
@@ -612,7 +612,7 @@ void K3bFileTreeView::followUrl( const KURL& url )
 }
 
 
-void K3bFileTreeView::slotContextMenu( KListView*, TQListViewItem* item, const TQPoint& p )
+void K3bFileTreeView::slotContextMenu( TDEListView*, TQListViewItem* item, const TQPoint& p )
 {
   KFileTreeViewItem* treeItem = dynamic_cast<KFileTreeViewItem*>(item);
   if( treeItem ) {

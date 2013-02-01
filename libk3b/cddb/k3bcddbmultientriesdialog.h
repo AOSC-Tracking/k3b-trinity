@@ -24,7 +24,7 @@
 
 
 class TQStringList;
-class KListBox;
+class TDEListBox;
 
 /**
   *@author Sebastian Trueg
@@ -43,7 +43,7 @@ class K3bCddbMultiEntriesDialog : public KDialogBase
   K3bCddbMultiEntriesDialog( TQWidget* parent = 0, const char* name = 0);
 
  private:
-  KListBox *m_listBox;
+  TDEListBox *m_listBox;
 };
 
 #endif

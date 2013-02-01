@@ -30,16 +30,16 @@
 class K3bAudioTrackPlayer::Private
 {
 public:
-  KAction* actionPlay;
-  KAction* actionPause;
-  KAction* actionPlayPause;
-  KAction* actionStop;
-  KAction* actionNext;
-  KAction* actionPrev;
-  KAction* actionSeek;
+  TDEAction* actionPlay;
+  TDEAction* actionPause;
+  TDEAction* actionPlayPause;
+  TDEAction* actionStop;
+  TDEAction* actionNext;
+  TDEAction* actionPrev;
+  TDEAction* actionSeek;
 
   // just to handle them easily;
-  KActionCollection* actionCollection;
+  TDEActionCollection* actionCollection;
 
   TQSlider* seekSlider;
   TQTimer sliderTimer;
@@ -63,44 +63,44 @@ K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* parent, co
   d->playing = false;
 
   // TODO: handle the shortcuts: pass a widget to the action collection (perhaps the trackview?)
-  d->actionCollection = new KActionCollection( 0, this );
+  d->actionCollection = new TDEActionCollection( 0, this );
 
   // create the actions
   // TODO: create shortcuts (is there a way to let the user change them?)
-  d->actionPlay = new KAction( i18n("Play"), 
+  d->actionPlay = new TDEAction( i18n("Play"), 
 			       "player_play", 
-			       KShortcut(), 
+			       TDEShortcut(), 
 			       this, TQT_SLOT(playPause()), 
 			       d->actionCollection,
 			       "play" );
-  d->actionPause = new KAction( i18n("Pause"), 
+  d->actionPause = new TDEAction( i18n("Pause"), 
 				"player_pause", 
-				KShortcut(), 
+				TDEShortcut(), 
 				this, TQT_SLOT(playPause()), 
 				d->actionCollection,
 				"pause" );
-  d->actionPlayPause = new KAction( i18n("Play/Pause"), 
+  d->actionPlayPause = new TDEAction( i18n("Play/Pause"), 
 				    "player_play", 
-				    KShortcut(), 
+				    TDEShortcut(), 
 				    this, TQT_SLOT(playPause()), 
 				    d->actionCollection,
 				    "play_pause" );
 
-  d->actionStop = new KAction( i18n("Stop"), 
+  d->actionStop = new TDEAction( i18n("Stop"), 
 			       "player_stop", 
-			       KShortcut(), 
+			       TDEShortcut(), 
 			       this, TQT_SLOT(stop()), 
 			       d->actionCollection,
 			       "stop" );
-  d->actionNext = new KAction( i18n("Next"), 
+  d->actionNext = new TDEAction( i18n("Next"), 
 			       "player_end", 
-			       KShortcut(), 
+			       TDEShortcut(), 
 			       this, TQT_SLOT(next()), 
 			       d->actionCollection,
 			       "next" );
-  d->actionPrev = new KAction( i18n("Prev"), 
+  d->actionPrev = new TDEAction( i18n("Prev"), 
 			       "player_start", 
-			       KShortcut(), 
+			       TDEShortcut(), 
 			       this, TQT_SLOT(prev()), 
 			       d->actionCollection,
 			       "prev" );
@@ -112,7 +112,7 @@ K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* parent, co
   // the action into several toolboxes and also use it in some resizing or track splitting dialogs.
   d->actionSeek = new KWidgetAction( d->seekSlider,
 				     i18n("Seek"),
-				     KShortcut(),
+				     TDEShortcut(),
 				     0,
 				     0,
 				     d->actionCollection,
@@ -156,7 +156,7 @@ K3bAudioTrackPlayer::~K3bAudioTrackPlayer()
 }
 
 
-KAction* K3bAudioTrackPlayer::action( int action ) const
+TDEAction* K3bAudioTrackPlayer::action( int action ) const
 {
   switch( action ) {
   case ACTION_PLAY:

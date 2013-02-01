@@ -29,7 +29,7 @@ class K3bThemedHeader;
  * the selected device and reloads the contents if a new usable medium is inserted or disables the controls if the
  * medium is just ejected. For this to work the proper content types have to be set.
  *
- * TODO: how about giving this one a KActionCollection so it can handle the toolbar automatically
+ * TODO: how about giving this one a TDEActionCollection so it can handle the toolbar automatically
  */
 class K3bMediaContentsView : public K3bContentsView
 {

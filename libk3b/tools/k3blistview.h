@@ -39,7 +39,7 @@ class K3bMsfEdit;
 class K3bListView;
 
 
-class LIBK3B_EXPORT K3bListViewItem : public KListViewItem
+class LIBK3B_EXPORT K3bListViewItem : public TDEListViewItem
 {
  public:
   K3bListViewItem(TQListView *parent);
@@ -74,7 +74,7 @@ class LIBK3B_EXPORT K3bListViewItem : public KListViewItem
   virtual ~K3bListViewItem();
 
   /**
-   * reimplemented from KListViewItem
+   * reimplemented from TDEListViewItem
    */
   void setup();
 
@@ -153,7 +153,7 @@ class LIBK3B_EXPORT K3bCheckListViewItem : public K3bListViewItem
 
 
 
-class LIBK3B_EXPORT K3bListView : public KListView
+class LIBK3B_EXPORT K3bListView : public TDEListView
 {
   friend class K3bListViewItem;
 
@@ -234,7 +234,7 @@ class LIBK3B_EXPORT K3bListView : public KListView
 
  protected:
   /**
-   * calls KListView::drawContentsOffset
+   * calls TDEListView::drawContentsOffset
    * and paints a the noItemText if no item is in the list
    */
   virtual void drawContentsOffset ( TQPainter * p, int ox, int oy, int cx, int cy, int cw, int ch );

@@ -25,11 +25,11 @@
 #include <k3bcdtext.h>
 
 class K3bListView;
-class KListView;
+class TDEListView;
 class TQListViewItem;
 class TQPoint;
-class KActionCollection;
-class KActionMenu;
+class TDEActionCollection;
+class TDEActionMenu;
 class K3bCddb;
 class TQLabel;
 class K3bToolBox;
@@ -50,7 +50,7 @@ class K3bAudioCdView : public K3bMediaContentsView
   K3bAudioCdView( TQWidget* parent = 0, const char * name = 0 );
   ~K3bAudioCdView();
 
-  KActionCollection* actionCollection() const { return m_actionCollection; }
+  TDEActionCollection* actionCollection() const { return m_actionCollection; }
 
   /**
    * internal
@@ -61,7 +61,7 @@ class K3bAudioCdView : public K3bMediaContentsView
   void queryCddb();
 
  private slots:
-  void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& );
+  void slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& );
   void slotItemRenamed( TQListViewItem*, const TQString&, int );
   void slotCddbQueryFinished( int );
   void slotTrackSelectionChanged( TQListViewItem* );
@@ -88,8 +88,8 @@ class K3bAudioCdView : public K3bMediaContentsView
 
   K3bCddbResultEntry m_cddbInfo;
 
-  KActionCollection* m_actionCollection;
-  KActionMenu* m_popupMenu;
+  TDEActionCollection* m_actionCollection;
+  TDEActionMenu* m_popupMenu;
 
   K3bListView* m_trackView;
   K3bToolBox* m_toolBox;

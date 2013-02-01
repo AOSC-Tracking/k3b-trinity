@@ -73,7 +73,7 @@ K3bDataFileView::K3bDataFileView( K3bView* view, K3bDataDirTreeView* dirTreeView
   addColumn( i18n("Local Path") );
   addColumn( i18n("Link") );
 
-  setSelectionModeExt( KListView::Extended );
+  setSelectionModeExt( TDEListView::Extended );
 
   m_doc = doc;
   m_currentDir = doc->root();
@@ -83,8 +83,8 @@ K3bDataFileView::K3bDataFileView( K3bView* view, K3bDataDirTreeView* dirTreeView
   connect( m_doc, TQT_SIGNAL(itemRemoved(K3bDataItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotDataItemRemoved(K3bDataItem*)) );
   connect( m_doc, TQT_SIGNAL(itemAdded(K3bDataItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotItemAdded(K3bDataItem*)) );
   connect( this, TQT_SIGNAL(executed(TQListViewItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotExecuted(TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(contextMenu(KListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(showPopupMenu(KListView*, TQListViewItem*, const TQPoint&)) );
+  connect( this, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQT_SLOT(showPopupMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
   connect( this, TQT_SIGNAL(dropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)),
 	   this, TQT_SLOT(slotDropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)) );
   connect( this, TQT_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)),
@@ -317,39 +317,39 @@ void K3bDataFileView::slotExecuted( TQListViewItem* item )
 
 void K3bDataFileView::setupActions()
 {
-  m_actionCollection = new KActionCollection( this );
+  m_actionCollection = new TDEActionCollection( this );
 
-  m_actionProperties = new KAction( i18n("Properties"), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
+  m_actionProperties = new TDEAction( i18n("Properties"), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
 				    actionCollection(), "properties" );
-  m_actionNewDir = new KAction( i18n("New Directory..."), "folder_new", CTRL+Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotNewDir()),
+  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder_new", CTRL+Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotNewDir()),
 				actionCollection(), "new_dir" );
-  m_actionRemove = new KAction( i18n("Remove"), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItem()),
+  m_actionRemove = new TDEAction( i18n("Remove"), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItem()),
 				actionCollection(), "remove" );
-  KShortcut renameShortCut( Key_F2 );
-  renameShortCut.append( KShortcut(CTRL+Key_R) ); // backwards compatibility
-  m_actionRename = new KAction( i18n("Rename"), "edit", renameShortCut, TQT_TQOBJECT(this), TQT_SLOT(slotRenameItem()),
+  TDEShortcut renameShortCut( Key_F2 );
+  renameShortCut.append( TDEShortcut(CTRL+Key_R) ); // backwards compatibility
+  m_actionRename = new TDEAction( i18n("Rename"), "edit", renameShortCut, TQT_TQOBJECT(this), TQT_SLOT(slotRenameItem()),
 				actionCollection(), "rename" );
-  m_actionParentDir = new KAction( i18n("Parent Directory"), "up", 0, TQT_TQOBJECT(this), TQT_SLOT(slotParentDir()),
+  m_actionParentDir = new TDEAction( i18n("Parent Directory"), "up", 0, TQT_TQOBJECT(this), TQT_SLOT(slotParentDir()),
 				   actionCollection(), "parent_dir" );
-  m_actionOpen = new KAction( i18n("Open"), "fileopen", 0, TQT_TQOBJECT(this), TQT_SLOT(slotOpen()),
+  m_actionOpen = new TDEAction( i18n("Open"), "fileopen", 0, TQT_TQOBJECT(this), TQT_SLOT(slotOpen()),
 				   actionCollection(), "open" );
 
-  m_popupMenu = new KActionMenu( m_actionCollection, "contextMenu" );
+  m_popupMenu = new TDEActionMenu( m_actionCollection, "contextMenu" );
   m_popupMenu->insert( m_actionParentDir );
-  m_popupMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
+  m_popupMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
   m_popupMenu->insert( m_actionRename );
   m_popupMenu->insert( m_actionRemove );
   m_popupMenu->insert( m_actionNewDir );
-  m_popupMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
+  m_popupMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
   m_popupMenu->insert( m_actionOpen );
-  m_popupMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
+  m_popupMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
   m_popupMenu->insert( m_actionProperties );
-  m_popupMenu->insert( new KActionSeparator( TQT_TQOBJECT(this) ) );
+  m_popupMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
   m_popupMenu->insert( m_view->actionCollection()->action("project_burn") );
 }
 
 
-void K3bDataFileView::showPopupMenu( KListView*, TQListViewItem* item, const TQPoint& point )
+void K3bDataFileView::showPopupMenu( TDEListView*, TQListViewItem* item, const TQPoint& point )
 {
   if( item ) {
     K3bDataItem* di = static_cast<K3bDataViewItem*>(item)->dataItem();

@@ -24,9 +24,9 @@
 
 #include "k3bvideocdinfo.h"
 
-class KActionCollection;
-class KActionMenu;
-class KListView;
+class TDEActionCollection;
+class TDEActionMenu;
+class TDEListView;
 
 class TQLabel;
 class TQListViewItem;
@@ -52,13 +52,13 @@ class K3bVideoCdView : public K3bMediaContentsView
         K3bVideoCdView( TQWidget* parent = 0, const char * name = 0 );
         ~K3bVideoCdView();
 
-        KActionCollection* actionCollection() const
+        TDEActionCollection* actionCollection() const
         {
             return m_actionCollection;
         }
 
     private slots:
-        void slotContextMenu( KListView*, TQListViewItem*, const TQPoint& );
+        void slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& );
         void slotTrackSelectionChanged( TQListViewItem* );
         void slotStateChanged( TQListViewItem* );
         void slotVideoCdInfoFinished( bool );
@@ -83,8 +83,8 @@ class K3bVideoCdView : public K3bMediaContentsView
 
         K3bDevice::Toc m_toc;
 
-        KActionCollection* m_actionCollection;
-        KActionMenu* m_popupMenu;
+        TDEActionCollection* m_actionCollection;
+        TDEActionMenu* m_popupMenu;
 
         K3bVideoCdInfoResult m_videocdinfoResult;
         K3bVideoCdInfo* m_videocdinfo;

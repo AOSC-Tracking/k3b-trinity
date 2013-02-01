@@ -98,25 +98,25 @@ public:
 
 
 K3bListViewItem::K3bListViewItem(TQListView *parent)
-  : KListViewItem( parent )
+  : TDEListViewItem( parent )
 {
   init();
 }
 
 K3bListViewItem::K3bListViewItem(TQListViewItem *parent)
-  : KListViewItem( parent )
+  : TDEListViewItem( parent )
 {
   init();
 }
 
 K3bListViewItem::K3bListViewItem(TQListView *parent, TQListViewItem *after)
-  : KListViewItem( parent, after )
+  : TDEListViewItem( parent, after )
 {
   init();
 }
 
 K3bListViewItem::K3bListViewItem(TQListViewItem *parent, TQListViewItem *after)
-  : KListViewItem( parent, after )
+  : TDEListViewItem( parent, after )
 {
   init();
 }
@@ -127,7 +127,7 @@ K3bListViewItem::K3bListViewItem(TQListView *parent,
 				 const TQString& s3, const TQString& s4,
 				 const TQString& s5, const TQString& s6,
 				 const TQString& s7, const TQString& s8)
-  : KListViewItem( parent, s1, s2, s3, s4, s5, s6, s7, s8 )
+  : TDEListViewItem( parent, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
@@ -138,7 +138,7 @@ K3bListViewItem::K3bListViewItem(TQListViewItem *parent,
 				 const TQString& s3, const TQString& s4,
 				 const TQString& s5, const TQString& s6,
 				 const TQString& s7, const TQString& s8)
-  : KListViewItem( parent, s1, s2, s3, s4, s5, s6, s7, s8 )
+  : TDEListViewItem( parent, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
@@ -149,7 +149,7 @@ K3bListViewItem::K3bListViewItem(TQListView *parent, TQListViewItem *after,
 				 const TQString& s3, const TQString& s4,
 				 const TQString& s5, const TQString& s6,
 				 const TQString& s7, const TQString& s8)
-  : KListViewItem( parent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
+  : TDEListViewItem( parent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
@@ -160,7 +160,7 @@ K3bListViewItem::K3bListViewItem(TQListViewItem *parent, TQListViewItem *after,
 				 const TQString& s3, const TQString& s4,
 				 const TQString& s5, const TQString& s6,
 				 const TQString& s7, const TQString& s8)
-  : KListViewItem( parent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
+  : TDEListViewItem( parent, after, s1, s2, s3, s4, s5, s6, s7, s8 )
 {
   init();
 }
@@ -186,7 +186,7 @@ void K3bListViewItem::init()
 
 int K3bListViewItem::width( const TQFontMetrics& fm, const TQListView* lv, int c ) const
 {
-  return KListViewItem::width( fm, lv, c ) + getColumnInfo(c)->margin*2;
+  return TDEListViewItem::width( fm, lv, c ) + getColumnInfo(c)->margin*2;
 }
 
 
@@ -343,7 +343,7 @@ int K3bListViewItem::marginVertical() const
 
 void K3bListViewItem::setup()
 {
-  KListViewItem::setup();
+  TDEListViewItem::setup();
 
   setHeight( height() + 2*m_vMargin );
 }
@@ -374,7 +374,7 @@ void K3bListViewItem::paintCell( TQPainter* p, const TQColorGroup& cg, int col, 
     p->fillRect( width-info->margin, 0, info->margin, height(),
 		 cgh.brush( TQColorGroup::Highlight ) );
   }
-  else { // in case we use the KListView alternate color stuff
+  else { // in case we use the TDEListView alternate color stuff
     p->fillRect( 0, 0, info->margin, height(),
 		 cgh.brush( TQColorGroup::Base ) );
     p->fillRect( width-info->margin, 0, info->margin, height(),
@@ -546,7 +546,7 @@ public:
 
 
 K3bListView::K3bListView( TQWidget* parent, const char* name )
-  : KListView( parent, name ),
+  : TDEListView( parent, name ),
     m_noItemVMargin( 20 ),
     m_noItemHMargin( 20 )
 {
@@ -592,7 +592,7 @@ TQWidget* K3bListView::editor( K3bListViewItem::EditorType t ) const
 void K3bListView::clear()
 {
   hideEditor();
-  KListView::clear();
+  TDEListView::clear();
 }
 
 
@@ -806,7 +806,7 @@ void K3bListView::setCurrentItem( TQListViewItem* i )
 //   doRename();
 //   hideEditor();
 //   m_currentEditItem = 0;
-  KListView::setCurrentItem( i );
+  TDEListView::setCurrentItem( i );
 }
 
 
@@ -819,14 +819,14 @@ void K3bListView::setNoItemText( const TQString& text )
 
 void K3bListView::viewportPaintEvent( TQPaintEvent* e )
 {
-  KListView::viewportPaintEvent( e );
+  TDEListView::viewportPaintEvent( e );
 }
 
 
 // FIXME: move this to viewportPaintEvent
 void K3bListView::drawContentsOffset( TQPainter * p, int ox, int oy, int cx, int cy, int cw, int ch )
 {
-  KListView::drawContentsOffset( p, ox, oy, cx, cy, cw, ch );
+  TDEListView::drawContentsOffset( p, ox, oy, cx, cy, cw, ch );
 
   if( childCount() == 0 && !m_noItemText.isEmpty()) {
 
@@ -846,7 +846,7 @@ void K3bListView::drawContentsOffset( TQPainter * p, int ox, int oy, int cx, int
 
 void K3bListView::paintEmptyArea( TQPainter* p, const TQRect& rect )
 {
-  KListView::paintEmptyArea( p, rect );
+  TDEListView::paintEmptyArea( p, rect );
 
 //   if( childCount() == 0 && !m_noItemText.isEmpty()) {
 
@@ -869,7 +869,7 @@ void K3bListView::paintEmptyArea( TQPainter* p, const TQRect& rect )
 
 void K3bListView::resizeEvent( TQResizeEvent* e )
 {
-  KListView::resizeEvent( e );
+  TDEListView::resizeEvent( e );
   updateEditorSize();
 }
 
@@ -1150,7 +1150,7 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
     }
   }
 
-  return KListView::eventFilter( o, e );
+  return TDEListView::eventFilter( o, e );
 }
 
 
@@ -1202,7 +1202,7 @@ void K3bListView::viewportResizeEvent( TQResizeEvent* e )
     viewport()->setPaletteBackgroundPixmap( bgPix );
   }
 
-  KListView::viewportResizeEvent( e );
+  TDEListView::viewportResizeEvent( e );
 }
 
 

@@ -44,7 +44,7 @@ K3bFlatButton::K3bFlatButton( const TQString& text, TQWidget *parent, const char
 }
 
 
-K3bFlatButton::K3bFlatButton( KAction* a, TQWidget *parent, const char *name )
+K3bFlatButton::K3bFlatButton( TDEAction* a, TQWidget *parent, const char *name )
   : TQFrame( parent, name/*, WNoAutoErase*/ ),
     m_pressed(false)
 {

@@ -22,8 +22,8 @@
 
 class K3bMovixDoc;
 class K3bMovixListView;
-class KAction;
-class KPopupMenu;
+class TDEAction;
+class TDEPopupMenu;
 class TQListViewItem;
 class TQPoint;
 class TQLineEdit;
@@ -54,11 +54,11 @@ class K3bMovixView : public K3bView
  private:
   K3bMovixDoc* m_doc;
 
-  KAction* m_actionProperties;
-  KAction* m_actionRemove;
-  KAction* m_actionRemoveSubTitle;
-  KAction* m_actionAddSubTitle;
-  KPopupMenu* m_popupMenu;
+  TDEAction* m_actionProperties;
+  TDEAction* m_actionRemove;
+  TDEAction* m_actionRemoveSubTitle;
+  TDEAction* m_actionAddSubTitle;
+  TDEPopupMenu* m_popupMenu;
 
   TQLineEdit* m_volumeIDEdit;
 };

@@ -46,7 +46,7 @@ K3bVcdListView::K3bVcdListView( K3bView* view, K3bVcdDoc* doc, TQWidget *parent,
     setDropVisualizer( true );
     setAllColumnsShowFocus( true );
     setDragEnabled( true );
-    setSelectionModeExt( KListView::Extended );
+    setSelectionModeExt( TDEListView::Extended );
     setItemsMovable( false );
 
     setNoItemText( i18n( "Use drag'n'drop to add MPEG video files to the project." ) + "\n"
@@ -60,10 +60,10 @@ K3bVcdListView::K3bVcdListView( K3bView* view, K3bVcdDoc* doc, TQWidget *parent,
     setupColumns();
     header() ->setClickEnabled( false );
 
-    connect( this, TQT_SIGNAL( dropped( KListView*, TQDropEvent*, TQListViewItem* ) ),
-             this, TQT_SLOT( slotDropped( KListView*, TQDropEvent*, TQListViewItem* ) ) );
-    connect( this, TQT_SIGNAL( contextMenu( KListView*, TQListViewItem*, const TQPoint& ) ),
-             this, TQT_SLOT( showPopupMenu( KListView*, TQListViewItem*, const TQPoint& ) ) );
+    connect( this, TQT_SIGNAL( dropped( TDEListView*, TQDropEvent*, TQListViewItem* ) ),
+             this, TQT_SLOT( slotDropped( TDEListView*, TQDropEvent*, TQListViewItem* ) ) );
+    connect( this, TQT_SIGNAL( contextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ),
+             this, TQT_SLOT( showPopupMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ) );
     connect( this, TQT_SIGNAL( doubleClicked( TQListViewItem*, const TQPoint&, int ) ),
              this, TQT_SLOT( showPropertiesDialog() ) );
 
@@ -93,9 +93,9 @@ void K3bVcdListView::setupColumns()
 
 void K3bVcdListView::setupActions()
 {
-    m_actionCollection = new KActionCollection( this );
-    m_actionProperties = new KAction( i18n( "Properties" ), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT( showPropertiesDialog() ), actionCollection() );
-    m_actionRemove = new KAction( i18n( "Remove" ), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT( slotRemoveTracks() ), actionCollection() );
+    m_actionCollection = new TDEActionCollection( this );
+    m_actionProperties = new TDEAction( i18n( "Properties" ), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT( showPropertiesDialog() ), actionCollection() );
+    m_actionRemove = new TDEAction( i18n( "Remove" ), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT( slotRemoveTracks() ), actionCollection() );
 
     // disabled by default
     m_actionRemove->setEnabled( false );
@@ -104,7 +104,7 @@ void K3bVcdListView::setupActions()
 
 void K3bVcdListView::setupPopupMenu()
 {
-    m_popupMenu = new KPopupMenu( this, "VcdViewPopupMenu" );
+    m_popupMenu = new TDEPopupMenu( this, "VcdViewPopupMenu" );
     m_actionRemove->plug( m_popupMenu );
     m_popupMenu->insertSeparator();
     m_actionProperties->plug( m_popupMenu );
@@ -116,7 +116,7 @@ void K3bVcdListView::setupPopupMenu()
 bool K3bVcdListView::acceptDrag( TQDropEvent* e ) const
 {
     // the first is for built-in item moving, the second for dropping urls
-    return ( KListView::acceptDrag( e ) || KURLDrag::canDecode( e ) );
+    return ( TDEListView::acceptDrag( e ) || KURLDrag::canDecode( e ) );
 }
 
 
@@ -137,7 +137,7 @@ TQDragObject* K3bVcdListView::dragObject()
 }
 
 
-void K3bVcdListView::slotDropped( KListView*, TQDropEvent* e, TQListViewItem* after )
+void K3bVcdListView::slotDropped( TDEListView*, TQDropEvent* e, TQListViewItem* after )
 {
     if ( !e->isAccepted() )
         return ;
@@ -172,7 +172,7 @@ void K3bVcdListView::slotDropped( KListView*, TQDropEvent* e, TQListViewItem* af
 
 void K3bVcdListView::insertItem( TQListViewItem* item )
 {
-    KListView::insertItem( item );
+    TDEListView::insertItem( item );
 
     // make sure at least one item is selected
     if ( selectedItems().isEmpty() ) {
@@ -180,7 +180,7 @@ void K3bVcdListView::insertItem( TQListViewItem* item )
     }
 }
 
-void K3bVcdListView::showPopupMenu( KListView*, TQListViewItem* _item, const TQPoint& _point )
+void K3bVcdListView::showPopupMenu( TDEListView*, TQListViewItem* _item, const TQPoint& _point )
 {
     if ( _item ) {
         m_actionRemove->setEnabled( true );

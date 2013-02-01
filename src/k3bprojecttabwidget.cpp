@@ -60,7 +60,7 @@ K3bProjectTabWidget::K3bProjectTabWidget( TQWidget *parent, const char *name, WF
   tabBar()->setAcceptDrops(true);
   tabBar()->installEventFilter( this );
 
-  m_projectActionMenu = new KActionMenu( i18n("Project"), TQT_TQOBJECT(this) );
+  m_projectActionMenu = new TDEActionMenu( i18n("Project"), TQT_TQOBJECT(this) );
 }
 
 
@@ -133,7 +133,7 @@ void K3bProjectTabWidget::insertTab( K3bDoc* doc )
 }
 
 
-void K3bProjectTabWidget::insertAction( KAction* action )
+void K3bProjectTabWidget::insertAction( TDEAction* action )
 {
   m_projectActionMenu->insert( action );
 }

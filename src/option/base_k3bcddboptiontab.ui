@@ -102,7 +102,7 @@
                                     <string>Directory:</string>
                                 </property>
                             </widget>
-                            <widget class="KListView" row="1" column="0" rowspan="4" colspan="2">
+                            <widget class="TDEListView" row="1" column="0" rowspan="4" colspan="2">
                                 <column>
                                     <property name="text">
                                         <string>Directory</string>
@@ -256,7 +256,7 @@
                                     <cstring>m_comboCddbType</cstring>
                                 </property>
                             </widget>
-                            <widget class="KListView" row="1" column="0" rowspan="4" colspan="4">
+                            <widget class="TDEListView" row="1" column="0" rowspan="4" colspan="4">
                                 <column>
                                     <property name="text">
                                         <string>Type</string>

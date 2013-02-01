@@ -57,10 +57,10 @@ K3bView::K3bView( K3bDoc* pDoc, TQWidget *parent, const char* name )
   grid->setSpacing( 5 );
   grid->setMargin( 2 );
 
-  KAction* burnAction = new KAction( i18n("&Burn"), "cdburn", CTRL + Key_B, TQT_TQOBJECT(this), TQT_SLOT(slotBurn()),
+  TDEAction* burnAction = new TDEAction( i18n("&Burn"), "cdburn", CTRL + Key_B, TQT_TQOBJECT(this), TQT_SLOT(slotBurn()),
 				     actionCollection(), "project_burn");
   burnAction->setToolTip( i18n("Open the burn dialog for the current project") );
-  KAction* propAction = new KAction( i18n("&Properties"), "edit", CTRL + Key_P, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
+  TDEAction* propAction = new TDEAction( i18n("&Properties"), "edit", CTRL + Key_P, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
 				     actionCollection(), "project_properties");
   propAction->setToolTip( i18n("Open the properties dialog") );
 
@@ -123,7 +123,7 @@ void K3bView::slotProperties()
 }
 
 
-// KActionCollection* K3bView::actionCollection() const
+// TDEActionCollection* K3bView::actionCollection() const
 // {
 //   return m_actionCollection; 
 // }

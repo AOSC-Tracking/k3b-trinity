@@ -55,7 +55,7 @@ K3bFileView::~K3bFileView()
 }
 
 
-KActionCollection* K3bFileView::actionCollection() const
+TDEActionCollection* K3bFileView::actionCollection() const
 {
   return m_dirOp->actionCollection();
 }
@@ -74,10 +74,10 @@ void K3bFileView::setupGUI()
   layout->setStretchFactor( m_dirOp, 1 );
 
   // setup actions
-  KAction* actionHome = m_dirOp->actionCollection()->action("home");
-  KAction* actionBack = m_dirOp->actionCollection()->action("back");
-  KAction* actionUp = m_dirOp->actionCollection()->action("up");
-  KAction* actionReload = m_dirOp->actionCollection()->action("reload");
+  TDEAction* actionHome = m_dirOp->actionCollection()->action("home");
+  TDEAction* actionBack = m_dirOp->actionCollection()->action("back");
+  TDEAction* actionUp = m_dirOp->actionCollection()->action("up");
+  TDEAction* actionReload = m_dirOp->actionCollection()->action("reload");
 
   m_toolBox->addButton( actionUp );
   m_toolBox->addButton( actionBack );

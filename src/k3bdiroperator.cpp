@@ -39,7 +39,7 @@ K3bDirOperator::K3bDirOperator(const KURL& url, TQWidget* parent, const char* na
 
   // disable the del-key since we still have a focus problem and users keep
   // deleting files when they want to remove project entries
-  KAction* aDelete = actionCollection()->action("delete");
+  TDEAction* aDelete = actionCollection()->action("delete");
   if( aDelete )
     aDelete->setShortcut( 0 );
 
@@ -49,10 +49,10 @@ K3bDirOperator::K3bDirOperator(const KURL& url, TQWidget* parent, const char* na
   bmMan->setUpdate( true );
   bmMan->setShowNSBookmarks( false );
 
-  m_bmPopup = new KActionMenu( i18n("Bookmarks"), "bookmark", TQT_TQOBJECT(this), "bookmarks" );
+  m_bmPopup = new TDEActionMenu( i18n("Bookmarks"), "bookmark", TQT_TQOBJECT(this), "bookmarks" );
   m_bmMenu = new KBookmarkMenu( bmMan, this, m_bmPopup->popupMenu(), actionCollection(), true );
 
-  (void)new KAction( i18n("&Add to Project"), SHIFT+Key_Return, 
+  (void)new TDEAction( i18n("&Add to Project"), SHIFT+Key_Return, 
 		     TQT_TQOBJECT(this), TQT_SLOT(slotAddFilesToProject()), 
 		     actionCollection(), "add_file_to_project");
 }
@@ -130,12 +130,12 @@ void K3bDirOperator::activatedMenu( const KFileItem*, const TQPoint& pos )
   updateSelectionDependentActions();
 
   // insert our own actions
-  KActionMenu* dirOpMenu = (KActionMenu*)actionCollection()->action("popupMenu");
-  dirOpMenu->insert( new KActionSeparator( actionCollection() ) );
+  TDEActionMenu* dirOpMenu = (TDEActionMenu*)actionCollection()->action("popupMenu");
+  dirOpMenu->insert( new TDEActionSeparator( actionCollection() ) );
   dirOpMenu->insert( m_bmPopup );
 
   dirOpMenu->insert( actionCollection()->action("add_file_to_project"), 0 );
-  dirOpMenu->insert( new KActionSeparator( actionCollection() ), 1 );
+  dirOpMenu->insert( new TDEActionSeparator( actionCollection() ), 1 );
 
   bool hasSelection = view() && view()->selectedItems() &&
                       !view()->selectedItems()->isEmpty();

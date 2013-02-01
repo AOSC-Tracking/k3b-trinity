@@ -123,7 +123,7 @@ void K3bAudioRippingDialog::setupGui()
   Form1Layout->setSpacing( KDialog::spacingHint() );
   Form1Layout->setMargin( 0 );
 
-  m_viewTracks = new KListView( frame, "m_viewTracks" );
+  m_viewTracks = new TDEListView( frame, "m_viewTracks" );
   m_viewTracks->addColumn(i18n( "Filename") );
   m_viewTracks->addColumn(i18n( "Length") );
   m_viewTracks->addColumn(i18n( "File Size") );
@@ -330,7 +330,7 @@ void K3bAudioRippingDialog::refresh()
 
     filename = d->fsInfo.fixupPath( filename );
 
-    (void)new KListViewItem( m_viewTracks,
+    (void)new TDEListViewItem( m_viewTracks,
 			     m_viewTracks->lastItem(),
 			     filename + "." + extension,
 			     K3b::Msf(length).toString(),
@@ -339,7 +339,7 @@ void K3bAudioRippingDialog::refresh()
     d->filenames.append( baseDir + "/" + filename + "." + extension );
 
     if( m_optionWidget->createCueFile() )
-      (void)new KListViewItem( m_viewTracks,
+      (void)new TDEListViewItem( m_viewTracks,
 			       m_viewTracks->lastItem(),
 			       filename + ".cue",
 			       "-",
@@ -388,7 +388,7 @@ void K3bAudioRippingDialog::refresh()
 
       filename = d->fsInfo.fixupPath( filename );
 
-      (void)new KListViewItem( m_viewTracks,
+      (void)new TDEListViewItem( m_viewTracks,
 			       m_viewTracks->lastItem(),
 			       filename,
 			       trackLength.toString(),
@@ -406,7 +406,7 @@ void K3bAudioRippingDialog::refresh()
 						       m_patternWidget->replaceBlanks(),
 						       m_patternWidget->blankReplaceString() ) + ".m3u";
 
-    (void)new KListViewItem( m_viewTracks,
+    (void)new TDEListViewItem( m_viewTracks,
 			     m_viewTracks->lastItem(),
 			     filename,
 			     "-",

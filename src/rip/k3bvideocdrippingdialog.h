@@ -23,7 +23,7 @@
 #include <k3bdiskinfo.h>
 #include "k3bvideocdrippingoptions.h"
 
-class KListView;
+class TDEListView;
 class TQCheckBox;
 class TQLabel;
 class TQSpinBox;

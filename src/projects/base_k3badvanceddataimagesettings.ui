@@ -29,7 +29,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="KListView">
+                <widget class="TDEListView">
                     <column>
                         <property name="text">
                             <string>ISO9660 Filesystem</string>

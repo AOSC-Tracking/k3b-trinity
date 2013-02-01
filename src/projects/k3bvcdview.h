@@ -28,7 +28,7 @@ class TQWidget;
 class K3bVcdDoc;
 class K3bVcdTrack;
 class TQListViewItem;
-class KListView;
+class TDEListView;
 class K3bVcdBurnDialog;
 class K3bProjectBurnDialog;
 

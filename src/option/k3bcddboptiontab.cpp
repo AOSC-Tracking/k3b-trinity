@@ -153,7 +153,7 @@ void K3bCddbOptionTab::readSettings()
     localCddbDirs.append( "~/.cddb/" );
 
   for( TQStringList::const_iterator it = localCddbDirs.begin(); it != localCddbDirs.end(); ++it )
-    (void)new KListViewItem( m_viewLocalDir, m_viewLocalDir->lastItem(), *it );
+    (void)new TDEListViewItem( m_viewLocalDir, m_viewLocalDir->lastItem(), *it );
 
 
   // old config <= 0.7.3
@@ -177,9 +177,9 @@ void K3bCddbOptionTab::readSettings()
     TQString server = buf[0];
     int port = buf[1].toInt();
     if( s.startsWith("Http") )
-      (void)new KListViewItem( m_viewCddbServer, m_viewCddbServer->lastItem(), "Http", server, TQString::number(port) );
+      (void)new TDEListViewItem( m_viewCddbServer, m_viewCddbServer->lastItem(), "Http", server, TQString::number(port) );
     else
-      (void)new KListViewItem( m_viewCddbServer, m_viewCddbServer->lastItem(), "Cddbp", server, TQString::number(port) );
+      (void)new TDEListViewItem( m_viewCddbServer, m_viewCddbServer->lastItem(), "Cddbp", server, TQString::number(port) );
   }
 
   enDisableButtons();
@@ -236,7 +236,7 @@ void K3bCddbOptionTab::slotLocalDirAdd()
               return;
           ++it;
       }
-    (void)new KListViewItem( m_viewLocalDir, m_viewLocalDir->lastItem(),
+    (void)new TDEListViewItem( m_viewLocalDir, m_viewLocalDir->lastItem(),
 			     localDir );
 
     enDisableButtons();
@@ -256,7 +256,7 @@ void K3bCddbOptionTab::slotLocalDirRemove()
 void K3bCddbOptionTab::slotCddbServerAdd()
 {
   if( !m_editCddbServer->text().isEmpty() ) {
-    (void)new KListViewItem( m_viewCddbServer, m_viewCddbServer->lastItem(),
+    (void)new TDEListViewItem( m_viewCddbServer, m_viewCddbServer->lastItem(),
 			     m_comboCddbType->currentText(),
 			     m_editCddbServer->text(),
 			     TQString::number( m_editCddbPort->value() ) );

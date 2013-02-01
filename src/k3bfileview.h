@@ -26,7 +26,7 @@ class TQDragObject;
 class KURL;
 class KFileFilterCombo;
 class KFileItem;
-class KActionCollection;
+class TDEActionCollection;
 class TDEConfig;
 class K3bToolBox;
 
@@ -46,7 +46,7 @@ class K3bFileView : public K3bContentsView
   void setUrl( const KURL &url, bool forward = true );
   KURL url();
 
-  KActionCollection* actionCollection() const;
+  TDEActionCollection* actionCollection() const;
 
   void reload();
 

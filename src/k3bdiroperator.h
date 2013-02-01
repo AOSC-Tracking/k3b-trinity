@@ -23,7 +23,7 @@
 class TQIconViewItem;
 class TQListViewItem;
 class KBookmarkMenu;
-class KActionMenu;
+class TDEActionMenu;
 
 
 
@@ -64,7 +64,7 @@ class K3bDirOperator : public KDirOperator, public KBookmarkOwner
    */
   TQString currentURL() const;
 
-  KActionMenu* bookmarkMenu() const { return m_bmPopup; }
+  TDEActionMenu* bookmarkMenu() const { return m_bmPopup; }
 
  public slots:
   void slotAddFilesToProject();
@@ -77,7 +77,7 @@ class K3bDirOperator : public KDirOperator, public KBookmarkOwner
 
  private:
   KBookmarkMenu* m_bmMenu;
-  KActionMenu* m_bmPopup;
+  TDEActionMenu* m_bmPopup;
 };
 
 #endif

@@ -25,12 +25,12 @@ class TQDragEnterEvent;
 class TQDragObject;
 class TQDropEvent;
 class TQTimer;
-class KPopupMenu;
-class KAction;
+class TDEPopupMenu;
+class TDEAction;
 class K3bVcdDoc;
 class K3bView;
 class K3bVcdTrack;
-class KActionCollection;
+class TDEActionCollection;
 class K3bVcdListViewItem;
 class TQPainter;
 
@@ -45,11 +45,11 @@ class K3bVcdListView : public K3bListView
         ~K3bVcdListView();
 
         /**
-         * reimplemented from KListView
+         * reimplemented from TDEListView
          */
         void insertItem( TQListViewItem* );
 
-        KActionCollection* actionCollection() const
+        TDEActionCollection* actionCollection() const
         {
             return m_actionCollection;
         }
@@ -67,18 +67,18 @@ class K3bVcdListView : public K3bListView
         K3bVcdDoc* m_doc;
         K3bView* m_view;
 
-        KAction* m_actionProperties;
-        KAction* m_actionRemove;
-        KActionCollection* m_actionCollection;
+        TDEAction* m_actionProperties;
+        TDEAction* m_actionRemove;
+        TDEActionCollection* m_actionCollection;
 
-        KPopupMenu* m_popupMenu;
+        TDEPopupMenu* m_popupMenu;
 
         TQMap<K3bVcdTrack*, K3bVcdListViewItem*> m_itemMap;
 
     private slots:
-        void slotDropped( KListView*, TQDropEvent* e, TQListViewItem* after );
+        void slotDropped( TDEListView*, TQDropEvent* e, TQListViewItem* after );
         void slotUpdateItems();
-        void showPopupMenu( KListView*, TQListViewItem* item, const TQPoint& );
+        void showPopupMenu( TDEListView*, TQListViewItem* item, const TQPoint& );
         void showPropertiesDialog();
         void slotRemoveTracks();
         void slotTrackRemoved( K3bVcdTrack* );

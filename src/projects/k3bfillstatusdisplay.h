@@ -25,10 +25,10 @@
 class TQPaintEvent;
 class TQMouseEvent;
 class K3bDoc;
-class KToggleAction;
-class KAction;
-class KActionCollection;
-class KPopupMenu;
+class TDEToggleAction;
+class TDEAction;
+class TDEActionCollection;
+class TDEPopupMenu;
 class TQToolButton;
 
 namespace K3bDevice {

@@ -26,15 +26,15 @@ class K3bAudioTrack;
 class K3bAudioTrackViewItem;
 class K3bAudioDataSource;
 class K3bAudioDoc;
-class KActionCollection;
-class KAction;
+class TDEActionCollection;
+class TDEAction;
 class TQDropEvent;
 class TQKeyEvent;
 class TQFocusEvent;
 class TQMouseEvent;
 class TQDragMoveEvent;
 class TQTimer;
-class KPopupMenu;
+class TDEPopupMenu;
 class TQPainter;
 class K3bListViewItemAnimator;
 class K3bAudioTrackPlayer;
@@ -49,7 +49,7 @@ class K3bAudioTrackView : public K3bListView
   K3bAudioTrackView( K3bAudioDoc*, TQWidget* parent, const char* name = 0 );
   ~K3bAudioTrackView();
 
-  KActionCollection* actionCollection() const { return m_actionCollection; }
+  TDEActionCollection* actionCollection() const { return m_actionCollection; }
 
   K3bAudioTrackPlayer* player() const { return m_player; }
 
@@ -70,15 +70,15 @@ class K3bAudioTrackView : public K3bListView
 
   K3bAudioDoc* m_doc;
 
-  KAction* m_actionProperties;
-  KAction* m_actionRemove;
-  KAction* m_actionAddSilence;
-  KAction* m_actionMergeTracks;
-  KAction* m_actionSplitSource;
-  KAction* m_actionSplitTrack;
-  KAction* m_actionEditSource;
-  KAction* m_actionPlayTrack;
-  KActionCollection* m_actionCollection;
+  TDEAction* m_actionProperties;
+  TDEAction* m_actionRemove;
+  TDEAction* m_actionAddSilence;
+  TDEAction* m_actionMergeTracks;
+  TDEAction* m_actionSplitSource;
+  TDEAction* m_actionSplitTrack;
+  TDEAction* m_actionEditSource;
+  TDEAction* m_actionPlayTrack;
+  TDEActionCollection* m_actionCollection;
 
   bool m_updatingColumnWidths;
 
@@ -88,7 +88,7 @@ class K3bAudioTrackView : public K3bListView
   TQTimer* m_autoOpenTrackTimer;
   TQTimer* m_animationTimer;
 
-  KPopupMenu* m_popupMenu;
+  TDEPopupMenu* m_popupMenu;
 
   K3bAudioTrackPlayer* m_player;
 
@@ -118,7 +118,7 @@ class K3bAudioTrackView : public K3bListView
   void slotMergeTracks();
   void slotSplitSource();
   void slotSplitTrack();
-  void showPopupMenu( KListView*, TQListViewItem* item, const TQPoint& pos );
+  void showPopupMenu( TDEListView*, TQListViewItem* item, const TQPoint& pos );
   void slotProperties();
   void slotPlayTrack();
   void slotQueryMusicBrainz();

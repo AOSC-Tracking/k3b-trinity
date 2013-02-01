@@ -35,7 +35,7 @@ class K3bAudioCdListView : public K3bListView
 
  protected:
   /**
-   * @reimpl from KListView
+   * @reimpl from TDEListView
    */
   TQDragObject* dragObject();
 

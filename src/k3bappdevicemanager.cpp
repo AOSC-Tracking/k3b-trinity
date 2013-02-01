@@ -38,25 +38,25 @@ K3bAppDeviceManager::K3bAppDeviceManager( TQObject* parent, const char* name )
 {
   // FIXME: should we pass the mainwindow as watch window here?
   //        Is there a proper way to insert this actioncollection into the mainwindow's?
-  m_actionCollection = new KActionCollection( this );
+  m_actionCollection = new TDEActionCollection( this );
 
   // setup actions
-  KActionMenu* devicePopupMenu = new KActionMenu( m_actionCollection, "device_popup" );
-  m_actionDiskInfo = new KAction( i18n("Media &Info"), "info", 0, this, TQT_SLOT(diskInfo()),
+  TDEActionMenu* devicePopupMenu = new TDEActionMenu( m_actionCollection, "device_popup" );
+  m_actionDiskInfo = new TDEAction( i18n("Media &Info"), "info", 0, this, TQT_SLOT(diskInfo()),
 				  m_actionCollection, "device_diskinfo");
-  m_actionUnmount = new KAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(unmountDisk()),
+  m_actionUnmount = new TDEAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(unmountDisk()),
 				 m_actionCollection, "device_unmount");
-  m_actionMount = new KAction( i18n("&Mount"), "cdrom_mount", 0, this, TQT_SLOT(mountDisk()),
+  m_actionMount = new TDEAction( i18n("&Mount"), "cdrom_mount", 0, this, TQT_SLOT(mountDisk()),
 			       m_actionCollection, "device_mount");
-  m_actionEject = new KAction( i18n("&Eject"), "", 0, this, TQT_SLOT(ejectDisk()),
+  m_actionEject = new TDEAction( i18n("&Eject"), "", 0, this, TQT_SLOT(ejectDisk()),
 			       m_actionCollection, "device_eject");
-  m_actionLoad = new KAction( i18n("L&oad"), "", 0, this, TQT_SLOT(loadDisk()),
+  m_actionLoad = new TDEAction( i18n("L&oad"), "", 0, this, TQT_SLOT(loadDisk()),
 			      m_actionCollection, "device_load");
-//   KAction* actionUnlock = new KAction( i18n("Un&lock"), "", 0, this, TQT_SLOT(unlockDevice()),
+//   TDEAction* actionUnlock = new TDEAction( i18n("Un&lock"), "", 0, this, TQT_SLOT(unlockDevice()),
 // 				       m_actionCollection, "device_unlock" );
-//   KAction* actionlock = new KAction( i18n("Loc&k"), "", 0, this, TQT_SLOT(lockDevice()),
+//   TDEAction* actionlock = new TDEAction( i18n("Loc&k"), "", 0, this, TQT_SLOT(lockDevice()),
 // 				     m_actionCollection, "device_lock" );
-  m_actionSetReadSpeed = new KAction( i18n("Set Read Speed..."), "", 0, this, TQT_SLOT(setReadSpeed()),
+  m_actionSetReadSpeed = new TDEAction( i18n("Set Read Speed..."), "", 0, this, TQT_SLOT(setReadSpeed()),
 				      m_actionCollection, "device_set_read_speed" );
 
   m_actionDiskInfo->setToolTip( i18n("Display generic medium information") );
@@ -67,16 +67,16 @@ K3bAppDeviceManager::K3bAppDeviceManager( TQObject* parent, const char* name )
   m_actionSetReadSpeed->setToolTip( i18n("Force the drive's read speed") );
 
   devicePopupMenu->insert( m_actionDiskInfo );
-  devicePopupMenu->insert( new KActionSeparator( this ) );
+  devicePopupMenu->insert( new TDEActionSeparator( this ) );
   devicePopupMenu->insert( m_actionUnmount );
   devicePopupMenu->insert( m_actionMount );
-  devicePopupMenu->insert( new KActionSeparator( this ) );
+  devicePopupMenu->insert( new TDEActionSeparator( this ) );
   devicePopupMenu->insert( m_actionEject );
   devicePopupMenu->insert( m_actionLoad );
-//  devicePopupMenu->insert( new KActionSeparator( this ) );
+//  devicePopupMenu->insert( new TDEActionSeparator( this ) );
 //  devicePopupMenu->insert( actionUnlock );
 //  devicePopupMenu->insert( actionlock );
-  devicePopupMenu->insert( new KActionSeparator( this ) );
+  devicePopupMenu->insert( new TDEActionSeparator( this ) );
   devicePopupMenu->insert( m_actionSetReadSpeed );
 
   setCurrentDevice( 0 );

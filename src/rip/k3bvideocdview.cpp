@@ -173,8 +173,8 @@ K3bVideoCdView::K3bVideoCdView( TQWidget* parent, const char *name )
     m_trackView->setItemsRenameable( false );
     m_trackView->setRootIsDecorated( true );
 
-    connect( m_trackView, TQT_SIGNAL( contextMenu( KListView*, TQListViewItem*, const TQPoint& ) ),
-             this, TQT_SLOT( slotContextMenu( KListView*, TQListViewItem*, const TQPoint& ) ) );
+    connect( m_trackView, TQT_SIGNAL( contextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ),
+             this, TQT_SLOT( slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ) );
     connect( m_trackView, TQT_SIGNAL( selectionChanged( TQListViewItem* ) ),
              this, TQT_SLOT( slotTrackSelectionChanged( TQListViewItem* ) ) );
     connect( m_trackView, TQT_SIGNAL( clicked( TQListViewItem* ) ),
@@ -320,28 +320,28 @@ void K3bVideoCdView::updateDisplay()
 
 void K3bVideoCdView::initActions()
 {
-    m_actionCollection = new KActionCollection( this );
+    m_actionCollection = new TDEActionCollection( this );
 
-    KAction* actionSelectAll = KStdAction::selectAll( TQT_TQOBJECT(this), TQT_SLOT( slotSelectAll() ),
+    TDEAction* actionSelectAll = KStdAction::selectAll( TQT_TQOBJECT(this), TQT_SLOT( slotSelectAll() ),
                                m_actionCollection, "select_all" );
-    KAction* actionDeselectAll = KStdAction::deselect( TQT_TQOBJECT(this), TQT_SLOT( slotDeselectAll() ),
+    TDEAction* actionDeselectAll = KStdAction::deselect( TQT_TQOBJECT(this), TQT_SLOT( slotDeselectAll() ),
                                  m_actionCollection, "deselect_all" );
     actionDeselectAll->setText( i18n( "Dese&lect All" ) );
-    KAction* actionSelect = new KAction( i18n( "Select Track" ), 0, 0, TQT_TQOBJECT(this),
+    TDEAction* actionSelect = new TDEAction( i18n( "Select Track" ), 0, 0, TQT_TQOBJECT(this),
                                          TQT_SLOT( slotSelect() ), actionCollection(),
                                          "select_track" );
-    KAction* actionDeselect = new KAction( i18n( "Deselect Track" ), 0, 0, TQT_TQOBJECT(this),
+    TDEAction* actionDeselect = new TDEAction( i18n( "Deselect Track" ), 0, 0, TQT_TQOBJECT(this),
                                            TQT_SLOT( slotDeselect() ), actionCollection(),
                                            "deselect_track" );
 
-    KAction* actionStartRip = new KAction( i18n( "Start Ripping" ), "run", 0, TQT_TQOBJECT(this),
+    TDEAction* actionStartRip = new TDEAction( i18n( "Start Ripping" ), "run", 0, TQT_TQOBJECT(this),
                                            TQT_SLOT( startRip() ), actionCollection(), "start_rip" );
 
     // TODO: set the actions tooltips and whatsthis infos
 
     // setup the popup menu
-    m_popupMenu = new KActionMenu( actionCollection(), "popup_menu" );
-    KAction* separator = new KActionSeparator( actionCollection(), "separator" );
+    m_popupMenu = new TDEActionMenu( actionCollection(), "popup_menu" );
+    TDEAction* separator = new TDEActionSeparator( actionCollection(), "separator" );
     m_popupMenu->insert( actionSelect );
     m_popupMenu->insert( actionDeselect );
     m_popupMenu->insert( actionSelectAll );
@@ -354,7 +354,7 @@ void K3bVideoCdView::initActions()
 }
 
 
-void K3bVideoCdView::slotContextMenu( KListView*, TQListViewItem*, const TQPoint& p )
+void K3bVideoCdView::slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& p )
 {
     m_popupMenu->popup( p );
 }

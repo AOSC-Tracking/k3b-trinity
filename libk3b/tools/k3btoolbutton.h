@@ -27,7 +27,7 @@ class TQEvent;
 /**
  * the K3bToolButton is an enhanced TQToolButton which adds two functionalities:
  * <li>A delayed popup menu is shown immiadetely once the mouse is dragged downwards
- *     much like the KToolBarButton
+ *     much like the TDEToolBarButton
  * <li>If a popup menu is set a little arrow indicates this.
  */
 class LIBK3B_EXPORT K3bToolButton : public TQToolButton

@@ -325,8 +325,8 @@ void K3bDirView::slotUnmountFinished( bool success )
 
 void K3bDirView::slotFileTreeContextMenu( K3bDevice::Device* /*dev*/, const TQPoint& p )
 {
-  KAction* a = k3bappcore->appDeviceManager()->actionCollection()->action( "device_popup" );
-  if( KActionMenu* m = dynamic_cast<KActionMenu*>(a) )
+  TDEAction* a = k3bappcore->appDeviceManager()->actionCollection()->action( "device_popup" );
+  if( TDEActionMenu* m = dynamic_cast<TDEActionMenu*>(a) )
     m->popup( p );
 }
 

@@ -28,7 +28,7 @@
                 <string>Please select the audio streams you want to include in every ripped title</string>
             </property>
         </widget>
-        <widget class="KListView">
+        <widget class="TDEListView">
             <property name="name">
                 <cstring>m_titleView</cstring>
             </property>
