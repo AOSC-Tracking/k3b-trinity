@@ -53,8 +53,8 @@
 #include <kurl.h>
 #include <kurldrag.h>
 #include <klocale.h>
-#include <kaction.h>
-#include <kpopupmenu.h>
+#include <tdeaction.h>
+#include <tdepopupmenu.h>
 #include <kiconloader.h>
 #include <kapplication.h>
 #include <kmessagebox.h>

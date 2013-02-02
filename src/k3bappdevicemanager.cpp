@@ -21,14 +21,14 @@
 #include <k3bapplication.h>
 #include <k3bmediacache.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kinputdialog.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
 #include <tdeio/job.h>
 #include <klocale.h>
 #include <tdeio/global.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 
 
 K3bAppDeviceManager::K3bAppDeviceManager( TQObject* parent, const char* name )

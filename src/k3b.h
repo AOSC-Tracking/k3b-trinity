@@ -32,7 +32,7 @@
 #include <kapplication.h>
 #include <tdeparts/dockmainwindow.h>
 #include <kdockwidget.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kurl.h>
 
 class TQVBox;

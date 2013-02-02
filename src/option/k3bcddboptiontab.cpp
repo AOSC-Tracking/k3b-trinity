@@ -32,7 +32,7 @@
 #include <kdialog.h>
 #include <kiconloader.h>
 #include <krun.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <knuminput.h>

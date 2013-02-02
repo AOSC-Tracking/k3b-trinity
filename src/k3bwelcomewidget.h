@@ -23,7 +23,7 @@
 #include <tqimage.h>
 
 #include <kurl.h>
-#include <kaction.h>
+#include <tdeaction.h>
 
 class K3bMainWindow;
 class TQDropEvent;

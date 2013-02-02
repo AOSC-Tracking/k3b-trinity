@@ -34,7 +34,7 @@
 #include <k3bfillstatusdisplay.h>
 #include <k3bmsf.h>
 #include <k3btoolbox.h>
-#include <kactionclasses.h>
+#include <tdeactionclasses.h>
 #include <k3bprojectplugin.h>
 
 // QT-includes

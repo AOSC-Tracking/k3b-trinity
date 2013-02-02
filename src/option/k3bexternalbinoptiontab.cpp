@@ -22,7 +22,7 @@
 #include <kdialog.h>
 #include <klocale.h>
 #include <kiconloader.h>
-#include <klistview.h>
+#include <tdelistview.h>
 
 #include <tqgroupbox.h>
 #include <tqlabel.h>

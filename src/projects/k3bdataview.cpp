@@ -34,8 +34,8 @@
 #include <klocale.h>
 #include <kurl.h>
 #include <kapplication.h>
-#include <kpopupmenu.h>
-#include <kaction.h>
+#include <tdepopupmenu.h>
+#include <tdeaction.h>
 #include <kmessagebox.h>
 #include <tdeio/global.h>
 #include <tdeio/job.h>

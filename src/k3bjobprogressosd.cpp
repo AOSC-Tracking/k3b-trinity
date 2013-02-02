@@ -24,7 +24,7 @@
 #include <kcursor.h>
 #include <tdeconfig.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 
 #include <tqpixmap.h>
 #include <tqpainter.h>

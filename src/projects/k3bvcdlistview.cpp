@@ -27,8 +27,8 @@
 #include <kurl.h>
 #include <kurldrag.h>
 #include <klocale.h>
-#include <kaction.h>
-#include <kpopupmenu.h>
+#include <tdeaction.h>
+#include <tdepopupmenu.h>
 #include <kdialog.h>
 
 // K3b Includes

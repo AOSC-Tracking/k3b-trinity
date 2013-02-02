@@ -32,7 +32,7 @@
 #include <k3bpluginfactory.h>
 
 #include <kdebug.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kinstance.h>
 #include <kmessagebox.h>
 #include <klocale.h>

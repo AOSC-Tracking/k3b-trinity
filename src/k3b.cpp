@@ -48,7 +48,7 @@
 #include <kprocess.h>
 #include <kurl.h>
 #include <kurllabel.h>
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 #include <kstatusbar.h>
 #include <kglobalsettings.h>
 #include <kdialog.h>
@@ -60,7 +60,7 @@
 #include <kstdguiitem.h>
 #include <tdeio/global.h>
 #include <tdeio/netaccess.h>
-#include <krecentdocument.h>
+#include <tderecentdocument.h>
 
 #include <stdlib.h>
 

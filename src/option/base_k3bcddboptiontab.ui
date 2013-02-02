@@ -553,8 +553,8 @@
 </tabstops>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
-    <includehint>klistview.h</includehint>
-    <includehint>klistview.h</includehint>
+    <includehint>tdelistview.h</includehint>
+    <includehint>tdelistview.h</includehint>
     <includehint>knuminput.h</includehint>
 </includehints>
 </UI>

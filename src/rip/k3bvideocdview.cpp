@@ -14,7 +14,7 @@
 */
 
 // kde includes
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kcutlabel.h>
 #include <kdebug.h>
 #include <kdialogbase.h>

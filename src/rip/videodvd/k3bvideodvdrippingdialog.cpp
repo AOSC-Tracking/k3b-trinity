@@ -24,7 +24,7 @@
 #include <k3bfilesysteminfo.h>
 
 #include <klocale.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kurlrequester.h>

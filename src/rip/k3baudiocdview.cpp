@@ -37,7 +37,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kiconloader.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kstdaction.h>
 #include <kmessagebox.h>
 #include <tdeconfig.h>

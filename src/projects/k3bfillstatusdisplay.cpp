@@ -39,8 +39,8 @@
 #include <tqwhatsthis.h>
 #include <tqtimer.h>
 
-#include <kaction.h>
-#include <kpopupmenu.h>
+#include <tdeaction.h>
+#include <tdepopupmenu.h>
 #include <klocale.h>
 #include <kinputdialog.h>
 #include <tdeconfig.h>

@@ -35,7 +35,7 @@
 #include <tdeio/global.h>
 #include <kstatusbar.h>
 #include <kaboutdata.h>
-#include <kaction.h>
+#include <tdeaction.h>
 
 #include <tqlabel.h>
 #include <tqhbox.h>

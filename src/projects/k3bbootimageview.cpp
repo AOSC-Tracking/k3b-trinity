@@ -20,7 +20,7 @@
 #include <k3bintvalidator.h>
 
 #include <klocale.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <tdefiledialog.h>
 #include <kdebug.h>
 #include <kmessagebox.h>

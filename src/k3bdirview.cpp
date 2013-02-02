@@ -61,7 +61,7 @@
 #include <kmimetype.h>
 #include <kcursor.h>
 #include <tdefiledetailview.h>
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 #include <kiconloader.h>
 #include <kurl.h>
 #include <klocale.h>
@@ -77,7 +77,7 @@
 #include <kmessagebox.h>
 #include <kstdaction.h>
 #include <tdeconfig.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kinputdialog.h>
 
 

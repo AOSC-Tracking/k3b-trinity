@@ -18,7 +18,7 @@
 #define K3BLISTVIEW_H
 
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include "k3b_export.h"
 #include <tqptrvector.h>
 #include <tqptrlist.h>

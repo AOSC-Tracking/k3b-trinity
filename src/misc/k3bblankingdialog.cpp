@@ -28,7 +28,7 @@
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kstdguiitem.h>

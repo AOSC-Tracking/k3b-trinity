@@ -22,7 +22,7 @@
 #include <k3bview.h>
 #include <k3bdoc.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <kurldrag.h>

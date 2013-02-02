@@ -15,9 +15,9 @@
 
 #include "k3btoolbox.h"
 
-#include <kaction.h>
-#include <kpopupmenu.h>
-#include <ktoolbarbutton.h>
+#include <tdeaction.h>
+#include <tdepopupmenu.h>
+#include <tdetoolbarbutton.h>
 #include <kiconloader.h>
 
 #include <tqtoolbutton.h>

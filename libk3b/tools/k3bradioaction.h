@@ -16,7 +16,7 @@
 #ifndef _K3B_RADIO_ACTION_H_
 #define _K3B_RADIO_ACTION_H_
 
-#include <kactionclasses.h>
+#include <tdeactionclasses.h>
 #include "k3b_export.h"
 
 /**

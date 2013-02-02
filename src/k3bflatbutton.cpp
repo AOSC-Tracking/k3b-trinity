@@ -17,7 +17,7 @@
 #include "k3bthememanager.h"
 #include "k3bapplication.h"
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kiconloader.h>
 #include <kglobal.h>
 

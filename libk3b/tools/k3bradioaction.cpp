@@ -15,7 +15,7 @@
 
 #include "k3bradioaction.h"
 
-#include <ktoolbarbutton.h>
+#include <tdetoolbarbutton.h>
 
 K3bRadioAction::K3bRadioAction( const TQString& text, const TDEShortcut& cut,
 				TQObject* parent, const char* name )

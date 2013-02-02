@@ -37,7 +37,7 @@
 #include <kiconloader.h>
 #include <klocale.h>
 #include <keditlistbox.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kglobalsettings.h>
 #include <tdeversion.h>
 

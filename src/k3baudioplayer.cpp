@@ -37,7 +37,7 @@
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kurl.h>
-#include <kaction.h>
+#include <tdeaction.h>
 
 #include <string.h>
 

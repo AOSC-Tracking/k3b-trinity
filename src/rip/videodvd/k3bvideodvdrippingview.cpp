@@ -33,7 +33,7 @@
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <klocale.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tdeconfig.h>
 
 

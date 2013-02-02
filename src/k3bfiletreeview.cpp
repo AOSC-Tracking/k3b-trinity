@@ -29,7 +29,7 @@
 #include <klocale.h>
 #include <kurl.h>
 #include <kstandarddirs.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tdeio/global.h>
 #include <tdefileitem.h>
 #include <kapplication.h>

@@ -17,7 +17,7 @@
 #ifndef K3BAUDIOPLAYER_H
 #define K3BAUDIOPLAYER_H
 
-#include <klistview.h>
+#include <tdelistview.h>
 
 #include <config.h>
 

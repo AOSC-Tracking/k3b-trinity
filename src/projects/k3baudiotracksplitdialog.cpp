@@ -21,9 +21,9 @@
 #include <k3bmsfedit.h>
 
 #include <klocale.h>
-#include <kactioncollection.h>
-#include <kaction.h>
-#include <kpopupmenu.h>
+#include <tdeactioncollection.h>
+#include <tdeaction.h>
+#include <tdepopupmenu.h>
 
 #include <tqlabel.h>
 #include <tqframe.h>

@@ -23,10 +23,10 @@
 
 #include <kcombiview.h>
 #include <tdefilepreview.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kbookmarkmenu.h>
 #include <kstandarddirs.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 
 #include <tqdir.h>
 

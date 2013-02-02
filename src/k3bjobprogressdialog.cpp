@@ -55,7 +55,7 @@
 #include <kprogress.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kiconloader.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
@@ -63,7 +63,7 @@
 #include <knotifyclient.h>
 #include <kstandarddirs.h>
 #include <kapplication.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <kstdguiitem.h>
 #include <kpushbutton.h>
 

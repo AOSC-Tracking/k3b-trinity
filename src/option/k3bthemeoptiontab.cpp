@@ -23,7 +23,7 @@
 #include <tdeconfig.h>
 #include <kmessagebox.h>
 #include <kurlrequester.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <tdeio/global.h>
 #include <tdeio/netaccess.h>
 #include <tdeio/job.h>

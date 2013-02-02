@@ -28,7 +28,7 @@
 #include <tqvalidator.h>
 #include <tqregexp.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kcombobox.h>
 #include <klocale.h>
 #include <kdebug.h>

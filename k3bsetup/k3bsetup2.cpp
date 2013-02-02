@@ -29,7 +29,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kgenericfactory.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <keditlistbox.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>

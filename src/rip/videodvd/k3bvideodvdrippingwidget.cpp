@@ -20,7 +20,7 @@
 #include <k3brichtextlabel.h>
 #include <k3bintmapcombobox.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <klocale.h>
 #include <kurlrequester.h>
 #include <tdeio/global.h>

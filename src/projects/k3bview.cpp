@@ -22,7 +22,7 @@
 #include <tqptrlist.h>
 #include <tqtoolbutton.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>

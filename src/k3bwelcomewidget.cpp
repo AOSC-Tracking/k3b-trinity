@@ -41,9 +41,9 @@
 #include <kglobal.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kaboutdata.h>
-#include <kactionclasses.h>
+#include <tdeactionclasses.h>
 
 
 static const char* s_allActions[] = {

@@ -34,7 +34,7 @@
 #include <kcombobox.h>
 #include <klocale.h>
 #include <tdeconfig.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kurlrequester.h>
 #include <tdefiledialog.h>
 #include <tdeio/global.h>

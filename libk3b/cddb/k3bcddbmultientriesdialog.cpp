@@ -20,7 +20,7 @@
 #include <tqframe.h>
 #include <tqlabel.h>
 
-#include <klistbox.h>
+#include <tdelistbox.h>
 #include <klocale.h>
 
 

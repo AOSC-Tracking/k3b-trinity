@@ -38,11 +38,11 @@
 #include <tqfileinfo.h>
 
 #include <klocale.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kurldrag.h>
 #include <kinputdialog.h>
 #include <kdebug.h>
-#include <kshortcut.h>
+#include <tdeshortcut.h>
 #include <krun.h>
 #include <tdeversion.h>
 

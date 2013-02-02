@@ -33,7 +33,7 @@
 #include <klocale.h>
 #include <kapplication.h>
 #include <tdeconfig.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kurlrequester.h>
 #include <tdefiledialog.h>
 #include <tdeio/global.h>

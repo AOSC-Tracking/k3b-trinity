@@ -31,11 +31,11 @@
 #include <tqtimer.h>
 
 #include <klocale.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kurldrag.h>
 #include <kinputdialog.h>
 #include <kiconloader.h>
-#include <kshortcut.h>
+#include <tdeshortcut.h>
 
 #include <kdebug.h>
 

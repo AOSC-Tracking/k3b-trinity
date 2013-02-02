@@ -41,7 +41,7 @@
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
-#include <kactionclasses.h>
+#include <tdeactionclasses.h>
 
 
 K3bMixedView::K3bMixedView( K3bMixedDoc* doc, TQWidget* parent, const char* name )

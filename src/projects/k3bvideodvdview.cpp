@@ -26,7 +26,7 @@
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kactioncollection.h>
+#include <tdeactioncollection.h>
 
 #include <tqsplitter.h>
 

@@ -18,7 +18,7 @@
 #include <k3baudiotrack.h>
 #include <k3baudioserver.h>
 
-#include <kactionclasses.h>
+#include <tdeactionclasses.h>
 #include <klocale.h>
 
 #include <tqslider.h>

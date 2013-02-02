@@ -29,10 +29,10 @@
 #include <tqtoolbutton.h>
 
 #include <tdefiledetailview.h>
-#include <klistview.h>
-#include <kaction.h>
-#include <ktoolbar.h>
-#include <ktoolbarbutton.h>
+#include <tdelistview.h>
+#include <tdeaction.h>
+#include <tdetoolbar.h>
+#include <tdetoolbarbutton.h>
 #include <kurl.h>
 #include <kurldrag.h>
 #include <tdefilefiltercombo.h>
