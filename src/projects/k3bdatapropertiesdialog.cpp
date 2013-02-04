@@ -92,7 +92,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
 
   if( K3bFileItem* fileItem = dynamic_cast<K3bFileItem*>(dataItem) ) {
     KFileItem kFileItem( KFileItem::Unknown, KFileItem::Unknown, KURL::fromPathOrURL(fileItem->localPath()) );
-    labelMimeType->setPixmap( kFileItem.pixmap(KIcon::SizeLarge) );
+    labelMimeType->setPixmap( kFileItem.pixmap(TDEIcon::SizeLarge) );
     if( fileItem->isSymLink() )
       m_labelType->setText( i18n("Link to %1").arg(kFileItem.mimeComment()) );
     else
@@ -116,7 +116,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
 			  i18n("and 1 directory", "and %n directories", dirItem->numDirs()) + ")" );
   }
   else {
-    labelMimeType->setPixmap( DesktopIcon("unknown", KIcon::SizeLarge) );
+    labelMimeType->setPixmap( DesktopIcon("unknown", TDEIcon::SizeLarge) );
     m_labelType->setText( i18n("Special file") );
     m_labelLocalName->hide();
     m_labelLocalLocation->hide();

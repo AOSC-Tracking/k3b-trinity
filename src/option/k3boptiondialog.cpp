@@ -127,7 +127,7 @@ void K3bOptionDialog::slotDefault()
 void K3bOptionDialog::setupBurningPage()
 {
   TQFrame* frame = addPage( i18n("Advanced"), i18n("Advanced Settings"),
-			   TDEGlobal::instance()->iconLoader()->loadIcon( "cdwriter_unmount", KIcon::NoGroup, KIcon::SizeMedium ) );
+			   TDEGlobal::instance()->iconLoader()->loadIcon( "cdwriter_unmount", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   TQGridLayout* _frameLayout = new TQGridLayout( frame );
   _frameLayout->setSpacing( 0 );
@@ -141,7 +141,7 @@ void K3bOptionDialog::setupBurningPage()
 void K3bOptionDialog::setupProgramsPage()
 {
   TQFrame* frame = addPage( i18n("Programs"), i18n("Setup External Programs"),
-			   TDEGlobal::instance()->iconLoader()->loadIcon( "exec", KIcon::NoGroup, KIcon::SizeMedium ) );
+			   TDEGlobal::instance()->iconLoader()->loadIcon( "exec", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   TQGridLayout* _frameLayout = new TQGridLayout( frame );
   _frameLayout->setSpacing( 0 );
@@ -155,7 +155,7 @@ void K3bOptionDialog::setupProgramsPage()
 void K3bOptionDialog::setupCddbPage()
 {
   TQFrame* frame = addPage( i18n("CDDB"), i18n("Setup the CDDB Server"),
-			   TDEGlobal::instance()->iconLoader()->loadIcon( "connect_established", KIcon::NoGroup, KIcon::SizeMedium ) );
+			   TDEGlobal::instance()->iconLoader()->loadIcon( "connect_established", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   TQGridLayout* mainGrid = new TQGridLayout( frame );
   mainGrid->setSpacing(0);
@@ -173,7 +173,7 @@ void K3bOptionDialog::setupCddbPage()
 void K3bOptionDialog::setupDevicePage()
 {
   TQFrame* frame = addPage( i18n("Devices"), i18n("Setup Devices"),
-			   TDEGlobal::instance()->iconLoader()->loadIcon( "blockdevice", KIcon::NoGroup, KIcon::SizeMedium ) );
+			   TDEGlobal::instance()->iconLoader()->loadIcon( "blockdevice", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   TQHBoxLayout* box = new TQHBoxLayout( frame );
   box->setSpacing(0);
@@ -186,7 +186,7 @@ void K3bOptionDialog::setupDevicePage()
 void K3bOptionDialog::setupMiscPage()
 {
   TQFrame* frame = addPage( i18n("Misc"), i18n("Miscellaneous Settings"),
-			   TDEGlobal::instance()->iconLoader()->loadIcon( "misc", KIcon::NoGroup, KIcon::SizeMedium ) );
+			   TDEGlobal::instance()->iconLoader()->loadIcon( "misc", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );
@@ -201,7 +201,7 @@ void K3bOptionDialog::setupNotifyPage()
 {
   TQFrame* frame = addPage( i18n("Notifications"), i18n("System Notifications"),
 			   TDEGlobal::instance()->iconLoader()->loadIcon( "knotify", 
-									KIcon::NoGroup, KIcon::SizeMedium ) );
+									TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
   TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );
   box->setMargin( 0 );
@@ -215,7 +215,7 @@ void K3bOptionDialog::setupPluginPage()
 {
   TQFrame* frame = addPage( i18n("Plugins"), i18n("K3b Plugin Configuration"),
 			   TDEGlobal::instance()->iconLoader()->loadIcon( "gear",
-									KIcon::NoGroup, KIcon::SizeMedium ) );
+									TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
   TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );
   box->setMargin( 0 );
@@ -229,7 +229,7 @@ void K3bOptionDialog::setupThemePage()
 {
   TQFrame* frame = addPage( i18n("Themes"), i18n("K3b GUI Themes"),
 			   TDEGlobal::instance()->iconLoader()->loadIcon( "style",
-									KIcon::NoGroup, KIcon::SizeMedium ) );
+									TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
   TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );
   box->setMargin( 0 );

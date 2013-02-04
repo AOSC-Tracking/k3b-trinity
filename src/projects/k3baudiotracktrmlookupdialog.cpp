@@ -57,7 +57,7 @@ K3bAudioTrackTRMLookupDialog::K3bAudioTrackTRMLookupDialog( TQWidget* parent, co
 
   m_infoLabel = new TQLabel( plainPage() );
   TQLabel* pixLabel = new TQLabel( plainPage() );
-  pixLabel->setPixmap( TDEGlobal::iconLoader()->loadIcon( "musicbrainz", KIcon::NoGroup, 64 ) );
+  pixLabel->setPixmap( TDEGlobal::iconLoader()->loadIcon( "musicbrainz", TDEIcon::NoGroup, 64 ) );
   pixLabel->setScaledContents( false );
 
   m_busyWidget = new K3bBusyWidget( plainPage() );

@@ -52,7 +52,7 @@ K3bFlatButton::K3bFlatButton( TDEAction* a, TQWidget *parent, const char *name )
 
   setText( a->text() );
   TQToolTip::add( this, a->toolTip() );
-  setPixmap( TDEGlobal::iconLoader()->loadIcon( a->icon(), KIcon::NoGroup, 32 ) );
+  setPixmap( TDEGlobal::iconLoader()->loadIcon( a->icon(), TDEIcon::NoGroup, 32 ) );
   connect( this, TQT_SIGNAL(clicked()), a, TQT_SLOT(activate()) );
 }
 

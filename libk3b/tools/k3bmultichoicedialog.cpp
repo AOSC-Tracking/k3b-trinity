@@ -67,7 +67,7 @@ static TQPixmap themedMessageBoxIcon(TQMessageBox::Icon icon)
     break;
   }
  
-  TQPixmap ret = TDEApplication::kApplication()->iconLoader()->loadIcon(icon_name, KIcon::NoGroup, KIcon::SizeMedium, KIcon::DefaultState, 0, true);
+  TQPixmap ret = TDEApplication::kApplication()->iconLoader()->loadIcon(icon_name, TDEIcon::NoGroup, TDEIcon::SizeMedium, TDEIcon::DefaultState, 0, true);
  
   if (ret.isNull())
     return TQMessageBox::standardIcon(icon);

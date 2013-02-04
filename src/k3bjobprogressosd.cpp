@@ -118,7 +118,7 @@ void K3bJobProgressOSD::renderOSD()
 
   // calculate needed size 
   if( K3bTheme* theme = k3bappcore->themeManager()->currentTheme() ) {
-    TQPixmap icon = TDEGlobal::iconLoader()->loadIcon( "k3b", KIcon::NoGroup, 32 );
+    TQPixmap icon = TDEGlobal::iconLoader()->loadIcon( "k3b", TDEIcon::NoGroup, 32 );
     int margin = 10;
     int textWidth = fontMetrics().width( m_text );
 

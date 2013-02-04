@@ -290,7 +290,7 @@ void K3bProjectBurnDialog::prepareGui()
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
   TQLabel* pixLabel = new TQLabel( groupCopies );
-  pixLabel->setPixmap( SmallIcon( "cdcopy", KIcon::SizeMedium ) );
+  pixLabel->setPixmap( SmallIcon( "cdcopy", TDEIcon::SizeMedium ) );
   pixLabel->setScaledContents( false );
   m_spinCopies = new TQSpinBox( 1, 999, 1, groupCopies );
 

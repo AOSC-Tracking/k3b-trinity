@@ -70,10 +70,10 @@ K3bExternalBinWidget::K3bExternalBinViewItem::K3bExternalBinViewItem( K3bExterna
 
 void K3bExternalBinWidget::K3bExternalBinViewItem::setDefault( bool b )
 {
-  static TQPixmap s_emptyPix( (int)KIcon::SizeSmall, (int)KIcon::SizeSmall );
+  static TQPixmap s_emptyPix( (int)TDEIcon::SizeSmall, (int)TDEIcon::SizeSmall );
   static bool s_emptyPixInitialized = false;
   if( !s_emptyPixInitialized ) {
-    s_emptyPix.setMask( TQBitmap( (int)KIcon::SizeSmall, (int)KIcon::SizeSmall, true ) );
+    s_emptyPix.setMask( TQBitmap( (int)TDEIcon::SizeSmall, (int)TDEIcon::SizeSmall, true ) );
     s_emptyPixInitialized = true;
   }
 

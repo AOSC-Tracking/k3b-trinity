@@ -91,7 +91,7 @@ void K3bSidePanel::addButton( TQFrame* frame, TDEAction* a )
     TQToolButton* b = new TQToolButton( frame );
     b->setTextLabel( a->toolTip(), true );
     b->setTextLabel( a->text(), false );
-    b->setIconSet( a->iconSet(KIcon::Small) );
+    b->setIconSet( a->iconSet(TDEIcon::Small) );
     b->setUsesTextLabel( true );
     b->setAutoRaise( true );
     b->setTextPosition( TQToolButton::BesideIcon );

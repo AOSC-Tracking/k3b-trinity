@@ -193,7 +193,7 @@ protected:
 	  preW = h*16/9;
 
 	p->drawRect( ( w - preW ) / 2, ( height() - h ) / 2, preW, h );
-	TQPixmap noIcon = TDEApplication::kApplication()->iconLoader()->loadIcon( "no", KIcon::NoGroup, KIcon::SizeSmall, KIcon::DefaultState, 0, true );
+	TQPixmap noIcon = TDEApplication::kApplication()->iconLoader()->loadIcon( "no", TDEIcon::NoGroup, TDEIcon::SizeSmall, TDEIcon::DefaultState, 0, true );
 	p->drawPixmap( ( w - noIcon.width() ) / 2, ( height() - noIcon.height() ) / 2, noIcon );
       }
       else {
