@@ -44,7 +44,7 @@
 static const char* description = I18N_NOOP("A CD and DVD burning application");
 
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
     {
         { "+[URL(s)]", I18N_NOOP("file(s) to open"), 0 },
         { "datacd", I18N_NOOP("Create a new data CD project and add all given files"), 0 },
@@ -71,7 +71,7 @@ static KCmdLineOptions options[] =
 	{ "ao <method>", I18N_NOOP("Set the audio output method (like arts or alsa depending on the installed plugins)"), 0 },
         { "device <device>", I18N_NOOP( "Set the device to be used for new projects (This option has no effect. "
                                         "Its main purpose is to enable handling of empty media from the TDE Media Manager)." ), 0 },
-        KCmdLineLastOption
+        TDECmdLineLastOption
     };
 
 int main( int argc, char* argv[] )
