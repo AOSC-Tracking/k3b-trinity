@@ -30,7 +30,7 @@
 #include <klocale.h>
 #include <kstdguiitem.h>
 #include <kglobalsettings.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdefiledialog.h>
 #include <kmessagebox.h>
 

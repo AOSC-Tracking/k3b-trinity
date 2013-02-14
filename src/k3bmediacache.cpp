@@ -22,7 +22,7 @@
 #include <k3bcore.h>
 
 #include <kdebug.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
 
 #include <tqthread.h>

@@ -25,7 +25,7 @@
 #include <tqcursor.h>
 #include <tqapplication.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kdialog.h>
 #include <klocale.h>
 #include <tdeconfig.h>

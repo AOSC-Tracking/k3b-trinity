@@ -30,7 +30,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kdebug.h>
 #include <tdeio/job.h>
 #include <tdeio/netaccess.h>

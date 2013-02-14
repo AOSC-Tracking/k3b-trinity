@@ -27,8 +27,8 @@
 #include <tqpainter.h>
 
 #include <kstandarddirs.h>
-#include <kapplication.h>
-#include <kaboutdata.h>
+#include <tdeapplication.h>
+#include <tdeaboutdata.h>
 
 
 K3bSplash::K3bSplash( TQWidget* parent, const char* name )

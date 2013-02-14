@@ -35,7 +35,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <tdeio/global.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 

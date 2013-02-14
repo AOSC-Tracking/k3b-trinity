@@ -62,7 +62,7 @@
 #include <kglobal.h>
 #include <knotifyclient.h>
 #include <kstandarddirs.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdemainwindow.h>
 #include <kstdguiitem.h>
 #include <kpushbutton.h>

@@ -18,7 +18,7 @@
 #define _K3BSETUP2_H_
 
 #include <tdecmodule.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 
 
 class base_K3bSetup2;

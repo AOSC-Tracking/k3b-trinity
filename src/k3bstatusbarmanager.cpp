@@ -34,7 +34,7 @@
 #include <kstandarddirs.h>
 #include <tdeio/global.h>
 #include <kstatusbar.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <tdeaction.h>
 
 #include <tqlabel.h>

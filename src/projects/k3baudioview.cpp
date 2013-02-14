@@ -43,7 +43,7 @@
 
 // KDE-includes
 #include <klocale.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 

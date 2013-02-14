@@ -47,8 +47,8 @@
 #include <ktip.h>
 #include <klocale.h>
 #include <tdeconfig.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
+#include <tdeaboutdata.h>
+#include <tdecmdlineargs.h>
 #include <dcopclient.h>
 #include <kstandarddirs.h>
 #include <kstartupinfo.h>

@@ -21,7 +21,7 @@
 #include "k3bthememanager.h"
 #include <k3bapplication.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kguiitem.h>

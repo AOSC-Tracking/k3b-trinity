@@ -34,7 +34,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kiconloader.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 
 static TQString audioStreamString( const K3bVideoDVD::Title& title, unsigned int maxLines = 9999, bool includeExtInfo = true )

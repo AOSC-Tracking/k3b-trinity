@@ -20,7 +20,7 @@
 #include <tqevent.h>
 
 #include <kglobalsettings.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 
 class K3bToolButton::Private

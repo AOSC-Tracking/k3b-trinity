@@ -44,7 +44,7 @@
 #include <kstandarddirs.h>
 #include <ktextedit.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
 #include <kglobal.h>

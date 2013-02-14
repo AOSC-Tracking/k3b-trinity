@@ -30,7 +30,7 @@
 #include <tqregexp.h>
 
 #include <kprocess.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <ktempfile.h>
 

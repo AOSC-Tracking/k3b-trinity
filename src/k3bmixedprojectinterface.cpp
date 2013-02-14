@@ -17,7 +17,7 @@
 #include "k3bdataprojectinterface.h"
 #include "k3baudioprojectinterface.h"
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <dcopclient.h>
 
 #include <k3bmixeddoc.h>

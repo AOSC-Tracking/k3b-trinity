@@ -36,13 +36,13 @@
 #include <kurldrag.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kiconloader.h>
 #include <kglobal.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <tdepopupmenu.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <tdeactionclasses.h>
 
 

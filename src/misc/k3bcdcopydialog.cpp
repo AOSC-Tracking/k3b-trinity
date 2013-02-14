@@ -41,7 +41,7 @@
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kiconloader.h>
 
 #include <tqcheckbox.h>

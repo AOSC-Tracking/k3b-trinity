@@ -30,7 +30,7 @@
 #include <k3bmsinfofetcher.h>
 
 #include <klocale.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 
 class K3bDvdJob::Private

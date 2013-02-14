@@ -36,7 +36,7 @@
 #include <k3bverificationjob.h>
 
 #include <kprocess.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>

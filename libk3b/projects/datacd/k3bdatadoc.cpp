@@ -53,7 +53,7 @@
 #include <kglobal.h>
 #include <kprogress.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 
 #include <string.h>

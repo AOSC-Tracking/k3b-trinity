@@ -56,7 +56,7 @@
 #include <tdeaction.h>
 #include <tdepopupmenu.h>
 #include <kiconloader.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 #include <kdialogbase.h>
 

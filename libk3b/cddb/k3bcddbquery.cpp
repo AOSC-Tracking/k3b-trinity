@@ -20,8 +20,8 @@
 #include "k3bcddbresult.h"
 
 #include <kdebug.h>
-#include <kapplication.h>
-#include <kaboutdata.h>
+#include <tdeapplication.h>
+#include <tdeaboutdata.h>
 #include <klocale.h>
 
 

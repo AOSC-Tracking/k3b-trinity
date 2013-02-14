@@ -47,7 +47,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>

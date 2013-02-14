@@ -26,7 +26,7 @@
 // KDE-includes
 #include <kprocess.h>
 #include <kurl.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 #include <tdeconfig.h>
 #include <klocale.h>

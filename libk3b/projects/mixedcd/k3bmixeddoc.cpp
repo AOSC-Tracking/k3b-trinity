@@ -26,7 +26,7 @@
 
 #include <klocale.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 
 

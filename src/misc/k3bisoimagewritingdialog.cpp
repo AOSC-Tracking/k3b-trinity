@@ -32,7 +32,7 @@
 #include <k3bapplication.h>
 #include <k3bmediacache.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kurlrequester.h>

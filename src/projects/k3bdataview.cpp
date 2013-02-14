@@ -33,7 +33,7 @@
 
 #include <klocale.h>
 #include <kurl.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdepopupmenu.h>
 #include <tdeaction.h>
 #include <kmessagebox.h>

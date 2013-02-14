@@ -16,7 +16,7 @@
 
 // kde include
 #include <klocale.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kurlrequester.h>
 #include <kdebug.h>

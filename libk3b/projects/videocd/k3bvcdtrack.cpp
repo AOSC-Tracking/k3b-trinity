@@ -13,7 +13,7 @@
 * See the file "COPYING" for the exact licensing terms.
 */
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 
 #include <tqstring.h>

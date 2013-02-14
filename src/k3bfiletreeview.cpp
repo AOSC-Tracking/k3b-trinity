@@ -32,7 +32,7 @@
 #include <tdeaction.h>
 #include <tdeio/global.h>
 #include <tdefileitem.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kglobalsettings.h>
 
 #include <tqdir.h>

@@ -18,7 +18,7 @@
 #include <k3brichtextlabel.h>
 
 #include <kpushbutton.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kiconloader.h>
 
 #include <tqlayout.h>

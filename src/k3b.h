@@ -29,7 +29,7 @@
 #include <tqptrlist.h>
 
 // include files for KDE
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeparts/dockmainwindow.h>
 #include <kdockwidget.h>
 #include <tdeaction.h>

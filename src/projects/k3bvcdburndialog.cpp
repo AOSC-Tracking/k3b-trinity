@@ -32,7 +32,7 @@
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 #include <tdeio/global.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include "k3bvcdburndialog.h"
 #include "k3bvcddoc.h"

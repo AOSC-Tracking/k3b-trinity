@@ -41,7 +41,7 @@
 #include <k3btrack.h>
 #include <k3bcdtext.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kurlrequester.h>

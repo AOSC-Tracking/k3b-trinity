@@ -24,7 +24,7 @@
 
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include <tqtextstream.h>
 

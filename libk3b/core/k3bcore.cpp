@@ -33,9 +33,9 @@
 
 #include <klocale.h>
 #include <tdeconfig.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <kstandarddirs.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include <tqptrlist.h>
 #include <tqthread.h>
