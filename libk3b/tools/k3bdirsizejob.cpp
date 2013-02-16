@@ -21,7 +21,7 @@
 #include <k3bglobals.h>
 
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include <tqfileinfo.h>
 #include <tqdir.h>

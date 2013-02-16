@@ -38,14 +38,14 @@
 #include <tqapplication.h>
 #include <tqtimer.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
 #include <kstdguiitem.h>
 #include <kpushbutton.h>
 #include <tdeconfig.h>
 #include <kiconloader.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <tdeversion.h>
 
 

@@ -36,10 +36,10 @@
 #include <k3bmediacache.h>
 
 #include <kguiitem.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstdguiitem.h>
 #include <kstandarddirs.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
 #include <kiconloader.h>

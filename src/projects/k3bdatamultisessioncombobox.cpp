@@ -15,7 +15,7 @@
 
 #include "k3bdatamultisessioncombobox.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 
 #include <tqwhatsthis.h>

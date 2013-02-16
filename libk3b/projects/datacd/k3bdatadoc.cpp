@@ -46,11 +46,11 @@
 #include <kstandarddirs.h>
 #include <kurl.h>
 #include <kstatusbar.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kinputdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kprogress.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>

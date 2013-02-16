@@ -19,7 +19,7 @@
 #include <k3bvideodvdtitledetectclippingjob.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 K3bVideoDVDRippingJob::TitleRipInfo::TitleRipInfo()

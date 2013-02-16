@@ -37,10 +37,10 @@
 #include <tqeventloop.h>
 #include <tqfont.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kiconloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kactivelabel.h>
 #include <knotifyclient.h>
 

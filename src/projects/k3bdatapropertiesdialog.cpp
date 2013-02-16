@@ -33,7 +33,7 @@
 
 #include <klineedit.h>
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kmimetype.h>
 #include <kurl.h>
 #include <tdeio/global.h>

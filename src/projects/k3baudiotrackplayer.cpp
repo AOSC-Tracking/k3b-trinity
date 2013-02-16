@@ -19,7 +19,7 @@
 #include <k3baudioserver.h>
 
 #include <tdeactionclasses.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqslider.h>
 #include <tqtimer.h>

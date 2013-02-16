@@ -18,10 +18,10 @@
 #include <k3bversion.h>
 
 #include <kstandarddirs.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <ksimpleconfig.h>
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include <tqpixmap.h>
 #include <tqfile.h>

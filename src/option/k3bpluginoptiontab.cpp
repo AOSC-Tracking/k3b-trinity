@@ -22,12 +22,12 @@
 #include <k3blistview.h>
 #include <k3bcore.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <kdialogbase.h>
 #include <tdeconfig.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <tdeversion.h>
 
 #include <tqstringlist.h>

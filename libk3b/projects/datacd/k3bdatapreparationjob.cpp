@@ -23,7 +23,7 @@
 #include <k3bfileitem.h>
 #include <k3bglobals.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstringhandler.h>
 
 #include <tqfile.h>

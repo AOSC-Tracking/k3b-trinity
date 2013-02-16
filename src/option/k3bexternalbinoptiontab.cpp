@@ -18,9 +18,9 @@
 #include <k3bexternalbinmanager.h>
 #include "k3bexternalbinwidget.h"
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tdelistview.h>
 

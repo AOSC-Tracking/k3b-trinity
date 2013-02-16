@@ -25,12 +25,12 @@
 #include <k3bprojectplugin.h>
 #include <k3btoolbox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <tdeaction.h>
 #include <tdepopupmenu.h>
 #include <tdefiledialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kurl.h>
 
 #include <tqlayout.h>

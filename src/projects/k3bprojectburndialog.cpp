@@ -39,13 +39,13 @@
 #include <tqspinbox.h>
 #include <tqlabel.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kguiitem.h>
 #include <kstdguiitem.h>
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kstandarddirs.h>
 #include <tdeapplication.h>
 #include <kiconloader.h>

@@ -33,7 +33,7 @@
 #include <k3bverificationjob.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeio/global.h>
 
 #include <tqfile.h>

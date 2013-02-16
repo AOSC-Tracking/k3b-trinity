@@ -18,7 +18,7 @@
 #include <k3bglobals.h>
 #include <k3bcore.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocess.h>
 
 #include <tqstringlist.h>

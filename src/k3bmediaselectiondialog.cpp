@@ -18,7 +18,7 @@
 #include "k3bmediacache.h"
 #include "k3bapplication.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqlayout.h>
 #include <tqlabel.h>

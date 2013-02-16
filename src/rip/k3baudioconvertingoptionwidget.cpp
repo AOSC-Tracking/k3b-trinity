@@ -24,7 +24,7 @@
 #include <kurlrequester.h>
 #include <tdeio/global.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 
 #include <tqintdict.h>

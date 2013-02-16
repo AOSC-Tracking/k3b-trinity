@@ -36,9 +36,9 @@
 #include <kurl.h>
 #include <kurldrag.h>
 #include <tdefilefiltercombo.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdefileitem.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdirlister.h>
 #include <kprogress.h>
 

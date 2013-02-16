@@ -34,12 +34,12 @@
 #include <k3baudiocdtrackdrag.h>
 #include <k3bthemedlabel.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <tdeaction.h>
 #include <kstdaction.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeconfig.h>
 #include <klineedit.h>
 #include <kcombobox.h>

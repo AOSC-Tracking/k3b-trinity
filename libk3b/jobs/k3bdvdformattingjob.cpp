@@ -26,7 +26,7 @@
 #include <k3bversion.h>
 #include <k3bglobalsettings.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 #include <tqvaluelist.h>

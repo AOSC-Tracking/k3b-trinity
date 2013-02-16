@@ -40,14 +40,14 @@
 #include <tqlabel.h>
 #include <tqfileinfo.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 #include <ktextedit.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kprocess.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #ifdef HAVE_ICONV_H
 #include <langinfo.h>

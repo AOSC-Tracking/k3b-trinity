@@ -34,7 +34,7 @@
 #include <krun.h>
 #include <tdelistview.h>
 #include <klineedit.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>

@@ -26,8 +26,8 @@
 #include <tqcursor.h>
 #include <tqapplication.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 
 K3bDataSessionImportDialog::K3bDataSessionImportDialog( TQWidget* parent )

@@ -19,7 +19,7 @@
 #include <k3bmovixlistview.h>
 #include <k3bfillstatusdisplay.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 K3bMovixDvdView::K3bMovixDvdView( K3bMovixDvdDoc* doc, TQWidget *parent, const char *name )

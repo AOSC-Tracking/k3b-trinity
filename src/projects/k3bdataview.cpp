@@ -31,12 +31,12 @@
 #include <k3btoolbox.h>
 #include <k3bvalidators.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kurl.h>
 #include <tdeapplication.h>
 #include <tdepopupmenu.h>
 #include <tdeaction.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeio/global.h>
 #include <tdeio/job.h>
 #include <kdialogbase.h>

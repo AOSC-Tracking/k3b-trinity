@@ -18,7 +18,7 @@
 #include <tqtimer.h>
 #include <tqpainter.h>
 
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 
 K3bBusyWidget::K3bBusyWidget( TQWidget* parent, const char* name )

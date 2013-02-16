@@ -23,7 +23,7 @@
 #include <k3bglobals.h>
 #include <k3biso9660.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocess.h>
 #include <kdebug.h>
 

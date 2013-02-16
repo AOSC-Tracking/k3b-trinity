@@ -23,7 +23,7 @@
 #include <kdebug.h>
 #include <kcursor.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdepopupmenu.h>
 
 #include <tqpixmap.h>

@@ -34,8 +34,8 @@
 #include <kdebug.h>
 #include <tdeaction.h>
 #include <kinstance.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 
 #include <tqstring.h>

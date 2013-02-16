@@ -19,8 +19,8 @@
 
 #include "k3bintvalidator.h"
 
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kdebug.h>
 
 

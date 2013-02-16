@@ -37,7 +37,7 @@
 #include <tqheader.h>
 #include <tqfileinfo.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaction.h>
 #include <kurldrag.h>
 #include <kinputdialog.h>

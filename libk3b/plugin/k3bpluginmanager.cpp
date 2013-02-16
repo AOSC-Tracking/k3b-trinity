@@ -20,11 +20,11 @@
 
 #include <kdebug.h>
 #include <ksimpleconfig.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kstandarddirs.h>
 #include <kdialogbase.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <klibloader.h>
 
 #include <tqptrlist.h>

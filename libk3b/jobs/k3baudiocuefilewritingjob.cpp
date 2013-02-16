@@ -26,7 +26,7 @@
 #include <k3bthreadjob.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 class K3bAudioCueFileWritingJob::AnalyserThread : public K3bThread

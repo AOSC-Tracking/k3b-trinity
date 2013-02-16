@@ -32,7 +32,7 @@
 #include <kprocess.h>
 #include <tdeapplication.h>
 #include <tdeconfig.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include <iostream>
 #include <limits.h>

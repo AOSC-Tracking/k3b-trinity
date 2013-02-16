@@ -23,7 +23,7 @@
 #include <tqframe.h>
 #include <tqwidgetstack.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprogress.h>
 
 

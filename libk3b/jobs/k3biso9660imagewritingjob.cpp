@@ -32,8 +32,8 @@
 
 #include <kdebug.h>
 #include <tdeconfig.h>
-#include <klocale.h>
-#include <ktempfile.h>
+#include <tdelocale.h>
+#include <tdetempfile.h>
 #include <tdeio/global.h>
 
 #include <tqstring.h>

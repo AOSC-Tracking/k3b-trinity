@@ -20,7 +20,7 @@
 #include <k3bcore.h>
 #include <k3bglobals.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 

@@ -50,8 +50,8 @@
 #include <kdebug.h>
 #include <tdeconfig.h>
 #include <tdeio/netaccess.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 
 class K3bProjectManager::Private

@@ -23,7 +23,7 @@
 #include <tqregexp.h>
 #include <tqtextstream.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <tdeio/global.h>
 #include <tdeio/job.h>

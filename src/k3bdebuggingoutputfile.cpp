@@ -23,7 +23,7 @@
 #include <k3bglobals.h>
 
 #include <kstandarddirs.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <tdeapplication.h>
 
 #include <tqtextstream.h>

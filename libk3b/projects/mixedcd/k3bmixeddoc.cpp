@@ -24,10 +24,10 @@
 #include <tqfileinfo.h>
 #include <tqdom.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 
 

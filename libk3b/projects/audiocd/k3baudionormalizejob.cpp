@@ -20,7 +20,7 @@
 #include <k3bcore.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 K3bAudioNormalizeJob::K3bAudioNormalizeJob( K3bJobHandler* hdl, TQObject* parent, const char* name )

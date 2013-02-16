@@ -30,9 +30,9 @@
 #include <k3bwritingmodewidget.h>
 #include <k3bcore.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeio/global.h>
 #include <tdeapplication.h>
 #include <tdeconfig.h>

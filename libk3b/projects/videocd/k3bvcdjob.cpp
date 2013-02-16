@@ -13,11 +13,11 @@
 * See the file "COPYING" for the exact licensing terms.
 */
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <kurl.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tdeio/global.h>
 
 #include <tqstring.h>

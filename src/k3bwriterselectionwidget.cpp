@@ -24,11 +24,11 @@
 #include <k3bglobals.h>
 #include <k3bcore.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 #include <tdeconfig.h>
 #include <kcombobox.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kiconloader.h>
 #include <kinputdialog.h>
 

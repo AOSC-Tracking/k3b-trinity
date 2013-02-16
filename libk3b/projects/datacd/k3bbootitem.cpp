@@ -17,7 +17,7 @@
 #include "k3bdatadoc.h"
 #include "k3bdiritem.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqptrlist.h>
 

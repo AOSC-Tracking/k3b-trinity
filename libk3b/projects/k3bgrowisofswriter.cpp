@@ -29,9 +29,9 @@
 #include <k3bglobalsettings.h>
 #include <k3bdeviceglobals.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include <tqvaluelist.h>
 #include <tqfile.h>

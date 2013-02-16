@@ -18,7 +18,7 @@
 #include <k3bdevicemanager.h>
 #include <k3bcore.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqmap.h>
 #include <tqptrvector.h>

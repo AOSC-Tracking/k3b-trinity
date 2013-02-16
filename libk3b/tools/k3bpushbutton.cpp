@@ -19,7 +19,7 @@
 #include <tqpopupmenu.h>
 #include <tqevent.h>
 
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <tdeapplication.h>
 
 

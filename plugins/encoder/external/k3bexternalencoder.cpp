@@ -25,7 +25,7 @@
 
 #include <kdebug.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 
 #include <tqregexp.h>

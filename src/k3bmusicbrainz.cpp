@@ -21,7 +21,7 @@
 
 #include <musicbrainz/mb_c.h>
 
-#include <kprotocolmanager.h>
+#include <tdeprotocolmanager.h>
 #include <kurl.h>
 #include <kdebug.h>
 

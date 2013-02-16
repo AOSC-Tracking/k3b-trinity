@@ -48,8 +48,8 @@
 #include <tqapplication.h>
 
 #include <kdebug.h>
-#include <klocale.h>
-#include <ktempfile.h>
+#include <tdelocale.h>
+#include <tdetempfile.h>
 #include <tdeio/netaccess.h>
 #include <tdeio/global.h>
 #include <kstringhandler.h>

@@ -22,8 +22,8 @@
 
 #include <kdebug.h>
 #include <kinstance.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <kurl.h>
 
 #include <stdlib.h>

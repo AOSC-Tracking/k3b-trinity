@@ -24,7 +24,7 @@
 
 #include <tdeio/global.h>
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kmimetype.h>
 #include <kurl.h>
 #include <kpixmapeffect.h>

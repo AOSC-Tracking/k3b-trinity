@@ -23,7 +23,7 @@
 #include <k3biso9660.h>
 #include <k3biso9660backend.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeio/global.h>
 
 /**

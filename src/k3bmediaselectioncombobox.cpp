@@ -25,7 +25,7 @@
 #include <k3bcdtext.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqfont.h>
 #include <tqmap.h>

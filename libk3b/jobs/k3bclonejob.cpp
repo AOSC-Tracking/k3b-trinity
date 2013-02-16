@@ -25,7 +25,7 @@
 #include <k3bclonetocreader.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqfile.h>
 #include <tqfileinfo.h>

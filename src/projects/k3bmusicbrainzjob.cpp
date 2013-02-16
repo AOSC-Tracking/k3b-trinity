@@ -27,9 +27,9 @@
 #include <k3baudiodatasource.h>
 #include <k3bsimplejobhandler.h>
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kinputdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 // determine one trm

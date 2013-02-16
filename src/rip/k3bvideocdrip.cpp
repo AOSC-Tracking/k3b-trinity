@@ -16,9 +16,9 @@
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <tdeio/global.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <kurl.h>
 
 #include <tqdatetime.h>

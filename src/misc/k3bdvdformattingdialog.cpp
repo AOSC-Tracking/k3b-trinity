@@ -24,8 +24,8 @@
 #include <k3bwritingmodewidget.h>
 #include <k3bjobprogressdialog.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
 

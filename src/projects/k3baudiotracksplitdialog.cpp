@@ -20,7 +20,7 @@
 #include <k3bmsf.h>
 #include <k3bmsfedit.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeactioncollection.h>
 #include <tdeaction.h>
 #include <tdepopupmenu.h>

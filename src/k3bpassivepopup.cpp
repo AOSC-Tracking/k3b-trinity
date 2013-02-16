@@ -22,7 +22,7 @@
 #include <k3bapplication.h>
 
 #include <tdeapplication.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kpushbutton.h>

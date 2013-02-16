@@ -31,7 +31,7 @@
 #include <k3bglobalsettings.h>
 #include <k3bpluginmanager.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdeaboutdata.h>
 #include <kstandarddirs.h>

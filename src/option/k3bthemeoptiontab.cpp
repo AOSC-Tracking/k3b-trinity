@@ -19,9 +19,9 @@
 #include "k3bthememanager.h"
 
 #include <k3bapplication.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kurlrequester.h>
 #include <tdelistview.h>
 #include <tdeio/global.h>

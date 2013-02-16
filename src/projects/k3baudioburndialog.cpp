@@ -49,10 +49,10 @@
 #include <tqhbox.h>
 #include <tqspinbox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 
 K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, TQWidget *parent, const char *name, bool modal )

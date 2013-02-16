@@ -26,14 +26,14 @@
 #include <k3bglobals.h>
 
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kurl.h>
 #include <kstandarddirs.h>
 #include <tdeaction.h>
 #include <tdeio/global.h>
 #include <tdefileitem.h>
 #include <tdeapplication.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 #include <tqdir.h>
 #include <tqevent.h>

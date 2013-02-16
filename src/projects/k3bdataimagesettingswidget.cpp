@@ -28,8 +28,8 @@
 #include <tqwhatsthis.h>
 #include <tqlayout.h>
 
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <kdialogbase.h>
 #include <kdebug.h>
 

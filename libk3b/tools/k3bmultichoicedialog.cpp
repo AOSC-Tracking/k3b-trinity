@@ -45,7 +45,7 @@ public:
 };
 
 
-// from kmessagebox.cpp
+// from tdemessagebox.cpp
 static TQPixmap themedMessageBoxIcon(TQMessageBox::Icon icon)
 {
   TQString icon_name;

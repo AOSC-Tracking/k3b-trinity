@@ -23,7 +23,7 @@
 #include <tqlabel.h>
 #include <tqtooltip.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 
 

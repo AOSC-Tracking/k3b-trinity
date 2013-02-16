@@ -27,7 +27,7 @@
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kurldrag.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 class K3bMixedDirTreeView::PrivateAudioRootViewItem : public K3bListViewItem

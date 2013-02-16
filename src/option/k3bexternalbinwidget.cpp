@@ -35,10 +35,10 @@
 
 #include <kdialog.h>
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <keditlistbox.h>
 #include <tdelistview.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <tdeversion.h>
 
 

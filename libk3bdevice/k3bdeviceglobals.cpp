@@ -17,7 +17,7 @@
 #include "k3bdiskinfo.h"
 #include "k3bdevice.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <k3bdebug.h>
 
 #include <tqstringlist.h>

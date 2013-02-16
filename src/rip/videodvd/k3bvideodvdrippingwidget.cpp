@@ -21,7 +21,7 @@
 #include <k3bintmapcombobox.h>
 
 #include <tdelistview.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kurlrequester.h>
 #include <tdeio/global.h>
 #include <kurllabel.h>

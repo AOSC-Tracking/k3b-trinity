@@ -34,11 +34,11 @@
 
 #include <kurl.h>
 #include <kurldrag.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 #include <tdeapplication.h>
 #include <kiconloader.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <tdepopupmenu.h>

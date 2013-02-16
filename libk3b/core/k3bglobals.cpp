@@ -26,8 +26,8 @@
 #include <k3bhalconnection.h>
 
 #include <tdeversion.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>

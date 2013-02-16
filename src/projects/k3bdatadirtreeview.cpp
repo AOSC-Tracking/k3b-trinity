@@ -30,7 +30,7 @@
 #include <tqheader.h>
 #include <tqtimer.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaction.h>
 #include <kurldrag.h>
 #include <kinputdialog.h>

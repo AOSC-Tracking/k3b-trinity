@@ -32,8 +32,8 @@
 #include <k3bcore.h>
 #include <k3bglobalsettings.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tdeio/global.h>
 #include <tdeapplication.h>
 #include <tdeconfig.h>

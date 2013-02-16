@@ -21,7 +21,7 @@
 #include <k3bfilesplitter.h>
 
 #include <kmdcodec.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <tdeio/netaccess.h>
 

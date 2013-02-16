@@ -22,7 +22,7 @@
 #include <tqtextstream.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 K3bCddbLocalSubmit::K3bCddbLocalSubmit( TQObject* parent, const char* name )

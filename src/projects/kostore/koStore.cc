@@ -35,8 +35,8 @@
 #include <kurl.h>
 #include <kdebug.h>
 #include <tdeversion.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tdeio/netaccess.h>
 
 //#define DefaultFormat KoStore::Tar

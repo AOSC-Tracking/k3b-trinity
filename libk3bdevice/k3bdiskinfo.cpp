@@ -18,7 +18,7 @@
 
 #include <k3bmsf.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <k3bdebug.h>
 #include <tdeio/global.h>
 

@@ -21,8 +21,8 @@
 #include <k3bdevicehandler.h>
 #include <k3bglobalsettings.h>
 
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 
 
 

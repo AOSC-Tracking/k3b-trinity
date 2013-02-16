@@ -29,7 +29,7 @@
 #include <k3biso9660.h>
 #include <k3bmsinfofetcher.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 
 

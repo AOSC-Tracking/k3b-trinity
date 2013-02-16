@@ -19,8 +19,8 @@
 
 #include <klibloader.h>
 #include <kinstance.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 
 /**
  * Template based on KGenericFactory. This is just here to avoid using the TQStringList args parameter

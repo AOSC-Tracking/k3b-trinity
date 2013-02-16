@@ -25,9 +25,9 @@
 #include <k3bthreadjob.h>
 #include <k3bcuefileparser.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include <tqlabel.h>
 #include <tqlayout.h>

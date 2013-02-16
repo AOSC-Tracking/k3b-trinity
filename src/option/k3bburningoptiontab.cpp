@@ -35,7 +35,7 @@
 #include <knuminput.h>
 #include <tdeconfig.h>
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <klineedit.h>
 
 

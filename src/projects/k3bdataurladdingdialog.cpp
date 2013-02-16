@@ -41,12 +41,12 @@
 #include <k3bsignalwaiter.h>
 #include <k3bexternalbinmanager.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kurl.h>
 #include <kinputdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kiconloader.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kstdguiitem.h>
 #include <tdeconfig.h>
 #include <ksqueezedtextlabel.h>

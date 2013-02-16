@@ -52,12 +52,12 @@
 
 #include <kurl.h>
 #include <kurldrag.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaction.h>
 #include <tdepopupmenu.h>
 #include <kiconloader.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdialogbase.h>
 
 

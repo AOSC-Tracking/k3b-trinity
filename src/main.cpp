@@ -16,9 +16,9 @@
 
 #include <tdecmdlineargs.h>
 #include <tdeaboutdata.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocess.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kstandarddirs.h>
 #include <ksimpleconfig.h>
 #include <kstdguiitem.h>

@@ -25,7 +25,7 @@
 #include <k3bthread.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqdatetime.h>
 

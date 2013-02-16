@@ -23,16 +23,16 @@
 #include <k3bglobals.h>
 #include <k3bfilesysteminfo.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdelistview.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kurlrequester.h>
 #include <kcombobox.h>
 #include <klineedit.h>
 #include <tdeio/global.h>
 #include <tdeconfig.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include <tqlayout.h>
 #include <tqcheckbox.h>

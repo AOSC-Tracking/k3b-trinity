@@ -25,7 +25,7 @@
 #include <k3bdeviceselectiondialog.h>
 #include <k3bcore.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 

@@ -21,7 +21,7 @@
 #include <tqlabel.h>
 
 #include <tdelistbox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 

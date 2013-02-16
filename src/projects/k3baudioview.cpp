@@ -42,10 +42,10 @@
 #include <tqstring.h>
 
 // KDE-includes
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 
 

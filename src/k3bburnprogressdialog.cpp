@@ -23,9 +23,9 @@
 #include "k3bthemedlabel.h"
 #include <k3bthememanager.h>
 
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kprogress.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqgroupbox.h>
 #include <tqlabel.h>

@@ -14,7 +14,7 @@
 */
 
 // kde includes
-#include <klocale.h>
+#include <tdelocale.h>
 
 // k3b includes
 #include "k3bmpeginfo.h"

@@ -20,7 +20,7 @@
 #include <tqdom.h>
 
 // include files for KDE
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 // application specific includes

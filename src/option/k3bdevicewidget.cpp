@@ -21,10 +21,10 @@
 #include <k3blistview.h>
 
 #include <kinputdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <knuminput.h>
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <ksimpleconfig.h>
 #include <kiconloader.h>

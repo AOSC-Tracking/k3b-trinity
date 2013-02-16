@@ -15,7 +15,7 @@
 
 #include "k3btempfile.h"
 
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kstandarddirs.h>
 
 

@@ -45,14 +45,14 @@
 #include <k3bjob.h>
 
 #include <ktip.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
 #include <dcopclient.h>
 #include <kstandarddirs.h>
-#include <kstartupinfo.h>
-#include <kmessagebox.h>
+#include <tdestartupinfo.h>
+#include <tdemessagebox.h>
 
 #include <tqguardedptr.h>
 #include <tqtimer.h>

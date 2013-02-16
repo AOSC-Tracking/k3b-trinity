@@ -19,7 +19,7 @@
 #include <k3bprocess.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqdir.h>
 #include <tqfile.h>

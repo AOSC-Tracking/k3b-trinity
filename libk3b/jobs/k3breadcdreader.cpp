@@ -25,7 +25,7 @@
 #include <k3bglobals.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 
 #include <tqregexp.h>

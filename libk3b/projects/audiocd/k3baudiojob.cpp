@@ -42,8 +42,8 @@
 #include <tqvaluevector.h>
 
 #include <kdebug.h>
-#include <klocale.h>
-#include <ktempfile.h>
+#include <tdelocale.h>
+#include <tdetempfile.h>
 #include <kstringhandler.h>
 
 

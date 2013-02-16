@@ -30,7 +30,7 @@
 #include <k3baudioencoder.h>
 
 #include <kcombobox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <tdelistview.h>
@@ -40,7 +40,7 @@
 #include <kiconloader.h>
 #include <kstdguiitem.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kurllabel.h>
 
 #include <tqgroupbox.h>

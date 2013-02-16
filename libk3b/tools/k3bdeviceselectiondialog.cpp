@@ -27,7 +27,7 @@
 #include <tqstring.h>
 #include <tqframe.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 class K3bDeviceSelectionDialog::Private

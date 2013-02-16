@@ -23,7 +23,7 @@
 #include <k3bglobals.h>
 #include <k3bglobalsettings.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 K3bDvdrecordWriter::K3bDvdrecordWriter( K3bDevice::Device* dev, TQObject* parent, const char* name )

@@ -24,7 +24,7 @@
 #include <k3bcore.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <unistd.h>
 

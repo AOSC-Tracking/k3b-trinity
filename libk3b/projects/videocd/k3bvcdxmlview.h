@@ -19,7 +19,7 @@
 
 #include <tqstring.h>
 #include <tqdom.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include <k3bvcddoc.h>
 

@@ -17,7 +17,7 @@
 #ifndef K3BDIROPERATOR_H
 #define K3BDIROPERATOR_H
 
-#include <kdiroperator.h>
+#include <tdediroperator.h>
 #include <kbookmarkmanager.h>
 
 class TQIconViewItem;

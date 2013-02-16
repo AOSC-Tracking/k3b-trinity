@@ -19,10 +19,10 @@
 
 
 // KDE-includes
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 // K3b Includes
 #include "k3bvcdview.h"

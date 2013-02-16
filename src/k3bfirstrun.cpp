@@ -18,7 +18,7 @@
 #include "k3bservicemenuinstaller.h"
 #include <k3bcore.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tdeconfig.h>
 

@@ -25,7 +25,7 @@
 #include <tqwhatsthis.h>
 
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 #include <kmimetype.h>
 #include <kurl.h>

@@ -28,7 +28,7 @@
 #include <tqfileinfo.h>
 
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdefiledialog.h>
 #include <kdialog.h>
 #include <kstandarddirs.h>

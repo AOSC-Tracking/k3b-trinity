@@ -26,7 +26,7 @@
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <kurldrag.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqevent.h>
 #include <tqtabbar.h>

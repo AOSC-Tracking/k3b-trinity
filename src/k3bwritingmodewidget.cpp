@@ -19,7 +19,7 @@
 
 #include <k3bglobals.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 
 #include <tqtooltip.h>

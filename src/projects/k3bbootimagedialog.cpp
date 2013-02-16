@@ -17,7 +17,7 @@
 #include "k3bbootimagedialog.h"
 #include "k3bbootimageview.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 K3bBootImageDialog::K3bBootImageDialog( K3bDataDoc* doc, 

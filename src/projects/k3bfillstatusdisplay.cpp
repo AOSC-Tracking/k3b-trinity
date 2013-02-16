@@ -41,14 +41,14 @@
 
 #include <tdeaction.h>
 #include <tdepopupmenu.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kinputdialog.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <tdeio/global.h>
-#include <kmessagebox.h>
-#include <kglobal.h>
+#include <tdemessagebox.h>
+#include <tdeglobal.h>
 #include <kpixmapeffect.h>
 
 

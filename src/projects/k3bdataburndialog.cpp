@@ -51,9 +51,9 @@
 #include <tqspinbox.h>
 #include <tqfile.h>
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <klineedit.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <tdefiledialog.h>

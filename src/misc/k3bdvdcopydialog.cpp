@@ -45,13 +45,13 @@
 #include <tqhbox.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
-#include <kmessagebox.h>
-#include <kglobal.h>
+#include <tdemessagebox.h>
+#include <tdeglobal.h>
 
 
 

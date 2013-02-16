@@ -24,7 +24,7 @@
 #include <k3biso9660.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeio/global.h>
 #include <tdeio/job.h>
 #include <tdeio/netaccess.h>

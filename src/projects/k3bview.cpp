@@ -24,8 +24,8 @@
 
 #include <tdeaction.h>
 #include <kiconloader.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 
 // application specific includes

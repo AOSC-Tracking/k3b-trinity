@@ -35,7 +35,7 @@
 #include <tqtimer.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 
 

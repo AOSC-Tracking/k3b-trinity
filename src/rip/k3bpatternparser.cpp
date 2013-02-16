@@ -21,8 +21,8 @@
 #include <tqdatetime.h>
 #include <tqvaluestack.h>
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 
 
 TQString K3bPatternParser::parsePattern( const K3bCddbResultEntry& entry,

@@ -23,9 +23,9 @@
 #include <tqpushbutton.h>
 
 #include <klineedit.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 

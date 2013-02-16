@@ -64,7 +64,7 @@
 #include <tdetoolbar.h>
 #include <kiconloader.h>
 #include <kurl.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 #include <tdeio/file.h>
 #include <tdeio/global.h>
@@ -74,7 +74,7 @@
 #include <kcombobox.h>
 #include <tdefiletreeview.h>
 #include <kdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kstdaction.h>
 #include <tdeconfig.h>
 #include <tdeaction.h>

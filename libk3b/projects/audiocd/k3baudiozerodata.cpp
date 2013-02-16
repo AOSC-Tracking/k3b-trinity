@@ -16,7 +16,7 @@
 #include "k3baudiozerodata.h"
 #include "k3baudiotrack.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <string.h>
 

@@ -23,10 +23,10 @@
 
 #include <tdeaction.h>
 #include <kinputdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kinputdialog.h>
 #include <tdeio/job.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeio/global.h>
 #include <tdepopupmenu.h>
 

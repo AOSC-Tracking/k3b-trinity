@@ -19,11 +19,11 @@
 #include "k3bbootitem.h"
 #include <k3bintvalidator.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdelistview.h>
 #include <tdefiledialog.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include <tqpushbutton.h>
 #include <tqstring.h>

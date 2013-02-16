@@ -32,14 +32,14 @@
 #include <k3bthreadjob.h>
 
 #include <kcombobox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdelistview.h>
 #include <kurlrequester.h>
 #include <tdefiledialog.h>
 #include <tdeio/global.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include <tqgroupbox.h>
 #include <tqheader.h>

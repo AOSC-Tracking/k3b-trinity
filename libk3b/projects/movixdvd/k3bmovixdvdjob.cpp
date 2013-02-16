@@ -23,7 +23,7 @@
 #include <k3bdvdjob.h>
 #include <k3bdevice.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 

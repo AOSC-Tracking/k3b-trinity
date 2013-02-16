@@ -16,7 +16,7 @@
 #include "k3bcddbpatternwidget.h"
 
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kcombobox.h>
 #include <klineedit.h>
 #include <kurllabel.h>

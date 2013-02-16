@@ -19,7 +19,7 @@
 
 #include <tdeaction.h>
 #include <kiconloader.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include <tqpainter.h>
 #include <tqtooltip.h>

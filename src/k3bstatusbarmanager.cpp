@@ -29,7 +29,7 @@
 #include <k3bview.h>
 
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <tdeio/global.h>

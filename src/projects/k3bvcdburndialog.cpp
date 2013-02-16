@@ -27,9 +27,9 @@
 #include <tqtoolbutton.h>
 #include <tqfileinfo.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kstandarddirs.h>
 #include <tdeio/global.h>
 #include <tdeapplication.h>

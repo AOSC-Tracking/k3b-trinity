@@ -16,7 +16,7 @@
 #include "k3baudiocdlistview.h"
 #include "k3baudiocdview.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqheader.h>
 #include <tqtooltip.h>

@@ -39,7 +39,7 @@
 #include <tqframe.h>
 
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdelistview.h>
 #include <kiconloader.h>
 #include <kstandarddirs.h>

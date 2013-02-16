@@ -26,8 +26,8 @@
 #include <k3bcore.h>
 #include <k3bemptydiscwaiter.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tdelistview.h>
 #include <kiconloader.h>
 #include <kguiitem.h>

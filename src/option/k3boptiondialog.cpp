@@ -31,7 +31,7 @@
 #include <tqwhatsthis.h>
 #include <tqtabwidget.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tdeconfig.h>
 #include <tdeversion.h>

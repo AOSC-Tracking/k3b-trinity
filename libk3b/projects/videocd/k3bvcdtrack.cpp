@@ -24,7 +24,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 // K3b Includes
 #include "k3bvcdtrack.h"

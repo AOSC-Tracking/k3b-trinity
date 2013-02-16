@@ -29,9 +29,9 @@
 #include <k3bglobalsettings.h>
 
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeio/global.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include <tqlayout.h>
 #include <tqcheckbox.h>

@@ -16,7 +16,7 @@
 #ifndef _K3B_TEMP_FILE_H_
 #define _K3B_TEMP_FILE_H_
 
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include <k3b_export.h>
 

@@ -27,9 +27,9 @@
 #include <kprocess.h>
 #include <kurl.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 #include <tdeio/global.h>
 #include <kdebug.h>

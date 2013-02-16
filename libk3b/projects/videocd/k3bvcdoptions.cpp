@@ -17,7 +17,7 @@
 #include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <k3bcore.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 
 // TQt Includes

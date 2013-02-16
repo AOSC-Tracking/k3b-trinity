@@ -26,7 +26,7 @@
 #include <kiconloader.h>
 #include <kurl.h>
 #include <kurldrag.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaction.h>
 #include <tdepopupmenu.h>
 #include <kdialog.h>

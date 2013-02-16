@@ -26,12 +26,12 @@
 #include <tqscrollview.h>
 #include <tqtimer.h>
 
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kgenericfactory.h>
 #include <tdelistview.h>
 #include <keditlistbox.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kinputdialog.h>
 #include <kstandarddirs.h>
 #include <tdeconfig.h>

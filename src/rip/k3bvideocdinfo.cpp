@@ -21,7 +21,7 @@
 #include <tqtimer.h>
 #include <tqdom.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 

@@ -25,11 +25,11 @@
 #include <k3baudiofile.h>
 #include <k3bpassivepopup.h>
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kinputdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kdebug.h>
 
 #include <tqlabel.h>

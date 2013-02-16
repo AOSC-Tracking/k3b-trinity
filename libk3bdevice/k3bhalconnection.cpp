@@ -17,7 +17,7 @@
 #include "k3bdevice.h"
 
 #include <k3bdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqtimer.h>
 

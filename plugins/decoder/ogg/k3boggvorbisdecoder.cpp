@@ -24,7 +24,7 @@
 
 #include <kurl.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <stdio.h>
 #include <stdlib.h>

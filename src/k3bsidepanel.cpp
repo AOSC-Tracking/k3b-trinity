@@ -17,7 +17,7 @@
 #include "k3b.h"
 #include "k3bfiletreeview.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 

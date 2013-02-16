@@ -31,8 +31,8 @@
 #include <tqlabel.h>
 
 #include <tdeapplication.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <tdeaction.h>
 #include <tdeconfig.h>
 

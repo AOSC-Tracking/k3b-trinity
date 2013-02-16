@@ -23,7 +23,7 @@
 
 #include <kurl.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <string.h>
 #include <math.h>

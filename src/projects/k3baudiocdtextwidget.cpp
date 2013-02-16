@@ -28,7 +28,7 @@
 #include <tqgroupbox.h>
 
 #include <klineedit.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialogbase.h>
 #include <kiconloader.h>
 

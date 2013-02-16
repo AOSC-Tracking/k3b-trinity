@@ -20,7 +20,7 @@
 
 #include <k3bpluginfactory.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 K_EXPORT_COMPONENT_FACTORY( libk3bmpcdecoder, K3bPluginFactory<K3bMpcDecoderFactory>( "libk3bmpcdecoder" ) )

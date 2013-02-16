@@ -19,7 +19,7 @@
 #include "k3bmovixfileitem.h"
 #include <k3bdiritem.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <tdeio/global.h>
 #include <kurldrag.h>

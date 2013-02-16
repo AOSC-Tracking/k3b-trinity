@@ -24,7 +24,7 @@
 
 #include <tqfile.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <inttypes.h> // needed by dvdreads headers
 #include <dvdread/dvd_reader.h>

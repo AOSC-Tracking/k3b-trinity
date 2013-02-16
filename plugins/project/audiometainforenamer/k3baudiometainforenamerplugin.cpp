@@ -27,8 +27,8 @@
 
 #include <kdebug.h>
 #include <kinstance.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <tdefilemetainfo.h>
 #include <kcombobox.h>
 #include <tdeconfig.h>

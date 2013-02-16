@@ -30,7 +30,7 @@
 #include <tqtabwidget.h>
 
 #include <klineedit.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 

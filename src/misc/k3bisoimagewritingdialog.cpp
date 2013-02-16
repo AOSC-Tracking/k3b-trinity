@@ -33,8 +33,8 @@
 #include <k3bmediacache.h>
 
 #include <tdeapplication.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kurlrequester.h>
 #include <tdefiledialog.h>
 #include <kstdguiitem.h>

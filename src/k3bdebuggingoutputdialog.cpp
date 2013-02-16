@@ -27,12 +27,12 @@
 #include <tqfile.h>
 #include <tqclipboard.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstdguiitem.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <tdeapplication.h>
 #include <tdefiledialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 
 K3bDebuggingOutputDialog::K3bDebuggingOutputDialog( TQWidget* parent )

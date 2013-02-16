@@ -37,10 +37,10 @@
 #include <kkeydialog.h>
 // include files for KDE
 #include <kiconloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdefiledialog.h>
-#include <kmenubar.h>
-#include <klocale.h>
+#include <tdemenubar.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kstdaction.h>
 #include <klineeditdlg.h>
@@ -50,7 +50,7 @@
 #include <kurllabel.h>
 #include <tdetoolbar.h>
 #include <kstatusbar.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kdialog.h>
 #include <kedittoolbar.h>
 #include <ksystemtray.h>

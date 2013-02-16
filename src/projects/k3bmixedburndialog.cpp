@@ -52,11 +52,11 @@
 #include <tqbuttongroup.h>
 #include <tqradiobutton.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 
 K3bMixedBurnDialog::K3bMixedBurnDialog( K3bMixedDoc* doc, TQWidget *parent, const char *name, bool modal )

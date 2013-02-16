@@ -22,7 +22,7 @@
 #include <tqframe.h>
 #include <tqpalette.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 TQCheckBox* K3bStdGuiItems::simulateCheckbox( TQWidget* parent, const char* name )

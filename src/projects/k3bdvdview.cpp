@@ -19,7 +19,7 @@
 #include <k3bfillstatusdisplay.h>
 #include <k3bdatafileview.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 K3bDvdView::K3bDvdView( K3bDvdDoc* doc, TQWidget *parent, const char *name )

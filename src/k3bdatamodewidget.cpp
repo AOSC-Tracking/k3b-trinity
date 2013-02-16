@@ -17,7 +17,7 @@
 #include "k3bdatamodewidget.h"
 #include <k3bglobals.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 
 #include <tqwhatsthis.h>

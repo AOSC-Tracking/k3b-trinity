@@ -29,11 +29,11 @@
 #include <tqradiobutton.h>
 
 #include <tdeapplication.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kdialog.h>
 #include <kstandarddirs.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kurlrequester.h>
 #include <kcombobox.h>
 

@@ -24,7 +24,7 @@ extern "C" {
 
 #include <string.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 #if LIBAVFORMAT_BUILD < 4629

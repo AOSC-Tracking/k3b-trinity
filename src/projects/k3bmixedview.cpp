@@ -37,10 +37,10 @@
 #include <tqvaluelist.h>
 
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeactionclasses.h>
 
 

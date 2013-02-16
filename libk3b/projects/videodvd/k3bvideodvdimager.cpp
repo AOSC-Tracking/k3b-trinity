@@ -20,11 +20,11 @@
 #include <k3bprocess.h>
 #include <k3bglobals.h>
 
-#include <ktempfile.h>
-#include <kglobal.h>
+#include <tdetempfile.h>
+#include <tdeglobal.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqtextstream.h>
 #include <tqdir.h>
