@@ -580,11 +580,7 @@ bool K3b::unmount( K3bDevice::Device* dev )
     return !p.exitStatus();
   }
   else {
-#ifdef HAVE_HAL
     return !K3bDevice::HalConnection::instance()->unmount( dev );
-#else
-    return false;
-#endif
   }
 }
 
@@ -602,10 +598,8 @@ bool K3b::mount( K3bDevice::Device* dev )
     return true;
 #endif
 
-#ifdef HAVE_HAL
   if( !K3bDevice::HalConnection::instance()->mount( dev ) )
     return true;
-#endif
 
   // now try pmount
   TQString pmountBin = K3b::findExe( "pmount" );
@@ -622,10 +616,8 @@ bool K3b::mount( K3bDevice::Device* dev )
 
 bool K3b::eject( K3bDevice::Device* dev )
 {
-#ifdef HAVE_HAL
   if( !K3bDevice::HalConnection::instance()->eject( dev ) )
     return true;
-#endif
 
   if( K3b::isMounted( dev ) )
     K3b::unmount( dev );

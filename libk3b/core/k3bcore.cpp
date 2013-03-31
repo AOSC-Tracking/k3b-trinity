@@ -19,9 +19,7 @@
 #include "k3bjob.h"
 
 #include <k3bdevicemanager.h>
-#ifdef HAVE_HAL
 #include <k3bhalconnection.h>
-#endif
 #include <k3bexternalbinmanager.h>
 #include <k3bdefaultexternalprograms.h>
 #include <k3bglobals.h>
@@ -204,7 +202,6 @@ void K3bCore::init()
 
   externalBinManager()->search();
 
-#ifdef HAVE_HAL
   connect( K3bDevice::HalConnection::instance(), TQT_SIGNAL(deviceAdded(const TQString&)),
 	   deviceManager(), TQT_SLOT(addDevice(const TQString&)) );
   connect( K3bDevice::HalConnection::instance(), TQT_SIGNAL(deviceRemoved(const TQString&)),
@@ -215,9 +212,6 @@ void K3bCore::init()
   else
     for( unsigned int i = 0; i < devList.count(); ++i )
       deviceManager()->addDevice( devList[i] );
-#else
-  deviceManager()->scanBus();
-#endif
 }
 
 

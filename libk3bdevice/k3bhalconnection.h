@@ -26,8 +26,11 @@
 #include <tqmap.h>
 #include <tqstringlist.h>
 
+#ifdef HAVE_HAL
 class DBusConnection;
-
+#else // HAVE_HAL
+class TDEGenericDevice;
+#endif // HAVE_HAL
 
 namespace K3bDevice {
 
@@ -74,6 +77,7 @@ namespace K3bDevice {
        */
       TQStringList devices() const;
 
+#ifdef HAVE_HAL
       /**
        * \internal
        */
@@ -83,6 +87,7 @@ namespace K3bDevice {
        * \internal
        */
       void removeDevice( const char* udi );
+#endif // HAVE_HAL
 
       /**
        * Error codes named as the HAL deamon raises them
@@ -176,6 +181,24 @@ namespace K3bDevice {
       int eject( Device*,
 		 const TQStringList& options = TQStringList() );
 
+#ifndef HAVE_HAL
+private slots:
+	/**
+	* \internal
+	*/
+	void AddDeviceHandler(TDEGenericDevice*);
+
+	/**
+	* \internal
+	*/
+	void RemoveDeviceHandler(TDEGenericDevice*);
+
+	/**
+	* \internal
+	*/
+	void ModifyDeviceHandler(TDEGenericDevice*);
+#endif // HAVE_HAL
+
     signals:
       /**
        * This signal gets emitted whenever HAL finds a new optical drive.
@@ -217,7 +240,9 @@ namespace K3bDevice {
       class Private;
       Private* d;
 
+#ifdef HAVE_HAL
       void setupDBusTQtConnection( DBusConnection* dbusConnection );
+#endif // HAVE_HAL
     };
 }
 

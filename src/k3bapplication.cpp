@@ -416,10 +416,8 @@ bool K3bApplication::Core::internalBlockDevice( K3bDevice::Device* dev )
       m_deviceBlockMap[dev] = mediaCache()->blockDevice( dev );
     }
 
-#ifdef HAVE_HAL
     if( K3bDevice::HalConnection::instance()->lock( dev ) != K3bDevice::HalConnection::org_freedesktop_Hal_Success )
       kdDebug() << "(K3bInterferingSystemsHandler) HAL lock failed." << endl;
-#endif
 
     //
     // Check if the device is in use
@@ -441,9 +439,7 @@ void K3bApplication::Core::internalUnblockDevice( K3bDevice::Device* dev )
     m_deviceBlockMap.erase( dev );
   }
 
-#ifdef HAVE_HAL
   K3bDevice::HalConnection::instance()->unlock( dev );
-#endif
 
   K3bCore::internalUnblockDevice( dev );
 }

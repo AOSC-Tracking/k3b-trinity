@@ -1,8 +1,8 @@
 doc
 k3bsetup
-tdefile-plugins
-tdeioslaves
 libk3b
 libk3bdevice
 plugins
 src
+tdefile-plugins
+tdeioslaves
