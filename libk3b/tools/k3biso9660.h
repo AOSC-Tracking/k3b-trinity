@@ -319,7 +319,7 @@ class LIBK3B_EXPORT K3bIso9660File : public K3bIso9660Entry
 
 /**
  * This class is based on the KIso class by
- * Gyï¿½gy Szombathelyi <gyurco@users.sourceforge.net>.
+ * György Szombathelyi <gyurco@users.sourceforge.net>.
  * A lot has been changed and bugfixed.
  * The API has been improved to be useful.
  *

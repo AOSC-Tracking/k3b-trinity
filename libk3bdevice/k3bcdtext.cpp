@@ -73,18 +73,18 @@ namespace K3bDevice {
       s += TQString( " %1 |" ).arg( pack[i].dbcc, 4 );
 //       char str[12];
 //       sprintf( str, "%c%c%c%c%c%c%c%c%c%c%c%c",
-// 	       pack[i].data[0] == '\0' ? 'ï¿½' : pack[i].data[0],
-// 	       pack[i].data[1] == '\0' ? 'ï¿½' : pack[i].data[1],
-// 	       pack[i].data[2] == '\0' ? 'ï¿½' : pack[i].data[2],
-// 	       pack[i].data[3] == '\0' ? 'ï¿½' : pack[i].data[3],
-// 	       pack[i].data[4] == '\0' ? 'ï¿½' : pack[i].data[4],
-// 	       pack[i].data[5] == '\0' ? 'ï¿½' : pack[i].data[5],
-// 	       pack[i].data[6] == '\0' ? 'ï¿½' : pack[i].data[6],
-// 	       pack[i].data[7] == '\0' ? 'ï¿½' : pack[i].data[7],
-// 	       pack[i].data[8] == '\0' ? 'ï¿½' : pack[i].data[8],
-// 	       pack[i].data[9] == '\0' ? 'ï¿½' : pack[i].data[9],
-// 	       pack[i].data[10] == '\0' ? 'ï¿½' : pack[i].data[10],
-// 	       pack[i].data[11] == '\0' ? 'ï¿½' : pack[i].data[11] );
+//         pack[i].data[0] == '\0' ? '°' : pack[i].data[0],
+//         pack[i].data[1] == '\0' ? '°' : pack[i].data[1],
+//         pack[i].data[2] == '\0' ? '°' : pack[i].data[2],
+//         pack[i].data[3] == '\0' ? '°' : pack[i].data[3],
+//         pack[i].data[4] == '\0' ? '°' : pack[i].data[4],
+//         pack[i].data[5] == '\0' ? '°' : pack[i].data[5],
+//         pack[i].data[6] == '\0' ? '°' : pack[i].data[6],
+//         pack[i].data[7] == '\0' ? '°' : pack[i].data[7],
+//         pack[i].data[8] == '\0' ? '°' : pack[i].data[8],
+//         pack[i].data[9] == '\0' ? '°' : pack[i].data[9],
+//         pack[i].data[10] == '\0' ? '°' : pack[i].data[10],
+//         pack[i].data[11] == '\0' ? '°' : pack[i].data[11] );
 //       s += TQString( " %1 |" ).arg( "'" + TQCString(str,13) + "'", 14 );
 //       TQ_UINT16 crc = pack[i].crc[0]<<8|pack[i].crc[1];
 //       s += TQString( " %1 |" ).arg( crc );

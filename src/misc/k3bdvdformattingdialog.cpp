@@ -41,7 +41,7 @@
 K3bDvdFormattingDialog::K3bDvdFormattingDialog( TQWidget* parent, const char* name, bool modal )
   : K3bInteractionDialog( parent, name,
 			  i18n("DVD Formatting"),
-			  i18n("DVD%1RW").arg("ï¿½"),
+			  i18n("DVD%1RW").arg("±"),
 			  START_BUTTON|CANCEL_BUTTON,
 			  START_BUTTON,
 			  "DVD Formatting", // config group

@@ -288,7 +288,7 @@ void K3bMainWindow::initActions()
 
   actionToolsBlankCdrw = new TDEAction( i18n("&Erase CD-RW..."), "erasecd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotBlankCdrw()),
 				      actionCollection(), "tools_blank_cdrw" );
-  TDEAction* actionToolsFormatDVD = new TDEAction( i18n("&Format DVD%1RW...").arg("ï¿½"), "formatdvd", 0, TQT_TQOBJECT(this), 
+  TDEAction* actionToolsFormatDVD = new TDEAction( i18n("&Format DVD%1RW...").arg("±"), "formatdvd", 0, TQT_TQOBJECT(this), 
 					       TQT_SLOT(slotFormatDvd()), actionCollection(), "tools_format_dvd" );
   actionToolsWriteCdImage = new TDEAction(i18n("&Burn CD Image..."), "burn_cdimage", 0, TQT_TQOBJECT(this), TQT_SLOT(slotWriteCdImage()),
 					 actionCollection(), "tools_write_cd_image" );
@@ -330,7 +330,7 @@ void K3bMainWindow::initActions()
   actionFileNewMovix->setToolTip( i18n("Creates a new eMovix CD project") );
   actionFileNewVcd->setToolTip( i18n("Creates a new Video CD project") );
   actionToolsBlankCdrw->setToolTip( i18n("Open the CD-RW erasing dialog") );
-  actionToolsFormatDVD->setToolTip( i18n("Open the DVD%1RW formatting dialog").arg("ï¿½") );
+  actionToolsFormatDVD->setToolTip( i18n("Open the DVD%1RW formatting dialog").arg("±") );
   actionCdCopy->setToolTip( i18n("Open the CD copy dialog") );
   actionToolsWriteCdImage->setToolTip( i18n("Write an Iso9660, cue/bin, or cdrecord clone image to CD") );
   actionToolsWriteDvdImage->setToolTip( i18n("Write an Iso9660 image to DVD") );

@@ -152,11 +152,11 @@ int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const TQStri
   //
   if( (d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD) &&
 	   (d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_CD) )
-    d->wantedMediaTypeString = i18n("CD-R(W) or DVD%1R(W)").arg("ï¿½");
+    d->wantedMediaTypeString = i18n("CD-R(W) or DVD%1R(W)").arg("±");
   else if( d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD_SL )
-    d->wantedMediaTypeString = i18n("DVD%1R(W)").arg("ï¿½");
+    d->wantedMediaTypeString = i18n("DVD%1R(W)").arg("±");
   else if( d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD_DL )
-    d->wantedMediaTypeString = i18n("Double Layer DVD%1R").arg("ï¿½");
+    d->wantedMediaTypeString = i18n("Double Layer DVD%1R").arg("±");
   else
     d->wantedMediaTypeString = i18n("CD-R(W)");
 

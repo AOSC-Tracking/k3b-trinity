@@ -1188,7 +1188,7 @@ bool K3bDataDoc::importSession( K3bDevice::Device* device )
     // TODO: also import some other pd fields
     
     const K3bIso9660Directory* rootDir = iso.firstRRDirEntry();
-    // Jï¿½rg Schilling says that it is impossible to import the joliet tree for multisession
+    // Jörg Schilling says that it is impossible to import the joliet tree for multisession
 //     if( !rootDir )
 //       rootDir = iso.firstJolietDirEntry();
     if( !rootDir )
