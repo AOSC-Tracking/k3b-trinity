@@ -840,9 +840,9 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
 	TDEStorageDevice* sdevice = static_cast<TDEStorageDevice*>(hwdevice);
 
 	// FIXME
-	// Options from 'options' are not currently loaded into 'optionString'
-	TQString optionString;
-	TQString mountedPath = sdevice->mountDevice(mountPoint, optionString);
+	// Options from 'options' are not currently loaded into 'mountOptions'
+	TDEStorageMountOptions mountOptions;
+	TQString mountedPath = sdevice->mountDevice(mountPoint, mountOptions);
 	if (mountedPath.isNull()) {
 		return org_freedesktop_Hal_CommunicationError;
 	}
@@ -869,8 +869,8 @@ int K3bDevice::HalConnection::unmount(K3bDevice::Device* dev, const TQStringList
 	TDEStorageDevice* sdevice = static_cast<TDEStorageDevice*>(hwdevice);
 
 	// FIXME
-	// Options from 'options' are not currently loaded into 'optionString'
-	TQString optionString;
+	// Options from 'options' are not currently loaded into 'mountOptions'
+	TQString mountOptions;
 
 	if (!sdevice->unmountDevice(NULL)) {
 		// Unmount failed!
