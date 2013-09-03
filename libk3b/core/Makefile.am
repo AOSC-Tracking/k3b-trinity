@@ -2,7 +2,7 @@ AM_CPPFLAGS = -I$(srcdir)/../../libk3bdevice -I$(srcdir)/../plugin -I$(srcdir)/.
 
 noinst_LTLIBRARIES = libk3bcore.la
 
-libk3bcore_la_LIBADD = $(LIB_KIO) $(ARTSC_LIB)
+libk3bcore_la_LIBADD = $(LIB_TDEIO) $(ARTSC_LIB)
 
 libk3bcore_la_LDFLAGS = $(all_libraries)
 
