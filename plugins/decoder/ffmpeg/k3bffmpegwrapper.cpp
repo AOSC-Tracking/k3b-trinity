@@ -49,7 +49,7 @@ public:
   K3b::Msf length;
 
   // for decoding
-  char outputBuffer[AVCODEC_MAX_AUDIO_FRAME_SIZE];
+  char outputBuffer[192000];
   char* outputBufferPos;
   int outputBufferSize;
   AVPacket packet;
