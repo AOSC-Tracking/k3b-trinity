@@ -43,8 +43,8 @@ namespace K3bVideoDVD
   };
 
   enum AudioSampleFrequency {
-    AUDIO_SAMPLE_FRETQ_48HZ = 0,
-    AUDIO_SAMPLE_FRETQ_96HZ = 1
+    AUDIO_SAMPLE_FREQ_48HZ = 0,
+    AUDIO_SAMPLE_FREQ_96HZ = 1
   };
 
   enum AudioCodeExtension {

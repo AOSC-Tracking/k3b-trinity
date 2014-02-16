@@ -380,7 +380,7 @@ void K3bDevice::DeviceManager::BSDDeviceScan()
       break;
     }
 
-    if ((ccb.ccb_h.status != CAM_RETQ_CMP)
+    if ((ccb.ccb_h.status != CAM_REQ_CMP)
 	|| ((ccb.cdm.status != CAM_DEV_MATCH_LAST) && (ccb.cdm.status != CAM_DEV_MATCH_MORE))) {
       k3bDebug() << "(BSDDeviceScan) got CAM error " << ccb.ccb_h.status << ", CDM error %d" << ccb.cdm.status << endl;
       break;
@@ -454,7 +454,7 @@ void K3bDevice::DeviceManager::BSDDeviceScan()
       }
     }
 
-  } while ((ccb.ccb_h.status == CAM_RETQ_CMP)
+  } while ((ccb.ccb_h.status == CAM_REQ_CMP)
 	   && (ccb.cdm.status == CAM_DEV_MATCH_MORE));
 
   if (need_close)

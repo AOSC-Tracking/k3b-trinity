@@ -118,7 +118,7 @@ int K3bDevice::ScsiCommand::transport( TransportDirection dir,
       return result ? result : ret;
   }
 
-  else if ((d->ccb.ccb_h.status & CAM_STATUS_MASK) == CAM_RETQ_CMP) {
+  else if ((d->ccb.ccb_h.status & CAM_STATUS_MASK) == CAM_REQ_CMP) {
       if( needToClose )
           m_device->close();
       m_device->usageUnlock();
@@ -165,7 +165,7 @@ int K3bDevice::ScsiCommand::transport( TransportDirection dir,
 
 	  return -1;
 	}
-      if ((d->ccb.ccb_h.status&CAM_STATUS_MASK) != CAM_RETQ_CMP)
+      if ((d->ccb.ccb_h.status&CAM_STATUS_MASK) != CAM_REQ_CMP)
 	{
 	  k3bDebug() << "(K3bDevice::ScsiCommand) transport failed (3): " << ret << endl;
 	  errno=EIO,-1;
