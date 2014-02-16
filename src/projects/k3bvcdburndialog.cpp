@@ -619,7 +619,7 @@ void K3bVcdBurnDialog::loadK3bDefaults()
         m_checkCdiSupport->setEnabled( false );
         m_checkCdiSupport->setChecked( false );
         m_checkUpdateScanOffsets->setEnabled( true );
-        m_editVolumeId->setText( "HTQ_VIDEOCD" );
+        m_editVolumeId->setText( "HQ_VIDEOCD" );
     } else {
         m_checkCdiSupport->setEnabled( true );
         m_checkCdiSupport->setChecked( o.CdiSupport() );
@@ -959,7 +959,7 @@ void K3bVcdBurnDialog::setVolumeID()
         if ( m_radioSvcd10->isChecked() )
             m_editVolumeId->setText( "SUPER_VIDEOCD" );
         else if ( m_radioHqVcd10->isChecked() )
-            m_editVolumeId->setText( "HTQ_VIDEOCD" );
+            m_editVolumeId->setText( "HQ_VIDEOCD" );
         else
             m_editVolumeId->setText( "VIDEOCD" );
     }
