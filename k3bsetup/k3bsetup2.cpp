@@ -118,7 +118,7 @@ K3bSetup2::K3bSetup2( TQWidget *parent, const char *, const TQStringList& )
 			       "(C) 2003-2007 Sebastian Trueg");
   m_aboutData->addAuthor("Sebastian Trueg", 0, "trueg@k3b.org");
 
-  setButtons( TDECModule::Apply|TDECModule::Cancel|TDECModule::Ok|TDECModule::Default );
+  setButtons( TDECModule::Apply|TDECModule::Cancel|TDECModule::Ok|TDECModule::Default|TDECModule::Help );
 
   TQHBoxLayout* box = new TQHBoxLayout( this );
   box->setAutoAdd(true);
