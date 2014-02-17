@@ -1,6 +1,6 @@
 <chapter id="dcop">
   <title>The &k3b; &DCOP; Interface</title>
-  <para>&k3b; features, like many other &kde; applications as well, a
+  <para>&k3b; features, like many other &tde; applications as well, a
     &DCOP; interface which makes it possible to control a part of it's
     functionality from &eg; a shellscript.</para>
   <para>To use these &DCOP; functions you can either use the
@@ -16,7 +16,7 @@
 </screen>
 </para>
 
-<para>Besides the generic &DCOP; functions available to all &kde;
+<para>Besides the generic &DCOP; functions available to all &tde;
 applications, &k3b;'s DCOP interface mainly consists of two parts as described below.</para>
 
 <sect1>
