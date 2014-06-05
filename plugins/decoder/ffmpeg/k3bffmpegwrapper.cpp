@@ -38,7 +38,7 @@ extern "C" {
 #endif
 
 // From libavcodec version 54.25, CodecID have been renamed to AVCodecID and all CODEC_ID_* to AV_CODEC_ID_*.
-// This code can be simplyfied once all supported distros have updated to libavcodec version >=54.25
+// This code can be simplified once all supported distros have updated to libavcodec version >=54.25
 #if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(54, 25, 0)
 #define K3B_CODEC_ID_WMAV1 CODEC_ID_WMAV1
 #define K3B_CODEC_ID_WMAV2 CODEC_ID_WMAV2
