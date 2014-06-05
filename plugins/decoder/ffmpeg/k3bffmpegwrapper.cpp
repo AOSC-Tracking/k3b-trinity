@@ -37,6 +37,21 @@ extern "C" {
 #define AVMEDIA_TYPE_SUBTITLE CODEC_TYPE_SUBTITLE
 #endif
 
+// From libavcodec version 54.25, CodecID have been renamed to AVCodecID and all CODEC_ID_* to AV_CODEC_ID_*.
+// This code can be simplyfied once all supported distros have updated to libavcodec version >=54.25
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(54, 25, 0)
+#define K3B_CODEC_ID_WMAV1 CODEC_ID_WMAV1
+#define K3B_CODEC_ID_WMAV2 CODEC_ID_WMAV2
+#define K3B_CODEC_ID_MP3   CODEC_ID_MP3
+#define K3B_CODEC_ID_AAC   CODEC_ID_AAC
+#else
+#define K3B_CODEC_ID_WMAV1 AV_CODEC_ID_WMAV1
+#define K3B_CODEC_ID_WMAV2 AV_CODEC_ID_WMAV2
+#define K3B_CODEC_ID_MP3   AV_CODEC_ID_MP3
+#define K3B_CODEC_ID_AAC   AV_CODEC_ID_AAC
+#endif
+
+
 K3bFFMpegWrapper* K3bFFMpegWrapper::s_instance = 0;
 
 
@@ -217,13 +232,13 @@ int K3bFFMpegFile::type() const
 TQString K3bFFMpegFile::typeComment() const
 {
   switch( type() ) {
-  case CODEC_ID_WMAV1:
+  case K3B_CODEC_ID_WMAV1:
     return i18n("Windows Media v1");
-  case CODEC_ID_WMAV2:
+  case K3B_CODEC_ID_WMAV2:
     return i18n("Windows Media v2");
-  case CODEC_ID_MP3:
+  case K3B_CODEC_ID_MP3:
     return i18n("MPEG 1 Layer III");
-  case CODEC_ID_AAC:
+  case K3B_CODEC_ID_AAC:
     return i18n("Advanced Audio Coding (AAC)");
   default:
     return TQString::fromLocal8Bit( d->codec->name );
@@ -424,9 +439,9 @@ K3bFFMpegFile* K3bFFMpegWrapper::open( const TQString& filename ) const
     // mp3 being one of them sadly. Most importantly: allow the libsndfile decoder to do
     // its thing.
     //
-    if( file->type() == CODEC_ID_WMAV1 ||
-	file->type() == CODEC_ID_WMAV2 ||
-	file->type() == CODEC_ID_AAC )
+    if( file->type() == K3B_CODEC_ID_WMAV1 ||
+	file->type() == K3B_CODEC_ID_WMAV2 ||
+	file->type() == K3B_CODEC_ID_AAC )
 #endif
       return file;
   }
