@@ -1,5 +1,5 @@
 [Desktop Entry]
-ServiceTypes=media/blankcd
+X-TDE-ServiceTypes=media/blankcd
 Actions=K3bDataProject;K3bAudioCDProject;
 X-TDE-Priority=TopLevel
 

@@ -1,5 +1,5 @@
 [Desktop Entry]
-ServiceTypes=media/blankdvd
+X-TDE-ServiceTypes=media/blankdvd
 Actions=K3bDataProject;
 X-TDE-Priority=TopLevel
 

@@ -1,5 +1,5 @@
 [Desktop Entry]
-ServiceTypes=media/audiocd,media/mixedcd
+X-TDE-ServiceTypes=media/audiocd,media/mixedcd
 Actions=K3bRip;
 X-TDE-Priority=TopLevel
 
