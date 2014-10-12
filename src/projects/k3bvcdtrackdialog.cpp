@@ -296,7 +296,7 @@ void K3bVcdTrackDialog::fillPbcGui()
     }
 
     // add Event Disabled
-    TQPixmap pmDisabled = SmallIcon( "stop" );
+    TQPixmap pmDisabled = SmallIcon( "process-stop" );
     TQString txtDisabled = i18n( "Event Disabled" );
     m_pbc_previous->insertItem( pmDisabled, txtDisabled );
     m_pbc_next->insertItem( pmDisabled, txtDisabled );

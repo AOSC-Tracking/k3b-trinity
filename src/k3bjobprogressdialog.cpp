@@ -332,7 +332,7 @@ void K3bJobProgressDialog::slotInfoMessage( const TQString& infoString, int type
   // set the icon
   switch( type ) {
   case K3bJob::ERROR:
-    currentInfoItem->setPixmap( 0, SmallIcon( "stop" ) );
+    currentInfoItem->setPixmap( 0, SmallIcon( "process-stop" ) );
     break;
   case K3bJob::WARNING:
     currentInfoItem->setPixmap( 0, SmallIcon( "yellowinfo" ) );

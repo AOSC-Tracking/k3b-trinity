@@ -569,14 +569,14 @@ void K3bCdImageWritingDialog::slotUpdateImage( const TQString& )
       K3bListViewItem* item = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 						   i18n("Seems not to be a usable image") );
       item->setForegroundColor( 0, TQt::red );
-      item->setPixmap( 0, SmallIcon( "stop") );
+      item->setPixmap( 0, SmallIcon( "process-stop") );
     }
   }
   else {
     K3bListViewItem* item = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 						 i18n("File not found") );
     item->setForegroundColor( 0, TQt::red );
-    item->setPixmap( 0, SmallIcon( "stop") );
+    item->setPixmap( 0, SmallIcon( "process-stop") );
   }
 
   slotToggleAll();
@@ -871,7 +871,7 @@ void K3bCdImageWritingDialog::slotMd5JobFinished( bool success )
       d->md5SumItem->setText( 1, i18n("Calculation cancelled") );
     else
       d->md5SumItem->setText( 1, i18n("Calculation failed") );
-    d->md5SumItem->setPixmap( 0, SmallIcon( "stop") );
+    d->md5SumItem->setPixmap( 0, SmallIcon( "process-stop") );
     d->lastCheckedFile.truncate(0);
   }
 

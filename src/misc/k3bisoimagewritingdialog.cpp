@@ -381,7 +381,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
       K3bListViewItem* item = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 				  i18n("Not an Iso9660 image") );
       item->setForegroundColor( 0, TQt::red );
-      item->setPixmap( 0, SmallIcon( "stop") );
+      item->setPixmap( 0, SmallIcon( "process-stop") );
     }
 
     calculateMd5Sum( path );
@@ -473,7 +473,7 @@ void K3bIsoImageWritingDialog::slotMd5JobFinished( bool success )
       d->md5SumItem->setText( 1, i18n("Calculation cancelled") );
     else
       d->md5SumItem->setText( 1, i18n("Calculation failed") );
-    d->md5SumItem->setPixmap( 0, SmallIcon( "stop") );
+    d->md5SumItem->setPixmap( 0, SmallIcon( "process-stop") );
     d->lastCheckedFile.truncate(0);
   }
 

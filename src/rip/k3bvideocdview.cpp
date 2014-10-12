@@ -334,7 +334,7 @@ void K3bVideoCdView::initActions()
                                            TQT_SLOT( slotDeselect() ), actionCollection(),
                                            "deselect_track" );
 
-    TDEAction* actionStartRip = new TDEAction( i18n( "Start Ripping" ), "run", 0, TQT_TQOBJECT(this),
+    TDEAction* actionStartRip = new TDEAction( i18n( "Start Ripping" ), "system-run", 0, TQT_TQOBJECT(this),
                                            TQT_SLOT( startRip() ), actionCollection(), "start_rip" );
 
     // TODO: set the actions tooltips and whatsthis infos

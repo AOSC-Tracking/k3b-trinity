@@ -88,11 +88,11 @@ K3bCddbOptionTab::K3bCddbOptionTab( TQWidget* parent,  const char* name )
 
   // set icons for the buttons
   m_buttonAddLocalDir->setPixmap( SmallIcon("ok") );
-  m_buttonRemoveLocalDir->setPixmap( SmallIcon("stop") );
+  m_buttonRemoveLocalDir->setPixmap( SmallIcon("process-stop") );
   m_buttonLocalDirUp->setPixmap( SmallIcon("up") );
   m_buttonLocalDirDown->setPixmap( SmallIcon("down") );
   m_buttonAddCddbServer->setPixmap( SmallIcon("ok") );
-  m_buttonRemoveCddbServer->setPixmap( SmallIcon("stop") );
+  m_buttonRemoveCddbServer->setPixmap( SmallIcon("process-stop") );
   m_buttonCddbServerUp->setPixmap( SmallIcon("up") );
   m_buttonCddbServerDown->setPixmap( SmallIcon("down") );
 
