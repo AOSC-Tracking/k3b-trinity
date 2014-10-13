@@ -84,7 +84,7 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
   if( !m_configGroup.isEmpty() ) {
     TQHBoxLayout* layout2 = new TQHBoxLayout( 0, 0, spacingHint(), "layout2");
     m_buttonLoadSettings = new K3bToolButton( /*i18n("User Defaults"), */this );
-    ((K3bToolButton*)m_buttonLoadSettings)->setIconSet( SmallIconSet( "revert" ) );
+    ((K3bToolButton*)m_buttonLoadSettings)->setIconSet( SmallIconSet( "document-revert" ) );
     TQPopupMenu* userDefaultsPopup = new TQPopupMenu( m_buttonLoadSettings );
     userDefaultsPopup->insertItem( i18n("Load default settings"), this, TQT_SLOT(slotLoadK3bDefaults()) );
     userDefaultsPopup->insertItem( i18n("Load saved settings"), this, TQT_SLOT(slotLoadUserDefaults()) );
