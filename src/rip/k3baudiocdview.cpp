@@ -251,7 +251,7 @@ void K3bAudioCdView::initActions()
   TDEAction* actionQueryCddb = new TDEAction( i18n("Query cddb"), "reload", 0, TQT_TQOBJECT(this),
 					  TQT_SLOT(queryCddb()), actionCollection(), "query_cddb" );
 
-  TDEAction* actionSaveCddbLocally = new TDEAction( i18n("Save Cddb Entry Locally"), "filesave", 0, TQT_TQOBJECT(this),
+  TDEAction* actionSaveCddbLocally = new TDEAction( i18n("Save Cddb Entry Locally"), "document-save", 0, TQT_TQOBJECT(this),
 						TQT_SLOT(slotSaveCddbLocally()), actionCollection(), "save_cddb_local" );
 
   // TODO: set the actions tooltips and whatsthis infos

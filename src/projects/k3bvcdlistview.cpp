@@ -95,7 +95,7 @@ void K3bVcdListView::setupActions()
 {
     m_actionCollection = new TDEActionCollection( this );
     m_actionProperties = new TDEAction( i18n( "Properties" ), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT( showPropertiesDialog() ), actionCollection() );
-    m_actionRemove = new TDEAction( i18n( "Remove" ), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT( slotRemoveTracks() ), actionCollection() );
+    m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT( slotRemoveTracks() ), actionCollection() );
 
     // disabled by default
     m_actionRemove->setEnabled( false );

@@ -222,10 +222,10 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
 
   // actions
   // ------------------------------------------------------------------------
-  m_actionRemove = new TDEAction( i18n( "Remove" ), "editdelete",
+  m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete",
 				Key_Delete, this, TQT_SLOT(slotRemoveSelected()),
 				this, "audioplayer_remove" );
-  m_actionClear = new TDEAction( i18n( "Clear List" ), "editclear",
+  m_actionClear = new TDEAction( i18n( "Clear List" ), "edit-clear",
 			       0, this, TQT_SLOT(clear()),
 			       this, "audioplayer_clear" );
 

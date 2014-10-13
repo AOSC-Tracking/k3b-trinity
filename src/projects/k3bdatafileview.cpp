@@ -321,9 +321,9 @@ void K3bDataFileView::setupActions()
 
   m_actionProperties = new TDEAction( i18n("Properties"), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
 				    actionCollection(), "properties" );
-  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder_new", CTRL+Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotNewDir()),
+  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder-new", CTRL+Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotNewDir()),
 				actionCollection(), "new_dir" );
-  m_actionRemove = new TDEAction( i18n("Remove"), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItem()),
+  m_actionRemove = new TDEAction( i18n("Remove"), "edit-delete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItem()),
 				actionCollection(), "remove" );
   TDEShortcut renameShortCut( Key_F2 );
   renameShortCut.append( TDEShortcut(CTRL+Key_R) ); // backwards compatibility
@@ -331,7 +331,7 @@ void K3bDataFileView::setupActions()
 				actionCollection(), "rename" );
   m_actionParentDir = new TDEAction( i18n("Parent Directory"), "go-up", 0, TQT_TQOBJECT(this), TQT_SLOT(slotParentDir()),
 				   actionCollection(), "parent_dir" );
-  m_actionOpen = new TDEAction( i18n("Open"), "fileopen", 0, TQT_TQOBJECT(this), TQT_SLOT(slotOpen()),
+  m_actionOpen = new TDEAction( i18n("Open"), "document-open", 0, TQT_TQOBJECT(this), TQT_SLOT(slotOpen()),
 				   actionCollection(), "open" );
 
   m_popupMenu = new TDEActionMenu( m_actionCollection, "contextMenu" );

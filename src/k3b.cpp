@@ -232,7 +232,7 @@ void K3bMainWindow::initActions()
   setStandardToolBarMenuEnabled(true);
   KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT(slotShowMenuBar()), actionCollection() );
 
-  actionFileNewMenu = new TDEActionMenu( i18n("&New Project"), "filenew", actionCollection(), "file_new" );
+  actionFileNewMenu = new TDEActionMenu( i18n("&New Project"), "document-new", actionCollection(), "file_new" );
   actionFileNewAudio = new TDEAction(i18n("New &Audio CD Project"), "audiocd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewAudioDoc()),
 			     actionCollection(), "file_new_audio");
   actionFileNewData = new TDEAction(i18n("New Data &CD Project"), "datacd", 0, TQT_TQOBJECT(this), TQT_SLOT(slotNewDataDoc()),
@@ -271,7 +271,7 @@ void K3bMainWindow::initActions()
 
 
 
-  actionProjectAddFiles = new TDEAction( i18n("&Add Files..."), "filenew", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProjectAddFiles()),
+  actionProjectAddFiles = new TDEAction( i18n("&Add Files..."), "document-new", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProjectAddFiles()),
 				       actionCollection(), "project_add_files");
 
   TDEAction* actionClearProject = new TDEAction( i18n("&Clear Project"), TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, 

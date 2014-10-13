@@ -282,9 +282,9 @@ void K3bDataDirTreeView::setupActions()
 
   m_actionProperties = new TDEAction( i18n("Properties"), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
 				    actionCollection(), "properties" );
-  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder_new", CTRL+Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotNewDir()),
+  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder-new", CTRL+Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotNewDir()),
 				actionCollection(), "new_dir" );
-  m_actionRemove = new TDEAction( i18n("Remove"), "editdelete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItem()),
+  m_actionRemove = new TDEAction( i18n("Remove"), "edit-delete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItem()),
 				actionCollection(), "remove" );
   TDEShortcut renameShortCut( Key_F2 );
   renameShortCut.append( TDEShortcut(CTRL+Key_R) ); // backwards compatibility

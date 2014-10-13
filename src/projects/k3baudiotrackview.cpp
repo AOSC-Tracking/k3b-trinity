@@ -157,7 +157,7 @@ void K3bAudioTrackView::setupActions()
   m_actionProperties = new TDEAction( i18n("Properties"), "misc",
 				    TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
 				    actionCollection(), "track_properties" );
-  m_actionRemove = new TDEAction( i18n( "Remove" ), "editdelete",
+  m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete",
 				Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemove()),
 				actionCollection(), "track_remove" );
 

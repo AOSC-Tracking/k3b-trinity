@@ -94,7 +94,7 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
     layout2->addWidget( m_buttonLoadSettings );
 
     m_buttonSaveSettings = new TQToolButton( /*i18n("Save User Defaults"), */this, "m_buttonSaveSettings" );
-    ((TQToolButton*)m_buttonSaveSettings)->setIconSet( SmallIconSet( "filesave" ) );
+    ((TQToolButton*)m_buttonSaveSettings)->setIconSet( SmallIconSet( "document-save" ) );
     layout2->addWidget( m_buttonSaveSettings );
 
     mainGrid->addLayout( layout2, 2, 0 );
