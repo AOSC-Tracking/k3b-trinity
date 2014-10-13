@@ -76,7 +76,7 @@ void K3bFileView::setupGUI()
   // setup actions
   TDEAction* actionHome = m_dirOp->actionCollection()->action("home");
   TDEAction* actionBack = m_dirOp->actionCollection()->action("back");
-  TDEAction* actionUp = m_dirOp->actionCollection()->action("up");
+  TDEAction* actionUp = m_dirOp->actionCollection()->action("go-up");
   TDEAction* actionReload = m_dirOp->actionCollection()->action("reload");
 
   m_toolBox->addButton( actionUp );

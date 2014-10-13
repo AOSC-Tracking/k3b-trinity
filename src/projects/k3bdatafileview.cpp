@@ -329,7 +329,7 @@ void K3bDataFileView::setupActions()
   renameShortCut.append( TDEShortcut(CTRL+Key_R) ); // backwards compatibility
   m_actionRename = new TDEAction( i18n("Rename"), "edit", renameShortCut, TQT_TQOBJECT(this), TQT_SLOT(slotRenameItem()),
 				actionCollection(), "rename" );
-  m_actionParentDir = new TDEAction( i18n("Parent Directory"), "up", 0, TQT_TQOBJECT(this), TQT_SLOT(slotParentDir()),
+  m_actionParentDir = new TDEAction( i18n("Parent Directory"), "go-up", 0, TQT_TQOBJECT(this), TQT_SLOT(slotParentDir()),
 				   actionCollection(), "parent_dir" );
   m_actionOpen = new TDEAction( i18n("Open"), "fileopen", 0, TQT_TQOBJECT(this), TQT_SLOT(slotOpen()),
 				   actionCollection(), "open" );
