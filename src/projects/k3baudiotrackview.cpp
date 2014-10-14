@@ -176,7 +176,7 @@ void K3bAudioTrackView::setupActions()
   m_actionEditSource = new TDEAction( i18n("Edit Source..."), 0,
 				    TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotEditSource()),
 				    actionCollection(), "source_edit" );
-  m_actionPlayTrack = new TDEAction( i18n("Play Track"), "player_play",
+  m_actionPlayTrack = new TDEAction( i18n("Play Track"), "media-playback-start",
 				   TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT(slotPlayTrack()),
 				   actionCollection(), "track_play" );
 #ifdef HAVE_MUSICBRAINZ
@@ -954,7 +954,7 @@ void K3bAudioTrackView::showPlayerIndicator( K3bAudioTrack* track )
   removePlayerIndicator();
   m_currentlyPlayingTrack = track;
   K3bAudioTrackViewItem* item = getTrackViewItem( track );
-  item->setPixmap( 1, SmallIcon( "player_play" ) );
+  item->setPixmap( 1, SmallIcon( "media-playback-start" ) );
   m_playerItemAnimator->setItem( item, 1 );
 }
 
@@ -963,9 +963,9 @@ void K3bAudioTrackView::togglePauseIndicator( bool b )
 {
   if( m_currentlyPlayingTrack ) {
     if( b )
-      m_playerItemAnimator->setPixmap( SmallIcon( "player_pause" ) );
+      m_playerItemAnimator->setPixmap( SmallIcon( "media-playback-pause" ) );
     else
-      m_playerItemAnimator->setPixmap( SmallIcon( "player_play" ) );
+      m_playerItemAnimator->setPixmap( SmallIcon( "media-playback-start" ) );
   }
 }
 

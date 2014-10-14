@@ -181,13 +181,13 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
   m_buttonPlay = new TQToolButton( this );
   m_buttonPause = new TQToolButton( this );
   m_buttonStop = new TQToolButton( this );
-  m_buttonPlay->setIconSet( SmallIconSet("player_play") );
-  m_buttonPause->setIconSet( SmallIconSet("player_pause") );
-  m_buttonStop->setIconSet( SmallIconSet("player_stop") );
+  m_buttonPlay->setIconSet( SmallIconSet("media-playback-start") );
+  m_buttonPause->setIconSet( SmallIconSet("media-playback-pause") );
+  m_buttonStop->setIconSet( SmallIconSet("media-playback-stop") );
   m_buttonForward = new TQToolButton( this );
   m_buttonBack = new TQToolButton( this );
-  m_buttonForward->setIconSet( SmallIconSet("player_end") );
-  m_buttonBack->setIconSet( SmallIconSet("player_start") );
+  m_buttonForward->setIconSet( SmallIconSet("media-skip-forward") );
+  m_buttonBack->setIconSet( SmallIconSet("media-skip-backward") );
 
   m_seekSlider = new TQSlider( TQSlider::Horizontal, this );
 

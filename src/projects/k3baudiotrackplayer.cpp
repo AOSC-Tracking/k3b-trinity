@@ -68,38 +68,38 @@ K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* parent, co
   // create the actions
   // TODO: create shortcuts (is there a way to let the user change them?)
   d->actionPlay = new TDEAction( i18n("Play"), 
-			       "player_play", 
+			       "media-playback-start", 
 			       TDEShortcut(), 
 			       this, TQT_SLOT(playPause()), 
 			       d->actionCollection,
 			       "play" );
   d->actionPause = new TDEAction( i18n("Pause"), 
-				"player_pause", 
+				"media-playback-pause", 
 				TDEShortcut(), 
 				this, TQT_SLOT(playPause()), 
 				d->actionCollection,
 				"pause" );
   d->actionPlayPause = new TDEAction( i18n("Play/Pause"), 
-				    "player_play", 
+				    "media-playback-start", 
 				    TDEShortcut(), 
 				    this, TQT_SLOT(playPause()), 
 				    d->actionCollection,
 				    "play_pause" );
 
   d->actionStop = new TDEAction( i18n("Stop"), 
-			       "player_stop", 
+			       "media-playback-stop", 
 			       TDEShortcut(), 
 			       this, TQT_SLOT(stop()), 
 			       d->actionCollection,
 			       "stop" );
   d->actionNext = new TDEAction( i18n("Next"), 
-			       "player_end", 
+			       "media-skip-forward", 
 			       TDEShortcut(), 
 			       this, TQT_SLOT(next()), 
 			       d->actionCollection,
 			       "next" );
   d->actionPrev = new TDEAction( i18n("Prev"), 
-			       "player_start", 
+			       "media-skip-backward", 
 			       TDEShortcut(), 
 			       this, TQT_SLOT(prev()), 
 			       d->actionCollection,
@@ -212,7 +212,7 @@ void K3bAudioTrackPlayer::playPause()
     if( !d->playing ) {
       seek( m_currentPosition );
       d->playing = true;
-      d->actionPlayPause->setIcon( "player_pause" );
+      d->actionPlayPause->setIcon( "media-playback-pause" );
       d->actionPause->setEnabled(true);
       d->actionPlay->setEnabled(false);
       d->actionSeek->setEnabled(true);
@@ -221,7 +221,7 @@ void K3bAudioTrackPlayer::playPause()
     }
     else if( d->paused ) {
       d->paused = false;
-      d->actionPlayPause->setIcon( "player_pause" );
+      d->actionPlayPause->setIcon( "media-playback-pause" );
       d->actionPause->setEnabled(true);
       d->actionPlay->setEnabled(false);
       startStreaming();
@@ -231,7 +231,7 @@ void K3bAudioTrackPlayer::playPause()
     }
     else {
       d->paused = true;
-      d->actionPlayPause->setIcon( "player_play" );
+      d->actionPlayPause->setIcon( "media-playback-start" );
       d->actionPause->setEnabled(false);
       d->actionPlay->setEnabled(true);
       stopStreaming();
@@ -259,7 +259,7 @@ void K3bAudioTrackPlayer::stop()
   d->actionNext->setEnabled(false);
   d->actionPrev->setEnabled(false);
 
-  d->actionPlayPause->setIcon( "player_play" );
+  d->actionPlayPause->setIcon( "media-playback-start" );
 
   emit stopped();
 }
