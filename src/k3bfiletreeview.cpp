@@ -449,7 +449,7 @@ void K3bFileTreeView::initActions()
 //   m_devicePopupMenu = new TDEActionMenu( m_actionCollection, "device_popup_menu" );
 //   m_urlPopupMenu = new TDEActionMenu( m_actionCollection, "url_popup_menu" );
 
-//   TDEAction* actionDiskInfo = new TDEAction( i18n("&Disk Info"), "info", 0, this, TQT_SLOT(slotShowDiskInfo()),
+//   TDEAction* actionDiskInfo = new TDEAction( i18n("&Disk Info"), "application-vnd.tde.info", 0, this, TQT_SLOT(slotShowDiskInfo()),
 // 					 m_actionCollection, "disk_info");
 //   TDEAction* actionUnmount = new TDEAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(slotUnmountDisk()),
 // 					m_actionCollection, "disk_unmount");

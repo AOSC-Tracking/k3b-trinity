@@ -42,7 +42,7 @@ K3bAppDeviceManager::K3bAppDeviceManager( TQObject* parent, const char* name )
 
   // setup actions
   TDEActionMenu* devicePopupMenu = new TDEActionMenu( m_actionCollection, "device_popup" );
-  m_actionDiskInfo = new TDEAction( i18n("Media &Info"), "info", 0, this, TQT_SLOT(diskInfo()),
+  m_actionDiskInfo = new TDEAction( i18n("Media &Info"), "application-vnd.tde.info", 0, this, TQT_SLOT(diskInfo()),
 				  m_actionCollection, "device_diskinfo");
   m_actionUnmount = new TDEAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(unmountDisk()),
 				 m_actionCollection, "device_unmount");
