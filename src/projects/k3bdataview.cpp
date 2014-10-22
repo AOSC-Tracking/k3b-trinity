@@ -80,7 +80,7 @@ K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *parent, const char *name )
   TDEAction* actionClearSession = new TDEAction(i18n("&Clear Imported Session"), "gear", 0, TQT_TQOBJECT(this),
 					    TQT_SLOT(clearImportedSession()), actionCollection(),
 					    "project_data_clear_imported_session" );
-  TDEAction* actionEditBootImages = new TDEAction(i18n("&Edit Boot Images..."), "cdtrack", 0, TQT_TQOBJECT(this),
+  TDEAction* actionEditBootImages = new TDEAction(i18n("&Edit Boot Images..."), "application-x-cda", 0, TQT_TQOBJECT(this),
 					      TQT_SLOT(editBootImages()), actionCollection(),
 					      "project_data_edit_boot_images" );
 

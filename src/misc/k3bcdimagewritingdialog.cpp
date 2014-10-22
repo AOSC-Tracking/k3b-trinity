@@ -589,7 +589,7 @@ void K3bCdImageWritingDialog::createIso9660InfoItems( K3bIso9660* isoF )
 						      i18n("Detected:"),
 						      i18n("Iso9660 image") );
   isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
-  isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
+  isoRootItem->setPixmap( 0, SmallIcon( "application-x-cd-image") );
 
   TDEIO::filesize_t size = K3b::filesize( KURL::fromPathOrURL(isoF->fileName()) );
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
@@ -654,7 +654,7 @@ void K3bCdImageWritingDialog::createCdrecordCloneItems( const TQString& tocFile,
 						      i18n("Detected:"),
 						      i18n("Cdrecord clone image") );
   isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
-  isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
+  isoRootItem->setPixmap( 0, SmallIcon( "application-x-cd-image") );
 
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 					       i18n("Filesize:"), TDEIO::convertSize( K3b::filesize(KURL::fromPathOrURL(imageFile)) ) );
@@ -682,7 +682,7 @@ void K3bCdImageWritingDialog::createCueBinItems( const TQString& cueFile, const 
 						      i18n("Detected:"),
 						      i18n("Cue/bin image") );
   isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
-  isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
+  isoRootItem->setPixmap( 0, SmallIcon( "application-x-cd-image") );
 
   K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 					       i18n("Filesize:"), TDEIO::convertSize( K3b::filesize(KURL::fromPathOrURL(imageFile)) ) );
@@ -710,7 +710,7 @@ void K3bCdImageWritingDialog::createAudioCueItems( const K3bCueFileParser& cp )
 						   i18n("Detected:"),
 						   i18n("Audio Cue Image") );
   rootItem->setForegroundColor( 0, palette().disabled().foreground() );
-  rootItem->setPixmap( 0, SmallIcon( "sound") );
+  rootItem->setPixmap( 0, SmallIcon( "audio-x-generic") );
 
   K3bListViewItem* trackParent = new K3bListViewItem( rootItem,
 						      i18n("%n track", "%n tracks", cp.toc().count() ),

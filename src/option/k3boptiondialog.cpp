@@ -186,7 +186,7 @@ void K3bOptionDialog::setupDevicePage()
 void K3bOptionDialog::setupMiscPage()
 {
   TQFrame* frame = addPage( i18n("Misc"), i18n("Miscellaneous Settings"),
-			   TDEGlobal::instance()->iconLoader()->loadIcon( "misc", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
+			   TDEGlobal::instance()->iconLoader()->loadIcon( ""application-vnd.tde.misc", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   TQVBoxLayout* box = new TQVBoxLayout( frame );
   box->setSpacing( 0 );

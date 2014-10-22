@@ -342,7 +342,7 @@ void K3bJobProgressDialog::slotInfoMessage( const TQString& infoString, int type
     break;
   case K3bJob::INFO:
   default:
-    currentInfoItem->setPixmap( 0, SmallIcon( "info" ) );
+    currentInfoItem->setPixmap( 0, SmallIcon( "application-vnd.tde.info" ) );
   }
 
   // This should scroll down (hopefully!)

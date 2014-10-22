@@ -300,7 +300,7 @@ void K3bDataRootViewItem::setText( int col, const TQString& text )
 K3bSpecialDataViewItem::K3bSpecialDataViewItem( K3bSpecialDataItem* item, TQListView* parent )
   : K3bDataViewItem( item, parent )
 {
-  setPixmap( 0, SmallIcon("unknown") );
+  setPixmap( 0, SmallIcon("text-x-katefilelist") );
 }
 
 TQString K3bSpecialDataViewItem::text( int col ) const
@@ -322,7 +322,7 @@ TQString K3bSpecialDataViewItem::text( int col ) const
 K3bSessionImportViewItem::K3bSessionImportViewItem( K3bSessionImportItem* item, TQListView* parent )
   : K3bDataViewItem( item, parent )
 {
-  setPixmap( 0, SmallIcon("unknown") );
+  setPixmap( 0, SmallIcon("text-x-katefilelist") );
 }
 
 TQString K3bSessionImportViewItem::text( int col ) const

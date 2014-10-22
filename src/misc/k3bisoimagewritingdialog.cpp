@@ -320,7 +320,7 @@ void K3bIsoImageWritingDialog::updateImageSize( const TQString& path )
       K3bListViewItem* isoRootItem = new K3bListViewItem( m_infoView, m_infoView->lastItem(),
 							  i18n("Iso9660 image") );
       isoRootItem->setForegroundColor( 0, palette().disabled().foreground() );
-      isoRootItem->setPixmap( 0, SmallIcon( "cdimage") );
+      isoRootItem->setPixmap( 0, SmallIcon( "application-x-cd-image") );
 
       K3bListViewItem* item = new K3bListViewItem( isoRootItem, m_infoView->lastItem(),
 						   i18n("Filesize:"), TDEIO::convertSize( imageSize ) );

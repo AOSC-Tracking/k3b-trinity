@@ -73,9 +73,9 @@ K3bVcdTrackDialog::K3bVcdTrackDialog( K3bVcdDoc* _doc, TQPtrList<K3bVcdTrack>& t
         m_muxrate->setText( i18n( "%1 bit/s" ).arg( selectedTrack->muxrate() ) );
 
         if ( selectedTrack->isSegment() )
-            m_labelMimeType->setPixmap( SmallIcon( "image", TDEIcon::SizeMedium ) );
+            m_labelMimeType->setPixmap( SmallIcon( "image-x-generic", TDEIcon::SizeMedium ) );
         else
-            m_labelMimeType->setPixmap( SmallIcon( "video", TDEIcon::SizeMedium ) );
+            m_labelMimeType->setPixmap( SmallIcon( "video-x-generic", TDEIcon::SizeMedium ) );
 
         fillGui();
     }
@@ -265,9 +265,9 @@ void K3bVcdTrackDialog::fillPbcGui()
     for ( track = m_tracks.first(); track; track = m_tracks.next() ) {
         TQPixmap pm;
         if ( track->isSegment() )
-            pm = SmallIcon( "image" );
+            pm = SmallIcon( "image-x-generic" );
         else
-            pm = SmallIcon( "video" );
+            pm = SmallIcon( "video-x-generic" );
 
         TQString s = displayName( track );
         if ( track != selectedTrack )              // donot insert selectedTrack, it was as "ItSelf" inserted to the begin of map
