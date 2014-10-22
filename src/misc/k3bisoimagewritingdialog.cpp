@@ -443,7 +443,7 @@ void K3bIsoImageWritingDialog::calculateMd5Sum( const TQString& file )
   d->md5SumItem->setText( 0, i18n("Md5 Sum:") );
   d->md5SumItem->setForegroundColor( 0, palette().disabled().foreground() );
   d->md5SumItem->setProgress( 1, 0 );
-  d->md5SumItem->setPixmap( 0, SmallIcon( "exec") );
+  d->md5SumItem->setPixmap( 0, SmallIcon( "application-x-executable") );
 
   if( file != d->lastCheckedFile ) {
     d->lastCheckedFile = file;

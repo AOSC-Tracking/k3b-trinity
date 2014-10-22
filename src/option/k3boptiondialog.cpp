@@ -141,7 +141,7 @@ void K3bOptionDialog::setupBurningPage()
 void K3bOptionDialog::setupProgramsPage()
 {
   TQFrame* frame = addPage( i18n("Programs"), i18n("Setup External Programs"),
-			   TDEGlobal::instance()->iconLoader()->loadIcon( "exec", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
+			   TDEGlobal::instance()->iconLoader()->loadIcon( "application-x-executable", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   TQGridLayout* _frameLayout = new TQGridLayout( frame );
   _frameLayout->setSpacing( 0 );
