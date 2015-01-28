@@ -34,7 +34,7 @@ SUBDIRS = option misc rip projects fastscale pics icons konqi mimetypes sounds
 
 xdg_apps_DATA = k3b.desktop
 
-silent_DATA = k3b-iso.desktop k3b-cue.desktop
+silent_DATA = k3b-cue.desktop
 silentdir = $(kde_appsdir)/.hidden/
 
 ###################
