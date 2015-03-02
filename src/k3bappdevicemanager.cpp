@@ -44,9 +44,9 @@ K3bAppDeviceManager::K3bAppDeviceManager( TQObject* parent, const char* name )
   TDEActionMenu* devicePopupMenu = new TDEActionMenu( m_actionCollection, "device_popup" );
   m_actionDiskInfo = new TDEAction( i18n("Media &Info"), "application-vnd.tde.info", 0, this, TQT_SLOT(diskInfo()),
 				  m_actionCollection, "device_diskinfo");
-  m_actionUnmount = new TDEAction( i18n("&Unmount"), "cdrom_unmount", 0, this, TQT_SLOT(unmountDisk()),
+  m_actionUnmount = new TDEAction( i18n("&Unmount"), "media-optical-cdrom", 0, this, TQT_SLOT(unmountDisk()),
 				 m_actionCollection, "device_unmount");
-  m_actionMount = new TDEAction( i18n("&Mount"), "cdrom_mount", 0, this, TQT_SLOT(mountDisk()),
+  m_actionMount = new TDEAction( i18n("&Mount"), "media-optical-cdrom-mounted", 0, this, TQT_SLOT(mountDisk()),
 			       m_actionCollection, "device_mount");
   m_actionEject = new TDEAction( i18n("&Eject"), "", 0, this, TQT_SLOT(ejectDisk()),
 			       m_actionCollection, "device_eject");

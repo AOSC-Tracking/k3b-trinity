@@ -127,7 +127,7 @@ void K3bOptionDialog::slotDefault()
 void K3bOptionDialog::setupBurningPage()
 {
   TQFrame* frame = addPage( i18n("Advanced"), i18n("Advanced Settings"),
-			   TDEGlobal::instance()->iconLoader()->loadIcon( "cdwriter_unmount", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
+			   TDEGlobal::instance()->iconLoader()->loadIcon( "media-optical-cdwriter", TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   TQGridLayout* _frameLayout = new TQGridLayout( frame );
   _frameLayout->setSpacing( 0 );

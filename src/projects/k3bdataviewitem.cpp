@@ -266,7 +266,7 @@ K3bDataRootViewItem::K3bDataRootViewItem( K3bDataDoc* doc, TQListView* parent )
   : K3bDataDirViewItem( doc->root(), parent )
 {
   m_doc = doc;
-  setPixmap( 0, SmallIcon( "cdrom_unmount" ) );
+  setPixmap( 0, SmallIcon( "media-optical-cdrom" ) );
   setValidator( 0, new K3bLatin1Validator() );
 }
 
