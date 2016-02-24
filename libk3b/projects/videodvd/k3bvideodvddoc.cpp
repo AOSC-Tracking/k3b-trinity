@@ -68,4 +68,3 @@ K3bBurnJob* K3bVideoDvdDoc::newBurnJob( K3bJobHandler* hdl, TQObject* parent )
   return new K3bVideoDvdJob( this, hdl, parent );
 }
 
-//#include "k3bdvddoc.moc"
