@@ -34,3 +34,12 @@ tde_add_library( k3bdevice SHARED AUTOMOC
   LINK tdecore-shared
   DESTINATION ${LIB_INSTALL_DIR}
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bdevicemanager.h k3bdevice.h k3btoc.h k3btrack.h
+    k3bdeviceglobals.h k3bdiskinfo.h k3bcdtext.h k3bmsf.h k3bdevicetypes.h
+    k3bdevice_export.h k3bhalconnection.h k3bdebug.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

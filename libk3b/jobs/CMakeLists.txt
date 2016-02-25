@@ -45,3 +45,19 @@ tde_add_library( jobs STATIC_PIC AUTOMOC
     k3biso9660imagewritingjob.cpp k3bdvdformattingjob.cpp k3bblankingjob.cpp
     k3bclonetocreader.cpp k3bverificationjob.cpp ${VIDEODVDRIP_SOURCES}
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bcdcopyjob.h k3bdvdcopyjob.h k3bclonejob.h
+	k3baudiocuefilewritingjob.h k3bbinimagewritingjob.h
+	k3biso9660imagewritingjob.h k3bdvdformattingjob.h
+	k3bblankingjob.h k3bverificationjob.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)
+
+if ( WITH_LIBDVDREAD )
+  install( FILES k3bvideodvdtitletranscodingjob.h k3bvideodvdtitledetectclippingjob.h
+    DESTINATION ${INCLUDE_INSTALL_DIR}
+  )
+endif ( WITH_LIBDVDREAD )

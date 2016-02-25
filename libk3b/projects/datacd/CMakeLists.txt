@@ -36,3 +36,11 @@ tde_add_library( data STATIC_PIC AUTOMOC
     k3bisooptions.cpp k3bfilecompilationsizehandler.cpp
     k3bsessionimportitem.cpp k3bmkisofshandler.cpp k3bdatapreparationjob.cpp
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bdatadoc.h k3bdatajob.h k3bdataitem.h k3bdiritem.h
+    k3bfileitem.h k3bbootitem.h k3bisooptions.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

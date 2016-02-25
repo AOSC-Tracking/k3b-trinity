@@ -44,3 +44,10 @@ tde_add_library( vcd STATIC_PIC AUTOMOC
   SOURCES k3bvcddoc.cpp k3bvcdtrack.cpp k3bvcdjob.cpp k3bvcdoptions.cpp
     k3bvcdxmlview.cpp
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bvcdjob.h k3bvcddoc.h k3bvcdoptions.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

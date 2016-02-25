@@ -33,3 +33,10 @@ link_directories(
 tde_add_library( mixed STATIC_PIC AUTOMOC
   SOURCES k3bmixeddoc.cpp k3bmixedjob.cpp
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bmixeddoc.h k3bmixedjob.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)
