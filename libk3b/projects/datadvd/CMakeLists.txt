@@ -33,3 +33,10 @@ link_directories(
 tde_add_library( dvd STATIC_PIC AUTOMOC
   SOURCES k3bdvddoc.cpp k3bdvdjob.cpp k3bdvdbooktypejob.cpp
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bdvddoc.h k3bdvdjob.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

@@ -32,3 +32,12 @@ tde_add_library( videodvdrip STATIC_PIC AUTOMOC
   SOURCES k3bvideodvd.cpp k3bvideodvdtime.cpp k3bvideodvdvideostream.cpp
   LINK ${LIBDVDREAD_LIBRARIES}
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bvideodvd.h k3bvideodvdtitle.h k3bvideodvdaudiostream.h
+    k3bvideodvdsubpicturestream.h k3bvideodvdvideostream.h k3bvideodvdtime.h
+    k3bvideodvdptt.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

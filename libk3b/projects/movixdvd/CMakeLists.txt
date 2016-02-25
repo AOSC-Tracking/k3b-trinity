@@ -34,3 +34,10 @@ link_directories(
 tde_add_library( movixdvd STATIC_PIC AUTOMOC
   SOURCES k3bmovixdvddoc.cpp k3bmovixdvdjob.cpp
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bmovixdvddoc.h k3bmovixdvdjob.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

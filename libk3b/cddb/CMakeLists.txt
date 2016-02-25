@@ -34,3 +34,10 @@ tde_add_library( cddb STATIC_PIC AUTOMOC
     k3bcddbpquery.cpp k3bcddblocalquery.cpp k3bcddbsubmit.cpp
     k3bcddblocalsubmit.cpp k3bcddbmultientriesdialog.cpp
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bcddb.h k3bcddbresult.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

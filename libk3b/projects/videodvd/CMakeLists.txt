@@ -34,3 +34,10 @@ tde_add_library( videodvd STATIC_PIC AUTOMOC
   SOURCES k3bvideodvddoc.cpp k3bvideodvdjob.cpp k3bvideodvdimager.cpp
     k3bvideodvddoc.h k3bvideodvdjob.h
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bvideodvddoc.h k3bvideodvdjob.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

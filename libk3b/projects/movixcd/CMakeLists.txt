@@ -35,3 +35,7 @@ tde_add_library( movix STATIC_PIC AUTOMOC
   SOURCES k3bmovixprogram.cpp k3bmovixdoc.cpp k3bmovixjob.cpp
     k3bmovixfileitem.cpp k3bmovixdocpreparer.cpp
 )
+
+install( FILES k3bmovixdoc.h k3bmovixjob.h k3bmovixfileitem.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

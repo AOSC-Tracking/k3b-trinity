@@ -50,3 +50,12 @@ tde_add_library( k3bproject STATIC_PIC AUTOMOC
     k3btocfilewriter.cpp k3bimagefilereader.cpp k3bcuefileparser.cpp
     k3bpipebuffer.cpp
 )
+
+
+##### Headers ###################################
+
+install( FILES k3bdoc.h k3bgrowisofswriter.h k3bcdrdaowriter.h
+    k3bcdrecordwriter.h k3binffilewriter.h k3btocfilewriter.h
+    k3bcuefileparser.h k3bimagefilereader.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)
