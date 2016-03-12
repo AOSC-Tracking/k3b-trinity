@@ -23,8 +23,8 @@
 #cmakedefine HAVE_SYS_VFS_H
 #cmakedefine HAVE_BYTESWAP_H
 #cmakedefine HAVE_STDINT_H
-#cmakedefine HAVE_LRINT
-#cmakedefine HAVE_LRINTF
+#define HAVE_LRINT @HAVE_LRINT@
+#define HAVE_LRINTF @HAVE_LRINTF@
 #cmakedefine HAVE_STAT64
 
 // Don't define HAVE_RESMGR due to it seems to be totally outdated
