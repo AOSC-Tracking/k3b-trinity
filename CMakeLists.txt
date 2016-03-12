@@ -45,7 +45,7 @@ tde_setup_paths( )
 
 option( WITH_ALL_OPTIONS   "Enable all sane supported options" OFF )
 option( WITH_LIBDVDREAD    "Enable support for libdvdread"    ${WITH_ALL_OPTIONS} )
-option( WITH_MUSICBRAINZ   "Enable Musicbrainz support" ${WITH_ALL_OPTIONS} )
+option( WITH_MUSICBRAINZ   "Enable Musicbrainz support" OFF )
 option( WITH_SYSTEM_LIBSAMPLERATE
     "Use system libsamplerate instead of bundled one" ON )
 option( WITH_HAL           "Enable hal support" OFF )
