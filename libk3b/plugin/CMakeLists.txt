@@ -44,7 +44,7 @@ tde_moc( k3bplugin_SOURCES k3bprojectplugin.h )
 
 tde_add_library( k3bplugin STATIC_PIC AUTOMOC
   SOURCES ${k3bplugin_SOURCES}
-  LINK ${LIBSAMPLERATE_LIBRARIES}
+  LINK m ${LIBSAMPLERATE_LIBRARIES}
 )
 
 
