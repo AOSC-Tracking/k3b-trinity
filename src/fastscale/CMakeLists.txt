@@ -21,7 +21,9 @@ link_directories(
   ${TQT_LIBRARY_DIRS}
 )
 
-enable_language(CXX ASM)
+# Force to use C compiler for asm_scale.S instead of ASM
+# because contains mixed code - ASM with C definitions
+set_source_files_properties( asm_scale.S PROPERTIES LANGUAGE C )
 
 # TODO add assembler flags here (2016-01-14, Fat-Zer)
 
