@@ -112,17 +112,17 @@ void K3bWaveFileWriter::writeEmptyHeader()
 {
   static const char riffHeader[] =
   {
-    0x52, 0x49, 0x46, 0x46, // 0  "RIFF"
-    0x00, 0x00, 0x00, 0x00, // 4  wavSize
-    0x57, 0x41, 0x56, 0x45, // 8  "WAVE"
-    0x66, 0x6d, 0x74, 0x20, // 12 "fmt "
-    0x10, 0x00, 0x00, 0x00, // 16
-    0x01, 0x00, 0x02, 0x00, // 20
-    0x44, 0xac, 0x00, 0x00, // 24
-    0x10, 0xb1, 0x02, 0x00, // 28
-    0x04, 0x00, 0x10, 0x00, // 32
-    0x64, 0x61, 0x74, 0x61, // 36 "data"
-    0x00, 0x00, 0x00, 0x00  // 40 byteCount
+    '\x52', '\x49', '\x46', '\x46', // 0  "RIFF"
+    '\x00', '\x00', '\x00', '\x00', // 4  wavSize
+    '\x57', '\x41', '\x56', '\x45', // 8  "WAVE"
+    '\x66', '\x6d', '\x74', '\x20', // 12 "fmt "
+    '\x10', '\x00', '\x00', '\x00', // 16
+    '\x01', '\x00', '\x02', '\x00', // 20
+    '\x44', '\xac', '\x00', '\x00', // 24
+    '\x10', '\xb1', '\x02', '\x00', // 28
+    '\x04', '\x00', '\x10', '\x00', // 32
+    '\x64', '\x61', '\x74', '\x61', // 36 "data"
+    '\x00', '\x00', '\x00', '\x00'  // 40 byteCount
   };
 
   m_outputStream.writeRawBytes( riffHeader, 44 );
