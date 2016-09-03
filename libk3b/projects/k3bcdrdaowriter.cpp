@@ -936,7 +936,7 @@ void K3bCdrdaoWriter::parseCdrdaoWrote( const TQString& line )
 
 void K3bCdrdaoWriter::parseCdrdaoMessage()
 {
-  static const char msgSync[] = { 0xff, 0x00, 0xff, 0x00 };
+  static const char msgSync[] = { '\xff', '\x00', '\xff', '\x00' };
   unsigned int avail = m_comSock->bytesAvailable();
   unsigned int msgs = avail / ( sizeof(msgSync)+d->progressMsgSize );
   unsigned int count = 0;

@@ -594,7 +594,7 @@ bool K3b::mount( K3bDevice::Device* dev )
 
 #if KDE_IS_VERSION(3,4,0)
   // first try to mount it the standard way
-  if( TDEIO::NetAccess::synchronousRun( TDEIO::mount( true, 0, mntDev, false ), 0 ) )
+  if( TDEIO::NetAccess::synchronousRun( TDEIO::mount( true, 0, mntDev, 0, false ), 0 ) )
     return true;
 #endif
 
