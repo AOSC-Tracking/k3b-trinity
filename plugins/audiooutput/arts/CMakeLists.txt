@@ -31,7 +31,7 @@ link_directories(
 
 tde_add_kpart( libk3bartsoutputplugin AUTOMOC
   SOURCES k3bartsoutputplugin.cpp
-  LINK tdecore-shared k3b-shared ${ARTS_LIBRARIES} artsc
+  LINK tdecore-shared k3b-shared artsc
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

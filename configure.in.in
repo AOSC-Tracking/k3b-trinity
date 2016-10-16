@@ -35,13 +35,21 @@ AM_CONDITIONAL(compile_libsamplerate, [test -z "$LIBSAMPLERATE"])
 ARTS_LIBS=""
 if test "x$build_arts" = "xyes"; then
 	dnl Find aRts
-	KDE_CHECK_HEADERS(artsc/artsc.h,
-		[arts_available=yes
-	 	 ARTS_LIBS="-lartsc"],
-		[arts_available=no]
-	)
+	if $PKG_CONFIG artsc --exists; then
+		arts_available=yes
+		ARTS_LIBS="-lartsc"
+		ARTS_INCLUDES="`$PKG_CONFIG artsc --cflags`"
+	else
+		KDE_CHECK_HEADERS(artsc/artsc.h,
+			[arts_available=yes
+			 ARTS_LIBS="-lartsc"
+			 ARTS_INCLUDES="`$ARTSCCONFIG --cflags`"],
+			[arts_available=no]
+		)
+	fi
 fi
 AC_SUBST(ARTS_LIBS)
+AC_SUBST(ARTS_INCLUDES)
 AM_CONDITIONAL(include_arts, [test -n "$ARTS_LIBS"])
 if test "x$build_arts" = "xyes" -a "x$arts_available" = "xyes"; then
 	AC_DEFINE(WITH_ARTS,1,[defined if arts support is compiled in])
