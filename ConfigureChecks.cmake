@@ -108,9 +108,9 @@ endif( )
 ##### arts ######################################
 
 if( WITH_ARTS )
-  pkg_search_module( ARTS arts )
+  pkg_search_module( ARTS artsc )
   if( NOT ARTS_FOUND )
-    tde_message_fatal( "aRts is requested, but was not found on your system" )
+    tde_message_fatal( "aRtsC is requested, but was not found on your system" )
   endif( )
 endif( )
 

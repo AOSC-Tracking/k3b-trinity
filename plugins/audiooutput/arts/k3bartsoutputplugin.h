@@ -18,7 +18,7 @@
 
 #include <k3baudiooutputplugin.h>
 
-#include <artsc/artsc.h>
+#include <artsc.h>
 
 
 class K3bArtsOutputPlugin : public K3bAudioOutputPlugin
