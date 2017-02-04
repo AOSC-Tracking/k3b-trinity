@@ -1,5 +1,9 @@
 #cmakedefine VERSION "@VERSION@"
 
+/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+   significant byte first (like Motorola and SPARC, unlike Intel). */
+#cmakedefine WORDS_BIGENDIAN @WORDS_BIGENDIAN@
+
 // User specified build options
 
 #cmakedefine HAVE_K3BSETUP

@@ -24,6 +24,9 @@ endif( WITH_GCC_VISIBILITY )
 
 tde_setup_architecture_flags( )
 
+include(TestBigEndian)
+test_big_endian(WORDS_BIGENDIAN)
+
 # Check system configuration
 check_include_file ( "iconv.h"       HAVE_ICONV_H       )
 check_include_file ( "endian.h"      HAVE_ENDIAN_H      )
