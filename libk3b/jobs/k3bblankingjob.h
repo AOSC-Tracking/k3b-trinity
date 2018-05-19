@@ -20,7 +20,9 @@
 #include "k3b_export.h"
 class TDEProcess;
 class TQString;
-class K3bDevice::Device;
+namespace K3bDevice {
+    class Device;
+}
 class K3bAbstractWriter;
 
 
