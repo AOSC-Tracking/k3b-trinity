@@ -20,7 +20,9 @@
 #include <k3bjob.h>
 
 class K3bMovixDvdDoc;
-class K3bDevice::Device;
+namespace K3bDevice {
+    class Device;
+}
 class K3bDvdJob;
 class KTempFile;
 class K3bMovixInstallation;

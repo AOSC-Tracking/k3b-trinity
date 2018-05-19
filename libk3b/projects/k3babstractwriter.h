@@ -22,7 +22,9 @@
 
 #include <tqdatetime.h>
 
-class K3bDevice::Device;
+namespace K3bDevice {
+    class Device;
+}
 class K3bJobHandler;
 
 

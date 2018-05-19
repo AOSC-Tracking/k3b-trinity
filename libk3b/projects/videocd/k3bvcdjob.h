@@ -25,7 +25,9 @@ class K3bProcess;
 class TDEProcess;
 class TQDataStream;
 class K3bAbstractWriter;
-class K3bDevice::Device;
+namespace K3bDevice {
+    class Device;
+}
 
 
 class K3bVcdJob : public K3bBurnJob

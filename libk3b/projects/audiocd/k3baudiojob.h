@@ -29,7 +29,9 @@ class KTempFile;
 class K3bCdrecordWriter;
 class K3bAudioNormalizeJob;
 class K3bAudioJobTempData;
-class K3bDevice::Device;
+namespace K3bDevice {
+    class Device;
+}
 class K3bAudioMaxSpeedJob;
 
 /**
