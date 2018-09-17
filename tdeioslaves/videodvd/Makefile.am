@@ -7,7 +7,7 @@ kde_module_LTLIBRARIES = tdeio_videodvd.la
 
 tdeio_videodvd_la_SOURCES = videodvd.cpp
 tdeio_videodvd_la_LIBADD = -ltdeio ../../libk3b/libk3b.la
-tdeio_videodvd_la_LDFLAGS = -avoid-version -module $(all_libraries) $(KDE_PLUGIN) $(LIB_QT) -ltdeio -ltdecore -L../../libk3bdevice/.libs -lk3bdevice
+tdeio_videodvd_la_LDFLAGS = -avoid-version -module $(all_libraries) $(KDE_PLUGIN) $(LIB_TQT) -ltdeio -ltdecore -L../../libk3bdevice/.libs -lk3bdevice
 
 protocol_DATA = videodvd.protocol
 protocoldir = $(kde_servicesdir)
