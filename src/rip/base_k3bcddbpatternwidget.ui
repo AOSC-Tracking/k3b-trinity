@@ -173,8 +173,9 @@
     <tabstop>m_editBlankReplace</tabstop>
 </tabstops>
 <layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>kurllabel.h</includehint>
-    <includehint>kurllabel.h</includehint>
-</includehints>
+<includes>
+    <include location="global" impldecl="in implementation">kcombobox.h</include>
+    <include location="global" impldecl="in implementation">klineedit.h</include>
+    <include location="global" impldecl="in implementation">kurllabel.h</include>
+</includes>
 </UI>

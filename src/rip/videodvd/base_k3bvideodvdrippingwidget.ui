@@ -707,15 +707,12 @@
     </connection>
 </connections>
 <layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>tdelistview.h</includehint>
-    <includehint>kurlrequester.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>kpushbutton.h</includehint>
-    <includehint>kactivelabel.h</includehint>
-    <includehint>k3bintmapcombobox.h</includehint>
-    <includehint>k3bintmapcombobox.h</includehint>
-    <includehint>kurllabel.h</includehint>
-    <includehint>klineedit.h</includehint>
-</includehints>
+<includes>
+    <include location="global" impldecl="in implementation">k3bintmapcombobox.h</include>
+    <include location="global" impldecl="in implementation">kactivelabel.h</include>
+    <include location="global" impldecl="in implementation">klineedit.h</include>
+    <include location="global" impldecl="in implementation">kurllabel.h</include>
+    <include location="global" impldecl="in implementation">kurlrequester.h</include>
+    <include location="global" impldecl="in implementation">tdelistview.h</include>
+</includes>
 </UI>
