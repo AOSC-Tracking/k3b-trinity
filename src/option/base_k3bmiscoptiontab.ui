@@ -274,11 +274,9 @@
     </image>
 </images>
 <layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>kurlrequester.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>kpushbutton.h</includehint>
-    <includehint>kcombobox.h</includehint>
-    <includehint>k3bintmapcombobox.h</includehint>
-</includehints>
+<includes>
+    <include location="global" impldecl="in implementation">k3bintmapcombobox.h</include>
+    <include location="global" impldecl="in implementation">kcombobox.h</include>
+    <include location="global" impldecl="in implementation">kurlrequester.h</include>
+</includes>
 </UI>

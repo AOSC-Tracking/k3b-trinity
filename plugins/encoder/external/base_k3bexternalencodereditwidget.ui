@@ -155,10 +155,8 @@ Please insert the command used to encode the audio data. The command has to read
     <tabstop>m_editCommand</tabstop>
 </tabstops>
 <layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>klineedit.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>kactivelabel.h</includehint>
-    <includehint>klineedit.h</includehint>
-</includehints>
+<includes>
+    <include location="global" impldecl="in implementation">kactivelabel.h</include>
+    <include location="global" impldecl="in implementation">klineedit.h</include>
+</includes>
 </UI>

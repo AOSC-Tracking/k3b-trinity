@@ -323,14 +323,8 @@ This does not mean that K3b adds an additional gap of silence to the track. This
     <tabstop>m_checkCopyPermitted</tabstop>
 </tabstops>
 <layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>klineedit.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>k3bmsfedit.h</includehint>
-</includehints>
+<includes>
+    <include location="global" impldecl="in implementation">k3bmsfedit.h</include>
+    <include location="global" impldecl="in implementation">klineedit.h</include>
+</includes>
 </UI>
