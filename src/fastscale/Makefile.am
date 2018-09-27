@@ -9,6 +9,6 @@ libfastscale_la_SOURCES = \
 	scale.cpp \
 	asm_scale.S
 
-libfastscale_la_LIBADD = $(LIB_TDECORE) $(LIBQT) $(LIBJPEG)
+libfastscale_la_LIBADD = $(LIB_TDECORE) $(LIBTQT) $(LIBJPEG)
 
 METASOURCES = AUTO
