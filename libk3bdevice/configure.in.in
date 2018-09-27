@@ -129,7 +129,7 @@ if test "x$ac_cv_use_hal" = "xyes" ; then
                     dbus=FOUND,dbus=no)
 
   AC_SUBST(DBUSQT_CFLAGS)
-  AC_SUBST(DBUSQT_LIBS)
+  AC_SUBST(DBUSTQT_LIBS)
 
 
 ########### Check if media HAL backend sould be compiled
@@ -142,7 +142,7 @@ AC_MSG_RESULT(Found HAL storage version $hal_storage_version)
 if [test "x$hal" = "xFOUND"] && [test "x$dbus" = "xFOUND"] && [ test $hal_storage_version = 5 ] ; then
   AC_DEFINE(HAVE_HAL, , [compile in HAL support])
   have_hal=yes
-  HAL_DBUS_LIBS="$HAL_LIBS $DBUSQT_LIBS"
+  HAL_DBUS_LIBS="$HAL_LIBS $DBUSTQT_LIBS"
 fi
 
 AM_CONDITIONAL(include_HAL, [test x$have_hal = xyes])
