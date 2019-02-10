@@ -9,23 +9,26 @@
 #
 #################################################
 
-##### check for gcc visibility support #########
-# FIXME
-# This should check for [T]Qt3 visibility support
 
-if( WITH_GCC_VISIBILITY )
-  if( NOT UNIX )
-    tde_message_fatal(FATAL_ERROR "\ngcc visibility support was requested, but your system is not *NIX" )
-  endif( NOT UNIX )
-  set( __KDE_HAVE_GCC_VISIBILITY 1 )
-  set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
-  set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
-endif( WITH_GCC_VISIBILITY )
+# required stuff
 
 tde_setup_architecture_flags( )
 
 include(TestBigEndian)
 test_big_endian(WORDS_BIGENDIAN)
+
+tde_setup_largefiles( )
+
+find_package( TQt )
+find_package( TDE )
+
+
+##### check for gcc visibility support #########
+
+if( WITH_GCC_VISIBILITY )
+  tde_setup_gcc_visibility( )
+endif( )
+
 
 # Check system configuration
 check_include_file ( "iconv.h"       HAVE_ICONV_H       )
@@ -230,21 +233,3 @@ if( WITH_LAME )
     tde_message_fatal( "lame is requested, but was not found on your system" )
   endif( )
 endif( )
-
-
-# # gettext
-# if( BUILD_TRANSLATIONS )
-#   include( FindGettext )
-#   if( GETTEXT_FOUND )
-#     set( MSGFMT_EXECUTABLE ${GETTEXT_MSGFMT_EXECUTABLE}
-#       CACHE FILEPATH "path to msgfmt executable" )
-#   endif( GETTEXT_FOUND )
-#
-#   if( NOT MSGFMT_EXECUTABLE )
-#     tde_message_fatal( "msgfmt is required but was not found on your system." )
-#   endif( NOT MSGFMT_EXECUTABLE )
-# endif( BUILD_TRANSLATIONS )
-
-# required stuff
-find_package( TQt )
-find_package( TDE )
