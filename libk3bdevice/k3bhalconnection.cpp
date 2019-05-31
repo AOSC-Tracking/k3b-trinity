@@ -22,6 +22,7 @@
 #include <tdelocale.h>
 
 #include <tqtimer.h>
+#include <tqvariant.h>
 
 #ifdef HAVE_HAL
 // We acknowledge the the dbus API is unstable
@@ -842,8 +843,9 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
 	// FIXME
 	// Options from 'options' are not currently loaded into 'mountOptions'
 	TDEStorageMountOptions mountOptions;
-	TQString mountedPath = sdevice->mountDevice(mountPoint, mountOptions);
-	if (mountedPath.isNull()) {
+	TDEStorageOpResult mountResult = sdevice->mountDevice(mountPoint, mountOptions);
+	TQString mountedPath = mountResult.contains("mountPath") ? mountResult["mountPath"].toString() : TQString::null;
+	if (mountedPath.isEmpty()) {
 		return org_freedesktop_Hal_CommunicationError;
 	}
 	else {
@@ -872,7 +874,8 @@ int K3bDevice::HalConnection::unmount(K3bDevice::Device* dev, const TQStringList
 	// Options from 'options' are not currently loaded into 'mountOptions'
 	TQString mountOptions;
 
-	if (!sdevice->unmountDevice(NULL)) {
+	TDEStorageOpResult unmountResult = sdevice->unmountDevice();
+	if (unmountResult["result"].toBool() == false) {
 		// Unmount failed!
 		return org_freedesktop_Hal_CommunicationError;
 	}
