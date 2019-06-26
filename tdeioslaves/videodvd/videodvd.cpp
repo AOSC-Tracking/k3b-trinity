@@ -302,7 +302,7 @@ void tdeio_videodvdProtocol::listVideoDVDs()
 	uds.append( a );
 
 	a.m_uds = TDEIO::UDS_ICON_NAME;
-	a.m_str = "media-optical-dvd";
+	a.m_str = "media-optical-dvd-unmounted";
 	uds.append( a );
 
 	udsl.append( uds );

@@ -341,7 +341,7 @@ K3bFillStatusDisplay::K3bFillStatusDisplay( K3bDoc* doc, TQWidget *parent, const
 
   d->displayWidget = new K3bFillStatusDisplayWidget( doc, this );
 //   d->buttonMenu = new TQToolButton( this );
-//   d->buttonMenu->setIconSet( SmallIconSet("media-optical-cdrom") );
+//   d->buttonMenu->setIconSet( SmallIconSet("media-optical-cdrom-unmounted") );
 //   d->buttonMenu->setAutoRaise(true);
 //   TQToolTip::add( d->buttonMenu, i18n("Fill display properties") );
 //   connect( d->buttonMenu, TQT_SIGNAL(clicked()), TQT_TQOBJECT(this), TQT_SLOT(slotMenuButtonClicked()) );
@@ -402,7 +402,7 @@ void K3bFillStatusDisplay::setupPopupMenu()
   d->actionCustomSize = new K3bRadioAction( i18n("Custom..."), 0, TQT_TQOBJECT(this), TQT_SLOT(slotCustomSize()),
 					    d->actionCollection, "fillstatus_custom_size" );
   d->actionCustomSize->setAlwaysEmitActivated(true);
-  d->actionDetermineSize = new K3bRadioAction( i18n("From Medium..."), "media-optical-cdrom", 0,
+  d->actionDetermineSize = new K3bRadioAction( i18n("From Medium..."), "media-optical-cdrom-unmounted", 0,
 					       TQT_TQOBJECT(this), TQT_SLOT(slotDetermineSize()),
 					       d->actionCollection, "fillstatus_size_from_disk" );
   d->actionDetermineSize->setAlwaysEmitActivated(true);

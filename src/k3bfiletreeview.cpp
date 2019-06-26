@@ -54,8 +54,8 @@ K3bDeviceBranch::K3bDeviceBranch( KFileTreeView* view, K3bDevice::Device* dev, K
 		     KURL( "media:/" + dev->blockDeviceName() ),
 		     TQString("%1 - %2").arg(dev->vendor()).arg(dev->description()),
 		     ( dev->burner()
-		       ? SmallIcon("media-optical-cdwriter")
-		       : SmallIcon("media-optical-cdrom") ),
+		       ? SmallIcon("cd-rw-unmounted")
+		       : SmallIcon("media-optical-cdrom-unmounted") ),
 		     false,
 		     item == 0
 		     ? new K3bDeviceBranchViewItem( view, dev, this )
@@ -451,7 +451,7 @@ void K3bFileTreeView::initActions()
 
 //   TDEAction* actionDiskInfo = new TDEAction( i18n("&Disk Info"), "application-vnd.tde.info", 0, this, TQT_SLOT(slotShowDiskInfo()),
 // 					 m_actionCollection, "disk_info");
-//   TDEAction* actionUnmount = new TDEAction( i18n("&Unmount"), "media-optical-cdrom", 0, this, TQT_SLOT(slotUnmountDisk()),
+//   TDEAction* actionUnmount = new TDEAction( i18n("&Unmount"), "media-optical-cdrom-unmounted", 0, this, TQT_SLOT(slotUnmountDisk()),
 // 					m_actionCollection, "disk_unmount");
 //   TDEAction* actionEject = new TDEAction( i18n("&Eject"), "", 0, this, TQT_SLOT(slotEjectDisk()),
 // 					m_actionCollection, "disk_eject");

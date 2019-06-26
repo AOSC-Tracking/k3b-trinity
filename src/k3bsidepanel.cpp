@@ -37,7 +37,7 @@ K3bSidePanel::K3bSidePanel( K3bMainWindow* m, TQWidget* parent, const char* name
 
   // CD projects
   TQFrame* cdProjectsFrame = createPanel();
-  addItem( cdProjectsFrame, SmallIconSet( "media-optical-cdrom" ), i18n("CD Tasks") );
+  addItem( cdProjectsFrame, SmallIconSet( "media-optical-cdrom-unmounted" ), i18n("CD Tasks") );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_audio" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_data" ) );
   addButton( cdProjectsFrame, m_mainWindow->action( "file_new_mixed" ) );
@@ -52,7 +52,7 @@ K3bSidePanel::K3bSidePanel( K3bMainWindow* m, TQWidget* parent, const char* name
 
   // DVD projects
   TQFrame* dvdProjectsFrame = createPanel();
-  addItem( dvdProjectsFrame, SmallIconSet( "media-optical-dvd" ), i18n("DVD Tasks") );
+  addItem( dvdProjectsFrame, SmallIconSet( "media-optical-dvd-unmounted" ), i18n("DVD Tasks") );
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_dvd" ) );
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_video_dvd" ) );
   addButton( dvdProjectsFrame, m_mainWindow->action( "file_new_movix_dvd" ) );

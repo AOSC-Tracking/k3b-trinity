@@ -1,5 +1,5 @@
 [Desktop Entry]
-X-TDE-ServiceTypes=media/cdrom_unmounted,media/cdwriter_unmounted,media/audiocd
+X-TDE-ServiceTypes=media/cdrom_unmounted,media/cd-rw_unmounted,media/audiocd
 Actions=K3bCDCopy;
 X-TDE-Priority=TopLevel
 

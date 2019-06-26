@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=Link
 URL=videodvd:/
-Icon=media-optical-dvd
+Icon=media-optical-dvd-unmounted
 Name=Video DVD Browser
 Name[af]=Video DVD Blaaier
 Name[ar]= قارىء القرص المدمج المرئي الرقمي DVD

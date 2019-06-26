@@ -208,10 +208,10 @@ int K3bEmptyDiscWaiter::waitForDisc( int mediaState, int mediaType, const TQStri
     d->labelRequest->setText( message );
 
   if( d->wantedMediaType & K3bDevice::MEDIA_WRITABLE_DVD )
-    d->pixLabel->setPixmap( TDEGlobal::instance()->iconLoader()->loadIcon( "media-optical-dvd",
+    d->pixLabel->setPixmap( TDEGlobal::instance()->iconLoader()->loadIcon( "media-optical-dvd-unmounted",
 									 TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
   else
-    d->pixLabel->setPixmap( TDEGlobal::instance()->iconLoader()->loadIcon( "media-optical-cdwriter",
+    d->pixLabel->setPixmap( TDEGlobal::instance()->iconLoader()->loadIcon( "cd-rw-unmounted",
 									 TDEIcon::NoGroup, TDEIcon::SizeMedium ) );
 
   adjustSize();

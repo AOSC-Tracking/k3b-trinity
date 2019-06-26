@@ -305,7 +305,7 @@ void K3bVcdTrackDialog::fillPbcGui()
     m_comboAfterTimeout->insertItem( pmDisabled, txtDisabled );
 
     // add VideoCD End
-    TQPixmap pmEnd = SmallIcon( "media-optical-cdrom" );
+    TQPixmap pmEnd = SmallIcon( "media-optical-cdrom-unmounted" );
     TQString txtEnd = i18n( "VideoCD END" );
     m_pbc_previous->insertItem( pmEnd, txtEnd );
     m_pbc_next->insertItem( pmEnd, txtEnd );
