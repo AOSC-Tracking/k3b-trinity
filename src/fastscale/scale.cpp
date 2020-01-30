@@ -439,7 +439,7 @@ static void HorizontalFilter(const TQImage& source,TQImage& destination,
     stop,
     y;
 
-  register long
+  long
     i,
     x;
 
@@ -524,7 +524,7 @@ static void VerticalFilter(const TQImage& source,TQImage& destination,
     stop,
     x;
 
-  register long
+  long
     i,
     y;
 
@@ -738,13 +738,13 @@ TQImage SampleImage(const TQImage& image,const int columns,
   uchar
     *pixels;
 
-  register const uchar
+  const uchar
     *p;
 
-  register long
+  long
     x;
 
-  register uchar
+  uchar
     *q;
 
   /*
