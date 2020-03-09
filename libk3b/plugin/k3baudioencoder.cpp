@@ -91,7 +91,7 @@ const TQString& K3bAudioEncoder::filename() const
   if( d->outputFile )
     return d->outputFilename;
   else
-    return TQString();
+    return TQString::null;
 }
 
 

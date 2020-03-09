@@ -524,7 +524,7 @@ const TQString& K3bDevice::CdText::textForPackType( int packType, unsigned int t
     if( track == 0 )
       return discId();
     else 
-      return TQString();
+      return TQString::null;
 
 //   case 0x87:
 //     if( track == 0 )
