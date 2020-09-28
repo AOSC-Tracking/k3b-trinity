@@ -1,4 +1,3 @@
-// vim: set tabstop=4 shiftwidth=4 noexpandtab
 /*
 Copied from gwenview/src/imageutils/imageutils.h
 Copyright 2000-2004 Aurélien Gâteau
