@@ -16,5 +16,5 @@ link_directories(
 ##### kostore (static) ##########################
 
 tde_add_library( kostore STATIC_PIC AUTOMOC
-  SOURCES koStore.cc koZipStore.cc koStoreBase.cc
+  SOURCES koStore.cpp koZipStore.cpp koStoreBase.cpp
 )
