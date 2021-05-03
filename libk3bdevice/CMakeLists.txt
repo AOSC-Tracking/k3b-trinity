@@ -31,7 +31,7 @@ tde_add_library( k3bdevice SHARED AUTOMOC
     k3bdeviceglobals.cpp k3bcrc.cpp k3bcdtext.cpp k3bhalconnection.cpp
     k3bdebug.cpp
   VERSION 5.0.0
-  LINK tdecore-shared
+  LINK tdecore-shared ${HAL_LIBRARIES} ${DBUS_TQT_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )
 
