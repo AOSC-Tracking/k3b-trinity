@@ -25,12 +25,16 @@
 #include <tqobject.h>
 #include <tqmap.h>
 #include <tqstringlist.h>
+#include <kdemacros.h>
 
 #ifdef HAVE_HAL
 class DBusConnection;
-#else // HAVE_HAL
+#endif
+#ifdef __TDE_HAVE_TDEHWLIB
 class TDEGenericDevice;
-#endif // HAVE_HAL
+#else
+#define TDEGenericDevice void
+#endif
 
 namespace K3bDevice {
 
@@ -165,7 +169,7 @@ namespace K3bDevice {
        * \see ErrorCode
        */
       int unmount( Device*,
-		   const TQStringList& options = TQStringList() );
+       const TQStringList& options = TQStringList() );
 
       /**
        * Unmounts a device via HAL
@@ -179,25 +183,23 @@ namespace K3bDevice {
        * \see ErrorCode
        */
       int eject( Device*,
-		 const TQStringList& options = TQStringList() );
+     const TQStringList& options = TQStringList() );
 
-#ifndef HAVE_HAL
-private slots:
-	/**
-	* \internal
-	*/
-	void AddDeviceHandler(TDEGenericDevice*);
+    private slots:
+      /**
+       * \internal
+       */
+      void AddDeviceHandler(TDEGenericDevice*);
 
-	/**
-	* \internal
-	*/
-	void RemoveDeviceHandler(TDEGenericDevice*);
+      /**
+       * \internal
+       */
+      void RemoveDeviceHandler(TDEGenericDevice*);
 
-	/**
-	* \internal
-	*/
-	void ModifyDeviceHandler(TDEGenericDevice*);
-#endif // HAVE_HAL
+      /**
+       * \internal
+       */
+      void ModifyDeviceHandler(TDEGenericDevice*);
 
     signals:
       /**

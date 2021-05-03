@@ -30,9 +30,7 @@
 #include <dbus/connection.h>
 #include <dbus/dbus.h>
 #include <hal/libhal.h>
-#else // HAVE_HAL
-#include <tdehardwaredevices.h>
-#endif // HAVE_HAL
+#endif
 
 #ifdef HAVE_HAL
 static char** qstringListToArray( const TQStringList& s )
@@ -616,6 +614,12 @@ void K3bDevice::HalConnection::setupDBusTQtConnection( DBusConnection* dbusConne
 
 #else // HAVE_HAL
 
+#ifdef __TDE_HAVE_TDEHWLIB
+#include <tdehardwaredevices.h>
+#else
+#define TDEHardwareDevices void
+#endif
+
 K3bDevice::HalConnection* K3bDevice::HalConnection::s_instance = 0;
 
 
@@ -675,6 +679,7 @@ bool K3bDevice::HalConnection::isConnected() const
 
 bool K3bDevice::HalConnection::open()
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	// Initialize the TDE device manager
 	d->m_hwdevices = TDEGlobal::hardwareDevices();
 
@@ -695,6 +700,9 @@ bool K3bDevice::HalConnection::open()
 	}
 	
 	return true;
+#else
+	return false;
+#endif
 }
 
 
@@ -711,6 +719,7 @@ TQStringList K3bDevice::HalConnection::devices() const
 
 void K3bDevice::HalConnection::AddDeviceHandler(TDEGenericDevice* hwdevice)
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	if (hwdevice->type() != TDEGenericDeviceType::Disk) {
 		return;
 	}
@@ -731,10 +740,12 @@ void K3bDevice::HalConnection::AddDeviceHandler(TDEGenericDevice* hwdevice)
 			}
 		}
 	}
+#endif
 }
 
 void K3bDevice::HalConnection::RemoveDeviceHandler(TDEGenericDevice* hwdevice)
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	if (hwdevice->type() != TDEGenericDeviceType::Disk) {
 		return;
 	}
@@ -753,10 +764,12 @@ void K3bDevice::HalConnection::RemoveDeviceHandler(TDEGenericDevice* hwdevice)
 			emit mediumChanged(blockDevice);
 		}
 	}
+#endif
 }
 
 void K3bDevice::HalConnection::ModifyDeviceHandler(TDEGenericDevice* hwdevice)
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	if (hwdevice->type() != TDEGenericDeviceType::Disk) {
 		return;
 	}
@@ -768,11 +781,12 @@ void K3bDevice::HalConnection::ModifyDeviceHandler(TDEGenericDevice* hwdevice)
 		d->deviceMediumUdiMap[blockDevice] = sdevice->mediaInserted();
 		emit mediumChanged(blockDevice);
 	}
+#endif
 }
-
 
 int K3bDevice::HalConnection::lock(Device* dev)
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	if (!d->deviceUdiMap.contains(dev->blockDeviceName())) {
 		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 	}
@@ -793,11 +807,15 @@ int K3bDevice::HalConnection::lock(Device* dev)
 	else {
 		return org_freedesktop_Hal_Device_Volume_InvalidEjectOption;
 	}
+#else
+		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
+#endif
 }
 
 
 int K3bDevice::HalConnection::unlock(Device* dev)
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	if (!d->deviceUdiMap.contains(dev->blockDeviceName())) {
 		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 	}
@@ -818,6 +836,9 @@ int K3bDevice::HalConnection::unlock(Device* dev)
 	else {
 		return org_freedesktop_Hal_Device_Volume_InvalidEjectOption;
 	}
+#else
+		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
+#endif
 }
 
 
@@ -826,6 +847,7 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
 				     const TQString& fstype,
 				     const TQStringList& options )
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	if (!d->deviceUdiMap.contains(dev->blockDeviceName())) {
 		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 	}
@@ -851,11 +873,15 @@ int K3bDevice::HalConnection::mount( K3bDevice::Device* dev,
 	else {
 		return org_freedesktop_Hal_Success;
 	}
+#else
+		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
+#endif
 }
 
 
 int K3bDevice::HalConnection::unmount(K3bDevice::Device* dev, const TQStringList& options)
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	if (!d->deviceUdiMap.contains(dev->blockDeviceName())) {
 		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 	}
@@ -882,11 +908,15 @@ int K3bDevice::HalConnection::unmount(K3bDevice::Device* dev, const TQStringList
 	else {
 		return org_freedesktop_Hal_Success;
 	}
+#else
+		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
+#endif
 }
 
 
 int K3bDevice::HalConnection::eject(K3bDevice::Device* dev, const TQStringList& options)
 {
+#ifdef __TDE_HAVE_TDEHWLIB
 	if (!d->deviceUdiMap.contains(dev->blockDeviceName())) {
 		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
 	}
@@ -907,6 +937,9 @@ int K3bDevice::HalConnection::eject(K3bDevice::Device* dev, const TQStringList& 
 	else {
 		return org_freedesktop_Hal_Device_Volume_InvalidEjectOption;
 	}
+#else
+		return org_freedesktop_Hal_Device_Volume_NoSuchDevice;
+#endif
 }
 
 #endif // HAVE_HAL
