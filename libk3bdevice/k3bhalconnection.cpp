@@ -611,6 +611,21 @@ void K3bDevice::HalConnection::setupDBusTQtConnection( DBusConnection* dbusConne
   d->dBusTQtConnection->dbus_connection_setup_with_qt_main( dbusConnection );
 }
 
+void K3bDevice::HalConnection::AddDeviceHandler(TDEGenericDevice* hwdevice)
+{
+	// Empty body, only to avoid linking errors
+}
+
+void K3bDevice::HalConnection::RemoveDeviceHandler(TDEGenericDevice* hwdevice)
+{
+	// Empty body, only to avoid linking errors
+}
+
+void K3bDevice::HalConnection::ModifyDeviceHandler(TDEGenericDevice* hwdevice)
+{
+	// Empty body, only to avoid linking errors
+}
+
 #else // HAVE_HAL
 
 #ifdef __TDE_HAVE_TDEHWLIB
