@@ -100,6 +100,26 @@ if ( WITH_SYSTEM_LIBSAMPLERATE )
 endif ( )
 
 
+##### tdehwlib ##################################
+
+if( WITH_TDEHWLIB )
+  tde_save_and_set( CMAKE_REQUIRED_INCLUDES "${TDE_INCLUDE_DIR}" )
+  check_cxx_source_compiles( "
+    #include <kdemacros.h>
+      #ifndef __TDE_HAVE_TDEHWLIB
+      #error tdecore is not build with tdehwlib
+      #endif
+      int main() { return 0; } "
+    HAVE_TDEHWLIB
+  )
+  tde_restore( CMAKE_REQUIRED_INCLUDES )
+  if( NOT HAVE_TDEHWLIB )
+    tde_message_fatal( "tdehwlib is required, but not built in tdecore" )
+  endif( NOT HAVE_TDEHWLIB )
+  set( TDEHW_LIBRARIES "tdehw-shared" )
+endif( )
+
+
 ##### hal #######################################
 
 if( WITH_HAL )

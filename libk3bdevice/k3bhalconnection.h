@@ -30,7 +30,7 @@
 #ifdef HAVE_HAL
 class DBusConnection;
 #endif
-#ifdef __TDE_HAVE_TDEHWLIB
+#ifdef HAVE_TDEHWLIB
 class TDEGenericDevice;
 #else
 #define TDEGenericDevice void

@@ -48,6 +48,7 @@ option( WITH_LIBDVDREAD    "Enable support for libdvdread"    ${WITH_ALL_OPTIONS
 option( WITH_MUSICBRAINZ   "Enable Musicbrainz support" OFF )
 option( WITH_SYSTEM_LIBSAMPLERATE
     "Use system libsamplerate instead of bundled one" ON )
+option( WITH_TDEHWLIB      "Enable TDE hardware library support" ${WITH_ALL_OPTIONS} )
 option( WITH_HAL           "Enable hal support" OFF )
 option( WITH_DEBUG         "Enable extra debug" OFF )
 
