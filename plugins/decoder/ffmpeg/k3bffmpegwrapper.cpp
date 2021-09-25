@@ -74,7 +74,7 @@ extern "C" {
 //        [wmav2 @ 0xxxxx] Multiple frames in a packet.
 //        [wmav2 @ 0xxxxx] Got unexpected packet size after a partial decode
 
-K3bFFMpegWrapper *K3bFFMpegWrapper::s_instance = nullptr;
+K3bFFMpegWrapper *K3bFFMpegWrapper::s_instance = NULL;
 
 class K3bFFMpegFile::Private {
 public:
@@ -88,7 +88,7 @@ public:
   ::AVFrame *frame;
   ::AVPacket packet;
 
-  char *outputBufferPos = nullptr;
+  char *outputBufferPos = NULL;
   int outputBufferSize;
   int packetSize;
   bool isSpacious;
@@ -96,9 +96,9 @@ public:
 
 K3bFFMpegFile::K3bFFMpegFile(const TQString &filename) : m_filename(filename) {
   d = new Private;
-  d->formatContext = nullptr;
-  d->codec = nullptr;
-  d->audio_stream = nullptr;
+  d->formatContext = NULL;
+  d->codec = NULL;
+  d->audio_stream = NULL;
   d->frame = av_frame_alloc();
 }
 
@@ -113,7 +113,7 @@ bool K3bFFMpegFile::open() {
 
   // open the file
   int err = ::avformat_open_input(&d->formatContext, m_filename.local8Bit(),
-                                  nullptr, nullptr);
+                                  NULL, NULL);
   if (err < 0) {
     kdDebug() << "(K3bFFMpegFile) unable to open " << m_filename
               << " with error " << err;
@@ -121,7 +121,7 @@ bool K3bFFMpegFile::open() {
   }
 
   // analyze the streams
-  ::avformat_find_stream_info(d->formatContext, nullptr);
+  ::avformat_find_stream_info(d->formatContext, NULL);
 
   // we only handle files containing one audio stream
   for (uint i = 0; i < d->formatContext->nb_streams; ++i) {
@@ -130,7 +130,7 @@ bool K3bFFMpegFile::open() {
       if (!d->audio_stream) {
         d->audio_stream = d->formatContext->streams[i];
       } else {
-        d->audio_stream = nullptr;
+        d->audio_stream = NULL;
         kdDebug() << "(K3bFFMpegFile) more than one audio stream in "
                   << m_filename;
         return false;
@@ -154,7 +154,7 @@ bool K3bFFMpegFile::open() {
 
   // open the codec on our context
   kdDebug() << "(K3bFFMpegFile) found codec for " << m_filename;
-  if (::avcodec_open2(codecContext, d->codec, nullptr) < 0) {
+  if (::avcodec_open2(codecContext, d->codec, NULL) < 0) {
     kdDebug() << "(K3bFFMpegDecoderFactory) could not open codec.";
     return false;
   }
@@ -182,19 +182,19 @@ bool K3bFFMpegFile::open() {
 void K3bFFMpegFile::close() {
   d->outputBufferSize = 0;
   d->packetSize = 0;
-  d->packetData = nullptr;
+  d->packetData = NULL;
 
   if (d->codec) {
     ::avcodec_close(FFMPEG_CODEC(d->audio_stream));
-    d->codec = nullptr;
+    d->codec = NULL;
   }
 
   if (d->formatContext) {
     ::avformat_close_input(&d->formatContext);
-    d->formatContext = nullptr;
+    d->formatContext = NULL;
   }
 
-  d->audio_stream = nullptr;
+  d->audio_stream = NULL;
 }
 
 K3b::Msf K3bFFMpegFile::length() const { return d->length; }
@@ -229,7 +229,7 @@ TQString K3bFFMpegFile::typeComment() const {
 TQString K3bFFMpegFile::title() const {
   // FIXME: is this UTF8 or something??
   AVDictionaryEntry *ade =
-      av_dict_get(d->formatContext->metadata, "TITLE", nullptr, 0);
+      av_dict_get(d->formatContext->metadata, "TITLE", NULL, 0);
   return ade && ade->value && ade->value[0] != '\0'
              ? TQString::fromLocal8Bit(ade->value)
              : TQString();
@@ -238,7 +238,7 @@ TQString K3bFFMpegFile::title() const {
 TQString K3bFFMpegFile::author() const {
   // FIXME: is this UTF8 or something??
   AVDictionaryEntry *ade =
-      av_dict_get(d->formatContext->metadata, "ARTIST", nullptr, 0);
+      av_dict_get(d->formatContext->metadata, "ARTIST", NULL, 0);
   return ade && ade->value && ade->value[0] != '\0'
              ? TQString::fromLocal8Bit(ade->value)
              : TQString();
@@ -247,7 +247,7 @@ TQString K3bFFMpegFile::author() const {
 TQString K3bFFMpegFile::comment() const {
   // FIXME: is this UTF8 or something??
   AVDictionaryEntry *ade =
-      av_dict_get(d->formatContext->metadata, "COMMENT", nullptr, 0);
+      av_dict_get(d->formatContext->metadata, "COMMENT", NULL, 0);
   return ade && ade->value && ade->value[0] != '\0'
              ? TQString::fromLocal8Bit(ade->value)
              : TQString();
@@ -366,7 +366,7 @@ bool K3bFFMpegFile::seek(const K3b::Msf &msf) {
 // av_register_all is deprecated since ffmpeg 4.0, can be dropped
 K3bFFMpegWrapper::K3bFFMpegWrapper() { ::av_register_all(); }
 
-K3bFFMpegWrapper::~K3bFFMpegWrapper() { s_instance = nullptr; }
+K3bFFMpegWrapper::~K3bFFMpegWrapper() { s_instance = NULL; }
 
 K3bFFMpegWrapper *K3bFFMpegWrapper::instance() {
   if (!s_instance) {
@@ -393,5 +393,5 @@ K3bFFMpegFile *K3bFFMpegWrapper::open(const TQString &filename) const {
   }
 
   delete file;
-  return nullptr;
+  return NULL;
 }
