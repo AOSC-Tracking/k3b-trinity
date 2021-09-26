@@ -36,12 +36,12 @@ extern "C" {
 
 #define FFMPEG_CODEC(s) (s->codec)
 
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 101, 0)
+#define av_dump_format(c, x, f, y) dump_format(c, x, f, y)
+#endif
 #if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(53, 2, 0)
 //      this works because the parameters/options are not used
 #define avformat_open_input(c, s, f, o) av_open_input_file(c, s, f, 0, o)
-#endif
-#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 101, 0)
-#define av_dump_format(c, x, f, y) dump_format(c, x, f, y)
 #endif
 #if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(53, 6, 0)
 #define avformat_find_stream_info(c, o) av_find_stream_info(c)
@@ -49,22 +49,40 @@ extern "C" {
 #if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(53, 17, 0)
 #define avformat_close_input(c) av_close_input_file(*c)
 #endif
-#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(53, 8, 0)
-#define avcodec_open2(a, c, o) avcodec_open(a, c)
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(57, 41, 100)
+#define codecpar codec
 #endif
+
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55, 45, 101)
+#define av_frame_alloc avcodec_alloc_frame
+#endif
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(54, 28, 0)
+#define av_frame_free(f) av_free(*(f))
+#elif LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55, 45, 101)
+#define av_frame_free  avcodec_free_frame
+#endif
+
 #if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(52, 64, 0)
 #define AVMEDIA_TYPE_AUDIO CODEC_TYPE_AUDIO
 #define AVMEDIA_TYPE_VIDEO CODEC_TYPE_VIDEO
 #define AVMEDIA_TYPE_SUBTITLE CODEC_TYPE_SUBTITLE
 #endif
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(53, 8, 0)
+#define avcodec_open2(a, c, o) avcodec_open(a, c)
+#endif
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(54, 25, 0)
 // From libavcodec version 54.25, CodecID have been renamed to AVCodecID and all
 // CODEC_ID_* to AV_CODEC_ID_*. This code can be simplified once all supported
 // distros have updated to libavcodec version >=54.25
-#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(54, 25, 0)
 #define AV_CODEC_ID_WMAV1 CODEC_ID_WMAV1
 #define AV_CODEC_ID_WMAV2 CODEC_ID_WMAV2
 #define AV_CODEC_ID_MP3 CODEC_ID_MP3
 #define AV_CODEC_ID_AAC CODEC_ID_AAC
+#define AV_CODEC_ID_APE CODEC_ID_APE
+#define AV_CODEC_ID_WAVPACK CODEC_ID_WAVPACK
+#endif
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55,39,101)
+#define av_packet_unref av_free_packet
 #endif
 
 // TODO:  most of the used av_functions there are deprecated and there
@@ -168,8 +186,11 @@ bool K3bFFMpegFile::open() {
     return false;
   }
 
-  d->sampleFormat =
-      static_cast<::AVSampleFormat>(d->audio_stream->codecpar->format);
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(57, 41, 100)
+  d->sampleFormat = d->audio_stream->codec->sample_fmt;
+#else
+  d->sampleFormat = static_cast<::AVSampleFormat>(d->audio_stream->codecpar->format);
+#endif
   d->isSpacious = ::av_sample_fmt_is_planar(d->sampleFormat) &&
                   d->audio_stream->codecpar->channels > 1;
 
