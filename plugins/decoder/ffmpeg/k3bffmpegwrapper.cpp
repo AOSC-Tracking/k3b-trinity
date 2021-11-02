@@ -106,7 +106,7 @@ public:
   ::AVFrame *frame;
   ::AVPacket packet;
 
-  char *outputBufferPos = NULL;
+  char *outputBufferPos;
   int outputBufferSize;
   int packetSize;
   bool isSpacious;
@@ -118,6 +118,7 @@ K3bFFMpegFile::K3bFFMpegFile(const TQString &filename) : m_filename(filename) {
   d->codec = NULL;
   d->audio_stream = NULL;
   d->frame = av_frame_alloc();
+  d->outputBufferPos = NULL;
 }
 
 K3bFFMpegFile::~K3bFFMpegFile() {
