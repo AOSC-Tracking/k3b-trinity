@@ -23,7 +23,7 @@
 #include <k3bdeviceglobals.h>
 #include <k3bexternalbinmanager.h>
 #include <k3bcore.h>
-#include <k3bhalconnection.h>
+#include <k3bconnection.h>
 
 #include <tdeversion.h>
 #include <tdeglobal.h>
@@ -580,7 +580,7 @@ bool K3b::unmount( K3bDevice::Device* dev )
     return !p.exitStatus();
   }
   else {
-    return !K3bDevice::HalConnection::instance()->unmount( dev );
+    return !K3bDevice::Connection::instance()->unmount( dev );
   }
 }
 
@@ -598,7 +598,7 @@ bool K3b::mount( K3bDevice::Device* dev )
     return true;
 #endif
 
-  if( !K3bDevice::HalConnection::instance()->mount( dev ) )
+  if( !K3bDevice::Connection::instance()->mount( dev ) )
     return true;
 
   // now try pmount
@@ -616,7 +616,7 @@ bool K3b::mount( K3bDevice::Device* dev )
 
 bool K3b::eject( K3bDevice::Device* dev )
 {
-  if( !K3bDevice::HalConnection::instance()->eject( dev ) )
+  if( !K3bDevice::Connection::instance()->eject( dev ) )
     return true;
 
   if( K3b::isMounted( dev ) )

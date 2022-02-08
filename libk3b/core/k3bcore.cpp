@@ -19,7 +19,7 @@
 #include "k3bjob.h"
 
 #include <k3bdevicemanager.h>
-#include <k3bhalconnection.h>
+#include <k3bconnection.h>
 #include <k3bexternalbinmanager.h>
 #include <k3bdefaultexternalprograms.h>
 #include <k3bglobals.h>
@@ -202,11 +202,11 @@ void K3bCore::init()
 
   externalBinManager()->search();
 
-  connect( K3bDevice::HalConnection::instance(), TQT_SIGNAL(deviceAdded(const TQString&)),
+  connect( K3bDevice::Connection::instance(), TQT_SIGNAL(deviceAdded(const TQString&)),
 	   deviceManager(), TQT_SLOT(addDevice(const TQString&)) );
-  connect( K3bDevice::HalConnection::instance(), TQT_SIGNAL(deviceRemoved(const TQString&)),
+  connect( K3bDevice::Connection::instance(), TQT_SIGNAL(deviceRemoved(const TQString&)),
 	   deviceManager(), TQT_SLOT(removeDevice(const TQString&)) );
-  TQStringList devList = K3bDevice::HalConnection::instance()->devices();
+  TQStringList devList = K3bDevice::Connection::instance()->devices();
   if( devList.isEmpty() )
     deviceManager()->scanBus();
   else

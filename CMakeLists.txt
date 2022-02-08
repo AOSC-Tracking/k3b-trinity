@@ -49,7 +49,6 @@ option( WITH_MUSICBRAINZ   "Enable Musicbrainz support" OFF )
 option( WITH_SYSTEM_LIBSAMPLERATE
     "Use system libsamplerate instead of bundled one" ON )
 option( WITH_TDEHWLIB      "Enable TDE hardware library support" ${WITH_ALL_OPTIONS} )
-option( WITH_HAL           "Enable hal support" OFF )
 option( WITH_DEBUG         "Enable extra debug" OFF )
 
 # sound output plugins
@@ -86,29 +85,25 @@ option( WITH_LAME          "Enable support for mp3 encoding via lame" ${WITH_ALL
 # WITH_LIBDVDREAD     if disabled removes dvd reaping functionality
 #                     requires libdvdread: http://dvdnav.mplayerhq.hu/
 # WITH_MUSICBRAINZ    if enabled adds support for musicbrainz service for
-#                        query metadata about audio cds
+#                     query metadata about audio cds
 #                     requires media-libs/musicbrainz library: http://musicbrainz.org/doc/libmusicbrainz
 # WITH_SYSTEM_LIBSAMPLERATE if disabled the bundled version of libsamplerate
-#                              is used and staticaly linked into the k3b
-#                           requires media-libs/libsamplerate: http://www.mega-nerd.com/SRC/
-# WITH_HAL            if enabled use of hal daemon instead of libtdehw for
-#                        device management
-#                     depricated
+#                     is used and staticaly linked into the k3b
+#                     requires media-libs/libsamplerate: http://www.mega-nerd.com/SRC/
 # WITH_DEBUG          if enabled extra debug output is provided
-
 # WITH_ALSA           if enabled build the alsa output driver; it's a good
-#                        idea to enable it on a linux othervice sound playback
-#                        may fallback to arts
+#                     idea to enable it on a linux othervice sound playback
+#                     may fallback to arts
 # WITH_ARTS           if disabled disables fuctionality to play audio (files
-#                        or CDs, not sure exactly)
+#                     or CDs, not sure exactly)
 #                     requires arts (an optional part of TDE)
 # WITH_FFMPEG         if enabled build an ffmpeg decoding plugin
 #                     requires ffmpeg
 # WITH_FFMPEG_ALL_CODECS
 #                     affects ffmpeg plugin
 #                     if enabled makes ffmpeg to decode all formats is
-#                       supports; this is untested and may result in some
-#                       bugs: e.g. display of wrong length
+#                     supports; this is untested and may result in some
+#                     bugs: e.g. display of wrong length
 # WITH_FLAC           if enabled build flac decoding plugin
 #                     requires media-sound/flac: http://flac.sourceforge.net
 # WITH_LAME           if enabled build mp3 encoding file via lame

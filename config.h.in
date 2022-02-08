@@ -10,9 +10,6 @@
    */
 #undef FLAC_NEWER_THAN_1_1_1
 
-/* HAL API version 0.4 */
-#undef HAL_0_4
-
 /* Define to 1 if you have the <artsc/artsc.h> header file. */
 #undef HAVE_ARTSC_ARTSC_H
 
@@ -39,9 +36,6 @@
 
 /* Define to 1 if you have the <FLAC++/decoder.h> header file. */
 #undef HAVE_FLAC___DECODER_H
-
-/* compile in HAL support */
-#undef HAVE_HAL
 
 /* Define to 1 if you have the <iconv.h> header file. */
 #undef HAVE_ICONV_H

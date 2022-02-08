@@ -13,8 +13,8 @@
  * See the file "COPYING" for the exact licensing terms.
  */
 
-#ifndef _K3B_HAL_CONNECTION_H_
-#define _K3B_HAL_CONNECTION_H_
+#ifndef _K3B_CONNECTION_H_
+#define _K3B_CONNECTION_H_
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -27,9 +27,6 @@
 #include <tqstringlist.h>
 #include <kdemacros.h>
 
-#ifdef HAVE_HAL
-class DBusConnection;
-#endif
 #ifdef HAVE_TDEHWLIB
 class TDEGenericDevice;
 #else
@@ -41,84 +38,72 @@ namespace K3bDevice {
   class Device;
 
   /**
-   * This is a simple HAL/DBUS wrapper which creates QT signals whenever a new optical
+   * This is a simple wrapper which creates QT signals whenever a new optical
    * drive is plugged into the system or one is unplugged.
    *
-   * The HalConnection class also handles media changes. Whenever a new medium is inserted
+   * The Connection class also handles media changes. Whenever a new medium is inserted
    * into a drive or a medium is removed (i.e. ejected) a signal is emitted. This way it
    * is easy to keep track of the inserted media.
    *
    * This class does not deal with K3b devices but with system device names
    * such as /dev/cdrom. These device names can be used in DeviceManager::findDevice().
    */
-  class LIBK3BDEVICE_EXPORT HalConnection : public TQObject
+  class LIBK3BDEVICE_EXPORT Connection : public TQObject
     {
       Q_OBJECT
   
 
     public:
-      ~HalConnection();
+      ~Connection();
 
       /**
-       * Creates a new singleton HalConnection object or returns the already existing one.
-       * A newly created HalConnection will emit newDevice signals for all devices in the HAL
-       * manager. However, since one cannot be sure if this is the first time the HalConnection
+       * Creates a new singleton Connection object or returns the already existing one.
+       * A newly created Connection will emit newDevice signals for all devices in the 
+       * manager. However, since one cannot be sure if this is the first time the Connection
        * is created it is recommended to connect to the signals and query the list of current
        * devices.
        *
-       * \return An instance of the singleton HalConnection object.
+       * \return An instance of the singleton Connection object.
        */
-      static HalConnection* instance();
+      static Connection* instance();
 
       /**
-       * \return true if a connection to the HAL deamon could be established and
+       * \return true if a connection to the deamon could be established and
        *         communication has been set up.
        */
       bool isConnected() const;
 
       /**
-       * \return a list of optical devices as reported by HAL.
+       * \return a list of optical devices as reported.
        */
       TQStringList devices() const;
 
-#ifdef HAVE_HAL
       /**
-       * \internal
-       */
-      void addDevice( const char* udi );
-
-      /**
-       * \internal
-       */
-      void removeDevice( const char* udi );
-#endif // HAVE_HAL
-
-      /**
-       * Error codes named as the HAL deamon raises them
+       * Error codes named as the deamon raises them
        */
       enum ErrorCodes {
-	org_freedesktop_Hal_Success = 0, //*< The operation was successful. This code does not match any in HAL
-	org_freedesktop_Hal_CommunicationError, //*< DBus communication error. This code does not match any in HAL
-	org_freedesktop_Hal_NoSuchDevice,
-	org_freedesktop_Hal_DeviceAlreadyLocked,
-	org_freedesktop_Hal_PermissionDenied,
-	org_freedesktop_Hal_Device_Volume_NoSuchDevice,
-	org_freedesktop_Hal_Device_Volume_PermissionDenied,
-	org_freedesktop_Hal_Device_Volume_AlreadyMounted,
-	org_freedesktop_Hal_Device_Volume_InvalidMountOption,
-	org_freedesktop_Hal_Device_Volume_UnknownFilesystemType,
-	org_freedesktop_Hal_Device_Volume_InvalidMountpoint,
-	org_freedesktop_Hal_Device_Volume_MountPointNotAvailable,
-	org_freedesktop_Hal_Device_Volume_PermissionDeniedByPolicy,
-	org_freedesktop_Hal_Device_Volume_InvalidUnmountOption,
-	org_freedesktop_Hal_Device_Volume_InvalidEjectOption
+	Success = 0, //*< The operation was successful.
+	CommunicationError,
+	NoSuchDevice,
+	DeviceAlreadyLocked,
+	PermissionDenied,
+	Device_Volume_NoSuchDevice,
+	Device_Volume_PermissionDenied,
+	Device_Volume_AlreadyMounted,
+	Device_Volume_InvalidMountOption,
+	Device_Volume_UnknownFilesystemType,
+	Device_Volume_InvalidMountpoint,
+	Device_Volume_MountPointNotAvailable,
+	Device_Volume_PermissionDeniedByPolicy,
+	Device_Volume_InvalidUnmountOption,
+	Device_Volume_InvalidEjectOption
       };
 
      public slots:
       /**
-       * Lock the device in HAL
+       * Lock the device
        * 
-       * Be aware that once the method returns the HAL deamon has not necessarily 
+       * Be aware that once the method returns the deamon has not necessarily 
        * finished the procedure yet.
        *
        * \param dev The device to lock
@@ -129,9 +114,9 @@ namespace K3bDevice {
       int lock( Device* );
 
       /**
-       * Unlock a previously locked device in HAL
+       * Unlock a previously locked device
        * 
-       * Be aware that once the method returns the HAL deamon has not necessarily 
+       * Be aware that once the method returns the deamon has not necessarily 
        * finished the procedure yet.
        *
        * \param dev The device to lock
@@ -142,9 +127,9 @@ namespace K3bDevice {
       int unlock( Device* );
 
       /**
-       * Mounts a device via HAL
+       * Mounts a device
        * 
-       * Be aware that once the method returns the HAL deamon has not necessarily 
+       * Be aware that once the method returns the deamon has not necessarily 
        * finished the procedure yet.
        *
        * \param dev The device to lock
@@ -158,9 +143,9 @@ namespace K3bDevice {
 		 const TQStringList& options = TQStringList() );
 
       /**
-       * Unmounts a device via HAL
+       * Unmounts a device
        * 
-       * Be aware that once the method returns the HAL deamon has not necessarily 
+       * Be aware that once the method returns the deamon has not necessarily 
        * finished the procedure yet.
        *
        * \param dev The device to lock
@@ -172,9 +157,9 @@ namespace K3bDevice {
        const TQStringList& options = TQStringList() );
 
       /**
-       * Unmounts a device via HAL
+       * Unmounts a device
        * 
-       * Be aware that once the method returns the HAL deamon has not necessarily 
+       * Be aware that once the method returns the deamon has not necessarily 
        * finished the procedure yet.
        *
        * \param dev The device to lock
@@ -203,14 +188,14 @@ namespace K3bDevice {
 
     signals:
       /**
-       * This signal gets emitted whenever HAL finds a new optical drive.
+       * This signal gets emitted whenever it finds a new optical drive.
        *
        * \param dev The block device name of the new drive.
        */
       void deviceAdded( const TQString& dev );
 
       /**
-       * This signal gets emitted whenever HAL detects that an optical drive
+       * This signal gets emitted whenever it detects that an optical drive
        * has been unplugged.
        *
        * \param dev The block device name of the drive.
@@ -227,24 +212,20 @@ namespace K3bDevice {
 
     private:
       /**
-       * HalConnection is a signelton class. Use the instance() method to create it.
+       * Connection is a signelton class. Use the instance() method to create it.
        */
-      HalConnection( TQObject* parent = 0, const char* name = 0 );
+      Connection( TQObject* parent = 0, const char* name = 0 );
 
       /**
-       * Tries to open a connection to HAL.
+       * Tries to open a connection
        */
       bool open();
       void close();
 
-      static HalConnection* s_instance;
+      static Connection* s_instance;
 
       class Private;
       Private* d;
-
-#ifdef HAVE_HAL
-      void setupDBusTQtConnection( DBusConnection* dbusConnection );
-#endif // HAVE_HAL
     };
 }
 

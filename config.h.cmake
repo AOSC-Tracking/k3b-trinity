@@ -15,7 +15,6 @@
 #cmakedefine WITH_ARTS
 
 #cmakedefine HAVE_TDEHWLIB
-#cmakedefine HAVE_HAL
 
 #cmakedefine K3B_FFMPEG_ALL_CODECS
 

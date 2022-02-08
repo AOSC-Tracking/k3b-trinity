@@ -185,9 +185,6 @@ namespace K3bDevice {
       /**
        * Scan the system for devices. Call this to initialize all devices.
        * 
-       * If the system uses the HAL device deamon it is possible to use
-       * HalConnection instead of calling this method.
-       *
        * \return Number of found devices.
        **/
       virtual int scanBus();
@@ -214,7 +211,7 @@ namespace K3bDevice {
 
       /**
        * Remove a device from the device manager. Basicly this method
-       * only makes sense in combination with the HalConnection. Connect
+       * only makes sense in combination with the Connection. Connect
        * it to the deviceRemoved signal.
        */
       virtual void removeDevice( const TQString& dev );
