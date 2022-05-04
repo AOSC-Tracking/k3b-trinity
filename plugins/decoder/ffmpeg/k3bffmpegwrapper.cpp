@@ -34,8 +34,6 @@ extern "C" {
 #include <math.h>
 #include <string.h>
 
-#define FFMPEG_CODEC(s) (s->codec)
-
 #if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(52, 101, 0)
 #define av_dump_format(c, x, f, y) dump_format(c, x, f, y)
 #endif
@@ -102,9 +100,13 @@ public:
   ::AVFormatContext *formatContext;
   ::AVCodec *codec;
   ::AVStream *audio_stream;
+  ::AVCodecContext *audio_stream_ctx;
   ::AVSampleFormat sampleFormat;
   ::AVFrame *frame;
-  ::AVPacket packet;
+  ::AVPacket *packet;
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(57, 12, 100)
+  ::AVPacket _packet;
+#endif
 
   char *outputBufferPos;
   int outputBufferSize;
@@ -117,8 +119,10 @@ K3bFFMpegFile::K3bFFMpegFile(const TQString &filename) : m_filename(filename) {
   d->formatContext = NULL;
   d->codec = NULL;
   d->audio_stream = NULL;
+  d->audio_stream_ctx = NULL;
   d->frame = av_frame_alloc();
   d->outputBufferPos = NULL;
+  d->packet = NULL;
 }
 
 K3bFFMpegFile::~K3bFFMpegFile() {
@@ -158,22 +162,43 @@ bool K3bFFMpegFile::open() {
   }
 
   // urgh... ugly
-  ::AVCodecContext *codecContext = FFMPEG_CODEC(d->audio_stream);
-  if (codecContext->codec_type != AVMEDIA_TYPE_AUDIO) {
+#if LIBAVFORMAT_VERSION_INT >= AV_VERSION_INT(57, 33, 100)
+  if (d->audio_stream->codecpar->codec_type != AVMEDIA_TYPE_AUDIO)
+#else
+  d->audio_stream_ctx = d->audio_stream->codec;
+  if (d->audio_stream_ctx->codec_type != AVMEDIA_TYPE_AUDIO)
+#endif
+  {
     kdDebug() << "(K3bFFMpegFile) not a simple audio stream: " << m_filename;
     return false;
   }
 
   // get the codec
-  d->codec = ::avcodec_find_decoder(codecContext->codec_id);
+#if LIBAVFORMAT_VERSION_INT >= AV_VERSION_INT(57, 33, 100)
+  d->codec = (AVCodec *)::avcodec_find_decoder(d->audio_stream->codecpar->codec_id);
+#else
+  d->codec = (AVCodec *)::avcodec_find_decoder(d->audio_stream_ctx->codec_id);
+#endif
   if (!d->codec) {
     kdDebug() << "(K3bFFMpegFile) no codec found for " << m_filename;
     return false;
   }
 
+#if LIBAVFORMAT_VERSION_INT >= AV_VERSION_INT(57, 33, 100)
+  // allocate a codec context
+  d->audio_stream_ctx = avcodec_alloc_context3(d->codec);
+  if (d->audio_stream_ctx) {
+    avcodec_parameters_to_context(d->audio_stream_ctx, d->audio_stream->codecpar);
+  }
+  else {
+    kdDebug() << "(K3bFFMpegFile) failed to allocate a codec context for "
+              << m_filename;
+  }
+#endif
+
   // open the codec on our context
-  kdDebug() << "(K3bFFMpegFile) found codec for " << m_filename;
-  if (::avcodec_open2(codecContext, d->codec, NULL) < 0) {
+  kdDebug() << "(K3bFFMpegFile) found codec for " << m_filename << endl;
+  if (::avcodec_open2(d->audio_stream_ctx, d->codec, NULL) < 0) {
     kdDebug() << "(K3bFFMpegDecoderFactory) could not open codec.";
     return false;
   }
@@ -207,8 +232,12 @@ void K3bFFMpegFile::close() {
   d->packetData = NULL;
 
   if (d->codec) {
-    ::avcodec_close(FFMPEG_CODEC(d->audio_stream));
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(55, 63, 100)
+    ::avcodec_free_context(&d->audio_stream_ctx);
+#else
+    ::avcodec_close(d->audio_stream_ctx);
     d->codec = NULL;
+#endif
   }
 
   if (d->formatContext) {
@@ -301,13 +330,18 @@ int K3bFFMpegFile::read(char *buf, int bufLen) {
 // fill d->packetData with data to decode
 int K3bFFMpegFile::readPacket() {
   if (d->packetSize <= 0) {
-    ::av_init_packet(&d->packet);
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(57, 12, 100)
+    d->packet = ::av_packet_alloc();
+#else
+    ::av_init_packet(&d->_packet);
+    d->packet = &d->_packet;
+#endif
 
-    if (::av_read_frame(d->formatContext, &d->packet) < 0) {
+    if (::av_read_frame(d->formatContext, d->packet) < 0) {
       return 0;
     }
-    d->packetSize = d->packet.size;
-    d->packetData = d->packet.data;
+    d->packetSize = d->packet->size;
+    d->packetData = d->packet->data;
   }
 
   return d->packetSize;
@@ -324,15 +358,42 @@ int K3bFFMpegFile::fillOutputBuffer() {
     }
 
     int gotFrame = 0;
-    int len = ::avcodec_decode_audio4(FFMPEG_CODEC(d->audio_stream), d->frame,
-                                      &gotFrame, &d->packet);
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(57, 12, 100)
+    int len = avcodec_receive_frame(d->audio_stream_ctx, d->frame);
+    if (len == 0) {
+      gotFrame = 1;
+    }
+    else if (len == AVERROR(EAGAIN)) {
+      len = 0;
+    }
 
-    if (d->packetSize <= 0 || len < 0)
-      ::av_packet_unref(&d->packet);
+    if (len == 0) {
+      len = avcodec_send_packet(d->audio_stream_ctx, d->packet);
+      if (len == AVERROR(EAGAIN)) {
+        len = 0;
+      }
+    }
+#else
+    int len = ::avcodec_decode_audio4(d->audio_stream_ctx, d->frame,
+                                      &gotFrame, d->packet);
+#endif
+
+    if (d->packetSize <= 0 || len < 0) {
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(57, 12, 100)
+      ::av_packet_free(&d->packet);
+#else
+      ::av_packet_unref(d->packet);
+      d->packet = NULL;
+#endif
+    }
     if (len < 0) {
       kdDebug() << "(K3bFFMpegFile) decoding failed for " << m_filename;
       return -1;
     }
+
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(57, 12, 100)
+    len = d->packet->size;
+#endif
 
     if (gotFrame) {
       int nb_s = d->frame->nb_samples;
@@ -386,7 +447,11 @@ bool K3bFFMpegFile::seek(const K3b::Msf &msf) {
 
 //
 // av_register_all is deprecated since ffmpeg 4.0, can be dropped
-K3bFFMpegWrapper::K3bFFMpegWrapper() { ::av_register_all(); }
+K3bFFMpegWrapper::K3bFFMpegWrapper() {
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(58,9,100)
+  ::av_register_all();
+#endif
+}
 
 K3bFFMpegWrapper::~K3bFFMpegWrapper() { s_instance = NULL; }
 
