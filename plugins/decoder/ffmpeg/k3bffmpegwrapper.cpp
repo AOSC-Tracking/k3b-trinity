@@ -448,7 +448,7 @@ bool K3bFFMpegFile::seek(const K3b::Msf &msf) {
 //
 // av_register_all is deprecated since ffmpeg 4.0, can be dropped
 K3bFFMpegWrapper::K3bFFMpegWrapper() {
-#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(58,9,100)
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(58,9,100)
   ::av_register_all();
 #endif
 }
