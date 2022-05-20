@@ -232,7 +232,7 @@ void K3bFFMpegFile::close() {
   d->packetData = NULL;
 
   if (d->codec) {
-#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(55, 63, 100)
+#if LIBAVFORMAT_VERSION_INT >= AV_VERSION_INT(57, 33, 100)
     ::avcodec_free_context(&d->audio_stream_ctx);
 #else
     ::avcodec_close(d->audio_stream_ctx);
@@ -358,7 +358,7 @@ int K3bFFMpegFile::fillOutputBuffer() {
     }
 
     int gotFrame = 0;
-#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(57, 12, 100)
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(57, 106, 100)
     int len = avcodec_receive_frame(d->audio_stream_ctx, d->frame);
     if (len == 0) {
       gotFrame = 1;
