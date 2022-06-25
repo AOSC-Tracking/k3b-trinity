@@ -34,6 +34,11 @@ include( CheckSymbolExists )
 include( TDEMacros )
 
 
+##### set version number ########################
+
+tde_set_project_version( )
+
+
 ##### setup install paths #######################
 
 include( TDESetupPaths )
