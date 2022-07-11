@@ -190,7 +190,7 @@ endif( )
 ##### mad #######################################
 
 if( WITH_MAD )
-  pkg_search_module( MAD mad )
+  pkg_search_module( MAD libmad mad )
   if( NOT MAD_FOUND )
     tde_message_fatal( "mad is requested, but was not found on your system" )
   endif( )
