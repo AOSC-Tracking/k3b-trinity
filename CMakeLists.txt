@@ -161,7 +161,7 @@ add_subdirectory( src             )
 add_subdirectory( tdefile-plugins )
 add_subdirectory( tdeioslaves     )
 tde_conditional_add_subdirectory( BUILD_K3BSETUP k3bsetup )
-tde_conditional_add_subdirectory( BUILD_DOC doc )
+tde_conditional_add_project_docs( BUILD_DOC )
 
 
 ##### write configure files #####################
