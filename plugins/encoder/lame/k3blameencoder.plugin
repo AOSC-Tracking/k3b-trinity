@@ -1,9 +1,9 @@
 [K3b Plugin]
-Lib=libk3blameencoder
-Group=AudioEncoder
 Name=K3b Lame Mp3 Encoder
+Comment=Encoding module to encode MPEG1 Layer III (mp3) files
 Author=Sebastian Trueg
 Email=trueg@k3b.org
 Version=3.0
-Comment=Encoding module to encode MPEG1 Layer III (mp3) files
 License=GPL
+Group=AudioEncoder
+Lib=libk3blameencoder

@@ -84,14 +84,22 @@ tde_add_executable( k3b AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3b-cue.desktop
+tde_create_translated_desktop(
+  SOURCE k3b-cue.desktop
   DESTINATION ${APPS_INSTALL_DIR}/.hidden/
 )
 
-install( FILES k3bui.rc eventsrc tips
+tde_create_translated_desktop(
+  SOURCE eventsrc
   DESTINATION ${DATA_INSTALL_DIR}/k3b
 )
 
-install( FILES k3b.desktop
+install(
+  FILES k3bui.rc tips
+  DESTINATION ${DATA_INSTALL_DIR}/k3b
+)
+
+tde_create_translated_desktop(
+  SOURCE k3b.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
 )

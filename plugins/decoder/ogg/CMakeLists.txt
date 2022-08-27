@@ -41,6 +41,7 @@ tde_add_kpart( libk3boggvorbisdecoder AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3boggvorbisdecoder.plugin
+tde_create_translated_desktop(
+  SOURCE k3boggvorbisdecoder.plugin
   DESTINATION ${DATA_INSTALL_DIR}/k3b/plugins
 )

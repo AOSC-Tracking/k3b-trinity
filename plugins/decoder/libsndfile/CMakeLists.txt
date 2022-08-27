@@ -38,6 +38,7 @@ tde_add_kpart( libk3blibsndfiledecoder AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3blibsndfiledecoder.plugin
+tde_create_translated_desktop(
+  SOURCE k3blibsndfiledecoder.plugin
   DESTINATION ${DATA_INSTALL_DIR}/k3b/plugins
 )

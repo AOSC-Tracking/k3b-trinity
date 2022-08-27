@@ -40,6 +40,7 @@ tde_add_kpart( tdefile_k3b AUTOMOC
 
 ##### other data ################################
 
-install( FILES tdefile_k3b.desktop
+tde_create_translated_desktop(
+  SOURCE tdefile_k3b.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
 )

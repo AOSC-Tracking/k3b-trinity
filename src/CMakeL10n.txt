@@ -7,3 +7,8 @@ tde_l10n_create_template(
         "../plugins"
         "tips"
 )
+
+tde_l10n_create_template(
+    CATALOG "desktop_files/eventsrc/"
+    SOURCES eventsrc
+)

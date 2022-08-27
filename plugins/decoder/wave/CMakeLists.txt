@@ -36,6 +36,7 @@ tde_add_kpart( libk3bwavedecoder AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3bwavedecoder.plugin
+tde_create_translated_desktop(
+  SOURCE k3bwavedecoder.plugin
   DESTINATION ${DATA_INSTALL_DIR}/k3b/plugins
 )

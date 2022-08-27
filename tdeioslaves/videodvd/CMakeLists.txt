@@ -36,10 +36,12 @@ tde_add_kpart( tdeio_videodvd AUTOMOC
 
 ##### other data ################################
 
-install( FILES videodvd.desktop
+tde_create_translated_desktop(
+  SOURCE videodvd.desktop
   DESTINATION ${DATA_INSTALL_DIR}/konqsidebartng/virtual_folders/services
 )
 
-install( FILES videodvd.protocol
+tde_create_translated_desktop(
+  SOURCE videodvd.protocol
   DESTINATION ${SERVICES_INSTALL_DIR}
 )

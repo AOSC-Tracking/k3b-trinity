@@ -38,6 +38,7 @@ tde_add_kpart( libk3bmaddecoder AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3bmaddecoder.plugin
+tde_create_translated_desktop(
+  SOURCE k3bmaddecoder.plugin
   DESTINATION ${DATA_INSTALL_DIR}/k3b/plugins
 )
