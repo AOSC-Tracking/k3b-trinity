@@ -1,7 +1,0 @@
-echo ""
-
-if test -n "$RESMGR_LIB"; then
-	echo "K3b - Resmgr support:                        yes"
-else
-	echo "K3b - Resmgr support:                         no"
-fi
