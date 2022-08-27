@@ -1,3 +1,1 @@
-KDE_LANG = en
-KDE_DOCS = k3b
-SUBDIRS = tdeioslave
+SUBDIRS = en
