@@ -38,6 +38,7 @@ tde_add_kpart( libk3bartsoutputplugin AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3bartsoutputplugin.plugin
+tde_create_translated_desktop(
+  SOURCE k3bartsoutputplugin.plugin
   DESTINATION ${DATA_INSTALL_DIR}/k3b/plugins
 )

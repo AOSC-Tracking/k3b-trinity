@@ -37,6 +37,7 @@ tde_add_kpart( libk3blameencoder AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3blameencoder.plugin
+tde_create_translated_desktop(
+  SOURCE k3blameencoder.plugin
   DESTINATION ${DATA_INSTALL_DIR}/k3b/plugins
 )

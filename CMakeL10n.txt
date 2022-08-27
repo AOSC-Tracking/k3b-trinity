@@ -25,3 +25,41 @@ set( POT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../k3b-i18n/template/messages" 
 ##### create translation templates ##############
 
 tde_l10n_auto_add_subdirectories( )
+
+
+file( GLOB_RECURSE src_desktops
+    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+    src/*.desktop
+    src/*.protocol
+    src/*.theme
+)
+list( SORT src_desktops )
+
+file( GLOB_RECURSE plugins_desktops
+    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+    plugins/*.plugin
+    tdefile-plugins/*.desktop
+    tdeioslaves/*.desktop
+    tdeioslaves/*.protocol
+)
+foreach( plugin_desktop IN LISTS plugins_desktops )
+    if ( "${plugin_desktop}" MATCHES "/skeleton.plugin" )
+       list( REMOVE_ITEM plugins_desktops "${plugin_desktop}" )
+    endif()
+endforeach()
+list( SORT plugins_desktops )
+
+file( GLOB_RECURSE k3bsetup_desktops
+    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+    k3bsetup/*.desktop
+)
+list( SORT k3bsetup_desktops )
+
+tde_l10n_create_template(
+    CATALOG "desktop_files/k3b-desktops"
+    SOURCES_DESKTOP
+        ${src_desktops}
+        ${plugins_desktops}
+        ${k3bsetup_desktops}
+    DESTINATION "${CMAKE_SOURCE_DIR}/translations"
+)

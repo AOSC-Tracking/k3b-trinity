@@ -44,6 +44,7 @@ tde_add_kpart( libk3bffmpegdecoder AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3bffmpegdecoder.plugin
+tde_create_translated_desktop(
+  SOURCE k3bffmpegdecoder.plugin
   DESTINATION ${DATA_INSTALL_DIR}/k3b/plugins
 )

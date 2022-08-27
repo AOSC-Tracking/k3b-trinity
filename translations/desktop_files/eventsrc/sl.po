@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-27 17:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Comment
+#: eventsrc:3
+msgid "K3b"
+msgstr ""
+
+#. Name
+#: eventsrc:6
+msgid "Process successful"
+msgstr "Proces uspešen"
+
+#. Comment
+#: eventsrc:7
+msgid "Process successfully finished"
+msgstr "Proces je uspešno končan"
+
+#. Name
+#: eventsrc:13
+msgid "Process error"
+msgstr "Napaka procesa"
+
+#. Comment
+#: eventsrc:14
+msgid "Process finished with errors"
+msgstr "Proces je končal brez napak"
+
+#. Name
+#: eventsrc:19
+msgid "Waiting for medium"
+msgstr "Čakanje na medij"
+
+#. Comment
+#: eventsrc:20
+msgid "The user needs to insert a medium"
+msgstr "Uporabnik mora vstaviti medij"

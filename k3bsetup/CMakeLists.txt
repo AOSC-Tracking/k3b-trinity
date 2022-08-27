@@ -42,6 +42,7 @@ install( PROGRAMS k3bsetup
 
 ##### other data ################################
 
-install( FILES k3bsetup2.desktop
+tde_create_translated_desktop(
+  SOURCE k3bsetup2.desktop
   DESTINATION ${APPS_INSTALL_DIR}/Settings/System
 )

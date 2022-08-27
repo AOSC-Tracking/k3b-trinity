@@ -1,0 +1,304 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-27 16:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: src/k3b-cue.desktop:2 src/k3b.desktop:2
+msgid "K3b"
+msgstr "के3बी"
+
+#. GenericName
+#: src/k3b.desktop:4
+msgid "CD & DVD Burning"
+msgstr "सीडी & डीवीडी बर्निंग"
+
+#. Comment
+#: src/k3b.desktop:6
+msgid "CD writing program"
+msgstr "सीडी लिखने का प्रोग्राम"
+
+#. Name
+#: src/konqi/k3b_audiocd_rip.desktop:7
+#, fuzzy
+msgid "Extract Digital Audio with K3b"
+msgstr "के3बी के साथ ऑडियो सीडी बनाए..."
+
+#. Name
+#: src/konqi/k3b_cd_copy.desktop:7
+#, fuzzy
+msgid "Copy CD with K3b"
+msgstr "के3बी के साथ ऑडियो सीडी बनाए..."
+
+#. Name
+#: src/konqi/k3b_create_audio_cd.desktop:6
+#: src/konqi/k3b_handle_empty_cd.desktop:12
+msgid "Create Audio CD with K3b..."
+msgstr "के3बी के साथ ऑडियो सीडी बनाए..."
+
+#. Name
+#: src/konqi/k3b_create_data_cd.desktop:7
+#: src/konqi/k3b_handle_empty_cd.desktop:7
+#: src/konqi/k3b_handle_empty_dvd.desktop:7
+msgid "Create Data CD with K3b..."
+msgstr "के3बी के साथ डाटा सीडी बनाए..."
+
+#. Name
+#: src/konqi/k3b_create_data_dvd.desktop:7
+#: src/konqi/k3b_handle_empty_dvd.desktop:8
+#, fuzzy
+msgid "Create Data DVD with K3b..."
+msgstr "के3बी के साथ डाटा सीडी बनाए..."
+
+#. Name
+#: src/konqi/k3b_create_video_cd.desktop:6
+msgid "Create Video CD with K3b..."
+msgstr "के3बी के साथ वीडियो सीडी बनाए..."
+
+#. Name
+#: src/konqi/k3b_dvd_copy.desktop:7
+msgid "Copy DVD/BLURAY with K3b"
+msgstr ""
+
+#. Name
+#: src/konqi/k3b_videodvd_rip.desktop:7
+msgid "Rip Video DVD/BLURAY Titles with K3b"
+msgstr ""
+
+#. Name
+#: src/konqi/k3b_write_bin_image.desktop:6
+msgid "Write CD Image with K3b..."
+msgstr "के3बी के साथ सीडी इमेज लिखें..."
+
+#. Name
+#: src/konqi/k3b_write_iso_image.desktop:6
+#, fuzzy
+msgid "Write CD or DVD Image with K3b..."
+msgstr "के3बी के साथ सीडी इमेज लिखें..."
+
+#. Comment
+#: src/mimetypes/x-k3b.desktop:2
+msgid "K3b Project"
+msgstr "के3बी परियोजना"
+
+#. Comment
+#: src/pics/73lab/k3b.theme:4
+msgid "Ayo's original K3b theme"
+msgstr ""
+
+#. Comment
+#: src/pics/RobsTheme/k3b.theme:4
+msgid "A semitransparent theme that uses your system colors. "
+msgstr ""
+
+#. Comment
+#: src/pics/crystal/k3b.theme:4
+msgid "The cool crystal theme"
+msgstr ""
+
+#. Comment
+#: src/pics/quant/k3b.theme:4
+msgid "New official theme for K3b. Enjoy! "
+msgstr ""
+
+#. Name
+#: plugins/audiooutput/alsa/k3balsaoutputplugin.plugin:2
+msgid "K3b Alsa Audio Output Plugin"
+msgstr ""
+
+#. Comment
+#: plugins/audiooutput/alsa/k3balsaoutputplugin.plugin:3
+msgid "Audio Output plugin which plays through alsa"
+msgstr ""
+
+#. Name
+#: plugins/audiooutput/arts/k3bartsoutputplugin.plugin:2
+msgid "K3b Arts Audio Output Plugin"
+msgstr ""
+
+#. Comment
+#: plugins/audiooutput/arts/k3bartsoutputplugin.plugin:3
+msgid "Audio Output plugin which plays through arts"
+msgstr ""
+
+#. Name
+#: plugins/decoder/ffmpeg/k3bffmpegdecoder.plugin:2
+msgid "K3b FFMpeg Decoder"
+msgstr ""
+
+#. Comment
+#: plugins/decoder/ffmpeg/k3bffmpegdecoder.plugin:3
+msgid "Decoding module to decode wma files"
+msgstr ""
+
+#. Name
+#: plugins/decoder/flac/k3bflacdecoder.plugin:2
+msgid "K3b FLAC Decoder"
+msgstr ""
+
+#. Comment
+#: plugins/decoder/flac/k3bflacdecoder.plugin:3
+msgid "Decoding module to decode FLAC files"
+msgstr ""
+
+#. Name
+#: plugins/decoder/libsndfile/k3blibsndfiledecoder.plugin:2
+msgid "K3b Libsndfile Decoder"
+msgstr ""
+
+#. Comment
+#: plugins/decoder/libsndfile/k3blibsndfiledecoder.plugin:3
+msgid "Decoding module to decode audio files supported by libsndfile"
+msgstr ""
+
+#. Name
+#: plugins/decoder/mp3/k3bmaddecoder.plugin:2
+msgid "K3b MAD Decoder"
+msgstr ""
+
+#. Comment
+#: plugins/decoder/mp3/k3bmaddecoder.plugin:3
+msgid "Decoding module to decode MPEG 1 Layer III files"
+msgstr ""
+
+#. Name
+#: plugins/decoder/musepack/k3bmpcdecoder.plugin:2
+msgid "K3b Musepack Decoder"
+msgstr ""
+
+#. Comment
+#: plugins/decoder/musepack/k3bmpcdecoder.plugin:3
+msgid "Decoding module to decode Musepack audio files"
+msgstr ""
+
+#. Name
+#: plugins/decoder/ogg/k3boggvorbisdecoder.plugin:2
+msgid "K3b Ogg Vorbis Decoder"
+msgstr ""
+
+#. Comment
+#: plugins/decoder/ogg/k3boggvorbisdecoder.plugin:3
+msgid "Decoding module to decode Ogg Vorbis files"
+msgstr ""
+
+#. Name
+#: plugins/decoder/wave/k3bwavedecoder.plugin:2
+msgid "K3b Wave Decoder"
+msgstr ""
+
+#. Comment
+#: plugins/decoder/wave/k3bwavedecoder.plugin:3
+msgid "Decoding module to decode wave files"
+msgstr ""
+
+#. Name
+#: plugins/encoder/external/k3bexternalencoder.plugin:2
+msgid "K3b External Audio Encoder"
+msgstr ""
+
+#. Comment
+#: plugins/encoder/external/k3bexternalencoder.plugin:3
+msgid "Encoding module that allows specifying an encoding commmand"
+msgstr ""
+
+#. Name
+#: plugins/encoder/lame/k3blameencoder.plugin:2
+msgid "K3b Lame Mp3 Encoder"
+msgstr ""
+
+#. Comment
+#: plugins/encoder/lame/k3blameencoder.plugin:3
+msgid "Encoding module to encode MPEG1 Layer III (mp3) files"
+msgstr ""
+
+#. Name
+#: plugins/encoder/ogg/k3boggvorbisencoder.plugin:2
+msgid "K3b Ogg Vorbis Encoder"
+msgstr ""
+
+#. Comment
+#: plugins/encoder/ogg/k3boggvorbisencoder.plugin:3
+msgid "Encoding module to encode Ogg Vorbis files"
+msgstr ""
+
+#. Name
+#: plugins/encoder/sox/k3bsoxencoder.plugin:2
+msgid "K3b SoX Audio Encoder"
+msgstr ""
+
+#. Comment
+#: plugins/encoder/sox/k3bsoxencoder.plugin:3
+msgid "Encoding module to encode many file formats using SoX"
+msgstr ""
+
+#. Name
+#: plugins/project/audiometainforenamer/k3baudiometainforenamerplugin.plugin:2
+msgid "K3b Audio Metainfo Renamer"
+msgstr ""
+
+#. Comment
+#: plugins/project/audiometainforenamer/k3baudiometainforenamerplugin.plugin:3
+msgid "Plugin to rename audio files in a data project based on the meta info."
+msgstr ""
+
+#. Name
+#: plugins/project/audioprojectcddb/k3baudioprojectcddbplugin.plugin:2
+msgid "K3b Cddb Audio Plugin"
+msgstr ""
+
+#. Comment
+#: plugins/project/audioprojectcddb/k3baudioprojectcddbplugin.plugin:3
+msgid "Plugin to query a cddb server for information about an audio project."
+msgstr ""
+
+#. Name
+#: tdefile-plugins/k3bproject/tdefile_k3b.desktop:2
+#, fuzzy
+msgid "K3b Project Info"
+msgstr "के3बी परियोजना"
+
+#. Name
+#: tdeioslaves/videodvd/videodvd.desktop:2
+msgid "Video DVD Browser"
+msgstr ""
+
+#. Description
+#: tdeioslaves/videodvd/videodvd.protocol:2
+msgid ""
+"A tdeioslave that allows files to be copied from a Video DVD (including "
+"decryption)"
+msgstr ""
+
+#. Name
+#: k3bsetup/k3bsetup2.desktop:2
+msgid "K3bSetup"
+msgstr "के3बी-सेटअप"
+
+#. GenericName
+#: k3bsetup/k3bsetup2.desktop:4
+#, fuzzy
+msgid "CD & DVD Burning Setup"
+msgstr "सीडी & डीवीडी बर्निंग"
+
+#. Comment
+#: k3bsetup/k3bsetup2.desktop:6
+msgid "K3bSetup 2 - modify permission for CD/DVD burning with K3b"
+msgstr "के3बी-सेटअप 2 - के3बी के साथ सीडी/डीवीडी बर्निंग हेतु आज्ञाएँ परिवर्धित करें"
+
+#. Keywords
+#: k3bsetup/k3bsetup2.desktop:8
+msgid "K3bSetup2;k3bsetup2;"
+msgstr "के3बी-सेटअप 2;के3बी-सेटअप2;"

@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-27 17:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Comment
+#: eventsrc:3
+msgid "K3b"
+msgstr "के3बी"
+
+#. Name
+#: eventsrc:6
+msgid "Process successful"
+msgstr "प्रक्रिया सफल"
+
+#. Comment
+#: eventsrc:7
+msgid "Process successfully finished"
+msgstr "प्रक्रिया सफलतापूर्वक पूर्ण"
+
+#. Name
+#: eventsrc:13
+msgid "Process error"
+msgstr "प्रक्रिया त्रुटि"
+
+#. Comment
+#: eventsrc:14
+msgid "Process finished with errors"
+msgstr "प्रक्रिया त्रुटि के साथ पूर्ण"
+
+#. Name
+#: eventsrc:19
+msgid "Waiting for medium"
+msgstr "साधन हेतु प्रतीक्षारत"
+
+#. Comment
+#: eventsrc:20
+msgid "The user needs to insert a medium"
+msgstr "उपयोगकर्ता को आवश्यक होगा कि साधन प्रविष्ट करे"

@@ -36,6 +36,7 @@ tde_add_kpart( libk3balsaoutputplugin AUTOMOC
 
 ##### other data ################################
 
-install( FILES k3balsaoutputplugin.plugin
+tde_create_translated_desktop(
+  SOURCE k3balsaoutputplugin.plugin
   DESTINATION ${DATA_INSTALL_DIR}/k3b/plugins
 )

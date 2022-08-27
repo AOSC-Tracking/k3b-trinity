@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-27 17:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Comment
+#: eventsrc:3
+msgid "K3b"
+msgstr ""
+
+#. Name
+#: eventsrc:6
+msgid "Process successful"
+msgstr "Proces was succesvol"
+
+#. Comment
+#: eventsrc:7
+msgid "Process successfully finished"
+msgstr "Proces met succes voltooid"
+
+#. Name
+#: eventsrc:13
+msgid "Process error"
+msgstr "Procesfout"
+
+#. Comment
+#: eventsrc:14
+msgid "Process finished with errors"
+msgstr "Proces voltooid met fouten"
+
+#. Name
+#: eventsrc:19
+msgid "Waiting for medium"
+msgstr "Wacht op medium"
+
+#. Comment
+#: eventsrc:20
+msgid "The user needs to insert a medium"
+msgstr "De gebruiker dient een medium in te voeren"
