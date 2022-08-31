@@ -4,7 +4,6 @@ X-TDE-Priority=TopLevel
 X-TDE-ServiceTypes=media/blankdvd
 
 [Desktop Action K3bDataProject]
-Name=Create Data CD with K3b...
 Name=Create Data DVD with K3b...
 Exec=k3b --device %u --datadvd
 Icon=k3b
