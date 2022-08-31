@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-28 20:26+0000\n"
+"POT-Creation-Date: 2022-08-31 20:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,13 +50,12 @@ msgstr "Stwórz płytę CD Audio za pomocą K3b..."
 #. Name
 #: src/konqi/k3b_create_data_cd.desktop:7
 #: src/konqi/k3b_handle_empty_cd.desktop:7
-#: src/konqi/k3b_handle_empty_dvd.desktop:7
 msgid "Create Data CD with K3b..."
 msgstr "Stwórz płytę CD z danymi za pomocą K3b..."
 
 #. Name
 #: src/konqi/k3b_create_data_dvd.desktop:7
-#: src/konqi/k3b_handle_empty_dvd.desktop:8
+#: src/konqi/k3b_handle_empty_dvd.desktop:7
 msgid "Create Data DVD with K3b..."
 msgstr "Stwórz płytę DVD z danymi za pomocą K3b..."
 
