@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-27 16:19+0200\n"
+"POT-Creation-Date: 2022-08-31 18:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,13 +52,12 @@ msgstr "কে-থ্রি-বি দিয়ে অডিও সিডি তৈ
 #. Name
 #: src/konqi/k3b_create_data_cd.desktop:7
 #: src/konqi/k3b_handle_empty_cd.desktop:7
-#: src/konqi/k3b_handle_empty_dvd.desktop:7
 msgid "Create Data CD with K3b..."
 msgstr "কে-থ্রি-বি দিয়ে ডেটা-সিডি তৈরি করো..."
 
 #. Name
 #: src/konqi/k3b_create_data_dvd.desktop:7
-#: src/konqi/k3b_handle_empty_dvd.desktop:8
+#: src/konqi/k3b_handle_empty_dvd.desktop:7
 msgid "Create Data DVD with K3b..."
 msgstr "কে-থ্রি-বি দিয়ে ডেটা-ডিভিডি তৈরি করো..."
 
