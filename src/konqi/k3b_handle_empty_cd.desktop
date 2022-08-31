@@ -5,10 +5,10 @@ X-TDE-ServiceTypes=media/blankcd
 
 [Desktop Action K3bDataProject]
 Name=Create Data CD with K3b...
+Exec=k3b --device %u --datacd
 Icon=k3b
 
 [Desktop Action K3bAudioCDProject]
-Exec=k3b --device %u --audiocd
 Name=Create Audio CD with K3b...
-Exec=k3b --device %u --datacd
+Exec=k3b --device %u --audiocd
 Icon=k3b
