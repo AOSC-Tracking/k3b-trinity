@@ -18,6 +18,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/libk3bdevice
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
+  ${SNDFILE_INCLUDE_DIRS}
 )
 
 link_directories(
