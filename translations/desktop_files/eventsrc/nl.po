@@ -1,52 +1,53 @@
 # SOME DESCRIPTIVE TITLE.
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Heimen Stoffels <vistausss@outlook.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-27 17:13+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2023-04-09 19:15+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Language-Team: Dutch <https://mirror.git.trinitydesktop.org/weblate/projects/"
+"applications/k3b-events/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.16.1\n"
 
 #. Comment
 #: eventsrc:3
 msgid "K3b"
-msgstr ""
+msgstr "K3b"
 
 #. Name
 #: eventsrc:6
 msgid "Process successful"
-msgstr "Proces was succesvol"
+msgstr "Proces afgerond"
 
 #. Comment
 #: eventsrc:7
 msgid "Process successfully finished"
-msgstr "Proces met succes voltooid"
+msgstr "Het proces is afgerond"
 
 #. Name
 #: eventsrc:13
 msgid "Process error"
-msgstr "Procesfout"
+msgstr "Foutmelding"
 
 #. Comment
 #: eventsrc:14
 msgid "Process finished with errors"
-msgstr "Proces voltooid met fouten"
+msgstr "Het proces is afgerond, maar met foutmeldingen"
 
 #. Name
 #: eventsrc:19
 msgid "Waiting for medium"
-msgstr "Wacht op medium"
+msgstr "Bezig met wachten op medium…"
 
 #. Comment
 #: eventsrc:20
 msgid "The user needs to insert a medium"
-msgstr "De gebruiker dient een medium in te voeren"
+msgstr "Voer een medium in"
