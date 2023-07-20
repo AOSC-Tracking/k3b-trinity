@@ -33,7 +33,7 @@ class K3bVerificationJob;
   */
 class LIBK3B_EXPORT K3bIso9660ImageWritingJob : public K3bBurnJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 	
  public:

@@ -37,7 +37,7 @@ class K3bMediaCache;
 
 class K3bApplication : public KUniqueApplication
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -75,7 +75,7 @@ class K3bApplication : public KUniqueApplication
  */
 class K3bApplication::Core : public K3bCore
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -29,7 +29,7 @@ class TQTimer;
  */
 class LIBK3B_EXPORT K3bListViewItemAnimator : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

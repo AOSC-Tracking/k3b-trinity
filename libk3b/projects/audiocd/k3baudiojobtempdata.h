@@ -27,7 +27,7 @@ class TQTextStream;
 
 class K3bAudioJobTempData : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

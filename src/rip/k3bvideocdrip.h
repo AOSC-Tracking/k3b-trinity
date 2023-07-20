@@ -26,7 +26,7 @@ class TQDataStream;
 
 class K3bVideoCdRip : public K3bJob
 {
-        Q_OBJECT
+        TQ_OBJECT
   
 
     public:

@@ -31,7 +31,7 @@ class TDEConfigBase;
   */
 class K3bTempDirSelectionWidget : public TQGroupBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

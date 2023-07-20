@@ -25,7 +25,7 @@
   */
 class K3bThemeOptionTab : public base_K3bThemeOptionTab
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

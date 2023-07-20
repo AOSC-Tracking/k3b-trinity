@@ -36,7 +36,7 @@ class K3bToolBox;
   */
 class K3bFileView : public K3bContentsView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

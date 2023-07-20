@@ -32,7 +32,7 @@ class K3bFileItem;
 
 class K3bMovixDvdJob : public K3bBurnJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

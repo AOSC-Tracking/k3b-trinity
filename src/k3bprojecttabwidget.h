@@ -33,7 +33,7 @@ class K3bDoc;
  */
 class K3bProjectTabWidget : public TQTabWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

@@ -27,7 +27,7 @@ class K3bBusyWidget;
 
 class K3bAudioTrackTRMLookupDialog : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

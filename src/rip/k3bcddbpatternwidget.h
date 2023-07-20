@@ -24,7 +24,7 @@ class TDEConfigBase;
 
 class K3bCddbPatternWidget : public base_K3bCddbPatternWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

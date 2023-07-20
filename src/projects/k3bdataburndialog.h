@@ -41,7 +41,7 @@ class K3bDataMultiSessionCombobox;
 
 class K3bDataBurnDialog : public K3bProjectBurnDialog
 {
- Q_OBJECT
+ TQ_OBJECT
   
 
  public:

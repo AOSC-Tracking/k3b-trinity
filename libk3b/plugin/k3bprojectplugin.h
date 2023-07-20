@@ -67,7 +67,7 @@ class K3bProjectPluginGUIBase
  */
 class LIBK3B_EXPORT K3bProjectPlugin : public K3bPlugin
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

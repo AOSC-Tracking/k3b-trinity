@@ -26,7 +26,7 @@ class TDEProcess;
 
 class K3bExternalEncoder : public K3bAudioEncoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

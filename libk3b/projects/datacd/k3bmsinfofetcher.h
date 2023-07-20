@@ -26,7 +26,7 @@ class TDEProcess;
 
 class K3bMsInfoFetcher : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

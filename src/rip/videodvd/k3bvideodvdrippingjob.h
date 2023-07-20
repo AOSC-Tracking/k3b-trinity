@@ -31,7 +31,7 @@ class K3bVideoDVDTitleDetectClippingJob;
  */
 class K3bVideoDVDRippingJob : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -26,7 +26,7 @@ class TDEConfigBase;
 
 class K3bProjectPluginDialog : public K3bInteractionDialog
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

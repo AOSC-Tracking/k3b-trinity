@@ -29,7 +29,7 @@ class TQCheckListItem;
 
 class K3bVideoDVDRippingDialog : public K3bInteractionDialog
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

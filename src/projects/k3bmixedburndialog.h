@@ -36,7 +36,7 @@ class K3bIntMapComboBox;
   */
 class K3bMixedBurnDialog : public K3bProjectBurnDialog  
 {
- Q_OBJECT
+ TQ_OBJECT
   
 
  public:

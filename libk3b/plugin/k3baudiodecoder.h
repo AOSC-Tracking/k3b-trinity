@@ -33,7 +33,7 @@
  **/
 class LIBK3B_EXPORT K3bAudioDecoder : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -209,7 +209,7 @@ class LIBK3B_EXPORT K3bAudioDecoder : public TQObject
  */
 class LIBK3B_EXPORT K3bAudioDecoderFactory : public K3bPlugin
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

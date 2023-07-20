@@ -25,7 +25,7 @@ namespace K3bDevice {
 
 class K3bLsofWrapperDialog : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

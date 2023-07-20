@@ -40,7 +40,7 @@ class TQWidget;
  */
 class K3bMusicBrainzJob : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

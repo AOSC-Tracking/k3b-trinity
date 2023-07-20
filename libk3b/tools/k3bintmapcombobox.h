@@ -29,7 +29,7 @@
  */
 class LIBK3B_EXPORT K3bIntMapComboBox : public KComboBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

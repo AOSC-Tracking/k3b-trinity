@@ -28,7 +28,7 @@ class K3bJobHandler;
  */
 class K3bDataPreparationJob : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

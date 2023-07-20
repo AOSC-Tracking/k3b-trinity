@@ -36,7 +36,7 @@ class K3bCutComboBox;
 
 class K3bVcdTrackDialog : public KDialogBase
 {
-        Q_OBJECT
+        TQ_OBJECT
   
 
     public:

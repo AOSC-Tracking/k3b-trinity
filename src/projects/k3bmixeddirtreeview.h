@@ -28,7 +28,7 @@ class TQListViewItem;
 
 class K3bMixedDirTreeView : public K3bDataDirTreeView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

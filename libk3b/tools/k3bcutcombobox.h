@@ -34,7 +34,7 @@ class TQResizeEvent;
  */ 
 class LIBK3B_EXPORT K3bCutComboBox : public KComboBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

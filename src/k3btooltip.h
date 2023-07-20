@@ -28,7 +28,7 @@ class TQTimer;
  */
 class K3bToolTip : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

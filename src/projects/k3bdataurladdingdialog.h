@@ -33,7 +33,7 @@ class K3bDataDoc;
 
 class K3bDataUrlAddingDialog : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

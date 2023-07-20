@@ -52,7 +52,7 @@ class K3bAlsaOutputPlugin : public K3bAudioOutputPlugin
 
 class K3bAlsaOutputPluginConfigWidget : public K3bPluginConfigWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

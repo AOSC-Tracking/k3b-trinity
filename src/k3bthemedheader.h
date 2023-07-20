@@ -25,7 +25,7 @@ class TQLabel;
 
 class K3bThemedHeader : public TQFrame
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

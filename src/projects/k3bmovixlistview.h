@@ -73,7 +73,7 @@ class K3bMovixSubTitleViewItem : public K3bMovixListViewItem, public KFileItem
 
 class K3bMovixListView : public K3bListView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

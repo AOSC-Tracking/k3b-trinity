@@ -25,7 +25,7 @@ class TQStringList;
 
 class K3bProjectFilePlugin: public KFilePlugin
 {
-  Q_OBJECT
+  TQ_OBJECT
   
     
  public:

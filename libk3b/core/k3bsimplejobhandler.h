@@ -30,7 +30,7 @@
  */
 class LIBK3B_EXPORT K3bSimpleJobHandler : public TQObject, public K3bJobHandler
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

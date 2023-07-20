@@ -33,7 +33,7 @@ namespace K3bDevice {
  */
 class K3bDvdBooktypeJob : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

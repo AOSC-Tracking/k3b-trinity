@@ -34,7 +34,7 @@ class K3bExternalBin;
 
 class K3bExternalBinWidget : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

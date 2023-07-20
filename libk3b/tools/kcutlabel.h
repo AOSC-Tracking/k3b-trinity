@@ -26,7 +26,7 @@
  */
 class LIBK3B_EXPORT KCutLabel : public TQLabel 
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

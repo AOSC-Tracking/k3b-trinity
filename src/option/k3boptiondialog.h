@@ -34,7 +34,7 @@ class K3bThemeOptionTab;
   */
 class K3bOptionDialog : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

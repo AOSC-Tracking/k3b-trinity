@@ -29,7 +29,7 @@ namespace K3bDevice {
 
 class K3bAudioSessionReadingJob : public K3bThreadJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

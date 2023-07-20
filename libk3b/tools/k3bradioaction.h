@@ -28,7 +28,7 @@
  */
 class LIBK3B_EXPORT K3bRadioAction : public TDEToggleAction
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -26,7 +26,7 @@
 
 class K3bCddbLocalQuery : public K3bCddbQuery
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

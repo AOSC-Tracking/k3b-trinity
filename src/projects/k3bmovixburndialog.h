@@ -29,7 +29,7 @@ class K3bDataModeWidget;
 
 class K3bMovixBurnDialog : public K3bProjectBurnDialog
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -28,7 +28,7 @@ class TDEProcess;
 
 class K3bAudioNormalizeJob : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

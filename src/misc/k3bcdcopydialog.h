@@ -44,7 +44,7 @@ class TQGroupBox;
   */
 class K3bCdCopyDialog : public K3bInteractionDialog
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

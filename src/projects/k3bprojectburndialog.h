@@ -38,7 +38,7 @@ class TDEConfigBase;
   */
 class K3bProjectBurnDialog : public K3bInteractionDialog
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 
  public:

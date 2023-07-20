@@ -33,7 +33,7 @@ class K3bThemedHeader;
  */
 class K3bMediaContentsView : public K3bContentsView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

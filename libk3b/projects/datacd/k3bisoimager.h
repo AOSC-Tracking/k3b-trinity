@@ -37,7 +37,7 @@ class KTempFile;
 
 class K3bIsoImager : public K3bJob, public K3bMkisofsHandler
 {
- Q_OBJECT
+ TQ_OBJECT
   
 
  public:

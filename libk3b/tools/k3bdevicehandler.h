@@ -46,7 +46,7 @@ namespace K3bDevice
    */
   class LIBK3B_EXPORT DeviceHandler : public K3bThreadJob
     {
-      Q_OBJECT
+      TQ_OBJECT
   
 
      public:

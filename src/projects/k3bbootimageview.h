@@ -25,7 +25,7 @@ class K3bBootItem;
 
 class K3bBootImageView : public base_K3bBootImageView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

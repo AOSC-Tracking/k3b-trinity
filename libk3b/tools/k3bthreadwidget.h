@@ -34,7 +34,7 @@ namespace K3bDevice {
  */
 class K3bThreadWidget : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

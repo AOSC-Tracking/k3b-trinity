@@ -26,7 +26,7 @@ class TDEConfigBase;
 
 class K3bMovixOptionsWidget : public base_K3bMovixOptionsWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

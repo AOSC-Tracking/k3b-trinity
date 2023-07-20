@@ -34,7 +34,7 @@ namespace K3bDevice {
   */
 class K3bWriterSelectionWidget : public TQWidget
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 
  public: 

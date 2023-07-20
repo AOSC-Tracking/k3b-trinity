@@ -32,7 +32,7 @@ namespace K3bDevice {
 
 class K3bDiskInfoView : public K3bMediaContentsView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -26,7 +26,7 @@ class base_K3bOggVorbisEncoderSettingsWidget;
 
 class K3bOggVorbisEncoder : public K3bAudioEncoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -62,7 +62,7 @@ class K3bOggVorbisEncoder : public K3bAudioEncoder
 
 class K3bOggVorbisEncoderSettingsWidget : public K3bPluginConfigWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -32,7 +32,7 @@
  */
 class LIBK3B_EXPORT K3bAudioEncoder : public K3bPlugin
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

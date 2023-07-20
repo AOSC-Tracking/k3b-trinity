@@ -31,7 +31,7 @@ class TQLineEdit;
 
 class K3bMovixView : public K3bView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

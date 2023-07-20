@@ -27,7 +27,7 @@ class K3bProjectInterface;
 
 class K3bProjectManager : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

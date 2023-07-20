@@ -30,7 +30,7 @@ class TDEConfigBase;
  */
 class K3bAudioConvertingOptionWidget : public base_K3bAudioRippingOptionWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

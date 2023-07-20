@@ -24,7 +24,7 @@ class K3bJob;
 
 class K3bSignalWaiter : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

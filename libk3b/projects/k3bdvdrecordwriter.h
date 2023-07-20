@@ -29,7 +29,7 @@ namespace K3bDevice {
  */
 class K3bDvdrecordWriter : public K3bCdrecordWriter
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

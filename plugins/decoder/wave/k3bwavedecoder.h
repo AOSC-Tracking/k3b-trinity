@@ -28,7 +28,7 @@ class TQFile;
 
 class LIBK3B_EXPORT K3bWaveDecoderFactory : public K3bAudioDecoderFactory
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -46,7 +46,7 @@ class LIBK3B_EXPORT K3bWaveDecoderFactory : public K3bAudioDecoderFactory
 
 class LIBK3B_EXPORT K3bWaveDecoder : public K3bAudioDecoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -37,7 +37,7 @@ namespace K3bDevice {
  */
 class K3bEmptyDiscWaiter : public KDialogBase, public K3bJobHandler
 {
- Q_OBJECT
+ TQ_OBJECT
   
 
  public: 

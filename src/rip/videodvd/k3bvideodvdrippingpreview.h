@@ -27,7 +27,7 @@ class TDEProcess;
 
 class K3bVideoDVDRippingPreview : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

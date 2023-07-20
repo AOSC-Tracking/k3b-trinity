@@ -26,7 +26,7 @@ extern "C" {
 
 class K3bMadDecoderFactory : public K3bAudioDecoderFactory
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -44,7 +44,7 @@ class K3bMadDecoderFactory : public K3bAudioDecoderFactory
 
 class K3bMadDecoder : public K3bAudioDecoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
