@@ -24,7 +24,7 @@
 
 class K3bCddbLocalSubmit : public K3bCddbSubmit
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

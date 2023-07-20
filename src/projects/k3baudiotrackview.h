@@ -42,7 +42,7 @@ class K3bAudioTrackPlayer;
 
 class K3bAudioTrackView : public K3bListView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

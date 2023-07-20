@@ -46,7 +46,7 @@ namespace K3bDevice {
  */
 class K3bVerificationJob : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

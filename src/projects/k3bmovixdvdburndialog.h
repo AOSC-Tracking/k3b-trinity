@@ -28,7 +28,7 @@ class TQCheckBox;
 
 class K3bMovixDvdBurnDialog : public K3bProjectBurnDialog
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

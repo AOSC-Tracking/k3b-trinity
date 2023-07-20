@@ -24,7 +24,7 @@ class K3bIsoOptions;
 
 class K3bDataImageSettingsWidget : public base_K3bDataImageSettings
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

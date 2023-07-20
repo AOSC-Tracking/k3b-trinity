@@ -25,7 +25,7 @@ class KURL;
 
 class K3bOggVorbisDecoderFactory : public K3bAudioDecoderFactory
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -46,7 +46,7 @@ class K3bOggVorbisDecoderFactory : public K3bAudioDecoderFactory
   */
 class K3bOggVorbisDecoder : public K3bAudioDecoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

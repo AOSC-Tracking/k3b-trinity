@@ -23,7 +23,7 @@
 
 class K3b<name>Encoder : public K3bAudioEncoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -51,7 +51,7 @@ class K3b<name>Encoder : public K3bAudioEncoder
 
 class K3b<name>EncoderSettingsWidget : public K3bPluginConfigWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -37,7 +37,7 @@ class K3bWritingModeWidget;
 
 class K3bDvdCopyDialog : public K3bInteractionDialog
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

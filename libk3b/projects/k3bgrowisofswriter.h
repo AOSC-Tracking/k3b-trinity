@@ -29,7 +29,7 @@ class TDEProcess;
 
 class K3bGrowisofsWriter : public K3bAbstractWriter
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

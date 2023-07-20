@@ -27,7 +27,7 @@ class K3bVideoDvdDoc;
  */
 class K3bVideoDvdJob : public K3bDvdJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

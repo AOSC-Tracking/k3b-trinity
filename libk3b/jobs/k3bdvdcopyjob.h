@@ -29,7 +29,7 @@ namespace K3bDevice {
 
 class LIBK3B_EXPORT K3bDvdCopyJob : public K3bBurnJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

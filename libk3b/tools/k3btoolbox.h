@@ -35,7 +35,7 @@ class TQResizeEvent;
  */
 class LIBK3B_EXPORT K3bToolBoxButton : public TQToolButton
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -58,7 +58,7 @@ class LIBK3B_EXPORT K3bToolBoxButton : public TQToolButton
 
 class LIBK3B_EXPORT K3bToolBox : public TQFrame
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

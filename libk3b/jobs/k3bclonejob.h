@@ -30,7 +30,7 @@ class K3bReadcdReader;
 
 class LIBK3B_EXPORT K3bCloneJob : public K3bBurnJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

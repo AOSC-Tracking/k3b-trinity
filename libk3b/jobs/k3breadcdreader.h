@@ -33,7 +33,7 @@ namespace K3b {
 
 class K3bReadcdReader : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

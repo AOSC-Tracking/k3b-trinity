@@ -30,7 +30,7 @@ class TQListViewItem;
 
 class K3bVideoDVDRippingView : public K3bMediaContentsView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

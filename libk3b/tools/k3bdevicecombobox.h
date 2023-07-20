@@ -33,7 +33,7 @@ namespace K3bDevice {
  */
 class LIBK3B_EXPORT K3bDeviceComboBox : public KComboBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

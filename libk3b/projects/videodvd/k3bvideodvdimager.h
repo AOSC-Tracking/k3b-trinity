@@ -31,7 +31,7 @@ class K3bVideoDvdDoc;
  */
 class K3bVideoDvdImager : public K3bIsoImager
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

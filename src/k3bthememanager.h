@@ -110,7 +110,7 @@ class K3bTheme
 
 class K3bThemeManager : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

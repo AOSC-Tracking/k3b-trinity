@@ -41,7 +41,7 @@ class K3bProjectPlugin;
  */
 class K3bView : public TQWidget, public KXMLGUIClient
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -79,7 +79,7 @@ class K3bPluginInfo
  */
 class LIBK3B_EXPORT K3bPlugin : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
     friend class K3bPluginManager;

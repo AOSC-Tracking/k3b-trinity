@@ -84,7 +84,7 @@ class K3bPlayListViewItem : public TDEListViewItem
  */ 
 class K3bPlayListView : public TDEListView
 {
-Q_OBJECT
+TQ_OBJECT
   
 
  public:
@@ -104,7 +104,7 @@ Q_OBJECT
  */
 class K3bAudioPlayer : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
  public: 

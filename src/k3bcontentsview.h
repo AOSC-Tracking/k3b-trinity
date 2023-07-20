@@ -25,7 +25,7 @@ class K3bThemedHeader;
 
 class K3bContentsView : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

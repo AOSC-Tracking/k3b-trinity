@@ -33,7 +33,7 @@ class TDEPopupMenu;
  */
 class K3bAudioTrackSplitDialog : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

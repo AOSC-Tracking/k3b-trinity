@@ -38,7 +38,7 @@
  */
 class K3bToolBoxSeparator : public TQWidget
 {
-  //  Q_OBJECT
+  //  TQ_OBJECT
   
 
  public:

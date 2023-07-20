@@ -70,7 +70,7 @@ class K3bVideoCdInfoResult
 
 class K3bVideoCdInfo : public TQObject
 {
-        Q_OBJECT
+        TQ_OBJECT
   
 
     public:

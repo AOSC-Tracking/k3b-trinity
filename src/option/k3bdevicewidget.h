@@ -41,7 +41,7 @@ class TQLineEdit;
   */
 class K3bDeviceWidget : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

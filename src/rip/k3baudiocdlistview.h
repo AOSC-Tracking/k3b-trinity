@@ -26,7 +26,7 @@ class K3bAudioCdView;
  */
 class K3bAudioCdListView : public K3bListView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

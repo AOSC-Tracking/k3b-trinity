@@ -33,7 +33,7 @@ class K3bAudioTrackView;
   */
 class K3bAudioView : public K3bView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 	
  public: 

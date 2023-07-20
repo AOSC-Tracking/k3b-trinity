@@ -26,7 +26,7 @@ class K3bDataFileView;
 
 class K3bVideoDvdView : public K3bView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

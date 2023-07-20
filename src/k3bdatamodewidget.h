@@ -25,7 +25,7 @@ class TDEConfigBase;
 
 class K3bDataModeWidget : public TQComboBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

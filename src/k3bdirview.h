@@ -51,7 +51,7 @@ namespace TDEIO {
   */
 class K3bDirView : public TQVBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

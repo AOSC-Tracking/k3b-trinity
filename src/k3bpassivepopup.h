@@ -30,7 +30,7 @@ class TQLabel;
  */
 class K3bPassivePopup : public TQFrame
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

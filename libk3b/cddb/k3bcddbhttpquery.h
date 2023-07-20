@@ -28,7 +28,7 @@ namespace TDEIO {
 
 class K3bCddbHttpQuery : public K3bCddbQuery
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

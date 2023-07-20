@@ -50,7 +50,7 @@ class TQCustomEvent;
  */
 class K3bMediaCache : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

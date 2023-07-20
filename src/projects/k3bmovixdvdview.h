@@ -24,7 +24,7 @@ class K3bMovixDvdDoc;
 
 class K3bMovixDvdView : public K3bMovixView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

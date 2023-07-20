@@ -27,7 +27,7 @@ class TQSocket;
 
 class K3bCddbpQuery : public K3bCddbQuery
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

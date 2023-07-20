@@ -29,7 +29,7 @@ class TDEAction;
 
 class K3bAudioTrackPlayer : public TQObject, public K3bAudioClient
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -26,7 +26,7 @@
 
 class K3bCddbSubmit : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

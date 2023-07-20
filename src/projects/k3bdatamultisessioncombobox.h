@@ -24,7 +24,7 @@ class TDEConfigBase;
 
 class K3bDataMultiSessionCombobox : public TQComboBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -29,7 +29,7 @@ class TQTimer;
 
 class K3bVideoDVDRippingWidget : public base_K3bVideoDVDRippingWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

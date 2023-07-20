@@ -54,7 +54,7 @@ namespace K3bDevice {
  */
 class LIBK3B_EXPORT K3bCore : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

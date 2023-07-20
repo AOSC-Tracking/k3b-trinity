@@ -32,7 +32,7 @@ namespace K3bDevice {
 
 class K3bCdrecordWriter : public K3bAbstractWriter
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

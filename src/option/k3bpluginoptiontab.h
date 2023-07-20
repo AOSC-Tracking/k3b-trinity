@@ -22,7 +22,7 @@
 
 class K3bPluginOptionTab : public base_K3bPluginOptionTab
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

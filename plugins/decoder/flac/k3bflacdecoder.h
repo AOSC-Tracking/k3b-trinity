@@ -23,7 +23,7 @@ class KURL;
 
 class K3bFLACDecoderFactory : public K3bAudioDecoderFactory
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -41,7 +41,7 @@ class K3bFLACDecoderFactory : public K3bAudioDecoderFactory
 
 class K3bFLACDecoder : public K3bAudioDecoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

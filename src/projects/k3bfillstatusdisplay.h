@@ -44,7 +44,7 @@ namespace K3b {
   */
 class K3bFillStatusDisplayWidget : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -75,7 +75,7 @@ class K3bFillStatusDisplayWidget : public TQWidget
 
 class K3bFillStatusDisplay : public TQFrame  {
 
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

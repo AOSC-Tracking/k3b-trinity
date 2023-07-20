@@ -32,7 +32,7 @@ class TDEActionMenu;
   */
 class K3bDirOperator : public KDirOperator, public KBookmarkOwner
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

@@ -42,7 +42,7 @@ namespace K3bDevice {
   */
 class K3bDataView : public K3bView
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 
  public:

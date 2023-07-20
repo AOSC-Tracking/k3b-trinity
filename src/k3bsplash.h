@@ -27,7 +27,7 @@ class TQString;
 
 class K3bSplash : public TQVBox
 {
-Q_OBJECT
+TQ_OBJECT
   
 
  public:

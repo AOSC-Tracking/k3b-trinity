@@ -29,7 +29,7 @@ class K3bDirItem;
  */
 class K3bMovixDocPreparer : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -23,7 +23,7 @@ class K3bMpcWrapper;
 
 class K3bMpcDecoderFactory : public K3bAudioDecoderFactory
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -41,7 +41,7 @@ class K3bMpcDecoderFactory : public K3bAudioDecoderFactory
 
 class K3bMpcDecoder : public K3bAudioDecoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

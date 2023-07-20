@@ -39,7 +39,7 @@ namespace K3bDevice {
   */
 class K3bDataJob : public K3bBurnJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 	
  public:

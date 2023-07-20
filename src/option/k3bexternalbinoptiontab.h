@@ -30,7 +30,7 @@ class K3bExternalBinWidget;
 
 class K3bExternalBinOptionTab : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
  public:

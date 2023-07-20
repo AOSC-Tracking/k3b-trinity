@@ -24,7 +24,7 @@ class K3bIsoOptions;
 
 class K3bDataVolumeDescWidget : public base_K3bDataVolumeDescWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

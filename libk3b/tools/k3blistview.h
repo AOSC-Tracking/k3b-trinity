@@ -157,7 +157,7 @@ class LIBK3B_EXPORT K3bListView : public TDEListView
 {
   friend class K3bListViewItem;
 
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

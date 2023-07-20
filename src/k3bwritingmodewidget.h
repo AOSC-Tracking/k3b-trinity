@@ -29,7 +29,7 @@ class TDEConfigBase;
  */
 class K3bWritingModeWidget : public K3bIntMapComboBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -27,7 +27,7 @@ class TQPainter;
 
 class K3bAudioEditorWidget : public TQFrame
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

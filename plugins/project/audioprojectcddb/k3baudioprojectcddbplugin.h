@@ -26,7 +26,7 @@ class TQWidget;
 
 class K3bAudioProjectCddbPlugin : public K3bProjectPlugin
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

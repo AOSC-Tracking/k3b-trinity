@@ -34,7 +34,7 @@ class K3bTempDirSelectionWidget;
 
 class K3bVideoCdRippingDialog : public K3bInteractionDialog
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

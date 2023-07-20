@@ -25,7 +25,7 @@ class TQResizeEvent;
 
 class LIBK3B_EXPORT K3bTitleLabel : public TQFrame
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

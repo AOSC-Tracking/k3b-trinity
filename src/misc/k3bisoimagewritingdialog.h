@@ -41,7 +41,7 @@ class TQPoint;
   */
 class K3bIsoImageWritingDialog : public K3bInteractionDialog
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

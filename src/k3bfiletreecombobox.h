@@ -30,7 +30,7 @@ namespace K3bDevice {
 
 class K3bFileTreeComboBox : public KComboBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -25,7 +25,7 @@ class K3bDeviceWidget;
 
 class K3bDeviceOptionTab : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
  public:

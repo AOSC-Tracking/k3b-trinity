@@ -32,7 +32,7 @@ class TQRadioButton;
 
 class K3bBurningOptionTab : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
  public:

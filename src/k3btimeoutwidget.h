@@ -24,7 +24,7 @@ class TQResizeEvent;
 
 class K3bTimeoutWidget : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -33,7 +33,7 @@ class TDEConfig;
 
 class LIBK3B_EXPORT K3bMovixDoc : public K3bDataDoc
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

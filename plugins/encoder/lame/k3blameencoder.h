@@ -29,7 +29,7 @@ class KDialogBase;
 
 class K3bLameEncoder : public K3bAudioEncoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -65,7 +65,7 @@ class K3bLameEncoder : public K3bAudioEncoder
 
 class K3bLameEncoderSettingsWidget : public K3bPluginConfigWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

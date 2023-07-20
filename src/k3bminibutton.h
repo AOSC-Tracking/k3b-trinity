@@ -33,7 +33,7 @@ class TQEvent;
  */
 class K3bMiniButton : public TQPushButton
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

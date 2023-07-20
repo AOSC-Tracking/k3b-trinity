@@ -39,7 +39,7 @@ namespace TDEIO {
 
 class K3bDeviceBranch : public KFileTreeBranch
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -116,7 +116,7 @@ class K3bFileTreeViewItem : public KFileTreeViewItem
   */
 class K3bFileTreeView : public KFileTreeView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

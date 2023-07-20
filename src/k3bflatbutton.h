@@ -31,7 +31,7 @@ class TDEAction;
 */
 class K3bFlatButton : public TQFrame
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

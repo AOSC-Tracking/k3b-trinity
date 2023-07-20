@@ -21,7 +21,7 @@
 
 class K3b<name>DecoderFactory : public K3bAudioDecoderFactory
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -39,7 +39,7 @@ class K3b<name>DecoderFactory : public K3bAudioDecoderFactory
 
 class K3b<name>Decoder : public K3bAudioDecoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

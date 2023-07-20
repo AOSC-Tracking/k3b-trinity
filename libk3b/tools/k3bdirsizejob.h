@@ -30,7 +30,7 @@
  */
 class LIBK3B_EXPORT K3bDirSizeJob : public K3bThreadJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

@@ -29,7 +29,7 @@
 
 class LIBK3B_EXPORT K3bCddbQuery : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

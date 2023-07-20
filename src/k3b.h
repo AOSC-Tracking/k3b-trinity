@@ -61,7 +61,7 @@ namespace K3bDevice {
 
 class K3bMainWindow : public KParts::DockMainWindow
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

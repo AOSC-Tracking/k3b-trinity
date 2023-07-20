@@ -24,7 +24,7 @@ class K3bDvdDoc;
 
 class K3bDvdView : public K3bDataView
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

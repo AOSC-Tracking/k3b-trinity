@@ -32,7 +32,7 @@ class TDEConfig;
 
 class LIBK3B_EXPORT K3bMixedDoc : public K3bDoc
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public: 

@@ -26,7 +26,7 @@ class TDEAction;
 
 class K3bSidePanel : public TQToolBox
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

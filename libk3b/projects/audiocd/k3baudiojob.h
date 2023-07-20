@@ -39,7 +39,7 @@ class K3bAudioMaxSpeedJob;
   */
 class K3bAudioJob : public K3bBurnJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 	
  public:

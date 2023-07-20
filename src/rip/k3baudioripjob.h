@@ -31,7 +31,7 @@ class K3bThreadJob;
 
 class K3bAudioRipJob : public K3bJob
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

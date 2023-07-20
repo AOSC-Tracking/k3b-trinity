@@ -26,7 +26,7 @@ class TDEProcess;
 
 class K3bSoxEncoder : public K3bAudioEncoder
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
@@ -66,7 +66,7 @@ class K3bSoxEncoder : public K3bAudioEncoder
 
 class K3bSoxEncoderSettingsWidget : public K3bPluginConfigWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

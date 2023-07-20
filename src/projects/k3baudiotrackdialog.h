@@ -33,7 +33,7 @@ class K3bAudioTrackWidget;
 
 class K3bAudioTrackDialog : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

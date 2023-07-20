@@ -32,7 +32,7 @@ class K3bMediaSelectionComboBox;
 
 class K3bDataSessionImportDialog : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

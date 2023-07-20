@@ -41,7 +41,7 @@ class TQShowEvent;
   */
 class K3bAudioBurnDialog : public K3bProjectBurnDialog  
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:
