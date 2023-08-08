@@ -273,7 +273,7 @@ bool K3bFileTreeComboBox::eventFilter( TQObject* o, TQEvent* e )
     }
     else if( e->type() == TQEvent::MouseButtonPress ) {
       TQMouseEvent* me = (TQMouseEvent*)e;
-      if ( !TQT_TQRECT_OBJECT(m_fileTreeView->rect()).contains( me->pos() ) ) {
+      if ( !m_fileTreeView->rect().contains( me->pos() ) ) {
 	TQRect arrowRect = style().querySubControlMetrics( TQStyle::CC_ComboBox, this,
 							  TQStyle::SC_ComboBoxArrow);
 	arrowRect = TQStyle::visualRect(arrowRect, this);
