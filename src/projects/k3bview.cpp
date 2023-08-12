@@ -149,7 +149,7 @@ void K3bView::addPluginButtons( int projectType )
 
 void K3bView::slotPluginButtonClicked()
 {
-  TQObject* o = TQT_TQOBJECT(const_cast<TQT_BASE_OBJECT_NAME*>(sender()));
+  TQObject* o = const_cast<TQObject*>(sender());
   if( K3bProjectPlugin* p = m_plugins[static_cast<void*>(o)] ) {
     if( p->hasGUI() ) {
       K3bProjectPluginDialog dlg( p, doc(), this );

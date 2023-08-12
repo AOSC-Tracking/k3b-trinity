@@ -153,9 +153,9 @@ void K3bStatusBarManager::clearActionStatusText()
 bool K3bStatusBarManager::eventFilter( TQObject* o, TQEvent* e )
 {
   if( e->type() == TQEvent::MouseButtonDblClick ) {
-    if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_labelFreeTemp->parentWidget()) )
+    if( o == m_labelFreeTemp->parentWidget() )
       m_mainWindow->showOptionDialog( 0 );  // FIXME: use an enumeration for the option pages
-    else if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_versionBox) )
+    else if( o == m_versionBox )
       if( TDEAction* a = m_mainWindow->action( "help_about_app" ) )
 	a->activate();
   }
