@@ -174,7 +174,7 @@ K3bDoc* K3bProjectTabWidget::projectAt( const TQPoint& pos ) const
 
 bool K3bProjectTabWidget::eventFilter( TQObject* o, TQEvent* e )
 {
-  if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(tabBar()) ) {
+  if( o == tabBar() ) {
     if( e->type() == TQEvent::MouseButtonPress ) {
       TQMouseEvent* me = TQT_TQMOUSEEVENT(e);
       if( me->button() == Qt::RightButton ) {

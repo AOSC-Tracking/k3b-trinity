@@ -134,7 +134,7 @@ void K3bToolTip::hideTip()
 
 bool K3bToolTip::eventFilter( TQObject* o, TQEvent* e )
 {
-  if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(parentWidget()) ) {
+  if( o == parentWidget() ) {
     switch( e->type() ) {
     case TQEvent::MouseButtonPress:
     case TQEvent::MouseButtonRelease:

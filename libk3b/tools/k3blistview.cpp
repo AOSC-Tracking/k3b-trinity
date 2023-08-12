@@ -1017,9 +1017,9 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
   if( e->type() == TQEvent::KeyPress ) {
      TQKeyEvent* ke = TQT_TQKEYEVENT(e);
      if( ke->key() == Key_Tab ) {
-       if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorLineEdit) ||
-	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
-	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ) {
+       if( o == m_editorLineEdit ||
+	   o == d->msfEditLineEdit ||
+	   o == d->spinBoxLineEdit ) {
 	 K3bListViewItem* lastEditItem = m_currentEditItem;
 
 	 doRename();
@@ -1059,9 +1059,9 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
      }
      if( ke->key() == Key_Return ||
          ke->key() == Key_Enter ) {
-       if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorLineEdit) ||
-	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
-	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ) {
+       if( o == m_editorLineEdit ||
+	   o == d->msfEditLineEdit ||
+	   o == d->spinBoxLineEdit ) {
 	 K3bListViewItem* lastEditItem = m_currentEditItem;
 	 doRename();
 
@@ -1079,9 +1079,9 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
        }
      }
      else if( ke->key() == Key_Escape ) {
-       if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorLineEdit) ||
-	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
-	   TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ) {
+       if( o == m_editorLineEdit ||
+	   o == d->msfEditLineEdit ||
+	   o == d->spinBoxLineEdit ) {
 	 hideEditor();
 
 	 // keep the focus here
@@ -1092,7 +1092,7 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
      }
   }
 
-  else if( e->type() == TQEvent::MouseButtonPress && TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(viewport()) ) {
+  else if( e->type() == TQEvent::MouseButtonPress && o == viewport() ) {
 
     // first let's grab the focus
     viewport()->setFocus();
@@ -1138,12 +1138,12 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
   }
 
   else if( e->type() == TQEvent::FocusOut ) {
-    if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorLineEdit) ||
-	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->msfEditLineEdit) ||
-	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(d->spinBoxLineEdit) ||
-	TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorComboBox) ) {
+    if( o == m_editorLineEdit ||
+	o == d->msfEditLineEdit ||
+	o == d->spinBoxLineEdit ||
+	o == m_editorComboBox ) {
       // make sure we did not lose the focus to one of the edit widgets' children
-      if( !tqApp->focusWidget() || TQT_BASE_OBJECT(tqApp->focusWidget()->parentWidget()) != TQT_BASE_OBJECT(o) ) {
+      if( !tqApp->focusWidget() || tqApp->focusWidget()->parentWidget() != o ) {
 	doRename();
 	hideEditor();
       }

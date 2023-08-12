@@ -162,7 +162,7 @@ void K3bAudioTrackSplitDialog::splitAt( const TQPoint& p )
 
 bool K3bAudioTrackSplitDialog::eventFilter( TQObject* o, TQEvent* e )
 {
-  if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(m_editorWidget) ) {
+  if( o == m_editorWidget ) {
     if( e->type() == TQEvent::MouseButtonDblClick ) {
       TQMouseEvent* me = TQT_TQMOUSEEVENT( e );
       splitAt( me->pos() );
