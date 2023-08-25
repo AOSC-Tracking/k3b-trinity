@@ -155,11 +155,7 @@ void K3bFileSplitter::flush()
   d->file.flush();
 }
 
-#ifdef USE_QT4
-qint64 K3bFileSplitter::size() const
-#else // USE_QT4
 TQIODevice::Offset K3bFileSplitter::size() const
-#endif // USE_QT4
 {
   // not implemented due to Offset size limitations
   return 0;

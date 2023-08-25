@@ -19,19 +19,7 @@
 #include <tqfile.h>
 #include <tqobject.h>
 
-#ifdef Q_MOC_RUN
-#define USE_QT4
-#endif // Q_MOC_RUN
-
-// MOC_SKIP_BEGIN
-#ifdef USE_QT4
-class K3bDebuggingOutputFile : public TQFile
-#else // USE_QT4
-// MOC_SKIP_END
 class K3bDebuggingOutputFile : public TQObject, public TQFile
-// MOC_SKIP_BEGIN
-#endif // USE_QT4
-// MOC_SKIP_END
 {
   TQ_OBJECT
   

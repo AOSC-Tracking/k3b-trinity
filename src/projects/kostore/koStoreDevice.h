@@ -46,16 +46,7 @@ public:
   void close() { }
   void flush() { }
 
-#ifdef USE_QT4
-  inline qint64 readData ( char * data, qint64 maxSize ) { return readBlock(data, maxSize); }
-  inline qint64 writeData ( const char * data, qint64 maxSize ) { return writeBlock(data, maxSize); }
-#endif // USE_QT4
-
-#ifdef USE_QT4
-  qint64 size() const {
-#else // USE_QT4
   Offset size() const {
-#endif // USE_QT4
     if ( m_store->mode() == KoStore::Read )
       return m_store->size();
     else
