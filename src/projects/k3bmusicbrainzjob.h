@@ -20,10 +20,6 @@
 #include <config.h>
 #endif
 
-#ifdef Q_MOC_RUN
-#define HAVE_MUSICBRAINZ
-#endif // Q_MOC_RUN
-
 #ifdef HAVE_MUSICBRAINZ
 
 #include <k3bjob.h>

@@ -63,11 +63,6 @@ class LIBK3B_EXPORT K3bFileSplitter : public TQIODevice
 
   virtual void close();
 
-#ifdef USE_QT4
-	inline qint64 readData ( char * data, qint64 maxSize ) { return readBlock(data, maxSize); }
-	inline qint64 writeData ( const char * data, qint64 maxSize ) { return writeBlock(data, maxSize); }
-#endif // USE_QT4
-
   /**
    * File descriptor to read from and write to.
    * Not implemented yet!
@@ -79,11 +74,7 @@ class LIBK3B_EXPORT K3bFileSplitter : public TQIODevice
   /**
    * Not implemented
    */
-#ifdef USE_QT4
-  virtual qint64 size() const;
-#else // USE_QT4
   virtual Offset size() const;
-#endif // USE_QT4
 
   /**
    * Not implemented
