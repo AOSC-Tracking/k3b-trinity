@@ -27,7 +27,7 @@ K3bMiniButton::K3bMiniButton( TQWidget *parent, const char * name )
   :TQPushButton( parent, name ),
    m_mouseOver( false )
 {
-  setFocusPolicy( TQ_NoFocus );
+  setFocusPolicy( TQWidget::NoFocus );
 }
 
 K3bMiniButton::~K3bMiniButton()

@@ -1920,7 +1920,7 @@ void MImageScale::mimageScaleAARGB(MImageScaleInfo *isi, unsigned int *dest,
 // }
 
 TQImage scale(const TQImage& image, int width, int height,
-	SmoothAlgorithm alg, TQ_ScaleMode mode, double blur )
+	SmoothAlgorithm alg, TQImage::ScaleMode mode, double blur )
 {
 	if( image.isNull()) return image.copy();
 	
