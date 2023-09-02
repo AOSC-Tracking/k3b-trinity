@@ -41,7 +41,7 @@ K3bJobProgressOSD::K3bJobProgressOSD( TQWidget* parent, const char* name )
     m_screen(0),
     m_position(s_outerMargin, s_outerMargin)
 {
-  setFocusPolicy( TQ_NoFocus );
+  setFocusPolicy( TQWidget::NoFocus );
   setBackgroundMode( NoBackground );
 
   // dummy size

@@ -1174,7 +1174,7 @@ void K3bListView::viewportResizeEvent( TQResizeEvent* e )
 
     if( bgPix.width() < m_backgroundPixmap.width() ||
 	bgPix.height() < m_backgroundPixmap.height() ) {
-      TQPixmap newBgPix( m_backgroundPixmap.convertToImage().scale( bgPix.size(), TQ_ScaleMin ) );
+      TQPixmap newBgPix( m_backgroundPixmap.convertToImage().scale( bgPix.size(), TQImage::ScaleMin ) );
       if( m_backgroundPixmapPosition == TOP_LEFT )
 	bitBlt( &bgPix, 0, 0,
 		&newBgPix, 0, 0,

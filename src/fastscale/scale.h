@@ -27,7 +27,7 @@ namespace ImageUtils {
 	enum SmoothAlgorithm { SMOOTH_NONE, SMOOTH_FAST, SMOOTH_NORMAL, SMOOTH_BEST };
 
 	TQImage scale(const TQImage& image, int width, int height,
-		SmoothAlgorithm alg, TQ_ScaleMode mode = TQ_ScaleFree, double blur = 1.0);
+		SmoothAlgorithm alg, TQImage::ScaleMode mode = TQImage::ScaleFree, double blur = 1.0);
 }
 
 #endif
