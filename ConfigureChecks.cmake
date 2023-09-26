@@ -183,6 +183,7 @@ if( WITH_TAGLIB )
   if( NOT TAGLIB_FOUND )
     tde_message_fatal( "taglib is requested, but was not found on your system" )
   endif( )
+  set( HAVE_TAGLIB 1 )
 endif( )
 
 

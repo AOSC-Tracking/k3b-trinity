@@ -18,11 +18,13 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/libk3bdevice
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
+  ${TAGLIB_INCLUDE_DIRS}
 )
 
 link_directories(
   ${TQT_LIBRARY_DIRS}
   ${FLAC_LIBRARY_DIRS}
+  ${TAGLIB_LIBRARY_DIRS}
 )
 
 if( ${FLAC_VERSION} VERSION_GREATER "1.1.1" )
@@ -34,7 +36,7 @@ endif( )
 tde_add_kpart( libk3bflacdecoder AUTOMOC
   SOURCES k3bflacdecoder.cpp
   LINK tdecore-shared k3b-shared k3bdevice-shared
-    ${FLAC_LIBRARIES}
+    ${FLAC_LIBRARIES} ${TAGLIB_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 
