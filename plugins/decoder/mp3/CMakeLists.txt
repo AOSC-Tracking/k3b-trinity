@@ -18,11 +18,13 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/libk3bdevice
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
+  ${TAGLIB_INCLUDE_DIRS}
 )
 
 link_directories(
   ${TQT_LIBRARY_DIRS}
   ${MAD_LIBRARY_DIRS}
+  ${TAGLIB_LIBRARY_DIRS}
 )
 
 
@@ -31,7 +33,7 @@ link_directories(
 tde_add_kpart( libk3bmaddecoder AUTOMOC
   SOURCES k3bmad.cpp k3bmaddecoder.cpp
   LINK tdecore-shared k3b-shared k3bdevice-shared
-    ${MAD_LIBRARIES}
+    ${MAD_LIBRARIES} ${TAGLIB_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

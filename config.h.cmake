@@ -33,3 +33,5 @@
 
 // Don't define HAVE_RESMGR due to it seems to be totally outdated
 // #cmakedefine HAVE_RESMGR
+
+#cmakedefine HAVE_TAGLIB
