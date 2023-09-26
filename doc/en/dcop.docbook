@@ -76,13 +76,13 @@ void burn()
 <para>K3b offers the K3bProjectInterface as listed above or the more powerful K3bDataProjectInterface which only applies to data projects (CD and DVD):
 
 <programlisting>
-void createFolder(QString name)
-void createFolder(QString name,QString parent)
-void addUrl(KURL url,QString parent)
-void addUrls(KURL::List urls,QString parent)
-void removeItem(QString path)
-void renameItem(QString path,QString newName)
-void setVolumeID(QString id)
+void createFolder(TQString name)
+void createFolder(TQString name,TQString parent)
+void addUrl(KURL url,TQString parent)
+void addUrls(KURL::List urls,TQString parent)
+void removeItem(TQString path)
+void renameItem(TQString path,TQString newName)
+void setVolumeID(TQString id)
 </programlisting>
 </para>
 

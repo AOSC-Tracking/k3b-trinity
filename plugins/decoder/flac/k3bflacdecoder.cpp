@@ -33,6 +33,7 @@
 #ifdef HAVE_TAGLIB
 #include <taglib/tag.h>
 #include <taglib/flacfile.h>
+#define TStringToTQString(s) TQString::fromUtf8((s).toCString(true))
 #endif
 
 #if !defined FLACPP_API_VERSION_CURRENT || FLACPP_API_VERSION_CURRENT < 6
@@ -293,9 +294,9 @@ bool K3bFLACDecoder::analyseFileInternal( K3b::Msf& frames, int& samplerate, int
     kdDebug() << "(K3bFLACDecoder) using taglib to read tag" << endl;
     TagLib::FLAC::File f( TQFile::encodeName(filename()) );
     if( f.isOpen() ) {
-      addMetaInfo( META_TITLE, TStringToQString( f.tag()->title() ) );
-      addMetaInfo( META_ARTIST, TStringToQString( f.tag()->artist() ) );
-      addMetaInfo( META_COMMENT, TStringToQString( f.tag()->comment() ) );
+      addMetaInfo( META_TITLE, TStringToTQString( f.tag()->title() ) );
+      addMetaInfo( META_ARTIST, TStringToTQString( f.tag()->artist() ) );
+      addMetaInfo( META_COMMENT, TStringToTQString( f.tag()->comment() ) );
     }
   }
 #endif

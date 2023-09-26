@@ -48,6 +48,7 @@
 #ifdef HAVE_TAGLIB
 #include <taglib/tag.h>
 #include <taglib/mpegfile.h>
+#define TStringToTQString(s) TQString::fromUtf8((s).toCString(true))
 #endif
 
 
@@ -110,11 +111,11 @@ TQString K3bMadDecoder::metaInfo( MetaDataField f )
   if ( file.tag() ) {
       switch( f ) {
       case META_TITLE:
-          return TStringToQString( file.tag()->title() );
+          return TStringToTQString( file.tag()->title() );
       case META_ARTIST:
-          return TStringToQString( file.tag()->artist() );
+          return TStringToTQString( file.tag()->artist() );
       case META_COMMENT:
-          return TStringToQString( file.tag()->comment() );
+          return TStringToTQString( file.tag()->comment() );
       default:
           return TQString();
       }
