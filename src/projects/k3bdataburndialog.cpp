@@ -157,10 +157,10 @@ void K3bDataBurnDialog::setupSettingsTab()
   frameLayout->setSpacing( spacingHint() );
   frameLayout->setMargin( marginHint() );
 
-  m_groupDataMode = new TQGroupBox( 1, Qt::Vertical, i18n("Datatrack Mode"), frame );
+  m_groupDataMode = new TQGroupBox( 1, TQt::Vertical, i18n("Datatrack Mode"), frame );
   m_dataModeWidget = new K3bDataModeWidget( m_groupDataMode );
 
-  TQGroupBox* groupMultiSession = new TQGroupBox( 1, Qt::Vertical, i18n("Multisession Mode"), frame );
+  TQGroupBox* groupMultiSession = new TQGroupBox( 1, TQt::Vertical, i18n("Multisession Mode"), frame );
   m_comboMultisession = new K3bDataMultiSessionCombobox( groupMultiSession );
 
   frameLayout->addWidget( m_groupDataMode, 0, 0 );

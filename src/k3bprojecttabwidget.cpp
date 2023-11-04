@@ -177,7 +177,7 @@ bool K3bProjectTabWidget::eventFilter( TQObject* o, TQEvent* e )
   if( o == tabBar() ) {
     if( e->type() == TQEvent::MouseButtonPress ) {
       TQMouseEvent* me = TQT_TQMOUSEEVENT(e);
-      if( me->button() == Qt::RightButton ) {
+      if( me->button() == TQt::RightButton ) {
 	if( projectAt( me->pos() ) ) {
 	  // we need change the tab because the actions work on the current tab
 	  TQTab* clickedTab = tabBar()->selectTab( me->pos() );

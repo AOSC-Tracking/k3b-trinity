@@ -79,13 +79,13 @@ K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, TQWidget *parent, cons
   advancedTabGrid->setSpacing( spacingHint() );
   advancedTabGrid->setMargin( marginHint() );
 
-  TQGroupBox* advancedSettingsGroup = new TQGroupBox( 1, Qt::Vertical, i18n("Settings"), advancedTab );
+  TQGroupBox* advancedSettingsGroup = new TQGroupBox( 1, TQt::Vertical, i18n("Settings"), advancedTab );
   m_checkNormalize = K3bStdGuiItems::normalizeCheckBox( advancedSettingsGroup );
 
-  TQGroupBox* advancedGimmickGroup = new TQGroupBox( 1, Qt::Vertical, i18n("Gimmicks"), advancedTab );
+  TQGroupBox* advancedGimmickGroup = new TQGroupBox( 1, TQt::Vertical, i18n("Gimmicks"), advancedTab );
   m_checkHideFirstTrack = new TQCheckBox( i18n( "Hide first track" ), advancedGimmickGroup, "m_checkHideFirstTrack" );
 
-  m_audioRippingGroup = new TQGroupBox( 3, Qt::Vertical, i18n("Audio Ripping"), advancedTab );
+  m_audioRippingGroup = new TQGroupBox( 3, TQt::Vertical, i18n("Audio Ripping"), advancedTab );
   TQHBox* box = new TQHBox( m_audioRippingGroup );
   box->setSpacing( spacingHint() );
   box->setStretchFactor(new TQLabel( i18n("Paranoia mode:"), box ), 1 );

@@ -94,13 +94,13 @@ void K3bMixedBurnDialog::setupSettingsPage()
 {
   TQWidget* w = new TQWidget( this );
 
-  TQGroupBox* groupDataMode = new TQGroupBox( 1, Qt::Vertical, i18n("Datatrack Mode"), w );
+  TQGroupBox* groupDataMode = new TQGroupBox( 1, TQt::Vertical, i18n("Datatrack Mode"), w );
   m_dataModeWidget = new K3bDataModeWidget( groupDataMode );
 
-  TQGroupBox* groupNormalize = new TQGroupBox( 1, Qt::Vertical, i18n("Misc"), w );
+  TQGroupBox* groupNormalize = new TQGroupBox( 1, TQt::Vertical, i18n("Misc"), w );
   m_checkNormalize = K3bStdGuiItems::normalizeCheckBox( groupNormalize );
 
-  TQGroupBox* groupMixedType = new TQGroupBox( 1, Qt::Vertical, i18n("Mixed Mode Type"), w );
+  TQGroupBox* groupMixedType = new TQGroupBox( 1, TQt::Vertical, i18n("Mixed Mode Type"), w );
   m_comboMixedModeType = new K3bIntMapComboBox( groupMixedType );
 
   m_comboMixedModeType->insertItem( K3bMixedDoc::DATA_SECOND_SESSION,

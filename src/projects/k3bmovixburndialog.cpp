@@ -96,10 +96,10 @@ void K3bMovixBurnDialog::setupSettingsPage()
   frameLayout->setSpacing( spacingHint() );
   frameLayout->setMargin( marginHint() );
 
-  TQGroupBox* groupDataMode = new TQGroupBox( 1, Qt::Vertical, i18n("Datatrack Mode"), frame );
+  TQGroupBox* groupDataMode = new TQGroupBox( 1, TQt::Vertical, i18n("Datatrack Mode"), frame );
   m_dataModeWidget = new K3bDataModeWidget( groupDataMode );
 
-  TQGroupBox* groupMultisession = new TQGroupBox( 1, Qt::Vertical, i18n("Multisession"), frame );
+  TQGroupBox* groupMultisession = new TQGroupBox( 1, TQt::Vertical, i18n("Multisession"), frame );
   m_checkStartMultiSesssion = K3bStdGuiItems::startMultisessionCheckBox( groupMultisession );
 
   frameLayout->addWidget( groupDataMode, 0, 0 );

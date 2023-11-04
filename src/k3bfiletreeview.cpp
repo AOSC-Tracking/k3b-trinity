@@ -343,7 +343,7 @@ void K3bDeviceTreeToolTip::maybeTip( const TQPoint& pos )
   lay->addMultiCellWidget( label, 0, 0, 0, 1 );
   label = new TQLabel( details, tooltip );
   label->setMargin( 9 );
-  label->setAlignment( Qt::Vertical );
+  label->setAlignment( TQt::Vertical );
   lay->addMultiCellWidget( label, 1, 2, 0, 0 );
   label = new TQLabel( tooltip );
   lay->addWidget( label, 2, 1 );
@@ -705,7 +705,7 @@ void K3bFileTreeView::slotSettingsChangedK3b(int category)
 
 void K3bFileTreeView::slotMouseButtonClickedK3b( int btn, TQListViewItem *item, const TQPoint &pos, int c )
 {
-  if( (btn == Qt::LeftButton) && item )
+  if( (btn == TQt::LeftButton) && item )
     emitExecute(item, pos, c);
 }
 

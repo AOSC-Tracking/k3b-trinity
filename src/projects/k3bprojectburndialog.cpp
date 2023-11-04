@@ -264,11 +264,11 @@ void K3bProjectBurnDialog::prepareGui()
   TQWidget* w = new TQWidget( m_tabWidget );
   m_tabWidget->addTab( w, i18n("Writing") );
 
-  TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), w );
+  TQGroupBox* groupWritingMode = new TQGroupBox( 1, TQt::Vertical, i18n("Writing Mode"), w );
   groupWritingMode->setInsideMargin( marginHint() );
   m_writingModeWidget = new K3bWritingModeWidget( groupWritingMode );
 
-  m_optionGroup = new TQGroupBox( 0, Qt::Vertical, i18n("Settings"), w );
+  m_optionGroup = new TQGroupBox( 0, TQt::Vertical, i18n("Settings"), w );
   m_optionGroup->layout()->setMargin(0);
   m_optionGroup->layout()->setSpacing(0);
   m_optionGroupLayout = new TQVBoxLayout( m_optionGroup->layout() );
@@ -286,7 +286,7 @@ void K3bProjectBurnDialog::prepareGui()
   m_optionGroupLayout->addWidget(m_checkOnlyCreateImage);
   m_optionGroupLayout->addWidget(m_checkRemoveBufferFiles);
 
-  TQGroupBox* groupCopies = new TQGroupBox( 2, Qt::Horizontal, i18n("Copies"), w );
+  TQGroupBox* groupCopies = new TQGroupBox( 2, TQt::Horizontal, i18n("Copies"), w );
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
   TQLabel* pixLabel = new TQLabel( groupCopies );

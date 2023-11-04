@@ -169,7 +169,7 @@ K3bDeviceWidget::K3bDeviceWidget( K3bDevice::DeviceManager* manager, TQWidget *p
 
   // Devices Box
   // ------------------------------------------------
-  TQGroupBox* groupDevices = new TQGroupBox( 1, Qt::Vertical, i18n( "CD/DVD Drives" ), this );
+  TQGroupBox* groupDevices = new TQGroupBox( 1, TQt::Vertical, i18n( "CD/DVD Drives" ), this );
   groupDevices->layout()->setSpacing( KDialog::spacingHint() );
   groupDevices->layout()->setMargin( KDialog::marginHint() );
 

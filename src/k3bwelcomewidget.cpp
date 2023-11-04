@@ -425,7 +425,7 @@ void K3bWelcomeWidget::fixSize()
 
 void K3bWelcomeWidget::contentsMousePressEvent( TQMouseEvent* e )
 {
-  if( e->button() == Qt::RightButton ) {
+  if( e->button() == TQt::RightButton ) {
     TQMap<int, TDEAction*> map;
     TDEPopupMenu addPop;
 
