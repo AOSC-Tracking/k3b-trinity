@@ -69,7 +69,7 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* parent, const char* name, bool mod
   //
   // Source group
   // //////////////////////////////////////////////////////////////////////////
-  TQGroupBox* groupSource = new TQGroupBox( 1, Qt::Vertical, i18n("Source Medium"), w );
+  TQGroupBox* groupSource = new TQGroupBox( 1, TQt::Vertical, i18n("Source Medium"), w );
   groupSource->setInsideSpacing( spacingHint() );
   groupSource->setInsideMargin( marginHint() );
   m_comboSourceDevice = new K3bMediaSelectionComboBox( groupSource );
@@ -97,11 +97,11 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* parent, const char* name, bool mod
   optionTabGrid->setSpacing( spacingHint() );
   optionTabGrid->setMargin( marginHint() );
 
-  TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), optionTab );
+  TQGroupBox* groupWritingMode = new TQGroupBox( 1, TQt::Vertical, i18n("Writing Mode"), optionTab );
   groupWritingMode->setInsideMargin( marginHint() );
   m_writingModeWidget = new K3bWritingModeWidget( groupWritingMode );
 
-  TQGroupBox* groupOptions = new TQGroupBox( 5, Qt::Vertical, i18n("Settings"), optionTab );
+  TQGroupBox* groupOptions = new TQGroupBox( 5, TQt::Vertical, i18n("Settings"), optionTab );
   groupOptions->setInsideSpacing( spacingHint() );
   groupOptions->setInsideMargin( marginHint() );
   m_checkSimulate = K3bStdGuiItems::simulateCheckbox( groupOptions );
@@ -110,7 +110,7 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* parent, const char* name, bool mod
   m_checkDeleteImages = K3bStdGuiItems::removeImagesCheckbox( groupOptions );
   m_checkVerifyData = K3bStdGuiItems::verifyCheckBox( groupOptions );
 
-  TQGroupBox* groupCopies = new TQGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
+  TQGroupBox* groupCopies = new TQGroupBox( 2, TQt::Horizontal, i18n("Copies"), optionTab );
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
   TQLabel* pixLabel = new TQLabel( groupCopies );
@@ -153,7 +153,7 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* parent, const char* name, bool mod
   advancedTabGrid->setSpacing( spacingHint() );
   advancedTabGrid->setMargin( marginHint() );
 
-  TQGroupBox* groupGeneral = new TQGroupBox( 2, Qt::Vertical, i18n("General"), advancedTab );
+  TQGroupBox* groupGeneral = new TQGroupBox( 2, TQt::Vertical, i18n("General"), advancedTab );
   groupGeneral->setInsideSpacing( spacingHint() );
   groupGeneral->setInsideMargin( marginHint() );
   TQHBox* box = new TQHBox( groupGeneral );

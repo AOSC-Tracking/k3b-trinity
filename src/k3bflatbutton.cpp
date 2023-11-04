@@ -102,7 +102,7 @@ void K3bFlatButton::leaveEvent( TQEvent* )
 
 void K3bFlatButton::mousePressEvent( TQMouseEvent* e )
 {
-  if( e->button() == Qt::LeftButton ) {
+  if( e->button() == TQt::LeftButton ) {
     emit pressed();
     m_pressed = true;
   }
@@ -113,7 +113,7 @@ void K3bFlatButton::mousePressEvent( TQMouseEvent* e )
 
 void K3bFlatButton::mouseReleaseEvent( TQMouseEvent* e )
 {
-  if( e->button() == Qt::LeftButton ) {
+  if( e->button() == TQt::LeftButton ) {
     if( m_pressed  )
       emit clicked();
     m_pressed = false;

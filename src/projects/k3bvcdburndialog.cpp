@@ -296,7 +296,7 @@ void K3bVcdBurnDialog::setupAdvancedTab()
     TQWidget * w = new TQWidget( this );
 
     // ---------------------------------------------------- generic group ----
-    m_groupGeneric = new TQGroupBox( 5, Qt::Vertical, i18n( "Generic" ), w );
+    m_groupGeneric = new TQGroupBox( 5, TQt::Vertical, i18n( "Generic" ), w );
 
     m_checkPbc = new TQCheckBox( i18n( "Playback Control (PBC)" ), m_groupGeneric );
     m_checkSegmentFolder = new TQCheckBox( i18n( "SEGMENT Folder must always be present" ), m_groupGeneric );
@@ -306,7 +306,7 @@ void K3bVcdBurnDialog::setupAdvancedTab()
 
 
     // -------------------------------------------- gaps & margins group ----
-    m_groupGaps = new TQGroupBox( 0, Qt::Vertical, i18n( "Gaps" ), w );
+    m_groupGaps = new TQGroupBox( 0, TQt::Vertical, i18n( "Gaps" ), w );
     m_groupGaps->layout() ->setSpacing( spacingHint() );
     m_groupGaps->layout() ->setMargin( marginHint() );
 
@@ -402,7 +402,7 @@ void K3bVcdBurnDialog::setupAdvancedTab()
     groupGapsLayout->setRowStretch( 4, 0 );
 
     // ------------------------------------------------------- misc group ----
-    m_groupMisc = new TQGroupBox( 0, Qt::Vertical, i18n( "Misc" ), w );
+    m_groupMisc = new TQGroupBox( 0, TQt::Vertical, i18n( "Misc" ), w );
     m_groupMisc->layout() ->setSpacing( spacingHint() );
     m_groupMisc->layout() ->setMargin( marginHint() );
 
@@ -434,7 +434,7 @@ void K3bVcdBurnDialog::setupVideoCdTab()
     TQWidget * w = new TQWidget( this );
 
     // ---------------------------------------------------- Format group ----
-    m_groupVcdFormat = new TQButtonGroup( 4, Qt::Vertical, i18n( "Type" ), w );
+    m_groupVcdFormat = new TQButtonGroup( 4, TQt::Vertical, i18n( "Type" ), w );
     m_radioVcd11 = new TQRadioButton( i18n( "VideoCD 1.1" ), m_groupVcdFormat );
     m_radioVcd20 = new TQRadioButton( i18n( "VideoCD 2.0" ), m_groupVcdFormat );
     m_radioSvcd10 = new TQRadioButton( i18n( "Super-VideoCD" ), m_groupVcdFormat );
@@ -443,7 +443,7 @@ void K3bVcdBurnDialog::setupVideoCdTab()
 
     // ---------------------------------------------------- Options group ---
 
-    m_groupOptions = new TQGroupBox( 5, Qt::Vertical, i18n( "Settings" ), w );
+    m_groupOptions = new TQGroupBox( 5, TQt::Vertical, i18n( "Settings" ), w );
     m_checkAutoDetect = new TQCheckBox( i18n( "Autodetect VideoCD type" ), m_groupOptions );
 
     m_checkNonCompliant = new TQCheckBox( i18n( "Enable broken SVCD mode" ), m_groupOptions );
@@ -461,7 +461,7 @@ void K3bVcdBurnDialog::setupVideoCdTab()
     m_checkCdiSupport = new TQCheckBox( i18n( "Enable CD-i support" ), m_groupOptions );
 
     // ------------------------------------------------- CD-i Application ---
-    m_groupCdi = new TQGroupBox( 4, Qt::Vertical, i18n( "VideoCD on CD-i" ), w );
+    m_groupCdi = new TQGroupBox( 4, TQt::Vertical, i18n( "VideoCD on CD-i" ), w );
     m_editCdiCfg = new TQMultiLineEdit( m_groupCdi, "m_editCdiCfg" );
     m_editCdiCfg->setFrameShape( TQTextEdit::NoFrame );
 

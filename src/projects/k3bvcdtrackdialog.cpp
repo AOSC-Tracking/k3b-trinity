@@ -374,7 +374,7 @@ void K3bVcdTrackDialog::prepareGui()
     ///////////////////////////////////////////////////
     // FILE-INFO BOX
     ///////////////////////////////////////////////////
-    TQGroupBox* groupFileInfo = new TQGroupBox( 0, Qt::Vertical, i18n( "File Info" ), frame, "groupFileInfo" );
+    TQGroupBox* groupFileInfo = new TQGroupBox( 0, TQt::Vertical, i18n( "File Info" ), frame, "groupFileInfo" );
     groupFileInfo->layout() ->setSpacing( 0 );
     groupFileInfo->layout() ->setMargin( 0 );
 
@@ -449,7 +449,7 @@ void K3bVcdTrackDialog::setupPbcTab()
 
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    TQGroupBox* groupOptions = new TQGroupBox( 3, Qt::Vertical, i18n( "Settings" ), w );
+    TQGroupBox* groupOptions = new TQGroupBox( 3, TQt::Vertical, i18n( "Settings" ), w );
     groupOptions->layout() ->setSpacing( spacingHint() );
     groupOptions->layout() ->setMargin( marginHint() );
 
@@ -462,7 +462,7 @@ void K3bVcdTrackDialog::setupPbcTab()
     m_check_reactivity->setEnabled( false );
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    m_groupPlay = new TQGroupBox( 0, Qt::Vertical, i18n( "Playing" ), w );
+    m_groupPlay = new TQGroupBox( 0, TQt::Vertical, i18n( "Playing" ), w );
     m_groupPlay->layout() ->setSpacing( spacingHint() );
     m_groupPlay->layout() ->setMargin( marginHint() );
 
@@ -498,7 +498,7 @@ void K3bVcdTrackDialog::setupPbcTab()
     groupPlayLayout->addMultiCellWidget( m_comboAfterTimeout, 3, 3, 1, 3 );
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    m_groupPbc = new TQGroupBox( 0, Qt::Vertical, i18n( "Key Pressed Interaction" ), w );
+    m_groupPbc = new TQGroupBox( 0, TQt::Vertical, i18n( "Key Pressed Interaction" ), w );
     m_groupPbc->layout() ->setSpacing( spacingHint() );
     m_groupPbc->layout() ->setMargin( marginHint() );
 
@@ -557,7 +557,7 @@ void K3bVcdTrackDialog::setupPbcKeyTab()
     grid->setSpacing( spacingHint() );
     grid->setMargin( marginHint() );
 
-    m_groupKey = new TQGroupBox( 3, Qt::Vertical, i18n( "Numeric Keys" ), m_widgetnumkeys );
+    m_groupKey = new TQGroupBox( 3, TQt::Vertical, i18n( "Numeric Keys" ), m_widgetnumkeys );
     m_groupKey->setEnabled( false );
     m_groupKey->layout() ->setSpacing( spacingHint() );
     m_groupKey->layout() ->setMargin( marginHint() );

@@ -76,7 +76,7 @@ K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *parent, const char *name, bool modal
   mainGrid->setSpacing( spacingHint() );
   mainGrid->setMargin( 0 );
 
-  TQGroupBox* groupSource = new TQGroupBox( 1, Qt::Vertical, i18n("Source Medium"), main );
+  TQGroupBox* groupSource = new TQGroupBox( 1, TQt::Vertical, i18n("Source Medium"), main );
   groupSource->setInsideSpacing( spacingHint() );
   groupSource->setInsideMargin( marginHint() );
   m_comboSourceDevice = new K3bMediaSelectionComboBox( groupSource );
@@ -99,18 +99,18 @@ K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *parent, const char *name, bool modal
   optionTabGrid->setSpacing( spacingHint() );
   optionTabGrid->setMargin( marginHint() );
 
-  TQGroupBox* groupCopyMode = new TQGroupBox( 1, Qt::Vertical, i18n("Copy Mode"), optionTab );
+  TQGroupBox* groupCopyMode = new TQGroupBox( 1, TQt::Vertical, i18n("Copy Mode"), optionTab );
   groupCopyMode->setInsideMargin( marginHint() );
   groupCopyMode->setInsideSpacing( spacingHint() );
   m_comboCopyMode = new TQComboBox( groupCopyMode );
   m_comboCopyMode->insertItem( i18n("Normal Copy") );
   m_comboCopyMode->insertItem( i18n("Clone Copy") );
 
-  TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), optionTab );
+  TQGroupBox* groupWritingMode = new TQGroupBox( 1, TQt::Vertical, i18n("Writing Mode"), optionTab );
   groupWritingMode->setInsideMargin( marginHint() );
   m_writingModeWidget = new K3bWritingModeWidget( groupWritingMode );
 
-  TQGroupBox* groupCopies = new TQGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
+  TQGroupBox* groupCopies = new TQGroupBox( 2, TQt::Horizontal, i18n("Copies"), optionTab );
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
   TQLabel* pixLabel = new TQLabel( groupCopies );
@@ -118,7 +118,7 @@ K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *parent, const char *name, bool modal
   pixLabel->setScaledContents( false );
   m_spinCopies = new TQSpinBox( 1, 999, 1, groupCopies );
 
-  TQGroupBox* groupOptions = new TQGroupBox( 5, Qt::Vertical, i18n("Settings"), optionTab );
+  TQGroupBox* groupOptions = new TQGroupBox( 5, TQt::Vertical, i18n("Settings"), optionTab );
   groupOptions->setInsideSpacing( spacingHint() );
   groupOptions->setInsideMargin( marginHint() );
   m_checkSimulate = K3bStdGuiItems::simulateCheckbox( groupOptions );
@@ -159,7 +159,7 @@ K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *parent, const char *name, bool modal
   advancedTabGrid->setSpacing( spacingHint() );
   advancedTabGrid->setMargin( marginHint() );
 
-  m_groupAdvancedDataOptions = new TQGroupBox( 3, Qt::Vertical, i18n("Data"), advancedTab, "data_options" );
+  m_groupAdvancedDataOptions = new TQGroupBox( 3, TQt::Vertical, i18n("Data"), advancedTab, "data_options" );
   m_groupAdvancedDataOptions->setInsideSpacing( spacingHint() );
   m_groupAdvancedDataOptions->setInsideMargin( marginHint() );
   TQHBox* box = new TQHBox( m_groupAdvancedDataOptions );
@@ -169,7 +169,7 @@ K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *parent, const char *name, bool modal
   m_checkIgnoreDataReadErrors = K3bStdGuiItems::ignoreAudioReadErrorsCheckBox( m_groupAdvancedDataOptions );
   m_checkNoCorrection = new TQCheckBox( i18n("No error correction"), m_groupAdvancedDataOptions );
 
-  m_groupAdvancedAudioOptions = new TQGroupBox( 5, Qt::Vertical, i18n("Audio"), advancedTab, "audio_options" );
+  m_groupAdvancedAudioOptions = new TQGroupBox( 5, TQt::Vertical, i18n("Audio"), advancedTab, "audio_options" );
   m_groupAdvancedAudioOptions->setInsideSpacing( spacingHint() );
   m_groupAdvancedAudioOptions->setInsideMargin( marginHint() );
   box = new TQHBox( m_groupAdvancedAudioOptions );

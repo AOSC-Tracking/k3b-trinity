@@ -72,7 +72,7 @@ void K3bVideoCdRippingDialog::setupGui()
     MainLayout->setMargin( 0 );
 
     // ---------------------------------------------------- Directory group ---
-    TQGroupBox* groupDirectory = new TQGroupBox( 0, Qt::Vertical, i18n( "Destination Directory" ), frame );
+    TQGroupBox* groupDirectory = new TQGroupBox( 0, TQt::Vertical, i18n( "Destination Directory" ), frame );
     groupDirectory->layout() ->setSpacing( KDialog::spacingHint() );
     groupDirectory->layout() ->setMargin( KDialog::marginHint() );
 
@@ -105,7 +105,7 @@ void K3bVideoCdRippingDialog::setupGui()
     groupDirectoryLayout->addWidget( necessarySizeBox, 2, 1 );
 
     // ---------------------------------------------------- Options group ---
-    TQGroupBox* groupOptions = new TQGroupBox( 4, Qt::Vertical, i18n( "Settings" ), frame );
+    TQGroupBox* groupOptions = new TQGroupBox( 4, TQt::Vertical, i18n( "Settings" ), frame );
 
     m_ignoreExt = new TQCheckBox( i18n( "Ignore /EXT/PSD_X.VCD" ), groupOptions );
 

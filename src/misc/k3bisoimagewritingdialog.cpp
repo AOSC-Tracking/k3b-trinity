@@ -149,7 +149,7 @@ void K3bIsoImageWritingDialog::setupGui()
 
   // image
   // -----------------------------------------------------------------------
-  TQGroupBox* groupImageUrl = new TQGroupBox( 1, Qt::Horizontal, i18n("Image to Burn"), frame );
+  TQGroupBox* groupImageUrl = new TQGroupBox( 1, TQt::Horizontal, i18n("Image to Burn"), frame );
   m_editImagePath = new KURLRequester( groupImageUrl );
   m_editImagePath->setMode( KFile::File|KFile::ExistingOnly );
   m_editImagePath->setCaption( i18n("Choose Image File") );
@@ -185,13 +185,13 @@ void K3bIsoImageWritingDialog::setupGui()
   optionTabLayout->setSpacing( spacingHint() );
   optionTabLayout->setMargin( marginHint() );
 
-  TQGroupBox* writingModeGroup = new TQGroupBox( 1,Qt::Vertical, i18n("Writing Mode"), optionTab );
+  TQGroupBox* writingModeGroup = new TQGroupBox( 1,TQt::Vertical, i18n("Writing Mode"), optionTab );
   writingModeGroup->setInsideMargin( marginHint() );
   m_writingModeWidget = new K3bWritingModeWidget( writingModeGroup );
 
 
   // copies --------
-  TQGroupBox* groupCopies = new TQGroupBox( 2, Qt::Horizontal, i18n("Copies"), optionTab );
+  TQGroupBox* groupCopies = new TQGroupBox( 2, TQt::Horizontal, i18n("Copies"), optionTab );
   groupCopies->setInsideSpacing( spacingHint() );
   groupCopies->setInsideMargin( marginHint() );
   TQLabel* pixLabel = new TQLabel( groupCopies );
@@ -202,7 +202,7 @@ void K3bIsoImageWritingDialog::setupGui()
   m_spinCopies->setMaxValue( 999 );
   // -------- copies
 
-  TQGroupBox* optionGroup = new TQGroupBox( 3,Qt::Vertical, i18n("Settings"), optionTab );
+  TQGroupBox* optionGroup = new TQGroupBox( 3,TQt::Vertical, i18n("Settings"), optionTab );
   optionGroup->setInsideMargin( marginHint() );
   optionGroup->setInsideSpacing( spacingHint() );
   m_checkDummy = K3bStdGuiItems::simulateCheckbox( optionGroup );

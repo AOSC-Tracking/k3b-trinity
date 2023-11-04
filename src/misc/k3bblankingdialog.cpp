@@ -108,7 +108,7 @@ void K3bBlankingDialog::setupGui()
   m_writerSelectionWidget->setWantedMediumState( K3bDevice::STATE_COMPLETE|K3bDevice::STATE_INCOMPLETE );
 
   // --- setup the blanking type button group -----------------------------
-  TQGroupBox* groupBlankType = new TQGroupBox( 1, Qt::Vertical, i18n("&Erase Type"), frame );
+  TQGroupBox* groupBlankType = new TQGroupBox( 1, TQt::Vertical, i18n("&Erase Type"), frame );
   groupBlankType->layout()->setSpacing( spacingHint() );
   groupBlankType->layout()->setMargin( marginHint() );
 

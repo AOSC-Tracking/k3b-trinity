@@ -1108,7 +1108,7 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
       }
     }
 
-    if( me->button() == Qt::LeftButton ) {
+    if( me->button() == TQt::LeftButton ) {
       if( item != m_currentEditItem || m_currentEditColumn != col ) {
 	doRename();
 	if( K3bListViewItem* k3bItem = dynamic_cast<K3bListViewItem*>(item) ) {

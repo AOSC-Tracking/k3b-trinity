@@ -96,7 +96,7 @@ void K3bDvdBurnDialog::setupSettingsTab()
 
   // Multisession
   // ////////////////////////////////////////////////////////////////////////
-  TQGroupBox* groupMultiSession = new TQGroupBox( 1, Qt::Vertical, i18n("Multisession Mode"), frame );
+  TQGroupBox* groupMultiSession = new TQGroupBox( 1, TQt::Vertical, i18n("Multisession Mode"), frame );
   m_comboMultisession = new K3bDataMultiSessionCombobox( groupMultiSession );
 
   frameLayout->addWidget( groupMultiSession, 0, 0 );

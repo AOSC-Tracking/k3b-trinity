@@ -105,7 +105,7 @@ K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* parent, co
 			       d->actionCollection,
 			       "prev" );
 
-  d->seekSlider = new TQSlider( 0, 100, 1, 0, Qt::Horizontal, 0, "audiotrackplayerslider" );
+  d->seekSlider = new TQSlider( 0, 100, 1, 0, TQt::Horizontal, 0, "audiotrackplayerslider" );
   connect( d->seekSlider, TQT_SIGNAL(sliderMoved(int)), this, TQT_SLOT(slotSeek(int)) );
   // FIXME: maybe it's not such a good idea to use a KWidgetAction here since this way the player
   // can only be used once in one widget. If the action would always create a new slider we could plug

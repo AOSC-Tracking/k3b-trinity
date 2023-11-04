@@ -58,14 +58,14 @@ K3bDvdFormattingDialog::K3bDvdFormattingDialog( TQWidget* parent, const char* na
   m_writerSelectionWidget->setSupportedWritingApps( K3b::DVD_RW_FORMAT );
   m_writerSelectionWidget->setForceAutoSpeed(true);
 
-  TQGroupBox* groupWritingMode = new TQGroupBox( 1, Qt::Vertical, i18n("Writing Mode"), frame );
+  TQGroupBox* groupWritingMode = new TQGroupBox( 1, TQt::Vertical, i18n("Writing Mode"), frame );
   groupWritingMode->layout()->setMargin( marginHint() );
   groupWritingMode->layout()->setSpacing( spacingHint() );
   m_writingModeWidget = new K3bWritingModeWidget( K3b::WRITING_MODE_INCR_SEQ|K3b::WRITING_MODE_RES_OVWR,
 						  groupWritingMode );
 
 
-  TQGroupBox* groupOptions = new TQGroupBox( 2, Qt::Vertical, i18n("Settings"), frame );
+  TQGroupBox* groupOptions = new TQGroupBox( 2, TQt::Vertical, i18n("Settings"), frame );
   groupOptions->layout()->setMargin( marginHint() );
   groupOptions->layout()->setSpacing( spacingHint() );
   m_checkForce = new TQCheckBox( i18n("Force"), groupOptions );

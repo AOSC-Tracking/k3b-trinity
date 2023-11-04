@@ -83,7 +83,7 @@ K3bAudioMetainfoRenamerPluginWidget::K3bAudioMetainfoRenamerPluginWidget( K3bDoc
   //  d->progressDialog = 0;
 
   // pattern group
-  TQGroupBox* patternGroup = new TQGroupBox( 2, Qt::Horizontal,
+  TQGroupBox* patternGroup = new TQGroupBox( 2, TQt::Horizontal,
 					   i18n("Rename Pattern"), this );
   patternGroup->setInsideMargin( KDialog::marginHint() );
   patternGroup->setInsideSpacing( KDialog::spacingHint() );
@@ -94,7 +94,7 @@ K3bAudioMetainfoRenamerPluginWidget::K3bAudioMetainfoRenamerPluginWidget( K3bDoc
   d->scanButton = new TQPushButton( i18n("Scan"), patternGroup );
 
   // the files view
-  TQGroupBox* filesGroup = new TQGroupBox( 1, Qt::Horizontal,
+  TQGroupBox* filesGroup = new TQGroupBox( 1, TQt::Horizontal,
 					  i18n("Found Files"), this );
   filesGroup->setInsideMargin( KDialog::marginHint() );
   filesGroup->setInsideSpacing( KDialog::spacingHint() );

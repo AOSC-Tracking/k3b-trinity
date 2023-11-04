@@ -120,7 +120,7 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *parent, const char
 
   TQGroupBox* groupWriter = new TQGroupBox( this );
   groupWriter->setTitle( i18n( "Burn Medium" ) );
-  groupWriter->setColumnLayout(0, Qt::Vertical );
+  groupWriter->setColumnLayout(0, TQt::Vertical );
   groupWriter->layout()->setSpacing( 0 );
   groupWriter->layout()->setMargin( 0 );
 

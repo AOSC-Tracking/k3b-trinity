@@ -40,7 +40,7 @@
 
 
 K3bTempDirSelectionWidget::K3bTempDirSelectionWidget( TQWidget *parent, const char *name )
-  : TQGroupBox( 4, Qt::Vertical, parent, name ),
+  : TQGroupBox( 4, TQt::Vertical, parent, name ),
     m_labelCdSize(0),
     m_defaultImageFileName( "k3b_image.iso" )
 {

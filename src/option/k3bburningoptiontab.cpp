@@ -59,7 +59,7 @@ void K3bBurningOptionTab::setupGui()
   groupAdvancedLayout->setMargin( 0 );
 
 
-  TQGroupBox* groupWritingApp = new TQGroupBox( 0, Qt::Vertical, i18n("Burning"), this );
+  TQGroupBox* groupWritingApp = new TQGroupBox( 0, TQt::Vertical, i18n("Burning"), this );
   groupWritingApp->layout()->setMargin( 0 );
   TQGridLayout* bufferLayout = new TQGridLayout( groupWritingApp->layout() );
   bufferLayout->setMargin( KDialog::marginHint() );
@@ -80,7 +80,7 @@ void K3bBurningOptionTab::setupGui()
   bufferLayout->addMultiCellWidget( m_checkAllowWritingAppSelection, 4, 4, 0, 2 );
   bufferLayout->setColStretch( 2, 1 );
 
-  TQGroupBox* groupMisc = new TQGroupBox( 2, Qt::Vertical, i18n("Miscellaneous"), this );
+  TQGroupBox* groupMisc = new TQGroupBox( 2, TQt::Vertical, i18n("Miscellaneous"), this );
   m_checkEject = new TQCheckBox( i18n("Do not &eject medium after write process"), groupMisc );
   m_checkAutoErasingRewritable = new TQCheckBox( i18n("Automatically erase CD-RWs and DVD-RWs"), groupMisc );
 

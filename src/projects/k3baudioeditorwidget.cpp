@@ -718,7 +718,7 @@ void K3bAudioEditorWidget::mouseMoveEvent( TQMouseEvent* e )
   if( m_mouseAt )
     emit mouseAt( posToMsf( e->pos().x() ) );
   
-  if( e->state() & Qt::LeftButton ) {
+  if( e->state() & TQt::LeftButton ) {
     if( m_draggedRange ) {
       // determine the position the range's end was dragged to and its other end
       K3b::Msf msfPos = TQMAX( 0, TQMIN( posToMsf( e->pos().x() ), m_length-1 ) );
