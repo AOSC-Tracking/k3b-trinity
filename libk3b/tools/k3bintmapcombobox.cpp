@@ -82,7 +82,7 @@ bool K3bIntMapComboBox::insertItem( int value, const TQString& text, const TQStr
   index = KComboBox::count();
 
   d->valueIndexMap[value] = index;
-  d->indexValueDescriptionMap[index] = tqMakePair<int, TQString>( value, description );
+  d->indexValueDescriptionMap[index] = qMakePair<int, TQString>( value, description );
 
   KComboBox::insertItem( text );
 

@@ -226,7 +226,7 @@ bool K3bLibDvdCss::crackAllKeys()
 
     const K3bIso9660File* file = dynamic_cast<const K3bIso9660File*>( dir->entry( filename ) );
     if( file && file->size() > 0 ) {
-      d->titleOffsets.append( tqMakePair( (int)file->startSector(), (int)(file->size() / 2048U) ) );
+      d->titleOffsets.append( qMakePair( (int)file->startSector(), (int)(file->size() / 2048U) ) );
       kdDebug() << "(K3bLibDvdCss) Get key for /" << filename << " at " << file->startSector() << endl;
       if( seek( (int)file->startSector(), DVDCSS_SEEK_KEY ) < 0 ) {
 	kdDebug() << "(K3bLibDvdCss) unable to seek to " << file->startSector() << endl;

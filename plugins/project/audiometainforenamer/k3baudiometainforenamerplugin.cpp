@@ -215,7 +215,7 @@ void K3bAudioMetainfoRenamerPluginWidget::scanDir( K3bDirItem* dir, TQListViewIt
 							      TQCheckListItem::CheckBox );
 	  fileViewItem->setText(1, item->k3bName() );
 	  fileViewItem->setOn(true);
-	  d->renamableItems.append( tqMakePair( (K3bFileItem*)item, fileViewItem ) );
+	  d->renamableItems.append( qMakePair( (K3bFileItem*)item, fileViewItem ) );
 	}
       }
 

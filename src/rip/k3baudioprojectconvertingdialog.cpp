@@ -175,7 +175,7 @@ void K3bAudioProjectConvertingDialog::slotStartClicked()
   int i = 0;
   K3bAudioTrack* track = m_doc->firstTrack();
   while( track ) {
-    tracksToRip.append( tqMakePair( i+1, d->filenames[(m_optionWidget->createSingleFile() ? 0 : i)] ) );
+    tracksToRip.append( qMakePair( i+1, d->filenames[(m_optionWidget->createSingleFile() ? 0 : i)] ) );
     ++i;
     track = track->next();
   }
