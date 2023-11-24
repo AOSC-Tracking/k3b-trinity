@@ -520,7 +520,7 @@ void K3bCheckListViewItem::paintK3bCell( TQPainter* p, const TQColorGroup& cg, i
       else
 	flags |= TQStyle::Style_Off;
 
-      listView()->style().tqdrawPrimitive( TQStyle::PE_CheckMark, p, r, cg, flags );
+      listView()->style().drawPrimitive( TQStyle::PE_CheckMark, p, r, cg, flags );
     }
   }
 }

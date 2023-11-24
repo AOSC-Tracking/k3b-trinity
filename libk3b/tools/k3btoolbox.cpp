@@ -71,7 +71,7 @@ void K3bToolBoxSeparator::paintEvent( TQPaintEvent* )
   TQPainter p( this );
   TQStyle::SFlags flags = TQStyle::Style_Default|TQStyle::Style_Horizontal;
 
-  style().tqdrawPrimitive( TQStyle::PE_DockWindowSeparator, &p, rect(),
+  style().drawPrimitive( TQStyle::PE_DockWindowSeparator, &p, rect(),
 			 colorGroup(), flags );
 }
 

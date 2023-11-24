@@ -250,7 +250,7 @@ void K3bAudioRippingDialog::slotStartClicked()
   unsigned int i = 0;
   for( TQValueList<int>::const_iterator trackIt = m_trackNumbers.begin();
        trackIt != m_trackNumbers.end(); ++trackIt ) {
-    tracksToRip.append( tqMakePair( *trackIt, d->filenames[(m_optionWidget->createSingleFile() ? 0 : i)] ) );
+    tracksToRip.append( qMakePair( *trackIt, d->filenames[(m_optionWidget->createSingleFile() ? 0 : i)] ) );
     ++i;
   }
 

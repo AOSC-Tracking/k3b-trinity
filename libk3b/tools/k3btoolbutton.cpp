@@ -68,7 +68,7 @@ void K3bToolButton::drawButton( TQPainter* p )
     if( isEnabled() )
       arrowFlags |= TQStyle::Style_Enabled;
     
-    style().tqdrawPrimitive(TQStyle::PE_ArrowDown, p,
+    style().drawPrimitive(TQStyle::PE_ArrowDown, p,
 			  TQRect(width()-7, height()-7, 7, 7), colorGroup(),
 			  arrowFlags, TQStyleOption() );
   }

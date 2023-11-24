@@ -141,7 +141,7 @@ int K3bDataUrlAddingDialog::addUrls( const KURL::List& urls,
   K3bDataUrlAddingDialog dlg( dir->doc(), parent );
   dlg.m_urls = urls;
   for( KURL::List::ConstIterator it = urls.begin(); it != urls.end(); ++it )
-    dlg.m_urlQueue.append( tqMakePair( K3b::convertToLocalUrl(*it), dir ) );
+    dlg.m_urlQueue.append( qMakePair( K3b::convertToLocalUrl(*it), dir ) );
 
   dlg.slotAddUrls();
   int ret = TQDialog::Accepted;
@@ -226,7 +226,7 @@ int K3bDataUrlAddingDialog::copyMoveItems( const TQValueList<K3bDataItem*>& item
   dlg.m_copyItems = copy;
 
   for( TQValueList<K3bDataItem*>::const_iterator it = items.begin(); it != items.end(); ++it ) {
-    dlg.m_items.append( tqMakePair( *it, dir ) );
+    dlg.m_items.append( qMakePair( *it, dir ) );
     ++dlg.m_totalFiles;
     if( (*it)->isDir() ) {
       dlg.m_totalFiles += static_cast<K3bDirItem*>( *it )->numFiles();
@@ -568,7 +568,7 @@ void K3bDataUrlAddingDialog::slotAddUrls()
       dlist.remove( dotdot );
 
       for( TQStringList::Iterator it = dlist.begin(); it != dlist.end(); ++it ) {
-	m_urlQueue.append( tqMakePair( KURL::fromPathOrURL(absFilePath + '/' + *it), newDirItem ) );
+	m_urlQueue.append( qMakePair( KURL::fromPathOrURL(absFilePath + '/' + *it), newDirItem ) );
       }
     }
     else {
@@ -625,7 +625,7 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
       if( oldItem->isDir() && item->isDir() ) {
 	const TQPtrList<K3bDataItem>& cl = dynamic_cast<K3bDirItem*>( item )->children();
 	for( TQPtrListIterator<K3bDataItem> it( cl ); *it; ++it )
-	  m_items.append( tqMakePair( *it, dynamic_cast<K3bDirItem*>( oldItem ) ) );
+	  m_items.append( qMakePair( *it, dynamic_cast<K3bDirItem*>( oldItem ) ) );
 
 	// FIXME: we need to remove the old dir item
       }

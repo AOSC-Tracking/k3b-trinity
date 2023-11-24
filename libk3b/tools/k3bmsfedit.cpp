@@ -60,7 +60,7 @@ TQSize K3bMsfEdit::sizeHint() const
   int w = fm.width( "00:00:00" );
   int wx = fm.width( ' ' )*2;
   int frame = style().pixelMetric( TQStyle::PM_SpinBoxFrameWidth );
-  return style().tqsizeFromContents(TQStyle::CT_SpinBox, this,
+  return style().sizeFromContents(TQStyle::CT_SpinBox, this,
 				  TQSize( w + wx + downRect().width() + frame*2,
 					 h + frame*2).
 				  expandedTo( TQApplication::globalStrut() ));
