@@ -80,7 +80,7 @@ void K3bRadioAction::slotActivated()
 
     const TQObject *senderObj = sender();
     
-    if ( !senderObj || !::tqqt_cast<const TDEToolBarButton *>( senderObj ) )
+    if ( !senderObj || !::tqt_cast<const TDEToolBarButton *>( senderObj ) )
       return;
     
     const_cast<TDEToolBarButton *>( static_cast<const TDEToolBarButton *>( senderObj ) )->on( true );
