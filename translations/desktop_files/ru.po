@@ -1,25 +1,27 @@
 # SOME DESCRIPTIVE TITLE.
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Andrei Stepanov <adem4ik@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-31 18:33+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2023-11-26 14:14+0000\n"
+"Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
+"Language-Team: Russian <https://mirror.git.trinitydesktop.org/weblate/"
+"projects/applications/k3b-desktop-files/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. Name
 #: src/k3b-cue.desktop:2 src/k3b.desktop:2
 msgid "K3b"
-msgstr ""
+msgstr "K3b"
 
 #. GenericName
 #: src/k3b.desktop:4
@@ -33,9 +35,8 @@ msgstr "Программа записи на CD"
 
 #. Name
 #: src/konqi/k3b_audiocd_rip.desktop:7
-#, fuzzy
 msgid "Extract Digital Audio with K3b"
-msgstr "Записать аудио компакт-диск, используя K3b..."
+msgstr "Извлечь цифровое аудио через K3b"
 
 #. Name
 #: src/konqi/k3b_cd_copy.desktop:7
@@ -72,9 +73,8 @@ msgstr "Копировать DVD/BLURAY, используя K3b..."
 
 #. Name
 #: src/konqi/k3b_videodvd_rip.desktop:7
-#, fuzzy
 msgid "Rip Video DVD/BLURAY Titles with K3b"
-msgstr "Копировать DVD/BLURAY, используя K3b..."
+msgstr "Вытянуть заголовки видео DVD/BLURAY через K3b"
 
 #. Name
 #: src/konqi/k3b_write_bin_image.desktop:6
@@ -94,172 +94,174 @@ msgstr "Проект K3b"
 #. Comment
 #: src/pics/73lab/k3b.theme:4
 msgid "Ayo's original K3b theme"
-msgstr ""
+msgstr "Оригинальная тема Айо для K3b"
 
 #. Comment
 #: src/pics/RobsTheme/k3b.theme:4
 msgid "A semitransparent theme that uses your system colors. "
-msgstr ""
+msgstr "Полупрозрачная тема с использованием системных цветов. "
 
 #. Comment
 #: src/pics/crystal/k3b.theme:4
 msgid "The cool crystal theme"
-msgstr ""
+msgstr "Прохладная хрустальная тема"
 
 #. Comment
 #: src/pics/quant/k3b.theme:4
 msgid "New official theme for K3b. Enjoy! "
-msgstr ""
+msgstr "Новая официальная тема для K3b. Наслаждайтесь! "
 
 #. Name
 #: plugins/audiooutput/alsa/k3balsaoutputplugin.plugin:2
 msgid "K3b Alsa Audio Output Plugin"
-msgstr ""
+msgstr "Модуль вывода аудио через ALSA для K3b"
 
 #. Comment
 #: plugins/audiooutput/alsa/k3balsaoutputplugin.plugin:3
 msgid "Audio Output plugin which plays through alsa"
-msgstr ""
+msgstr "Модуль вывода аудио для воспроизведения через ALSA"
 
 #. Name
 #: plugins/audiooutput/arts/k3bartsoutputplugin.plugin:2
 msgid "K3b Arts Audio Output Plugin"
-msgstr ""
+msgstr "Модуль вывода аудио через Arts для K3b"
 
 #. Comment
 #: plugins/audiooutput/arts/k3bartsoutputplugin.plugin:3
 msgid "Audio Output plugin which plays through arts"
-msgstr ""
+msgstr "Модуль вывода аудио для воспроизведения через Arts"
 
 #. Name
 #: plugins/decoder/ffmpeg/k3bffmpegdecoder.plugin:2
 msgid "K3b FFMpeg Decoder"
-msgstr ""
+msgstr "Декодер FFMpeg для K3b"
 
 #. Comment
 #: plugins/decoder/ffmpeg/k3bffmpegdecoder.plugin:3
 msgid "Decoding module to decode wma files"
-msgstr ""
+msgstr "Модуль декодирования файлов WMA"
 
 #. Name
 #: plugins/decoder/flac/k3bflacdecoder.plugin:2
 msgid "K3b FLAC Decoder"
-msgstr ""
+msgstr "Декордер FLAC для K3b"
 
 #. Comment
 #: plugins/decoder/flac/k3bflacdecoder.plugin:3
 msgid "Decoding module to decode FLAC files"
-msgstr ""
+msgstr "Модуль декодирования файлов FLAC"
 
 #. Name
 #: plugins/decoder/libsndfile/k3blibsndfiledecoder.plugin:2
 msgid "K3b Libsndfile Decoder"
-msgstr ""
+msgstr "Декордер Libsndfile для K3b"
 
 #. Comment
 #: plugins/decoder/libsndfile/k3blibsndfiledecoder.plugin:3
 msgid "Decoding module to decode audio files supported by libsndfile"
-msgstr ""
+msgstr "Модуль декодирования файлов аудио, поддерживаемых libsndfile"
 
 #. Name
 #: plugins/decoder/mp3/k3bmaddecoder.plugin:2
 msgid "K3b MAD Decoder"
-msgstr ""
+msgstr "Декордер MAD для K3b"
 
 #. Comment
 #: plugins/decoder/mp3/k3bmaddecoder.plugin:3
 msgid "Decoding module to decode MPEG 1 Layer III files"
-msgstr ""
+msgstr "Модуль декодирования файлов MPEG 1 Layer III"
 
 #. Name
 #: plugins/decoder/musepack/k3bmpcdecoder.plugin:2
 msgid "K3b Musepack Decoder"
-msgstr ""
+msgstr "Декодер Musepack для K3b"
 
 #. Comment
 #: plugins/decoder/musepack/k3bmpcdecoder.plugin:3
 msgid "Decoding module to decode Musepack audio files"
-msgstr ""
+msgstr "Модуль декодирования аудиофайлов Musepack"
 
 #. Name
 #: plugins/decoder/ogg/k3boggvorbisdecoder.plugin:2
 msgid "K3b Ogg Vorbis Decoder"
-msgstr ""
+msgstr "Декодер Ogg Vorbis для K3b"
 
 #. Comment
 #: plugins/decoder/ogg/k3boggvorbisdecoder.plugin:3
 msgid "Decoding module to decode Ogg Vorbis files"
-msgstr ""
+msgstr "Модуль декодирования файлов Ogg Vorbis"
 
 #. Name
 #: plugins/decoder/wave/k3bwavedecoder.plugin:2
 msgid "K3b Wave Decoder"
-msgstr ""
+msgstr "Декордер Wave для K3b"
 
 #. Comment
 #: plugins/decoder/wave/k3bwavedecoder.plugin:3
 msgid "Decoding module to decode wave files"
-msgstr ""
+msgstr "Модуль декодирования файлов Wave"
 
 #. Name
 #: plugins/encoder/external/k3bexternalencoder.plugin:2
 msgid "K3b External Audio Encoder"
-msgstr ""
+msgstr "Внешний кодировщик аудио K3b"
 
 #. Comment
 #: plugins/encoder/external/k3bexternalencoder.plugin:3
 msgid "Encoding module that allows specifying an encoding commmand"
-msgstr ""
+msgstr "Модуль кодирования, позволяющий задавать команду для кодировщика"
 
 #. Name
 #: plugins/encoder/lame/k3blameencoder.plugin:2
 msgid "K3b Lame Mp3 Encoder"
-msgstr ""
+msgstr "Кодировщик Lame Mp3 для K3b"
 
 #. Comment
 #: plugins/encoder/lame/k3blameencoder.plugin:3
 msgid "Encoding module to encode MPEG1 Layer III (mp3) files"
-msgstr ""
+msgstr "Модуль кодирования файлов MPEG 1 Layer III (mp3)"
 
 #. Name
 #: plugins/encoder/ogg/k3boggvorbisencoder.plugin:2
 msgid "K3b Ogg Vorbis Encoder"
-msgstr ""
+msgstr "Кодировщик Ogg Vorbis для K3b"
 
 #. Comment
 #: plugins/encoder/ogg/k3boggvorbisencoder.plugin:3
 msgid "Encoding module to encode Ogg Vorbis files"
-msgstr ""
+msgstr "Модуль кодирования файлов Ogg Vorbis"
 
 #. Name
 #: plugins/encoder/sox/k3bsoxencoder.plugin:2
 msgid "K3b SoX Audio Encoder"
-msgstr ""
+msgstr "Кодировщик аудио SoX для K3b"
 
 #. Comment
 #: plugins/encoder/sox/k3bsoxencoder.plugin:3
 msgid "Encoding module to encode many file formats using SoX"
-msgstr ""
+msgstr "Модуль кодирования множества форматов файлов через SoX"
 
 #. Name
 #: plugins/project/audiometainforenamer/k3baudiometainforenamerplugin.plugin:2
 msgid "K3b Audio Metainfo Renamer"
-msgstr ""
+msgstr "Переименователь метаданных аудио K3b"
 
 #. Comment
 #: plugins/project/audiometainforenamer/k3baudiometainforenamerplugin.plugin:3
 msgid "Plugin to rename audio files in a data project based on the meta info."
 msgstr ""
+"Плагин для переименования аудиофайлов в проекте данных на основе "
+"метаинформации."
 
 #. Name
 #: plugins/project/audioprojectcddb/k3baudioprojectcddbplugin.plugin:2
 msgid "K3b Cddb Audio Plugin"
-msgstr ""
+msgstr "Плагин аудио Cddb для K3b"
 
 #. Comment
 #: plugins/project/audioprojectcddb/k3baudioprojectcddbplugin.plugin:3
 msgid "Plugin to query a cddb server for information about an audio project."
-msgstr ""
+msgstr "Плагин для запроса информации об аудиопроекте с сервера CDDB."
 
 #. Name
 #: tdefile-plugins/k3bproject/tdefile_k3b.desktop:2
@@ -269,7 +271,7 @@ msgstr "Свдения о проекте K3b"
 #. Name
 #: tdeioslaves/videodvd/videodvd.desktop:2
 msgid "Video DVD Browser"
-msgstr ""
+msgstr "Навигатор DVD-видео"
 
 #. Description
 #: tdeioslaves/videodvd/videodvd.protocol:2
@@ -281,7 +283,7 @@ msgstr "Позволяет копировать файлы с Video DVD (с де
 #. Name
 #: k3bsetup/k3bsetup2.desktop:2
 msgid "K3bSetup"
-msgstr ""
+msgstr "K3bSetup"
 
 #. GenericName
 #: k3bsetup/k3bsetup2.desktop:4
@@ -296,4 +298,4 @@ msgstr "K3bSetup 2 - настроить права для записи при п
 #. Keywords
 #: k3bsetup/k3bsetup2.desktop:8
 msgid "K3bSetup2;k3bsetup2;"
-msgstr ""
+msgstr "K3bSetup2;k3bsetup2;"
