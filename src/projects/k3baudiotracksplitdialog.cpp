@@ -164,11 +164,11 @@ bool K3bAudioTrackSplitDialog::eventFilter( TQObject* o, TQEvent* e )
 {
   if( o == m_editorWidget ) {
     if( e->type() == TQEvent::MouseButtonDblClick ) {
-      TQMouseEvent* me = TQT_TQMOUSEEVENT( e );
+      TQMouseEvent* me = static_cast<TQMouseEvent*>( e );
       splitAt( me->pos() );
     }
     else if( e->type() == TQEvent::ContextMenu ) {
-      TQContextMenuEvent* ce = TQT_TQCONTEXTMENUEVENT( e );
+      TQContextMenuEvent* ce = static_cast<TQContextMenuEvent*>( e );
       ce->consume();
       m_lastClickPosition = ce->pos();
       if( m_editorWidget->findRange( ce->pos().x() ) > 0 )
