@@ -99,12 +99,12 @@ bool K3bPushButton::eventFilter( TQObject* o, TQEvent* ev )
     // is moved by a small distance.
     if( popup() ) {
       if( ev->type() == TQEvent::MouseButtonPress ) {
-        TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
+        TQMouseEvent* mev = static_cast<TQMouseEvent*>(ev);
         d->mousePressPos = mev->pos();
 	d->popupTimer->start( TQApplication::startDragTime() );
       }
       else if( ev->type() == TQEvent::MouseMove ) {
-        TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
+        TQMouseEvent* mev = static_cast<TQMouseEvent*>(ev);
         if( ( mev->pos() - d->mousePressPos).manhattanLength() > TDEGlobalSettings::dndEventDelay() ) {
 	  d->popupTimer->stop();
 	  slotDelayedPopup();

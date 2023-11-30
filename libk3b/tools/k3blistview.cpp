@@ -1015,7 +1015,7 @@ void K3bListView::slotEditorButtonClicked( K3bListViewItem* item, int col )
 bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
 {
   if( e->type() == TQEvent::KeyPress ) {
-     TQKeyEvent* ke = TQT_TQKEYEVENT(e);
+     TQKeyEvent* ke = static_cast<TQKeyEvent*>(e);
      if( ke->key() == Key_Tab ) {
        if( o == m_editorLineEdit ||
 	   o == d->msfEditLineEdit ||
@@ -1097,7 +1097,7 @@ bool K3bListView::eventFilter( TQObject* o, TQEvent* e )
     // first let's grab the focus
     viewport()->setFocus();
 
-    TQMouseEvent* me = TQT_TQMOUSEEVENT( e );
+    TQMouseEvent* me = static_cast<TQMouseEvent*>( e );
     TQListViewItem* item = itemAt( me->pos() );
     int col = header()->sectionAt( me->pos().x() );
     if( K3bCheckListViewItem* ci = dynamic_cast<K3bCheckListViewItem*>( item ) ) {

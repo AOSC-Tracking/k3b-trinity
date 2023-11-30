@@ -83,7 +83,7 @@ bool K3bToolButton::eventFilter( TQObject* o, TQEvent* ev )
     // is moved by a small distance.
     if( TQToolButton::popup() ) {
       if( ev->type() == TQEvent::MouseButtonPress ) {
-	TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
+	TQMouseEvent* mev = static_cast<TQMouseEvent*>(ev);
 
 	if( d->instantMenu ) {
 	  setDown(true);
@@ -95,7 +95,7 @@ bool K3bToolButton::eventFilter( TQObject* o, TQEvent* ev )
 	}
       }
       else if( ev->type() == TQEvent::MouseMove ) {
-        TQMouseEvent* mev = TQT_TQMOUSEEVENT(ev);
+        TQMouseEvent* mev = static_cast<TQMouseEvent*>(ev);
         if( !d->instantMenu &&
 	    ( mev->pos() - d->mousePressPos).manhattanLength() > TDEGlobalSettings::dndEventDelay() ) {
 	  openPopup();
