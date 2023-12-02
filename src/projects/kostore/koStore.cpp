@@ -69,7 +69,7 @@ KoStore* KoStore::createStore( const TQString& fileName, Mode mode, const TQCStr
       {
         TQFile file( fileName );
         if ( file.open( IO_ReadOnly ) )
-          backend = determineBackend( TQT_TQIODEVICE(&file) );
+          backend = determineBackend( &file );
         else
           backend = DefaultFormat; // will create a "bad" store (bad()==true)
       }
@@ -143,7 +143,7 @@ KoStore* KoStore::createStore( TQWidget* window, const KURL& url, Mode mode, con
       TQFile file( tmpFile );
       if ( file.open( IO_ReadOnly ) )
       {
-        backend = determineBackend( TQT_TQIODEVICE(&file) );
+        backend = determineBackend( &file );
         file.close();
       }
     }
