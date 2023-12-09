@@ -476,7 +476,7 @@ void K3bWelcomeWidget::slotMoreActions()
 
   for ( int i = 0; s_allActions[i]; ++i ) {
       if ( s_allActions[i][0] == '_' ) {
-          (new TDEActionSeparator( TQT_TQOBJECT(&popup) ))->plug( &popup );
+          (new TDEActionSeparator( &popup ))->plug( &popup );
       }
       else {
           m_mainWindow->actionCollection()->action( s_allActions[i] )->plug( &popup );

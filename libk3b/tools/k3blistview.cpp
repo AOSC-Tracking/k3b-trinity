@@ -769,7 +769,7 @@ TQWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
   case K3bListViewItem::SPIN:
     if( !m_editorSpinBox ) {
       m_editorSpinBox = new TQSpinBox( viewport() );
-      d->spinBoxLineEdit = static_cast<TQLineEdit*>(TQT_TQWIDGET( m_editorSpinBox->child( 0, "TQLineEdit" ) ));
+      d->spinBoxLineEdit = static_cast<TQLineEdit*>( m_editorSpinBox->child( 0, "TQLineEdit" ) );
       connect( m_editorSpinBox, TQT_SIGNAL(valueChanged(int)),
 	       this, TQT_SLOT(slotEditorSpinBoxValueChanged(int)) );
       //      m_editorSpinBox->installEventFilter( this );
@@ -782,7 +782,7 @@ TQWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
   case K3bListViewItem::MSF:
     if( !m_editorMsfEdit ) {
       m_editorMsfEdit = new K3bMsfEdit( viewport() );
-      d->msfEditLineEdit = static_cast<TQLineEdit*>(TQT_TQWIDGET( m_editorMsfEdit->child( 0, "TQLineEdit" ) ));
+      d->msfEditLineEdit = static_cast<TQLineEdit*>( m_editorMsfEdit->child( 0, "TQLineEdit" ) );
       connect( m_editorMsfEdit, TQT_SIGNAL(valueChanged(int)),
 	       this, TQT_SLOT(slotEditorMsfEditValueChanged(int)) );
       //      m_editorMsfEdit->installEventFilter( this );

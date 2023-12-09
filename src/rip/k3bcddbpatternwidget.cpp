@@ -41,7 +41,7 @@ K3bCddbPatternWidget::K3bCddbPatternWidget( TQWidget* parent, const char* name )
   // additional the filename can never contain a slash /
   // and the dir should never start with a slash since it should always be a relative path
 
-  TQRegExpValidator* dirValidator = new TQRegExpValidator( TQRegExp( "[^/][^?\\*\\\"]*" ), TQT_TQOBJECT(this) );
+  TQRegExpValidator* dirValidator = new TQRegExpValidator( TQRegExp( "[^/][^?\\*\\\"]*" ), this );
   m_comboFilenamePattern->setValidator( dirValidator );
   m_comboPlaylistPattern->setValidator( dirValidator );
   m_editBlankReplace->setValidator( dirValidator );

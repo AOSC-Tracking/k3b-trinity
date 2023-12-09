@@ -82,7 +82,7 @@ K3bMultiChoiceDialog::K3bMultiChoiceDialog( const TQString& caption,
   : KDialog( parent, name )
 {
   d = new Private();
-  d->mapper = new TQSignalMapper( TQT_TQOBJECT(this) );
+  d->mapper = new TQSignalMapper( this );
   connect( d->mapper, TQT_SIGNAL(mapped(int)), this, TQT_SLOT(done(int)) );
 
   setCaption( caption );
@@ -126,7 +126,7 @@ int K3bMultiChoiceDialog::addButton( const KGuiItem& b )
   KPushButton* button = new KPushButton( b, this );
   d->buttonLayout->add( button );
   d->buttons.append(button);
-  d->mapper->setMapping( TQT_TQOBJECT(button), d->buttons.count() );
+  d->mapper->setMapping( button, d->buttons.count() );
   connect( button, TQT_SIGNAL(clicked()), d->mapper, TQT_SLOT(map()) );
   return d->buttons.count();
 }

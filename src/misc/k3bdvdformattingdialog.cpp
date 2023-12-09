@@ -128,7 +128,7 @@ void K3bDvdFormattingDialog::slotStartClicked()
 
   K3bJobProgressDialog d( kapp->mainWidget(), "formattingProgress", false );
 
-  K3bDvdFormattingJob*  job = new K3bDvdFormattingJob( &d, TQT_TQOBJECT(this) );
+  K3bDvdFormattingJob*  job = new K3bDvdFormattingJob( &d, this );
   job->setDevice( m_writerSelectionWidget->writerDevice() );
   job->setMode( m_writingModeWidget->writingMode() );
   job->setForce( m_checkForce->isChecked() );

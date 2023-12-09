@@ -154,7 +154,7 @@ void K3bMusicBrainzJob::MusicBrainzThread::run()
 
 // cannot use this as parent for the K3bSimpleJobHandler since this has not been constructed yet
 K3bMusicBrainzJob::K3bMusicBrainzJob( TQWidget* parent, const char* name )
-  : K3bJob( new K3bSimpleJobHandler( 0 ), TQT_TQOBJECT(parent), name ),
+  : K3bJob( new K3bSimpleJobHandler( 0 ), parent, name ),
     m_canceled( false )
 {
   m_trmThread = new TRMThread();

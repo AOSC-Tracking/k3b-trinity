@@ -77,7 +77,7 @@ K3bAudioTrackAddingDialog::K3bAudioTrackAddingDialog( TQWidget* parent, const ch
   grid->addWidget( m_busyWidget, 1, 0 );
 
   m_analyserThread = new AnalyserThread();
-  m_analyserJob = new K3bThreadJob( m_analyserThread, this, TQT_TQOBJECT(this) );
+  m_analyserJob = new K3bThreadJob( m_analyserThread, this, this );
   connect( m_analyserJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotAnalysingFinished(bool)) );
 }
 

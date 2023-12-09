@@ -131,7 +131,7 @@ void K3bBlankingDialog::slotStartClicked()
   d->debugFile.open();
 
   if( d->job == 0 ) {
-    d->job = new K3bBlankingJob( this, TQT_TQOBJECT(this) );
+    d->job = new K3bBlankingJob( this, this );
     connect( d->job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
 	     d->debugDialog, TQT_SLOT(addOutput(const TQString&, const TQString&)) );
     connect( d->job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 

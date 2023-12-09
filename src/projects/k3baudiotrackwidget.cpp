@@ -48,14 +48,14 @@ K3bAudioTrackWidget::K3bAudioTrackWidget( const TQPtrList<K3bAudioTrack>& tracks
   // no post-gap for the last track
   m_editPostGap->setDisabled( tracks.count() == 1 && !tracks.getFirst()->next() );
 
-  K3bCdTextValidator* val = new K3bCdTextValidator( TQT_TQOBJECT(this) );
+  K3bCdTextValidator* val = new K3bCdTextValidator( this );
   m_editSongwriter->setValidator( val );
   m_editArranger->setValidator( val );
   m_editComposer->setValidator( val );
   m_editMessage->setValidator( val );
   m_editTitle->setValidator( val );
   m_editPerformer->setValidator( val );
-  m_editIsrc->setValidator( K3bValidators::isrcValidator( TQT_TQOBJECT(this) ) );
+  m_editIsrc->setValidator( K3bValidators::isrcValidator( this ) );
 
   load();
 }

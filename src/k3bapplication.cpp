@@ -72,11 +72,11 @@ K3bApplication::K3bApplication()
   TDEGlobal::locale()->insertCatalogue( "libk3bdevice" );
   TDEGlobal::locale()->insertCatalogue( "libk3b" );
 
-  m_core = new Core( TQT_TQOBJECT(this) );
+  m_core = new Core( this );
 
   // TODO: move to K3bCore?
   // from this point on available through K3bAudioServer::instance()
-  m_audioServer = new K3bAudioServer( TQT_TQOBJECT(this), "K3bAudioServer" );
+  m_audioServer = new K3bAudioServer( this, "K3bAudioServer" );
 
   connect( m_core, TQT_SIGNAL(initializationInfo(const TQString&)),
 	   TQT_SIGNAL(initializationInfo(const TQString&)) );

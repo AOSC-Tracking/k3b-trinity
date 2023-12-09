@@ -929,7 +929,7 @@ void K3bAudioDoc::informAboutNotFoundFiles()
     for( KURL::List::const_iterator it = m_notFoundFiles.begin();
 	 it != m_notFoundFiles.end(); ++it )
       l.append( (*it).path() );
-    KMessageBox::informationList( TQT_TQWIDGET(tqApp->activeWindow()),
+    KMessageBox::informationList( tqApp->activeWindow(),
 				  i18n("Could not find the following files:"),
 				  l,
 				  i18n("Not Found") );
@@ -941,7 +941,7 @@ void K3bAudioDoc::informAboutNotFoundFiles()
     for( KURL::List::const_iterator it = m_unknownFileFormatFiles.begin();
 	 it != m_unknownFileFormatFiles.end(); ++it )
       l.append( (*it).path() );
-    KMessageBox::informationList( TQT_TQWIDGET(tqApp->activeWindow()),
+    KMessageBox::informationList( tqApp->activeWindow(),
 				  i18n("<p>Unable to handle the following files due to an unsupported format:"
 				       "<p>You may manually convert these audio files to wave using another "
 				       "application supporting the audio format and then add the wave files "

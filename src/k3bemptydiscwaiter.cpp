@@ -685,7 +685,7 @@ void K3bEmptyDiscWaiter::slotReloadingAfterErasingFinished( K3bDevice::DeviceHan
 
 int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device, bool appendable, int mediaType, TQWidget* parent )
 {
-  K3bEmptyDiscWaiter d( device, parent ? parent : TQT_TQWIDGET(tqApp->activeWindow()) );
+  K3bEmptyDiscWaiter d( device, parent ? parent : tqApp->activeWindow() );
   int mediaState = K3bDevice::STATE_EMPTY;
   if( appendable ) mediaState |= K3bDevice::STATE_INCOMPLETE;
   return d.waitForDisc( mediaState, mediaType );
@@ -698,7 +698,7 @@ int K3bEmptyDiscWaiter::wait( K3bDevice::Device* device,
 			      const TQString& message,
 			      TQWidget* parent )
 {
-  K3bEmptyDiscWaiter d( device, parent ? parent : TQT_TQWIDGET(tqApp->activeWindow()) );
+  K3bEmptyDiscWaiter d( device, parent ? parent : tqApp->activeWindow() );
   return d.waitForDisc( mediaState, mediaType, message );
 }
 

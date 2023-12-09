@@ -196,7 +196,7 @@ void K3bAudioProjectConvertingDialog::slotStartClicked()
 
   K3bJobProgressDialog progressDialog( parentWidget() );
 
-  K3bThreadJob job( thread, &progressDialog, TQT_TQOBJECT(this) );
+  K3bThreadJob job( thread, &progressDialog, this );
 
   hide();
   progressDialog.startJob(&job);

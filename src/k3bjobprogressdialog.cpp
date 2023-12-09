@@ -682,14 +682,14 @@ void K3bJobProgressDialog::blockingInformation( const TQString& text,
 void K3bJobProgressDialog::slotThemeChanged()
 {
   if( K3bTheme* theme = k3bappcore->themeManager()->currentTheme() ) {
-    TQT_TQWIDGET(child( "frame4" ))->setPaletteBackgroundColor( theme->backgroundColor() );
-    TQT_TQWIDGET(child( "frame4" ))->setPaletteForegroundColor( theme->backgroundColor() );
-    TQT_TQWIDGET(child( "frame5" ))->setPaletteBackgroundColor( theme->backgroundColor() );
-    TQT_TQWIDGET(child( "frame5" ))->setPaletteForegroundColor( theme->backgroundColor() );
-    TQT_TQWIDGET(child( "progressHeaderFrame" ))->setPaletteBackgroundColor( theme->backgroundColor() );
-    TQT_TQWIDGET(child( "progressHeaderFrame" ))->setPaletteForegroundColor( theme->backgroundColor() );
-    TQT_TQWIDGET(child( "headerFrame" ))->setPaletteBackgroundColor( theme->backgroundColor() );
-    TQT_TQWIDGET(child( "headerFrame" ))->setPaletteForegroundColor( theme->backgroundColor() );
+    static_cast<TQWidget*>(child( "frame4" ))->setPaletteBackgroundColor( theme->backgroundColor() );
+    static_cast<TQWidget*>(child( "frame4" ))->setPaletteForegroundColor( theme->backgroundColor() );
+    static_cast<TQWidget*>(child( "frame5" ))->setPaletteBackgroundColor( theme->backgroundColor() );
+    static_cast<TQWidget*>(child( "frame5" ))->setPaletteForegroundColor( theme->backgroundColor() );
+    static_cast<TQWidget*>(child( "progressHeaderFrame" ))->setPaletteBackgroundColor( theme->backgroundColor() );
+    static_cast<TQWidget*>(child( "progressHeaderFrame" ))->setPaletteForegroundColor( theme->backgroundColor() );
+    static_cast<TQWidget*>(child( "headerFrame" ))->setPaletteBackgroundColor( theme->backgroundColor() );
+    static_cast<TQWidget*>(child( "headerFrame" ))->setPaletteForegroundColor( theme->backgroundColor() );
   }
 }
 
