@@ -126,7 +126,7 @@ K3bCdImageWritingDialog::K3bCdImageWritingDialog( TQWidget* parent, const char* 
 
   setupGui();
 
-  d->md5Job = new K3bMd5Job( 0, TQT_TQOBJECT(this) );
+  d->md5Job = new K3bMd5Job( 0, this );
   connect( d->md5Job, TQT_SIGNAL(finished(bool)),
 	   this, TQT_SLOT(slotMd5JobFinished(bool)) );
   connect( d->md5Job, TQT_SIGNAL(percent(int)),
@@ -354,7 +354,7 @@ void K3bCdImageWritingDialog::slotStartClicked()
   switch( currentImageType() ) {
   case IMAGE_CDRECORD_CLONE:
     {
-      K3bCloneJob* _job = new K3bCloneJob( &dlg, TQT_TQOBJECT(this) );
+      K3bCloneJob* _job = new K3bCloneJob( &dlg, this );
       _job->setWriterDevice( m_writerSelectionWidget->writerDevice() );
       _job->setImagePath( d->imageFile );
       _job->setSimulate( m_checkDummy->isChecked() );
@@ -368,7 +368,7 @@ void K3bCdImageWritingDialog::slotStartClicked()
 
   case IMAGE_AUDIO_CUE: 
     {
-      K3bAudioCueFileWritingJob* job_ = new K3bAudioCueFileWritingJob( &dlg, TQT_TQOBJECT(this) );
+      K3bAudioCueFileWritingJob* job_ = new K3bAudioCueFileWritingJob( &dlg, this );
       
       job_->setBurnDevice( m_writerSelectionWidget->writerDevice() );
       job_->setSpeed( m_writerSelectionWidget->writerSpeed() );
@@ -387,7 +387,7 @@ void K3bCdImageWritingDialog::slotStartClicked()
     // for now the K3bBinImageWritingJob decides if it's a toc or a cue file
   case IMAGE_CDRDAO_TOC:
     {
-      K3bBinImageWritingJob* job_ = new K3bBinImageWritingJob( &dlg, TQT_TQOBJECT(this) );
+      K3bBinImageWritingJob* job_ = new K3bBinImageWritingJob( &dlg, this );
 
       job_->setWriter( m_writerSelectionWidget->writerDevice() );
       job_->setSpeed( m_writerSelectionWidget->writerSpeed() );

@@ -67,7 +67,7 @@ K3bAudioCdTextWidget::K3bAudioCdTextWidget( TQWidget* parent, const char* name )
   m_allFieldsDlg->w->m_buttonCopyComposer->setPixmap( SmallIcon( "edit-copy" ) );
   m_allFieldsDlg->w->m_buttonCopyArranger->setPixmap( SmallIcon( "edit-copy" ) );
 
-  TQValidator* cdTextVal = new K3bCdTextValidator( TQT_TQOBJECT(this) );
+  TQValidator* cdTextVal = new K3bCdTextValidator( this );
   m_editTitle->setValidator( cdTextVal );
   m_editPerformer->setValidator( cdTextVal );
 

@@ -612,7 +612,7 @@ void K3bVideoDVDRippingDialog::slotStartClicked()
 
   // start the job
   K3bJobProgressDialog dlg( parentWidget() );
-  K3bVideoDVDRippingJob* job = new K3bVideoDVDRippingJob( &dlg, TQT_TQOBJECT(&dlg) );
+  K3bVideoDVDRippingJob* job = new K3bVideoDVDRippingJob( &dlg, &dlg );
   job->setVideoDVD( m_dvd );
   job->setTitles( titles );
 

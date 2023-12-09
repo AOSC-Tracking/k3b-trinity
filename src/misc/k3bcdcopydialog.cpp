@@ -309,7 +309,7 @@ void K3bCdCopyDialog::slotStartClicked()
 	return;
     }
 
-    K3bCloneJob* job = new K3bCloneJob( dlg, TQT_TQOBJECT(this) );
+    K3bCloneJob* job = new K3bCloneJob( dlg, this );
 
     job->setWriterDevice( m_writerSelectionWidget->writerDevice() );
     job->setReaderDevice( m_comboSourceDevice->selectedDevice() );
@@ -325,7 +325,7 @@ void K3bCdCopyDialog::slotStartClicked()
     burnJob = job;
   }
   else {
-    K3bCdCopyJob* job = new K3bCdCopyJob( dlg, TQT_TQOBJECT(this) );
+    K3bCdCopyJob* job = new K3bCdCopyJob( dlg, this );
 
     job->setWriterDevice( m_writerSelectionWidget->writerDevice() );
     job->setReaderDevice( m_comboSourceDevice->selectedDevice() );
@@ -392,7 +392,7 @@ void K3bCdCopyDialog::toggleAll()
 
 
 
-  TQT_TQWIDGET( child( "audio_options" ) )->setDisabled( m_comboCopyMode->currentItem() == 1 );
+  static_cast<TQWidget*>( child( "audio_options" ) )->setDisabled( m_comboCopyMode->currentItem() == 1 );
 
   m_checkIgnoreDataReadErrors->setDisabled( m_comboCopyMode->currentItem() == 1 );
 

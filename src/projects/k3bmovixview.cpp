@@ -51,16 +51,16 @@ K3bMovixView::K3bMovixView( K3bMovixDoc* doc, TQWidget* parent, const char* name
 
   // setup actions
   m_actionProperties = new TDEAction( i18n("Properties"), "misc",
-				    0, TQT_TQOBJECT(this), TQT_SLOT(showPropertiesDialog()),
+				    0, this, TQT_SLOT(showPropertiesDialog()),
 				    actionCollection(), "movix_show_props" );
   m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete",
-				Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItems()),
+				Key_Delete, this, TQT_SLOT(slotRemoveItems()),
 				actionCollection(), "movix_remove_item" );
   m_actionRemoveSubTitle = new TDEAction( i18n( "Remove Subtitle File" ), "edit-delete",
-					0, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveSubTitleItems()),
+					0, this, TQT_SLOT(slotRemoveSubTitleItems()),
 					actionCollection(), "movix_remove_subtitle_item" );
   m_actionAddSubTitle = new TDEAction( i18n("Add Subtitle File..."), "",
-				     0, TQT_TQOBJECT(this), TQT_SLOT(slotAddSubTitleFile()),
+				     0, this, TQT_SLOT(slotAddSubTitleFile()),
 				     actionCollection(), "movix_add_subtitle" );
 
   m_popupMenu = new TDEPopupMenu( this );
@@ -85,7 +85,7 @@ K3bMovixView::K3bMovixView( K3bMovixDoc* doc, TQWidget* parent, const char* name
 	   m_doc,
 	   TQT_SLOT(setVolumeID(const TQString&)) );
 
-  connect( m_doc, TQT_SIGNAL(changed()), TQT_TQOBJECT(this), TQT_SLOT(slotDocChanged()) );
+  connect( m_doc, TQT_SIGNAL(changed()), this, TQT_SLOT(slotDocChanged()) );
 }
 
 

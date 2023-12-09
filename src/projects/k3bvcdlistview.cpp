@@ -67,8 +67,8 @@ K3bVcdListView::K3bVcdListView( K3bView* view, K3bVcdDoc* doc, TQWidget *parent,
     connect( this, TQT_SIGNAL( doubleClicked( TQListViewItem*, const TQPoint&, int ) ),
              this, TQT_SLOT( showPropertiesDialog() ) );
 
-    connect( m_doc, TQT_SIGNAL( changed() ), TQT_TQOBJECT(this), TQT_SLOT( slotUpdateItems() ) );
-    connect( m_doc, TQT_SIGNAL( trackRemoved( K3bVcdTrack* ) ), TQT_TQOBJECT(this), TQT_SLOT( slotTrackRemoved( K3bVcdTrack* ) ) );
+    connect( m_doc, TQT_SIGNAL( changed() ), this, TQT_SLOT( slotUpdateItems() ) );
+    connect( m_doc, TQT_SIGNAL( trackRemoved( K3bVcdTrack* ) ), this, TQT_SLOT( slotTrackRemoved( K3bVcdTrack* ) ) );
 
     slotUpdateItems();
 }
@@ -94,8 +94,8 @@ void K3bVcdListView::setupColumns()
 void K3bVcdListView::setupActions()
 {
     m_actionCollection = new TDEActionCollection( this );
-    m_actionProperties = new TDEAction( i18n( "Properties" ), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT( showPropertiesDialog() ), actionCollection() );
-    m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT( slotRemoveTracks() ), actionCollection() );
+    m_actionProperties = new TDEAction( i18n( "Properties" ), "misc", 0, this, TQT_SLOT( showPropertiesDialog() ), actionCollection() );
+    m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete", Key_Delete, this, TQT_SLOT( slotRemoveTracks() ), actionCollection() );
 
     // disabled by default
     m_actionRemove->setEnabled( false );

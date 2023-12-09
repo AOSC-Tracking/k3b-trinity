@@ -102,7 +102,7 @@ K3bIsoImageWritingDialog::K3bIsoImageWritingDialog( TQWidget* parent, const char
   m_writerSelectionWidget->setSupportedWritingApps( K3b::GROWISOFS );
   m_writingModeWidget->setSupportedModes( K3b::DAO|K3b::WRITING_MODE_INCR_SEQ|K3b::WRITING_MODE_RES_OVWR );
 
-  m_md5Job = new K3bMd5Job( 0, TQT_TQOBJECT(this) );
+  m_md5Job = new K3bMd5Job( 0, this );
   connect( m_md5Job, TQT_SIGNAL(finished(bool)),
 	   this, TQT_SLOT(slotMd5JobFinished(bool)) );
   connect( m_md5Job, TQT_SIGNAL(percent(int)),

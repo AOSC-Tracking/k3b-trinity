@@ -376,7 +376,7 @@ K3bSoxEncoderSettingsWidget::K3bSoxEncoderSettingsWidget( TQWidget* parent, cons
   : K3bPluginConfigWidget( parent, name )
 {
   w = new base_K3bSoxEncoderConfigWidget( this );
-  w->m_editSamplerate->setValidator( new TQIntValidator( TQT_TQOBJECT(w->m_editSamplerate) ) );
+  w->m_editSamplerate->setValidator( new TQIntValidator( w->m_editSamplerate ) );
 
   TQHBoxLayout* lay = new TQHBoxLayout( this );
   lay->setMargin( 0 );

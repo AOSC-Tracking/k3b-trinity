@@ -1118,13 +1118,13 @@ void K3bDataDoc::prepareFilenamesInDir( K3bDirItem* dir )
 void K3bDataDoc::informAboutNotFoundFiles()
 {
   if( !m_notFoundFiles.isEmpty() ) {
-    KMessageBox::informationList( TQT_TQWIDGET(tqApp->activeWindow()), i18n("Could not find the following files:"),
+    KMessageBox::informationList( tqApp->activeWindow(), i18n("Could not find the following files:"),
  				  m_notFoundFiles, i18n("Not Found") );
     m_notFoundFiles.clear();
   }
 
   if( !m_noPermissionFiles.isEmpty() ) {
-    KMessageBox::informationList( TQT_TQWIDGET(tqApp->activeWindow()), i18n("No permission to read the following files:"),
+    KMessageBox::informationList( tqApp->activeWindow(), i18n("No permission to read the following files:"),
 				  m_noPermissionFiles, i18n("No Read Permission") );
 
     m_noPermissionFiles.clear();

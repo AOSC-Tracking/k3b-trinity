@@ -49,11 +49,11 @@ K3bDirOperator::K3bDirOperator(const KURL& url, TQWidget* parent, const char* na
   bmMan->setUpdate( true );
   bmMan->setShowNSBookmarks( false );
 
-  m_bmPopup = new TDEActionMenu( i18n("Bookmarks"), "bookmark", TQT_TQOBJECT(this), "bookmarks" );
+  m_bmPopup = new TDEActionMenu( i18n("Bookmarks"), "bookmark", this, "bookmarks" );
   m_bmMenu = new KBookmarkMenu( bmMan, this, m_bmPopup->popupMenu(), actionCollection(), true );
 
   (void)new TDEAction( i18n("&Add to Project"), SHIFT+Key_Return, 
-		     TQT_TQOBJECT(this), TQT_SLOT(slotAddFilesToProject()), 
+		     this, TQT_SLOT(slotAddFilesToProject()), 
 		     actionCollection(), "add_file_to_project");
 }
 

@@ -167,7 +167,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
   sortingBoxGrid->setSpacing( spacingHint() );
   sortingBoxGrid->setMargin( marginHint() );
   m_editSortWeight = new KLineEdit( sortingBox );
-  m_editSortWeight->setValidator( new TQIntValidator( -2147483647, 2147483647, TQT_TQOBJECT(m_editSortWeight) ) );
+  m_editSortWeight->setValidator( new TQIntValidator( -2147483647, 2147483647, m_editSortWeight ) );
   m_editSortWeight->setAlignment( TQt::AlignRight );
   sortingBoxGrid->addWidget( new TQLabel( i18n("Sort weight:"), sortingBox ), 0, 0 );
   sortingBoxGrid->addWidget( m_editSortWeight, 0, 1 );
@@ -222,7 +222,7 @@ K3bDataPropertiesDialog::K3bDataPropertiesDialog( K3bDataItem* dataItem, TQWidge
 					  "It sorts the order in which the file data is "
 					  "written to the image.") );
 
-  m_editName->setValidator( K3bValidators::iso9660Validator( false, TQT_TQOBJECT(this) ) );
+  m_editName->setValidator( K3bValidators::iso9660Validator( false, this ) );
   m_editName->setReadOnly( !dataItem->isRenameable() );
   m_editName->setFocus();
 }

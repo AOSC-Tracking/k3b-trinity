@@ -36,7 +36,7 @@ K3bMsfValidator::K3bMsfValidator( TQObject* parent, const char* name )
 K3bMsfEdit::K3bMsfEdit( TQWidget* parent, const char* name )
   : TQSpinBox( parent, name )
 {
-  setValidator( new K3bMsfValidator( TQT_TQOBJECT(this) ) );
+  setValidator( new K3bMsfValidator( this ) );
   setMinValue( 0 );
   // some very high value (10000 minutes)
   setMaxValue( 10000*60*75 );

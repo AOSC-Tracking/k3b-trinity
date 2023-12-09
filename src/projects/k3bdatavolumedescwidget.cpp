@@ -29,7 +29,7 @@ K3bDataVolumeDescWidget::K3bDataVolumeDescWidget( TQWidget* parent, const char* 
 {
   // the maximal number of characters that can be inserted are set in the ui file!
 
-  TQValidator* isoValidator = new K3bLatin1Validator( TQT_TQOBJECT(this) );
+  TQValidator* isoValidator = new K3bLatin1Validator( this );
 
   m_editVolumeName->setValidator( isoValidator );
   m_editVolumeSetName->setValidator( isoValidator );

@@ -253,7 +253,7 @@ void K3bDvdCopyDialog::slotStartClicked()
     dlg = new K3bBurnProgressDialog( kapp->mainWidget() );
   }
 
-  K3bDvdCopyJob* job = new K3bDvdCopyJob( dlg, TQT_TQOBJECT(this) );
+  K3bDvdCopyJob* job = new K3bDvdCopyJob( dlg, this );
 
   job->setWriterDevice( m_writerSelectionWidget->writerDevice() );
   job->setReaderDevice( m_comboSourceDevice->selectedDevice() );

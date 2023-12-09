@@ -89,11 +89,11 @@ K3bDataDirTreeView::K3bDataDirTreeView( K3bView* view, K3bDataDoc* doc, TQWidget
   m_root = new K3bDataRootViewItem( doc, this );
   m_itemMap.insert( doc->root(), m_root );
 
-  connect( m_doc, TQT_SIGNAL(changed()), TQT_TQOBJECT(this), TQT_SLOT(slotDocChanged()) );
-  connect( this, TQT_SIGNAL(clicked(TQListViewItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotExecuted(TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(selectionChanged(TQListViewItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotExecuted(TQListViewItem*)) );
-  connect( m_doc, TQT_SIGNAL(itemRemoved(K3bDataItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotDataItemRemoved(K3bDataItem*)) );
-  connect( m_doc, TQT_SIGNAL(itemAdded(K3bDataItem*)), TQT_TQOBJECT(this), TQT_SLOT(slotItemAdded(K3bDataItem*)) );
+  connect( m_doc, TQT_SIGNAL(changed()), this, TQT_SLOT(slotDocChanged()) );
+  connect( this, TQT_SIGNAL(clicked(TQListViewItem*)), this, TQT_SLOT(slotExecuted(TQListViewItem*)) );
+  connect( this, TQT_SIGNAL(selectionChanged(TQListViewItem*)), this, TQT_SLOT(slotExecuted(TQListViewItem*)) );
+  connect( m_doc, TQT_SIGNAL(itemRemoved(K3bDataItem*)), this, TQT_SLOT(slotDataItemRemoved(K3bDataItem*)) );
+  connect( m_doc, TQT_SIGNAL(itemAdded(K3bDataItem*)), this, TQT_SLOT(slotItemAdded(K3bDataItem*)) );
   connect( this, TQT_SIGNAL(contextMenu(TDEListView*,TQListViewItem*, const TQPoint&)),
 	   this, TQT_SLOT(showPopupMenu(TDEListView*,TQListViewItem*, const TQPoint&)) );
   connect( this, TQT_SIGNAL(dropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)),
@@ -207,7 +207,7 @@ void K3bDataDirTreeView::slotDropped( TQDropEvent* e, TQListViewItem*, TQListVie
 	// event queues: the url adding dialog will be non-modal regardless of
 	// the settings in case we open it directly.
 	//
-	TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT(slotAddUrls()) );
+	TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
       }
     }
   }
@@ -280,24 +280,24 @@ void K3bDataDirTreeView::setupActions()
 {
   m_actionCollection = new TDEActionCollection( this );
 
-  m_actionProperties = new TDEAction( i18n("Properties"), "misc", 0, TQT_TQOBJECT(this), TQT_SLOT(slotProperties()),
+  m_actionProperties = new TDEAction( i18n("Properties"), "misc", 0, this, TQT_SLOT(slotProperties()),
 				    actionCollection(), "properties" );
-  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder-new", CTRL+Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotNewDir()),
+  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder-new", CTRL+Key_N, this, TQT_SLOT(slotNewDir()),
 				actionCollection(), "new_dir" );
-  m_actionRemove = new TDEAction( i18n("Remove"), "edit-delete", Key_Delete, TQT_TQOBJECT(this), TQT_SLOT(slotRemoveItem()),
+  m_actionRemove = new TDEAction( i18n("Remove"), "edit-delete", Key_Delete, this, TQT_SLOT(slotRemoveItem()),
 				actionCollection(), "remove" );
   TDEShortcut renameShortCut( Key_F2 );
   renameShortCut.append( TDEShortcut(CTRL+Key_R) ); // backwards compatibility
-  m_actionRename = new TDEAction( i18n("Rename"), "edit", renameShortCut, TQT_TQOBJECT(this), TQT_SLOT(slotRenameItem()),
+  m_actionRename = new TDEAction( i18n("Rename"), "edit", renameShortCut, this, TQT_SLOT(slotRenameItem()),
 				actionCollection(), "rename" );
 
   m_popupMenu = new TDEActionMenu( m_actionCollection, "contextMenu" );
   m_popupMenu->insert( m_actionRename );
   m_popupMenu->insert( m_actionRemove );
   m_popupMenu->insert( m_actionNewDir );
-  m_popupMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
+  m_popupMenu->insert( new TDEActionSeparator( this ) );
   m_popupMenu->insert( m_actionProperties );
-  m_popupMenu->insert( new TDEActionSeparator( TQT_TQOBJECT(this) ) );
+  m_popupMenu->insert( new TDEActionSeparator( this ) );
   m_popupMenu->insert( m_view->actionCollection()->action("project_burn") );
 }
 
@@ -393,7 +393,7 @@ void K3bDataDirTreeView::startDropAnimation( K3bDirItem* dir )
     d->animationCounter = 0;
     d->animatedDirItem = vI;
     d->beforeAniPixmap = TQPixmap( *vI->pixmap(0) );
-    TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT(slotDropAnimate()) );
+    TQTimer::singleShot( 0, this, TQT_SLOT(slotDropAnimate()) );
   }
 }
 
@@ -426,7 +426,7 @@ void K3bDataDirTreeView::slotDropAnimate()
       }
 
       d->animationCounter++;
-      TQTimer::singleShot( 300, TQT_TQOBJECT(this), TQT_SLOT(slotDropAnimate()) );
+      TQTimer::singleShot( 300, this, TQT_SLOT(slotDropAnimate()) );
     }
   }
 }

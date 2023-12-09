@@ -25,14 +25,14 @@
 
 
 K3bIntValidator::K3bIntValidator ( TQWidget * parent, const char * name )
-  : TQValidator(TQT_TQOBJECT(parent), name)
+  : TQValidator(parent, name)
 {
   m_min = m_max = 0;
 }
 
 
 K3bIntValidator::K3bIntValidator ( int bottom, int top, TQWidget * parent, const char * name )
-  : TQValidator(TQT_TQOBJECT(parent), name)
+  : TQValidator(parent, name)
 {
   m_min = bottom;
   m_max = top;

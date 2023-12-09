@@ -218,19 +218,19 @@ void K3bVideoDVDRippingView::initActions()
 {
   m_actionCollection = new TDEActionCollection( this );
 
-  TDEAction* actionSelectAll = new TDEAction( i18n("Check All"), 0, 0, TQT_TQOBJECT(this),
+  TDEAction* actionSelectAll = new TDEAction( i18n("Check All"), 0, 0, this,
 					  TQT_SLOT(slotCheckAll()), actionCollection(),
 					  "check_all" );
-  TDEAction* actionDeselectAll = new TDEAction( i18n("Uncheck All"), 0, 0, TQT_TQOBJECT(this),
+  TDEAction* actionDeselectAll = new TDEAction( i18n("Uncheck All"), 0, 0, this,
 					    TQT_SLOT(slotUncheckAll()), actionCollection(),
 					    "uncheck_all" );
-  TDEAction* actionSelect = new TDEAction( i18n("Check Track"), 0, 0, TQT_TQOBJECT(this),
+  TDEAction* actionSelect = new TDEAction( i18n("Check Track"), 0, 0, this,
 				       TQT_SLOT(slotCheck()), actionCollection(),
 				       "select_track" );
-  TDEAction* actionDeselect = new TDEAction( i18n("Uncheck Track"), 0, 0, TQT_TQOBJECT(this),
+  TDEAction* actionDeselect = new TDEAction( i18n("Uncheck Track"), 0, 0, this,
 					 TQT_SLOT(slotUncheck()), actionCollection(),
 					 "deselect_track" );
-  TDEAction* actionStartRip = new TDEAction( i18n("Start Ripping"), "gear", 0, TQT_TQOBJECT(this),
+  TDEAction* actionStartRip = new TDEAction( i18n("Start Ripping"), "gear", 0, this,
 					 TQT_SLOT(slotStartRipping()), m_actionCollection, "start_rip" );
 
   actionStartRip->setToolTip( i18n("Open the Video DVD ripping dialog") );

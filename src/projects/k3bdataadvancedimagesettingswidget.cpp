@@ -244,7 +244,7 @@ K3bDataAdvancedImageSettingsWidget::K3bDataAdvancedImageSettingsWidget( TQWidget
   miscRoot->setOpen( true );
 
 
-  m_comboInputCharset->setValidator( new TQRegExpValidator( TQRegExp("[\\w_-]*"), TQT_TQOBJECT(this) ) );
+  m_comboInputCharset->setValidator( new TQRegExpValidator( TQRegExp("[\\w_-]*"), this ) );
 
   // fill charset combo
   for( int i = 0; mkisofsCharacterSets[i]; i++ ) {

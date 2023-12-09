@@ -248,7 +248,7 @@ void K3bVideoCdView::reloadMedium()
 
     m_videooptions ->setVideoCdSource( device()->devicename() );
     
-    m_videocdinfo = new K3bVideoCdInfo( TQT_TQOBJECT(this) );
+    m_videocdinfo = new K3bVideoCdInfo( this );
     m_videocdinfo->info( device()->devicename() );
 
     connect( m_videocdinfo, TQT_SIGNAL( infoFinished( bool ) ),
@@ -322,19 +322,19 @@ void K3bVideoCdView::initActions()
 {
     m_actionCollection = new TDEActionCollection( this );
 
-    TDEAction* actionSelectAll = KStdAction::selectAll( TQT_TQOBJECT(this), TQT_SLOT( slotSelectAll() ),
+    TDEAction* actionSelectAll = KStdAction::selectAll( this, TQT_SLOT( slotSelectAll() ),
                                m_actionCollection, "select_all" );
-    TDEAction* actionDeselectAll = KStdAction::deselect( TQT_TQOBJECT(this), TQT_SLOT( slotDeselectAll() ),
+    TDEAction* actionDeselectAll = KStdAction::deselect( this, TQT_SLOT( slotDeselectAll() ),
                                  m_actionCollection, "deselect_all" );
     actionDeselectAll->setText( i18n( "Dese&lect All" ) );
-    TDEAction* actionSelect = new TDEAction( i18n( "Select Track" ), 0, 0, TQT_TQOBJECT(this),
+    TDEAction* actionSelect = new TDEAction( i18n( "Select Track" ), 0, 0, this,
                                          TQT_SLOT( slotSelect() ), actionCollection(),
                                          "select_track" );
-    TDEAction* actionDeselect = new TDEAction( i18n( "Deselect Track" ), 0, 0, TQT_TQOBJECT(this),
+    TDEAction* actionDeselect = new TDEAction( i18n( "Deselect Track" ), 0, 0, this,
                                            TQT_SLOT( slotDeselect() ), actionCollection(),
                                            "deselect_track" );
 
-    TDEAction* actionStartRip = new TDEAction( i18n( "Start Ripping" ), "system-run", 0, TQT_TQOBJECT(this),
+    TDEAction* actionStartRip = new TDEAction( i18n( "Start Ripping" ), "system-run", 0, this,
                                            TQT_SLOT( startRip() ), actionCollection(), "start_rip" );
 
     // TODO: set the actions tooltips and whatsthis infos

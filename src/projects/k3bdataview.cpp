@@ -68,19 +68,19 @@ K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *parent, const char *name )
 
   connect( m_dataFileView, TQT_SIGNAL(dirSelected(K3bDirItem*)),
 	   m_dataDirTree, TQT_SLOT(setCurrentDir(K3bDirItem*)) );
-  connect( m_doc, TQT_SIGNAL(changed()), TQT_TQOBJECT(this), TQT_SLOT(slotDocChanged()) );
+  connect( m_doc, TQT_SIGNAL(changed()), this, TQT_SLOT(slotDocChanged()) );
 
   m_dataDirTree->checkForNewItems();
   m_dataFileView->checkForNewItems();
 
 
   // the data actions
-  TDEAction* actionImportSession = new TDEAction(i18n("&Import Session..."), "gear", 0, TQT_TQOBJECT(this), TQT_SLOT(importSession()),
+  TDEAction* actionImportSession = new TDEAction(i18n("&Import Session..."), "gear", 0, this, TQT_SLOT(importSession()),
 					     actionCollection(), "project_data_import_session" );
-  TDEAction* actionClearSession = new TDEAction(i18n("&Clear Imported Session"), "gear", 0, TQT_TQOBJECT(this),
+  TDEAction* actionClearSession = new TDEAction(i18n("&Clear Imported Session"), "gear", 0, this,
 					    TQT_SLOT(clearImportedSession()), actionCollection(),
 					    "project_data_clear_imported_session" );
-  TDEAction* actionEditBootImages = new TDEAction(i18n("&Edit Boot Images..."), "application-x-cda", 0, TQT_TQOBJECT(this),
+  TDEAction* actionEditBootImages = new TDEAction(i18n("&Edit Boot Images..."), "application-x-cda", 0, this,
 					      TQT_SLOT(editBootImages()), actionCollection(),
 					      "project_data_edit_boot_images" );
 
@@ -100,7 +100,7 @@ K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *parent, const char *name )
   toolBox()->addStretch();
 
   m_volumeIDEdit = new TQLineEdit( doc->isoOptions().volumeID(), toolBox() );
-  m_volumeIDEdit->setValidator( new K3bLatin1Validator( TQT_TQOBJECT(m_volumeIDEdit) ) );
+  m_volumeIDEdit->setValidator( new K3bLatin1Validator( m_volumeIDEdit ) );
   toolBox()->addLabel( i18n("Volume Name:") );
   toolBox()->addSpacing();
   toolBox()->addWidget( m_volumeIDEdit );

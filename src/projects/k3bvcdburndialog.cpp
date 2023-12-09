@@ -511,13 +511,13 @@ void K3bVcdBurnDialog::setupLabelTab()
     m_editPublisher = new TQLineEdit( w, "m_editPublisher" );
 
     // only ISO646 d-Characters
-    m_editVolumeId->setValidator( K3bValidators::iso646Validator( K3bValidators::Iso646_d, true, TQT_TQOBJECT(m_editVolumeId) ) );
-    m_editAlbumId->setValidator( K3bValidators::iso646Validator( K3bValidators::Iso646_d, true, TQT_TQOBJECT(m_editVolumeId) ) );
+    m_editVolumeId->setValidator( K3bValidators::iso646Validator( K3bValidators::Iso646_d, true, m_editVolumeId ) );
+    m_editAlbumId->setValidator( K3bValidators::iso646Validator( K3bValidators::Iso646_d, true, m_editVolumeId ) );
 
     m_editVolumeId->setMaxLength( 32 );
     m_editAlbumId->setMaxLength( 16 );
     // only ISO646 a-Characters
-    m_editPublisher->setValidator( K3bValidators::iso646Validator( K3bValidators::Iso646_a, true, TQT_TQOBJECT(m_editVolumeId) ) );
+    m_editPublisher->setValidator( K3bValidators::iso646Validator( K3bValidators::Iso646_a, true, m_editVolumeId ) );
     m_editPublisher->setMaxLength( 128 );
 
     m_spinVolumeNumber->setMinValue( 1 );

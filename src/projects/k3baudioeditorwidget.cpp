@@ -491,7 +491,7 @@ void K3bAudioEditorWidget::drawContents( TQPainter* p )
   pix.fill( colorGroup().base() );
 
   TQPainter pixP;
-  pixP.begin( &pix, TQT_TQOBJECT(this) );
+  pixP.begin( &pix, this );
 
   TQRect drawRect( contentsRect() );
   drawRect.setLeft( drawRect.left() + m_margin );

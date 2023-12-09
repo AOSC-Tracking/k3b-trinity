@@ -130,7 +130,7 @@ K3bAudioCdView::K3bAudioCdView( TQWidget* parent, const char *name )
   mainGrid->addWidget( m_trackView, 1, 0 );
 
 
-  m_cddb = new K3bCddb( TQT_TQOBJECT(this) );
+  m_cddb = new K3bCddb( this );
 
   connect( m_cddb, TQT_SIGNAL(queryFinished(int)),
 	   this, TQT_SLOT(slotCddbQueryFinished(int)) );
@@ -226,32 +226,32 @@ void K3bAudioCdView::initActions()
 {
   m_actionCollection = new TDEActionCollection( this );
 
-  TDEAction* actionSelectAll = new TDEAction( i18n("Check All"), 0, 0, TQT_TQOBJECT(this),
+  TDEAction* actionSelectAll = new TDEAction( i18n("Check All"), 0, 0, this,
 					  TQT_SLOT(slotCheckAll()), actionCollection(),
 					  "check_all" );
-  TDEAction* actionDeselectAll = new TDEAction( i18n("Uncheck All"), 0, 0, TQT_TQOBJECT(this),
+  TDEAction* actionDeselectAll = new TDEAction( i18n("Uncheck All"), 0, 0, this,
 					    TQT_SLOT(slotUncheckAll()), actionCollection(),
 					    "uncheck_all" );
-  TDEAction* actionSelect = new TDEAction( i18n("Check Track"), 0, 0, TQT_TQOBJECT(this),
+  TDEAction* actionSelect = new TDEAction( i18n("Check Track"), 0, 0, this,
 				       TQT_SLOT(slotSelect()), actionCollection(),
 				       "select_track" );
-  TDEAction* actionDeselect = new TDEAction( i18n("Uncheck Track"), 0, 0, TQT_TQOBJECT(this),
+  TDEAction* actionDeselect = new TDEAction( i18n("Uncheck Track"), 0, 0, this,
 					 TQT_SLOT(slotDeselect()), actionCollection(),
 					 "deselect_track" );
-  TDEAction* actionEditTrackCddbInfo = new TDEAction( i18n("Edit Track cddb Info"), "edit", 0, TQT_TQOBJECT(this),
+  TDEAction* actionEditTrackCddbInfo = new TDEAction( i18n("Edit Track cddb Info"), "edit", 0, this,
 						  TQT_SLOT(slotEditTrackCddb()), actionCollection(),
 						  "edit_track_cddb" );
-  TDEAction* actionEditAlbumCddbInfo = new TDEAction( i18n("Edit Album cddb Info"), "edit", 0, TQT_TQOBJECT(this),
+  TDEAction* actionEditAlbumCddbInfo = new TDEAction( i18n("Edit Album cddb Info"), "edit", 0, this,
 						  TQT_SLOT(slotEditAlbumCddb()), actionCollection(),
 						  "edit_album_cddb" );
 
-  TDEAction* actionStartRip = new TDEAction( i18n("Start Ripping"), "cddarip", 0, TQT_TQOBJECT(this),
+  TDEAction* actionStartRip = new TDEAction( i18n("Start Ripping"), "cddarip", 0, this,
 					 TQT_SLOT(startRip()), actionCollection(), "start_rip" );
 
-  TDEAction* actionQueryCddb = new TDEAction( i18n("Query cddb"), "reload", 0, TQT_TQOBJECT(this),
+  TDEAction* actionQueryCddb = new TDEAction( i18n("Query cddb"), "reload", 0, this,
 					  TQT_SLOT(queryCddb()), actionCollection(), "query_cddb" );
 
-  TDEAction* actionSaveCddbLocally = new TDEAction( i18n("Save Cddb Entry Locally"), "document-save", 0, TQT_TQOBJECT(this),
+  TDEAction* actionSaveCddbLocally = new TDEAction( i18n("Save Cddb Entry Locally"), "document-save", 0, this,
 						TQT_SLOT(slotSaveCddbLocally()), actionCollection(), "save_cddb_local" );
 
   // TODO: set the actions tooltips and whatsthis infos

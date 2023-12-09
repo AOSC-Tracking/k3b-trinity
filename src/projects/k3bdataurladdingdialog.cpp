@@ -91,7 +91,7 @@ K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* paren
   grid->addWidget( m_infoLabel, 0, 0 );
   grid->addMultiCellWidget( m_progressWidget, 1, 1, 0, 1 );
 
-  m_dirSizeJob = new K3bDirSizeJob( TQT_TQOBJECT(this) );
+  m_dirSizeJob = new K3bDirSizeJob( this );
   connect( m_dirSizeJob, TQT_SIGNAL(finished(bool)),
 	   this, TQT_SLOT(slotDirSizeDone(bool)) );
 
@@ -745,7 +745,7 @@ bool K3bDataUrlAddingDialog::getNewName( const TQString& oldName, K3bDirItem* di
 {
   bool ok = true;
   newName = oldName;
-  TQValidator* validator = K3bValidators::iso9660Validator( false, TQT_TQOBJECT(this) );
+  TQValidator* validator = K3bValidators::iso9660Validator( false, this );
   do {
     newName = KInputDialog::getText( i18n("Enter New Filename"),
 				     i18n("A file with that name already exists. Please enter a new name:"),
