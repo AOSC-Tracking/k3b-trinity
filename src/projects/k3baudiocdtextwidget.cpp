@@ -80,19 +80,19 @@ K3bAudioCdTextWidget::K3bAudioCdTextWidget( TQWidget* parent, const char* name )
   m_allFieldsDlg->w->m_editSongwriter->setValidator( cdTextVal );
   m_allFieldsDlg->w->m_editComposer->setValidator( cdTextVal );
 
-  connect( m_allFieldsDlg->w->m_buttonCopyTitle, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotCopyTitle()) );
-  connect( m_allFieldsDlg->w->m_buttonCopyPerformer, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotCopyPerformer()) );
-  connect( m_allFieldsDlg->w->m_buttonCopyArranger, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotCopyArranger()) );
-  connect( m_allFieldsDlg->w->m_buttonCopySongwriter, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotCopySongwriter()) );
-  connect( m_allFieldsDlg->w->m_buttonCopyComposer, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotCopyComposer()) );
+  connect( m_allFieldsDlg->w->m_buttonCopyTitle, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotCopyTitle()) );
+  connect( m_allFieldsDlg->w->m_buttonCopyPerformer, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotCopyPerformer()) );
+  connect( m_allFieldsDlg->w->m_buttonCopyArranger, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotCopyArranger()) );
+  connect( m_allFieldsDlg->w->m_buttonCopySongwriter, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotCopySongwriter()) );
+  connect( m_allFieldsDlg->w->m_buttonCopyComposer, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotCopyComposer()) );
 
-  connect( m_buttonMoreFields, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotMoreFields()) );
+  connect( m_buttonMoreFields, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotMoreFields()) );
 }
 
 

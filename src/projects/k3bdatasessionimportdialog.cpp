@@ -42,8 +42,8 @@ K3bDataSessionImportDialog::K3bDataSessionImportDialog( TQWidget* parent )
   m_comboMedia = new K3bMediaSelectionComboBox( this );
   setMainWidget( m_comboMedia );
 
-  connect( m_comboMedia, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotSelectionChanged(K3bDevice::Device*)) );
+  connect( m_comboMedia, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotSelectionChanged(K3bDevice::Device*)) );
 }
 
 

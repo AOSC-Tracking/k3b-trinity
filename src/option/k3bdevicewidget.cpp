@@ -198,10 +198,10 @@ K3bDeviceWidget::K3bDeviceWidget( K3bDevice::DeviceManager* manager, TQWidget *p
 
   // connections
   // ------------------------------------------------
-  //  connect( m_buttonRefreshDevices, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotRefreshDevices()) );
-  connect( m_buttonRefreshDevices, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(refreshButtonClicked()) );
-  connect( m_buttonAddDevice, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotNewDevice()) );
-  connect( m_deviceManager, TQT_SIGNAL(changed()), this, TQT_SLOT(init()) );
+  //  connect( m_buttonRefreshDevices, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotRefreshDevices()) );
+  connect( m_buttonRefreshDevices, TQ_SIGNAL(clicked()), this, TQ_SIGNAL(refreshButtonClicked()) );
+  connect( m_buttonAddDevice, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotNewDevice()) );
+  connect( m_deviceManager, TQ_SIGNAL(changed()), this, TQ_SLOT(init()) );
   // ------------------------------------------------
 }
 

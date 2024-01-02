@@ -73,13 +73,13 @@ void K3bAudioProjectCddbPlugin::activate( K3bDoc* doc, TQWidget* parent )
   else {
     if( !m_cddb ) {
       m_cddb = new K3bCddb( this );
-      connect( m_cddb, TQT_SIGNAL(queryFinished(int)),
-	       this, TQT_SLOT(slotCddbQueryFinished(int)) );
+      connect( m_cddb, TQ_SIGNAL(queryFinished(int)),
+	       this, TQ_SLOT(slotCddbQueryFinished(int)) );
     }
     if( !m_progress ) {
       m_progress = new K3bProgressDialog( i18n("Query Cddb"), parent, i18n("Audio Project") );
-      connect( m_progress, TQT_SIGNAL(cancelClicked()),
-	       this, TQT_SLOT(slotCancelClicked()) );
+      connect( m_progress, TQ_SIGNAL(cancelClicked()),
+	       this, TQ_SLOT(slotCancelClicked()) );
     }
 
     // read the k3b config :)

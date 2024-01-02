@@ -86,11 +86,11 @@ K3bVcdBurnDialog::K3bVcdBurnDialog( K3bVcdDoc* _doc, TQWidget *parent, const cha
     setupLabelTab();
     setupAdvancedTab();
 
-    connect( m_spinVolumeCount, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotSpinVolumeCount() ) );
-    connect( m_groupVcdFormat, TQT_SIGNAL( clicked( int ) ), this, TQT_SLOT( slotVcdTypeClicked( int ) ) );
-    connect( m_checkCdiSupport, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotCdiSupportChecked( bool ) ) );
-    connect( m_checkAutoDetect, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotAutoDetect( bool ) ) );
-    connect( m_checkGaps, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotGapsChecked( bool ) ) );
+    connect( m_spinVolumeCount, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( slotSpinVolumeCount() ) );
+    connect( m_groupVcdFormat, TQ_SIGNAL( clicked( int ) ), this, TQ_SLOT( slotVcdTypeClicked( int ) ) );
+    connect( m_checkCdiSupport, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( slotCdiSupportChecked( bool ) ) );
+    connect( m_checkAutoDetect, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( slotAutoDetect( bool ) ) );
+    connect( m_checkGaps, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( slotGapsChecked( bool ) ) );
 
     // ToolTips
     // -------------------------------------------------------------------------

@@ -321,14 +321,14 @@ void K3bProjectBurnDialog::prepareGui()
   setTabOrder( groupCopies, m_optionGroup );
 
   // some default connections that should always be useful
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotWriterChanged()) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged(K3bDevice::Device*)), 
-	   m_writingModeWidget, TQT_SLOT(determineSupportedModesFromMedium(K3bDevice::Device*)) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)), this, TQT_SLOT(slotWritingAppChanged(int)) );
-  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkSimulate, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkOnlyCreateImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged()), this, TQ_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged(K3bDevice::Device*)), 
+	   m_writingModeWidget, TQ_SLOT(determineSupportedModesFromMedium(K3bDevice::Device*)) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writingAppChanged(int)), this, TQ_SLOT(slotWritingAppChanged(int)) );
+  connect( m_checkCacheImage, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkSimulate, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkOnlyCreateImage, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_writingModeWidget, TQ_SIGNAL(writingModeChanged(int)), this, TQ_SLOT(slotToggleAll()) );
 }
 
 

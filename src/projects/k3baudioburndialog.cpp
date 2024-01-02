@@ -103,10 +103,10 @@ K3bAudioBurnDialog::K3bAudioBurnDialog(K3bAudioDoc* _doc, TQWidget *parent, cons
 
   addPage( advancedTab, i18n("Advanced") );
 
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkNormalize, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotNormalizeToggled(bool)) );
-  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotCacheImageToggled(bool)) );
-  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writingAppChanged(int)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkNormalize, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotNormalizeToggled(bool)) );
+  connect( m_checkCacheImage, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotCacheImageToggled(bool)) );
+  connect( m_writingModeWidget, TQ_SIGNAL(writingModeChanged(int)), this, TQ_SLOT(slotToggleAll()) );
 
   // ToolTips
   // -------------------------------------------------------------------------

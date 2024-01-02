@@ -83,12 +83,12 @@ void K3bBurnProgressDialog::setBurnJob( K3bBurnJob* burnJob )
   K3bJobProgressDialog::setJob(burnJob);
 
   if( burnJob ) {
-    connect( burnJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SLOT(slotBufferStatus(int)) );
-    connect( burnJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SLOT(slotDeviceBuffer(int)) );
-    connect( burnJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SLOT(slotWriteSpeed(int, int)) );
-    connect( burnJob, TQT_SIGNAL(burning(bool)), m_progressWritingBuffer, TQT_SLOT(setEnabled(bool)) );
-    connect( burnJob, TQT_SIGNAL(burning(bool)), m_progressDeviceBuffer, TQT_SLOT(setEnabled(bool)) );
-    connect( burnJob, TQT_SIGNAL(burning(bool)), m_labelWritingSpeed, TQT_SLOT(setEnabled(bool)) );
+    connect( burnJob, TQ_SIGNAL(bufferStatus(int)), this, TQ_SLOT(slotBufferStatus(int)) );
+    connect( burnJob, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SLOT(slotDeviceBuffer(int)) );
+    connect( burnJob, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SLOT(slotWriteSpeed(int, int)) );
+    connect( burnJob, TQ_SIGNAL(burning(bool)), m_progressWritingBuffer, TQ_SLOT(setEnabled(bool)) );
+    connect( burnJob, TQ_SIGNAL(burning(bool)), m_progressDeviceBuffer, TQ_SLOT(setEnabled(bool)) );
+    connect( burnJob, TQ_SIGNAL(burning(bool)), m_labelWritingSpeed, TQ_SLOT(setEnabled(bool)) );
 
     if( burnJob->writer() )
       m_labelWriter->setText( i18n("Writer: %1 %2").arg(burnJob->writer()->vendor()).

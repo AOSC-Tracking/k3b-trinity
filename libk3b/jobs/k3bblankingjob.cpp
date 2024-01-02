@@ -121,11 +121,11 @@ void K3bBlankingJob::slotStartErasing()
     writer->setForceNoEject( m_forceNoEject );
   }
 
-  connect(m_writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotFinished(bool)));
-  connect(m_writerJob, TQT_SIGNAL(infoMessage( const TQString&, int)),
-          this,TQT_SIGNAL(infoMessage( const TQString&, int)));
-  connect( m_writerJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect(m_writerJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotFinished(bool)));
+  connect(m_writerJob, TQ_SIGNAL(infoMessage( const TQString&, int)),
+          this,TQ_SIGNAL(infoMessage( const TQString&, int)));
+  connect( m_writerJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   if( waitForMedia( m_device,  
 		    K3bDevice::STATE_COMPLETE|K3bDevice::STATE_INCOMPLETE,

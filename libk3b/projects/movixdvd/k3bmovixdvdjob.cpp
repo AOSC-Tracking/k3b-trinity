@@ -35,25 +35,25 @@ K3bMovixDvdJob::K3bMovixDvdJob( K3bMovixDvdDoc* doc, K3bJobHandler* jh, TQObject
   m_movixDocPreparer = new K3bMovixDocPreparer( doc, this, this );
 
   // pipe signals
-  connect( m_dvdJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(percent(int)) );
-  connect( m_dvdJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
-  connect( m_dvdJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-  connect( m_dvdJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( m_dvdJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SIGNAL(bufferStatus(int)) );
-  connect( m_dvdJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
-  connect( m_dvdJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
-  connect( m_dvdJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-  connect( m_dvdJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
-  connect( m_dvdJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_dvdJob, TQT_SIGNAL(burning(bool)), this, TQT_SIGNAL(burning(bool)) );
+  connect( m_dvdJob, TQ_SIGNAL(percent(int)), this, TQ_SIGNAL(percent(int)) );
+  connect( m_dvdJob, TQ_SIGNAL(subPercent(int)), this, TQ_SIGNAL(subPercent(int)) );
+  connect( m_dvdJob, TQ_SIGNAL(processedSubSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+  connect( m_dvdJob, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSize(int, int)) );
+  connect( m_dvdJob, TQ_SIGNAL(bufferStatus(int)), this, TQ_SIGNAL(bufferStatus(int)) );
+  connect( m_dvdJob, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SIGNAL(writeSpeed(int, int)) );
+  connect( m_dvdJob, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newTask(const TQString&)) );
+  connect( m_dvdJob, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_dvdJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_dvdJob, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_dvdJob, TQ_SIGNAL(burning(bool)), this, TQ_SIGNAL(burning(bool)) );
 
   // we need to clean up here
-  connect( m_dvdJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotDvdJobFinished(bool)) );
+  connect( m_dvdJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotDvdJobFinished(bool)) );
 
-  connect( m_movixDocPreparer, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_movixDocPreparer, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
 }
 
 

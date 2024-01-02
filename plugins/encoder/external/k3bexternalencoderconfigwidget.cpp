@@ -119,14 +119,14 @@ K3bExternalEncoderSettingsWidget::K3bExternalEncoderSettingsWidget( TQWidget* pa
   lay->setMargin( 0 );
   lay->addWidget( w );
 
-  connect( w->m_viewEncoders, TQT_SIGNAL(selectionChanged()),
-	   this, TQT_SLOT(slotSelectionChanged()) );
-  connect( w->m_buttonAdd, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotNewCommand()) );
-  connect( w->m_buttonEdit, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotEditCommand()) );
-  connect( w->m_buttonRemove, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotRemoveCommand()) );
+  connect( w->m_viewEncoders, TQ_SIGNAL(selectionChanged()),
+	   this, TQ_SLOT(slotSelectionChanged()) );
+  connect( w->m_buttonAdd, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotNewCommand()) );
+  connect( w->m_buttonEdit, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotEditCommand()) );
+  connect( w->m_buttonRemove, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotRemoveCommand()) );
 
   m_editDlg = new K3bExternalEncoderEditDialog( this );
 }

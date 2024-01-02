@@ -154,7 +154,7 @@ K3bDataPreparationJob::K3bDataPreparationJob( K3bDataDoc* doc, K3bJobHandler* hd
 {
   d = new Private( doc );
   d->threadJob = new K3bThreadJob( d, this, this );
-  connectSubJob( d->threadJob, TQT_SLOT(slotWorkDone(bool)), K3bJob::DEFAULT_SIGNAL_CONNECTION );
+  connectSubJob( d->threadJob, TQ_SLOT(slotWorkDone(bool)), K3bJob::DEFAULT_SIGNAL_CONNECTION );
 }
 
 

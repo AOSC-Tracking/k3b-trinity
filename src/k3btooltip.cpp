@@ -35,8 +35,8 @@ K3bToolTip::K3bToolTip( TQWidget* widget )
     m_tipTimeout( 700 )
 {
   m_parentWidget->installEventFilter( this );
-  connect( m_tipTimer, TQT_SIGNAL(timeout()),
-	   this, TQT_SLOT(slotCheckShowTip()) );
+  connect( m_tipTimer, TQ_SIGNAL(timeout()),
+	   this, TQ_SLOT(slotCheckShowTip()) );
 }
 
 

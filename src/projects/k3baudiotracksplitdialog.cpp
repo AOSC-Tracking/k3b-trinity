@@ -60,14 +60,14 @@ K3bAudioTrackSplitDialog::K3bAudioTrackSplitDialog( K3bAudioTrack* track, TQWidg
   m_editorWidget->enableRangeSelection( true );
   m_editorWidget->installEventFilter( this );
 
-  connect( m_editorWidget, TQT_SIGNAL(rangeChanged(int, const K3b::Msf&, const K3b::Msf&)),
-	   this, TQT_SLOT(slotRangeModified(int, const K3b::Msf&, const K3b::Msf&)) );
-  connect( m_editorWidget, TQT_SIGNAL(selectedRangeChanged(int)),
-	   this, TQT_SLOT(slotRangeSelectionChanged(int)) );
-  connect( m_msfEditStart, TQT_SIGNAL(valueChanged(const K3b::Msf&)),
-	   this, TQT_SLOT(slotMsfEditChanged(const K3b::Msf&)) );
-  connect( m_msfEditEnd, TQT_SIGNAL(valueChanged(const K3b::Msf&)),
-	   this, TQT_SLOT(slotMsfEditChanged(const K3b::Msf&)) );
+  connect( m_editorWidget, TQ_SIGNAL(rangeChanged(int, const K3b::Msf&, const K3b::Msf&)),
+	   this, TQ_SLOT(slotRangeModified(int, const K3b::Msf&, const K3b::Msf&)) );
+  connect( m_editorWidget, TQ_SIGNAL(selectedRangeChanged(int)),
+	   this, TQ_SLOT(slotRangeSelectionChanged(int)) );
+  connect( m_msfEditStart, TQ_SIGNAL(valueChanged(const K3b::Msf&)),
+	   this, TQ_SLOT(slotMsfEditChanged(const K3b::Msf&)) );
+  connect( m_msfEditEnd, TQ_SIGNAL(valueChanged(const K3b::Msf&)),
+	   this, TQ_SLOT(slotMsfEditChanged(const K3b::Msf&)) );
 
   setupActions();
 
@@ -94,11 +94,11 @@ void K3bAudioTrackSplitDialog::setupActions()
   m_popupMenu = new TDEPopupMenu( this );
 
   TDEAction* actionSplitHere = new TDEAction( i18n("Split Here"), 0,
-					  TDEShortcut(), this, TQT_SLOT(slotSplitHere()),
+					  TDEShortcut(), this, TQ_SLOT(slotSplitHere()),
 					  actionCollection(), "range_split" );
   // FIXME: after the message freeze give this action a proper name like "Remove track part"
   TDEAction* actionRemoveRange = new TDEAction( i18n("Remove this Range"), 0,
-					    TDEShortcut(), this, TQT_SLOT(slotRemoveRange()),
+					    TDEShortcut(), this, TQ_SLOT(slotRemoveRange()),
 					    actionCollection(), "range_remove" );
 
   actionSplitHere->plug( m_popupMenu );

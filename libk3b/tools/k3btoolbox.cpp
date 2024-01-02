@@ -101,22 +101,22 @@ K3bToolBoxButton::K3bToolBoxButton( TDEAction* action, TQWidget* parent )
 //     if( ta->isChecked() )
 //       toggle();
     
-//     connect( ta, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(toggle()) );
-//     connect( this, TQT_SIGNAL(toggled(bool)), ta, TQT_SLOT(setChecked(bool)) );
+//     connect( ta, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(toggle()) );
+//     connect( this, TQ_SIGNAL(toggled(bool)), ta, TQ_SLOT(setChecked(bool)) );
 //   }
 
 //  else
   if( TDEActionMenu* am = dynamic_cast<TDEActionMenu*>( action ) ) {
     m_popupMenu = am->popupMenu();
-    connect( this, TQT_SIGNAL(pressed()), this, TQT_SLOT(slotPopupActivated()) );
+    connect( this, TQ_SIGNAL(pressed()), this, TQ_SLOT(slotPopupActivated()) );
     setPopup( m_popupMenu );
   }
 
   else {
-    connect( this, TQT_SIGNAL(clicked()), action, TQT_SLOT(activate()) );
+    connect( this, TQ_SIGNAL(clicked()), action, TQ_SLOT(activate()) );
   }
 
-  connect( action, TQT_SIGNAL(enabled(bool)), this, TQT_SLOT(setEnabled(bool)) );
+  connect( action, TQ_SIGNAL(enabled(bool)), this, TQ_SLOT(setEnabled(bool)) );
 }
 
 
@@ -141,7 +141,7 @@ K3bToolBoxButton::K3bToolBoxButton( const TQString& text, const TQString& icon,
   TQToolTip::add( this, tooltip );
 
   if( receiver && slot )
-    connect( this, TQT_SIGNAL(clicked()), receiver, slot );
+    connect( this, TQ_SIGNAL(clicked()), receiver, slot );
 }
 
 

@@ -86,9 +86,9 @@ K3bInteractionDialog::K3bInteractionDialog( TQWidget* parent,
     m_buttonLoadSettings = new K3bToolButton( /*i18n("User Defaults"), */this );
     ((K3bToolButton*)m_buttonLoadSettings)->setIconSet( SmallIconSet( "document-revert" ) );
     TQPopupMenu* userDefaultsPopup = new TQPopupMenu( m_buttonLoadSettings );
-    userDefaultsPopup->insertItem( i18n("Load default settings"), this, TQT_SLOT(slotLoadK3bDefaults()) );
-    userDefaultsPopup->insertItem( i18n("Load saved settings"), this, TQT_SLOT(slotLoadUserDefaults()) );
-    userDefaultsPopup->insertItem( i18n("Load last used settings"), this, TQT_SLOT(slotLoadLastSettings()) );
+    userDefaultsPopup->insertItem( i18n("Load default settings"), this, TQ_SLOT(slotLoadK3bDefaults()) );
+    userDefaultsPopup->insertItem( i18n("Load saved settings"), this, TQ_SLOT(slotLoadUserDefaults()) );
+    userDefaultsPopup->insertItem( i18n("Load last used settings"), this, TQ_SLOT(slotLoadLastSettings()) );
     ((TQToolButton*)m_buttonLoadSettings)->setPopup( userDefaultsPopup );
     ((K3bToolButton*)m_buttonLoadSettings)->setInstantMenu( true );
     layout2->addWidget( m_buttonLoadSettings );
@@ -215,22 +215,22 @@ TQSize K3bInteractionDialog::sizeHint() const
 void K3bInteractionDialog::initConnections()
 {
   if( m_buttonStart ) {
-    connect( m_buttonStart, TQT_SIGNAL(clicked()),
-	     this, TQT_SLOT(slotStartClickedInternal()) );
+    connect( m_buttonStart, TQ_SIGNAL(clicked()),
+	     this, TQ_SLOT(slotStartClickedInternal()) );
   }
   if( m_buttonSave ) {
-//     connect( m_buttonSave, TQT_SIGNAL(clicked()),
-// 	     this, TQT_SLOT(slotSaveLastSettings()) );
-    connect( m_buttonSave, TQT_SIGNAL(clicked()),
-	     this, TQT_SLOT(slotSaveClicked()) );
+//     connect( m_buttonSave, TQ_SIGNAL(clicked()),
+// 	     this, TQ_SLOT(slotSaveLastSettings()) );
+    connect( m_buttonSave, TQ_SIGNAL(clicked()),
+	     this, TQ_SLOT(slotSaveClicked()) );
   }
   if( m_buttonCancel )
-    connect( m_buttonCancel, TQT_SIGNAL(clicked()),
-	     this, TQT_SLOT(slotCancelClicked()) );
+    connect( m_buttonCancel, TQ_SIGNAL(clicked()),
+	     this, TQ_SLOT(slotCancelClicked()) );
 
   if( !m_configGroup.isEmpty() ) {
-    connect( m_buttonSaveSettings, TQT_SIGNAL(clicked()),
-	     this, TQT_SLOT(slotSaveUserDefaults()) );
+    connect( m_buttonSaveSettings, TQ_SIGNAL(clicked()),
+	     this, TQ_SLOT(slotSaveUserDefaults()) );
   }
 }
 
@@ -584,7 +584,7 @@ int K3bInteractionDialog::exec( bool returnOnHide )
   loadStartupSettings();
   show();
   if( m_delayedInit )
-    TQTimer::singleShot( 0, this, TQT_SLOT(slotDelayedInit()) );
+    TQTimer::singleShot( 0, this, TQ_SLOT(slotDelayedInit()) );
   else
     init();
 

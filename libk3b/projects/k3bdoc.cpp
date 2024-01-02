@@ -45,7 +45,7 @@ K3bDoc::K3bDoc( TQObject* parent )
     m_modified(false),
     m_view(0)
 {
-  connect( this, TQT_SIGNAL(changed()), this, TQT_SLOT(slotChanged()) );
+  connect( this, TQ_SIGNAL(changed()), this, TQ_SLOT(slotChanged()) );
 }
 
 

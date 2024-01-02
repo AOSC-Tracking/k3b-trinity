@@ -146,8 +146,8 @@ K3bCdrdaoWriter::K3bCdrdaoWriter( K3bDevice::Device* dev, K3bJobHandler* hdl,
 {
   d = new Private();
   d->speedEst = new K3bThroughputEstimator( this );
-  connect( d->speedEst, TQT_SIGNAL(throughput(int)),
-	   this, TQT_SLOT(slotThroughput(int)) );
+  connect( d->speedEst, TQ_SIGNAL(throughput(int)),
+	   this, TQ_SLOT(slotThroughput(int)) );
 
   m_eject = k3bcore->globalSettings()->ejectMedia();
 
@@ -166,8 +166,8 @@ K3bCdrdaoWriter::K3bCdrdaoWriter( K3bDevice::Device* dev, K3bJobHandler* hdl,
     m_comSock->socketDevice()->setReceiveBufferSize(49152);
     // magic number from TQt documentation
     m_comSock->socketDevice()->setBlocking(false);
-    connect( m_comSock, TQT_SIGNAL(readyRead()),
-             this, TQT_SLOT(parseCdrdaoMessage()));
+    connect( m_comSock, TQ_SIGNAL(readyRead()),
+             this, TQ_SLOT(parseCdrdaoMessage()));
   }
 }
 
@@ -464,10 +464,10 @@ void K3bCdrdaoWriter::start()
   m_process->setRunPrivileged(true);
   m_process->setSplitStdout(false);
   m_process->setRawStdin(true);
-  connect( m_process, TQT_SIGNAL(stderrLine(const TQString&)),
-           this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
-           this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
+  connect( m_process, TQ_SIGNAL(stderrLine(const TQString&)),
+           this, TQ_SLOT(slotStdLine(const TQString&)) );
+  connect( m_process, TQ_SIGNAL(processExited(TDEProcess*)),
+           this, TQ_SLOT(slotProcessExited(TDEProcess*)) );
 
   m_canceled = false;
   m_knownError = false;

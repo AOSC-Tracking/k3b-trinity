@@ -44,7 +44,7 @@ K3bVideoDvdView::K3bVideoDvdView( K3bVideoDvdDoc* doc, TQWidget *parent, const c
   m_dataDirTree->setFileView( m_dataFileView );
   setMainWidget( mainSplitter );
 
-  connect( m_dataFileView, TQT_SIGNAL(dirSelected(K3bDirItem*)), m_dataDirTree, TQT_SLOT(setCurrentDir(K3bDirItem*)) );
+  connect( m_dataFileView, TQ_SIGNAL(dirSelected(K3bDirItem*)), m_dataDirTree, TQ_SLOT(setCurrentDir(K3bDirItem*)) );
 
   m_dataDirTree->checkForNewItems();
   m_dataFileView->checkForNewItems();

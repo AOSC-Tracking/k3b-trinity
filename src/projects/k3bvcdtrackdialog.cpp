@@ -539,10 +539,10 @@ void K3bVcdTrackDialog::setupPbcTab()
     m_groupPlay->setEnabled( false );
     m_groupPbc->setEnabled( false );
 
-    connect( m_check_pbc, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotPbcToggled( bool ) ) );
-    connect( m_spin_times, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotPlayTimeChanged( int ) ) );
-    connect( m_spin_waittime, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotWaitTimeChanged( int ) ) );
-    connect( m_check_usekeys, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotUseKeysToggled( bool ) ) );
+    connect( m_check_pbc, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( slotPbcToggled( bool ) ) );
+    connect( m_spin_times, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( slotPlayTimeChanged( int ) ) );
+    connect( m_spin_waittime, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( slotWaitTimeChanged( int ) ) );
+    connect( m_check_usekeys, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( slotUseKeysToggled( bool ) ) );
 }
 
 void K3bVcdTrackDialog::setupPbcKeyTab()
@@ -578,7 +578,7 @@ void K3bVcdTrackDialog::setupPbcKeyTab()
 
     m_mainTabbed->addTab( m_widgetnumkeys, i18n( "Numeric Keys" ) );
 
-    connect( m_check_overwritekeys, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( slotGroupkeyToggled( bool ) ) );
+    connect( m_check_overwritekeys, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( slotGroupkeyToggled( bool ) ) );
 
 }
 

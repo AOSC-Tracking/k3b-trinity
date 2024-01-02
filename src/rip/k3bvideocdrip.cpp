@@ -150,12 +150,12 @@ void K3bVideoCdRip::vcdxRip()
         *m_process << "-o" << "/dev/null";
       
 
-    connect( m_process, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseVcdXRipOutput( TDEProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseVcdXRipOutput( TDEProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( processExited( TDEProcess* ) ),
-             this, TQT_SLOT( slotVcdXRipFinished() ) );
+    connect( m_process, TQ_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+             this, TQ_SLOT( slotParseVcdXRipOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQ_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+             this, TQ_SLOT( slotParseVcdXRipOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQ_SIGNAL( processExited( TDEProcess* ) ),
+             this, TQ_SLOT( slotVcdXRipFinished() ) );
 
     m_process->setWorkingDirectory( TQUrl( m_videooptions ->getVideoCdDestination() ).dirPath() );
 

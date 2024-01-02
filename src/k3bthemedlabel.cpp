@@ -22,10 +22,10 @@ K3bThemedLabel::K3bThemedLabel( TQWidget* parent )
 {
   slotThemeChanged();
 
-  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
-  connect( kapp, TQT_SIGNAL(appearanceChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQ_SIGNAL(themeChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
 }
 
 
@@ -35,10 +35,10 @@ K3bThemedLabel::K3bThemedLabel( const TQString& text, TQWidget* parent )
 {
   slotThemeChanged();
 
-  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
-  connect( kapp, TQT_SIGNAL(appearanceChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQ_SIGNAL(themeChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
 }
 
 
@@ -47,10 +47,10 @@ K3bThemedLabel::K3bThemedLabel( K3bTheme::PixmapType pix, TQWidget* parent )
 {
   setThemePixmap( pix );
 
-  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
-  connect( kapp, TQT_SIGNAL(appearanceChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQ_SIGNAL(themeChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
 }
 
 

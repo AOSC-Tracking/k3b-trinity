@@ -95,10 +95,10 @@ K3bDataJob::K3bDataJob( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* parent )
   m_isoImager = 0;
 
   m_msInfoFetcher = new K3bMsInfoFetcher( this, this );
-  connect( m_msInfoFetcher, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMsInfoFetched(bool)) );
-  connect( m_msInfoFetcher, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_msInfoFetcher, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_msInfoFetcher, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotMsInfoFetched(bool)) );
+  connect( m_msInfoFetcher, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_msInfoFetcher, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   d->imageFinished = true;
 }
@@ -432,20 +432,20 @@ void K3bDataJob::slotWriterJobFinished( bool success )
     if( d->doc->verifyData() ) {
       if( !d->verificationJob ) {
 	d->verificationJob = new K3bVerificationJob( this, this );
-	connect( d->verificationJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
-		 this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
- 	connect( d->verificationJob, TQT_SIGNAL(newTask(const TQString&)),
- 		 this, TQT_SIGNAL(newSubTask(const TQString&)) );
-	connect( d->verificationJob, TQT_SIGNAL(newSubTask(const TQString&)),
-		 this, TQT_SIGNAL(newSubTask(const TQString&)) );
-	connect( d->verificationJob, TQT_SIGNAL(percent(int)),
-		 this, TQT_SLOT(slotVerificationProgress(int)) );
-	connect( d->verificationJob, TQT_SIGNAL(percent(int)),
-		 this, TQT_SIGNAL(subPercent(int)) );
-	connect( d->verificationJob, TQT_SIGNAL(finished(bool)),
-		 this, TQT_SLOT(slotVerificationFinished(bool)) );
-	connect( d->verificationJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-		 this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+	connect( d->verificationJob, TQ_SIGNAL(infoMessage(const TQString&, int)),
+		 this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+ 	connect( d->verificationJob, TQ_SIGNAL(newTask(const TQString&)),
+ 		 this, TQ_SIGNAL(newSubTask(const TQString&)) );
+	connect( d->verificationJob, TQ_SIGNAL(newSubTask(const TQString&)),
+		 this, TQ_SIGNAL(newSubTask(const TQString&)) );
+	connect( d->verificationJob, TQ_SIGNAL(percent(int)),
+		 this, TQ_SLOT(slotVerificationProgress(int)) );
+	connect( d->verificationJob, TQ_SIGNAL(percent(int)),
+		 this, TQ_SIGNAL(subPercent(int)) );
+	connect( d->verificationJob, TQ_SIGNAL(finished(bool)),
+		 this, TQ_SLOT(slotVerificationFinished(bool)) );
+	connect( d->verificationJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+		 this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
       }
       d->verificationJob->clear();
@@ -541,19 +541,19 @@ void K3bDataJob::setWriterJob( K3bAbstractWriter* writer )
 {
   // FIXME: progressedsize for multiple copies
   m_writerJob = writer;
-  connect( m_writerJob, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_writerJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterJobPercent(int)) );
-  connect( m_writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( m_writerJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
-  connect( m_writerJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-  connect( m_writerJob, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
-  connect( m_writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
-  connect( m_writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
-  connect( m_writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
-  connect( m_writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterJobFinished(bool)) );
-  connect( m_writerJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-  connect( m_writerJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_writerJob, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_writerJob, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotWriterJobPercent(int)) );
+  connect( m_writerJob, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSize(int, int)) );
+  connect( m_writerJob, TQ_SIGNAL(subPercent(int)), this, TQ_SIGNAL(subPercent(int)) );
+  connect( m_writerJob, TQ_SIGNAL(processedSubSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+  connect( m_writerJob, TQ_SIGNAL(nextTrack(int, int)), this, TQ_SLOT(slotWriterNextTrack(int, int)) );
+  connect( m_writerJob, TQ_SIGNAL(buffer(int)), this, TQ_SIGNAL(bufferStatus(int)) );
+  connect( m_writerJob, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SIGNAL(deviceBuffer(int)) );
+  connect( m_writerJob, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SIGNAL(writeSpeed(int, int)) );
+  connect( m_writerJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotWriterJobFinished(bool)) );
+  connect( m_writerJob, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_writerJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 }
 
 
@@ -572,11 +572,11 @@ void K3bDataJob::setImager( K3bIsoImager* imager )
 void K3bDataJob::connectImager()
 {
   m_isoImager->disconnect( this );
-  connect( m_isoImager, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_isoImager, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotIsoImagerPercent(int)) );
-  connect( m_isoImager, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotIsoImagerFinished(bool)) );
-  connect( m_isoImager, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_isoImager, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_isoImager, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotIsoImagerPercent(int)) );
+  connect( m_isoImager, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotIsoImagerFinished(bool)) );
+  connect( m_isoImager, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 }
 
 
@@ -790,9 +790,9 @@ void K3bDataJob::determineMultiSessionMode()
     else {
       // now we need to determine the media's size
       connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::NG_DISKINFO, d->doc->burner() ),
-	       TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	       TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	       this,
-	       TQT_SLOT(slotDetermineMultiSessionMode(K3bDevice::DeviceHandler*)) );
+	       TQ_SLOT(slotDetermineMultiSessionMode(K3bDevice::DeviceHandler*)) );
     }
   }
   else {

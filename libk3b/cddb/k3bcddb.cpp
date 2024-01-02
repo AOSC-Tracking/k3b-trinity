@@ -98,14 +98,14 @@ void K3bCddb::query( const K3bDevice::Toc& toc )
 
   if( m_bLocalCddbQuery ) {
     m_iCurrentQueriedLocalDir = 0;
-    TQTimer::singleShot( 0, this, TQT_SLOT(localQuery()) );
+    TQTimer::singleShot( 0, this, TQ_SLOT(localQuery()) );
   }
   else if( m_bRemoteCddbQuery ) {
     m_iCurrentQueriedServer = 0;
-    TQTimer::singleShot( 0, this, TQT_SLOT(remoteQuery()) );
+    TQTimer::singleShot( 0, this, TQ_SLOT(remoteQuery()) );
   }
   else {
-    TQTimer::singleShot( 0, this, TQT_SLOT(slotNoEntry()) );
+    TQTimer::singleShot( 0, this, TQ_SLOT(slotNoEntry()) );
   }
 }
 
@@ -178,12 +178,12 @@ K3bCddbQuery* K3bCddb::getQuery( const TQString& s )
   if( s.startsWith("Http") ) {
     if( !m_httpQuery ) {
       m_httpQuery = new K3bCddbHttpQuery( this );
-      connect( m_httpQuery, TQT_SIGNAL(infoMessage(const TQString&)),
-	       this, TQT_SIGNAL(infoMessage(const TQString&)) );
-      connect( m_httpQuery, TQT_SIGNAL(queryFinished(K3bCddbQuery*)),
-	       this, TQT_SLOT(slotQueryFinished(K3bCddbQuery*)) );
-      connect( m_httpQuery, TQT_SIGNAL(inexactMatches(K3bCddbQuery*)),
-	       this, TQT_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
+      connect( m_httpQuery, TQ_SIGNAL(infoMessage(const TQString&)),
+	       this, TQ_SIGNAL(infoMessage(const TQString&)) );
+      connect( m_httpQuery, TQ_SIGNAL(queryFinished(K3bCddbQuery*)),
+	       this, TQ_SLOT(slotQueryFinished(K3bCddbQuery*)) );
+      connect( m_httpQuery, TQ_SIGNAL(inexactMatches(K3bCddbQuery*)),
+	       this, TQ_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
     }
 
     m_httpQuery->setServer( server, port );
@@ -194,12 +194,12 @@ K3bCddbQuery* K3bCddb::getQuery( const TQString& s )
   else {
     if( !m_cddbpQuery ) {
       m_cddbpQuery = new K3bCddbpQuery( this );
-      connect( m_cddbpQuery, TQT_SIGNAL(infoMessage(const TQString&)),
-	       this, TQT_SIGNAL(infoMessage(const TQString&)) );
-      connect( m_cddbpQuery, TQT_SIGNAL(queryFinished(K3bCddbQuery*)),
-	       this, TQT_SLOT(slotQueryFinished(K3bCddbQuery*)) );
-      connect( m_cddbpQuery, TQT_SIGNAL(inexactMatches(K3bCddbQuery*)),
-	       this, TQT_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
+      connect( m_cddbpQuery, TQ_SIGNAL(infoMessage(const TQString&)),
+	       this, TQ_SIGNAL(infoMessage(const TQString&)) );
+      connect( m_cddbpQuery, TQ_SIGNAL(queryFinished(K3bCddbQuery*)),
+	       this, TQ_SLOT(slotQueryFinished(K3bCddbQuery*)) );
+      connect( m_cddbpQuery, TQ_SIGNAL(inexactMatches(K3bCddbQuery*)),
+	       this, TQ_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
     }
 
     m_cddbpQuery->setServer( server, port );
@@ -213,12 +213,12 @@ void K3bCddb::localQuery()
 {
   if( !m_localQuery ) {
     m_localQuery = new K3bCddbLocalQuery( this );
-    connect( m_localQuery, TQT_SIGNAL(infoMessage(const TQString&)),
-	     this, TQT_SIGNAL(infoMessage(const TQString&)) );
-    connect( m_localQuery, TQT_SIGNAL(queryFinished(K3bCddbQuery*)),
-	     this, TQT_SLOT(slotQueryFinished(K3bCddbQuery*)) );
-    connect( m_localQuery, TQT_SIGNAL(inexactMatches(K3bCddbQuery*)),
-	     this, TQT_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
+    connect( m_localQuery, TQ_SIGNAL(infoMessage(const TQString&)),
+	     this, TQ_SIGNAL(infoMessage(const TQString&)) );
+    connect( m_localQuery, TQ_SIGNAL(queryFinished(K3bCddbQuery*)),
+	     this, TQ_SLOT(slotQueryFinished(K3bCddbQuery*)) );
+    connect( m_localQuery, TQ_SIGNAL(inexactMatches(K3bCddbQuery*)),
+	     this, TQ_SLOT(slotMultibleMatches(K3bCddbQuery*)) );
   }
   
   m_localQuery->setCddbDir( m_localCddbDirs[m_iCurrentQueriedLocalDir] );
@@ -261,8 +261,8 @@ void K3bCddb::saveEntry( const K3bCddbResultEntry& entry )
 {
   if( !m_localSubmit ) {
     m_localSubmit = new K3bCddbLocalSubmit( this );
-    connect( m_localSubmit, TQT_SIGNAL(submitFinished(K3bCddbSubmit*)),
-	     this, TQT_SLOT(slotSubmitFinished(K3bCddbSubmit*)) );
+    connect( m_localSubmit, TQ_SIGNAL(submitFinished(K3bCddbSubmit*)),
+	     this, TQ_SLOT(slotSubmitFinished(K3bCddbSubmit*)) );
   }
   
   m_localSubmit->setCddbDir( m_localCddbDirs[0] );

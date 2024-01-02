@@ -88,7 +88,7 @@ void K3bWritingModeWidget::init()
   d = new Private();
   d->device = 0;
 
-  connect( this, TQT_SIGNAL(valueChanged(int)), this, TQT_SIGNAL(writingModeChanged(int)) );
+  connect( this, TQ_SIGNAL(valueChanged(int)), this, TQ_SIGNAL(writingModeChanged(int)) );
 
   TQToolTip::add( this, i18n("Select the writing mode to use") );
 

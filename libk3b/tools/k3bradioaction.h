@@ -47,8 +47,8 @@ class LIBK3B_EXPORT K3bRadioAction : public TDEToggleAction
   /**
    *  @param text The text that will be displayed.
    *  @param cut The corresponding keyboard accelerator (shortcut).
-   *  @param receiver The SLOT's parent.
-   *  @param slot The TQT_SLOT to invoke to execute this action.
+   *  @param receiver The TQ_SLOT's parent.
+   *  @param slot The TQ_SLOT to invoke to execute this action.
    *  @param parent This action's parent.
    *  @param name An internal name for this action.
    */
@@ -79,8 +79,8 @@ class LIBK3B_EXPORT K3bRadioAction : public TDEToggleAction
    *  @param text The text that will be displayed.
    *  @param pix The icons that go with this action.
    *  @param cut The corresponding keyboard accelerator (shortcut).
-   *  @param receiver The SLOT's parent.
-   *  @param slot The TQT_SLOT to invoke to execute this action.
+   *  @param receiver The TQ_SLOT's parent.
+   *  @param slot The TQ_SLOT to invoke to execute this action.
    *  @param parent This action's parent.
    *  @param name An internal name for this action.
    */
@@ -91,8 +91,8 @@ class LIBK3B_EXPORT K3bRadioAction : public TDEToggleAction
    *  @param text The text that will be displayed.
    *  @param pix The dynamically loaded icon that goes with this action.
    *  @param cut The corresponding keyboard accelerator (shortcut).
-   *  @param receiver The SLOT's parent.
-   *  @param slot The TQT_SLOT to invoke to execute this action.
+   *  @param receiver The TQ_SLOT's parent.
+   *  @param slot The TQ_SLOT to invoke to execute this action.
    *  @param parent This action's parent.
    *  @param name An internal name for this action.
    */

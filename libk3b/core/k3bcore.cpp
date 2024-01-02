@@ -202,10 +202,10 @@ void K3bCore::init()
 
   externalBinManager()->search();
 
-  connect( K3bDevice::Connection::instance(), TQT_SIGNAL(deviceAdded(const TQString&)),
-	   deviceManager(), TQT_SLOT(addDevice(const TQString&)) );
-  connect( K3bDevice::Connection::instance(), TQT_SIGNAL(deviceRemoved(const TQString&)),
-	   deviceManager(), TQT_SLOT(removeDevice(const TQString&)) );
+  connect( K3bDevice::Connection::instance(), TQ_SIGNAL(deviceAdded(const TQString&)),
+	   deviceManager(), TQ_SLOT(addDevice(const TQString&)) );
+  connect( K3bDevice::Connection::instance(), TQ_SIGNAL(deviceRemoved(const TQString&)),
+	   deviceManager(), TQ_SLOT(removeDevice(const TQString&)) );
   TQStringList devList = K3bDevice::Connection::instance()->devices();
   if( devList.isEmpty() )
     deviceManager()->scanBus();

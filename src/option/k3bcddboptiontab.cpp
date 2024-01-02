@@ -99,24 +99,24 @@ K3bCddbOptionTab::K3bCddbOptionTab( TQWidget* parent,  const char* name )
 
   // setup connections
   // -----------------------------------------------------------------------------
-  connect( m_buttonAddLocalDir, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotLocalDirAdd()) );
-  connect( m_buttonRemoveLocalDir, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotLocalDirRemove()) );
-  connect( m_buttonLocalDirUp, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotLocalDirUp()) );
-  connect( m_buttonLocalDirDown, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotLocalDirDown()) );
+  connect( m_buttonAddLocalDir, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotLocalDirAdd()) );
+  connect( m_buttonRemoveLocalDir, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotLocalDirRemove()) );
+  connect( m_buttonLocalDirUp, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotLocalDirUp()) );
+  connect( m_buttonLocalDirDown, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotLocalDirDown()) );
 
-  connect( m_buttonAddCddbServer, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotCddbServerAdd()) );
-  connect( m_buttonRemoveCddbServer, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotCddbServerRemove()) );
-  connect( m_buttonCddbServerUp, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotCddbServerUp()) );
-  connect( m_buttonCddbServerDown, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotCddbServerDown()) );
+  connect( m_buttonAddCddbServer, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotCddbServerAdd()) );
+  connect( m_buttonRemoveCddbServer, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotCddbServerRemove()) );
+  connect( m_buttonCddbServerUp, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotCddbServerUp()) );
+  connect( m_buttonCddbServerDown, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotCddbServerDown()) );
 
-  connect( m_editLocalDir, TQT_SIGNAL(textChanged(const TQString&)), this, TQT_SLOT(enDisableButtons()) );
-  connect( m_editCddbServer, TQT_SIGNAL(textChanged(const TQString&)), this, TQT_SLOT(enDisableButtons()) );
-  connect( m_viewLocalDir, TQT_SIGNAL(selectionChanged()), this, TQT_SLOT(enDisableButtons()) );
-  connect( m_viewCddbServer, TQT_SIGNAL(selectionChanged()), this, TQT_SLOT(enDisableButtons()) );
-  connect( m_comboCddbType, TQT_SIGNAL(highlighted(int)),
-	   this, TQT_SLOT(slotServerTypeChanged()) );
-  connect( m_comboCddbType, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotServerTypeChanged()) );
+  connect( m_editLocalDir, TQ_SIGNAL(textChanged(const TQString&)), this, TQ_SLOT(enDisableButtons()) );
+  connect( m_editCddbServer, TQ_SIGNAL(textChanged(const TQString&)), this, TQ_SLOT(enDisableButtons()) );
+  connect( m_viewLocalDir, TQ_SIGNAL(selectionChanged()), this, TQ_SLOT(enDisableButtons()) );
+  connect( m_viewCddbServer, TQ_SIGNAL(selectionChanged()), this, TQ_SLOT(enDisableButtons()) );
+  connect( m_comboCddbType, TQ_SIGNAL(highlighted(int)),
+	   this, TQ_SLOT(slotServerTypeChanged()) );
+  connect( m_comboCddbType, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotServerTypeChanged()) );
   // -----------------------------------------------------------------------------
 
   enDisableButtons();

@@ -35,26 +35,26 @@ K3bMovixJob::K3bMovixJob( K3bMovixDoc* doc, K3bJobHandler* jh, TQObject* parent 
   m_movixDocPreparer = new K3bMovixDocPreparer( doc, this, this );
 
   // pipe signals
-  connect( m_dataJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(percent(int)) );
-  connect( m_dataJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
-  connect( m_dataJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-  connect( m_dataJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( m_dataJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SIGNAL(bufferStatus(int)) );
-  connect( m_dataJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
-  connect( m_dataJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
-  connect( m_dataJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
-  connect( m_dataJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-  connect( m_dataJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
-  connect( m_dataJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_dataJob, TQT_SIGNAL(burning(bool)), this, TQT_SIGNAL(burning(bool)) );
+  connect( m_dataJob, TQ_SIGNAL(percent(int)), this, TQ_SIGNAL(percent(int)) );
+  connect( m_dataJob, TQ_SIGNAL(subPercent(int)), this, TQ_SIGNAL(subPercent(int)) );
+  connect( m_dataJob, TQ_SIGNAL(processedSubSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+  connect( m_dataJob, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSize(int, int)) );
+  connect( m_dataJob, TQ_SIGNAL(bufferStatus(int)), this, TQ_SIGNAL(bufferStatus(int)) );
+  connect( m_dataJob, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SIGNAL(deviceBuffer(int)) );
+  connect( m_dataJob, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SIGNAL(writeSpeed(int, int)) );
+  connect( m_dataJob, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newTask(const TQString&)) );
+  connect( m_dataJob, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_dataJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_dataJob, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_dataJob, TQ_SIGNAL(burning(bool)), this, TQ_SIGNAL(burning(bool)) );
 
   // we need to clean up here
-  connect( m_dataJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotDataJobFinished(bool)) );
+  connect( m_dataJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotDataJobFinished(bool)) );
 
-  connect( m_movixDocPreparer, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_movixDocPreparer, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
 }
 
 

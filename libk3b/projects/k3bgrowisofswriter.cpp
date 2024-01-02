@@ -102,20 +102,20 @@ K3bGrowisofsWriter::K3bGrowisofsWriter( K3bDevice::Device* dev, K3bJobHandler* h
 {
   d = new Private;
   d->speedEst = new K3bThroughputEstimator( this );
-  connect( d->speedEst, TQT_SIGNAL(throughput(int)),
-	   this, TQT_SLOT(slotThroughput(int)) );
+  connect( d->speedEst, TQ_SIGNAL(throughput(int)),
+	   this, TQ_SLOT(slotThroughput(int)) );
 
   d->gh = new K3bGrowisofsHandler( this );
-  connect( d->gh, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this,TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( d->gh, TQT_SIGNAL(newSubTask(const TQString&)),
-	   this, TQT_SIGNAL(newSubTask(const TQString&)) );
-  connect( d->gh, TQT_SIGNAL(buffer(int)),
-	   this, TQT_SIGNAL(buffer(int)) );
-  connect( d->gh, TQT_SIGNAL(deviceBuffer(int)),
-	   this, TQT_SIGNAL(deviceBuffer(int)) );
-  connect( d->gh, TQT_SIGNAL(flushingCache()),
-	   this, TQT_SLOT(slotFlushingCache()) );
+  connect( d->gh, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this,TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( d->gh, TQ_SIGNAL(newSubTask(const TQString&)),
+	   this, TQ_SIGNAL(newSubTask(const TQString&)) );
+  connect( d->gh, TQ_SIGNAL(buffer(int)),
+	   this, TQ_SIGNAL(buffer(int)) );
+  connect( d->gh, TQ_SIGNAL(deviceBuffer(int)),
+	   this, TQ_SIGNAL(deviceBuffer(int)) );
+  connect( d->gh, TQ_SIGNAL(flushingCache()),
+	   this, TQ_SLOT(slotFlushingCache()) );
 }
 
 
@@ -182,9 +182,9 @@ bool K3bGrowisofsWriter::prepareProcess()
   //  d->process->setPriority( TDEProcess::PrioHighest );
   d->process->setSplitStdout(true);
   d->process->setRawStdin(true);
-  connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotReceivedStderr(const TQString&)) );
-  connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotReceivedStderr(const TQString&)) );
-  connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
+  connect( d->process, TQ_SIGNAL(stderrLine(const TQString&)), this, TQ_SLOT(slotReceivedStderr(const TQString&)) );
+  connect( d->process, TQ_SIGNAL(stdoutLine(const TQString&)), this, TQ_SLOT(slotReceivedStderr(const TQString&)) );
+  connect( d->process, TQ_SIGNAL(processExited(TDEProcess*)), this, TQ_SLOT(slotProcessExited(TDEProcess*)) );
 
 
   //
@@ -394,8 +394,8 @@ void K3bGrowisofsWriter::start()
       if( d->usingRingBuffer ) {
 	if( !d->ringBuffer ) {
 	  d->ringBuffer = new K3bPipeBuffer( this, this );
-	  connect( d->ringBuffer, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(buffer(int)) );
-	  connect( d->ringBuffer, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotRingBufferFinished(bool)) );
+	  connect( d->ringBuffer, TQ_SIGNAL(percent(int)), this, TQ_SIGNAL(buffer(int)) );
+	  connect( d->ringBuffer, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotRingBufferFinished(bool)) );
 	}
 
 	d->ringBuffer->writeToFd( d->process->stdinFd() );
@@ -571,9 +571,9 @@ void K3bGrowisofsWriter::slotProcessExited( TDEProcess* p )
   else {
     emit newSubTask( i18n("Ejecting DVD") );
     connect( K3bDevice::eject( burnDevice() ),
-	     TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	     TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	     this,
-	     TQT_SLOT(slotEjectingFinished(K3bDevice::DeviceHandler*)) );
+	     TQ_SLOT(slotEjectingFinished(K3bDevice::DeviceHandler*)) );
   }
 }
 

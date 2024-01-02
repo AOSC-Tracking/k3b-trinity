@@ -70,43 +70,43 @@ K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* parent, co
   d->actionPlay = new TDEAction( i18n("Play"), 
 			       "media-playback-start", 
 			       TDEShortcut(), 
-			       this, TQT_SLOT(playPause()), 
+			       this, TQ_SLOT(playPause()), 
 			       d->actionCollection,
 			       "play" );
   d->actionPause = new TDEAction( i18n("Pause"), 
 				"media-playback-pause", 
 				TDEShortcut(), 
-				this, TQT_SLOT(playPause()), 
+				this, TQ_SLOT(playPause()), 
 				d->actionCollection,
 				"pause" );
   d->actionPlayPause = new TDEAction( i18n("Play/Pause"), 
 				    "media-playback-start", 
 				    TDEShortcut(), 
-				    this, TQT_SLOT(playPause()), 
+				    this, TQ_SLOT(playPause()), 
 				    d->actionCollection,
 				    "play_pause" );
 
   d->actionStop = new TDEAction( i18n("Stop"), 
 			       "media-playback-stop", 
 			       TDEShortcut(), 
-			       this, TQT_SLOT(stop()), 
+			       this, TQ_SLOT(stop()), 
 			       d->actionCollection,
 			       "stop" );
   d->actionNext = new TDEAction( i18n("Next"), 
 			       "media-skip-forward", 
 			       TDEShortcut(), 
-			       this, TQT_SLOT(next()), 
+			       this, TQ_SLOT(next()), 
 			       d->actionCollection,
 			       "next" );
   d->actionPrev = new TDEAction( i18n("Prev"), 
 			       "media-skip-backward", 
 			       TDEShortcut(), 
-			       this, TQT_SLOT(prev()), 
+			       this, TQ_SLOT(prev()), 
 			       d->actionCollection,
 			       "prev" );
 
   d->seekSlider = new TQSlider( 0, 100, 1, 0, TQt::Horizontal, 0, "audiotrackplayerslider" );
-  connect( d->seekSlider, TQT_SIGNAL(sliderMoved(int)), this, TQT_SLOT(slotSeek(int)) );
+  connect( d->seekSlider, TQ_SIGNAL(sliderMoved(int)), this, TQ_SLOT(slotSeek(int)) );
   // FIXME: maybe it's not such a good idea to use a KWidgetAction here since this way the player
   // can only be used once in one widget. If the action would always create a new slider we could plug
   // the action into several toolboxes and also use it in some resizing or track splitting dialogs.
@@ -118,7 +118,7 @@ K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* parent, co
 				     d->actionCollection,
 				     "seek" );
   // this should be done in KWidgetAction but is not yet
-  connect( d->actionSeek, TQT_SIGNAL(enabled(bool)), d->seekSlider, TQT_SLOT(setEnabled(bool)) );
+  connect( d->actionSeek, TQ_SIGNAL(enabled(bool)), d->seekSlider, TQ_SLOT(setEnabled(bool)) );
 
   d->actionStop->setEnabled(false);
   d->actionPause->setEnabled(false);
@@ -126,18 +126,18 @@ K3bAudioTrackPlayer::K3bAudioTrackPlayer( K3bAudioDoc* doc, TQObject* parent, co
   d->actionPrev->setEnabled(false);
   d->actionSeek->setEnabled(false);
 
-  connect( m_doc, TQT_SIGNAL(changed()), 
-	   this, TQT_SLOT(slotDocChanged()) );
-  connect( m_doc, TQT_SIGNAL(trackChanged(K3bAudioTrack*)),
-	   this, TQT_SLOT(slotTrackChanged(K3bAudioTrack*)) );
-  connect( m_doc, TQT_SIGNAL(trackRemoved(K3bAudioTrack*)),
-	   this, TQT_SLOT(slotTrackRemoved(K3bAudioTrack*)) );
-  connect( &d->sliderTimer, TQT_SIGNAL(timeout()),
-	   this, TQT_SLOT(slotUpdateSlider()) );
+  connect( m_doc, TQ_SIGNAL(changed()), 
+	   this, TQ_SLOT(slotDocChanged()) );
+  connect( m_doc, TQ_SIGNAL(trackChanged(K3bAudioTrack*)),
+	   this, TQ_SLOT(slotTrackChanged(K3bAudioTrack*)) );
+  connect( m_doc, TQ_SIGNAL(trackRemoved(K3bAudioTrack*)),
+	   this, TQ_SLOT(slotTrackRemoved(K3bAudioTrack*)) );
+  connect( &d->sliderTimer, TQ_SIGNAL(timeout()),
+	   this, TQ_SLOT(slotUpdateSlider()) );
 
   // we just stop the player if the audio server has an error. K3bMainWindow will show the error message
   // This is all very hacky and has to be improved for K3b 2.0. But then we will probably use Phonon anyway...
-  connect( K3bAudioServer::instance(), TQT_SIGNAL(error(const TQString&)), this, TQT_SLOT(stop()) );
+  connect( K3bAudioServer::instance(), TQ_SIGNAL(error(const TQString&)), this, TQ_SLOT(stop()) );
 
   // tooltips
   d->actionPlay->setToolTip( i18n("Play") );

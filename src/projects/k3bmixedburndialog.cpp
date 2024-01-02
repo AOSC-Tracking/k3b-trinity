@@ -83,10 +83,10 @@ K3bMixedBurnDialog::K3bMixedBurnDialog( K3bMixedDoc* doc, TQWidget *parent, cons
   TQSpacerItem* spacer = new TQSpacerItem( 20, 20, TQSizePolicy::Minimum, TQSizePolicy::Expanding );
   m_optionGroupLayout->addItem( spacer );
 
-  connect( m_checkNormalize, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotNormalizeToggled(bool)) );
-  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotCacheImageToggled(bool)) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_checkNormalize, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotNormalizeToggled(bool)) );
+  connect( m_checkCacheImage, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotCacheImageToggled(bool)) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writingAppChanged(int)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_writingModeWidget, TQ_SIGNAL(writingModeChanged(int)), this, TQ_SLOT(slotToggleAll()) );
 }
 
 

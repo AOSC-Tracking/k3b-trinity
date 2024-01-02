@@ -152,14 +152,14 @@ void K3bCloneJob::prepareReader()
 {
   if( !m_readcdReader ) {
     m_readcdReader = new K3bReadcdReader( this, this );
-    connect( m_readcdReader, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotReadingPercent(int)) );
-    connect( m_readcdReader, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
-    connect( m_readcdReader, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-    connect( m_readcdReader, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotReadingFinished(bool)) );
-    connect( m_readcdReader, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-    connect( m_readcdReader, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-    connect( m_readcdReader, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
-	     this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+    connect( m_readcdReader, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotReadingPercent(int)) );
+    connect( m_readcdReader, TQ_SIGNAL(percent(int)), this, TQ_SIGNAL(subPercent(int)) );
+    connect( m_readcdReader, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+    connect( m_readcdReader, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotReadingFinished(bool)) );
+    connect( m_readcdReader, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( m_readcdReader, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+    connect( m_readcdReader, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	     this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   m_readcdReader->setReadDevice( readingDevice() );
@@ -175,19 +175,19 @@ void K3bCloneJob::prepareWriter()
 {
   if( !m_writerJob ) {
     m_writerJob = new K3bCdrecordWriter( writer(), this, this );
-    connect( m_writerJob, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-    connect( m_writerJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterPercent(int)) );
-    connect( m_writerJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
-    connect( m_writerJob, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
-    connect( m_writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-    connect( m_writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
-    connect( m_writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
-    connect( m_writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
-    connect( m_writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
-    //    connect( m_writerJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
-    connect( m_writerJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-    connect( m_writerJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
-	     this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+    connect( m_writerJob, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( m_writerJob, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotWriterPercent(int)) );
+    connect( m_writerJob, TQ_SIGNAL(percent(int)), this, TQ_SIGNAL(subPercent(int)) );
+    connect( m_writerJob, TQ_SIGNAL(nextTrack(int, int)), this, TQ_SLOT(slotWriterNextTrack(int, int)) );
+    connect( m_writerJob, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+    connect( m_writerJob, TQ_SIGNAL(buffer(int)), this, TQ_SIGNAL(bufferStatus(int)) );
+    connect( m_writerJob, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SIGNAL(deviceBuffer(int)) );
+    connect( m_writerJob, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SIGNAL(writeSpeed(int, int)) );
+    connect( m_writerJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotWriterFinished(bool)) );
+    //    connect( m_writerJob, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newTask(const TQString&)) );
+    connect( m_writerJob, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+    connect( m_writerJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	     this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   m_writerJob->clearArguments();

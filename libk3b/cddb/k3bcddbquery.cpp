@@ -53,7 +53,7 @@ void K3bCddbQuery::query( const K3bDevice::Toc& toc )
   m_toc = toc;
   m_inexactMatches.clear();
 
-  TQTimer::singleShot( 0, this, TQT_SLOT(doQuery()) );
+  TQTimer::singleShot( 0, this, TQ_SLOT(doQuery()) );
 }
 
 
@@ -64,7 +64,7 @@ void K3bCddbQuery::queryMatch( const K3bCddbResultHeader& header )
   m_result.category = header.category;
   m_result.discid = header.discid;
 
-  TQTimer::singleShot( 0, this, TQT_SLOT(doMatchQuery()) );
+  TQTimer::singleShot( 0, this, TQ_SLOT(doMatchQuery()) );
 }
 
 

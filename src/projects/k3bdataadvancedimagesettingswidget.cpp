@@ -251,7 +251,7 @@ K3bDataAdvancedImageSettingsWidget::K3bDataAdvancedImageSettingsWidget( TQWidget
     m_comboInputCharset->insertItem( TQString( mkisofsCharacterSets[i] ) );
   }
 
-  connect( m_checkJoliet, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotJolietToggled(bool)) );
+  connect( m_checkJoliet, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotJolietToggled(bool)) );
 }
 
 

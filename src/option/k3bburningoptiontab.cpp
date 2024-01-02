@@ -89,10 +89,10 @@ void K3bBurningOptionTab::setupGui()
   groupAdvancedLayout->setRowStretch( 2, 1 );
 
 
-  connect( m_checkManualWritingBufferSize, TQT_SIGNAL(toggled(bool)),
-           m_editWritingBufferSize, TQT_SLOT(setEnabled(bool)) );
-  connect( m_checkManualWritingBufferSize, TQT_SIGNAL(toggled(bool)),
-           this, TQT_SLOT(slotSetDefaultBufferSizes(bool)) );
+  connect( m_checkManualWritingBufferSize, TQ_SIGNAL(toggled(bool)),
+           m_editWritingBufferSize, TQ_SLOT(setEnabled(bool)) );
+  connect( m_checkManualWritingBufferSize, TQ_SIGNAL(toggled(bool)),
+           this, TQ_SLOT(slotSetDefaultBufferSizes(bool)) );
 
 
   m_editWritingBufferSize->setDisabled( true );

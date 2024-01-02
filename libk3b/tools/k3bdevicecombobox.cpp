@@ -36,10 +36,10 @@ K3bDeviceComboBox::K3bDeviceComboBox( TQWidget* parent, const char* name )
   : KComboBox( parent, name )
 {
   d = new Private();
-  connect( this, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotActivated(int)) );
-  connect( k3bcore->deviceManager(), TQT_SIGNAL(changed(K3bDevice::DeviceManager*)),
-	   this, TQT_SLOT(slotDeviceManagerChanged(K3bDevice::DeviceManager*)) );
+  connect( this, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotActivated(int)) );
+  connect( k3bcore->deviceManager(), TQ_SIGNAL(changed(K3bDevice::DeviceManager*)),
+	   this, TQ_SLOT(slotDeviceManagerChanged(K3bDevice::DeviceManager*)) );
 }
 
 

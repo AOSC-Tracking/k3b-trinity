@@ -37,8 +37,8 @@
 K3bMovixDoc::K3bMovixDoc( TQObject* parent )
   : K3bDataDoc( parent )
 {
-  connect( this, TQT_SIGNAL(itemRemoved(K3bDataItem*)),
-	   this, TQT_SLOT(slotDataItemRemoved(K3bDataItem*)) );
+  connect( this, TQ_SIGNAL(itemRemoved(K3bDataItem*)),
+	   this, TQ_SLOT(slotDataItemRemoved(K3bDataItem*)) );
 }
 
 

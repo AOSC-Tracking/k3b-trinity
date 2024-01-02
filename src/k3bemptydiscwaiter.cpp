@@ -117,8 +117,8 @@ K3bEmptyDiscWaiter::K3bEmptyDiscWaiter( K3bDevice::Device* device, TQWidget* par
   grid->setColStretch( 3, 1 );
   // -----------------------------
 
-  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( k3bappcore->mediaCache(), TQ_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 
   TQToolTip::add( actionButton(KDialogBase::User1),
 		 i18n("Force K3b to continue if it seems not to detect your empty CD/DVD.") );
@@ -314,9 +314,9 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	  job.setForceNoEject( true );
 
 	  d->erasingInfoDialog->setText( i18n("Preformatting DVD+RW") );
-	  connect( &job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotErasingFinished(bool)) );
-	  connect( &job, TQT_SIGNAL(percent(int)), d->erasingInfoDialog, TQT_SLOT(setProgress(int)) );
-	  connect( d->erasingInfoDialog, TQT_SIGNAL(cancelClicked()), &job, TQT_SLOT(cancel()) );
+	  connect( &job, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotErasingFinished(bool)) );
+	  connect( &job, TQ_SIGNAL(percent(int)), d->erasingInfoDialog, TQ_SLOT(setProgress(int)) );
+	  connect( d->erasingInfoDialog, TQ_SIGNAL(cancelClicked()), &job, TQ_SLOT(cancel()) );
 	  job.start( medium.diskInfo() );
 	  d->erasingInfoDialog->exec( true );
 	}
@@ -492,9 +492,9 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
 	job.setForceNoEject(true);
 
 	d->erasingInfoDialog->setText( i18n("Formatting DVD-RW") );
-	connect( &job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotErasingFinished(bool)) );
-	connect( &job, TQT_SIGNAL(percent(int)), d->erasingInfoDialog, TQT_SLOT(setProgress(int)) );
-	connect( d->erasingInfoDialog, TQT_SIGNAL(cancelClicked()), &job, TQT_SLOT(cancel()) );
+	connect( &job, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotErasingFinished(bool)) );
+	connect( &job, TQ_SIGNAL(percent(int)), d->erasingInfoDialog, TQ_SLOT(setProgress(int)) );
+	connect( d->erasingInfoDialog, TQ_SIGNAL(cancelClicked()), &job, TQ_SLOT(cancel()) );
 	job.start( medium.diskInfo() );
 	d->erasingInfoDialog->exec( true );
       }
@@ -566,8 +566,8 @@ void K3bEmptyDiscWaiter::slotMediumChanged( K3bDevice::Device* dev )
       job.setForceNoEject(true);
       job.setSpeed( 0 ); // Auto
       job.setWritingApp( erasingApp );
-      connect( &job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotErasingFinished(bool)) );
-      connect( d->erasingInfoDialog, TQT_SIGNAL(cancelClicked()), &job, TQT_SLOT(cancel()) );
+      connect( &job, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotErasingFinished(bool)) );
+      connect( d->erasingInfoDialog, TQ_SIGNAL(cancelClicked()), &job, TQ_SLOT(cancel()) );
       job.start();
       d->erasingInfoDialog->exec( false );
     }
@@ -664,9 +664,9 @@ void K3bEmptyDiscWaiter::slotErasingFinished( bool success )
 {
   if( success ) {
     connect( K3bDevice::reload( d->device ),
-	     TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	     TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	     this,
-	     TQT_SLOT(slotReloadingAfterErasingFinished(K3bDevice::DeviceHandler*)) );
+	     TQ_SLOT(slotReloadingAfterErasingFinished(K3bDevice::DeviceHandler*)) );
   }
   else {
     K3bDevice::eject( d->device );

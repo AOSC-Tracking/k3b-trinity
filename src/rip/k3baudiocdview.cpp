@@ -119,12 +119,12 @@ K3bAudioCdView::K3bAudioCdView( TQWidget* parent, const char *name )
   // ----------------------------------------------------------------------------------
   m_trackView = new K3bAudioCdListView( this, mainWidget() );
 
-  connect( m_trackView, TQT_SIGNAL(itemRenamed(TQListViewItem*, const TQString&, int)),
-	   this, TQT_SLOT(slotItemRenamed(TQListViewItem*, const TQString&, int)) );
-  connect( m_trackView, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
-//   connect( m_trackView, TQT_SIGNAL(selectionChanged(TQListViewItem*)), 
-// 	   this, TQT_SLOT(slotTrackSelectionChanged(TQListViewItem*)) );
+  connect( m_trackView, TQ_SIGNAL(itemRenamed(TQListViewItem*, const TQString&, int)),
+	   this, TQ_SLOT(slotItemRenamed(TQListViewItem*, const TQString&, int)) );
+  connect( m_trackView, TQ_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQ_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
+//   connect( m_trackView, TQ_SIGNAL(selectionChanged(TQListViewItem*)), 
+// 	   this, TQ_SLOT(slotTrackSelectionChanged(TQListViewItem*)) );
 
   mainGrid->addLayout( toolBoxLayout, 0, 0 );
   mainGrid->addWidget( m_trackView, 1, 0 );
@@ -132,8 +132,8 @@ K3bAudioCdView::K3bAudioCdView( TQWidget* parent, const char *name )
 
   m_cddb = new K3bCddb( this );
 
-  connect( m_cddb, TQT_SIGNAL(queryFinished(int)),
-	   this, TQT_SLOT(slotCddbQueryFinished(int)) );
+  connect( m_cddb, TQ_SIGNAL(queryFinished(int)),
+	   this, TQ_SLOT(slotCddbQueryFinished(int)) );
 
   initActions();
   //  slotTrackSelectionChanged(0);
@@ -227,32 +227,32 @@ void K3bAudioCdView::initActions()
   m_actionCollection = new TDEActionCollection( this );
 
   TDEAction* actionSelectAll = new TDEAction( i18n("Check All"), 0, 0, this,
-					  TQT_SLOT(slotCheckAll()), actionCollection(),
+					  TQ_SLOT(slotCheckAll()), actionCollection(),
 					  "check_all" );
   TDEAction* actionDeselectAll = new TDEAction( i18n("Uncheck All"), 0, 0, this,
-					    TQT_SLOT(slotUncheckAll()), actionCollection(),
+					    TQ_SLOT(slotUncheckAll()), actionCollection(),
 					    "uncheck_all" );
   TDEAction* actionSelect = new TDEAction( i18n("Check Track"), 0, 0, this,
-				       TQT_SLOT(slotSelect()), actionCollection(),
+				       TQ_SLOT(slotSelect()), actionCollection(),
 				       "select_track" );
   TDEAction* actionDeselect = new TDEAction( i18n("Uncheck Track"), 0, 0, this,
-					 TQT_SLOT(slotDeselect()), actionCollection(),
+					 TQ_SLOT(slotDeselect()), actionCollection(),
 					 "deselect_track" );
   TDEAction* actionEditTrackCddbInfo = new TDEAction( i18n("Edit Track cddb Info"), "edit", 0, this,
-						  TQT_SLOT(slotEditTrackCddb()), actionCollection(),
+						  TQ_SLOT(slotEditTrackCddb()), actionCollection(),
 						  "edit_track_cddb" );
   TDEAction* actionEditAlbumCddbInfo = new TDEAction( i18n("Edit Album cddb Info"), "edit", 0, this,
-						  TQT_SLOT(slotEditAlbumCddb()), actionCollection(),
+						  TQ_SLOT(slotEditAlbumCddb()), actionCollection(),
 						  "edit_album_cddb" );
 
   TDEAction* actionStartRip = new TDEAction( i18n("Start Ripping"), "cddarip", 0, this,
-					 TQT_SLOT(startRip()), actionCollection(), "start_rip" );
+					 TQ_SLOT(startRip()), actionCollection(), "start_rip" );
 
   TDEAction* actionQueryCddb = new TDEAction( i18n("Query cddb"), "reload", 0, this,
-					  TQT_SLOT(queryCddb()), actionCollection(), "query_cddb" );
+					  TQ_SLOT(queryCddb()), actionCollection(), "query_cddb" );
 
   TDEAction* actionSaveCddbLocally = new TDEAction( i18n("Save Cddb Entry Locally"), "document-save", 0, this,
-						TQT_SLOT(slotSaveCddbLocally()), actionCollection(), "save_cddb_local" );
+						TQ_SLOT(slotSaveCddbLocally()), actionCollection(), "save_cddb_local" );
 
   // TODO: set the actions tooltips and whatsthis infos
 

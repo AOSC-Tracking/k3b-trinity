@@ -51,14 +51,14 @@ K3bAudioDataSourceEditWidget::K3bAudioDataSourceEditWidget( TQWidget* parent, co
   grid->setColStretch( 1, 1 );
 
   // setup connections between the msfedits and the editor
-  connect( m_editor, TQT_SIGNAL(rangeChanged(int, const K3b::Msf&, const K3b::Msf&)),
-	   this, TQT_SLOT(slotRangeModified(int, const K3b::Msf&, const K3b::Msf&)) );
+  connect( m_editor, TQ_SIGNAL(rangeChanged(int, const K3b::Msf&, const K3b::Msf&)),
+	   this, TQ_SLOT(slotRangeModified(int, const K3b::Msf&, const K3b::Msf&)) );
 
-  connect( m_editStartOffset, TQT_SIGNAL(valueChanged(const K3b::Msf&)),
-	   this, TQT_SLOT(slotStartOffsetEdited(const K3b::Msf&)) );
+  connect( m_editStartOffset, TQ_SIGNAL(valueChanged(const K3b::Msf&)),
+	   this, TQ_SLOT(slotStartOffsetEdited(const K3b::Msf&)) );
 
-  connect( m_editEndOffset, TQT_SIGNAL(valueChanged(const K3b::Msf&)),
-	   this, TQT_SLOT(slotEndOffsetEdited(const K3b::Msf&)) );
+  connect( m_editEndOffset, TQ_SIGNAL(valueChanged(const K3b::Msf&)),
+	   this, TQ_SLOT(slotEndOffsetEdited(const K3b::Msf&)) );
 
   TQToolTip::add( m_editor, i18n("Drag the edges of the highlighted area to define the portion of the "
 				"audio source you want to include in the Audio CD track. "

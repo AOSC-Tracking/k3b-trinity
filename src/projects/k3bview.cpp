@@ -57,10 +57,10 @@ K3bView::K3bView( K3bDoc* pDoc, TQWidget *parent, const char* name )
   grid->setSpacing( 5 );
   grid->setMargin( 2 );
 
-  TDEAction* burnAction = new TDEAction( i18n("&Burn"), "cdburn", CTRL + Key_B, this, TQT_SLOT(slotBurn()),
+  TDEAction* burnAction = new TDEAction( i18n("&Burn"), "cdburn", CTRL + Key_B, this, TQ_SLOT(slotBurn()),
 				     actionCollection(), "project_burn");
   burnAction->setToolTip( i18n("Open the burn dialog for the current project") );
-  TDEAction* propAction = new TDEAction( i18n("&Properties"), "edit", CTRL + Key_P, this, TQT_SLOT(slotProperties()),
+  TDEAction* propAction = new TDEAction( i18n("&Properties"), "edit", CTRL + Key_P, this, TQ_SLOT(slotProperties()),
 				     actionCollection(), "project_properties");
   propAction->setToolTip( i18n("Open the properties dialog") );
 
@@ -140,7 +140,7 @@ void K3bView::addPluginButtons( int projectType )
 						  pp->toolTip(),
 						  pp->whatsThis(),
 						  this, 
-						  TQT_SLOT(slotPluginButtonClicked()) );
+						  TQ_SLOT(slotPluginButtonClicked()) );
       m_plugins.insert( static_cast<void*>(button), pp );
     }
   }

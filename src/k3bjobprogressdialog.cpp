@@ -98,7 +98,7 @@ K3bJobProgressDialog::K3bJobProgressDialog( TQWidget* parent,
   m_job = 0;
   m_timer = new TQTimer( this );
 
-  connect( m_timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotUpdateTime()) );
+  connect( m_timer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotUpdateTime()) );
 }
 
 
@@ -254,10 +254,10 @@ void K3bJobProgressDialog::setupGUI()
 
   slotThemeChanged();
 
-  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
-  connect( kapp, TQT_SIGNAL(appearanceChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQ_SIGNAL(themeChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
 }
 
 
@@ -306,9 +306,9 @@ void K3bJobProgressDialog::closeEvent( TQCloseEvent* e )
 
 void K3bJobProgressDialog::setupConnections()
 {
-  connect( m_buttonCancel, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotCancelButtonPressed()) );
-  connect( m_buttonClose, TQT_SIGNAL(clicked()), this, TQT_SLOT(close()) );
-  connect( m_buttonShowDebug, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotShowDebuggingOutput()) );
+  connect( m_buttonCancel, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotCancelButtonPressed()) );
+  connect( m_buttonClose, TQ_SIGNAL(clicked()), this, TQ_SLOT(close()) );
+  connect( m_buttonShowDebug, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotShowDebuggingOutput()) );
 }
 
 
@@ -434,23 +434,23 @@ void K3bJobProgressDialog::setJob( K3bJob* job )
   if( job ) {
 
     // connect to all the shit
-    connect( job, TQT_SIGNAL(infoMessage(const TQString&,int)), this, TQT_SLOT(slotInfoMessage(const TQString&,int)) );
+    connect( job, TQ_SIGNAL(infoMessage(const TQString&,int)), this, TQ_SLOT(slotInfoMessage(const TQString&,int)) );
     
-    connect( job, TQT_SIGNAL(percent(int)), m_progressPercent, TQT_SLOT(setValue(int)) );
-    connect( job, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotProgress(int)) );
-    connect( job, TQT_SIGNAL(subPercent(int)), m_progressSubPercent, TQT_SLOT(setValue(int)) );
+    connect( job, TQ_SIGNAL(percent(int)), m_progressPercent, TQ_SLOT(setValue(int)) );
+    connect( job, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotProgress(int)) );
+    connect( job, TQ_SIGNAL(subPercent(int)), m_progressSubPercent, TQ_SLOT(setValue(int)) );
     
-    connect( job, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SLOT(slotProcessedSubSize(int, int)) );
-    connect( job, TQT_SIGNAL(processedSize(int, int)), this, TQT_SLOT(slotProcessedSize(int, int)) );
+    connect( job, TQ_SIGNAL(processedSubSize(int, int)), this, TQ_SLOT(slotProcessedSubSize(int, int)) );
+    connect( job, TQ_SIGNAL(processedSize(int, int)), this, TQ_SLOT(slotProcessedSize(int, int)) );
     
-    connect( job, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SLOT(slotNewTask(const TQString&)) );
-    connect( job, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SLOT(slotNewSubTask(const TQString&)) );
-    connect( job, TQT_SIGNAL(started()), this, TQT_SLOT(slotStarted()) );
-    connect( job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotFinished(bool)) );
-    connect( job, TQT_SIGNAL(canceled()), this, TQT_SLOT(slotCanceled()) );
+    connect( job, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SLOT(slotNewTask(const TQString&)) );
+    connect( job, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SLOT(slotNewSubTask(const TQString&)) );
+    connect( job, TQ_SIGNAL(started()), this, TQ_SLOT(slotStarted()) );
+    connect( job, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotFinished(bool)) );
+    connect( job, TQ_SIGNAL(canceled()), this, TQ_SLOT(slotCanceled()) );
     
-    connect( job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	     this, TQT_SLOT(slotDebuggingOutput(const TQString&, const TQString&)) );
+    connect( job, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	     this, TQ_SLOT(slotDebuggingOutput(const TQString&, const TQString&)) );
 
     m_labelJob->setText( m_job->jobDescription() );
     m_labelJobDetails->setText( m_job->jobDetails() );
@@ -467,8 +467,8 @@ void K3bJobProgressDialog::setJob( K3bJob* job )
     if( m_osd ) {
       m_osd->setText( job->jobDescription() );
       // FIXME: use a setJob method and let the osd also change the text color to red/green
-      //      connect( job, TQT_SIGNAL(newTask(const TQString&)), m_osd, TQT_SLOT(setText(const TQString&)) );
-      connect( job, TQT_SIGNAL(percent(int)), m_osd, TQT_SLOT(setProgress(int)) );
+      //      connect( job, TQ_SIGNAL(newTask(const TQString&)), m_osd, TQ_SLOT(setText(const TQString&)) );
+      connect( job, TQ_SIGNAL(percent(int)), m_osd, TQ_SLOT(setProgress(int)) );
     }
   }
 }

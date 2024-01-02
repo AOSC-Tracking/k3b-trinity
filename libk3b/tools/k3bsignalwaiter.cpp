@@ -36,7 +36,7 @@ void K3bSignalWaiter::waitForSignal( TQObject* o, const char* signal )
 {
   K3bSignalWaiter w;
   connect( o, signal,
-	   &w, TQT_SLOT(slotSignal()) );
+	   &w, TQ_SLOT(slotSignal()) );
 
   TQApplication::eventLoop()->enterLoop();
 }
@@ -47,7 +47,7 @@ void K3bSignalWaiter::waitForJob( K3bJob* job )
   if( !job->active() )
     return;
 
-  waitForSignal( job, TQT_SIGNAL(finished(bool)) );
+  waitForSignal( job, TQ_SIGNAL(finished(bool)) );
 }
 
 

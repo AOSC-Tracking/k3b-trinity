@@ -82,18 +82,18 @@ K3bAudioConvertingOptionWidget::K3bAudioConvertingOptionWidget( TQWidget* parent
 {
   d = new Private();
 
-  connect( m_editBaseDir, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SLOT(slotUpdateFreeTempSpace()) );
-  connect( m_comboFileType, TQT_SIGNAL(activated(int)), 
-	   this, TQT_SLOT(slotEncoderChanged()) );
-  connect( &d->freeSpaceUpdateTimer, TQT_SIGNAL(timeout()),
-	   this, TQT_SLOT(slotUpdateFreeTempSpace()) );
-  connect( m_checkCreatePlaylist, TQT_SIGNAL(toggled(bool)), this, TQT_SIGNAL(changed()) );
-  connect( m_checkSingleFile, TQT_SIGNAL(toggled(bool)), this, TQT_SIGNAL(changed()) );
-  connect( m_checkWriteCueFile, TQT_SIGNAL(toggled(bool)), this, TQT_SIGNAL(changed()) );
-  connect( m_comboFileType, TQT_SIGNAL(activated(int)), this, TQT_SIGNAL(changed()) );
-  connect( m_editBaseDir, TQT_SIGNAL(textChanged(const TQString&)), this, TQT_SIGNAL(changed()) );
-  connect( m_buttonConfigurePlugin, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotConfigurePlugin()) );
+  connect( m_editBaseDir, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SLOT(slotUpdateFreeTempSpace()) );
+  connect( m_comboFileType, TQ_SIGNAL(activated(int)), 
+	   this, TQ_SLOT(slotEncoderChanged()) );
+  connect( &d->freeSpaceUpdateTimer, TQ_SIGNAL(timeout()),
+	   this, TQ_SLOT(slotUpdateFreeTempSpace()) );
+  connect( m_checkCreatePlaylist, TQ_SIGNAL(toggled(bool)), this, TQ_SIGNAL(changed()) );
+  connect( m_checkSingleFile, TQ_SIGNAL(toggled(bool)), this, TQ_SIGNAL(changed()) );
+  connect( m_checkWriteCueFile, TQ_SIGNAL(toggled(bool)), this, TQ_SIGNAL(changed()) );
+  connect( m_comboFileType, TQ_SIGNAL(activated(int)), this, TQ_SIGNAL(changed()) );
+  connect( m_editBaseDir, TQ_SIGNAL(textChanged(const TQString&)), this, TQ_SIGNAL(changed()) );
+  connect( m_buttonConfigurePlugin, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotConfigurePlugin()) );
 
   m_editBaseDir->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
   m_buttonConfigurePlugin->setIconSet( SmallIconSet( "gear" ) );

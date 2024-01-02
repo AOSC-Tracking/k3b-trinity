@@ -173,14 +173,14 @@ K3bVideoCdView::K3bVideoCdView( TQWidget* parent, const char *name )
     m_trackView->setItemsRenameable( false );
     m_trackView->setRootIsDecorated( true );
 
-    connect( m_trackView, TQT_SIGNAL( contextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ),
-             this, TQT_SLOT( slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ) );
-    connect( m_trackView, TQT_SIGNAL( selectionChanged( TQListViewItem* ) ),
-             this, TQT_SLOT( slotTrackSelectionChanged( TQListViewItem* ) ) );
-    connect( m_trackView, TQT_SIGNAL( clicked( TQListViewItem* ) ),
-             this, TQT_SLOT( slotStateChanged( TQListViewItem* ) ) );
-    connect( m_trackView, TQT_SIGNAL( spacePressed( TQListViewItem* ) ),
-             this, TQT_SLOT( slotStateChanged( TQListViewItem* ) ) );
+    connect( m_trackView, TQ_SIGNAL( contextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ),
+             this, TQ_SLOT( slotContextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ) );
+    connect( m_trackView, TQ_SIGNAL( selectionChanged( TQListViewItem* ) ),
+             this, TQ_SLOT( slotTrackSelectionChanged( TQListViewItem* ) ) );
+    connect( m_trackView, TQ_SIGNAL( clicked( TQListViewItem* ) ),
+             this, TQ_SLOT( slotStateChanged( TQListViewItem* ) ) );
+    connect( m_trackView, TQ_SIGNAL( spacePressed( TQListViewItem* ) ),
+             this, TQ_SLOT( slotStateChanged( TQListViewItem* ) ) );
 
 
     mainGrid->addLayout( toolBoxLayout, 0, 0 );
@@ -251,8 +251,8 @@ void K3bVideoCdView::reloadMedium()
     m_videocdinfo = new K3bVideoCdInfo( this );
     m_videocdinfo->info( device()->devicename() );
 
-    connect( m_videocdinfo, TQT_SIGNAL( infoFinished( bool ) ),
-             this, TQT_SLOT( slotVideoCdInfoFinished( bool ) ) );
+    connect( m_videocdinfo, TQ_SIGNAL( infoFinished( bool ) ),
+             this, TQ_SLOT( slotVideoCdInfoFinished( bool ) ) );
 
 }
 
@@ -322,20 +322,20 @@ void K3bVideoCdView::initActions()
 {
     m_actionCollection = new TDEActionCollection( this );
 
-    TDEAction* actionSelectAll = KStdAction::selectAll( this, TQT_SLOT( slotSelectAll() ),
+    TDEAction* actionSelectAll = KStdAction::selectAll( this, TQ_SLOT( slotSelectAll() ),
                                m_actionCollection, "select_all" );
-    TDEAction* actionDeselectAll = KStdAction::deselect( this, TQT_SLOT( slotDeselectAll() ),
+    TDEAction* actionDeselectAll = KStdAction::deselect( this, TQ_SLOT( slotDeselectAll() ),
                                  m_actionCollection, "deselect_all" );
     actionDeselectAll->setText( i18n( "Dese&lect All" ) );
     TDEAction* actionSelect = new TDEAction( i18n( "Select Track" ), 0, 0, this,
-                                         TQT_SLOT( slotSelect() ), actionCollection(),
+                                         TQ_SLOT( slotSelect() ), actionCollection(),
                                          "select_track" );
     TDEAction* actionDeselect = new TDEAction( i18n( "Deselect Track" ), 0, 0, this,
-                                           TQT_SLOT( slotDeselect() ), actionCollection(),
+                                           TQ_SLOT( slotDeselect() ), actionCollection(),
                                            "deselect_track" );
 
     TDEAction* actionStartRip = new TDEAction( i18n( "Start Ripping" ), "system-run", 0, this,
-                                           TQT_SLOT( startRip() ), actionCollection(), "start_rip" );
+                                           TQ_SLOT( startRip() ), actionCollection(), "start_rip" );
 
     // TODO: set the actions tooltips and whatsthis infos
 

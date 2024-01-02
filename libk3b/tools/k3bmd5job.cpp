@@ -73,8 +73,8 @@ K3bMd5Job::K3bMd5Job( K3bJobHandler* jh, TQObject* parent, const char* name )
 {
   d = new K3bMd5JobPrivate;
   d->data = new char[K3bMd5JobPrivate::BUFFERSIZE];
-  connect( &d->timer, TQT_SIGNAL(timeout()), 
-	   this, TQT_SLOT(slotUpdate()) );
+  connect( &d->timer, TQ_SIGNAL(timeout()), 
+	   this, TQ_SLOT(slotUpdate()) );
 }
 
 
@@ -135,7 +135,7 @@ void K3bMd5Job::setupFdNotifier()
   // the TQSocketNotifier will fire once the fd is closed
   delete d->fdNotifier;
   d->fdNotifier = new TQSocketNotifier( d->fileDes, TQSocketNotifier::Read, this );
-  connect( d->fdNotifier, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotUpdate()) );
+  connect( d->fdNotifier, TQ_SIGNAL(activated(int)), this, TQ_SLOT(slotUpdate()) );
   d->fdNotifier->setEnabled( true );
 }
 

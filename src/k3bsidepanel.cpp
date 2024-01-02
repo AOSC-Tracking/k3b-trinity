@@ -96,7 +96,7 @@ void K3bSidePanel::addButton( TQFrame* frame, TDEAction* a )
     b->setAutoRaise( true );
     b->setTextPosition( TQToolButton::BesideIcon );
 
-    connect( b, TQT_SIGNAL(clicked()), a, TQT_SLOT(activate()) );
+    connect( b, TQ_SIGNAL(clicked()), a, TQ_SLOT(activate()) );
 
     TQGridLayout* grid = (TQGridLayout*)(frame->layout());
     grid->addWidget( b, grid->numRows(), 0 );

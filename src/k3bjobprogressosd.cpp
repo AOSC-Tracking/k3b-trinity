@@ -50,10 +50,10 @@ K3bJobProgressOSD::K3bJobProgressOSD( TQWidget* parent, const char* name )
   // make sure we are always visible
   KWin::setOnAllDesktops( winId(), true );
 
-  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
-	   this, TQT_SLOT(refresh()) );
-  connect( kapp, TQT_SIGNAL(appearanceChanged()),
-	   this, TQT_SLOT(refresh()) );
+  connect( k3bappcore->themeManager(), TQ_SIGNAL(themeChanged()),
+	   this, TQ_SLOT(refresh()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()),
+	   this, TQ_SLOT(refresh()) );
 }
 
 

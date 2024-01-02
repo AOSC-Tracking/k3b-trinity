@@ -56,29 +56,29 @@ K3bAudioCueFileWritingJob::K3bAudioCueFileWritingJob( K3bJobHandler* jh, TQObjec
 {
   m_analyserThread = new AnalyserThread();
   m_analyserJob = new K3bThreadJob( m_analyserThread, this, this );
-  connect( m_analyserJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotAnalyserThreadFinished(bool)) );
+  connect( m_analyserJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotAnalyserThreadFinished(bool)) );
 
   m_audioDoc = new K3bAudioDoc( this );
   m_audioDoc->newDocument();
   m_audioJob = new K3bAudioJob( m_audioDoc, this, this );
 
   // just loop all through
-  connect( m_audioJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
-  connect( m_audioJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-  connect( m_audioJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
-  connect( m_audioJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_audioJob, TQT_SIGNAL(finished(bool)), this, TQT_SIGNAL(finished(bool)) );
-  connect( m_audioJob, TQT_SIGNAL(canceled()), this, TQT_SIGNAL(canceled()) );
-  connect( m_audioJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(percent(int)) );
-  connect( m_audioJob, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
-  connect( m_audioJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-  connect( m_audioJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-  connect( m_audioJob, TQT_SIGNAL(burning(bool)), this, TQT_SIGNAL(burning(bool)) );
-  connect( m_audioJob, TQT_SIGNAL(bufferStatus(int)), this, TQT_SIGNAL(bufferStatus(int)) );
-  connect( m_audioJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
-  connect( m_audioJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
+  connect( m_audioJob, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newTask(const TQString&)) );
+  connect( m_audioJob, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_audioJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_audioJob, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_audioJob, TQ_SIGNAL(finished(bool)), this, TQ_SIGNAL(finished(bool)) );
+  connect( m_audioJob, TQ_SIGNAL(canceled()), this, TQ_SIGNAL(canceled()) );
+  connect( m_audioJob, TQ_SIGNAL(percent(int)), this, TQ_SIGNAL(percent(int)) );
+  connect( m_audioJob, TQ_SIGNAL(subPercent(int)), this, TQ_SIGNAL(subPercent(int)) );
+  connect( m_audioJob, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+  connect( m_audioJob, TQ_SIGNAL(processedSubSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+  connect( m_audioJob, TQ_SIGNAL(burning(bool)), this, TQ_SIGNAL(burning(bool)) );
+  connect( m_audioJob, TQ_SIGNAL(bufferStatus(int)), this, TQ_SIGNAL(bufferStatus(int)) );
+  connect( m_audioJob, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SIGNAL(deviceBuffer(int)) );
+  connect( m_audioJob, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SIGNAL(writeSpeed(int, int)) );
 
   m_canceled = false;
   m_audioJobRunning = false;

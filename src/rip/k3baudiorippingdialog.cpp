@@ -142,7 +142,7 @@ void K3bAudioRippingDialog::setupGui()
   // -------------------------------------------------------------------------------------------
   m_patternWidget = new K3bCddbPatternWidget( mainTab );
   mainTab->addTab( m_patternWidget, i18n("File Naming") );
-  connect( m_patternWidget, TQT_SIGNAL(changed()), this, TQT_SLOT(refresh()) );
+  connect( m_patternWidget, TQ_SIGNAL(changed()), this, TQ_SLOT(refresh()) );
 
 
   // setup advanced page
@@ -176,8 +176,8 @@ void K3bAudioRippingDialog::setupGui()
 
   setStartButtonText( i18n( "Start Ripping" ), i18n( "Starts copying the selected tracks") );
   
-  connect( m_checkUseIndex0, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(refresh()) );
-  connect( m_optionWidget, TQT_SIGNAL(changed()), this, TQT_SLOT(refresh()) );
+  connect( m_checkUseIndex0, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(refresh()) );
+  connect( m_optionWidget, TQ_SIGNAL(changed()), this, TQ_SLOT(refresh()) );
 }
 
 

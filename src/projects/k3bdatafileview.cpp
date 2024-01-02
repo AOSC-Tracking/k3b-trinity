@@ -79,16 +79,16 @@ K3bDataFileView::K3bDataFileView( K3bView* view, K3bDataDirTreeView* dirTreeView
   m_currentDir = doc->root();
   checkForNewItems();
 
-  connect( m_treeView, TQT_SIGNAL(dirSelected(K3bDirItem*)), this, TQT_SLOT(slotSetCurrentDir(K3bDirItem*)) );
-  connect( m_doc, TQT_SIGNAL(itemRemoved(K3bDataItem*)), this, TQT_SLOT(slotDataItemRemoved(K3bDataItem*)) );
-  connect( m_doc, TQT_SIGNAL(itemAdded(K3bDataItem*)), this, TQT_SLOT(slotItemAdded(K3bDataItem*)) );
-  connect( this, TQT_SIGNAL(executed(TQListViewItem*)), this, TQT_SLOT(slotExecuted(TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(showPopupMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
-  connect( this, TQT_SIGNAL(dropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)),
-	   this, TQT_SLOT(slotDropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)),
-	   this, TQT_SLOT(slotDoubleClicked(TQListViewItem*)) );
+  connect( m_treeView, TQ_SIGNAL(dirSelected(K3bDirItem*)), this, TQ_SLOT(slotSetCurrentDir(K3bDirItem*)) );
+  connect( m_doc, TQ_SIGNAL(itemRemoved(K3bDataItem*)), this, TQ_SLOT(slotDataItemRemoved(K3bDataItem*)) );
+  connect( m_doc, TQ_SIGNAL(itemAdded(K3bDataItem*)), this, TQ_SLOT(slotItemAdded(K3bDataItem*)) );
+  connect( this, TQ_SIGNAL(executed(TQListViewItem*)), this, TQ_SLOT(slotExecuted(TQListViewItem*)) );
+  connect( this, TQ_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQ_SLOT(showPopupMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
+  connect( this, TQ_SIGNAL(dropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)),
+	   this, TQ_SLOT(slotDropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)) );
+  connect( this, TQ_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)),
+	   this, TQ_SLOT(slotDoubleClicked(TQListViewItem*)) );
 
   setupActions();
 }
@@ -289,7 +289,7 @@ void K3bDataFileView::slotDropped( TQDropEvent* e, TQListViewItem*, TQListViewIt
 	// event queues: the url adding dialog will be non-modal regardless of
 	// the settings in case we open it directly.
 	//
-	TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
+	TQTimer::singleShot( 0, this, TQ_SLOT(slotAddUrls()) );
       }
     }
   }
@@ -319,19 +319,19 @@ void K3bDataFileView::setupActions()
 {
   m_actionCollection = new TDEActionCollection( this );
 
-  m_actionProperties = new TDEAction( i18n("Properties"), "misc", 0, this, TQT_SLOT(slotProperties()),
+  m_actionProperties = new TDEAction( i18n("Properties"), "misc", 0, this, TQ_SLOT(slotProperties()),
 				    actionCollection(), "properties" );
-  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder-new", CTRL+Key_N, this, TQT_SLOT(slotNewDir()),
+  m_actionNewDir = new TDEAction( i18n("New Directory..."), "folder-new", CTRL+Key_N, this, TQ_SLOT(slotNewDir()),
 				actionCollection(), "new_dir" );
-  m_actionRemove = new TDEAction( i18n("Remove"), "edit-delete", Key_Delete, this, TQT_SLOT(slotRemoveItem()),
+  m_actionRemove = new TDEAction( i18n("Remove"), "edit-delete", Key_Delete, this, TQ_SLOT(slotRemoveItem()),
 				actionCollection(), "remove" );
   TDEShortcut renameShortCut( Key_F2 );
   renameShortCut.append( TDEShortcut(CTRL+Key_R) ); // backwards compatibility
-  m_actionRename = new TDEAction( i18n("Rename"), "edit", renameShortCut, this, TQT_SLOT(slotRenameItem()),
+  m_actionRename = new TDEAction( i18n("Rename"), "edit", renameShortCut, this, TQ_SLOT(slotRenameItem()),
 				actionCollection(), "rename" );
-  m_actionParentDir = new TDEAction( i18n("Parent Directory"), "go-up", 0, this, TQT_SLOT(slotParentDir()),
+  m_actionParentDir = new TDEAction( i18n("Parent Directory"), "go-up", 0, this, TQ_SLOT(slotParentDir()),
 				   actionCollection(), "parent_dir" );
-  m_actionOpen = new TDEAction( i18n("Open"), "document-open", 0, this, TQT_SLOT(slotOpen()),
+  m_actionOpen = new TDEAction( i18n("Open"), "document-open", 0, this, TQ_SLOT(slotOpen()),
 				   actionCollection(), "open" );
 
   m_popupMenu = new TDEActionMenu( m_actionCollection, "contextMenu" );

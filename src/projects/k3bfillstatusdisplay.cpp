@@ -344,7 +344,7 @@ K3bFillStatusDisplay::K3bFillStatusDisplay( K3bDoc* doc, TQWidget *parent, const
 //   d->buttonMenu->setIconSet( SmallIconSet("media-optical-cdrom-unmounted") );
 //   d->buttonMenu->setAutoRaise(true);
 //   TQToolTip::add( d->buttonMenu, i18n("Fill display properties") );
-//   connect( d->buttonMenu, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotMenuButtonClicked()) );
+//   connect( d->buttonMenu, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotMenuButtonClicked()) );
 
   TQGridLayout* layout = new TQGridLayout( this );
   layout->setSpacing(5);
@@ -357,10 +357,10 @@ K3bFillStatusDisplay::K3bFillStatusDisplay( K3bDoc* doc, TQWidget *parent, const
 
   showDvdSizes( false );
 
-  connect( d->doc, TQT_SIGNAL(changed()), this, TQT_SLOT(slotDocChanged()) );
-  connect( &d->updateTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotUpdateDisplay()) );
-  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( d->doc, TQ_SIGNAL(changed()), this, TQ_SLOT(slotDocChanged()) );
+  connect( &d->updateTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotUpdateDisplay()) );
+  connect( k3bappcore->mediaCache(), TQ_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 }
 
 K3bFillStatusDisplay::~K3bFillStatusDisplay()
@@ -378,32 +378,32 @@ void K3bFillStatusDisplay::setupPopupMenu()
   d->popup = new TDEPopupMenu( this, "popup" );
   d->dvdPopup = new TDEPopupMenu( this, "dvdpopup" );
 
-  d->actionShowMinutes = new TDERadioAction( i18n("Minutes"), 0, this, TQT_SLOT(showTime()),
+  d->actionShowMinutes = new TDERadioAction( i18n("Minutes"), 0, this, TQ_SLOT(showTime()),
 					   d->actionCollection, "fillstatus_show_minutes" );
-  d->actionShowMegs = new TDERadioAction( i18n("Megabytes"), 0, this, TQT_SLOT(showSize()),
+  d->actionShowMegs = new TDERadioAction( i18n("Megabytes"), 0, this, TQ_SLOT(showSize()),
 					d->actionCollection, "fillstatus_show_megabytes" );
 
   d->actionShowMegs->setExclusiveGroup( "show_size_in" );
   d->actionShowMinutes->setExclusiveGroup( "show_size_in" );
 
-  d->actionAuto = new TDERadioAction( i18n("Auto"), 0, this, TQT_SLOT(slotAutoSize()),
+  d->actionAuto = new TDERadioAction( i18n("Auto"), 0, this, TQ_SLOT(slotAutoSize()),
 				    d->actionCollection, "fillstatus_auto" );
-  d->action74Min = new TDERadioAction( i18n("%1 MB").arg(650), 0, this, TQT_SLOT(slot74Minutes()),
+  d->action74Min = new TDERadioAction( i18n("%1 MB").arg(650), 0, this, TQ_SLOT(slot74Minutes()),
 				     d->actionCollection, "fillstatus_74minutes" );
-  d->action80Min = new TDERadioAction( i18n("%1 MB").arg(700), 0, this, TQT_SLOT(slot80Minutes()),
+  d->action80Min = new TDERadioAction( i18n("%1 MB").arg(700), 0, this, TQ_SLOT(slot80Minutes()),
 				     d->actionCollection, "fillstatus_80minutes" );
-  d->action100Min = new TDERadioAction( i18n("%1 MB").arg(880), 0, this, TQT_SLOT(slot100Minutes()),
+  d->action100Min = new TDERadioAction( i18n("%1 MB").arg(880), 0, this, TQ_SLOT(slot100Minutes()),
 				      d->actionCollection, "fillstatus_100minutes" );
-  d->actionDvd4_7GB = new TDERadioAction( TDEIO::convertSizeFromKB((int)(4.4*1024.0*1024.0)), 0, this, TQT_SLOT(slotDvd4_7GB()),
+  d->actionDvd4_7GB = new TDERadioAction( TDEIO::convertSizeFromKB((int)(4.4*1024.0*1024.0)), 0, this, TQ_SLOT(slotDvd4_7GB()),
 					d->actionCollection, "fillstatus_dvd_4_7gb" );
   d->actionDvdDoubleLayer = new TDERadioAction( TDEIO::convertSizeFromKB((int)(8.0*1024.0*1024.0)),
-					      0, this, TQT_SLOT(slotDvdDoubleLayer()),
+					      0, this, TQ_SLOT(slotDvdDoubleLayer()),
 					      d->actionCollection, "fillstatus_dvd_double_layer" );
-  d->actionCustomSize = new K3bRadioAction( i18n("Custom..."), 0, this, TQT_SLOT(slotCustomSize()),
+  d->actionCustomSize = new K3bRadioAction( i18n("Custom..."), 0, this, TQ_SLOT(slotCustomSize()),
 					    d->actionCollection, "fillstatus_custom_size" );
   d->actionCustomSize->setAlwaysEmitActivated(true);
   d->actionDetermineSize = new K3bRadioAction( i18n("From Medium..."), "media-optical-cdrom-unmounted", 0,
-					       this, TQT_SLOT(slotDetermineSize()),
+					       this, TQ_SLOT(slotDetermineSize()),
 					       d->actionCollection, "fillstatus_size_from_disk" );
   d->actionDetermineSize->setAlwaysEmitActivated(true);
 
@@ -417,14 +417,14 @@ void K3bFillStatusDisplay::setupPopupMenu()
   d->actionDetermineSize->setExclusiveGroup( "cd_size" );
 
   d->actionLoadUserDefaults = new TDEAction( i18n("User Defaults"), "", 0,
-					   this, TQT_SLOT(slotLoadUserDefaults()),
+					   this, TQ_SLOT(slotLoadUserDefaults()),
 					   d->actionCollection, "load_user_defaults" );
   d->actionSaveUserDefaults = new TDEAction( i18n("Save User Defaults"), "", 0,
-					   this, TQT_SLOT(slotSaveUserDefaults()),
+					   this, TQ_SLOT(slotSaveUserDefaults()),
 					   d->actionCollection, "save_user_defaults" );
 
   TDEAction* dvdSizeInfoAction = new TDEAction( i18n("Why 4.4 instead of 4.7?"), "", 0,
-					    this, TQT_SLOT(slotWhy44()),
+					    this, TQ_SLOT(slotWhy44()),
 					    d->actionCollection, "why_44_gb" );
 
   d->popup->insertTitle( i18n("Show Size In") );
@@ -452,7 +452,7 @@ void K3bFillStatusDisplay::setupPopupMenu()
   d->actionLoadUserDefaults->plug( d->dvdPopup );
   d->actionSaveUserDefaults->plug( d->dvdPopup );
 
-  connect( d->displayWidget, TQT_SIGNAL(contextMenu(const TQPoint&)), this, TQT_SLOT(slotPopupMenu(const TQPoint&)) );
+  connect( d->displayWidget, TQ_SIGNAL(contextMenu(const TQPoint&)), this, TQ_SLOT(slotPopupMenu(const TQPoint&)) );
 }
 
 

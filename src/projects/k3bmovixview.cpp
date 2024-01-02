@@ -45,22 +45,22 @@ K3bMovixView::K3bMovixView( K3bMovixDoc* doc, TQWidget* parent, const char* name
   m_listView = new K3bMovixListView( m_doc, this );
   setMainWidget( m_listView );
 
-  connect( m_listView, TQT_SIGNAL(contextMenuRequested( TQListViewItem*, const TQPoint& , int )),
-	   this, TQT_SLOT(slotContextMenuRequested(TQListViewItem*, const TQPoint& , int )) );
+  connect( m_listView, TQ_SIGNAL(contextMenuRequested( TQListViewItem*, const TQPoint& , int )),
+	   this, TQ_SLOT(slotContextMenuRequested(TQListViewItem*, const TQPoint& , int )) );
 
 
   // setup actions
   m_actionProperties = new TDEAction( i18n("Properties"), "misc",
-				    0, this, TQT_SLOT(showPropertiesDialog()),
+				    0, this, TQ_SLOT(showPropertiesDialog()),
 				    actionCollection(), "movix_show_props" );
   m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete",
-				Key_Delete, this, TQT_SLOT(slotRemoveItems()),
+				Key_Delete, this, TQ_SLOT(slotRemoveItems()),
 				actionCollection(), "movix_remove_item" );
   m_actionRemoveSubTitle = new TDEAction( i18n( "Remove Subtitle File" ), "edit-delete",
-					0, this, TQT_SLOT(slotRemoveSubTitleItems()),
+					0, this, TQ_SLOT(slotRemoveSubTitleItems()),
 					actionCollection(), "movix_remove_subtitle_item" );
   m_actionAddSubTitle = new TDEAction( i18n("Add Subtitle File..."), "",
-				     0, this, TQT_SLOT(slotAddSubTitleFile()),
+				     0, this, TQ_SLOT(slotAddSubTitleFile()),
 				     actionCollection(), "movix_add_subtitle" );
 
   m_popupMenu = new TDEPopupMenu( this );
@@ -81,11 +81,11 @@ K3bMovixView::K3bMovixView( K3bMovixDoc* doc, TQWidget* parent, const char* name
   toolBox()->addLabel( i18n("Volume Name:") );
   toolBox()->addSpacing();
   toolBox()->addWidget( m_volumeIDEdit );
-  connect( m_volumeIDEdit, TQT_SIGNAL(textChanged(const TQString&)), 
+  connect( m_volumeIDEdit, TQ_SIGNAL(textChanged(const TQString&)), 
 	   m_doc,
-	   TQT_SLOT(setVolumeID(const TQString&)) );
+	   TQ_SLOT(setVolumeID(const TQString&)) );
 
-  connect( m_doc, TQT_SIGNAL(changed()), this, TQT_SLOT(slotDocChanged()) );
+  connect( m_doc, TQ_SIGNAL(changed()), this, TQ_SLOT(slotDocChanged()) );
 }
 
 

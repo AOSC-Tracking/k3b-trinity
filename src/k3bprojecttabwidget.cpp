@@ -121,8 +121,8 @@ void K3bProjectTabWidget::removePage( TQWidget* w )
 void K3bProjectTabWidget::insertTab( K3bDoc* doc )
 {
   TQTabWidget::insertTab( doc->view(), doc->URL().fileName() );
-  connect( k3bappcore->projectManager(), TQT_SIGNAL(projectSaved(K3bDoc*)), this, TQT_SLOT(slotDocSaved(K3bDoc*)) );
-  connect( doc, TQT_SIGNAL(changed(K3bDoc*)), this, TQT_SLOT(slotDocChanged(K3bDoc*)) );
+  connect( k3bappcore->projectManager(), TQ_SIGNAL(projectSaved(K3bDoc*)), this, TQ_SLOT(slotDocSaved(K3bDoc*)) );
+  connect( doc, TQ_SIGNAL(changed(K3bDoc*)), this, TQ_SLOT(slotDocChanged(K3bDoc*)) );
 
   m_projectDataMap[doc] = ProjectData( doc );
 

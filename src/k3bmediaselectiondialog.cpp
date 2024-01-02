@@ -47,8 +47,8 @@ K3bMediaSelectionDialog::K3bMediaSelectionDialog( TQWidget* parent,
   lay->addWidget( m_combo, 1, 0 );
   lay->setRowStretch( 2, 1 );
 
-  connect( m_combo, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotSelectionChanged(K3bDevice::Device*)) );
+  connect( m_combo, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotSelectionChanged(K3bDevice::Device*)) );
 
   slotSelectionChanged( m_combo->selectedDevice() );
 }

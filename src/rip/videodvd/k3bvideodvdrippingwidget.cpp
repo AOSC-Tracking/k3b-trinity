@@ -118,32 +118,32 @@ K3bVideoDVDRippingWidget::K3bVideoDVDRippingWidget( TQWidget* parent )
 
   slotAudioCodecChanged( m_comboAudioCodec->selectedValue() );
 
-  connect( m_comboAudioBitrate, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_spinVideoBitrate, TQT_SIGNAL(valueChanged(int)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_checkBlankReplace, TQT_SIGNAL(toggled(bool)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_editBlankReplace, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_comboFilenamePattern, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_editBaseDir, TQT_SIGNAL(textChanged(const TQString&)), 
-	   this, TQT_SIGNAL(changed()) );
+  connect( m_comboAudioBitrate, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_spinVideoBitrate, TQ_SIGNAL(valueChanged(int)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_checkBlankReplace, TQ_SIGNAL(toggled(bool)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_editBlankReplace, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_comboFilenamePattern, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_editBaseDir, TQ_SIGNAL(textChanged(const TQString&)), 
+	   this, TQ_SIGNAL(changed()) );
 
-  connect( m_comboAudioCodec, TQT_SIGNAL(valueChanged(int)),
-	   this, TQT_SLOT(slotAudioCodecChanged(int)) );
-  connect( m_specialStringsLabel, TQT_SIGNAL(leftClickedURL()),
-	   this, TQT_SLOT(slotSeeSpecialStrings()) );
-  connect( m_buttonCustomPictureSize, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotCustomPictureSize()) );
-  connect( m_comboVideoSize, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotVideoSizeChanged(int)) );
+  connect( m_comboAudioCodec, TQ_SIGNAL(valueChanged(int)),
+	   this, TQ_SLOT(slotAudioCodecChanged(int)) );
+  connect( m_specialStringsLabel, TQ_SIGNAL(leftClickedURL()),
+	   this, TQ_SLOT(slotSeeSpecialStrings()) );
+  connect( m_buttonCustomPictureSize, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotCustomPictureSize()) );
+  connect( m_comboVideoSize, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotVideoSizeChanged(int)) );
 
   // refresh every 2 seconds
   m_freeSpaceUpdateTimer = new TQTimer( this );
-  connect( m_freeSpaceUpdateTimer, TQT_SIGNAL(timeout()),
-	   this, TQT_SLOT(slotUpdateFreeTempSpace()) );
+  connect( m_freeSpaceUpdateTimer, TQ_SIGNAL(timeout()),
+	   this, TQ_SLOT(slotUpdateFreeTempSpace()) );
   m_freeSpaceUpdateTimer->start(2000);
   slotUpdateFreeTempSpace();
 }

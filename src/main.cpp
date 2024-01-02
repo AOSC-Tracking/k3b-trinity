@@ -145,7 +145,7 @@ int main( int argc, char* argv[] )
     K3bApplication app;
 
     // we need a running app for the init method
-    TQTimer::singleShot( 0, &app, TQT_SLOT(init()) );
+    TQTimer::singleShot( 0, &app, TQ_SLOT(init()) );
 
     return app.exec();
   }

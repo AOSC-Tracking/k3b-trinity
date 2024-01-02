@@ -178,8 +178,8 @@ namespace K3bDevice
    * Usage: 
    * \code 
    *  connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::MOUNT, dev ), 
-   *           TQT_SIGNAL(finished(DeviceHandler*)),
-   *           this, TQT_SLOT(someSlot(DeviceHandler*)) );
+   *           TQ_SIGNAL(finished(DeviceHandler*)),
+   *           this, TQ_SLOT(someSlot(DeviceHandler*)) );
    *
    *  void someSlot( DeviceHandler* dh ) {
    *     if( dh->success() ) {

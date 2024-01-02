@@ -70,9 +70,9 @@ void K3bMsInfoFetcher::start()
   //
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::NG_DISKINFO, m_device ),
-	   TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	   TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	   this,
-	   TQT_SLOT(slotMediaDetectionFinished(K3bDevice::DeviceHandler*)) );
+	   TQ_SLOT(slotMediaDetectionFinished(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -116,12 +116,12 @@ void K3bMsInfoFetcher::getMsInfo()
     emit debuggingOutput( "msinfo command:", s );
 
 
-    //   connect( m_process, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
-    // 	   this, TQT_SLOT(slotCollectOutput(TDEProcess*, char*, int)) );
-    connect( m_process, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
-	     this, TQT_SLOT(slotCollectOutput(TDEProcess*, char*, int)) );
-    connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
-	     this, TQT_SLOT(slotProcessExited()) );
+    //   connect( m_process, TQ_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+    // 	   this, TQ_SLOT(slotCollectOutput(TDEProcess*, char*, int)) );
+    connect( m_process, TQ_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+	     this, TQ_SLOT(slotCollectOutput(TDEProcess*, char*, int)) );
+    connect( m_process, TQ_SIGNAL(processExited(TDEProcess*)),
+	     this, TQ_SLOT(slotProcessExited()) );
 
     m_msInfo = TQString();
     m_collectedOutput = TQString();

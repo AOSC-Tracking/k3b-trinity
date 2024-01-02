@@ -190,14 +190,14 @@ K3bDvdCopyDialog::K3bDvdCopyDialog( TQWidget* parent, const char* name, bool mod
   //
   // setup connections
   // //////////////////////////////////////////////////////////////////////////
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_comboSourceDevice, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_comboSourceDevice, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotSourceMediumChanged(K3bDevice::Device*)) );
-  connect( m_checkSimulate, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkOnlyCreateImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged()), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_comboSourceDevice, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_comboSourceDevice, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotSourceMediumChanged(K3bDevice::Device*)) );
+  connect( m_checkSimulate, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkCacheImage, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkOnlyCreateImage, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_writingModeWidget, TQ_SIGNAL(writingModeChanged(int)), this, TQ_SLOT(slotToggleAll()) );
 
   TQToolTip::add( m_checkIgnoreReadErrors, i18n("Skip unreadable sectors") );
   TQWhatsThis::add( m_checkIgnoreReadErrors, i18n("<p>If this option is checked and K3b is not able to read a sector from the "

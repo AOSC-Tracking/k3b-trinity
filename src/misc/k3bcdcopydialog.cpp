@@ -195,18 +195,18 @@ K3bCdCopyDialog::K3bCdCopyDialog( TQWidget *parent, const char *name, bool modal
   mainGrid->setRowStretch( 2, 1 );
 
 
-  connect( m_comboSourceDevice, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_comboSourceDevice, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotSourceMediumChanged(K3bDevice::Device*)) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged(K3bDevice::Device*)),
-	   m_writingModeWidget, TQT_SLOT(setDevice(K3bDevice::Device*)) );
-  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkSimulate, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkOnlyCreateImage, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_comboCopyMode, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkReadCdText, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotToggleAll()) );
+  connect( m_comboSourceDevice, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_comboSourceDevice, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotSourceMediumChanged(K3bDevice::Device*)) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged()), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged(K3bDevice::Device*)),
+	   m_writingModeWidget, TQ_SLOT(setDevice(K3bDevice::Device*)) );
+  connect( m_writingModeWidget, TQ_SIGNAL(writingModeChanged(int)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkCacheImage, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkSimulate, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkOnlyCreateImage, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_comboCopyMode, TQ_SIGNAL(activated(int)), this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkReadCdText, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotToggleAll()) );
 
   TQToolTip::add( m_checkIgnoreDataReadErrors, i18n("Skip unreadable data sectors") );
   TQToolTip::add( m_checkNoCorrection, i18n("Disable the source drive's error correction") );

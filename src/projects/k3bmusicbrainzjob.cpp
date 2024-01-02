@@ -162,10 +162,10 @@ K3bMusicBrainzJob::K3bMusicBrainzJob( TQWidget* parent, const char* name )
   m_trmJob = new K3bThreadJob( m_trmThread, this, this );
   m_mbJob = new K3bThreadJob( m_mbThread, this, this );
 
-  connect( m_trmJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
-  connect( m_trmJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotTrmPercent(int)) );
-  connect( m_trmJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotTrmJobFinished(bool)) );
-  connect( m_mbJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMbJobFinished(bool)) );
+  connect( m_trmJob, TQ_SIGNAL(percent(int)), this, TQ_SIGNAL(subPercent(int)) );
+  connect( m_trmJob, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotTrmPercent(int)) );
+  connect( m_trmJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotTrmJobFinished(bool)) );
+  connect( m_mbJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotMbJobFinished(bool)) );
 }
 
 

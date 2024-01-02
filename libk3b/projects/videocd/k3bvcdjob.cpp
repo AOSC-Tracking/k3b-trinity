@@ -225,12 +225,12 @@ void K3bVcdJob::vcdxBuild()
 
     *m_process << TQString( "%1" ).arg( TQFile::encodeName( m_xmlFile ).data() );
 
-    connect( m_process, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseVcdxBuildOutput( TDEProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseVcdxBuildOutput( TDEProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( processExited( TDEProcess* ) ),
-             this, TQT_SLOT( slotVcdxBuildFinished() ) );
+    connect( m_process, TQ_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+             this, TQ_SLOT( slotParseVcdxBuildOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQ_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+             this, TQ_SLOT( slotParseVcdxBuildOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQ_SIGNAL( processExited( TDEProcess* ) ),
+             this, TQ_SLOT( slotVcdxBuildFinished() ) );
 
     // vcdxbuild commandline parameters
     kdDebug() << "***** vcdxbuild parameters:" << endl;
@@ -432,19 +432,19 @@ bool K3bVcdJob::prepareWriterJob()
 
     }
 
-    connect( m_writerJob, TQT_SIGNAL( infoMessage( const TQString&, int ) ), this, TQT_SIGNAL( infoMessage( const TQString&, int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( percent( int ) ), this, TQT_SLOT( slotWriterJobPercent( int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( processedSize( int, int ) ), this, TQT_SLOT( slotProcessedSize( int, int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( subPercent( int ) ), this, TQT_SIGNAL( subPercent( int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( processedSubSize( int, int ) ), this, TQT_SIGNAL( processedSubSize( int, int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( nextTrack( int, int ) ), this, TQT_SLOT( slotWriterNextTrack( int, int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( buffer( int ) ), this, TQT_SIGNAL( bufferStatus( int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( deviceBuffer( int ) ), this, TQT_SIGNAL( deviceBuffer( int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( writeSpeed( int, int ) ), this, TQT_SIGNAL( writeSpeed( int, int ) ) );
-    connect( m_writerJob, TQT_SIGNAL( finished( bool ) ), this, TQT_SLOT( slotWriterJobFinished( bool ) ) );
-    connect( m_writerJob, TQT_SIGNAL( newTask( const TQString& ) ), this, TQT_SIGNAL( newTask( const TQString& ) ) );
-    connect( m_writerJob, TQT_SIGNAL( newSubTask( const TQString& ) ), this, TQT_SIGNAL( newSubTask( const TQString& ) ) );
-    connect( m_writerJob, TQT_SIGNAL( debuggingOutput( const TQString&, const TQString& ) ), this, TQT_SIGNAL( debuggingOutput( const TQString&, const TQString& ) ) );
+    connect( m_writerJob, TQ_SIGNAL( infoMessage( const TQString&, int ) ), this, TQ_SIGNAL( infoMessage( const TQString&, int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( percent( int ) ), this, TQ_SLOT( slotWriterJobPercent( int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( processedSize( int, int ) ), this, TQ_SLOT( slotProcessedSize( int, int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( subPercent( int ) ), this, TQ_SIGNAL( subPercent( int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( processedSubSize( int, int ) ), this, TQ_SIGNAL( processedSubSize( int, int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( nextTrack( int, int ) ), this, TQ_SLOT( slotWriterNextTrack( int, int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( buffer( int ) ), this, TQ_SIGNAL( bufferStatus( int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( deviceBuffer( int ) ), this, TQ_SIGNAL( deviceBuffer( int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( writeSpeed( int, int ) ), this, TQ_SIGNAL( writeSpeed( int, int ) ) );
+    connect( m_writerJob, TQ_SIGNAL( finished( bool ) ), this, TQ_SLOT( slotWriterJobFinished( bool ) ) );
+    connect( m_writerJob, TQ_SIGNAL( newTask( const TQString& ) ), this, TQ_SIGNAL( newTask( const TQString& ) ) );
+    connect( m_writerJob, TQ_SIGNAL( newSubTask( const TQString& ) ), this, TQ_SIGNAL( newSubTask( const TQString& ) ) );
+    connect( m_writerJob, TQ_SIGNAL( debuggingOutput( const TQString&, const TQString& ) ), this, TQ_SIGNAL( debuggingOutput( const TQString&, const TQString& ) ) );
 
     return true;
 }

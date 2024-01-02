@@ -69,10 +69,10 @@ K3bAudioTrackView::K3bAudioTrackView( K3bAudioDoc* doc, TQWidget* parent, const 
     m_currentlyPlayingTrack(0)
 {
   m_player = new K3bAudioTrackPlayer( m_doc, this );
-  connect( m_player, TQT_SIGNAL(playingTrack(K3bAudioTrack*)), this,
-	   TQT_SLOT(showPlayerIndicator(K3bAudioTrack*)) );
-  connect( m_player, TQT_SIGNAL(paused(bool)), this, TQT_SLOT(togglePauseIndicator(bool)) );
-  connect( m_player, TQT_SIGNAL(stopped()), this, TQT_SLOT(removePlayerIndicator()) );
+  connect( m_player, TQ_SIGNAL(playingTrack(K3bAudioTrack*)), this,
+	   TQ_SLOT(showPlayerIndicator(K3bAudioTrack*)) );
+  connect( m_player, TQ_SIGNAL(paused(bool)), this, TQ_SLOT(togglePauseIndicator(bool)) );
+  connect( m_player, TQ_SIGNAL(stopped()), this, TQ_SLOT(removePlayerIndicator()) );
 
   setItemMargin( 5 );
   setAcceptDrops( true );
@@ -93,24 +93,24 @@ K3bAudioTrackView::K3bAudioTrackView( K3bAudioDoc* doc, TQWidget* parent, const 
   m_playerItemAnimator = new K3bListViewItemAnimator( this );
 
   m_animationTimer = new TQTimer( this );
-  connect( m_animationTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotAnimation()) );
+  connect( m_animationTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotAnimation()) );
 
   m_autoOpenTrackTimer = new TQTimer( this );
-  connect( m_autoOpenTrackTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotDragTimeout()) );
+  connect( m_autoOpenTrackTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotDragTimeout()) );
 
-  connect( this, TQT_SIGNAL(dropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)),
-	   this, TQT_SLOT(slotDropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(showPopupMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
-  connect( this, TQT_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)),
-	   this, TQT_SLOT(slotProperties()) );
+  connect( this, TQ_SIGNAL(dropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)),
+	   this, TQ_SLOT(slotDropped(TQDropEvent*, TQListViewItem*, TQListViewItem*)) );
+  connect( this, TQ_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQ_SLOT(showPopupMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
+  connect( this, TQ_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)),
+	   this, TQ_SLOT(slotProperties()) );
 
-  connect( doc, TQT_SIGNAL(changed()),
-	   this, TQT_SLOT(slotChanged()) );
-  connect( doc, TQT_SIGNAL(trackChanged(K3bAudioTrack*)),
-	   this, TQT_SLOT(slotTrackChanged(K3bAudioTrack*)) );
-  connect( doc, TQT_SIGNAL(trackRemoved(K3bAudioTrack*)),
-	   this, TQT_SLOT(slotTrackRemoved(K3bAudioTrack*)) );
+  connect( doc, TQ_SIGNAL(changed()),
+	   this, TQ_SLOT(slotChanged()) );
+  connect( doc, TQ_SIGNAL(trackChanged(K3bAudioTrack*)),
+	   this, TQ_SLOT(slotTrackChanged(K3bAudioTrack*)) );
+  connect( doc, TQ_SIGNAL(trackRemoved(K3bAudioTrack*)),
+	   this, TQ_SLOT(slotTrackRemoved(K3bAudioTrack*)) );
 
   slotChanged();
 
@@ -155,33 +155,33 @@ void K3bAudioTrackView::setupActions()
   m_popupMenu = new TDEPopupMenu( this );
 
   m_actionProperties = new TDEAction( i18n("Properties"), "misc",
-				    TDEShortcut(), this, TQT_SLOT(slotProperties()),
+				    TDEShortcut(), this, TQ_SLOT(slotProperties()),
 				    actionCollection(), "track_properties" );
   m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete",
-				Key_Delete, this, TQT_SLOT(slotRemove()),
+				Key_Delete, this, TQ_SLOT(slotRemove()),
 				actionCollection(), "track_remove" );
 
   m_actionAddSilence = new TDEAction( i18n("Add Silence") + "...", "misc",
-				    TDEShortcut(), this, TQT_SLOT(slotAddSilence()),
+				    TDEShortcut(), this, TQ_SLOT(slotAddSilence()),
 				    actionCollection(), "track_add_silence" );
   m_actionMergeTracks = new TDEAction( i18n("Merge Tracks"), "misc",
-				     TDEShortcut(), this, TQT_SLOT(slotMergeTracks()),
+				     TDEShortcut(), this, TQ_SLOT(slotMergeTracks()),
 				     actionCollection(), "track_merge" );
   m_actionSplitSource = new TDEAction( i18n("Source to Track"), "misc",
-				     TDEShortcut(), this, TQT_SLOT(slotSplitSource()),
+				     TDEShortcut(), this, TQ_SLOT(slotSplitSource()),
 				     actionCollection(), "source_split" );
   m_actionSplitTrack = new TDEAction( i18n("Split Track..."), 0,
-				    TDEShortcut(), this, TQT_SLOT(slotSplitTrack()),
+				    TDEShortcut(), this, TQ_SLOT(slotSplitTrack()),
 				    actionCollection(), "track_split" );
   m_actionEditSource = new TDEAction( i18n("Edit Source..."), 0,
-				    TDEShortcut(), this, TQT_SLOT(slotEditSource()),
+				    TDEShortcut(), this, TQ_SLOT(slotEditSource()),
 				    actionCollection(), "source_edit" );
   m_actionPlayTrack = new TDEAction( i18n("Play Track"), "media-playback-start",
-				   TDEShortcut(), this, TQT_SLOT(slotPlayTrack()),
+				   TDEShortcut(), this, TQ_SLOT(slotPlayTrack()),
 				   actionCollection(), "track_play" );
 #ifdef HAVE_MUSICBRAINZ
   TDEAction* mbAction = new TDEAction( i18n("Musicbrainz Lookup"), "musicbrainz", 0, this,
-				   TQT_SLOT(slotQueryMusicBrainz()),
+				   TQ_SLOT(slotQueryMusicBrainz()),
 				   actionCollection(), "project_audio_musicbrainz" );
   mbAction->setToolTip( i18n("Try to determine meta information over the internet") );
 #endif
@@ -394,7 +394,7 @@ void K3bAudioTrackView::slotDropped( TQDropEvent* e, TQListViewItem* parent, TQL
       // event queues: the url adding dialog will be non-modal regardless of
       // the settings in case we open it directly.
       //
-      TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
+      TQTimer::singleShot( 0, this, TQ_SLOT(slotAddUrls()) );
     }
   }
 

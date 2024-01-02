@@ -173,8 +173,8 @@ int K3bPluginManager::execPluginDialog( K3bPlugin* plugin, TQWidget* parent, con
   K3bPluginConfigWidget* configWidget = plugin->createConfigWidget( &dlg );
   if( configWidget ) {
     dlg.setMainWidget( configWidget );
-    connect( &dlg, TQT_SIGNAL(applyClicked()), configWidget, TQT_SLOT(saveConfig()) );
-    connect( &dlg, TQT_SIGNAL(okClicked()), configWidget, TQT_SLOT(saveConfig()) );
+    connect( &dlg, TQ_SIGNAL(applyClicked()), configWidget, TQ_SLOT(saveConfig()) );
+    connect( &dlg, TQ_SIGNAL(okClicked()), configWidget, TQ_SLOT(saveConfig()) );
     configWidget->loadConfig();
     int r = dlg.exec();
     delete configWidget;

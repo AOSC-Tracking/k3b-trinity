@@ -105,9 +105,9 @@ void K3bDvdJob::determineMultiSessionMode()
   }
   else {
      connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::NG_DISKINFO, m_doc->burner() ),
-	     TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	     TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	     this,
-	     TQT_SLOT(slotDetermineMultiSessionMode(K3bDevice::DeviceHandler*)) );
+	     TQ_SLOT(slotDetermineMultiSessionMode(K3bDevice::DeviceHandler*)) );
   }
 }
 

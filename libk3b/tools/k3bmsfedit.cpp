@@ -41,8 +41,8 @@ K3bMsfEdit::K3bMsfEdit( TQWidget* parent, const char* name )
   // some very high value (10000 minutes)
   setMaxValue( 10000*60*75 );
 
-  connect( this, TQT_SIGNAL(valueChanged(int)),
-	   this, TQT_SLOT(slotValueChanged(int)) );
+  connect( this, TQ_SIGNAL(valueChanged(int)),
+	   this, TQ_SLOT(slotValueChanged(int)) );
 }
 
 

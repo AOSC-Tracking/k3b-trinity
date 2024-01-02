@@ -80,7 +80,7 @@ void K3bPushButton::setDelayedPopupMenu( TQPopupMenu* popup )
 {
   if( !d->popupTimer ) {
     d->popupTimer = new TQTimer( this );
-    connect( d->popupTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotDelayedPopup()) );
+    connect( d->popupTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotDelayedPopup()) );
   }
 
   setPopup( popup );

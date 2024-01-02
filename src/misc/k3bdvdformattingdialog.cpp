@@ -99,9 +99,9 @@ K3bDvdFormattingDialog::K3bDvdFormattingDialog( TQWidget* parent, const char* na
 					    "time and some DVD writers perform a full format even if "
 					    "quick format is enabled." ) );
 
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotWriterChanged()) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged(K3bDevice::Device*)),
-	   m_writingModeWidget, TQT_SLOT(determineSupportedModesFromMedium(K3bDevice::Device*)) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged()), this, TQ_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged(K3bDevice::Device*)),
+	   m_writingModeWidget, TQ_SLOT(determineSupportedModesFromMedium(K3bDevice::Device*)) );
 
   slotWriterChanged();
 } 

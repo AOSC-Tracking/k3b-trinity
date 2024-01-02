@@ -104,10 +104,10 @@ void K3bThemedHeader::init()
 
   slotThemeChanged();
 
-  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
-  connect( kapp, TQT_SIGNAL(appearanceChanged()),
-	   this, TQT_SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQ_SIGNAL(themeChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()),
+	   this, TQ_SLOT(slotThemeChanged()) );
 }
 
 
