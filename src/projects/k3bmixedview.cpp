@@ -56,10 +56,10 @@ K3bMixedView::K3bMixedView( K3bMixedDoc* doc, TQWidget* parent, const char* name
 
   setMainWidget( splitter );
 
-  connect( m_mixedDirTreeView, TQT_SIGNAL(audioTreeSelected()), 
-	   this, TQT_SLOT(slotAudioTreeSelected()) );
-  connect( m_mixedDirTreeView, TQT_SIGNAL(dataTreeSelected()), 
-	   this, TQT_SLOT(slotDataTreeSelected()) );
+  connect( m_mixedDirTreeView, TQ_SIGNAL(audioTreeSelected()), 
+	   this, TQ_SLOT(slotAudioTreeSelected()) );
+  connect( m_mixedDirTreeView, TQ_SIGNAL(dataTreeSelected()), 
+	   this, TQ_SLOT(slotDataTreeSelected()) );
 
   m_widgetStack->raiseWidget( m_dataFileView );
 

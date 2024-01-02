@@ -79,16 +79,16 @@ K3bStatusBarManager::K3bStatusBarManager( K3bMainWindow* parent )
   m_mainWindow->statusBar()->addWidget( new TQLabel( "  ", m_mainWindow->statusBar() ), 0, true );
   m_mainWindow->statusBar()->addWidget( m_versionBox, 0, true );
 
-  connect( m_mainWindow, TQT_SIGNAL(configChanged(TDEConfig*)), this, TQT_SLOT(update()) );
-  connect( m_mainWindow->actionCollection(), TQT_SIGNAL(actionStatusText(const TQString&)),
-	   this, TQT_SLOT(showActionStatusText(const TQString&)) );
-  connect( m_mainWindow->actionCollection(), TQT_SIGNAL(clearStatusText()),
-	   this, TQT_SLOT(clearActionStatusText()) );
-  connect( k3bappcore->projectManager(), TQT_SIGNAL(activeProjectChanged(K3bDoc*)),
-	   this, TQT_SLOT(slotActiveProjectChanged(K3bDoc*)) );
-  connect( k3bappcore->projectManager(), TQT_SIGNAL(projectChanged(K3bDoc*)),
-	   this, TQT_SLOT(slotActiveProjectChanged(K3bDoc*)) );
-  connect( (m_updateTimer = new TQTimer( this )), TQT_SIGNAL(timeout()), this, TQT_SLOT(slotUpdateProjectStats()) );
+  connect( m_mainWindow, TQ_SIGNAL(configChanged(TDEConfig*)), this, TQ_SLOT(update()) );
+  connect( m_mainWindow->actionCollection(), TQ_SIGNAL(actionStatusText(const TQString&)),
+	   this, TQ_SLOT(showActionStatusText(const TQString&)) );
+  connect( m_mainWindow->actionCollection(), TQ_SIGNAL(clearStatusText()),
+	   this, TQ_SLOT(clearActionStatusText()) );
+  connect( k3bappcore->projectManager(), TQ_SIGNAL(activeProjectChanged(K3bDoc*)),
+	   this, TQ_SLOT(slotActiveProjectChanged(K3bDoc*)) );
+  connect( k3bappcore->projectManager(), TQ_SIGNAL(projectChanged(K3bDoc*)),
+	   this, TQ_SLOT(slotActiveProjectChanged(K3bDoc*)) );
+  connect( (m_updateTimer = new TQTimer( this )), TQ_SIGNAL(timeout()), this, TQ_SLOT(slotUpdateProjectStats()) );
 
   update();
 }
@@ -134,7 +134,7 @@ void K3bStatusBarManager::slotFreeTempSpace(const TQString&,
     m_pixFreeTemp->setPixmap( SmallIcon("folder_green") );
 
   // update the display every second
-  TQTimer::singleShot( 2000, this, TQT_SLOT(update()) );
+  TQTimer::singleShot( 2000, this, TQ_SLOT(update()) );
 }
 
 

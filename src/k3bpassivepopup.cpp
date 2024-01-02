@@ -127,20 +127,20 @@ K3bPassivePopup::K3bPassivePopup( TQWidget* parent )
   d->pixmapLabel->setAlignment( TQt::AlignTop );
 
   d->timeoutWidget = new K3bTimeoutWidget( this );
-  connect( d->timeoutWidget, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotClose()) );
+  connect( d->timeoutWidget, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotClose()) );
 
   d->closeButton = new K3bMiniButton( d->titleLabel );
   d->closeButton->setPixmap( style().stylePixmap( TQStyle::SP_TitleBarCloseButton, this ) );
   d->closeButton->setFixedSize( d->closeButton->pixmap()->width(), d->closeButton->pixmap()->height() );
   TQToolTip::add( d->closeButton, i18n("Close") );
-  connect( d->closeButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotClose()) );
+  connect( d->closeButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotClose()) );
 
   d->stickyButton = new K3bMiniButton( d->titleLabel );
   d->stickyButton->setToggleButton( true );
   d->stickyButton->setPixmap( const_cast< const char** >( sticky_xpm ) );
   d->stickyButton->setFixedSize( d->closeButton->pixmap()->width(), d->closeButton->pixmap()->height() );
   TQToolTip::add( d->stickyButton, i18n("Keep Open") );
-  connect( d->stickyButton, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotSticky(bool)) );
+  connect( d->stickyButton, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotSticky(bool)) );
 
   grid->addWidget( d->pixmapLabel, 0, 0 );
   grid->addWidget( d->messageLabel, 0, 1 );
@@ -218,8 +218,8 @@ void K3bPassivePopup::setMessageType( MessageType m )
 void K3bPassivePopup::slideIn()
 {
   d->showEffect = K3bWidgetShowEffect::Slide;
-  connect( K3bWidgetShowEffect::showWidget( this, (K3bWidgetShowEffect::Effect)d->showEffect ), TQT_SIGNAL(widgetShown(TQWidget*)),
-	   this, TQT_SLOT(slotShown()) );  
+  connect( K3bWidgetShowEffect::showWidget( this, (K3bWidgetShowEffect::Effect)d->showEffect ), TQ_SIGNAL(widgetShown(TQWidget*)),
+	   this, TQ_SLOT(slotShown()) );  
 }
 
 
@@ -230,7 +230,7 @@ void K3bPassivePopup::slotShown()
     d->timeoutWidget->start();
   }
   else
-    TQTimer::singleShot( d->timeout, this, TQT_SLOT(slotClose()) );
+    TQTimer::singleShot( d->timeout, this, TQ_SLOT(slotClose()) );
 }
 
 
@@ -243,8 +243,8 @@ void K3bPassivePopup::slotHidden()
 void K3bPassivePopup::slotClose()
 {
   if( d->showEffect != 0 ) {
-    connect( K3bWidgetShowEffect::hideWidget( this, (K3bWidgetShowEffect::Effect)d->showEffect ), TQT_SIGNAL(widgetHidden(TQWidget*)),
-	     this, TQT_SLOT(slotHidden()) );
+    connect( K3bWidgetShowEffect::hideWidget( this, (K3bWidgetShowEffect::Effect)d->showEffect ), TQ_SIGNAL(widgetHidden(TQWidget*)),
+	     this, TQ_SLOT(slotHidden()) );
   }
   else
     deleteLater();

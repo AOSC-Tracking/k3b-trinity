@@ -108,14 +108,14 @@ K3bMediaSelectionComboBox::K3bMediaSelectionComboBox( TQWidget* parent )
 
   d->font = font();
 
-  connect( this, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotActivated(int)) );
-  connect( k3bcore->deviceManager(), TQT_SIGNAL(changed(K3bDevice::DeviceManager*)),
-	   this, TQT_SLOT(slotDeviceManagerChanged(K3bDevice::DeviceManager*)) );
-  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
-  connect( this, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotUpdateToolTip(K3bDevice::Device*)) );
+  connect( this, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotActivated(int)) );
+  connect( k3bcore->deviceManager(), TQ_SIGNAL(changed(K3bDevice::DeviceManager*)),
+	   this, TQ_SLOT(slotDeviceManagerChanged(K3bDevice::DeviceManager*)) );
+  connect( k3bappcore->mediaCache(), TQ_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( this, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotUpdateToolTip(K3bDevice::Device*)) );
 
   updateMedia();
 

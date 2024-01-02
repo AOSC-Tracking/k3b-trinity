@@ -38,8 +38,8 @@ K3bDataVolumeDescWidget::K3bDataVolumeDescWidget( TQWidget* parent, const char* 
   m_editSystem->setValidator( isoValidator );
   m_editApplication->setValidator( isoValidator );
 
-  connect( m_spinVolumeSetSize, TQT_SIGNAL(valueChanged(int)),
-	   this, TQT_SLOT(slotVolumeSetSizeChanged(int)) );
+  connect( m_spinVolumeSetSize, TQ_SIGNAL(valueChanged(int)),
+	   this, TQ_SLOT(slotVolumeSetSizeChanged(int)) );
 
   // for now we hide the volume set size stuff since it's not working anymore in mkisofs 2.01a34
   textLabel1->hide();

@@ -182,12 +182,12 @@ bool K3bSoxEncoder::initEncoderInternal( const TQString& extension )
     d->process->setSplitStdout(true);
     d->process->setRawStdin(true);
 
-    connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)),
-	     this, TQT_SLOT(slotSoxFinished(TDEProcess*)) );
-    connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)),
-	     this, TQT_SLOT(slotSoxOutputLine(const TQString&)) );
-    connect( d->process, TQT_SIGNAL(stdoutLine(const TQString&)),
-	     this, TQT_SLOT(slotSoxOutputLine(const TQString&)) );
+    connect( d->process, TQ_SIGNAL(processExited(TDEProcess*)),
+	     this, TQ_SLOT(slotSoxFinished(TDEProcess*)) );
+    connect( d->process, TQ_SIGNAL(stderrLine(const TQString&)),
+	     this, TQ_SLOT(slotSoxOutputLine(const TQString&)) );
+    connect( d->process, TQ_SIGNAL(stdoutLine(const TQString&)),
+	     this, TQ_SLOT(slotSoxOutputLine(const TQString&)) );
 
     // input settings
     *d->process << soxBin->path

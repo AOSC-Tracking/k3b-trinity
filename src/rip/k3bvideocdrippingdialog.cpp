@@ -124,7 +124,7 @@ void K3bVideoCdRippingDialog::setupGui()
     setStartButtonText( i18n( "Start Ripping" ), i18n( "Starts extracting the selected VideoCd tracks" ) );
     // ----------------------------------------------------------------------------------
 
-    connect( m_editDirectory, TQT_SIGNAL(textChanged(const TQString&)), this, TQT_SLOT(slotUpdateFreeSpace()) );
+    connect( m_editDirectory, TQ_SIGNAL(textChanged(const TQString&)), this, TQ_SLOT(slotUpdateFreeSpace()) );
 
     m_labelNecessarySize ->setText( TDEIO::convertSize( m_videooptions ->getVideoCdSize() ) );    
 }
@@ -211,7 +211,7 @@ void K3bVideoCdRippingDialog::slotFreeSpace(const TQString&,
     else
         m_labelNecessarySize->setPaletteForegroundColor( m_labelFreeSpace->paletteForegroundColor() );
 
-    TQTimer::singleShot( 1000, this, TQT_SLOT(slotUpdateFreeSpace()) );
+    TQTimer::singleShot( 1000, this, TQ_SLOT(slotUpdateFreeSpace()) );
 }
 
 

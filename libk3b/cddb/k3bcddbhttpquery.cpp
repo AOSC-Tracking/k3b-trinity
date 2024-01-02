@@ -87,10 +87,10 @@ void K3bCddbHttpQuery::performCommand( const TQString& cmd )
     return;
   }
 
-  connect( job, TQT_SIGNAL(data(TDEIO::Job*, const TQByteArray&)),
-	   TQT_SLOT(slotData(TDEIO::Job*, const TQByteArray&)) );
-  connect( job, TQT_SIGNAL(result(TDEIO::Job*)),
-	   TQT_SLOT(slotResult(TDEIO::Job*)) );
+  connect( job, TQ_SIGNAL(data(TDEIO::Job*, const TQByteArray&)),
+	   TQ_SLOT(slotData(TDEIO::Job*, const TQByteArray&)) );
+  connect( job, TQ_SIGNAL(result(TDEIO::Job*)),
+	   TQ_SLOT(slotResult(TDEIO::Job*)) );
 }
 
 

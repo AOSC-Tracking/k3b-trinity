@@ -89,11 +89,11 @@ K3bVideoDVDRippingJob::K3bVideoDVDRippingJob( K3bJobHandler* hdl, TQObject* pare
 
   m_transcodingJob = new K3bVideoDVDTitleTranscodingJob( this, this );
   connectSubJob( m_transcodingJob,
-		 TQT_SLOT(slotTranscodingJobFinished(bool)),
-		 TQT_SIGNAL(newTask(const TQString&)),
-		 TQT_SIGNAL(newSubTask(const TQString&)),
-		 TQT_SLOT(slotTranscodingProgress(int)),
-		 TQT_SIGNAL(subPercent(int)),
+		 TQ_SLOT(slotTranscodingJobFinished(bool)),
+		 TQ_SIGNAL(newTask(const TQString&)),
+		 TQ_SIGNAL(newSubTask(const TQString&)),
+		 TQ_SLOT(slotTranscodingProgress(int)),
+		 TQ_SIGNAL(subPercent(int)),
 		 0,
 		 0 );
   m_detectClippingJob = 0;
@@ -234,11 +234,11 @@ void K3bVideoDVDRippingJob::startDetectClipping( int ripInfoIndex )
   if( !m_detectClippingJob ) {
     m_detectClippingJob = new K3bVideoDVDTitleDetectClippingJob( this, this );
     connectSubJob( m_detectClippingJob,
-		   TQT_SLOT(slotDetectClippingJobFinished(bool)),
-		   TQT_SIGNAL(newTask(const TQString&)),
-		   TQT_SIGNAL(newSubTask(const TQString&)),
-		   TQT_SLOT(slotDetectClippingProgress(int)),
-		   TQT_SIGNAL(subPercent(int)),
+		   TQ_SLOT(slotDetectClippingJobFinished(bool)),
+		   TQ_SIGNAL(newTask(const TQString&)),
+		   TQ_SIGNAL(newSubTask(const TQString&)),
+		   TQ_SLOT(slotDetectClippingProgress(int)),
+		   TQ_SIGNAL(subPercent(int)),
 		   0,
 		   0 );
   }

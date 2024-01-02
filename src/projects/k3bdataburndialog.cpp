@@ -84,8 +84,8 @@ K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, TQWidget *parent, const c
 
   setupSettingsTab();
 
-  connect( m_comboMultisession, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotMultiSessionModeChanged()) );
+  connect( m_comboMultisession, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotMultiSessionModeChanged()) );
 
   m_writerSelectionWidget->setWantedMediumState( K3bDevice::STATE_EMPTY|K3bDevice::STATE_INCOMPLETE );
 
@@ -98,8 +98,8 @@ K3bDataBurnDialog::K3bDataBurnDialog(K3bDataDoc* _doc, TQWidget *parent, const c
       m_tempDirSelectionWidget->setDefaultImageFileName( _doc->isoOptions().volumeID() + ".iso" );
   }
 
-  connect( m_imageSettingsWidget->m_editVolumeName, TQT_SIGNAL(textChanged(const TQString&)),
-           m_tempDirSelectionWidget, TQT_SLOT(setDefaultImageFileName(const TQString&)) );
+  connect( m_imageSettingsWidget->m_editVolumeName, TQ_SIGNAL(textChanged(const TQString&)),
+           m_tempDirSelectionWidget, TQ_SLOT(setDefaultImageFileName(const TQString&)) );
 }
 
 K3bDataBurnDialog::~K3bDataBurnDialog()

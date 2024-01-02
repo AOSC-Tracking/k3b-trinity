@@ -62,8 +62,8 @@ K3bVideoDVDRippingView::K3bVideoDVDRippingView( TQWidget* parent, const char * n
   // ----------------------------------------------------------------------------------
   m_titleView = new K3bVideoDVDRippingTitleListView( mainWidget() );
 
-  connect( m_titleView, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
+  connect( m_titleView, TQ_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQ_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
 
   // general layout
   // ----------------------------------------------------------------------------------
@@ -219,19 +219,19 @@ void K3bVideoDVDRippingView::initActions()
   m_actionCollection = new TDEActionCollection( this );
 
   TDEAction* actionSelectAll = new TDEAction( i18n("Check All"), 0, 0, this,
-					  TQT_SLOT(slotCheckAll()), actionCollection(),
+					  TQ_SLOT(slotCheckAll()), actionCollection(),
 					  "check_all" );
   TDEAction* actionDeselectAll = new TDEAction( i18n("Uncheck All"), 0, 0, this,
-					    TQT_SLOT(slotUncheckAll()), actionCollection(),
+					    TQ_SLOT(slotUncheckAll()), actionCollection(),
 					    "uncheck_all" );
   TDEAction* actionSelect = new TDEAction( i18n("Check Track"), 0, 0, this,
-				       TQT_SLOT(slotCheck()), actionCollection(),
+				       TQ_SLOT(slotCheck()), actionCollection(),
 				       "select_track" );
   TDEAction* actionDeselect = new TDEAction( i18n("Uncheck Track"), 0, 0, this,
-					 TQT_SLOT(slotUncheck()), actionCollection(),
+					 TQ_SLOT(slotUncheck()), actionCollection(),
 					 "deselect_track" );
   TDEAction* actionStartRip = new TDEAction( i18n("Start Ripping"), "gear", 0, this,
-					 TQT_SLOT(slotStartRipping()), m_actionCollection, "start_rip" );
+					 TQ_SLOT(slotStartRipping()), m_actionCollection, "start_rip" );
 
   actionStartRip->setToolTip( i18n("Open the Video DVD ripping dialog") );
 

@@ -73,13 +73,13 @@ K3bFileTreeComboBox::K3bFileTreeComboBox( TQWidget* parent, const char* name )
   // HACK! Why the hell is TQComboBox that closed???
   listBox()->insertItem( "HACK" );
 
-  connect( m_fileTreeView, TQT_SIGNAL(deviceExecuted(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotDeviceExecuted(K3bDevice::Device*)) );
-  connect( m_fileTreeView, TQT_SIGNAL(urlExecuted(const KURL&)),
-	   this, TQT_SLOT(slotUrlExecuted(const KURL&)) );
+  connect( m_fileTreeView, TQ_SIGNAL(deviceExecuted(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotDeviceExecuted(K3bDevice::Device*)) );
+  connect( m_fileTreeView, TQ_SIGNAL(urlExecuted(const KURL&)),
+	   this, TQ_SLOT(slotUrlExecuted(const KURL&)) );
 
-  connect( lineEdit(), TQT_SIGNAL(returnPressed()),
-	   this, TQT_SLOT(slotGoUrl()) );
+  connect( lineEdit(), TQ_SIGNAL(returnPressed()),
+	   this, TQ_SLOT(slotGoUrl()) );
 
   // TODO: subclass KURLCompletition to support the dev:/ stuff and block any non-local urls
 }

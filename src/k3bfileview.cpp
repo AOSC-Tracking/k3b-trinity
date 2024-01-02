@@ -108,11 +108,11 @@ void K3bFileView::setupGUI()
   filter += "\n" + i18n("video/mpeg |MPEG Video Files");
   m_filterWidget->setFilter(filter);
 
-  connect( m_filterWidget, TQT_SIGNAL(filterChanged()), TQT_SLOT(slotFilterChanged()) );
+  connect( m_filterWidget, TQ_SIGNAL(filterChanged()), TQ_SLOT(slotFilterChanged()) );
 
-  connect( m_dirOp, TQT_SIGNAL(fileHighlighted(const KFileItem*)), this, TQT_SLOT(slotFileHighlighted(const KFileItem*)) );
-  connect( m_dirOp, TQT_SIGNAL(urlEntered(const KURL&)), this, TQT_SIGNAL(urlEntered(const KURL&)) );
-  connect( m_dirOp, TQT_SIGNAL(fileSelected(const KFileItem*)), m_dirOp, TQT_SLOT(slotAddFilesToProject()) );
+  connect( m_dirOp, TQ_SIGNAL(fileHighlighted(const KFileItem*)), this, TQ_SLOT(slotFileHighlighted(const KFileItem*)) );
+  connect( m_dirOp, TQ_SIGNAL(urlEntered(const KURL&)), this, TQ_SIGNAL(urlEntered(const KURL&)) );
+  connect( m_dirOp, TQ_SIGNAL(fileSelected(const KFileItem*)), m_dirOp, TQ_SLOT(slotAddFilesToProject()) );
 
   slotFileHighlighted(0);
 }

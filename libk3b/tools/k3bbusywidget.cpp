@@ -27,7 +27,7 @@ K3bBusyWidget::K3bBusyWidget( TQWidget* parent, const char* name )
   m_busyTimer = new TQTimer( this );
   m_iBusyPosition = 0;
 
-  connect( m_busyTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(animateBusy()) );
+  connect( m_busyTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(animateBusy()) );
 
   m_bBusy = false;
 }

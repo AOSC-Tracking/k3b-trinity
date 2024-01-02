@@ -109,8 +109,8 @@ void K3bProjectManager::addProject( K3bDoc* doc )
     
     d->projects.append(doc);
 
-    connect( doc, TQT_SIGNAL(changed(K3bDoc*)),
-	     this, TQT_SLOT(slotProjectChanged(K3bDoc*)) );
+    connect( doc, TQ_SIGNAL(changed(K3bDoc*)),
+	     this, TQ_SLOT(slotProjectChanged(K3bDoc*)) );
 
     emit newProject( doc );
   }

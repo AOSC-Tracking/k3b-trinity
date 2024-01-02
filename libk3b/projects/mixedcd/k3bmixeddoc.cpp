@@ -37,10 +37,10 @@ K3bMixedDoc::K3bMixedDoc( TQObject* parent )
   m_dataDoc = new K3bDataDoc( this );
   m_audioDoc = new K3bAudioDoc( this );
 
-  connect( m_dataDoc, TQT_SIGNAL(changed()),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_audioDoc, TQT_SIGNAL(changed()),
-	   this, TQT_SIGNAL(changed()) );
+  connect( m_dataDoc, TQ_SIGNAL(changed()),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_audioDoc, TQ_SIGNAL(changed()),
+	   this, TQ_SIGNAL(changed()) );
 }
 
 

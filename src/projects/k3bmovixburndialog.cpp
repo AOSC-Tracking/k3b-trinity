@@ -79,8 +79,8 @@ K3bMovixBurnDialog::K3bMovixBurnDialog( K3bMovixDoc* doc, TQWidget* parent, cons
       m_tempDirSelectionWidget->setDefaultImageFileName( m_doc->isoOptions().volumeID() + ".iso" );
   }
 
-  connect( m_imageSettingsWidget->m_editVolumeName, TQT_SIGNAL(textChanged(const TQString&)),
-           m_tempDirSelectionWidget, TQT_SLOT(setDefaultImageFileName(const TQString&)) );
+  connect( m_imageSettingsWidget->m_editVolumeName, TQ_SIGNAL(textChanged(const TQString&)),
+           m_tempDirSelectionWidget, TQ_SLOT(setDefaultImageFileName(const TQString&)) );
 }
 
 

@@ -72,9 +72,9 @@ K3bPluginOptionTab::K3bPluginOptionTab( TQWidget* parent, const char* name )
   m_viewPlugins->setAlternateBackground( TQColor() );
   m_viewPlugins->setAllColumnsShowFocus(true);
 
-  connect( m_viewPlugins, TQT_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)), this, TQT_SLOT(slotConfigureButtonClicked()) );
-  connect( m_buttonConfigure, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotConfigureButtonClicked()) );
-  connect( m_viewPlugins, TQT_SIGNAL(selectionChanged()), this, TQT_SLOT(slotSelectionChanged()) );
+  connect( m_viewPlugins, TQ_SIGNAL(doubleClicked(TQListViewItem*, const TQPoint&, int)), this, TQ_SLOT(slotConfigureButtonClicked()) );
+  connect( m_buttonConfigure, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotConfigureButtonClicked()) );
+  connect( m_viewPlugins, TQ_SIGNAL(selectionChanged()), this, TQ_SLOT(slotSelectionChanged()) );
 }
 
 

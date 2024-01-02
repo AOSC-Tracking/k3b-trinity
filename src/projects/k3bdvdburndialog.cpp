@@ -77,8 +77,8 @@ K3bDvdBurnDialog::K3bDvdBurnDialog( K3bDvdDoc* doc, TQWidget *parent, const char
       m_tempDirSelectionWidget->setDefaultImageFileName( doc->isoOptions().volumeID() + ".iso" );
   }
 
-  connect( m_imageSettingsWidget->m_editVolumeName, TQT_SIGNAL(textChanged(const TQString&)),
-           m_tempDirSelectionWidget, TQT_SLOT(setDefaultImageFileName(const TQString&)) );
+  connect( m_imageSettingsWidget->m_editVolumeName, TQ_SIGNAL(textChanged(const TQString&)),
+           m_tempDirSelectionWidget, TQ_SLOT(setDefaultImageFileName(const TQString&)) );
 }
 
 
@@ -104,8 +104,8 @@ void K3bDvdBurnDialog::setupSettingsTab()
 
   addPage( frame, i18n("Misc") );
 
-  connect( m_comboMultisession, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotMultiSessionModeChanged()) );
+  connect( m_comboMultisession, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotMultiSessionModeChanged()) );
 }
 
 

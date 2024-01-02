@@ -56,18 +56,18 @@ K3bCddbPatternWidget::K3bCddbPatternWidget( TQWidget* parent, const char* name )
   m_comboPlaylistPattern->insertItem( i18n( "Playlist" ) );
   m_comboPlaylistPattern->insertItem( i18n( "playlists/%{albumartist}/%{albumtitle    }" ) );
 
-  connect( m_comboFilenamePattern, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_comboPlaylistPattern, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_editBlankReplace, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_checkBlankReplace, TQT_SIGNAL(toggled(bool)),
-	   this, TQT_SIGNAL(changed()) );
-  connect( m_specialStringsLabel, TQT_SIGNAL(leftClickedURL()),
-	   this, TQT_SLOT(slotSeeSpecialStrings()) );
-  connect( m_conditionalInclusionLabel, TQT_SIGNAL(leftClickedURL()),
-	   this, TQT_SLOT(slotSeeConditionalInclusion()) );
+  connect( m_comboFilenamePattern, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_comboPlaylistPattern, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_editBlankReplace, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_checkBlankReplace, TQ_SIGNAL(toggled(bool)),
+	   this, TQ_SIGNAL(changed()) );
+  connect( m_specialStringsLabel, TQ_SIGNAL(leftClickedURL()),
+	   this, TQ_SLOT(slotSeeSpecialStrings()) );
+  connect( m_conditionalInclusionLabel, TQ_SIGNAL(leftClickedURL()),
+	   this, TQ_SLOT(slotSeeConditionalInclusion()) );
 }
 
 

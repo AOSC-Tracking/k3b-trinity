@@ -57,9 +57,9 @@ K3bMixedDirTreeView::K3bMixedDirTreeView( K3bView* view, K3bMixedDoc* doc, TQWid
 {
   m_audioRootItem = new PrivateAudioRootViewItem( doc, this, root() );
 
-  connect( this, TQT_SIGNAL(selectionChanged(TQListViewItem*)),
-	   this, TQT_SLOT(slotSelectionChanged(TQListViewItem*)) );
-  connect( m_doc->audioDoc(), TQT_SIGNAL(changed()), this, TQT_SLOT(slotNewAudioTracks()) );
+  connect( this, TQ_SIGNAL(selectionChanged(TQListViewItem*)),
+	   this, TQ_SLOT(slotSelectionChanged(TQListViewItem*)) );
+  connect( m_doc->audioDoc(), TQ_SIGNAL(changed()), this, TQ_SLOT(slotNewAudioTracks()) );
 }
 
 

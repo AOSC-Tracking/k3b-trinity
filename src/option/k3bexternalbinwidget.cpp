@@ -184,9 +184,9 @@ K3bExternalBinWidget::K3bExternalBinWidget( K3bExternalBinManager* manager, TQWi
   m_programRootItems.setAutoDelete( true );
 
 
-  connect( m_rescanButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(rescan()) );
-  connect( m_defaultButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotSetDefaultButtonClicked()) );
-  connect( m_programView, TQT_SIGNAL(selectionChanged(TQListViewItem*)), this, TQT_SLOT(slotProgramSelectionChanged(TQListViewItem*)) );
+  connect( m_rescanButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(rescan()) );
+  connect( m_defaultButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotSetDefaultButtonClicked()) );
+  connect( m_programView, TQ_SIGNAL(selectionChanged(TQListViewItem*)), this, TQ_SLOT(slotProgramSelectionChanged(TQListViewItem*)) );
 
   slotProgramSelectionChanged( 0 );
 }

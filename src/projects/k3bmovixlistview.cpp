@@ -189,12 +189,12 @@ K3bMovixListView::K3bMovixListView( K3bMovixDoc* doc, TQWidget* parent, const ch
 		 + i18n("To remove or rename files use the context menu.") + "\n"
 		 + i18n("After that press the burn button to write the CD.") );
 
-  connect( m_doc, TQT_SIGNAL(changed()), this, TQT_SLOT(slotChanged()) );
-  connect( m_doc, TQT_SIGNAL(newMovixFileItems()), this, TQT_SLOT(slotNewFileItems()) );
-  connect( m_doc, TQT_SIGNAL(movixItemRemoved(K3bMovixFileItem*)), this, TQT_SLOT(slotFileItemRemoved(K3bMovixFileItem*)) );
-  connect( m_doc, TQT_SIGNAL(subTitleItemRemoved(K3bMovixFileItem*)), this, TQT_SLOT(slotSubTitleItemRemoved(K3bMovixFileItem*)) );
-  connect( this, TQT_SIGNAL(dropped(TDEListView*, TQDropEvent*, TQListViewItem*)),
-	   this, TQT_SLOT(slotDropped(TDEListView*, TQDropEvent*, TQListViewItem*)) );
+  connect( m_doc, TQ_SIGNAL(changed()), this, TQ_SLOT(slotChanged()) );
+  connect( m_doc, TQ_SIGNAL(newMovixFileItems()), this, TQ_SLOT(slotNewFileItems()) );
+  connect( m_doc, TQ_SIGNAL(movixItemRemoved(K3bMovixFileItem*)), this, TQ_SLOT(slotFileItemRemoved(K3bMovixFileItem*)) );
+  connect( m_doc, TQ_SIGNAL(subTitleItemRemoved(K3bMovixFileItem*)), this, TQ_SLOT(slotSubTitleItemRemoved(K3bMovixFileItem*)) );
+  connect( this, TQ_SIGNAL(dropped(TDEListView*, TQDropEvent*, TQListViewItem*)),
+	   this, TQ_SLOT(slotDropped(TDEListView*, TQDropEvent*, TQListViewItem*)) );
 
   // let's see what the doc already has
   slotNewFileItems();

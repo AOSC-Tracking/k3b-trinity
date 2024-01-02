@@ -67,14 +67,14 @@ K3bThemeOptionTab::K3bThemeOptionTab(TQWidget *parent, const char *name )
   m_viewTheme->setShadeSortColumn( false );
 #endif
 
-  connect( m_viewTheme, TQT_SIGNAL(selectionChanged()),
-	   this, TQT_SLOT(selectionChanged()) );
-  connect( kapp, TQT_SIGNAL(appearanceChanged()),
-	   this, TQT_SLOT(selectionChanged()) );
-  connect( m_buttonInstallTheme, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotInstallTheme()) );
-  connect( m_buttonRemoveTheme, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotRemoveTheme()) );
+  connect( m_viewTheme, TQ_SIGNAL(selectionChanged()),
+	   this, TQ_SLOT(selectionChanged()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()),
+	   this, TQ_SLOT(selectionChanged()) );
+  connect( m_buttonInstallTheme, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotInstallTheme()) );
+  connect( m_buttonRemoveTheme, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotRemoveTheme()) );
 }
 
 

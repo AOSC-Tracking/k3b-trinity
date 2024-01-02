@@ -38,22 +38,22 @@ void K3bJobInterface::setJob( K3bJob* job )
   m_lastProgress = m_lastSubProgress = 0;
 
   if( m_job ) {
-    connect( m_job, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SLOT(slotNewTask(const TQString&)) );
-    connect( m_job, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SLOT(slotNewSubTask(const TQString&)) );
-    connect( m_job, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SLOT(slotInfoMessage(const TQString&, int)) );
-    connect( m_job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotFinished(bool)) );
-    connect( m_job, TQT_SIGNAL(started()), this, TQT_SLOT(slotStarted()) );
-    connect( m_job, TQT_SIGNAL(canceled()), this, TQT_SLOT(slotCanceled()) );
-    connect( m_job, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotProgress(int)) );
-    connect( m_job, TQT_SIGNAL(subPercent(int)), this, TQT_SLOT(slotSubProgress(int)) );
-    connect( m_job, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotNextTrack(int, int)) );
+    connect( m_job, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SLOT(slotNewTask(const TQString&)) );
+    connect( m_job, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SLOT(slotNewSubTask(const TQString&)) );
+    connect( m_job, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SLOT(slotInfoMessage(const TQString&, int)) );
+    connect( m_job, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotFinished(bool)) );
+    connect( m_job, TQ_SIGNAL(started()), this, TQ_SLOT(slotStarted()) );
+    connect( m_job, TQ_SIGNAL(canceled()), this, TQ_SLOT(slotCanceled()) );
+    connect( m_job, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotProgress(int)) );
+    connect( m_job, TQ_SIGNAL(subPercent(int)), this, TQ_SLOT(slotSubProgress(int)) );
+    connect( m_job, TQ_SIGNAL(nextTrack(int, int)), this, TQ_SLOT(slotNextTrack(int, int)) );
 
     if( m_job->inherits( "K3bBurnJob" ) ) {
-      connect( m_job, TQT_SIGNAL(bufferStatus(int)), this, TQT_SLOT(slotBuffer(int)) );
-      connect( m_job, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SLOT(slotDeviceBuffer(int)) );
+      connect( m_job, TQ_SIGNAL(bufferStatus(int)), this, TQ_SLOT(slotBuffer(int)) );
+      connect( m_job, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SLOT(slotDeviceBuffer(int)) );
     }
 
-    connect( m_job, TQT_SIGNAL(destroyed()), this, TQT_SLOT(slotDestroyed()) );
+    connect( m_job, TQ_SIGNAL(destroyed()), this, TQ_SLOT(slotDestroyed()) );
   }
 }
 

@@ -53,7 +53,7 @@ K3bDirOperator::K3bDirOperator(const KURL& url, TQWidget* parent, const char* na
   m_bmMenu = new KBookmarkMenu( bmMan, this, m_bmPopup->popupMenu(), actionCollection(), true );
 
   (void)new TDEAction( i18n("&Add to Project"), SHIFT+Key_Return, 
-		     this, TQT_SLOT(slotAddFilesToProject()), 
+		     this, TQ_SLOT(slotAddFilesToProject()), 
 		     actionCollection(), "add_file_to_project");
 }
 

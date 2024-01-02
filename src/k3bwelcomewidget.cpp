@@ -96,9 +96,9 @@ K3bWelcomeWidget::Display::Display( K3bWelcomeWidget* parent )
   m_rows = m_cols = 1;
 
   m_buttonMore = new K3bFlatButton( i18n("Further actions..."), this );
-  connect( m_buttonMore, TQT_SIGNAL(pressed()), parent, TQT_SLOT(slotMoreActions()) );
+  connect( m_buttonMore, TQ_SIGNAL(pressed()), parent, TQ_SLOT(slotMoreActions()) );
 
-  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()), this, TQT_SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQ_SIGNAL(themeChanged()), this, TQ_SLOT(slotThemeChanged()) );
 
   slotThemeChanged();
 }
@@ -351,9 +351,9 @@ K3bWelcomeWidget::K3bWelcomeWidget( K3bMainWindow* mw, TQWidget* parent, const c
   main = new Display( this );
   addChild( main );
 
-  connect( main, TQT_SIGNAL(dropped(const KURL::List&)), m_mainWindow, TQT_SLOT(addUrls(const KURL::List&)) );
+  connect( main, TQ_SIGNAL(dropped(const KURL::List&)), m_mainWindow, TQ_SLOT(addUrls(const KURL::List&)) );
 
-  connect( kapp, TQT_SIGNAL(appearanceChanged()), main, TQT_SLOT(update()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()), main, TQ_SLOT(update()) );
 }
 
 

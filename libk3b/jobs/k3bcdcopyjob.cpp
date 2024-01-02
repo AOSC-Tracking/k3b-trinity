@@ -173,8 +173,8 @@ void K3bCdCopyJob::start()
 
   // FIXME: read ISRCs and MCN
 
-  connect( K3bDevice::diskInfo( m_readerDevice ), TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
-	   this, TQT_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
+  connect( K3bDevice::diskInfo( m_readerDevice ), TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	   this, TQ_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -368,9 +368,9 @@ void K3bCdCopyJob::searchCdText()
   emit newSubTask( i18n("Searching CD-TEXT") );
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::CD_TEXT_RAW, m_readerDevice ),
-	   TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	   TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	   this,
-	   TQT_SLOT(slotCdTextReady(K3bDevice::DeviceHandler*)) );
+	   TQ_SLOT(slotCdTextReady(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -411,8 +411,8 @@ void K3bCdCopyJob::queryCddb()
 
   if( !d->cddb ) {
     d->cddb = new K3bCddb( this );
-    connect( d->cddb, TQT_SIGNAL(queryFinished(int)),
-	     this, TQT_SLOT(slotCddbQueryFinished(int)) );
+    connect( d->cddb, TQ_SIGNAL(queryFinished(int)),
+	     this, TQ_SLOT(slotCddbQueryFinished(int)) );
   }
 
   TDEConfig* c = k3bcore->config();
@@ -594,13 +594,13 @@ void K3bCdCopyJob::readNextSession()
   if( d->currentReadSession == 1 && d->toc[0].type() == K3bDevice::Track::AUDIO ) {
     if( !d->audioSessionReader ) {
       d->audioSessionReader = new K3bAudioSessionReadingJob( this, this );
-      connect( d->audioSessionReader, TQT_SIGNAL(nextTrack(int, int)),
-	       this, TQT_SLOT(slotReadingNextTrack(int, int)) );
+      connect( d->audioSessionReader, TQ_SIGNAL(nextTrack(int, int)),
+	       this, TQ_SLOT(slotReadingNextTrack(int, int)) );
       connectSubJob( d->audioSessionReader,
-		     TQT_SLOT(slotSessionReaderFinished(bool)),
+		     TQ_SLOT(slotSessionReaderFinished(bool)),
 		     true,
-		     TQT_SLOT(slotReaderProgress(int)),
-		     TQT_SLOT(slotReaderSubProgress(int)) );
+		     TQ_SLOT(slotReaderProgress(int)),
+		     TQ_SLOT(slotReaderSubProgress(int)) );
     }
 
     d->audioSessionReader->setDevice( m_readerDevice );
@@ -619,12 +619,12 @@ void K3bCdCopyJob::readNextSession()
   else {
     if( !d->dataTrackReader ) {
       d->dataTrackReader = new K3bDataTrackReader( this, this );
-      connect( d->dataTrackReader, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotReaderProgress(int)) );
-      connect( d->dataTrackReader, TQT_SIGNAL(processedSize(int, int)), this, TQT_SLOT(slotReaderProcessedSize(int, int)) );
-      connect( d->dataTrackReader, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotSessionReaderFinished(bool)) );
-      connect( d->dataTrackReader, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-      connect( d->dataTrackReader, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	       this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotReaderProgress(int)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(processedSize(int, int)), this, TQ_SLOT(slotReaderProcessedSize(int, int)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotSessionReaderFinished(bool)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	       this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
     }
 
     d->dataTrackReader->setDevice( m_readerDevice );
@@ -707,20 +707,20 @@ bool K3bCdCopyJob::writeNextSession()
 
   if( !d->cdrecordWriter ) {
     d->cdrecordWriter = new K3bCdrecordWriter( m_writerDevice, this, this );
-    connect( d->cdrecordWriter, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterProgress(int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWritingNextTrack(int, int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
-    //    connect( d->cdrecordWriter, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-    connect( d->cdrecordWriter, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	     this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotWriterProgress(int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSize(int, int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(subPercent(int)), this, TQ_SIGNAL(subPercent(int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(processedSubSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(nextTrack(int, int)), this, TQ_SLOT(slotWritingNextTrack(int, int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(buffer(int)), this, TQ_SIGNAL(bufferStatus(int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SIGNAL(deviceBuffer(int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SIGNAL(writeSpeed(int, int)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotWriterFinished(bool)) );
+    //    connect( d->cdrecordWriter, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newTask(const TQString&)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+    connect( d->cdrecordWriter, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	     this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   d->cdrecordWriter->setBurnDevice( m_writerDevice );
@@ -1015,8 +1015,8 @@ void K3bCdCopyJob::slotWriterFinished( bool success )
 
       // reload the media
       emit newSubTask( i18n("Reloading the medium") );
-      connect( K3bDevice::reload( m_writerDevice ), TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
-	       this, TQT_SLOT(slotMediaReloadedForNextSession(K3bDevice::DeviceHandler*)) );
+      connect( K3bDevice::reload( m_writerDevice ), TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	       this, TQ_SLOT(slotMediaReloadedForNextSession(K3bDevice::DeviceHandler*)) );
     }
     else {
       d->doneCopies++;

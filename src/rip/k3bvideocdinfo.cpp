@@ -67,12 +67,12 @@ void K3bVideoCdInfo::info( const TQString& device )
 
     *m_process << "-q" << "--norip" << "-i" << device << "-o" << "-";
 
-    connect( m_process, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseOutput( TDEProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
-             this, TQT_SLOT( slotParseOutput( TDEProcess*, char*, int ) ) );
-    connect( m_process, TQT_SIGNAL( processExited( TDEProcess* ) ),
-             this, TQT_SLOT( slotInfoFinished() ) );
+    connect( m_process, TQ_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+             this, TQ_SLOT( slotParseOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQ_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+             this, TQ_SLOT( slotParseOutput( TDEProcess*, char*, int ) ) );
+    connect( m_process, TQ_SIGNAL( processExited( TDEProcess* ) ),
+             this, TQ_SLOT( slotInfoFinished() ) );
 
     if ( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) ) {
         kdDebug() << "(K3bVideoCdInfo::info) could not start vcdxrip" << endl;

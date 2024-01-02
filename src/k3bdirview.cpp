@@ -135,24 +135,24 @@ K3bDirView::K3bDirView(K3bFileTreeView* treeView, TQWidget *parent, const char *
     m_mainSplitter->setSizes( sizes );
   }
 
-  connect( m_fileTreeView, TQT_SIGNAL(urlExecuted(const KURL&)),
-	   this, TQT_SLOT(slotDirActivated(const KURL&)) );
-  connect( m_fileTreeView, TQT_SIGNAL(deviceExecuted(K3bDevice::Device*)),
-	   this, TQT_SLOT(showDevice(K3bDevice::Device*)) );
-  connect( m_fileTreeView, TQT_SIGNAL(deviceExecuted(K3bDevice::Device*)),
-	   this, TQT_SIGNAL(deviceSelected(K3bDevice::Device*)) );
-  connect( m_fileTreeView, TQT_SIGNAL(contextMenu(K3bDevice::Device*, const TQPoint&)),
-	   this, TQT_SLOT(slotFileTreeContextMenu(K3bDevice::Device*, const TQPoint&)) );
+  connect( m_fileTreeView, TQ_SIGNAL(urlExecuted(const KURL&)),
+	   this, TQ_SLOT(slotDirActivated(const KURL&)) );
+  connect( m_fileTreeView, TQ_SIGNAL(deviceExecuted(K3bDevice::Device*)),
+	   this, TQ_SLOT(showDevice(K3bDevice::Device*)) );
+  connect( m_fileTreeView, TQ_SIGNAL(deviceExecuted(K3bDevice::Device*)),
+	   this, TQ_SIGNAL(deviceSelected(K3bDevice::Device*)) );
+  connect( m_fileTreeView, TQ_SIGNAL(contextMenu(K3bDevice::Device*, const TQPoint&)),
+	   this, TQ_SLOT(slotFileTreeContextMenu(K3bDevice::Device*, const TQPoint&)) );
 
-  connect( m_fileView, TQT_SIGNAL(urlEntered(const KURL&)), m_fileTreeView, TQT_SLOT(followUrl(const KURL&)) );
-  connect( m_fileView, TQT_SIGNAL(urlEntered(const KURL&)), this, TQT_SIGNAL(urlEntered(const KURL&)) );
+  connect( m_fileView, TQ_SIGNAL(urlEntered(const KURL&)), m_fileTreeView, TQ_SLOT(followUrl(const KURL&)) );
+  connect( m_fileView, TQ_SIGNAL(urlEntered(const KURL&)), this, TQ_SIGNAL(urlEntered(const KURL&)) );
 
-  connect( k3bappcore->appDeviceManager(), TQT_SIGNAL(mountFinished(const TQString&)),
-	   this, TQT_SLOT(slotMountFinished(const TQString&)) );
-  connect( k3bappcore->appDeviceManager(), TQT_SIGNAL(unmountFinished(bool)),
-	   this, TQT_SLOT(slotUnmountFinished(bool)) );
-  connect( k3bappcore->appDeviceManager(), TQT_SIGNAL(detectingDiskInfo(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotDetectingDiskInfo(K3bDevice::Device*)) );
+  connect( k3bappcore->appDeviceManager(), TQ_SIGNAL(mountFinished(const TQString&)),
+	   this, TQ_SLOT(slotMountFinished(const TQString&)) );
+  connect( k3bappcore->appDeviceManager(), TQ_SIGNAL(unmountFinished(bool)),
+	   this, TQ_SLOT(slotUnmountFinished(bool)) );
+  connect( k3bappcore->appDeviceManager(), TQ_SIGNAL(detectingDiskInfo(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotDetectingDiskInfo(K3bDevice::Device*)) );
 }
 
 K3bDirView::~K3bDirView()

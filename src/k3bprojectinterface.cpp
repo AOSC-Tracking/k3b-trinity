@@ -61,7 +61,7 @@ void K3bProjectInterface::addUrl( const TQString& url )
 void K3bProjectInterface::burn()
 {
   // we want to return this method immediately
-  TQTimer::singleShot( 0, m_doc->view(), TQT_SLOT(slotBurn()) );
+  TQTimer::singleShot( 0, m_doc->view(), TQ_SLOT(slotBurn()) );
 }
 
 

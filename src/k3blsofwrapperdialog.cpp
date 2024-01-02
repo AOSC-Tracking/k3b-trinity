@@ -56,8 +56,8 @@ K3bLsofWrapperDialog::K3bLsofWrapperDialog( TQWidget* parent )
   m_label = new K3bRichTextLabel( this );
   setMainWidget( m_label );
 
-  connect( this, TQT_SIGNAL(user1Clicked()), TQT_SLOT(slotQuitOtherApps()) );
-  connect( this, TQT_SIGNAL(user2Clicked()), TQT_SLOT(slotCheckDevice()) );
+  connect( this, TQ_SIGNAL(user1Clicked()), TQ_SLOT(slotQuitOtherApps()) );
+  connect( this, TQ_SIGNAL(user2Clicked()), TQ_SLOT(slotCheckDevice()) );
 }
 
 

@@ -40,8 +40,8 @@ K3bJob::K3bJob( K3bJobHandler* handler, TQObject* parent, const char* name )
     m_canceled(false),
     m_active(false)
 {
-  connect( this, TQT_SIGNAL(canceled()),
-	   this, TQT_SLOT(slotCanceled()) );
+  connect( this, TQ_SIGNAL(canceled()),
+	   this, TQ_SLOT(slotCanceled()) );
 }
 
 K3bJob::~K3bJob()
@@ -128,23 +128,23 @@ void K3bJob::connectSubJob( K3bJob* subJob,
 			    const char* processedSizeSlot,
 			    const char* processedSubSizeSlot )
 {
-  connect( subJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-  connect( subJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SLOT(slotNewSubTask(const TQString&)) );
-  connect( subJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
-  connect( subJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( subJob, TQT_SIGNAL(finished(bool)), this, finishedSlot );
+  connect( subJob, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+  connect( subJob, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SLOT(slotNewSubTask(const TQString&)) );
+  connect( subJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( subJob, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( subJob, TQ_SIGNAL(finished(bool)), this, finishedSlot );
 
   if( connectProgress ) {
-    connect( subJob, TQT_SIGNAL(percent(int)), 
-	       this, progressSlot != 0 ? progressSlot : TQT_SIGNAL(subPercent(int)) );
+    connect( subJob, TQ_SIGNAL(percent(int)), 
+	       this, progressSlot != 0 ? progressSlot : TQ_SIGNAL(subPercent(int)) );
     if( subProgressSlot )
-      connect( subJob, TQT_SIGNAL(subPercent(int)), this, subProgressSlot );
-    connect( subJob, TQT_SIGNAL(processedSize(int, int)), 
-	     this, processedSizeSlot != 0 ? processedSizeSlot : TQT_SIGNAL(processedSubSize(int, int)) );
+      connect( subJob, TQ_SIGNAL(subPercent(int)), this, subProgressSlot );
+    connect( subJob, TQ_SIGNAL(processedSize(int, int)), 
+	     this, processedSizeSlot != 0 ? processedSizeSlot : TQ_SIGNAL(processedSubSize(int, int)) );
     if( processedSubSizeSlot )
-      connect( subJob, TQT_SIGNAL(processedSubSize(int, int)), this, processedSubSizeSlot );
+      connect( subJob, TQ_SIGNAL(processedSubSize(int, int)), this, processedSubSizeSlot );
   }
 }
 
@@ -159,42 +159,42 @@ void K3bJob::connectSubJob( K3bJob* subJob,
 			    const char* processedSubSizeSlot )
 {
   // standard connections
-  connect( subJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
-  connect( subJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( subJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( subJob, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
 
   // task connections
   if( newTaskSlot == DEFAULT_SIGNAL_CONNECTION )
-    connect( subJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
+    connect( subJob, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
   else if( newTaskSlot )
-    connect( subJob, TQT_SIGNAL(newTask(const TQString&)), this, newTaskSlot );
+    connect( subJob, TQ_SIGNAL(newTask(const TQString&)), this, newTaskSlot );
 
   if( newSubTaskSlot == DEFAULT_SIGNAL_CONNECTION )
-    connect( subJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SLOT(slotNewSubTask(const TQString&)) );
+    connect( subJob, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SLOT(slotNewSubTask(const TQString&)) );
   else if( newSubTaskSlot )
-    connect( subJob, TQT_SIGNAL(newSubTask(const TQString&)), this, newSubTaskSlot );
+    connect( subJob, TQ_SIGNAL(newSubTask(const TQString&)), this, newSubTaskSlot );
 
   if( finishedSlot && finishedSlot != DEFAULT_SIGNAL_CONNECTION )
-    connect( subJob, TQT_SIGNAL(finished(bool)), this, finishedSlot );
+    connect( subJob, TQ_SIGNAL(finished(bool)), this, finishedSlot );
 
   // progress
   if( progressSlot == DEFAULT_SIGNAL_CONNECTION )
-    connect( subJob, TQT_SIGNAL(percent(int)), this, TQT_SIGNAL(subPercent(int)) );
+    connect( subJob, TQ_SIGNAL(percent(int)), this, TQ_SIGNAL(subPercent(int)) );
   else if( progressSlot )
-    connect( subJob, TQT_SIGNAL(percent(int)), this, progressSlot );
+    connect( subJob, TQ_SIGNAL(percent(int)), this, progressSlot );
 
   if( subProgressSlot && subProgressSlot != DEFAULT_SIGNAL_CONNECTION )
-    connect( subJob, TQT_SIGNAL(subPercent(int)), this, subProgressSlot );
+    connect( subJob, TQ_SIGNAL(subPercent(int)), this, subProgressSlot );
 
   // processed size
   if( processedSizeSlot == DEFAULT_SIGNAL_CONNECTION )
-    connect( subJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
+    connect( subJob, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
   else if( processedSizeSlot )
-    connect( subJob, TQT_SIGNAL(processedSize(int, int)), this, processedSizeSlot );
+    connect( subJob, TQ_SIGNAL(processedSize(int, int)), this, processedSizeSlot );
 
   if( processedSubSizeSlot && processedSubSizeSlot != DEFAULT_SIGNAL_CONNECTION )
-    connect( subJob, TQT_SIGNAL(processedSubSize(int, int)), this, processedSubSizeSlot );
+    connect( subJob, TQ_SIGNAL(processedSubSize(int, int)), this, processedSubSizeSlot );
 }
 
 

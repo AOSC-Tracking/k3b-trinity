@@ -59,12 +59,12 @@ K3bTempDirSelectionWidget::K3bTempDirSelectionWidget( TQWidget *parent, const ch
   m_labelFreeSpace->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 
 
-  connect( m_editDirectory, TQT_SIGNAL(openFileDialog(KURLRequester*)),
-	   this, TQT_SLOT(slotTempDirButtonPressed(KURLRequester*)) );
-  connect( m_editDirectory, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SLOT(slotUpdateFreeTempSpace()) );
-  connect( m_editDirectory->lineEdit(), TQT_SIGNAL(lostFocus()),
-           this, TQT_SLOT(slotFixTempPath()) );
+  connect( m_editDirectory, TQ_SIGNAL(openFileDialog(KURLRequester*)),
+	   this, TQ_SLOT(slotTempDirButtonPressed(KURLRequester*)) );
+  connect( m_editDirectory, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SLOT(slotUpdateFreeTempSpace()) );
+  connect( m_editDirectory->lineEdit(), TQ_SIGNAL(lostFocus()),
+           this, TQ_SLOT(slotFixTempPath()) );
 
   // choose a default
   setSelectionMode( DIR );
@@ -115,7 +115,7 @@ void K3bTempDirSelectionWidget::slotUpdateFreeTempSpace()
     else
       m_labelCdSize->setPaletteForegroundColor( m_labelFreeSpace->paletteForegroundColor() );
   }
-  TQTimer::singleShot( 1000, this, TQT_SLOT(slotUpdateFreeTempSpace()) );
+  TQTimer::singleShot( 1000, this, TQ_SLOT(slotUpdateFreeTempSpace()) );
 }
 
 

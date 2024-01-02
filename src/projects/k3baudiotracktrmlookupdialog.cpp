@@ -68,11 +68,11 @@ K3bAudioTrackTRMLookupDialog::K3bAudioTrackTRMLookupDialog( TQWidget* parent, co
 
   m_inLoop = false;
   m_mbJob = new K3bMusicBrainzJob( this );
-  connect( m_mbJob, TQT_SIGNAL(infoMessage(const TQString&, int)), 
-	   this, TQT_SLOT(slotMbJobInfoMessage(const TQString&, int)) );
-  connect( m_mbJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMbJobFinished(bool)) );
-  connect( m_mbJob, TQT_SIGNAL(trackFinished(K3bAudioTrack*, bool)), 
-	   this, TQT_SLOT(slotTrackFinished(K3bAudioTrack*, bool)) );
+  connect( m_mbJob, TQ_SIGNAL(infoMessage(const TQString&, int)), 
+	   this, TQ_SLOT(slotMbJobInfoMessage(const TQString&, int)) );
+  connect( m_mbJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotMbJobFinished(bool)) );
+  connect( m_mbJob, TQ_SIGNAL(trackFinished(K3bAudioTrack*, bool)), 
+	   this, TQ_SLOT(slotTrackFinished(K3bAudioTrack*, bool)) );
 }
 
 

@@ -163,12 +163,12 @@ K3bVideoDVDRippingDialog::K3bVideoDVDRippingDialog( const K3bVideoDVD::VideoDVD&
   frameLayout->setAutoAdd( true );
   m_w = new K3bVideoDVDRippingWidget( frame );
 
-  connect( m_w, TQT_SIGNAL(changed()),
-	   this, TQT_SLOT(slotUpdateFilesizes()) );
-  connect( m_w, TQT_SIGNAL(changed()),
-	   this, TQT_SLOT(slotUpdateFilenames()) );
-  connect( m_w, TQT_SIGNAL(changed()),
-	   this, TQT_SLOT(slotUpdateVideoSizes()) );
+  connect( m_w, TQ_SIGNAL(changed()),
+	   this, TQ_SLOT(slotUpdateFilesizes()) );
+  connect( m_w, TQ_SIGNAL(changed()),
+	   this, TQ_SLOT(slotUpdateFilenames()) );
+  connect( m_w, TQ_SIGNAL(changed()),
+	   this, TQ_SLOT(slotUpdateVideoSizes()) );
 
   setTitle( i18n("Video DVD Ripping"),
 	    i18n("1 title from %1", "%n titles from %1", titles.count())

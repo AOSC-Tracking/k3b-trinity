@@ -29,11 +29,11 @@ K3bAudioRipJob::K3bAudioRipJob( K3bJobHandler* hdl, TQObject* parent )
   m_thread = new K3bAudioRipThread();
   m_threadJob = new K3bThreadJob( m_thread, this, this );
   connectSubJob( m_threadJob,
-		 TQT_SLOT(slotRippingFinished(bool)),
-		 TQT_SIGNAL(newTask(const TQString&)),
-		 TQT_SIGNAL(newSubTask(const TQString&)),
-		 TQT_SIGNAL(percent(int)),
-		 TQT_SIGNAL(subPercent(int)) );
+		 TQ_SLOT(slotRippingFinished(bool)),
+		 TQ_SIGNAL(newTask(const TQString&)),
+		 TQ_SIGNAL(newSubTask(const TQString&)),
+		 TQ_SIGNAL(percent(int)),
+		 TQ_SIGNAL(subPercent(int)) );
 }
 
 

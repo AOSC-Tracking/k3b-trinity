@@ -55,8 +55,8 @@ void K3bAbstractWriter::cancel()
   if( burnDevice() ) {
     // we need to unlock the writer because cdrecord locked it while writing
     emit infoMessage( i18n("Unlocking drive..."), INFO );
-    connect( K3bDevice::unblock( burnDevice() ), TQT_SIGNAL(finished(bool)),
-	     this, TQT_SLOT(slotUnblockWhileCancellationFinished(bool)) );
+    connect( K3bDevice::unblock( burnDevice() ), TQ_SIGNAL(finished(bool)),
+	     this, TQ_SLOT(slotUnblockWhileCancellationFinished(bool)) );
   }
   else {
     emit canceled();
@@ -72,8 +72,8 @@ void K3bAbstractWriter::slotUnblockWhileCancellationFinished( bool success )
 
   if( k3bcore->globalSettings()->ejectMedia() ) {
     emit newSubTask( i18n("Ejecting CD") );  // FIXME: "media" instead of "CD"
-    connect( K3bDevice::eject( burnDevice() ), TQT_SIGNAL(finished(bool)),
-	     this, TQT_SLOT(slotEjectWhileCancellationFinished(bool)) );
+    connect( K3bDevice::eject( burnDevice() ), TQ_SIGNAL(finished(bool)),
+	     this, TQ_SLOT(slotEjectWhileCancellationFinished(bool)) );
   }
   else {
     emit canceled();

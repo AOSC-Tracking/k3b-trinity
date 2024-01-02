@@ -127,27 +127,27 @@ K3bCdImageWritingDialog::K3bCdImageWritingDialog( TQWidget* parent, const char* 
   setupGui();
 
   d->md5Job = new K3bMd5Job( 0, this );
-  connect( d->md5Job, TQT_SIGNAL(finished(bool)),
-	   this, TQT_SLOT(slotMd5JobFinished(bool)) );
-  connect( d->md5Job, TQT_SIGNAL(percent(int)),
-	   this, TQT_SLOT(slotMd5JobPercent(int)) );
+  connect( d->md5Job, TQ_SIGNAL(finished(bool)),
+	   this, TQ_SLOT(slotMd5JobFinished(bool)) );
+  connect( d->md5Job, TQ_SIGNAL(percent(int)),
+	   this, TQ_SLOT(slotMd5JobPercent(int)) );
 
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()),
-	   this, TQT_SLOT(slotToggleAll()) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)),
-	   this, TQT_SLOT(slotToggleAll()) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged(K3bDevice::Device*)), 
-	   m_writingModeWidget, TQT_SLOT(setDevice(K3bDevice::Device*)) );
-  connect( m_comboImageType, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotToggleAll()) );
-  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)),
-	   this, TQT_SLOT(slotToggleAll()) );
-  connect( m_editImagePath, TQT_SIGNAL(textChanged(const TQString&)), 
-	   this, TQT_SLOT(slotUpdateImage(const TQString&)) );
-  connect( m_checkDummy, TQT_SIGNAL(toggled(bool)),
-	   this, TQT_SLOT(slotToggleAll()) );
-  connect( m_checkCacheImage, TQT_SIGNAL(toggled(bool)),
-	   this, TQT_SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged()),
+	   this, TQ_SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writingAppChanged(int)),
+	   this, TQ_SLOT(slotToggleAll()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged(K3bDevice::Device*)), 
+	   m_writingModeWidget, TQ_SLOT(setDevice(K3bDevice::Device*)) );
+  connect( m_comboImageType, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotToggleAll()) );
+  connect( m_writingModeWidget, TQ_SIGNAL(writingModeChanged(int)),
+	   this, TQ_SLOT(slotToggleAll()) );
+  connect( m_editImagePath, TQ_SIGNAL(textChanged(const TQString&)), 
+	   this, TQ_SLOT(slotUpdateImage(const TQString&)) );
+  connect( m_checkDummy, TQ_SIGNAL(toggled(bool)),
+	   this, TQ_SLOT(slotToggleAll()) );
+  connect( m_checkCacheImage, TQ_SIGNAL(toggled(bool)),
+	   this, TQ_SLOT(slotToggleAll()) );
 }
 
 
@@ -224,8 +224,8 @@ void K3bCdImageWritingDialog::setupGui()
   m_infoView->setFullWidth(true);
   m_infoView->setSelectionMode( TQListView::NoSelection );
 
-  connect( m_infoView, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
+  connect( m_infoView, TQ_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQ_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
 
 
   m_writerSelectionWidget = new K3bWriterSelectionWidget( frame );

@@ -35,10 +35,10 @@ K3bIntMapComboBox::K3bIntMapComboBox( TQWidget* parent, const char* name )
   : KComboBox( parent, name )
 {
   d = new Private;
-  connect( this, TQT_SIGNAL(highlighted(int)),
-	   this, TQT_SLOT(slotItemHighlighted(int)) );
-  connect( this, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotItemActivated(int)) );
+  connect( this, TQ_SIGNAL(highlighted(int)),
+	   this, TQ_SLOT(slotItemHighlighted(int)) );
+  connect( this, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotItemActivated(int)) );
 }
 
 

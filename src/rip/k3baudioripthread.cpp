@@ -409,7 +409,7 @@ void K3bAudioRipThread::cancel()
   // wait for 1 second. I the thread still is working terminate it
   // and trigger the finished slot manually
   emitInfoMessage( i18n("Cancellation could take a while..."), K3bJob::INFO );
-  TQTimer::singleShot( 1000, this, TQT_SLOT(slotCheckIfThreadStillRunning()) );
+  TQTimer::singleShot( 1000, this, TQ_SLOT(slotCheckIfThreadStillRunning()) );
 }
 
 

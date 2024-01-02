@@ -74,8 +74,8 @@ K3bCdrecordWriter::K3bCdrecordWriter( K3bDevice::Device* dev, K3bJobHandler* hdl
 {
   d = new Private();
   d->speedEst = new K3bThroughputEstimator( this );
-  connect( d->speedEst, TQT_SIGNAL(throughput(int)),
-	   this, TQT_SLOT(slotThroughput(int)) );
+  connect( d->speedEst, TQ_SIGNAL(throughput(int)),
+	   this, TQ_SLOT(slotThroughput(int)) );
 
   m_process = 0;
   m_writingMode = K3b::TAO;
@@ -145,9 +145,9 @@ void K3bCdrecordWriter::prepareProcess()
   m_process->setSplitStdout(true);
   m_process->setSuppressEmptyLines(true);
   m_process->setRawStdin(true);  // we only use stdin when writing on-the-fly
-  connect( m_process, TQT_SIGNAL(stdoutLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
+  connect( m_process, TQ_SIGNAL(stdoutLine(const TQString&)), this, TQ_SLOT(slotStdLine(const TQString&)) );
+  connect( m_process, TQ_SIGNAL(stderrLine(const TQString&)), this, TQ_SLOT(slotStdLine(const TQString&)) );
+  connect( m_process, TQ_SIGNAL(processExited(TDEProcess*)), this, TQ_SLOT(slotProcessExited(TDEProcess*)) );
 
   m_cdrecordBinObject = k3bcore->externalBinManager()->binObject("cdrecord");
 

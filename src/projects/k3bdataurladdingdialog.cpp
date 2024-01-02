@@ -92,8 +92,8 @@ K3bDataUrlAddingDialog::K3bDataUrlAddingDialog( K3bDataDoc* doc, TQWidget* paren
   grid->addMultiCellWidget( m_progressWidget, 1, 1, 0, 1 );
 
   m_dirSizeJob = new K3bDirSizeJob( this );
-  connect( m_dirSizeJob, TQT_SIGNAL(finished(bool)),
-	   this, TQT_SLOT(slotDirSizeDone(bool)) );
+  connect( m_dirSizeJob, TQ_SIGNAL(finished(bool)),
+	   this, TQ_SLOT(slotDirSizeDone(bool)) );
 
   // try to start with a reasonable size
   resize( (int)( fontMetrics().width( caption() ) * 1.5 ), sizeHint().height() );
@@ -583,7 +583,7 @@ void K3bDataUrlAddingDialog::slotAddUrls()
   }
   else {
     updateProgress();
-    TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
+    TQTimer::singleShot( 0, this, TQ_SLOT(slotAddUrls()) );
   }
 }
 
@@ -736,7 +736,7 @@ void K3bDataUrlAddingDialog::slotCopyMoveItems()
   }
   else {
     updateProgress();
-    TQTimer::singleShot( 0, this, TQT_SLOT(slotCopyMoveItems()) );
+    TQTimer::singleShot( 0, this, TQ_SLOT(slotCopyMoveItems()) );
   }
 }
 

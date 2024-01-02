@@ -60,15 +60,15 @@ K3bVcdListView::K3bVcdListView( K3bView* view, K3bVcdDoc* doc, TQWidget *parent,
     setupColumns();
     header() ->setClickEnabled( false );
 
-    connect( this, TQT_SIGNAL( dropped( TDEListView*, TQDropEvent*, TQListViewItem* ) ),
-             this, TQT_SLOT( slotDropped( TDEListView*, TQDropEvent*, TQListViewItem* ) ) );
-    connect( this, TQT_SIGNAL( contextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ),
-             this, TQT_SLOT( showPopupMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ) );
-    connect( this, TQT_SIGNAL( doubleClicked( TQListViewItem*, const TQPoint&, int ) ),
-             this, TQT_SLOT( showPropertiesDialog() ) );
+    connect( this, TQ_SIGNAL( dropped( TDEListView*, TQDropEvent*, TQListViewItem* ) ),
+             this, TQ_SLOT( slotDropped( TDEListView*, TQDropEvent*, TQListViewItem* ) ) );
+    connect( this, TQ_SIGNAL( contextMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ),
+             this, TQ_SLOT( showPopupMenu( TDEListView*, TQListViewItem*, const TQPoint& ) ) );
+    connect( this, TQ_SIGNAL( doubleClicked( TQListViewItem*, const TQPoint&, int ) ),
+             this, TQ_SLOT( showPropertiesDialog() ) );
 
-    connect( m_doc, TQT_SIGNAL( changed() ), this, TQT_SLOT( slotUpdateItems() ) );
-    connect( m_doc, TQT_SIGNAL( trackRemoved( K3bVcdTrack* ) ), this, TQT_SLOT( slotTrackRemoved( K3bVcdTrack* ) ) );
+    connect( m_doc, TQ_SIGNAL( changed() ), this, TQ_SLOT( slotUpdateItems() ) );
+    connect( m_doc, TQ_SIGNAL( trackRemoved( K3bVcdTrack* ) ), this, TQ_SLOT( slotTrackRemoved( K3bVcdTrack* ) ) );
 
     slotUpdateItems();
 }
@@ -94,8 +94,8 @@ void K3bVcdListView::setupColumns()
 void K3bVcdListView::setupActions()
 {
     m_actionCollection = new TDEActionCollection( this );
-    m_actionProperties = new TDEAction( i18n( "Properties" ), "misc", 0, this, TQT_SLOT( showPropertiesDialog() ), actionCollection() );
-    m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete", Key_Delete, this, TQT_SLOT( slotRemoveTracks() ), actionCollection() );
+    m_actionProperties = new TDEAction( i18n( "Properties" ), "misc", 0, this, TQ_SLOT( showPropertiesDialog() ), actionCollection() );
+    m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete", Key_Delete, this, TQ_SLOT( slotRemoveTracks() ), actionCollection() );
 
     // disabled by default
     m_actionRemove->setEnabled( false );

@@ -37,7 +37,7 @@ void K3bCddbSubmit::submit( const K3bCddbResultEntry& entry )
   if( m_resultEntry.rawData.isEmpty() )
     createDataStream( m_resultEntry );
 
-  TQTimer::singleShot( 0, this, TQT_SLOT(doSubmit()) );
+  TQTimer::singleShot( 0, this, TQ_SLOT(doSubmit()) );
 }
 
 

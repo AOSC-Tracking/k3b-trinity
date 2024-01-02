@@ -95,10 +95,10 @@ K3bVerificationJob::K3bVerificationJob( K3bJobHandler* hdl, TQObject* parent, co
   d = new Private();
 
   d->md5Job = new K3bMd5Job( this );
-  connect( d->md5Job, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( d->md5Job, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMd5JobFinished(bool)) );
-  connect( d->md5Job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( d->md5Job, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( d->md5Job, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotMd5JobFinished(bool)) );
+  connect( d->md5Job, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 }
 
 
@@ -155,9 +155,9 @@ void K3bVerificationJob::start()
 
   d->mediumHasBeenReloaded = false;
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::DISKINFO, d->device ),
-           TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+           TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
            this,
-           TQT_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
+           TQ_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -174,9 +174,9 @@ void K3bVerificationJob::slotMediaReloaded( bool /*success*/ )
   emit newTask( i18n("Checking medium") );
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::DISKINFO, d->device ),
-           TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+           TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
            this,
-           TQT_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
+           TQ_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -211,9 +211,9 @@ void K3bVerificationJob::slotDiskInfoReady( K3bDevice::DeviceHandler* dh )
             // many drives need to reload the medium to return to a proper state
             emit newTask( i18n("Reloading the medium") );
             connect( K3bDevice::reload( d->device ),
-                     TQT_SIGNAL(finished(bool)),
+                     TQ_SIGNAL(finished(bool)),
                      this,
-                     TQT_SLOT(slotMediaReloaded(bool)) );
+                     TQ_SLOT(slotMediaReloaded(bool)) );
             return;
         }
     }
@@ -243,13 +243,13 @@ void K3bVerificationJob::readTrack( int trackIndex )
   if( d->toc[d->tracks[trackIndex].trackNumber-1].type() == K3bDevice::Track::DATA ) {
     if( !d->dataTrackReader ) {
       d->dataTrackReader = new K3bDataTrackReader( this );
-      connect( d->dataTrackReader, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotReaderProgress(int)) );
-      //      connect( d->dataTrackReader, TQT_SIGNAL(processedSize(int, int)), this, TQT_SLOT(slotReaderProcessedSize(int, int)) );
-      connect( d->dataTrackReader, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotReaderFinished(bool)) );
-      connect( d->dataTrackReader, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-      connect( d->dataTrackReader, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-      connect( d->dataTrackReader, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	       this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotReaderProgress(int)) );
+      //      connect( d->dataTrackReader, TQ_SIGNAL(processedSize(int, int)), this, TQ_SLOT(slotReaderProcessedSize(int, int)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotReaderFinished(bool)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+      connect( d->dataTrackReader, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	       this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
     }
 
     d->dataTrackReader->setDevice( d->device );

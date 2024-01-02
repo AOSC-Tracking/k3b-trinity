@@ -79,16 +79,16 @@ K3bBootImageView::K3bBootImageView( K3bDataDoc* doc, TQWidget* parent, const cha
   : base_K3bBootImageView( parent, name ),
     m_doc(doc)
 {
-  connect( m_buttonNew, TQT_SIGNAL(clicked()), 
-	   this, TQT_SLOT(slotNewBootImage()) );
-  connect( m_buttonDelete, TQT_SIGNAL(clicked()), 
-	   this, TQT_SLOT(slotDeleteBootImage()) );
-  connect( m_buttonToggleOptions, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotToggleOptions()) );
-  connect( m_viewImages, TQT_SIGNAL(selectionChanged()),
-	   this, TQT_SLOT(slotSelectionChanged()) );
-  connect( m_radioNoEmulation, TQT_SIGNAL(toggled(bool)),
-	   this, TQT_SLOT(slotNoEmulationToggled(bool)) );
+  connect( m_buttonNew, TQ_SIGNAL(clicked()), 
+	   this, TQ_SLOT(slotNewBootImage()) );
+  connect( m_buttonDelete, TQ_SIGNAL(clicked()), 
+	   this, TQ_SLOT(slotDeleteBootImage()) );
+  connect( m_buttonToggleOptions, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotToggleOptions()) );
+  connect( m_viewImages, TQ_SIGNAL(selectionChanged()),
+	   this, TQ_SLOT(slotSelectionChanged()) );
+  connect( m_radioNoEmulation, TQ_SIGNAL(toggled(bool)),
+	   this, TQ_SLOT(slotNoEmulationToggled(bool)) );
 
   K3bIntValidator* v = new K3bIntValidator( this );
   m_editLoadSegment->setValidator( v );

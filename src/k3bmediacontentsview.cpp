@@ -50,8 +50,8 @@ K3bMediaContentsView::K3bMediaContentsView( bool withHeader,
   d->supportedMediumStates = mediumState;
   d->autoReload = true;
 
-  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( k3bappcore->mediaCache(), TQ_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 }
 
 

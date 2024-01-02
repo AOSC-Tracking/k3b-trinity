@@ -56,7 +56,7 @@ K3bDeviceOptionTab::K3bDeviceOptionTab( TQWidget* parent, const char* name )
   frameLayout->addWidget( m_labelDevicesInfo, 0, 0 );
   frameLayout->addWidget( m_deviceWidget, 1, 0 );
 
-  connect( m_deviceWidget, TQT_SIGNAL(refreshButtonClicked()), this, TQT_SLOT(slotRefreshButtonClicked()) );
+  connect( m_deviceWidget, TQ_SIGNAL(refreshButtonClicked()), this, TQ_SLOT(slotRefreshButtonClicked()) );
 }
 
 

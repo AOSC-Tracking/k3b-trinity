@@ -144,14 +144,14 @@ K3bSetup2::K3bSetup2( TQWidget *parent, const char *, const TQStringList& )
   w->textLabel2->hide();
 
 
-  connect( w->m_checkUseBurningGroup, TQT_SIGNAL(toggled(bool)),
-	   this, TQT_SLOT(updateViews()) );
-  connect( w->m_editBurningGroup, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SLOT(updateViews()) );
-  connect( w->m_editSearchPath, TQT_SIGNAL(changed()),
-	   this, TQT_SLOT(slotSearchPrograms()) );
-  connect( w->m_buttonAddDevice, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotAddDevice()) );
+  connect( w->m_checkUseBurningGroup, TQ_SIGNAL(toggled(bool)),
+	   this, TQ_SLOT(updateViews()) );
+  connect( w->m_editBurningGroup, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SLOT(updateViews()) );
+  connect( w->m_editSearchPath, TQ_SIGNAL(changed()),
+	   this, TQ_SLOT(slotSearchPrograms()) );
+  connect( w->m_buttonAddDevice, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotAddDevice()) );
 
 
   d->externalBinManager = new K3bExternalBinManager( this );
@@ -171,7 +171,7 @@ K3bSetup2::K3bSetup2( TQWidget *parent, const char *, const TQStringList& )
   // This is a hack to work around a kcm bug which makes the faulty assumption that
   // every module starts without anything to apply
   //
-  TQTimer::singleShot( 0, this, TQT_SLOT(updateViews()) );
+  TQTimer::singleShot( 0, this, TQ_SLOT(updateViews()) );
 
   if( getuid() != 0 || !d->config->checkConfigFilesWritable( true ) )
     makeReadOnly();
@@ -383,7 +383,7 @@ void K3bSetup2::defaults()
   // This is a hack to work around a kcm bug which makes the faulty assumption that
   // every module defaults to a state where nothing is to be applied
   //
-  TQTimer::singleShot( 0, this, TQT_SLOT(updateViews()) );
+  TQTimer::singleShot( 0, this, TQ_SLOT(updateViews()) );
 }
 
 

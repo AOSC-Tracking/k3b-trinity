@@ -49,8 +49,8 @@ void K3bAudioNormalizeJob::start()
     delete m_process;
 
   m_process = new K3bProcess();
-  connect( m_process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStdLine(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
+  connect( m_process, TQ_SIGNAL(stderrLine(const TQString&)), this, TQ_SLOT(slotStdLine(const TQString&)) );
+  connect( m_process, TQ_SIGNAL(processExited(TDEProcess*)), this, TQ_SLOT(slotProcessExited(TDEProcess*)) );
 
   const K3bExternalBin* bin = k3bcore->externalBinManager()->binObject( "normalize-audio" );
 

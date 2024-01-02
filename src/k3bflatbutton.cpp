@@ -53,7 +53,7 @@ K3bFlatButton::K3bFlatButton( TDEAction* a, TQWidget *parent, const char *name )
   setText( a->text() );
   TQToolTip::add( this, a->toolTip() );
   setPixmap( TDEGlobal::iconLoader()->loadIcon( a->icon(), TDEIcon::NoGroup, 32 ) );
-  connect( this, TQT_SIGNAL(clicked()), a, TQT_SLOT(activate()) );
+  connect( this, TQ_SIGNAL(clicked()), a, TQ_SLOT(activate()) );
 }
 
 
@@ -66,8 +66,8 @@ void K3bFlatButton::init()
   setMargin(5);
   setFrameStyle( TQFrame::Box|TQFrame::Plain );
 
-  connect( k3bappcore->themeManager(), TQT_SIGNAL(themeChanged()), this, TQT_SLOT(slotThemeChanged()) );
-  connect( kapp, TQT_SIGNAL(appearanceChanged()), this, TQT_SLOT(slotThemeChanged()) );
+  connect( k3bappcore->themeManager(), TQ_SIGNAL(themeChanged()), this, TQ_SLOT(slotThemeChanged()) );
+  connect( kapp, TQ_SIGNAL(appearanceChanged()), this, TQ_SLOT(slotThemeChanged()) );
   slotThemeChanged();
 }
 

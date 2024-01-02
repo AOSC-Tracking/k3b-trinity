@@ -78,10 +78,10 @@ K3bApplication::K3bApplication()
   // from this point on available through K3bAudioServer::instance()
   m_audioServer = new K3bAudioServer( this, "K3bAudioServer" );
 
-  connect( m_core, TQT_SIGNAL(initializationInfo(const TQString&)),
-	   TQT_SIGNAL(initializationInfo(const TQString&)) );
+  connect( m_core, TQ_SIGNAL(initializationInfo(const TQString&)),
+	   TQ_SIGNAL(initializationInfo(const TQString&)) );
 
-  connect( this, TQT_SIGNAL(shutDown()), TQT_SLOT(slotShutDown()) );
+  connect( this, TQ_SIGNAL(shutDown()), TQ_SLOT(slotShutDown()) );
 }
 
 
@@ -104,10 +104,10 @@ void K3bApplication::init()
       m_core->m_themeManager->readConfig( config() );
 
       splash = new K3bSplash( 0 );
-      splash->connect( this, TQT_SIGNAL(initializationInfo(const TQString&)), TQT_SLOT(addInfo(const TQString&)) );
+      splash->connect( this, TQ_SIGNAL(initializationInfo(const TQString&)), TQ_SLOT(addInfo(const TQString&)) );
 
       // kill the splash after 5 seconds
-      TQTimer::singleShot( 5000, splash, TQT_SLOT(close()) );
+      TQTimer::singleShot( 5000, splash, TQ_SLOT(close()) );
 
       splash->show();
       tqApp->processEvents();
@@ -382,8 +382,8 @@ void K3bApplication::Core::init()
 
   mediaCache()->buildDeviceList( deviceManager() );
 
-  connect( deviceManager(), TQT_SIGNAL(changed(K3bDevice::DeviceManager*)),
-           mediaCache(), TQT_SLOT(buildDeviceList(K3bDevice::DeviceManager*)) );
+  connect( deviceManager(), TQ_SIGNAL(changed(K3bDevice::DeviceManager*)),
+           mediaCache(), TQ_SLOT(buildDeviceList(K3bDevice::DeviceManager*)) );
 }
 
 

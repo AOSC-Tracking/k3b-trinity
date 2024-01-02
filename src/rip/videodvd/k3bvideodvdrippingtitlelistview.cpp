@@ -353,8 +353,8 @@ K3bVideoDVDRippingTitleListView::K3bVideoDVDRippingTitleListView( TQWidget* pare
   m_toolTip = new TitleToolTip( this );
 
   m_previewGen = new K3bVideoDVDRippingPreview( this );
-  connect( m_previewGen, TQT_SIGNAL(previewDone(bool)),
-	   this, TQT_SLOT(slotPreviewDone(bool)) );
+  connect( m_previewGen, TQ_SIGNAL(previewDone(bool)),
+	   this, TQ_SLOT(slotPreviewDone(bool)) );
 }
 
 

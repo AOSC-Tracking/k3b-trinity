@@ -67,8 +67,8 @@ K3bDeviceBranch::K3bDeviceBranch( KFileTreeView* view, K3bDevice::Device* dev, K
   root()->setExpandable(false);
   updateLabel();
 
-  connect( k3bappcore->mediaCache(), TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( k3bappcore->mediaCache(), TQ_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 }
 
 
@@ -413,15 +413,15 @@ K3bFileTreeView::K3bFileTreeView( TQWidget *parent, const char *name )
   m_dirOnlyMode = true;
   m_menuEnabled = false;
 
-  connect( this, TQT_SIGNAL(executed(TQListViewItem*)), this, TQT_SLOT(slotItemExecuted(TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(returnPressed(TQListViewItem*)), this, TQT_SLOT(slotItemExecuted(TQListViewItem*)) );
-  connect( this, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem* , const TQPoint& )),
-	   this, TQT_SLOT(slotContextMenu(TDEListView*, TQListViewItem* , const TQPoint& )) );
+  connect( this, TQ_SIGNAL(executed(TQListViewItem*)), this, TQ_SLOT(slotItemExecuted(TQListViewItem*)) );
+  connect( this, TQ_SIGNAL(returnPressed(TQListViewItem*)), this, TQ_SLOT(slotItemExecuted(TQListViewItem*)) );
+  connect( this, TQ_SIGNAL(contextMenu(TDEListView*, TQListViewItem* , const TQPoint& )),
+	   this, TQ_SLOT(slotContextMenu(TDEListView*, TQListViewItem* , const TQPoint& )) );
 
   // we always simulate the single click
   slotSettingsChangedK3b(TDEApplication::SETTINGS_MOUSE);
   if( kapp )
-    connect( kapp, TQT_SIGNAL(settingsChanged(int)), TQT_SLOT(slotSettingsChangedK3b(int)) );
+    connect( kapp, TQ_SIGNAL(settingsChanged(int)), TQ_SLOT(slotSettingsChangedK3b(int)) );
 
   initActions();
 }
@@ -449,11 +449,11 @@ void K3bFileTreeView::initActions()
 //   m_devicePopupMenu = new TDEActionMenu( m_actionCollection, "device_popup_menu" );
 //   m_urlPopupMenu = new TDEActionMenu( m_actionCollection, "url_popup_menu" );
 
-//   TDEAction* actionDiskInfo = new TDEAction( i18n("&Disk Info"), "application-vnd.tde.info", 0, this, TQT_SLOT(slotShowDiskInfo()),
+//   TDEAction* actionDiskInfo = new TDEAction( i18n("&Disk Info"), "application-vnd.tde.info", 0, this, TQ_SLOT(slotShowDiskInfo()),
 // 					 m_actionCollection, "disk_info");
-//   TDEAction* actionUnmount = new TDEAction( i18n("&Unmount"), "media-optical-cdrom-unmounted", 0, this, TQT_SLOT(slotUnmountDisk()),
+//   TDEAction* actionUnmount = new TDEAction( i18n("&Unmount"), "media-optical-cdrom-unmounted", 0, this, TQ_SLOT(slotUnmountDisk()),
 // 					m_actionCollection, "disk_unmount");
-//   TDEAction* actionEject = new TDEAction( i18n("&Eject"), "", 0, this, TQT_SLOT(slotEjectDisk()),
+//   TDEAction* actionEject = new TDEAction( i18n("&Eject"), "", 0, this, TQ_SLOT(slotEjectDisk()),
 // 					m_actionCollection, "disk_eject");
 
 //   m_devicePopupMenu->insert( actionDiskInfo );
@@ -498,12 +498,12 @@ void K3bFileTreeView::addCdDeviceBranches( K3bDevice::DeviceManager* dm )
     d->deviceManager = dm;
 
     // make sure we get changes to the config
-    connect( dm, TQT_SIGNAL(changed(K3bDevice::DeviceManager*)),
-	     this, TQT_SLOT(addCdDeviceBranches(K3bDevice::DeviceManager*)) );
+    connect( dm, TQ_SIGNAL(changed(K3bDevice::DeviceManager*)),
+	     this, TQ_SLOT(addCdDeviceBranches(K3bDevice::DeviceManager*)) );
 
     if( K3bAppDeviceManager* appDevM = dynamic_cast<K3bAppDeviceManager*>( dm ) )
-      connect( appDevM, TQT_SIGNAL(currentDeviceChanged(K3bDevice::Device*)),
-	       this, TQT_SLOT(setCurrentDevice(K3bDevice::Device*)) );
+      connect( appDevM, TQ_SIGNAL(currentDeviceChanged(K3bDevice::Device*)),
+	       this, TQ_SLOT(setCurrentDevice(K3bDevice::Device*)) );
   }
 
   K3bDevice::Device* currentDevice = k3bappcore->appDeviceManager()->currentDevice();
@@ -693,12 +693,12 @@ void K3bFileTreeView::slotSettingsChangedK3b(int category)
   // we force single click like konqueror does. This really should be done in KFileTreeView
 
   if( category == TDEApplication::SETTINGS_MOUSE ) {
-    disconnect(this, TQT_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
-	       this, TQT_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
+    disconnect(this, TQ_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
+	       this, TQ_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
 
     if( !TDEGlobalSettings::singleClick() )
-      connect(this, TQT_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
-	      this, TQT_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
+      connect(this, TQ_SIGNAL(mouseButtonClicked(int, TQListViewItem*, const TQPoint &, int)),
+	      this, TQ_SLOT(slotMouseButtonClickedK3b(int, TQListViewItem*, const TQPoint &, int)));
   }
 }
 

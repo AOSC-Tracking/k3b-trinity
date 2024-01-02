@@ -103,7 +103,7 @@ K3bIsoImager::K3bIsoImager( K3bDataDoc* doc, K3bJobHandler* hdl, TQObject* paren
   d = new Private();
   d->dataPreparationJob = new K3bDataPreparationJob( doc, this, this );
   connectSubJob( d->dataPreparationJob,
-		 TQT_SLOT(slotDataPreparationDone(bool)),
+		 TQ_SLOT(slotDataPreparationDone(bool)),
 		 DEFAULT_SIGNAL_CONNECTION );
 }
 
@@ -340,16 +340,16 @@ void K3bIsoImager::startSizeCalculation()
 
   // TODO: use K3bProcess::OutputCollector instead iof our own two slots.
 
-  connect( m_process, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
-	   this, TQT_SLOT(slotCollectMkisofsPrintSizeStderr(TDEProcess*, char*, int)) );
-  connect( m_process, TQT_SIGNAL(stdoutLine(const TQString&)),
-	   this, TQT_SLOT(slotCollectMkisofsPrintSizeStdout(const TQString&)) );
-  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
-	   this, TQT_SLOT(slotMkisofsPrintSizeFinished()) );
+  connect( m_process, TQ_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+	   this, TQ_SLOT(slotCollectMkisofsPrintSizeStderr(TDEProcess*, char*, int)) );
+  connect( m_process, TQ_SIGNAL(stdoutLine(const TQString&)),
+	   this, TQ_SLOT(slotCollectMkisofsPrintSizeStdout(const TQString&)) );
+  connect( m_process, TQ_SIGNAL(processExited(TDEProcess*)),
+	   this, TQ_SLOT(slotMkisofsPrintSizeFinished()) );
 
   // we also want error messages
-  connect( m_process, TQT_SIGNAL(stderrLine( const TQString& )),
-	   this, TQT_SLOT(slotReceivedStderr( const TQString& )) );
+  connect( m_process, TQ_SIGNAL(stderrLine( const TQString& )),
+	   this, TQ_SLOT(slotReceivedStderr( const TQString& )) );
 
   m_collectedMkisofsPrintSizeStdout = TQString();
   m_collectedMkisofsPrintSizeStderr = TQString();
@@ -485,11 +485,11 @@ void K3bIsoImager::start()
     return;
   }
 
-  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
-	   this, TQT_SLOT(slotProcessExited(TDEProcess*)) );
+  connect( m_process, TQ_SIGNAL(processExited(TDEProcess*)),
+	   this, TQ_SLOT(slotProcessExited(TDEProcess*)) );
 
-  connect( m_process, TQT_SIGNAL(stderrLine( const TQString& )),
-	   this, TQT_SLOT(slotReceivedStderr( const TQString& )) );
+  connect( m_process, TQ_SIGNAL(stderrLine( const TQString& )),
+	   this, TQ_SLOT(slotReceivedStderr( const TQString& )) );
 
   //
   // Check the image file

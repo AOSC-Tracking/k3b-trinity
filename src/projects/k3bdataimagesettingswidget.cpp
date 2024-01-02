@@ -176,12 +176,12 @@ K3bDataImageSettingsWidget::K3bDataImageSettingsWidget( TQWidget* parent, const 
   m_customFsDlg = new CustomFilesystemsDialog( this );
   m_volDescDlg = new VolumeDescDialog( this );
 
-  connect( m_buttonCustomFilesystems, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotCustomFilesystems()) );
-  connect( m_buttonMoreVolDescFields, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotMoreVolDescFields()) );
-  connect( m_comboSpaceHandling, TQT_SIGNAL(activated(int)),
-	   this, TQT_SLOT(slotSpaceHandlingChanged(int)) );
+  connect( m_buttonCustomFilesystems, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotCustomFilesystems()) );
+  connect( m_buttonMoreVolDescFields, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotMoreVolDescFields()) );
+  connect( m_comboSpaceHandling, TQ_SIGNAL(activated(int)),
+	   this, TQ_SLOT(slotSpaceHandlingChanged(int)) );
 
   for( int i = 0; i < FS_MAX; ++i )
     m_comboFilesystems->insertItem( i18n( s_fsPresetNames[i] ) );

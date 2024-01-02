@@ -223,10 +223,10 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
   // actions
   // ------------------------------------------------------------------------
   m_actionRemove = new TDEAction( i18n( "Remove" ), "edit-delete",
-				Key_Delete, this, TQT_SLOT(slotRemoveSelected()),
+				Key_Delete, this, TQ_SLOT(slotRemoveSelected()),
 				this, "audioplayer_remove" );
   m_actionClear = new TDEAction( i18n( "Clear List" ), "edit-clear",
-			       0, this, TQT_SLOT(clear()),
+			       0, this, TQ_SLOT(clear()),
 			       this, "audioplayer_clear" );
 
   m_contextMenu = new TDEActionMenu( this, "audio_player_menu" );
@@ -237,26 +237,26 @@ K3bAudioPlayer::K3bAudioPlayer( TQWidget* parent, const char* name )
 
   // connections
   // ------------------------------------------------------------------------
-  connect( m_viewPlayList, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(slotShowContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
+  connect( m_viewPlayList, TQ_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQ_SLOT(slotShowContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
 
-  connect( m_buttonPlay, TQT_SIGNAL(clicked()), this, TQT_SLOT(play()) );
-  connect( m_buttonStop, TQT_SIGNAL(clicked()), this, TQT_SLOT(stop()) );
-  connect( m_buttonPause, TQT_SIGNAL(clicked()), this, TQT_SLOT(pause()) );
+  connect( m_buttonPlay, TQ_SIGNAL(clicked()), this, TQ_SLOT(play()) );
+  connect( m_buttonStop, TQ_SIGNAL(clicked()), this, TQ_SLOT(stop()) );
+  connect( m_buttonPause, TQ_SIGNAL(clicked()), this, TQ_SLOT(pause()) );
 
-  connect( m_buttonForward, TQT_SIGNAL(clicked()), this, TQT_SLOT(forward()) );
-  connect( m_buttonBack, TQT_SIGNAL(clicked()), this, TQT_SLOT(back()) );
+  connect( m_buttonForward, TQ_SIGNAL(clicked()), this, TQ_SLOT(forward()) );
+  connect( m_buttonBack, TQ_SIGNAL(clicked()), this, TQ_SLOT(back()) );
 
-  connect( m_seekSlider, TQT_SIGNAL(sliderMoved(int)), this, TQT_SLOT(seek(int)) );
-  connect( m_seekSlider, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(slotUpdateCurrentTime(int)) );
+  connect( m_seekSlider, TQ_SIGNAL(sliderMoved(int)), this, TQ_SLOT(seek(int)) );
+  connect( m_seekSlider, TQ_SIGNAL(valueChanged(int)), this, TQ_SLOT(slotUpdateCurrentTime(int)) );
 
-  connect( m_updateTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotUpdateDisplay()) );
-  connect( m_updateTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotCheckEnd()) );
+  connect( m_updateTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotUpdateDisplay()) );
+  connect( m_updateTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotCheckEnd()) );
 
-  connect( m_viewPlayList, TQT_SIGNAL(doubleClicked(TQListViewItem*)),
-	   this, TQT_SLOT(slotPlayItem(TQListViewItem*)) );
-  connect( m_viewPlayList, TQT_SIGNAL(dropped(TQDropEvent*,TQListViewItem*)),
-	   this, TQT_SLOT(slotDropped(TQDropEvent*,TQListViewItem*)) );
+  connect( m_viewPlayList, TQ_SIGNAL(doubleClicked(TQListViewItem*)),
+	   this, TQ_SLOT(slotPlayItem(TQListViewItem*)) );
+  connect( m_viewPlayList, TQ_SIGNAL(dropped(TQDropEvent*,TQListViewItem*)),
+	   this, TQ_SLOT(slotDropped(TQDropEvent*,TQListViewItem*)) );
   // ------------------------------------------------------------------------
 
 

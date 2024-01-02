@@ -112,7 +112,7 @@ K3bAudioMetainfoRenamerPluginWidget::K3bAudioMetainfoRenamerPluginWidget( K3bDoc
   box->addWidget( patternGroup );
   box->addWidget( filesGroup );
 
-  connect( d->scanButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotScanClicked()) );
+  connect( d->scanButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotScanClicked()) );
 
   TQToolTip::add( d->scanButton, i18n("Scan for renamable files") );
   TQWhatsThis::add( d->comboPattern, i18n("<qt>This specifies how the files should be renamed. "

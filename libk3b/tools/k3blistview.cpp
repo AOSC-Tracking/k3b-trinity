@@ -552,8 +552,8 @@ K3bListView::K3bListView( TQWidget* parent, const char* name )
 {
   d = new Private;
 
-  connect( header(), TQT_SIGNAL( sizeChange( int, int, int ) ),
-	   this, TQT_SLOT( updateEditorSize() ) );
+  connect( header(), TQ_SIGNAL( sizeChange( int, int, int ) ),
+	   this, TQ_SLOT( updateEditorSize() ) );
 
   m_editorButton = 0;
   m_editorComboBox = 0;
@@ -709,8 +709,8 @@ void K3bListView::prepareButton( K3bListViewItem*, int )
 {
   if( !m_editorButton ) {
     m_editorButton = new TQPushButton( viewport() );
-    connect( m_editorButton, TQT_SIGNAL(clicked()),
-	     this, TQT_SLOT(slotEditorButtonClicked()) );
+    connect( m_editorButton, TQ_SIGNAL(clicked()),
+	     this, TQ_SLOT(slotEditorButtonClicked()) );
   }
 
   // TODO: do some useful things
@@ -724,8 +724,8 @@ TQWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
   case K3bListViewItem::COMBO:
     if( !m_editorComboBox ) {
       m_editorComboBox = new TQComboBox( viewport() );
-      connect( m_editorComboBox, TQT_SIGNAL(activated(const TQString&)),
-	       this, TQT_SLOT(slotEditorComboBoxActivated(const TQString&)) );
+      connect( m_editorComboBox, TQ_SIGNAL(activated(const TQString&)),
+	       this, TQ_SLOT(slotEditorComboBoxActivated(const TQString&)) );
       m_editorComboBox->installEventFilter( this );
     }
     m_editorComboBox->clear();
@@ -770,8 +770,8 @@ TQWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
     if( !m_editorSpinBox ) {
       m_editorSpinBox = new TQSpinBox( viewport() );
       d->spinBoxLineEdit = static_cast<TQLineEdit*>( m_editorSpinBox->child( 0, "TQLineEdit" ) );
-      connect( m_editorSpinBox, TQT_SIGNAL(valueChanged(int)),
-	       this, TQT_SLOT(slotEditorSpinBoxValueChanged(int)) );
+      connect( m_editorSpinBox, TQ_SIGNAL(valueChanged(int)),
+	       this, TQ_SLOT(slotEditorSpinBoxValueChanged(int)) );
       //      m_editorSpinBox->installEventFilter( this );
       d->spinBoxLineEdit->installEventFilter( this );
     }
@@ -783,8 +783,8 @@ TQWidget* K3bListView::prepareEditor( K3bListViewItem* item, int col )
     if( !m_editorMsfEdit ) {
       m_editorMsfEdit = new K3bMsfEdit( viewport() );
       d->msfEditLineEdit = static_cast<TQLineEdit*>( m_editorMsfEdit->child( 0, "TQLineEdit" ) );
-      connect( m_editorMsfEdit, TQT_SIGNAL(valueChanged(int)),
-	       this, TQT_SLOT(slotEditorMsfEditValueChanged(int)) );
+      connect( m_editorMsfEdit, TQ_SIGNAL(valueChanged(int)),
+	       this, TQ_SLOT(slotEditorMsfEditValueChanged(int)) );
       //      m_editorMsfEdit->installEventFilter( this );
       d->msfEditLineEdit->installEventFilter( this );
     }

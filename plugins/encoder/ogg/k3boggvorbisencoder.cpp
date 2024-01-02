@@ -455,8 +455,8 @@ K3bOggVorbisEncoderSettingsWidget::K3bOggVorbisEncoderSettingsWidget( TQWidget* 
 
   lay->addWidget( w );
 
-  connect( w->m_slideQualityLevel, TQT_SIGNAL(valueChanged(int)),
-	   this, TQT_SLOT(slotQualityLevelChanged(int)) );
+  connect( w->m_slideQualityLevel, TQ_SIGNAL(valueChanged(int)),
+	   this, TQ_SLOT(slotQualityLevelChanged(int)) );
 
   slotQualityLevelChanged( 4 );
 }

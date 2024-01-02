@@ -85,8 +85,8 @@ void K3bVideoDVDRippingPreview::generatePreview( const K3bVideoDVD::VideoDVD& dv
   *m_process << "-Z" << "x200";
   *m_process << "-o" << m_tempDir->name();
 
-  connect( m_process, TQT_SIGNAL(processExited(TDEProcess*)),
-	   this, TQT_SLOT(slotTranscodeFinished(TDEProcess*)) );
+  connect( m_process, TQ_SIGNAL(processExited(TDEProcess*)),
+	   this, TQ_SLOT(slotTranscodeFinished(TDEProcess*)) );
   if( !m_process->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) ) { // we use AllOutput to not pollute stdout
     // something went wrong when starting the program
     // it "should" be the executable

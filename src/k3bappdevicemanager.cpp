@@ -42,21 +42,21 @@ K3bAppDeviceManager::K3bAppDeviceManager( TQObject* parent, const char* name )
 
   // setup actions
   TDEActionMenu* devicePopupMenu = new TDEActionMenu( m_actionCollection, "device_popup" );
-  m_actionDiskInfo = new TDEAction( i18n("Media &Info"), "application-vnd.tde.info", 0, this, TQT_SLOT(diskInfo()),
+  m_actionDiskInfo = new TDEAction( i18n("Media &Info"), "application-vnd.tde.info", 0, this, TQ_SLOT(diskInfo()),
 				  m_actionCollection, "device_diskinfo");
-  m_actionUnmount = new TDEAction( i18n("&Unmount"), "media-optical-cdrom-unmounted", 0, this, TQT_SLOT(unmountDisk()),
+  m_actionUnmount = new TDEAction( i18n("&Unmount"), "media-optical-cdrom-unmounted", 0, this, TQ_SLOT(unmountDisk()),
 				 m_actionCollection, "device_unmount");
-  m_actionMount = new TDEAction( i18n("&Mount"), "media-optical-cdrom-mounted", 0, this, TQT_SLOT(mountDisk()),
+  m_actionMount = new TDEAction( i18n("&Mount"), "media-optical-cdrom-mounted", 0, this, TQ_SLOT(mountDisk()),
 			       m_actionCollection, "device_mount");
-  m_actionEject = new TDEAction( i18n("&Eject"), "", 0, this, TQT_SLOT(ejectDisk()),
+  m_actionEject = new TDEAction( i18n("&Eject"), "", 0, this, TQ_SLOT(ejectDisk()),
 			       m_actionCollection, "device_eject");
-  m_actionLoad = new TDEAction( i18n("L&oad"), "", 0, this, TQT_SLOT(loadDisk()),
+  m_actionLoad = new TDEAction( i18n("L&oad"), "", 0, this, TQ_SLOT(loadDisk()),
 			      m_actionCollection, "device_load");
-//   TDEAction* actionUnlock = new TDEAction( i18n("Un&lock"), "", 0, this, TQT_SLOT(unlockDevice()),
+//   TDEAction* actionUnlock = new TDEAction( i18n("Un&lock"), "", 0, this, TQ_SLOT(unlockDevice()),
 // 				       m_actionCollection, "device_unlock" );
-//   TDEAction* actionlock = new TDEAction( i18n("Loc&k"), "", 0, this, TQT_SLOT(lockDevice()),
+//   TDEAction* actionlock = new TDEAction( i18n("Loc&k"), "", 0, this, TQ_SLOT(lockDevice()),
 // 				     m_actionCollection, "device_lock" );
-  m_actionSetReadSpeed = new TDEAction( i18n("Set Read Speed..."), "", 0, this, TQT_SLOT(setReadSpeed()),
+  m_actionSetReadSpeed = new TDEAction( i18n("Set Read Speed..."), "", 0, this, TQ_SLOT(setReadSpeed()),
 				      m_actionCollection, "device_set_read_speed" );
 
   m_actionDiskInfo->setToolTip( i18n("Display generic medium information") );
@@ -85,8 +85,8 @@ K3bAppDeviceManager::K3bAppDeviceManager( TQObject* parent, const char* name )
 
 void K3bAppDeviceManager::setMediaCache( K3bMediaCache* c )
 {
-  connect( c, TQT_SIGNAL(mediumChanged(K3bDevice::Device*)),
-	   this, TQT_SLOT(slotMediumChanged(K3bDevice::Device*)) );
+  connect( c, TQ_SIGNAL(mediumChanged(K3bDevice::Device*)),
+	   this, TQ_SLOT(slotMediumChanged(K3bDevice::Device*)) );
 }
 
 

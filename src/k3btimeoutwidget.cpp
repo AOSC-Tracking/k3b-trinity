@@ -41,7 +41,7 @@ K3bTimeoutWidget::K3bTimeoutWidget( TQWidget* parent )
   d = new Private;
   d->timeout = 10000;
   d->margin = 4;
-  connect( &d->timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(timeStep()) );
+  connect( &d->timer, TQ_SIGNAL(timeout()), this, TQ_SLOT(timeStep()) );
 }
 
 

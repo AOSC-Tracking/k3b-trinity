@@ -143,28 +143,28 @@ void K3bInterface::copyDvd( const KURL& dev )
 void K3bInterface::copyCd()
 {
   // HACK since we want this method to return immediately
-  TQTimer::singleShot( 0, m_main, TQT_SLOT(slotCdCopy()) );
+  TQTimer::singleShot( 0, m_main, TQ_SLOT(slotCdCopy()) );
 }
 
 
 void K3bInterface::copyDvd()
 {
   // HACK since we want this method to return immediately
-  TQTimer::singleShot( 0, m_main, TQT_SLOT(slotDvdCopy()) );
+  TQTimer::singleShot( 0, m_main, TQ_SLOT(slotDvdCopy()) );
 }
 
 
 void K3bInterface::eraseCdrw()
 {
   // HACK since we want this method to return immediately
-  TQTimer::singleShot( 0, m_main, TQT_SLOT(slotBlankCdrw()) );
+  TQTimer::singleShot( 0, m_main, TQ_SLOT(slotBlankCdrw()) );
 }
 
 
 void K3bInterface::formatDvd()
 {
   // HACK since we want this method to return immediately
-  TQTimer::singleShot( 0, m_main, TQT_SLOT(slotFormatDvd()) );
+  TQTimer::singleShot( 0, m_main, TQ_SLOT(slotFormatDvd()) );
 }
 
 

@@ -116,13 +116,13 @@ void K3bAudioProjectConvertingDialog::setupGui()
   // -------------------------------------------------------------------------------------------
   m_patternWidget = new K3bCddbPatternWidget( mainTab );
   mainTab->addTab( m_patternWidget, i18n("File Naming") );
-  connect( m_patternWidget, TQT_SIGNAL(changed()), this, TQT_SLOT(refresh()) );
+  connect( m_patternWidget, TQ_SIGNAL(changed()), this, TQ_SLOT(refresh()) );
 
   Form1Layout->addWidget( m_viewTracks, 0, 0 );
   Form1Layout->addWidget( mainTab, 1, 0 );
   Form1Layout->setRowStretch( 0, 1 );
 
-  connect( m_optionWidget, TQT_SIGNAL(changed()), this, TQT_SLOT(refresh()) );
+  connect( m_optionWidget, TQ_SIGNAL(changed()), this, TQ_SLOT(refresh()) );
 }
 
 

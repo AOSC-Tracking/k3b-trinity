@@ -45,8 +45,8 @@ K3bVcdView::K3bVcdView( K3bVcdDoc* pDoc, TQWidget* parent, const char *name )
     setMainWidget( m_vcdlist );
     fillStatusDisplay() ->showSize();
 
-    connect( m_vcdlist, TQT_SIGNAL( lengthReady() ), fillStatusDisplay(), TQT_SLOT( update() ) );
-    connect( m_doc, TQT_SIGNAL( newTracks() ), fillStatusDisplay(), TQT_SLOT( update() ) );
+    connect( m_vcdlist, TQ_SIGNAL( lengthReady() ), fillStatusDisplay(), TQ_SLOT( update() ) );
+    connect( m_doc, TQ_SIGNAL( newTracks() ), fillStatusDisplay(), TQ_SLOT( update() ) );
 }
 
 K3bVcdView::~K3bVcdView()

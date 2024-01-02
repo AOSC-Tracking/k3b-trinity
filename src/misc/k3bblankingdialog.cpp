@@ -80,8 +80,8 @@ K3bBlankingDialog::K3bBlankingDialog( TQWidget* parent, const char* name )
 
   setupGui();
 
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()), this, TQT_SLOT(slotWriterChanged()) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)), this, TQT_SLOT(slotWritingAppChanged(int)) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged()), this, TQ_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writingAppChanged(int)), this, TQ_SLOT(slotWritingAppChanged(int)) );
   slotWriterChanged();
 	slotWritingAppChanged( m_writerSelectionWidget->writingApp() );
 }
@@ -132,12 +132,12 @@ void K3bBlankingDialog::slotStartClicked()
 
   if( d->job == 0 ) {
     d->job = new K3bBlankingJob( this, this );
-    connect( d->job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
-	     d->debugDialog, TQT_SLOT(addOutput(const TQString&, const TQString&)) );
-    connect( d->job, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
-	     &d->debugFile, TQT_SLOT(addOutput(const TQString&, const TQString&)) );
-    connect( d->job, TQT_SIGNAL(finished(bool)), 
-	     this, TQT_SLOT(slotJobFinished(bool)) );
+    connect( d->job, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	     d->debugDialog, TQ_SLOT(addOutput(const TQString&, const TQString&)) );
+    connect( d->job, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)), 
+	     &d->debugFile, TQ_SLOT(addOutput(const TQString&, const TQString&)) );
+    connect( d->job, TQ_SIGNAL(finished(bool)), 
+	     this, TQ_SLOT(slotJobFinished(bool)) );
   }
 
   d->job->setDevice( m_writerSelectionWidget->writerDevice() );
@@ -150,7 +150,7 @@ void K3bBlankingDialog::slotStartClicked()
   if( !d->erasingDlg )
     d->erasingDlg = new K3bProgressDialog( i18n("Erasing CD-RW"), this );
 
-  connect( d->erasingDlg, TQT_SIGNAL(cancelClicked()), d->job, TQT_SLOT(cancel()) );
+  connect( d->erasingDlg, TQ_SIGNAL(cancelClicked()), d->job, TQ_SLOT(cancel()) );
 
   if( !exitLoopOnHide() )
     hide();

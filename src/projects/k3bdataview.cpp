@@ -66,22 +66,22 @@ K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *parent, const char *name )
   setMainWidget( mainSplitter );
 
 
-  connect( m_dataFileView, TQT_SIGNAL(dirSelected(K3bDirItem*)),
-	   m_dataDirTree, TQT_SLOT(setCurrentDir(K3bDirItem*)) );
-  connect( m_doc, TQT_SIGNAL(changed()), this, TQT_SLOT(slotDocChanged()) );
+  connect( m_dataFileView, TQ_SIGNAL(dirSelected(K3bDirItem*)),
+	   m_dataDirTree, TQ_SLOT(setCurrentDir(K3bDirItem*)) );
+  connect( m_doc, TQ_SIGNAL(changed()), this, TQ_SLOT(slotDocChanged()) );
 
   m_dataDirTree->checkForNewItems();
   m_dataFileView->checkForNewItems();
 
 
   // the data actions
-  TDEAction* actionImportSession = new TDEAction(i18n("&Import Session..."), "gear", 0, this, TQT_SLOT(importSession()),
+  TDEAction* actionImportSession = new TDEAction(i18n("&Import Session..."), "gear", 0, this, TQ_SLOT(importSession()),
 					     actionCollection(), "project_data_import_session" );
   TDEAction* actionClearSession = new TDEAction(i18n("&Clear Imported Session"), "gear", 0, this,
-					    TQT_SLOT(clearImportedSession()), actionCollection(),
+					    TQ_SLOT(clearImportedSession()), actionCollection(),
 					    "project_data_clear_imported_session" );
   TDEAction* actionEditBootImages = new TDEAction(i18n("&Edit Boot Images..."), "application-x-cda", 0, this,
-					      TQT_SLOT(editBootImages()), actionCollection(),
+					      TQ_SLOT(editBootImages()), actionCollection(),
 					      "project_data_edit_boot_images" );
 
   actionImportSession->setToolTip( i18n("Import a previously burned session into the current project") );
@@ -104,9 +104,9 @@ K3bDataView::K3bDataView(K3bDataDoc* doc, TQWidget *parent, const char *name )
   toolBox()->addLabel( i18n("Volume Name:") );
   toolBox()->addSpacing();
   toolBox()->addWidget( m_volumeIDEdit );
-  connect( m_volumeIDEdit, TQT_SIGNAL(textChanged(const TQString&)),
+  connect( m_volumeIDEdit, TQ_SIGNAL(textChanged(const TQString&)),
 	   m_doc,
-	   TQT_SLOT(setVolumeID(const TQString&)) );
+	   TQ_SLOT(setVolumeID(const TQString&)) );
 
   // this is just for testing (or not?)
   // most likely every project type will have it's rc file in the future

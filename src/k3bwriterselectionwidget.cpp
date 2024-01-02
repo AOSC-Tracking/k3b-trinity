@@ -160,15 +160,15 @@ K3bWriterSelectionWidget::K3bWriterSelectionWidget( TQWidget *parent, const char
   setTabOrder( m_comboMedium, m_comboSpeed );
   setTabOrder( m_comboSpeed, m_comboWritingApp );
 
-  connect( m_comboMedium, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQT_SIGNAL(writerChanged()) );
-  connect( m_comboMedium, TQT_SIGNAL(selectionChanged(K3bDevice::Device*)),
-	   this, TQT_SIGNAL(writerChanged(K3bDevice::Device*)) );
-  connect( m_comboMedium, TQT_SIGNAL(newMedia()), this, TQT_SIGNAL(newMedia()) );
-  connect( m_comboMedium, TQT_SIGNAL(newMedium(K3bDevice::Device*)), this, TQT_SIGNAL(newMedium(K3bDevice::Device*)) );
-  connect( m_comboMedium, TQT_SIGNAL(newMedium(K3bDevice::Device*)), this, TQT_SLOT(slotNewBurnMedium(K3bDevice::Device*)) );
-  connect( m_comboWritingApp, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotWritingAppSelected(int)) );
-  connect( this, TQT_SIGNAL(writerChanged()), TQT_SLOT(slotWriterChanged()) );
-  connect( m_comboSpeed, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSpeedChanged(int)) );
+  connect( m_comboMedium, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)), this, TQ_SIGNAL(writerChanged()) );
+  connect( m_comboMedium, TQ_SIGNAL(selectionChanged(K3bDevice::Device*)),
+	   this, TQ_SIGNAL(writerChanged(K3bDevice::Device*)) );
+  connect( m_comboMedium, TQ_SIGNAL(newMedia()), this, TQ_SIGNAL(newMedia()) );
+  connect( m_comboMedium, TQ_SIGNAL(newMedium(K3bDevice::Device*)), this, TQ_SIGNAL(newMedium(K3bDevice::Device*)) );
+  connect( m_comboMedium, TQ_SIGNAL(newMedium(K3bDevice::Device*)), this, TQ_SLOT(slotNewBurnMedium(K3bDevice::Device*)) );
+  connect( m_comboWritingApp, TQ_SIGNAL(activated(int)), this, TQ_SLOT(slotWritingAppSelected(int)) );
+  connect( this, TQ_SIGNAL(writerChanged()), TQ_SLOT(slotWriterChanged()) );
+  connect( m_comboSpeed, TQ_SIGNAL(activated(int)), this, TQ_SLOT(slotSpeedChanged(int)) );
 
 
   TQToolTip::add( m_comboMedium, i18n("The medium that will be used for burning") );

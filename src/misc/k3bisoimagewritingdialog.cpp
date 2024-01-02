@@ -103,23 +103,23 @@ K3bIsoImageWritingDialog::K3bIsoImageWritingDialog( TQWidget* parent, const char
   m_writingModeWidget->setSupportedModes( K3b::DAO|K3b::WRITING_MODE_INCR_SEQ|K3b::WRITING_MODE_RES_OVWR );
 
   m_md5Job = new K3bMd5Job( 0, this );
-  connect( m_md5Job, TQT_SIGNAL(finished(bool)),
-	   this, TQT_SLOT(slotMd5JobFinished(bool)) );
-  connect( m_md5Job, TQT_SIGNAL(percent(int)),
-	   this, TQT_SLOT(slotMd5JobPercent(int)) );
+  connect( m_md5Job, TQ_SIGNAL(finished(bool)),
+	   this, TQ_SLOT(slotMd5JobFinished(bool)) );
+  connect( m_md5Job, TQ_SIGNAL(percent(int)),
+	   this, TQ_SLOT(slotMd5JobPercent(int)) );
 
   updateImageSize( imagePath() );
 
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writerChanged()),
-	   this, TQT_SLOT(slotWriterChanged()) );
-  connect( m_writerSelectionWidget, TQT_SIGNAL(writingAppChanged(int)),
-	   this, TQT_SLOT(slotWriterChanged()) );
-  connect( m_writingModeWidget, TQT_SIGNAL(writingModeChanged(int)),
-	   this, TQT_SLOT(slotWriterChanged()) );
-  connect( m_editImagePath, TQT_SIGNAL(textChanged(const TQString&)),
-	   this, TQT_SLOT(updateImageSize(const TQString&)) );
-  connect( m_checkDummy, TQT_SIGNAL(toggled(bool)),
-	   this, TQT_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writerChanged()),
+	   this, TQ_SLOT(slotWriterChanged()) );
+  connect( m_writerSelectionWidget, TQ_SIGNAL(writingAppChanged(int)),
+	   this, TQ_SLOT(slotWriterChanged()) );
+  connect( m_writingModeWidget, TQ_SIGNAL(writingModeChanged(int)),
+	   this, TQ_SLOT(slotWriterChanged()) );
+  connect( m_editImagePath, TQ_SIGNAL(textChanged(const TQString&)),
+	   this, TQ_SLOT(updateImageSize(const TQString&)) );
+  connect( m_checkDummy, TQ_SIGNAL(toggled(bool)),
+	   this, TQ_SLOT(slotWriterChanged()) );
 }
 
 
@@ -156,7 +156,7 @@ void K3bIsoImageWritingDialog::setupGui()
   m_editImagePath->setFilter( i18n("*.iso *.ISO|ISO9660 Image Files") + "\n"
 			      + i18n("*|All Files") );
 
-  connect( m_editImagePath->lineEdit(), TQT_SIGNAL( textChanged ( const TQString & ) ), this,  TQT_SLOT( slotWriterChanged() ) );
+  connect( m_editImagePath->lineEdit(), TQ_SIGNAL( textChanged ( const TQString & ) ), this,  TQ_SLOT( slotWriterChanged() ) );
 
   // image info
   // -----------------------------------------------------------------------
@@ -170,8 +170,8 @@ void K3bIsoImageWritingDialog::setupGui()
   m_infoView->setFullWidth(true);
   m_infoView->setSelectionMode( TQListView::NoSelection );
 
-  connect( m_infoView, TQT_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
-	   this, TQT_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
+  connect( m_infoView, TQ_SIGNAL(contextMenu(TDEListView*, TQListViewItem*, const TQPoint&)),
+	   this, TQ_SLOT(slotContextMenu(TDEListView*, TQListViewItem*, const TQPoint&)) );
 
   m_writerSelectionWidget = new K3bWriterSelectionWidget( frame );
 

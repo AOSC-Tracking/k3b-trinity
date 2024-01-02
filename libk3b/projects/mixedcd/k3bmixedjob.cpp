@@ -103,23 +103,23 @@ K3bMixedJob::K3bMixedJob( K3bMixedDoc* doc, K3bJobHandler* hdl, TQObject* parent
   d = new Private;
 
   m_isoImager = new K3bIsoImager( doc->dataDoc(), this, this );
-  connect( m_isoImager, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_isoImager, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotIsoImagerPercent(int)) );
-  connect( m_isoImager, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotIsoImagerFinished(bool)) );
-  connect( m_isoImager, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_isoImager, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_isoImager, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotIsoImagerPercent(int)) );
+  connect( m_isoImager, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotIsoImagerFinished(bool)) );
+  connect( m_isoImager, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   m_audioImager = new K3bAudioImager( doc->audioDoc(), this, this );
-  connect( m_audioImager, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	   this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_audioImager, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotAudioDecoderPercent(int)) );
-  connect( m_audioImager, TQT_SIGNAL(subPercent(int)), this, TQT_SLOT(slotAudioDecoderSubPercent(int)) );
-  connect( m_audioImager, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotAudioDecoderFinished(bool)) );
-  connect( m_audioImager, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotAudioDecoderNextTrack(int, int)) );
+  connect( m_audioImager, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	   this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_audioImager, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotAudioDecoderPercent(int)) );
+  connect( m_audioImager, TQ_SIGNAL(subPercent(int)), this, TQ_SLOT(slotAudioDecoderSubPercent(int)) );
+  connect( m_audioImager, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotAudioDecoderFinished(bool)) );
+  connect( m_audioImager, TQ_SIGNAL(nextTrack(int, int)), this, TQ_SLOT(slotAudioDecoderNextTrack(int, int)) );
 
   m_msInfoFetcher = new K3bMsInfoFetcher( this, this );
-  connect( m_msInfoFetcher, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotMsInfoFetched(bool)) );
-  connect( m_msInfoFetcher, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_msInfoFetcher, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotMsInfoFetched(bool)) );
+  connect( m_msInfoFetcher, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
 
   m_writer = 0;
   m_tocFile = 0;
@@ -251,10 +251,10 @@ void K3bMixedJob::startFirstCopy()
 	// the maxspeed job gets the device from the doc:
 	m_doc->audioDoc()->setBurner( m_doc->burner() );
 	d->maxSpeedJob = new K3bAudioMaxSpeedJob( m_doc->audioDoc(), this, this );
-	connect( d->maxSpeedJob, TQT_SIGNAL(percent(int)),
-		 this, TQT_SIGNAL(subPercent(int)) );
-	connect( d->maxSpeedJob, TQT_SIGNAL(finished(bool)),
-		 this, TQT_SLOT(slotMaxSpeedJobFinished(bool)) );
+	connect( d->maxSpeedJob, TQ_SIGNAL(percent(int)),
+		 this, TQ_SIGNAL(subPercent(int)) );
+	connect( d->maxSpeedJob, TQ_SIGNAL(finished(bool)),
+		 this, TQ_SLOT(slotMaxSpeedJobFinished(bool)) );
       }
       d->maxSpeedJob->start();
     }
@@ -510,8 +510,8 @@ void K3bMixedJob::slotWriterFinished( bool success )
     // reload the media (as a subtask so the user does not see the "Flushing cache" or "Fixating" messages while
     // doing so
     emit newSubTask( i18n("Reloading the medium") );
-    connect( K3bDevice::reload( m_doc->burner() ), TQT_SIGNAL(finished(bool)),
-	     this, TQT_SLOT(slotMediaReloadedForSecondSession(bool)) );
+    connect( K3bDevice::reload( m_doc->burner() ), TQ_SIGNAL(finished(bool)),
+	     this, TQ_SLOT(slotMediaReloadedForSecondSession(bool)) );
   }
   else {
     d->copiesDone++;
@@ -690,20 +690,20 @@ bool K3bMixedJob::prepareWriter()
     m_writer = writer;
   }
 
-  connect( m_writer, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( m_writer, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterJobPercent(int)) );
-  connect( m_writer, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( m_writer, TQT_SIGNAL(subPercent(int)), this, TQT_SIGNAL(subPercent(int)) );
-  connect( m_writer, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-  connect( m_writer, TQT_SIGNAL(nextTrack(int, int)), this, TQT_SLOT(slotWriterNextTrack(int, int)) );
-  connect( m_writer, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
-  connect( m_writer, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
-  connect( m_writer, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
-  connect( m_writer, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
-  //  connect( m_writer, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
-  connect( m_writer, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-  connect( m_writer, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( m_writer, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( m_writer, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotWriterJobPercent(int)) );
+  connect( m_writer, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSize(int, int)) );
+  connect( m_writer, TQ_SIGNAL(subPercent(int)), this, TQ_SIGNAL(subPercent(int)) );
+  connect( m_writer, TQ_SIGNAL(processedSubSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+  connect( m_writer, TQ_SIGNAL(nextTrack(int, int)), this, TQ_SLOT(slotWriterNextTrack(int, int)) );
+  connect( m_writer, TQ_SIGNAL(buffer(int)), this, TQ_SIGNAL(bufferStatus(int)) );
+  connect( m_writer, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SIGNAL(deviceBuffer(int)) );
+  connect( m_writer, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SIGNAL(writeSpeed(int, int)) );
+  connect( m_writer, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotWriterFinished(bool)) );
+  //  connect( m_writer, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newTask(const TQString&)) );
+  connect( m_writer, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+  connect( m_writer, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   return true;
 }
@@ -1228,14 +1228,14 @@ void K3bMixedJob::normalizeFiles()
   if( !m_normalizeJob ) {
     m_normalizeJob = new K3bAudioNormalizeJob( this, this );
 
-    connect( m_normalizeJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
-	     this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-    connect( m_normalizeJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotNormalizeProgress(int)) );
-    connect( m_normalizeJob, TQT_SIGNAL(subPercent(int)), this, TQT_SLOT(slotNormalizeSubProgress(int)) );
-    connect( m_normalizeJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotNormalizeJobFinished(bool)) );
-    connect( m_normalizeJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-    connect( m_normalizeJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	     this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+    connect( m_normalizeJob, TQ_SIGNAL(infoMessage(const TQString&, int)),
+	     this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( m_normalizeJob, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotNormalizeProgress(int)) );
+    connect( m_normalizeJob, TQ_SIGNAL(subPercent(int)), this, TQ_SLOT(slotNormalizeSubProgress(int)) );
+    connect( m_normalizeJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotNormalizeJobFinished(bool)) );
+    connect( m_normalizeJob, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+    connect( m_normalizeJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	     this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   // add all the files

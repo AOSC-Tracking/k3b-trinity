@@ -427,10 +427,10 @@ K3bLameEncoderSettingsWidget::K3bLameEncoderSettingsWidget( TQWidget* parent, co
   // TODO: add whatsthis help for the quality level.
   //  TQString qualityLevelWhatsThis = i18n("<p>");
 
-  connect( m_w->m_buttonManualSettings, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotShowManualSettings()) );
-  connect( m_w->m_sliderQuality, TQT_SIGNAL(valueChanged(int)),
-	   this, TQT_SLOT(slotQualityLevelChanged(int)) );
+  connect( m_w->m_buttonManualSettings, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotShowManualSettings()) );
+  connect( m_w->m_sliderQuality, TQ_SIGNAL(valueChanged(int)),
+	   this, TQ_SLOT(slotQualityLevelChanged(int)) );
 
   updateManualSettingsLabel();
   slotQualityLevelChanged( 5 );

@@ -94,9 +94,9 @@ bool K3bDevice::Connection::open()
 	d->m_hwdevices = TDEGlobal::hardwareDevices();
 
 	// Connect device monitoring signals/slots
-	connect(d->m_hwdevices, TQT_SIGNAL(hardwareAdded(TDEGenericDevice*)), this, TQT_SLOT(AddDeviceHandler(TDEGenericDevice*)));
-	connect(d->m_hwdevices, TQT_SIGNAL(hardwareRemoved(TDEGenericDevice*)), this, TQT_SLOT(RemoveDeviceHandler(TDEGenericDevice*)));
-	connect(d->m_hwdevices, TQT_SIGNAL(hardwareUpdated(TDEGenericDevice*)), this, TQT_SLOT(ModifyDeviceHandler(TDEGenericDevice*)));
+	connect(d->m_hwdevices, TQ_SIGNAL(hardwareAdded(TDEGenericDevice*)), this, TQ_SLOT(AddDeviceHandler(TDEGenericDevice*)));
+	connect(d->m_hwdevices, TQ_SIGNAL(hardwareRemoved(TDEGenericDevice*)), this, TQ_SLOT(RemoveDeviceHandler(TDEGenericDevice*)));
+	connect(d->m_hwdevices, TQ_SIGNAL(hardwareUpdated(TDEGenericDevice*)), this, TQ_SLOT(ModifyDeviceHandler(TDEGenericDevice*)));
 
 	d->bOpen = true;
 	

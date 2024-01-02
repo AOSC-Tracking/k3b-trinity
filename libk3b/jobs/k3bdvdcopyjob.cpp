@@ -141,9 +141,9 @@ void K3bDvdCopyJob::start()
   emit newSubTask( i18n("Checking source medium") );
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::DISKINFO, m_readerDevice ),
-           TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+           TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
            this,
-           TQT_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
+           TQ_SLOT(slotDiskInfoReady(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -399,13 +399,13 @@ void K3bDvdCopyJob::prepareReader()
 {
   if( !d->dataTrackReader ) {
     d->dataTrackReader = new K3bDataTrackReader( this );
-    connect( d->dataTrackReader, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotReaderProgress(int)) );
-    connect( d->dataTrackReader, TQT_SIGNAL(processedSize(int, int)), this, TQT_SLOT(slotReaderProcessedSize(int, int)) );
-    connect( d->dataTrackReader, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotReaderFinished(bool)) );
-    connect( d->dataTrackReader, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-    connect( d->dataTrackReader, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-    connect( d->dataTrackReader, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-             this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+    connect( d->dataTrackReader, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotReaderProgress(int)) );
+    connect( d->dataTrackReader, TQ_SIGNAL(processedSize(int, int)), this, TQ_SLOT(slotReaderProcessedSize(int, int)) );
+    connect( d->dataTrackReader, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotReaderFinished(bool)) );
+    connect( d->dataTrackReader, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+    connect( d->dataTrackReader, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+    connect( d->dataTrackReader, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+             this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
   }
 
   d->dataTrackReader->setDevice( m_readerDevice );
@@ -430,18 +430,18 @@ void K3bDvdCopyJob::prepareWriter()
 
   d->writerJob = new K3bGrowisofsWriter( m_writerDevice, this );
 
-  connect( d->writerJob, TQT_SIGNAL(infoMessage(const TQString&, int)), this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-  connect( d->writerJob, TQT_SIGNAL(percent(int)), this, TQT_SLOT(slotWriterProgress(int)) );
-  connect( d->writerJob, TQT_SIGNAL(processedSize(int, int)), this, TQT_SIGNAL(processedSize(int, int)) );
-  connect( d->writerJob, TQT_SIGNAL(processedSubSize(int, int)), this, TQT_SIGNAL(processedSubSize(int, int)) );
-  connect( d->writerJob, TQT_SIGNAL(buffer(int)), this, TQT_SIGNAL(bufferStatus(int)) );
-  connect( d->writerJob, TQT_SIGNAL(deviceBuffer(int)), this, TQT_SIGNAL(deviceBuffer(int)) );
-  connect( d->writerJob, TQT_SIGNAL(writeSpeed(int, int)), this, TQT_SIGNAL(writeSpeed(int, int)) );
-  connect( d->writerJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotWriterFinished(bool)) );
-  //  connect( d->writerJob, TQT_SIGNAL(newTask(const TQString&)), this, TQT_SIGNAL(newTask(const TQString&)) );
-  connect( d->writerJob, TQT_SIGNAL(newSubTask(const TQString&)), this, TQT_SIGNAL(newSubTask(const TQString&)) );
-  connect( d->writerJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-	   this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+  connect( d->writerJob, TQ_SIGNAL(infoMessage(const TQString&, int)), this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+  connect( d->writerJob, TQ_SIGNAL(percent(int)), this, TQ_SLOT(slotWriterProgress(int)) );
+  connect( d->writerJob, TQ_SIGNAL(processedSize(int, int)), this, TQ_SIGNAL(processedSize(int, int)) );
+  connect( d->writerJob, TQ_SIGNAL(processedSubSize(int, int)), this, TQ_SIGNAL(processedSubSize(int, int)) );
+  connect( d->writerJob, TQ_SIGNAL(buffer(int)), this, TQ_SIGNAL(bufferStatus(int)) );
+  connect( d->writerJob, TQ_SIGNAL(deviceBuffer(int)), this, TQ_SIGNAL(deviceBuffer(int)) );
+  connect( d->writerJob, TQ_SIGNAL(writeSpeed(int, int)), this, TQ_SIGNAL(writeSpeed(int, int)) );
+  connect( d->writerJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotWriterFinished(bool)) );
+  //  connect( d->writerJob, TQ_SIGNAL(newTask(const TQString&)), this, TQ_SIGNAL(newTask(const TQString&)) );
+  connect( d->writerJob, TQ_SIGNAL(newSubTask(const TQString&)), this, TQ_SIGNAL(newSubTask(const TQString&)) );
+  connect( d->writerJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+	   this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
   // these do only make sense with DVD-R(W)
   d->writerJob->setSimulate( m_simulate );
@@ -602,18 +602,18 @@ void K3bDvdCopyJob::slotWriterFinished( bool success )
     if( d->verifyData && !m_simulate ) {
       if( !d->verificationJob ) {
 	d->verificationJob = new K3bVerificationJob( this, this );
-	connect( d->verificationJob, TQT_SIGNAL(infoMessage(const TQString&, int)),
-		 this, TQT_SIGNAL(infoMessage(const TQString&, int)) );
-	connect( d->verificationJob, TQT_SIGNAL(newTask(const TQString&)),
-		 this, TQT_SIGNAL(newSubTask(const TQString&)) );
-	connect( d->verificationJob, TQT_SIGNAL(percent(int)),
-		 this, TQT_SLOT(slotVerificationProgress(int)) );
-	connect( d->verificationJob, TQT_SIGNAL(percent(int)),
-		 this, TQT_SIGNAL(subPercent(int)) );
-	connect( d->verificationJob, TQT_SIGNAL(finished(bool)),
-		 this, TQT_SLOT(slotVerificationFinished(bool)) );
-	connect( d->verificationJob, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
-		 this, TQT_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
+	connect( d->verificationJob, TQ_SIGNAL(infoMessage(const TQString&, int)),
+		 this, TQ_SIGNAL(infoMessage(const TQString&, int)) );
+	connect( d->verificationJob, TQ_SIGNAL(newTask(const TQString&)),
+		 this, TQ_SIGNAL(newSubTask(const TQString&)) );
+	connect( d->verificationJob, TQ_SIGNAL(percent(int)),
+		 this, TQ_SLOT(slotVerificationProgress(int)) );
+	connect( d->verificationJob, TQ_SIGNAL(percent(int)),
+		 this, TQ_SIGNAL(subPercent(int)) );
+	connect( d->verificationJob, TQ_SIGNAL(finished(bool)),
+		 this, TQ_SLOT(slotVerificationFinished(bool)) );
+	connect( d->verificationJob, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)),
+		 this, TQ_SIGNAL(debuggingOutput(const TQString&, const TQString&)) );
 
       }
       d->verificationJob->setDevice( m_writerDevice );

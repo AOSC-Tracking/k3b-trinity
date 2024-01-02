@@ -153,9 +153,9 @@ void K3bDvdFormattingJob::start()
   emit newTask( i18n("Checking media") );
 
   connect( K3bDevice::sendCommand( K3bDevice::DeviceHandler::NG_DISKINFO, d->device ),
-	   TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	   TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	   this,
-	   TQT_SLOT(slotDeviceHandlerFinished(K3bDevice::DeviceHandler*)) );
+	   TQ_SLOT(slotDeviceHandlerFinished(K3bDevice::DeviceHandler*)) );
 }
 
 
@@ -288,9 +288,9 @@ void K3bDvdFormattingJob::slotProcessFinished( TDEProcess* p )
   else {
     emit infoMessage( i18n("Ejecting DVD..."), INFO );
     connect( K3bDevice::eject( d->device ),
-	     TQT_SIGNAL(finished(K3bDevice::DeviceHandler*)),
+	     TQ_SIGNAL(finished(K3bDevice::DeviceHandler*)),
 	     this,
-	     TQT_SLOT(slotEjectingFinished(K3bDevice::DeviceHandler*)) );
+	     TQ_SLOT(slotEjectingFinished(K3bDevice::DeviceHandler*)) );
   }
 }
 
@@ -467,8 +467,8 @@ void K3bDvdFormattingJob::startFormatting( const K3bDevice::DiskInfo& diskInfo )
     d->process = new K3bProcess();
     d->process->setRunPrivileged(true);
     //      d->process->setSuppressEmptyLines(false);
-    connect( d->process, TQT_SIGNAL(stderrLine(const TQString&)), this, TQT_SLOT(slotStderrLine(const TQString&)) );
-    connect( d->process, TQT_SIGNAL(processExited(TDEProcess*)), this, TQT_SLOT(slotProcessFinished(TDEProcess*)) );
+    connect( d->process, TQ_SIGNAL(stderrLine(const TQString&)), this, TQ_SLOT(slotStderrLine(const TQString&)) );
+    connect( d->process, TQ_SIGNAL(processExited(TDEProcess*)), this, TQ_SLOT(slotProcessFinished(TDEProcess*)) );
 
     d->dvdFormatBin = k3bcore->externalBinManager()->binObject( "dvd+rw-format" );
     if( !d->dvdFormatBin ) {

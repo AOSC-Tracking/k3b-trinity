@@ -53,7 +53,7 @@ void K3bListViewItemAnimator::init()
   m_item = 0;
   m_column = 0;
   m_timer = new TQTimer( this );
-  connect( m_timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotAnimate()) );
+  connect( m_timer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotAnimate()) );
 }
 
 

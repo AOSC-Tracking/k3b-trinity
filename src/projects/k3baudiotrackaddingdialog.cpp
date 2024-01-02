@@ -78,7 +78,7 @@ K3bAudioTrackAddingDialog::K3bAudioTrackAddingDialog( TQWidget* parent, const ch
 
   m_analyserThread = new AnalyserThread();
   m_analyserJob = new K3bThreadJob( m_analyserThread, this, this );
-  connect( m_analyserJob, TQT_SIGNAL(finished(bool)), this, TQT_SLOT(slotAnalysingFinished(bool)) );
+  connect( m_analyserJob, TQ_SIGNAL(finished(bool)), this, TQ_SLOT(slotAnalysingFinished(bool)) );
 }
 
 
@@ -107,7 +107,7 @@ int K3bAudioTrackAddingDialog::addUrls( const KURL::List& urls,
   dlg.m_infoLabel->setText( i18n("Adding files to project \"%1\"...").arg(doc->URL().fileName()) );
 
   dlg.m_busyWidget->showBusy(true);
-  TQTimer::singleShot( 0, &dlg, TQT_SLOT(slotAddUrls()) );
+  TQTimer::singleShot( 0, &dlg, TQ_SLOT(slotAddUrls()) );
   int ret = dlg.exec();
 
   TQString message;
@@ -199,7 +199,7 @@ void K3bAudioTrackAddingDialog::slotAddUrls()
   // invalid file, next url
   if( !valid ) {
     m_urls.remove( m_urls.begin() );
-    TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
+    TQTimer::singleShot( 0, this, TQ_SLOT(slotAddUrls()) );
   }
 }
 
@@ -251,7 +251,7 @@ void K3bAudioTrackAddingDialog::slotAnalysingFinished( bool /*success*/ )
     }
   }
 
-  TQTimer::singleShot( 0, this, TQT_SLOT(slotAddUrls()) );
+  TQTimer::singleShot( 0, this, TQ_SLOT(slotAddUrls()) );
 }
 
 

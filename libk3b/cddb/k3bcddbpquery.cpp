@@ -32,11 +32,11 @@ K3bCddbpQuery::K3bCddbpQuery( TQObject* parent, const char* name )
   m_stream.setDevice( m_socket );
   m_stream.setEncoding( TQTextStream::UnicodeUTF8 );
 
-  connect( m_socket, TQT_SIGNAL(connected()), this, TQT_SLOT(slotConnected()) );
-  connect( m_socket, TQT_SIGNAL(hostFound()), this, TQT_SLOT(slotHostFound()) );
-  connect( m_socket, TQT_SIGNAL(connectionClosed()), this, TQT_SLOT(slotConnectionClosed()) );
-  connect( m_socket, TQT_SIGNAL(error(int)), this, TQT_SLOT(slotError(int)) );
-  connect( m_socket, TQT_SIGNAL(readyRead()), this, TQT_SLOT(slotReadyRead()) );
+  connect( m_socket, TQ_SIGNAL(connected()), this, TQ_SLOT(slotConnected()) );
+  connect( m_socket, TQ_SIGNAL(hostFound()), this, TQ_SLOT(slotHostFound()) );
+  connect( m_socket, TQ_SIGNAL(connectionClosed()), this, TQ_SLOT(slotConnectionClosed()) );
+  connect( m_socket, TQ_SIGNAL(error(int)), this, TQ_SLOT(slotError(int)) );
+  connect( m_socket, TQ_SIGNAL(readyRead()), this, TQ_SLOT(slotReadyRead()) );
 }
 
 

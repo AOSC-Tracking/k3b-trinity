@@ -42,8 +42,8 @@ K3bMiscOptionTab::K3bMiscOptionTab(TQWidget *parent, const char *name )
   : base_K3bMiscOptionTab(parent,name)
 {
   m_editTempDir->setMode( KFile::Directory );
-  connect( m_buttonConfigureAudioOutput, TQT_SIGNAL(clicked()),
-	   this, TQT_SLOT(slotConfigureAudioOutput()) );
+  connect( m_buttonConfigureAudioOutput, TQ_SIGNAL(clicked()),
+	   this, TQ_SLOT(slotConfigureAudioOutput()) );
 
   m_comboActionDialogSettings->insertItem( K3bInteractionDialog::LOAD_K3B_DEFAULTS, 
 					   i18n("Default Settings"),

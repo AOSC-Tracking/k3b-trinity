@@ -93,12 +93,12 @@ K3bSystemProblemDialog::K3bSystemProblemDialog( const TQValueList<K3bSystemProbl
 			i18n("1 problem", "%n problems", problems.count() ) );
 
   m_closeButton = new TQPushButton( i18n("Close"), this );
-  connect( m_closeButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(close()) );
+  connect( m_closeButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(close()) );
   m_checkDontShowAgain = new TQCheckBox( i18n("Do not show again"), this );
 
 #ifdef HAVE_K3BSETUP
   m_k3bsetupButton = new TQPushButton( i18n("Start K3bSetup2"), this );
-  connect( m_k3bsetupButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotK3bSetup()) );
+  connect( m_k3bsetupButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotK3bSetup()) );
 #endif
 
   // setup the problem view
