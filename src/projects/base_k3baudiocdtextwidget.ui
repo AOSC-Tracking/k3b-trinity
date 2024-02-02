@@ -207,13 +207,13 @@
     <tabstop>m_editTitle</tabstop>
     <tabstop>m_editPerformer</tabstop>
 </tabstops>
-<Q_SLOTS>
+<slots>
     <slot access="protected" specifier="pure virtual">slotCopyTitle()</slot>
     <slot access="protected" specifier="pure virtual">slotCopyPerformer()</slot>
     <slot access="protected" specifier="pure virtual">slotCopyArranger()</slot>
     <slot access="protected" specifier="pure virtual">slotCopyComposer()</slot>
     <slot access="protected" specifier="pure virtual">slotCopySongwriter()</slot>
-</Q_SLOTS>
+</slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includes>
     <include location="global" impldecl="in implementation">klineedit.h</include>

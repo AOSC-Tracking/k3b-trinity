@@ -204,7 +204,7 @@
                             <string>Preemph&amp;asis</string>
                         </property>
                         <property name="whatsThis" stdset="0">
-                            <string>&lt;p&gt;Preemphasis is mainly used in audio processing. Higher frequencies in audio Q_SIGNALS usually have lower amplitudes. This can lead to bad signal quality on noisy transmission because the high frequencies might become too weak. To avoid this effect, high frequencies are amplified before transmission (preemphasis); the receiver will then weaken them accordingly for playback.</string>
+                            <string>&lt;p&gt;Preemphasis is mainly used in audio processing. Higher frequencies in audio signals usually have lower amplitudes. This can lead to bad signal quality on noisy transmission because the high frequencies might become too weak. To avoid this effect, high frequencies are amplified before transmission (preemphasis); the receiver will then weaken them accordingly for playback.</string>
                         </property>
                     </widget>
                     <widget class="TQCheckBox">
