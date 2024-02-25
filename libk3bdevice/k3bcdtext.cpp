@@ -556,7 +556,7 @@ TQCString K3bDevice::encodeCdText( const TQString& s, bool* illegalChars )
   if( illegalChars )
     *illegalChars = false;
 
-  // TODO: do this without QT
+  // TODO: do this without TQt
   TQTextCodec* codec = TQTextCodec::codecForName("ISO8859-1");
   if( codec ) {
     TQCString encoded = codec->fromUnicode( s );

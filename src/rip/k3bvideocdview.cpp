@@ -24,7 +24,7 @@
 #include <kstandarddirs.h>
 #include <kstdaction.h>
 
-// qt includes
+// TQt includes
 #include <tqfont.h>
 #include <tqframe.h>
 #include <tqheader.h>
@@ -368,14 +368,6 @@ void K3bVideoCdView::slotTrackSelectionChanged( TQListViewItem* item )
 
 void K3bVideoCdView::slotStateChanged( TQListViewItem* item )
 {
-    /* > QT 3.1
-    if ( !item == 0 && item ->isSelectable() ) {
-        if ( ( ( VideoTrackViewCheckItem* ) item) ->state() == TQCheckListItem::On)
-            slotSelect();
-        else if ( ( ( VideoTrackViewCheckItem* ) item) ->state() == TQCheckListItem::Off)
-            slotDeselect();
-    }
-    */
     if ( !item == 0 && item ->isSelectable() ) {
         if ( ( ( VideoTrackViewCheckItem* ) item) ->isOn() )
             slotSelect();

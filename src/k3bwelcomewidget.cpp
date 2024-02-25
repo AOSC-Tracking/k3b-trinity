@@ -438,7 +438,7 @@ void K3bWelcomeWidget::contentsMousePressEvent( TQMouseEvent* e )
         }
     }
 
-    // menu identifiers in QT are always < 0 (when automatically generated)
+    // menu identifiers in TQt are always < 0 (when automatically generated)
     // and unique throughout the entire application!
     int r = 0;
     int removeAction = 0;

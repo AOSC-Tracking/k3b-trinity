@@ -16,7 +16,7 @@
 #ifndef K3BVCDTRACK_H
 #define K3BVCDTRACK_H
 
-// TQt Includes
+// TQt includes
 #include <tqstring.h>
 #include <tqfileinfo.h>
 #include <tqfile.h>

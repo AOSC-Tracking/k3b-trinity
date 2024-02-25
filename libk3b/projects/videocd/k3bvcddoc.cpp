@@ -13,7 +13,7 @@
 * See the file "COPYING" for the exact licensing terms.
 */
 
-// QT-includes
+// TQt includes
 #include <tqstring.h>
 #include <tqstringlist.h>
 #include <tqfile.h>

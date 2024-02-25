@@ -11,7 +11,7 @@ Howto create a K3b release (stable branch)
 3. Create the tarball.
 
 4. Test the tarball. That includes removing any trace of K3b from the test system before and in the ideal
-   case compile on a minimal system meaning minimal KDE/QT versions.
+   case compile on a minimal system meaning minimal TDE/TQt versions.
 
 5. Upload the tarball to upload.sf.net/incoming and create a release on www.sourceforge.net (or use releaseforge,
    a nice little application which automates the whole sourceforge release thing).

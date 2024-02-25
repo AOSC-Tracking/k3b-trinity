@@ -16,7 +16,7 @@
 #ifndef K3BVCDDOC_H
 #define K3BVCDDOC_H
 
-// TQt Includes
+// TQt includes
 #include <tqptrqueue.h>
 #include <tqfile.h>
 #include <tqstring.h>

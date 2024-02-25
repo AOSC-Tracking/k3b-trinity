@@ -38,7 +38,7 @@ namespace K3bDevice {
   class Device;
 
   /**
-   * This is a simple wrapper which creates QT signals whenever a new optical
+   * This is a simple wrapper which creates TQt signals whenever a new optical
    * drive is plugged into the system or one is unplugged.
    *
    * The Connection class also handles media changes. Whenever a new medium is inserted
