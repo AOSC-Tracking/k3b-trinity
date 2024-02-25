@@ -68,7 +68,7 @@ K3bFileItem::K3bFileItem( const TQString& filePath, K3bDataDoc* doc, K3bDirItem*
     m_k3bName = k3bName;
 
   // we determine the size here to avoid problems with removed or renamed files
-  // we need to use lstat here since for symlinks both KDE and QT return the size of the file pointed to
+  // we need to use lstat here since for symlinks both TDE and TQt return the size of the file pointed to
   // instead the size of the link.
   k3b_struct_stat statBuf;
   if( k3b_lstat( TQFile::encodeName(filePath), &statBuf ) ) {

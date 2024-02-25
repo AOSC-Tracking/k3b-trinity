@@ -20,7 +20,7 @@
 #include <tdelocale.h>
 #include <kstandarddirs.h>
 
-// TQt Includes
+// TQt includes
 #include <tqstring.h>
 #include <tqfile.h>
 

@@ -36,7 +36,7 @@
 #include <k3bpassivepopup.h>
 
 #include <unistd.h>
-// QT-includes
+// TQt includes
 #include <tqdir.h>
 #include <tqlistview.h>
 #include <tqstring.h>

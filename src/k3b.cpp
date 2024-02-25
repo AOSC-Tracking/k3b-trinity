@@ -16,7 +16,7 @@
 #include <config.h>
 
 
-// include files for QT
+// include files for TQt
 #include <tqdir.h>
 #include <tqfile.h>
 #include <tqfileinfo.h>

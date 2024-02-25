@@ -28,7 +28,7 @@
 #include <k3baudiodecoder.h>
 
 
-// QT-includes
+// TQt includes
 #include <tqstring.h>
 #include <tqstringlist.h>
 #include <tqfile.h>

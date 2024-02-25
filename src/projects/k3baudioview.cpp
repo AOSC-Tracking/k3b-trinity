@@ -37,7 +37,7 @@
 #include <tdeactionclasses.h>
 #include <k3bprojectplugin.h>
 
-// QT-includes
+// TQt includes
 #include <tqlayout.h>
 #include <tqstring.h>
 

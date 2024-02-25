@@ -13,7 +13,7 @@
 * See the file "COPYING" for the exact licensing terms.
 */
 
-// TQt Includes
+// TQt includes
 #include <tqbuttongroup.h>
 #include <tqcheckbox.h>
 #include <tqcombobox.h>

@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-// include files for QT
+// include files for TQt
 #include <tqobject.h>
 #include <tqstring.h>
 #include <tqptrlist.h>

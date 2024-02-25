@@ -23,7 +23,7 @@
 #include <tdemessagebox.h>
 #include <kstandarddirs.h>
 
-// qt includes
+// TQt includes
 #include <tqgroupbox.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>

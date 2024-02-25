@@ -451,7 +451,7 @@ K3bAudioTrackViewItem* K3bAudioTrackView::getTrackViewItem( K3bAudioTrack* track
     // so the user may not change the cd-text until the one from the
     // file is loaded.
     //
-    // Since for some reason QT thinks it's bad to open disabled items
+    // Since for some reason TQt thinks it's bad to open disabled items
     // we need to open it before disabling it
     //
     newItem->showSources( track->numberSources() != 1 );
