@@ -35,3 +35,6 @@
 // #cmakedefine HAVE_RESMGR
 
 #cmakedefine HAVE_TAGLIB
+
+// Defined if you have MMX support
+#cmakedefine HAVE_X86_MMX 1

@@ -21,15 +21,22 @@ link_directories(
   ${TQT_LIBRARY_DIRS}
 )
 
-# Force to use C compiler for asm_scale.S instead of ASM
-# because contains mixed code - ASM with C definitions
-set_source_files_properties( asm_scale.S PROPERTIES LANGUAGE C )
-
-# TODO add assembler flags here (2016-01-14, Fat-Zer)
 
 ##### fastscale (static) ########################
 
+set( fastscale_SRCS scale.cpp )
+
+if( HAVE_X86_MMX )
+  list( APPEND fastscale_SRCS asm_scale.S )
+
+  # Force to use C compiler for asm_scale.S instead of ASM
+  # because it contains mixed code - ASM with C definitions
+  set_source_files_properties( asm_scale.S PROPERTIES LANGUAGE C )
+
+  add_compile_options( -DHAVE_X86_MMX )
+endif( )
+
 tde_add_library( fastscale STATIC_PIC AUTOMOC
-  SOURCES scale.cpp asm_scale.S
+  SOURCES ${fastscale_SRCS}
   LINK tdecore-shared
 )
