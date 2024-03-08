@@ -243,3 +243,38 @@ if( WITH_LAME )
     tde_message_fatal( "lame is requested, but was not found on your system" )
   endif( )
 endif( )
+
+
+##### check architecture
+
+if( NOT CMAKE_ARCHITECTURE )
+  execute_process(
+    COMMAND ${CMAKE_C_COMPILER} -dumpmachine
+    OUTPUT_VARIABLE CMAKE_ARCHITECTURE
+    ERROR_VARIABLE CMAKE_ARCHITECTURE
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_STRIP_TRAILING_WHITESPACE )
+  set( CMAKE_ARCHITECTURE "${CMAKE_ARCHITECTURE}" CACHE INTERNAL "" FORCE )
+  message( STATUS "Detected ${CMAKE_ARCHITECTURE} target architecture" )
+endif( )
+
+
+##### check specific architecture dependant support
+
+if( ${CMAKE_ARCHITECTURE} MATCHES "i.86" )
+
+  # MMX support
+  message( STATUS "Performing MMX support test" )
+  check_c_source_compiles( "
+    int main() {
+      #if defined(__GNUC__)
+      __asm__(\"pxor %mm0, %mm0\");
+      #else
+      #error Not gcc on x86/x86_64
+      #endif
+      return 0;
+    }"
+    HAVE_X86_MMX
+  )
+
+endif( )

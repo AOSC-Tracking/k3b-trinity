@@ -20,13 +20,10 @@ project( k3b )
 ##### include essential cmake modules ###########
 
 include( FindPkgConfig )
+include( CheckCSourceCompiles )
 include( CheckIncludeFile )
 include( CheckLibraryExists )
 include( CheckSymbolExists )
-# EXAMPLE:
-# include( CheckTypeSize )
-# include( CheckCSourceCompiles )
-# include( CheckCXXSourceCompiles )
 
 
 ##### include our cmake modules #################
