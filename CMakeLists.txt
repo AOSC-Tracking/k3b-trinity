@@ -9,7 +9,12 @@
 #
 #################################################
 
-cmake_minimum_required( VERSION 3.5 )
+
+##### set project version ########################
+
+include( TDEVersion )
+cmake_minimum_required( VERSION ${TDE_CMAKE_MINIMUM_VERSION} )
+tde_set_project_version( )
 
 
 ##### general package setup #####################
@@ -29,11 +34,6 @@ include( CheckSymbolExists )
 ##### include our cmake modules #################
 
 include( TDEMacros )
-
-
-##### set version number ########################
-
-tde_set_project_version( )
 
 
 ##### setup install paths #######################
