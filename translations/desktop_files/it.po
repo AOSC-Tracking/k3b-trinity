@@ -239,7 +239,8 @@ msgstr "Codificatore audio K3b SoX"
 #. Comment
 #: plugins/encoder/sox/k3bsoxencoder.plugin:3
 msgid "Encoding module to encode many file formats using SoX"
-msgstr "Modulo di codifica per codificare molti formati di file utilizzando SoX"
+msgstr ""
+"Modulo di codifica per codificare molti formati di file utilizzando SoX"
 
 #. Name
 #: plugins/project/audiometainforenamer/k3baudiometainforenamerplugin.plugin:2
