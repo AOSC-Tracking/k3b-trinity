@@ -27,7 +27,7 @@
 //#include <koffice_export.h>
 #include <kdemacros.h>
 
-#define KOSTORE_EXPORT KDE_EXPORT
+#define KOSTORE_EXPORT TDE_EXPORT
 
 class TQWidget;
 
