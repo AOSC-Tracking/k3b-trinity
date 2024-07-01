@@ -25,7 +25,7 @@
 #include <tqobject.h>
 #include <tqmap.h>
 #include <tqstringlist.h>
-#include <kdemacros.h>
+#include <tdemacros.h>
 
 #ifdef HAVE_TDEHWLIB
 class TDEGenericDevice;
