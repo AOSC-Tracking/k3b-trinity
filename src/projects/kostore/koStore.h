@@ -25,7 +25,7 @@
 #include <tqiodevice.h>
 #include <tqvaluestack.h>
 //#include <koffice_export.h>
-#include <kdemacros.h>
+#include <tdemacros.h>
 
 #define KOSTORE_EXPORT TDE_EXPORT
 
