@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#ifdef __KDE_HAVE_GCC_VISIBILITY
+#ifdef __TDE_HAVE_GCC_VISIBILITY
 #define LIBK3BDEVICE_NO_EXPORT __attribute__ ((visibility("hidden")))
 #define LIBK3BDEVICE_EXPORT __attribute__ ((visibility("default")))
 #else
