@@ -217,8 +217,13 @@ bool K3bFFMpegFile::open() {
 #else
   d->sampleFormat = static_cast<::AVSampleFormat>(d->audio_stream->codecpar->format);
 #endif
+# if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(59, 24, 100)
   d->isSpacious = ::av_sample_fmt_is_planar(d->sampleFormat) &&
                   d->audio_stream->codecpar->channels > 1;
+# else
+  d->isSpacious = ::av_sample_fmt_is_planar(d->sampleFormat) &&
+                  d->audio_stream->codecpar->ch_layout.nb_channels > 1;
+# endif
 
   // dump some debugging info
   ::av_dump_format(d->formatContext, 0, m_filename.local8Bit(), 0);
@@ -255,7 +260,11 @@ int K3bFFMpegFile::sampleRate() const {
 }
 
 int K3bFFMpegFile::channels() const {
+# if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(59, 24, 100)
   return d->audio_stream->codecpar->channels;
+# else
+  return d->audio_stream->codecpar->ch_layout.nb_channels;
+# endif
 }
 
 int K3bFFMpegFile::type() const { return d->audio_stream->codecpar->codec_id; }
